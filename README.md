@@ -1,69 +1,91 @@
-# 🪙 Pennyway iOS Mobile Client
+## 💰 Pennyway
+> 지출 관리 SNS 플랫폼
 
-Pennyway iOS 파트 Repository 입니다.
+| Version # | Revision Date | Description   | Author |
+|:---------:|:-------------:|:--------------|:------:|
+|  v0.0.1   |  2024.03.09   | 프로젝트 기본 설명 작성 | 최희진 |
 
-- 개발자: [아우신얀](https://github.com/yanni13)
-- 개발자: [최희진](https://github.com/heejinnn)
+<br/>
 
-## Dev Environment
-- Xcode
-- GitHub
-- Notion
-- Jira
+## 👪 iOS Team
 
-## Tech Stack
+<table>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/heejinnn">최희진</a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/yanni13">아우신얀</a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/heejinnn"><img height="200px" width="200px" src="https://avatars.githubusercontent.com/u/103185302?v=4"/></a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/yanni13"><img height="200px" width="200px" src="https://avatars.githubusercontent.com/u/122153297?v=4"/></a>
+        </td>
+    </tr>
+</table>
 
-### Framework
+
+<br/>
+
+## 🌳 Branch Convention
+> 💡 Git-Flow 전략을 사용합니다.
+- main
+    - 배포 가능한 상태의 코드만을 관리하는 프로덕션용 브랜치
+    - PM(양재서)의 승인 후 병합 가능
+- dev
+    - 개발 전용 브랜치
+    - 한 명 이상의 팀원의 승인 후 병합 가능
+    - 기능 개발이 완료된 브랜치를 병합하여 테스트를 진행
+- 이슈 기반 브랜치
+    - 이슈는 `{티켓번호}-{브랜치명}`을 포함한다.
+    - `feat/{티켓번호}-{브랜치명}`: 신규 기능 개발 시 브랜치명
+    - `fix/{티켓번호}-{브랜치명}`: 리팩토링, 수정 작업 시 브랜치명
+    - `hotfix/{티켓번호}-{브랜치명}`: 빠르게 수정해야 하는 버그 조치 시 브랜치명
+
+<br/>
+
+## 🤝 Commit Convention
+> 💡 angular commit convention
+- feat: 신규 기능 추가 #1
+- fix: 버그 수정
+- docs: 문서 수정
+- rename: 주석, 로그, 변수명 등 수정
+- style: 코드 포맷팅, 세미콜론 누락 (코드 변경 없는 경우)
+- refactor: 코드 리팩토링
+- test: 테스트 코드, 리펙토링 테스트 코드 추가
+- chore: 빌드 업무 수정, 패키지 매니저 수정
+
+<br/>
+
+## 📌 Architecture
+### MVVM
+
+<div align="center">
+  <img src="https://github.com/CollaBu/pennyway-client-ios/assets/103185302/08ca65ab-3938-4d7f-aed4-1116dedb241f" width="900" >
+</div>
+
+<br/>
+
+## 📗 Tech Stack
+
+### 1️⃣ Language 
+
+- Swift 5
+
+### 2️⃣ Framework
 - SwiftUI
+- Foundation
 
-### Library
+### 3️⃣ Library
 
-- Alamofire
-- CocoaPod
-
-### Architecture
-- MVVM
+- Alamofire 5.9.0
+- CocoaPod 1.15.2
 
 
-
-## Branch Convention
-
-```
-main ── develop ── feature
-└── hotfix
-```
-
-| Brach name | description |
-| --- | --- |
-| main | 배포 중인 서비스 브랜치
-• 실제 서비스가 이루어지는 브랜치입니다.
-• 해당 브랜치를 기준으로 develop 브랜치가 분기됩니다.
-• 긴급 수정 안건에 대해서는 hotfix 브랜치에서 처리합니다. |
-| develop | 작업 브랜치
-• 개발, 테스트, 릴리즈 등 배포 전 단계의 기준이 되는 브랜치입니다.
-• 프로젝트의 default 브랜치입니다.
-• 해당 브랜치에서 feature 브랜치가 분기됩니다. |
-| feature | 기능 단위 구현
-• 개별 개발자가 맡은 작업을 개발하는 브랜치입니다.
-• feature/(feature-name)처럼 머릿말-꼬릿말(개발하는 기능)으로 명명합니다.
-• kebab-case 네이밍 규칙을 준수합니다. |
-| hotfix | 서비스 중 긴급 수정 사항 처리
-• main에서 분기합니다. |
-
-
-## Commit Convention
-
-| emoji | message | description |
-| --- | --- | --- |
-| :sparkles: | feat | 새로운 기능 추가, 기존 기능을 요구 사항에 맞추어 수정 |
-| :bug: | fix | 기능에 대한 버그 수정 |
-| :green_heart: | build | 빌드 관련 수정 |
-| :pushpin: | chore | 패키지 매니저 수정, 그 외 기타 수정 ex) .gitignore |
-| :construction_worker: | ci | CI 관련 설정 수정 |
-| :closed_book: | docs | 문서(주석) 수정 |
-| :art: | style | 코드 스타일, 포맷팅에 대한 수정 |
-| :recycle: | refactor | 기능 변화가 아닌 코드 리팩터링 |
-| :white_check_mark: | test | 테스트 코드 추가/수정 |
-| :bookmark: | release | 버전 릴리즈 |
-| :ambulance: | hotfix | 긴급 수정 |
-| :twisted_rightwards_arrows: | branch | 브랜치 추가/병합 |
+## 4️⃣ Dev Environment
+- Xcode 15.3
+- iOS 14 +
