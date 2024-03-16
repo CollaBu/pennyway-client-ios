@@ -7,6 +7,7 @@ struct LoginView: View {
     @State private var isSignUpScreenActive = false
     
     var body: some View {
+
         NavigationView(content: {
             
             if isSplashShown {
@@ -19,7 +20,7 @@ struct LoginView: View {
                         }
                     }
             } else {
-                NavigationLink(destination: NumberVerificationView(), isActive: $isSignUpScreenActive) {
+                NavigationLink(destination: SignUpView(), isActive: $isSignUpScreenActive) {
                     Text("회원가입")
                 }
                 .padding()
