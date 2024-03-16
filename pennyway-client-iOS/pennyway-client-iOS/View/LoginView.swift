@@ -4,28 +4,31 @@ import SwiftUI
 
 struct LoginView: View {
     @State private var isSplashShown = true
- 
+    @State private var isSignUpScreenActive = false
+    
     var body: some View {
-        Group {
+        NavigationView(content: {
+            
             if isSplashShown {
                 SplashView()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {//1초로 수정
                             withAnimation {
                                 isSplashShown = false
                             }
                         }
                     }
             } else {
-                Button(action: {
-                    
-                }, label: {
+                NavigationLink(destination: NumberVerificationView(), isActive: $isSignUpScreenActive) {
                     Text("회원가입")
-                })
+                }
+                .padding()
             }
-        }
+            
+        })
     }
 }
+
 
 
 #Preview {

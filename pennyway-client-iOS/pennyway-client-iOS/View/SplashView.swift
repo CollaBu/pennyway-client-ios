@@ -4,14 +4,14 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         ZStack {
-            Color("primary")
+            Color("mint02")
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Image("logo_pennyway")
+                Image("icon_logo")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100) 
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 112, height: 112)
             }
         }
     }
