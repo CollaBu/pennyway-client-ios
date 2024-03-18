@@ -19,9 +19,9 @@ struct SignUpView: View {
     }
     
     var body: some View {
-        NavigationView{
+
+        NavigationAvailable{
             VStack(spacing: 14) {
-                Spacer().frame(height: 0)
                 HStack(spacing: 8){
                     LazyHGrid(rows: [GridItem(.flexible())]) {
                         Text("1")
@@ -46,14 +46,14 @@ struct SignUpView: View {
                     Spacer()
                 }.padding(.horizontal, 20)
                     .frame(height: 20)
-                
+
                 NumberVerificationView(phoneNumber: $phoneNumber, verificationCode: $verificationCode)
-                
+
                 Spacer()
-  
-                
+
+
                 Button(action: {
-                    
+
                 }) {
                     Text("계속하기")
                         .font(.system(size: 14, weight: .semibold))

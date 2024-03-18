@@ -18,8 +18,8 @@
 		4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B022B99A246001C1188 /* model_ex_file.swift */; };
 		4A762B052B99A259001C1188 /* viewmodel_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B042B99A259001C1188 /* viewmodel_ex_file.swift */; };
 		4A762B072B99A262001C1188 /* api_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* api_ex_file.swift */; };
-		4A762B092B99A26C001C1188 /* extension_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* extension_ex_file.swift */; };
-		4A762B0B2B99A27A001C1188 /* utils_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* utils_ex_file.swift */; };
+		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
+		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +36,8 @@
 		4A762B022B99A246001C1188 /* model_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model_ex_file.swift; sourceTree = "<group>"; };
 		4A762B042B99A259001C1188 /* viewmodel_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewmodel_ex_file.swift; sourceTree = "<group>"; };
 		4A762B062B99A262001C1188 /* api_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = api_ex_file.swift; sourceTree = "<group>"; };
-		4A762B082B99A26C001C1188 /* extension_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension_ex_file.swift; sourceTree = "<group>"; };
-		4A762B0A2B99A27A001C1188 /* utils_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils_ex_file.swift; sourceTree = "<group>"; };
+		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
+		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +147,7 @@
 		4A762AFE2B99A1D7001C1188 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4A762B082B99A26C001C1188 /* extension_ex_file.swift */,
+				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -155,7 +155,7 @@
 		4A762AFF2B99A1DF001C1188 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				4A762B0A2B99A27A001C1188 /* utils_ex_file.swift */,
+				4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -233,8 +233,8 @@
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
 				4A762B072B99A262001C1188 /* api_ex_file.swift in Sources */,
-				4A762B092B99A26C001C1188 /* extension_ex_file.swift in Sources */,
-				4A762B0B2B99A27A001C1188 /* utils_ex_file.swift in Sources */,
+				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
+				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A762B052B99A259001C1188 /* viewmodel_ex_file.swift in Sources */,

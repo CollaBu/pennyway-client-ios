@@ -48,18 +48,11 @@ struct NumberVerificationView: View {
                     }.padding(.horizontal, 20)
                 }
                 if showErrorPhoneNumber{
-                    if #available(iOS 15.0, *) {
-                        Text("존재하지 않는 전화번호예요")
-                            .padding(.horizontal, 20)
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(Color("Red03"))
-                        
-                    } else {
-                        Text("존재하지 않는 전화번호예요")
-                            .padding(.horizontal, 20)
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(Color("Red03"))
-                    }
+                    Text("존재하지 않는 전화번호예요")
+                        .padding(.horizontal, 20)
+                        .font(.system(size: 12, weight: .medium))
+                        .platformTextColor(color: Color("Red03"))
+      
                 }
             }
             
@@ -69,23 +62,16 @@ struct NumberVerificationView: View {
             VStack(alignment: .leading, spacing: 11){
                 CustomInputView(inputText: $verificationCode, titleText: "인증 번호")
                 if showErrorVerificationCode{
-                    if #available(iOS 15.0, *) {
-                        Text("잘못된 인증번호예요")
-                            .padding(.horizontal, 20)
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundStyle(Color("Red03"))
-                        
-                    } else {
-                        Text("잘못된 인증번호예요")
-                            .padding(.horizontal, 20)
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(Color("Red03"))
-                    }
+                    Text("잘못된 인증번호예요")
+                    .padding(.horizontal, 20)
+                    .font(.system(size: 12, weight: .medium))
+                    .platformTextColor(color: Color("Red03"))
                 }
             }
         }
     }
 }
+
 
 #Preview {
     NumberVerificationView(phoneNumber: .constant("01012345678"), verificationCode: .constant("123456"))
