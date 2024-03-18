@@ -4,7 +4,7 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         ZStack {
-            Color("mint02")
+            Color("Mint03")
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
