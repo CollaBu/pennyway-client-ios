@@ -14,8 +14,7 @@ struct SignUpView: View {
             Image("icon_arrow_back")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 28, height: 28)
-                .border(Color.black)
+                .frame(width: 24, height: 24)
         })
     }
     
@@ -47,7 +46,7 @@ struct SignUpView: View {
                     Spacer()
                 }.padding(.horizontal, 20)
                     .frame(height: 20)
-             
+                
                 NumberVerificationView(phoneNumber: $phoneNumber, verificationCode: $verificationCode)
                 
                 Spacer()

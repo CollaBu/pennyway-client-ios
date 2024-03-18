@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */; };
 		4A6E62D62BA5F7FC00111246 /* NumberVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* NumberVerificationView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* NumberVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberVerificationView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A1179812BA86D6C00A9CF4C /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +120,7 @@
 		4A762AFB2B99A1C4001C1188 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A1179812BA86D6C00A9CF4C /* CustomView */,
 				4A6E62D42BA5F7CC00111246 /* SignUpView */,
 				4A762B002B99A239001C1188 /* SplashView.swift */,
 				4A762AEE2B99A16B001C1188 /* LoginView.swift */,
@@ -229,6 +240,7 @@
 				4A762B052B99A259001C1188 /* viewmodel_ex_file.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* NumberVerificationView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
+				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

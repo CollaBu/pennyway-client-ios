@@ -7,13 +7,11 @@ struct LoginView: View {
     @State private var isSignUpScreenActive = false
     
     var body: some View {
-
         NavigationView(content: {
-            
             if isSplashShown {
                 SplashView()
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {//1초로 수정
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             withAnimation {
                                 isSplashShown = false
                             }
@@ -25,7 +23,6 @@ struct LoginView: View {
                 }
                 .padding()
             }
-            
         })
     }
 }
