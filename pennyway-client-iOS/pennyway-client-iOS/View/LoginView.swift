@@ -4,7 +4,6 @@ import SwiftUI
 
 struct LoginView: View {
     @State private var isSplashShown = true
-    @State private var isSignUpScreenActive = false
     
     var body: some View {
         NavigationAvailable {
@@ -19,7 +18,7 @@ struct LoginView: View {
                             }
                         }
                 } else {
-                    NavigationLink(destination: SignUpView(), isActive: $isSignUpScreenActive) {
+                    NavigationLink(destination: SignUpView()) {
                         Text("회원가입")
                     }
                     .padding()
@@ -28,8 +27,6 @@ struct LoginView: View {
         }
     }
 }
-
-
 
 #Preview {
     LoginView()

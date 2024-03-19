@@ -27,38 +27,38 @@ struct SignUpView: View {
                         Text("1")
                             .padding(6)
                             .background(Color("Gray06"))
-                            .foregroundColor(.white)
+                            .platformTextColor(color: Color("White"))
                             .clipShape(Circle())
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.pretendard(.medium, size: 12))
                         Text("2")
                             .padding(6)
                             .background(Color("Gray03"))
-                            .foregroundColor(Color("Gray04"))
+                            .platformTextColor(color: Color("Gray04"))
                             .clipShape(Circle())
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.pretendard(.medium, size: 12))
                         Text("3")
                             .padding(6)
                             .background(Color("Gray03"))
-                            .foregroundColor(Color("Gray04"))
+                            .platformTextColor(color: Color("Gray04"))
                             .clipShape(Circle())
-                            .font(.system(size: 12, weight: .medium))
+                            .font(.pretendard(.medium, size: 12))
                     }
                     Spacer()
-                }.padding(.horizontal, 20)
-                    .frame(height: 20)
+                }
+                .padding(.horizontal, 20)
+                .frame(height: 20)
 
                 NumberVerificationView(phoneNumber: $phoneNumber, verificationCode: $verificationCode)
 
                 Spacer()
-
-
+                
                 Button(action: {
-
-                }) {
+                    
+                }, label: {
                     Text("계속하기")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(Color("Gray04"))
-                }
+                        .font(.pretendard(.semibold, size: 14))
+                        .platformTextColor(color: Color("Gray04"))
+                })
                 .frame(height: 47)
                 .frame(maxWidth: .infinity)
                 .background(Color("Gray02"))
@@ -71,7 +71,6 @@ struct SignUpView: View {
         .navigationBarItems(leading: backButton)
     }
 }
-
 
 #Preview {
     SignUpView()

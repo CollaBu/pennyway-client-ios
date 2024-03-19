@@ -11,8 +11,8 @@ struct CustomInputView: View {
         
             Text(titleText!)
                 .padding(.horizontal, 20)
-                .font(.system(size: 12, weight: .regular))
-                .foregroundColor(Color("Gray04"))
+                .font(.pretendard(.regular, size: 12))
+                .platformTextColor(color: Color("Gray04"))
             
             HStack(spacing: 11) {
                 ZStack {
@@ -22,7 +22,8 @@ struct CustomInputView: View {
                     
                     TextField("", text: $inputText)
                         .padding(.leading, 13)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.pretendard(.medium, size: 14))
+                        
                 }
             }
             .padding(.horizontal, 20)
