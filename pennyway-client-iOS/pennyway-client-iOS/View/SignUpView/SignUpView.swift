@@ -6,6 +6,11 @@ struct SignUpView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var phoneNumber: String = ""
     @State private var verificationCode: String = ""
+    @State private var name: String = ""
+    @State private var id: String = ""
+    @State private var password: String = ""
+    @State private var confirmPw: String = ""
+    
     
     var backButton: some View{
         Button(action: {
@@ -53,7 +58,7 @@ struct SignUpView: View {
                 Spacer()
                 
                 Button(action: {
-                    
+                    SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw) //계속하기 눌렀을 때 SignUpFormView로 가기 위한 임시 코드
                 }, label: {
                     Text("계속하기")
                         .font(.pretendard(.semibold, size: 14))
