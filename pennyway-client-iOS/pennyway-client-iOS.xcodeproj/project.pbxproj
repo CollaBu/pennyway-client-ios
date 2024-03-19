@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */; };
+		4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */; };
+		4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A12BA9572F00A9CF4C /* Pretendard-ExtraBold.otf */; };
+		4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A22BA9572F00A9CF4C /* Pretendard-ExtraLight.otf */; };
+		4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A32BA9572F00A9CF4C /* Pretendard-Thin.otf */; };
+		4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A42BA9572F00A9CF4C /* Pretendard-Regular.otf */; };
+		4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A52BA9572F00A9CF4C /* Pretendard-Black.otf */; };
+		4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A62BA9572F00A9CF4C /* Pretendard-SemiBold.otf */; };
+		4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A72BA9572F00A9CF4C /* Pretendard-Bold.otf */; };
+		4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A82BA9572F00A9CF4C /* Pretendard-Medium.otf */; };
+		4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */; };
+		4A6E62D62BA5F7FC00111246 /* NumberVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* NumberVerificationView.swift */; };
+		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
 		4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEE2B99A16B001C1188 /* LoginView.swift */; };
 		4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A762AF02B99A16D001C1188 /* Assets.xcassets */; };
@@ -15,11 +28,26 @@
 		4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B022B99A246001C1188 /* model_ex_file.swift */; };
 		4A762B052B99A259001C1188 /* viewmodel_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B042B99A259001C1188 /* viewmodel_ex_file.swift */; };
 		4A762B072B99A262001C1188 /* api_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* api_ex_file.swift */; };
-		4A762B092B99A26C001C1188 /* extension_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* extension_ex_file.swift */; };
-		4A762B0B2B99A27A001C1188 /* utils_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* utils_ex_file.swift */; };
+		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
+		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
+		4A1179A12BA9572F00A9CF4C /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		4A1179A22BA9572F00A9CF4C /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		4A1179A32BA9572F00A9CF4C /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		4A1179A42BA9572F00A9CF4C /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		4A1179A52BA9572F00A9CF4C /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		4A1179A62BA9572F00A9CF4C /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		4A1179A72BA9572F00A9CF4C /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		4A1179A82BA9572F00A9CF4C /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		4A1179B32BA958ED00A9CF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
+		4A6E62D52BA5F7FC00111246 /* NumberVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberVerificationView.swift; sourceTree = "<group>"; };
+		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pennyway-client-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pennyway_client_iOSApp.swift; sourceTree = "<group>"; };
 		4A762AEE2B99A16B001C1188 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -29,8 +57,8 @@
 		4A762B022B99A246001C1188 /* model_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model_ex_file.swift; sourceTree = "<group>"; };
 		4A762B042B99A259001C1188 /* viewmodel_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewmodel_ex_file.swift; sourceTree = "<group>"; };
 		4A762B062B99A262001C1188 /* api_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = api_ex_file.swift; sourceTree = "<group>"; };
-		4A762B082B99A26C001C1188 /* extension_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension_ex_file.swift; sourceTree = "<group>"; };
-		4A762B0A2B99A27A001C1188 /* utils_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils_ex_file.swift; sourceTree = "<group>"; };
+		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
+		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +72,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A1179812BA86D6C00A9CF4C /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		4A1179822BA9522D00A9CF4C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				4A1179832BA9524400A9CF4C /* Fonts */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		4A1179832BA9524400A9CF4C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4A1179A52BA9572F00A9CF4C /* Pretendard-Black.otf */,
+				4A1179A72BA9572F00A9CF4C /* Pretendard-Bold.otf */,
+				4A1179A12BA9572F00A9CF4C /* Pretendard-ExtraBold.otf */,
+				4A1179A22BA9572F00A9CF4C /* Pretendard-ExtraLight.otf */,
+				4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */,
+				4A1179A82BA9572F00A9CF4C /* Pretendard-Medium.otf */,
+				4A1179A42BA9572F00A9CF4C /* Pretendard-Regular.otf */,
+				4A1179A62BA9572F00A9CF4C /* Pretendard-SemiBold.otf */,
+				4A1179A32BA9572F00A9CF4C /* Pretendard-Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
+			isa = PBXGroup;
+			children = (
+				4A6E62D52BA5F7FC00111246 /* NumberVerificationView.swift */,
+				4A6E62D72BA6082100111246 /* SignUpView.swift */,
+			);
+			path = SignUpView;
+			sourceTree = "<group>";
+		};
 		4A762AE02B99A16B001C1188 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +132,9 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4A1179B32BA958ED00A9CF4C /* Info.plist */,
+				4A1179822BA9522D00A9CF4C /* Resource */,
+				4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */,
 				4A762AFF2B99A1DF001C1188 /* Utils */,
 				4A762AFE2B99A1D7001C1188 /* Extension */,
 				4A762AFD2B99A1D1001C1188 /* API */,
@@ -70,7 +142,6 @@
 				4A762AFB2B99A1C4001C1188 /* View */,
 				4A762AFA2B99A1A5001C1188 /* Model */,
 				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
-				4A762AEE2B99A16B001C1188 /* LoginView.swift */,
 				4A762AF02B99A16D001C1188 /* Assets.xcassets */,
 				4A762AF22B99A16D001C1188 /* Preview Content */,
 			);
@@ -96,7 +167,10 @@
 		4A762AFB2B99A1C4001C1188 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A1179812BA86D6C00A9CF4C /* CustomView */,
+				4A6E62D42BA5F7CC00111246 /* SignUpView */,
 				4A762B002B99A239001C1188 /* SplashView.swift */,
+				4A762AEE2B99A16B001C1188 /* LoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -120,7 +194,8 @@
 		4A762AFE2B99A1D7001C1188 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4A762B082B99A26C001C1188 /* extension_ex_file.swift */,
+				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
+				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -128,7 +203,7 @@
 		4A762AFF2B99A1DF001C1188 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				4A762B0A2B99A27A001C1188 /* utils_ex_file.swift */,
+				4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -192,7 +267,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
+				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
+				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
+				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
+				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
+				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
+				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
+				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
+				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
+				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,12 +289,16 @@
 			files = (
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
+				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
 				4A762B072B99A262001C1188 /* api_ex_file.swift in Sources */,
-				4A762B092B99A26C001C1188 /* extension_ex_file.swift in Sources */,
-				4A762B0B2B99A27A001C1188 /* utils_ex_file.swift in Sources */,
+				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
+				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
+				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A762B052B99A259001C1188 /* viewmodel_ex_file.swift in Sources */,
+				4A6E62D62BA5F7FC00111246 /* NumberVerificationView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
+				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +357,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -326,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -341,11 +429,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "pennyway-client-iOS/pennyway-client-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pennyway-client-iOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "pennyway-client-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -370,11 +460,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "pennyway-client-iOS/pennyway-client-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pennyway-client-iOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "pennyway-client-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
