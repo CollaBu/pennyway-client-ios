@@ -1,10 +1,3 @@
-//
-//  TermsAndConditionsView.swift
-//  pennyway-client-iOS
-//
-//  Created by 아우신얀 on 3/20/24.
-//
-
 import SwiftUI
 
 struct TermsAndConditionsView: View {
@@ -15,9 +8,14 @@ struct TermsAndConditionsView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("이용 약관 동의")
-                .font(.pretendard(.semibold, size: 24))
-                .padding(.horizontal,20)
+            
+            HStack{
+                Text("이용 약관 동의")
+                    .font(.pretendard(.semibold, size: 24))
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.leading, 20)
             
             Spacer().frame(height: 49)
             
@@ -27,15 +25,17 @@ struct TermsAndConditionsView: View {
                         
                         Button(action: {
                             isSelectedAllBtn.toggle()
+                            isSelectedUseBtn.toggle()
+                            isSelectedInfoBtn.toggle()
                         }, label: {
                             ZStack(alignment: .leading){
                                 Rectangle()
-                                    .frame(width: 280, height: 44)
+                                    .frame(maxWidth: .infinity, minHeight: 44)
                                     .platformTextColor(color: isSelectedAllBtn ? Color("Gray05") : Color("Gray02"))
                                     .cornerRadius(4)
-                                    
                                 
                                 Image("icon_check") //버튼 눌렀을 때 색 안바뀜
+                                    .renderingMode(.template)
                                     .resizable()
                                     .frame(width: 24, height: 24)
                                     .platformTextColor(color: isSelectedAllBtn ? Color.white : Color("Gray04"))
@@ -59,8 +59,9 @@ struct TermsAndConditionsView: View {
                                         
                                         selected
                                             .resizable()
+                                            .aspectRatio(contentMode: .fit)
                                             .frame(width: 24, height: 24)
-                                            .padding(.leading, 28)
+                                            .padding(.leading, 4)
                                     })
                                     
                                     
@@ -74,7 +75,7 @@ struct TermsAndConditionsView: View {
                             ZStack() {
                                 Rectangle()
                                     .platformTextColor(color: .clear)
-                                    .frame(width: 280, height: 121)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                                     .cornerRadius(4)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 4)
@@ -84,12 +85,11 @@ struct TermsAndConditionsView: View {
                                 
                                 Text("Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit")
                                     .font(.pretendard(.medium, size: 12))
+                                    .minimumScaleFactor(0.001)
                                     .multilineTextAlignment(.leading)
-                                    .frame(width: 256, alignment: .topLeading)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                                     .platformTextColor(color: Color("Gray04"))
-                                    .padding(.horizontal,12)
-                                    .padding(.vertical,13)
-                                
+                                    .padding(12)
                             }
                             
                             Spacer().frame(height: 0)
@@ -105,20 +105,18 @@ struct TermsAndConditionsView: View {
                                         selectedInfo
                                             .resizable()
                                             .frame(width: 24, height: 24)
-                                            .padding(.leading, 28)
+                                            .padding(.leading, 4)
                                     })
                                     Text("개인정보 처리방침 (필수)")
                                         .font(.pretendard(.medium, size: 11))
                                         .multilineTextAlignment(.leading)
                                         .platformTextColor(color: Color("Gray04"))
-                                    
                                 }
                                 
                                 ZStack{
-                                    
                                     Rectangle()
                                         .platformTextColor(color: .clear)
-                                        .frame(width: 280, height: 121)
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                                         .cornerRadius(4)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 4)
@@ -128,19 +126,21 @@ struct TermsAndConditionsView: View {
                                     
                                     Text("Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit")
                                         .font(.pretendard(.medium, size: 12))
+                                        .minimumScaleFactor(0.001)
                                         .multilineTextAlignment(.leading)
-                                        .frame(width: 256, alignment: .topLeading)
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                                         .platformTextColor(color: Color("Gray04"))
-                                        .padding(.horizontal,12)
-                                        .padding(.vertical,13)
+                                        .padding(12)
                                     
                                 }
                             }
                         }
                     }
                 }
+                .padding(.horizontal, 20)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

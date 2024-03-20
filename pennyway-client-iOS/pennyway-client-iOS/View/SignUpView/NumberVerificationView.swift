@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct NumberVerificationView: View {
@@ -9,7 +8,7 @@ struct NumberVerificationView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("번호 인증")   
+            Text("번호 인증")
                 .font(.pretendard(.semibold, size: 24))
                 .padding(.horizontal,20)
             
@@ -53,19 +52,19 @@ struct NumberVerificationView: View {
                         .padding(.horizontal, 20)
                         .font(.pretendard(.medium, size: 12))
                         .platformTextColor(color: Color("Red03"))
-      
+                    
                 }
             }
- 
+            
             Spacer().frame(height: 21)
             
             VStack(alignment: .leading, spacing: 11){
                 CustomInputView(inputText: $verificationCode, titleText: "인증 번호")
                 if showErrorVerificationCode{
                     Text("잘못된 인증번호예요")
-                    .padding(.horizontal, 20)
-                    .font(.pretendard(.medium, size: 12))
-                    .platformTextColor(color: Color("Red03"))
+                        .padding(.horizontal, 20)
+                        .font(.pretendard(.medium, size: 12))
+                        .platformTextColor(color: Color("Red03"))
                 }
             }
         }

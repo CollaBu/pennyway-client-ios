@@ -53,8 +53,7 @@ struct SignUpView: View {
                 .padding(.horizontal, 20)
                 .frame(height: 20)
 
-//                NumberVerificationView(phoneNumber: $phoneNumber, verificationCode: $verificationCode)
-                SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw)
+                NumberVerificationView(phoneNumber: $phoneNumber, verificationCode: $verificationCode)
 
                 Spacer()
                 
