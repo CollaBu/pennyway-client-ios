@@ -16,8 +16,9 @@ struct SignUpView: View {
             Image("icon_arrow_back")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .padding(.vertical,20)
+                .frame(width: 34, height: 34)
+                .padding(5)
+                
         })
     }
     
@@ -26,7 +27,7 @@ struct SignUpView: View {
         NavigationAvailable{
             ZStack{
                 VStack(spacing: 14) {
-                    Spacer().frame(height: 25)
+                    Spacer().frame(height: 10)
                     
                     HStack(spacing: 8){
                         LazyHGrid(rows: [GridItem(.flexible())]) {
@@ -73,9 +74,7 @@ struct SignUpView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .padding(.horizontal, 20)
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
-                    .border(.black
-                    )
-                    
+                
                 }
                 
                 if showingPopUp {
@@ -86,7 +85,18 @@ struct SignUpView: View {
             
         }
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack {
+                    backButton
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                       
+                }.offset(x: -10)
+            }
+        }
+
     }
 }
 
