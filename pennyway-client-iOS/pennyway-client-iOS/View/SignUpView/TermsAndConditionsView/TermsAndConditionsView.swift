@@ -56,10 +56,9 @@ struct TermsAndConditionsView: View {
                 }.offset(x: -10)
             }
         }
-        
     }
 }
 
 #Preview {
-    SignUpView()
+    TermsAndConditionsView()
 }

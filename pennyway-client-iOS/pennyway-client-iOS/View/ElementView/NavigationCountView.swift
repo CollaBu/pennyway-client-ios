@@ -14,9 +14,6 @@ struct NavigationCountView: View {
                     .platformTextColor(color: selectedText == 1 ? Color("White") : Color("Gray04"))
                     .clipShape(Circle())
                     .font(.pretendard(.medium, size: 12))
-                    .onTapGesture {
-                        selectedText = 1
-                    }
                 
                 Text("2")
                     .padding(6)
@@ -24,9 +21,6 @@ struct NavigationCountView: View {
                     .platformTextColor(color: selectedText == 2 ? Color("White") : Color("Gray04"))
                     .clipShape(Circle())
                     .font(.pretendard(.medium, size: 12))
-                    .onTapGesture {
-                        selectedText = 2
-                    }
                 
                 Text("3")
                     .padding(6)
@@ -34,9 +28,6 @@ struct NavigationCountView: View {
                     .platformTextColor(color: selectedText == 3 ? Color("White") : Color("Gray04"))
                     .clipShape(Circle())
                     .font(.pretendard(.medium, size: 12))
-                    .onTapGesture {
-                        selectedText = 3
-                    }
             }
             Spacer()
         }

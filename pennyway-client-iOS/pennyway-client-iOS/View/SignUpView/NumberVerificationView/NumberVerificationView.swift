@@ -70,3 +70,7 @@ struct NumberVerificationView: View {
         }
     }
 }
+
+#Preview {
+    NumberVerificationView()
+}

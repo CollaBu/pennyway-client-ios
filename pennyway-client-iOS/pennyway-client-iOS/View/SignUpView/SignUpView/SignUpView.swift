@@ -13,7 +13,6 @@ struct SignUpView: View {
     @State private var selectedText: Int? = 2
     
     var body: some View {
-        
         ZStack{
             VStack(spacing: 14) {
                 Spacer().frame(height: 10)
