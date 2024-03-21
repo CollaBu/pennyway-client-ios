@@ -1,88 +1,69 @@
-
 import SwiftUI
 
 struct NumberVerificationView: View {
-    @StateObject var viewModel = PhoneNumberVerificationViewModel()
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State private var phoneNumber: String = ""
     @State private var verificationCode: String = ""
-    @Binding var showErrorVerificationCode: Bool
+    @State private var showingPopUp = false
+    @State var showErrorVerificationCode = false
+    @State private var selectedText: Int? = 1
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("번호인증")
-                .font(.pretendard(.semibold, size: 24))
-                .padding(.horizontal,20)
-            
-            Spacer().frame(height: 32)
-            
-            phoneNumberInputSection()
-       
-            Spacer().frame(height: 21)
-            
-            VStack(alignment: .leading, spacing: 11){
-                CustomInputView(inputText: $verificationCode, titleText: "인증 번호")
-            }
-        }
-        .onChange(of: verificationCode) { newValue in
-            if newValue == viewModel.randomVerificationCode {
-                showErrorVerificationCode = false
-            } else {
-                showErrorVerificationCode = true
-            }
-        }
-    }
-    
-    private func phoneNumberInputSection() -> some View {
-        VStack(alignment: .leading, spacing: 11){
-            VStack(alignment: .leading, spacing: 13){
-                Text("휴대폰 번호")
-                    .padding(.horizontal, 20)
-                    .font(.pretendard(.regular, size: 12))
-                    .platformTextColor(color: Color("Gray04"))
-                HStack(spacing: 11){
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(Color("Gray01"))
-                            .frame(height: 46)
-                        TextField("'-' 제외 입력", text: $viewModel.phoneNumber)
-                            .padding(.leading, 13)
-                            .font(.pretendard(.medium, size: 14))
-                            .keyboardType(.numberPad)
-                        
-                            .onChange(of: viewModel.phoneNumber) { newValue in
-                                if Int(newValue) != nil {
-                                    if newValue.count > 11 {
-                                        viewModel.phoneNumber = String(newValue.prefix(11))
-                                    }
-                                } else {
-                                    viewModel.phoneNumber = ""
-                                }
-                            }
-                    }
+        NavigationAvailable {
+            ZStack{
+                VStack(spacing: 14) {
+                    Spacer().frame(height: 10)
+                    
+                    NavigationCountView(selectedText: $selectedText) 
+                    
+                    NumberVerificationContentView(showErrorVerificationCode: $showErrorVerificationCode)
+                    
+                    Spacer()
+                    
                     Button(action: {
-                        viewModel.validatePhoneNumber()
-                        viewModel.generateRandomVerificationCode()
+                        if !showErrorVerificationCode {
+                            showingPopUp = false
+                            selectedText = 2
+                        } else {
+                            showingPopUp = true 
+                        }
                     }, label: {
-                        Text("인증번호 받기")
-                            .font(.pretendard(.medium, size: 13))
-                            .platformTextColor(color: viewModel.phoneNumber.count >= 11 ? Color("White") : Color("Gray04"))
+                        Text("계속하기")
+                            .font(.pretendard(.semibold, size: 14))
+                            .platformTextColor(color: Color("Gray04"))
+                            .frame(maxWidth: .infinity)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 17)
                     })
-                    .padding(.horizontal, 13)
-                    .frame(height: 46)
-                    .background(viewModel.phoneNumber.count == 11 ? Color("Gray05"): Color("Gray03"))
+                    .frame(maxWidth: .infinity)
+                    .background(Color("Gray02"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
-                }
-                .padding(.horizontal, 20)
-            }
-            if viewModel.showErrorPhoneNumberFormat {
-                Text("존재하지 않는 전화번호예요")
                     .padding(.horizontal, 20)
-                    .font(.pretendard(.medium, size: 12))
-                    .platformTextColor(color: Color("Red03"))
+                    .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                    
+                    NavigationLink(destination: SignUpView(), tag: 2, selection: $selectedText) {
+                        EmptyView()
+                    }
+                }
+                
+                if showingPopUp {
+                    Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
+                    ErrorCodePopUpView(showingPopUp: $showingPopUp)
+                }
+            }
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                        
+                    }.offset(x: -10)
+                }
             }
         }
     }
-}
-
-#Preview {
-    NumberVerificationView(showErrorVerificationCode: .constant(false))
 }

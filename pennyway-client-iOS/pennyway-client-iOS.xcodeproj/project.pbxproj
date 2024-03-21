@@ -20,7 +20,9 @@
 		4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */; };
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
 		4A4A56702BAC99F40071D00E /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A566F2BAC99F40071D00E /* NavigationBackButton.swift */; };
-		4A6E62D62BA5F7FC00111246 /* NumberVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* NumberVerificationView.swift */; };
+		4A4A56722BACA2250071D00E /* NumberVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56712BACA2250071D00E /* NumberVerificationView.swift */; };
+		4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56732BACA4000071D00E /* NavigationCountView.swift */; };
+		4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* NumberVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
 		4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEE2B99A16B001C1188 /* LoginView.swift */; };
@@ -52,8 +54,10 @@
 		4A1179B32BA958ED00A9CF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
 		4A4A566F2BAC99F40071D00E /* NavigationBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationBackButton.swift; path = "pennyway-client-iOS/View/SignUpView/NavigationBackButton.swift"; sourceTree = SOURCE_ROOT; };
+		4A4A56712BACA2250071D00E /* NumberVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberVerificationView.swift; sourceTree = "<group>"; };
+		4A4A56732BACA4000071D00E /* NavigationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCountView.swift; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
-		4A6E62D52BA5F7FC00111246 /* NumberVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberVerificationView.swift; sourceTree = "<group>"; };
+		4A6E62D52BA5F7FC00111246 /* NumberVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pennyway-client-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pennyway_client_iOSApp.swift; sourceTree = "<group>"; };
@@ -117,7 +121,8 @@
 		4A4A566D2BAC96A10071D00E /* NumberVerification */ = {
 			isa = PBXGroup;
 			children = (
-				4A6E62D52BA5F7FC00111246 /* NumberVerificationView.swift */,
+				4A4A56712BACA2250071D00E /* NumberVerificationView.swift */,
+				4A6E62D52BA5F7FC00111246 /* NumberVerificationContentView.swift */,
 				4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */,
 			);
 			path = NumberVerification;
@@ -127,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				4A4A566F2BAC99F40071D00E /* NavigationBackButton.swift */,
+				4A4A56732BACA4000071D00E /* NavigationCountView.swift */,
 			);
 			path = ElementView;
 			sourceTree = "<group>";
@@ -318,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
@@ -331,9 +338,10 @@
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D850DF8F2BAAD70E004FBF67 /* WelcomeView.swift in Sources */,
 				D850DF8D2BA9F1F1004FBF67 /* TermsAndConditionsView.swift in Sources */,
-				4A6E62D62BA5F7FC00111246 /* NumberVerificationView.swift in Sources */,
+				4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
 				4A4A56702BAC99F40071D00E /* NavigationBackButton.swift in Sources */,
+				4A4A56722BACA2250071D00E /* NumberVerificationView.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -4,9 +4,7 @@ import SwiftUI
 struct SignUpView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var phoneNumber: String = ""
-    @State private var verificationCode: String = ""
-    @State private var showingPopUp = false
+
     @State private var name: String = ""
     @State private var id: String = ""
     @State private var password: String = ""
@@ -47,17 +45,12 @@ struct SignUpView: View {
                     .padding(.horizontal, 20)
                     .frame(height: 20)
                     
-                    NumberVerificationView(showErrorVerificationCode: $showErrorVerificationCode)
+                    SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw)
                     
                     Spacer()
                     
                     Button(action: {
                         
-                        if showErrorVerificationCode{
-                            showingPopUp = true
-                        }else{
-                            showingPopUp = false
-                        }
                     }, label: {
                         Text("계속하기")
                             .font(.pretendard(.semibold, size: 14))
@@ -74,16 +67,12 @@ struct SignUpView: View {
                     
                 }
                 
-                if showingPopUp {
-                    Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                    ErrorCodePopUpView(showingPopUp: $showingPopUp)
-                }
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
-                        BackButton()
+                        NavigationBackButton()
                             .padding(.leading, 5)
                             .frame(width: 44, height: 44)
                             .contentShape(Rectangle())

@@ -7,7 +7,7 @@ class PhoneNumberVerificationViewModel: ObservableObject {
     @Published var randomVerificationCode = ""
     
     func generateRandomVerificationCode() {
-        if showErrorPhoneNumberFormat{
+        if !showErrorPhoneNumberFormat{
             randomVerificationCode = String(Int.random(in: 100000...999999))
             print(randomVerificationCode)
         }

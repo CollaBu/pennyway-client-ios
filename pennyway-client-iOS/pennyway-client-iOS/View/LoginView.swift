@@ -18,7 +18,7 @@ struct LoginView: View {
                             }
                         }
                 } else {
-                    NavigationLink(destination: SignUpView()) {
+                    NavigationLink(destination: NumberVerificationView()) {
                         Text("회원가입")
                     }
                     .padding()

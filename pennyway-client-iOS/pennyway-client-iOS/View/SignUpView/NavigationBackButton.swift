@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct BackButton: View {
+struct NavigationBackButton: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
