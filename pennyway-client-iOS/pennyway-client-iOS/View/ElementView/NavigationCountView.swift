@@ -1,9 +1,4 @@
-//
-//  NavigationCountView.swift
-//  pennyway-client-iOS
-//
-//  Created by 최희진 on 3/22/24.
-//
+
 
 import SwiftUI
 

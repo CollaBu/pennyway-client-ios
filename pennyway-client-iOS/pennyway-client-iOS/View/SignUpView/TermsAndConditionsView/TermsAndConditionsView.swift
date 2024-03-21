@@ -1,34 +1,29 @@
 
+
 import SwiftUI
 
-struct SignUpView: View {
+struct TermsAndConditionsView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var name: String = ""
-    @State private var id: String = ""
-    @State private var password: String = ""
-    @State private var confirmPw: String = ""
-    
-    @State private var selectedText: Int? = 2
-    
+    @State private var selectedText: Int? = 3
+   
     var body: some View {
-        
         ZStack{
             VStack(spacing: 14) {
                 Spacer().frame(height: 10)
                 
                 NavigationCountView(selectedText: $selectedText)
                     .onAppear {
-                        selectedText = 2
+                        selectedText = 3
                     }
                 
-                SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw)
+                TermsAndConditionsContentView()
                 
                 Spacer()
                 
                 Button(action: {
-                    selectedText = 3
+                    selectedText = 4
                 }, label: {
                     Text("계속하기")
                         .font(.pretendard(.semibold, size: 14))
@@ -43,9 +38,10 @@ struct SignUpView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                 
-                NavigationLink(destination: TermsAndConditionsView(), tag: 3, selection: $selectedText) {
+                NavigationLink(destination: WelcomeView(), tag: 4, selection: $selectedText) {
                     EmptyView()
                 }
+                
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -59,8 +55,8 @@ struct SignUpView: View {
                     
                 }.offset(x: -10)
             }
-            
         }
+        
     }
 }
 

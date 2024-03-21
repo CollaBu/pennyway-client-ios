@@ -16,6 +16,9 @@ struct NumberVerificationView: View {
                     Spacer().frame(height: 10)
                     
                     NavigationCountView(selectedText: $selectedText) 
+                        .onAppear {
+                            selectedText = 1
+                        }
                     
                     NumberVerificationContentView(showErrorVerificationCode: $showErrorVerificationCode)
                     

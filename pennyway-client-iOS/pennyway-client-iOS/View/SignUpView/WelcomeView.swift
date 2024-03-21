@@ -39,6 +39,18 @@ struct WelcomeView: View {
             })
             .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack {
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                    
+                }.offset(x: -10)
+            }
+        }
     }
 }
 
