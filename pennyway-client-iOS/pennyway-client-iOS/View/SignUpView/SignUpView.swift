@@ -12,21 +12,10 @@ struct SignUpView: View {
     @State private var password: String = ""
     @State private var confirmPw: String = ""
     
-    var backButton: some View{
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-        }, label: {
-            Image("icon_arrow_back")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 34, height: 34)
-                .padding(5)
-                
-        })
-    }
-    
+    @State var showErrorVerificationCode = false
+   
     var body: some View {
-
+        
         NavigationAvailable{
             ZStack{
                 VStack(spacing: 14) {
@@ -57,14 +46,18 @@ struct SignUpView: View {
                     }
                     .padding(.horizontal, 20)
                     .frame(height: 20)
-
-                    NumberVerificationView()                 
-
+                    
+                    NumberVerificationView(showErrorVerificationCode: $showErrorVerificationCode)
+                    
                     Spacer()
                     
                     Button(action: {
-                        SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw) //계속하기 눌렀을 때 SignUpFormView로 가기 위한 임시 코드
-                        showingPopUp = true
+                        
+                        if showErrorVerificationCode{
+                            showingPopUp = true
+                        }else{
+                            showingPopUp = false
+                        }
                     }, label: {
                         Text("계속하기")
                             .font(.pretendard(.semibold, size: 14))
@@ -78,28 +71,28 @@ struct SignUpView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .padding(.horizontal, 20)
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
-                
+                    
                 }
                 
                 if showingPopUp {
                     Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                   ErrorCodePopUpView(showingPopUp: $showingPopUp)
+                    ErrorCodePopUpView(showingPopUp: $showingPopUp)
                 }
             }
-            
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    backButton
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-                       
-                }.offset(x: -10)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        BackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                        
+                    }.offset(x: -10)
+                }
             }
         }
+    }
 }
 
 #Preview {
