@@ -118,14 +118,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		4A4A566D2BAC96A10071D00E /* NumberVerification */ = {
+		4A4A566D2BAC96A10071D00E /* NumberVerificationView */ = {
 			isa = PBXGroup;
 			children = (
 				4A4A56712BACA2250071D00E /* NumberVerificationView.swift */,
 				4A6E62D52BA5F7FC00111246 /* NumberVerificationContentView.swift */,
 				4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */,
 			);
-			path = NumberVerification;
+			path = NumberVerificationView;
 			sourceTree = "<group>";
 		};
 		4A4A566E2BAC97C90071D00E /* ElementView */ = {
@@ -137,12 +137,20 @@
 			path = ElementView;
 			sourceTree = "<group>";
 		};
+		4A4A56752BACACEE0071D00E /* SignUpView */ = {
+			isa = PBXGroup;
+			children = (
+				4A6E62D72BA6082100111246 /* SignUpView.swift */,
+				D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */,
+			);
+			path = SignUpView;
+			sourceTree = "<group>";
+		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
 			isa = PBXGroup;
 			children = (
-				4A4A566D2BAC96A10071D00E /* NumberVerification */,
-				4A6E62D72BA6082100111246 /* SignUpView.swift */,
-				D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */,
+				4A4A56752BACACEE0071D00E /* SignUpView */,
+				4A4A566D2BAC96A10071D00E /* NumberVerificationView */,
 				D850DF8C2BA9F1F1004FBF67 /* TermsAndConditionsView.swift */,
 				D850DF8E2BAAD70D004FBF67 /* WelcomeView.swift */,
 			);

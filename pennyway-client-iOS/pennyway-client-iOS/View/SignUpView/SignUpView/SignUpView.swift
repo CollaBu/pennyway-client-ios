@@ -1,33 +1,33 @@
+
 import SwiftUI
 
-struct NumberVerificationView: View {
+struct SignUpView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var phoneNumber: String = ""
-    @State private var verificationCode: String = ""
-    @State private var showingPopUp = false
-    @State var showErrorVerificationCode = false
-    @State private var selectedText: Int? = 1
+
+    @State private var name: String = ""
+    @State private var id: String = ""
+    @State private var password: String = ""
+    @State private var confirmPw: String = ""
     
+    @State var showErrorVerificationCode = false
+    @State private var selectedText: Int? = 2
+   
     var body: some View {
-        NavigationAvailable {
+        
+        NavigationAvailable{
             ZStack{
                 VStack(spacing: 14) {
                     Spacer().frame(height: 10)
                     
-                    NavigationCountView(selectedText: $selectedText) 
+                    NavigationCountView(selectedText: $selectedText)
                     
-                    NumberVerificationContentView(showErrorVerificationCode: $showErrorVerificationCode)
+                    SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw)
                     
                     Spacer()
                     
                     Button(action: {
-                        if !showErrorVerificationCode {
-                            showingPopUp = false
-                            selectedText = 2
-                        } else {
-                            showingPopUp = true 
-                        }
+                        selectedText = 3
                     }, label: {
                         Text("계속하기")
                             .font(.pretendard(.semibold, size: 14))
@@ -42,15 +42,12 @@ struct NumberVerificationView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                     
-                    NavigationLink(destination: SignUpView(), tag: 2, selection: $selectedText) {
+                    NavigationLink(destination: TermsAndConditionsView(), tag: 3, selection: $selectedText) {
                         EmptyView()
                     }
+                    
                 }
                 
-                if showingPopUp {
-                    Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                    ErrorCodePopUpView(showingPopUp: $showingPopUp)
-                }
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
@@ -66,4 +63,8 @@ struct NumberVerificationView: View {
             }
         }
     }
+}
+
+#Preview {
+    SignUpView()
 }

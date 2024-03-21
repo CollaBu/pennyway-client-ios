@@ -1,56 +1,33 @@
-
 import SwiftUI
 
-struct SignUpView: View {
+struct NumberVerificationView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
-    @State private var name: String = ""
-    @State private var id: String = ""
-    @State private var password: String = ""
-    @State private var confirmPw: String = ""
-    
+    @State private var phoneNumber: String = ""
+    @State private var verificationCode: String = ""
+    @State private var showingPopUp = false
     @State var showErrorVerificationCode = false
-   
+    @State private var selectedText: Int? = 1
+    
     var body: some View {
-        
-        NavigationAvailable{
+        NavigationAvailable {
             ZStack{
                 VStack(spacing: 14) {
                     Spacer().frame(height: 10)
                     
-                    HStack(spacing: 8){
-                        LazyHGrid(rows: [GridItem(.flexible())]) {
-                            Text("1")
-                                .padding(6)
-                                .background(Color("Gray06"))
-                                .platformTextColor(color: Color("White"))
-                                .clipShape(Circle())
-                                .font(.pretendard(.medium, size: 12))
-                            Text("2")
-                                .padding(6)
-                                .background(Color("Gray03"))
-                                .platformTextColor(color: Color("Gray04"))
-                                .clipShape(Circle())
-                                .font(.pretendard(.medium, size: 12))
-                            Text("3")
-                                .padding(6)
-                                .background(Color("Gray03"))
-                                .platformTextColor(color: Color("Gray04"))
-                                .clipShape(Circle())
-                                .font(.pretendard(.medium, size: 12))
-                        }
-                        Spacer()
-                    }
-                    .padding(.horizontal, 20)
-                    .frame(height: 20)
+                    NavigationCountView(selectedText: $selectedText) 
                     
-                    SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw)
+                    NumberVerificationContentView(showErrorVerificationCode: $showErrorVerificationCode)
                     
                     Spacer()
                     
                     Button(action: {
-                        
+                        if !showErrorVerificationCode {
+                            showingPopUp = false
+                            selectedText = 2
+                        } else {
+                            showingPopUp = true
+                        }
                     }, label: {
                         Text("계속하기")
                             .font(.pretendard(.semibold, size: 14))
@@ -65,8 +42,15 @@ struct SignUpView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                     
+                    NavigationLink(destination: SignUpView(), tag: 2, selection: $selectedText) {
+                        EmptyView()
+                    }
                 }
                 
+                if showingPopUp {
+                    Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
+                    ErrorCodePopUpView(showingPopUp: $showingPopUp)
+                }
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
@@ -82,8 +66,4 @@ struct SignUpView: View {
             }
         }
     }
-}
-
-#Preview {
-    SignUpView()
 }
