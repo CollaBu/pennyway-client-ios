@@ -22,8 +22,8 @@ struct CustomInputView: View {
                     
                     TextField("", text: $inputText)
                         .padding(.leading, 13)
+                        .padding(.vertical, 16)
                         .font(.pretendard(.medium, size: 14))
-                        
                 }
             }
             .padding(.horizontal, 20)

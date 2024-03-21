@@ -1,14 +1,15 @@
 import SwiftUI
 
 struct NumberVerificationView: View {
-    @Binding var phoneNumber: String
-    @Binding var verificationCode: String
+    @State private var phoneNumber: String = ""
+    @State private var verificationCode: String = ""
     @State var showErrorPhoneNumber = false
     @State var showErrorVerificationCode = false
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("번호 인증")
+
+            Text("번호인증")
                 .font(.pretendard(.semibold, size: 24))
                 .padding(.horizontal,20)
             
@@ -37,12 +38,12 @@ struct NumberVerificationView: View {
                             
                         }, label: {
                             Text("인증번호 받기")
-                                .platformTextColor(color: Color("Gray04"))
                                 .font(.pretendard(.medium, size: 13))
+                                .platformTextColor(color: phoneNumber.count >= 11 ? Color("White") : Color("Gray04"))
                         })
                         .padding(.horizontal, 13)
                         .frame(height: 46)
-                        .background(Color("Gray03"))
+                        .background(phoneNumber.count == 11 ? Color("Gray05"): Color("Gray03"))
                         .clipShape(RoundedRectangle(cornerRadius: 4))
                     }
                     .padding(.horizontal, 20)
@@ -52,7 +53,6 @@ struct NumberVerificationView: View {
                         .padding(.horizontal, 20)
                         .font(.pretendard(.medium, size: 12))
                         .platformTextColor(color: Color("Red03"))
-                    
                 }
             }
             
@@ -61,10 +61,7 @@ struct NumberVerificationView: View {
             VStack(alignment: .leading, spacing: 11){
                 CustomInputView(inputText: $verificationCode, titleText: "인증 번호")
                 if showErrorVerificationCode{
-                    Text("잘못된 인증번호예요")
-                        .padding(.horizontal, 20)
-                        .font(.pretendard(.medium, size: 12))
-                        .platformTextColor(color: Color("Red03"))
+
                 }
             }
         }
@@ -72,5 +69,5 @@ struct NumberVerificationView: View {
 }
 
 #Preview {
-    NumberVerificationView(phoneNumber: .constant("01012345678"), verificationCode: .constant("123456"))
+    NumberVerificationView()
 }
