@@ -16,6 +16,8 @@ class PhoneNumberVerificationViewModel: ObservableObject {
     func validatePhoneNumber() {
         if phoneNumber.prefix(3) != "010" && phoneNumber.prefix(3) != "011" {
             showErrorPhoneNumberFormat = true
+        } else{
+            showErrorPhoneNumberFormat = false
         }
     }
 }

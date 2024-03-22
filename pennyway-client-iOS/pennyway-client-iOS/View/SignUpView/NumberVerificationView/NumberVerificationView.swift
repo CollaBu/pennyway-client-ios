@@ -6,7 +6,7 @@ struct NumberVerificationView: View {
     @State private var phoneNumber: String = ""
     @State private var verificationCode: String = ""
     @State private var showingPopUp = false
-    @State var showErrorVerificationCode = false
+    @State var showErrorVerificationCode = true
     @State private var selectedText: Int? = 1
     
     var body: some View {
