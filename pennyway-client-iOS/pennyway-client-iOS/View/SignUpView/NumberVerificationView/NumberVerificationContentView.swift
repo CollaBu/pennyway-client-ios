@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct NumberVerificationContentView: View {
-    @StateObject var viewModel = PhoneNumberVerificationViewModel()
+    @StateObject var viewModel = NumberVerificationViewModel()
     @State private var verificationCode: String = ""
     @Binding var showErrorVerificationCode: Bool
     

@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-class PhoneNumberVerificationViewModel: ObservableObject {
+class NumberVerificationViewModel: ObservableObject {
     @Published var phoneNumber: String = ""
     @Published var showErrorPhoneNumberFormat = false
     @Published var randomVerificationCode = ""
