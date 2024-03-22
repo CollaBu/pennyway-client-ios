@@ -4,6 +4,7 @@ struct NumberVerificationView: View {
     @State private var verificationCode: String = ""
     @Binding var showErrorVerificationCode: Bool
     @State var showErrorPhoneNumberFormat = false
+    @State var randomVerificationCode = ""
     @State var phoneNumber: String = ""
     
     var body: some View {
@@ -20,6 +21,13 @@ struct NumberVerificationView: View {
             
             VStack(alignment: .leading, spacing: 11){
                 CustomInputView(inputText: $verificationCode, titleText: "인증 번호")
+            }
+        }
+        .onChange(of: verificationCode) { newValue in
+            if newValue == randomVerificationCode {
+                showErrorVerificationCode = false
+            } else {
+                showErrorVerificationCode = true
             }
         }
     }
@@ -55,6 +63,9 @@ struct NumberVerificationView: View {
                  
                         if phoneNumber.prefix(3) != "010" && phoneNumber.prefix(3) != "011" {
                             showErrorPhoneNumberFormat = true
+                        }else{
+                            randomVerificationCode = String(Int.random(in: 100000...999999))
+                            print(randomVerificationCode)
                         }
                         
                                  
