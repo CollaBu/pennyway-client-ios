@@ -12,6 +12,8 @@ struct SignUpView: View {
     @State private var password: String = ""
     @State private var confirmPw: String = ""
     
+    @State var showErrorVerificationCode = false
+    
     var backButton: some View{
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -26,7 +28,7 @@ struct SignUpView: View {
     }
     
     var body: some View {
-
+        
         NavigationAvailable{
             ZStack{
                 VStack(spacing: 14) {
@@ -57,9 +59,9 @@ struct SignUpView: View {
                     }
                     .padding(.horizontal, 20)
                     .frame(height: 20)
-
-                    NumberVerificationView()                 
-
+                    
+                    NumberVerificationView(showErrorVerificationCode: $showErrorVerificationCode)
+                    
                     Spacer()
                     
                     Button(action: {
@@ -78,12 +80,12 @@ struct SignUpView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .padding(.horizontal, 20)
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
-                
+                    
                 }
                 
                 if showingPopUp {
                     Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                   ErrorCodePopUpView(showingPopUp: $showingPopUp)
+                    ErrorCodePopUpView(showingPopUp: $showingPopUp)
                 }
             }
             
@@ -96,10 +98,11 @@ struct SignUpView: View {
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-                       
+                    
                 }.offset(x: -10)
             }
         }
+    }
 }
 
 #Preview {
