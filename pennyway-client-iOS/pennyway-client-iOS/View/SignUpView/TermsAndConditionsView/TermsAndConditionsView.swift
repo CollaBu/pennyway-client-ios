@@ -6,39 +6,30 @@ struct TermsAndConditionsView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var selectedText: Int? = 3
+    @ObservedObject var viewModel: SignUpNavigationViewModel
    
     var body: some View {
         ZStack{
-            VStack(spacing: 14) {
-                Spacer().frame(height: 10)
+            VStack {
+                Spacer().frame(height: 15)
                 
-                NavigationCountView(selectedText: $selectedText)
+                NavigationCountView(selectedText: $viewModel.selectedText)
                     .onAppear {
-                        selectedText = 3
+                        viewModel.selectedText = 3
                     }
+                
+                Spacer().frame(height: 14)
                 
                 TermsAndConditionsContentView()
                 
                 Spacer()
                 
-                Button(action: {
-                    selectedText = 4
-                }, label: {
-                    Text("계속하기")
-                        .font(.pretendard(.semibold, size: 14))
-                        .platformTextColor(color: Color("Gray04"))
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 17)
-                })
-                .frame(maxWidth: .infinity)
-                .background(Color("Gray02"))
-                .clipShape(RoundedRectangle(cornerRadius: 4))
-                .padding(.horizontal, 20)
+                CustomBottomButton(action: {
+                    viewModel.continueButtonTapped()
+                }, label: "계속하기")
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
-                
-                NavigationLink(destination: WelcomeView(), tag: 4, selection: $selectedText) {
+
+                NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {
                     EmptyView()
                 }
                 
@@ -60,5 +51,5 @@ struct TermsAndConditionsView: View {
 }
 
 #Preview {
-    TermsAndConditionsView()
+    TermsAndConditionsView(viewModel: SignUpNavigationViewModel())
 }

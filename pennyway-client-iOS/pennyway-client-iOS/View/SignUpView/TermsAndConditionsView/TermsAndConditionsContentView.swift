@@ -5,7 +5,6 @@ struct TermsAndConditionsContentView: View {
     @State private var isSelectedUseBtn: Bool = false
     @State private var isSelectedInfoBtn: Bool = false
     
-    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -38,11 +37,11 @@ struct TermsAndConditionsContentView: View {
                                     .renderingMode(.template)
                                     .resizable()
                                     .frame(width: 24, height: 24)
-                                    .platformTextColor(color: isSelectedAllBtn ? Color.white : Color("Gray04"))
+                                    .platformTextColor(color: isSelectedAllBtn ? Color("White"): Color("Gray04"))
                                     .padding(.horizontal,10)
                                 Text("모두 동의할게요")
                                     .font(.pretendard(.medium, size: 14))
-                                    .platformTextColor(color: isSelectedAllBtn ? Color.white : Color("Gray04"))
+                                    .platformTextColor(color: isSelectedAllBtn ? Color("White") : Color("Gray04"))
                                     .padding(.horizontal,36)
                                 
                             }
@@ -148,5 +147,5 @@ struct TermsAndConditionsContentView: View {
 
 
 #Preview {
-    TermsAndConditionsView()
+    TermsAndConditionsView(viewModel: SignUpNavigationViewModel())
 }

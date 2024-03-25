@@ -9,40 +9,31 @@ struct SignUpView: View {
     @State private var id: String = ""
     @State private var password: String = ""
     @State private var confirmPw: String = ""
-    
-    @State private var selectedText: Int? = 2
+
+    @ObservedObject var viewModel: SignUpNavigationViewModel
     
     var body: some View {
         ZStack{
-            VStack(spacing: 14) {
-                Spacer().frame(height: 10)
+            VStack {
+                Spacer().frame(height: 15)
                 
-                NavigationCountView(selectedText: $selectedText)
+                NavigationCountView(selectedText: $viewModel.selectedText)
                     .onAppear {
-                        selectedText = 2
+                        viewModel.selectedText = 2
                     }
+                
+                Spacer().frame(height: 14)
                 
                 SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw)
                 
                 Spacer()
                 
-                Button(action: {
-                    selectedText = 3
-                }, label: {
-                    Text("계속하기")
-                        .font(.pretendard(.semibold, size: 14))
-                        .platformTextColor(color: Color("Gray04"))
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 17)
-                })
-                .frame(maxWidth: .infinity)
-                .background(Color("Gray02"))
-                .clipShape(RoundedRectangle(cornerRadius: 4))
-                .padding(.horizontal, 20)
+                CustomBottomButton(action: {
+                    viewModel.continueButtonTapped()
+                }, label: "계속하기")
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                 
-                NavigationLink(destination: TermsAndConditionsView(), tag: 3, selection: $selectedText) {
+                NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
                     EmptyView()
                 }
             }
@@ -64,5 +55,5 @@ struct SignUpView: View {
 }
 
 #Preview {
-    SignUpView()
+    SignUpView(viewModel: SignUpNavigationViewModel())
 }

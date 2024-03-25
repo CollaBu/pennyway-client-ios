@@ -7,45 +7,36 @@ struct NumberVerificationView: View {
     @State private var verificationCode: String = ""
     @State private var showingPopUp = false
     @State var showErrorVerificationCode = true
-    @State private var selectedText: Int? = 1
+    @StateObject var viewModel = SignUpNavigationViewModel()
     
     var body: some View {
         NavigationAvailable {
             ZStack{
-                VStack(spacing: 14) {
-                    Spacer().frame(height: 10)
+                VStack{
+                    Spacer().frame(height: 15)
                     
-                    NavigationCountView(selectedText: $selectedText) 
+                    NavigationCountView(selectedText: $viewModel.selectedText)
                         .onAppear {
-                            selectedText = 1
+                            viewModel.selectedText = 1
                         }
+                    
+                    Spacer().frame(height: 14)
                     
                     NumberVerificationContentView(showErrorVerificationCode: $showErrorVerificationCode)
                     
                     Spacer()
                     
-                    Button(action: {
+                    CustomBottomButton(action: {
                         if !showErrorVerificationCode {
                             showingPopUp = false
-                            selectedText = 2
+                            viewModel.continueButtonTapped()
                         } else {
                             showingPopUp = true
                         }
-                    }, label: {
-                        Text("계속하기")
-                            .font(.pretendard(.semibold, size: 14))
-                            .platformTextColor(color: Color("Gray04"))
-                            .frame(maxWidth: .infinity)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 17)
-                    })
-                    .frame(maxWidth: .infinity)
-                    .background(Color("Gray02"))
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
-                    .padding(.horizontal, 20)
+                    }, label: "계속하기")
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                     
-                    NavigationLink(destination: SignUpView(), tag: 2, selection: $selectedText) {
+                    NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) {
                         EmptyView()
                     }
                 }
@@ -54,6 +45,7 @@ struct NumberVerificationView: View {
                     Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
                     ErrorCodePopUpView(showingPopUp: $showingPopUp)
                 }
+                    
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
