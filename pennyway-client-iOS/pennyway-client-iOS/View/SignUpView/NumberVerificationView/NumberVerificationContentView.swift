@@ -5,11 +5,10 @@ struct NumberVerificationContentView: View {
     @StateObject var viewModel = NumberVerificationViewModel()
     @State private var verificationCode: String = ""
     @Binding var showErrorVerificationCode: Bool
-    @State private var timerSeconds = 120 // 2분
-        
+    
     var timerString: String {
-        let minutes = timerSeconds / 60
-        let seconds = timerSeconds % 60
+        let minutes = viewModel.timerSeconds / 60
+        let seconds = viewModel.timerSeconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
@@ -68,6 +67,8 @@ struct NumberVerificationContentView: View {
                     Button(action: {
                         viewModel.validatePhoneNumber()
                         viewModel.generateRandomVerificationCode()
+                        viewModel.judgeTimerRunning()
+                        
                     }, label: {
                         Text("인증번호 받기")
                             .font(.pretendard(.medium, size: 13))
@@ -123,19 +124,7 @@ struct NumberVerificationContentView: View {
             .padding(.horizontal, 20)
         }
     }
-    
-    
-    func startTimer() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if timerSeconds > 0 {
-                timerSeconds -= 1
-            } else {
-                timer.invalidate()
-                verificationCode = ""
-            }
-        }
-    
-    }
+
 }
 
 #Preview {
