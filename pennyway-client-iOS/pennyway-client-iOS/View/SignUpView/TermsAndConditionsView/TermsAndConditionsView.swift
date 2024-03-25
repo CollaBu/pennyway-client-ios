@@ -22,27 +22,18 @@ struct TermsAndConditionsView: View {
                 
                 Spacer()
                 
-                Button(action: {
+                CustomBottomButton(action: {
                     selectedText = 4
-                }, label: {
-                    Text("계속하기")
-                        .font(.pretendard(.semibold, size: 14))
-                        .platformTextColor(color: Color("Gray04"))
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 17)
-                })
-                .frame(maxWidth: .infinity)
-                .background(Color("Gray02"))
-                .clipShape(RoundedRectangle(cornerRadius: 4))
-                .padding(.horizontal, 20)
+                }, label: "계속하기")
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
-                
+                .border(Color.black)
+
                 NavigationLink(destination: WelcomeView(), tag: 4, selection: $selectedText) {
                     EmptyView()
                 }
                 
             }
+            .border(Color.black)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

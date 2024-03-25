@@ -23,6 +23,7 @@
 		4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56732BACA4000071D00E /* NavigationCountView.swift */; };
 		4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */; };
 		4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56792BADEFF90071D00E /* NavigationBackButton.swift */; };
+		4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */; };
 		4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* NumberVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
@@ -58,6 +59,7 @@
 		4A4A56732BACA4000071D00E /* NavigationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCountView.swift; sourceTree = "<group>"; };
 		4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
 		4A4A56792BADEFF90071D00E /* NavigationBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackButton.swift; sourceTree = "<group>"; };
+		4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomButton.swift; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* NumberVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */,
+				4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D850DF8F2BAAD70E004FBF67 /* WelcomeView.swift in Sources */,
 				D850DF8D2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift in Sources */,
+				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,

@@ -8,7 +8,7 @@ struct WelcomeView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: .infinity, maxHeight: 160)
-                    .padding(.top, 71)//수정
+                    .padding(.top, 71)
                     .padding(.horizontal, 80)
                     .padding(.bottom, 20)
                 
@@ -21,25 +21,15 @@ struct WelcomeView: View {
                     .font(.pretendard(.medium, size: 14))
                     .platformTextColor(color: Color("Gray04"))
                 
-                Spacer()//수정
+                Spacer()
                 
-                Button(action: {
+                CustomBottomButton(action: {
                     
-                }, label: {
-                    ZStack{
-                        Rectangle()
-                            .frame(maxWidth: .infinity, maxHeight: 47)
-                            .platformTextColor(color: Color("Mint03"))
-                            .cornerRadius(4)
-                            .padding(.horizontal, 20)
-                        
-                        Text("확인")
-                            .font(.pretendard(.semibold, size: 14))
-                            .platformTextColor(color: .white)
-                    }
-                })
+                }, label: "확인")
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                .border(Color.black)
             }
+            .border(Color.black)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
