@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-class PhoneNumberVerificationViewModel: ObservableObject {
+class NumberVerificationViewModel: ObservableObject {
     @Published var phoneNumber: String = ""
     @Published var showErrorPhoneNumberFormat = false
     @Published var randomVerificationCode = ""
@@ -16,7 +16,7 @@ class PhoneNumberVerificationViewModel: ObservableObject {
     func validatePhoneNumber() {
         if phoneNumber.prefix(3) != "010" && phoneNumber.prefix(3) != "011" {
             showErrorPhoneNumberFormat = true
-        }else{
+        } else{
             showErrorPhoneNumberFormat = false
         }
     }

@@ -1,7 +1,8 @@
+
 import SwiftUI
 
-struct NumberVerificationView: View {
-    @StateObject var viewModel = PhoneNumberVerificationViewModel()
+struct NumberVerificationContentView: View {
+    @StateObject var viewModel = NumberVerificationViewModel()
     @State private var verificationCode: String = ""
     @Binding var showErrorVerificationCode: Bool
     
@@ -83,5 +84,5 @@ struct NumberVerificationView: View {
 }
 
 #Preview {
-    NumberVerificationView(showErrorVerificationCode: .constant(false))
+    NumberVerificationContentView(showErrorVerificationCode: .constant(false))
 }
