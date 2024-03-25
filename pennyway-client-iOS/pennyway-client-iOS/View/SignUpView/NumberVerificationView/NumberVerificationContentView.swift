@@ -72,12 +72,13 @@ struct NumberVerificationContentView: View {
                     }, label: {
                         Text("인증번호 받기")
                             .font(.pretendard(.medium, size: 13))
-                            .platformTextColor(color: viewModel.phoneNumber.count >= 11 ? Color("White") : Color("Gray04"))
+                            .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White") : Color("Gray04"))
                     })
                     .padding(.horizontal, 13)
                     .frame(height: 46)
-                    .background(viewModel.phoneNumber.count == 11 ? Color("Gray05"): Color("Gray03"))
+                    .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05"): Color("Gray03"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .disabled(viewModel.isDisabledButton)
                 }
                 .padding(.horizontal, 20)
             }
