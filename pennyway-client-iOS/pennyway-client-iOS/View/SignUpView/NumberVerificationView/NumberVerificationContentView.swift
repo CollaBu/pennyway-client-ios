@@ -5,6 +5,13 @@ struct NumberVerificationContentView: View {
     @StateObject var viewModel = NumberVerificationViewModel()
     @State private var verificationCode: String = ""
     @Binding var showErrorVerificationCode: Bool
+    @State private var timerSeconds = 120 // 2분
+        
+    var timerString: String {
+        let minutes = timerSeconds / 60
+        let seconds = timerSeconds % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -18,9 +25,9 @@ struct NumberVerificationContentView: View {
        
             Spacer().frame(height: 21)
             
-            VStack(alignment: .leading, spacing: 11){
-                CustomInputView(inputText: $verificationCode, titleText: "인증 번호")
-            }
+            numberInputSection()
+            
+            
         }
         .onChange(of: verificationCode) { newValue in
             if newValue == viewModel.randomVerificationCode {
@@ -80,6 +87,54 @@ struct NumberVerificationContentView: View {
                     .platformTextColor(color: Color("Red03"))
             }
         }
+    }
+    
+    private func numberInputSection() -> some View {
+        VStack(alignment: .leading, spacing: 13){
+            Text("인증 번호")
+                .padding(.horizontal, 20)
+                .font(.pretendard(.regular, size: 12))
+                .platformTextColor(color: Color("Gray04"))
+            
+            HStack(spacing: 11){
+                ZStack {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color("Gray01"))
+                        .frame(height: 46)
+                    HStack {
+                        TextField("", text: $verificationCode)
+                            .padding(.leading, 13)
+                            .font(.pretendard(.medium, size: 14))
+                            .keyboardType(.numberPad)
+                            .onChange(of: verificationCode) { newValue in
+                                if Int(newValue) == nil {
+                                    verificationCode = ""
+                                }
+                            }
+                        Spacer()
+                        Text(timerString)
+                            .padding(.trailing, 13)
+                            .font(.pretendard(.regular, size: 12))
+                            .platformTextColor(color: Color("Mint03"))
+                        
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+    
+    
+    func startTimer() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if timerSeconds > 0 {
+                timerSeconds -= 1
+            } else {
+                timer.invalidate()
+                verificationCode = ""
+            }
+        }
+    
     }
 }
 
