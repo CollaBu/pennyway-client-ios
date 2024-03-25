@@ -12,13 +12,15 @@ struct NumberVerificationView: View {
     var body: some View {
         NavigationAvailable {
             ZStack{
-                VStack(spacing: 14) {
-                    Spacer().frame(height: 10)
+                VStack{
+                    Spacer().frame(height: 15)
                     
                     NavigationCountView(selectedText: $selectedText) 
                         .onAppear {
                             selectedText = 1
                         }
+                    
+                    Spacer().frame(height: 14)
                     
                     NumberVerificationContentView(showErrorVerificationCode: $showErrorVerificationCode)
                     

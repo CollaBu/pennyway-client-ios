@@ -10,13 +10,15 @@ struct TermsAndConditionsView: View {
    
     var body: some View {
         ZStack{
-            VStack(spacing: 14) {
-                Spacer().frame(height: 10)
+            VStack {
+                Spacer().frame(height: 15)
                 
                 NavigationCountView(selectedText: $selectedText)
                     .onAppear {
                         selectedText = 3
                     }
+                
+                Spacer().frame(height: 14)
                 
                 TermsAndConditionsContentView()
                 
