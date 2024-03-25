@@ -5,7 +5,6 @@ struct TermsAndConditionsContentView: View {
     @State private var isSelectedUseBtn: Bool = false
     @State private var isSelectedInfoBtn: Bool = false
     
-    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -148,5 +147,5 @@ struct TermsAndConditionsContentView: View {
 
 
 #Preview {
-    TermsAndConditionsView()
+    TermsAndConditionsView(viewModel: SignUpNavigationViewModel())
 }

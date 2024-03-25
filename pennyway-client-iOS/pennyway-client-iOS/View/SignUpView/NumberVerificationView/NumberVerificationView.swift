@@ -7,7 +7,7 @@ struct NumberVerificationView: View {
     @State private var verificationCode: String = ""
     @State private var showingPopUp = false
     @State var showErrorVerificationCode = true
-    @State private var selectedText: Int? = 1
+    @StateObject var viewModel = SignUpNavigationViewModel()
     
     var body: some View {
         NavigationAvailable {
@@ -15,9 +15,9 @@ struct NumberVerificationView: View {
                 VStack{
                     Spacer().frame(height: 15)
                     
-                    NavigationCountView(selectedText: $selectedText) 
+                    NavigationCountView(selectedText: $viewModel.selectedText)
                         .onAppear {
-                            selectedText = 1
+                            viewModel.selectedText = 1
                         }
                     
                     Spacer().frame(height: 14)
@@ -29,20 +29,17 @@ struct NumberVerificationView: View {
                     CustomBottomButton(action: {
                         if !showErrorVerificationCode {
                             showingPopUp = false
-                            selectedText = 2
+                            viewModel.continueButtonTapped()
                         } else {
                             showingPopUp = true
                         }
                     }, label: "계속하기")
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
-                    .border(Color.black)
                     
-                    
-                    NavigationLink(destination: SignUpView(), tag: 2, selection: $selectedText) {
+                    NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) {
                         EmptyView()
                     }
                 }
-               
                 
                 if showingPopUp {
                     Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
@@ -50,7 +47,6 @@ struct NumberVerificationView: View {
                 }
                     
             }
-            .border(.red)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

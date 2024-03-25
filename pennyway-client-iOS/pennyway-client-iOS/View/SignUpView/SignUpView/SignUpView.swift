@@ -9,17 +9,17 @@ struct SignUpView: View {
     @State private var id: String = ""
     @State private var password: String = ""
     @State private var confirmPw: String = ""
-    
-    @State private var selectedText: Int? = 2
+
+    @ObservedObject var viewModel: SignUpNavigationViewModel
     
     var body: some View {
         ZStack{
             VStack {
                 Spacer().frame(height: 15)
                 
-                NavigationCountView(selectedText: $selectedText)
+                NavigationCountView(selectedText: $viewModel.selectedText)
                     .onAppear {
-                        selectedText = 2
+                        viewModel.selectedText = 2
                     }
                 
                 Spacer().frame(height: 14)
@@ -29,11 +29,11 @@ struct SignUpView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    selectedText = 3
+                    viewModel.continueButtonTapped()
                 }, label: "계속하기")
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                 
-                NavigationLink(destination: TermsAndConditionsView(), tag: 3, selection: $selectedText) {
+                NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
                     EmptyView()
                 }
             }
@@ -55,5 +55,5 @@ struct SignUpView: View {
 }
 
 #Preview {
-    SignUpView()
+    SignUpView(viewModel: SignUpNavigationViewModel())
 }

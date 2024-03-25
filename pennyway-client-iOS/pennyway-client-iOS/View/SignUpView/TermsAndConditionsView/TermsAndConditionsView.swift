@@ -6,16 +6,16 @@ struct TermsAndConditionsView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var selectedText: Int? = 3
+    @ObservedObject var viewModel: SignUpNavigationViewModel
    
     var body: some View {
         ZStack{
             VStack {
                 Spacer().frame(height: 15)
                 
-                NavigationCountView(selectedText: $selectedText)
+                NavigationCountView(selectedText: $viewModel.selectedText)
                     .onAppear {
-                        selectedText = 3
+                        viewModel.selectedText = 3
                     }
                 
                 Spacer().frame(height: 14)
@@ -25,17 +25,15 @@ struct TermsAndConditionsView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    selectedText = 4
+                    viewModel.continueButtonTapped()
                 }, label: "계속하기")
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
-                .border(Color.black)
 
-                NavigationLink(destination: WelcomeView(), tag: 4, selection: $selectedText) {
+                NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {
                     EmptyView()
                 }
                 
             }
-            .border(Color.black)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -53,5 +51,5 @@ struct TermsAndConditionsView: View {
 }
 
 #Preview {
-    TermsAndConditionsView()
+    TermsAndConditionsView(viewModel: SignUpNavigationViewModel())
 }
