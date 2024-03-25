@@ -5,6 +5,7 @@ import SwiftUI
 struct CustomInputView: View {
     @Binding var inputText: String
     @State var titleText: String?
+    var onCommit: (() -> Void)?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 13) {
@@ -20,7 +21,9 @@ struct CustomInputView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46)
                     
-                    TextField("", text: $inputText)
+                    TextField("", text: $inputText, onCommit: {
+                        onCommit?()
+                    })
                         .padding(.leading, 13)
                         .padding(.vertical, 16)
                         .font(.pretendard(.medium, size: 14))

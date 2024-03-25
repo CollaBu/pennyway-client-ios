@@ -1,12 +1,13 @@
 import SwiftUI
 
 struct SignUpFormView: View {
-    @Binding var name: String
-    @Binding var id: String
-    @Binding var password: String
-    @Binding var confirmPw: String
-    @State var showErrorName = false
+//    @Binding var name: String
+//    @Binding var id: String
+//    @Binding var password: String
+//    @Binding var confirmPw: String
+//    @State var showErrorName = false
     
+    @StateObject private var viewModel = SignUpFormViewModel()
     
     var body: some View {
         VStack(alignment: .leading){
@@ -19,16 +20,58 @@ struct SignUpFormView: View {
             ScrollView() {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading, spacing: 21){
-                        CustomInputView(inputText: $name, titleText: "이름")
-                        if showErrorName{
-                            Text("입력 포멧 관련 문구")
-                            .padding(.horizontal, 20)
-                            .font(.pretendard(.medium, size: 12))
-                            .platformTextColor(color: Color("Red03"))
+                        VStack(alignment:.leading, spacing: 9) {
+                            CustomInputView(inputText: $viewModel.name, titleText: "이름", onCommit: {
+                                viewModel.validateName()
+                            })
+
+                                if viewModel.showErrorName{
+                                    Text("입력 포멧 관련 문구")
+                                    .padding(.leading, 20)
+                                    .font(.pretendard(.medium, size: 12))
+                                    .platformTextColor(color: Color("Red03"))
+                                }
                         }
-                        CustomInputView(inputText: $id, titleText: "아이디")
-                        CustomInputView(inputText: $password, titleText: "비밀번호")
-                        CustomInputView(inputText: $confirmPw, titleText: "비밀번호 확인")
+                        
+                        VStack(alignment:.leading, spacing: 9) {
+                            CustomInputView(inputText: $viewModel.id, titleText: "아이디", onCommit: {
+                                viewModel.validateID()
+                            })
+
+                            if viewModel.showErrorID{
+                                Text("입력 포멧 관련 문구")
+                                .padding(.leading, 20)
+                                .font(.pretendard(.medium, size: 12))
+                                .platformTextColor(color: Color("Red03"))
+                            }
+                        }
+                        
+                        VStack(alignment:.leading, spacing:9) {
+                            CustomInputView(inputText: $viewModel.password, titleText: "비밀번호", onCommit: {
+                                viewModel.validatePassword()
+                            })
+
+                            if viewModel.showErrorPassword{
+                                Text("입력 포멧 관련 문구")
+                                .padding(.leading, 20)
+                                
+                                .font(.pretendard(.medium, size: 12))
+                                .platformTextColor(color: Color("Red03"))
+                            }
+                        }
+                        
+                        VStack(alignment:.leading, spacing:9) {
+                            CustomInputView(inputText: $viewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
+                                viewModel.validateConfirmPw()
+                            })
+
+                            if viewModel.showErrorConfirmPw{
+                                Text("입력 포멧 관련 문구")
+                                .padding(.leading, 20)
+                                .font(.pretendard(.medium, size: 12))
+                                .platformTextColor(color: Color("Red03"))
+                            }
+                        }
                     }
                 }
             }
@@ -37,5 +80,5 @@ struct SignUpFormView: View {
 }
 
 #Preview {
-    SignUpFormView(name: .constant("01097740978"), id: .constant("2weeksone"), password: .constant("* * * * * *"), confirmPw: .constant("* * * * * *"))
+    SignUpFormView()
 }
