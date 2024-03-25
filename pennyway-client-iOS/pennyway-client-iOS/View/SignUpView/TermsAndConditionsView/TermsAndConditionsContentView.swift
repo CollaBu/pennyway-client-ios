@@ -23,9 +23,10 @@ struct TermsAndConditionsContentView: View {
                     VStack(alignment: .leading, spacing: 28){
                         
                         Button(action: {
-                            isSelectedAllBtn.toggle()
-                            isSelectedUseBtn.toggle()
-                            isSelectedInfoBtn.toggle()
+                            let newSelection = !isSelectedAllBtn
+                            isSelectedAllBtn = newSelection
+                            isSelectedUseBtn = newSelection
+                            isSelectedInfoBtn = newSelection
                         }, label: {
                             ZStack(alignment: .leading){
                                 Rectangle()
@@ -33,7 +34,7 @@ struct TermsAndConditionsContentView: View {
                                     .platformTextColor(color: isSelectedAllBtn ? Color("Gray05") : Color("Gray02"))
                                     .cornerRadius(4)
                                 
-                                Image("icon_check") //버튼 눌렀을 때 색 안바뀜
+                                Image("icon_check")
                                     .renderingMode(.template)
                                     .resizable()
                                     .frame(width: 24, height: 24)
@@ -137,6 +138,8 @@ struct TermsAndConditionsContentView: View {
                     }
                 }
                 .padding(.horizontal, 20)
+                .onChange(of: isSelectedUseBtn) { _ in isSelectedAllBtn = isSelectedUseBtn && isSelectedInfoBtn }
+                .onChange(of: isSelectedInfoBtn) { _ in isSelectedAllBtn = isSelectedUseBtn && isSelectedInfoBtn }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

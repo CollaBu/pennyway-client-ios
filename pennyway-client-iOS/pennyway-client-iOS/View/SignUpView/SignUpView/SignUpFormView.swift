@@ -1,12 +1,7 @@
 import SwiftUI
 
 struct SignUpFormView: View {
-//    @Binding var name: String
-//    @Binding var id: String
-//    @Binding var password: String
-//    @Binding var confirmPw: String
-//    @State var showErrorName = false
-    
+
     @StateObject private var viewModel = SignUpFormViewModel()
     
     var body: some View {

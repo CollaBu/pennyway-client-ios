@@ -1,10 +1,3 @@
-//
-//  SignUpForm.swift
-//  pennyway-client-iOS
-//
-//  Created by 아우신얀 on 3/26/24.
-//
-
 import SwiftUI
 import Combine
 
