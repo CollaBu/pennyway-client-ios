@@ -7,7 +7,7 @@ struct TermsAndConditionsContentView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            ScrollView(){ //스크롤 뷰 위치 수정
+            ScrollView(){ 
                 
                 HStack{
                     Text("이용 약관 동의")
