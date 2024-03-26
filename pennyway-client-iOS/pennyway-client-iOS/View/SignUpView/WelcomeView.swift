@@ -25,7 +25,7 @@ struct WelcomeView: View {
                 
                 CustomBottomButton(action: {
                     
-                }, label: "확인")
+                }, label: "확인", isFormValid: .constant(false))
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                 .border(Color.black)
             }

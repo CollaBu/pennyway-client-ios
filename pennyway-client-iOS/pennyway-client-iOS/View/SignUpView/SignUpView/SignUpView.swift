@@ -30,7 +30,7 @@ struct SignUpView: View {
                 
                 CustomBottomButton(action: {
                     viewModel.continueButtonTapped()
-                }, label: "계속하기")
+                }, label: "계속하기", isFormValid: .constant(false))
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                 
                 NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {

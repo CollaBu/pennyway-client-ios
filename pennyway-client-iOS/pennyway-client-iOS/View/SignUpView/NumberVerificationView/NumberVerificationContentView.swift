@@ -2,10 +2,9 @@
 import SwiftUI
 
 struct NumberVerificationContentView: View {
-    @StateObject var viewModel = NumberVerificationViewModel()
-    @State private var verificationCode: String = ""
-    @Binding var showErrorVerificationCode: Bool
     
+    @ObservedObject var viewModel: NumberVerificationViewModel
+
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
         let seconds = viewModel.timerSeconds % 60
@@ -25,15 +24,6 @@ struct NumberVerificationContentView: View {
             Spacer().frame(height: 21)
             
             numberInputSection()
-            
-            
-        }
-        .onChange(of: verificationCode) { newValue in
-            if newValue == viewModel.randomVerificationCode {
-                showErrorVerificationCode = false
-            } else {
-                showErrorVerificationCode = true
-            }
         }
     }
     
@@ -62,6 +52,7 @@ struct NumberVerificationContentView: View {
                                 } else {
                                     viewModel.phoneNumber = ""
                                 }
+                                viewModel.validateForm()
                             }
                     }
                     Button(action: {
@@ -104,14 +95,17 @@ struct NumberVerificationContentView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46)
                     HStack {
-                        TextField("", text: $verificationCode)
+                        TextField("", text: $viewModel.verificationCode)
                             .padding(.leading, 13)
                             .font(.pretendard(.medium, size: 14))
                             .keyboardType(.numberPad)
-                            .onChange(of: verificationCode) { newValue in
-                                if Int(newValue) == nil {
-                                    verificationCode = ""
+                            .onChange(of: viewModel.verificationCode) { newValue in
+                                if Int(newValue) != nil {
+                                    viewModel.verificationCode = String(newValue)
+                                }else{
+                                    viewModel.verificationCode = ""
                                 }
+                                viewModel.validateForm()
                             }
                         Spacer()
                         Text(timerString)
@@ -125,9 +119,8 @@ struct NumberVerificationContentView: View {
             .padding(.horizontal, 20)
         }
     }
-
 }
 
 #Preview {
-    NumberVerificationContentView(showErrorVerificationCode: .constant(false))
+    NumberVerificationContentView(viewModel: NumberVerificationViewModel())
 }

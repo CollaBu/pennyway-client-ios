@@ -2,9 +2,15 @@
 import SwiftUI
 
 class NumberVerificationViewModel: ObservableObject {
+    
     @Published var phoneNumber: String = ""
-    @Published var showErrorPhoneNumberFormat = false
+    @Published var verificationCode: String = ""
     @Published var randomVerificationCode = ""
+    @Published var showErrorPhoneNumberFormat = false
+    @Published var showErrorVerificationCode = true
+    @Published var isFormValid = false
+    
+    //Timer
     @Published var timerSeconds = 10
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
@@ -13,6 +19,7 @@ class NumberVerificationViewModel: ObservableObject {
     func generateRandomVerificationCode() {
         if !showErrorPhoneNumberFormat && !isDisabledButton{
             randomVerificationCode = String(Int.random(in: 100000...999999))
+            print(randomVerificationCode)
             isDisabledButton = true
         }
     }
@@ -24,6 +31,20 @@ class NumberVerificationViewModel: ObservableObject {
             showErrorPhoneNumberFormat = false
         }
     }
+    
+    func validateNumberVerification(){
+        if verificationCode == randomVerificationCode {
+            showErrorVerificationCode = false
+        } else {
+            showErrorVerificationCode = true
+        }
+    }
+    
+    func validateForm() {
+        isFormValid = !phoneNumber.isEmpty && !verificationCode.isEmpty
+    }
+    
+    //MARK: Timer function
     
     func judgeTimerRunning(){
         
@@ -53,5 +74,5 @@ class NumberVerificationViewModel: ObservableObject {
         timerSeconds = 10
         self.isTimerRunning = false
     }
-    
+
 }
