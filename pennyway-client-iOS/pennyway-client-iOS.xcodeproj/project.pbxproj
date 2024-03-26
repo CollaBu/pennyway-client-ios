@@ -38,6 +38,7 @@
 		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
 		D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */; };
+		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D850DF8B2BA9E3AA004FBF67 /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */; };
 		D850DF8D2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850DF8C2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift */; };
 		D850DF8F2BAAD70E004FBF67 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850DF8E2BAAD70D004FBF67 /* WelcomeView.swift */; };
@@ -78,6 +79,7 @@
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
 		D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpFormViewModel.swift; path = ../View/SignUpView/SignUpView/SignUpFormViewModel.swift; sourceTree = "<group>"; };
+		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormView.swift; sourceTree = "<group>"; };
 		D850DF8C2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsContentView.swift; sourceTree = "<group>"; };
 		D850DF8E2BAAD70D004FBF67 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */,
 				D850DF8C2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift */,
+				D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */,
 			);
 			path = TermsAndConditionsView;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
 				4A4A56722BACA2250071D00E /* NumberVerificationView.swift in Sources */,
+				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
 			);
