@@ -29,7 +29,6 @@ struct WelcomeView: View {
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                 .border(Color.black)
             }
-            .border(Color.black)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

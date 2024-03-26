@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-=======
-//
-//  SignUpForm.swift
-//  pennyway-client-iOS
-//
-//  Created by 아우신얀 on 3/26/24.
-//
-
->>>>>>> 7508c42c783da61113f2cb8320cd89aad05ce5a6
 import SwiftUI
 import Combine
 
