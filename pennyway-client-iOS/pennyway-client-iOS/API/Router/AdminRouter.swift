@@ -1,9 +1,4 @@
-//
-//  AdminRouter.swift
-//  pennyway-client-iOS
-//
-//  Created by 최희진 on 3/28/24.
-//
+
 
 import Foundation
 import Alamofire
@@ -41,6 +36,11 @@ enum AdminRouter: URLRequestConvertible {
         let url = baseURL.appendingPathComponent(path)
         var request: URLRequest
         
-        return request
+        switch self {
+        case .regist(let username, let name , let password):
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
+            
+            return request
+        }
     }
 }
