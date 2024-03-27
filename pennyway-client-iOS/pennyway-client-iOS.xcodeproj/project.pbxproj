@@ -43,6 +43,8 @@
 		4AB5AB4A2BB4A37600D2C9EA /* AdminRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AdminRouter.swift */; };
 		4AB5AB4C2BB4A54F00D2C9EA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4B2BB4A54F00D2C9EA /* Constants.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
+		4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */; };
+		4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */; };
 		D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D850DF8B2BA9E3AA004FBF67 /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */; };
@@ -90,6 +92,8 @@
 		4AB5AB492BB4A37600D2C9EA /* AdminRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4B2BB4A54F00D2C9EA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
+		4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiStatusLogger.swift; sourceTree = "<group>"; };
+		4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLogger.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpFormViewModel.swift; path = ../View/SignUpView/SignUpView/SignUpFormViewModel.swift; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
@@ -285,6 +289,8 @@
 				4A762B062B99A262001C1188 /* TokenHandling.swift */,
 				4AB5AB432BB4A17200D2C9EA /* KeychainHelper.swift */,
 				4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */,
+				4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */,
+				4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -466,6 +472,8 @@
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				4AB5AB4C2BB4A54F00D2C9EA /* Constants.swift in Sources */,
+				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
+				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A762B052B99A259001C1188 /* NumberVerificationViewModel.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,

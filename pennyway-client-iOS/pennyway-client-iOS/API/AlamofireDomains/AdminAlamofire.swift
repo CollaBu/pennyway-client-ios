@@ -5,10 +5,11 @@ import os.log
 
 class AdminAlamofire: TokenHandling {
     
-    // 싱글턴 적용
     static let shared = AdminAlamofire()
+    
+    let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
     
     var session = Session.default
     
-    
+
 }
