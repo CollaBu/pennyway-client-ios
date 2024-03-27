@@ -6,9 +6,8 @@ struct NumberVerificationView: View {
     @State private var phoneNumber: String = ""
     @State private var verificationCode: String = ""
     @State private var showingPopUp = false
-    @State var showErrorVerificationCode = true
     @StateObject var viewModel = SignUpNavigationViewModel()
-    @StateObject var formViewModel = SignUpFormViewModel()
+    @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
     
     var body: some View {
         NavigationAvailable {
@@ -23,18 +22,20 @@ struct NumberVerificationView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    NumberVerificationContentView(showErrorVerificationCode: $showErrorVerificationCode)
+                    NumberVerificationContentView(viewModel: numberVerificationViewModel)
                     
                     Spacer()
                     
                     CustomBottomButton(action: {
-                        if !showErrorVerificationCode {
+                        numberVerificationViewModel.validateNumberVerification()
+                        if !numberVerificationViewModel.showErrorVerificationCode {
+
                             showingPopUp = false
                             viewModel.continueButtonTapped()
                         } else {
                             showingPopUp = true
                         }
-                    }, label: "계속하기", isFormValid: .constant(false))
+                    }, label: "계속하기", isFormValid: $numberVerificationViewModel.isFormValid)
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                     
                     NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) { //수정

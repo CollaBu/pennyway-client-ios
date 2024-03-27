@@ -7,6 +7,7 @@ struct TermsAndConditionsView: View {
     @ObservedObject var viewModel: SignUpNavigationViewModel
     
     var body: some View {
+
         ScrollView() {
             VStack{
                 VStack {

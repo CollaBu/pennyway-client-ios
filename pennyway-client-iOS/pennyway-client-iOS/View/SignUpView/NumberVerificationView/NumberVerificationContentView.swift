@@ -2,9 +2,14 @@
 import SwiftUI
 
 struct NumberVerificationContentView: View {
-    @StateObject var viewModel = NumberVerificationViewModel()
-    @State private var verificationCode: String = ""
-    @Binding var showErrorVerificationCode: Bool
+    
+    @ObservedObject var viewModel: NumberVerificationViewModel
+
+    var timerString: String {
+        let minutes = viewModel.timerSeconds / 60
+        let seconds = viewModel.timerSeconds % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -18,16 +23,8 @@ struct NumberVerificationContentView: View {
        
             Spacer().frame(height: 21)
             
-            VStack(alignment: .leading, spacing: 11){
-                CustomInputView(inputText: $verificationCode, titleText: "인증 번호", isSecureText: false)
-            }
-        }
-        .onChange(of: verificationCode) { newValue in
-            if newValue == viewModel.randomVerificationCode {
-                showErrorVerificationCode = false
-            } else {
-                showErrorVerificationCode = true
-            }
+            numberInputSection()
+
         }
     }
     
@@ -56,20 +53,24 @@ struct NumberVerificationContentView: View {
                                 } else {
                                     viewModel.phoneNumber = ""
                                 }
+                                viewModel.validateForm()
                             }
                     }
                     Button(action: {
                         viewModel.validatePhoneNumber()
                         viewModel.generateRandomVerificationCode()
+                        viewModel.judgeTimerRunning()
+                        
                     }, label: {
                         Text("인증번호 받기")
                             .font(.pretendard(.medium, size: 13))
-                            .platformTextColor(color: viewModel.phoneNumber.count >= 11 ? Color("White") : Color("Gray04"))
+                            .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
                     .padding(.horizontal, 13)
                     .frame(height: 46)
-                    .background(viewModel.phoneNumber.count == 11 ? Color("Gray05"): Color("Gray03"))
+                    .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05"): Color("Gray03"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .disabled(viewModel.isDisabledButton)
                 }
                 .padding(.horizontal, 20)
             }
@@ -81,8 +82,46 @@ struct NumberVerificationContentView: View {
             }
         }
     }
+    
+    private func numberInputSection() -> some View {
+        VStack(alignment: .leading, spacing: 13){
+            Text("인증 번호")
+                .padding(.horizontal, 20)
+                .font(.pretendard(.regular, size: 12))
+                .platformTextColor(color: Color("Gray04"))
+            
+            HStack(spacing: 11){
+                ZStack {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color("Gray01"))
+                        .frame(height: 46)
+                    HStack {
+                        TextField("", text: $viewModel.verificationCode)
+                            .padding(.leading, 13)
+                            .font(.pretendard(.medium, size: 14))
+                            .keyboardType(.numberPad)
+                            .onChange(of: viewModel.verificationCode) { newValue in
+                                if Int(newValue) != nil {
+                                    viewModel.verificationCode = String(newValue)
+                                }else{
+                                    viewModel.verificationCode = ""
+                                }
+                                viewModel.validateForm()
+                            }
+                        Spacer()
+                        Text(timerString)
+                            .padding(.trailing, 13)
+                            .font(.pretendard(.regular, size: 12))
+                            .platformTextColor(color: Color("Mint03"))
+                        
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
 }
 
 #Preview {
-    NumberVerificationContentView(showErrorVerificationCode: .constant(false))
+    NumberVerificationContentView(viewModel: NumberVerificationViewModel())
 }

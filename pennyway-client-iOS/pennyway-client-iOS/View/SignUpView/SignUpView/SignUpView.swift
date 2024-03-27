@@ -16,7 +16,7 @@ struct SignUpView: View {
     //@ObservedObject var formViewModel: SignUpFormViewModel
     
     var body: some View {
-        
+       
         ScrollView() {
             VStack(spacing: 47){
                 VStack {
