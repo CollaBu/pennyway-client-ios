@@ -28,7 +28,7 @@ struct TermsAndConditionsView: View {
         VStack {
             CustomBottomButton(action: {
                 viewModel.continueButtonTapped()
-            }, label: "계속하기")
+            }, label: "계속하기", isFormValid: .constant(false))
             .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
             
             NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {

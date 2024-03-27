@@ -8,8 +8,12 @@ struct SignUpView: View {
     @State private var id: String = ""
     @State private var password: String = ""
     @State private var confirmPw: String = ""
+    @State private var isActiveButton: Bool = true
     
-    @ObservedObject var viewModel: SignUpNavigationViewModel
+    @StateObject var formViewModel = SignUpFormViewModel()
+    @StateObject var viewModel = SignUpNavigationViewModel()
+    //@ObservedObject var viewModel: SignUpNavigationViewModel
+    //@ObservedObject var formViewModel: SignUpFormViewModel
     
     var body: some View {
         
@@ -25,8 +29,8 @@ struct SignUpView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    SignUpFormView()
-                    
+                    //                    SignUpFormView()
+                    SignUpFormView(formViewModel: formViewModel)
                     
                 }
             }
@@ -49,10 +53,17 @@ struct SignUpView: View {
         
         VStack {
             CustomBottomButton(action: {
-                viewModel.continueButtonTapped()
-            }, label: "계속하기")
-            .padding(.bottom, 20)
-            
+                if formViewModel.isFormValid {
+                    viewModel.continueButtonTapped()
+                    print(formViewModel.isFormValid)
+                } else {
+                    
+                }
+                    
+            }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
+                    .padding(.bottom, 20)
+                
+                
             NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
                 EmptyView()
             }

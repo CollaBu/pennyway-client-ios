@@ -2,8 +2,9 @@ import SwiftUI
 
 struct SignUpFormView: View {
     
-    @StateObject private var viewModel = SignUpFormViewModel()
-    
+    @ObservedObject var formViewModel: SignUpFormViewModel
+    @State private var shouldNavigate = false
+
     var body: some View {
         
         ScrollView() {
@@ -15,11 +16,12 @@ struct SignUpFormView: View {
                 Spacer().frame(height: 32)
                 VStack(alignment: .leading, spacing: 21){
                     VStack(alignment:.leading, spacing: 9) {
-                        CustomInputView(inputText: $viewModel.name, titleText: "이름", onCommit: {
-                            viewModel.validateName()
+                        CustomInputView(inputText: $formViewModel.name, titleText: "이름", onCommit: {
+                            formViewModel.validateName()
+                            formViewModel.validateForm()
                         })
                         
-                        if viewModel.showErrorName{
+                        if formViewModel.showErrorName{
                             Text("입력 포멧 관련 문구")
                                 .padding(.leading, 20)
                                 .font(.pretendard(.medium, size: 12))
@@ -28,11 +30,12 @@ struct SignUpFormView: View {
                     }
                     
                     VStack(alignment:.leading, spacing: 9) {
-                        CustomInputView(inputText: $viewModel.id, titleText: "아이디", onCommit: {
-                            viewModel.validateID()
+                        CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
+                            formViewModel.validateID()
+                            formViewModel.validateForm()
                         })
                         
-                        if viewModel.showErrorID{
+                        if formViewModel.showErrorID{
                             Text("입력 포멧 관련 문구")
                                 .padding(.leading, 20)
                                 .font(.pretendard(.medium, size: 12))
@@ -41,11 +44,14 @@ struct SignUpFormView: View {
                     }
                     
                     VStack(alignment:.leading, spacing:9) {
-                        CustomInputView(inputText: $viewModel.password, titleText: "비밀번호", onCommit: {
-                            viewModel.validatePassword()
+                        CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
+                            
+                            print(formViewModel.password)
+                            formViewModel.validatePassword()
+                            formViewModel.validateForm()
                         })
                         
-                        if viewModel.showErrorPassword{
+                        if formViewModel.showErrorPassword{
                             Text("입력 포멧 관련 문구")
                                 .padding(.leading, 20)
                             
@@ -55,11 +61,12 @@ struct SignUpFormView: View {
                     }
                     
                     VStack(alignment:.leading, spacing:9) {
-                        CustomInputView(inputText: $viewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
-                            viewModel.validateConfirmPw()
+                        CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
+                            formViewModel.validateConfirmPw()
+                            formViewModel.validateForm()
                         })
                         
-                        if viewModel.showErrorConfirmPw{
+                        if formViewModel.showErrorConfirmPw{
                             Text("입력 포멧 관련 문구")
                                 .padding(.leading, 20)
                                 .font(.pretendard(.medium, size: 12))
@@ -73,6 +80,6 @@ struct SignUpFormView: View {
     }
 }
 #Preview {
-    SignUpFormView()
+    SignUpFormView(formViewModel: SignUpFormViewModel())
 }
 

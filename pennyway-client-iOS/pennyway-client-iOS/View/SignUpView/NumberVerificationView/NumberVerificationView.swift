@@ -8,6 +8,7 @@ struct NumberVerificationView: View {
     @State private var showingPopUp = false
     @State var showErrorVerificationCode = true
     @StateObject var viewModel = SignUpNavigationViewModel()
+    @StateObject var formViewModel = SignUpFormViewModel()
     
     var body: some View {
         NavigationAvailable {
@@ -33,10 +34,10 @@ struct NumberVerificationView: View {
                         } else {
                             showingPopUp = true
                         }
-                    }, label: "계속하기")
+                    }, label: "계속하기", isFormValid: .constant(false))
                     .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                     
-                    NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) {
+                    NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) { //수정
                         EmptyView()
                     }
                 }
