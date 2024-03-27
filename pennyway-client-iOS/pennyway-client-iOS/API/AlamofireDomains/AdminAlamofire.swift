@@ -9,7 +9,11 @@ class AdminAlamofire: TokenHandling {
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
     
-    var session = Session.default
+    let interceptors = Interceptor(interceptors:[BaseInterceptor()])
     
-
+    var session : Session
+    
+    private init(){
+        session = Session(interceptor: interceptors, eventMonitors: monitors)
+    }
 }

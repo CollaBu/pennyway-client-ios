@@ -45,6 +45,7 @@
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
 		4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */; };
 		4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */; };
+		4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */; };
 		D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D850DF8B2BA9E3AA004FBF67 /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */; };
@@ -94,6 +95,7 @@
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
 		4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiStatusLogger.swift; sourceTree = "<group>"; };
 		4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLogger.swift; sourceTree = "<group>"; };
+		4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterceptor.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpFormViewModel.swift; path = ../View/SignUpView/SignUpView/SignUpFormViewModel.swift; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
@@ -284,13 +286,13 @@
 		4A762AFD2B99A1D1001C1188 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				4AB5AB532BB4AA2A00D2C9EA /* Logger */,
 				4AB5AB482BB4A35F00D2C9EA /* Router */,
 				4AB5AB452BB4A1E500D2C9EA /* AlamofireDomains */,
 				4A762B062B99A262001C1188 /* TokenHandling.swift */,
 				4AB5AB432BB4A17200D2C9EA /* KeychainHelper.swift */,
 				4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */,
-				4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */,
-				4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */,
+				4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -327,6 +329,15 @@
 				4AB5AB492BB4A37600D2C9EA /* AdminRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		4AB5AB532BB4AA2A00D2C9EA /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */,
+				4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 		C2F5B21500B89F9F684EBF8B /* Frameworks */ = {
@@ -486,6 +497,7 @@
 				D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
+				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				4A4A56722BACA2250071D00E /* NumberVerificationView.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
