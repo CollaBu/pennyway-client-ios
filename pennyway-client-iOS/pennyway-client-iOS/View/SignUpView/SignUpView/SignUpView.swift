@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct SignUpView: View {
@@ -24,7 +23,7 @@ struct SignUpView: View {
                 
                 Spacer().frame(height: 14)
                 
-                SignUpFormView(name: $name, id: $id, password: $password, confirmPw: $confirmPw)
+                SignUpFormView()
                 
                 Spacer()
                 
