@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B9C10D7C0B3BA3565084FD9 /* Pods_pennyway_client_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */; };
 		4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */; };
 		4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */; };
 		4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A12BA9572F00A9CF4C /* Pretendard-ExtraBold.otf */; };
@@ -34,7 +35,7 @@
 		4A762B012B99A239001C1188 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B002B99A239001C1188 /* SplashView.swift */; };
 		4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B022B99A246001C1188 /* model_ex_file.swift */; };
 		4A762B052B99A259001C1188 /* NumberVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B042B99A259001C1188 /* NumberVerificationViewModel.swift */; };
-		4A762B072B99A262001C1188 /* api_ex_file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* api_ex_file.swift */; };
+		4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* TokenHandling.swift */; };
 		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
 		D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01648F6A2404D638E6615EDB /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
 		4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		4A1179A12BA9572F00A9CF4C /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -75,14 +77,16 @@
 		4A762B002B99A239001C1188 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		4A762B022B99A246001C1188 /* model_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model_ex_file.swift; sourceTree = "<group>"; };
 		4A762B042B99A259001C1188 /* NumberVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberVerificationViewModel.swift; sourceTree = "<group>"; };
-		4A762B062B99A262001C1188 /* api_ex_file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = api_ex_file.swift; sourceTree = "<group>"; };
+		4A762B062B99A262001C1188 /* TokenHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandling.swift; sourceTree = "<group>"; };
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
+		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpFormViewModel.swift; path = ../View/SignUpView/SignUpView/SignUpFormViewModel.swift; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormView.swift; sourceTree = "<group>"; };
 		D850DF8C2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsContentView.swift; sourceTree = "<group>"; };
 		D850DF8E2BAAD70D004FBF67 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,12 +94,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B9C10D7C0B3BA3565084FD9 /* Pods_pennyway_client_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41951791426F03880A100F2C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				01648F6A2404D638E6615EDB /* Pods-pennyway-client-iOS.debug.xcconfig */,
+				5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4A1179812BA86D6C00A9CF4C /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +197,8 @@
 			children = (
 				4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */,
 				4A762AEA2B99A16B001C1188 /* Products */,
+				41951791426F03880A100F2C /* Pods */,
+				C2F5B21500B89F9F684EBF8B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,7 +270,7 @@
 		4A762AFD2B99A1D1001C1188 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				4A762B062B99A262001C1188 /* api_ex_file.swift */,
+				4A762B062B99A262001C1188 /* TokenHandling.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -276,6 +292,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		C2F5B21500B89F9F684EBF8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -283,9 +307,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A762AF72B99A16D001C1188 /* Build configuration list for PBXNativeTarget "pennyway-client-iOS" */;
 			buildPhases = (
+				08C52BD7B1B264293E382616 /* [CP] Check Pods Manifest.lock */,
 				4A762AE52B99A16B001C1188 /* Sources */,
 				4A762AE62B99A16B001C1188 /* Frameworks */,
 				4A762AE72B99A16B001C1188 /* Resources */,
+				24C9C1C263B27715B91C6BC6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -350,6 +376,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		08C52BD7B1B264293E382616 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-pennyway-client-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		24C9C1C263B27715B91C6BC6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4A762AE52B99A16B001C1188 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -360,7 +428,7 @@
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
-				4A762B072B99A262001C1188 /* api_ex_file.swift in Sources */,
+				4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */,
 				D850DF8B2BA9E3AA004FBF67 /* SignUpFormView.swift in Sources */,
 				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
@@ -506,6 +574,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01648F6A2404D638E6615EDB /* Pods-pennyway-client-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -537,6 +606,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
