@@ -19,7 +19,7 @@ struct NumberVerificationContentView: View {
             Spacer().frame(height: 21)
             
             VStack(alignment: .leading, spacing: 11){
-                CustomInputView(inputText: $verificationCode, titleText: "인증 번호")
+                CustomInputView(inputText: $verificationCode, titleText: "인증 번호", isSecureText: false)
             }
         }
         .onChange(of: verificationCode) { newValue in
