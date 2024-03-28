@@ -50,15 +50,55 @@ class NumberVerificationViewModel: ObservableObject {
         validatePhoneNumber()
         
         if !showErrorPhoneNumberFormat {
-            AuthAlamofire.shared.sendSms(phoneNumber) { result in
+            AuthAlamofire.shared.sendVerificationCode(phoneNumber) { result in
                 switch result {
                 case .success(let data):
-                    // 인증번호 적용
-                    print("SMS sent successfully")
+                    if let responseData = data {
+                        do {
+                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+                            if let code = responseJSON?["code"] as? String {
+                                if code == "2000" {
+                                    // 성공적으로 인증번호를 전송한 경우
+                                    
+                                } else if code == "4220" {
+                                    // 포맷 오류
+                                }
+                            }
+                        } catch {
+                            print("Error parsing response JSON: \(error)")
+                        }
+                    }
                 case .failure(let error):
                 
                     print("Failed to send SMS: \(error)")
                 }
+            }
+        }
+    }
+    
+    func requestVerifyVerificationCodeAPI() {
+      
+        AuthAlamofire.shared.verifyVerificationCode(phoneNumber, verificationCode) { result in
+            switch result {
+            case .success(let data):
+                if let responseData = data {
+                    do {
+                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+                        if let code = responseJSON?["code"] as? String {
+                            if code == "2000" {
+                                // 인증 성공
+                                
+                            } else if code == "4000" {
+                                // 인증번호 만료, 인증번호 매칭 오류, 사용중인 전화번호
+                            }
+                        }
+                    } catch {
+                        print("Error parsing response JSON: \(error)")
+                    }
+                }
+            case .failure(let error):
+                
+                print("Failed to send SMS: \(error)")
             }
         }
     }
