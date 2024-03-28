@@ -5,6 +5,7 @@ struct TermsAndConditionsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var viewModel: SignUpNavigationViewModel
+    @StateObject var formViewModel = TermsAndConditionsViewModel()
     
     var body: some View {
 
@@ -29,6 +30,7 @@ struct TermsAndConditionsView: View {
         VStack {
             CustomBottomButton(action: {
                 viewModel.continueButtonTapped()
+                //formViewModel.requestRegistAPI()
             }, label: "계속하기", isFormValid: .constant(false))
             .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
             

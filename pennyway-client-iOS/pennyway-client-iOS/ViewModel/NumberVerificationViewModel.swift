@@ -98,7 +98,7 @@ class NumberVerificationViewModel: ObservableObject {
                 }
             case .failure(let error):
                 
-                print("Failed to send SMS: \(error)")
+                print("Failed to verify: \(error)")
             }
         }
     }
