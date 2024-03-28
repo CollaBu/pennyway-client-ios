@@ -5,7 +5,7 @@ import Alamofire
 
 enum AuthRouter: URLRequestConvertible {
 
-    case regist(username: String, name: String, password: String)
+    case regist(username: String, name: String, password: String, phone: String, code: String)
     case sendVerificationCode(phone: String)
     case verifyVerificationCode(phone: String, code: String)
     
@@ -33,8 +33,8 @@ enum AuthRouter: URLRequestConvertible {
     
     var parameters: Parameters {
         switch self {
-        case let .regist(username, name, password):
-            return ["username": username, "name": name, "password": password]
+        case let .regist(username, name, password, phone, code):
+            return ["username": username, "name": name, "password": password, "phone": phone, "cdoe": code]
         case let .sendVerificationCode(phone):
             return ["phone": phone]
         case let .verifyVerificationCode(phone, code):
@@ -47,7 +47,7 @@ enum AuthRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .regist(let username, let name , let password):
+        case .regist(let username, let name , let password, let phone, let code):
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         
         case .sendVerificationCode(let phone):

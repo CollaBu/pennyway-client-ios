@@ -50,12 +50,12 @@ class AuthAlamofire: TokenHandling {
     }
     
     
-    func regist(_ username: String, _ name: String, _ password: String, completion: @escaping(Result<Data?, Error>) -> Void){
-        os_log("AuthAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ", log: .default, type: .info, username, password, name)
+    func regist(_ username: String, _ name: String, _ password: String, _ phone: String, code: String, completion: @escaping(Result<Data?, Error>) -> Void){
+        os_log("AuthAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, username, password, name, phone, code)
         
         self
             .session
-            .request(AuthRouter.regist(username: username, name: name, password: password))
+            .request(AuthRouter.regist(username: username, name: name, password: password, phone: phone, code: code))
             .response { response in
                 switch response.result{
                 case .success(let data):
