@@ -26,8 +26,8 @@ struct CustomInputView: View {
                         SecureField("", text: $inputText, onCommit: {
                             onCommit?()
                         })
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
+                        .TextAutocapitalization()
+                        .AutoCorrectionExtensions()
                         .padding(.leading, 13)
                         .padding(.vertical, 16)
                         .font(.pretendard(.medium, size: 14))
@@ -36,8 +36,8 @@ struct CustomInputView: View {
                         TextField("", text: $inputText, onCommit: {
                             onCommit?()
                         })
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
+                        .TextAutocapitalization()
+                        .AutoCorrectionExtensions()
                         .padding(.leading, 13)
                         .padding(.vertical, 16)
                         .font(.pretendard(.medium, size: 14))

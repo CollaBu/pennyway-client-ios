@@ -45,6 +45,8 @@
 		D850DF8B2BA9E3AA004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D850DF8F2BAAD70E004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D8E2A2C92BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E2A2C82BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift */; };
+		D8E2A2CB2BB55C3900B93EAD /* AutoCorrectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E2A2CA2BB55C3900B93EAD /* AutoCorrectionExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,8 @@
 		D80E6A102BB2DFC9009F2DFE /* SignUpFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFormView.swift; sourceTree = "<group>"; };
 		D80E6A122BB2E017009F2DFE /* TermsAndConditionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionContentView.swift; sourceTree = "<group>"; };
 		D80E6A142BB2E0C4009F2DFE /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		D8E2A2C82BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAutocapitalizationExtentions.swift; sourceTree = "<group>"; };
+		D8E2A2CA2BB55C3900B93EAD /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +271,8 @@
 			children = (
 				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
 				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
+				D8E2A2C82BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift */,
+				D8E2A2CA2BB55C3900B93EAD /* AutoCorrectionExtensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -375,6 +381,7 @@
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D850DF8F2BAAD70E004FBF67 /* (null) in Sources */,
 				D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */,
+				D8E2A2CB2BB55C3900B93EAD /* AutoCorrectionExtensions.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				D80E6A132BB2E017009F2DFE /* TermsAndConditionContentView.swift in Sources */,
@@ -382,6 +389,7 @@
 				4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
 				4A4A56722BACA2250071D00E /* NumberVerificationView.swift in Sources */,
+				D8E2A2C92BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,

@@ -10,7 +10,7 @@ struct CustomBottomButton: View {
         Button(action: action) {
             Text(label)
                 .font(.pretendard(.semibold, size: 14))
-                .platformTextColor(color: isFormValid ? Color("White") : Color("Gray04"))
+                .platformTextColor(color: isFormValid ? Color("White01"): Color("Gray04"))
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 17)

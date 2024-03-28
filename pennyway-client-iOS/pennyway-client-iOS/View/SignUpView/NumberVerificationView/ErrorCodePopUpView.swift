@@ -75,7 +75,7 @@ extension ErrorCodePopUpView {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .frame(width: UIScreen.main.bounds.width - 120, height: frameHeight)
-            .background(Color("White"))
+            .background(Color("White01"))
             .cornerRadius(10)
         }
     }

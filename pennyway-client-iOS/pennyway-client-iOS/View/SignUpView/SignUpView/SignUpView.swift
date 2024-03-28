@@ -32,6 +32,7 @@ struct SignUpView: View {
                     //                    SignUpFormView()
                     SignUpFormView(formViewModel: formViewModel)
                     
+
                 }
             }
             
