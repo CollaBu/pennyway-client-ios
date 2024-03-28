@@ -18,7 +18,7 @@ class AuthAlamofire: TokenHandling {
     }
     
     func sendVerificationCode(_ phone: String, completion: @escaping(Result<Data?, Error>) -> Void){
-        os_log("AuthAlamofire - sendSms() called userInput : %@ ", log: .default, type: .info, phone)
+        os_log("AuthAlamofire - sendVerificationCode() called userInput : %@ ", log: .default, type: .info, phone)
         
         self
             .session
