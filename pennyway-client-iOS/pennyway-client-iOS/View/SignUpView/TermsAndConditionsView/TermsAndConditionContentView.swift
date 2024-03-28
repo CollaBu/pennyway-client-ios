@@ -7,7 +7,7 @@ struct TermsAndConditionsContentView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            ScrollView(){ 
+            ScrollView(){ //스크롤 뷰 위치 수정
                 
                 HStack{
                     Text("이용 약관 동의")
@@ -39,11 +39,11 @@ struct TermsAndConditionsContentView: View {
                                     .renderingMode(.template)
                                     .resizable()
                                     .frame(width: 24, height: 24)
-                                    .platformTextColor(color: isSelectedAllBtn ? Color("White01"): Color("Gray04"))
+                                    .platformTextColor(color: isSelectedAllBtn ? Color("White"): Color("Gray04"))
                                     .padding(.horizontal,10)
                                 Text("모두 동의할게요")
                                     .font(.pretendard(.medium, size: 14))
-                                    .platformTextColor(color: isSelectedAllBtn ? Color("White01") : Color("Gray04"))
+                                    .platformTextColor(color: isSelectedAllBtn ? Color("White") : Color("Gray04"))
                                     .padding(.horizontal,36)
                                 
                             }

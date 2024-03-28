@@ -48,9 +48,12 @@
 		4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */; };
 		D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
-		D850DF8B2BA9E3AA004FBF67 /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */; };
-		D850DF8D2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850DF8C2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift */; };
-		D850DF8F2BAAD70E004FBF67 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850DF8E2BAAD70D004FBF67 /* WelcomeView.swift */; };
+		D80E6A112BB2DFC9009F2DFE /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A102BB2DFC9009F2DFE /* SignUpFormView.swift */; };
+		D80E6A132BB2E017009F2DFE /* TermsAndConditionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A122BB2E017009F2DFE /* TermsAndConditionContentView.swift */; };
+		D80E6A152BB2E0C4009F2DFE /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A142BB2E0C4009F2DFE /* WelcomeView.swift */; };
+		D850DF8B2BA9E3AA004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D850DF8F2BAAD70E004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -182,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6E62D72BA6082100111246 /* SignUpView.swift */,
-				D850DF8A2BA9E3AA004FBF67 /* SignUpFormView.swift */,
+				D80E6A102BB2DFC9009F2DFE /* SignUpFormView.swift */,
 			);
 			path = SignUpView;
 			sourceTree = "<group>";
@@ -191,8 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */,
-				D850DF8C2BA9F1F1004FBF67 /* TermsAndConditionsContentView.swift */,
 				D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */,
+				D80E6A122BB2E017009F2DFE /* TermsAndConditionContentView.swift */,
 			);
 			path = TermsAndConditionsView;
 			sourceTree = "<group>";
@@ -203,7 +206,7 @@
 				4A4A56762BACAD5A0071D00E /* TermsAndConditionsView */,
 				4A4A56752BACACEE0071D00E /* SignUpView */,
 				4A4A566D2BAC96A10071D00E /* NumberVerificationView */,
-				D850DF8E2BAAD70D004FBF67 /* WelcomeView.swift */,
+				D80E6A142BB2E0C4009F2DFE /* WelcomeView.swift */,
 			);
 			path = SignUpView;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
+				D80E6A152BB2E0C4009F2DFE /* WelcomeView.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */,
 				D850DF8B2BA9E3AA004FBF67 /* SignUpFormView.swift in Sources */,
@@ -494,6 +498,7 @@
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AdminRouter.swift in Sources */,
+
 				D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
