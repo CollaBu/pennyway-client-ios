@@ -24,8 +24,7 @@ class BaseInterceptor : RequestInterceptor{
         
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
             
-        }else {
-        
+        }else {  
             completion(.doNotRetry)
         }
     }

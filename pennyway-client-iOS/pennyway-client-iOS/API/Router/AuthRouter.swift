@@ -3,13 +3,14 @@
 import Foundation
 import Alamofire
 
-enum AdminRouter: URLRequestConvertible {
+enum AuthRouter: URLRequestConvertible {
 
     case regist(username: String, name: String, password: String)
+    case sendSms(phone: String)
     
     var method: HTTPMethod {
         switch self {
-        case .regist:
+        case .regist, .sendSms:
             return .post
         }
     }
@@ -21,7 +22,8 @@ enum AdminRouter: URLRequestConvertible {
         switch self {
         case .regist:
             return "v1/auth/register"
-      
+        case .sendSms:
+            return "v1/auth/send_sms"
         }
     }
     
@@ -29,6 +31,8 @@ enum AdminRouter: URLRequestConvertible {
         switch self {
         case let .regist(username, name, password):
             return ["username": username, "name": name, "password": password]
+        case let .sendSms(phone):
+            return ["phone": phone]
         }
     }
 
@@ -39,8 +43,10 @@ enum AdminRouter: URLRequestConvertible {
         switch self {
         case .regist(let username, let name , let password):
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
-            
-            return request
+        
+        case .sendSms(let phone):
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         }
+        return request
     }
 }
