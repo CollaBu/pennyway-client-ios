@@ -32,6 +32,10 @@ struct NumberVerificationView: View {
                         if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid{
                             showingPopUp = false
                             viewModel.continueButtonTapped()
+                            
+                            RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
+                            RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
+
                         } else {
                             showingPopUp = true
                         }

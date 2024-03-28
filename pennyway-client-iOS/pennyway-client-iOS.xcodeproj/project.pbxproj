@@ -46,7 +46,12 @@
 		4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */; };
 		4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */; };
 		4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */; };
-		D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */; };
+		4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */; };
+		4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */; };
+		4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB5A2BB5E9BC00D2C9EA /* SignUpFormViewModel.swift */; };
+		4AB5AB5D2BB5EA7200D2C9EA /* TermsAndConditionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB5C2BB5EA7200D2C9EA /* TermsAndConditionContentView.swift */; };
+		4AB5AB5F2BB5EACD00D2C9EA /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB5E2BB5EACC00D2C9EA /* WelcomeView.swift */; };
+		4AB5AB612BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB602BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D850DF8B2BA9E3AA004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -97,8 +102,13 @@
 		4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiStatusLogger.swift; sourceTree = "<group>"; };
 		4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLogger.swift; sourceTree = "<group>"; };
 		4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterceptor.swift; sourceTree = "<group>"; };
+		4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationManager.swift; sourceTree = "<group>"; };
+		4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormView.swift; sourceTree = "<group>"; };
+		4AB5AB5A2BB5E9BC00D2C9EA /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
+		4AB5AB5C2BB5EA7200D2C9EA /* TermsAndConditionContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionContentView.swift; sourceTree = "<group>"; };
+		4AB5AB5E2BB5EACC00D2C9EA /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeView.swift; path = SignUpView/WelcomeView.swift; sourceTree = "<group>"; };
+		4AB5AB602BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModel.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpFormViewModel.swift; path = ../View/SignUpView/SignUpView/SignUpFormViewModel.swift; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -179,6 +189,7 @@
 		4A4A56752BACACEE0071D00E /* SignUpView */ = {
 			isa = PBXGroup;
 			children = (
+				4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */,
 				4A6E62D72BA6082100111246 /* SignUpView.swift */,
 			);
 			path = SignUpView;
@@ -187,6 +198,7 @@
 		4A4A56762BACAD5A0071D00E /* TermsAndConditionsView */ = {
 			isa = PBXGroup;
 			children = (
+				4AB5AB5C2BB5EA7200D2C9EA /* TermsAndConditionContentView.swift */,
 				4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */,
 				D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */,
 			);
@@ -264,6 +276,7 @@
 				4A6E62D42BA5F7CC00111246 /* SignUpView */,
 				4A762B002B99A239001C1188 /* SplashView.swift */,
 				4A762AEE2B99A16B001C1188 /* LoginView.swift */,
+				4AB5AB5E2BB5EACC00D2C9EA /* WelcomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -271,9 +284,10 @@
 		4A762AFC2B99A1CB001C1188 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */,
+				4AB5AB5A2BB5E9BC00D2C9EA /* SignUpFormViewModel.swift */,
 				4A762B042B99A259001C1188 /* NumberVerificationViewModel.swift */,
 				4A51D2AD2BB18EBC0080083D /* SignUpNavigationViewModel.swift */,
+				4AB5AB602BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -306,6 +320,7 @@
 			children = (
 				4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */,
 				4AB5AB4B2BB4A54F00D2C9EA /* Constants.swift */,
+				4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -466,6 +481,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AB5AB612BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift in Sources */,
+				4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */,
 				4AB5AB442BB4A17200D2C9EA /* KeychainHelper.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
@@ -473,9 +490,12 @@
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
+				4AB5AB5F2BB5EACD00D2C9EA /* WelcomeView.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */,
 				D850DF8B2BA9E3AA004FBF67 /* (null) in Sources */,
 				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
+				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
+				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				4AB5AB4C2BB4A54F00D2C9EA /* Constants.swift in Sources */,
@@ -490,8 +510,8 @@
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
-				D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */,
+				4AB5AB5D2BB5EA7200D2C9EA /* TermsAndConditionContentView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				4A4A56722BACA2250071D00E /* NumberVerificationView.swift in Sources */,
@@ -542,7 +562,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -605,7 +625,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
