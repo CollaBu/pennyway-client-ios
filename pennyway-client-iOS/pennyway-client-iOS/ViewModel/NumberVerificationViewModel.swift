@@ -44,6 +44,25 @@ class NumberVerificationViewModel: ObservableObject {
         isFormValid = !phoneNumber.isEmpty && !verificationCode.isEmpty
     }
     
+    //MARK: API
+    
+    func requestVerificationCodeAPI() {
+        validatePhoneNumber()
+        
+        if !showErrorPhoneNumberFormat {
+            AuthAlamofire.shared.sendSms(phoneNumber) { result in
+                switch result {
+                case .success(let data):
+                    // 인증번호 적용
+                    print("SMS sent successfully")
+                case .failure(let error):
+                
+                    print("Failed to send SMS: \(error)")
+                }
+            }
+        }
+    }
+    
     //MARK: Timer function
     
     func judgeTimerRunning(){

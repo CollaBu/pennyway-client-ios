@@ -28,8 +28,7 @@ struct NumberVerificationView: View {
                     
                     CustomBottomButton(action: {
                         numberVerificationViewModel.validateNumberVerification()
-                        if !numberVerificationViewModel.showErrorVerificationCode {
-
+                        if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid{
                             showingPopUp = false
                             viewModel.continueButtonTapped()
                         } else {
