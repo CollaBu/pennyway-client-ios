@@ -2,71 +2,75 @@ import SwiftUI
 
 struct SignUpFormView: View {
     
-    @StateObject private var viewModel = SignUpFormViewModel()
-    
+    @ObservedObject var formViewModel: SignUpFormViewModel
+    @State private var shouldNavigate = false
+
     var body: some View {
+        
         ScrollView() {
-            VStack(alignment: .leading){
+            VStack(alignment: .leading) {
                 Text("회원가입")
                     .font(.pretendard(.semibold, size: 24))
                     .padding(.horizontal,20)
                 
                 Spacer().frame(height: 32)
-                
-                
-                VStack(alignment: .leading) {
-                    VStack(alignment: .leading, spacing: 21){
-                        VStack(alignment:.leading, spacing: 9) {
-                            CustomInputView(inputText: $viewModel.name, titleText: "이름", onCommit: {
-                                viewModel.validateName()
-                            })
-                            
-                            if viewModel.showErrorName{
-                                Text("입력 포멧 관련 문구")
-                                    .padding(.leading, 20)
-                                    .font(.pretendard(.medium, size: 12))
-                                    .platformTextColor(color: Color("Red03"))
-                            }
-                        }
+                VStack(alignment: .leading, spacing: 21){
+                    VStack(alignment:.leading, spacing: 9) {
+                        CustomInputView(inputText: $formViewModel.name, titleText: "이름", onCommit: {
+                            formViewModel.validateName()
+                            formViewModel.validateForm()
+                        }, isSecureText: false)
                         
-                        VStack(alignment:.leading, spacing: 9) {
-                            CustomInputView(inputText: $viewModel.id, titleText: "아이디", onCommit: {
-                                viewModel.validateID()
-                            })
-                            
-                            if viewModel.showErrorID{
-                                Text("입력 포멧 관련 문구")
-                                    .padding(.leading, 20)
-                                    .font(.pretendard(.medium, size: 12))
-                                    .platformTextColor(color: Color("Red03"))
-                            }
+                        if formViewModel.showErrorName{
+                            Text("입력 포멧 관련 문구")
+                                .padding(.leading, 20)
+                                .font(.pretendard(.medium, size: 12))
+                                .platformTextColor(color: Color("Red03"))
                         }
+                    }
+                    
+                    VStack(alignment:.leading, spacing: 9) {
+                        CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
+                            formViewModel.validateID()
+                            formViewModel.validateForm()
+                        }, isSecureText: false)
                         
-                        VStack(alignment:.leading, spacing:9) {
-                            CustomInputView(inputText: $viewModel.password, titleText: "비밀번호", onCommit: {
-                                viewModel.validatePassword()
-                            })
-                            
-                            if viewModel.showErrorPassword{
-                                Text("입력 포멧 관련 문구")
-                                    .padding(.leading, 20)
-                                
-                                    .font(.pretendard(.medium, size: 12))
-                                    .platformTextColor(color: Color("Red03"))
-                            }
+                        if formViewModel.showErrorID{
+                            Text("입력 포멧 관련 문구")
+                                .padding(.leading, 20)
+                                .font(.pretendard(.medium, size: 12))
+                                .platformTextColor(color: Color("Red03"))
                         }
-                        
-                        VStack(alignment:.leading, spacing:9) {
-                            CustomInputView(inputText: $viewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
-                                viewModel.validateConfirmPw()
-                            })
+                    }
+                    
+                    VStack(alignment:.leading, spacing:9) {
+                        CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
                             
-                            if viewModel.showErrorConfirmPw{
-                                Text("입력 포멧 관련 문구")
-                                    .padding(.leading, 20)
-                                    .font(.pretendard(.medium, size: 12))
-                                    .platformTextColor(color: Color("Red03"))
-                            }
+                            print(formViewModel.password)
+                            formViewModel.validatePassword()
+                            formViewModel.validateForm()
+                        }, isSecureText: true)
+                        
+                        if formViewModel.showErrorPassword{
+                            Text("입력 포멧 관련 문구")
+                                .padding(.leading, 20)
+                            
+                                .font(.pretendard(.medium, size: 12))
+                                .platformTextColor(color: Color("Red03"))
+                        }
+                    }
+                    
+                    VStack(alignment:.leading, spacing:9) {
+                        CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
+                            formViewModel.validateConfirmPw()
+                            formViewModel.validateForm()
+                        }, isSecureText: true)
+                        
+                        if formViewModel.showErrorConfirmPw{
+                            Text("입력 포멧 관련 문구")
+                                .padding(.leading, 20)
+                                .font(.pretendard(.medium, size: 12))
+                                .platformTextColor(color: Color("Red03"))
                         }
                     }
                 }
@@ -74,7 +78,7 @@ struct SignUpFormView: View {
         }
     }
 }
-
 #Preview {
-    SignUpFormView()
+    SignUpFormView(formViewModel: SignUpFormViewModel())
 }
+

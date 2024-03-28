@@ -11,11 +11,19 @@ class SignUpFormViewModel: ObservableObject {
     @Published var showErrorID = false
     @Published var showErrorPassword = false
     @Published var showErrorConfirmPw = false
-
+    @Published var isFormValid: Bool = false
+    
+    func validateForm() {
+        if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
+            isFormValid = true
+        } else {
+            isFormValid = false
+        }
+    }
+    
     func validateName() {
         let nameRegex = "^[가-힣a-zA-Z]+$"
         showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
-        print(showErrorName)
     }
 
     func validateID() {
@@ -31,4 +39,5 @@ class SignUpFormViewModel: ObservableObject {
     func validateConfirmPw() {
         showErrorConfirmPw = password != confirmPw
     }
+    
 }

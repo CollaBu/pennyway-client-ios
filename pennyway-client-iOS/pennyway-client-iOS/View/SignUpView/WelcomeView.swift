@@ -27,9 +27,7 @@ struct WelcomeView: View {
 
                 }, label: "확인", isFormValid: .constant(false))
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
-                .border(Color.black)
             }
-            .border(Color.black)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
