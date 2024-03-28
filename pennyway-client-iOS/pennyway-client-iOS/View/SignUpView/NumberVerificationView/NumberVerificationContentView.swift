@@ -24,6 +24,7 @@ struct NumberVerificationContentView: View {
             Spacer().frame(height: 21)
             
             numberInputSection()
+
         }
     }
     

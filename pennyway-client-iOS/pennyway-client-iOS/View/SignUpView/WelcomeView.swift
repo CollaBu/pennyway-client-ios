@@ -10,7 +10,7 @@ struct WelcomeView: View {
                     .frame(maxWidth: .infinity, maxHeight: 160)
                     .padding(.top, 71)
                     .padding(.horizontal, 80)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 26)
                 
                 Text("이주원님 환영해요!")
                     .font(.pretendard(.semibold, size: 24))

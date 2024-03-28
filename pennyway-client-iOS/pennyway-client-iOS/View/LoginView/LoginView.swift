@@ -1,9 +1,13 @@
-
-
 import SwiftUI
 
 struct LoginView: View {
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State private var id: String = ""
+    @State private var password: String = ""
     @State private var isSplashShown = true
+    @StateObject var viewModel = LoginFormViewModel()
+
     
     var body: some View {
         NavigationAvailable {
@@ -18,10 +22,10 @@ struct LoginView: View {
                             }
                         }
                 } else {
-                    NavigationLink(destination: NumberVerificationView()) {
-                        Text("회원가입")
+                    ZStack() {
+                        LoginFormView(viewModel: LoginFormViewModel())
                     }
-                    .padding()
+                    
                 }
             }
         }

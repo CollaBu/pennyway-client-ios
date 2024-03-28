@@ -47,6 +47,8 @@
 		D850DF8F2BAAD70E004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8E2A2C92BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E2A2C82BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift */; };
 		D8E2A2CB2BB55C3900B93EAD /* AutoCorrectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E2A2CA2BB55C3900B93EAD /* AutoCorrectionExtensions.swift */; };
+		D8E2A2CD2BB5D1A900B93EAD /* LoginFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E2A2CC2BB5D1A900B93EAD /* LoginFormView.swift */; };
+		D8E2A2CF2BB5D5D300B93EAD /* LoginFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E2A2CE2BB5D5D300B93EAD /* LoginFormViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		D80E6A142BB2E0C4009F2DFE /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		D8E2A2C82BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAutocapitalizationExtentions.swift; sourceTree = "<group>"; };
 		D8E2A2CA2BB55C3900B93EAD /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
+		D8E2A2CC2BB5D1A900B93EAD /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
+		D8E2A2CE2BB5D5D300B93EAD /* LoginFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,11 +243,11 @@
 		4A762AFB2B99A1C4001C1188 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8E2A2D02BB5E2BB00B93EAD /* LoginView */,
 				4A4A566E2BAC97C90071D00E /* ElementView */,
 				4A1179812BA86D6C00A9CF4C /* CustomView */,
 				4A6E62D42BA5F7CC00111246 /* SignUpView */,
 				4A762B002B99A239001C1188 /* SplashView.swift */,
-				4A762AEE2B99A16B001C1188 /* LoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,6 +258,7 @@
 				D80E6A0C2BB1D549009F2DFE /* SignUpFormViewModel.swift */,
 				4A762B042B99A259001C1188 /* NumberVerificationViewModel.swift */,
 				4A51D2AD2BB18EBC0080083D /* SignUpNavigationViewModel.swift */,
+				D8E2A2CE2BB5D5D300B93EAD /* LoginFormViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -283,6 +288,15 @@
 				4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		D8E2A2D02BB5E2BB00B93EAD /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				4A762AEE2B99A16B001C1188 /* LoginView.swift */,
+				D8E2A2CC2BB5D1A900B93EAD /* LoginFormView.swift */,
+			);
+			path = LoginView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +380,7 @@
 			files = (
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
+				D8E2A2CD2BB5D1A900B93EAD /* LoginFormView.swift in Sources */,
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* WelcomeView.swift in Sources */,
@@ -388,6 +403,7 @@
 				D80E6A0D2BB1D549009F2DFE /* SignUpFormViewModel.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* NumberVerificationContentView.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
+				D8E2A2CF2BB5D5D300B93EAD /* LoginFormViewModel.swift in Sources */,
 				4A4A56722BACA2250071D00E /* NumberVerificationView.swift in Sources */,
 				D8E2A2C92BB558DE00B93EAD /* TextAutocapitalizationExtentions.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,

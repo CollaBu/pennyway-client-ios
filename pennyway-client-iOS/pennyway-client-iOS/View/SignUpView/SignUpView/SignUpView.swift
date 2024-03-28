@@ -12,11 +12,8 @@ struct SignUpView: View {
     
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
-    //@ObservedObject var viewModel: SignUpNavigationViewModel
-    //@ObservedObject var formViewModel: SignUpFormViewModel
-    
+
     var body: some View {
-        
         ScrollView() {
             VStack(spacing: 47){
                 VStack {
@@ -29,10 +26,8 @@ struct SignUpView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    //                    SignUpFormView()
                     SignUpFormView(formViewModel: formViewModel)
                     
-
                 }
             }
             
