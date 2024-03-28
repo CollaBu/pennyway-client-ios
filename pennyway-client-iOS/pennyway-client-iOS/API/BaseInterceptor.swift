@@ -1,0 +1,32 @@
+
+import Foundation
+import Alamofire
+
+class BaseInterceptor : RequestInterceptor{
+
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        print("BaseInterceptor - adapt() ")
+
+        var adaptedRequest = urlRequest
+        let accessToken = KeychainHelper.loadAccessToken()!
+        adaptedRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+
+        if let url = adaptedRequest.url, let cookies = HTTPCookieStorage.shared.cookies(for: url) {
+            let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)
+            adaptedRequest.allHTTPHeaderFields = cookieHeader
+        }
+
+        completion(.success(adaptedRequest))
+    }
+   
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        print("BaseInterceptor - retry()")
+        
+        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
+            
+        }else {
+        
+            completion(.doNotRetry)
+        }
+    }
+}
