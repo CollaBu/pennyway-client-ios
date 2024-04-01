@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct NumberVerificationView: View {
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var phoneNumber: String = ""
     @State private var verificationCode: String = ""
@@ -11,8 +10,8 @@ struct NumberVerificationView: View {
     
     var body: some View {
         NavigationAvailable {
-            ZStack{
-                VStack{
+            ZStack {
+                VStack {
                     Spacer().frame(height: 15)
                     
                     NavigationCountView(selectedText: $viewModel.selectedText)
@@ -40,9 +39,9 @@ struct NumberVerificationView: View {
                             showingPopUp = true
                         }
                     }, label: "계속하기", isFormValid: $numberVerificationViewModel.isFormValid)
-                    .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                        .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
                     
-                    NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) { //수정
+                    NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) { // 수정
                         EmptyView()
                     }
                 }
@@ -51,7 +50,6 @@ struct NumberVerificationView: View {
                     Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
                     ErrorCodePopUpView(showingPopUp: $showingPopUp)
                 }
-                    
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {

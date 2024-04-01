@@ -6,7 +6,7 @@ struct SplashView: View {
         ZStack {
             Color("Mint03")
                 .edgesIgnoringSafeArea(.all)
-            
+
             VStack {
                 Image("icon_logo")
                     .resizable()

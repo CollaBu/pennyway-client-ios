@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct SignUpView: View {
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var name: String = ""
@@ -12,13 +11,12 @@ struct SignUpView: View {
     
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
-    //@ObservedObject var viewModel: SignUpNavigationViewModel
-    //@ObservedObject var formViewModel: SignUpFormViewModel
+    // @ObservedObject var viewModel: SignUpNavigationViewModel
+    // @ObservedObject var formViewModel: SignUpFormViewModel
     
     var body: some View {
-       
-        ScrollView() {
-            VStack(spacing: 47){
+        ScrollView {
+            VStack(spacing: 47) {
                 VStack {
                     Spacer().frame(height: 15)
                     
@@ -30,7 +28,6 @@ struct SignUpView: View {
                     Spacer().frame(height: 14)
                     
                     SignUpFormView(formViewModel: formViewModel)
-                    
                 }
                 VStack {
                     CustomBottomButton(action: {
@@ -69,10 +66,10 @@ struct SignUpView: View {
                     
                 }.offset(x: -10)
             }
-            
         }
     }
 }
+
 #Preview {
     SignUpView(viewModel: SignUpNavigationViewModel())
 }

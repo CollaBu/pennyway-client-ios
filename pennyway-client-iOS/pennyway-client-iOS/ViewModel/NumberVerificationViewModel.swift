@@ -2,44 +2,44 @@
 import SwiftUI
 
 class NumberVerificationViewModel: ObservableObject {
-    
+    // MARK: Internal
+
     @Published var phoneNumber: String = ""
     @Published var verificationCode: String = ""
     @Published var randomVerificationCode = ""
     @Published var showErrorPhoneNumberFormat = false
     @Published var showErrorVerificationCode = true
     @Published var isFormValid = false
-    
-    //Timer
+
+    /// Timer
     @Published var timerSeconds = 10
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
-    @State private var timer: Timer?
-    
+
     func generateRandomVerificationCode() {
-        if !showErrorPhoneNumberFormat && !isDisabledButton{
-            randomVerificationCode = String(Int.random(in: 100000...999999))
+        if !showErrorPhoneNumberFormat && !isDisabledButton {
+            randomVerificationCode = String(Int.random(in: 100_000 ... 999_999))
             print(randomVerificationCode)
             isDisabledButton = true
         }
     }
-    
+
     func validatePhoneNumber() {
         if phoneNumber.prefix(3) != "010" && phoneNumber.prefix(3) != "011" {
             showErrorPhoneNumberFormat = true
-        } else{
+        } else {
             showErrorPhoneNumberFormat = false
         }
     }
-    
-    func validateNumberVerification(){
+
+    func validateNumberVerification() {
         if verificationCode == randomVerificationCode {
             showErrorVerificationCode = false
         } else {
             showErrorVerificationCode = true
         }
     }
-    
+
     func validateForm() {
         isFormValid = !phoneNumber.isEmpty && !verificationCode.isEmpty
     }
@@ -102,24 +102,23 @@ class NumberVerificationViewModel: ObservableObject {
             }
         }
     }
-    
-    //MARK: Timer function
-    
-    func judgeTimerRunning(){
-        
-        if !showErrorPhoneNumberFormat{
+
+    // MARK: Timer function
+
+    func judgeTimerRunning() {
+        if !showErrorPhoneNumberFormat {
             if isTimerRunning {
                 stopTimer()
             } else {
                 startTimer()
-                self.isTimerRunning = true
+                isTimerRunning = true
             }
         }
     }
-    
+
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if self.timerSeconds > 0 && self.isTimerRunning{
+            if self.timerSeconds > 0 && self.isTimerRunning {
                 self.timerSeconds -= 1
             } else {
                 self.stopTimer()
@@ -127,11 +126,15 @@ class NumberVerificationViewModel: ObservableObject {
             }
         }
     }
+
     func stopTimer() {
         timer?.invalidate()
         timer = nil
         timerSeconds = 10
-        self.isTimerRunning = false
+        isTimerRunning = false
     }
 
+    // MARK: Private
+
+    @State private var timer: Timer?
 }

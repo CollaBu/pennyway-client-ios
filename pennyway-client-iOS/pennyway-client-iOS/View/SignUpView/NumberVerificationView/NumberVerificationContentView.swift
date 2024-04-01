@@ -2,7 +2,8 @@
 import SwiftUI
 
 struct NumberVerificationContentView: View {
-    
+    // MARK: Internal
+
     @ObservedObject var viewModel: NumberVerificationViewModel
 
     var timerString: String {
@@ -15,7 +16,7 @@ struct NumberVerificationContentView: View {
         VStack(alignment: .leading) {
             Text("번호인증")
                 .font(.pretendard(.semibold, size: 24))
-                .padding(.horizontal,20)
+                .padding(.horizontal, 20)
             
             Spacer().frame(height: 32)
             
@@ -24,18 +25,19 @@ struct NumberVerificationContentView: View {
             Spacer().frame(height: 21)
             
             numberInputSection()
-
         }
     }
-    
+
+    // MARK: Private
+
     private func phoneNumberInputSection() -> some View {
-        VStack(alignment: .leading, spacing: 11){
-            VStack(alignment: .leading, spacing: 13){
+        VStack(alignment: .leading, spacing: 11) {
+            VStack(alignment: .leading, spacing: 13) {
                 Text("휴대폰 번호")
                     .padding(.horizontal, 20)
                     .font(.pretendard(.regular, size: 12))
                     .platformTextColor(color: Color("Gray04"))
-                HStack(spacing: 11){
+                HStack(spacing: 11) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color("Gray01"))
@@ -69,7 +71,7 @@ struct NumberVerificationContentView: View {
                     })
                     .padding(.horizontal, 13)
                     .frame(height: 46)
-                    .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05"): Color("Gray03"))
+                    .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05") : Color("Gray03"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .disabled(viewModel.isDisabledButton)
                 }
@@ -85,13 +87,13 @@ struct NumberVerificationContentView: View {
     }
     
     private func numberInputSection() -> some View {
-        VStack(alignment: .leading, spacing: 13){
+        VStack(alignment: .leading, spacing: 13) {
             Text("인증 번호")
                 .padding(.horizontal, 20)
                 .font(.pretendard(.regular, size: 12))
                 .platformTextColor(color: Color("Gray04"))
             
-            HStack(spacing: 11){
+            HStack(spacing: 11) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
@@ -104,7 +106,7 @@ struct NumberVerificationContentView: View {
                             .onChange(of: viewModel.verificationCode) { newValue in
                                 if Int(newValue) != nil {
                                     viewModel.verificationCode = String(newValue)
-                                }else{
+                                } else {
                                     viewModel.verificationCode = ""
                                 }
                                 viewModel.validateForm()
@@ -114,7 +116,6 @@ struct NumberVerificationContentView: View {
                             .padding(.trailing, 13)
                             .font(.pretendard(.regular, size: 12))
                             .platformTextColor(color: Color("Mint03"))
-                        
                     }
                 }
             }

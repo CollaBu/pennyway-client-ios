@@ -1,16 +1,14 @@
 import SwiftUI
 
 struct TermsAndConditionsView: View {
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var viewModel: SignUpNavigationViewModel
     @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
-    
-    var body: some View {
 
-        ScrollView() {
-            VStack{
+    var body: some View {
+        ScrollView {
+            VStack {
                 VStack {
                     Spacer().frame(height: 15)
                     
@@ -32,7 +30,7 @@ struct TermsAndConditionsView: View {
                 viewModel.continueButtonTapped()
                 //termsAndConditionsViewModel.requestRegistAPI()
             }, label: "계속하기", isFormValid: .constant(false))
-            .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
             
             NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {
                 EmptyView()
