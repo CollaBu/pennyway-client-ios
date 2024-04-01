@@ -370,6 +370,7 @@
 				4A762AE62B99A16B001C1188 /* Frameworks */,
 				4A762AE72B99A16B001C1188 /* Resources */,
 				24C9C1C263B27715B91C6BC6 /* [CP] Embed Pods Frameworks */,
+				4ACE1FF02BBB1F3B00BB4F0A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -473,6 +474,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4ACE1FF02BBB1F3B00BB4F0A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

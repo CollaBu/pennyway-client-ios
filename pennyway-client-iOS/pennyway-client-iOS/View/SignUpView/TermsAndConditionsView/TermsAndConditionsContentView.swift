@@ -1,6 +1,13 @@
 import SwiftUI
 
 struct TermsAndConditionsContentView: View {
+    
+    // MARK: Private
+
+    @State private var isSelectedAllBtn: Bool = false
+    @State private var isSelectedUseBtn: Bool = false
+    @State private var isSelectedInfoBtn: Bool = false
+    
     // MARK: Internal
 
     var body: some View {
@@ -59,12 +66,6 @@ struct TermsAndConditionsContentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-
-    // MARK: Private
-
-    @State private var isSelectedAllBtn: Bool = false
-    @State private var isSelectedUseBtn: Bool = false
-    @State private var isSelectedInfoBtn: Bool = false
 }
 
 #Preview {

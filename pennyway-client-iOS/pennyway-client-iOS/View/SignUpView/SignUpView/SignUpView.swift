@@ -34,6 +34,7 @@ struct SignUpView: View {
                         if formViewModel.isFormValid {
                             viewModel.continueButtonTapped()
                             print(formViewModel.isFormValid)
+                            //formViewModel.checkDuplicateUserNameAPI()
                             
                             RegistrationManager.shared.name = formViewModel.name
                             RegistrationManager.shared.id = formViewModel.id

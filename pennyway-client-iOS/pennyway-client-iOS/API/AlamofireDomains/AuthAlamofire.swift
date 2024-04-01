@@ -66,4 +66,20 @@ class AuthAlamofire: TokenHandling {
                 }
             }
     }
+    
+    func checkDuplicateUserName(username: String, completion: @escaping(Result<Data?, Error>) -> Void){
+        os_log("AuthAlamofire - checkDuplicateUserName() called ", log: .default, type: .info)
+        
+        self
+            .session
+            .request(AuthRouter.checkDuplicateUserName(username: username))
+            .response { response in
+                switch response.result{
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
 }

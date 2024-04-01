@@ -38,4 +38,31 @@ class SignUpFormViewModel: ObservableObject {
     func validateConfirmPw() {
         showErrorConfirmPw = password != confirmPw
     }
+    
+    func checkDuplicateUserNameAPI(){
+        AuthAlamofire.shared.checkDuplicateUserName(username: id) { result in
+            switch result {
+            case .success(let data):
+                if let responseData = data {
+                    do {
+                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+                        if let code = responseJSON?["code"] as? String {
+                            if code == "2000" {
+                                // 확인
+                                
+                            } else if code == "4000" {
+                                // 중복된 아이디
+                            }
+                        }
+                    } catch {
+                        print("Error parsing response JSON: \(error)")
+                    }
+                }
+            case .failure(let error):
+                
+                print("Failed to verify: \(error)")
+            }
+        }
+    }
+   
 }
