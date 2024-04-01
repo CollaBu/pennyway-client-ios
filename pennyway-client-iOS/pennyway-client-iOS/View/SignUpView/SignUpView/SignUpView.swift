@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct SignUpView: View {
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State private var name: String = ""
@@ -12,13 +11,12 @@ struct SignUpView: View {
     
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
-    //@ObservedObject var viewModel: SignUpNavigationViewModel
-    //@ObservedObject var formViewModel: SignUpFormViewModel
+    // @ObservedObject var viewModel: SignUpNavigationViewModel
+    // @ObservedObject var formViewModel: SignUpFormViewModel
     
     var body: some View {
-       
-        ScrollView() {
-            VStack(spacing: 47){
+        ScrollView {
+            VStack(spacing: 47) {
                 VStack {
                     Spacer().frame(height: 15)
                     
@@ -31,7 +29,6 @@ struct SignUpView: View {
                     
                     //                    SignUpFormView()
                     SignUpFormView(formViewModel: formViewModel)
-                    
                 }
             }
             
@@ -48,7 +45,6 @@ struct SignUpView: View {
                     
                 }.offset(x: -10)
             }
-            
         }
         
         VStack {
@@ -56,13 +52,10 @@ struct SignUpView: View {
                 if formViewModel.isFormValid {
                     viewModel.continueButtonTapped()
                     print(formViewModel.isFormValid)
-                } else {
-                    
-                }
+                } else {}
                     
             }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
-                    .padding(.bottom, 20)
-                
+                .padding(.bottom, 20)
                 
             NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
                 EmptyView()
@@ -70,6 +63,7 @@ struct SignUpView: View {
         }
     }
 }
+
 #Preview {
     SignUpView(viewModel: SignUpNavigationViewModel())
 }

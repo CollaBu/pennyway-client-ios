@@ -1,33 +1,35 @@
 
-import Foundation
 import Alamofire
+import Foundation
 import os.log
 
 class AdminAlamofire: TokenHandling {
-    
-    static let shared = AdminAlamofire()
-    
-    let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
-    
-    let interceptors = Interceptor(interceptors:[BaseInterceptor()])
-    
-    var session : Session
-    
-    private init(){
+    // MARK: Lifecycle
+
+    private init() {
         session = Session(interceptor: interceptors, eventMonitors: monitors)
     }
-    
-    func regist(_ username: String, _ name: String, _ password: String, completion: @escaping(Result<Data?, Error>) -> Void){
+
+    // MARK: Internal
+
+    static let shared = AdminAlamofire()
+
+    let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
+
+    let interceptors = Interceptor(interceptors: [BaseInterceptor()])
+
+    var session: Session
+
+    func regist(_ username: String, _ name: String, _ password: String, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AdminAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ", log: .default, type: .info, username, password, name)
-        
-        self
-            .session
+
+        session
             .request(AdminRouter.regist(username: username, name: name, password: password))
             .response { response in
-                switch response.result{
-                case .success(let data):
+                switch response.result {
+                case let .success(data):
                     completion(.success(data))
-                case .failure(let error):
+                case let .failure(error):
                     completion(.failure(error))
                 }
             }

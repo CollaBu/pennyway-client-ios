@@ -1,10 +1,9 @@
 
-import Foundation
 import Alamofire
+import Foundation
 
-class BaseInterceptor : RequestInterceptor{
-
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+class BaseInterceptor: RequestInterceptor {
+    func adapt(_ urlRequest: URLRequest, for _: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         print("BaseInterceptor - adapt() ")
 
         var adaptedRequest = urlRequest
@@ -18,14 +17,12 @@ class BaseInterceptor : RequestInterceptor{
 
         completion(.success(adaptedRequest))
     }
-   
-    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+
+    func retry(_ request: Request, for _: Session, dueTo _: Error, completion: @escaping (RetryResult) -> Void) {
         print("BaseInterceptor - retry()")
-        
+
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
-            
-        }else {
-        
+        } else {
             completion(.doNotRetry)
         }
     }

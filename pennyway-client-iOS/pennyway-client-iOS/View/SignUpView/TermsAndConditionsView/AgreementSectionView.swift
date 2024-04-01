@@ -4,11 +4,11 @@ struct AgreementSectionView: View {
     @Binding var isSelected: Bool
     var title: String
     var contentText: String
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 7) {
-            ZStack{
-                HStack{
+            ZStack {
+                HStack {
                     Button(action: {
                         isSelected.toggle()
                     }, label: {
@@ -28,7 +28,7 @@ struct AgreementSectionView: View {
                 }
             }
             
-            ZStack() {
+            ZStack {
                 Rectangle()
                     .platformTextColor(color: .clear)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -36,7 +36,7 @@ struct AgreementSectionView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
                             .inset(by: 0.5)
-                            .stroke(.gray04.opacity(0.5),lineWidth: 1)
+                            .stroke(.gray04.opacity(0.5), lineWidth: 1)
                     )
                 
                 Text(contentText)
