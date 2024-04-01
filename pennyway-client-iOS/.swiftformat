@@ -7,6 +7,6 @@
 --exclude Pods
 
 # rules
---enable acronyms, blankLinesBetweenImports, blockComments, docComments, isEmpty, markTypes, organizeDeclarations, sortImports, wrapConditionalBodies, wrapMultilineConditionalAssignment 
+--enable acronyms, blankLinesBetweenImports, blockComments, docComments, isEmpty, markTypes, sortImports, wrapConditionalBodies, wrapMultilineConditionalAssignment 
 
 --disable applicationMain, assertionFailures, blankLinesBetweenChainedFunctions, conditionalAssignment, extensionAccessControl, headerFileName, hoistAwait, modifierOrder, opaqueGenericParameters, preferKeyPath, redundantBackticks, redundantBreak, redundantClosure, redundantExtensionACL, redundantGet, redundantInit, redundantInternal, redundantLetError, redundantObjc, redundantOptionalBinding, redundantRawValues, redundantReturn, redundantStaticSelf, redundantType, sortTypealiases, strongOutlets, strongifiedSelf, trailingCommas, trailingSpace, wrapArguments, wrapAttributes, wrapSingleLineComments, yodaConditions
