@@ -2,8 +2,8 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
-        ZStack{
-            VStack{
+        ZStack {
+            VStack {
                 Image("icon_illust_welcome")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -23,10 +23,8 @@ struct WelcomeView: View {
                 
                 Spacer()
                 
-                CustomBottomButton(action: {
-
-                }, label: "확인", isFormValid: .constant(false))
-                .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(false))
+                    .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
             }
         }
         .navigationBarBackButtonHidden(true)

@@ -1,6 +1,6 @@
 
 import Foundation
 
-enum API{
-    static let BASE_URL : String = ""
+enum API {
+    static let BASE_URL: String = ""
 }

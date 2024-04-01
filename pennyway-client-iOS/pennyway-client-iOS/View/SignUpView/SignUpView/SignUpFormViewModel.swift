@@ -1,8 +1,7 @@
-import SwiftUI
 import Combine
+import SwiftUI
 
 class SignUpFormViewModel: ObservableObject {
-    
     @Published var name: String = ""
     @Published var id: String = ""
     @Published var password: String = ""
@@ -12,7 +11,7 @@ class SignUpFormViewModel: ObservableObject {
     @Published var showErrorPassword = false
     @Published var showErrorConfirmPw = false
     @Published var isFormValid: Bool = false
-    
+
     func validateForm() {
         if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
             isFormValid = true
@@ -20,7 +19,7 @@ class SignUpFormViewModel: ObservableObject {
             isFormValid = false
         }
     }
-    
+
     func validateName() {
         let nameRegex = "^[가-힣a-zA-Z]+$"
         showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
@@ -39,5 +38,4 @@ class SignUpFormViewModel: ObservableObject {
     func validateConfirmPw() {
         showErrorConfirmPw = password != confirmPw
     }
-    
 }

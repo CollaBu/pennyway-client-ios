@@ -11,7 +11,9 @@ extension Font {
         case regular
         case semibold
         case thin
-        
+
+        // MARK: Internal
+
         var value: String {
             switch self {
             case .black:
@@ -43,4 +45,3 @@ extension Font {
         return Font.custom("\(familyName)-\(weightString)", size: fontSize)
     }
 }
-

@@ -5,9 +5,9 @@
 //  Created by 최희진 on 3/28/24.
 //
 
+import Alamofire
 import Foundation
 import OSLog
-import Alamofire
 
 extension URLRequest {
     static func createURLRequest(url: URL, method: HTTPMethod, bodyParameters: [String: Any]? = nil, queryParameters: [URLQueryItem]? = nil) -> URLRequest {
