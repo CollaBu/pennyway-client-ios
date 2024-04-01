@@ -38,7 +38,6 @@
 		4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* TokenHandling.swift */; };
 		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
-		4AB5AB442BB4A17200D2C9EA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB432BB4A17200D2C9EA /* KeychainHelper.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
 		4AB5AB4C2BB4A54F00D2C9EA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4B2BB4A54F00D2C9EA /* Constants.swift */; };
@@ -52,6 +51,7 @@
 		4AB5AB5D2BB5EA7200D2C9EA /* TermsAndConditionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB5C2BB5EA7200D2C9EA /* TermsAndConditionContentView.swift */; };
 		4AB5AB5F2BB5EACD00D2C9EA /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB5E2BB5EACC00D2C9EA /* WelcomeView.swift */; };
 		4AB5AB612BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB602BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift */; };
+		4ACE1FED2BBB149D00BB4F0A /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEC2BBB149D00BB4F0A /* KeychainHelper.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D850DF8B2BA9E3AA004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -94,7 +94,6 @@
 		4A762B062B99A262001C1188 /* TokenHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandling.swift; sourceTree = "<group>"; };
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
-		4AB5AB432BB4A17200D2C9EA /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = "../../../../../../.Trash/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/API/KeychainHelper.swift"; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4B2BB4A54F00D2C9EA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -108,6 +107,7 @@
 		4AB5AB5C2BB5EA7200D2C9EA /* TermsAndConditionContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionContentView.swift; sourceTree = "<group>"; };
 		4AB5AB5E2BB5EACC00D2C9EA /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeView.swift; path = SignUpView/WelcomeView.swift; sourceTree = "<group>"; };
 		4AB5AB602BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModel.swift; sourceTree = "<group>"; };
+		4ACE1FEC2BBB149D00BB4F0A /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = "pennyway-client-iOS/API/KeychainHelper.swift"; sourceTree = SOURCE_ROOT; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,9 +299,9 @@
 				4AB5AB482BB4A35F00D2C9EA /* Router */,
 				4AB5AB452BB4A1E500D2C9EA /* AlamofireDomains */,
 				4A762B062B99A262001C1188 /* TokenHandling.swift */,
-				4AB5AB432BB4A17200D2C9EA /* KeychainHelper.swift */,
 				4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */,
 				4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */,
+				4ACE1FEC2BBB149D00BB4F0A /* KeychainHelper.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -483,7 +483,6 @@
 			files = (
 				4AB5AB612BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift in Sources */,
 				4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */,
-				4AB5AB442BB4A17200D2C9EA /* KeychainHelper.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
@@ -505,6 +504,7 @@
 				4A762B052B99A259001C1188 /* NumberVerificationViewModel.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D850DF8F2BAAD70E004FBF67 /* (null) in Sources */,
+				4ACE1FED2BBB149D00BB4F0A /* KeychainHelper.swift in Sources */,
 				D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,

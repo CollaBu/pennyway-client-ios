@@ -23,6 +23,7 @@ class AuthAlamofire: TokenHandling {
         self
             .session
             .request(AuthRouter.sendVerificationCode(phone: phone))
+            
             .response { response in
                 switch response.result{
                 case .success(let data):
