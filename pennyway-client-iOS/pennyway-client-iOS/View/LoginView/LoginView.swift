@@ -1,15 +1,13 @@
-
-
 import SwiftUI
 
 struct LoginView: View {
     
     // MARK: Private
-
+    
     @State private var isSplashShown = true
     
     // MARK: Internal
-
+    
     var body: some View {
         NavigationAvailable {
             VStack {
@@ -23,10 +21,8 @@ struct LoginView: View {
                             }
                         }
                 } else {
-                    NavigationLink(destination: NumberVerificationView()) {
-                        Text("회원가입")
-                    }
-                    .padding()
+                    
+                    LoginFormView(viewModel: LoginFormViewModel())
                 }
             }
         }
