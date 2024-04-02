@@ -2,7 +2,6 @@ import Foundation
 import Security
 
 class KeychainHelper {
-    
     static func saveAccessToken(accessToken: String) {
         let keychainQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,

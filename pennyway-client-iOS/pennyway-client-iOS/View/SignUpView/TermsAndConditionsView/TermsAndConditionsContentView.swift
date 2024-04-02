@@ -1,13 +1,12 @@
 import SwiftUI
 
 struct TermsAndConditionsContentView: View {
-    
     // MARK: Private
 
     @State private var isSelectedAllBtn: Bool = false
     @State private var isSelectedUseBtn: Bool = false
     @State private var isSelectedInfoBtn: Bool = false
-    
+
     // MARK: Internal
 
     var body: some View {

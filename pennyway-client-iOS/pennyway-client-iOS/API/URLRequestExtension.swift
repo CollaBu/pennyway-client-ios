@@ -9,7 +9,6 @@ import Alamofire
 import Foundation
 import OSLog
 
-
 extension URLRequest {
     static func createURLRequest(url: URL, method: HTTPMethod, bodyParameters: [String: Any]? = nil, queryParameters: [URLQueryItem]? = nil) -> URLRequest {
         var request = URLRequest(url: url)
