@@ -2,12 +2,10 @@
 import SwiftUI
 
 class NumberVerificationViewModel: ObservableObject {
-    
-    
     // MARK: Private
 
     @State private var timer: Timer?
-    
+
     // MARK: Internal
 
     @Published var phoneNumber: String = ""

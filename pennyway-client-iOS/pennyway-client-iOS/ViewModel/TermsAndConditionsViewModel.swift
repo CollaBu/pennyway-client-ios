@@ -11,7 +11,7 @@ class TermsAndConditionsViewModel: ObservableObject {
                         if let code = responseJSON?["code"] as? String {
                             if code == "2000" {
                                 // 회원가입 성공
-                                
+
                             } else if code == "4220" {
                                 // 입력 유효성 검사 오류
                             }
@@ -21,7 +21,7 @@ class TermsAndConditionsViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-            
+
                 print("Failed to regist: \(error)")
             }
         }
