@@ -4,6 +4,7 @@ struct TermsAndConditionsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var viewModel: SignUpNavigationViewModel
+    @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
 
     var body: some View {
         ScrollView {
@@ -27,6 +28,7 @@ struct TermsAndConditionsView: View {
         VStack {
             CustomBottomButton(action: {
                 viewModel.continueButtonTapped()
+                //termsAndConditionsViewModel.requestRegistAPI()
             }, label: "계속하기", isFormValid: .constant(false))
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
             

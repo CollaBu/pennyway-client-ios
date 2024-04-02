@@ -1,3 +1,4 @@
+
 import Alamofire
 import Foundation
 import OSLog
@@ -17,7 +18,6 @@ extension TokenHandling {
                 let cookies = HTTPCookie.cookies(withResponseHeaderFields: responseHeaders, for: response.response!.url!)
                 for cookie in cookies {
                     print("Cookie name: \(cookie.name), value: \(cookie.value)")
-
                     let nsCookie = HTTPCookie(properties: [
                         HTTPCookiePropertyKey.name: cookie.name,
                         HTTPCookiePropertyKey.value: cookie.value,
@@ -30,7 +30,6 @@ extension TokenHandling {
                     HTTPCookieStorage.shared.setCookie(nsCookie!)
                 }
             }
-
             KeychainHelper.saveAccessToken(accessToken: accessToken)
             os_log("accessToken: %@", log: .default, type: .info, accessToken)
         }

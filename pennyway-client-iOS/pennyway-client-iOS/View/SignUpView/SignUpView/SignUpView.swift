@@ -27,8 +27,30 @@ struct SignUpView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    //                    SignUpFormView()
                     SignUpFormView(formViewModel: formViewModel)
+                }
+                VStack {
+                    CustomBottomButton(action: {
+                        if formViewModel.isFormValid {
+                            viewModel.continueButtonTapped()
+                            print(formViewModel.isFormValid)
+                            //formViewModel.checkDuplicateUserNameAPI()
+                            
+                            RegistrationManager.shared.name = formViewModel.name
+                            RegistrationManager.shared.id = formViewModel.id
+                            RegistrationManager.shared.password = formViewModel.password
+                            RegistrationManager.shared.performRegistration()
+                        } else {
+                            
+                        }
+                            
+                    }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
+                            .padding(.bottom, 20)
+                        
+                        
+                    NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
+                        EmptyView()
+                    }
                 }
             }
             
@@ -44,21 +66,6 @@ struct SignUpView: View {
                         .contentShape(Rectangle())
                     
                 }.offset(x: -10)
-            }
-        }
-        
-        VStack {
-            CustomBottomButton(action: {
-                if formViewModel.isFormValid {
-                    viewModel.continueButtonTapped()
-                    print(formViewModel.isFormValid)
-                } else {}
-                    
-            }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
-                .padding(.bottom, 20)
-                
-            NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
-                EmptyView()
             }
         }
     }

@@ -60,6 +60,7 @@ struct NumberVerificationContentView: View {
                     }
                     Button(action: {
                         viewModel.validatePhoneNumber()
+                        //viewModel.requestVerificationCodeAPI()
                         viewModel.generateRandomVerificationCode()
                         viewModel.judgeTimerRunning()
                         

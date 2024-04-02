@@ -1,6 +1,11 @@
 import SwiftUI
 
 struct SignUpFormView: View {
+    
+    // MARK: Private
+
+    @State private var shouldNavigate = false
+    
     // MARK: Internal
 
     @ObservedObject var formViewModel: SignUpFormViewModel
@@ -75,10 +80,6 @@ struct SignUpFormView: View {
             }
         }
     }
-
-    // MARK: Private
-
-    @State private var shouldNavigate = false
 }
 
 #Preview {

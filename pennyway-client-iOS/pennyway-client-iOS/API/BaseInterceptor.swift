@@ -4,6 +4,7 @@ import Foundation
 
 class BaseInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for _: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        
         print("BaseInterceptor - adapt() ")
 
         var adaptedRequest = urlRequest
@@ -23,7 +24,6 @@ class BaseInterceptor: RequestInterceptor {
 
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
         } else {
-            completion(.doNotRetry)
         }
     }
 }
