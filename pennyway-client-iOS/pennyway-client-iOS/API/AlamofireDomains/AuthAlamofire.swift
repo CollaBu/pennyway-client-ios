@@ -82,4 +82,21 @@ class AuthAlamofire: TokenHandling {
                 }
             }
     }
+    
+    func login(_ username: String, _ password: String, completion: @escaping(Result<Data?, Error>) -> Void){
+        os_log("AuthAlamofire - login() called userInput : %@ ,, %@", log: .default, type: .info, username, password)
+        
+        self
+            .session
+            .request(AuthRouter.login(username: username, password: password))
+            .response { response in
+                switch response.result{
+                case .success(let data):
+                    self.extractAndStoreToken(from: response) //토큰 저장
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
 }

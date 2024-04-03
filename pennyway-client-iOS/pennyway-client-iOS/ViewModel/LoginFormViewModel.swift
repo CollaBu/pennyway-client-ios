@@ -14,6 +14,35 @@ class LoginFormViewModel: ObservableObject {
             loginFailed = false
         }
     }
+    
+    func loginAPI() {
+        
+        if !isFormValid {
+            AuthAlamofire.shared.login(id, password) { result in
+                switch result {
+                case .success(let data):
+                    if let responseData = data {
+                        do {
+                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+                            if let code = responseJSON?["code"] as? String {
+                                if code == "2000" {
+                                    // 성공적으로 인증번호를 전송한 경우
+                                    
+                                } else if code == "4010" {
+                                    // 포맷 오류
+                                }
+                            }
+                        } catch {
+                            print("Error parsing response JSON: \(error)")
+                        }
+                    }
+                case .failure(let error):
+                
+                    print("Failed Login: \(error)")
+                }
+            }
+        }
+    }
 
     
 }

@@ -65,6 +65,7 @@ struct LoginFormView: View {
                             }, label: "로그인", isFormValid: $viewModel.isFormValid, alwaysMint: true)
                         }
                         
+                        
                     }
                     
                     Spacer().frame(height: 19)
