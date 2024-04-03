@@ -63,7 +63,6 @@ enum AuthRouter: URLRequestConvertible {
         case let .checkDuplicateUserName(username):
             let queryParameters = [URLQueryItem(name: "username", value: username)]
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
-
         }
         return request
     }

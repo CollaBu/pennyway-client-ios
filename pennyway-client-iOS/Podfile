@@ -10,7 +10,7 @@ target 'pennyway-client-iOS' do
   pod 'KakaoSDKCommon'  
   pod 'KakaoSDKAuth'  
   pod 'KakaoSDKUser'  
-
+  pod 'GoogleSignIn'
 # Pods for pennyway-client-iOS
 
 end
