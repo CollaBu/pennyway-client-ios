@@ -1,3 +1,4 @@
+import GoogleSignIn
 import KakaoSDKAuth
 import KakaoSDKCommon
 import KakaoSDKUser
@@ -13,6 +14,9 @@ struct pennyway_client_iOSApp: App {
     var body: some Scene {
         WindowGroup {
             LoginView()
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url)
+                }
         }
     }
 }
