@@ -28,7 +28,7 @@ struct TermsAndConditionsView: View {
         VStack {
             CustomBottomButton(action: {
                 viewModel.continueButtonTapped()
-                //termsAndConditionsViewModel.requestRegistAPI()
+                // termsAndConditionsViewModel.requestRegistAPI()
             }, label: "계속하기", isFormValid: .constant(false))
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
             

@@ -1,11 +1,10 @@
 import SwiftUI
 
 class LoginFormViewModel: ObservableObject {
-    
     @Published var id: String = ""
     @Published var password: String = ""
     @Published var isFormValid = false
-    @Published var loginFailed: Bool =  false
+    @Published var loginFailed: Bool = false
     
     func login() {
         if id != "jayang" || password != "dkssudgktpdy1" {
@@ -16,11 +15,10 @@ class LoginFormViewModel: ObservableObject {
     }
     
     func loginAPI() {
-        
         if !isFormValid {
             AuthAlamofire.shared.login(id, password) { result in
                 switch result {
-                case .success(let data):
+                case let .success(data):
                     if let responseData = data {
                         do {
                             let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
@@ -36,15 +34,11 @@ class LoginFormViewModel: ObservableObject {
                             print("Error parsing response JSON: \(error)")
                         }
                     }
-                case .failure(let error):
+                case let .failure(error):
                 
                     print("Failed Login: \(error)")
                 }
             }
         }
     }
-
-    
 }
-
-

@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct LoginView: View {
-    
     // MARK: Private
     
     @State private var isSplashShown = true
@@ -21,7 +20,6 @@ struct LoginView: View {
                             }
                         }
                 } else {
-                    
                     LoginFormView(viewModel: LoginFormViewModel())
                 }
             }

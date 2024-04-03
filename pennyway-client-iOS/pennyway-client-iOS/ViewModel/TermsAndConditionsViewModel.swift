@@ -1,11 +1,10 @@
 import Foundation
 
 class TermsAndConditionsViewModel: ObservableObject {
-    
     func requestRegistAPI() {
         AuthAlamofire.shared.regist(RegistrationManager.shared.name ?? "", RegistrationManager.shared.id ?? "", RegistrationManager.shared.password ?? "", RegistrationManager.shared.formattedPhoneNumber ?? "", RegistrationManager.shared.verificationCode ?? "") { result in
             switch result {
-            case .success(let data):
+            case let .success(data):
                 if let responseData = data {
                     do {
                         let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
@@ -21,7 +20,7 @@ class TermsAndConditionsViewModel: ObservableObject {
                         print("Error parsing response JSON: \(error)")
                     }
                 }
-            case .failure(let error):
+            case let .failure(error):
             
                 print("Failed to regist: \(error)")
             }

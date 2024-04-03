@@ -34,19 +34,16 @@ struct SignUpView: View {
                         if formViewModel.isFormValid {
                             viewModel.continueButtonTapped()
                             print(formViewModel.isFormValid)
-                            //formViewModel.checkDuplicateUserNameAPI()
+                            // formViewModel.checkDuplicateUserNameAPI()
                             
                             RegistrationManager.shared.name = formViewModel.name
                             RegistrationManager.shared.id = formViewModel.id
                             RegistrationManager.shared.password = formViewModel.password
                             RegistrationManager.shared.performRegistration()
-                        } else {
-                            
-                        }
+                        } else {}
                             
                     }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
-                            .padding(.bottom, 20)
-                        
+                        .padding(.bottom, 20)
                         
                     NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
                         EmptyView()
