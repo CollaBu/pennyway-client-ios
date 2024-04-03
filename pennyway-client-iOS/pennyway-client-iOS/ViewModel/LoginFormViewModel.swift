@@ -30,6 +30,7 @@ class LoginFormViewModel: ObservableObject {
                                     // 포맷 오류
                                 }
                             }
+                            print(responseJSON)
                         } catch {
                             print("Error parsing response JSON: \(error)")
                         }
