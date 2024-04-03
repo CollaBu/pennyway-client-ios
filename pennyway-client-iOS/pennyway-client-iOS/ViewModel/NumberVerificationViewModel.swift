@@ -79,6 +79,30 @@ class NumberVerificationViewModel: ObservableObject {
                     print("Failed to send SMS: \(error)")
                 }
             }
+
+            AuthAlamofire.shared.login("", "") { result in
+                switch result {
+                case let .success(data):
+                    if let responseData = data {
+                        do {
+                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+                            if let code = responseJSON?["code"] as? String {
+                                if code == "2000" {
+                                    // 성공적으로 인증번호를 전송한 경우
+
+                                } else if code == "4220" {
+                                    // 포맷 오류
+                                }
+                            }
+                        } catch {
+                            print("Error parsing response JSON: \(error)")
+                        }
+                    }
+                case let .failure(error):
+
+                    print("Failed to send SMS: \(error)")
+                }
+            }
         }
     }
 
