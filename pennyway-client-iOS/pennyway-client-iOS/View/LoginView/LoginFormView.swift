@@ -57,7 +57,7 @@ struct LoginFormView: View {
                             CustomBottomButton(action: {
                                 viewModel.login()
                                 
-                            }, label: "로그인", isFormValid: $viewModel.isFormValid, alwaysMint: true)
+                            }, label: "로그인", isFormValid: .constant(true)) // 수정
                         }
                     }
                     
