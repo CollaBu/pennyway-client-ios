@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LoginFormView: View {
+
     var body: some View {
         VStack {
             ScrollView {
@@ -23,6 +24,7 @@ struct LoginFormView: View {
                             .platformTextColor(color: Color("Gray04"))
                             .font(.pretendard(.medium, size: 9))
                             .padding(8)
+
                     }
                     .padding(.horizontal, 103)
                     

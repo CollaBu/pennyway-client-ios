@@ -8,12 +8,15 @@ class AuthAlamofire: TokenHandling {
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
     
-    let interceptors = Interceptor(interceptors: [BaseInterceptor()])
+    //  let interceptors = Interceptor(interceptors: [BaseInterceptor()])
     
     var session: Session
     
     private init() {
-        session = Session(interceptor: interceptors, eventMonitors: monitors)
+
+        session = Session(eventMonitors: monitors)
+
+
     }
     
     func sendVerificationCode(_ phone: String, completion: @escaping (Result<Data?, Error>) -> Void) {
@@ -70,6 +73,22 @@ class AuthAlamofire: TokenHandling {
             .response { response in
                 switch response.result {
                 case let .success(data):
+                    completion(.success(data))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    func login(_ username: String, _ password: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - login() called userInput : %@ ,, %@", log: .default, type: .info, username, password)
+        
+        session
+            .request(AuthRouter.login(username: username, password: password))
+            .response { response in
+                switch response.result {
+                case let .success(data):
+                    self.extractAndStoreToken(from: response) // 토큰 저장
                     completion(.success(data))
                 case let .failure(error):
                     completion(.failure(error))
