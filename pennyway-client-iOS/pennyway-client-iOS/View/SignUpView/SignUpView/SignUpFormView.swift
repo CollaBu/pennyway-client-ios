@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct SignUpFormView: View {
-    
     // MARK: Private
 
     @State private var shouldNavigate = false

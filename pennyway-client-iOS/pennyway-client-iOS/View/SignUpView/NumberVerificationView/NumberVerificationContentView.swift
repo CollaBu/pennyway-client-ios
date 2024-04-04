@@ -60,7 +60,7 @@ struct NumberVerificationContentView: View {
                     }
                     Button(action: {
                         viewModel.validatePhoneNumber()
-                        //viewModel.requestVerificationCodeAPI()
+                        // viewModel.requestVerificationCodeAPI()
                         viewModel.generateRandomVerificationCode()
                         viewModel.judgeTimerRunning()
                         
@@ -112,10 +112,12 @@ struct NumberVerificationContentView: View {
                                 viewModel.validateForm()
                             }
                         Spacer()
-                        Text(timerString)
-                            .padding(.trailing, 13)
-                            .font(.pretendard(.regular, size: 12))
-                            .platformTextColor(color: Color("Mint03"))
+                        if !viewModel.isTimerHidden {
+                            Text(timerString)
+                                .padding(.trailing, 13)
+                                .font(.pretendard(.regular, size: 12))
+                                .platformTextColor(color: Color("Mint03"))
+                        }
                     }
                 }
             }
