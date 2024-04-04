@@ -13,7 +13,7 @@ struct ErrorCodeContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(Color("Red03"))
                 .frame(width: 44, height: 44)
-            
+
             Text("아이디 또는 비밀번호가 잘못 입력되었어요")
                 .platformTextColor(color: Color("Red03"))
                 .font(.pretendard(.medium, size: 9))
@@ -27,4 +27,3 @@ struct ErrorCodeContentView: View {
 #Preview {
     ErrorCodeContentView()
 }
-

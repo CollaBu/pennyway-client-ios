@@ -6,7 +6,7 @@ struct CustomBottomButton: View {
     let label: String
     @Binding var isFormValid: Bool
     var alwaysMint: Bool = false
-    
+
     var body: some View {
         Button(action: action) {
             Text(label)
