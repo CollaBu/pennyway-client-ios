@@ -5,7 +5,8 @@ extension View {
         if #available(iOS 15.0, *) {
             self.textInputAutocapitalization(.never)
         } else {
-            autocapitalization(.none)
+            self.autocapitalization(.none)
         }
     }
 }
+

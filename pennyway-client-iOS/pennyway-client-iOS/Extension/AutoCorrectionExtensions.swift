@@ -5,7 +5,8 @@ extension View {
         if #available(iOS 15.0, *) {
             self.autocorrectionDisabled(true)
         } else {
-            disableAutocorrection(true)
+            self.disableAutocorrection(true)
         }
     }
 }
+
