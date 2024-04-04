@@ -1,10 +1,9 @@
 
 
-import Foundation
 import Alamofire
+import Foundation
 
 enum AuthRouter: URLRequestConvertible {
-
     case regist(username: String, name: String, password: String, phone: String, code: String)
     case sendVerificationCode(phone: String)
     case verifyVerificationCode(phone: String, code: String)
@@ -54,12 +53,12 @@ enum AuthRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .regist(_, _ , _, _, _):
+        case .regist:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         
-        case .sendVerificationCode(_):
+        case .sendVerificationCode:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
-        case .verifyVerificationCode(_, _):
+        case .verifyVerificationCode:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         case let .checkDuplicateUserName(username):
             let queryParameters = [URLQueryItem(name: "username", value: username)]

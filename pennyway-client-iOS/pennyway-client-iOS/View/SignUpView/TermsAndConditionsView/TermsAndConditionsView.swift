@@ -4,7 +4,8 @@ struct TermsAndConditionsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var viewModel: SignUpNavigationViewModel
-    @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
+    /// @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
+    @State private var isAllAgreed = false
 
     var body: some View {
         ScrollView {
@@ -19,7 +20,7 @@ struct TermsAndConditionsView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    TermsAndConditionsContentView()
+                    TermsAndConditionsContentView(isSelectedAllBtn: $isAllAgreed)
                     
                     Spacer()
                 }
@@ -27,9 +28,11 @@ struct TermsAndConditionsView: View {
         }
         VStack {
             CustomBottomButton(action: {
-                viewModel.continueButtonTapped()
-                //termsAndConditionsViewModel.requestRegistAPI()
-            }, label: "계속하기", isFormValid: .constant(false))
+                if isAllAgreed {
+                    viewModel.continueButtonTapped()
+                }
+                // termsAndConditionsViewModel.requestRegistAPI()
+            }, label: "계속하기", isFormValid: $isAllAgreed)
                 .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
             
             NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {
