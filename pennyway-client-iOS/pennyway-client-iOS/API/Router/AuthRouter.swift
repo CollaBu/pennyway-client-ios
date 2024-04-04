@@ -9,10 +9,11 @@ enum AuthRouter: URLRequestConvertible {
     case verifyVerificationCode(phone: String, code: String)
     case checkDuplicateUserName(username: String)
     case oauthLogin(oauthID: String, idToken: String, provider: String)
+    case login(username: String, password: String)
     
     var method: HTTPMethod {
         switch self {
-        case .regist, .sendVerificationCode, .verifyVerificationCode, .oauthLogin:
+        case .regist, .sendVerificationCode, .verifyVerificationCode, .login, .oauthLogin:
             return .post
         case .checkDuplicateUserName:
             return .get
@@ -35,6 +36,8 @@ enum AuthRouter: URLRequestConvertible {
             return "v1/duplication/username"
         case .oauthLogin:
             return "v1/auth/oauth/sign-in"
+        case .login:
+            return "v1/auth/sign-in"
         }
     }
     
@@ -50,6 +53,8 @@ enum AuthRouter: URLRequestConvertible {
             return [:]
         case let .oauthLogin(oauthID, idToken, _):
             return ["oauthId": oauthID, "idToken": idToken]
+        case let .login(username, password):
+            return ["username": username, "password": password]
         }
     }
 
@@ -71,6 +76,8 @@ enum AuthRouter: URLRequestConvertible {
         case let .oauthLogin(_, _, provider):
             let queryParameters = [URLQueryItem(name: "provider", value: provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
+        case .login:
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         }
         return request
     }

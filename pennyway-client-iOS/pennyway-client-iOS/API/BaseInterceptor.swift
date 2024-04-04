@@ -7,8 +7,8 @@ class BaseInterceptor: RequestInterceptor {
         print("BaseInterceptor - adapt() ")
 
         var adaptedRequest = urlRequest
-        let accessToken = KeychainHelper.loadAccessToken()!
-        adaptedRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+        let accessToken = KeychainHelper.loadAccessToken()
+        adaptedRequest.setValue("Bearer " + (accessToken ?? ""), forHTTPHeaderField: "Authorization")
 
         if let url = adaptedRequest.url, let cookies = HTTPCookieStorage.shared.cookies(for: url) {
             let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)

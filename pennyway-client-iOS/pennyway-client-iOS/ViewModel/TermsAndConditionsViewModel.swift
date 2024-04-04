@@ -21,7 +21,6 @@ class TermsAndConditionsViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-
                 print("Failed to regist: \(error)")
             }
         }
