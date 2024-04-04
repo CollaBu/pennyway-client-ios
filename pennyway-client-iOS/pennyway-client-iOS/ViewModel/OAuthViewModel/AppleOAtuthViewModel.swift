@@ -21,8 +21,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     }
     
     func signOut() {
-//        GIDSignIn.sharedInstance.signOut()
-//        checkStatus()
+        // 로그아웃
     }
 }
 
@@ -32,18 +31,14 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
     /// Apple ID 연동 성공 시
     func authorizationController(controller _: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
-        // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
              
-            // 계정 정보 가져오기
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
             let idToken = appleIDCredential.identityToken!
             let tokeStr = String(data: idToken, encoding: .utf8)
           
             print("User ID : \(userIdentifier)")
-            print("User Email : \(String(describing: email))")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             print("token : \(String(describing: tokeStr!))")
              

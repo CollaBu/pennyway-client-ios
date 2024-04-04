@@ -8,12 +8,12 @@ class AuthAlamofire: TokenHandling {
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
     
-    let interceptors = Interceptor(interceptors: [BaseInterceptor()])
+    // let interceptors = Interceptor(interceptors: [BaseInterceptor()])
     
     var session: Session
     
     private init() {
-        session = Session(interceptor: interceptors, eventMonitors: monitors)
+        session = Session(eventMonitors: monitors)
     }
     
     func sendVerificationCode(_ phone: String, completion: @escaping (Result<Data?, Error>) -> Void) {
@@ -62,11 +62,26 @@ class AuthAlamofire: TokenHandling {
             }
     }
     
-    func checkDuplicateUserName(username: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func checkDuplicateUserName(_ username: String, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - checkDuplicateUserName() called ", log: .default, type: .info)
         
         session
             .request(AuthRouter.checkDuplicateUserName(username: username))
+            .response { response in
+                switch response.result {
+                case let .success(data):
+                    completion(.success(data))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    func oauthLogin(_ oauthID: String, _ idToken: String, _ provider: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - oauthLogin() called ", log: .default, type: .info)
+        
+        session
+            .request(AuthRouter.oauthLogin(oauthID: oauthID, idToken: idToken, provider: provider))
             .response { response in
                 switch response.result {
                 case let .success(data):

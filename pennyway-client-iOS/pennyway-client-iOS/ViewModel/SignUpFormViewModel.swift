@@ -40,7 +40,7 @@ class SignUpFormViewModel: ObservableObject {
     }
 
     func checkDuplicateUserNameAPI() {
-        AuthAlamofire.shared.checkDuplicateUserName(username: id) { result in
+        AuthAlamofire.shared.checkDuplicateUserName(id) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

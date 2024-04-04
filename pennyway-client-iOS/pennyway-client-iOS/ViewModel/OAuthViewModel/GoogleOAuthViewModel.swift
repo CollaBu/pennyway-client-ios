@@ -7,11 +7,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var errorMessage: String = ""
     
-    init() {
-        check()
-    }
-    
-    func checkStatus() {
+    func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
             let user = GIDSignIn.sharedInstance.currentUser
             guard let user = user else {
@@ -26,16 +22,6 @@ class GoogleOAuthViewModel: ObservableObject {
         }
     }
     
-    func check() {
-        GIDSignIn.sharedInstance.restorePreviousSignIn { _, error in
-            if let error = error {
-                self.errorMessage = "error: \(error.localizedDescription)"
-            }
-            
-            self.checkStatus()
-        }
-    }
-    
     func signIn() {
         guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
             return
@@ -47,12 +33,11 @@ class GoogleOAuthViewModel: ObservableObject {
             if let error = error {
                 self.errorMessage = "error: \(error.localizedDescription)"
             }
-            self.checkStatus()
+            self.checkUserInfo()
         }
     }
     
     func signOut() {
         GIDSignIn.sharedInstance.signOut()
-        checkStatus()
     }
 }
