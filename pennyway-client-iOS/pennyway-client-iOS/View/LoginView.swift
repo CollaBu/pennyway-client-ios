@@ -10,6 +10,7 @@ struct LoginView: View {
 
     @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
+    @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
     @State private var isSplashShown = true
 
     // MARK: Internal
@@ -39,6 +40,13 @@ struct LoginView: View {
                     }) {
                         Text("구글 로그인")
                     }
+
+                    Button(action: {
+                        appleOAtuthViewModel.signIn()
+
+                    }, label: {
+                        Text("애플 로그인 ")
+                    })
 
                     NavigationLink(destination: NumberVerificationView()) {
                         Text("회원가입")
