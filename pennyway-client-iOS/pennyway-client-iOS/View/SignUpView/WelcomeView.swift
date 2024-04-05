@@ -12,12 +12,11 @@ struct WelcomeView: View {
                     .padding(.horizontal, 80)
                     .padding(.bottom, 20)
                 
-                Text("이주원님 환영합니다.") //이름 받아오도록 수정
+                Text("이주원님 환영합니다.") // 이름 받아오도록 수정
                     .font(.pretendard(.semibold, size: 24))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 73)
                     .padding(.bottom, 12)
-                
                 
                 Text("페니웨이와 절약을 시작해볼까요?")
                     .font(.pretendard(.medium, size: 14))
