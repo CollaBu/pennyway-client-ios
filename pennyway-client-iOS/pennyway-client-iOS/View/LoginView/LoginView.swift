@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct LoginView: View {
@@ -5,7 +6,6 @@ struct LoginView: View {
 
     @State private var isSplashShown = true
 
-    // MARK: Internal
 
     var body: some View {
         NavigationAvailable {
