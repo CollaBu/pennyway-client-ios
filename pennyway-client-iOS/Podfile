@@ -7,6 +7,10 @@ target 'pennyway-client-iOS' do
   
   pod 'Alamofire'
   pod 'SwiftFormat/CLI'
-  # Pods for pennyway-client-iOS
+  pod 'KakaoSDKCommon'  
+  pod 'KakaoSDKAuth'  
+  pod 'KakaoSDKUser'  
+  pod 'GoogleSignIn'
+# Pods for pennyway-client-iOS
 
 end

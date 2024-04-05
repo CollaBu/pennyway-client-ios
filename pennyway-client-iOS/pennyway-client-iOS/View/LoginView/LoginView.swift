@@ -1,13 +1,11 @@
+
 import SwiftUI
 
 struct LoginView: View {
-
     // MARK: Private
-    
+
     @State private var isSplashShown = true
 
-    // MARK: Internal
-    
     var body: some View {
         NavigationAvailable {
             VStack {

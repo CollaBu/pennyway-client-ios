@@ -4,11 +4,11 @@ struct ErrorCodeContentView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             Rectangle()
-              .foregroundColor(.clear)
-              .frame(maxWidth: .infinity, maxHeight: 28)
-              .background(Color(red: 1, green: 0.95, blue: 0.95))
-              .cornerRadius(17)
-            
+                .foregroundColor(.clear)
+                .frame(maxWidth: .infinity, maxHeight: 28)
+                .background(Color(red: 1, green: 0.95, blue: 0.95))
+                .cornerRadius(17)
+
             Image("icon_close_filled_red")
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(Color("Red03"))
