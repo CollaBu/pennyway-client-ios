@@ -8,23 +8,12 @@ class AuthAlamofire: TokenHandling {
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
     
-<<<<<<< HEAD
-    let interceptors = Interceptor(interceptors: [BaseInterceptor()])
-=======
     //  let interceptors = Interceptor(interceptors: [BaseInterceptor()])
 
->>>>>>> a9ec36c796249bbb48f3f93f8cd9dd7532669fa9
-    
     var session: Session
     
     private init() {
-<<<<<<< HEAD
-        session = Session(interceptor: interceptors, eventMonitors: monitors)
-=======
-
         session = Session(eventMonitors: monitors)
-
->>>>>>> a9ec36c796249bbb48f3f93f8cd9dd7532669fa9
     }
     
     func sendVerificationCode(_ phone: String, completion: @escaping (Result<Data?, Error>) -> Void) {
@@ -73,11 +62,7 @@ class AuthAlamofire: TokenHandling {
             }
     }
     
-<<<<<<< HEAD
-    func checkDuplicateUserName(username: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-=======
     func checkDuplicateUserName(_ username: String, completion: @escaping (Result<Data?, Error>) -> Void) {
->>>>>>> a9ec36c796249bbb48f3f93f8cd9dd7532669fa9
         os_log("AuthAlamofire - checkDuplicateUserName() called ", log: .default, type: .info)
         
         session
@@ -87,8 +72,6 @@ class AuthAlamofire: TokenHandling {
                 case let .success(data):
                     completion(.success(data))
                 case let .failure(error):
-<<<<<<< HEAD
-=======
                     completion(.failure(error))
                 }
             }
@@ -120,7 +103,6 @@ class AuthAlamofire: TokenHandling {
                     self.extractAndStoreToken(from: response) // 토큰 저장
                     completion(.success(data))
                 case let .failure(error):
->>>>>>> a9ec36c796249bbb48f3f93f8cd9dd7532669fa9
                     completion(.failure(error))
                 }
             }

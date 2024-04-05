@@ -17,7 +17,7 @@ struct InputFormView: View {
             
             Spacer().frame(height: 14)
             
-            if viewModel.loginFailed {
+            if viewModel.loginFailed != nil {
                 ErrorCodeContentView()
             }
             
@@ -53,7 +53,7 @@ struct InputFormView: View {
                 
                 VStack {
                     CustomBottomButton(action: {
-                        viewModel.login()
+                        viewModel.loginAPI()
                         
                     }, label: "로그인", isFormValid: .constant(true)) // 수정
                 }

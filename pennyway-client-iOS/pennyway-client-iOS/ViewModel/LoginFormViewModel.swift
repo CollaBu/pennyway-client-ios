@@ -4,18 +4,6 @@ class LoginFormViewModel: ObservableObject {
     @Published var id: String = ""
     @Published var password: String = ""
     @Published var isFormValid = false
-<<<<<<< HEAD
-    @Published var loginFailed: Bool = false
-
-    func login() {
-        if id != "jayang" || password != "dkssudgktpdy1" {
-            loginFailed = true
-        } else {
-            loginFailed = false
-        }
-    }
-}
-=======
     @Published var loginFailed: String? = nil
 
     func loginAPI() {
@@ -48,5 +36,3 @@ class LoginFormViewModel: ObservableObject {
         }
     }
 }
-
->>>>>>> a9ec36c796249bbb48f3f93f8cd9dd7532669fa9

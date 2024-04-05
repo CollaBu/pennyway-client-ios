@@ -1,23 +1,21 @@
 import SwiftUI
 
 struct LoginFormView: View {
-
     @ObservedObject var viewModel: LoginFormViewModel
     @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
     @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
 
-
     var body: some View {
         VStack {
             ScrollView {
                 InputFormView(viewModel: LoginFormViewModel()) // Id, Pw 입력 폼
-                
+
                 OauthButtonView()
-            
+
                 AdditionalOptionView()
             }
-            
+
             VStack {
                 Button(action: {}, label: {
                     ZStack {
@@ -40,5 +38,5 @@ struct LoginFormView: View {
 }
 
 #Preview {
-    LoginFormView()
+    LoginFormView(viewModel: LoginFormViewModel())
 }
