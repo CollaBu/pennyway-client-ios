@@ -6,6 +6,7 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
     @Published var isLoggedIn: Bool = false
     @Published var errorMessage: String = ""
+
     var token = ""
     var oauthID = ""
 
@@ -34,6 +35,7 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginAPI() {
+        isLoggedIn = true
         AuthAlamofire.shared.oauthLogin(oauthID, token, "kakao") { result in
             switch result {
             case let .success(data):

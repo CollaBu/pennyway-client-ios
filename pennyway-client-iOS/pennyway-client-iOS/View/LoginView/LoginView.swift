@@ -19,7 +19,6 @@ struct LoginView: View {
                             }
                         }
                 } else {
-
                     LoginFormView(viewModel: LoginFormViewModel())
                 }
             }

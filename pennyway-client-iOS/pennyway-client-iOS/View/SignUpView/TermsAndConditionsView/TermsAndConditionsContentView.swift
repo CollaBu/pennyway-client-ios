@@ -3,7 +3,7 @@ import SwiftUI
 struct TermsAndConditionsContentView: View {
     // MARK: Private
 
-    @State private var isSelectedAllBtn: Bool = false
+    @Binding var isSelectedAllBtn: Bool
     @State private var isSelectedUseBtn: Bool = false
     @State private var isSelectedInfoBtn: Bool = false
 
@@ -11,7 +11,7 @@ struct TermsAndConditionsContentView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            ScrollView { 
+            ScrollView {
                 HStack {
                     Text("이용 약관 동의")
                         .font(.pretendard(.semibold, size: 24))
