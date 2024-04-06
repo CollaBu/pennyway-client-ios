@@ -3,12 +3,6 @@ import SwiftUI
 struct SignUpView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State private var name: String = ""
-    @State private var id: String = ""
-    @State private var password: String = ""
-    @State private var confirmPw: String = ""
-    @State private var isActiveButton: Bool = true
-    
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
     

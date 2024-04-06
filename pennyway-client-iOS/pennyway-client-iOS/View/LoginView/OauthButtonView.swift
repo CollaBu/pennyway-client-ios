@@ -6,11 +6,12 @@ struct OauthButtonView: View {
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
     @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
 
+    @State private var isOAuthExistUser = true
+
     var body: some View {
         VStack(alignment: .center, spacing: 15) {
             HStack(spacing: 10) {
                 Button(action: { // kakao
-                    print(kakaoOAuthViewModel.isLoggedIn)
                     kakaoOAuthViewModel.signIn()
                 }, label: {
                     Image("icon_signin_kakao")
@@ -31,9 +32,20 @@ struct OauthButtonView: View {
             .padding(.horizontal, 100)
         }
         Spacer().frame(height: 15)
-        NavigationLink(destination: NumberVerificationView(), isActive: $kakaoOAuthViewModel.isLoggedIn) {
+        NavigationLink(destination: NumberVerificationView(), isActive: $isOAuthExistUser) {
             Text("??")
         }
+        .onReceive(kakaoOAuthViewModel.$isOAuthExistUser) { newValue in
+            print(isOAuthExistUser)
+            isOAuthExistUser = !newValue
+        }
+
+//        .onReceive(googleOAuthViewModel.$isOAuthLoggedIn) { newValue in
+//            isOAuthLoggedIn = newValue
+//        }
+//        .onReceive(appleOAtuthViewModel.$isOAuthLoggedIn) { newValue in
+//            isOAuthLoggedIn = newValue
+//        }
     }
 }
 

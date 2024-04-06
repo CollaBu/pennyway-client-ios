@@ -4,7 +4,7 @@ import SwiftUI
 
 class KakaoOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
-    @Published var isLoggedIn: Bool = false
+    @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
 
     var token = ""
@@ -29,13 +29,11 @@ class KakaoOAuthViewModel: ObservableObject {
             }
         } else {
             // 카카오 로그인이 안 된 경우
-            isLoggedIn = false
             givenName = "Not Logged In"
         }
     }
 
     func oauthLoginAPI() {
-        isLoggedIn = true
         AuthAlamofire.shared.oauthLogin(oauthID, token, "kakao") { result in
             switch result {
             case let .success(data):
@@ -44,8 +42,17 @@ class KakaoOAuthViewModel: ObservableObject {
                         let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
                         if let code = responseJSON?["code"] as? String {
                             if code == "2000" {
-                                self.isLoggedIn = true
-                                // 성공적으로 로그인한 경우
+                                if let userData = responseJSON?["data"] as? [String: Any],
+                                   let user = userData["user"] as? [String: Any],
+                                   let userID = user["id"] as? Int
+                                {
+                                    if userID == 1 {
+                                        self.isOAuthExistUser = true
+                                    } else {
+                                        self.isOAuthExistUser = false
+                                        OAuthRegistrationManager.shared.isOAuthRegistration = true
+                                    }
+                                }
 
                             } else if code == "4000" {
                                 // 에러

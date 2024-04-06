@@ -9,6 +9,9 @@ struct AdditionalOptionView: View {
             }
             .font(.pretendard(.medium, size: 9))
             .platformTextColor(color: Color("Gray04"))
+            .onTapGesture {
+                OAuthRegistrationManager.shared.isOAuthRegistration = false
+            }
 
             Button(action: { // 해당 버튼들은 추후 NavigationLink로 수정 할 것
             }, label: {

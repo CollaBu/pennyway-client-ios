@@ -2,8 +2,7 @@ import SwiftUI
 
 struct NumberVerificationView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var phoneNumber: String = ""
-    @State private var verificationCode: String = ""
+
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
@@ -27,7 +26,13 @@ struct NumberVerificationView: View {
                     
                     CustomBottomButton(action: {
                         numberVerificationViewModel.validateNumberVerification()
-                        // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
+                        
+                        if OAuthRegistrationManager.shared.isOAuthRegistration {
+                            numberVerificationViewModel.requestOAuthVerifyVerificationCodeAPI()
+                        } else {
+                            // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
+                        }
+                       
                         if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
                             showingPopUp = false
                             viewModel.continueButtonTapped()

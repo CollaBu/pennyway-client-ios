@@ -108,6 +108,12 @@ class NumberVerificationViewModel: ObservableObject {
         }
     }
 
+    func requestOAuthVerificationCodeAPI() {}
+
+    func requestOAuthVerifyVerificationCodeAPI() {
+        OAuthRegistrationManager.shared.isExistUser = false
+    }
+
     // MARK: Timer function
 
     func judgeTimerRunning() {
