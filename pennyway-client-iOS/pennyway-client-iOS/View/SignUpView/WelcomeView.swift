@@ -12,7 +12,7 @@ struct WelcomeView: View {
                     .padding(.horizontal, 80)
                     .padding(.bottom, 20)
                 
-                Text("안ㄴ나나나나ㅏ나나나나ㅏ나난님 환영해요!")
+                Text("이주원님 환영해요!")
                     .font(.pretendard(.semibold, size: 24))
                     .padding(.horizontal, 73)
                     .padding(.bottom, 12)
@@ -24,7 +24,7 @@ struct WelcomeView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
-                    .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                    .padding(.bottom, 34)
             }
         }
         .navigationBarBackButtonHidden(true)

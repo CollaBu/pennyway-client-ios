@@ -44,7 +44,7 @@ struct NumberVerificationView: View {
                             showingPopUp = true
                         }
                     }, label: "계속하기", isFormValid: $numberVerificationViewModel.isFormValid)
-                        .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                        .padding(.bottom, 34)
                     
                     NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) { // 수정
                         EmptyView()
