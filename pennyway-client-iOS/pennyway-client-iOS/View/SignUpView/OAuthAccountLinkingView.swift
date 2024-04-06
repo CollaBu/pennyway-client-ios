@@ -1,6 +1,10 @@
 import SwiftUI
 
 struct OAuthAccountLinkingView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @StateObject var viewModel = SignUpNavigationViewModel()
+    @State private var isActiveButton = false
+    
     var body: some View {
         ZStack {
             VStack(alignment: .center) {
@@ -21,18 +25,23 @@ struct OAuthAccountLinkingView: View {
                 
                 ZStack {
                     Text("아이디")
-                        .font(.pretendard(.medium, size: 14))
+                        .font(.pretendard(.medium, size: 16))
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.vertical, 20)
+                        .frame(maxWidth: .infinity)
                 }
                 .background(Color("Gray01"))
-                .frame(maxWidth: .infinity)
                 .padding(.horizontal, 20)
                 
                 Spacer()
                 
-                CustomBottomButton(action: {}, label: "연동하기", isFormValid: .constant(true))
+                CustomBottomButton(action: {
+                    isActiveButton = true
+                }, label: "연동하기", isFormValid: .constant(true))
                     .padding(.bottom, 34)
+                NavigationLink(destination: SignUpView(viewModel: viewModel), isActive: $isActiveButton) {
+                    EmptyView()
+                }
             }
         }
         .navigationBarBackButtonHidden(true)

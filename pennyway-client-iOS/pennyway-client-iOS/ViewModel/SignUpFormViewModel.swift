@@ -12,11 +12,30 @@ class SignUpFormViewModel: ObservableObject {
     @Published var showErrorConfirmPw = false
     @Published var isFormValid: Bool = false
 
+    @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
+    @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
+
     func validateForm() {
-        if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
-            isFormValid = true
+        if !isOAuthRegistration {
+            if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
+                isFormValid = true
+            } else {
+                isFormValid = false
+            }
         } else {
-            isFormValid = false
+            if isExistUser {
+                if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
+                    isFormValid = true
+                } else {
+                    isFormValid = false
+                }
+            } else {
+                if !name.isEmpty && !id.isEmpty && !showErrorName && !showErrorID {
+                    isFormValid = true
+                } else {
+                    isFormValid = false
+                }
+            }
         }
     }
 
