@@ -21,7 +21,7 @@ struct NumberVerificationView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    NumberVerificationContentView(viewModel: numberVerificationViewModel)
+                    NumberVerificationContentView()
                     
                     Spacer()
                     
