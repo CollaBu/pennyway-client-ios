@@ -16,7 +16,7 @@ struct AdditionalOptionView: View {
             .font(.pretendard(.medium, size: 9))
             .platformTextColor(color: Color("Gray04"))
 
-            NavigationLink(destination: NumberVerificationView()) {
+            NavigationLink(destination: FindPwView()) {
                 Text("비밀번호 찾기")
             }
             .font(.pretendard(.medium, size: 9))
