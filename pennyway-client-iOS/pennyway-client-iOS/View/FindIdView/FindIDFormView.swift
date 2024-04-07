@@ -3,6 +3,7 @@ import SwiftUI
 struct FindIDFormView: View {
     @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
     @State private var showingPopUp = false
+    @State private var navigateToFindIDView = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     
     var body: some View {
@@ -11,11 +12,11 @@ struct FindIDFormView: View {
                 VStack {
                     Spacer().frame(height: 36)
                     
-                    PhoneNumberInputSectionView(viewModel: NumberVerificationViewModel())
+                    PhoneNumberInputSectionView(viewModel: numberVerificationViewModel) //
                     
                     Spacer().frame(height: 21)
                     
-                    NumberInputSectionView(viewModel: NumberVerificationViewModel())
+                    NumberInputSectionView(viewModel: numberVerificationViewModel)
                     
                     Spacer().frame(height: 203)
                     Spacer()
@@ -23,6 +24,7 @@ struct FindIDFormView: View {
                     VStack {
                         CustomBottomButton(action: {
                             numberVerificationViewModel.validateNumberVerification()
+                            FindIDView()
                             // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
                             if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
                                 showingPopUp = false
@@ -31,12 +33,21 @@ struct FindIDFormView: View {
                                 RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
                                 RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
                                 
+//                                NavigationLink(destination: FindIDView(), isActive: $navigateToFindIDView) {
+//                                    EmptyView()
+//                                }
+                                navigateToFindIDView = true
+                                
                             } else {
                                 showingPopUp = true
                             }
                         }, label: "아이디 찾기", isFormValid: $numberVerificationViewModel.isFormValid)
                     }
                     .padding(.bottom, 34)
+                    
+                    NavigationLink(destination: FindIDView(), isActive: $navigateToFindIDView) {
+                        EmptyView()
+                    }.hidden()
                 }
             }
         }
