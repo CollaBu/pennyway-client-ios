@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct FindIDView: View {
+struct FindIDFormView: View {
     @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
@@ -57,5 +57,5 @@ struct FindIDView: View {
 }
 
 #Preview {
-    FindIDView()
+    FindIDFormView()
 }

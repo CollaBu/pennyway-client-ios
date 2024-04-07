@@ -60,9 +60,10 @@
 		D8157E642BBEF2040083844B /* InputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E632BBEF2040083844B /* InputFormView.swift */; };
 		D8157E662BBEF2740083844B /* OauthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E652BBEF2740083844B /* OauthButtonView.swift */; };
 		D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E672BBEF4400083844B /* AdditionalOptionView.swift */; };
-		D8157E6B2BC04D7E0083844B /* FindIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E6A2BC04D7E0083844B /* FindIDView.swift */; };
+		D8157E6B2BC04D7E0083844B /* FindIdFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E6A2BC04D7E0083844B /* FindIdFormView.swift */; };
 		D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E712BC19E590083844B /* PhoneNumberInputSectionView.swift */; };
 		D8157E782BC1A1FE0083844B /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E772BC1A1FE0083844B /* NumberInputSectionView.swift */; };
+		D8157E7C2BC269350083844B /* FindIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E7B2BC269350083844B /* FindIdView.swift */; };
 		D850DF8B2BA9E3AA004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D850DF8F2BAAD70E004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -131,9 +132,10 @@
 		D8157E652BBEF2740083844B /* OauthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthButtonView.swift; sourceTree = "<group>"; };
 		D8157E672BBEF4400083844B /* AdditionalOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionView.swift; sourceTree = "<group>"; };
 		D8157E692BBFACC10083844B /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		D8157E6A2BC04D7E0083844B /* FindIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDView.swift; sourceTree = "<group>"; };
+		D8157E6A2BC04D7E0083844B /* FindIdFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdFormView.swift; sourceTree = "<group>"; };
 		D8157E712BC19E590083844B /* PhoneNumberInputSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputSectionView.swift; sourceTree = "<group>"; };
 		D8157E772BC1A1FE0083844B /* NumberInputSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
+		D8157E7B2BC269350083844B /* FindIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdView.swift; sourceTree = "<group>"; };
 		D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAutocapitalization.swift; sourceTree = "<group>"; };
 		D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
 		D888329B2BBC612600F49B27 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
@@ -408,7 +410,8 @@
 		D8157E6C2BC080E20083844B /* FindIdView */ = {
 			isa = PBXGroup;
 			children = (
-				D8157E6A2BC04D7E0083844B /* FindIDView.swift */,
+				D8157E6A2BC04D7E0083844B /* FindIdFormView.swift */,
+				D8157E7B2BC269350083844B /* FindIdView.swift */,
 			);
 			path = FindIdView;
 			sourceTree = "<group>";
@@ -573,7 +576,7 @@
 				4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
-				D8157E6B2BC04D7E0083844B /* FindIDView.swift in Sources */,
+				D8157E6B2BC04D7E0083844B /* FindIdFormView.swift in Sources */,
 				D888329E2BBC613E00F49B27 /* LoginFormViewModel.swift in Sources */,
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
@@ -589,6 +592,7 @@
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
+				D8157E7C2BC269350083844B /* FindIdView.swift in Sources */,
 				4AB5AB4C2BB4A54F00D2C9EA /* Constants.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
