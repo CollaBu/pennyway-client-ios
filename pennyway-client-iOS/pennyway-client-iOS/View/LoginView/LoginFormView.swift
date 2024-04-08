@@ -4,16 +4,21 @@ struct LoginFormView: View {
     @ObservedObject var viewModel: LoginFormViewModel
 
     var body: some View {
-        VStack {
-            ScrollView {
-                InputFormView(viewModel: LoginFormViewModel())
+        ZStack {
+            VStack {
+                ScrollView {
+                    InputFormView(viewModel: LoginFormViewModel()) // Id, Pw 입력 폼
 
-                OauthButtonView()
+                    OauthButtonView()
 
-                AdditionalOptionView()
+                    AdditionalOptionView()
+                    Spacer()
+                }
             }
 
             VStack {
+                Spacer()
+
                 Button(action: {}, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 14)
@@ -27,9 +32,10 @@ struct LoginFormView: View {
                     }
                     .padding(.horizontal, 103)
 
+                    .padding(.bottom, 34)
                 })
             }
-            .padding(.bottom, 34)
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
 }

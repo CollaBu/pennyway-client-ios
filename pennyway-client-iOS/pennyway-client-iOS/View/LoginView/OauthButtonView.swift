@@ -13,30 +13,26 @@ struct OauthButtonView: View {
             HStack(spacing: 10) {
                 Button(action: { // kakao
                     kakaoOAuthViewModel.signIn()
+
                 }, label: {
                     Image("icon_signin_kakao")
                 })
 
                 Button(action: { // google
                     googleOAuthViewModel.signIn()
+
                 }, label: {
                     Image("icon_signin_google")
                 })
 
                 Button(action: { // apple
                     appleOAtuthViewModel.signIn()
+
                 }, label: {
                     Image("icon_signin_apple")
                 })
             }
             .padding(.horizontal, 100)
-        }
-        Spacer().frame(height: 15)
-        NavigationLink(destination: NumberVerificationView(), isActive: $isActiveLink) {
-            EmptyView()
-        }
-        .onReceive(kakaoOAuthViewModel.$isOAuthExistUser) { newValue in
-            isActiveLink = !newValue
         }
     }
 }
