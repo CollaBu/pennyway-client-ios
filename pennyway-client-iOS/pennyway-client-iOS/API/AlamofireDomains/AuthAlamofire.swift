@@ -10,13 +10,10 @@ class AuthAlamofire: TokenHandling {
     
     //  let interceptors = Interceptor(interceptors: [BaseInterceptor()])
 
-    
     var session: Session
     
     private init() {
-
         session = Session(eventMonitors: monitors)
-
     }
     
     func sendVerificationCode(_ phone: String, completion: @escaping (Result<Data?, Error>) -> Void) {

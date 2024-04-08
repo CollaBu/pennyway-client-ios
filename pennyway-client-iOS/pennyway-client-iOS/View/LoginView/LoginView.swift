@@ -6,7 +6,6 @@ struct LoginView: View {
 
     @State private var isSplashShown = true
 
-
     var body: some View {
         NavigationAvailable {
             VStack {
@@ -20,8 +19,7 @@ struct LoginView: View {
                             }
                         }
                 } else {
-                    LoginFormView()
-
+                    LoginFormView(viewModel: LoginFormViewModel())
                 }
             }
         }
