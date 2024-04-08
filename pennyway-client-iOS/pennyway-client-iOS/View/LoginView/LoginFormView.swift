@@ -7,13 +7,15 @@ struct LoginFormView: View {
     @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
     
     var body: some View {
-        VStack {
-            InputFormView(viewModel: LoginFormViewModel()) // Id, Pw 입력 폼
-                    
-            OauthButtonView()
-                    
-            AdditionalOptionView()
-            Spacer()
+        ScrollView {
+            VStack {
+                InputFormView(viewModel: LoginFormViewModel()) // Id, Pw 입력 폼
+                
+                OauthButtonView()
+                
+                AdditionalOptionView()
+                Spacer()
+            }
         }
         Spacer()
         VStack {
@@ -28,11 +30,11 @@ struct LoginFormView: View {
                         .font(.pretendard(.medium, size: 9))
                         .padding(8)
                 }
+                .padding(.horizontal, 103)
+                .padding(.bottom, 34)
                     
             })
         }
-        .padding(.horizontal, 103)
-        .padding(.bottom, 34)
     }
 }
 
