@@ -7,18 +7,11 @@ struct RegistrationManager {
     var password: String?
     var phoneNumber: String?
     var formattedPhoneNumber: String? {
-        guard let phoneNumber = phoneNumber else {
-            return nil
-        }
-        let areaCode = String(phoneNumber.prefix(3))
-        let middlePart = String(phoneNumber.dropFirst(3).prefix(4))
-        let lastPart = String(phoneNumber.dropFirst(7))
-        return "\(areaCode)-\(middlePart)-\(lastPart)"
+        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber)
     }
 
     var verificationCode: String?
 
-    /// Singleton 패턴을 위한 private 생성자
     private init() {}
 
     func performRegistration() {

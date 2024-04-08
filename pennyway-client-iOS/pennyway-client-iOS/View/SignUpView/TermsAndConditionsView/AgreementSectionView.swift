@@ -36,7 +36,7 @@ struct AgreementSectionView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
                             .inset(by: 0.5)
-                            .stroke(.gray04.opacity(0.5), lineWidth: 1)
+                            .stroke(.black.opacity(0.5), lineWidth: 1)
                     )
                 
                 Text(contentText)
