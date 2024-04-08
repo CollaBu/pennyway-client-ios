@@ -6,7 +6,7 @@ struct LoginFormView: View {
     var body: some View {
         VStack {
             ScrollView {
-                InputFormView(viewModel: LoginFormViewModel()) // Id, Pw 입력 폼
+                InputFormView(viewModel: LoginFormViewModel())
 
                 OauthButtonView()
 

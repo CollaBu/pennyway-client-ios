@@ -46,7 +46,7 @@ class KakaoOAuthViewModel: ObservableObject {
                                    let user = userData["user"] as? [String: Any],
                                    let userID = user["id"] as? Int
                                 {
-                                    if userID == 1 {
+                                    if userID != -1 {
                                         self.isOAuthExistUser = true
                                     } else {
                                         self.isOAuthExistUser = false

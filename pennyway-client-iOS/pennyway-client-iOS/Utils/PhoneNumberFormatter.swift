@@ -1,8 +1,7 @@
 
 import Foundation
 
-struct PhoneNumberFormatter {
-    
+enum PhoneNumberFormatter {
     static func formattedPhoneNumber(from phoneNumber: String?) -> String? {
         guard let phoneNumber = phoneNumber else {
             return nil

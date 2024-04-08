@@ -7,9 +7,9 @@ struct RegistrationManager {
     var password: String?
     var phoneNumber: String?
     var formattedPhoneNumber: String? {
-        return PhoneNumberFormatter.formattedPhoneNumber(from: self.phoneNumber)
+        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber)
     }
-    
+
     var verificationCode: String?
 
     private init() {}

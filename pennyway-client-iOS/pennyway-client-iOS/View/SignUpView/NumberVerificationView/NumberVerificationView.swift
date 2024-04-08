@@ -8,8 +8,7 @@ struct NumberVerificationView: View {
     @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
-    @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
-    
+   
     var body: some View {
         NavigationAvailable {
             ZStack {
@@ -80,7 +79,7 @@ struct NumberVerificationView: View {
     
     @ViewBuilder
     private func destinationView() -> some View {
-        if isOAuthRegistration && isExistUser {
+        if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser {
             OAuthAccountLinkingView(viewModel: viewModel)
         } else {
             SignUpView(viewModel: viewModel)
