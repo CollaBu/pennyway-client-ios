@@ -33,9 +33,6 @@ struct FindIDFormView: View {
                                 RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
                                 RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
                                 
-//                                NavigationLink(destination: FindIDView(), isActive: $navigateToFindIDView) {
-//                                    EmptyView()
-//                                }
                                 navigateToFindIDView = true
                                 
                             } else {
