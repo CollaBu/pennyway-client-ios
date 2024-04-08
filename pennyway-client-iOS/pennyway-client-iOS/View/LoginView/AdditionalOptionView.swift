@@ -6,12 +6,13 @@ struct AdditionalOptionView: View {
         HStack(alignment: .center) {
             NavigationLink(destination: NumberVerificationView()) {
                 Text("회원가입")
+                    .font(.pretendard(.medium, size: 9))
+                    .platformTextColor(color: Color("Gray04"))
             }
-            .font(.pretendard(.medium, size: 9))
-            .platformTextColor(color: Color("Gray04"))
-            .onTapGesture {
+            .simultaneousGesture(TapGesture().onEnded {
                 OAuthRegistrationManager.shared.isOAuthRegistration = false
-            }
+                OAuthRegistrationManager.shared.isExistUser = true
+            })
 
             Button(action: { // 해당 버튼들은 추후 NavigationLink로 수정 할 것
             }, label: {

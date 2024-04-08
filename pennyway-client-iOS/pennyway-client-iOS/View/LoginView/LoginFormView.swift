@@ -9,7 +9,6 @@ struct LoginFormView: View {
                 InputFormView(viewModel: LoginFormViewModel()) // Id, Pw 입력 폼
 
                 OauthButtonView()
-                // Spacer().frame(height: 15)
 
                 AdditionalOptionView()
             }

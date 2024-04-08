@@ -2,7 +2,7 @@ import SwiftUI
 
 struct NumberVerificationView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
@@ -56,7 +56,7 @@ struct NumberVerificationView: View {
             }
         }
     }
-
+    
     private func continueButtonAction() {
         numberVerificationViewModel.validateNumberVerification()
         

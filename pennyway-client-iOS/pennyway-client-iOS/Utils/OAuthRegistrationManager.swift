@@ -10,10 +10,6 @@ struct OAuthRegistrationManager {
     private init() {}
 
     func checkRegistration() {
-        // if let isLoggedIn = isLoggedIn{
         print("checkRegistration User: isOAuthRegistration - \(isOAuthRegistration), isExistUser - \(isExistUser)")
-        //  } else {
-        // print("Missing information for registration")
-        //  }
     }
 }

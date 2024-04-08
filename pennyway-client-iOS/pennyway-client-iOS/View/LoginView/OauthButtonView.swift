@@ -6,7 +6,7 @@ struct OauthButtonView: View {
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
     @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
 
-    @State private var isOAuthExistUser = true
+    @State private var isActiveLink = true
 
     var body: some View {
         VStack(alignment: .center, spacing: 15) {
@@ -32,20 +32,12 @@ struct OauthButtonView: View {
             .padding(.horizontal, 100)
         }
         Spacer().frame(height: 15)
-        NavigationLink(destination: NumberVerificationView(), isActive: $isOAuthExistUser) {
-            Text("??")
+        NavigationLink(destination: NumberVerificationView(), isActive: $isActiveLink) {
+            EmptyView()
         }
         .onReceive(kakaoOAuthViewModel.$isOAuthExistUser) { newValue in
-            print(isOAuthExistUser)
-            isOAuthExistUser = !newValue
+            isActiveLink = !newValue
         }
-
-//        .onReceive(googleOAuthViewModel.$isOAuthLoggedIn) { newValue in
-//            isOAuthLoggedIn = newValue
-//        }
-//        .onReceive(appleOAtuthViewModel.$isOAuthLoggedIn) { newValue in
-//            isOAuthLoggedIn = newValue
-//        }
     }
 }
 
