@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct NumberVerificationView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
@@ -22,7 +20,7 @@ struct NumberVerificationView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    NumberVerificationContentView()
+                    NumberVerificationContentView(numberVerificationViewModel: numberVerificationViewModel)
                     
                     Spacer()
                     
@@ -73,6 +71,7 @@ struct NumberVerificationView: View {
             RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
 
         } else {
+            print(numberVerificationViewModel.verificationCode, numberVerificationViewModel.phoneNumber)
             showingPopUp = true
         }
     }

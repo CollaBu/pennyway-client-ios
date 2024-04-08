@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct TermsAndConditionsView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     @ObservedObject var viewModel: SignUpNavigationViewModel
     /// @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @State private var isAllAgreed = false

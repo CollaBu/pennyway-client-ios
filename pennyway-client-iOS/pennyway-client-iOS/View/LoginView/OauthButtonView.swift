@@ -6,7 +6,7 @@ struct OauthButtonView: View {
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
     @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
 
-    @State private var isActiveLink = true
+    @State private var isActiveLink = false
 
     var body: some View {
         VStack(alignment: .center, spacing: 15) {
@@ -17,6 +17,12 @@ struct OauthButtonView: View {
                 }, label: {
                     Image("icon_signin_kakao")
                 })
+                .onReceive(kakaoOAuthViewModel.$isOAuthExistUser) { newValue in
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        isActiveLink = !newValue
+                    }
+                }
 
                 Button(action: { // google
                     googleOAuthViewModel.signIn()
@@ -33,6 +39,10 @@ struct OauthButtonView: View {
                 })
             }
             .padding(.horizontal, 100)
+
+            NavigationLink(destination: NumberVerificationView(), isActive: $isActiveLink) {
+                EmptyView()
+            }
         }
     }
 }

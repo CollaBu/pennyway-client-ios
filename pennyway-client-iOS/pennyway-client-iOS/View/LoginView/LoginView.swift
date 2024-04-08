@@ -1,11 +1,10 @@
-
 import SwiftUI
 
 struct LoginView: View {
     // MARK: Private
 
     @State private var isSplashShown = true
-    @State private var isSplashShownn = false
+    @State private var isActiveLink = false
 
     var body: some View {
         NavigationAvailable {
@@ -16,16 +15,12 @@ struct LoginView: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 withAnimation {
                                     isSplashShown = false
-                                    isSplashShownn = true
                                 }
                             }
                         }
                 } else {
                     LoginFormView(viewModel: LoginFormViewModel())
                 }
-            }
-            NavigationLink(destination: NumberVerificationView(), isActive: $isSplashShownn) {
-                EmptyView()
             }
         }
     }
