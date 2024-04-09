@@ -18,7 +18,7 @@ struct OauthButtonView: View {
                     Image("icon_signin_kakao")
                 })
                 .onReceive(kakaoOAuthViewModel.$isOAuthExistUser) { newValue in
-                    
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         isActiveLink = !newValue
                     }
