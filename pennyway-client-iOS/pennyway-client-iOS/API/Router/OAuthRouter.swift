@@ -6,10 +6,11 @@ enum OAuthRouter: URLRequestConvertible {
    
     case oauthLogin(oauthID: String, idToken: String, provider: String)
     case oauthSendVerificationCode(phone: String)
+    case oauthVerifyVerificationCode(phone: String, code: String)
     
     var method: HTTPMethod {
         switch self {
-        case .oauthLogin, .oauthSendVerificationCode:
+        case .oauthLogin, .oauthSendVerificationCode, .oauthVerifyVerificationCode:
             return .post
         }
     }
@@ -24,6 +25,8 @@ enum OAuthRouter: URLRequestConvertible {
             return "v1/auth/oauth/sign-in"
         case .oauthSendVerificationCode:
             return "v1/auth/oauth/phone"
+        case .oauthVerifyVerificationCode:
+            return "v1/auth/oauth/phone/verification"
         }
     }
     
@@ -34,6 +37,8 @@ enum OAuthRouter: URLRequestConvertible {
             return ["oauthId": oauthID, "idToken": idToken]
         case let .oauthSendVerificationCode(phone):
             return ["phone": phone]
+        case let .oauthVerifyVerificationCode(phone, code):
+            return ["phone" : phone, "code": code]
         }
     }
 
@@ -47,7 +52,7 @@ enum OAuthRouter: URLRequestConvertible {
             let queryParameters = [URLQueryItem(name: "provider", value: provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
             
-        case .oauthSendVerificationCode:
+        case .oauthSendVerificationCode, .oauthVerifyVerificationCode:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         }
         return request

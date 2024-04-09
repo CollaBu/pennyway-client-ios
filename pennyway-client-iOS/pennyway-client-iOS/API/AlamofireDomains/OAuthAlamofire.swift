@@ -18,7 +18,7 @@ class OAuthAlamofire: TokenHandling {
         os_log("AuthAlamofire - oauthLogin() called ", log: .default, type: .info)
         
         session
-            .request(AuthRouter.oauthLogin(oauthID: oauthID, idToken: idToken, provider: provider))
+            .request(OAuthRouter.oauthLogin(oauthID: oauthID, idToken: idToken, provider: provider))
             .response { response in
                 switch response.result {
                 case let .success(data):
