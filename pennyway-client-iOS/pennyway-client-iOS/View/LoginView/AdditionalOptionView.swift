@@ -30,7 +30,7 @@ struct AdditionalOptionView: View {
                         .stroke(Color("Gray02"), lineWidth: 0.69506)
                 )
 
-            NavigationLink(destination: NumberVerificationView()) {
+            NavigationLink(destination: FindPwView()) {
                 Text("비밀번호 찾기")
             }
             .font(.pretendard(.medium, size: 9))
