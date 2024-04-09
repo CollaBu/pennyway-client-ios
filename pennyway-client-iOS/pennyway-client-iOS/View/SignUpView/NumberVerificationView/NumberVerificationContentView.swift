@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct NumberVerificationContentView: View {
+    @ObservedObject var numberVerificationViewModel: NumberVerificationViewModel
+
     // MARK: Internal
 
     var body: some View {
@@ -12,15 +14,15 @@ struct NumberVerificationContentView: View {
 
             Spacer().frame(height: 32)
 
-            PhoneNumberInputSectionView(viewModel: NumberVerificationViewModel())
+            PhoneNumberInputSectionView(viewModel: numberVerificationViewModel)
 
             Spacer().frame(height: 21)
 
-            NumberInputSectionView(viewModel: NumberVerificationViewModel())
+            NumberInputSectionView(viewModel: numberVerificationViewModel)
         }
     }
 }
 
 #Preview {
-    NumberVerificationContentView()
+    NumberVerificationContentView(numberVerificationViewModel: NumberVerificationViewModel())
 }

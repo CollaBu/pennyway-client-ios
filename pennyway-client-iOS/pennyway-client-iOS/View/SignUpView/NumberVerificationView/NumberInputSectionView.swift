@@ -2,20 +2,20 @@ import SwiftUI
 
 struct NumberInputSectionView: View {
     @ObservedObject var viewModel: NumberVerificationViewModel
-    
+
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
         let seconds = viewModel.timerSeconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 13) {
             Text("인증 번호")
                 .padding(.horizontal, 20)
                 .font(.pretendard(.regular, size: 12))
                 .platformTextColor(color: Color("Gray04"))
-            
+
             HStack(spacing: 11) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)

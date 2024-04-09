@@ -25,7 +25,7 @@ struct WelcomeView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
-                    .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                    .padding(.bottom, 34)
             }
         }
         .navigationBarBackButtonHidden(true)

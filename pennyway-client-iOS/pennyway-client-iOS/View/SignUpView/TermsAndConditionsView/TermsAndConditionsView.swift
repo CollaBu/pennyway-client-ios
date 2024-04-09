@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct TermsAndConditionsView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     @ObservedObject var viewModel: SignUpNavigationViewModel
     /// @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @State private var isAllAgreed = false
@@ -33,7 +31,7 @@ struct TermsAndConditionsView: View {
                 }
                 // termsAndConditionsViewModel.requestRegistAPI()
             }, label: "계속하기", isFormValid: $isAllAgreed)
-                .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                .padding(.bottom, 34)
             
             NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {
                 EmptyView()

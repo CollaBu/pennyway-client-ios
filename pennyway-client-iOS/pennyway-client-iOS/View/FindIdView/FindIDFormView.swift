@@ -45,7 +45,6 @@ struct FindIDFormView: View {
                     }, label: "아이디 찾기", isFormValid: $numberVerificationViewModel.isFormValid)
                 }
                 .padding(.bottom, 34)
-                .border(Color.black)
                 
                 NavigationLink(destination: FindIDView(), isActive: $navigateToFindIDView) {
                     EmptyView()

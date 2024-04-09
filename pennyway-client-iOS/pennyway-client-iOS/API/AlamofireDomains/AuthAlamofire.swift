@@ -7,9 +7,8 @@ class AuthAlamofire: TokenHandling {
     static let shared = AuthAlamofire()
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
-    
-    //  let interceptors = Interceptor(interceptors: [BaseInterceptor()])
 
+    /// let interceptors = Interceptor(interceptors: [BaseInterceptor()])
     var session: Session
     
     private init() {

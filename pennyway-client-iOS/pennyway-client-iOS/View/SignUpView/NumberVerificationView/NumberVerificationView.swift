@@ -1,13 +1,12 @@
 import SwiftUI
 
 struct NumberVerificationView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var phoneNumber: String = ""
-    @State private var verificationCode: String = ""
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
     
+    @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
+   
     var body: some View {
         NavigationAvailable {
             ZStack {
@@ -21,27 +20,16 @@ struct NumberVerificationView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    NumberVerificationContentView()
+                    NumberVerificationContentView(numberVerificationViewModel: numberVerificationViewModel)
                     
                     Spacer()
                     
                     CustomBottomButton(action: {
-                        numberVerificationViewModel.validateNumberVerification()
-                        // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
-                        if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
-                            showingPopUp = false
-                            viewModel.continueButtonTapped()
-                            
-                            RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
-                            RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
-
-                        } else {
-                            showingPopUp = true
-                        }
+                        continueButtonAction()
                     }, label: "계속하기", isFormValid: $numberVerificationViewModel.isFormValid)
-                        .padding(.bottom, (UIApplication.shared.windows.first?.safeAreaInsets.bottom)! + 34)
+                        .padding(.bottom, 34)
                     
-                    NavigationLink(destination: SignUpView(viewModel: viewModel), tag: 2, selection: $viewModel.selectedText) { // 수정
+                    NavigationLink(destination: destinationView(), tag: 2, selection: $viewModel.selectedText) {
                         EmptyView()
                     }
                 }
@@ -63,6 +51,37 @@ struct NumberVerificationView: View {
                     }.offset(x: -10)
                 }
             }
+        }
+    }
+    
+    private func continueButtonAction() {
+        numberVerificationViewModel.validateNumberVerification()
+        
+        if isOAuthRegistration {
+            numberVerificationViewModel.requestOAuthVerifyVerificationCodeAPI()
+        } else {
+            // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
+        }
+       
+        if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
+            showingPopUp = false
+            viewModel.continueButtonTapped()
+            
+            RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
+            RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
+
+        } else {
+            print(numberVerificationViewModel.verificationCode, numberVerificationViewModel.phoneNumber)
+            showingPopUp = true
+        }
+    }
+    
+    @ViewBuilder
+    private func destinationView() -> some View {
+        if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser {
+            OAuthAccountLinkingView(viewModel: viewModel)
+        } else {
+            SignUpView(viewModel: viewModel)
         }
     }
 }

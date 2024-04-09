@@ -1,10 +1,10 @@
-
 import SwiftUI
 
 struct LoginView: View {
     // MARK: Private
 
     @State private var isSplashShown = true
+    @State private var isActiveLink = false
 
     var body: some View {
         NavigationAvailable {

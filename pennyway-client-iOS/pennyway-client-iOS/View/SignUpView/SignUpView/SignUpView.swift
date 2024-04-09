@@ -1,18 +1,8 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @State private var name: String = ""
-    @State private var id: String = ""
-    @State private var password: String = ""
-    @State private var confirmPw: String = ""
-    @State private var isActiveButton: Bool = true
-    
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
-    // @ObservedObject var viewModel: SignUpNavigationViewModel
-    // @ObservedObject var formViewModel: SignUpFormViewModel
     
     var body: some View {
         ScrollView {
@@ -29,29 +19,27 @@ struct SignUpView: View {
                     
                     SignUpFormView(formViewModel: formViewModel)
                 }
-                VStack {
-                    CustomBottomButton(action: {
-                        if formViewModel.isFormValid {
-                            viewModel.continueButtonTapped()
-                            print(formViewModel.isFormValid)
-                            // formViewModel.checkDuplicateUserNameAPI()
-                            
-                            RegistrationManager.shared.name = formViewModel.name
-                            RegistrationManager.shared.id = formViewModel.id
-                            RegistrationManager.shared.password = formViewModel.password
-                            RegistrationManager.shared.performRegistration()
-                        } else {}
-                            
-                    }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
-                        .padding(.bottom, 20)
-                        
-                    NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
-                        EmptyView()
-                    }
-                }
             }
-            
-            Spacer().frame(height: 47)
+        }
+        VStack {
+            CustomBottomButton(action: {
+                if formViewModel.isFormValid {
+                    viewModel.continueButtonTapped()
+                    print(formViewModel.isFormValid)
+                    // formViewModel.checkDuplicateUserNameAPI()
+                    
+                    RegistrationManager.shared.name = formViewModel.name
+                    RegistrationManager.shared.id = formViewModel.id
+                    RegistrationManager.shared.password = formViewModel.password
+                    RegistrationManager.shared.performRegistration()
+                } else {}
+                    
+            }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
+                .padding(.bottom, 34)
+                
+            NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
+                EmptyView()
+            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

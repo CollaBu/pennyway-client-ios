@@ -2,27 +2,48 @@
 import SwiftUI
 
 struct OauthButtonView: View {
+    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
+    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
+    @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
+
+    @State private var isActiveLink = false
+
     var body: some View {
         VStack(alignment: .center, spacing: 15) {
             HStack(spacing: 10) {
                 Button(action: { // kakao
+                    kakaoOAuthViewModel.signIn()
+
                 }, label: {
                     Image("icon_signin_kakao")
                 })
+                .onReceive(kakaoOAuthViewModel.$isOAuthExistUser) { newValue in
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        isActiveLink = !newValue
+                    }
+                }
 
                 Button(action: { // google
+                    googleOAuthViewModel.signIn()
+
                 }, label: {
                     Image("icon_signin_google")
                 })
 
                 Button(action: { // apple
+                    appleOAtuthViewModel.signIn()
+
                 }, label: {
                     Image("icon_signin_apple")
                 })
             }
             .padding(.horizontal, 100)
+
+            NavigationLink(destination: NumberVerificationView(), isActive: $isActiveLink) {
+                EmptyView()
+            }
         }
-        Spacer().frame(height: 15)
     }
 }
 
