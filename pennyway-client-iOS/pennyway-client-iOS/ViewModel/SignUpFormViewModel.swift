@@ -39,6 +39,14 @@ class SignUpFormViewModel: ObservableObject {
         }
     }
 
+    func validatePwForm() { //추가
+        if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
+            isFormValid = true
+        } else {
+            isFormValid = false
+        }
+    }
+
     func validateName() {
         let nameRegex = "^[가-힣a-zA-Z]+$"
         showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)

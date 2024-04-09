@@ -11,7 +11,7 @@ struct ResetPwFormView: View {
                     CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
                         print(formViewModel.password)
                         formViewModel.validatePassword()
-                        formViewModel.validateForm()
+                        formViewModel.validatePwForm()
                     }, isSecureText: true)
 
                     if formViewModel.showErrorPassword {
@@ -27,10 +27,12 @@ struct ResetPwFormView: View {
                     }
                 }
 
+                Spacer().frame(height: 21)
+
                 ZStack {
                     CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
                         formViewModel.validateConfirmPw()
-                        formViewModel.validateForm()
+                        formViewModel.validatePwForm()
                     }, isSecureText: true)
 
                     if formViewModel.showErrorConfirmPw {
@@ -47,8 +49,7 @@ struct ResetPwFormView: View {
                 }
             }
 
-            Spacer() //수정 필요
-            Spacer()
+            Spacer() // 수정 필요
             Spacer()
             Spacer()
         }

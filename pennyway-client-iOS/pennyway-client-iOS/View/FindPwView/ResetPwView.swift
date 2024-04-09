@@ -22,7 +22,7 @@ struct ResetPwView: View {
                     
                     Spacer().frame(height: 33)
                     
-                    ResetPwFormView(formViewModel: SignUpFormViewModel())
+                    ResetPwFormView(formViewModel: formViewModel)
                     
                     Spacer().frame(height: 129)
                     Spacer()
@@ -36,21 +36,19 @@ struct ResetPwView: View {
                                 // formViewModel.checkDuplicateUserNameAPI()
                                 
                                 RegistrationManager.shared.password = formViewModel.password
-                                RegistrationManager.shared.performRegistration()
+//                                RegistrationManager.shared.performRegistration()
                                 
                                 navigateView = true
                             } else {}
                             
                         }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
+                            .padding(.bottom, 34)
                     }
-                    .padding(.bottom, 34)
-                    .border(Color.black)
                     
                     NavigationLink(destination: CompleteChangePwView(), isActive: $navigateView) {
                         EmptyView()
                     }.hidden()
                 }
-                .border(Color.red)
             }
             .frame(maxHeight: .infinity)
             .navigationBarBackButtonHidden(true)
