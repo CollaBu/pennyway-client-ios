@@ -9,6 +9,10 @@ struct AdditionalOptionView: View {
             }
             .font(.pretendard(.medium, size: 9))
             .platformTextColor(color: Color("Gray04"))
+            .simultaneousGesture(TapGesture().onEnded {
+                OAuthRegistrationManager.shared.isOAuthRegistration = false
+                OAuthRegistrationManager.shared.isExistUser = true
+            })
             
             Image("icon_line_gray")
                 .frame(width: 0, height: 9)

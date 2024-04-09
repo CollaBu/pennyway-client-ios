@@ -4,6 +4,8 @@ import SwiftUI
 struct PhoneNumberInputSectionView: View {
     @ObservedObject var viewModel: NumberVerificationViewModel
 
+    @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
+
     var body: some View {
         VStack(alignment: .leading, spacing: 11) {
             VStack(alignment: .leading, spacing: 13) {
@@ -34,7 +36,13 @@ struct PhoneNumberInputSectionView: View {
                     }
                     Button(action: {
                         viewModel.validatePhoneNumber()
-                        // viewModel.requestVerificationCodeAPI()
+
+                        if isOAuthRegistration {
+                            viewModel.requestOAuthVerificationCodeAPI()
+
+                        } else {
+                            viewModel.requestVerificationCodeAPI() 
+                        }
                         viewModel.generateRandomVerificationCode()
                         viewModel.judgeTimerRunning()
 

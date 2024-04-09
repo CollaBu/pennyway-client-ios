@@ -3,10 +3,9 @@ import Alamofire
 import Foundation
 
 enum OAuthRouter: URLRequestConvertible {
-   
     case oauthLogin(oauthID: String, idToken: String, provider: String)
-    case oauthSendVerificationCode(phone: String)
-    case oauthVerifyVerificationCode(phone: String, code: String)
+    case oauthSendVerificationCode(phone: String, provider: String)
+    case oauthVerifyVerificationCode(phone: String, code: String, provider: String)
     
     var method: HTTPMethod {
         switch self {
@@ -32,13 +31,12 @@ enum OAuthRouter: URLRequestConvertible {
     
     var parameters: Parameters {
         switch self {
-      
         case let .oauthLogin(oauthID, idToken, _):
             return ["oauthId": oauthID, "idToken": idToken]
-        case let .oauthSendVerificationCode(phone):
+        case let .oauthSendVerificationCode(phone, _):
             return ["phone": phone]
-        case let .oauthVerifyVerificationCode(phone, code):
-            return ["phone" : phone, "code": code]
+        case let .oauthVerifyVerificationCode(phone, code, _):
+            return ["phone": phone, "code": code]
         }
     }
 
@@ -47,13 +45,16 @@ enum OAuthRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        
         case let .oauthLogin(_, _, provider):
             let queryParameters = [URLQueryItem(name: "provider", value: provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
             
-        case .oauthSendVerificationCode, .oauthVerifyVerificationCode:
-            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
+        case let .oauthSendVerificationCode(_, provider):
+            let queryParameters = [URLQueryItem(name: "provider", value: provider)]
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
+        case let .oauthVerifyVerificationCode(_, _, provider):
+            let queryParameters = [URLQueryItem(name: "provider", value: provider)]
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
         }
         return request
     }

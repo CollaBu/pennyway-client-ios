@@ -9,7 +9,7 @@ enum AuthRouter: URLRequestConvertible {
     case verifyVerificationCode(phone: String, code: String)
     case checkDuplicateUserName(username: String)
     case login(username: String, password: String)
-    
+
     var method: HTTPMethod {
         switch self {
         case .regist, .sendVerificationCode, .verifyVerificationCode, .login:
@@ -18,11 +18,11 @@ enum AuthRouter: URLRequestConvertible {
             return .get
         }
     }
-    
+
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
     }
-    
+
     var path: String {
         switch self {
         case .regist:
@@ -37,7 +37,7 @@ enum AuthRouter: URLRequestConvertible {
             return "v1/auth/sign-in"
         }
     }
-    
+
     var parameters: Parameters {
         switch self {
         case let .regist(username, name, password, phone, code):
@@ -56,7 +56,7 @@ enum AuthRouter: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request: URLRequest
-        
+
         switch self {
         case .regist, .sendVerificationCode, .verifyVerificationCode, .login:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)

@@ -27,7 +27,7 @@ struct FindIDFormView: View {
                 VStack {
                     Spacer()
                     CustomBottomButton(action: {
-                        numberVerificationViewModel.validateNumberVerification()
+//                        numberVerificationViewModel.validateNumberVerification()
                         FindIDView()
                         // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
                         if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {

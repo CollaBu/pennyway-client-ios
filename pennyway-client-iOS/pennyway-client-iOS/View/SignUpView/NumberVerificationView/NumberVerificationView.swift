@@ -55,12 +55,12 @@ struct NumberVerificationView: View {
     }
     
     private func continueButtonAction() {
-        numberVerificationViewModel.validateNumberVerification()
+        // numberVerificationViewModel.validateNumberVerification()
         
         if isOAuthRegistration {
             numberVerificationViewModel.requestOAuthVerifyVerificationCodeAPI()
         } else {
-            // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
+            numberVerificationViewModel.requestVerifyVerificationCodeAPI()
         }
        
         if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
@@ -71,7 +71,6 @@ struct NumberVerificationView: View {
             RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
 
         } else {
-            print(numberVerificationViewModel.verificationCode, numberVerificationViewModel.phoneNumber)
             showingPopUp = true
         }
     }
