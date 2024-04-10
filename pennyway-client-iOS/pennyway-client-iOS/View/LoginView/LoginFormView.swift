@@ -2,6 +2,9 @@ import SwiftUI
 
 struct LoginFormView: View {
     @ObservedObject var viewModel: LoginFormViewModel
+    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
+    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
+    @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
 
     var body: some View {
         ZStack {
