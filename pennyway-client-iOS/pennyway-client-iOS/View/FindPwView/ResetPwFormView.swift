@@ -48,12 +48,7 @@ struct ResetPwFormView: View {
                     }
                 }
             }
-
-            Spacer() // 수정 필요
-            Spacer()
-            Spacer()
         }
-        Spacer()
     }
 }
 
