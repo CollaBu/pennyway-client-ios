@@ -7,7 +7,7 @@ struct InputFormView: View {
         VStack {
             HStack(alignment: .top) {
                 Text("친구들과 함께\n간편한 자산관리")
-                    .font(.pretendard(.semibold, size: 30))
+                    .font(.pretendard(.semibold, size: 28))
                     .multilineTextAlignment(.leading)
                     .padding(.top, 39)
 

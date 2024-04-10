@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FindIDFormView: View {
-    @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
+    @StateObject var numberVerificationViewModel = PhoneVerificationViewModel()
     @State private var showingPopUp = false
     @State private var navigateToFindIDView = false
     @StateObject var viewModel = SignUpNavigationViewModel()
@@ -27,7 +27,7 @@ struct FindIDFormView: View {
                 VStack {
                     Spacer()
                     CustomBottomButton(action: {
-                        numberVerificationViewModel.validateNumberVerification()
+//                        numberVerificationViewModel.validateNumberVerification()
                         FindIDView()
                         // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
                         if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {

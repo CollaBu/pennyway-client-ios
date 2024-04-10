@@ -39,11 +39,9 @@ class SignUpFormViewModel: ObservableObject {
         }
     }
 
-    func validatePwForm() { // 추가
+    func validatePwForm() { 
         if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
             isFormValid = true
-        } else {
-            isFormValid = false
         }
     }
 

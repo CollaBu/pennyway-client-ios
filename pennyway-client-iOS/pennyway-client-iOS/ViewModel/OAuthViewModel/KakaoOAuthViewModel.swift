@@ -34,7 +34,7 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginAPI() {
-        AuthAlamofire.shared.oauthLogin(oauthID, token, "kakao") { result in
+        OAuthAlamofire.shared.oauthLogin(oauthID, token, "kakao") { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

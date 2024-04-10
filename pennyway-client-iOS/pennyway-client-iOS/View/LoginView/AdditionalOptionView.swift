@@ -4,11 +4,15 @@ import SwiftUI
 struct AdditionalOptionView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 9) {
-            NavigationLink(destination: NumberVerificationView()) {
+            NavigationLink(destination: PhoneVerificationView()) {
                 Text("회원가입")
             }
             .font(.pretendard(.medium, size: 9))
             .platformTextColor(color: Color("Gray04"))
+            .simultaneousGesture(TapGesture().onEnded {
+                OAuthRegistrationManager.shared.isOAuthRegistration = false
+                OAuthRegistrationManager.shared.isExistUser = true
+            })
 
             Image("icon_line_gray")
                 .frame(width: 0, height: 9)
