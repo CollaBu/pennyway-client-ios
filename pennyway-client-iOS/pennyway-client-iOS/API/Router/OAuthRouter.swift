@@ -3,11 +3,11 @@ import Alamofire
 import Foundation
 
 enum OAuthRouter: URLRequestConvertible {
-    case oauthLogin(oauthId: String, idToken: String, provider: String)
+    case oauthLogin(oauthID: String, idToken: String, provider: String)
     case oauthSendVerificationCode(phone: String, provider: String)
     case oauthVerifyVerificationCode(phone: String, code: String, provider: String)
     case linkOAuthWithNormalAccount(idToken: String, phone: String, provider: String)
-    case oauthRegist(idToken: String, name: String,  username: String, phone: String, code: String, provider: String)
+    case oauthRegist(idToken: String, name: String, username: String, phone: String, code: String, provider: String)
     
     var method: HTTPMethod {
         switch self {
@@ -37,8 +37,8 @@ enum OAuthRouter: URLRequestConvertible {
     
     var parameters: Parameters {
         switch self {
-        case let .oauthLogin(oauthId, idToken, _):
-            return ["oauthId": oauthId, "idToken": idToken]
+        case let .oauthLogin(oauthID, idToken, _):
+            return ["oauthId": oauthID, "idToken": idToken]
         case let .oauthSendVerificationCode(phone, _):
             return ["phone": phone]
         case let .oauthVerifyVerificationCode(phone, code, _):
@@ -56,13 +56,12 @@ enum OAuthRouter: URLRequestConvertible {
         
         switch self {
         case let .oauthLogin(_, _, provider), 
-            let .oauthVerifyVerificationCode(_, _, provider),
-            let .linkOAuthWithNormalAccount(_,_,provider),
-            let .oauthSendVerificationCode(_, provider),
-            let .oauthRegist(_, _, _, _, _, provider):
+             let .oauthVerifyVerificationCode(_, _, provider),
+             let .linkOAuthWithNormalAccount(_, _, provider),
+             let .oauthSendVerificationCode(_, provider),
+             let .oauthRegist(_, _, _, _, _, provider):
             let queryParameters = [URLQueryItem(name: "provider", value: provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-            
         }
         return request
     }

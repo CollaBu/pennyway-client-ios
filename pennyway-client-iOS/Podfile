@@ -11,6 +11,8 @@ target 'pennyway-client-iOS' do
   pod 'KakaoSDKAuth'  
   pod 'KakaoSDKUser'  
   pod 'GoogleSignIn'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
 # Pods for pennyway-client-iOS
 
 end

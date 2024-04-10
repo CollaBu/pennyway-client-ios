@@ -1,8 +1,12 @@
+
 import GoogleSignIn
 import KakaoSDKAuth
 import KakaoSDKCommon
 import KakaoSDKUser
 import SwiftUI
+
+
+// MARK: - pennyway_client_iOSApp
 
 @main
 struct pennyway_client_iOSApp: App {

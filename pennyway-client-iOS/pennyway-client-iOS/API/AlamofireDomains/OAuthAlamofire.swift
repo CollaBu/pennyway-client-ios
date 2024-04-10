@@ -14,11 +14,11 @@ class OAuthAlamofire: TokenHandling {
         session = Session(eventMonitors: monitors)
     }
     
-    func oauthLogin(_ oauthId: String, _ idToken: String, _ provider: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@", log: .default, type: .info, oauthId, idToken, provider)
+    func oauthLogin(_ oauthID: String, _ idToken: String, _ provider: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@", log: .default, type: .info, oauthID, idToken, provider)
         
         session
-            .request(OAuthRouter.oauthLogin(oauthId: oauthId, idToken: idToken, provider: provider))
+            .request(OAuthRouter.oauthLogin(oauthID: oauthID, idToken: idToken, provider: provider))
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -73,11 +73,12 @@ class OAuthAlamofire: TokenHandling {
                 }
             }
     }
+
     func oauthRegist(_ idToken: String, _ name: String, _ username: String, _ phone: String, _ code: String, _ provider: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - oauthRegist() called : %@ ,, %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, idToken, name , username, phone, code, provider)
+        os_log("OAuthAlamofire - oauthRegist() called : %@ ,, %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, idToken, name, username, phone, code, provider)
         
         session
-            .request(OAuthRouter.oauthRegist(idToken: idToken, name: name,  username: username, phone: phone, code: code, provider: provider))
+            .request(OAuthRouter.oauthRegist(idToken: idToken, name: name, username: username, phone: phone, code: code, provider: provider))
             .response { response in
                 switch response.result {
                 case let .success(data):

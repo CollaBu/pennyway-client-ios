@@ -41,9 +41,10 @@
 		4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* TokenHandling.swift */; };
 		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
+		4A8571302BC64A5A0082CE47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A85712F2BC64A5A0082CE47 /* GoogleService-Info.plist */; };
+		4A8571342BC650FA0082CE47 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571322BC650FA0082CE47 /* Constants.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
-		4AB5AB4C2BB4A54F00D2C9EA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4B2BB4A54F00D2C9EA /* Constants.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
 		4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */; };
 		4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */; };
@@ -117,9 +118,11 @@
 		4A762B062B99A262001C1188 /* TokenHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandling.swift; sourceTree = "<group>"; };
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
+		4A85712F2BC64A5A0082CE47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A8571312BC64F510082CE47 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		4A8571322BC650FA0082CE47 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
-		4AB5AB4B2BB4A54F00D2C9EA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
 		4AB5AB4F2BB4A8CB00D2C9EA /* ApiStatusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiStatusLogger.swift; sourceTree = "<group>"; };
 		4AB5AB512BB4A93500D2C9EA /* RequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLogger.swift; sourceTree = "<group>"; };
@@ -129,7 +132,6 @@
 		4AB5AB5A2BB5E9BC00D2C9EA /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
 		4AB5AB5E2BB5EACC00D2C9EA /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WelcomeView.swift; path = SignUpView/WelcomeView.swift; sourceTree = "<group>"; };
 		4AB5AB602BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModel.swift; sourceTree = "<group>"; };
-		4AC4FD012BBC81960027ACD5 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4AC4FD072BBDCC190027ACD5 /* KakaoOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC4FD092BBDCE080027ACD5 /* GoogleOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleOAtuthViewModel.swift; sourceTree = "<group>"; };
@@ -142,7 +144,6 @@
 		D8157E632BBEF2040083844B /* InputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormView.swift; sourceTree = "<group>"; };
 		D8157E652BBEF2740083844B /* OauthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthButtonView.swift; sourceTree = "<group>"; };
 		D8157E672BBEF4400083844B /* AdditionalOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionView.swift; sourceTree = "<group>"; };
-		D8157E692BBFACC10083844B /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		D8157E6A2BC04D7E0083844B /* FindIDFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDFormView.swift; sourceTree = "<group>"; };
 		D8157E712BC19E590083844B /* PhoneNumberInputSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputSectionView.swift; sourceTree = "<group>"; };
 		D8157E772BC1A1FE0083844B /* NumberInputSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
@@ -249,14 +250,6 @@
 			path = TermsAndConditionsView;
 			sourceTree = "<group>";
 		};
-		4A5050312BC3DA4200EE5666 /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				4AB5AB4B2BB4A54F00D2C9EA /* Constants.swift */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,7 +264,6 @@
 		4A762AE02B99A16B001C1188 = {
 			isa = PBXGroup;
 			children = (
-				4A5050312BC3DA4200EE5666 /* Constants */,
 				4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */,
 				4A762AEA2B99A16B001C1188 /* Products */,
 				41951791426F03880A100F2C /* Pods */,
@@ -290,7 +282,9 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4A85712F2BC64A5A0082CE47 /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
+				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
 				4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */,
 				4A762AFF2B99A1DF001C1188 /* Utils */,
@@ -302,8 +296,7 @@
 				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
 				4A762AF02B99A16D001C1188 /* Assets.xcassets */,
 				4A762AF22B99A16D001C1188 /* Preview Content */,
-				4AC4FD012BBC81960027ACD5 /* Secrets.xcconfig */,
-				D8157E692BBFACC10083844B /* Secrets.xcconfig */,
+				4A8571312BC64F510082CE47 /* Secrets.xcconfig */,
 			);
 			path = "pennyway-client-iOS";
 			sourceTree = "<group>";
@@ -385,6 +378,14 @@
 				4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		4A8571332BC650FA0082CE47 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4A8571322BC650FA0082CE47 /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		4AB5AB452BB4A1E500D2C9EA /* AlamofireDomains */ = {
@@ -515,6 +516,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A8571302BC64A5A0082CE47 /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
@@ -600,6 +602,7 @@
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
+				4A8571342BC650FA0082CE47 /* Constants.swift in Sources */,
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				D8157E6B2BC04D7E0083844B /* FindIDFormView.swift in Sources */,
@@ -620,7 +623,6 @@
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				D8157E7C2BC269350083844B /* FindIDView.swift in Sources */,
-				4AB5AB4C2BB4A54F00D2C9EA /* Constants.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
 				D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */,
@@ -661,7 +663,6 @@
 /* Begin XCBuildConfiguration section */
 		4A762AF52B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AC4FD012BBC81960027ACD5 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -725,7 +726,6 @@
 		};
 		4A762AF62B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AC4FD012BBC81960027ACD5 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
