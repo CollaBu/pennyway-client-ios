@@ -5,7 +5,6 @@ import KakaoSDKCommon
 import KakaoSDKUser
 import SwiftUI
 
-
 // MARK: - pennyway_client_iOSApp
 
 @main

@@ -30,6 +30,12 @@ struct OauthButtonView: View {
                 }, label: {
                     Image("icon_signin_google")
                 })
+                .onReceive(googleOAuthViewModel.$isOAuthExistUser) { newValue in
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        isActiveLink = !newValue
+                    }
+                }
 
                 Button(action: { // apple
                     appleOAtuthViewModel.signIn()
@@ -37,6 +43,12 @@ struct OauthButtonView: View {
                 }, label: {
                     Image("icon_signin_apple")
                 })
+                .onReceive(appleOAtuthViewModel.$isOAuthExistUser) { newValue in
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        isActiveLink = !newValue
+                    }
+                }
             }
             .padding(.horizontal, 100)
 
