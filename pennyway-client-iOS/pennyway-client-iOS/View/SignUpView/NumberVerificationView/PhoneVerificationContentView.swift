@@ -18,7 +18,7 @@ struct PhoneVerificationContentView: View {
 
             Spacer().frame(height: 21)
 
-            PhoneNumberInputSectionView(viewModel: phoneVerificationViewModel)
+            NumberInputSectionView(viewModel: phoneVerificationViewModel)
         }
     }
 }

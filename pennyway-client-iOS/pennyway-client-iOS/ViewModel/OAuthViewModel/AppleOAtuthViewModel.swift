@@ -47,7 +47,7 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             //            print("token : \(String(describing: tokeStr!))")
             
-            OAuthAlamofire.shared.oauthLogin(oauthID, token, "apple") { result in
+            OAuthAlamofire.shared.oauthLogin(oauthID, token, OAuthRegistrationManager.shared.provider) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {

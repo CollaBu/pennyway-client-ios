@@ -4,6 +4,8 @@ struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
     
+    @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 47) {
@@ -28,10 +30,15 @@ struct SignUpView: View {
                     print(formViewModel.isFormValid)
                     // formViewModel.checkDuplicateUserNameAPI()
                     
-                    RegistrationManager.shared.name = formViewModel.name
-                    RegistrationManager.shared.id = formViewModel.id
-                    RegistrationManager.shared.password = formViewModel.password
-                    RegistrationManager.shared.performRegistration()
+                    if isOAuthRegistration {
+                        // OAuthRegistrationManager.shared.phone = formViewModel.
+                    } else {
+                        RegistrationManager.shared.name = formViewModel.name
+                        RegistrationManager.shared.id = formViewModel.id
+                        RegistrationManager.shared.password = formViewModel.password
+                        RegistrationManager.shared.performRegistration()
+                    }
+                   
                 } else {}
                     
             }, label: "계속하기", isFormValid: $formViewModel.isFormValid)

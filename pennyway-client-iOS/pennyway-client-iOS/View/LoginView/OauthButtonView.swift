@@ -13,6 +13,7 @@ struct OauthButtonView: View {
             HStack(spacing: 10) {
                 Button(action: { // kakao
                     kakaoOAuthViewModel.signIn()
+                    OAuthRegistrationManager.shared.provider = "kakao"
 
                 }, label: {
                     Image("icon_signin_kakao")
@@ -26,7 +27,7 @@ struct OauthButtonView: View {
 
                 Button(action: { // google
                     googleOAuthViewModel.signIn()
-
+                    OAuthRegistrationManager.shared.provider = "google"
                 }, label: {
                     Image("icon_signin_google")
                 })
@@ -39,7 +40,7 @@ struct OauthButtonView: View {
 
                 Button(action: { // apple
                     appleOAtuthViewModel.signIn()
-
+                    OAuthRegistrationManager.shared.provider = "apple"
                 }, label: {
                     Image("icon_signin_apple")
                 })

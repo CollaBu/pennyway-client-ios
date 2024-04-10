@@ -7,7 +7,6 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
 
-    var token = ""
     var oauthID = ""
 
     func checkUserInfo() {
@@ -23,7 +22,6 @@ class KakaoOAuthViewModel: ObservableObject {
                     self.oauthID = String(user.id ?? 0)
 
                     print(self.oauthID)
-                    print(self.token)
                     self.oauthLoginAPI()
                 }
             }
@@ -34,7 +32,7 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginAPI() {
-        OAuthAlamofire.shared.oauthLogin(oauthID, token, "kakao") { result in
+        OAuthAlamofire.shared.oauthLogin(oauthID, KeychainHelper.loadIDToken() ?? "", OAuthRegistrationManager.shared.provider) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -77,7 +75,8 @@ class KakaoOAuthViewModel: ObservableObject {
                 print(error)
             } else {
                 print("loginWithKakaoAccount() success.")
-                self.token = oauthToken!.idToken ?? ""
+
+                KeychainHelper.saveIDToken(accessToken: oauthToken!.idToken ?? "")
 
                 // 로그인 성공 시 처리
                 self.checkUserInfo()

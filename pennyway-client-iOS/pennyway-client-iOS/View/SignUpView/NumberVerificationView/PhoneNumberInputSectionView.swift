@@ -43,7 +43,7 @@ struct PhoneNumberInputSectionView: View {
                         } else {
                             viewModel.requestVerificationCodeAPI() 
                         }
-                        viewModel.generateRandomVerificationCode()
+                        viewModel.requestVerificationCodeAPI()
                         viewModel.judgeTimerRunning()
 
                     }, label: {

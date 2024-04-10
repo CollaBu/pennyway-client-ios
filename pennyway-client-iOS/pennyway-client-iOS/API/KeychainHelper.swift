@@ -33,4 +33,36 @@ class KeychainHelper {
             return nil
         }
     }
+    
+    static func saveIDToken(accessToken: String) {
+        let keychainQuery: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: "idToken",
+            kSecValueData: accessToken.data(using: .utf8)!,
+        ]
+        
+        let status = SecItemAdd(keychainQuery as CFDictionary, nil)
+        if status == errSecDuplicateItem {
+            SecItemUpdate(keychainQuery as CFDictionary, [kSecValueData: accessToken.data(using: .utf8)!] as CFDictionary)
+        } else if status != noErr {
+            print("Failed to save AccessToken to Keychain")
+        }
+    }
+    
+    static func loadIDToken() -> String? {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: "idToken",
+            kSecReturnData: kCFBooleanTrue!,
+        ]
+        
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+        
+        if status == noErr, let data = item as? Data, let token = String(data: data, encoding: .utf8) {
+            return token
+        } else {
+            return nil
+        }
+    }
 }

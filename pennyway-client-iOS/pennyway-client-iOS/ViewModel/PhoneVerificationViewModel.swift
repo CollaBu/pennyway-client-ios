@@ -25,7 +25,7 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
 
-    func generateRandomVerificationCode() {
+    func requestVerificationCodeAction() {
         if !showErrorPhoneNumberFormat && !isDisabledButton {
             isDisabledButton = true
             isTimerHidden = false
@@ -48,6 +48,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     func requestVerificationCodeAPI() {
         validatePhoneNumber()
+        requestVerificationCodeAction()
 
         if !showErrorPhoneNumberFormat {
             AuthAlamofire.shared.sendVerificationCode(formattedPhoneNumber) { result in
@@ -106,6 +107,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     func requestOAuthVerificationCodeAPI() {
         validatePhoneNumber()
+        requestVerificationCodeAction()
 
         if !showErrorPhoneNumberFormat {
             OAuthAlamofire.shared.oauthSendVerificationCode(formattedPhoneNumber, "kakao") { result in
