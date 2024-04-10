@@ -2,9 +2,6 @@ import SwiftUI
 
 struct LoginFormView: View {
     @ObservedObject var viewModel: LoginFormViewModel
-    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
-    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
-    @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
 
     var body: some View {
         ZStack {
@@ -30,7 +27,7 @@ struct LoginFormView: View {
 
                         Text("로그인에 문제가 발생했나요?")
                             .platformTextColor(color: Color("Gray04"))
-                            .font(.pretendard(.medium, size: 9))
+                            .font(.pretendard(.medium, size: 11))
                             .padding(8)
                     }
                     .padding(.horizontal, 103)

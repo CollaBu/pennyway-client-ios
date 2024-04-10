@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FindPwView: View {
-    @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
+    @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var showingPopUp = false
     @State private var navigateToFindPwView = false
     @StateObject var viewModel = SignUpNavigationViewModel()
@@ -13,11 +13,11 @@ struct FindPwView: View {
                     VStack {
                         Spacer().frame(height: 36)
                         
-                        PhoneNumberInputSectionView(viewModel: numberVerificationViewModel) //
+                        PhoneNumberInputSectionView(viewModel: phoneVerificationViewModel) //
                         
                         Spacer().frame(height: 21)
                         
-                        NumberInputSectionView(viewModel: numberVerificationViewModel)
+                        NumberInputSectionView(viewModel: phoneVerificationViewModel)
                     }
                 }
                 Spacer().frame(height: 203)
@@ -27,22 +27,22 @@ struct FindPwView: View {
                 VStack {
                     Spacer()
                     CustomBottomButton(action: {
-                        numberVerificationViewModel.validateNumberVerification()
+                        // phoneVerificationViewModel.validateNumberVerification()
                         ResetPwView(formViewModel: SignUpFormViewModel())
                         // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
-                        if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
+                        if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
                             showingPopUp = false
                             viewModel.continueButtonTapped()
                             
-                            RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
-                            RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
+                            RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
+                            RegistrationManager.shared.verificationCode = phoneVerificationViewModel.verificationCode
                             
                             navigateToFindPwView = true
                             
                         } else {
                             showingPopUp = true
                         }
-                    }, label: "확인", isFormValid: $numberVerificationViewModel.isFormValid)
+                    }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
                 }
                 .padding(.bottom, 34)
                 

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct NumberInputSectionView: View {
-    @ObservedObject var viewModel: NumberVerificationViewModel
+    @ObservedObject var viewModel: PhoneVerificationViewModel
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
@@ -50,5 +50,5 @@ struct NumberInputSectionView: View {
 }
 
 #Preview {
-    NumberInputSectionView(viewModel: NumberVerificationViewModel())
+    NumberInputSectionView(viewModel: PhoneVerificationViewModel())
 }

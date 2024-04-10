@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-class NumberVerificationViewModel: ObservableObject {
+class PhoneVerificationViewModel: ObservableObject {
     // MARK: Private
 
     @State private var timer: Timer?
@@ -9,6 +9,10 @@ class NumberVerificationViewModel: ObservableObject {
     // MARK: Internal
 
     @Published var phoneNumber: String = ""
+    private var formattedPhoneNumber: String {
+        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber) ?? ""
+    }
+
     @Published var verificationCode: String = ""
     @Published var randomVerificationCode = ""
     @Published var showErrorPhoneNumberFormat = false
@@ -23,8 +27,6 @@ class NumberVerificationViewModel: ObservableObject {
 
     func generateRandomVerificationCode() {
         if !showErrorPhoneNumberFormat && !isDisabledButton {
-            randomVerificationCode = String(Int.random(in: 100_000 ... 999_999))
-            print(randomVerificationCode)
             isDisabledButton = true
             isTimerHidden = false
         }
@@ -38,14 +40,6 @@ class NumberVerificationViewModel: ObservableObject {
         }
     }
 
-    func validateNumberVerification() {
-        if verificationCode == randomVerificationCode {
-            showErrorVerificationCode = false
-        } else {
-            showErrorVerificationCode = true
-        }
-    }
-
     func validateForm() {
         isFormValid = !phoneNumber.isEmpty && !verificationCode.isEmpty
     }
@@ -56,7 +50,7 @@ class NumberVerificationViewModel: ObservableObject {
         validatePhoneNumber()
 
         if !showErrorPhoneNumberFormat {
-            AuthAlamofire.shared.sendVerificationCode(phoneNumber) { result in
+            AuthAlamofire.shared.sendVerificationCode(formattedPhoneNumber) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {
@@ -83,7 +77,7 @@ class NumberVerificationViewModel: ObservableObject {
     }
 
     func requestVerifyVerificationCodeAPI() {
-        AuthAlamofire.shared.verifyVerificationCode(phoneNumber, verificationCode) { result in
+        AuthAlamofire.shared.verifyVerificationCode(formattedPhoneNumber, verificationCode) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -92,9 +86,11 @@ class NumberVerificationViewModel: ObservableObject {
                         if let code = responseJSON?["code"] as? String {
                             if code == "2000" {
                                 // 인증 성공
+                                self.showErrorVerificationCode = false
 
-                            } else if code == "4000" {
+                            } else {
                                 // 인증번호 만료, 인증번호 매칭 오류, 사용중인 전화번호
+                                self.showErrorVerificationCode = true
                             }
                         }
                     } catch {
@@ -108,10 +104,73 @@ class NumberVerificationViewModel: ObservableObject {
         }
     }
 
-    func requestOAuthVerificationCodeAPI() {}
+    func requestOAuthVerificationCodeAPI() {
+        validatePhoneNumber()
+
+        if !showErrorPhoneNumberFormat {
+            OAuthAlamofire.shared.oauthSendVerificationCode(formattedPhoneNumber, "kakao") { result in
+                switch result {
+                case let .success(data):
+                    if let responseData = data {
+                        do {
+                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+                            if let code = responseJSON?["code"] as? String {
+                                if code == "2000" {
+                                    // 성공적으로 인증번호를 전송한 경우
+
+                                } else if code == "4220" {
+                                    // 포맷 오류
+                                }
+                            }
+                        } catch {
+                            print("Error parsing response JSON: \(error)")
+                        }
+                    }
+                case let .failure(error):
+
+                    print("Failed to send SMS: \(error)")
+                }
+            }
+        }
+    }
 
     func requestOAuthVerifyVerificationCodeAPI() {
-        OAuthRegistrationManager.shared.isExistUser = true
+        OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, "kakao") { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+
+                        if let code = responseJSON?["code"] as? String {
+                            switch code {
+                            case "2000":
+                                self.showErrorVerificationCode = false
+                                if let smsData = responseJSON?["data"] as? [String: Any], let sms = smsData["sms"] as? [String: Any] {
+                                    if let existsUser = sms["existsUser"] as? Bool {
+                                        if existsUser {
+                                            OAuthRegistrationManager.shared.isExistUser = true
+                                        } else {
+                                            OAuthRegistrationManager.shared.isExistUser = false
+                                        }
+                                    }
+                                }
+                            case "4010", "4042":
+                                self.showErrorVerificationCode = true
+                            default:
+                                // 그 외의 응답 코드
+                                break
+                            }
+                        }
+                        print(responseJSON as Any)
+                    } catch {
+                        print("Error parsing response JSON: \(error)")
+                    }
+                }
+            case let .failure(error):
+                print("Failed to verify: \(error)")
+            }
+        }
     }
 
     // MARK: Timer function
