@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct NumberVerificationView: View {
+struct PhoneVerificationView: View {
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
-    @StateObject var numberVerificationViewModel = NumberVerificationViewModel()
+    @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
    
@@ -20,13 +20,13 @@ struct NumberVerificationView: View {
                     
                     Spacer().frame(height: 14)
                     
-                    NumberVerificationContentView(numberVerificationViewModel: numberVerificationViewModel)
+                    PhoneVerificationContentView(phoneVerificationViewModel: phoneVerificationViewModel)
                     
                     Spacer()
                     
                     CustomBottomButton(action: {
                         continueButtonAction()
-                    }, label: "계속하기", isFormValid: $numberVerificationViewModel.isFormValid)
+                    }, label: "계속하기", isFormValid: $phoneVerificationViewModel.isFormValid)
                         .padding(.bottom, 34)
                     
                     NavigationLink(destination: destinationView(), tag: 2, selection: $viewModel.selectedText) {
@@ -58,17 +58,17 @@ struct NumberVerificationView: View {
         // numberVerificationViewModel.validateNumberVerification()
         
         if isOAuthRegistration {
-            numberVerificationViewModel.requestOAuthVerifyVerificationCodeAPI()
+            phoneVerificationViewModel.requestOAuthVerifyVerificationCodeAPI()
         } else {
-            numberVerificationViewModel.requestVerifyVerificationCodeAPI()
+            phoneVerificationViewModel.requestVerifyVerificationCodeAPI()
         }
        
-        if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
+        if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
             showingPopUp = false
             viewModel.continueButtonTapped()
             
-            RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
-            RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
+            RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
+            RegistrationManager.shared.verificationCode = phoneVerificationViewModel.verificationCode
 
         } else {
             showingPopUp = true
@@ -86,5 +86,5 @@ struct NumberVerificationView: View {
 }
 
 #Preview {
-    NumberVerificationView()
+    PhoneVerificationView()
 }

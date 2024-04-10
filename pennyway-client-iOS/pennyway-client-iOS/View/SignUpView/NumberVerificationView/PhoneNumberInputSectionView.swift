@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct PhoneNumberInputSectionView: View {
-    @ObservedObject var viewModel: NumberVerificationViewModel
+    @ObservedObject var viewModel: PhoneVerificationViewModel
 
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
 
@@ -70,5 +70,5 @@ struct PhoneNumberInputSectionView: View {
 }
 
 #Preview {
-    PhoneNumberInputSectionView(viewModel: NumberVerificationViewModel())
+    PhoneNumberInputSectionView(viewModel: PhoneVerificationViewModel())
 }

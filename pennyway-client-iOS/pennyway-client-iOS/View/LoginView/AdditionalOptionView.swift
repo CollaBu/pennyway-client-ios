@@ -4,7 +4,7 @@ import SwiftUI
 struct AdditionalOptionView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 9) {
-            NavigationLink(destination: NumberVerificationView()) {
+            NavigationLink(destination: PhoneVerificationView()) {
                 Text("회원가입")
             }
             .font(.pretendard(.medium, size: 9))
@@ -34,7 +34,7 @@ struct AdditionalOptionView: View {
                         .stroke(Color("Gray02"), lineWidth: 0.69506)
                 )
             
-            NavigationLink(destination: NumberVerificationView()) {
+            NavigationLink(destination: PhoneVerificationView()) {
                 Text("비밀번호 찾기")
             }
             .font(.pretendard(.medium, size: 9))

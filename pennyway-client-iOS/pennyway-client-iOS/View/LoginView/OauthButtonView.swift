@@ -52,7 +52,7 @@ struct OauthButtonView: View {
             }
             .padding(.horizontal, 100)
 
-            NavigationLink(destination: NumberVerificationView(), isActive: $isActiveLink) {
+            NavigationLink(destination: PhoneVerificationView(), isActive: $isActiveLink) {
                 EmptyView()
             }
         }

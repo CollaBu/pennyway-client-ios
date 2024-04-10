@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-class NumberVerificationViewModel: ObservableObject {
+class PhoneVerificationViewModel: ObservableObject {
     // MARK: Private
 
     @State private var timer: Timer?
