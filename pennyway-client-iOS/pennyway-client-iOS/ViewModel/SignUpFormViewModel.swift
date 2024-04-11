@@ -2,12 +2,7 @@ import Combine
 import SwiftUI
 
 class SignUpFormViewModel: ObservableObject {
-    @Published var name: String = "" {
-        didSet {
-            print("이름이 설정됨: \(name)")
-        }
-    }
-
+    @Published var name: String = ""
     @Published var id: String = ""
     @Published var password: String = ""
     @Published var confirmPw: String = ""
@@ -51,7 +46,7 @@ class SignUpFormViewModel: ObservableObject {
     }
     
     func validateName() {
-        let nameRegex = "^[가-힣a-zA-Z]+$"
+        let nameRegex = "^[가-힣a-zA-Z]{2,8}$"
         showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
     }
     
