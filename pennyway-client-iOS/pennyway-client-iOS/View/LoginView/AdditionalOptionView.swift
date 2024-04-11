@@ -3,7 +3,7 @@ import SwiftUI
 
 struct AdditionalOptionView: View {
     var body: some View {
-        HStack(alignment: .center, spacing: 9) {
+        HStack(alignment: .center, spacing: 9 * DynamicSizeFactor.factor()) {
             NavigationLink(destination: PhoneVerificationView()) {
                 Text("회원가입")
             }
@@ -15,7 +15,7 @@ struct AdditionalOptionView: View {
             })
 
             Image("icon_line_gray")
-                .frame(width: 0, height: 9)
+                .frame(width: 0, height: 9 * DynamicSizeFactor.factor())
                 .overlay(
                     Rectangle()
                         .stroke(Color("Gray02"), lineWidth: 0.69506)
@@ -28,7 +28,7 @@ struct AdditionalOptionView: View {
             .platformTextColor(color: Color("Gray04"))
 
             Image("icon_line_gray")
-                .frame(width: 0, height: 9)
+                .frame(width: 0, height: 9 * DynamicSizeFactor.factor())
                 .overlay(
                     Rectangle()
                         .stroke(Color("Gray02"), lineWidth: 0.69506)
@@ -40,7 +40,7 @@ struct AdditionalOptionView: View {
             .font(.B3MediumFont())
             .platformTextColor(color: Color("Gray04"))
         }
-        .padding(.horizontal, 86)
+        .padding(.horizontal, 86 * DynamicSizeFactor.factor())
     }
 }
 

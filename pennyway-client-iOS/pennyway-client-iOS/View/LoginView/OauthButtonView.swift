@@ -9,7 +9,7 @@ struct OauthButtonView: View {
     @State private var isActiveLink = false
 
     var body: some View {
-        VStack(alignment: .center, spacing: 15) {
+        VStack(alignment: .center, spacing: 15 * DynamicSizeFactor.factor()) {
             HStack(spacing: 10) {
                 Button(action: { // kakao
                     kakaoOAuthViewModel.signIn()
@@ -51,7 +51,7 @@ struct OauthButtonView: View {
                     }
                 }
             }
-            .padding(.horizontal, 100)
+            .padding(.horizontal, 100 * DynamicSizeFactor.factor())
 
             NavigationLink(destination: PhoneVerificationView(), isActive: $isActiveLink) {
                 EmptyView()
