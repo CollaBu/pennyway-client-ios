@@ -2,7 +2,7 @@
 import Foundation
 
 class OAuthAccountLinkingViewModel: ObservableObject {
-    func oauthLinkingAPI() {
+    func linkOAuthWithNormalAccountAPI() { // 바로 로그인 처리
         OAuthAlamofire.shared.linkOAuthWithNormalAccount(KeychainHelper.loadIDToken() ?? "", OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", OAuthRegistrationManager.shared.code, OAuthRegistrationManager.shared.provider) { result in
             switch result {
             case let .success(data):

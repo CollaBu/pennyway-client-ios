@@ -9,6 +9,7 @@ struct OAuthRegistrationManager {
     var provider = ""
     var name = ""
     var username = ""
+    var password = ""
     var phone = ""
     var formattedPhoneNumber: String? {
         return PhoneNumberFormatter.formattedPhoneNumber(from: phone)

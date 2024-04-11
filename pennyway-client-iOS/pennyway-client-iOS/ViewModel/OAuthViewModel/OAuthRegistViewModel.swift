@@ -2,7 +2,7 @@
 import Foundation
 
 class OAuthRegistViewModel: ObservableObject {
-    func oauthRegistAPI() {
+    func oauthRegistAPI() { // 소셜 회원가입
         OAuthAlamofire.shared.oauthRegist(KeychainHelper.loadIDToken() ?? "", OAuthRegistrationManager.shared.name, OAuthRegistrationManager.shared.username, OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", OAuthRegistrationManager.shared.code, OAuthRegistrationManager.shared.provider) { result in
             switch result {
             case let .success(data):

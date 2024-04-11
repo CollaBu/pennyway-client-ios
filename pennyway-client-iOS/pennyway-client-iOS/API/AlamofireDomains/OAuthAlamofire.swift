@@ -88,22 +88,4 @@ class OAuthAlamofire: TokenHandling {
                 }
             }
     }
-    
-    func linkOAuthWithNomalAccountRegist(_ password: String, _ phone: String, _ code: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - linkOAuthWithNomalAccountRegist() called : %@ ,, %@ ,, %@ ", log: .default, type: .info, password, phone, code)
-        
-        session
-            .request(OAuthRouter.linkOAuthWithNomalAccountRegist(password: password, phone: phone, code: code ))
-            .response { response in
-                switch response.result {
-                case let .success(data):
-                    completion(.success(data))
-                case let .failure(error):
-                    completion(.failure(error))
-                }
-            }
-    }
-    
-    
-    
 }

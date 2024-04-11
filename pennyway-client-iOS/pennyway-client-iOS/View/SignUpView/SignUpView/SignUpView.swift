@@ -3,6 +3,7 @@ import SwiftUI
 struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
+    @StateObject var accountLinkingViewModel = OAuthAccountLinkingViewModel()
     @StateObject var oauthRegistViewModel = OAuthRegistViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
@@ -30,15 +31,14 @@ struct SignUpView: View {
                 if formViewModel.isFormValid {
                     viewModel.continueButtonTapped()
                     print(formViewModel.isFormValid)
-                    // formViewModel.checkDuplicateUserNameAPI()
+                    formViewModel.checkDuplicateUserNameAPI()
                     
-                    if isOAuthRegistration{
+                    if isOAuthRegistration {
                         OAuthRegistrationManager.shared.name = formViewModel.name
                         OAuthRegistrationManager.shared.username = formViewModel.id
+                        OAuthRegistrationManager.shared.password = formViewModel.password
                         
-                        if isExistUser{
-                            
-                        }else{
+                        if !isExistUser {
                             oauthRegistViewModel.oauthRegistAPI()
                         }
                     } else {

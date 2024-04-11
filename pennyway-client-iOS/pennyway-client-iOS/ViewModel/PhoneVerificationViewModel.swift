@@ -77,7 +77,7 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
-    func requestVerifyVerificationCodeAPI() {
+    func requestVerifyVerificationCodeAPI(completion _: @escaping () -> Void) {
         AuthAlamofire.shared.verifyVerificationCode(formattedPhoneNumber, verificationCode) { result in
             switch result {
             case let .success(data):
@@ -110,7 +110,7 @@ class PhoneVerificationViewModel: ObservableObject {
         requestVerificationCodeAction()
 
         if !showErrorPhoneNumberFormat {
-            OAuthAlamofire.shared.oauthSendVerificationCode(formattedPhoneNumber, "kakao") { result in
+            OAuthAlamofire.shared.oauthSendVerificationCode(formattedPhoneNumber, OAuthRegistrationManager.shared.provider) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {
@@ -136,8 +136,8 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
-    func requestOAuthVerifyVerificationCodeAPI() {
-        OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, "kakao") { result in
+    func requestOAuthVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
+        OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, OAuthRegistrationManager.shared.provider) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -172,6 +172,9 @@ class PhoneVerificationViewModel: ObservableObject {
             case let .failure(error):
                 print("Failed to verify: \(error)")
             }
+
+            // API 요청이 완료되었으므로 completion 클로저 호출
+            completion()
         }
     }
 

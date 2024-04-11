@@ -8,11 +8,10 @@ enum OAuthRouter: URLRequestConvertible {
     case oauthVerifyVerificationCode(phone: String, code: String, provider: String)
     case linkOAuthWithNormalAccount(idToken: String, phone: String, code: String, provider: String)
     case oauthRegist(idToken: String, name: String, username: String, phone: String, code: String, provider: String)
-    case linkOAuthWithNomalAccountRegist(password: String, phone: String, code: String)
     
     var method: HTTPMethod {
         switch self {
-        case .oauthLogin, .oauthSendVerificationCode, .oauthVerifyVerificationCode, .linkOAuthWithNormalAccount, .linkOAuthWithNomalAccountRegist, .oauthRegist:
+        case .oauthLogin, .oauthSendVerificationCode, .oauthVerifyVerificationCode, .linkOAuthWithNormalAccount, .oauthRegist:
             return .post
         }
     }
@@ -33,8 +32,6 @@ enum OAuthRouter: URLRequestConvertible {
             return "v1/auth/oauth/link-auth"
         case .oauthRegist:
             return "v1/auth/oauth/sign-up"
-        case .linkOAuthWithNomalAccountRegist:
-            return "v1/auth/link-oauth"
         }
     }
     
@@ -46,12 +43,10 @@ enum OAuthRouter: URLRequestConvertible {
             return ["phone": phone]
         case let .oauthVerifyVerificationCode(phone, code, _):
             return ["phone": phone, "code": code]
-        case let .linkOAuthWithNormalAccount(idToken, phone, code,_):
+        case let .linkOAuthWithNormalAccount(idToken, phone, code, _):
             return ["idToken": idToken, "phone": phone, "code": code]
         case let .oauthRegist(idToken, name, username, phone, code, _):
             return ["idToken": idToken, "name": name, "username": username, "phone": phone, "code": code]
-        case let .linkOAuthWithNomalAccountRegist(password, phone, code):
-            return ["password": password, "phone": phone, "code": code]
         }
     }
 
@@ -62,14 +57,11 @@ enum OAuthRouter: URLRequestConvertible {
         switch self {
         case let .oauthLogin(_, _, provider), 
              let .oauthVerifyVerificationCode(_, _, provider),
-             let .linkOAuthWithNormalAccount(_, _, _,provider),
+             let .linkOAuthWithNormalAccount(_, _, _, provider),
              let .oauthSendVerificationCode(_, provider),
              let .oauthRegist(_, _, _, _, _, provider):
             let queryParameters = [URLQueryItem(name: "provider", value: provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-            
-        case .linkOAuthWithNomalAccountRegist:
-            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         }
         return request
     }
