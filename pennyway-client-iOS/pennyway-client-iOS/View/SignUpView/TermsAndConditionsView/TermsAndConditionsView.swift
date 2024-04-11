@@ -3,6 +3,7 @@ import SwiftUI
 struct TermsAndConditionsView: View {
     @State private var isAllAgreed = false
     @ObservedObject var viewModel: SignUpNavigationViewModel
+    
     /// @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @StateObject var formViewModel = SignUpFormViewModel()
 
