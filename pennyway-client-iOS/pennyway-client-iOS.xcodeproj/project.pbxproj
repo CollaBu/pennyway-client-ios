@@ -47,6 +47,8 @@
 		4A8571402BC701050082CE47 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A85713F2BC701050082CE47 /* Secrets.xcconfig */; };
 		4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */; };
 		4A8571442BC7C5EB0082CE47 /* OAuthRegistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthRegistViewModel.swift */; };
+		4A8571472BC85E6D0082CE47 /* DynamicFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571462BC85E6D0082CE47 /* DynamicFontSize.swift */; };
+		4A8571492BC86AF70082CE47 /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571482BC86AF70082CE47 /* DynamicSizeFactor.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
@@ -131,6 +133,8 @@
 		4A85713F2BC701050082CE47 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = "pennyway-client-iOS/Secrets.xcconfig"; sourceTree = SOURCE_ROOT; };
 		4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingViewModel.swift; sourceTree = "<group>"; };
 		4A8571432BC7C5EB0082CE47 /* OAuthRegistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRegistViewModel.swift; sourceTree = "<group>"; };
+		4A8571462BC85E6D0082CE47 /* DynamicFontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFontSize.swift; sourceTree = "<group>"; };
+		4A8571482BC86AF70082CE47 /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
@@ -375,8 +379,8 @@
 		4A762AFE2B99A1D7001C1188 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4A8571452BC85E1B0082CE47 /* FontExtensions */,
 				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
-				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
 				D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */,
 				D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */,
 			);
@@ -390,6 +394,7 @@
 				4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */,
 				4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */,
 				4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */,
+				4A8571482BC86AF70082CE47 /* DynamicSizeFactor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -400,6 +405,15 @@
 				4A8571322BC650FA0082CE47 /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		4A8571452BC85E1B0082CE47 /* FontExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
+				4A8571462BC85E6D0082CE47 /* DynamicFontSize.swift */,
+			);
+			path = FontExtensions;
 			sourceTree = "<group>";
 		};
 		4AB5AB452BB4A1E500D2C9EA /* AlamofireDomains */ = {
@@ -648,6 +662,7 @@
 				D8157E642BBEF2040083844B /* InputFormView.swift in Sources */,
 				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
 				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
+				4A8571472BC85E6D0082CE47 /* DynamicFontSize.swift in Sources */,
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
@@ -666,6 +681,7 @@
 				4ACE1FED2BBB149D00BB4F0A /* KeychainHelper.swift in Sources */,
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
 				D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */,
+				4A8571492BC86AF70082CE47 /* DynamicSizeFactor.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthRegistViewModel.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,

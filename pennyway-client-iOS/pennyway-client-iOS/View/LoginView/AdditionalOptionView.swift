@@ -7,7 +7,7 @@ struct AdditionalOptionView: View {
             NavigationLink(destination: PhoneVerificationView()) {
                 Text("회원가입")
             }
-            .font(.pretendard(.medium, size: 9))
+            .font(.B3MediumFont())
             .platformTextColor(color: Color("Gray04"))
             .simultaneousGesture(TapGesture().onEnded {
                 OAuthRegistrationManager.shared.isOAuthRegistration = false
@@ -24,7 +24,7 @@ struct AdditionalOptionView: View {
             NavigationLink(destination: FindIDFormView()) {
                 Text("아이디 찾기")
             }
-            .font(.pretendard(.medium, size: 9))
+            .font(.B3MediumFont())
             .platformTextColor(color: Color("Gray04"))
 
             Image("icon_line_gray")
@@ -37,7 +37,7 @@ struct AdditionalOptionView: View {
             NavigationLink(destination: FindPwView()) {
                 Text("비밀번호 찾기")
             }
-            .font(.pretendard(.medium, size: 9))
+            .font(.B3MediumFont())
             .platformTextColor(color: Color("Gray04"))
         }
         .padding(.horizontal, 86)

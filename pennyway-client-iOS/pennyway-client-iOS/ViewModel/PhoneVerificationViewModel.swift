@@ -173,7 +173,6 @@ class PhoneVerificationViewModel: ObservableObject {
                 print("Failed to verify: \(error)")
             }
 
-            // API 요청이 완료되었으므로 completion 클로저 호출
             completion()
         }
     }
