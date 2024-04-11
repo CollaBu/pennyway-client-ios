@@ -27,7 +27,7 @@ struct LoginFormView: View {
 
                         Text("로그인에 문제가 발생했나요?")
                             .platformTextColor(color: Color("Gray04"))
-                            .font(.pretendard(.medium, size: 11))
+                            .font(.pretendard(.medium, size: 10.8))
                             .padding(8)
                     }
                     .padding(.horizontal, 103)

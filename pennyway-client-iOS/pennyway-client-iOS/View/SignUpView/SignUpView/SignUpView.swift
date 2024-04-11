@@ -3,8 +3,10 @@ import SwiftUI
 struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
+    @StateObject var oauthRegistViewModel = OAuthRegistViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
+    @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
     
     var body: some View {
         ScrollView {
@@ -30,8 +32,15 @@ struct SignUpView: View {
                     print(formViewModel.isFormValid)
                     // formViewModel.checkDuplicateUserNameAPI()
                     
-                    if isOAuthRegistration {
-                        // OAuthRegistrationManager.shared.phone = formViewModel.
+                    if isOAuthRegistration{
+                        OAuthRegistrationManager.shared.name = formViewModel.name
+                        OAuthRegistrationManager.shared.username = formViewModel.id
+                        
+                        if isExistUser{
+                            
+                        }else{
+                            oauthRegistViewModel.oauthRegistAPI()
+                        }
                     } else {
                         RegistrationManager.shared.name = formViewModel.name
                         RegistrationManager.shared.id = formViewModel.id

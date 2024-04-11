@@ -60,7 +60,7 @@ struct PhoneVerificationView: View {
         } else {
             phoneVerificationViewModel.requestVerifyVerificationCodeAPI()
         }
-       
+        
         if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
             showingPopUp = false
             viewModel.continueButtonTapped()

@@ -9,15 +9,15 @@ struct CustomBottomButton: View {
     var body: some View {
         Button(action: action) {
             Text(label)
-                .font(.pretendard(.semibold, size: 14))
+                .font(.pretendard(.semibold, size: 16.1))
                 .platformTextColor(color: isFormValid ? Color("White01") : Color("Gray04")).frame(maxWidth: .infinity)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 17)
+                .padding(.horizontal, 23)
+                .padding(.vertical, 19.55)
         }
         .frame(maxWidth: .infinity)
         .background(isFormValid ? Color("Mint03") : Color("Gray03"))
 
         .clipShape(RoundedRectangle(cornerRadius: 4))
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 23)
     }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct TermsAndConditionsView: View {
     @ObservedObject var viewModel: SignUpNavigationViewModel
-    /// @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
+    @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @State private var isAllAgreed = false
 
     var body: some View {
@@ -29,7 +29,7 @@ struct TermsAndConditionsView: View {
                 if isAllAgreed {
                     viewModel.continueButtonTapped()
                 }
-                // termsAndConditionsViewModel.requestRegistAPI()
+                termsAndConditionsViewModel.requestRegistAPI()
             }, label: "계속하기", isFormValid: $isAllAgreed)
                 .padding(.bottom, 34)
             

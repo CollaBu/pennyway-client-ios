@@ -41,7 +41,7 @@ enum AuthRouter: URLRequestConvertible {
     var parameters: Parameters {
         switch self {
         case let .regist(username, name, password, phone, code):
-            return ["username": username, "name": name, "password": password, "phone": phone, "cdoe": code]
+            return ["username": username, "name": name, "password": password, "phone": phone, "code": code]
         case let .sendVerificationCode(phone):
             return ["phone": phone]
         case let .verifyVerificationCode(phone, code):

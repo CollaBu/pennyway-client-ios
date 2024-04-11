@@ -1,9 +1,9 @@
 
 import Foundation
 
-class OAuthAccountLinkingViewModel: ObservableObject {
-    func oauthLinkingAPI() {
-        OAuthAlamofire.shared.linkOAuthWithNormalAccount(KeychainHelper.loadIDToken() ?? "", OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", OAuthRegistrationManager.shared.code, OAuthRegistrationManager.shared.provider) { result in
+class OAuthRegistViewModel: ObservableObject {
+    func oauthRegistAPI() {
+        OAuthAlamofire.shared.oauthRegist(KeychainHelper.loadIDToken() ?? "", OAuthRegistrationManager.shared.name, OAuthRegistrationManager.shared.username, OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", OAuthRegistrationManager.shared.code, OAuthRegistrationManager.shared.provider) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -12,7 +12,8 @@ class OAuthAccountLinkingViewModel: ObservableObject {
                         if let code = responseJSON?["code"] as? String {
                             if code == "2000" {
                                 // 성공
-                            } else if code == "4000" {
+
+                            } else {
                                 // 에러
                             }
                         }

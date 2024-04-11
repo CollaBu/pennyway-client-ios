@@ -67,6 +67,7 @@ struct SignUpFormView: View {
                             CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
                                 formViewModel.validateConfirmPw()
                                 formViewModel.validateForm()
+                                print(formViewModel.confirmPw)
                             }, isSecureText: true)
                             
                             if formViewModel.showErrorConfirmPw {
