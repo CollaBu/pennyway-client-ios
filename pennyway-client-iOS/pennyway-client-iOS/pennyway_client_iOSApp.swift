@@ -20,6 +20,7 @@ struct pennyway_client_iOSApp: App {
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }
+//                .environmentObject(SignUpFormViewModel)
         }
     }
 }

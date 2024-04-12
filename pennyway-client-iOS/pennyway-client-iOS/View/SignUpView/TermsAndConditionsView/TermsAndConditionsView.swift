@@ -1,9 +1,12 @@
 import SwiftUI
 
 struct TermsAndConditionsView: View {
-    @ObservedObject var viewModel: SignUpNavigationViewModel
+
     @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @State private var isAllAgreed = false
+    @ObservedObject var viewModel: SignUpNavigationViewModel
+    // @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
+//    @StateObject var formViewModel = SignUpFormViewModel()
 
     var body: some View {
         ScrollView {

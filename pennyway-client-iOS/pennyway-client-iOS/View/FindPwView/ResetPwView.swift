@@ -24,8 +24,7 @@ struct ResetPwView: View {
                     
                     ResetPwFormView(formViewModel: formViewModel)
                     
-                    Spacer().frame(height: 129)
-                    //                    Spacer()
+//                    Spacer().frame(height: 129)
                 }
                 Spacer()
                 
