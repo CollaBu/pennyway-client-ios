@@ -3,6 +3,11 @@ import SwiftUI
 struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
+    @StateObject var accountLinkingViewModel = OAuthAccountLinkingViewModel()
+    @StateObject var oauthRegistViewModel = OAuthRegistViewModel()
+    
+    @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
+    @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
     
     var body: some View {
         ScrollView {
@@ -26,12 +31,23 @@ struct SignUpView: View {
                 if formViewModel.isFormValid {
                     viewModel.continueButtonTapped()
                     print(formViewModel.isFormValid)
-                    // formViewModel.checkDuplicateUserNameAPI()
+                    formViewModel.checkDuplicateUserNameAPI()
                     
-                    RegistrationManager.shared.name = formViewModel.name
-                    RegistrationManager.shared.id = formViewModel.id
-                    RegistrationManager.shared.password = formViewModel.password
-                    RegistrationManager.shared.performRegistration()
+                    if isOAuthRegistration {
+                        OAuthRegistrationManager.shared.name = formViewModel.name
+                        OAuthRegistrationManager.shared.username = formViewModel.id
+                        OAuthRegistrationManager.shared.password = formViewModel.password
+                        
+                        if !isExistUser {
+                            oauthRegistViewModel.oauthRegistAPI()
+                        }
+                    } else {
+                        RegistrationManager.shared.name = formViewModel.name
+                        RegistrationManager.shared.id = formViewModel.id
+                        RegistrationManager.shared.password = formViewModel.password
+                        RegistrationManager.shared.performRegistration()
+                    }
+                   
                 } else {}
                     
             }, label: "계속하기", isFormValid: $formViewModel.isFormValid)

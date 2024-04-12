@@ -4,6 +4,7 @@ struct PhoneVerificationView: View {
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
+    @StateObject var oauthAccountLinkingViewModel = OAuthAccountLinkingViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
    
@@ -55,21 +56,33 @@ struct PhoneVerificationView: View {
     }
     
     private func continueButtonAction() {
-        // numberVerificationViewModel.validateNumberVerification()
-        
         if isOAuthRegistration {
-            phoneVerificationViewModel.requestOAuthVerifyVerificationCodeAPI()
+            phoneVerificationViewModel.requestOAuthVerifyVerificationCodeAPI {
+                checkFormValid()
+            }
         } else {
-            phoneVerificationViewModel.requestVerifyVerificationCodeAPI()
+            phoneVerificationViewModel.requestVerifyVerificationCodeAPI {
+                checkFormValid()
+            }
         }
-       
+    }
+    
+    private func checkFormValid() {
         if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
             showingPopUp = false
             viewModel.continueButtonTapped()
             
-            RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
-            RegistrationManager.shared.verificationCode = phoneVerificationViewModel.verificationCode
-
+            if isOAuthRegistration {
+                OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
+                OAuthRegistrationManager.shared.code = phoneVerificationViewModel.verificationCode
+                
+                if OAuthRegistrationManager.shared.isExistUser {
+                    oauthAccountLinkingViewModel.linkOAuthWithNormalAccountAPI()
+                }
+            } else {
+                RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
+                RegistrationManager.shared.verificationCode = phoneVerificationViewModel.verificationCode
+            }
         } else {
             showingPopUp = true
         }
@@ -78,7 +91,7 @@ struct PhoneVerificationView: View {
     @ViewBuilder
     private func destinationView() -> some View {
         if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser {
-            OAuthAccountLinkingView(viewModel: viewModel)
+            // OAuthAccountLinkingView(signUpViewModel: viewModel)
         } else {
             SignUpView(viewModel: viewModel)
         }

@@ -7,50 +7,50 @@ struct InputFormView: View {
         VStack {
             HStack(alignment: .top) {
                 Text("친구들과 함께\n간편한 자산관리")
-                    .font(.pretendard(.semibold, size: 28.8))
+                    .font(.pretendard(.semibold, size: 27.6))
                     .multilineTextAlignment(.leading)
-                    .padding(.top, 39)
+                    .padding(.top, 44.85)
 
                 Spacer()
             }
-            .padding(.leading, 20)
+            .padding(.leading, 23)
 
-            Spacer().frame(height: 14)
+            Spacer().frame(height: 16.1)
 
             if viewModel.loginFailed != nil {
                 ErrorCodeContentView()
             }
 
-            Spacer().frame(height: 35)
+            Spacer().frame(height: 40.25)
 
-            VStack(spacing: 9) {
+            VStack(spacing: 10.35) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
-                        .frame(height: 46)
+                        .frame(height: 52.9)
 
                     TextField("아이디 입력", text: $viewModel.id)
-                        .padding(.horizontal, 20)
-                        .font(.pretendard(.medium, size: 14))
+                        .padding(.horizontal, 23)
+                        .font(.pretendard(.medium, size: 16.1))
                         .AutoCorrectionExtensions()
                         .TextAutocapitalization()
 
                         .ignoresSafeArea(.keyboard)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 23)
 
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
-                        .frame(height: 46)
+                        .frame(height: 52.9)
 
                     SecureField("비밀번호 입력", text: $viewModel.password)
-                        .padding(.horizontal, 20)
-                        .font(.pretendard(.medium, size: 14))
+                        .padding(.horizontal, 23)
+                        .font(.pretendard(.medium, size: 16.1))
                         .textContentType(.password)
                         .ignoresSafeArea(.keyboard)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 23)
 
                 Spacer().frame(height: 4)
 
@@ -61,7 +61,7 @@ struct InputFormView: View {
                     }, label: "로그인", isFormValid: .constant(true)) // 수정
                 }
 
-                Spacer().frame(height: 19)
+                Spacer().frame(height: 21.85)
             }
         }
     }

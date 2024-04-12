@@ -25,7 +25,7 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
 
-    func generateRandomVerificationCode() {
+    func requestVerificationCodeAction() {
         if !showErrorPhoneNumberFormat && !isDisabledButton {
             isDisabledButton = true
             isTimerHidden = false
@@ -48,6 +48,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     func requestVerificationCodeAPI() {
         validatePhoneNumber()
+        requestVerificationCodeAction()
 
         if !showErrorPhoneNumberFormat {
             AuthAlamofire.shared.sendVerificationCode(formattedPhoneNumber) { result in
@@ -76,7 +77,7 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
-    func requestVerifyVerificationCodeAPI() {
+    func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
         AuthAlamofire.shared.verifyVerificationCode(formattedPhoneNumber, verificationCode) { result in
             switch result {
             case let .success(data):
@@ -98,17 +99,19 @@ class PhoneVerificationViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-
                 print("Failed to verify: \(error)")
             }
+            completion()
         }
     }
 
+
     func requestOAuthVerificationCodeAPI() {
         validatePhoneNumber()
+        requestVerificationCodeAction()
 
         if !showErrorPhoneNumberFormat {
-            OAuthAlamofire.shared.oauthSendVerificationCode(formattedPhoneNumber, "kakao") { result in
+            OAuthAlamofire.shared.oauthSendVerificationCode(formattedPhoneNumber, OAuthRegistrationManager.shared.provider) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {
@@ -134,8 +137,8 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
-    func requestOAuthVerifyVerificationCodeAPI() {
-        OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, "kakao") { result in
+    func requestOAuthVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
+        OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, OAuthRegistrationManager.shared.provider) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -170,6 +173,8 @@ class PhoneVerificationViewModel: ObservableObject {
             case let .failure(error):
                 print("Failed to verify: \(error)")
             }
+
+            completion()
         }
     }
 

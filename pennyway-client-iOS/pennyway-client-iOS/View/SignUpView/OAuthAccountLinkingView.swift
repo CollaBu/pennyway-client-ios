@@ -2,7 +2,8 @@ import SwiftUI
 
 struct OAuthAccountLinkingView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @StateObject var viewModel = SignUpNavigationViewModel()
+    @StateObject var signUpViewModel = SignUpNavigationViewModel()
+    
     @State private var isActiveButton = false
     
     var body: some View {
@@ -37,9 +38,10 @@ struct OAuthAccountLinkingView: View {
                 
                 CustomBottomButton(action: {
                     isActiveButton = true
+                    
                 }, label: "연동하기", isFormValid: .constant(true))
                     .padding(.bottom, 34)
-                NavigationLink(destination: SignUpView(viewModel: viewModel), isActive: $isActiveButton) {
+                NavigationLink(destination: SignUpView(viewModel: signUpViewModel), isActive: $isActiveButton) {
                     EmptyView()
                 }
             }

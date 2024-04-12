@@ -43,6 +43,10 @@
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
 		4A8571342BC650FA0082CE47 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571322BC650FA0082CE47 /* Constants.swift */; };
 		4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */; };
+		4A85713E2BC700FB0082CE47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A85713D2BC700FB0082CE47 /* GoogleService-Info.plist */; };
+		4A8571402BC701050082CE47 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A85713F2BC701050082CE47 /* Secrets.xcconfig */; };
+		4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */; };
+		4A8571442BC7C5EB0082CE47 /* OAuthRegistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthRegistViewModel.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
@@ -122,9 +126,12 @@
 		4A762B062B99A262001C1188 /* TokenHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandling.swift; sourceTree = "<group>"; };
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
-		4A8571312BC64F510082CE47 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A8571322BC650FA0082CE47 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
+		4A85713D2BC700FB0082CE47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A85713F2BC701050082CE47 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = "pennyway-client-iOS/Secrets.xcconfig"; sourceTree = SOURCE_ROOT; };
+		4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingViewModel.swift; sourceTree = "<group>"; };
+		4A8571432BC7C5EB0082CE47 /* OAuthRegistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRegistViewModel.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
@@ -218,7 +225,7 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		4A4A566D2BAC96A10071D00E /* NumberVerificationView */ = {
+		4A4A566D2BAC96A10071D00E /* PhoneVerificationView */ = {
 			isa = PBXGroup;
 			children = (
 				4A4A56712BACA2250071D00E /* PhoneVerificationView.swift */,
@@ -227,7 +234,7 @@
 				4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */,
 				D8157E712BC19E590083844B /* PhoneNumberInputSectionView.swift */,
 			);
-			path = NumberVerificationView;
+			path = PhoneVerificationView;
 			sourceTree = "<group>";
 		};
 		4A4A566E2BAC97C90071D00E /* ElementView */ = {
@@ -263,7 +270,7 @@
 			children = (
 				4A4A56762BACAD5A0071D00E /* TermsAndConditionsView */,
 				4A4A56752BACACEE0071D00E /* SignUpView */,
-				4A4A566D2BAC96A10071D00E /* NumberVerificationView */,
+				4A4A566D2BAC96A10071D00E /* PhoneVerificationView */,
 				4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */,
 			);
 			path = SignUpView;
@@ -290,7 +297,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D86B43852BC7CF1100143C12 /* GoogleService-Info.plist */,
+				4A85713D2BC700FB0082CE47 /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
 				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
@@ -302,9 +309,9 @@
 				4A762AFB2B99A1C4001C1188 /* View */,
 				4A762AFA2B99A1A5001C1188 /* Model */,
 				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
+				4A85713F2BC701050082CE47 /* Secrets.xcconfig */,
 				4A762AF02B99A16D001C1188 /* Assets.xcassets */,
 				4A762AF22B99A16D001C1188 /* Preview Content */,
-				4A8571312BC64F510082CE47 /* Secrets.xcconfig */,
 			);
 			path = "pennyway-client-iOS";
 			sourceTree = "<group>";
@@ -370,8 +377,8 @@
 		4A762AFE2B99A1D7001C1188 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4A8571452BC85E1B0082CE47 /* FontExtensions */,
 				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
-				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
 				D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */,
 				D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */,
 			);
@@ -395,6 +402,14 @@
 				4A8571322BC650FA0082CE47 /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		4A8571452BC85E1B0082CE47 /* FontExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
+			);
+			path = FontExtensions;
 			sourceTree = "<group>";
 		};
 		4AB5AB452BB4A1E500D2C9EA /* AlamofireDomains */ = {
@@ -430,6 +445,8 @@
 				4AC4FD072BBDCC190027ACD5 /* KakaoOAuthViewModel.swift */,
 				4AC4FD092BBDCE080027ACD5 /* GoogleOAuthViewModel.swift */,
 				4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift */,
+				4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */,
+				4A8571432BC7C5EB0082CE47 /* OAuthRegistViewModel.swift */,
 			);
 			path = OAuthViewModel;
 			sourceTree = "<group>";
@@ -539,9 +556,11 @@
 				D86B43862BC7CF1100143C12 /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
+				4A8571402BC701050082CE47 /* Secrets.xcconfig in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
+				4A85713E2BC700FB0082CE47 /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
@@ -632,6 +651,7 @@
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
+				4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */,
 				4AB5AB5F2BB5EACD00D2C9EA /* WelcomeView.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */,
 				D850DF8B2BA9E3AA004FBF67 /* (null) in Sources */,
@@ -658,6 +678,7 @@
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
 				D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
+				4A8571442BC7C5EB0082CE47 /* OAuthRegistViewModel.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatter.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
@@ -688,7 +709,7 @@
 /* Begin XCBuildConfiguration section */
 		4A762AF52B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A8571312BC64F510082CE47 /* Secrets.xcconfig */;
+			baseConfigurationReference = 4A85713F2BC701050082CE47 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -752,7 +773,7 @@
 		};
 		4A762AF62B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A8571312BC64F510082CE47 /* Secrets.xcconfig */;
+			baseConfigurationReference = 4A85713F2BC701050082CE47 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

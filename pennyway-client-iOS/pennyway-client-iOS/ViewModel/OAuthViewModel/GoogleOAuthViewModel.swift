@@ -28,7 +28,7 @@ class GoogleOAuthViewModel: ObservableObject {
     }
     
     func oauthLoginAPI() {
-        OAuthAlamofire.shared.oauthLogin(oauthID, token, "google") { result in
+        OAuthAlamofire.shared.oauthLogin(oauthID, token, OAuthRegistrationManager.shared.provider) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

@@ -59,11 +59,11 @@ class OAuthAlamofire: TokenHandling {
             }
     }
     
-    func linkOAuthWithNormalAccount(_ idToken: String, _ phone: String, _ provider: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - linkOAuthWithNormalAccount() called : %@ ,, %@ ,, %@", log: .default, type: .info, idToken, phone, provider)
+    func linkOAuthWithNormalAccount(_ idToken: String, _ phone: String, _ code: String, _ provider: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("OAuthAlamofire - linkOAuthWithNormalAccount() called : %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, idToken, phone, code, provider)
         
         session
-            .request(OAuthRouter.linkOAuthWithNormalAccount(idToken: idToken, phone: phone, provider: provider))
+            .request(OAuthRouter.linkOAuthWithNormalAccount(idToken: idToken, phone: phone, code: code, provider: provider))
             .response { response in
                 switch response.result {
                 case let .success(data):

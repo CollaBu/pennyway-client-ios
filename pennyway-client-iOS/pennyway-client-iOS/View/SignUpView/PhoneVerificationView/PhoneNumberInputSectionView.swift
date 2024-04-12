@@ -35,15 +35,12 @@ struct PhoneNumberInputSectionView: View {
                             }
                     }
                     Button(action: {
-                        viewModel.validatePhoneNumber()
-
                         if isOAuthRegistration {
                             viewModel.requestOAuthVerificationCodeAPI()
 
                         } else {
                             viewModel.requestVerificationCodeAPI() 
                         }
-                        viewModel.generateRandomVerificationCode()
                         viewModel.judgeTimerRunning()
 
                     }, label: {
