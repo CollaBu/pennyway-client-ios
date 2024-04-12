@@ -11,10 +11,10 @@ class SignUpFormViewModel: ObservableObject {
     @Published var showErrorPassword = false
     @Published var showErrorConfirmPw = false
     @Published var isFormValid: Bool = false
-
+    
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
-
+    
     func validateForm() {
         if !isOAuthRegistration {
             if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
@@ -38,32 +38,32 @@ class SignUpFormViewModel: ObservableObject {
             }
         }
     }
-
+    
     func validatePwForm() { 
         if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
             isFormValid = true
         }
     }
-
+    
     func validateName() {
-        let nameRegex = "^[가-힣a-zA-Z]+$"
+        let nameRegex = "^[가-힣a-z]{2,8}$"
         showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
     }
-
+    
     func validateID() {
         let idRegex = "^[a-z0-9._-]{5,20}$"
         showErrorID = !NSPredicate(format: "SELF MATCHES %@", idRegex).evaluate(with: id)
     }
-
+    
     func validatePassword() {
         let passwordRegex = "^(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{8,16}$"
         showErrorPassword = !NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-
+    
     func validateConfirmPw() {
         showErrorConfirmPw = password != confirmPw
     }
-
+    
     func checkDuplicateUserNameAPI() {
         AuthAlamofire.shared.checkDuplicateUserName(id) { result in
             switch result {
@@ -74,7 +74,7 @@ class SignUpFormViewModel: ObservableObject {
                         if let code = responseJSON?["code"] as? String {
                             if code == "2000" {
                                 // 확인
-
+                                
                             } else if code == "4000" {
                                 // 중복된 아이디
                             }
@@ -84,7 +84,7 @@ class SignUpFormViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-
+                
                 print("Failed to verify: \(error)")
             }
         }
