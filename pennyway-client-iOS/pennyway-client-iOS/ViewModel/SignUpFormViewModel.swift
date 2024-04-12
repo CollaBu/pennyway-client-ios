@@ -79,6 +79,7 @@ class SignUpFormViewModel: ObservableObject {
                                 // 중복된 아이디
                             }
                         }
+                        print(responseJSON)
                     } catch {
                         print("Error parsing response JSON: \(error)")
                     }

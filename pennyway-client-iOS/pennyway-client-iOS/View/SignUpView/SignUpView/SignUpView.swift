@@ -37,10 +37,6 @@ struct SignUpView: View {
                         OAuthRegistrationManager.shared.name = formViewModel.name
                         OAuthRegistrationManager.shared.username = formViewModel.id
                         OAuthRegistrationManager.shared.password = formViewModel.password
-                        
-                        if !isExistUser {
-                            oauthRegistViewModel.oauthRegistAPI()
-                        }
                     } else {
                         RegistrationManager.shared.name = formViewModel.name
                         RegistrationManager.shared.id = formViewModel.id

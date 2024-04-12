@@ -9,10 +9,11 @@ enum AuthRouter: URLRequestConvertible {
     case verifyVerificationCode(phone: String, code: String)
     case checkDuplicateUserName(username: String)
     case login(username: String, password: String)
+    case linkExistingAccountToOAuth(password: String, phone: String, code: String)
 
     var method: HTTPMethod {
         switch self {
-        case .regist, .sendVerificationCode, .verifyVerificationCode, .login:
+        case .regist, .sendVerificationCode, .verifyVerificationCode, .login, .linkExistingAccountToOAuth:
             return .post
         case .checkDuplicateUserName:
             return .get
@@ -32,9 +33,11 @@ enum AuthRouter: URLRequestConvertible {
         case .verifyVerificationCode:
             return "v1/auth/phone/verification"
         case .checkDuplicateUserName:
-            return "v1/duplication/username"
+            return "v1/duplicate/username"
         case .login:
             return "v1/auth/sign-in"
+        case .linkExistingAccountToOAuth:
+            return "v1/auth/link-oauth"
         }
     }
 
@@ -50,6 +53,8 @@ enum AuthRouter: URLRequestConvertible {
             return [:]
         case let .login(username, password):
             return ["username": username, "password": password]
+        case let .linkExistingAccountToOAuth(password, phone, code):
+            return ["password": password, "phone": phone, "code": code]
         }
     }
 
@@ -58,7 +63,7 @@ enum AuthRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .regist, .sendVerificationCode, .verifyVerificationCode, .login:
+        case .regist, .sendVerificationCode, .verifyVerificationCode, .login, .linkExistingAccountToOAuth:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
 
         case let .checkDuplicateUserName(username):

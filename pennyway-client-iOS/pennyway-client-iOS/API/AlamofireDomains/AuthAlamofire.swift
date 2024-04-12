@@ -91,4 +91,20 @@ class AuthAlamofire: TokenHandling {
                 }
             }
     }
+
+    func linkExistingAccountToOAuth(_ password: String, _ phone: String, _ code: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - linkExistingAccountToOAuth() called userInput : %@ ,, %@ ,, %@", log: .default, type: .info, password, phone, code)
+        
+        session
+            .request(AuthRouter.linkExistingAccountToOAuth(password: password, phone: phone, code: code))
+            .response { response in
+                switch response.result {
+                case let .success(data):
+                    self.extractAndStoreToken(from: response) // 토큰 저장
+                    completion(.success(data))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+    }
 }

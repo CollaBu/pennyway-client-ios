@@ -560,7 +560,6 @@
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
-				4A85713E2BC700FB0082CE47 /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,

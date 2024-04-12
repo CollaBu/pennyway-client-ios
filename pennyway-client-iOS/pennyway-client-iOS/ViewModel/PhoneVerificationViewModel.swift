@@ -105,7 +105,6 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
-
     func requestOAuthVerificationCodeAPI() {
         validatePhoneNumber()
         requestVerificationCodeAction()
