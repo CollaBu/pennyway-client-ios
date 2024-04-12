@@ -223,7 +223,7 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		4A4A566D2BAC96A10071D00E /* NumberVerificationView */ = {
+		4A4A566D2BAC96A10071D00E /* PhoneVerificationView */ = {
 			isa = PBXGroup;
 			children = (
 				4A4A56712BACA2250071D00E /* PhoneVerificationView.swift */,
@@ -232,7 +232,7 @@
 				4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */,
 				D8157E712BC19E590083844B /* PhoneNumberInputSectionView.swift */,
 			);
-			path = NumberVerificationView;
+			path = PhoneVerificationView;
 			sourceTree = "<group>";
 		};
 		4A4A566E2BAC97C90071D00E /* ElementView */ = {
@@ -268,7 +268,7 @@
 			children = (
 				4A4A56762BACAD5A0071D00E /* TermsAndConditionsView */,
 				4A4A56752BACACEE0071D00E /* SignUpView */,
-				4A4A566D2BAC96A10071D00E /* NumberVerificationView */,
+				4A4A566D2BAC96A10071D00E /* PhoneVerificationView */,
 				4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */,
 			);
 			path = SignUpView;
@@ -375,8 +375,8 @@
 		4A762AFE2B99A1D7001C1188 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4A8571452BC85E1B0082CE47 /* FontExtensions */,
 				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
-				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
 				D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */,
 				D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */,
 			);
@@ -400,6 +400,14 @@
 				4A8571322BC650FA0082CE47 /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		4A8571452BC85E1B0082CE47 /* FontExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
+			);
+			path = FontExtensions;
 			sourceTree = "<group>";
 		};
 		4AB5AB452BB4A1E500D2C9EA /* AlamofireDomains */ = {

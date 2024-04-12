@@ -7,7 +7,6 @@ struct PhoneVerificationView: View {
     @StateObject var oauthAccountLinkingViewModel = OAuthAccountLinkingViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
-    @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
    
     var body: some View {
         NavigationAvailable {
@@ -77,7 +76,7 @@ struct PhoneVerificationView: View {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
                 OAuthRegistrationManager.shared.code = phoneVerificationViewModel.verificationCode
                 
-                if isExistUser {
+                if OAuthRegistrationManager.shared.isExistUser {
                     oauthAccountLinkingViewModel.linkOAuthWithNormalAccountAPI()
                 }
             } else {
@@ -91,7 +90,7 @@ struct PhoneVerificationView: View {
     
     @ViewBuilder
     private func destinationView() -> some View {
-        if isOAuthRegistration && isExistUser {
+        if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser {
             // OAuthAccountLinkingView(signUpViewModel: viewModel)
         } else {
             SignUpView(viewModel: viewModel)
