@@ -90,6 +90,10 @@ class PhoneVerificationViewModel: ObservableObject {
                                 if let existsUser = sms["existsUser"] as? Bool {
                                     OAuthRegistrationManager.shared.isExistUser = existsUser
                                 }
+
+                                if let oauth = sms["oauth"] as? Bool {
+                                    OAuthRegistrationManager.shared.isOAuthUser = oauth
+                                }
                             }
                         case "4010", "4042":
                             showErrorVerificationCode = true

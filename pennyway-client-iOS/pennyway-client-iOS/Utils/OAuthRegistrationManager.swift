@@ -5,7 +5,8 @@ struct OAuthRegistrationManager {
     static var shared = OAuthRegistrationManager()
 
     var isOAuthRegistration: Bool = false
-    var isExistUser: Bool = true
+    var isExistUser: Bool = false
+    var isOAuthUser: Bool = false
     var provider = ""
     var name = ""
     var username = ""

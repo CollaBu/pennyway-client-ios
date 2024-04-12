@@ -49,7 +49,7 @@ struct SignUpView: View {
             }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
                 .padding(.bottom, 34)
                 
-            NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
+            NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
                 EmptyView()
             }
         }
@@ -64,6 +64,14 @@ struct SignUpView: View {
                     
                 }.offset(x: -10)
             }
+        }
+    }
+
+    @ViewBuilder
+    private func destinationView() -> some View {
+        if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
+        } else {
+            TermsAndConditionsView(viewModel: viewModel)
         }
     }
 }

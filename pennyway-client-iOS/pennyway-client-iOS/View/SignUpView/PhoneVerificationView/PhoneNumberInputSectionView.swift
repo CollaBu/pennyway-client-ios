@@ -41,6 +41,7 @@ struct PhoneNumberInputSectionView: View {
                         } else {
                             viewModel.requestVerificationCodeAPI {}
                         }
+                        viewModel.requestVerificationCodeAction()
                         viewModel.judgeTimerRunning()
 
                     }, label: {

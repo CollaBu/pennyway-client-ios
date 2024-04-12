@@ -6,6 +6,7 @@ struct SignUpFormView: View {
     @ObservedObject var formViewModel: SignUpFormViewModel
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
+    @State private var isOAuthUser = OAuthRegistrationManager.shared.isOAuthUser
 
     var body: some View {
         ScrollView {
@@ -16,7 +17,7 @@ struct SignUpFormView: View {
                 
                 Spacer().frame(height: 32)
                 VStack(alignment: .leading, spacing: 21) {
-                    if !isOAuthRegistration || !isExistUser {
+                    if isOAuthRegistration && !isExistUser {
                         VStack(alignment: .leading, spacing: 9) {
                             CustomInputView(inputText: $formViewModel.name, titleText: "이름", onCommit: {
                                 formViewModel.validateName()
@@ -46,7 +47,7 @@ struct SignUpFormView: View {
                         }
                     }
                    
-                    if isExistUser {
+                    if !isOAuthRegistration || isOAuthUser {
                         VStack(alignment: .leading, spacing: 9) {
                             CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
                                 print(formViewModel.password)

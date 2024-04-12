@@ -11,7 +11,7 @@ struct AdditionalOptionView: View {
             .platformTextColor(color: Color("Gray04"))
             .simultaneousGesture(TapGesture().onEnded {
                 OAuthRegistrationManager.shared.isOAuthRegistration = false
-                OAuthRegistrationManager.shared.isExistUser = true
+                OAuthRegistrationManager.shared.isExistUser = false
             })
 
             Image("icon_line_gray")
