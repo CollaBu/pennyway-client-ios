@@ -39,7 +39,7 @@ struct SignUpView: View {
                         OAuthRegistrationManager.shared.password = formViewModel.password
                     } else {
                         RegistrationManager.shared.name = formViewModel.name
-                        RegistrationManager.shared.id = formViewModel.id
+                        RegistrationManager.shared.username = formViewModel.id
                         RegistrationManager.shared.password = formViewModel.password
                         RegistrationManager.shared.performRegistration()
                     }

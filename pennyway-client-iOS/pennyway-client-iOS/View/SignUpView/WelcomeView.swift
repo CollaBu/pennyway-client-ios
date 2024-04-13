@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    /// @ObservedObject var formViewModel: SignUpFormViewModel
+    
+    var name = OAuthRegistrationManager.shared.isOAuthRegistration ? OAuthRegistrationManager.shared.name : RegistrationManager.shared.name
+    
     var body: some View {
         ZStack {
             NavigationAvailable {
@@ -14,14 +16,13 @@ struct WelcomeView: View {
                         .padding(.horizontal, 80)
                         .padding(.bottom, 20)
                     
-                    Text("님 환영합니다.")
+                    Text("\(name ?? "")님 환영합니다.")
                         .font(.pretendard(.semibold, size: 24))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 73)
                         .padding(.bottom, 12)
                         .onAppear {
-                            // print("\(formViewModel.name)님 환영합니다.")
-                            // print("\(RegistrationManager.shared.name)님 환영합니다.")
+                          
                         }
                     
                     Text("페니웨이와 절약을 시작해볼까요?")
