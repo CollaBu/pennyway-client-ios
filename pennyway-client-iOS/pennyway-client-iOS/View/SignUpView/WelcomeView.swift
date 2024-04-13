@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    
     var name = OAuthRegistrationManager.shared.isOAuthRegistration ? OAuthRegistrationManager.shared.name : RegistrationManager.shared.name
     
     var body: some View {
@@ -21,9 +20,7 @@ struct WelcomeView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 73)
                         .padding(.bottom, 12)
-                        .onAppear {
-                          
-                        }
+                        .onAppear {}
                     
                     Text("페니웨이와 절약을 시작해볼까요?")
                         .font(.pretendard(.medium, size: 14))

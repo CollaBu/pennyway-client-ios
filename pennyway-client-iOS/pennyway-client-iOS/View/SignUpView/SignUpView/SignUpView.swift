@@ -30,7 +30,6 @@ struct SignUpView: View {
             CustomBottomButton(action: {
                 if formViewModel.isFormValid {
                     viewModel.continueButtonTapped()
-                    print(formViewModel.isFormValid)
                     formViewModel.checkDuplicateUserNameAPI()
                     
                     if isOAuthRegistration {
