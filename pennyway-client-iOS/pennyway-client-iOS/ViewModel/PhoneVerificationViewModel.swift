@@ -5,13 +5,13 @@ class PhoneVerificationViewModel: ObservableObject {
     // MARK: Private
 
     @State private var timer: Timer?
+    private var formattedPhoneNumber: String {
+        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber) ?? ""
+    }
 
     // MARK: Internal
 
     @Published var phoneNumber: String = ""
-    private var formattedPhoneNumber: String {
-        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber) ?? ""
-    }
 
     @Published var verificationCode: String = ""
     @Published var randomVerificationCode = ""
@@ -47,6 +47,9 @@ class PhoneVerificationViewModel: ObservableObject {
     // MARK: API
 
     func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
+        validatePhoneNumber()
+        requestVerificationCodeAction()
+
         AuthAlamofire.shared.verifyVerificationCode(formattedPhoneNumber, verificationCode) { result in
             self.handleAPIResult(result: result, completion: completion)
         }
