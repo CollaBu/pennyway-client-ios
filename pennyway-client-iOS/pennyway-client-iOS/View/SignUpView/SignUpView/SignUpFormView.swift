@@ -24,7 +24,7 @@ struct SignUpFormView: View {
                             }, isSecureText: false)
                             
                             if formViewModel.showErrorName {
-                                Text("입력 포멧 관련 문구")
+                                Text("한글, 영문 대/소문자만 가능해요")
                                     .padding(.leading, 20)
                                     .font(.pretendard(.medium, size: 12))
                                     .platformTextColor(color: Color("Red03"))
@@ -38,7 +38,7 @@ struct SignUpFormView: View {
                             }, isSecureText: false)
                             
                             if formViewModel.showErrorID {
-                                Text("입력 포멧 관련 문구")
+                                Text("영문 소문자, 특수기호 -, _, . 만 사용하여,\n5~20자의 아이디를 입력해주세요")
                                     .padding(.leading, 20)
                                     .font(.pretendard(.medium, size: 12))
                                     .platformTextColor(color: Color("Red03"))
@@ -55,7 +55,7 @@ struct SignUpFormView: View {
                             }, isSecureText: true)
                             
                             if formViewModel.showErrorPassword {
-                                Text("입력 포멧 관련 문구")
+                                Text("적어도 하나 이상의 소문자 알파벳과 숫자를 포함하여\n8~16자의 비밀번호를 입력해주세요")
                                     .padding(.leading, 20)
                                 
                                     .font(.pretendard(.medium, size: 12))
@@ -71,7 +71,7 @@ struct SignUpFormView: View {
                             }, isSecureText: true)
                             
                             if formViewModel.showErrorConfirmPw {
-                                Text("입력 포멧 관련 문구")
+                                Text("비밀번호가 일치하지 않아요")
                                     .padding(.leading, 20)
                                     .font(.pretendard(.medium, size: 12))
                                     .platformTextColor(color: Color("Red03"))

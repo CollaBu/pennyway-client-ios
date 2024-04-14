@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct FindIDView: View {
+    @State private var showingPopUp = false
+    @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
+
     var body: some View {
         ScrollView {
             NavigationAvailable {
@@ -49,7 +52,9 @@ struct FindIDView: View {
     
     private func bottomButton() -> some View {
         HStack(alignment: .center, spacing: 12) {
-            Button(action: {}, label: {
+            Button(action: {
+                ResetPwView()
+            }, label: {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
@@ -64,7 +69,9 @@ struct FindIDView: View {
                 }
             })
             
-            Button(action: {}, label: {
+            Button(action: {
+                LoginView()
+            }, label: {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)

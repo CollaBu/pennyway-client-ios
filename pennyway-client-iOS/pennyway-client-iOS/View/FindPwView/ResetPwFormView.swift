@@ -15,7 +15,7 @@ struct ResetPwFormView: View {
                     }, isSecureText: true)
 
                     if formViewModel.showErrorPassword {
-                        HStack {
+                        HStack { // 추후 버튼으로 변경 필요
                             Image("icon_close_filled_primary")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -36,7 +36,7 @@ struct ResetPwFormView: View {
                     }, isSecureText: true)
 
                     if formViewModel.showErrorConfirmPw {
-                        HStack {
+                        HStack { // 추후 버튼으로 변경 필요
                             Image("icon_close_filled_primary")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
