@@ -11,13 +11,11 @@ struct CustomBottomButton: View {
             Text(label)
                 .font(.ButtonH4SemiboldFont())
                 .platformTextColor(color: isFormValid ? Color("White01") : Color("Gray04")).frame(maxWidth: .infinity)
-                .padding(.horizontal, 23)
-                .padding(.vertical, 19.55)
+                .padding(.vertical, 17 * DynamicSizeFactor.factor())
         }
         .frame(maxWidth: .infinity)
         .background(isFormValid ? Color("Mint03") : Color("Gray03"))
-
         .clipShape(RoundedRectangle(cornerRadius: 4))
-        .padding(.horizontal, 23)
+        .padding(.horizontal, 20)
     }
 }

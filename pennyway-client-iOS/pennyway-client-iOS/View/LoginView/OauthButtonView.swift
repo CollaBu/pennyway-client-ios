@@ -10,13 +10,14 @@ struct OauthButtonView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 15 * DynamicSizeFactor.factor()) {
-            HStack(spacing: 10) {
+            HStack(spacing: 10 * DynamicSizeFactor.factor()) {
                 Button(action: { // kakao
                     kakaoOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = "kakao"
 
                 }, label: {
                     Image("icon_signin_kakao")
+                        .frame(width: 30 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
                 })
                 .onReceive(kakaoOAuthViewModel.$isOAuthExistUser) { newValue in
 
@@ -30,6 +31,7 @@ struct OauthButtonView: View {
                     OAuthRegistrationManager.shared.provider = "google"
                 }, label: {
                     Image("icon_signin_google")
+                        .frame(width: 30 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
                 })
                 .onReceive(googleOAuthViewModel.$isOAuthExistUser) { newValue in
 
@@ -43,6 +45,7 @@ struct OauthButtonView: View {
                     OAuthRegistrationManager.shared.provider = "apple"
                 }, label: {
                     Image("icon_signin_apple")
+                        .frame(width: 30 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
                 })
                 .onReceive(appleOAtuthViewModel.$isOAuthExistUser) { newValue in
 
@@ -51,7 +54,6 @@ struct OauthButtonView: View {
                     }
                 }
             }
-            // .padding(.horizontal, 100 * DynamicSizeFactor.factor())
 
             NavigationLink(destination: PhoneVerificationView(), isActive: $isActiveLink) {
                 EmptyView()

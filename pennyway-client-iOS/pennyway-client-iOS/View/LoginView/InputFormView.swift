@@ -13,7 +13,7 @@ struct InputFormView: View {
 
                 Spacer()
             }
-            .padding(.leading, 20 * DynamicSizeFactor.factor())
+            .padding(.leading, 20)
 
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
@@ -37,7 +37,7 @@ struct InputFormView: View {
 
                         .ignoresSafeArea(.keyboard)
                 }
-                .padding(.horizontal, 20 * DynamicSizeFactor.factor())
+                .padding(.horizontal, 20)
 
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)
@@ -50,7 +50,7 @@ struct InputFormView: View {
                         .textContentType(.password)
                         .ignoresSafeArea(.keyboard)
                 }
-                .padding(.horizontal, 20 * DynamicSizeFactor.factor())
+                .padding(.horizontal, 20)
 
                 Spacer().frame(height: 4 * DynamicSizeFactor.factor())
 
