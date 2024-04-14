@@ -5,13 +5,13 @@ class PhoneVerificationViewModel: ObservableObject {
     // MARK: Private
 
     @State private var timer: Timer?
+    private var formattedPhoneNumber: String {
+        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber) ?? ""
+    }
 
     // MARK: Internal
 
     @Published var phoneNumber: String = ""
-    private var formattedPhoneNumber: String {
-        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber) ?? ""
-    }
 
     @Published var verificationCode: String = ""
     @Published var randomVerificationCode = ""
@@ -46,135 +46,78 @@ class PhoneVerificationViewModel: ObservableObject {
 
     // MARK: API
 
-    func requestVerificationCodeAPI() {
+    func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
         validatePhoneNumber()
         requestVerificationCodeAction()
 
-        if !showErrorPhoneNumberFormat {
-            AuthAlamofire.shared.sendVerificationCode(formattedPhoneNumber) { result in
-                switch result {
-                case let .success(data):
-                    if let responseData = data {
-                        do {
-                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                            if let code = responseJSON?["code"] as? String {
-                                if code == "2000" {
-                                    // 성공적으로 인증번호를 전송한 경우
-
-                                } else if code == "4220" {
-                                    // 포맷 오류
-                                }
-                            }
-                        } catch {
-                            print("Error parsing response JSON: \(error)")
-                        }
-                    }
-                case let .failure(error):
-
-                    print("Failed to send SMS: \(error)")
-                }
-            }
-        }
-    }
-
-    func requestVerifyVerificationCodeAPI(completion _: @escaping () -> Void) {
         AuthAlamofire.shared.verifyVerificationCode(formattedPhoneNumber, verificationCode) { result in
-            switch result {
-            case let .success(data):
-                if let responseData = data {
-                    do {
-                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                        if let code = responseJSON?["code"] as? String {
-                            if code == "2000" {
-                                // 인증 성공
-                                self.showErrorVerificationCode = false
-
-                            } else {
-                                // 인증번호 만료, 인증번호 매칭 오류, 사용중인 전화번호
-                                self.showErrorVerificationCode = true
-                            }
-                        }
-                    } catch {
-                        print("Error parsing response JSON: \(error)")
-                    }
-                }
-            case let .failure(error):
-
-                print("Failed to verify: \(error)")
-            }
+            self.handleAPIResult(result: result, completion: completion)
         }
     }
 
-    func requestOAuthVerificationCodeAPI() {
+    func requestVerificationCodeAPI(completion: @escaping () -> Void) {
+        AuthAlamofire.shared.sendVerificationCode(formattedPhoneNumber) { result in
+            self.handleAPIResult(result: result, completion: completion)
+        }
+    }
+
+    func requestOAuthVerificationCodeAPI(completion: @escaping () -> Void) {
         validatePhoneNumber()
         requestVerificationCodeAction()
 
         if !showErrorPhoneNumberFormat {
             OAuthAlamofire.shared.oauthSendVerificationCode(formattedPhoneNumber, OAuthRegistrationManager.shared.provider) { result in
-                switch result {
-                case let .success(data):
-                    if let responseData = data {
-                        do {
-                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                            if let code = responseJSON?["code"] as? String {
-                                if code == "2000" {
-                                    // 성공적으로 인증번호를 전송한 경우
-
-                                } else if code == "4220" {
-                                    // 포맷 오류
-                                }
-                            }
-                        } catch {
-                            print("Error parsing response JSON: \(error)")
-                        }
-                    }
-                case let .failure(error):
-
-                    print("Failed to send SMS: \(error)")
-                }
+                self.handleAPIResult(result: result, completion: completion)
             }
         }
     }
 
     func requestOAuthVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
         OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, OAuthRegistrationManager.shared.provider) { result in
-            switch result {
-            case let .success(data):
-                if let responseData = data {
-                    do {
-                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-
-                        if let code = responseJSON?["code"] as? String {
-                            switch code {
-                            case "2000":
-                                self.showErrorVerificationCode = false
-                                if let smsData = responseJSON?["data"] as? [String: Any], let sms = smsData["sms"] as? [String: Any] {
-                                    if let existsUser = sms["existsUser"] as? Bool {
-                                        if existsUser {
-                                            OAuthRegistrationManager.shared.isExistUser = true
-                                        } else {
-                                            OAuthRegistrationManager.shared.isExistUser = false
-                                        }
-                                    }
-                                }
-                            case "4010", "4042":
-                                self.showErrorVerificationCode = true
-                            default:
-                                // 그 외의 응답 코드
-                                break
-                            }
-                        }
-                        print(responseJSON as Any)
-                    } catch {
-                        print("Error parsing response JSON: \(error)")
-                    }
-                }
-            case let .failure(error):
-                print("Failed to verify: \(error)")
-            }
-
-            completion()
+            self.handleAPIResult(result: result, completion: completion)
         }
+    }
+
+    private func handleAPIResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+
+                    if let code = responseJSON?["code"] as? String {
+                        switch code {
+                        case "2000":
+                            showErrorVerificationCode = false
+                            if let smsData = responseJSON?["data"] as? [String: Any], let sms = smsData["sms"] as? [String: Any] {
+                                if let existsUser = sms["existsUser"] as? Bool {
+                                    OAuthRegistrationManager.shared.isExistUser = existsUser
+                                }
+
+                                if let oauth = sms["oauth"] as? Bool {
+                                    OAuthRegistrationManager.shared.isOAuthUser = oauth
+                                }
+                                if let username = sms["username"] as? String {
+                                    OAuthRegistrationManager.shared.username = username
+                                }
+                            }
+                        case "4010", "4042":
+                            showErrorVerificationCode = true
+                        default:
+                            showErrorVerificationCode = true
+                            break
+                        }
+                    }
+                    print(responseJSON as Any)
+                } catch {
+                    print("Error parsing response JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            print("Failed to verify: \(error)")
+        }
+
+        completion()
     }
 
     // MARK: Timer function

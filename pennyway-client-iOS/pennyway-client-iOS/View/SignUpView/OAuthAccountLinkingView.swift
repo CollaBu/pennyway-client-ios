@@ -25,7 +25,7 @@ struct OAuthAccountLinkingView: View {
                 Spacer().frame(height: 30)
                 
                 ZStack {
-                    Text("아이디")
+                    Text("\(OAuthRegistrationManager.shared.username)")
                         .font(.pretendard(.medium, size: 16))
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.vertical, 20)

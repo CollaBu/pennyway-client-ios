@@ -51,7 +51,7 @@ struct OauthButtonView: View {
                     }
                 }
             }
-            .padding(.horizontal, 100 * DynamicSizeFactor.factor())
+            // .padding(.horizontal, 100 * DynamicSizeFactor.factor())
 
             NavigationLink(destination: PhoneVerificationView(), isActive: $isActiveLink) {
                 EmptyView()

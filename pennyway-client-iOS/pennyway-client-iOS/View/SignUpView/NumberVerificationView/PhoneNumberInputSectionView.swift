@@ -35,13 +35,13 @@ struct PhoneNumberInputSectionView: View {
                             }
                     }
                     Button(action: {
+                        viewModel.judgeTimerRunning()
                         if isOAuthRegistration {
-                            viewModel.requestOAuthVerificationCodeAPI()
+                            viewModel.requestOAuthVerificationCodeAPI {}
 
                         } else {
-                            viewModel.requestVerificationCodeAPI() 
+                            viewModel.requestVerificationCodeAPI {}
                         }
-                        viewModel.judgeTimerRunning()
 
                     }, label: {
                         Text("인증번호 받기")

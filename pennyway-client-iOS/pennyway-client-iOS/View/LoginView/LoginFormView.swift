@@ -30,7 +30,7 @@ struct LoginFormView: View {
                             .font(.B3MediumFont())
                             .padding(8 * DynamicSizeFactor.factor())
                     }
-                    .padding(.horizontal, 103 * DynamicSizeFactor.factor())
+                    // .padding(.horizontal, 103 * DynamicSizeFactor.factor())
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 })
             }
