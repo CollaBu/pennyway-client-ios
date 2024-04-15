@@ -16,7 +16,7 @@ struct ErrorCodeContentView: View {
 
             Text("아이디 또는 비밀번호가 잘못 입력되었어요")
                 .platformTextColor(color: Color("Red03"))
-                .font(.pretendard(.medium, size: 12 * DynamicSizeFactor.factor()))
+                .font(.B1MediumFont())
                 .padding(.leading, 38 * DynamicSizeFactor.factor())
         }
         .padding(.horizontal, 20 * DynamicSizeFactor.factor())
