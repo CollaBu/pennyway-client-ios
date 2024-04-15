@@ -12,6 +12,7 @@ struct AdditionalOptionView: View {
             .simultaneousGesture(TapGesture().onEnded {
                 OAuthRegistrationManager.shared.isOAuthRegistration = false
                 OAuthRegistrationManager.shared.isExistUser = false
+                OAuthRegistrationManager.shared.isOAuthUser = false
             })
 
             Image("icon_line_gray")
