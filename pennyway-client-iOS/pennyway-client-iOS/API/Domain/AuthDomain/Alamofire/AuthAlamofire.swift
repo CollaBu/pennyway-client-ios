@@ -15,12 +15,11 @@ class AuthAlamofire: TokenHandling {
         session = Session(eventMonitors: monitors)
     }
     
-    func sendVerificationCode(_ phone: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - sendVerificationCode() called userInput : %@ ", log: .default, type: .info, phone)
+    func sendVerificationCode(_ dto: VerificationCodeRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - sendVerificationCode() called userInput : %@ ", log: .default, type: .info, dto.phone)
         
         session
-            .request(AuthRouter.sendVerificationCode(phone: phone))
-            
+            .request(AuthRouter.sendVerificationCode(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -31,11 +30,11 @@ class AuthAlamofire: TokenHandling {
             }
     }
     
-    func verifyVerificationCode(_ phone: String, _ code: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - verifyVerificationCode() called with code : %@ ,, %@ ", log: .default, type: .info, phone, code)
+    func verifyVerificationCode(_ dto: VerificationRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - verifyVerificationCode() called with code : %@ ,, %@ ", log: .default, type: .info, dto.phone, dto.code)
         
         session
-            .request(AuthRouter.verifyVerificationCode(phone: phone, code: code))
+            .request(AuthRouter.verifyVerificationCode(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -46,11 +45,11 @@ class AuthAlamofire: TokenHandling {
             }
     }
     
-    func regist(_ username: String, _ name: String, _ password: String, _ phone: String, _ code: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, username, password, name, phone, code)
+    func signup(_ dto: SignUpRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.username, dto.password, dto.name, dto.phone, dto.code)
         
         session
-            .request(AuthRouter.regist(username: username, name: name, password: password, phone: phone, code: code))
+            .request(AuthRouter.regist(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -61,11 +60,11 @@ class AuthAlamofire: TokenHandling {
             }
     }
     
-    func checkDuplicateUserName(_ username: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func checkDuplicateUserName(_ dto: DuplicateCheckRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - checkDuplicateUserName() called ", log: .default, type: .info)
         
         session
-            .request(AuthRouter.checkDuplicateUserName(username: username))
+            .request(AuthRouter.checkDuplicateUserName(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -75,32 +74,32 @@ class AuthAlamofire: TokenHandling {
                 }
             }
     }
-
-    func login(_ username: String, _ password: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - login() called userInput : %@ ,, %@", log: .default, type: .info, username, password)
+    
+    func login(_ dto: LoginRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - login() called userInput : %@ ,, %@", log: .default, type: .info, dto.username, dto.password)
         
         session
-            .request(AuthRouter.login(username: username, password: password))
+            .request(AuthRouter.login(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):
-                    self.extractAndStoreToken(from: response) // 토큰 저장
+                    self.extractAndStoreToken(from: response)
                     completion(.success(data))
                 case let .failure(error):
                     completion(.failure(error))
                 }
             }
     }
-
-    func linkAccountToExistingOAuth(_ password: String, _ phone: String, _ code: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - linkExistingAccountToOAuth() called userInput : %@ ,, %@ ,, %@", log: .default, type: .info, password, phone, code)
+    
+    func linkAccountToExistingOAuth(_ dto: LinkAccountToOAuthRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - linkExistingAccountToOAuth() called userInput : %@ ,, %@ ,, %@", log: .default, type: .info, dto.password, dto.phone, dto.code)
         
         session
-            .request(AuthRouter.linkAccountToExistingOAuth(password: password, phone: phone, code: code))
+            .request(AuthRouter.linkAccountToExistingOAuth(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):
-                    self.extractAndStoreToken(from: response) // 토큰 저장
+                    self.extractAndStoreToken(from: response)
                     completion(.success(data))
                 case let .failure(error):
                     completion(.failure(error))
