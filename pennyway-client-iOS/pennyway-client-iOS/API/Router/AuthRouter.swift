@@ -32,7 +32,7 @@ enum AuthRouter: URLRequestConvertible {
         case .verifyVerificationCode:
             return "v1/auth/phone/verification"
         case .checkDuplicateUserName:
-            return "v1/duplication/username"
+            return "v1/duplicate/username"
         case .login:
             return "v1/auth/sign-in"
         }

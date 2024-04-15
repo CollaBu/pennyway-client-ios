@@ -30,20 +30,15 @@ struct SignUpView: View {
             CustomBottomButton(action: {
                 if formViewModel.isFormValid {
                     viewModel.continueButtonTapped()
-                    print(formViewModel.isFormValid)
                     formViewModel.checkDuplicateUserNameAPI()
                     
                     if isOAuthRegistration {
                         OAuthRegistrationManager.shared.name = formViewModel.name
                         OAuthRegistrationManager.shared.username = formViewModel.id
                         OAuthRegistrationManager.shared.password = formViewModel.password
-                        
-                        if !isExistUser {
-                            oauthRegistViewModel.oauthRegistAPI()
-                        }
                     } else {
                         RegistrationManager.shared.name = formViewModel.name
-                        RegistrationManager.shared.id = formViewModel.id
+                        RegistrationManager.shared.username = formViewModel.id
                         RegistrationManager.shared.password = formViewModel.password
                         RegistrationManager.shared.performRegistration()
                     }
@@ -53,7 +48,7 @@ struct SignUpView: View {
             }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
                 .padding(.bottom, 34)
                 
-            NavigationLink(destination: TermsAndConditionsView(viewModel: viewModel), tag: 3, selection: $viewModel.selectedText) {
+            NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
                 EmptyView()
             }
         }
@@ -68,6 +63,14 @@ struct SignUpView: View {
                     
                 }.offset(x: -10)
             }
+        }
+    }
+
+    @ViewBuilder
+    private func destinationView() -> some View {
+        if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
+        } else {
+            TermsAndConditionsView(viewModel: viewModel)
         }
     }
 }
