@@ -43,7 +43,6 @@
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
 		4A8571342BC650FA0082CE47 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571322BC650FA0082CE47 /* Constants.swift */; };
 		4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */; };
-		4A85713E2BC700FB0082CE47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A85713D2BC700FB0082CE47 /* GoogleService-Info.plist */; };
 		4A8571402BC701050082CE47 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A85713F2BC701050082CE47 /* Secrets.xcconfig */; };
 		4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */; };
 		4A8571442BC7C5EB0082CE47 /* OAuthRegistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthRegistViewModel.swift */; };
@@ -196,6 +195,55 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4A0FFBE32BCD9EDA00EFEC56 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				D86B43852BC7CF1100143C12 /* GoogleService-Info.plist */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		4A0FFBE42BCD9F2200EFEC56 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				4A0FFBE62BCD9F5D00EFEC56 /* AuthDomain */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		4A0FFBE52BCD9F5500EFEC56 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		4A0FFBE62BCD9F5D00EFEC56 /* AuthDomain */ = {
+			isa = PBXGroup;
+			children = (
+				4A0FFBE82BCD9F6D00EFEC56 /* Alamofire */,
+				4A0FFBE72BCD9F6700EFEC56 /* Router */,
+				4A0FFBE52BCD9F5500EFEC56 /* DTO */,
+			);
+			path = AuthDomain;
+			sourceTree = "<group>";
+		};
+		4A0FFBE72BCD9F6700EFEC56 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4A0FFBE82BCD9F6D00EFEC56 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
 		4A1179812BA86D6C00A9CF4C /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +335,7 @@
 				4A762AEA2B99A16B001C1188 /* Products */,
 				41951791426F03880A100F2C /* Pods */,
 				C2F5B21500B89F9F684EBF8B /* Frameworks */,
+				4A0FFBE32BCD9EDA00EFEC56 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -367,6 +416,7 @@
 		4A762AFD2B99A1D1001C1188 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				4A0FFBE42BCD9F2200EFEC56 /* Domain */,
 				4AB5AB532BB4AA2A00D2C9EA /* Logger */,
 				4AB5AB482BB4A35F00D2C9EA /* Router */,
 				4AB5AB452BB4A1E500D2C9EA /* AlamofireDomains */,
@@ -421,7 +471,6 @@
 		4AB5AB452BB4A1E500D2C9EA /* AlamofireDomains */ = {
 			isa = PBXGroup;
 			children = (
-				4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */,
 				4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */,
 			);
 			path = AlamofireDomains;
@@ -430,7 +479,6 @@
 		4AB5AB482BB4A35F00D2C9EA /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */,
 				4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */,
 			);
 			path = Router;
