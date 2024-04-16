@@ -67,6 +67,7 @@ class OAuthAlamofire: TokenHandling {
             .response { response in
                 switch response.result {
                 case let .success(data):
+                    self.extractAndStoreToken(from: response)
                     completion(.success(data))
                 case let .failure(error):
                     completion(.failure(error))

@@ -1,9 +1,3 @@
-//
-//  URLRequestExtension.swift
-//  pennyway-client-iOS
-//
-//  Created by 최희진 on 3/28/24.
-//
 
 import Alamofire
 import Foundation
