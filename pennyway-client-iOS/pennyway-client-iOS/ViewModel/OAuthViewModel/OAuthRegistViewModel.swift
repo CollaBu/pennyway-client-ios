@@ -3,7 +3,10 @@ import Foundation
 
 class OAuthRegistViewModel: ObservableObject {
     func oauthRegistAPI() { // 소셜 회원가입
-        OAuthAlamofire.shared.oauthRegist(KeychainHelper.loadIDToken() ?? "", OAuthRegistrationManager.shared.name, OAuthRegistrationManager.shared.username, OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", OAuthRegistrationManager.shared.code, OAuthRegistrationManager.shared.provider) { result in
+        
+        let linkOAuthToAccountDTO = OAuthSignUpRequestDTO(idToken: KeychainHelper.loadIDToken() ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
+        
+        OAuthAlamofire.shared.oauthSignUp(linkOAuthToAccountDTO) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

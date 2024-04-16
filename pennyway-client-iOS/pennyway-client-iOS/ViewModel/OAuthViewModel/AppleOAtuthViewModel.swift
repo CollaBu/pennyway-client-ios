@@ -9,7 +9,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
     
-    var oauthID = ""
+    var oauthId = ""
     var token = ""
     
     func signIn() {
@@ -40,14 +40,15 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             let fullName = appleIDCredential.fullName
             let idToken = appleIDCredential.identityToken!
             
-            oauthID = userIdentifier
-            token = String(data: idToken, encoding: .utf8) ?? ""
+            oauthId = userIdentifier
+            KeychainHelper.saveIDToken(accessToken: String(data: idToken, encoding: .utf8) ?? "")
           
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            //            print("token : \(String(describing: tokeStr!))")
             
-            OAuthAlamofire.shared.oauthLogin(oauthID, token, OAuthRegistrationManager.shared.provider) { result in
+            let oauthLoginDTO = OAuthLoginRequestDTO(oauthId: oauthId, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
+                   
+            OAuthAlamofire.shared.oauthLogin(oauthLoginDTO) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {

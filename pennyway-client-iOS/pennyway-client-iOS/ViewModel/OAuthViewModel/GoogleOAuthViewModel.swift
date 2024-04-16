@@ -7,8 +7,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
     
-    var oauthID = ""
-    var token = ""
+    var oauthId = ""
     
     func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
@@ -17,9 +16,9 @@ class GoogleOAuthViewModel: ObservableObject {
                 return
             }
             let givenName = user.profile?.givenName
-            oauthID = user.userID ?? ""
+            oauthId = user.userID ?? ""
             self.givenName = givenName ?? ""
-            token = user.idToken?.tokenString ?? ""
+            KeychainHelper.saveIDToken(accessToken: user.idToken?.tokenString ?? "")
             
             oauthLoginAPI()
         } else {
@@ -28,7 +27,10 @@ class GoogleOAuthViewModel: ObservableObject {
     }
     
     func oauthLoginAPI() {
-        OAuthAlamofire.shared.oauthLogin(oauthID, token, OAuthRegistrationManager.shared.provider) { result in
+        
+        let oauthLoginDTO = OAuthLoginRequestDTO(oauthId: oauthId, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
+        
+        OAuthAlamofire.shared.oauthLogin(oauthLoginDTO) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
