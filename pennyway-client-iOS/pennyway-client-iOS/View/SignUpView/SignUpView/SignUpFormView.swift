@@ -16,14 +16,12 @@ struct SignUpFormView: View {
                 Spacer().frame(height: 32)
                 
                 VStack(alignment: .leading, spacing: 21) {
-
                     if !isOAuthRegistration && (!isExistUser && !isOAuthUser) {
                         allInputFields()
                     } else if isOAuthRegistration && !isExistUser {
                         nameAndIDFields()
                     } else if !isOAuthRegistration && isOAuthUser {
                         passwordFields()
-
                     }
                 }
             }

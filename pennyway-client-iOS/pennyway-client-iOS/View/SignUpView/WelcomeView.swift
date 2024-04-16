@@ -14,7 +14,7 @@ struct WelcomeView: View {
                         .padding(.top, 71)
                         .padding(.horizontal, 80)
                         .padding(.bottom, 20)
-                    
+
                     Text("\(name ?? "")님 환영합니다.")
                         .font(.pretendard(.semibold, size: 24))
                         .multilineTextAlignment(.center)
