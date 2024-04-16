@@ -82,6 +82,7 @@
 		D87CB0D62BC5B56600BD882A /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D52BC5B56600BD882A /* ResetPwFormView.swift */; };
 		D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E182BCEBEE700922894 /* DynamicFontSize.swift */; };
 		D8880E1E2BCEC8DD00922894 /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */; };
+		D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */; };
 		D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */; };
 		D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */; };
 		D888329C2BBC612600F49B27 /* LoginFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329B2BBC612600F49B27 /* LoginFormView.swift */; };
@@ -166,6 +167,7 @@
 		D87CB0D52BC5B56600BD882A /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
 		D8880E182BCEBEE700922894 /* DynamicFontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFontSize.swift; sourceTree = "<group>"; };
 		D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
+		D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAutocapitalization.swift; sourceTree = "<group>"; };
 		D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
 		D888329B2BBC612600F49B27 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */,
 				4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */,
 				D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */,
+				D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A762B052B99A259001C1188 /* PhoneVerificationViewModel.swift in Sources */,
+				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D850DF8F2BAAD70E004FBF67 /* (null) in Sources */,
 				D8157E662BBEF2740083844B /* OauthButtonView.swift in Sources */,
