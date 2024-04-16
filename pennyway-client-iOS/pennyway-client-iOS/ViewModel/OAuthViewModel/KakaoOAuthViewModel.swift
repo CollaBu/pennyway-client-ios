@@ -7,7 +7,7 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
 
-    var oauthId = ""
+    var oauthID = ""
 
     func checkUserInfo() {
         if AuthApi.hasToken() {
@@ -19,9 +19,9 @@ class KakaoOAuthViewModel: ObservableObject {
                 }
                 if let user = user {
                     self.givenName = user.kakaoAccount?.profile?.nickname ?? ""
-                    self.oauthId = String(user.id ?? 0)
+                    self.oauthID = String(user.id ?? 0)
 
-                    print(self.oauthId)
+                    print(self.oauthID)
                     self.oauthLoginAPI()
                 }
             }
@@ -32,10 +32,8 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginAPI() {
-        
-        
-        let oauthLoginDTO = OAuthLoginRequestDTO(oauthId: oauthId, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
-        
+        let oauthLoginDTO = OAuthLoginRequestDTO(oauthID: oauthID, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
+
         OAuthAlamofire.shared.oauthLogin(oauthLoginDTO) { result in
             switch result {
             case let .success(data):

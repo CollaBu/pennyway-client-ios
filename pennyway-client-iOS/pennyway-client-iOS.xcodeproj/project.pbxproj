@@ -34,6 +34,9 @@
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDTO.swift */; };
 		4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038F2BCEA4D700AEE04E /* LinkOAuthToAccountRequestDTO.swift */; };
 		4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703912BCEA55500AEE04E /* OAuthSignUpRequestDTO.swift */; };
+		4A4703942BCEB21500AEE04E /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703932BCEB21500AEE04E /* DomainError.swift */; };
+		4A4703962BCEB2E800AEE04E /* ErrorCodeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703952BCEB2E800AEE04E /* ErrorCodeMapper.swift */; };
+		4A4703992BCED84F00AEE04E /* VerificationCodeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703982BCED84F00AEE04E /* VerificationCodeResponseDTO.swift */; };
 		4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56712BACA2250071D00E /* PhoneVerificationView.swift */; };
 		4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56732BACA4000071D00E /* NavigationCountView.swift */; };
 		4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */; };
@@ -53,7 +56,7 @@
 		4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* TokenHandling.swift */; };
 		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
-		4A8571342BC650FA0082CE47 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571322BC650FA0082CE47 /* Constants.swift */; };
+		4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571322BC650FA0082CE47 /* BaseUrl.swift */; };
 		4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */; };
 		4A8571402BC701050082CE47 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A85713F2BC701050082CE47 /* Secrets.xcconfig */; };
 		4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */; };
@@ -130,6 +133,9 @@
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDTO.swift; sourceTree = "<group>"; };
 		4A47038F2BCEA4D700AEE04E /* LinkOAuthToAccountRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOAuthToAccountRequestDTO.swift; sourceTree = "<group>"; };
 		4A4703912BCEA55500AEE04E /* OAuthSignUpRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpRequestDTO.swift; sourceTree = "<group>"; };
+		4A4703932BCEB21500AEE04E /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
+		4A4703952BCEB2E800AEE04E /* ErrorCodeMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodeMapper.swift; sourceTree = "<group>"; };
+		4A4703982BCED84F00AEE04E /* VerificationCodeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeResponseDTO.swift; sourceTree = "<group>"; };
 		4A4A56712BACA2250071D00E /* PhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationView.swift; sourceTree = "<group>"; };
 		4A4A56732BACA4000071D00E /* NavigationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCountView.swift; sourceTree = "<group>"; };
 		4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
@@ -151,7 +157,7 @@
 		4A762B062B99A262001C1188 /* TokenHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandling.swift; sourceTree = "<group>"; };
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
-		4A8571322BC650FA0082CE47 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4A8571322BC650FA0082CE47 /* BaseUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUrl.swift; sourceTree = "<group>"; };
 		4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
 		4A85713D2BC700FB0082CE47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A85713F2BC701050082CE47 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = "pennyway-client-iOS/Secrets.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -239,6 +245,7 @@
 		4A0FFBE52BCD9F5500EFEC56 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				4A4703972BCED80000AEE04E /* Response */,
 				4A0FFBED2BCDA02900EFEC56 /* Request */,
 			);
 			path = DTO;
@@ -352,6 +359,14 @@
 				4A1179A32BA9572F00A9CF4C /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4A4703972BCED80000AEE04E /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				4A4703982BCED84F00AEE04E /* VerificationCodeResponseDTO.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		4A4A566D2BAC96A10071D00E /* PhoneVerificationView */ = {
@@ -530,7 +545,9 @@
 		4A8571332BC650FA0082CE47 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				4A8571322BC650FA0082CE47 /* Constants.swift */,
+				4A8571322BC650FA0082CE47 /* BaseUrl.swift */,
+				4A4703932BCEB21500AEE04E /* DomainError.swift */,
+				4A4703952BCEB2E800AEE04E /* ErrorCodeMapper.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -754,7 +771,7 @@
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
-				4A8571342BC650FA0082CE47 /* Constants.swift in Sources */,
+				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
 				4A762B032B99A246001C1188 /* model_ex_file.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				D888329E2BBC613E00F49B27 /* LoginFormViewModel.swift in Sources */,
@@ -779,6 +796,7 @@
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
+				4A4703942BCEB21500AEE04E /* DomainError.swift in Sources */,
 				D8157E7C2BC269350083844B /* FindIDView.swift in Sources */,
 				D87CB0D62BC5B56600BD882A /* ResetPwFormView.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
@@ -789,6 +807,7 @@
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDTO.swift in Sources */,
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
 				D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */,
+				4A4703962BCEB2E800AEE04E /* ErrorCodeMapper.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDTO.swift in Sources */,
 				4A762B052B99A259001C1188 /* PhoneVerificationViewModel.swift in Sources */,
@@ -817,6 +836,7 @@
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
 				4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDTO.swift in Sources */,
 				D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */,
+				4A4703992BCED84F00AEE04E /* VerificationCodeResponseDTO.swift in Sources */,
 				D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */,
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,

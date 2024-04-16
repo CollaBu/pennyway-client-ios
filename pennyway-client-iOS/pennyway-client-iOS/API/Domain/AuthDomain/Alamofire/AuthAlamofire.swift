@@ -20,12 +20,19 @@ class AuthAlamofire: TokenHandling {
         
         session
             .request(AuthRouter.sendVerificationCode(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(error))
+                    if let statusCode = response.response?.statusCode,
+                       let responseError = ErrorCodeMapper.mapError(statusCode)
+                    {
+                        completion(.failure(responseError))
+                    } else {
+                        completion(.failure(error))
+                    }
                 }
             }
     }

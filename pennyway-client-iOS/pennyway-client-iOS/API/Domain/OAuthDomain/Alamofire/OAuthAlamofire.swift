@@ -15,7 +15,7 @@ class OAuthAlamofire: TokenHandling {
     }
     
     func oauthLogin(_ dto: OAuthLoginRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@", log: .default, type: .info, dto.oauthId, dto.idToken, dto.provider)
+        os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@", log: .default, type: .info, dto.oauthID, dto.idToken, dto.provider)
         
         session
             .request(OAuthRouter.oauthLogin(dto: dto))
@@ -75,7 +75,7 @@ class OAuthAlamofire: TokenHandling {
             }
     }
 
-    func oauthSignUp(_ dto: OAuthSignUpRequestDTO,completion: @escaping (Result<Data?, Error>) -> Void) {
+    func oauthSignUp(_ dto: OAuthSignUpRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - oauthRegist() called : %@ ,, %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.idToken, dto.name, dto.username, dto.phone, dto.code, dto.provider)
         
         session

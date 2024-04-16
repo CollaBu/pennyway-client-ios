@@ -1,16 +1,16 @@
 
 
 public struct OAuthLoginRequestDTO: Encodable {
-    let oauthId: String
+    let oauthID: String
     let idToken: String
     let provider: String
 
     public init(
-        oauthId: String,
+        oauthID: String,
         idToken: String,
         provider: String
     ) {
-        self.oauthId = oauthId
+        self.oauthID = oauthID
         self.idToken = idToken
         self.provider = provider
     }

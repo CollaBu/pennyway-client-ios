@@ -61,8 +61,7 @@ enum OAuthRouter: URLRequestConvertible {
         case let .oauthVerifyVerificationCode(dto):          
             let queryParameters = [URLQueryItem(name: "provider", value: dto.provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-            
-        case  let .linkOAuthWithNormalAccount(dto):
+        case let .linkOAuthWithNormalAccount(dto):
             let queryParameters = [URLQueryItem(name: "provider", value: dto.provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
         case let .oauthSendVerificationCode(dto):
@@ -71,7 +70,6 @@ enum OAuthRouter: URLRequestConvertible {
         case let .oauthSignUp(dto):
             let queryParameters = [URLQueryItem(name: "provider", value: dto.provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-            
         }
         return request
     }
