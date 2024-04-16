@@ -57,7 +57,6 @@ struct SignUpFormView: View {
                             if formViewModel.showErrorPassword {
                                 Text("적어도 하나 이상의 소문자 알파벳과 숫자를 포함하여\n8~16자의 비밀번호를 입력해주세요")
                                     .padding(.leading, 20)
-                                
                                     .font(.pretendard(.medium, size: 12))
                                     .platformTextColor(color: Color("Red03"))
                             }

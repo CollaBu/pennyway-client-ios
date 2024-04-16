@@ -28,7 +28,7 @@ struct PhoneVerificationView: View {
                     CustomBottomButton(action: {
                         continueButtonAction()
                     }, label: "계속하기", isFormValid: $phoneVerificationViewModel.isFormValid)
-                        .padding(.bottom, 34)
+                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
                     
                     NavigationLink(destination: destinationView(), tag: 2, selection: $viewModel.selectedText) {
                         EmptyView()
@@ -40,6 +40,7 @@ struct PhoneVerificationView: View {
                     ErrorCodePopUpView(showingPopUp: $showingPopUp)
                 }
             }
+            .edgesIgnoringSafeArea(.bottom)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -75,7 +76,6 @@ struct PhoneVerificationView: View {
             if isOAuthRegistration {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
                 OAuthRegistrationManager.shared.code = phoneVerificationViewModel.verificationCode
-                
                 if OAuthRegistrationManager.shared.isExistUser {
                     oauthAccountLinkingViewModel.linkOAuthWithNormalAccountAPI()
                 }
@@ -90,8 +90,10 @@ struct PhoneVerificationView: View {
     
     @ViewBuilder
     private func destinationView() -> some View {
-        if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser {
-            // OAuthAccountLinkingView(signUpViewModel: viewModel)
+        if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
+            OAuthAccountLinkingView(signUpViewModel: viewModel)
+          
+        } else if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser {
         } else {
             SignUpView(viewModel: viewModel)
         }
