@@ -15,8 +15,8 @@ class AuthAlamofire: TokenHandling {
         session = Session(eventMonitors: monitors)
     }
     
-    func sendVerificationCode(_ dto: VerificationCodeRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - sendVerificationCode() called userInput : %@ ", log: .default, type: .info, dto.phone)
+    func receiveVerificationCode(_ dto: VerificationCodeRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - receiveVerificationCode() called userInput : %@ ", log: .default, type: .info, dto.phone)
         
         session
             .request(AuthRouter.sendVerificationCode(dto: dto))

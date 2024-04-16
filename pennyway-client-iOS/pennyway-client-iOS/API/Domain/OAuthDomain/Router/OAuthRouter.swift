@@ -4,14 +4,14 @@ import Foundation
 
 enum OAuthRouter: URLRequestConvertible {
     case oauthLogin(dto: OAuthLoginRequestDTO)
-    case oauthSendVerificationCode(dto: OAuthVerificationCodeRequestDTO)
+    case oauthReceiveVerificationCode(dto: OAuthVerificationCodeRequestDTO)
     case oauthVerifyVerificationCode(dto: OAuthVerificationRequestDTO)
     case linkOAuthWithNormalAccount(dto: LinkOAuthToAccountRequestDTO)
     case oauthSignUp(dto: OAuthSignUpRequestDTO)
     
     var method: HTTPMethod {
         switch self {
-        case .oauthLogin, .oauthSendVerificationCode, .oauthVerifyVerificationCode, .linkOAuthWithNormalAccount, .oauthSignUp:
+        case .oauthLogin, .oauthReceiveVerificationCode, .oauthVerifyVerificationCode, .linkOAuthWithNormalAccount, .oauthSignUp:
             return .post
         }
     }
@@ -24,8 +24,8 @@ enum OAuthRouter: URLRequestConvertible {
         switch self {
         case .oauthLogin:
             return "v1/auth/oauth/sign-in"
-        case .oauthSendVerificationCode:
-            return "v1/auth/oauth/phone"
+        case .oauthReceiveVerificationCode:
+            return "v1/phone"
         case .oauthVerifyVerificationCode:
             return "v1/auth/oauth/phone/verification"
         case .linkOAuthWithNormalAccount:
@@ -39,7 +39,7 @@ enum OAuthRouter: URLRequestConvertible {
         switch self {
         case let .oauthLogin(dto):
             return try? dto.asDictionary()
-        case let .oauthSendVerificationCode(dto):
+        case let .oauthReceiveVerificationCode(dto):
             return try? dto.asDictionary()
         case let .oauthVerifyVerificationCode(dto):
             return try? dto.asDictionary()
@@ -64,8 +64,8 @@ enum OAuthRouter: URLRequestConvertible {
         case let .linkOAuthWithNormalAccount(dto):
             let queryParameters = [URLQueryItem(name: "provider", value: dto.provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-        case let .oauthSendVerificationCode(dto):
-            let queryParameters = [URLQueryItem(name: "provider", value: dto.provider)]
+        case let .oauthReceiveVerificationCode(dto):
+            let queryParameters = [URLQueryItem(name: "provider", value: dto.provider), URLQueryItem(name: "type", value: "oauth")]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
         case let .oauthSignUp(dto):
             let queryParameters = [URLQueryItem(name: "provider", value: dto.provider)]

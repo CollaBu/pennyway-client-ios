@@ -5,7 +5,7 @@ import Foundation
 
 enum AuthRouter: URLRequestConvertible {
     case signup(dto: SignUpRequestDTO)
-    case sendVerificationCode(dto: VerificationCodeRequestDTO)
+    case receiveVerificationCode(dto: VerificationCodeRequestDTO)
     case verifyVerificationCode(dto: VerificationRequestDTO)
     case checkDuplicateUserName(dto: DuplicateCheckRequestDTO)
     case login(dto: LoginRequestDTO)
@@ -13,7 +13,7 @@ enum AuthRouter: URLRequestConvertible {
 
     var method: HTTPMethod {
         switch self {
-        case .signup, .sendVerificationCode, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
+        case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
             return .post
         case .checkDuplicateUserName:
             return .get
@@ -28,8 +28,8 @@ enum AuthRouter: URLRequestConvertible {
         switch self {
         case .signup:
             return "v1/auth/sign-up"
-        case .sendVerificationCode:
-            return "v1/auth/phone"
+        case .receiveVerificationCode:
+            return "v1/phone"
         case .verifyVerificationCode:
             return "v1/auth/phone/verification"
         case .checkDuplicateUserName:
@@ -45,7 +45,7 @@ enum AuthRouter: URLRequestConvertible {
         switch self {
         case let .signup(dto):
             return try? dto.asDictionary()
-        case let .sendVerificationCode(dto):
+        case let .receiveVerificationCode(dto):
             return try? dto.asDictionary()
         case let .verifyVerificationCode(dto):
             return try? dto.asDictionary()
@@ -63,9 +63,13 @@ enum AuthRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .signup, .sendVerificationCode, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
+        case .signup, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
 
+        case .receiveVerificationCode:
+            let queryParameters = [URLQueryItem(name: "type", value: "general")]
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
+            
         case let .checkDuplicateUserName(dto):
             let queryParameters = [URLQueryItem(name: "username", value: dto.username)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)

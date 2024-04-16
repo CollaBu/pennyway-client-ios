@@ -29,11 +29,11 @@ class OAuthAlamofire: TokenHandling {
             }
     }
 
-    func oauthSendVerificationCode(_ dto: OAuthVerificationCodeRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - oauthSendVerificationCode() called : %@ ,, %@", log: .default, type: .info, dto.phone, dto.provider)
+    func oauthReceiveVerificationCode(_ dto: OAuthVerificationCodeRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("OAuthAlamofire - oauthReceiveVerificationCode() called : %@ ,, %@", log: .default, type: .info, dto.phone, dto.provider)
         
         session
-            .request(OAuthRouter.oauthSendVerificationCode(dto: dto))
+            .request(OAuthRouter.oauthReceiveVerificationCode(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):

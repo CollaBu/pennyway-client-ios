@@ -48,7 +48,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     func requestVerificationCodeAPI(completion: @escaping () -> Void) {
         let verificationCodeDTO = VerificationCodeRequestDTO(phone: formattedPhoneNumber)
-        AuthAlamofire.shared.sendVerificationCode(verificationCodeDTO) { result in
+        AuthAlamofire.shared.receiveVerificationCode(verificationCodeDTO) { result in
             self.handleAPIResult(result: result, completion: completion)
         }
     }
@@ -70,7 +70,7 @@ class PhoneVerificationViewModel: ObservableObject {
         let oauthVerificationCodeDTO = OAuthVerificationCodeRequestDTO(phone: formattedPhoneNumber, provider: OAuthRegistrationManager.shared.provider)
 
         if !showErrorPhoneNumberFormat {
-            OAuthAlamofire.shared.oauthSendVerificationCode(oauthVerificationCodeDTO) { result in
+            OAuthAlamofire.shared.oauthReceiveVerificationCode(oauthVerificationCodeDTO) { result in
                 self.handleAPIResult(result: result, completion: completion)
             }
         }
