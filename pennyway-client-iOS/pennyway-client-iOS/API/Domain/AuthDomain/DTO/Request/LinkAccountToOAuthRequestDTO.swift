@@ -1,12 +1,10 @@
 
-import Foundation
-
 
 public struct LinkAccountToOAuthRequestDTO: Encodable {
     let password: String
     let phone: String
     let code: String
-    
+
     public init(
         password: String,
         phone: String,

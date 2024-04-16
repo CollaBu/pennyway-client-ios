@@ -49,7 +49,7 @@ class AuthAlamofire: TokenHandling {
         os_log("AuthAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.username, dto.password, dto.name, dto.phone, dto.code)
         
         session
-            .request(AuthRouter.regist(dto: dto))
+            .request(AuthRouter.signup(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):

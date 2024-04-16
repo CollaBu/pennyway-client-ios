@@ -14,6 +14,7 @@
 		4A0FFBF52BCDA16B00EFEC56 /* DuplicateCheckRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF42BCDA16B00EFEC56 /* DuplicateCheckRequestDTO.swift */; };
 		4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF62BCDA18C00EFEC56 /* LoginRequestDTO.swift */; };
 		4A0FFBF92BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF82BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDTO.swift */; };
+		4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBFA2BCDA74000EFEC56 /* EncodableExtension.swift */; };
 		4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */; };
 		4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */; };
 		4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A12BA9572F00A9CF4C /* Pretendard-ExtraBold.otf */; };
@@ -103,6 +104,7 @@
 		4A0FFBF42BCDA16B00EFEC56 /* DuplicateCheckRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateCheckRequestDTO.swift; sourceTree = "<group>"; };
 		4A0FFBF62BCDA18C00EFEC56 /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
 		4A0FFBF82BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAccountToOAuthRequestDTO.swift; sourceTree = "<group>"; };
+		4A0FFBFA2BCDA74000EFEC56 /* EncodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtension.swift; sourceTree = "<group>"; };
 		4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
 		4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		4A1179A12BA9572F00A9CF4C /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
 				D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */,
 				D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */,
+				4A0FFBFA2BCDA74000EFEC56 /* EncodableExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
 				4A0FFBF92BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDTO.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
+				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */,
 				4AB5AB5F2BB5EACD00D2C9EA /* WelcomeView.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandling.swift in Sources */,

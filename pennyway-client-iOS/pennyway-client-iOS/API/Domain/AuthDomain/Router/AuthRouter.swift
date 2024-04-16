@@ -4,16 +4,16 @@ import Alamofire
 import Foundation
 
 enum AuthRouter: URLRequestConvertible {
-    case regist(username: String, name: String, password: String, phone: String, code: String)
-    case sendVerificationCode(phone: String)
-    case verifyVerificationCode(phone: String, code: String)
-    case checkDuplicateUserName(username: String)
-    case login(username: String, password: String)
-    case linkAccountToExistingOAuth(password: String, phone: String, code: String)
+    case signup(dto: SignUpRequestDTO)
+    case sendVerificationCode(dto: VerificationCodeRequestDTO)
+    case verifyVerificationCode(dto: VerificationRequestDTO)
+    case checkDuplicateUserName(dto: DuplicateCheckRequestDTO)
+    case login(dto: LoginRequestDTO)
+    case linkAccountToExistingOAuth(dto: LinkAccountToOAuthRequestDTO)
 
     var method: HTTPMethod {
         switch self {
-        case .regist, .sendVerificationCode, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
+        case .signup, .sendVerificationCode, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
             return .post
         case .checkDuplicateUserName:
             return .get
@@ -26,7 +26,7 @@ enum AuthRouter: URLRequestConvertible {
 
     var path: String {
         switch self {
-        case .regist:
+        case .signup:
             return "v1/auth/sign-up"
         case .sendVerificationCode:
             return "v1/auth/phone"
@@ -41,20 +41,20 @@ enum AuthRouter: URLRequestConvertible {
         }
     }
 
-    var parameters: Parameters {
+    var parameters: Parameters? {
         switch self {
-        case let .regist(username, name, password, phone, code):
-            return ["username": username, "name": name, "password": password, "phone": phone, "code": code]
-        case let .sendVerificationCode(phone):
-            return ["phone": phone]
-        case let .verifyVerificationCode(phone, code):
-            return ["phone": phone, "code": code]
-        case .checkDuplicateUserName:
-            return [:]
-        case let .login(username, password):
-            return ["username": username, "password": password]
-        case let .linkAccountToExistingOAuth(password, phone, code):
-            return ["password": password, "phone": phone, "code": code]
+        case let .signup(dto):
+            return try? dto.asDictionary()
+        case let .sendVerificationCode(dto):
+            return try? dto.asDictionary()
+        case let .verifyVerificationCode(dto):
+            return try? dto.asDictionary()
+        case let .checkDuplicateUserName(dto):
+            return try? dto.asDictionary()
+        case let .login(dto):
+            return try? dto.asDictionary()
+        case let .linkAccountToExistingOAuth(dto):
+            return try? dto.asDictionary()
         }
     }
 
@@ -63,12 +63,12 @@ enum AuthRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .regist, .sendVerificationCode, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
+        case .signup, .sendVerificationCode, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
 
-        case let .checkDuplicateUserName(username):
-            let queryParameters = [URLQueryItem(name: "username", value: username)]
-            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
+        case let .checkDuplicateUserName(dto):
+            let queryParameters = [URLQueryItem(name: "username", value: dto.username)]
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
         }
         return request
     }

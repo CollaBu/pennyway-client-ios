@@ -8,7 +8,8 @@ class LoginFormViewModel: ObservableObject {
 
     func loginAPI() {
         if !isFormValid {
-            AuthAlamofire.shared.login(id, password) { result in
+            let loginDTO = LoginRequestDTO(username: id, password: password)
+            AuthAlamofire.shared.login(loginDTO) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {

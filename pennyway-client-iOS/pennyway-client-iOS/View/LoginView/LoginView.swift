@@ -7,20 +7,18 @@ struct LoginView: View {
     @State private var isActiveLink = false
 
     var body: some View {
-        NavigationAvailable {
-            VStack {
-                if isSplashShown {
-                    SplashView()
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                withAnimation {
-                                    isSplashShown = false
-                                }
+        VStack {
+            if isSplashShown {
+                SplashView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation {
+                                isSplashShown = false
                             }
                         }
-                } else {
-                    LoginFormView(viewModel: LoginFormViewModel())
-                }
+                    }
+            } else {
+                LoginFormView(viewModel: LoginFormViewModel())
             }
         }
     }
