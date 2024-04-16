@@ -4,8 +4,10 @@ struct TermsAndConditionsView: View {
     @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @State private var isAllAgreed = false
     @ObservedObject var viewModel: SignUpNavigationViewModel
-    // @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
-//    @StateObject var formViewModel = SignUpFormViewModel()
+    
+    @StateObject var oauthRegistViewModel = OAuthRegistViewModel()
+    
+    @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
 
     var body: some View {
         ScrollView {
@@ -30,8 +32,13 @@ struct TermsAndConditionsView: View {
             CustomBottomButton(action: {
                 if isAllAgreed {
                     viewModel.continueButtonTapped()
+                    
+                    if isOAuthRegistration {
+                        oauthRegistViewModel.oauthRegistAPI()
+                    } else {
+                        termsAndConditionsViewModel.requestRegistAPI()
+                    }
                 }
-                termsAndConditionsViewModel.requestRegistAPI()
             }, label: "계속하기", isFormValid: $isAllAgreed)
                 .padding(.bottom, 34)
             

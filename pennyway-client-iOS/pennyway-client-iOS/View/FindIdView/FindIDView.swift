@@ -89,17 +89,6 @@ struct FindIDView: View {
         .padding(.horizontal, 20)
         .padding(.bottom, 34)
     }
-    
-//    private func continueButtonAction() {
-//        phoneVerificationViewModel.requestVerifyVerificationCodeAPI {
-    ////            checkFormValid()
-//            showingPopUp = true
-//        }
-//    }
-    
-//    private func checkFormValid() {
-//        showingPopUp = true
-//    }
 }
 
 #Preview {
