@@ -46,7 +46,7 @@ class AuthAlamofire: TokenHandling {
     }
     
     func signup(_ dto: SignUpRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.username, dto.password, dto.name, dto.phone, dto.code)
+        os_log("AuthAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.username, dto.name, dto.phone, dto.code)
         
         session
             .request(AuthRouter.signup(dto: dto))
@@ -61,7 +61,7 @@ class AuthAlamofire: TokenHandling {
     }
     
     func checkDuplicateUserName(_ dto: DuplicateCheckRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - checkDuplicateUserName() called ", log: .default, type: .info)
+        os_log("AuthAlamofire - checkDuplicateUserName() called userInput: %@", log: .default, type: .info, dto.username)
         
         session
             .request(AuthRouter.checkDuplicateUserName(dto: dto))
@@ -76,7 +76,7 @@ class AuthAlamofire: TokenHandling {
     }
     
     func login(_ dto: LoginRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - login() called userInput : %@ ,, %@", log: .default, type: .info, dto.username, dto.password)
+        os_log("AuthAlamofire - login() called userInput : %@ ", log: .default, type: .info, dto.username)
         
         session
             .request(AuthRouter.login(dto: dto))
@@ -92,7 +92,7 @@ class AuthAlamofire: TokenHandling {
     }
     
     func linkAccountToExistingOAuth(_ dto: LinkAccountToOAuthRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - linkExistingAccountToOAuth() called userInput : %@ ,, %@ ,, %@", log: .default, type: .info, dto.password, dto.phone, dto.code)
+        os_log("AuthAlamofire - linkExistingAccountToOAuth() called userInput : %@ ,, %@", log: .default, type: .info, dto.phone, dto.code)
         
         session
             .request(AuthRouter.linkAccountToExistingOAuth(dto: dto))
