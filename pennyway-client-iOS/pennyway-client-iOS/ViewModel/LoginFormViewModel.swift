@@ -14,15 +14,15 @@ class LoginFormViewModel: ObservableObject {
                 case let .success(data):
                     if let responseData = data {
                         do {
-                            let signupResponse = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                            let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                             self.loginFailed = nil
-                            print(signupResponse)
+                            print(response)
                         } catch {
                             print("Error parsing response JSON: \(error)")
                         }
                     }
                 case let .failure(error):
-                    self.loginFailed = "code"//수정
+                    self.loginFailed = "code" // 수정
                     if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
                         print("Failed to verify: \(errorWithDomainErrorAndMessage)")
                     } else {

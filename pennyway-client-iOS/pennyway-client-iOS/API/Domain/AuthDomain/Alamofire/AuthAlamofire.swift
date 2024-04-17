@@ -70,6 +70,7 @@ class AuthAlamofire: TokenHandling {
         
         session
             .request(AuthRouter.signup(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -94,6 +95,7 @@ class AuthAlamofire: TokenHandling {
         
         session
             .request(AuthRouter.checkDuplicateUserName(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -118,6 +120,7 @@ class AuthAlamofire: TokenHandling {
         
         session
             .request(AuthRouter.login(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -143,6 +146,7 @@ class AuthAlamofire: TokenHandling {
         
         session
             .request(AuthRouter.linkAccountToOAuth(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):

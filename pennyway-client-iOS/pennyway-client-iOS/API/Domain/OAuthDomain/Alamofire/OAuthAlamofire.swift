@@ -19,6 +19,7 @@ class OAuthAlamofire: TokenHandling {
         
         session
             .request(OAuthRouter.oauthLogin(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -43,6 +44,7 @@ class OAuthAlamofire: TokenHandling {
         
         session
             .request(OAuthRouter.oauthReceiveVerificationCode(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -67,6 +69,7 @@ class OAuthAlamofire: TokenHandling {
         
         session
             .request(OAuthRouter.oauthVerifyVerificationCode(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -91,6 +94,7 @@ class OAuthAlamofire: TokenHandling {
         
         session
             .request(OAuthRouter.linkOAuthToAccount(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
@@ -116,6 +120,7 @@ class OAuthAlamofire: TokenHandling {
         
         session
             .request(OAuthRouter.oauthSignUp(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):

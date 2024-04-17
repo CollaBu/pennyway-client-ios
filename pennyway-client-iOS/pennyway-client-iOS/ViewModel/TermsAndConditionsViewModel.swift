@@ -9,8 +9,8 @@ class TermsAndConditionsViewModel: ObservableObject {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let signupResponse = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
-                        print(signupResponse)
+                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        print(response)
                     } catch {
                         print("Error parsing response JSON: \(error)")
                     }

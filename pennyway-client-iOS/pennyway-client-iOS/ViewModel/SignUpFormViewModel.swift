@@ -74,16 +74,9 @@ class SignUpFormViewModel: ObservableObject {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                        if let code = responseJSON?["code"] as? String {
-                            if code == "2000" {
-                                // 확인
-                                
-                            } else if code == "4000" {
-                                // 중복된 아이디
-                            }
-                        }
-                        print(responseJSON)
+                        let response = try JSONDecoder().decode(DuplicateCheckResponseDto.self, from: responseData)
+
+                        print(response)
                     } catch {
                         print("Error parsing response JSON: \(error)")
                     }

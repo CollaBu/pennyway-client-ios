@@ -1,5 +1,3 @@
-
-
 // MARK: - AuthResponseDto
 
 struct AuthResponseDto: Codable {
@@ -18,4 +16,3 @@ struct AuthResponseData: Codable {
 struct AuthUserData: Codable {
     let id: Int
 }
-

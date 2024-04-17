@@ -1,6 +1,4 @@
-
-
-// MARK: - VerificationResponseDTO
+// MARK: - VerificationResponseDto
 
 struct VerificationResponseDto: Codable {
     let code: String

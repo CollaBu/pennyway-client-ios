@@ -46,42 +46,17 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             
-            let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
-                   
-            OAuthAlamofire.shared.oauthLogin(oauthLoginDto) { result in
-                switch result {
-                case let .success(data):
-                    if let responseData = data {
-                        do {
-                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                            if let code = responseJSON?["code"] as? String {
-                                if code == "2000" {
-                                    if let userData = responseJSON?["data"] as? [String: Any],
-                                       let user = userData["user"] as? [String: Any],
-                                       let userID = user["id"] as? Int
-                                    {
-                                        if userID != -1 {
-                                            self.isOAuthExistUser = true
-                                        } else {
-                                            self.isOAuthExistUser = false
-                                            OAuthRegistrationManager.shared.isOAuthRegistration = true
-                                        }
-                                    }
-                                    
-                                } else if code == "4000" {
-                                    // 에러
-                                }
-                            }
-                            print(responseJSON)
-                        } catch {
-                            print("Error parsing response JSON: \(error)")
-                        }
-                    }
-                case let .failure(error):
-                    if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
-                        print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
+
+            viewModel.oauthLoginAPI { success, error in
+                if success {
+                    self.isOAuthExistUser = true
+                } else {
+                    if let error = error {
+                        self.errorMessage = error
                     } else {
-                        print("Failed to verify: \(error)")
+                        self.isOAuthExistUser = false
+                        OAuthRegistrationManager.shared.isOAuthRegistration = true
                     }
                 }
             }

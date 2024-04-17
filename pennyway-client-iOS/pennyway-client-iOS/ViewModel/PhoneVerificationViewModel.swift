@@ -91,8 +91,8 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .success(data):
             if let responseData = data {
                 do {
-                    let smsResponse = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
-                    print(smsResponse)
+                    let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
+                    print(response)
                 } catch {
                     print("Error decoding JSON: \(error)")
                 }
@@ -112,12 +112,12 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .success(data):
             if let responseData = data {
                 do {
-                    let smsResponse = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
+                    let response = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
                     showErrorVerificationCode = false
-                    let sms = smsResponse.data.sms
+                    let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
 
-                    print(smsResponse)
+                    print(response)
                 } catch {
                     print("Error decoding JSON: \(error)")
                 }
@@ -138,14 +138,14 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .success(data):
             if let responseData = data {
                 do {
-                    let smsResponse = try JSONDecoder().decode(OAuthVerificationResponseDto.self, from: responseData)
+                    let response = try JSONDecoder().decode(OAuthVerificationResponseDto.self, from: responseData)
 
                     showErrorVerificationCode = false
-                    let sms = smsResponse.data.sms
+                    let sms = response.data.sms
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
                     OAuthRegistrationManager.shared.username = sms.username
 
-                    print(smsResponse)
+                    print(response)
                 } catch {
                     print("Error decoding JSON: \(error)")
                 }
