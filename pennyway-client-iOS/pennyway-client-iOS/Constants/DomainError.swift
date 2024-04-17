@@ -1,5 +1,5 @@
-
 enum DomainError: Error {
+    case badRequest
     case unauthorized
     case forbidden
     case notFound

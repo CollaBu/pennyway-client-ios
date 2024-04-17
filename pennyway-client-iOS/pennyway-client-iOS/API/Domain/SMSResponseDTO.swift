@@ -1,15 +1,17 @@
+// MARK: - SMSResponseDTO
 
-
-import Foundation
-
-struct SMSDTO: Codable {
+struct SMSResponseDTO: Codable {
     let code: String
     let data: SMSData
 }
 
+// MARK: - SMSData
+
 struct SMSData: Codable {
     let sms: SMSDetails
 }
+
+// MARK: - SMSDetails
 
 struct SMSDetails: Codable {
     let to: String

@@ -19,7 +19,7 @@ class AuthAlamofire: TokenHandling {
         os_log("AuthAlamofire - receiveVerificationCode() called userInput : %@ ", log: .default, type: .info, dto.phone)
         
         session
-            .request(AuthRouter.sendVerificationCode(dto: dto))
+            .request(AuthRouter.receiveVerificationCode(dto: dto))
             .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
@@ -27,7 +27,9 @@ class AuthAlamofire: TokenHandling {
                     completion(.success(data))
                 case let .failure(error):
                     if let statusCode = response.response?.statusCode,
-                       let responseError = ErrorCodeMapper.mapError(statusCode)
+                       let responseData = response.data,
+                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDTO.self, from: responseData),
+                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
                     {
                         completion(.failure(responseError))
                     } else {
@@ -42,16 +44,27 @@ class AuthAlamofire: TokenHandling {
         
         session
             .request(AuthRouter.verifyVerificationCode(dto: dto))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case let .success(data):
+                    
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(error))
+                    if let responseData = response.data,
+                       let statusCode = response.response?.statusCode,
+                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDTO.self, from: responseData),
+                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
+                    {
+                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, message: responseError.message)
+                        completion(.failure(errorWithDomainErrorAndMessage))
+                    } else {
+                        completion(.failure(error))
+                    }
                 }
             }
     }
-    
+
     func signup(_ dto: SignUpRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - regist() called userInput : %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.username, dto.name, dto.phone, dto.code)
         

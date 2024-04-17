@@ -47,19 +47,21 @@ class PhoneVerificationViewModel: ObservableObject {
     // MARK: API
 
     func requestVerificationCodeAPI(completion: @escaping () -> Void) {
+        validatePhoneNumber()
+        requestVerificationCodeAction()
         let verificationCodeDTO = VerificationCodeRequestDTO(phone: formattedPhoneNumber)
-        AuthAlamofire.shared.receiveVerificationCode(verificationCodeDTO) { result in
-            self.handleAPIResult(result: result, completion: completion)
+
+        if !showErrorPhoneNumberFormat {
+            AuthAlamofire.shared.receiveVerificationCode(verificationCodeDTO) { result in
+                self.handleVerificationCodeAPIResult(result: result, completion: completion)
+            }
         }
     }
 
     func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        validatePhoneNumber()
-        requestVerificationCodeAction()
-
         let verificationDTO = VerificationRequestDTO(phone: formattedPhoneNumber, code: verificationCode)
         AuthAlamofire.shared.verifyVerificationCode(verificationDTO) { result in
-            self.handleAPIResult(result: result, completion: completion)
+            self.handleVerificationAPIResult(result: result, completion: completion)
         }
     }
 
@@ -71,7 +73,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
         if !showErrorPhoneNumberFormat {
             OAuthAlamofire.shared.oauthReceiveVerificationCode(oauthVerificationCodeDTO) { result in
-                self.handleAPIResult(result: result, completion: completion)
+                self.handleVerificationCodeAPIResult(result: result, completion: completion)
             }
         }
     }
@@ -80,49 +82,74 @@ class PhoneVerificationViewModel: ObservableObject {
         let oauthVerificationDTO = OAuthVerificationRequestDTO(phone: formattedPhoneNumber, code: verificationCode, provider: OAuthRegistrationManager.shared.provider)
 
         OAuthAlamofire.shared.oauthVerifyVerificationCode(oauthVerificationDTO) { result in
-            self.handleAPIResult(result: result, completion: completion)
+            self.handleOAuthVerificationAPIResult(result: result, completion: completion)
         }
     }
 
-    private func handleAPIResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+    private func handleVerificationCodeAPIResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
         switch result {
         case let .success(data):
             if let responseData = data {
                 do {
-                    let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-
-                    if let code = responseJSON?["code"] as? String {
-                        switch code {
-                        case "2000":
-                            showErrorVerificationCode = false
-                            if let smsData = responseJSON?["data"] as? [String: Any], let sms = smsData["sms"] as? [String: Any] {
-                                if let existsUser = sms["existsUser"] as? Bool {
-                                    OAuthRegistrationManager.shared.isExistUser = existsUser
-                                }
-
-                                if let oauth = sms["oauth"] as? Bool {
-                                    OAuthRegistrationManager.shared.isOAuthUser = oauth
-                                }
-                                if let username = sms["username"] as? String {
-                                    OAuthRegistrationManager.shared.username = username
-                                }
-                            }
-//                        case "4010", "4042":
-//                            showErrorVerificationCode = true
-                        default:
-                            // showErrorVerificationCode = true
-                            break
-                        }
-                    }
-                    print(responseJSON as Any)
+                    let smsResponse = try JSONDecoder().decode(SMSResponseDTO.self, from: responseData)
+                    print(smsResponse)
                 } catch {
-                    print("Error parsing response JSON: \(error)")
+                    print("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
             print("Failed to verify: \(error)")
         }
+        completion()
+    }
 
+    private func handleVerificationAPIResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let smsResponse = try JSONDecoder().decode(VerificationResponseDTO.self, from: responseData)
+                    showErrorVerificationCode = false
+                    let sms = smsResponse.data.sms
+                    OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
+
+                    print(smsResponse)
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
+        }
+        completion()
+    }
+
+    private func handleOAuthVerificationAPIResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let smsResponse = try JSONDecoder().decode(OAuthVerificationResponseDTO.self, from: responseData)
+
+                    showErrorVerificationCode = false
+                    let sms = smsResponse.data.sms
+                    OAuthRegistrationManager.shared.isExistUser = sms.existsUser
+                    OAuthRegistrationManager.shared.username = sms.username
+
+                    print(smsResponse)
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            print("Failed to verify: \(error)")
+            showErrorVerificationCode = true
+        }
         completion()
     }
 

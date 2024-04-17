@@ -69,7 +69,7 @@ enum AuthRouter: URLRequestConvertible {
         case .receiveVerificationCode:
             let queryParameters = [URLQueryItem(name: "type", value: "general")]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-            
+
         case let .checkDuplicateUserName(dto):
             let queryParameters = [URLQueryItem(name: "username", value: dto.username)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)

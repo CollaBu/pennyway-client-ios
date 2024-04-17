@@ -35,8 +35,11 @@
 		4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703912BCEA55500AEE04E /* OAuthSignUpRequestDTO.swift */; };
 		4A4703942BCEB21500AEE04E /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703932BCEB21500AEE04E /* DomainError.swift */; };
 		4A4703962BCEB2E800AEE04E /* ErrorCodeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703952BCEB2E800AEE04E /* ErrorCodeMapper.swift */; };
-		4A4703992BCED84F00AEE04E /* VerificationCodeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703982BCED84F00AEE04E /* VerificationCodeResponseDTO.swift */; };
 		4A4703A72BCEDD9800AEE04E /* VerificationCodeRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703A62BCEDD9800AEE04E /* VerificationCodeRequestDTO.swift */; };
+		4A4703A92BCEE25000AEE04E /* SMSResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703A82BCEE25000AEE04E /* SMSResponseDTO.swift */; };
+		4A4703AB2BCEE52300AEE04E /* VerificationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703AA2BCEE52300AEE04E /* VerificationResponseDTO.swift */; };
+		4A4703AE2BCEE5AF00AEE04E /* OAuthVerificationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703AD2BCEE5AF00AEE04E /* OAuthVerificationResponseDTO.swift */; };
+		4A4703B02BCF897300AEE04E /* ErrorResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703AF2BCF897300AEE04E /* ErrorResponseDTO.swift */; };
 		4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56712BACA2250071D00E /* PhoneVerificationView.swift */; };
 		4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56732BACA4000071D00E /* NavigationCountView.swift */; };
 		4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */; };
@@ -134,8 +137,11 @@
 		4A4703912BCEA55500AEE04E /* OAuthSignUpRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpRequestDTO.swift; sourceTree = "<group>"; };
 		4A4703932BCEB21500AEE04E /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		4A4703952BCEB2E800AEE04E /* ErrorCodeMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodeMapper.swift; sourceTree = "<group>"; };
-		4A4703982BCED84F00AEE04E /* VerificationCodeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeResponseDTO.swift; sourceTree = "<group>"; };
 		4A4703A62BCEDD9800AEE04E /* VerificationCodeRequestDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationCodeRequestDTO.swift; sourceTree = "<group>"; };
+		4A4703A82BCEE25000AEE04E /* SMSResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSResponseDTO.swift; sourceTree = "<group>"; };
+		4A4703AA2BCEE52300AEE04E /* VerificationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationResponseDTO.swift; sourceTree = "<group>"; };
+		4A4703AD2BCEE5AF00AEE04E /* OAuthVerificationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationResponseDTO.swift; sourceTree = "<group>"; };
+		4A4703AF2BCF897300AEE04E /* ErrorResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponseDTO.swift; sourceTree = "<group>"; };
 		4A4A56712BACA2250071D00E /* PhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationView.swift; sourceTree = "<group>"; };
 		4A4A56732BACA4000071D00E /* NavigationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCountView.swift; sourceTree = "<group>"; };
 		4A4A56772BACADBF0071D00E /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
@@ -238,6 +244,8 @@
 			children = (
 				4A0FFBE92BCD9FC200EFEC56 /* OAuthDomain */,
 				4A0FFBE62BCD9F5D00EFEC56 /* AuthDomain */,
+				4A4703A82BCEE25000AEE04E /* SMSResponseDTO.swift */,
+				4A4703AF2BCF897300AEE04E /* ErrorResponseDTO.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -306,6 +314,7 @@
 		4A0FFBEC2BCD9FD700EFEC56 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				4A4703AC2BCEE58D00AEE04E /* Response */,
 				4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDTO.swift */,
 				4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDTO.swift */,
 				4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDTO.swift */,
@@ -364,7 +373,15 @@
 		4A4703972BCED80000AEE04E /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				4A4703982BCED84F00AEE04E /* VerificationCodeResponseDTO.swift */,
+				4A4703AA2BCEE52300AEE04E /* VerificationResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		4A4703AC2BCEE58D00AEE04E /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				4A4703AD2BCEE5AF00AEE04E /* OAuthVerificationResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -809,11 +826,13 @@
 				D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */,
 				4A4703962BCEB2E800AEE04E /* ErrorCodeMapper.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
+				4A4703B02BCF897300AEE04E /* ErrorResponseDTO.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDTO.swift in Sources */,
 				4A762B052B99A259001C1188 /* PhoneVerificationViewModel.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D850DF8F2BAAD70E004FBF67 /* (null) in Sources */,
 				D8157E662BBEF2740083844B /* OauthButtonView.swift in Sources */,
+				4A4703A92BCEE25000AEE04E /* SMSResponseDTO.swift in Sources */,
 				4ACE1FED2BBB149D00BB4F0A /* KeychainHelper.swift in Sources */,
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
 				D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */,
@@ -831,13 +850,13 @@
 				4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* DuplicateCheckRequestDTO.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
+				4A4703AB2BCEE52300AEE04E /* VerificationResponseDTO.swift in Sources */,
 				D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDTO.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
 				4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDTO.swift in Sources */,
 				D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */,
-				4A4703992BCED84F00AEE04E /* VerificationCodeResponseDTO.swift in Sources */,
 				D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */,
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
@@ -848,6 +867,7 @@
 				4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */,
 				4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
+				4A4703AE2BCEE5AF00AEE04E /* OAuthVerificationResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,7 +1023,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Pennyway;
@@ -1041,10 +1061,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Pennway Release";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Pennyway Release";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

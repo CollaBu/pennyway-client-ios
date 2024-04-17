@@ -38,7 +38,6 @@ struct PhoneNumberInputSectionView: View {
                         viewModel.judgeTimerRunning()
                         if isOAuthRegistration {
                             viewModel.requestOAuthVerificationCodeAPI {}
-
                         } else {
                             viewModel.requestVerificationCodeAPI {}
                         }
