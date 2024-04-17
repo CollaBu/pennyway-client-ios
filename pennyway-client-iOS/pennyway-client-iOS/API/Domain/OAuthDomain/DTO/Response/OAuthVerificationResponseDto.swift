@@ -1,15 +1,10 @@
-//
-//  OAuthVerificationResponseDTO.swift
-//  pennyway-client-iOS
-//
-//  Created by 최희진 on 4/17/24.
-//
+
 
 import Foundation
 
-// MARK: - OAuthVerificationResponseDTO
+// MARK: - OAuthVerificationResponseDto
 
-struct OAuthVerificationResponseDTO: Codable {
+struct OAuthVerificationResponseDto: Codable {
     let code: String
     let data: OAuthVerificationResponseData
 }

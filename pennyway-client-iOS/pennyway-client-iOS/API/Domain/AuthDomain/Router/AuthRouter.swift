@@ -4,16 +4,16 @@ import Alamofire
 import Foundation
 
 enum AuthRouter: URLRequestConvertible {
-    case signup(dto: SignUpRequestDTO)
-    case receiveVerificationCode(dto: VerificationCodeRequestDTO)
-    case verifyVerificationCode(dto: VerificationRequestDTO)
-    case checkDuplicateUserName(dto: DuplicateCheckRequestDTO)
-    case login(dto: LoginRequestDTO)
-    case linkAccountToExistingOAuth(dto: LinkAccountToOAuthRequestDTO)
+    case signup(dto: SignUpRequestDto)
+    case receiveVerificationCode(dto: VerificationCodeRequestDto)
+    case verifyVerificationCode(dto: VerificationRequestDto)
+    case checkDuplicateUserName(dto: DuplicateCheckRequestDto)
+    case login(dto: LoginRequestDto)
+    case linkAccountToOAuth(dto: LinkAccountToOAuthRequestDto)
 
     var method: HTTPMethod {
         switch self {
-        case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
+        case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToOAuth:
             return .post
         case .checkDuplicateUserName:
             return .get
@@ -36,7 +36,7 @@ enum AuthRouter: URLRequestConvertible {
             return "v1/duplicate/username"
         case .login:
             return "v1/auth/sign-in"
-        case .linkAccountToExistingOAuth:
+        case .linkAccountToOAuth:
             return "v1/auth/link-oauth"
         }
     }
@@ -53,7 +53,7 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .login(dto):
             return try? dto.asDictionary()
-        case let .linkAccountToExistingOAuth(dto):
+        case let .linkAccountToOAuth(dto):
             return try? dto.asDictionary()
         }
     }
@@ -63,7 +63,7 @@ enum AuthRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .signup, .verifyVerificationCode, .login, .linkAccountToExistingOAuth:
+        case .signup, .verifyVerificationCode, .login, .linkAccountToOAuth:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
 
         case .receiveVerificationCode:

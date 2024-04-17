@@ -1,6 +1,6 @@
 
 
-public struct DuplicateCheckRequestDTO: Encodable {
+public struct DuplicateCheckRequestDto: Encodable {
     let username: String
 
     public init(

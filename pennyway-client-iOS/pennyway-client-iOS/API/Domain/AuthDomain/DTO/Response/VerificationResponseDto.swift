@@ -1,9 +1,8 @@
 
-import Foundation
 
 // MARK: - VerificationResponseDTO
 
-struct VerificationResponseDTO: Codable {
+struct VerificationResponseDto: Codable {
     let code: String
     let data: VerificationResponseData
 }

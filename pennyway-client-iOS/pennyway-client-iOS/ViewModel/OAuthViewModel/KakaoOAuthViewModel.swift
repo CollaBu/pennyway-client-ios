@@ -32,9 +32,9 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginAPI() {
-        let oauthLoginDTO = OAuthLoginRequestDTO(oauthID: oauthID, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
+        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthID, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
 
-        OAuthAlamofire.shared.oauthLogin(oauthLoginDTO) { result in
+        OAuthAlamofire.shared.oauthLogin(oauthLoginDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -64,8 +64,11 @@ class KakaoOAuthViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-
-                print("Failed to oauthLogin: \(error)")
+                if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                    print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                } else {
+                    print("Failed to verify: \(error)")
+                }
             }
         }
     }

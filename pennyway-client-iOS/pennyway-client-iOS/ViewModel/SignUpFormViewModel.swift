@@ -68,7 +68,7 @@ class SignUpFormViewModel: ObservableObject {
     }
     
     func checkDuplicateUserNameAPI() {
-        let duplicateCheckDTO = DuplicateCheckRequestDTO(username: id)
+        let duplicateCheckDTO = DuplicateCheckRequestDto(username: id)
         AuthAlamofire.shared.checkDuplicateUserName(duplicateCheckDTO) { result in
             switch result {
             case let .success(data):
@@ -89,8 +89,11 @@ class SignUpFormViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-                
-                print("Failed to verify: \(error)")
+                if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                    print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                } else {
+                    print("Failed to verify: \(error)")
+                }
             }
         }
     }

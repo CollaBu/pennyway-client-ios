@@ -1,6 +1,6 @@
 
 
-public struct LoginRequestDTO: Encodable {
+public struct LoginRequestDto: Encodable {
     let username: String
     let password: String
 

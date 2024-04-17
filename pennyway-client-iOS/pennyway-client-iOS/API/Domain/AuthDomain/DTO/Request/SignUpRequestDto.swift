@@ -1,26 +1,23 @@
 
 
-public struct OAuthSignUpRequestDTO: Encodable {
-    let idToken: String
+public struct SignUpRequestDto: Encodable {
     let name: String
     let username: String
+    let password: String
     let phone: String
     let code: String
-    let provider: String
 
     public init(
-        idToken: String,
         name: String,
         username: String,
+        password: String,
         phone: String,
-        code: String,
-        provider: String
+        code: String
     ) {
-        self.idToken = idToken
         self.name = name
         self.username = username
+        self.password = password
         self.phone = phone
         self.code = code
-        self.provider = provider
     }
 }

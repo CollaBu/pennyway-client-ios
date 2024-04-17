@@ -14,8 +14,8 @@ class OAuthAlamofire: TokenHandling {
         session = Session(eventMonitors: monitors)
     }
     
-    func oauthLogin(_ dto: OAuthLoginRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@", log: .default, type: .info, dto.oauthID, dto.idToken, dto.provider)
+    func oauthLogin(_ dto: OAuthLoginRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@", log: .default, type: .info, dto.oauthId, dto.idToken, dto.provider)
         
         session
             .request(OAuthRouter.oauthLogin(dto: dto))
@@ -24,12 +24,21 @@ class OAuthAlamofire: TokenHandling {
                 case let .success(data):
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(error))
+                    if let responseData = response.data,
+                       let statusCode = response.response?.statusCode,
+                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
+                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
+                    {
+                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        completion(.failure(errorWithDomainErrorAndMessage))
+                    } else {
+                        completion(.failure(error))
+                    }
                 }
             }
     }
 
-    func oauthReceiveVerificationCode(_ dto: OAuthVerificationCodeRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func oauthReceiveVerificationCode(_ dto: OAuthVerificationCodeRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - oauthReceiveVerificationCode() called : %@ ,, %@", log: .default, type: .info, dto.phone, dto.provider)
         
         session
@@ -39,12 +48,21 @@ class OAuthAlamofire: TokenHandling {
                 case let .success(data):
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(error))
+                    if let responseData = response.data,
+                       let statusCode = response.response?.statusCode,
+                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
+                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
+                    {
+                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        completion(.failure(errorWithDomainErrorAndMessage))
+                    } else {
+                        completion(.failure(error))
+                    }
                 }
             }
     }
     
-    func oauthVerifyVerificationCode(_ dto: OAuthVerificationRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func oauthVerifyVerificationCode(_ dto: OAuthVerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - oauthVerifyVerificationCode() called : %@ ,, %@ ", log: .default, type: .info, dto.phone, dto.code)
         
         session
@@ -54,29 +72,47 @@ class OAuthAlamofire: TokenHandling {
                 case let .success(data):
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(error))
+                    if let responseData = response.data,
+                       let statusCode = response.response?.statusCode,
+                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
+                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
+                    {
+                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        completion(.failure(errorWithDomainErrorAndMessage))
+                    } else {
+                        completion(.failure(error))
+                    }
                 }
             }
     }
     
-    func linkOAuthWithNormalAccount(_ dto: LinkOAuthToAccountRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - linkOAuthWithNormalAccount() called : %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.idToken, dto.phone, dto.code, dto.provider)
+    func linkOAuthToAccount(_ dto: LinkOAuthToAccountRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("OAuthAlamofire - linkOAuthToAccount() called : %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.idToken, dto.phone, dto.code, dto.provider)
         
         session
-            .request(OAuthRouter.linkOAuthWithNormalAccount(dto: dto))
+            .request(OAuthRouter.linkOAuthToAccount(dto: dto))
             .response { response in
                 switch response.result {
                 case let .success(data):
                     self.extractAndStoreToken(from: response)
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(error))
+                    if let responseData = response.data,
+                       let statusCode = response.response?.statusCode,
+                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
+                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
+                    {
+                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        completion(.failure(errorWithDomainErrorAndMessage))
+                    } else {
+                        completion(.failure(error))
+                    }
                 }
             }
     }
 
-    func oauthSignUp(_ dto: OAuthSignUpRequestDTO, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - oauthRegist() called : %@ ,, %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.idToken, dto.name, dto.username, dto.phone, dto.code, dto.provider)
+    func oauthSignUp(_ dto: OAuthSignUpRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("OAuthAlamofire - oauthSignUp() called : %@ ,, %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.idToken, dto.name, dto.username, dto.phone, dto.code, dto.provider)
         
         session
             .request(OAuthRouter.oauthSignUp(dto: dto))
@@ -85,7 +121,16 @@ class OAuthAlamofire: TokenHandling {
                 case let .success(data):
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(error))
+                    if let responseData = response.data,
+                       let statusCode = response.response?.statusCode,
+                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
+                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
+                    {
+                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        completion(.failure(errorWithDomainErrorAndMessage))
+                    } else {
+                        completion(.failure(error))
+                    }
                 }
             }
     }

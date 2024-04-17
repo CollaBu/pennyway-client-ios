@@ -49,7 +49,7 @@ class PhoneVerificationViewModel: ObservableObject {
     func requestVerificationCodeAPI(completion: @escaping () -> Void) {
         validatePhoneNumber()
         requestVerificationCodeAction()
-        let verificationCodeDTO = VerificationCodeRequestDTO(phone: formattedPhoneNumber)
+        let verificationCodeDTO = VerificationCodeRequestDto(phone: formattedPhoneNumber)
 
         if !showErrorPhoneNumberFormat {
             AuthAlamofire.shared.receiveVerificationCode(verificationCodeDTO) { result in
@@ -59,7 +59,7 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        let verificationDTO = VerificationRequestDTO(phone: formattedPhoneNumber, code: verificationCode)
+        let verificationDTO = VerificationRequestDto(phone: formattedPhoneNumber, code: verificationCode)
         AuthAlamofire.shared.verifyVerificationCode(verificationDTO) { result in
             self.handleVerificationAPIResult(result: result, completion: completion)
         }
@@ -69,7 +69,7 @@ class PhoneVerificationViewModel: ObservableObject {
         validatePhoneNumber()
         requestVerificationCodeAction()
 
-        let oauthVerificationCodeDTO = OAuthVerificationCodeRequestDTO(phone: formattedPhoneNumber, provider: OAuthRegistrationManager.shared.provider)
+        let oauthVerificationCodeDTO = OAuthVerificationCodeRequestDto(phone: formattedPhoneNumber, provider: OAuthRegistrationManager.shared.provider)
 
         if !showErrorPhoneNumberFormat {
             OAuthAlamofire.shared.oauthReceiveVerificationCode(oauthVerificationCodeDTO) { result in
@@ -79,7 +79,7 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func requestOAuthVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        let oauthVerificationDTO = OAuthVerificationRequestDTO(phone: formattedPhoneNumber, code: verificationCode, provider: OAuthRegistrationManager.shared.provider)
+        let oauthVerificationDTO = OAuthVerificationRequestDto(phone: formattedPhoneNumber, code: verificationCode, provider: OAuthRegistrationManager.shared.provider)
 
         OAuthAlamofire.shared.oauthVerifyVerificationCode(oauthVerificationDTO) { result in
             self.handleOAuthVerificationAPIResult(result: result, completion: completion)
@@ -91,14 +91,18 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .success(data):
             if let responseData = data {
                 do {
-                    let smsResponse = try JSONDecoder().decode(SMSResponseDTO.self, from: responseData)
+                    let smsResponse = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
                     print(smsResponse)
                 } catch {
                     print("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
-            print("Failed to verify: \(error)")
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
         }
         completion()
     }
@@ -108,7 +112,7 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .success(data):
             if let responseData = data {
                 do {
-                    let smsResponse = try JSONDecoder().decode(VerificationResponseDTO.self, from: responseData)
+                    let smsResponse = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
                     showErrorVerificationCode = false
                     let sms = smsResponse.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
@@ -119,7 +123,7 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-
+            showErrorVerificationCode = true
             if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
             } else {
@@ -134,7 +138,7 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .success(data):
             if let responseData = data {
                 do {
-                    let smsResponse = try JSONDecoder().decode(OAuthVerificationResponseDTO.self, from: responseData)
+                    let smsResponse = try JSONDecoder().decode(OAuthVerificationResponseDto.self, from: responseData)
 
                     showErrorVerificationCode = false
                     let sms = smsResponse.data.sms
@@ -147,8 +151,12 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-            print("Failed to verify: \(error)")
             showErrorVerificationCode = true
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
         }
         completion()
     }

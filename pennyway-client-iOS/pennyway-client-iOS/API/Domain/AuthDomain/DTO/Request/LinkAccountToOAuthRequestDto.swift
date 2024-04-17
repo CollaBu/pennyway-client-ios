@@ -1,6 +1,6 @@
 
 
-public struct LinkAccountToOAuthRequestDTO: Encodable {
+public struct LinkAccountToOAuthRequestDto: Encodable {
     let password: String
     let phone: String
     let code: String

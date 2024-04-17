@@ -5,7 +5,7 @@ struct TermsAndConditionsView: View {
     @State private var isAllAgreed = false
     @ObservedObject var viewModel: SignUpNavigationViewModel
     
-    @StateObject var oauthRegistViewModel = OAuthRegistViewModel()
+    @StateObject var oauthSignUpViewModel = OAuthSignUpViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
 
@@ -34,7 +34,7 @@ struct TermsAndConditionsView: View {
                     viewModel.continueButtonTapped()
                     
                     if isOAuthRegistration {
-                        oauthRegistViewModel.oauthRegistAPI()
+                        oauthSignUpViewModel.oauthSignUpAPI()
                     } else {
                         termsAndConditionsViewModel.requestRegistAPI()
                     }

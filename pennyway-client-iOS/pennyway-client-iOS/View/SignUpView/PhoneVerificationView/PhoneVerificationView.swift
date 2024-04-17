@@ -75,7 +75,7 @@ struct PhoneVerificationView: View {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
                 OAuthRegistrationManager.shared.code = phoneVerificationViewModel.verificationCode
                 if OAuthRegistrationManager.shared.isExistUser {
-                    oauthAccountLinkingViewModel.linkOAuthWithNormalAccountAPI()
+                    oauthAccountLinkingViewModel.linkOAuthToAccountAPI()
                 }
             } else {
                 RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber

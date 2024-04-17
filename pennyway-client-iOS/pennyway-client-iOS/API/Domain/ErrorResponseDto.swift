@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct ErrorResponseDTO: Codable {
+struct ErrorResponseDto: Codable {
     let code: String
     let message: String
 }

@@ -1,5 +1,5 @@
 
-public struct VerificationCodeRequestDTO: Encodable {
+public struct VerificationCodeRequestDto: Encodable {
     let phone: String
 
     public init(

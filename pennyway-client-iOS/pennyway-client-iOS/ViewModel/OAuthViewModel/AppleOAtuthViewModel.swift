@@ -9,7 +9,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
     
-    var oauthID = ""
+    var oauthId = ""
     var token = ""
     
     func signIn() {
@@ -40,15 +40,15 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             let fullName = appleIDCredential.fullName
             let idToken = appleIDCredential.identityToken!
             
-            oauthID = userIdentifier
+            oauthId = userIdentifier
             KeychainHelper.saveIDToken(accessToken: String(data: idToken, encoding: .utf8) ?? "")
           
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             
-            let oauthLoginDTO = OAuthLoginRequestDTO(oauthID: oauthID, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
+            let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIDToken() ?? "", provider: OAuthRegistrationManager.shared.provider)
                    
-            OAuthAlamofire.shared.oauthLogin(oauthLoginDTO) { result in
+            OAuthAlamofire.shared.oauthLogin(oauthLoginDto) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {
@@ -78,8 +78,11 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
                         }
                     }
                 case let .failure(error):
-                    
-                    print("Failed to oauthLogin: \(error)")
+                    if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                        print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                    } else {
+                        print("Failed to verify: \(error)")
+                    }
                 }
             }
             
