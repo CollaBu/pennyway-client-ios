@@ -1,59 +1,59 @@
 import SwiftUI
 
 struct FindIDView: View {
+    @State private var goToLoginView = false
+    @State private var goToPwView = false
     @State private var showingPopUp = false
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
 
     var body: some View {
-        ScrollView {
-            NavigationAvailable {
-                VStack {
-                    Spacer().frame(height: 147)
+        NavigationAvailable {
+            VStack {
+                Spacer().frame(height: 147)
                     
-                    Image("icon_illust_completion")
-                        .frame(width: 68, height: 68)
-                        .padding(.horizontal, 126)
+                Image("icon_illust_completion")
+                    .frame(width: 68, height: 68)
+                    .padding(.horizontal, 126)
                     
-                    Spacer().frame(height: 17)
+                Spacer().frame(height: 17)
                     
-                    Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
-                        .font(.pretendard(.semibold, size: 16))
-                        .multilineTextAlignment(.center)
+                Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
+                    .font(.pretendard(.semibold, size: 16))
+                    .multilineTextAlignment(.center)
                     
-                    Spacer().frame(height: 30)
+                Spacer().frame(height: 30)
                     
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 280, height: 62)
-                            .background(Color("Gray01"))
-                            .cornerRadius(4)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .inset(by: 0.5)
-                                    .stroke(Color("Gray02"), lineWidth: 1)
-                            )
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 280, height: 62)
+                        .background(Color("Gray01"))
+                        .cornerRadius(4)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .inset(by: 0.5)
+                                .stroke(Color("Gray02"), lineWidth: 1)
+                        )
                         
-                        Text("2weeksone") // api 연동필요
-                            .font(.pretendard(.semibold, size: 18))
-                            .multilineTextAlignment(.center)
-                    }
-                    
-                    Spacer().frame(height: 120)
-                    Spacer()
-                    
-                    bottomButton()
+                    Text("2weeksone") // api 연동필요
+                        .font(.pretendard(.semibold, size: 18))
+                        .multilineTextAlignment(.center)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                Spacer().frame(height: 120)
+                Spacer()
+                    
+                bottomButton()
             }
-            .navigationBarBackButtonHidden(true)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     private func bottomButton() -> some View {
         HStack(alignment: .center, spacing: 12) {
             Button(action: {
-                ResetPwView()
+                goToPwView = true
             }, label: {
                 ZStack {
                     Rectangle()
@@ -66,11 +66,16 @@ struct FindIDView: View {
                         .font(.pretendard(.semibold, size: 14))
                         .multilineTextAlignment(.center)
                         .platformTextColor(color: Color("Mint03"))
+                    
+                    NavigationLink(destination: FindPwView(), isActive: $goToPwView) {
+                        EmptyView()
+                    }
+                    .navigationBarBackButtonHidden(true)
                 }
             })
             
             Button(action: {
-                LoginView()
+                NavigationUtil.popToRootView()
             }, label: {
                 ZStack {
                     Rectangle()

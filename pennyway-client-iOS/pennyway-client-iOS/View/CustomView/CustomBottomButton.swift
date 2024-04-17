@@ -5,7 +5,7 @@ struct CustomBottomButton: View {
     let action: () -> Void
     let label: String
     @Binding var isFormValid: Bool
-    @Binding var isDuplicateUserName: Bool //아이디 중복 체크
+    @Binding var isDuplicateUserName: Bool // 아이디 중복 체크
 
     var body: some View {
         Button(action: action) {
