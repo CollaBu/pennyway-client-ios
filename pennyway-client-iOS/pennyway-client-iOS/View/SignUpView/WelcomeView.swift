@@ -26,7 +26,7 @@ struct WelcomeView: View {
 
                     Spacer()
 
-                    CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
+                    CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true), isDuplicateUserName: .constant(false))
                         .padding(.bottom, 34)
                 }
             }

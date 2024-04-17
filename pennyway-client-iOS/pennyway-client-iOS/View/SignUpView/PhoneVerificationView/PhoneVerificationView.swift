@@ -27,7 +27,7 @@ struct PhoneVerificationView: View {
                     
                     CustomBottomButton(action: {
                         continueButtonAction()
-                    }, label: "계속하기", isFormValid: $phoneVerificationViewModel.isFormValid)
+                    }, label: "계속하기", isFormValid: $phoneVerificationViewModel.isFormValid, isDuplicateUserName: .constant(false))
                         .padding(.bottom, 34 * DynamicSizeFactor.factor())
                     
                     NavigationLink(destination: destinationView(), tag: 2, selection: $viewModel.selectedText) {

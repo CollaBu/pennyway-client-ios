@@ -28,7 +28,7 @@ struct CompleteChangePwView: View {
                     Spacer()
                 }
                 
-                CustomBottomButton(action: {}, label: "메인으로 돌아가기", isFormValid: .constant(true))
+                CustomBottomButton(action: {}, label: "메인으로 돌아가기", isFormValid: .constant(true), isDuplicateUserName: .constant(false))
                     .padding(.bottom, 34)
             }
         }

@@ -11,6 +11,7 @@ class SignUpFormViewModel: ObservableObject {
     @Published var showErrorPassword = false
     @Published var showErrorConfirmPw = false
     @Published var isFormValid: Bool = false
+    @Published var isDuplicateUserName: Bool = false
     
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
     @State private var isOAuthUser = OAuthRegistrationManager.shared.isOAuthUser
@@ -71,25 +72,24 @@ class SignUpFormViewModel: ObservableObject {
         AuthAlamofire.shared.checkDuplicateUserName(id) { result in
             switch result {
             case let .success(data):
-                if let responseData = data {
-                    do {
-                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                        if let code = responseJSON?["code"] as? String {
-                            if code == "2000" {
-                                // 확인
-                                
-                            } else if code == "4000" {
-                                // 중복된 아이디
-                            }
-                        }
-                        print(responseJSON)
-                    } catch {
-                        print("Error parsing response JSON: \(error)")
+                do {
+                    if let responseJSON = try JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any],
+                       let dataDict = responseJSON["data"] as? [String: Any],
+                       let isDuplicate = dataDict["isDuplicate"] as? Int
+                    {
+                        self.isDuplicateUserName = (isDuplicate == 1)
+                    } else {
+                        self.isDuplicateUserName = false
                     }
+                    
+                } catch {
+                    print("Error parsing response JSON: \(error)")
+                    self.isDuplicateUserName = false
                 }
-            case let .failure(error):
                 
+            case let .failure(error):
                 print("Failed to verify: \(error)")
+                self.isDuplicateUserName = false // 네트워크 오류나 기타 에러 발생 시 처리
             }
         }
     }

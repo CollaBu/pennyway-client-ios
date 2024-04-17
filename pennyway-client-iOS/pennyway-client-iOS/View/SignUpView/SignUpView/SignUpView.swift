@@ -45,7 +45,7 @@ struct SignUpView: View {
                    
                 } else {}
                     
-            }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
+            }, label: "계속하기", isFormValid: $formViewModel.isFormValid, isDuplicateUserName: $formViewModel.isDuplicateUserName)
                 .padding(.bottom, 34)
                 
             NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
