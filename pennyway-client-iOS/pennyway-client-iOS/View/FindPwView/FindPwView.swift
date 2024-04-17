@@ -35,7 +35,7 @@ struct FindPwView: View {
                             viewModel.continueButtonTapped()
                             
                             RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
-                            RegistrationManager.shared.verificationCode = phoneVerificationViewModel.verificationCode
+                            RegistrationManager.shared.code = phoneVerificationViewModel.code
                             
                             navigateToFindPwView = true
                             

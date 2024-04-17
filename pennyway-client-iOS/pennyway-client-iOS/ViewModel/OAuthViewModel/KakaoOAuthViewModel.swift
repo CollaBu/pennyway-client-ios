@@ -56,7 +56,7 @@ class KakaoOAuthViewModel: ObservableObject {
             } else {
                 print("loginWithKakaoAccount() success.")
 
-                KeychainHelper.saveIDToken(accessToken: oauthToken!.idToken ?? "")
+                KeychainHelper.saveIdToken(accessToken: oauthToken!.idToken ?? "")
 
                 // 로그인 성공 시 처리
                 self.checkUserInfo()

@@ -35,7 +35,7 @@ struct FindIDFormView: View {
                             viewModel.continueButtonTapped()
                             
                             RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
-                            RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
+                            RegistrationManager.shared.code = numberVerificationViewModel.code
                             
                             navigateToFindIDView = true
                             

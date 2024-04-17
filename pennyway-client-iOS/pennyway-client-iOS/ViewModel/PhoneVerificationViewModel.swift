@@ -13,8 +13,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     @Published var phoneNumber: String = ""
 
-    @Published var verificationCode: String = ""
-    @Published var randomVerificationCode = ""
+    @Published var code: String = ""
     @Published var showErrorPhoneNumberFormat = false
     @Published var showErrorVerificationCode = true
     @Published var isFormValid = false
@@ -41,7 +40,7 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func validateForm() {
-        isFormValid = !phoneNumber.isEmpty && !verificationCode.isEmpty
+        isFormValid = !phoneNumber.isEmpty && !code.isEmpty
     }
 
     // MARK: API
@@ -59,7 +58,7 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        let verificationDTO = VerificationRequestDto(phone: formattedPhoneNumber, code: verificationCode)
+        let verificationDTO = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
         AuthAlamofire.shared.verifyVerificationCode(verificationDTO) { result in
             self.handleVerificationAPIResult(result: result, completion: completion)
         }
@@ -79,7 +78,7 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func requestOAuthVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        let oauthVerificationDTO = OAuthVerificationRequestDto(phone: formattedPhoneNumber, code: verificationCode, provider: OAuthRegistrationManager.shared.provider)
+        let oauthVerificationDTO = OAuthVerificationRequestDto(phone: formattedPhoneNumber, code: code, provider: OAuthRegistrationManager.shared.provider)
 
         OAuthAlamofire.shared.oauthVerifyVerificationCode(oauthVerificationDTO) { result in
             self.handleOAuthVerificationAPIResult(result: result, completion: completion)

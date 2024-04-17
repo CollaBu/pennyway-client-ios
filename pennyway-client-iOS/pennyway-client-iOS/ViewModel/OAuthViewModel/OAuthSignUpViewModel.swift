@@ -3,7 +3,7 @@ import Foundation
 
 class OAuthSignUpViewModel: ObservableObject {
     func oauthSignUpAPI() { // 소셜 회원가입
-        let oauthSignUpDto = OAuthSignUpRequestDto(idToken: KeychainHelper.loadIDToken() ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
+        let oauthSignUpDto = OAuthSignUpRequestDto(idToken: KeychainHelper.loadIdToken() ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
 
         OAuthAlamofire.shared.oauthSignUp(oauthSignUpDto) { result in
             switch result {

@@ -73,13 +73,13 @@ struct PhoneVerificationView: View {
             
             if isOAuthRegistration {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
-                OAuthRegistrationManager.shared.code = phoneVerificationViewModel.verificationCode
+                OAuthRegistrationManager.shared.code = phoneVerificationViewModel.code
                 if OAuthRegistrationManager.shared.isExistUser {
                     oauthAccountLinkingViewModel.linkOAuthToAccountAPI()
                 }
             } else {
                 RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
-                RegistrationManager.shared.verificationCode = phoneVerificationViewModel.verificationCode
+                RegistrationManager.shared.code = phoneVerificationViewModel.code
             }
         } else {
             showingPopUp = true

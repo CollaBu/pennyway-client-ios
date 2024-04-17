@@ -2,7 +2,7 @@ import Foundation
 
 class TermsAndConditionsViewModel: ObservableObject {
     func requestRegistAPI() {
-        let signupDto = SignUpRequestDto(name: RegistrationManager.shared.name ?? "", username: RegistrationManager.shared.username ?? "", password: RegistrationManager.shared.password ?? "", phone: RegistrationManager.shared.formattedPhoneNumber ?? "", code: RegistrationManager.shared.verificationCode ?? "")
+        let signupDto = SignUpRequestDto(name: RegistrationManager.shared.name, username: RegistrationManager.shared.username, password: RegistrationManager.shared.password, phone: RegistrationManager.shared.formattedPhoneNumber ?? "", code: RegistrationManager.shared.code)
 
         AuthAlamofire.shared.signup(signupDto) { result in
             switch result {

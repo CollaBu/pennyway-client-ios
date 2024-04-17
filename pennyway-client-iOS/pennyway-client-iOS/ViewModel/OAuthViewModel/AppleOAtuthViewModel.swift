@@ -41,7 +41,7 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             let idToken = appleIDCredential.identityToken!
             
             oauthId = userIdentifier
-            KeychainHelper.saveIDToken(accessToken: String(data: idToken, encoding: .utf8) ?? "")
+            KeychainHelper.saveIdToken(accessToken: String(data: idToken, encoding: .utf8) ?? "")
           
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")

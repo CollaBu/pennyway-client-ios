@@ -3,7 +3,7 @@ import Alamofire
 import Foundation
 import os.log
 
-class OAuthAlamofire: TokenHandling {
+class OAuthAlamofire: TokenHandler {
     static let shared = OAuthAlamofire()
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
@@ -17,126 +17,29 @@ class OAuthAlamofire: TokenHandling {
     func oauthLogin(_ dto: OAuthLoginRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@", log: .default, type: .info, dto.oauthId, dto.idToken, dto.provider)
         
-        session
-            .request(OAuthRouter.oauthLogin(dto: dto))
-            .validate(statusCode: 200 ..< 300)
-            .response { response in
-                switch response.result {
-                case let .success(data):
-                    completion(.success(data))
-                case let .failure(error):
-                    if let responseData = response.data,
-                       let statusCode = response.response?.statusCode,
-                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
-                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
-                    {
-                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
-                        completion(.failure(errorWithDomainErrorAndMessage))
-                    } else {
-                        completion(.failure(error))
-                    }
-                }
-            }
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: OAuthRouter.oauthLogin(dto: dto), completion: completion)
     }
 
     func oauthReceiveVerificationCode(_ dto: OAuthVerificationCodeRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - oauthReceiveVerificationCode() called : %@ ,, %@", log: .default, type: .info, dto.phone, dto.provider)
-        
-        session
-            .request(OAuthRouter.oauthReceiveVerificationCode(dto: dto))
-            .validate(statusCode: 200 ..< 300)
-            .response { response in
-                switch response.result {
-                case let .success(data):
-                    completion(.success(data))
-                case let .failure(error):
-                    if let responseData = response.data,
-                       let statusCode = response.response?.statusCode,
-                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
-                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
-                    {
-                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
-                        completion(.failure(errorWithDomainErrorAndMessage))
-                    } else {
-                        completion(.failure(error))
-                    }
-                }
-            }
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: OAuthRouter.oauthReceiveVerificationCode(dto: dto), completion: completion)
     }
     
     func oauthVerifyVerificationCode(_ dto: OAuthVerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - oauthVerifyVerificationCode() called : %@ ,, %@ ", log: .default, type: .info, dto.phone, dto.code)
         
-        session
-            .request(OAuthRouter.oauthVerifyVerificationCode(dto: dto))
-            .validate(statusCode: 200 ..< 300)
-            .response { response in
-                switch response.result {
-                case let .success(data):
-                    completion(.success(data))
-                case let .failure(error):
-                    if let responseData = response.data,
-                       let statusCode = response.response?.statusCode,
-                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
-                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
-                    {
-                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
-                        completion(.failure(errorWithDomainErrorAndMessage))
-                    } else {
-                        completion(.failure(error))
-                    }
-                }
-            }
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: OAuthRouter.oauthVerifyVerificationCode(dto: dto), completion: completion)
     }
     
     func linkOAuthToAccount(_ dto: LinkOAuthToAccountRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - linkOAuthToAccount() called : %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.idToken, dto.phone, dto.code, dto.provider)
         
-        session
-            .request(OAuthRouter.linkOAuthToAccount(dto: dto))
-            .validate(statusCode: 200 ..< 300)
-            .response { response in
-                switch response.result {
-                case let .success(data):
-                    self.extractAndStoreToken(from: response)
-                    completion(.success(data))
-                case let .failure(error):
-                    if let responseData = response.data,
-                       let statusCode = response.response?.statusCode,
-                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
-                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
-                    {
-                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
-                        completion(.failure(errorWithDomainErrorAndMessage))
-                    } else {
-                        completion(.failure(error))
-                    }
-                }
-            }
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: OAuthRouter.linkOAuthToAccount(dto: dto), completion: completion)
     }
 
     func oauthSignUp(_ dto: OAuthSignUpRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - oauthSignUp() called : %@ ,, %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.idToken, dto.name, dto.username, dto.phone, dto.code, dto.provider)
         
-        session
-            .request(OAuthRouter.oauthSignUp(dto: dto))
-            .validate(statusCode: 200 ..< 300)
-            .response { response in
-                switch response.result {
-                case let .success(data):
-                    completion(.success(data))
-                case let .failure(error):
-                    if let responseData = response.data,
-                       let statusCode = response.response?.statusCode,
-                       let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
-                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
-                    {
-                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
-                        completion(.failure(errorWithDomainErrorAndMessage))
-                    } else {
-                        completion(.failure(error))
-                    }
-                }
-            }
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: OAuthRouter.oauthSignUp(dto: dto), completion: completion)
     }
 }

@@ -18,7 +18,7 @@ class GoogleOAuthViewModel: ObservableObject {
             let givenName = user.profile?.givenName
             oauthId = user.userID ?? ""
             self.givenName = givenName ?? ""
-            KeychainHelper.saveIDToken(accessToken: user.idToken?.tokenString ?? "")
+            KeychainHelper.saveIdToken(accessToken: user.idToken?.tokenString ?? "")
             
             oauthLoginAPI()
         } else {

@@ -3,7 +3,7 @@ import Foundation
 
 class OAuthAccountLinkingViewModel: ObservableObject {
     func linkOAuthToAccountAPI() { // 바로 로그인 처리
-        let linkOAuthToAccountDto = LinkOAuthToAccountRequestDto(idToken: KeychainHelper.loadIDToken() ?? "", phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
+        let linkOAuthToAccountDto = LinkOAuthToAccountRequestDto(idToken: KeychainHelper.loadIdToken() ?? "", phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
 
         OAuthAlamofire.shared.linkOAuthToAccount(linkOAuthToAccountDto) { result in
             switch result {
