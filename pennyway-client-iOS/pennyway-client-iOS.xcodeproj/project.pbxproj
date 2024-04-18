@@ -83,6 +83,7 @@
 		D8880E1E2BCEC8DD00922894 /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */; };
 		D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */; };
 		D8880E222BCFBBC400922894 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8880E212BCFBBC400922894 /* GoogleService-Info.plist */; };
+		D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */; };
 		D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */; };
 		D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */; };
 		D888329C2BBC612600F49B27 /* LoginFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329B2BBC612600F49B27 /* LoginFormView.swift */; };
@@ -168,6 +169,7 @@
 		D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
 		D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		D8880E212BCFBBC400922894 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizer.swift; sourceTree = "<group>"; };
 		D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAutocapitalization.swift; sourceTree = "<group>"; };
 		D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
 		D888329B2BBC612600F49B27 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
 				D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */,
 				D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */,
+				D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
 				4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */,
+				D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
