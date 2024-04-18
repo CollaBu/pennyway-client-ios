@@ -58,7 +58,7 @@ struct InputFormView: View {
                     CustomBottomButton(action: {
                         viewModel.loginAPI()
 
-                    }, label: "로그인", isFormValid: .constant(true), isDuplicateUserName: .constant(false)) // 수정
+                    }, label: "로그인", isFormValid: .constant(true)) // 수정
                 }
 
                 Spacer().frame(height: 14 * DynamicSizeFactor.factor())

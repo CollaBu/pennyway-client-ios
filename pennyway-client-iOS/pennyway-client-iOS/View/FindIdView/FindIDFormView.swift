@@ -42,7 +42,7 @@ struct FindIDFormView: View {
                         } else {
                             showingPopUp = true
                         }
-                    }, label: "아이디 찾기", isFormValid: $numberVerificationViewModel.isFormValid, isDuplicateUserName: .constant(false))
+                    }, label: "아이디 찾기", isFormValid: $numberVerificationViewModel.isFormValid)
                 }
                 .padding(.bottom, 34)
                 

@@ -39,7 +39,7 @@ struct OAuthAccountLinkingView: View {
                 CustomBottomButton(action: {
                     isActiveButton = true
                     
-                }, label: "연동하기", isFormValid: .constant(true), isDuplicateUserName: .constant(false))
+                }, label: "연동하기", isFormValid: .constant(true))
                     .padding(.bottom, 34)
                 NavigationLink(destination: SignUpView(viewModel: signUpViewModel), isActive: $isActiveButton) {
                     EmptyView()

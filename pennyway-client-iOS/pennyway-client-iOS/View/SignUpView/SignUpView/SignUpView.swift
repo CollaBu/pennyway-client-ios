@@ -30,7 +30,7 @@ struct SignUpView: View {
             CustomBottomButton(action: {
                 if formViewModel.isFormValid {
                     viewModel.continueButtonTapped()
-                    formViewModel.checkDuplicateUserNameAPI()
+//                    formViewModel.checkDuplicateUserNameAPI()
                     
                     if isOAuthRegistration {
                         OAuthRegistrationManager.shared.name = formViewModel.name
@@ -45,7 +45,7 @@ struct SignUpView: View {
                    
                 } else {}
                     
-            }, label: "계속하기", isFormValid: $formViewModel.isFormValid, isDuplicateUserName: $formViewModel.isDuplicateUserName)
+            }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
                 .padding(.bottom, 34)
                 
             NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {

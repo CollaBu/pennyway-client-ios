@@ -42,7 +42,7 @@ struct FindPwView: View {
                         } else {
                             showingPopUp = true
                         }
-                    }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid, isDuplicateUserName: .constant(false))
+                    }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
                 }
                 .padding(.bottom, 34)
                 

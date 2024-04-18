@@ -38,7 +38,7 @@ struct ResetPwView: View {
                         navigateView = true
                     } else {}
                     
-                }, label: "변경하기", isFormValid: $formViewModel.isFormValid, isDuplicateUserName: .constant(false))
+                }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, 34)
                 
                 NavigationLink(destination: CompleteChangePwView(), isActive: $navigateView) {

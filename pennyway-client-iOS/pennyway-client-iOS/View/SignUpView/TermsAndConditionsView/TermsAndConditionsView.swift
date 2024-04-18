@@ -38,7 +38,7 @@ struct TermsAndConditionsView: View {
                         termsAndConditionsViewModel.requestRegistAPI()
                     }
                 }
-            }, label: "계속하기", isFormValid: $isAllAgreed, isDuplicateUserName: .constant(false))
+            }, label: "계속하기", isFormValid: $isAllAgreed)
                 .padding(.bottom, 34)
             
             NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {

@@ -18,29 +18,32 @@ class SignUpFormViewModel: ObservableObject {
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     
     func validateForm() {
-        if isOAuthRegistration {
-            if !isExistUser {
-                if !name.isEmpty && !id.isEmpty && !showErrorName && !showErrorID {
-                    isFormValid = true
-                } else {
-                    isFormValid = false
-                }
-            }
-        } else {
-            if isOAuthUser {
-                if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
-                    isFormValid = true
-                } else {
-                    isFormValid = false
-                }
+        func handleValidationResult(isDuplicate: Bool) {
+            if isDuplicate {
+                isFormValid = false
             } else {
-                if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
-                    isFormValid = true
+                if isOAuthRegistration {
+                    if !isExistUser && !name.isEmpty && !id.isEmpty && !showErrorName && !showErrorID {
+                        isFormValid = true
+                    } else {
+                        isFormValid = false
+                    }
+                } else if isOAuthUser {
+                    if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
+                        isFormValid = true
+                    } else {
+                        isFormValid = false
+                    }
                 } else {
-                    isFormValid = false
+                    if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
+                        isFormValid = true
+                    } else {
+                        isFormValid = false
+                    }
                 }
             }
         }
+        checkDuplicateUserNameAPI(completion: handleValidationResult)
     }
     
     func validatePwForm() {
@@ -68,28 +71,32 @@ class SignUpFormViewModel: ObservableObject {
         showErrorConfirmPw = password != confirmPw
     }
     
-    func checkDuplicateUserNameAPI() {
+    func checkDuplicateUserNameAPI(completion: @escaping (Bool) -> Void) {
         AuthAlamofire.shared.checkDuplicateUserName(id) { result in
             switch result {
             case let .success(data):
                 do {
                     if let responseJSON = try JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any],
                        let dataDict = responseJSON["data"] as? [String: Any],
-                       let isDuplicate = dataDict["isDuplicate"] as? Int
+                       let isDuplicate = dataDict["isDuplicate"] as? Bool
                     {
-                        self.isDuplicateUserName = (isDuplicate == 1)
+                        self.isDuplicateUserName = (isDuplicate == true)
+                        completion(isDuplicate)
                     } else {
                         self.isDuplicateUserName = false
+                        completion(false)
                     }
                     
                 } catch {
                     print("Error parsing response JSON: \(error)")
                     self.isDuplicateUserName = false
+                    completion(false)
                 }
                 
             case let .failure(error):
                 print("Failed to verify: \(error)")
-                self.isDuplicateUserName = false // 네트워크 오류나 기타 에러 발생 시 처리
+                self.isDuplicateUserName = false 
+                completion(false)
             }
         }
     }
