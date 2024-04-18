@@ -48,18 +48,18 @@ class PhoneVerificationViewModel: ObservableObject {
     func requestVerificationCodeAPI(completion: @escaping () -> Void) {
         validatePhoneNumber()
         requestVerificationCodeAction()
-        let verificationCodeDTO = VerificationCodeRequestDto(phone: formattedPhoneNumber)
+        let verificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
 
         if !showErrorPhoneNumberFormat {
-            AuthAlamofire.shared.receiveVerificationCode(verificationCodeDTO) { result in
+            AuthAlamofire.shared.receiveVerificationCode(verificationCodeDto) { result in
                 self.handleVerificationCodeAPIResult(result: result, completion: completion)
             }
         }
     }
 
     func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        let verificationDTO = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
-        AuthAlamofire.shared.verifyVerificationCode(verificationDTO) { result in
+        let verificationDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
+        AuthAlamofire.shared.verifyVerificationCode(verificationDto) { result in
             self.handleVerificationAPIResult(result: result, completion: completion)
         }
     }
@@ -68,19 +68,19 @@ class PhoneVerificationViewModel: ObservableObject {
         validatePhoneNumber()
         requestVerificationCodeAction()
 
-        let oauthVerificationCodeDTO = OAuthVerificationCodeRequestDto(phone: formattedPhoneNumber, provider: OAuthRegistrationManager.shared.provider)
+        let oauthVerificationCodeDto = OAuthVerificationCodeRequestDto(phone: formattedPhoneNumber, provider: OAuthRegistrationManager.shared.provider)
 
         if !showErrorPhoneNumberFormat {
-            OAuthAlamofire.shared.oauthReceiveVerificationCode(oauthVerificationCodeDTO) { result in
+            OAuthAlamofire.shared.oauthReceiveVerificationCode(oauthVerificationCodeDto) { result in
                 self.handleVerificationCodeAPIResult(result: result, completion: completion)
             }
         }
     }
 
     func requestOAuthVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        let oauthVerificationDTO = OAuthVerificationRequestDto(phone: formattedPhoneNumber, code: code, provider: OAuthRegistrationManager.shared.provider)
+        let oauthVerificationDto = OAuthVerificationRequestDto(phone: formattedPhoneNumber, code: code, provider: OAuthRegistrationManager.shared.provider)
 
-        OAuthAlamofire.shared.oauthVerifyVerificationCode(oauthVerificationDTO) { result in
+        OAuthAlamofire.shared.oauthVerifyVerificationCode(oauthVerificationDto) { result in
             self.handleOAuthVerificationAPIResult(result: result, completion: completion)
         }
     }
