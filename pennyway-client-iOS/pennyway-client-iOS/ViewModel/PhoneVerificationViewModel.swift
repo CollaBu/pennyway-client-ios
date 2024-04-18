@@ -4,7 +4,7 @@ import SwiftUI
 class PhoneVerificationViewModel: ObservableObject {
     // MARK: Private
 
-    @State private var timer: Timer?
+    private var timer: Timer?
     private var formattedPhoneNumber: String {
         return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber) ?? ""
     }
@@ -41,23 +41,27 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func validateForm() {
-        isFormValid = !phoneNumber.isEmpty && !verificationCode.isEmpty
+        isFormValid = (!phoneNumber.isEmpty && !verificationCode.isEmpty && timerSeconds > 0)
     }
 
     // MARK: API
 
-    func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
+    func requestVerificationCodeAPI(completion: @escaping () -> Void) {
         validatePhoneNumber()
         requestVerificationCodeAction()
 
-        AuthAlamofire.shared.verifyVerificationCode(formattedPhoneNumber, verificationCode) { result in
-            self.handleAPIResult(result: result, completion: completion)
+        if !showErrorPhoneNumberFormat {
+            AuthAlamofire.shared.sendVerificationCode(formattedPhoneNumber) { result in
+                self.handleAPIResult(result: result, completion: completion)
+            }
         }
     }
 
-    func requestVerificationCodeAPI(completion: @escaping () -> Void) {
-        AuthAlamofire.shared.sendVerificationCode(formattedPhoneNumber) { result in
-            self.handleAPIResult(result: result, completion: completion)
+    func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
+        if isFormValid {
+            AuthAlamofire.shared.verifyVerificationCode(formattedPhoneNumber, verificationCode) { result in
+                self.handleAPIResult(result: result, completion: completion)
+            }
         }
     }
 
@@ -73,8 +77,10 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func requestOAuthVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, OAuthRegistrationManager.shared.provider) { result in
-            self.handleAPIResult(result: result, completion: completion)
+        if isFormValid {
+            OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, OAuthRegistrationManager.shared.provider) { result in
+                self.handleAPIResult(result: result, completion: completion)
+            }
         }
     }
 
@@ -128,12 +134,12 @@ class PhoneVerificationViewModel: ObservableObject {
                 stopTimer()
             } else {
                 startTimer()
-                isTimerRunning = true
             }
         }
     }
 
     func startTimer() {
+        timerSeconds = 10
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if self.timerSeconds > 0 && self.isTimerRunning {
                 self.timerSeconds -= 1
@@ -143,12 +149,11 @@ class PhoneVerificationViewModel: ObservableObject {
                 self.isTimerHidden = true
             }
         }
+        isTimerRunning = true
     }
 
     func stopTimer() {
         timer?.invalidate()
-        timer = nil
-        timerSeconds = 10
         isTimerRunning = false
     }
 }
