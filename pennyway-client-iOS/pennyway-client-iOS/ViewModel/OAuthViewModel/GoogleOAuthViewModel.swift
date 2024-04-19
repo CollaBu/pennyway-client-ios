@@ -7,8 +7,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
     
-    var oauthID = ""
-    var token = ""
+    var oauthId = ""
     
     func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
@@ -17,49 +16,29 @@ class GoogleOAuthViewModel: ObservableObject {
                 return
             }
             let givenName = user.profile?.givenName
-            oauthID = user.userID ?? ""
+            oauthId = user.userID ?? ""
             self.givenName = givenName ?? ""
-            token = user.idToken?.tokenString ?? ""
+            KeychainHelper.saveIdToken(accessToken: user.idToken?.tokenString ?? "")
             
-            oauthLoginAPI()
+            oauthLoginApi()
         } else {
             givenName = "Not Logged In"
         }
     }
     
-    func oauthLoginAPI() {
-        OAuthAlamofire.shared.oauthLogin(oauthID, token, OAuthRegistrationManager.shared.provider) { result in
-            switch result {
-            case let .success(data):
-                if let responseData = data {
-                    do {
-                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                        if let code = responseJSON?["code"] as? String {
-                            if code == "2000" {
-                                if let userData = responseJSON?["data"] as? [String: Any],
-                                   let user = userData["user"] as? [String: Any],
-                                   let userID = user["id"] as? Int
-                                {
-                                    if userID != -1 {
-                                        self.isOAuthExistUser = true
-                                    } else {
-                                        self.isOAuthExistUser = false
-                                        OAuthRegistrationManager.shared.isOAuthRegistration = true
-                                    }
-                                }
+    func oauthLoginApi() {
+        let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
 
-                            } else if code == "4000" {
-                                // 에러
-                            }
-                        }
-                        print(responseJSON)
-                    } catch {
-                        print("Error parsing response JSON: \(error)")
-                    }
+        viewModel.oauthLoginApi { success, error in
+            if success {
+                self.isOAuthExistUser = true
+            } else {
+                if let error = error {
+                    self.errorMessage = error
+                } else {
+                    self.isOAuthExistUser = false
+                    OAuthRegistrationManager.shared.isOAuthRegistration = true
                 }
-            case let .failure(error):
-
-                print("Failed to oauthLogin: \(error)")
             }
         }
     }

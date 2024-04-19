@@ -43,7 +43,7 @@ class SignUpFormViewModel: ObservableObject {
                 }
             }
         }
-        checkDuplicateUserNameAPI(completion: handleValidationResult)
+        checkDuplicateUserNameApi(completion: handleValidationResult)
     }
     
     func validatePwForm() {
@@ -71,32 +71,34 @@ class SignUpFormViewModel: ObservableObject {
         showErrorConfirmPw = password != confirmPw
     }
     
-    func checkDuplicateUserNameAPI(completion: @escaping (Bool) -> Void) {
-        AuthAlamofire.shared.checkDuplicateUserName(id) { result in
+    func checkDuplicateUserNameApi(completion: @escaping (Bool) -> Void) {
+        
+        let checkDuplicateRequestDto = CheckDuplicateRequestDto(username: id)
+        AuthAlamofire.shared.checkDuplicateUserName(checkDuplicateRequestDto) { result in
             switch result {
             case let .success(data):
-                do {
-                    if let responseJSON = try JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any],
-                       let dataDict = responseJSON["data"] as? [String: Any],
-                       let isDuplicate = dataDict["isDuplicate"] as? Bool
-                    {
-                        self.isDuplicateUserName = (isDuplicate == true)
-                        completion(isDuplicate)
-                    } else {
-                        self.isDuplicateUserName = false
-                        completion(false)
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(CheckDuplicateResponseDto.self, from: responseData)
+                            
+                        if response.data.isDuplicate {
+                            self.isDuplicateUserName = true
+                            completion(true)
+                        } else {
+                            self.isDuplicateUserName = false
+                            completion(false)
+                        }
+                        print(response)
+                    } catch {
+                        print("Error parsing response JSON: \(error)")
                     }
-                    
-                } catch {
-                    print("Error parsing response JSON: \(error)")
-                    self.isDuplicateUserName = false
-                    completion(false)
                 }
-                
             case let .failure(error):
-                print("Failed to verify: \(error)")
-                self.isDuplicateUserName = false 
-                completion(false)
+                if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                    print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                } else {
+                    print("Failed to verify: \(error)")
+                }
             }
         }
     }

@@ -13,8 +13,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     @Published var phoneNumber: String = ""
 
-    @Published var verificationCode: String = ""
-    @Published var randomVerificationCode = ""
+    @Published var code: String = ""
     @Published var showErrorPhoneNumberFormat = false
     @Published var showErrorVerificationCode = true
     @Published var isFormValid = false
@@ -41,82 +40,123 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func validateForm() {
-        isFormValid = !phoneNumber.isEmpty && !verificationCode.isEmpty
+        isFormValid = !phoneNumber.isEmpty && !code.isEmpty
     }
 
     // MARK: API
 
-    func requestVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
+    func requestVerificationCodeApi(completion: @escaping () -> Void) {
         validatePhoneNumber()
         requestVerificationCodeAction()
-
-        AuthAlamofire.shared.verifyVerificationCode(formattedPhoneNumber, verificationCode) { result in
-            self.handleAPIResult(result: result, completion: completion)
-        }
-    }
-
-    func requestVerificationCodeAPI(completion: @escaping () -> Void) {
-        AuthAlamofire.shared.sendVerificationCode(formattedPhoneNumber) { result in
-            self.handleAPIResult(result: result, completion: completion)
-        }
-    }
-
-    func requestOAuthVerificationCodeAPI(completion: @escaping () -> Void) {
-        validatePhoneNumber()
-        requestVerificationCodeAction()
+        let verificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
 
         if !showErrorPhoneNumberFormat {
-            OAuthAlamofire.shared.oauthSendVerificationCode(formattedPhoneNumber, OAuthRegistrationManager.shared.provider) { result in
-                self.handleAPIResult(result: result, completion: completion)
+            AuthAlamofire.shared.receiveVerificationCode(verificationCodeDto) { result in
+                self.handleVerificationCodeApiResult(result: result, completion: completion)
             }
         }
     }
 
-    func requestOAuthVerifyVerificationCodeAPI(completion: @escaping () -> Void) {
-        OAuthAlamofire.shared.oauthVerifyVerificationCode(formattedPhoneNumber, verificationCode, OAuthRegistrationManager.shared.provider) { result in
-            self.handleAPIResult(result: result, completion: completion)
+    func requestVerifyVerificationCodeApi(completion: @escaping () -> Void) {
+        let verificationDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
+        AuthAlamofire.shared.verifyVerificationCode(verificationDto) { result in
+            self.handleVerificationApiResult(result: result, completion: completion)
         }
     }
 
-    private func handleAPIResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+    func requestOAuthVerificationCodeApi(completion: @escaping () -> Void) {
+        validatePhoneNumber()
+        requestVerificationCodeAction()
+
+        let oauthVerificationCodeDto = OAuthVerificationCodeRequestDto(phone: formattedPhoneNumber, provider: OAuthRegistrationManager.shared.provider)
+
+        if !showErrorPhoneNumberFormat {
+            OAuthAlamofire.shared.oauthReceiveVerificationCode(oauthVerificationCodeDto) { result in
+                self.handleVerificationCodeApiResult(result: result, completion: completion)
+            }
+        }
+    }
+
+    func requestOAuthVerifyVerificationCodeApi(completion: @escaping () -> Void) {
+        let oauthVerificationDto = OAuthVerificationRequestDto(phone: formattedPhoneNumber, code: code, provider: OAuthRegistrationManager.shared.provider)
+
+        OAuthAlamofire.shared.oauthVerifyVerificationCode(oauthVerificationDto) { result in
+            self.handleOAuthVerificationApiResult(result: result, completion: completion)
+        }
+    }
+
+    private func handleVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
         switch result {
         case let .success(data):
             if let responseData = data {
                 do {
-                    let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-
-                    if let code = responseJSON?["code"] as? String {
-                        switch code {
-                        case "2000":
-                            showErrorVerificationCode = false
-                            if let smsData = responseJSON?["data"] as? [String: Any], let sms = smsData["sms"] as? [String: Any] {
-                                if let existsUser = sms["existsUser"] as? Bool {
-                                    OAuthRegistrationManager.shared.isExistUser = existsUser
-                                }
-
-                                if let oauth = sms["oauth"] as? Bool {
-                                    OAuthRegistrationManager.shared.isOAuthUser = oauth
-                                }
-                                if let username = sms["username"] as? String {
-                                    OAuthRegistrationManager.shared.username = username
-                                }
-                            }
-                        case "4010", "4042":
-                            showErrorVerificationCode = true
-                        default:
-                            showErrorVerificationCode = true
-                            break
-                        }
-                    }
-                    print(responseJSON as Any)
+                    let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
+                    print(response)
                 } catch {
-                    print("Error parsing response JSON: \(error)")
+                    print("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
-            print("Failed to verify: \(error)")
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
         }
+        completion()
+    }
 
+    private func handleVerificationApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
+                    showErrorVerificationCode = false
+                    let sms = response.data.sms
+                    OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
+
+                    print(response)
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            showErrorVerificationCode = true
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
+        }
+        completion()
+    }
+
+    private func handleOAuthVerificationApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(OAuthVerificationResponseDto.self, from: responseData)
+
+                    showErrorVerificationCode = false
+                    let sms = response.data.sms
+                    OAuthRegistrationManager.shared.isExistUser = sms.existsUser
+                    OAuthRegistrationManager.shared.username = sms.username
+
+                    print(response)
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            showErrorVerificationCode = true
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
+        }
         completion()
     }
 

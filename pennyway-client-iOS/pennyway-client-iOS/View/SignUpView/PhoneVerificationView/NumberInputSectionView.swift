@@ -22,15 +22,15 @@ struct NumberInputSectionView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46)
                     HStack {
-                        TextField("", text: $viewModel.verificationCode)
+                        TextField("", text: $viewModel.code)
                             .padding(.leading, 13)
                             .font(.pretendard(.medium, size: 14))
                             .keyboardType(.numberPad)
-                            .onChange(of: viewModel.verificationCode) { newValue in
+                            .onChange(of: viewModel.code) { newValue in
                                 if Int(newValue) != nil {
-                                    viewModel.verificationCode = String(newValue)
+                                    viewModel.code = String(newValue)
                                 } else {
-                                    viewModel.verificationCode = ""
+                                    viewModel.code = ""
                                 }
                                 viewModel.validateForm()
                             }

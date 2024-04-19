@@ -7,7 +7,7 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
 
-    var oauthID = ""
+    var oauthId = ""
 
     func checkUserInfo() {
         if AuthApi.hasToken() {
@@ -19,10 +19,10 @@ class KakaoOAuthViewModel: ObservableObject {
                 }
                 if let user = user {
                     self.givenName = user.kakaoAccount?.profile?.nickname ?? ""
-                    self.oauthID = String(user.id ?? 0)
+                    self.oauthId = String(user.id ?? 0)
 
-                    print(self.oauthID)
-                    self.oauthLoginAPI()
+                    print(self.oauthId)
+                    self.oauthLoginApi()
                 }
             }
         } else {
@@ -31,39 +31,19 @@ class KakaoOAuthViewModel: ObservableObject {
         }
     }
 
-    func oauthLoginAPI() {
-        OAuthAlamofire.shared.oauthLogin(oauthID, KeychainHelper.loadIDToken() ?? "", OAuthRegistrationManager.shared.provider) { result in
-            switch result {
-            case let .success(data):
-                if let responseData = data {
-                    do {
-                        let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                        if let code = responseJSON?["code"] as? String {
-                            if code == "2000" {
-                                if let userData = responseJSON?["data"] as? [String: Any],
-                                   let user = userData["user"] as? [String: Any],
-                                   let userID = user["id"] as? Int
-                                {
-                                    if userID != -1 {
-                                        self.isOAuthExistUser = true
-                                    } else {
-                                        self.isOAuthExistUser = false
-                                        OAuthRegistrationManager.shared.isOAuthRegistration = true
-                                    }
-                                }
+    func oauthLoginApi() {
+        let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
 
-                            } else if code == "4000" {
-                                // 에러
-                            }
-                        }
-                        print(responseJSON)
-                    } catch {
-                        print("Error parsing response JSON: \(error)")
-                    }
+        viewModel.oauthLoginApi { success, error in
+            if success {
+                self.isOAuthExistUser = true
+            } else {
+                if let error = error {
+                    self.errorMessage = error
+                } else {
+                    self.isOAuthExistUser = false
+                    OAuthRegistrationManager.shared.isOAuthRegistration = true
                 }
-            case let .failure(error):
-
-                print("Failed to oauthLogin: \(error)")
             }
         }
     }
@@ -76,7 +56,7 @@ class KakaoOAuthViewModel: ObservableObject {
             } else {
                 print("loginWithKakaoAccount() success.")
 
-                KeychainHelper.saveIDToken(accessToken: oauthToken!.idToken ?? "")
+                KeychainHelper.saveIdToken(accessToken: oauthToken!.idToken ?? "")
 
                 // 로그인 성공 시 처리
                 self.checkUserInfo()

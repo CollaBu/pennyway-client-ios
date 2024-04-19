@@ -6,31 +6,28 @@ class LoginFormViewModel: ObservableObject {
     @Published var isFormValid = false
     @Published var loginFailed: String? = nil
 
-    func loginAPI() {
+    func loginApi() {
         if !isFormValid {
-            AuthAlamofire.shared.login(id, password) { result in
+            let loginDto = LoginRequestDto(username: id, password: password)
+            AuthAlamofire.shared.login(loginDto) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {
                         do {
-                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                            if let code = responseJSON?["code"] as? String {
-                                if code == "2000" {
-                                    // 성공적으로 로그인 된 경우
-                                    self.loginFailed = nil
-                                } else if code == "4010" {
-                                    // 포맷 오류
-                                    self.loginFailed = code
-                                }
-                            }
-                            print(responseJSON)
+                            let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                            self.loginFailed = nil
+                            print(response)
                         } catch {
                             print("Error parsing response JSON: \(error)")
                         }
                     }
                 case let .failure(error):
-
-                    print("Failed Login: \(error)")
+                    if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                        print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                        self.loginFailed = errorWithDomainErrorAndMessage.code // 수정
+                    } else {
+                        print("Failed to verify: \(error)")
+                    }
                 }
             }
         }

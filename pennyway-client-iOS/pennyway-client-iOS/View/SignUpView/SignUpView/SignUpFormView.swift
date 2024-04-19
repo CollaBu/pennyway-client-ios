@@ -48,11 +48,10 @@ struct SignUpFormView: View {
             if formViewModel.showErrorID {
                 errorMessage("영문 소문자, 특수기호 -, _, . 만 사용하여,\n5~20자의 아이디를 입력해주세요")
             }
-            
+
             if formViewModel.isDuplicateUserName {
                 errorMessage("이미 사용 중인 아이디예요")
             }
-            
             passwordFields()
         }
     }
@@ -77,7 +76,7 @@ struct SignUpFormView: View {
             if formViewModel.showErrorID {
                 errorMessage("영문 소문자, 특수기호 -, _, . 만 사용하여,\n5~20자의 아이디를 입력해주세요")
             }
-            
+ 
             if formViewModel.isDuplicateUserName {
                 errorMessage("이미 사용 중인 아이디예요")
             }

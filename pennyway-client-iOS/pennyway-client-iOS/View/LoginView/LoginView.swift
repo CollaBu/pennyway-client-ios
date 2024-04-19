@@ -2,10 +2,10 @@ import SwiftUI
 
 struct LoginView: View {
     // MARK: Private
-    
+
     @State private var isSplashShown = true
     @State private var isActiveLink = false
-    
+
     var body: some View {
         VStack {
             if isSplashShown {
@@ -21,7 +21,6 @@ struct LoginView: View {
                 LoginFormView(viewModel: LoginFormViewModel())
             }
         }
-        
     }
 }
 

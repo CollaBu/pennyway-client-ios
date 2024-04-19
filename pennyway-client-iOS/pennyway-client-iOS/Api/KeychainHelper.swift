@@ -34,7 +34,7 @@ class KeychainHelper {
         }
     }
     
-    static func saveIDToken(accessToken: String) {
+    static func saveIdToken(accessToken: String) {
         let keychainQuery: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: "idToken",
@@ -49,7 +49,7 @@ class KeychainHelper {
         }
     }
     
-    static func loadIDToken() -> String? {
+    static func loadIdToken() -> String? {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: "idToken",

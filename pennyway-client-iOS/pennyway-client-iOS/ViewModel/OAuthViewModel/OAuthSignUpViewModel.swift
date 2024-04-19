@@ -1,11 +1,11 @@
 
 import Foundation
 
-class OAuthAccountLinkingViewModel: ObservableObject {
-    func linkOAuthToAccountApi() { // 바로 로그인 처리
-        let linkOAuthToAccountDto = LinkOAuthToAccountRequestDto(idToken: KeychainHelper.loadIdToken() ?? "", phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
+class OAuthSignUpViewModel: ObservableObject {
+    func oauthSignUpApi() { // 소셜 회원가입
+        let oauthSignUpDto = OAuthSignUpRequestDto(idToken: KeychainHelper.loadIdToken() ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
 
-        OAuthAlamofire.shared.linkOAuthToAccount(linkOAuthToAccountDto) { result in
+        OAuthAlamofire.shared.oauthSignUp(oauthSignUpDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

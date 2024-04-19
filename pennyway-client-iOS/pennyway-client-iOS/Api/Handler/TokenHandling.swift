@@ -3,13 +3,13 @@ import Alamofire
 import Foundation
 import OSLog
 
-// MARK: - TokenHandling
+// MARK: - TokenHandler
 
-protocol TokenHandling {
+protocol TokenHandler {
     func extractAndStoreToken(from response: AFDataResponse<Data?>)
 }
 
-extension TokenHandling {
+extension TokenHandler {
     func extractAndStoreToken(from response: AFDataResponse<Data?>) {
         if let responseHeaders = response.response?.allHeaderFields as? [String: String],
            let accessToken = responseHeaders["Authorization"]

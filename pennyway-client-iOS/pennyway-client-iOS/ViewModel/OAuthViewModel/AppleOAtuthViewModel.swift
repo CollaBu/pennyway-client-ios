@@ -9,7 +9,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
     
-    var oauthID = ""
+    var oauthId = ""
     var token = ""
     
     func signIn() {
@@ -40,45 +40,24 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             let fullName = appleIDCredential.fullName
             let idToken = appleIDCredential.identityToken!
             
-            oauthID = userIdentifier
-            token = String(data: idToken, encoding: .utf8) ?? ""
+            oauthId = userIdentifier
+            KeychainHelper.saveIdToken(accessToken: String(data: idToken, encoding: .utf8) ?? "")
           
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            //            print("token : \(String(describing: tokeStr!))")
             
-            OAuthAlamofire.shared.oauthLogin(oauthID, token, OAuthRegistrationManager.shared.provider) { result in
-                switch result {
-                case let .success(data):
-                    if let responseData = data {
-                        do {
-                            let responseJSON = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
-                            if let code = responseJSON?["code"] as? String {
-                                if code == "2000" {
-                                    if let userData = responseJSON?["data"] as? [String: Any],
-                                       let user = userData["user"] as? [String: Any],
-                                       let userID = user["id"] as? Int
-                                    {
-                                        if userID != -1 {
-                                            self.isOAuthExistUser = true
-                                        } else {
-                                            self.isOAuthExistUser = false
-                                            OAuthRegistrationManager.shared.isOAuthRegistration = true
-                                        }
-                                    }
-                                    
-                                } else if code == "4000" {
-                                    // 에러
-                                }
-                            }
-                            print(responseJSON)
-                        } catch {
-                            print("Error parsing response JSON: \(error)")
-                        }
+            let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
+
+            viewModel.oauthLoginApi { success, error in
+                if success {
+                    self.isOAuthExistUser = true
+                } else {
+                    if let error = error {
+                        self.errorMessage = error
+                    } else {
+                        self.isOAuthExistUser = false
+                        OAuthRegistrationManager.shared.isOAuthRegistration = true
                     }
-                case let .failure(error):
-                    
-                    print("Failed to oauthLogin: \(error)")
                 }
             }
             
