@@ -30,7 +30,7 @@ class AuthAlamofire: TokenHandler {
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.signup(dto: dto), completion: completion)
     }
     
-    func checkDuplicateUserName(_ dto: DuplicateCheckRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func checkDuplicateUserName(_ dto: CheckDuplicateRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - checkDuplicateUserName() called userInput: %@", log: .default, type: .info, dto.username)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.checkDuplicateUserName(dto: dto), completion: completion)
     }

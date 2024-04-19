@@ -7,7 +7,7 @@ enum AuthRouter: URLRequestConvertible {
     case signup(dto: SignUpRequestDto)
     case receiveVerificationCode(dto: VerificationCodeRequestDto)
     case verifyVerificationCode(dto: VerificationRequestDto)
-    case checkDuplicateUserName(dto: DuplicateCheckRequestDto)
+    case checkDuplicateUserName(dto: CheckDuplicateRequestDto)
     case login(dto: LoginRequestDto)
     case linkAccountToOAuth(dto: LinkAccountToOAuthRequestDto)
 

@@ -11,35 +11,39 @@ class SignUpFormViewModel: ObservableObject {
     @Published var showErrorPassword = false
     @Published var showErrorConfirmPw = false
     @Published var isFormValid: Bool = false
+    @Published var isDuplicateUserName: Bool = false
     
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
     @State private var isOAuthUser = OAuthRegistrationManager.shared.isOAuthUser
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     
     func validateForm() {
-        if isOAuthRegistration {
-            if !isExistUser {
-                if !name.isEmpty && !id.isEmpty && !showErrorName && !showErrorID {
-                    isFormValid = true
-                } else {
-                    isFormValid = false
-                }
-            }
-        } else {
-            if isOAuthUser {
-                if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
-                    isFormValid = true
-                } else {
-                    isFormValid = false
-                }
+        func handleValidationResult(isDuplicate: Bool) {
+            if isDuplicate {
+                isFormValid = false
             } else {
-                if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
-                    isFormValid = true
+                if isOAuthRegistration {
+                    if !isExistUser && !name.isEmpty && !id.isEmpty && !showErrorName && !showErrorID {
+                        isFormValid = true
+                    } else {
+                        isFormValid = false
+                    }
+                } else if isOAuthUser {
+                    if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
+                        isFormValid = true
+                    } else {
+                        isFormValid = false
+                    }
                 } else {
-                    isFormValid = false
+                    if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
+                        isFormValid = true
+                    } else {
+                        isFormValid = false
+                    }
                 }
             }
         }
+        checkDuplicateUserNameAPI(completion: handleValidationResult)
     }
     
     func validatePwForm() {
@@ -59,7 +63,7 @@ class SignUpFormViewModel: ObservableObject {
     }
     
     func validatePassword() {
-        let passwordRegex = "^(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{8,16}$"
+        let passwordRegex = "^(?=.*[a-z])(?=.*[0-9])([A-Za-z0-9!@#$%^&*()_+={}?:~<>;,-./`]{8,16})$"
         showErrorPassword = !NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
     
@@ -67,15 +71,23 @@ class SignUpFormViewModel: ObservableObject {
         showErrorConfirmPw = password != confirmPw
     }
     
-    func checkDuplicateUserNameAPI() {
-        let duplicateCheckDto = DuplicateCheckRequestDto(username: id)
-        AuthAlamofire.shared.checkDuplicateUserName(duplicateCheckDto) { result in
+    func checkDuplicateUserNameAPI(completion: @escaping (Bool) -> Void) {
+        let checkDuplicateRequestDto = CheckDuplicateRequestDto(username: id)
+        
+        AuthAlamofire.shared.checkDuplicateUserName(checkDuplicateRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(DuplicateCheckResponseDto.self, from: responseData)
-
+                        let response = try JSONDecoder().decode(CheckDuplicateResponseDto.self, from: responseData)
+                            
+                        if response.data.isDuplicate {
+                            self.isDuplicateUserName = true
+                            completion(true)
+                        } else {
+                            self.isDuplicateUserName = false
+                            completion(false)
+                        }
                         print(response)
                     } catch {
                         print("Error parsing response JSON: \(error)")

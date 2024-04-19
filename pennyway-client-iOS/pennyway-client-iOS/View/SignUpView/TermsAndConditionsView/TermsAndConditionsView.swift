@@ -4,7 +4,6 @@ struct TermsAndConditionsView: View {
     @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @State private var isAllAgreed = false
     @ObservedObject var viewModel: SignUpNavigationViewModel
-    
     @StateObject var oauthSignUpViewModel = OAuthSignUpViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration

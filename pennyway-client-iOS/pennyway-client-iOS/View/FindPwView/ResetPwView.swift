@@ -23,8 +23,6 @@ struct ResetPwView: View {
                     Spacer().frame(height: 33)
                     
                     ResetPwFormView(formViewModel: formViewModel)
-                    
-//                    Spacer().frame(height: 129)
                 }
                 Spacer()
                 
@@ -53,10 +51,18 @@ struct ResetPwView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
+                        Button(action: {
+                            NavigationUtil.popToRootView()
+                        }, label: {
+                            Image("icon_arrow_back")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 34, height: 34)
+                                .padding(5)
+                        })
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
                         
                     }.offset(x: -10)
                 }
