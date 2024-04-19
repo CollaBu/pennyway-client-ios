@@ -26,11 +26,11 @@ struct SignUpView: View {
                 }
             }
         }
+        
         VStack {
             CustomBottomButton(action: {
                 if formViewModel.isFormValid {
                     viewModel.continueButtonTapped()
-//                    formViewModel.checkDuplicateUserNameAPI()
                     
                     if isOAuthRegistration {
                         OAuthRegistrationManager.shared.name = formViewModel.name
@@ -42,12 +42,12 @@ struct SignUpView: View {
                         RegistrationManager.shared.password = formViewModel.password
                         RegistrationManager.shared.performRegistration()
                     }
-                   
-                } else {}
                     
-            }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
-                .padding(.bottom, 34)
+                } else {}
                 
+            }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
+            .padding(.bottom, 34)
+            
             NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
                 EmptyView()
             }
@@ -73,7 +73,7 @@ struct SignUpView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private func destinationView() -> some View {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
