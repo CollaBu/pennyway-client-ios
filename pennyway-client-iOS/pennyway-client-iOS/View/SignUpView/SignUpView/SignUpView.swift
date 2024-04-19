@@ -4,7 +4,6 @@ struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var accountLinkingViewModel = OAuthAccountLinkingViewModel()
-    @StateObject var oauthRegistViewModel = OAuthRegistViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
@@ -46,7 +45,7 @@ struct SignUpView: View {
                 } else {}
                 
             }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
-            .padding(.bottom, 34)
+                .padding(.bottom, 34)
             
             NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
                 EmptyView()

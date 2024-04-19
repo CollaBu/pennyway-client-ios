@@ -4,7 +4,7 @@ struct TermsAndConditionsView: View {
     @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @State private var isAllAgreed = false
     @ObservedObject var viewModel: SignUpNavigationViewModel
-    @StateObject var oauthRegistViewModel = OAuthRegistViewModel()
+    @StateObject var oauthSignUpViewModel = OAuthSignUpViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
 
@@ -33,9 +33,9 @@ struct TermsAndConditionsView: View {
                     viewModel.continueButtonTapped()
                     
                     if isOAuthRegistration {
-                        oauthRegistViewModel.oauthRegistAPI()
+                        oauthSignUpViewModel.oauthSignUpApi()
                     } else {
-                        termsAndConditionsViewModel.requestRegistAPI()
+                        termsAndConditionsViewModel.requestRegistApi()
                     }
                 }
             }, label: "계속하기", isFormValid: $isAllAgreed)

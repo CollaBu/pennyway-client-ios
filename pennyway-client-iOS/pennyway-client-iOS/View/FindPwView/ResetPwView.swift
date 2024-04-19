@@ -30,7 +30,7 @@ struct ResetPwView: View {
                     if formViewModel.isFormValid {
                         // CompleteChangePwView()
                         print(formViewModel.isFormValid)
-                        // formViewModel.checkDuplicateUserNameAPI()
+                        // formViewModel.checkDuplicateUserNameApi()
                         
                         RegistrationManager.shared.password = formViewModel.password
                         //                                RegistrationManager.shared.performRegistration()

@@ -29,13 +29,13 @@ struct FindIDFormView: View {
                     CustomBottomButton(action: {
 //                        numberVerificationViewModel.validateNumberVerification()
                         FindIDView()
-                        // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
+                        // numberVerificationViewModel.requestVerifyVerificationCodeApi()
                         if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
                             showingPopUp = false
                             viewModel.continueButtonTapped()
                             
                             RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
-                            RegistrationManager.shared.verificationCode = numberVerificationViewModel.verificationCode
+                            RegistrationManager.shared.code = numberVerificationViewModel.code
                             
                             navigateToFindIDView = true
                             

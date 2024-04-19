@@ -56,7 +56,7 @@ struct InputFormView: View {
 
                 VStack {
                     CustomBottomButton(action: {
-                        viewModel.loginAPI()
+                        viewModel.loginApi()
 
                     }, label: "로그인", isFormValid: .constant(true)) // 수정
                 }

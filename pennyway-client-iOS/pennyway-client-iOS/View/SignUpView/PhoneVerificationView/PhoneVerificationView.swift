@@ -9,60 +9,58 @@ struct PhoneVerificationView: View {
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
    
     var body: some View {
-        NavigationAvailable {
-            ZStack {
-                VStack {
-                    Spacer().frame(height: 15)
-                    
-                    NavigationCountView(selectedText: $viewModel.selectedText)
-                        .onAppear {
-                            viewModel.selectedText = 1
-                        }
-                    
-                    Spacer().frame(height: 14)
-                    
-                    PhoneVerificationContentView(phoneVerificationViewModel: phoneVerificationViewModel)
-                    
-                    Spacer()
-                    
-                    CustomBottomButton(action: {
-                        continueButtonAction()
-                    }, label: "계속하기", isFormValid: $phoneVerificationViewModel.isFormValid)
-                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                    
-                    NavigationLink(destination: destinationView(), tag: 2, selection: $viewModel.selectedText) {
-                        EmptyView()
-                    }
-                }
+        ZStack {
+            VStack {
+                Spacer().frame(height: 15)
                 
-                if showingPopUp {
-                    Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                    ErrorCodePopUpView(showingPopUp: $showingPopUp)
+                NavigationCountView(selectedText: $viewModel.selectedText)
+                    .onAppear {
+                        viewModel.selectedText = 1
+                    }
+                
+                Spacer().frame(height: 14)
+                
+                PhoneVerificationContentView(phoneVerificationViewModel: phoneVerificationViewModel)
+                
+                Spacer()
+                
+                CustomBottomButton(action: {
+                    continueButtonAction()
+                }, label: "계속하기", isFormValid: $phoneVerificationViewModel.isFormValid)
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                
+                NavigationLink(destination: destinationView(), tag: 2, selection: $viewModel.selectedText) {
+                    EmptyView()
                 }
             }
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
-                        
-                    }.offset(x: -10)
-                }
+            
+            if showingPopUp {
+                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showingPopUp)
+            }
+        }
+        .edgesIgnoringSafeArea(.bottom)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack {
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                    
+                }.offset(x: -10)
             }
         }
     }
     
     private func continueButtonAction() {
         if isOAuthRegistration {
-            phoneVerificationViewModel.requestOAuthVerifyVerificationCodeAPI {
+            phoneVerificationViewModel.requestOAuthVerifyVerificationCodeApi {
                 checkFormValid()
             }
         } else {
-            phoneVerificationViewModel.requestVerifyVerificationCodeAPI {
+            phoneVerificationViewModel.requestVerifyVerificationCodeApi {
                 checkFormValid()
             }
         }
@@ -75,13 +73,13 @@ struct PhoneVerificationView: View {
             
             if isOAuthRegistration {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
-                OAuthRegistrationManager.shared.code = phoneVerificationViewModel.verificationCode
+                OAuthRegistrationManager.shared.code = phoneVerificationViewModel.code
                 if OAuthRegistrationManager.shared.isExistUser {
-                    oauthAccountLinkingViewModel.linkOAuthWithNormalAccountAPI()
+                    oauthAccountLinkingViewModel.linkOAuthToAccountApi()
                 }
             } else {
                 RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
-                RegistrationManager.shared.verificationCode = phoneVerificationViewModel.verificationCode
+                RegistrationManager.shared.code = phoneVerificationViewModel.code
             }
         } else {
             showingPopUp = true
