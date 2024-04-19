@@ -50,7 +50,7 @@ enum AuthRouter: URLRequestConvertible {
         case let .verifyVerificationCode(dto):
             return try? dto.asDictionary()
         case let .checkDuplicateUserName(dto):
-            return try? dto.asDictionary()
+            return [:]
         case let .login(dto):
             return try? dto.asDictionary()
         case let .linkAccountToOAuth(dto):
@@ -72,7 +72,7 @@ enum AuthRouter: URLRequestConvertible {
 
         case let .checkDuplicateUserName(dto):
             let queryParameters = [URLQueryItem(name: "username", value: dto.username)]
-            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }
         return request
     }
