@@ -17,10 +17,10 @@ struct pennyway_client_iOSApp: App {
     var body: some Scene {
         WindowGroup {
             LoginView()
+                .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }
-//                .environmentObject(SignUpFormViewModel)
         }
     }
 }

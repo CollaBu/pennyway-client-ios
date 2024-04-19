@@ -43,12 +43,9 @@
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
 		4A8571342BC650FA0082CE47 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571322BC650FA0082CE47 /* Constants.swift */; };
 		4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */; };
-		4A85713E2BC700FB0082CE47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A85713D2BC700FB0082CE47 /* GoogleService-Info.plist */; };
 		4A8571402BC701050082CE47 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A85713F2BC701050082CE47 /* Secrets.xcconfig */; };
 		4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */; };
 		4A8571442BC7C5EB0082CE47 /* OAuthRegistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthRegistViewModel.swift */; };
-		4A8571472BC85E6D0082CE47 /* DynamicFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571462BC85E6D0082CE47 /* DynamicFontSize.swift */; };
-		4A8571492BC86AF70082CE47 /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571482BC86AF70082CE47 /* DynamicSizeFactor.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
@@ -78,11 +75,15 @@
 		D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D850DF8F2BAAD70E004FBF67 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D867D6DC2BC453AA00A2EDA9 /* FindIDFormView.swift */; };
-		D86B43862BC7CF1100143C12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D86B43852BC7CF1100143C12 /* GoogleService-Info.plist */; };
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
 		D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */; };
 		D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */; };
 		D87CB0D62BC5B56600BD882A /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D52BC5B56600BD882A /* ResetPwFormView.swift */; };
+		D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E182BCEBEE700922894 /* DynamicFontSize.swift */; };
+		D8880E1E2BCEC8DD00922894 /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */; };
+		D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */; };
+		D8880E222BCFBBC400922894 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8880E212BCFBBC400922894 /* GoogleService-Info.plist */; };
+		D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */; };
 		D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */; };
 		D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */; };
 		D888329C2BBC612600F49B27 /* LoginFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329B2BBC612600F49B27 /* LoginFormView.swift */; };
@@ -130,12 +131,9 @@
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
 		4A8571322BC650FA0082CE47 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
-		4A85713D2BC700FB0082CE47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A85713F2BC701050082CE47 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = "pennyway-client-iOS/Secrets.xcconfig"; sourceTree = SOURCE_ROOT; };
 		4A8571412BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingViewModel.swift; sourceTree = "<group>"; };
 		4A8571432BC7C5EB0082CE47 /* OAuthRegistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRegistViewModel.swift; sourceTree = "<group>"; };
-		4A8571462BC85E6D0082CE47 /* DynamicFontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFontSize.swift; sourceTree = "<group>"; };
-		4A8571482BC86AF70082CE47 /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
@@ -167,6 +165,11 @@
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
 		D87CB0D52BC5B56600BD882A /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
+		D8880E182BCEBEE700922894 /* DynamicFontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFontSize.swift; sourceTree = "<group>"; };
+		D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
+		D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
+		D8880E212BCFBBC400922894 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizer.swift; sourceTree = "<group>"; };
 		D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAutocapitalization.swift; sourceTree = "<group>"; };
 		D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
 		D888329B2BBC612600F49B27 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
@@ -287,6 +290,7 @@
 				4A762AEA2B99A16B001C1188 /* Products */,
 				41951791426F03880A100F2C /* Pods */,
 				C2F5B21500B89F9F684EBF8B /* Frameworks */,
+				D86B43882BCCFBA100143C12 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -301,7 +305,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4A85713D2BC700FB0082CE47 /* GoogleService-Info.plist */,
+				D8880E212BCFBBC400922894 /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
 				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
@@ -385,6 +389,7 @@
 				4A762B082B99A26C001C1188 /* TextExtensions.swift */,
 				D88832972BBC60EC00F49B27 /* TextAutocapitalization.swift */,
 				D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */,
+				D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -396,7 +401,8 @@
 				4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */,
 				4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */,
 				4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */,
-				4A8571482BC86AF70082CE47 /* DynamicSizeFactor.swift */,
+				D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */,
+				D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -413,7 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				4A11799F2BA9533D00A9CF4C /* FontExtensions.swift */,
-				4A8571462BC85E6D0082CE47 /* DynamicFontSize.swift */,
+				D8880E182BCEBEE700922894 /* DynamicFontSize.swift */,
 			);
 			path = FontExtensions;
 			sourceTree = "<group>";
@@ -472,6 +478,14 @@
 				D867D6DC2BC453AA00A2EDA9 /* FindIDFormView.swift */,
 			);
 			path = FindIdView;
+			sourceTree = "<group>";
+		};
+		D86B43882BCCFBA100143C12 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				D86B43852BC7CF1100143C12 /* GoogleService-Info.plist */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		D87CB0CE2BC5A43B00BD882A /* FindPwView */ = {
@@ -559,7 +573,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D86B43862BC7CF1100143C12 /* GoogleService-Info.plist in Resources */,
+				D8880E222BCFBBC400922894 /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
 				4A8571402BC701050082CE47 /* Secrets.xcconfig in Resources */,
@@ -662,13 +676,14 @@
 				D850DF8B2BA9E3AA004FBF67 /* (null) in Sources */,
 				D888329C2BBC612600F49B27 /* LoginFormView.swift in Sources */,
 				D8157E642BBEF2040083844B /* InputFormView.swift in Sources */,
+				D8880E1E2BCEC8DD00922894 /* DynamicSizeFactor.swift in Sources */,
 				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
 				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
-				4A8571472BC85E6D0082CE47 /* DynamicFontSize.swift in Sources */,
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				D8157E7C2BC269350083844B /* FindIDView.swift in Sources */,
+				D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */,
 				D87CB0D62BC5B56600BD882A /* ResetPwFormView.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
@@ -677,13 +692,13 @@
 				D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A762B052B99A259001C1188 /* PhoneVerificationViewModel.swift in Sources */,
+				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D850DF8F2BAAD70E004FBF67 /* (null) in Sources */,
 				D8157E662BBEF2740083844B /* OauthButtonView.swift in Sources */,
 				4ACE1FED2BBB149D00BB4F0A /* KeychainHelper.swift in Sources */,
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
 				D850DF8D2BA9F1F1004FBF67 /* (null) in Sources */,
-				4A8571492BC86AF70082CE47 /* DynamicSizeFactor.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthRegistViewModel.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
@@ -702,6 +717,7 @@
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
 				4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */,
+				D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
@@ -863,7 +879,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Pennyway;
@@ -901,10 +917,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Pennway Release";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Pennyway Release";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
