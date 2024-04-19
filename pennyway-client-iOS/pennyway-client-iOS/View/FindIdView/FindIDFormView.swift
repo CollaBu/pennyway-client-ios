@@ -29,7 +29,7 @@ struct FindIDFormView: View {
                     CustomBottomButton(action: {
 //                        numberVerificationViewModel.validateNumberVerification()
                         FindIDView()
-                        // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
+                        // numberVerificationViewModel.requestVerifyVerificationCodeApi()
                         if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
                             showingPopUp = false
                             viewModel.continueButtonTapped()

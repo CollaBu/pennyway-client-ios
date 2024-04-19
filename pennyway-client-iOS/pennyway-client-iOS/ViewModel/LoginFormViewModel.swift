@@ -6,7 +6,7 @@ class LoginFormViewModel: ObservableObject {
     @Published var isFormValid = false
     @Published var loginFailed: String? = nil
 
-    func loginAPI() {
+    func loginApi() {
         if !isFormValid {
             let loginDto = LoginRequestDto(username: id, password: password)
             AuthAlamofire.shared.login(loginDto) { result in

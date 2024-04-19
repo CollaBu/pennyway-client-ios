@@ -10,7 +10,7 @@ class OAuthLoginViewModel: ObservableObject {
         self.provider = provider
     }
 
-    func oauthLoginAPI(completion: @escaping (Bool, String?) -> Void) {
+    func oauthLoginApi(completion: @escaping (Bool, String?) -> Void) {
         let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIdToken() ?? "", provider: provider)
 
         OAuthAlamofire.shared.oauthLogin(oauthLoginDto) { result in

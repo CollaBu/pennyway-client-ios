@@ -56,11 +56,11 @@ struct PhoneVerificationView: View {
     
     private func continueButtonAction() {
         if isOAuthRegistration {
-            phoneVerificationViewModel.requestOAuthVerifyVerificationCodeAPI {
+            phoneVerificationViewModel.requestOAuthVerifyVerificationCodeApi {
                 checkFormValid()
             }
         } else {
-            phoneVerificationViewModel.requestVerifyVerificationCodeAPI {
+            phoneVerificationViewModel.requestVerifyVerificationCodeApi {
                 checkFormValid()
             }
         }
@@ -75,7 +75,7 @@ struct PhoneVerificationView: View {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
                 OAuthRegistrationManager.shared.code = phoneVerificationViewModel.code
                 if OAuthRegistrationManager.shared.isExistUser {
-                    oauthAccountLinkingViewModel.linkOAuthToAccountAPI()
+                    oauthAccountLinkingViewModel.linkOAuthToAccountApi()
                 }
             } else {
                 RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber

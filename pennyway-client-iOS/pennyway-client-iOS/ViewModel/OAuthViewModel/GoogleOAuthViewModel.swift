@@ -20,16 +20,16 @@ class GoogleOAuthViewModel: ObservableObject {
             self.givenName = givenName ?? ""
             KeychainHelper.saveIdToken(accessToken: user.idToken?.tokenString ?? "")
             
-            oauthLoginAPI()
+            oauthLoginApi()
         } else {
             givenName = "Not Logged In"
         }
     }
     
-    func oauthLoginAPI() {
+    func oauthLoginApi() {
         let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
 
-        viewModel.oauthLoginAPI { success, error in
+        viewModel.oauthLoginApi { success, error in
             if success {
                 self.isOAuthExistUser = true
             } else {

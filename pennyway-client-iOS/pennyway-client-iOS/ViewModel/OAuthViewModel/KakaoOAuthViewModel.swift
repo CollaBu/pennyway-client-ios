@@ -22,7 +22,7 @@ class KakaoOAuthViewModel: ObservableObject {
                     self.oauthId = String(user.id ?? 0)
 
                     print(self.oauthId)
-                    self.oauthLoginAPI()
+                    self.oauthLoginApi()
                 }
             }
         } else {
@@ -31,10 +31,10 @@ class KakaoOAuthViewModel: ObservableObject {
         }
     }
 
-    func oauthLoginAPI() {
+    func oauthLoginApi() {
         let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
 
-        viewModel.oauthLoginAPI { success, error in
+        viewModel.oauthLoginApi { success, error in
             if success {
                 self.isOAuthExistUser = true
             } else {

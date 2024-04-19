@@ -48,7 +48,7 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             
             let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
 
-            viewModel.oauthLoginAPI { success, error in
+            viewModel.oauthLoginApi { success, error in
                 if success {
                     self.isOAuthExistUser = true
                 } else {

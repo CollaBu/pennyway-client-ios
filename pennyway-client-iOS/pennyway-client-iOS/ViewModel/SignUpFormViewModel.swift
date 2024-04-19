@@ -43,7 +43,7 @@ class SignUpFormViewModel: ObservableObject {
                 }
             }
         }
-        checkDuplicateUserNameAPI(completion: handleValidationResult)
+        checkDuplicateUserNameApi(completion: handleValidationResult)
     }
     
     func validatePwForm() {
@@ -71,7 +71,7 @@ class SignUpFormViewModel: ObservableObject {
         showErrorConfirmPw = password != confirmPw
     }
     
-    func checkDuplicateUserNameAPI(completion: @escaping (Bool) -> Void) {
+    func checkDuplicateUserNameApi(completion: @escaping (Bool) -> Void) {
         
         let checkDuplicateRequestDto = CheckDuplicateRequestDto(username: id)
         AuthAlamofire.shared.checkDuplicateUserName(checkDuplicateRequestDto) { result in

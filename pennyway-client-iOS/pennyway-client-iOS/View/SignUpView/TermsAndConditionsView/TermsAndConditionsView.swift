@@ -33,9 +33,9 @@ struct TermsAndConditionsView: View {
                     viewModel.continueButtonTapped()
                     
                     if isOAuthRegistration {
-                        oauthSignUpViewModel.oauthSignUpAPI()
+                        oauthSignUpViewModel.oauthSignUpApi()
                     } else {
-                        termsAndConditionsViewModel.requestRegistAPI()
+                        termsAndConditionsViewModel.requestRegistApi()
                     }
                 }
             }, label: "계속하기", isFormValid: $isAllAgreed)

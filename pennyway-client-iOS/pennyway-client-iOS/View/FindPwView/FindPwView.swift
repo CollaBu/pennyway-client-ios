@@ -29,7 +29,7 @@ struct FindPwView: View {
                     CustomBottomButton(action: {
                         // phoneVerificationViewModel.validateNumberVerification()
                         ResetPwView(formViewModel: SignUpFormViewModel())
-                        // numberVerificationViewModel.requestVerifyVerificationCodeAPI()
+                        // numberVerificationViewModel.requestVerifyVerificationCodeApi()
                         if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
                             showingPopUp = false
                             viewModel.continueButtonTapped()
