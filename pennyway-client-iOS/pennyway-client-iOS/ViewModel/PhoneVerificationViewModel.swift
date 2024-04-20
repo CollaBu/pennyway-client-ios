@@ -182,7 +182,6 @@ class PhoneVerificationViewModel: ObservableObject {
                 stopTimer()
             } else {
                 startTimer()
-                isTimerRunning = true
             }
         }
     }
@@ -198,6 +197,7 @@ class PhoneVerificationViewModel: ObservableObject {
                 self.isTimerHidden = true
             }
         }
+        isTimerRunning = true
     }
 
     func stopTimer() {
