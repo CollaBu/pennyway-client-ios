@@ -35,11 +35,10 @@ struct PhoneNumberInputSectionView: View {
                             }
                     }
                     Button(action: {
-                        viewModel.judgeTimerRunning()
                         if isOAuthRegistration {
-                            viewModel.requestOAuthVerificationCodeApi {}
+                            viewModel.requestOAuthVerificationCodeApi { viewModel.judgeTimerRunning() }
                         } else {
-                            viewModel.requestVerificationCodeApi {}
+                            viewModel.requestVerificationCodeApi { viewModel.judgeTimerRunning() }
                         }
 
                     }, label: {
@@ -56,7 +55,14 @@ struct PhoneNumberInputSectionView: View {
                 .padding(.horizontal, 20)
             }
             if viewModel.showErrorPhoneNumberFormat {
-                Text("존재하지 않는 전화번호예요")
+                Text("010, 011으로 시작하는 11자리 문자열을 입력해주세요")
+                    .padding(.horizontal, 20)
+                    .font(.pretendard(.medium, size: 12))
+                    .platformTextColor(color: Color("Red03"))
+            }
+
+            if viewModel.showErrorExistingUser {
+                Text("이미 가입된 전화번호예요")
                     .padding(.horizontal, 20)
                     .font(.pretendard(.medium, size: 12))
                     .platformTextColor(color: Color("Red03"))

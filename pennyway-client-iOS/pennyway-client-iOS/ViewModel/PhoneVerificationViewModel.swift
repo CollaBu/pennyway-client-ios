@@ -4,7 +4,7 @@ import SwiftUI
 class PhoneVerificationViewModel: ObservableObject {
     // MARK: Private
 
-    @State private var timer: Timer?
+    private var timer: Timer?
     private var formattedPhoneNumber: String {
         return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber) ?? ""
     }
@@ -15,12 +15,13 @@ class PhoneVerificationViewModel: ObservableObject {
 
     @Published var code: String = ""
     @Published var showErrorPhoneNumberFormat = false
-    @Published var showErrorVerificationCode = true
+    @Published var showErrorVerificationCode = false
+    @Published var showErrorExistingUser = false
     @Published var isFormValid = false
 
     /// Timer
     @Published var isTimerHidden = true
-    @Published var timerSeconds = 10
+    @Published var timerSeconds = 300
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
 
@@ -40,7 +41,7 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func validateForm() {
-        isFormValid = !phoneNumber.isEmpty && !code.isEmpty
+        isFormValid = (!phoneNumber.isEmpty && !code.isEmpty && timerSeconds > 0)
     }
 
     // MARK: API
@@ -59,8 +60,11 @@ class PhoneVerificationViewModel: ObservableObject {
 
     func requestVerifyVerificationCodeApi(completion: @escaping () -> Void) {
         let verificationDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
-        AuthAlamofire.shared.verifyVerificationCode(verificationDto) { result in
-            self.handleVerificationApiResult(result: result, completion: completion)
+
+        if isFormValid {
+            AuthAlamofire.shared.verifyVerificationCode(verificationDto) { result in
+                self.handleVerificationApiResult(result: result, completion: completion)
+            }
         }
     }
 
@@ -80,8 +84,10 @@ class PhoneVerificationViewModel: ObservableObject {
     func requestOAuthVerifyVerificationCodeApi(completion: @escaping () -> Void) {
         let oauthVerificationDto = OAuthVerificationRequestDto(phone: formattedPhoneNumber, code: code, provider: OAuthRegistrationManager.shared.provider)
 
-        OAuthAlamofire.shared.oauthVerifyVerificationCode(oauthVerificationDto) { result in
-            self.handleOAuthVerificationApiResult(result: result, completion: completion)
+        if isFormValid {
+            OAuthAlamofire.shared.oauthVerifyVerificationCode(oauthVerificationDto) { result in
+                self.handleOAuthVerificationApiResult(result: result, completion: completion)
+            }
         }
     }
 
@@ -122,9 +128,13 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-            showErrorVerificationCode = true
             if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                if errorWithDomainErrorAndMessage.code == "4004" {
+                    showErrorExistingUser = true
+                } else {
+                    showErrorVerificationCode = true
+                }
             } else {
                 print("Failed to verify: \(error)")
             }
@@ -150,9 +160,13 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-            showErrorVerificationCode = true
             if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                if errorWithDomainErrorAndMessage.code == "4004" {
+                    showErrorExistingUser = true
+                } else {
+                    showErrorVerificationCode = true
+                }
             } else {
                 print("Failed to verify: \(error)")
             }
@@ -168,12 +182,12 @@ class PhoneVerificationViewModel: ObservableObject {
                 stopTimer()
             } else {
                 startTimer()
-                isTimerRunning = true
             }
         }
     }
 
     func startTimer() {
+        timerSeconds = 300
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if self.timerSeconds > 0 && self.isTimerRunning {
                 self.timerSeconds -= 1
@@ -183,12 +197,12 @@ class PhoneVerificationViewModel: ObservableObject {
                 self.isTimerHidden = true
             }
         }
+        isTimerRunning = true
     }
 
     func stopTimer() {
         timer?.invalidate()
         timer = nil
-        timerSeconds = 10
         isTimerRunning = false
     }
 }

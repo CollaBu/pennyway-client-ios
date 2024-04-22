@@ -67,7 +67,7 @@ struct PhoneVerificationView: View {
     }
     
     private func checkFormValid() {
-        if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
+        if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
             showingPopUp = false
             viewModel.continueButtonTapped()
             
@@ -82,7 +82,9 @@ struct PhoneVerificationView: View {
                 RegistrationManager.shared.code = phoneVerificationViewModel.code
             }
         } else {
-            showingPopUp = true
+            if phoneVerificationViewModel.showErrorVerificationCode {
+                showingPopUp = true
+            }
         }
     }
     

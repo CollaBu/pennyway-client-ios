@@ -72,7 +72,6 @@ class SignUpFormViewModel: ObservableObject {
     }
     
     func checkDuplicateUserNameApi(completion: @escaping (Bool) -> Void) {
-        
         let checkDuplicateRequestDto = CheckDuplicateRequestDto(username: id)
         AuthAlamofire.shared.checkDuplicateUserName(checkDuplicateRequestDto) { result in
             switch result {

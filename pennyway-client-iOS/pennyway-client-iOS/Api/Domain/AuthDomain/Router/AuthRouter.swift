@@ -49,7 +49,7 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .verifyVerificationCode(dto):
             return try? dto.asDictionary()
-        case let .checkDuplicateUserName(dto):
+        case .checkDuplicateUserName:
             return [:]
         case let .login(dto):
             return try? dto.asDictionary()

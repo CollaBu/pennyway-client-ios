@@ -33,7 +33,6 @@ struct ResetPwView: View {
                         // formViewModel.checkDuplicateUserNameApi()
                         
                         RegistrationManager.shared.password = formViewModel.password
-                        //                                RegistrationManager.shared.performRegistration()
                         
                         navigateView = true
                     } else {}
