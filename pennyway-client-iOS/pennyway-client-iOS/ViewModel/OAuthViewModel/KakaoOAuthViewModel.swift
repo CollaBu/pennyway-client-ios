@@ -49,8 +49,12 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func signIn() {
+        
+        let nonce = CryptoHelper.randomNonceString()
+        let hashedString = CryptoHelper.sha256(nonce)
+        
         // 카카오 로그인 실행
-        UserApi.shared.loginWithKakaoAccount { oauthToken, error in
+        UserApi.shared.loginWithKakaoAccount(prompts: [.Login], nonce: hashedString){ oauthToken, error in
             if let error = error {
                 print(error)
             } else {
