@@ -15,7 +15,9 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     func signIn() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
+        let nonce = CryptoHelper.randomNonceString()
         request.requestedScopes = [.fullName, .email]
+        request.nonce = CryptoHelper.sha256(nonce)
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
