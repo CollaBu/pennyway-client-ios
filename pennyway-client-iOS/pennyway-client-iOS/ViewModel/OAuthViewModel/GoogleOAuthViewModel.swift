@@ -8,6 +8,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     var oauthId = ""
+    var nonce = ""
     
     func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
@@ -27,7 +28,7 @@ class GoogleOAuthViewModel: ObservableObject {
             }
             do {
                 let payloadJSON = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any]
-                let nonce = payloadJSON?["nonce"] as? String ?? ""
+                nonce = payloadJSON?["nonce"] as? String ?? ""
             } catch {
                 print("Error decoding JSON: \(error)")
             }
@@ -39,7 +40,8 @@ class GoogleOAuthViewModel: ObservableObject {
     }
     
     func oauthLoginApi() {
-        let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
+        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIdToken() ?? "", nonce: nonce, provider: OAuthRegistrationManager.shared.provider)
+        let viewModel = OAuthLoginViewModel(dto: oauthLoginDto)
 
         viewModel.oauthLoginApi { success, error in
             if success {

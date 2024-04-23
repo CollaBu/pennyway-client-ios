@@ -8,6 +8,7 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var errorMessage: String = ""
 
     var oauthId = ""
+    var nonce = ""
 
     func checkUserInfo() {
         if AuthApi.hasToken() {
@@ -32,7 +33,8 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginApi() {
-        let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
+        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIdToken() ?? "", nonce: nonce, provider: OAuthRegistrationManager.shared.provider)
+        let viewModel = OAuthLoginViewModel(dto: oauthLoginDto)
 
         viewModel.oauthLoginApi { success, error in
             if success {
@@ -49,11 +51,11 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func signIn() {
-        let nonce = CryptoHelper.randomNonceString()
-        let hashedString = CryptoHelper.sha256(nonce)
+        let randomNonce = CryptoHelper.randomNonceString()
+        nonce = CryptoHelper.sha256(randomNonce)
 
         // 카카오 로그인 실행
-        UserApi.shared.loginWithKakaoAccount(prompts: [.Login], nonce: hashedString) { oauthToken, error in
+        UserApi.shared.loginWithKakaoAccount(prompts: [.Login], nonce: nonce) { oauthToken, error in
             if let error = error {
                 print(error)
             } else {
