@@ -20,6 +20,18 @@ class GoogleOAuthViewModel: ObservableObject {
             self.givenName = givenName ?? ""
             KeychainHelper.saveIdToken(accessToken: user.idToken?.tokenString ?? "")
             
+            let jwtParts = user.idToken?.tokenString.components(separatedBy: ".")
+            guard jwtParts?.count == 3, let payloadData = Data(base64Encoded: jwtParts?[1] ?? "", options: .ignoreUnknownCharacters) else {
+                print("Invalid JWT format")
+                return
+            }
+            do {
+                let payloadJSON = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any]
+                let nonce = payloadJSON?["nonce"] as? String ?? ""
+            } catch {
+                print("Error decoding JSON: \(error)")
+            }
+            
             oauthLoginApi()
         } else {
             givenName = "Not Logged In"
