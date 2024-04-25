@@ -83,7 +83,7 @@
 		4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift */; };
 		4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */; };
 		4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */; };
-		4ACE1FED2BBB149D00BB4F0A /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEC2BBB149D00BB4F0A /* KeychainHelper.swift */; };
+		4ACE1FED2BBB149D00BB4F0A /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */; };
 		4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
@@ -107,6 +107,11 @@
 		D888329C2BBC612600F49B27 /* LoginFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329B2BBC612600F49B27 /* LoginFormView.swift */; };
 		D888329E2BBC613E00F49B27 /* LoginFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329D2BBC613E00F49B27 /* LoginFormViewModel.swift */; };
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
+		D89FB7822BD97A2F0019DE3C /* FindUserNameDtoResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameDtoResponseDto.swift */; };
+		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
+		D89FB7862BDA8D570019DE3C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7852BDA8D570019DE3C /* KeychainHelper.swift */; };
+		D89FB7892BDA925F0019DE3C /* FindUserNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */; };
+		D89FB78B2BDA9CA70019DE3C /* FindIDContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -212,6 +217,11 @@
 		D888329B2BBC612600F49B27 /* LoginFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormView.swift; sourceTree = "<group>"; };
 		D888329D2BBC613E00F49B27 /* LoginFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormViewModel.swift; sourceTree = "<group>"; };
 		D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodeContentView.swift; sourceTree = "<group>"; };
+		D89FB7812BD97A2F0019DE3C /* FindUserNameDtoResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameDtoResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameDtoResponseDto.swift"; sourceTree = SOURCE_ROOT; };
+		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
+		D89FB7852BDA8D570019DE3C /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = "pennyway-client-iOS/Api/KeychainHelper.swift"; sourceTree = SOURCE_ROOT; };
+		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
+		D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDContentView.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -373,6 +383,7 @@
 				4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */,
 				4A0FFBF62BCDA18C00EFEC56 /* LoginRequestDto.swift */,
 				4A0FFBF82BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift */,
+				D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -415,6 +426,7 @@
 			children = (
 				4A4703AA2BCEE52300AEE04E /* VerificationResponseDto.swift */,
 				4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */,
+				D89FB7812BD97A2F0019DE3C /* FindUserNameDtoResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -470,7 +482,6 @@
 		4A4B454C2BD16EE500D41C9A /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				D86B43852BC7CF1100143C12 /* GoogleService-Info.plist */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -567,6 +578,7 @@
 				4A51D2AD2BB18EBC0080083D /* SignUpNavigationViewModel.swift */,
 				4AB5AB602BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift */,
 				D888329D2BBC613E00F49B27 /* LoginFormViewModel.swift */,
+				D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -574,12 +586,12 @@
 		4A762AFD2B99A1D1001C1188 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				D89FB7852BDA8D570019DE3C /* KeychainHelper.swift */,
 				4A058F072BD05598004B6F89 /* Handler */,
 				4A0FFBE42BCD9F2200EFEC56 /* Domain */,
 				4AB5AB532BB4AA2A00D2C9EA /* Logger */,
 				4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */,
 				4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */,
-				4ACE1FEC2BBB149D00BB4F0A /* KeychainHelper.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -662,16 +674,9 @@
 			children = (
 				D8157E7B2BC269350083844B /* FindIDView.swift */,
 				D867D6DC2BC453AA00A2EDA9 /* FindIDFormView.swift */,
+				D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */,
 			);
 			path = FindIdView;
-			sourceTree = "<group>";
-		};
-		D86B43882BCCFBA100143C12 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				D8880E1D2BCEC8DD00922894 /* DynamicSizeFactor.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		D87CB0CE2BC5A43B00BD882A /* FindPwView */ = {
@@ -855,8 +860,10 @@
 				4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */,
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
+				D89FB7862BDA8D570019DE3C /* KeychainHelper.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
+				D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
 				4A0FFBF92BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
@@ -882,6 +889,7 @@
 				D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */,
 				4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */,
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDto.swift in Sources */,
+				D89FB7892BDA925F0019DE3C /* FindUserNameViewModel.swift in Sources */,
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
 				D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */,
 				4A4703962BCEB2E800AEE04E /* ErrorCodeMapper.swift in Sources */,
@@ -893,7 +901,7 @@
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D8157E662BBEF2740083844B /* OauthButtonView.swift in Sources */,
 				4A4703A92BCEE25000AEE04E /* SmsResponseDto.swift in Sources */,
-				4ACE1FED2BBB149D00BB4F0A /* KeychainHelper.swift in Sources */,
+				4ACE1FED2BBB149D00BB4F0A /* (null) in Sources */,
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */,
@@ -922,12 +930,14 @@
 				4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */,
 				D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
+				D89FB7822BD97A2F0019DE3C /* FindUserNameDtoResponseDto.swift in Sources */,
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
 				4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */,
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
 				4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
+				D89FB78B2BDA9CA70019DE3C /* FindIDContentView.swift in Sources */,
 				4A4703AE2BCEE5AF00AEE04E /* OAuthVerificationResponseDto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

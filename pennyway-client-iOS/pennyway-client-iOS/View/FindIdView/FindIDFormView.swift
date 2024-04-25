@@ -1,67 +1,85 @@
 import SwiftUI
 
 struct FindIDFormView: View {
-    @StateObject var numberVerificationViewModel = PhoneVerificationViewModel()
     @State private var showingPopUp = false
+    @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var navigateToFindIDView = false
     @StateObject var viewModel = SignUpNavigationViewModel()
+    @StateObject var findUserNameViewModel = FindUserNameViewModel()
     
     var body: some View {
         NavigationAvailable {
             ZStack {
                 ScrollView {
-                    VStack {
-                        Spacer().frame(height: 36)
-                        
-                        PhoneNumberInputSectionView(viewModel: numberVerificationViewModel) //
-                        
-                        Spacer().frame(height: 21)
-                        
-                        NumberInputSectionView(viewModel: numberVerificationViewModel)
-                    }
+                    FindIDContentView(phoneVerificationViewModel: phoneVerificationViewModel)
                 }
                 Spacer().frame(height: 203)
-
+                
                 Spacer()
                 
                 VStack {
                     Spacer()
+                    
                     CustomBottomButton(action: {
-//                        numberVerificationViewModel.validateNumberVerification()
-                        FindIDView()
-                        // numberVerificationViewModel.requestVerifyVerificationCodeApi()
-                        if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
-                            showingPopUp = false
-                            viewModel.continueButtonTapped()
-                            
-                            RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
-                            RegistrationManager.shared.code = numberVerificationViewModel.code
-                            
-                            navigateToFindIDView = true
-                            
-                        } else {
-                            showingPopUp = true
-                        }
-                    }, label: "아이디 찾기", isFormValid: $numberVerificationViewModel.isFormValid)
+                        continueButtonAction()
+                        navigateToFindIDView = true
+                        
+                    }, label: "아이디 찾기", isFormValid: $phoneVerificationViewModel.isFormValid)
+                        //                    CustomBottomButton(action: {
+                        ////                        numberVerificationViewModel.validateNumberVerification()
+                        //                        FindIDView(findUserNameViewModel: FindUserNameViewModel())
+                        //                        // numberVerificationViewModel.requestVerifyVerificationCodeApi()
+                        //                        if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
+                        //                            showingPopUp = false
+                        //                            viewModel.continueButtonTapped()
+                        //
+                        //                            RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
+                        //                            RegistrationManager.shared.code = numberVerificationViewModel.code
+                        //
+                        //                            navigateToFindIDView = true
+                        //
+                        //                        } else {
+                        //                            showingPopUp = true
+                        //                        }
+                        //                    }, label: "아이디 찾기", isFormValid: $numberVerificationViewModel.isFormValid)
+                        //                }
+                        .padding(.bottom, 34)
+                    
+                    NavigationLink(destination: FindIDView(findUserNameViewModel: FindUserNameViewModel()), isActive: $navigateToFindIDView) {
+                        EmptyView()
+                    }.hidden()
                 }
-                .padding(.bottom, 34)
-                
-                NavigationLink(destination: FindIDView(), isActive: $navigateToFindIDView) {
-                    EmptyView()
-                }.hidden()
+            }
+            .navigationTitle(Text("아이디 찾기"))
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                        
+                    }.offset(x: -10)
+                }
             }
         }
-        .navigationTitle(Text("아이디 찾기"))
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-                    
-                }.offset(x: -10)
+    }
+    
+    private func continueButtonAction() {
+        findUserNameViewModel.findUserNameApi {
+            checkFormValid()
+        }
+    }
+    
+    private func checkFormValid() {
+        if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
+            showingPopUp = false
+            viewModel.continueButtonTapped()
+            
+        } else {
+            if phoneVerificationViewModel.showErrorVerificationCode {
+                showingPopUp = true
             }
         }
     }

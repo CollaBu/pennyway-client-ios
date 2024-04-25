@@ -58,6 +58,18 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
+    func requestUserNameVerificationCodeApi(completion: @escaping () -> Void) { // 아이디 찾기 번호 인증
+        validatePhoneNumber()
+        requestVerificationCodeAction()
+        let usernameVerificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
+
+        if !showErrorPhoneNumberFormat {
+            AuthAlamofire.shared.receiveUserNameVerificationCode(usernameVerificationCodeDto) { result in
+                self.handleUserNameVerificationCodeApiResult(result: result, completion: completion)
+            }
+        }
+    }
+
     func requestVerifyVerificationCodeApi(completion: @escaping () -> Void) {
         let verificationDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
 
@@ -92,6 +104,27 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     private func handleVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
+                    print(response)
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
+        }
+        completion()
+    }
+
+    private func handleUserNameVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
         switch result {
         case let .success(data):
             if let responseData = data {

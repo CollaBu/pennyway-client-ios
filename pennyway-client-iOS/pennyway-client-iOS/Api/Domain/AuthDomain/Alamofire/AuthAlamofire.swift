@@ -20,6 +20,11 @@ class AuthAlamofire: TokenHandler {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receiveVerificationCode(dto: dto), completion: completion)
     }
     
+    func receiveUserNameVerificationCode(_ dto: VerificationCodeRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) { // 아이디 찾기 번호인증
+        os_log("AuthAlamofire - receiveUserNameVerificationCode() called userInput : %@ ", log: .default, type: .info, dto.phone)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receiveUserNameVerificationCode(dto: dto), completion: completion)
+    }
+    
     func verifyVerificationCode(_ dto: VerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - verifyVerificationCode() called with code : %@ ,, %@ ", log: .default, type: .info, dto.phone, dto.code)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.verifyVerificationCode(dto: dto), completion: completion)
@@ -44,5 +49,10 @@ class AuthAlamofire: TokenHandler {
     func linkAccountToOAuth(_ dto: LinkAccountToOAuthRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - linkAccountToOAuth() called userInput : %@ ,, %@", log: .default, type: .info, dto.phone, dto.code)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.linkAccountToOAuth(dto: dto), completion: completion)
+    }
+    
+    func findUserName(_ dto: FindUserNameRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - findUserName() called userInput : %@ ,, %@", log: .default, type: .info, dto.phone, dto.code)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.findUserName(dto: dto), completion: completion)
     }
 }
