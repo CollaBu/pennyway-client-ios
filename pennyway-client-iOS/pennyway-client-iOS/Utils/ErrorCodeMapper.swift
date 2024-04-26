@@ -34,8 +34,7 @@ enum ErrorCodeMapper {
         case 422:
             return mapUnprocessableContentError(errorCode, message: defaultMessage)
         case 500:
-            defaultMessage = "Internal Server Error"
-            return ErrorWithDomainErrorAndMessage(domainError: .internalServerError, code: code ?? "", message: message ?? defaultMessage)
+            return mapInternalServerError(errorCode, message: defaultMessage)
         default:
             return nil
         }
@@ -200,5 +199,14 @@ enum ErrorCodeMapper {
         return ErrorWithDomainErrorAndMessage(domainError: .unprocessableContent, code: code, message: message.isEmpty ? defaultMessage : message)
     }
 
-
+    private static func mapInternalServerError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
+        
+        guard let internalServerError = InternalServerError(rawValue: code) else {
+            return nil
+        }
+        
+        let defaultMessage = "Unexpected Error"
+        
+        return ErrorWithDomainErrorAndMessage(domainError: .internalServerError, code: code, message: message.isEmpty ? defaultMessage : message)
+    }
 }
