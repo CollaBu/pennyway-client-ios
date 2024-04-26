@@ -26,8 +26,7 @@ enum ErrorCodeMapper {
         case 405:
             return mapMethodNotAllowedError(errorCode, message: defaultMessage)
         case 406:
-            defaultMessage = "Not Acceptable"
-            return ErrorWithDomainErrorAndMessage(domainError: .notAcceptable, code: code ?? "", message: message ?? defaultMessage)
+            return mapNotAcceptableError(errorCode, message: defaultMessage)
         case 409:
             defaultMessage = "Conflict"
             return ErrorWithDomainErrorAndMessage(domainError: .conflict, code: code ?? "", message: message ?? defaultMessage)
@@ -139,5 +138,13 @@ enum ErrorCodeMapper {
         return ErrorWithDomainErrorAndMessage(domainError: .methodNotAllowed, code: code, message: message.isEmpty ? defaultMessage : message)
     }
 
-    
+    private static func mapNotAcceptableError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
+        guard let notAcceptableError = NotAcceptableError(rawValue: code) else {
+            return nil
+        }
+        
+        let defaultMessage = "Requested resource format not supported"
+     
+        return ErrorWithDomainErrorAndMessage(domainError: .notAcceptable, code: code, message: message.isEmpty ? defaultMessage : message)
+    }
 }

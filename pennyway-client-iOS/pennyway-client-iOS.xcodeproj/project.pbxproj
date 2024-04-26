@@ -58,6 +58,8 @@
 		4A5789732BDC1C0B00AFEB26 /* ForbiddenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789722BDC1C0B00AFEB26 /* ForbiddenError.swift */; };
 		4A5789752BDC1CBF00AFEB26 /* NotFoundError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789742BDC1CBF00AFEB26 /* NotFoundError.swift */; };
 		4A5789772BDC1D5500AFEB26 /* MethodNotAllowedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789762BDC1D5500AFEB26 /* MethodNotAllowedError.swift */; };
+		4A5789792BDC1DDE00AFEB26 /* NotAcceptableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789782BDC1DDE00AFEB26 /* NotAcceptableError.swift */; };
+		4A57897B2BDC1E5A00AFEB26 /* ConflictError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57897A2BDC1E5A00AFEB26 /* ConflictError.swift */; };
 		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
@@ -169,6 +171,8 @@
 		4A5789722BDC1C0B00AFEB26 /* ForbiddenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForbiddenError.swift; sourceTree = "<group>"; };
 		4A5789742BDC1CBF00AFEB26 /* NotFoundError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotFoundError.swift; sourceTree = "<group>"; };
 		4A5789762BDC1D5500AFEB26 /* MethodNotAllowedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodNotAllowedError.swift; sourceTree = "<group>"; };
+		4A5789782BDC1DDE00AFEB26 /* NotAcceptableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAcceptableError.swift; sourceTree = "<group>"; };
+		4A57897A2BDC1E5A00AFEB26 /* ConflictError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictError.swift; sourceTree = "<group>"; };
 		4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
@@ -499,6 +503,8 @@
 				4A5789722BDC1C0B00AFEB26 /* ForbiddenError.swift */,
 				4A5789742BDC1CBF00AFEB26 /* NotFoundError.swift */,
 				4A5789762BDC1D5500AFEB26 /* MethodNotAllowedError.swift */,
+				4A5789782BDC1DDE00AFEB26 /* NotAcceptableError.swift */,
+				4A57897A2BDC1E5A00AFEB26 /* ConflictError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -873,6 +879,7 @@
 				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestError.swift in Sources */,
+				4A57897B2BDC1E5A00AFEB26 /* ConflictError.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
 				4A5789752BDC1CBF00AFEB26 /* NotFoundError.swift in Sources */,
 				D888329E2BBC613E00F49B27 /* LoginFormViewModel.swift in Sources */,
@@ -888,6 +895,7 @@
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */,
 				4AB5AB5F2BB5EACD00D2C9EA /* WelcomeView.swift in Sources */,
+				4A5789792BDC1DDE00AFEB26 /* NotAcceptableError.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
 				D888329C2BBC612600F49B27 /* LoginFormView.swift in Sources */,
