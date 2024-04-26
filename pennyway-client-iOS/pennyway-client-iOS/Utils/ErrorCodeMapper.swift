@@ -28,8 +28,7 @@ enum ErrorCodeMapper {
         case 406:
             return mapNotAcceptableError(errorCode, message: defaultMessage)
         case 409:
-            defaultMessage = "Conflict"
-            return ErrorWithDomainErrorAndMessage(domainError: .conflict, code: code ?? "", message: message ?? defaultMessage)
+            return mapConflictError(errorCode, message: defaultMessage)
         case 412:
             defaultMessage = "Precondition Failed"
             return ErrorWithDomainErrorAndMessage(domainError: .preconditionFailed, code: code ?? "", message: message ?? defaultMessage)
@@ -147,4 +146,24 @@ enum ErrorCodeMapper {
      
         return ErrorWithDomainErrorAndMessage(domainError: .notAcceptable, code: code, message: message.isEmpty ? defaultMessage : message)
     }
+    
+    private static func mapConflictError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
+        guard let conflictError = ConflictError(rawValue: code) else {
+            return nil
+        }
+        
+        var defaultMessage: String
+        
+        switch conflictError {
+        case .requestConflictWithResourceState:
+            defaultMessage = "Request conflicts with current state of resource"
+        case .resourceAlreadyExists:
+            defaultMessage = "Resource already exists"
+        case .concurrentModificationConflict:
+            defaultMessage = "Concurrent modification conflict"
+        }
+        
+        return ErrorWithDomainErrorAndMessage(domainError: .conflict, code: code, message: message.isEmpty ? defaultMessage : message)
+    }
+
 }
