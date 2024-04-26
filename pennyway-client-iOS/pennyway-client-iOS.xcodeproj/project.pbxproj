@@ -503,7 +503,16 @@
 		4A57896D2BDBEFF000AFEB26 /* Error */ = {
 			isa = PBXGroup;
 			children = (
+				4A5789822BDC24A500AFEB26 /* ErrorCode */,
+				4A4703952BCEB2E800AEE04E /* ErrorCodeMapper.swift */,
 				4A4703932BCEB21500AEE04E /* DomainError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		4A5789822BDC24A500AFEB26 /* ErrorCode */ = {
+			isa = PBXGroup;
+			children = (
 				4A57896E2BDBF01500AFEB26 /* BadRequestError.swift */,
 				4A5789702BDC1ADC00AFEB26 /* UnauthorizedError.swift */,
 				4A5789722BDC1C0B00AFEB26 /* ForbiddenError.swift */,
@@ -515,7 +524,7 @@
 				4A57897E2BDC1F4E00AFEB26 /* UnprocessableContentError.swift */,
 				4A5789802BDC1FF300AFEB26 /* InternalServerError.swift */,
 			);
-			path = Error;
+			path = ErrorCode;
 			sourceTree = "<group>";
 		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
@@ -617,6 +626,7 @@
 		4A762AFD2B99A1D1001C1188 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				4A57896D2BDBEFF000AFEB26 /* Error */,
 				4A058F072BD05598004B6F89 /* Handler */,
 				4A0FFBE42BCD9F2200EFEC56 /* Domain */,
 				4AB5AB532BB4AA2A00D2C9EA /* Logger */,
@@ -647,7 +657,6 @@
 				4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */,
 				4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */,
 				4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */,
-				4A4703952BCEB2E800AEE04E /* ErrorCodeMapper.swift */,
 				D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */,
 			);
 			path = Utils;
@@ -656,7 +665,6 @@
 		4A8571332BC650FA0082CE47 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				4A57896D2BDBEFF000AFEB26 /* Error */,
 				4A8571322BC650FA0082CE47 /* BaseUrl.swift */,
 			);
 			path = Constants;
