@@ -106,4 +106,22 @@ enum ErrorCodeMapper {
         return ErrorWithDomainErrorAndMessage(domainError: .forbidden, code: code, message: message.isEmpty ? defaultMessage : message)
     }
     
+    private static func mapNotFoundError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
+        guard let notFoundError = NotFoundError(rawValue: code) else {
+            return nil
+        }
+        let defaultMessage: String
+
+        switch notFoundError {
+        case .resourceNotFound:
+            defaultMessage = "Requested resource not found"
+        case .invalidURLOrEndpoint:
+            defaultMessage = "Invalid URL or endpoint"
+        case .resourceDeletedOrMoved:
+            defaultMessage = "Resource deleted or moved"
+        }
+        
+        return ErrorWithDomainErrorAndMessage(domainError: .notFound, code: code, message: message.isEmpty ? defaultMessage : message)
+    }
+    
 }

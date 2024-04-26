@@ -1,3 +1,4 @@
+
 enum DomainError: Error {
     case badRequest
     case unauthorized
