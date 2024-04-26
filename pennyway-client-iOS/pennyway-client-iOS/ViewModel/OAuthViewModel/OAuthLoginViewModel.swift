@@ -9,7 +9,6 @@ class OAuthLoginViewModel: ObservableObject {
     }
 
     func oauthLoginApi(completion: @escaping (Bool, String?) -> Void) {
-
         OAuthAlamofire.shared.oauthLogin(dto) { result in
             switch result {
             case let .success(data):

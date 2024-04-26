@@ -130,7 +130,8 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .failure(error):
             if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
-                if errorWithDomainErrorAndMessage.code == "4004" {
+
+                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestError.invalidRequest.rawValue {
                     showErrorExistingUser = true
                 } else {
                     showErrorVerificationCode = true
@@ -162,7 +163,8 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .failure(error):
             if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
-                if errorWithDomainErrorAndMessage.code == "4004" {
+
+                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestError.invalidRequest.rawValue {
                     showErrorExistingUser = true
                 } else {
                     showErrorVerificationCode = true
