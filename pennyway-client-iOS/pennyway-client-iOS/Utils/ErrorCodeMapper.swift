@@ -22,11 +22,9 @@ enum ErrorCodeMapper {
         case 403:
             return mapForbiddenError(errorCode, message: defaultMessage)
         case 404:
-            defaultMessage = "Not Found"
-            return ErrorWithDomainErrorAndMessage(domainError: .notFound, code: code ?? "", message: message ?? defaultMessage)
+            return mapNotFoundError(errorCode, message: defaultMessage)
         case 405:
-            defaultMessage = "Method Not Allowed"
-            return ErrorWithDomainErrorAndMessage(domainError: .methodNotAllowed, code: code ?? "", message: message ?? defaultMessage)
+            return mapMethodNotAllowedError(errorCode, message: defaultMessage)
         case 406:
             defaultMessage = "Not Acceptable"
             return ErrorWithDomainErrorAndMessage(domainError: .notAcceptable, code: code ?? "", message: message ?? defaultMessage)
@@ -123,5 +121,23 @@ enum ErrorCodeMapper {
         
         return ErrorWithDomainErrorAndMessage(domainError: .notFound, code: code, message: message.isEmpty ? defaultMessage : message)
     }
+    
+    private static func mapMethodNotAllowedError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
+        guard let methodNotAllowedError = MethodNotAllowedError(rawValue: code) else {
+            return nil
+        }
+
+        var defaultMessage: String
+        
+        switch methodNotAllowedError {
+        case .methodNotSupported:
+            defaultMessage = "Request method not supported"
+        case .unsupportedMethodAccess:
+            defaultMessage = "Attempted to access unsupported method"
+        }
+        
+        return ErrorWithDomainErrorAndMessage(domainError: .methodNotAllowed, code: code, message: message.isEmpty ? defaultMessage : message)
+    }
+
     
 }
