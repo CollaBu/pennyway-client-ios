@@ -53,6 +53,7 @@
 		4A5050332BC3DA7700EE5666 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */; };
 		4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */; };
 		4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51D2AD2BB18EBC0080083D /* SignUpNavigationViewModel.swift */; };
+		4A57896F2BDBF01500AFEB26 /* BadRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57896E2BDBF01500AFEB26 /* BadRequestError.swift */; };
 		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
@@ -159,6 +160,7 @@
 		4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
 		4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomButton.swift; sourceTree = "<group>"; };
 		4A51D2AD2BB18EBC0080083D /* SignUpNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigationViewModel.swift; sourceTree = "<group>"; };
+		4A57896E2BDBF01500AFEB26 /* BadRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequestError.swift; sourceTree = "<group>"; };
 		4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
@@ -480,6 +482,15 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		4A57896D2BDBEFF000AFEB26 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				4A4703932BCEB21500AEE04E /* DomainError.swift */,
+				4A57896E2BDBF01500AFEB26 /* BadRequestError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
 			isa = PBXGroup;
 			children = (
@@ -618,8 +629,8 @@
 		4A8571332BC650FA0082CE47 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				4A57896D2BDBEFF000AFEB26 /* Error */,
 				4A8571322BC650FA0082CE47 /* BaseUrl.swift */,
-				4A4703932BCEB21500AEE04E /* DomainError.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -848,6 +859,7 @@
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
+				4A57896F2BDBF01500AFEB26 /* BadRequestError.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
 				D888329E2BBC613E00F49B27 /* LoginFormViewModel.swift in Sources */,
 				4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */,

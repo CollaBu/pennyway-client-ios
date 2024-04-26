@@ -10,11 +10,11 @@ struct ErrorWithDomainErrorAndMessage: Error {
 
 enum ErrorCodeMapper {
     static func mapError(_ statusCode: Int, code: String?, message: String?) -> ErrorWithDomainErrorAndMessage? {
-        let defaultMessage: String
+        let defaultMessage: String = message ?? ""
+        guard let errorCode = code else { return nil }
         switch statusCode {
         case 400:
-            defaultMessage = "Bad Request"
-            return ErrorWithDomainErrorAndMessage(domainError: .badRequest, code: code ?? "", message: message ?? defaultMessage)
+            return mapBadRequestError(errorCode, message: defaultMessage)
         case 401:
             defaultMessage = "Unauthorized"
             return ErrorWithDomainErrorAndMessage(domainError: .unauthorized, code: code ?? "", message: message ?? defaultMessage)
@@ -44,6 +44,25 @@ enum ErrorCodeMapper {
             return ErrorWithDomainErrorAndMessage(domainError: .internalServerError, code: code ?? "", message: message ?? defaultMessage)
         default:
             return nil
+        }
+    }
+    
+    private static func mapBadRequestError(_ code: String, message: String) ->  ErrorWithDomainErrorAndMessage? {
+        guard let badRequestError = BadRequestError(rawValue: code) else { return nil }
+        let defaultMessage: String
+        
+        switch badRequestError {
+        case .invalidRequestSyntax:
+            defaultMessage = "Invalid request syntax"
+            return ErrorWithDomainErrorAndMessage(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
+        case .missingRequiredParameter:
+            return .badRequest(code: code, message: defaultMessage.isEmpty ? "Missing required parameter" : defaultMessage)
+        case .malformedParameter:
+            return .badRequest(code: code, message: defaultMessage.isEmpty ? "Malformed parameter" : defaultMessage)
+        case .malformedRequestBody:
+            return .badRequest(code: code, message: defaultMessage.isEmpty ? "Malformed request body" : defaultMessage)
+        case .invalidRequest:
+            return .badRequest(code: code, message: defaultMessage.isEmpty ? "Invalid Request" : defaultMessage)
         }
     }
 }
