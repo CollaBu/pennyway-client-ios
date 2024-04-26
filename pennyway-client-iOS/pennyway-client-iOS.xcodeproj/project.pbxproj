@@ -55,6 +55,7 @@
 		4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51D2AD2BB18EBC0080083D /* SignUpNavigationViewModel.swift */; };
 		4A57896F2BDBF01500AFEB26 /* BadRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57896E2BDBF01500AFEB26 /* BadRequestError.swift */; };
 		4A5789712BDC1ADC00AFEB26 /* UnauthorizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789702BDC1ADC00AFEB26 /* UnauthorizedError.swift */; };
+		4A5789732BDC1C0B00AFEB26 /* ForbiddenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789722BDC1C0B00AFEB26 /* ForbiddenError.swift */; };
 		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
@@ -163,6 +164,7 @@
 		4A51D2AD2BB18EBC0080083D /* SignUpNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigationViewModel.swift; sourceTree = "<group>"; };
 		4A57896E2BDBF01500AFEB26 /* BadRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequestError.swift; sourceTree = "<group>"; };
 		4A5789702BDC1ADC00AFEB26 /* UnauthorizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedError.swift; sourceTree = "<group>"; };
+		4A5789722BDC1C0B00AFEB26 /* ForbiddenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForbiddenError.swift; sourceTree = "<group>"; };
 		4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				4A4703932BCEB21500AEE04E /* DomainError.swift */,
 				4A57896E2BDBF01500AFEB26 /* BadRequestError.swift */,
 				4A5789702BDC1ADC00AFEB26 /* UnauthorizedError.swift */,
+				4A5789722BDC1C0B00AFEB26 /* ForbiddenError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -944,6 +947,7 @@
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
 				4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
+				4A5789732BDC1C0B00AFEB26 /* ForbiddenError.swift in Sources */,
 				4A4703AE2BCEE5AF00AEE04E /* OAuthVerificationResponseDto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
