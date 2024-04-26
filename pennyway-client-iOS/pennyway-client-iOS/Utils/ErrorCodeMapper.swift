@@ -18,8 +18,7 @@ enum ErrorCodeMapper {
         case 400:
             return mapBadRequestError(errorCode, message: defaultMessage)
         case 401:
-            defaultMessage = "Unauthorized"
-            return ErrorWithDomainErrorAndMessage(domainError: .unauthorized, code: code ?? "", message: message ?? defaultMessage)
+            return mapUnauthorizedError(errorCode, message: defaultMessage)
         case 403:
             defaultMessage = "Forbidden"
             return ErrorWithDomainErrorAndMessage(domainError: .forbidden, code: code ?? "", message: message ?? defaultMessage)
@@ -58,19 +57,34 @@ enum ErrorCodeMapper {
         switch badRequestError {
         case .invalidRequestSyntax:
             defaultMessage = "Invalid request syntax"
-            return ErrorWithDomainErrorAndMessage(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
         case .missingRequiredParameter:
             defaultMessage = "Missing required parameter"
-            return ErrorWithDomainErrorAndMessage(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
         case .malformedParameter:
             defaultMessage = "Malformed parameter"
-            return ErrorWithDomainErrorAndMessage(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
         case .malformedRequestBody:
             defaultMessage = "Malformed request body"
-            return ErrorWithDomainErrorAndMessage(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
         case .invalidRequest:
             defaultMessage = "Invalid Request"
-            return ErrorWithDomainErrorAndMessage(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
         }
+        return ErrorWithDomainErrorAndMessage(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
+    }
+    
+    private static func mapUnauthorizedError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
+        guard let unauthorizedError = UnauthorizedError(rawValue: code) else {
+            return nil
+        }
+        let defaultMessage: String
+
+        switch unauthorizedError {
+        case .missingOrInvalidCredentials:
+            defaultMessage = "Missing or invalid credentials"
+        case .expiredOrRevokedToken:
+            defaultMessage = "Expired or revoked token"
+        case .insufficientPermissions:
+            defaultMessage = "Insufficient permissions"
+        case .tamperedOrMalformedToken:
+            defaultMessage = "Tampered or malformed token"
+        }
+        return ErrorWithDomainErrorAndMessage(domainError: .unauthorized, code: code, message: message.isEmpty ? defaultMessage : message)
     }
 }
