@@ -63,6 +63,17 @@
 		4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57897C2BDC1EDF00AFEB26 /* PreconditionFailedError.swift */; };
 		4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57897E2BDC1F4E00AFEB26 /* UnprocessableContentError.swift */; };
 		4A5789812BDC1FF300AFEB26 /* InternalServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789802BDC1FF300AFEB26 /* InternalServerError.swift */; };
+		4A5789852BDC269000AFEB26 /* DomainSpecificError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789842BDC269000AFEB26 /* DomainSpecificError.swift */; };
+		4A5789872BDC277100AFEB26 /* MapBadRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789862BDC277100AFEB26 /* MapBadRequestError.swift */; };
+		4A57898B2BDC28F100AFEB26 /* MapUnauthorizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57898A2BDC28F100AFEB26 /* MapUnauthorizedError.swift */; };
+		4A57898D2BDC291900AFEB26 /* MapForbiddenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57898C2BDC291900AFEB26 /* MapForbiddenError.swift */; };
+		4A57898F2BDC298500AFEB26 /* MapNotFoundError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57898E2BDC298500AFEB26 /* MapNotFoundError.swift */; };
+		4A5789912BDC29A100AFEB26 /* MapMethodNotAllowedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789902BDC29A100AFEB26 /* MapMethodNotAllowedError.swift */; };
+		4A5789932BDC29CA00AFEB26 /* MapNotAcceptableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789922BDC29CA00AFEB26 /* MapNotAcceptableError.swift */; };
+		4A5789952BDC29E700AFEB26 /* MapConflictError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789942BDC29E700AFEB26 /* MapConflictError.swift */; };
+		4A5789972BDC29FD00AFEB26 /* MapPreconditionFailedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789962BDC29FC00AFEB26 /* MapPreconditionFailedError.swift */; };
+		4A5789992BDC2A1100AFEB26 /* MapUnprocessableContentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789982BDC2A1100AFEB26 /* MapUnprocessableContentError.swift */; };
+		4A57899B2BDC2A2500AFEB26 /* MapInternalServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57899A2BDC2A2500AFEB26 /* MapInternalServerError.swift */; };
 		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
@@ -179,6 +190,17 @@
 		4A57897C2BDC1EDF00AFEB26 /* PreconditionFailedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreconditionFailedError.swift; sourceTree = "<group>"; };
 		4A57897E2BDC1F4E00AFEB26 /* UnprocessableContentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnprocessableContentError.swift; sourceTree = "<group>"; };
 		4A5789802BDC1FF300AFEB26 /* InternalServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalServerError.swift; sourceTree = "<group>"; };
+		4A5789842BDC269000AFEB26 /* DomainSpecificError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainSpecificError.swift; sourceTree = "<group>"; };
+		4A5789862BDC277100AFEB26 /* MapBadRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBadRequestError.swift; sourceTree = "<group>"; };
+		4A57898A2BDC28F100AFEB26 /* MapUnauthorizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUnauthorizedError.swift; sourceTree = "<group>"; };
+		4A57898C2BDC291900AFEB26 /* MapForbiddenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapForbiddenError.swift; sourceTree = "<group>"; };
+		4A57898E2BDC298500AFEB26 /* MapNotFoundError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNotFoundError.swift; sourceTree = "<group>"; };
+		4A5789902BDC29A100AFEB26 /* MapMethodNotAllowedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMethodNotAllowedError.swift; sourceTree = "<group>"; };
+		4A5789922BDC29CA00AFEB26 /* MapNotAcceptableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNotAcceptableError.swift; sourceTree = "<group>"; };
+		4A5789942BDC29E700AFEB26 /* MapConflictError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapConflictError.swift; sourceTree = "<group>"; };
+		4A5789962BDC29FC00AFEB26 /* MapPreconditionFailedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreconditionFailedError.swift; sourceTree = "<group>"; };
+		4A5789982BDC2A1100AFEB26 /* MapUnprocessableContentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUnprocessableContentError.swift; sourceTree = "<group>"; };
+		4A57899A2BDC2A2500AFEB26 /* MapInternalServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInternalServerError.swift; sourceTree = "<group>"; };
 		4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
@@ -503,14 +525,32 @@
 		4A57896D2BDBEFF000AFEB26 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				4A5789822BDC24A500AFEB26 /* ErrorCode */,
+				4A5789832BDC267900AFEB26 /* Dto */,
+				4A5789822BDC24A500AFEB26 /* Management */,
 				4A4703952BCEB2E800AEE04E /* ErrorCodeMapper.swift */,
 				4A4703932BCEB21500AEE04E /* DomainError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
 		};
-		4A5789822BDC24A500AFEB26 /* ErrorCode */ = {
+		4A5789822BDC24A500AFEB26 /* Management */ = {
+			isa = PBXGroup;
+			children = (
+				4A5789892BDC27AA00AFEB26 /* ErrorMapping */,
+				4A5789882BDC279300AFEB26 /* ErrorCodes */,
+			);
+			path = Management;
+			sourceTree = "<group>";
+		};
+		4A5789832BDC267900AFEB26 /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				4A5789842BDC269000AFEB26 /* DomainSpecificError.swift */,
+			);
+			path = Dto;
+			sourceTree = "<group>";
+		};
+		4A5789882BDC279300AFEB26 /* ErrorCodes */ = {
 			isa = PBXGroup;
 			children = (
 				4A57896E2BDBF01500AFEB26 /* BadRequestError.swift */,
@@ -524,7 +564,24 @@
 				4A57897E2BDC1F4E00AFEB26 /* UnprocessableContentError.swift */,
 				4A5789802BDC1FF300AFEB26 /* InternalServerError.swift */,
 			);
-			path = ErrorCode;
+			path = ErrorCodes;
+			sourceTree = "<group>";
+		};
+		4A5789892BDC27AA00AFEB26 /* ErrorMapping */ = {
+			isa = PBXGroup;
+			children = (
+				4A5789862BDC277100AFEB26 /* MapBadRequestError.swift */,
+				4A57898A2BDC28F100AFEB26 /* MapUnauthorizedError.swift */,
+				4A57898C2BDC291900AFEB26 /* MapForbiddenError.swift */,
+				4A57898E2BDC298500AFEB26 /* MapNotFoundError.swift */,
+				4A5789902BDC29A100AFEB26 /* MapMethodNotAllowedError.swift */,
+				4A5789922BDC29CA00AFEB26 /* MapNotAcceptableError.swift */,
+				4A5789942BDC29E700AFEB26 /* MapConflictError.swift */,
+				4A5789962BDC29FC00AFEB26 /* MapPreconditionFailedError.swift */,
+				4A5789982BDC2A1100AFEB26 /* MapUnprocessableContentError.swift */,
+				4A57899A2BDC2A2500AFEB26 /* MapInternalServerError.swift */,
+			);
+			path = ErrorMapping;
 			sourceTree = "<group>";
 		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
@@ -887,24 +944,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AB5AB612BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift in Sources */,
+				4A5789852BDC269000AFEB26 /* DomainSpecificError.swift in Sources */,
 				4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */,
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedError.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */,
+				4A5789992BDC2A1100AFEB26 /* MapUnprocessableContentError.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
+				4A5789912BDC29A100AFEB26 /* MapMethodNotAllowedError.swift in Sources */,
 				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestError.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictError.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
 				4A5789752BDC1CBF00AFEB26 /* NotFoundError.swift in Sources */,
+				4A57898F2BDC298500AFEB26 /* MapNotFoundError.swift in Sources */,
 				D888329E2BBC613E00F49B27 /* LoginFormViewModel.swift in Sources */,
 				4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */,
 				4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */,
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
+				4A57898D2BDC291900AFEB26 /* MapForbiddenError.swift in Sources */,
+				4A5789872BDC277100AFEB26 /* MapBadRequestError.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedError.swift in Sources */,
+				4A5789972BDC29FD00AFEB26 /* MapPreconditionFailedError.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* LoginView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
@@ -940,7 +1004,9 @@
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
+				4A5789932BDC29CA00AFEB26 /* MapNotAcceptableError.swift in Sources */,
 				4A762B052B99A259001C1188 /* PhoneVerificationViewModel.swift in Sources */,
+				4A57899B2BDC2A2500AFEB26 /* MapInternalServerError.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				D8157E662BBEF2740083844B /* OauthButtonView.swift in Sources */,
@@ -964,6 +1030,7 @@
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				4A4703AB2BCEE52300AEE04E /* VerificationResponseDto.swift in Sources */,
+				4A5789952BDC29E700AFEB26 /* MapConflictError.swift in Sources */,
 				D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
@@ -979,6 +1046,7 @@
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
+				4A57898B2BDC28F100AFEB26 /* MapUnauthorizedError.swift in Sources */,
 				4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */,
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
 				4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */,

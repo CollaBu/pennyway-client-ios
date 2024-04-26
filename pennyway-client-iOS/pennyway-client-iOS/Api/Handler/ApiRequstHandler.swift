@@ -19,7 +19,7 @@ class ApiRequstHandler: TokenHandler {
                        let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
                        let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
                     {
-                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        let errorWithDomainErrorAndMessage = DomainSpecificError(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
                         completion(.failure(errorWithDomainErrorAndMessage))
                     } else {
                         completion(.failure(error))
@@ -43,7 +43,7 @@ class ApiRequstHandler: TokenHandler {
                        let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
                        let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
                     {
-                        let errorWithDomainErrorAndMessage = ErrorWithDomainErrorAndMessage(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        let errorWithDomainErrorAndMessage = DomainSpecificError(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
                         completion(.failure(errorWithDomainErrorAndMessage))
                     } else {
                         completion(.failure(error))
