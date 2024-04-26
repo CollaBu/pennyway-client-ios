@@ -4,4 +4,3 @@ enum NotFoundError: String {
     case invalidURLOrEndpoint = "4041"
     case resourceDeletedOrMoved = "4042"
 }
-

@@ -200,7 +200,6 @@ enum ErrorCodeMapper {
     }
 
     private static func mapInternalServerError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
-        
         guard let internalServerError = InternalServerError(rawValue: code) else {
             return nil
         }

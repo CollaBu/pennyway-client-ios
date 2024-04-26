@@ -62,6 +62,7 @@
 		4A57897B2BDC1E5A00AFEB26 /* ConflictError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57897A2BDC1E5A00AFEB26 /* ConflictError.swift */; };
 		4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57897C2BDC1EDF00AFEB26 /* PreconditionFailedError.swift */; };
 		4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57897E2BDC1F4E00AFEB26 /* UnprocessableContentError.swift */; };
+		4A5789812BDC1FF300AFEB26 /* InternalServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789802BDC1FF300AFEB26 /* InternalServerError.swift */; };
 		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
@@ -177,6 +178,7 @@
 		4A57897A2BDC1E5A00AFEB26 /* ConflictError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConflictError.swift; sourceTree = "<group>"; };
 		4A57897C2BDC1EDF00AFEB26 /* PreconditionFailedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreconditionFailedError.swift; sourceTree = "<group>"; };
 		4A57897E2BDC1F4E00AFEB26 /* UnprocessableContentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnprocessableContentError.swift; sourceTree = "<group>"; };
+		4A5789802BDC1FF300AFEB26 /* InternalServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalServerError.swift; sourceTree = "<group>"; };
 		4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				4A57897A2BDC1E5A00AFEB26 /* ConflictError.swift */,
 				4A57897C2BDC1EDF00AFEB26 /* PreconditionFailedError.swift */,
 				4A57897E2BDC1F4E00AFEB26 /* UnprocessableContentError.swift */,
+				4A5789802BDC1FF300AFEB26 /* InternalServerError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -943,6 +946,7 @@
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
 				4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */,
 				4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDto.swift in Sources */,
+				4A5789812BDC1FF300AFEB26 /* InternalServerError.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
 				4A058EFF2BD03E01004B6F89 /* AuthResponseDto.swift in Sources */,
