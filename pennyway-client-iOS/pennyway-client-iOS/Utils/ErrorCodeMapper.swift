@@ -30,8 +30,7 @@ enum ErrorCodeMapper {
         case 409:
             return mapConflictError(errorCode, message: defaultMessage)
         case 412:
-            defaultMessage = "Precondition Failed"
-            return ErrorWithDomainErrorAndMessage(domainError: .preconditionFailed, code: code ?? "", message: message ?? defaultMessage)
+            return mapPreconditionFailedError(errorCode, message: defaultMessage)
         case 422:
             defaultMessage = "Unprocessable Content"
             return ErrorWithDomainErrorAndMessage(domainError: .unprocessableContent, code: code ?? "", message: message ?? defaultMessage)
@@ -165,5 +164,23 @@ enum ErrorCodeMapper {
         
         return ErrorWithDomainErrorAndMessage(domainError: .conflict, code: code, message: message.isEmpty ? defaultMessage : message)
     }
+    
+    private static func mapPreconditionFailedError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
+        guard let preconditionFailedError = PreconditionFailedError(rawValue: code) else {
+            return nil
+        }
+        
+        var defaultMessage: String
+        
+        switch preconditionFailedError {
+        case .preconditionRequestHeaderNotMatched:
+            defaultMessage = "Preconditions request header not matched"
+        case .ifMatchOrIfNoneMatchHeadersNotMatched:
+            defaultMessage = "If-Match or If-None-Match headers not matched"
+        }
+        
+        return ErrorWithDomainErrorAndMessage(domainError: .preconditionFailed, code: code, message: message.isEmpty ? defaultMessage : message)
+    }
+
 
 }
