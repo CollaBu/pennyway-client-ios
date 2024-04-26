@@ -32,8 +32,7 @@ enum ErrorCodeMapper {
         case 412:
             return mapPreconditionFailedError(errorCode, message: defaultMessage)
         case 422:
-            defaultMessage = "Unprocessable Content"
-            return ErrorWithDomainErrorAndMessage(domainError: .unprocessableContent, code: code ?? "", message: message ?? defaultMessage)
+            return mapUnprocessableContentError(errorCode, message: defaultMessage)
         case 500:
             defaultMessage = "Internal Server Error"
             return ErrorWithDomainErrorAndMessage(domainError: .internalServerError, code: code ?? "", message: message ?? defaultMessage)
@@ -180,6 +179,25 @@ enum ErrorCodeMapper {
         }
         
         return ErrorWithDomainErrorAndMessage(domainError: .preconditionFailed, code: code, message: message.isEmpty ? defaultMessage : message)
+    }
+
+    private static func mapUnprocessableContentError(_ code: String, message: String) -> ErrorWithDomainErrorAndMessage? {
+        guard let unprocessableContentError = UnprocessableContentError(rawValue: code) else {
+            return nil
+        }
+        
+        var defaultMessage: String
+        
+        switch unprocessableContentError {
+        case .requiredParametersMissingInRequestBody:
+            defaultMessage = "Required parameters missing in request body"
+        case .validationErrorsInRequestData:
+            defaultMessage = "Validation errors in request data"
+        case .typeMismatchErrorInRequestBody:
+            defaultMessage = "Type mismatch error in request body"
+        }
+        
+        return ErrorWithDomainErrorAndMessage(domainError: .unprocessableContent, code: code, message: message.isEmpty ? defaultMessage : message)
     }
 
 
