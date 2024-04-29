@@ -1,6 +1,6 @@
 
-enum StatusCodeHandling {
-    static func errorHandling(_ statusCode: Int, code: String?, message: String?) -> StatusSpecificError? {
+enum StatusCodeHandler {
+    static func handleStatusCode(_ statusCode: Int, code: String?, message: String?) -> StatusSpecificError? {
         let defaultMessage: String = message ?? ""
         guard let errorCode = code else {
             return nil

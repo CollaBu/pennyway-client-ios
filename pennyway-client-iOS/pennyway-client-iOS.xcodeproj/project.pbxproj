@@ -38,7 +38,7 @@
 		4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038F2BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift */; };
 		4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703912BCEA55500AEE04E /* OAuthSignUpRequestDto.swift */; };
 		4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703932BCEB21500AEE04E /* StatusError.swift */; };
-		4A4703962BCEB2E800AEE04E /* StatusCodeHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703952BCEB2E800AEE04E /* StatusCodeHandling.swift */; };
+		4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703952BCEB2E800AEE04E /* StatusCodeHandler.swift */; };
 		4A4703A72BCEDD9800AEE04E /* VerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703A62BCEDD9800AEE04E /* VerificationCodeRequestDto.swift */; };
 		4A4703A92BCEE25000AEE04E /* SmsResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703A82BCEE25000AEE04E /* SmsResponseDto.swift */; };
 		4A4703AB2BCEE52300AEE04E /* VerificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703AA2BCEE52300AEE04E /* VerificationResponseDto.swift */; };
@@ -165,7 +165,7 @@
 		4A47038F2BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOAuthToAccountRequestDto.swift; sourceTree = "<group>"; };
 		4A4703912BCEA55500AEE04E /* OAuthSignUpRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpRequestDto.swift; sourceTree = "<group>"; };
 		4A4703932BCEB21500AEE04E /* StatusError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusError.swift; sourceTree = "<group>"; };
-		4A4703952BCEB2E800AEE04E /* StatusCodeHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeHandling.swift; sourceTree = "<group>"; };
+		4A4703952BCEB2E800AEE04E /* StatusCodeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeHandler.swift; sourceTree = "<group>"; };
 		4A4703A62BCEDD9800AEE04E /* VerificationCodeRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A4703A82BCEE25000AEE04E /* SmsResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmsResponseDto.swift; sourceTree = "<group>"; };
 		4A4703AA2BCEE52300AEE04E /* VerificationResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationResponseDto.swift; sourceTree = "<group>"; };
@@ -534,7 +534,7 @@
 		4A5789822BDC24A500AFEB26 /* ErrorCode */ = {
 			isa = PBXGroup;
 			children = (
-				4A5789892BDC27AA00AFEB26 /* ErrorCodeHandling */,
+				4A5789892BDC27AA00AFEB26 /* ErrorCodeHandler */,
 				4A5789882BDC279300AFEB26 /* ErrorCodes */,
 			);
 			path = ErrorCode;
@@ -543,7 +543,7 @@
 		4A5789832BDC267900AFEB26 /* StatusCode */ = {
 			isa = PBXGroup;
 			children = (
-				4A4703952BCEB2E800AEE04E /* StatusCodeHandling.swift */,
+				4A4703952BCEB2E800AEE04E /* StatusCodeHandler.swift */,
 				4A4703932BCEB21500AEE04E /* StatusError.swift */,
 				4A5789842BDC269000AFEB26 /* StatusSpecificError.swift */,
 			);
@@ -567,7 +567,7 @@
 			path = ErrorCodes;
 			sourceTree = "<group>";
 		};
-		4A5789892BDC27AA00AFEB26 /* ErrorCodeHandling */ = {
+		4A5789892BDC27AA00AFEB26 /* ErrorCodeHandler */ = {
 			isa = PBXGroup;
 			children = (
 				4A5789862BDC277100AFEB26 /* BadRequestError.swift */,
@@ -581,7 +581,7 @@
 				4A5789982BDC2A1100AFEB26 /* UnprocessableContentError.swift */,
 				4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */,
 			);
-			path = ErrorCodeHandling;
+			path = ErrorCodeHandler;
 			sourceTree = "<group>";
 		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
@@ -1000,7 +1000,7 @@
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDto.swift in Sources */,
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
 				D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */,
-				4A4703962BCEB2E800AEE04E /* StatusCodeHandling.swift in Sources */,
+				4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
