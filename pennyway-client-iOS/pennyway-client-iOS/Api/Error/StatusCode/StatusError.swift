@@ -1,5 +1,5 @@
 
-enum DomainError: Error {
+enum StatusError: Error {
     case badRequest
     case unauthorized
     case forbidden

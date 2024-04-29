@@ -17,9 +17,9 @@ class ApiRequstHandler: TokenHandler {
                     if let responseData = response.data,
                        let statusCode = response.response?.statusCode,
                        let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
-                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
+                       let responseError = StatusCodeHandling.errorHandling(statusCode, code: errorResponse.code, message: errorResponse.message)
                     {
-                        let errorWithDomainErrorAndMessage = DomainSpecificError(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        let errorWithDomainErrorAndMessage = StatusSpecificError(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
                         completion(.failure(errorWithDomainErrorAndMessage))
                     } else {
                         completion(.failure(error))
@@ -41,9 +41,9 @@ class ApiRequstHandler: TokenHandler {
                     if let responseData = response.data,
                        let statusCode = response.response?.statusCode,
                        let errorResponse = try? JSONDecoder().decode(ErrorResponseDto.self, from: responseData),
-                       let responseError = ErrorCodeMapper.mapError(statusCode, code: errorResponse.code, message: errorResponse.message)
+                       let responseError = StatusCodeHandling.errorHandling(statusCode, code: errorResponse.code, message: errorResponse.message)
                     {
-                        let errorWithDomainErrorAndMessage = DomainSpecificError(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
+                        let errorWithDomainErrorAndMessage = StatusSpecificError(domainError: responseError.domainError, code: responseError.code, message: responseError.message)
                         completion(.failure(errorWithDomainErrorAndMessage))
                     } else {
                         completion(.failure(error))

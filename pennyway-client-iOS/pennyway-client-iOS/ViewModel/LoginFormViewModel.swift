@@ -22,7 +22,7 @@ class LoginFormViewModel: ObservableObject {
                         }
                     }
                 case let .failure(error):
-                    if let errorWithDomainErrorAndMessage = error as? DomainSpecificError {
+                    if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                         print("Failed to verify: \(errorWithDomainErrorAndMessage)")
                         self.loginFailed = errorWithDomainErrorAndMessage.code // 수정
                     } else {

@@ -1,6 +1,6 @@
 
-func mapBadRequestError(_ code: String, message: String) -> DomainSpecificError? {
-    guard let badRequestError = BadRequestError(rawValue: code) else {
+func badRequestError(_ code: String, message: String) -> StatusSpecificError? {
+    guard let badRequestError = BadRequestErrorCode(rawValue: code) else {
         return nil
     }
     let defaultMessage: String
@@ -17,5 +17,5 @@ func mapBadRequestError(_ code: String, message: String) -> DomainSpecificError?
     case .invalidRequest:
         defaultMessage = "Invalid Request"
     }
-    return DomainSpecificError(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
 }

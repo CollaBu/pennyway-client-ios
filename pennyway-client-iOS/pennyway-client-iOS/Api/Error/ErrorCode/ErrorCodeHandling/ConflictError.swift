@@ -1,6 +1,6 @@
 
-func mapConflictError(_ code: String, message: String) -> DomainSpecificError? {
-    guard let conflictError = ConflictError(rawValue: code) else {
+func conflictError(_ code: String, message: String) -> StatusSpecificError? {
+    guard let conflictError = ConflictErrorCode(rawValue: code) else {
         return nil
     }
     
@@ -15,5 +15,5 @@ func mapConflictError(_ code: String, message: String) -> DomainSpecificError? {
         defaultMessage = "Concurrent modification conflict"
     }
     
-    return DomainSpecificError(domainError: .conflict, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .conflict, code: code, message: message.isEmpty ? defaultMessage : message)
 }

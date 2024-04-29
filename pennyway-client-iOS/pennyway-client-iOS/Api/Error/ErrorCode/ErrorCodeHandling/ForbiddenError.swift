@@ -1,6 +1,6 @@
 
-func mapForbiddenError(_ code: String, message: String) -> DomainSpecificError? {
-    guard let forbiddenError = ForbiddenError(rawValue: code) else {
+func forbiddenError(_ code: String, message: String) -> StatusSpecificError? {
+    guard let forbiddenError = ForbiddenErrorCode(rawValue: code) else {
         return nil
     }
     let defaultMessage: String
@@ -15,5 +15,5 @@ func mapForbiddenError(_ code: String, message: String) -> DomainSpecificError? 
     case .accessNotAllowedForUserRole:
         defaultMessage = "Access to resource not allowed for user role"
     }
-    return DomainSpecificError(domainError: .forbidden, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .forbidden, code: code, message: message.isEmpty ? defaultMessage : message)
 }

@@ -103,7 +103,7 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? DomainSpecificError {
+            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
             } else {
                 print("Failed to verify: \(error)")
@@ -128,10 +128,10 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? DomainSpecificError {
+            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
 
-                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestError.invalidRequest.rawValue {
+                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestErrorCode.invalidRequest.rawValue {
                     showErrorExistingUser = true
                 } else {
                     showErrorVerificationCode = true
@@ -161,10 +161,10 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? DomainSpecificError {
+            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
 
-                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestError.invalidRequest.rawValue {
+                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestErrorCode.invalidRequest.rawValue {
                     showErrorExistingUser = true
                 } else {
                     showErrorVerificationCode = true

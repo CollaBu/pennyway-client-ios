@@ -1,6 +1,6 @@
 
-func mapNotFoundError(_ code: String, message: String) -> DomainSpecificError? {
-    guard let notFoundError = NotFoundError(rawValue: code) else {
+func notFoundError(_ code: String, message: String) -> StatusSpecificError? {
+    guard let notFoundError = NotFoundErrorCode(rawValue: code) else {
         return nil
     }
     let defaultMessage: String
@@ -14,5 +14,5 @@ func mapNotFoundError(_ code: String, message: String) -> DomainSpecificError? {
         defaultMessage = "Resource deleted or moved"
     }
 
-    return DomainSpecificError(domainError: .notFound, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .notFound, code: code, message: message.isEmpty ? defaultMessage : message)
 }

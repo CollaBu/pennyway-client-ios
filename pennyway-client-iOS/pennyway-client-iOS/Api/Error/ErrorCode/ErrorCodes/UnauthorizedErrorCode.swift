@@ -1,5 +1,5 @@
 
-enum UnauthorizedError: String {
+enum UnauthorizedErrorCode: String {
     case missingOrInvalidCredentials = "4010"
     case expiredOrRevokedToken = "4011"
     case insufficientPermissions = "4012"

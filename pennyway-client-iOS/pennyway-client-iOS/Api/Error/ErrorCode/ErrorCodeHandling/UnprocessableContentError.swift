@@ -1,6 +1,6 @@
 
-func mapUnprocessableContentError(_ code: String, message: String) -> DomainSpecificError? {
-    guard let unprocessableContentError = UnprocessableContentError(rawValue: code) else {
+func unprocessableContentError(_ code: String, message: String) -> StatusSpecificError? {
+    guard let unprocessableContentError = UnprocessableContentErrorCode(rawValue: code) else {
         return nil
     }
     
@@ -15,5 +15,5 @@ func mapUnprocessableContentError(_ code: String, message: String) -> DomainSpec
         defaultMessage = "Type mismatch error in request body"
     }
     
-    return DomainSpecificError(domainError: .unprocessableContent, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .unprocessableContent, code: code, message: message.isEmpty ? defaultMessage : message)
 }

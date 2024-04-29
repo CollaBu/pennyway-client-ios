@@ -1,6 +1,6 @@
 
-func mapUnauthorizedError(_ code: String, message: String) -> DomainSpecificError? {
-    guard let unauthorizedError = UnauthorizedError(rawValue: code) else {
+func unauthorizedError(_ code: String, message: String) -> StatusSpecificError? {
+    guard let unauthorizedError = UnauthorizedErrorCode(rawValue: code) else {
         return nil
     }
     let defaultMessage: String
@@ -15,5 +15,5 @@ func mapUnauthorizedError(_ code: String, message: String) -> DomainSpecificErro
     case .tamperedOrMalformedToken:
         defaultMessage = "Tampered or malformed token"
     }
-    return DomainSpecificError(domainError: .unauthorized, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .unauthorized, code: code, message: message.isEmpty ? defaultMessage : message)
 }

@@ -1,4 +1,4 @@
 
-enum NotAcceptableError: String {
+enum NotAcceptableErrorCode: String {
     case resourceFormatNotSupported = "4060"
 }
