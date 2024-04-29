@@ -16,6 +16,8 @@ func badRequestError(_ code: String, message: String) -> StatusSpecificError? {
         defaultMessage = "Malformed request body"
     case .invalidRequest:
         defaultMessage = "Invalid Request"
+    case .clientError:
+        defaultMessage = "Client Error"
     }
     return StatusSpecificError(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
 }

@@ -14,6 +14,8 @@ func unauthorizedError(_ code: String, message: String) -> StatusSpecificError? 
         defaultMessage = "Insufficient permissions"
     case .tamperedOrMalformedToken:
         defaultMessage = "Tampered or malformed token"
+    case .withoutOwnership:
+        defaultMessage = "Without Ownership"
     }
     return StatusSpecificError(domainError: .unauthorized, code: code, message: message.isEmpty ? defaultMessage : message)
 }

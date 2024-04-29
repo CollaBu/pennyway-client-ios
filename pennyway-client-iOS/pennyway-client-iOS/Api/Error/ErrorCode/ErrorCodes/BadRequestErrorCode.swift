@@ -5,4 +5,5 @@ enum BadRequestErrorCode: String {
     case malformedParameter = "4002"
     case malformedRequestBody = "4003"
     case invalidRequest = "4004"
+    case clientError = "4005"
 }
