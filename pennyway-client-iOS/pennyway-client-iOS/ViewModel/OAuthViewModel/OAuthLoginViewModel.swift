@@ -9,7 +9,6 @@ class OAuthLoginViewModel: ObservableObject {
     }
 
     func oauthLoginApi(completion: @escaping (Bool, String?) -> Void) {
-
         OAuthAlamofire.shared.oauthLogin(dto) { result in
             switch result {
             case let .success(data):
@@ -30,7 +29,7 @@ class OAuthLoginViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-                if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                     print("Failed to verify: \(errorWithDomainErrorAndMessage)")
                 } else {
                     print("Failed to verify: \(error)")
