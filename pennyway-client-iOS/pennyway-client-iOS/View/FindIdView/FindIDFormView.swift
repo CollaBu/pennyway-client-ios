@@ -67,7 +67,7 @@ struct FindIDFormView: View {
     }
     
     private func continueButtonAction() {
-        findUserNameViewModel.findUserNameApi {
+        phoneVerificationViewModel.requestUserNameVerificationCodeApi {
             checkFormValid()
         }
     }

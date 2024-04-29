@@ -11,11 +11,15 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     
     var oauthId = ""
     var token = ""
+    var nonce = ""
     
     func signIn() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
+        let randomNonce = CryptoHelper.randomNonceString()
+        nonce = CryptoHelper.sha256(randomNonce)
         request.requestedScopes = [.fullName, .email]
+        request.nonce = nonce
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
@@ -46,7 +50,8 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             
-            let viewModel = OAuthLoginViewModel(oauthId: oauthId, provider: OAuthRegistrationManager.shared.provider)
+            let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIdToken() ?? "", nonce: nonce, provider: OAuthRegistrationManager.shared.provider)
+            let viewModel = OAuthLoginViewModel(dto: oauthLoginDto)
 
             viewModel.oauthLoginApi { success, error in
                 if success {

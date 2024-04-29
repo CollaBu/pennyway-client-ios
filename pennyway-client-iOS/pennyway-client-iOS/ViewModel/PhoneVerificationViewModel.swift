@@ -19,6 +19,9 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var showErrorExistingUser = false
     @Published var isFormValid = false
 
+    @Published var phone: String = ""
+    @Published var username: String?
+
     /// Timer
     @Published var isTimerHidden = true
     @Published var timerSeconds = 300
@@ -125,21 +128,25 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     private func handleUserNameVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
-        switch result {
-        case let .success(data):
-            if let responseData = data {
-                do {
-                    let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
-                    print(response)
-                } catch {
-                    print("Error decoding JSON: \(error)")
+        let findUserNameDto = FindUserNameRequestDto(phone: phone, code: code)
+        AuthAlamofire.shared.findUserName(findUserNameDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
+                        self.username = response.data.user.username
+                        print(response)
+                    } catch {
+                        print("Error decoding JSON: \(error)")
+                    }
                 }
-            }
-        case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
-                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
-            } else {
-                print("Failed to verify: \(error)")
+            case let .failure(error):
+                if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                    print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                } else {
+                    print("Failed to verify: \(error)")
+                }
             }
         }
         completion()

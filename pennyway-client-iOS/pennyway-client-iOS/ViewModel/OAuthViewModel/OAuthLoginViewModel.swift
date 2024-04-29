@@ -2,18 +2,14 @@
 import SwiftUI
 
 class OAuthLoginViewModel: ObservableObject {
-    var oauthId: String
-    var provider: String
+    var dto: OAuthLoginRequestDto
 
-    init(oauthId: String, provider: String) {
-        self.oauthId = oauthId
-        self.provider = provider
+    init(dto: OAuthLoginRequestDto) {
+        self.dto = dto
     }
 
     func oauthLoginApi(completion: @escaping (Bool, String?) -> Void) {
-        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIdToken() ?? "", provider: provider)
-
-        OAuthAlamofire.shared.oauthLogin(oauthLoginDto) { result in
+        OAuthAlamofire.shared.oauthLogin(dto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
