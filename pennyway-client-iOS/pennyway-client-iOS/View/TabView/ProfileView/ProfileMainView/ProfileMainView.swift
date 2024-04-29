@@ -4,14 +4,22 @@ import SwiftUI
 struct ProfileMainView: View {
     var body: some View {
         NavigationAvailable {
-            VStack {
-                Text("Profile Main View")
-
-                ProfileUserInfoView()
-                ProfileOAuthButtonView()
-                ProfileSettingListView()
+            ScrollView {
+                VStack {
+                    ProfileUserInfoView()
+                    
+                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                    
+                    ProfileOAuthButtonView()
+                    
+                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                    
+                    ProfileSettingListView()
+                }
             }
-            .navigationBarTitle("Profile", displayMode: .inline)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("Gray01"))
+            .navigationBarTitle("프로필", displayMode: .inline)
         }
     }
 }

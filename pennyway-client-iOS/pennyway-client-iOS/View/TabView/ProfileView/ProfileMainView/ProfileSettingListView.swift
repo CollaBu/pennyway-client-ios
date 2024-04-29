@@ -4,6 +4,11 @@ import SwiftUI
 
 struct ProfileSettingListView: View {
     var body: some View {
-        Text("Subview 3")
+        VStack {
+            Text("Subview 3")
+        }
+
+        .frame(maxWidth: .infinity)
+        .background(Color("White01"))
     }
 }

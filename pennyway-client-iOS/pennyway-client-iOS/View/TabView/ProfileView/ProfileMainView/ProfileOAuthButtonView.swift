@@ -3,6 +3,11 @@ import SwiftUI
 
 struct ProfileOAuthButtonView: View {
     var body: some View {
-        Text("Subview 2")
+        VStack {
+            Text("Subview 2")
+        }
+
+        .frame(maxWidth: .infinity)
+        .background(Color("White01"))
     }
 }
