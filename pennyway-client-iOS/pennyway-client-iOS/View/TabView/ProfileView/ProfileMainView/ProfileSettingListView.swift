@@ -35,10 +35,17 @@ struct SectionView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
             ForEach(items, id: \.self) { item in
-                Text(item)
-                    .font(.H4MediumFont())
-                    .platformTextColor(color: Color("Gray07"))
-                    .padding(.vertical, 7)
+                HStack {
+                    Image("icon_close_filled_primary")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
+
+                    Text(item)
+                        .font(.H4MediumFont())
+                        .platformTextColor(color: Color("Gray07"))
+                        .padding(.vertical, 7)
+                }
             }
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
         }
