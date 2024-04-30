@@ -16,9 +16,9 @@ struct ProfileMainView: View {
                     
                     ProfileSettingListView()
                 }
+                .background(Color("Gray01"))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("Gray01"))
             .navigationBarTitle("프로필", displayMode: .inline)
         }
     }

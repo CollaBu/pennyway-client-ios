@@ -112,6 +112,7 @@
 		4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */; };
 		4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */; };
 		4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E282BE015970058A52A /* ProfileSettingListView.swift */; };
+		4AD70E2B2BE0A8D30058A52A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E2A2BE0A8D30058A52A /* MainTabView.swift */; };
 		4AE1A6182BD2D50F00E7687B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AE1A6172BD2D50F00E7687B /* GoogleService-Info.plist */; };
 		4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
@@ -244,6 +245,7 @@
 		4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
 		4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOAuthButtonView.swift; sourceTree = "<group>"; };
 		4AD70E282BE015970058A52A /* ProfileSettingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListView.swift; sourceTree = "<group>"; };
+		4AD70E2A2BE0A8D30058A52A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4AE1A6172BD2D50F00E7687B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -782,6 +784,7 @@
 				4AD70E1F2BE013380058A52A /* FeedView */,
 				4AD70E1E2BE011970058A52A /* SpendManagementView */,
 				4AD70E1D2BE011370058A52A /* ProfileView */,
+				4AD70E2A2BE0A8D30058A52A /* MainTabView.swift */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -1020,6 +1023,7 @@
 				4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
+				4AD70E2B2BE0A8D30058A52A /* MainTabView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
 				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
