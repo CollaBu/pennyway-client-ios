@@ -1,11 +1,12 @@
 
+
 import SwiftUI
 
-struct PhoneNumberInputSectionView: View {
+struct FindIDPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
 
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
-    @State private var isFindUsername = RegistrationManager.shared.isFindUsername
+    @State private var isFindUsername = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 11) {
@@ -39,7 +40,7 @@ struct PhoneNumberInputSectionView: View {
                         print(isFindUsername)
                         if isOAuthRegistration {
                             viewModel.requestOAuthVerificationCodeApi { viewModel.judgeTimerRunning() }
-                        } else if viewModel.isFindUsername {
+                        } else if isFindUsername {
                             print("아이디 찾기 번호 인증 api 요청")
                             viewModel.requestUserNameVerificationCodeApi { viewModel.judgeTimerRunning() }
                         } else {
@@ -79,5 +80,5 @@ struct PhoneNumberInputSectionView: View {
 }
 
 #Preview {
-    PhoneNumberInputSectionView(viewModel: PhoneVerificationViewModel())
+    FindIDPhoneVerificationView(viewModel: PhoneVerificationViewModel())
 }

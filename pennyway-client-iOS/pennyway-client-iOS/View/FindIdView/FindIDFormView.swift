@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FindIDFormView: View {
     @State private var showingPopUp = false
+    ///    @State private var isFindUsername = RegistrationManager.shared.isFindUsername
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var navigateToFindIDView = false
     @StateObject var viewModel = SignUpNavigationViewModel()
@@ -25,27 +26,9 @@ struct FindIDFormView: View {
                         navigateToFindIDView = true
                         
                     }, label: "아이디 찾기", isFormValid: $phoneVerificationViewModel.isFormValid)
-                        //                    CustomBottomButton(action: {
-                        ////                        numberVerificationViewModel.validateNumberVerification()
-                        //                        FindIDView(findUserNameViewModel: FindUserNameViewModel())
-                        //                        // numberVerificationViewModel.requestVerifyVerificationCodeApi()
-                        //                        if !numberVerificationViewModel.showErrorVerificationCode, numberVerificationViewModel.isFormValid {
-                        //                            showingPopUp = false
-                        //                            viewModel.continueButtonTapped()
-                        //
-                        //                            RegistrationManager.shared.phoneNumber = numberVerificationViewModel.phoneNumber
-                        //                            RegistrationManager.shared.code = numberVerificationViewModel.code
-                        //
-                        //                            navigateToFindIDView = true
-                        //
-                        //                        } else {
-                        //                            showingPopUp = true
-                        //                        }
-                        //                    }, label: "아이디 찾기", isFormValid: $numberVerificationViewModel.isFormValid)
-                        //                }
                         .padding(.bottom, 34)
                     
-                    NavigationLink(destination: FindIDView(findUserNameViewModel: FindUserNameViewModel()), isActive: $navigateToFindIDView) {
+                    NavigationLink(destination: FindIDView(phoneVerificationViewModel: PhoneVerificationViewModel()), isActive: $navigateToFindIDView) {
                         EmptyView()
                     }.hidden()
                 }
@@ -67,8 +50,10 @@ struct FindIDFormView: View {
     }
     
     private func continueButtonAction() {
-        phoneVerificationViewModel.requestUserNameVerificationCodeApi {
-            checkFormValid()
+        if phoneVerificationViewModel.isFormValid {
+            phoneVerificationViewModel.requestUserNameVerifyVerificationCodeApi {
+                checkFormValid()
+            }
         }
     }
     
@@ -76,6 +61,9 @@ struct FindIDFormView: View {
         if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
             showingPopUp = false
             viewModel.continueButtonTapped()
+            
+            //            RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
+            //            RegistrationManager.shared.code = phoneVerificationViewModel.code
             
         } else {
             if phoneVerificationViewModel.showErrorVerificationCode {

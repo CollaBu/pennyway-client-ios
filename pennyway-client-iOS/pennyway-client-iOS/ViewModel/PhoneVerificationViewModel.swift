@@ -21,6 +21,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     @Published var phone: String = ""
     @Published var username: String?
+    @Published var isFindUsername = false
 
     /// Timer
     @Published var isTimerHidden = true
@@ -69,6 +70,16 @@ class PhoneVerificationViewModel: ObservableObject {
         if !showErrorPhoneNumberFormat {
             AuthAlamofire.shared.receiveUserNameVerificationCode(usernameVerificationCodeDto) { result in
                 self.handleUserNameVerificationCodeApiResult(result: result, completion: completion)
+            }
+        }
+    }
+
+    func requestUserNameVerifyVerificationCodeApi(completion: @escaping () -> Void) {
+        let verificationDto = FindUserNameRequestDto(phone: formattedPhoneNumber, code: code)
+
+        if isFormValid {
+            AuthAlamofire.shared.findUserName(verificationDto) { result in
+                self.handleFindUserNameApi(result: result, completion: completion)
             }
         }
     }
@@ -127,26 +138,46 @@ class PhoneVerificationViewModel: ObservableObject {
         completion()
     }
 
-    private func handleUserNameVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
-        let findUserNameDto = FindUserNameRequestDto(phone: phone, code: code)
-        AuthAlamofire.shared.findUserName(findUserNameDto) { result in
-            switch result {
-            case let .success(data):
-                if let responseData = data {
-                    do {
-                        let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
-                        self.username = response.data.user.username
-                        print(response)
-                    } catch {
-                        print("Error decoding JSON: \(error)")
-                    }
+    private func handleUserNameVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) { // 아이디 찾기 번호 인증
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
+                    print(response)
+                } catch {
+                    print("Error decoding JSON: \(error)")
                 }
-            case let .failure(error):
-                if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
-                    print("Failed to verify: \(errorWithDomainErrorAndMessage)")
-                } else {
-                    print("Failed to verify: \(error)")
+            }
+        case let .failure(error):
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
+        }
+        completion()
+    }
+
+    private func handleFindUserNameApi(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
+                    username = response.data.user.username
+                    print("Username updated to: \(username)")
+
+                    print(response)
+                } catch {
+                    print("Error parsing response JSON: \(error)")
                 }
+            }
+        case let .failure(error):
+            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
             }
         }
         completion()

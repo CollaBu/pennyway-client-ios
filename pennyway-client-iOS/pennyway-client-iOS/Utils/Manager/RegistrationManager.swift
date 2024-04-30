@@ -11,10 +11,11 @@ struct RegistrationManager {
     }
 
     var code = ""
+    var isFindUsername: Bool = false
 
     private init() {}
 
     func performRegistration() {  
-        print("Registered User: Name - \(name), UserName - \(username), Phone Number - \(phoneNumber)")
+        print("Registered User: Name - \(name), UserName - \(username), Phone Number - \(phoneNumber), check FindIdView PhoneVerification - \(isFindUsername)")
     }
 }

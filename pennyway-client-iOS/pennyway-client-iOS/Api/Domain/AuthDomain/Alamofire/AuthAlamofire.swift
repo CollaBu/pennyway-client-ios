@@ -21,7 +21,7 @@ class AuthAlamofire: TokenHandler {
     }
     
     func receiveUserNameVerificationCode(_ dto: VerificationCodeRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) { // 아이디 찾기 번호인증
-        os_log("AuthAlamofire - receiveUserNameVerificationCode() called userInput : %@ ", log: .default, type: .info, dto.phone)
+        os_log("AuthAlamofire - receiveUserNameVerificationCode() called userInput : %@", log: .default, type: .info, dto.phone)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receiveUserNameVerificationCode(dto: dto), completion: completion)
     }
     

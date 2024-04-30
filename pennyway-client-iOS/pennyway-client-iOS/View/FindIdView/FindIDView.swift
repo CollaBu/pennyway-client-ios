@@ -4,8 +4,11 @@ struct FindIDView: View {
     @State private var goToLoginView = false
     @State private var goToPwView = false
     ///    @State private var showingPopUp = false
-    @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
-    @ObservedObject var findUserNameViewModel: FindUserNameViewModel
+    /// @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
+    @ObservedObject var phoneVerificationViewModel: PhoneVerificationViewModel
+    var username = OAuthRegistrationManager.shared.isOAuthRegistration ? OAuthRegistrationManager.shared.username : RegistrationManager.shared.username
+
+//    @ObservedObject var findUserNameViewModel: FindUserNameViewModel
 
     var body: some View {
         NavigationAvailable {
@@ -36,11 +39,11 @@ struct FindIDView: View {
                                 .stroke(Color("Gray02"), lineWidth: 1)
                         )
                         
-                    if let username = findUserNameViewModel.username {
-                        Text("\(username)")
-                            .font(.pretendard(.semibold, size: 18))
-                            .multilineTextAlignment(.center)
-                    }
+//                    if let username = self.username {
+                    Text("\(username)")
+                        .font(.pretendard(.semibold, size: 18))
+                        .multilineTextAlignment(.center)
+                    // }
                 }
                     
                 Spacer().frame(height: 120)
@@ -100,5 +103,5 @@ struct FindIDView: View {
 }
 
 #Preview {
-    FindIDView(findUserNameViewModel: FindUserNameViewModel())
+    FindIDView(phoneVerificationViewModel: PhoneVerificationViewModel())
 }

@@ -114,6 +114,7 @@
 		D89FB7862BDA8D570019DE3C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7852BDA8D570019DE3C /* KeychainHelper.swift */; };
 		D89FB7892BDA925F0019DE3C /* FindUserNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */; };
 		D89FB78B2BDA9CA70019DE3C /* FindIDContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */; };
+		D8FB77842BE1582E009A602E /* FindIDPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB77832BE1582D009A602E /* FindIDPhoneVerificationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -226,6 +227,7 @@
 		D89FB7852BDA8D570019DE3C /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = "pennyway-client-iOS/Api/KeychainHelper.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
 		D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDContentView.swift; sourceTree = "<group>"; };
+		D8FB77832BE1582D009A602E /* FindIDPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDPhoneVerificationView.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -681,6 +683,7 @@
 				D8157E7B2BC269350083844B /* FindIDView.swift */,
 				D867D6DC2BC453AA00A2EDA9 /* FindIDFormView.swift */,
 				D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */,
+				D8FB77832BE1582D009A602E /* FindIDPhoneVerificationView.swift */,
 			);
 			path = FindIdView;
 			sourceTree = "<group>";
@@ -865,6 +868,7 @@
 				D888329E2BBC613E00F49B27 /* LoginFormViewModel.swift in Sources */,
 				4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */,
 				4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */,
+				D8FB77842BE1582E009A602E /* FindIDPhoneVerificationView.swift in Sources */,
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
 				D89FB7862BDA8D570019DE3C /* KeychainHelper.swift in Sources */,
