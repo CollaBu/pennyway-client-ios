@@ -3,6 +3,8 @@ import SwiftUI
 struct InputFormView: View {
     @ObservedObject var viewModel: LoginFormViewModel
 
+    @State private var isLoginSuccessful = true
+
     var body: some View {
         VStack {
             HStack(alignment: .top) {
@@ -17,7 +19,7 @@ struct InputFormView: View {
 
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-            if viewModel.loginFailed != nil {
+            if viewModel.showErrorCodeContent {
                 ErrorCodeContentView()
             }
 

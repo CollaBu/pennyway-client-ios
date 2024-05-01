@@ -8,7 +8,7 @@ struct LoginFormView: View {
             ZStack {
                 VStack {
                     ScrollView {
-                        InputFormView(viewModel: LoginFormViewModel()) // Id, Pw 입력 폼
+                        InputFormView(viewModel: viewModel) // Id, Pw 입력 폼
 
                         OauthButtonView()
 
@@ -35,6 +35,7 @@ struct LoginFormView: View {
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
+            NavigationLink(destination: MainTabView(), isActive: $viewModel.isLoginSuccessful) {}
         }
     }
 }

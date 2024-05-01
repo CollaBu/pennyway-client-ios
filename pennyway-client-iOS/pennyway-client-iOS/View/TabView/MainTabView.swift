@@ -31,6 +31,7 @@ struct MainTabView: View {
                 }
                 .tag(3)
         }
+        .navigationBarBackButtonHidden(true)
         .accentColor(Color("Mint03"))
         .onAppear {
             UITabBar.appearance().barTintColor = .white
