@@ -8,10 +8,10 @@ struct ProfileSettingListView: View {
             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
 
             LazyVStack(spacing: 0) {
-                SectionView(title: "내 정보", items: ["내 정보 수정", "내가 쓴 글", "스크랩", "비밀번호 변경"])
-                SectionView(title: "앱 설정", items: ["알림 설정"])
-                SectionView(title: "이용안내", items: ["문의하기"])
-                SectionView(title: "기타", items: ["로그아웃", "회원탈퇴"])
+                SectionView(title: "내 정보", itemsWithIcons: [("내 정보 수정", "icon_modifyingprofile"), ("내가 쓴 글", "icon_list"), ("스크랩", "icon_modifyingprofile"), ("비밀번호 변경", "icon_modifyingprofile")])
+                SectionView(title: "앱 설정", itemsWithIcons: [("알림 설정", "icon_notificationsetting")])
+                SectionView(title: "이용안내", itemsWithIcons: [("문의하기", "icon_checkwithsomeone")])
+                SectionView(title: "기타", itemsWithIcons: [("로그아웃", "icon_logout"), ("회원탈퇴", "icon_cancelmembership")])
             }
         }
         .frame(maxWidth: .infinity)
@@ -23,7 +23,7 @@ struct ProfileSettingListView: View {
 
 struct SectionView: View {
     let title: String
-    let items: [String]
+    let itemsWithIcons: [(String, String)]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -34,9 +34,9 @@ struct SectionView: View {
 
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-            ForEach(items, id: \.self) { item in
+            ForEach(itemsWithIcons, id: \.0) { item, icon in
                 HStack {
-                    Image("icon_close_filled_primary")
+                    Image(icon)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)

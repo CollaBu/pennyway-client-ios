@@ -32,6 +32,9 @@ struct MainTabView: View {
                 .tag(3)
         }
         .accentColor(Color("Mint03"))
+        .onAppear {
+            UITabBar.appearance().barTintColor = .white
+        }
     }
 }
 
