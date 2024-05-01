@@ -10,6 +10,7 @@ class ProfileInfoViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(GetUserProfileResponseDto.self, from: responseData)
+                        saveUserData(userData: response.data.user)
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             os_log("getUserProfileApi call: %@", log: .default, type: .debug, jsonString)
                         }
