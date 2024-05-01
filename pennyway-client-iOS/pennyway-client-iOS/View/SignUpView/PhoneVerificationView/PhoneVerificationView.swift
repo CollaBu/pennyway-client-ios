@@ -36,7 +36,7 @@ struct PhoneVerificationView: View {
             
             if showingPopUp {
                 Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingPopUp)
+                ErrorCodePopUpView(showingPopUp: $showingPopUp, isVerificationError: false)
             }
         }
         .edgesIgnoringSafeArea(.bottom)

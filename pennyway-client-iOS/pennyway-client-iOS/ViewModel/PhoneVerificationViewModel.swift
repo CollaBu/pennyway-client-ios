@@ -152,6 +152,13 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .failure(error):
             if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+
+                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestErrorCode.invalidRequest.rawValue {
+                    showErrorExistingUser = false
+                } else {
+                    showErrorVerificationCode = true
+                    print("handleUserNameVerificationCodeApiResult 에러코드 실행")
+                }
             } else {
                 print("Failed to verify: \(error)")
             }
@@ -165,10 +172,8 @@ class PhoneVerificationViewModel: ObservableObject {
             if let responseData = data {
                 do {
                     let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
-//                    username = response.data.user.username 날리기
+//                    showErrorVerificationCode = false
                     RegistrationManager.shared.username = response.data.user.username
-                    print("Username updated to: \(username)")
-
                     print(response)
                 } catch {
                     print("Error parsing response JSON: \(error)")
@@ -177,6 +182,13 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .failure(error):
             if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+
+                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestErrorCode.invalidRequest.rawValue {
+                    showErrorExistingUser = false
+                } else {
+                    showErrorVerificationCode = true
+                    print("handleFindUserNameApi 에러 실패")
+                }
             } else {
                 print("Failed to verify: \(error)")
             }

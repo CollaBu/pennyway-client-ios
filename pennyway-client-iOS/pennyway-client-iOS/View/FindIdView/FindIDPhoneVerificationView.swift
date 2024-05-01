@@ -4,8 +4,6 @@ import SwiftUI
 
 struct FindIDPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
-
-    @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration//날리기
     @State private var isFindUsername = true
 
     var body: some View {
@@ -37,18 +35,12 @@ struct FindIDPhoneVerificationView: View {
                             }
                     }
                     Button(action: {
-                        print(isFindUsername)//oauth 지우기
-                        if isOAuthRegistration {//날리기
-                            viewModel.requestOAuthVerificationCodeApi { viewModel.judgeTimerRunning() }
-                        } else if isFindUsername {
+                        print(isFindUsername)
+                        if isFindUsername {
                             print("아이디 찾기 번호 인증 api 요청")
                             viewModel.requestUserNameVerificationCodeApi { viewModel.judgeTimerRunning() }
-                        } else {//날리기
-                            print("번호 인증 api요청")
-                            viewModel.requestVerificationCodeApi { viewModel.judgeTimerRunning() }
                         }
                         print(isFindUsername)
-
                     }, label: {
                         Text("인증번호 받기")
                             .font(.pretendard(.medium, size: 13))
