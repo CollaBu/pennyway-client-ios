@@ -1,12 +1,17 @@
+// MARK: - GetUserProfileResponseDto
 
-struct GetUserProfileResponse: Codable {
+struct GetUserProfileResponseDto: Codable {
     let code: String
     let data: UserProfileData
 }
 
+// MARK: - UserProfileData
+
 struct UserProfileData: Codable {
     let user: UserData
 }
+
+// MARK: - UserData
 
 struct UserData: Codable {
     let id: Int
@@ -21,6 +26,8 @@ struct UserData: Codable {
     let notifySetting: NotifySetting
     let createdAt: String
 }
+
+// MARK: - NotifySetting
 
 struct NotifySetting: Codable {
     let accountBookNotify: Bool

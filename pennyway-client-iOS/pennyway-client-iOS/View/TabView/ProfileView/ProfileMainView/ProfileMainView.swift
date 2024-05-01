@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct ProfileMainView: View {
+    @StateObject var viewModel = ProfileInfoViewModel()
+    
     var body: some View {
         NavigationAvailable {
             ScrollView {
@@ -33,10 +35,13 @@ struct ProfileMainView: View {
                     }
                 }
             }
+            .onAppear {
+                viewModel.getUserProfileApi()
+            }
         }
     }
 }
 
 #Preview {
-    ProfileMainView()
+    ProfileMainView(viewModel: ProfileInfoViewModel())
 }
