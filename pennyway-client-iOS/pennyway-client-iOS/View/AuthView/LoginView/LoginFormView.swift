@@ -35,11 +35,10 @@ struct LoginFormView: View {
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
-            NavigationLink(destination: MainTabView(), isActive: $viewModel.isLoginSuccessful) {}
         }
     }
 }
 
 #Preview {
-    LoginFormView(viewModel: LoginFormViewModel())
+    LoginFormView(viewModel: LoginFormViewModel(appViewModel: AppViewModel()))
 }

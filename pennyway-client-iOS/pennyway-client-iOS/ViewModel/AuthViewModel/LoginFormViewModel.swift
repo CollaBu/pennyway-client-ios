@@ -7,6 +7,12 @@ class LoginFormViewModel: ObservableObject {
     @Published var isLoginSuccessful = false
     @Published var showErrorCodeContent = false
 
+    let appViewModel: AppViewModel
+
+    init(appViewModel: AppViewModel) {
+        self.appViewModel = appViewModel
+    }
+
     func loginApi() {
         if !isFormValid {
             let loginDto = LoginRequestDto(username: id, password: password)
@@ -18,6 +24,7 @@ class LoginFormViewModel: ObservableObject {
                             let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                             self.isLoginSuccessful = true
                             self.showErrorCodeContent = false
+                            self.appViewModel.isLoggedIn = true
                             print(response)
                         } catch {
                             print("Error parsing response JSON: \(error)")
@@ -26,6 +33,7 @@ class LoginFormViewModel: ObservableObject {
                 case let .failure(error):
                     self.isLoginSuccessful = false
                     self.showErrorCodeContent = true
+                    self.appViewModel.isLoggedIn = false
                     if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                         print("Failed to verify: \(errorWithDomainErrorAndMessage)")
                     } else {

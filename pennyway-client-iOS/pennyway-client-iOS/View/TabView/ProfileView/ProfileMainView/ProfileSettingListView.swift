@@ -35,7 +35,7 @@ struct SectionView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
             ForEach(itemsWithIcons, id: \.0) { item, icon in
-                HStack {
+                Button(action: /*@START_MENU_TOKEN@*/ {}/*@END_MENU_TOKEN@*/, label: {
                     Image(icon)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -45,7 +45,7 @@ struct SectionView: View {
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.vertical, 7)
-                }
+                }) 
             }
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
         }
