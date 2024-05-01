@@ -29,7 +29,7 @@ class OAuthLoginViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-                if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
+                if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                     print("Failed to verify: \(errorWithDomainErrorAndMessage)")
                 } else {
                     print("Failed to verify: \(error)")

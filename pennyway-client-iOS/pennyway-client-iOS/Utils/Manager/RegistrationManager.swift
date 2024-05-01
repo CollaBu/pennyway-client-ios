@@ -11,7 +11,7 @@ struct RegistrationManager {
     }
 
     var code = ""
-    var isFindUsername: Bool = false
+    var isFindUsername: Bool = false//가능하면 지우도록
 
     private init() {}
 

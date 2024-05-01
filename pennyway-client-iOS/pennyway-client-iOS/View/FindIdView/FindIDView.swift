@@ -6,7 +6,7 @@ struct FindIDView: View {
     ///    @State private var showingPopUp = false
     /// @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @ObservedObject var phoneVerificationViewModel: PhoneVerificationViewModel
-    var username = OAuthRegistrationManager.shared.isOAuthRegistration ? OAuthRegistrationManager.shared.username : RegistrationManager.shared.username
+    var username = OAuthRegistrationManager.shared.isOAuthRegistration ? OAuthRegistrationManager.shared.username : RegistrationManager.shared.username//oauth 지우기
 
 //    @ObservedObject var findUserNameViewModel: FindUserNameViewModel
 
