@@ -1,4 +1,5 @@
 
+import os.log
 import SwiftUI
 
 class PhoneVerificationViewModel: ObservableObject {
@@ -121,6 +122,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     showErrorVerificationCode = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
+                    OAuthRegistrationManager.shared.username = sms.username ?? ""
 
                     print(response)
                 } catch {
@@ -153,7 +155,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     showErrorVerificationCode = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
-                    OAuthRegistrationManager.shared.username = sms.username
+                    OAuthRegistrationManager.shared.username = sms.username ?? ""
 
                     print(response)
                 } catch {

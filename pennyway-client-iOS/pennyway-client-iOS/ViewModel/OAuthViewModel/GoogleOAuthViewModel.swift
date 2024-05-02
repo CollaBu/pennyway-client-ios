@@ -29,6 +29,7 @@ class GoogleOAuthViewModel: ObservableObject {
             do {
                 let payloadJSON = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any]
                 nonce = payloadJSON?["nonce"] as? String ?? ""
+                OAuthRegistrationManager.shared.nonce = nonce
             } catch {
                 print("Error decoding JSON: \(error)")
             }

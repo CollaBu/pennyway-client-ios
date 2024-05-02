@@ -20,6 +20,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
         nonce = CryptoHelper.sha256(randomNonce)
         request.requestedScopes = [.fullName, .email]
         request.nonce = nonce
+        OAuthRegistrationManager.shared.nonce = nonce
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
