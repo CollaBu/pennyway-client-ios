@@ -36,7 +36,7 @@ struct PhoneVerificationView: View {
             
             if showingPopUp {
                 Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingPopUp, isVerificationError: false)
+                ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "잘못된 인증번호예요")
             }
         }
         .edgesIgnoringSafeArea(.bottom)

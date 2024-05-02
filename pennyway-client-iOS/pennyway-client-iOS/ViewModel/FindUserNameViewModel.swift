@@ -29,34 +29,4 @@ class FindUserNameViewModel: ObservableObject {
         }
         completion()
     }
-
-//    private func FindUserNameApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
-//        switch result {
-//        case let .success(data):
-//            if let responseData = data {
-//                do {
-//                    let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
-    ////                    showErrorVerificationCode = false
-//                    let username = response.data.user.username
-//
-//                    print(response)
-//                } catch {
-//                    print("Error decoding JSON: \(error)")
-//                }
-//            }
-//        case let .failure(error):
-//            if let errorWithDomainErrorAndMessage = error as? ErrorWithDomainErrorAndMessage {
-//                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
-//                if errorWithDomainErrorAndMessage.code == "4000" {
-    ////                    showErrorExistingUser = true
-//                    print("Failed to verify: \(error)")
-//                } else {
-    ////                    showErrorVerificationCode = true
-//                }
-//            } else {
-//                print("Failed to verify: \(error)")
-//            }
-//        }
-//        completion()
-//    }
 }

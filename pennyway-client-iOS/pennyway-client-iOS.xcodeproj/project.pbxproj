@@ -115,8 +115,8 @@
 		D8157E662BBEF2740083844B /* OauthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E652BBEF2740083844B /* OauthButtonView.swift */; };
 		D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E672BBEF4400083844B /* AdditionalOptionView.swift */; };
 		D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E712BC19E590083844B /* PhoneNumberInputSectionView.swift */; };
-		D8157E7C2BC269350083844B /* FindIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E7B2BC269350083844B /* FindIDView.swift */; };
-		D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D867D6DC2BC453AA00A2EDA9 /* FindIDFormView.swift */; };
+		D8157E7C2BC269350083844B /* FindIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E7B2BC269350083844B /* FindIdView.swift */; };
+		D867D6DD2BC453AA00A2EDA9 /* FindIdFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D867D6DC2BC453AA00A2EDA9 /* FindIdFormView.swift */; };
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
 		D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */; };
 		D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */; };
@@ -132,10 +132,9 @@
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameDtoResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameDtoResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
-		D89FB7862BDA8D570019DE3C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7852BDA8D570019DE3C /* KeychainHelper.swift */; };
 		D89FB7892BDA925F0019DE3C /* FindUserNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */; };
-		D89FB78B2BDA9CA70019DE3C /* FindIDContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */; };
-		D8FB77842BE1582E009A602E /* FindIDPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB77832BE1582D009A602E /* FindIDPhoneVerificationView.swift */; };
+		D89FB78B2BDA9CA70019DE3C /* FindIdContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB78A2BDA9CA70019DE3C /* FindIdContentView.swift */; };
+		D8FB77842BE1582E009A602E /* FindIdPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB77832BE1582D009A602E /* FindIdPhoneVerificationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -249,8 +248,8 @@
 		D8157E652BBEF2740083844B /* OauthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthButtonView.swift; sourceTree = "<group>"; };
 		D8157E672BBEF4400083844B /* AdditionalOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionView.swift; sourceTree = "<group>"; };
 		D8157E712BC19E590083844B /* PhoneNumberInputSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputSectionView.swift; sourceTree = "<group>"; };
-		D8157E7B2BC269350083844B /* FindIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDView.swift; sourceTree = "<group>"; };
-		D867D6DC2BC453AA00A2EDA9 /* FindIDFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDFormView.swift; sourceTree = "<group>"; };
+		D8157E7B2BC269350083844B /* FindIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdView.swift; sourceTree = "<group>"; };
+		D867D6DC2BC453AA00A2EDA9 /* FindIdFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdFormView.swift; sourceTree = "<group>"; };
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
@@ -266,10 +265,9 @@
 		D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodeContentView.swift; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameDtoResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameDtoResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameDtoResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
-		D89FB7852BDA8D570019DE3C /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainHelper.swift; path = "pennyway-client-iOS/Api/KeychainHelper.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
-		D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDContentView.swift; sourceTree = "<group>"; };
-		D8FB77832BE1582D009A602E /* FindIDPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIDPhoneVerificationView.swift; sourceTree = "<group>"; };
+		D89FB78A2BDA9CA70019DE3C /* FindIdContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdContentView.swift; sourceTree = "<group>"; };
+		D8FB77832BE1582D009A602E /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -782,10 +780,10 @@
 		D8157E6C2BC080E20083844B /* FindIdView */ = {
 			isa = PBXGroup;
 			children = (
-				D8157E7B2BC269350083844B /* FindIDView.swift */,
-				D867D6DC2BC453AA00A2EDA9 /* FindIDFormView.swift */,
-				D89FB78A2BDA9CA70019DE3C /* FindIDContentView.swift */,
-				D8FB77832BE1582D009A602E /* FindIDPhoneVerificationView.swift */,
+				D8157E7B2BC269350083844B /* FindIdView.swift */,
+				D867D6DC2BC453AA00A2EDA9 /* FindIdFormView.swift */,
+				D89FB78A2BDA9CA70019DE3C /* FindIdContentView.swift */,
+				D8FB77832BE1582D009A602E /* FindIdPhoneVerificationView.swift */,
 			);
 			path = FindIdView;
 			sourceTree = "<group>";
@@ -978,7 +976,7 @@
 				D888329E2BBC613E00F49B27 /* LoginFormViewModel.swift in Sources */,
 				4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */,
 				4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */,
-				D8FB77842BE1582E009A602E /* FindIDPhoneVerificationView.swift in Sources */,
+				D8FB77842BE1582E009A602E /* FindIdPhoneVerificationView.swift in Sources */,
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A51D2AE2BB18EBC0080083D /* SignUpNavigationViewModel.swift in Sources */,
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
@@ -1006,7 +1004,7 @@
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */,
-				D8157E7C2BC269350083844B /* FindIDView.swift in Sources */,
+				D8157E7C2BC269350083844B /* FindIdView.swift in Sources */,
 				D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */,
 				D87CB0D62BC5B56600BD882A /* ResetPwFormView.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
@@ -1017,7 +1015,7 @@
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDto.swift in Sources */,
 				D89FB7892BDA925F0019DE3C /* FindUserNameViewModel.swift in Sources */,
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
-				D867D6DD2BC453AA00A2EDA9 /* FindIDFormView.swift in Sources */,
+				D867D6DD2BC453AA00A2EDA9 /* FindIdFormView.swift in Sources */,
 				4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
@@ -1070,7 +1068,7 @@
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
 				4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
-				D89FB78B2BDA9CA70019DE3C /* FindIDContentView.swift in Sources */,
+				D89FB78B2BDA9CA70019DE3C /* FindIdContentView.swift in Sources */,
 				4A5789732BDC1C0B00AFEB26 /* ForbiddenErrorCode.swift in Sources */,
 				4A4703AE2BCEE5AF00AEE04E /* OAuthVerificationResponseDto.swift in Sources */,
 			);

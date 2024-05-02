@@ -2,22 +2,22 @@
 
 import SwiftUI
 
-struct FindIDContentView: View {
+struct FindIdContentView: View {
     @ObservedObject var phoneVerificationViewModel: PhoneVerificationViewModel
-    
+
     var body: some View {
         VStack {
             Spacer().frame(height: 36)
-            
-            FindIDPhoneVerificationView(viewModel: phoneVerificationViewModel)
-            
+
+            FindIdPhoneVerificationView(viewModel: phoneVerificationViewModel)
+
             Spacer().frame(height: 21)
-            
+
             NumberInputSectionView(viewModel: phoneVerificationViewModel)
         }
     }
 }
 
 #Preview {
-    FindIDContentView(phoneVerificationViewModel: PhoneVerificationViewModel())
+    FindIdContentView(phoneVerificationViewModel: PhoneVerificationViewModel())
 }

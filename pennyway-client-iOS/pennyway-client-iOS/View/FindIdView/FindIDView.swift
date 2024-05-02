@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct FindIDView: View {
+struct FindIdView: View {
     @State private var goToLoginView = false
     @State private var goToPwView = false
     @ObservedObject var phoneVerificationViewModel: PhoneVerificationViewModel
@@ -98,5 +98,5 @@ struct FindIDView: View {
 }
 
 #Preview {
-    FindIDView(phoneVerificationViewModel: PhoneVerificationViewModel())
+    FindIdView(phoneVerificationViewModel: PhoneVerificationViewModel())
 }

@@ -1,6 +1,7 @@
+import os.log
 import SwiftUI
 
-struct FindIDFormView: View {
+struct FindIdFormView: View {
     @State private var showingPopUp = false
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var isNavigateToFindIDView: Bool = false
@@ -12,7 +13,7 @@ struct FindIDFormView: View {
         NavigationAvailable {
             ZStack {
                 ScrollView {
-                    FindIDContentView(phoneVerificationViewModel: phoneVerificationViewModel)
+                    FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel)
                 }
                 Spacer().frame(height: 203)
                 
@@ -27,13 +28,13 @@ struct FindIDFormView: View {
                     }, label: "아이디 찾기", isFormValid: $phoneVerificationViewModel.isFormValid)
                         .padding(.bottom, 34)
                     
-                    NavigationLink(destination: FindIDView(phoneVerificationViewModel: PhoneVerificationViewModel()), isActive: $isNavigateToFindIDView) {
+                    NavigationLink(destination: FindIdView(phoneVerificationViewModel: PhoneVerificationViewModel()), isActive: $isNavigateToFindIDView) {
                         EmptyView()
                     }.hidden()
                 }
                 if showingPopUp == true {
                     Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                    ErrorCodePopUpView(showingPopUp: $showingPopUp, isVerificationError: isVerificationError)
+                    ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "사용자 정보를 찾을 수 없어요")
                 }
             }
             .navigationTitle(Text("아이디 찾기"))
@@ -60,6 +61,7 @@ struct FindIDFormView: View {
     
     private func checkFormValid() {
         if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
+            os_log("if문 시작", log: .default, type: .debug)
             showingPopUp = false
             isNavigateToFindIDView = true
             viewModel.continueButtonTapped()
@@ -68,6 +70,7 @@ struct FindIDFormView: View {
             RegistrationManager.shared.code = phoneVerificationViewModel.code
             
         } else {
+            os_log("else문 시작", log: .default, type: .debug)
             if phoneVerificationViewModel.showErrorVerificationCode {
                 showingPopUp = true
                 isVerificationError = true
@@ -77,5 +80,5 @@ struct FindIDFormView: View {
 }
 
 #Preview {
-    FindIDFormView()
+    FindIdFormView()
 }
