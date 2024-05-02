@@ -45,6 +45,7 @@ class KakaoOAuthViewModel: ObservableObject {
                 } else {
                     self.isOAuthExistUser = false
                     OAuthRegistrationManager.shared.isOAuthRegistration = true
+                    OAuthRegistrationManager.shared.oauthId = self.oauthId
                 }
             }
         }

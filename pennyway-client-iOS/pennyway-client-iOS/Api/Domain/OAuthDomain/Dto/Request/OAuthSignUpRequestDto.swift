@@ -1,6 +1,7 @@
 
 
 public struct OAuthSignUpRequestDto: Encodable {
+    let oauthId: String
     let idToken: String
     let name: String
     let username: String
@@ -9,6 +10,7 @@ public struct OAuthSignUpRequestDto: Encodable {
     let provider: String
 
     public init(
+        oauthId: String,
         idToken: String,
         name: String,
         username: String,
@@ -16,6 +18,7 @@ public struct OAuthSignUpRequestDto: Encodable {
         code: String,
         provider: String
     ) {
+        self.oauthId = oauthId
         self.idToken = idToken
         self.name = name
         self.username = username

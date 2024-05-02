@@ -41,7 +41,7 @@ struct TermsAndConditionsView: View {
             }, label: "계속하기", isFormValid: $isAllAgreed)
                 .padding(.bottom, 34)
             
-            NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {
+            NavigationLink(destination: destinationView(), tag: 4, selection: $viewModel.selectedText) {
                 EmptyView()
             }
         }
@@ -56,6 +56,16 @@ struct TermsAndConditionsView: View {
                     
                 }.offset(x: -10)
             }
+        }
+    }
+    @ViewBuilder
+    private func destinationView() -> some View {
+        if isOAuthRegistration{
+            if oauthSignUpViewModel.isSignUpSuccess{
+                WelcomeView()
+            }
+        } else {
+            WelcomeView()
         }
     }
 }

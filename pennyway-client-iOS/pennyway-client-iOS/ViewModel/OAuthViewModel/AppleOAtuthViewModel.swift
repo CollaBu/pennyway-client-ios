@@ -62,6 +62,7 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
                     } else {
                         self.isOAuthExistUser = false
                         OAuthRegistrationManager.shared.isOAuthRegistration = true
+                        OAuthRegistrationManager.shared.oauthId = self.oauthId
                     }
                 }
             }
