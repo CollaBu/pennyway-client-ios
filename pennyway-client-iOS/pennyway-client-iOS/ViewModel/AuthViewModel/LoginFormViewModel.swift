@@ -24,7 +24,9 @@ class LoginFormViewModel: ObservableObject {
                             let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                             self.isLoginSuccessful = true
                             self.showErrorCodeContent = false
+
                             self.appViewModel.isLoggedIn = true
+
                             print(response)
                         } catch {
                             print("Error parsing response JSON: \(error)")
@@ -34,6 +36,7 @@ class LoginFormViewModel: ObservableObject {
                     self.isLoginSuccessful = false
                     self.showErrorCodeContent = true
                     self.appViewModel.isLoggedIn = false
+
                     if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                         print("Failed to verify: \(errorWithDomainErrorAndMessage)")
                     } else {
