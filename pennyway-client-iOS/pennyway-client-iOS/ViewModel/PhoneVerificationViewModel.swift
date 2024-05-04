@@ -1,4 +1,5 @@
 
+import os.log
 import SwiftUI
 
 class PhoneVerificationViewModel: ObservableObject {
@@ -123,16 +124,16 @@ class PhoneVerificationViewModel: ObservableObject {
             if let responseData = data {
                 do {
                     let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
-                    print(response)
+                    Log.debug(response)
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    Log.fault("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            if let StatusSpecificError = error as? StatusSpecificError {
+                Log.error(StatusSpecificError)
             } else {
-                print("Failed to verify: \(error)")
+                Log.error("Failed to verify: \(error)")
             }
         }
         completion()
@@ -153,10 +154,6 @@ class PhoneVerificationViewModel: ObservableObject {
             if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
 
-//                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestErrorCode.invalidRequest.rawValue {
-//                    showErrorExistingUser = false
-//                } 
-//                else 
                 if errorWithDomainErrorAndMessage.domainError == .conflict && errorWithDomainErrorAndMessage.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
                 } else {
