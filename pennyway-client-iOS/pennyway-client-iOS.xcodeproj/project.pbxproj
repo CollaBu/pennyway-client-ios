@@ -264,8 +264,7 @@
 		D8180C012BE507FD00F837FB /* FindIdFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdFormView.swift; sourceTree = "<group>"; };
 		D8180C032BE5081F00F837FB /* FindIdContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdContentView.swift; sourceTree = "<group>"; };
 		D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
-		D8180C072BE5168800F837FB /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
-		D8180C092BE531C500F837FB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		D83D4CD42BE3E7890011D235 /* LogoutPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutPopUpView.swift; sourceTree = "<group>"; };
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
@@ -810,6 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				4AD70E232BE014C40058A52A /* ProfileMainView */,
+				D83D4CD42BE3E7890011D235 /* LogoutPopUpView.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -1037,6 +1037,7 @@
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
 				4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */,
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */,
+				D83D4CD52BE3E7890011D235 /* LogoutPopUpView.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				4AB5AB5B2BB5E9BD00D2C9EA /* SignUpFormViewModel.swift in Sources */,
