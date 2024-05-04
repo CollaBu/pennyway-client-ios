@@ -5,12 +5,13 @@ import SwiftUI
 
 struct ErrorCodePopUpView: View {
     @Binding var showingPopUp: Bool
+    let label: String
 
     var body: some View {
         if UIScreen.main.bounds.width <= 375 { // iPhone SE/iPhone mini
-            PopupContent(imageSize: CGSize(width: 44, height: 44), frameHeight: 150, contentHeight: 70, titleFontSize: 16, subtitleFontSize: 12, showingPopUp: $showingPopUp)
+            PopupContent(imageSize: CGSize(width: 44, height: 44), frameHeight: 150, contentHeight: 70, titleFontSize: 16, subtitleFontSize: 12, label: label, showingPopUp: $showingPopUp)
         } else {
-            PopupContent(imageSize: CGSize(width: 55, height: 55), frameHeight: 180, contentHeight: 90, titleFontSize: 20, subtitleFontSize: 15, showingPopUp: $showingPopUp)
+            PopupContent(imageSize: CGSize(width: 55, height: 55), frameHeight: 180, contentHeight: 90, titleFontSize: 20, subtitleFontSize: 15, label: label, showingPopUp: $showingPopUp)
         }
     }
 }
@@ -24,6 +25,7 @@ extension ErrorCodePopUpView {
         var contentHeight: CGFloat
         var titleFontSize: CGFloat
         var subtitleFontSize: CGFloat
+        let label: String
 
         @Binding var showingPopUp: Bool
 
@@ -64,7 +66,7 @@ extension ErrorCodePopUpView {
                     Spacer().frame(height: 9)
 
                     VStack(spacing: 2) {
-                        Text("잘못된 인증번호예요")
+                        Text(label)
                             .platformTextColor(color: Color("Gray07"))
                             .font(.pretendard(.semibold, size: titleFontSize))
                         Text("다시 한 번 확인해주세요")

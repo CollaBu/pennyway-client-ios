@@ -22,7 +22,7 @@ struct AdditionalOptionView: View {
                         .stroke(Color("Gray02"), lineWidth: 0.7 * DynamicSizeFactor.factor())
                 )
 
-            NavigationLink(destination: FindIDFormView()) {
+            NavigationLink(destination: FindIdFormView()) {
                 Text("아이디 찾기")
             }
             .font(.B3MediumFont())

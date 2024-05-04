@@ -1,10 +1,11 @@
 import SwiftUI
 
-struct FindIDView: View {
+struct FindIdView: View {
     @State private var goToLoginView = false
     @State private var goToPwView = false
-    @State private var showingPopUp = false
-    @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
+    @ObservedObject var phoneVerificationViewModel: PhoneVerificationViewModel
+    
+    var username = RegistrationManager.shared.username
 
     var body: some View {
         NavigationAvailable {
@@ -35,7 +36,7 @@ struct FindIDView: View {
                                 .stroke(Color("Gray02"), lineWidth: 1)
                         )
                         
-                    Text("2weeksone") // api 연동필요
+                    Text("\(username)")
                         .font(.pretendard(.semibold, size: 18))
                         .multilineTextAlignment(.center)
                 }
@@ -97,5 +98,5 @@ struct FindIDView: View {
 }
 
 #Preview {
-    FindIDView()
+    FindIdView(phoneVerificationViewModel: PhoneVerificationViewModel())
 }

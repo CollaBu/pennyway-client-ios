@@ -20,6 +20,10 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var showErrorExistingUser = false
     @Published var isFormValid = false
 
+    @Published var phone: String = ""
+    @Published var username: String?
+    @Published var isFindUsername = false
+
     /// Timer
     @Published var isTimerHidden = true
     @Published var timerSeconds = 300
@@ -55,6 +59,28 @@ class PhoneVerificationViewModel: ObservableObject {
         if !showErrorPhoneNumberFormat {
             AuthAlamofire.shared.receiveVerificationCode(verificationCodeDto) { result in
                 self.handleVerificationCodeApiResult(result: result, completion: completion)
+            }
+        }
+    }
+
+    func requestUserNameVerificationCodeApi(completion: @escaping () -> Void) { // 아이디 찾기 번호 인증
+        validatePhoneNumber()
+        requestVerificationCodeAction()
+        let usernameVerificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
+
+        if !showErrorPhoneNumberFormat {
+            AuthAlamofire.shared.receiveUserNameVerificationCode(usernameVerificationCodeDto) { result in
+                self.handleUserNameVerificationCodeApiResult(result: result, completion: completion)
+            }
+        }
+    }
+
+    func requestUserNameVerifyVerificationCodeApi(completion: @escaping () -> Void) {
+        let verificationDto = FindUserNameRequestDto(phone: formattedPhoneNumber, code: code)
+
+        if isFormValid {
+            AuthAlamofire.shared.findUserName(verificationDto) { result in
+                self.handleFindUserNameApi(result: result, completion: completion)
             }
         }
     }
@@ -106,6 +132,62 @@ class PhoneVerificationViewModel: ObservableObject {
         case let .failure(error):
             if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            } else {
+                print("Failed to verify: \(error)")
+            }
+        }
+        completion()
+    }
+
+    private func handleUserNameVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) { // 아이디 찾기 번호 인증
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
+                    print(response)
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+
+                if errorWithDomainErrorAndMessage.domainError == .conflict && errorWithDomainErrorAndMessage.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                    showErrorExistingUser = false
+                } else {
+                    showErrorVerificationCode = true
+                }
+            } else {
+                print("Failed to verify: \(error)")
+            }
+        }
+        completion()
+    }
+
+    private func handleFindUserNameApi(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
+                    RegistrationManager.shared.username = response.data.user.username
+                    showErrorVerificationCode = false
+                    print(response)
+                } catch {
+                    print("Error parsing response JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
+                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+
+                if errorWithDomainErrorAndMessage.domainError == .conflict && errorWithDomainErrorAndMessage.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                    showErrorExistingUser = false
+                } else {
+                    showErrorVerificationCode = true
+                }
             } else {
                 print("Failed to verify: \(error)")
             }

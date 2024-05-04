@@ -3,6 +3,8 @@ import SwiftUI
 // MARK: - ProfileSettingListView
 
 struct ProfileSettingListView: View {
+    @State private var showingPopUp = true
+
     var body: some View {
         VStack {
             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
@@ -22,6 +24,7 @@ struct ProfileSettingListView: View {
 // MARK: - SectionView
 
 struct SectionView: View {
+    @State private var showingPopUp = true
     let title: String
     let itemsWithIcons: [(String, String)]
 
@@ -35,7 +38,7 @@ struct SectionView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
             ForEach(itemsWithIcons, id: \.0) { item, icon in
-                Button(action: /*@START_MENU_TOKEN@*/ {}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {}, label: {
                     Image(icon)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
