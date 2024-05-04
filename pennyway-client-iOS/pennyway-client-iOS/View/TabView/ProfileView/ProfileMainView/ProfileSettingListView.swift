@@ -3,6 +3,8 @@ import SwiftUI
 // MARK: - ProfileSettingListView
 
 struct ProfileSettingListView: View {
+    @State private var showingPopUp = true
+
     var body: some View {
         VStack {
             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
@@ -22,6 +24,7 @@ struct ProfileSettingListView: View {
 // MARK: - SectionView
 
 struct SectionView: View {
+    @State private var showingPopUp = true
     let title: String
     let itemsWithIcons: [(String, String)]
 
@@ -35,16 +38,34 @@ struct SectionView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
             ForEach(itemsWithIcons, id: \.0) { item, icon in
-                HStack {
-                    Image(icon)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
+                if item == "로그아웃" {
+                    Button(action: {
+//                        LogoutPopUpView(showingPopUp: $showingPopUp, titleLabel: "로그아웃", subTitleLabel: "로그아웃하시겠어요?", firstBtnLabel: "취소", secondBtnLabel: "로그아웃")
+                    }, label: {
+                        HStack {
+                            Image(icon)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
 
-                    Text(item)
-                        .font(.H4MediumFont())
-                        .platformTextColor(color: Color("Gray07"))
-                        .padding(.vertical, 7)
+                            Text(item)
+                                .font(.H4MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                                .padding(.vertical, 7)
+                        }
+                    })
+                } else {
+                    HStack {
+                        Image(icon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
+
+                        Text(item)
+                            .font(.H4MediumFont())
+                            .platformTextColor(color: Color("Gray07"))
+                            .padding(.vertical, 7)
+                    }
                 }
             }
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
