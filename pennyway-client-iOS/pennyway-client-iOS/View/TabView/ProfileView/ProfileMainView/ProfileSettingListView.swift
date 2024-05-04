@@ -3,15 +3,7 @@ import SwiftUI
 // MARK: - ProfileSettingListView
 
 struct ProfileSettingListView: View {
-<<<<<<< HEAD
-    @State private var showingPopUp = false // 모든 섹션에서 공유할 상태
-=======
-    @State private var showingPopUp = true
-
-    var body: some View {
-        VStack {
-            Spacer().frame(height: 32 * DynamicSizeFactor.factor())
->>>>>>> 03145876f4ccb015d996ed411e2806bc1d6c9c1b
+    @State private var showingPopUp = false
 
     var body: some View {
         ZStack {
@@ -30,7 +22,7 @@ struct ProfileSettingListView: View {
 
             if showingPopUp {
                 Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                CustomPopUpView(showingPopUp: $showingPopUp, titleLabel: "로그아웃", subTitleLabel: "로그아웃하시겠어요?", firstBtnLabel: "취소", secondBtnLabel: "로그아웃", firstBtnColor: Color("Gray02"), secondBtnColor: Color("Red02"), firstBtnTextColor: Color("Gray04"), secondBtnTextColor: Color("White01"))
+                CustomPopUpView(showingPopUp: $showingPopUp, titleLabel: "로그아웃", subTitleLabel: "로그아웃하시겠어요?", firstBtnLabel: "취소", secondBtnLabel: "로그아웃", firstBtnColor: Color("Gray02"), secondBtnColor: Color("Red03"), firstBtnTextColor: Color("Gray04"), secondBtnTextColor: Color("White01"))
             }
         }
     }
@@ -39,11 +31,8 @@ struct ProfileSettingListView: View {
 // MARK: - SectionView
 
 struct SectionView: View {
-<<<<<<< HEAD
-    @Binding var showingPopUp: Bool // 상위 뷰에서 받는 바인딩 상태
-=======
-    @State private var showingPopUp = true
->>>>>>> 03145876f4ccb015d996ed411e2806bc1d6c9c1b
+    @Binding var showingPopUp: Bool
+
     let title: String
     let itemsWithIcons: [(String, String)]
 
@@ -57,7 +46,6 @@ struct SectionView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
             ForEach(itemsWithIcons, id: \.0) { item, icon in
-<<<<<<< HEAD
                 Button(action: {
                     if item == "로그아웃" {
                         showingPopUp = true
@@ -69,41 +57,12 @@ struct SectionView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
 
-=======
-                if item == "로그아웃" {
-                    Button(action: {
-//                        LogoutPopUpView(showingPopUp: $showingPopUp, titleLabel: "로그아웃", subTitleLabel: "로그아웃하시겠어요?", firstBtnLabel: "취소", secondBtnLabel: "로그아웃")
-                    }, label: {
-                        HStack {
-                            Image(icon)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
-
-                            Text(item)
-                                .font(.H4MediumFont())
-                                .platformTextColor(color: Color("Gray07"))
-                                .padding(.vertical, 7)
-                        }
-                    })
-                } else {
-                    HStack {
-                        Image(icon)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
-
->>>>>>> 03145876f4ccb015d996ed411e2806bc1d6c9c1b
                         Text(item)
                             .font(.H4MediumFont())
                             .platformTextColor(color: Color("Gray07"))
                             .padding(.vertical, 7)
                     }
-<<<<<<< HEAD
                 })
-=======
-                }
->>>>>>> 03145876f4ccb015d996ed411e2806bc1d6c9c1b
             }
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
         }
