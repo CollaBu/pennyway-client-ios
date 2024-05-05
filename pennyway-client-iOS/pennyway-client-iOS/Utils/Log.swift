@@ -1,19 +1,9 @@
 import Foundation
 import os.log
 
-extension OSLog {
-    static let subsystem = Bundle.main.bundleIdentifier!
-    static let `default` = OSLog(subsystem: subsystem, category: "Default")
-    static let debug = OSLog(subsystem: subsystem, category: "Debug")
-    static let info = OSLog(subsystem: subsystem, category: "Info")
-    static let warning = OSLog(subsystem: subsystem, category: "Warning")
-    static let fault = OSLog(subsystem: subsystem, category: "Fault")
-    static let error = OSLog(subsystem: subsystem, category: "Error")
-}
-
 // MARK: - Log
 
-enum Log {
+struct Log {
     /// # Level
     /// - default : 일반적인 정보 로그
     /// - debug : 디버깅 로그
@@ -49,7 +39,7 @@ enum Log {
 
     static private func log(_ message: Any, _ arguments: [Any], level: Level) {
         let extraMessage: String = arguments.map { String(describing: $0) }.joined(separator: " ")
-        let logger = Logger(subsystem: OSLog.subsystem, category: level.category)
+        let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: level.category)
         let logMessage = "\(message) \(extraMessage)"
 
         switch level {
@@ -89,7 +79,7 @@ extension Log {
     static func info(_ message: Any, _ arguments: Any...) {
         log(message, arguments, level: .info)
     }
-    
+
     /// # warning
     /// - Note : 경고에 대한 정보, 잠재적으로 문제가 될 수 있는 상황
     static func warning(_ message: Any, _ arguments: Any...) {

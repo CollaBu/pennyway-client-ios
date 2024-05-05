@@ -1,5 +1,4 @@
 
-import os.log
 import SwiftUI
 
 class PhoneVerificationViewModel: ObservableObject {
@@ -213,7 +212,7 @@ class PhoneVerificationViewModel: ObservableObject {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if StatusSpecificError.domainError == .badRequest && StatusSpecificError.code == BadRequestErrorCode.invalidRequest.rawValue {
+                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
                 } else {
                     showErrorVerificationCode = true
@@ -246,7 +245,7 @@ class PhoneVerificationViewModel: ObservableObject {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if StatusSpecificError.domainError == .badRequest && StatusSpecificError.code == BadRequestErrorCode.invalidRequest.rawValue {
+                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
                 } else {
                     showErrorVerificationCode = true
