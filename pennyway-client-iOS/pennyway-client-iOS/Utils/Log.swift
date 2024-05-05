@@ -6,6 +6,7 @@ extension OSLog {
     static let `default` = OSLog(subsystem: subsystem, category: "Default")
     static let debug = OSLog(subsystem: subsystem, category: "Debug")
     static let info = OSLog(subsystem: subsystem, category: "Info")
+    static let warning = OSLog(subsystem: subsystem, category: "Warning")
     static let fault = OSLog(subsystem: subsystem, category: "Fault")
     static let error = OSLog(subsystem: subsystem, category: "Error")
 }
@@ -17,14 +18,16 @@ enum Log {
     /// - default : 일반적인 정보 로그
     /// - debug : 디버깅 로그
     /// - info : 시스템 상태 파악 로그
+    /// - warning: 경고에 대한 정보 기록
     /// - fault : 실행 중 발생하는 버그
     /// - error :  심각한 오류
     enum Level {
         case `default`
         case debug
         case info
-        case error
+        case warning
         case fault
+        case error
 
         fileprivate var category: String {
             switch self {
@@ -34,25 +37,12 @@ enum Log {
                 return "⌨️ DEBUG"
             case .info:
                 return "ℹ️ INFO"
-            case .error:
-                return "❌ ERROR"
+            case .warning:
+                return "⚠️ WARNING"
             case .fault:
                 return "🚫 FAULT"
-            }
-        }
-
-        fileprivate var osLogType: OSLogType {
-            switch self {
-            case .`default`:
-                return .default
-            case .debug:
-                return .debug
-            case .info:
-                return .info
-            case .fault:
-                return .fault
             case .error:
-                return .error
+                return "❌ ERROR"
             }
         }
     }
@@ -69,6 +59,8 @@ enum Log {
             logger.debug("\(logMessage, privacy: .public)")
         case .info:
             logger.info("\(logMessage, privacy: .public)")
+        case .warning:
+            logger.warning("\(logMessage, privacy: .public)")
         case .fault:
             logger.fault("\(logMessage, privacy: .public)")
         case .error:
@@ -96,6 +88,12 @@ extension Log {
     /// - Note : 문제 해결시 활용할 수 있는, 도움이 되지만 필수적이지 않은 정보
     static func info(_ message: Any, _ arguments: Any...) {
         log(message, arguments, level: .info)
+    }
+    
+    /// # warning
+    /// - Note : 경고에 대한 정보, 잠재적으로 문제가 될 수 있는 상황
+    static func warning(_ message: Any, _ arguments: Any...) {
+        log(message, arguments, level: .warning)
     }
 
     /// # fault
