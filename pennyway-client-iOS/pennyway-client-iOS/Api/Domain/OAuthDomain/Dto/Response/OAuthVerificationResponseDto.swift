@@ -20,5 +20,5 @@ struct OAuthVerificationResponseData: Codable {
 struct OAuthVerificationResponseDetails: Codable {
     let code: Bool
     let existsUser: Bool
-    let username: String
+    let username: String?
 }

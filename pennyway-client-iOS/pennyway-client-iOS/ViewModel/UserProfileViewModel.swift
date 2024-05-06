@@ -3,11 +3,11 @@ import os.log
 import SwiftUI
 
 class UserProfileViewModel: ObservableObject {
-//    private var loginViewModel: LoginFormViewModel
-//
-//    init(loginViewModel: LoginFormViewModel) {
-//        self.loginViewModel = loginViewModel
-//    }
+    let appViewModel: AppViewModel
+
+    init(appViewModel: AppViewModel) {
+        self.appViewModel = appViewModel
+    }
 
     func logout() {
         AuthAlamofire.shared.logout { result in
@@ -16,6 +16,7 @@ class UserProfileViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         os_log("Success Logout", log: .default, type: .debug)
+                        self.appViewModel.isLoggedIn = false
                         NavigationUtil.popToRootView()
                     } catch {
                         print("Error parsing response JSON: \(error)")

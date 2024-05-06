@@ -21,8 +21,6 @@ class KakaoOAuthViewModel: ObservableObject {
                 if let user = user {
                     self.givenName = user.kakaoAccount?.profile?.nickname ?? ""
                     self.oauthId = String(user.id ?? 0)
-
-                    print(self.oauthId)
                     self.oauthLoginApi()
                 }
             }
@@ -45,6 +43,7 @@ class KakaoOAuthViewModel: ObservableObject {
                 } else {
                     self.isOAuthExistUser = false
                     OAuthRegistrationManager.shared.isOAuthRegistration = true
+                    OAuthRegistrationManager.shared.oauthId = self.oauthId
                 }
             }
         }
@@ -53,6 +52,8 @@ class KakaoOAuthViewModel: ObservableObject {
     func signIn() {
         let randomNonce = CryptoHelper.randomNonceString()
         nonce = CryptoHelper.sha256(randomNonce)
+
+        OAuthRegistrationManager.shared.nonce = nonce
 
         // 카카오 로그인 실행
         UserApi.shared.loginWithKakaoAccount(prompts: [.Login], nonce: nonce) { oauthToken, error in

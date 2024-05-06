@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct ProfileMainView: View {
+    @ObservedObject var appViewModel: AppViewModel
+    
     var body: some View {
         NavigationAvailable {
             ScrollView {
@@ -14,7 +16,7 @@ struct ProfileMainView: View {
                     
                     Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                     
-                    ProfileSettingListView(viewModel: UserProfileViewModel())
+                    ProfileSettingListView(viewModel: UserProfileViewModel(appViewModel: appViewModel))
                 }
                 .background(Color("Gray01"))
             }
@@ -38,5 +40,5 @@ struct ProfileMainView: View {
 }
 
 #Preview {
-    ProfileMainView()
+    ProfileMainView(appViewModel: AppViewModel())
 }

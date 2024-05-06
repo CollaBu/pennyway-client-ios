@@ -3,6 +3,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selection = 0
+    @ObservedObject var appViewModel: AppViewModel
 
     var body: some View {
         TabView(selection: $selection) {
@@ -24,7 +25,7 @@ struct MainTabView: View {
                     Text("채팅")
                 }
                 .tag(2)
-            ProfileMainView()
+            ProfileMainView(appViewModel: appViewModel)
                 .tabItem {
                     selection == 3 ? Image("icon_tapbar_profile_on") : Image("icon_tapbar_profile_off")
                     Text("프로필")
@@ -40,5 +41,5 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView()
+    MainTabView(appViewModel: AppViewModel())
 }

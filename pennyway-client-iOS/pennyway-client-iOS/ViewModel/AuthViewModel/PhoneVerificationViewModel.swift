@@ -1,4 +1,5 @@
 
+import os.log
 import SwiftUI
 
 class PhoneVerificationViewModel: ObservableObject {
@@ -203,6 +204,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     showErrorVerificationCode = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
+                    OAuthRegistrationManager.shared.username = sms.username ?? ""
 
                     print(response)
                 } catch {
@@ -210,10 +212,10 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            if let StatusSpecificError = error as? StatusSpecificError {
+                print("Failed to verify: \(StatusSpecificError)")
 
-                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestErrorCode.invalidRequest.rawValue {
+                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
                 } else {
                     showErrorVerificationCode = true
@@ -235,7 +237,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     showErrorVerificationCode = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
-                    OAuthRegistrationManager.shared.username = sms.username
+                    OAuthRegistrationManager.shared.username = sms.username ?? ""
 
                     print(response)
                 } catch {
@@ -243,10 +245,10 @@ class PhoneVerificationViewModel: ObservableObject {
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            if let StatusSpecificError = error as? StatusSpecificError {
+                print("Failed to verify: \(StatusSpecificError)")
 
-                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestErrorCode.invalidRequest.rawValue {
+                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
                 } else {
                     showErrorVerificationCode = true
