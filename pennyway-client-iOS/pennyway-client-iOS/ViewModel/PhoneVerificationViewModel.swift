@@ -201,6 +201,7 @@ class PhoneVerificationViewModel: ObservableObject {
                 do {
                     let response = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
                     showErrorVerificationCode = false
+                    showErrorExistingUser = false // 4091에러처리
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
                     Log.debug(response)
@@ -214,6 +215,11 @@ class PhoneVerificationViewModel: ObservableObject {
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
+                    // 4091 에러처리
+                    code = ""
+                    isTimerHidden = true
+                    stopTimer()
+                    isDisabledButton = false
                 } else {
                     showErrorVerificationCode = true
                 }
@@ -260,7 +266,7 @@ class PhoneVerificationViewModel: ObservableObject {
     // MARK: Timer function
 
     func judgeTimerRunning() {
-        if !showErrorPhoneNumberFormat {
+        if !showErrorPhoneNumberFormat && !isTimerHidden { // 4091 에러
             if isTimerRunning {
                 stopTimer()
             } else {
@@ -270,14 +276,12 @@ class PhoneVerificationViewModel: ObservableObject {
     }
 
     func startTimer() {
-        timerSeconds = 300
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if self.timerSeconds > 0 && self.isTimerRunning {
                 self.timerSeconds -= 1
             } else {
                 self.stopTimer()
                 self.isDisabledButton = false
-                self.isTimerHidden = true
             }
         }
         isTimerRunning = true
@@ -287,5 +291,7 @@ class PhoneVerificationViewModel: ObservableObject {
         timer?.invalidate()
         timer = nil
         isTimerRunning = false
+        isTimerHidden = true
+        timerSeconds = 300
     }
 }
