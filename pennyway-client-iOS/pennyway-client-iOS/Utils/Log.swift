@@ -43,17 +43,17 @@ enum Log {
 
         switch level {
         case .`default`:
-            logger.notice("\(logMessage, privacy: .public)")
+            logger.notice("\(logMessage, privacy: .private)")
         case .debug:
             logger.debug("\(logMessage, privacy: .public)")
         case .info:
             logger.info("\(logMessage, privacy: .public)")
         case .warning:
-            logger.warning("\(logMessage, privacy: .public)")
+            logger.warning("\(logMessage, privacy: .private)")
         case .fault:
-            logger.fault("\(logMessage, privacy: .public)")
+            logger.fault("\(logMessage, privacy: .private)")
         case .error:
-            logger.error("\(logMessage, privacy: .public)")
+            logger.error("\(logMessage, privacy: .private)")
         }
     }
 }
