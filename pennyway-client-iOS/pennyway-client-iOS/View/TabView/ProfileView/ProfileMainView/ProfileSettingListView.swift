@@ -4,6 +4,8 @@ import SwiftUI
 // MARK: - ProfileSettingListView
 
 struct ProfileSettingListView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+
     @ObservedObject var viewModel: UserProfileViewModel
     @State private var showingPopUp = false
 
@@ -31,7 +33,9 @@ struct ProfileSettingListView: View {
                                 firstBtnLabel: "취소",
                                 firstBtnColor: Color("Gray02"),
                                 firstBtnTextColor: Color("Gray04"),
-                                secondBtnAction: { viewModel.logout() },
+                                secondBtnAction: { viewModel.logout()
+                                    appViewModel.logout()
+                                },
                                 secondBtnLabel: "로그아웃",
                                 secondBtnColor: Color("Red03"),
                                 secondBtnTextColor: Color("White01"))

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct LoginFormView: View {
     @ObservedObject var viewModel: LoginFormViewModel
-    @ObservedObject var appViewModel: AppViewModel
 
     var body: some View {
         NavigationAvailable {
@@ -36,11 +35,11 @@ struct LoginFormView: View {
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
-            NavigationLink(destination: MainTabView(appViewModel: appViewModel), isActive: $viewModel.isLoginSuccessful) {}
+            NavigationLink(destination: MainTabView(), isActive: $viewModel.isLoginSuccessful) {}
         }
     }
 }
 
 #Preview {
-    LoginFormView(viewModel: LoginFormViewModel(appViewModel: AppViewModel()), appViewModel: AppViewModel())
+    LoginFormView(viewModel: LoginFormViewModel(appViewModel: AppViewModel()))
 }

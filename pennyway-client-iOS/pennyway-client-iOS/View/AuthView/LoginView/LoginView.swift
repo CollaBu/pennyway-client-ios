@@ -3,8 +3,7 @@ import SwiftUI
 struct LoginView: View {
     // MARK: Private
 
-    @ObservedObject var appViewModel: AppViewModel
-
+    @EnvironmentObject var appViewModel: AppViewModel
     @State private var isSplashShown = true
     @State private var isActiveLink = false
 
@@ -20,12 +19,12 @@ struct LoginView: View {
                         }
                     }
             } else {
-                LoginFormView(viewModel: LoginFormViewModel(appViewModel: appViewModel), appViewModel: appViewModel)
+                LoginFormView(viewModel: LoginFormViewModel(appViewModel: appViewModel))
             }
         }
     }
 }
 
 #Preview {
-    LoginView(appViewModel: AppViewModel())
+    LoginView()
 }

@@ -19,14 +19,14 @@ struct pennyway_client_iOSApp: App {
     var body: some Scene {
         WindowGroup {
             if appViewModel.isLoggedIn {
-                MainTabView(appViewModel: appViewModel)
+                MainTabView()
                     .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
                     .onOpenURL { url in
                         GIDSignIn.sharedInstance.handle(url)
                     }
                     .environmentObject(appViewModel)
             } else {
-                LoginView(appViewModel: appViewModel)
+                LoginView()
                     .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
                     .onOpenURL { url in
                         GIDSignIn.sharedInstance.handle(url)
