@@ -31,7 +31,7 @@ struct InputFormView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    TextField("아이디 입력", text: $viewModel.id)
+                    TextField("아이디 입력", text: $viewModel.username)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .AutoCorrectionExtensions()
@@ -59,6 +59,8 @@ struct InputFormView: View {
                 VStack {
                     CustomBottomButton(action: {
                         viewModel.loginApi()
+//                        viewModel.username = ""
+//                        viewModel.password = ""
 
                     }, label: "로그인", isFormValid: .constant(true)) // 수정
                 }

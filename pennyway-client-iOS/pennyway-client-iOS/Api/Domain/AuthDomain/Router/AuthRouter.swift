@@ -96,7 +96,6 @@ enum AuthRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
             
         case .logout:
-//            let queryParameters = [URLQueryItem(name: "accessToken", value: dto.accessToken), URLQueryItem(name: "refreshToken", value: dto.refreshToken)]
             request = URLRequest.createURLRequest(url: url, method: method)
             if let cookies = HTTPCookieStorage.shared.cookies(for: url) {
                 let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)

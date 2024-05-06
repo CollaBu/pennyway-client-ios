@@ -153,10 +153,6 @@ class PhoneVerificationViewModel: ObservableObject {
             if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                 print("Failed to verify: \(errorWithDomainErrorAndMessage)")
 
-//                if errorWithDomainErrorAndMessage.domainError == .badRequest && errorWithDomainErrorAndMessage.code == BadRequestErrorCode.invalidRequest.rawValue {
-//                    showErrorExistingUser = false
-//                } 
-//                else 
                 if errorWithDomainErrorAndMessage.domainError == .conflict && errorWithDomainErrorAndMessage.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
                 } else {

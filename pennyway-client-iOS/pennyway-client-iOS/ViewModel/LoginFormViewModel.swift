@@ -1,7 +1,8 @@
+import os.log
 import SwiftUI
 
 class LoginFormViewModel: ObservableObject {
-    @Published var id: String = ""
+    @Published var username: String = ""
     @Published var password: String = ""
     @Published var isFormValid = false
     @Published var isLoginSuccessful = false
@@ -9,7 +10,7 @@ class LoginFormViewModel: ObservableObject {
 
     func loginApi() {
         if !isFormValid {
-            let loginDto = LoginRequestDto(username: id, password: password)
+            let loginDto = LoginRequestDto(username: username, password: password)
             AuthAlamofire.shared.login(loginDto) { result in
                 switch result {
                 case let .success(data):
@@ -18,6 +19,8 @@ class LoginFormViewModel: ObservableObject {
                             let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                             self.isLoginSuccessful = true
                             self.showErrorCodeContent = false
+                            self.username = ""
+                            self.password = ""
                             print(response)
                         } catch {
                             print("Error parsing response JSON: \(error)")
