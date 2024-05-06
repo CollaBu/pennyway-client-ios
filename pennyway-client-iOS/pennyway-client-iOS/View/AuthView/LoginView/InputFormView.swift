@@ -70,5 +70,5 @@ struct InputFormView: View {
 }
 
 #Preview {
-    InputFormView(viewModel: LoginFormViewModel())
+    InputFormView(viewModel: LoginFormViewModel(appViewModel: AppViewModel()))
 }

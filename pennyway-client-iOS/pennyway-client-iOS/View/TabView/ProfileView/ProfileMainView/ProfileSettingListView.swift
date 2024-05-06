@@ -38,35 +38,17 @@ struct SectionView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
             ForEach(itemsWithIcons, id: \.0) { item, icon in
-                if item == "로그아웃" {
-                    Button(action: {
-//                        LogoutPopUpView(showingPopUp: $showingPopUp, titleLabel: "로그아웃", subTitleLabel: "로그아웃하시겠어요?", firstBtnLabel: "취소", secondBtnLabel: "로그아웃")
-                    }, label: {
-                        HStack {
-                            Image(icon)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
+                Button(action: {}, label: {
+                    Image(icon)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
 
-                            Text(item)
-                                .font(.H4MediumFont())
-                                .platformTextColor(color: Color("Gray07"))
-                                .padding(.vertical, 7)
-                        }
-                    })
-                } else {
-                    HStack {
-                        Image(icon)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
-
-                        Text(item)
-                            .font(.H4MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
-                            .padding(.vertical, 7)
-                    }
-                }
+                    Text(item)
+                        .font(.H4MediumFont())
+                        .platformTextColor(color: Color("Gray07"))
+                        .padding(.vertical, 7)
+                })
             }
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
         }

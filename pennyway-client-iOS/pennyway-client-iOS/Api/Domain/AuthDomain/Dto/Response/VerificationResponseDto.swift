@@ -16,4 +16,5 @@ struct VerificationResponseData: Codable {
 struct VerificationResponseDetails: Codable {
     let code: Bool
     let oauth: Bool
+    let username: String?
 }

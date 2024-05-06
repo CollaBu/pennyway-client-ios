@@ -29,6 +29,7 @@ class GoogleOAuthViewModel: ObservableObject {
             do {
                 let payloadJSON = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any]
                 nonce = payloadJSON?["nonce"] as? String ?? ""
+                OAuthRegistrationManager.shared.nonce = nonce
             } catch {
                 print("Error decoding JSON: \(error)")
             }
@@ -52,6 +53,7 @@ class GoogleOAuthViewModel: ObservableObject {
                 } else {
                     self.isOAuthExistUser = false
                     OAuthRegistrationManager.shared.isOAuthRegistration = true
+                    OAuthRegistrationManager.shared.oauthId = self.oauthId
                 }
             }
         }

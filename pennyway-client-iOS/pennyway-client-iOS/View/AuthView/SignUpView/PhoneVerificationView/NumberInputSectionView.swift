@@ -34,7 +34,7 @@ struct NumberInputSectionView: View {
                                 }
                                 viewModel.validateForm()
                             }
-                            .disabled(!viewModel.isDisabledButton) 
+                            .disabled(!viewModel.isDisabledButton)
                         Spacer()
                         if !viewModel.isTimerHidden {
                             Text(timerString)

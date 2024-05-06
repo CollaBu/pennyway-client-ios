@@ -1,4 +1,5 @@
 
+import os.log
 import SwiftUI
 
 class PhoneVerificationViewModel: ObservableObject {
@@ -95,7 +96,7 @@ class PhoneVerificationViewModel: ObservableObject {
         }
         completion()
     }
-    
+
     // MARK: 일반 인증번호 검증 API
 
     func requestVerifyVerificationCodeApi(completion: @escaping () -> Void) {
@@ -166,7 +167,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     showErrorExistingUser = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
-                    OAuthRegistrationManager.shared.username = sms.username
+                    OAuthRegistrationManager.shared.username = sms.username ?? ""
 
                     Log.debug(response)
                 } catch {
@@ -274,8 +275,6 @@ class PhoneVerificationViewModel: ObservableObject {
         }
         completion()
     }
-
-  
 
     // MARK: Timer function
 
