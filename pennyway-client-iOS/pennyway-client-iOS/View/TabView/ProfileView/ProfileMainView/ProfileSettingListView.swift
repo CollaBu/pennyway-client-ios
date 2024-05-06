@@ -25,15 +25,15 @@ struct ProfileSettingListView: View {
             if showingPopUp {
                 Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingPopUp, 
-                                firstBtnAction: { self.showingPopUp = false },
-                                secondBtnAction: { viewModel.logout() },
                                 titleLabel: "로그아웃",
                                 subTitleLabel: "로그아웃하시겠어요?",
+                                firstBtnAction: { self.showingPopUp = false },
                                 firstBtnLabel: "취소",
-                                secondBtnLabel: "로그아웃",
                                 firstBtnColor: Color("Gray02"),
-                                secondBtnColor: Color("Red03"),
                                 firstBtnTextColor: Color("Gray04"),
+                                secondBtnAction: { viewModel.logout() },
+                                secondBtnLabel: "로그아웃",
+                                secondBtnColor: Color("Red03"),
                                 secondBtnTextColor: Color("White01"))
             }
         }

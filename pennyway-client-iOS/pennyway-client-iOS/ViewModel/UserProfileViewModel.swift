@@ -3,11 +3,11 @@ import os.log
 import SwiftUI
 
 class UserProfileViewModel: ObservableObject {
-    private var loginViewModel: LoginFormViewModel
-
-    init(loginViewModel: LoginFormViewModel) {
-        self.loginViewModel = loginViewModel
-    }
+//    private var loginViewModel: LoginFormViewModel
+//
+//    init(loginViewModel: LoginFormViewModel) {
+//        self.loginViewModel = loginViewModel
+//    }
 
     func logout() {
         AuthAlamofire.shared.logout { result in
