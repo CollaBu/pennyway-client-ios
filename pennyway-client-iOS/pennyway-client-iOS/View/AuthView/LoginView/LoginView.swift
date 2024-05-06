@@ -3,6 +3,8 @@ import SwiftUI
 struct LoginView: View {
     // MARK: Private
 
+    @ObservedObject var appViewModel: AppViewModel
+
     @State private var isSplashShown = true
     @State private var isActiveLink = false
 
@@ -18,12 +20,12 @@ struct LoginView: View {
                         }
                     }
             } else {
-                LoginFormView(viewModel: LoginFormViewModel())
+                LoginFormView(viewModel: LoginFormViewModel(appViewModel: appViewModel))
             }
         }
     }
 }
 
 #Preview {
-    LoginView()
+    LoginView(appViewModel: AppViewModel())
 }

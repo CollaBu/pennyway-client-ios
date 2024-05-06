@@ -2,6 +2,16 @@
 import SwiftUI
 
 struct ProfileUserInfoView: View {
+    @State private var name = ""
+    @State private var username = ""
+
+    private func loadUserData() {
+        if let userData = getUserData() {
+            name = userData.name
+            username = userData.username
+        }
+    }
+
     var body: some View {
         VStack {
             Spacer().frame(height: 19 * DynamicSizeFactor.factor())
@@ -22,7 +32,7 @@ struct ProfileUserInfoView: View {
 
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("이름")
+                        Text("\(name)")
                             .font(.H3SemiboldFont())
                             .platformTextColor(color: Color("Mint03"))
                         Button(action: {}, label: {
@@ -33,7 +43,7 @@ struct ProfileUserInfoView: View {
                         })
                     }
 
-                    Text("아이디님 반가워요!")
+                    Text("\(username)님 반가워요!")
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray05"))
                 }
@@ -66,5 +76,8 @@ struct ProfileUserInfoView: View {
         .frame(maxWidth: .infinity, maxHeight: 180 * DynamicSizeFactor.factor())
         .padding(.horizontal, 20)
         .background(Color("White01"))
+        .onAppear {
+            loadUserData()
+        }
     }
 }

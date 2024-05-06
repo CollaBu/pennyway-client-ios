@@ -41,5 +41,5 @@ struct LoginFormView: View {
 }
 
 #Preview {
-    LoginFormView(viewModel: LoginFormViewModel())
+    LoginFormView(viewModel: LoginFormViewModel(appViewModel: AppViewModel()))
 }
