@@ -7,6 +7,13 @@ struct SignUpView: View {
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
+    private var buttonText: String {
+        if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
+            return "연동하기"
+        } else {
+            return "계속하기"
+        }
+    }
     
     var body: some View {
         ScrollView {
@@ -43,7 +50,7 @@ struct SignUpView: View {
                     
                 } else {}
                 
-            }, label: "계속하기", isFormValid: $formViewModel.isFormValid)
+            }, label: buttonText, isFormValid: $formViewModel.isFormValid)
                 .padding(.bottom, 34)
             
             NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
