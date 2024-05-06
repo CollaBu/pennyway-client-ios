@@ -1,8 +1,10 @@
+import os.log
 import SwiftUI
 
 // MARK: - ProfileSettingListView
 
 struct ProfileSettingListView: View {
+    @ObservedObject var viewModel: UserProfileViewModel
     @State private var showingPopUp = false
 
     var body: some View {
@@ -22,7 +24,17 @@ struct ProfileSettingListView: View {
 
             if showingPopUp {
                 Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                CustomPopUpView(showingPopUp: $showingPopUp, titleLabel: "로그아웃", subTitleLabel: "로그아웃하시겠어요?", firstBtnLabel: "취소", secondBtnLabel: "로그아웃", firstBtnColor: Color("Gray02"), secondBtnColor: Color("Red03"), firstBtnTextColor: Color("Gray04"), secondBtnTextColor: Color("White01"))
+                CustomPopUpView(showingPopUp: $showingPopUp, 
+                                firstBtnAction: { self.showingPopUp = false },
+                                secondBtnAction: { viewModel.logout() },
+                                titleLabel: "로그아웃",
+                                subTitleLabel: "로그아웃하시겠어요?",
+                                firstBtnLabel: "취소",
+                                secondBtnLabel: "로그아웃",
+                                firstBtnColor: Color("Gray02"),
+                                secondBtnColor: Color("Red03"),
+                                firstBtnTextColor: Color("Gray04"),
+                                secondBtnTextColor: Color("White01"))
             }
         }
     }

@@ -12,12 +12,13 @@ enum AuthRouter: URLRequestConvertible {
     case linkAccountToOAuth(dto: LinkAccountToOAuthRequestDto)
     case findUserName(dto: FindUserNameRequestDto)
     case receiveUserNameVerificationCode(dto: VerificationCodeRequestDto)
+    case logout
     
     var method: HTTPMethod {
         switch self {
         case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToOAuth, .receiveUserNameVerificationCode:
             return .post
-        case .checkDuplicateUserName, .findUserName:
+        case .checkDuplicateUserName, .findUserName, .logout:
             return .get
         }
     }
@@ -42,6 +43,8 @@ enum AuthRouter: URLRequestConvertible {
             return "v1/auth/link-oauth"
         case .findUserName:
             return "v1/find/username"
+        case .logout:
+            return "v1/sign-out"
         }
     }
     
@@ -63,6 +66,8 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .findUserName(dto):
             return try? dto.asDictionary()
+        case .logout:
+            return [:]
         }
     }
     
@@ -89,6 +94,16 @@ enum AuthRouter: URLRequestConvertible {
         case let .findUserName(dto):
             let queryParameters = [URLQueryItem(name: "phone", value: dto.phone), URLQueryItem(name: "code", value: dto.code)]
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
+            
+        case .logout:
+//            let queryParameters = [URLQueryItem(name: "accessToken", value: dto.accessToken), URLQueryItem(name: "refreshToken", value: dto.refreshToken)]
+            request = URLRequest.createURLRequest(url: url, method: method)
+            if let cookies = HTTPCookieStorage.shared.cookies(for: url) {
+                let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)
+                request.allHTTPHeaderFields = cookieHeader
+            }
+            let accessToken = KeychainHelper.loadAccessToken() ?? ""
+            request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
         }
         return request
     }

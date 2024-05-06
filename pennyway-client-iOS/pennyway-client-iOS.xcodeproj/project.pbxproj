@@ -127,6 +127,8 @@
 		D8180C082BE5168800F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8180C0A2BE531C500F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927ED2BE6842A00653391 /* CustomPopUpView.swift */; };
+		D85927F02BE6958D00653391 /* LogoutRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927EF2BE6958D00653391 /* LogoutRequestDto.swift */; };
+		D85927F22BE69C6A00653391 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */; };
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
 		D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */; };
 		D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */; };
@@ -266,6 +268,8 @@
 		D8180C032BE5081F00F837FB /* FindIdContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdContentView.swift; sourceTree = "<group>"; };
 		D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D85927ED2BE6842A00653391 /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
+		D85927EF2BE6958D00653391 /* LogoutRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogoutRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/LogoutRequestDto.swift"; sourceTree = SOURCE_ROOT; };
+		D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
@@ -444,6 +448,7 @@
 				4A0FFBF62BCDA18C00EFEC56 /* LoginRequestDto.swift */,
 				4A0FFBF82BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift */,
 				D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */,
+				D85927EF2BE6958D00653391 /* LogoutRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -700,6 +705,7 @@
 				4AB5AB602BB5ED3300D2C9EA /* TermsAndConditionsViewModel.swift */,
 				D888329D2BBC613E00F49B27 /* LoginFormViewModel.swift */,
 				D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */,
+				D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1069,6 +1075,7 @@
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A8571422BC70E570082CE47 /* OAuthAccountLinkingViewModel.swift in Sources */,
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
+				D85927F22BE69C6A00653391 /* UserProfileViewModel.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
 				D888329C2BBC612600F49B27 /* LoginFormView.swift in Sources */,
@@ -1095,6 +1102,7 @@
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
+				D85927F02BE6958D00653391 /* LogoutRequestDto.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,
 				4A762B052B99A259001C1188 /* PhoneVerificationViewModel.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,
