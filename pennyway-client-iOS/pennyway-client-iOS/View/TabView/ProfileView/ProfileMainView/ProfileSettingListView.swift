@@ -5,8 +5,7 @@ import SwiftUI
 
 struct ProfileSettingListView: View {
     @EnvironmentObject var appViewModel: AppViewModel
-
-    @ObservedObject var viewModel: UserProfileViewModel
+    @ObservedObject var userProfileViewModel: UserProfileViewModel
     @State private var showingPopUp = false
 
     var body: some View {
@@ -33,12 +32,23 @@ struct ProfileSettingListView: View {
                                 firstBtnLabel: "취소",
                                 firstBtnColor: Color("Gray02"),
                                 firstBtnTextColor: Color("Gray04"),
-                                secondBtnAction: { viewModel.logout()
-                                    appViewModel.logout()
-                                },
+                                secondBtnAction: handleLogout,
                                 secondBtnLabel: "로그아웃",
                                 secondBtnColor: Color("Red03"),
                                 secondBtnTextColor: Color("White01"))
+            }
+        }
+    }
+
+    func handleLogout() {
+        userProfileViewModel.logout { success in
+            DispatchQueue.main.async {
+                if success {
+                    appViewModel.logout()
+                    showingPopUp = false
+                } else {
+                    os_log("fail logout", log: .default, type: .debug)
+                }
             }
         }
     }
