@@ -30,12 +30,10 @@ struct ProfileSettingListView: View {
                                 subTitleLabel: "로그아웃하시겠어요?",
                                 firstBtnAction: { self.showingPopUp = false },
                                 firstBtnLabel: "취소",
-                                firstBtnColor: Color("Gray02"),
-                                firstBtnTextColor: Color("Gray04"),
                                 secondBtnAction: handleLogout,
                                 secondBtnLabel: "로그아웃",
-                                secondBtnColor: Color("Red03"),
-                                secondBtnTextColor: Color("White01"))
+                                secondBtnColor: Color("Red03")
+                )
             }
         }
     }

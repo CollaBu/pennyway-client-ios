@@ -12,14 +12,11 @@ struct CustomPopUpView: View {
     /// 첫 번째 버튼 관련
     let firstBtnAction: () -> Void
     let firstBtnLabel: String
-    let firstBtnColor: Color
-    let firstBtnTextColor: Color
 
     /// 두 번째 버튼 관련
     let secondBtnAction: () -> Void
     let secondBtnLabel: String
     let secondBtnColor: Color
-    let secondBtnTextColor: Color
 
     var body: some View {
         PopupContent(titleFontSize: 16, subtitleFontSize: 12,
@@ -27,12 +24,9 @@ struct CustomPopUpView: View {
                      subTitleLabel: subTitleLabel,
                      firstBtnAction: firstBtnAction,
                      firstBtnLabel: firstBtnLabel,
-                     firstBtnColor: firstBtnColor,
-                     firstBtnTextColor: firstBtnTextColor,
                      secondBtnAction: secondBtnAction,
                      secondBtnLabel: secondBtnLabel,
                      secondBtnColor: secondBtnColor,
-                     secondBtnTextColor: secondBtnTextColor,
                      showingPopUp: $showingPopUp)
     }
 }
@@ -50,14 +44,11 @@ extension CustomPopUpView {
         /// 첫 번째 버튼 관련
         let firstBtnAction: () -> Void
         let firstBtnLabel: String
-        let firstBtnColor: Color
-        let firstBtnTextColor: Color
 
         /// 두 번째 버튼 관련
         let secondBtnAction: () -> Void
         let secondBtnLabel: String
         let secondBtnColor: Color
-        let secondBtnTextColor: Color
 
         @Binding var showingPopUp: Bool
 
@@ -71,6 +62,7 @@ extension CustomPopUpView {
                     Spacer().frame(height: 7 * DynamicSizeFactor.factor())
 
                     Text(subTitleLabel)
+                        .platformTextColor(color: Color("Gray04"))
                         .font(.pretendard(.medium, size: subtitleFontSize))
 
                     Spacer().frame(height: 25 * DynamicSizeFactor.factor())
@@ -79,13 +71,12 @@ extension CustomPopUpView {
                         Button(action: firstBtnAction) {
                             ZStack {
                                 Rectangle()
-                                    .foregroundColor(.clear)
                                     .frame(width: 97 * DynamicSizeFactor.factor(), height: 36 * DynamicSizeFactor.factor())
-                                    .background(firstBtnColor)
+                                    .platformTextColor(color: Color("Gray02"))
                                     .cornerRadius(6)
 
                                 Text(firstBtnLabel)
-                                    .platformTextColor(color: firstBtnTextColor)
+                                    .platformTextColor(color: Color("Gray04"))
                                     .font(.pretendard(.medium, size: subtitleFontSize))
                             }
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
@@ -95,11 +86,11 @@ extension CustomPopUpView {
                             ZStack {
                                 Rectangle()
                                     .frame(width: 97 * DynamicSizeFactor.factor(), height: 36 * DynamicSizeFactor.factor())
-                                    .background(secondBtnColor)
+                                    .platformTextColor(color: secondBtnColor)
                                     .cornerRadius(6)
 
                                 Text(secondBtnLabel)
-                                    .platformTextColor(color: secondBtnTextColor)
+                                    .platformTextColor(color: Color("White01"))
                                     .font(.pretendard(.medium, size: subtitleFontSize))
                             }
                             .padding(.trailing, 13 * DynamicSizeFactor.factor())
