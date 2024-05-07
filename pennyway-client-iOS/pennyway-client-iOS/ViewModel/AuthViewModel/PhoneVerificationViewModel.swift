@@ -124,16 +124,16 @@ class PhoneVerificationViewModel: ObservableObject {
             if let responseData = data {
                 do {
                     let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
-                    print(response)
+                    Log.debug(response)
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    Log.fault("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            if let StatusSpecificError = error as? StatusSpecificError {
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
             } else {
-                print("Failed to verify: \(error)")
+                Log.error("Network request failed: \(error)")
             }
         }
         completion()
@@ -145,22 +145,22 @@ class PhoneVerificationViewModel: ObservableObject {
             if let responseData = data {
                 do {
                     let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
-                    print(response)
+                    Log.debug(response)
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    Log.fault("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            if let StatusSpecificError = error as? StatusSpecificError {
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if errorWithDomainErrorAndMessage.domainError == .conflict && errorWithDomainErrorAndMessage.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
                 } else {
                     showErrorVerificationCode = true
                 }
             } else {
-                print("Failed to verify: \(error)")
+                Log.error("Network request failed: \(error)")
             }
         }
         completion()
@@ -174,22 +174,22 @@ class PhoneVerificationViewModel: ObservableObject {
                     let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
                     RegistrationManager.shared.username = response.data.user.username
                     showErrorVerificationCode = false
-                    print(response)
+                    Log.debug(response)
                 } catch {
-                    print("Error parsing response JSON: \(error)")
+                    Log.fault("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
-            if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+            if let StatusSpecificError = error as? StatusSpecificError {
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if errorWithDomainErrorAndMessage.domainError == .conflict && errorWithDomainErrorAndMessage.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
                 } else {
                     showErrorVerificationCode = true
                 }
             } else {
-                print("Failed to verify: \(error)")
+                Log.error("Network request failed: \(error)")
             }
         }
         completion()
@@ -205,15 +205,14 @@ class PhoneVerificationViewModel: ObservableObject {
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
-
-                    print(response)
+                    Log.debug(response)
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    Log.fault("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                print("Failed to verify: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
@@ -221,7 +220,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     showErrorVerificationCode = true
                 }
             } else {
-                print("Failed to verify: \(error)")
+                Log.error("Network request failed: \(error)")
             }
         }
         completion()
@@ -239,14 +238,14 @@ class PhoneVerificationViewModel: ObservableObject {
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
 
-                    print(response)
+                    Log.debug(response)
                 } catch {
-                    print("Error decoding JSON: \(error)")
+                    Log.fault("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                print("Failed to verify: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
@@ -254,7 +253,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     showErrorVerificationCode = true
                 }
             } else {
-                print("Failed to verify: \(error)")
+                Log.error("Network request failed: \(error)")
             }
         }
         completion()

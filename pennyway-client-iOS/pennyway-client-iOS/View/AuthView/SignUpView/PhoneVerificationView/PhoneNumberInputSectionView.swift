@@ -37,7 +37,6 @@ struct PhoneNumberInputSectionView: View {
                         if isOAuthRegistration {
                             viewModel.requestOAuthVerificationCodeApi { viewModel.judgeTimerRunning() }
                         } else {
-                            print("번호 인증 api요청")
                             viewModel.requestVerificationCodeApi { viewModel.judgeTimerRunning() }
                         }
                     }, label: {
