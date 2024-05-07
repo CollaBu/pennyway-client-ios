@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - ProfileSettingListView
 
 struct ProfileSettingListView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
+    @EnvironmentObject var authViewModel: AppViewModel
     @ObservedObject var userProfileViewModel: UserProfileViewModel
     @State private var showingPopUp = false
 
@@ -42,7 +42,7 @@ struct ProfileSettingListView: View {
         userProfileViewModel.logout { success in
             DispatchQueue.main.async {
                 if success {
-                    appViewModel.logout()
+                    authViewModel.logout()
                     showingPopUp = false
                 } else {
                     os_log("fail logout", log: .default, type: .debug)
