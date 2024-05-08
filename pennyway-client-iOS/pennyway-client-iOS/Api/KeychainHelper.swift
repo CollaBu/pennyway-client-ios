@@ -34,7 +34,7 @@ class KeychainHelper {
         }
     }
     
-    static func saveIdToken(oauthUserData: OAuthUserData) {
+    static func saveOAuthUserData(oauthUserData: OAuthUserData) {
         do {
             let encoder = JSONEncoder()
             let oauthUserDataEncoded = try encoder.encode(oauthUserData)
@@ -56,7 +56,7 @@ class KeychainHelper {
         }
     }
     
-    static func loadIdToken() -> OAuthUserData? {
+    static func loadOAuthUserData() -> OAuthUserData? {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: "oauthUserData",
@@ -78,6 +78,18 @@ class KeychainHelper {
             }
         } else {
             return nil
+        }
+    }
+
+    static func deleteOAuthUserData() {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: "oauthUserData"
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        if status != noErr {
+            print("Failed to delete OAuthUserData from Keychain")
         }
     }
 }

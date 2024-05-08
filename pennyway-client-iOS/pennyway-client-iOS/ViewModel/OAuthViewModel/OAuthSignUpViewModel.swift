@@ -5,7 +5,7 @@ class OAuthSignUpViewModel: ObservableObject {
     @Published var isSignUpSuccess = false
 
     func oauthSignUpApi() { // 소셜 회원가입
-        let oauthSignUpDto = OAuthSignUpRequestDto(oauthId: KeychainHelper.loadIdToken()?.oauthId ?? "", idToken: KeychainHelper.loadIdToken()?.idToken ?? "", nonce: KeychainHelper.loadIdToken()?.nonce ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
+        let oauthSignUpDto = OAuthSignUpRequestDto(oauthId: KeychainHelper.loadOAuthUserData()?.oauthId ?? "", idToken: KeychainHelper.loadOAuthUserData()?.idToken ?? "", nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
 
         OAuthAlamofire.shared.oauthSignUp(oauthSignUpDto) { result in
             switch result {

@@ -42,7 +42,7 @@ class KakaoOAuthViewModel: ObservableObject {
                 } else {
                     self.isOAuthExistUser = false
                     OAuthRegistrationManager.shared.isOAuthRegistration = true
-                    KeychainHelper.saveIdToken(oauthUserData: self.oauthUserData)
+                    KeychainHelper.saveOAuthUserData(oauthUserData: self.oauthUserData)
                 }
             }
         }

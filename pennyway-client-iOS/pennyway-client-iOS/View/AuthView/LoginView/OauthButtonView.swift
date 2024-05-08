@@ -13,7 +13,7 @@ struct OauthButtonView: View {
             HStack(spacing: 10 * DynamicSizeFactor.factor()) {
                 Button(action: { // kakao
                     kakaoOAuthViewModel.signIn()
-                    OAuthRegistrationManager.shared.provider = "kakao"
+                    OAuthRegistrationManager.shared.provider = provider.kakao.rawValue
 
                 }, label: {
                     Image("icon_signin_kakao")
@@ -28,7 +28,7 @@ struct OauthButtonView: View {
 
                 Button(action: { // google
                     googleOAuthViewModel.signIn()
-                    OAuthRegistrationManager.shared.provider = "google"
+                    OAuthRegistrationManager.shared.provider = provider.google.rawValue
                 }, label: {
                     Image("icon_signin_google")
                         .frame(width: 30 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
@@ -42,7 +42,7 @@ struct OauthButtonView: View {
 
                 Button(action: { // apple
                     appleOAtuthViewModel.signIn()
-                    OAuthRegistrationManager.shared.provider = "apple"
+                    OAuthRegistrationManager.shared.provider = provider.apple.rawValue
                 }, label: {
                     Image("icon_signin_apple")
                         .frame(width: 30 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
