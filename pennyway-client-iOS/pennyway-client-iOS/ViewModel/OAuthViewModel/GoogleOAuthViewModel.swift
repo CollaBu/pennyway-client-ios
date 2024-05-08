@@ -16,7 +16,7 @@ class GoogleOAuthViewModel: ObservableObject {
                 return
             }
             let givenName = user.profile?.givenName
-            self.oauthUserData.oauthId = user.userID ?? ""
+            oauthUserData.oauthId = user.userID ?? ""
             self.givenName = givenName ?? ""
             
             let jwtParts = user.idToken?.tokenString.components(separatedBy: ".")
@@ -26,7 +26,7 @@ class GoogleOAuthViewModel: ObservableObject {
             }
             do {
                 let payloadJSON = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any]
-                self.oauthUserData.nonce = payloadJSON?["nonce"] as? String ?? ""
+                oauthUserData.nonce = payloadJSON?["nonce"] as? String ?? ""
             } catch {
                 print("Error decoding JSON: \(error)")
             }

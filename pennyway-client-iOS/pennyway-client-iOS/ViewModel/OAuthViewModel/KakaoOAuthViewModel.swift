@@ -6,7 +6,7 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
-    
+
     var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
 
     func checkUserInfo() {

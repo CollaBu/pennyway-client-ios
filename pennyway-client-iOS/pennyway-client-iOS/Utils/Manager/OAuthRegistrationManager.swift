@@ -7,8 +7,6 @@ struct OAuthRegistrationManager {
     var isOAuthRegistration: Bool = false
     var isExistUser: Bool = false
     var isOAuthUser: Bool = false
-    var oauthId = ""
-    var nonce = ""
     var provider = ""
     var name = ""
     var username = ""
