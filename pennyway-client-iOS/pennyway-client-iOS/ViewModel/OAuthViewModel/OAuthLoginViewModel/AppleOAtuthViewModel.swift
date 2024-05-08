@@ -8,7 +8,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     @Published var givenName: String = ""
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
-    @Published var isLoggedIn: Bool = false //로그인 여부 
+    @Published var isLoggedIn: Bool = false // 로그인 여부 
     
     var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     
@@ -50,18 +50,29 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             
             let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
-            let viewModel = OAuthLoginViewModel(dto: oauthLoginDto)
+            let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
+            let oauthAccountViewModel = OAuthAccountViewModel()
 
-            viewModel.oauthLoginApi { success, error in
-                if success {
-                    self.isOAuthExistUser = true
-                } else {
-                    if let error = error {
-                        self.errorMessage = error
+            if isLoggedIn {
+                oauthAccountViewModel.linkOAuthAccountApi { success in
+                    if success {
+                        self.isOAuthExistUser = true
                     } else {
                         self.isOAuthExistUser = false
-                        OAuthRegistrationManager.shared.isOAuthRegistration = true
-                        KeychainHelper.saveOAuthUserData(oauthUserData: self.oauthUserData)
+                    }
+                }
+            } else {  
+                oauthLoginViewModel.oauthLoginApi { success, error in
+                    if success {
+                        self.isOAuthExistUser = true
+                    } else {
+                        if let error = error {
+                            self.errorMessage = error
+                        } else {
+                            self.isOAuthExistUser = false
+                            OAuthRegistrationManager.shared.isOAuthRegistration = true
+                            KeychainHelper.saveOAuthUserData(oauthUserData: self.oauthUserData)
+                        }
                     }
                 }
             }
