@@ -27,9 +27,8 @@ class OAuthAccountViewModel: ObservableObject {
             }
         }
     }
-    
-    func unlinkOAuthAccountApi(completion: @escaping (Bool) -> Void) {
 
+    func unlinkOAuthAccountApi(completion: @escaping (Bool) -> Void) {
         UserAuthAlamofire.shared.unlinkOAuthAccount { result in
             switch result {
             case let .success(data):

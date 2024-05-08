@@ -23,6 +23,6 @@ class UserAuthAlamofire: TokenHandler {
     func unlinkOAuthAccount(completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("UserAuthAlamofire - unlinkOAuthAccount() called")
         
-        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserAuthRouter.unlinkOAuthAccount(dto: dto), completion: completion)
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserAuthRouter.unlinkOAuthAccount, completion: completion)
     }
 }

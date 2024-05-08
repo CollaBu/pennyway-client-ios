@@ -8,7 +8,9 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var isLoggedIn: Bool = false // 로그인 여부 
     
-    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    private var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
+    private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    let oauthAccountViewModel = OAuthAccountViewModel()
     
     func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
@@ -42,17 +44,16 @@ class GoogleOAuthViewModel: ObservableObject {
     func oauthLoginApi() {
         let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
         let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
-        let oauthAccountViewModel = OAuthAccountViewModel()
 
-        if isLoggedIn {//로그인 한 경우
+        if isLoggedIn { // 로그인 한 경우
             oauthAccountViewModel.linkOAuthAccountApi { success in
                 if success {
-                    self.isOAuthExistUser = true
+                    self.existOAuthAccount = true
                 } else {
-                    self.isOAuthExistUser = false
+                    self.existOAuthAccount = false
                 }
             }
-        } else {//로그인하지 않은 경우
+        } else { // 로그인하지 않은 경우
             oauthLoginViewModel.oauthLoginApi { success, error in
                 if success {
                     self.isOAuthExistUser = true
@@ -70,18 +71,31 @@ class GoogleOAuthViewModel: ObservableObject {
     }
     
     func signIn() {
-        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
-            return
-        }
         
-        GIDSignIn.sharedInstance.signIn(
-            withPresenting: presentingViewController)
-        { _, error in
-            if let error = error {
-                self.errorMessage = "error: \(error.localizedDescription)"
+        if isLoggedIn && existOAuthAccount{
+            oauthAccountViewModel.unlinkOAuthAccountApi { success in
+                if success {
+                    self.existOAuthAccount = false
+                } else {
+                    self.existOAuthAccount = true
+                }
             }
             
-            self.checkUserInfo()
+        } else {
+            
+            guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
+                return
+            }
+            
+            GIDSignIn.sharedInstance.signIn(
+                withPresenting: presentingViewController)
+            { _, error in
+                if let error = error {
+                    self.errorMessage = "error: \(error.localizedDescription)"
+                }
+                
+                self.checkUserInfo()
+            }
         }
     }
     
