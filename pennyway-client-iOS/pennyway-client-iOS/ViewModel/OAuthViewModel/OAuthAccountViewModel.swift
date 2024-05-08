@@ -27,4 +27,28 @@ class OAuthAccountViewModel: ObservableObject {
             }
         }
     }
+    
+    func unlinkOAuthAccountApi(completion: @escaping (Bool) -> Void) {
+
+        UserAuthAlamofire.shared.unlinkOAuthAccount { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    Log.debug(responseData)
+                    completion(true)
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                    if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                        Log.info("StatusSpecificError occurred 4040: \(StatusSpecificError)")
+                    }
+                    completion(false)
+                } else {
+                    Log.error("Network request failed: \(error)")
+                    completion(false)
+                }
+            }
+        }
+    }
 }
