@@ -14,7 +14,7 @@ class UserAuthAlamofire: TokenHandler {
         session = Session(interceptor: interceptors, eventMonitors: monitors)
     }
     
-    func linkOAuthAccount(dto: OAuthUserData, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func linkOAuthAccount(_ dto: OAuthUserData, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("UserAuthAlamofire - linkOAuthAccount() called")
         
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserAuthRouter.linkOAuthAccount(dto: dto), completion: completion)

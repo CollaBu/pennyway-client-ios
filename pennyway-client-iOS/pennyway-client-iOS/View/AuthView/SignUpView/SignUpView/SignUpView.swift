@@ -3,7 +3,7 @@ import SwiftUI
 struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
-    @StateObject var accountLinkingViewModel = OAuthAccountLinkingViewModel()
+    @StateObject var accountLinkingViewModel = LinkOAuthToAccountViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser

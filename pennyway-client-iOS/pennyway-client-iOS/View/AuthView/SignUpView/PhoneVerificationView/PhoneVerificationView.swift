@@ -4,7 +4,7 @@ struct PhoneVerificationView: View {
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
-    @StateObject var oauthAccountLinkingViewModel = OAuthAccountLinkingViewModel()
+    @StateObject var oauthAccountLinkingViewModel = LinkOAuthToAccountViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
    

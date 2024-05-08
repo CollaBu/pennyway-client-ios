@@ -8,6 +8,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     @Published var givenName: String = ""
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
+    @Published var isLoggedIn: Bool = false //로그인 여부 
     
     var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     
