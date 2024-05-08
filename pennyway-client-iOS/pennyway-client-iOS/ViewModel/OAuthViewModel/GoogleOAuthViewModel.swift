@@ -7,8 +7,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
     
-    var oauthId = ""
-    var nonce = ""
+    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     
     func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
@@ -17,9 +16,8 @@ class GoogleOAuthViewModel: ObservableObject {
                 return
             }
             let givenName = user.profile?.givenName
-            oauthId = user.userID ?? ""
+            self.oauthUserData.oauthId = user.userID ?? ""
             self.givenName = givenName ?? ""
-            KeychainHelper.saveIdToken(accessToken: user.idToken?.tokenString ?? "")
             
             let jwtParts = user.idToken?.tokenString.components(separatedBy: ".")
             guard jwtParts?.count == 3, let payloadData = Data(base64Encoded: jwtParts?[1] ?? "", options: .ignoreUnknownCharacters) else {
@@ -28,8 +26,7 @@ class GoogleOAuthViewModel: ObservableObject {
             }
             do {
                 let payloadJSON = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any]
-                nonce = payloadJSON?["nonce"] as? String ?? ""
-                OAuthRegistrationManager.shared.nonce = nonce
+                self.oauthUserData.nonce = payloadJSON?["nonce"] as? String ?? ""
             } catch {
                 print("Error decoding JSON: \(error)")
             }
@@ -41,7 +38,7 @@ class GoogleOAuthViewModel: ObservableObject {
     }
     
     func oauthLoginApi() {
-        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIdToken() ?? "", nonce: nonce, provider: OAuthRegistrationManager.shared.provider)
+        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
         let viewModel = OAuthLoginViewModel(dto: oauthLoginDto)
 
         viewModel.oauthLoginApi { success, error in
@@ -53,7 +50,7 @@ class GoogleOAuthViewModel: ObservableObject {
                 } else {
                     self.isOAuthExistUser = false
                     OAuthRegistrationManager.shared.isOAuthRegistration = true
-                    OAuthRegistrationManager.shared.oauthId = self.oauthId
+                    KeychainHelper.saveIdToken(oauthUserData: self.oauthUserData)
                 }
             }
         }

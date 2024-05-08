@@ -30,7 +30,7 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginApi() {
-        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: KeychainHelper.loadIdToken()?.idToken ?? "", nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
+        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
         let viewModel = OAuthLoginViewModel(dto: oauthLoginDto)
 
         viewModel.oauthLoginApi { success, error in

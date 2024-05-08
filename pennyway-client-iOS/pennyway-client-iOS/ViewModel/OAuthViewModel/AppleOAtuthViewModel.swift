@@ -9,18 +9,15 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
     
-    var oauthId = ""
-    var token = ""
-    var nonce = ""
+    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     
     func signIn() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         let randomNonce = CryptoHelper.randomNonceString()
-        nonce = CryptoHelper.sha256(randomNonce)
+        self.oauthUserData.nonce = CryptoHelper.sha256(randomNonce)
         request.requestedScopes = [.fullName, .email]
-        request.nonce = nonce
-        OAuthRegistrationManager.shared.nonce = nonce
+        request.nonce = self.oauthUserData.nonce
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
@@ -45,13 +42,13 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             let fullName = appleIDCredential.fullName
             let idToken = appleIDCredential.identityToken!
             
-            oauthId = userIdentifier
-            KeychainHelper.saveIdToken(accessToken: String(data: idToken, encoding: .utf8) ?? "")
+            self.oauthUserData.oauthId = userIdentifier
+            self.oauthUserData.idToken = String(data: idToken, encoding: .utf8) ?? ""
           
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             
-            let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIdToken() ?? "", nonce: nonce, provider: OAuthRegistrationManager.shared.provider)
+            let oauthLoginDto = OAuthLoginRequestDto(oauthId: self.oauthUserData.oauthId, idToken: self.oauthUserData.idToken, nonce: self.oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
             let viewModel = OAuthLoginViewModel(dto: oauthLoginDto)
 
             viewModel.oauthLoginApi { success, error in
@@ -63,7 +60,7 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
                     } else {
                         self.isOAuthExistUser = false
                         OAuthRegistrationManager.shared.isOAuthRegistration = true
-                        OAuthRegistrationManager.shared.oauthId = self.oauthId
+                        KeychainHelper.saveIdToken(oauthUserData: self.oauthUserData)
                     }
                 }
             }
