@@ -97,6 +97,7 @@ class PhoneVerificationViewModel: ObservableObject {
         completion()
     }
 
+
     // MARK: 일반 인증번호 검증 API
 
     func requestVerifyVerificationCodeApi(completion: @escaping () -> Void) {
@@ -109,7 +110,7 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
-    private func handleVerificationApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+     private func handleVerificationApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
         switch result {
         case let .success(data):
             if let responseData = data {
@@ -119,6 +120,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     showErrorExistingUser = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
+                    OAuthRegistrationManager.shared.username = sms.username ?? ""
                     Log.debug(response)
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
@@ -194,6 +196,7 @@ class PhoneVerificationViewModel: ObservableObject {
         completion()
     }
 
+
     // MARK: 아이디 찾기 인증번호 코드 요청 API
 
     func requestUserNameVerificationCodeApi(completion: @escaping () -> Void) { // 아이디 찾기 번호 인증
@@ -234,7 +237,6 @@ class PhoneVerificationViewModel: ObservableObject {
         }
         completion()
     }
-
     // MARK: 아이디 찾기 인증번호 검증 API
 
     func requestUserNameVerifyVerificationCodeApi(completion: @escaping () -> Void) {
