@@ -2,7 +2,7 @@
 import Alamofire
 import Foundation
 
-enum UserRouter: URLRequestConvertible {
+enum UserAccountRouter: URLRequestConvertible {
     case getUserProfile
     
     var method: HTTPMethod {

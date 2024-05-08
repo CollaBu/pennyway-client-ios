@@ -4,7 +4,7 @@ import SwiftUI
 
 class ProfileInfoViewModel: ObservableObject {
     func getUserProfileApi() {
-        UserAlamofire.shared.getUserProfile { result in
+        UserAccountAlamofire.shared.getUserProfile { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
