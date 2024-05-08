@@ -19,7 +19,7 @@ struct FindIdView: View {
                 Spacer().frame(height: 17)
                     
                 Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
-                    .font(.pretendard(.semibold, size: 16))
+                    .font(.H3SemiboldFont())
                     .multilineTextAlignment(.center)
                     
                 Spacer().frame(height: 30)
@@ -37,7 +37,7 @@ struct FindIdView: View {
                         )
                         
                     Text("\(username)")
-                        .font(.pretendard(.semibold, size: 18))
+                        .font(.H2SemiboldFont())
                         .multilineTextAlignment(.center)
                 }
                     

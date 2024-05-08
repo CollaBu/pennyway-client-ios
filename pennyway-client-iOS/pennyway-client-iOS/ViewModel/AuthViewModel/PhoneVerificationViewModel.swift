@@ -318,6 +318,46 @@ class PhoneVerificationViewModel: ObservableObject {
         completion()
     }
 
+    // MARK: 비밀번호 찾기 번호 검증 API
+
+    func requestPwVerifyVerificationCodeApi(completion: @escaping () -> Void) {
+        let verificationDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
+
+        if isFormValid {
+            AuthAlamofire.shared.receivePwVerifyVerificationCode(verificationDto) { result in
+                self.receivePwVerifyVerificationCode(result: result, completion: completion)
+            }
+        }
+    }
+
+    private func receivePwVerifyVerificationCode(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(ResponseResetPwDto.self, from: responseData)
+                    showErrorVerificationCode = false
+                    Log.debug(response)
+                } catch {
+                    Log.fault("Error decoding JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            if let StatusSpecificError = error as? StatusSpecificError {
+                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+
+                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                    showErrorExistingUser = false
+                } else {
+                    showErrorVerificationCode = true
+                }
+            } else {
+                Log.error("Network request failed: \(error)")
+            }
+        }
+        completion()
+    }
+
     // MARK: Timer function
 
     func judgeTimerRunning() {

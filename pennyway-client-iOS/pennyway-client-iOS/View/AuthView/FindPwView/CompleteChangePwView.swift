@@ -28,7 +28,10 @@ struct CompleteChangePwView: View {
                     Spacer()
                 }
                 
-                CustomBottomButton(action: {}, label: "메인으로 돌아가기", isFormValid: .constant(true))
+                CustomBottomButton(action: {
+                    NavigationUtil.popToRootView()
+                    Log.debug("버튼 누름")
+                }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                     .padding(.bottom, 34)
             }
         }

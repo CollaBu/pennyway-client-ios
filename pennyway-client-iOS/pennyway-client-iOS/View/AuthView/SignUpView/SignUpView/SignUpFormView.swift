@@ -37,7 +37,7 @@ struct SignUpFormView: View {
             }, isSecureText: false)
             
             if formViewModel.showErrorName {
-                errorMessage("한글, 영문 대/소문자만 가능해요")
+                errorMessage("한글과 영문 대, 소문자만 가능해요")
             }
             
             CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
@@ -46,7 +46,7 @@ struct SignUpFormView: View {
             }, isSecureText: false)
             
             if formViewModel.showErrorID {
-                errorMessage("영문 소문자, 특수기호 -, _, . 만 사용하여,\n5~20자의 아이디를 입력해주세요")
+                errorMessage("영문 소문자, 특수기호 (-), (_), (.) 만 사용하여,\n5~20자의 아이디를 입력해 주세요")
             }
 
             if formViewModel.isDuplicateUserName {
@@ -65,7 +65,7 @@ struct SignUpFormView: View {
             }, isSecureText: false)
             
             if formViewModel.showErrorName {
-                errorMessage("한글, 영문 대/소문자만 가능해요")
+                errorMessage("한글과 영문 대, 소문자만 가능해요")
             }
             
             CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
@@ -74,7 +74,7 @@ struct SignUpFormView: View {
             }, isSecureText: false)
             
             if formViewModel.showErrorID {
-                errorMessage("영문 소문자, 특수기호 -, _, . 만 사용하여,\n5~20자의 아이디를 입력해주세요")
+                errorMessage("영문 소문자, 특수기호 (-), (_), (.) 만 사용하여,\n5~20자의 아이디를 입력해 주세요")
             }
  
             if formViewModel.isDuplicateUserName {
@@ -92,7 +92,7 @@ struct SignUpFormView: View {
             }, isSecureText: true)
             
             if formViewModel.showErrorPassword {
-                errorMessage("적어도 하나 이상의 소문자 알파벳과 숫자를 포함하여\n8~16자의 비밀번호를 입력해주세요")
+                errorMessage("숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요")
             }
             
             CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {

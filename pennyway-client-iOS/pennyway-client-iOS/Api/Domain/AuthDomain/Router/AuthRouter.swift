@@ -14,13 +14,17 @@ enum AuthRouter: URLRequestConvertible {
     case receiveUserNameVerificationCode(dto: VerificationCodeRequestDto)
     case receivePwVerificationCode(dto: VerificationCodeRequestDto)
     case logout
+    case requestResetPw(dto: RequestResetPwDto)
+    case receivePwVerifyVerificationCode(dto: VerificationRequestDto)
     
     var method: HTTPMethod {
         switch self {
-        case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToOAuth, .receiveUserNameVerificationCode, .receivePwVerificationCode:
+        case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToOAuth, .receiveUserNameVerificationCode, .receivePwVerificationCode, .receivePwVerifyVerificationCode:
             return .post
         case .checkDuplicateUserName, .findUserName, .logout:
             return .get
+        case .requestResetPw:  
+            return .patch
         }
     }
     
@@ -46,6 +50,10 @@ enum AuthRouter: URLRequestConvertible {
             return "v1/find/username"
         case .logout:
             return "v1/sign-out"
+        case .requestResetPw:
+            return "v1/find/password"
+        case .receivePwVerifyVerificationCode:
+            return "v1/find/password/verification"
         }
     }
     
@@ -71,6 +79,11 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case .logout:
             return [:]
+            
+        case let .requestResetPw(dto):
+            return try? dto.asDictionary()
+        case let .receivePwVerifyVerificationCode(dto):
+            return try? dto.asDictionary()
         }
     }
     
@@ -79,7 +92,7 @@ enum AuthRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .signup, .verifyVerificationCode, .login, .linkAccountToOAuth:
+        case .signup, .verifyVerificationCode, .login, .linkAccountToOAuth, .receivePwVerifyVerificationCode, .requestResetPw:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
             
         case let .receiveVerificationCode:
@@ -110,6 +123,10 @@ enum AuthRouter: URLRequestConvertible {
             }
             let accessToken = KeychainHelper.loadAccessToken() ?? ""
             request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+            
+//        case let .requestResetPw(dto):
+//            let queryParameters = [URLQueryItem(name: "phone", value: dto.phone), URLQueryItem(name: "code", value: dto.code), URLQueryItem(name: "newPassword", value: dto.newPassword)]
+//            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }
         return request
     }

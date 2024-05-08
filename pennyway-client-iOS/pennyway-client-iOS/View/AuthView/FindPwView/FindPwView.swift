@@ -15,7 +15,7 @@ struct FindPwView: View {
                         FindPwContentView(phoneVerificationViewModel: phoneVerificationViewModel)
                     }
                 }
-                Spacer().frame(height: 203)
+                Spacer().frame(height: 203 * DynamicSizeFactor.factor())
 
                 Spacer()
                 
@@ -61,10 +61,10 @@ struct FindPwView: View {
     }
     
     private func continueButtonAction() {
-//        phoneVerificationViewModel.requestPwVerifyVerificationCodeApi {
-//            checkFormValid()
-//        }
-        checkFormValid()
+        phoneVerificationViewModel.requestPwVerifyVerificationCodeApi {
+            checkFormValid()
+            Log.debug("requestPwVerifyVerificationCodeApi 실행")
+        }
     }
     
     private func checkFormValid() {

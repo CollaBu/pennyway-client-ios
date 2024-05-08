@@ -3,6 +3,7 @@ import SwiftUI
 struct ResetPwView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @State private var navigateView = false
+    @StateObject var resetPwViewModel = ResetPwViewModel()
     
     //    @StateObject var viewModel = SignUpNavigationViewModel()
     
@@ -14,28 +15,20 @@ struct ResetPwView: View {
                         Text("새로운 비밀번호를\n설정해주세요")
                             .font(.pretendard(.semibold, size: 24))
                             .multilineTextAlignment(.leading)
-                            .padding(.top, 15)
+                            .padding(.top, 15 * DynamicSizeFactor.factor())
                         
                         Spacer()
                     }
-                    .padding(.leading, 20)
+                    .padding(.leading, 20 * DynamicSizeFactor.factor())
                     
-                    Spacer().frame(height: 33)
+                    Spacer().frame(height: 33 * DynamicSizeFactor.factor())
                     
                     ResetPwFormView(formViewModel: formViewModel)
                 }
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    if formViewModel.isFormValid {
-                        // CompleteChangePwView()
-                        print(formViewModel.isFormValid)
-                        // formViewModel.checkDuplicateUserNameApi()
-                        
-                        RegistrationManager.shared.password = formViewModel.password
-                        
-                        navigateView = true
-                    } else {}
+                    continueButtonAction()
                     
                 }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, 34)
@@ -66,6 +59,20 @@ struct ResetPwView: View {
                     }.offset(x: -10)
                 }
             }
+        }
+    }
+    
+    private func continueButtonAction() {
+        if formViewModel.isFormValid {
+            resetPwViewModel.RequestResetPwApi {
+                Log.debug("RequestResetPwApi 실행")
+                navigateView = true
+            }
+            
+            RegistrationManager.shared.password = formViewModel.password
+            
+        } else {
+            Log.fault("유효하지 않은 형식")
         }
     }
 }

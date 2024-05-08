@@ -30,6 +30,11 @@ class AuthAlamofire: TokenHandler {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receivePwVerificationCode(dto: dto), completion: completion)
     }
     
+    func receivePwVerifyVerificationCode(_ dto: VerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) { // 비밀번호 찾기 번호인증 검증
+        os_log("AuthAlamofire - receivePwVerifyVerificationCode() called userInput : %@ ,, %@", log: .default, type: .info, dto.phone, dto.code)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receivePwVerifyVerificationCode(dto: dto), completion: completion)
+    }
+    
     func verifyVerificationCode(_ dto: VerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - verifyVerificationCode() called with code : %@ ,, %@ ", log: .default, type: .info, dto.phone, dto.code)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.verifyVerificationCode(dto: dto), completion: completion)
@@ -51,7 +56,7 @@ class AuthAlamofire: TokenHandler {
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.login(dto: dto), completion: completion)
     }
     
-    func logout(completion: @escaping (Result<Data?, Error>) -> Void) { // 로그아웃
+    func logout(completion: @escaping (Result<Data?, Error>) -> Void) { 
         os_log("AuthAlamofire - logout() called userInput : %@ ,, %@ ", log: .default, type: .info)
         
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.logout, completion: completion)
@@ -65,5 +70,10 @@ class AuthAlamofire: TokenHandler {
     func findUserName(_ dto: FindUserNameRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - findUserName() called userInput : %@ ,, %@", log: .default, type: .info, dto.phone, dto.code)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.findUserName(dto: dto), completion: completion)
+    }
+    
+    func requestResetPw(_ dto: RequestResetPwDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        os_log("AuthAlamofire - requestResetPw() called userInput : %@ ,, %@ ,, %@", log: .default, type: .info, dto.phone, dto.code, dto.newPassword)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.requestResetPw(dto: dto), completion: completion)
     }
 }
