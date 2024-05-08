@@ -53,7 +53,7 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
             let oauthAccountViewModel = OAuthAccountViewModel()
 
-            if isLoggedIn {
+            if isLoggedIn {//로그인 한 경우
                 oauthAccountViewModel.linkOAuthAccountApi { success in
                     if success {
                         self.isOAuthExistUser = true
@@ -61,7 +61,7 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
                         self.isOAuthExistUser = false
                     }
                 }
-            } else {  
+            } else {//로그인하지 않은 경우
                 oauthLoginViewModel.oauthLoginApi { success, error in
                     if success {
                         self.isOAuthExistUser = true

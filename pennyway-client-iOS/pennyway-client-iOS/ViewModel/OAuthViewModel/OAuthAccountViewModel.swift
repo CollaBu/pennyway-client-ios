@@ -10,6 +10,7 @@ class OAuthAccountViewModel: ObservableObject {
             case let .success(data):
                 if let responseData = data {
                     Log.debug(responseData)
+                    KeychainHelper.deleteOAuthUserData()
                     completion(true)
                 }
             case let .failure(error):

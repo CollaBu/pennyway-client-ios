@@ -15,6 +15,7 @@ class OAuthSignUpViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         print(response)
                         self.isSignUpSuccess = true
+                        KeychainHelper.deleteOAuthUserData()
                     } catch {
                         print("Error parsing response JSON: \(error)")
                     }

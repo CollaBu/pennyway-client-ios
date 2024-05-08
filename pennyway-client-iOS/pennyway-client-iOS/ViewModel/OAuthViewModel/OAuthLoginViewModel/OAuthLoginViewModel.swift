@@ -17,6 +17,7 @@ class OAuthLoginViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         let isOAuthExistUser = response.data.user.id
                         if isOAuthExistUser != -1 {
+                            KeychainHelper.deleteOAuthUserData()
                             completion(true, nil)
                         } else {
                             completion(false, nil)
