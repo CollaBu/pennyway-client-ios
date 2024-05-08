@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct FindIdPhoneVerificationView: View {
+struct FindPwPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
     @State private var isFindUser = true
 
@@ -36,8 +36,7 @@ struct FindIdPhoneVerificationView: View {
                     }
                     Button(action: {
                         if isFindUser {
-                            Log.debug("아이디 찾기 api 요청")
-                            viewModel.requestUserNameVerificationCodeApi { viewModel.judgeTimerRunning() }
+                            viewModel.requestPwVerificationCodeApi { viewModel.judgeTimerRunning() }
                         }
                     }, label: {
                         Text("인증번호 받기")

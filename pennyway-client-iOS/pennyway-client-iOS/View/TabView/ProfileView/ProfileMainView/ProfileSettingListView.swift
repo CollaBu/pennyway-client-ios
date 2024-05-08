@@ -45,7 +45,7 @@ struct ProfileSettingListView: View {
                     authViewModel.logout()
                     showingPopUp = false
                 } else {
-                    os_log("fail logout", log: .default, type: .debug)
+                    Log.fault("fail logout")
                 }
             }
         }

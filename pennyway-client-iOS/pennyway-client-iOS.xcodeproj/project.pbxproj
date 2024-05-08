@@ -130,6 +130,8 @@
 		D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */; };
 		D8180C082BE5168800F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8180C0A2BE531C500F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A7882BEBABC700899AA3 /* FindPwContentView.swift */; };
+		D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */; };
 		D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927ED2BE6842A00653391 /* CustomPopUpView.swift */; };
 		D85927F22BE69C6A00653391 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */; };
 		D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F32BE9116700653391 /* SignUpFormViewModel.swift */; };
@@ -277,6 +279,8 @@
 		D8180C012BE507FD00F837FB /* FindIdFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdFormView.swift; sourceTree = "<group>"; };
 		D8180C032BE5081F00F837FB /* FindIdContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdContentView.swift; sourceTree = "<group>"; };
 		D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
+		D847A7882BEBABC700899AA3 /* FindPwContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwContentView.swift; sourceTree = "<group>"; };
+		D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D85927ED2BE6842A00653391 /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
 		D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		D85927F32BE9116700653391 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
@@ -953,6 +957,8 @@
 				D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */,
 				D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */,
 				D87CB0D52BC5B56600BD882A /* ResetPwFormView.swift */,
+				D847A7882BEBABC700899AA3 /* FindPwContentView.swift */,
+				D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */,
 			);
 			path = FindPwView;
 			sourceTree = "<group>";
@@ -1116,6 +1122,7 @@
 			files = (
 				4ADBFAED2BE2C36500C3ECE4 /* UserAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
+				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
 				4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */,
 				4ADBFAEF2BE2C43B00C3ECE4 /* UserRouter.swift in Sources */,
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */,
@@ -1162,6 +1169,7 @@
 				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
 				4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */,
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
+				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,

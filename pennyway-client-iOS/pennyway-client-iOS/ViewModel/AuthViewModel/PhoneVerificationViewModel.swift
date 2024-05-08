@@ -97,7 +97,6 @@ class PhoneVerificationViewModel: ObservableObject {
         completion()
     }
 
-
     // MARK: 일반 인증번호 검증 API
 
     func requestVerifyVerificationCodeApi(completion: @escaping () -> Void) {
@@ -110,7 +109,7 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
-     private func handleVerificationApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+    private func handleVerificationApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
         switch result {
         case let .success(data):
             if let responseData = data {
@@ -196,7 +195,6 @@ class PhoneVerificationViewModel: ObservableObject {
         completion()
     }
 
-
     // MARK: 아이디 찾기 인증번호 코드 요청 API
 
     func requestUserNameVerificationCodeApi(completion: @escaping () -> Void) { // 아이디 찾기 번호 인증
@@ -237,6 +235,7 @@ class PhoneVerificationViewModel: ObservableObject {
         }
         completion()
     }
+
     // MARK: 아이디 찾기 인증번호 검증 API
 
     func requestUserNameVerifyVerificationCodeApi(completion: @escaping () -> Void) {
@@ -257,6 +256,47 @@ class PhoneVerificationViewModel: ObservableObject {
                     let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
                     RegistrationManager.shared.username = response.data.user.username
                     showErrorVerificationCode = false
+                    Log.debug(response)
+                } catch {
+                    Log.fault("Error decoding JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            if let StatusSpecificError = error as? StatusSpecificError {
+                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+
+                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                    showErrorExistingUser = false
+                } else {
+                    showErrorVerificationCode = true
+                }
+            } else {
+                Log.error("Network request failed: \(error)")
+            }
+        }
+        completion()
+    }
+
+    // MARK: 비밀번호 찾기 인증번호 코드 요청 API
+
+    func requestPwVerificationCodeApi(completion: @escaping () -> Void) { 
+        validatePhoneNumber()
+        requestVerificationCodeAction()
+        let passwordVerificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
+
+        if !showErrorPhoneNumberFormat {
+            AuthAlamofire.shared.receivePwVerificationCode(passwordVerificationCodeDto) { result in
+                self.handlePwVerificationCodeApiResult(result: result, completion: completion)
+            }
+        }
+    }
+
+    private func handlePwVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
                     Log.debug(response)
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")

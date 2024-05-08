@@ -25,6 +25,11 @@ class AuthAlamofire: TokenHandler {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receiveUserNameVerificationCode(dto: dto), completion: completion)
     }
     
+    func receivePwVerificationCode(_ dto: VerificationCodeRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) { // 비밀번호 찾기 번호인증
+        os_log("AuthAlamofire - receivePwVerificationCode() called userInput : %@", log: .default, type: .info, dto.phone)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receivePwVerificationCode(dto: dto), completion: completion)
+    }
+    
     func verifyVerificationCode(_ dto: VerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - verifyVerificationCode() called with code : %@ ,, %@ ", log: .default, type: .info, dto.phone, dto.code)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.verifyVerificationCode(dto: dto), completion: completion)
