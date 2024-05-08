@@ -17,6 +17,7 @@ class GoogleOAuthViewModel: ObservableObject {
             }
             let givenName = user.profile?.givenName
             oauthUserData.oauthId = user.userID ?? ""
+            oauthUserData.idToken = user.idToken?.tokenString ?? ""
             self.givenName = givenName ?? ""
             
             let jwtParts = user.idToken?.tokenString.components(separatedBy: ".")

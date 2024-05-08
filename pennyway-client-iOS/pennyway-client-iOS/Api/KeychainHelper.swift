@@ -34,6 +34,8 @@ class KeychainHelper {
         }
     }
     
+    // MARK: OAuthUserData Keychain
+    
     static func saveOAuthUserData(oauthUserData: OAuthUserData) {
         do {
             let encoder = JSONEncoder()
@@ -49,10 +51,10 @@ class KeychainHelper {
             if status == errSecDuplicateItem {
                 SecItemUpdate(keychainQuery as CFDictionary, [kSecValueData: oauthUserDataEncoded] as CFDictionary)
             } else if status != noErr {
-                print("Failed to save UserData to Keychain")
+                Log.error("Failed to save oauthUserData to Keychain")
             }
         } catch {
-            print("Error encoding UserData: \(error.localizedDescription)")
+            Log.fault("Error encoding oauthUserData: \(error.localizedDescription)")
         }
     }
     
@@ -73,7 +75,7 @@ class KeychainHelper {
                 let oauthUserData = try decoder.decode(OAuthUserData.self, from: data)
                 return oauthUserData
             } catch {
-                print("Error decoding UserData: \(error.localizedDescription)")
+                Log.fault("Error decoding oauthUserData: \(error.localizedDescription)")
                 return nil
             }
         } else {
@@ -89,7 +91,7 @@ class KeychainHelper {
         
         let status = SecItemDelete(query as CFDictionary)
         if status != noErr {
-            print("Failed to delete OAuthUserData from Keychain")
+            Log.error("Failed to delete oauthUserData from Keychain")
         }
     }
 }

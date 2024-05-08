@@ -6,9 +6,9 @@ struct OAuthUserData: Codable {
     var nonce: String
 }
 
-// MARK: - provider
+// MARK: - Provider
 
-enum provider: String {
+enum Provider: String {
     case kakao = "kakao"
     case google = "google"
     case apple = "apple"
