@@ -46,6 +46,12 @@ class AuthAlamofire: TokenHandler {
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.login(dto: dto), completion: completion)
     }
     
+    func logout(completion: @escaping (Result<Data?, Error>) -> Void) { // 로그아웃
+        os_log("AuthAlamofire - logout() called userInput : %@ ,, %@ ", log: .default, type: .info)
+        
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.logout, completion: completion)
+    }
+    
     func linkAccountToOAuth(_ dto: LinkAccountToOAuthRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - linkAccountToOAuth() called userInput : %@ ,, %@", log: .default, type: .info, dto.phone, dto.code)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.linkAccountToOAuth(dto: dto), completion: completion)

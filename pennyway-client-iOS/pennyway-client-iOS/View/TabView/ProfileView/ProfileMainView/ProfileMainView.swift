@@ -14,7 +14,7 @@ struct ProfileMainView: View {
                     
                     Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                     
-                    ProfileSettingListView()
+                    ProfileSettingListView(userProfileViewModel: UserProfileViewModel())
                 }
                 .background(Color("Gray01"))
             }
