@@ -4,7 +4,7 @@ import SwiftUI
 
 class KakaoOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
-    @Published var isOAuthExistUser: Bool = true // oauth 계정 존재 여부
+    @Published var isOAuthExistUser: Bool = true 
     @Published var errorMessage: String = ""
     @Published var isLoggedIn: Bool = false // 로그인 여부
 
@@ -34,8 +34,6 @@ class KakaoOAuthViewModel: ObservableObject {
 
     func oauthLoginApi() {
         let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
-
-        Log.debug(oauthUserData)
 
         let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
         KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)

@@ -45,7 +45,7 @@ enum UserAuthRouter: URLRequestConvertible {
         case .linkOAuthAccount:
             let queryParameters = [URLQueryItem(name: "provider", value: OAuthRegistrationManager.shared.provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-            
+  
         case .unlinkOAuthAccount:
             let queryParameters = [URLQueryItem(name: "provider", value: OAuthRegistrationManager.shared.provider)]
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
