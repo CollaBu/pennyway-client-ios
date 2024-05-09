@@ -6,6 +6,9 @@ struct LoginOAuthButtonView: View {
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
     @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
 
+    
+    @EnvironmentObject var authViewModel: AppViewModel
+    @State private var isLoginSuccessful = true
     @State private var isActiveLink = false
 
     var body: some View {

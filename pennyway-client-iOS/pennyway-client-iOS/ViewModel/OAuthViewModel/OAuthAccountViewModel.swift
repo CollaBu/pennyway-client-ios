@@ -46,6 +46,8 @@ class OAuthAccountViewModel: ObservableObject {
                     Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                     if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
                         Log.info("StatusSpecificError occurred 4040: \(StatusSpecificError)")
+                    }else if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.requestConflictWithResourceState.rawValue {
+                        Log.info("StatusSpecificError occurred 4090: \(StatusSpecificError)")
                     }
                     completion(false)
                 } else {

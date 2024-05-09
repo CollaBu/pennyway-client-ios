@@ -29,6 +29,7 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var timerSeconds = 300
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
+    @Published var hasSentVerificationCodeRequest = false
 
     func requestVerificationCodeAction() {
         if !showErrorPhoneNumberFormat && !isDisabledButton {
@@ -47,6 +48,14 @@ class PhoneVerificationViewModel: ObservableObject {
 
     func validateForm() {
         isFormValid = (!phoneNumber.isEmpty && !code.isEmpty && timerSeconds > 0)
+    }
+
+    func validateRequestVerificationCode() {
+        if hasSentVerificationCodeRequest && RegistrationManager.shared.phoneNumber != "" && RegistrationManager.shared.phoneNumber != phoneNumber {
+            isDisabledButton = false
+        } else if hasSentVerificationCodeRequest && RegistrationManager.shared.phoneNumber != "" && RegistrationManager.shared.phoneNumber == phoneNumber {
+            isDisabledButton = true
+        }
     }
 
     // MARK: 인증번호 코드 요청 API
@@ -83,6 +92,8 @@ class PhoneVerificationViewModel: ObservableObject {
                 do {
                     let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
                     Log.debug(response)
+                    RegistrationManager.shared.phoneNumber = phoneNumber
+                    hasSentVerificationCodeRequest = true
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
                 }
@@ -283,6 +294,8 @@ class PhoneVerificationViewModel: ObservableObject {
         if !showErrorPhoneNumberFormat && !isTimerHidden {
             if isTimerRunning {
                 stopTimer()
+                isTimerHidden = false
+                startTimer()
             } else {
                 startTimer()
             }

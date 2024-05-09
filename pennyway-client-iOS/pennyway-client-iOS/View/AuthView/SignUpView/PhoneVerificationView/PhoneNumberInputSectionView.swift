@@ -31,6 +31,7 @@ struct PhoneNumberInputSectionView: View {
                                     viewModel.phoneNumber = ""
                                 }
                                 viewModel.validateForm()
+                                viewModel.validateRequestVerificationCode()
                             }
                     }
                     Button(action: {
