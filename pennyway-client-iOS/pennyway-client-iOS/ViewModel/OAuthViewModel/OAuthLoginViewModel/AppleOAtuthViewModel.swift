@@ -9,6 +9,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
     @Published var isLoggedIn: Bool = false // 로그인 여부
+    @Published var isLoginSuccessful = false
     
     private var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
     var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
@@ -79,6 +80,7 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
                 oauthLoginViewModel.oauthLoginApi { success, error in
                     if success {
                         self.isOAuthExistUser = true
+                        self.isLoginSuccessful = true
                     } else {
                         if let error = error {
                             self.errorMessage = error

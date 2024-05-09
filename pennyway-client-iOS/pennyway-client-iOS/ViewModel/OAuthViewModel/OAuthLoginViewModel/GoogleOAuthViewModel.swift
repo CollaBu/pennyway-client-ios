@@ -4,9 +4,10 @@ import SwiftUI
 
 class GoogleOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
-    @Published var isOAuthExistUser: Bool = true
+    @Published var isOAuthExistUser: Bool = false
     @Published var errorMessage: String = ""
     @Published var isLoggedIn: Bool = false // 로그인 여부 
+    @Published var isLoginSuccessful = false
     
     private var existOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
     private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
@@ -59,6 +60,7 @@ class GoogleOAuthViewModel: ObservableObject {
             oauthLoginViewModel.oauthLoginApi { success, error in
                 if success {
                     self.isOAuthExistUser = true
+                    self.isLoginSuccessful = true
                 } else {
                     if let error = error {
                         self.errorMessage = error
