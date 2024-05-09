@@ -7,20 +7,26 @@ struct OAuthButtonView: View {
 
     var body: some View {
         HStack(spacing: 10 * DynamicSizeFactor.factor()) {
-            Button(action: kakaoAction) {
+            Button(action: {
+                kakaoAction()
+            }, label: {
                 Image("icon_signin_kakao")
                     .frame(width: 30 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
-            }
-            
-            Button(action: googleAction) {
+            })
+
+            Button(action: {
+                googleAction()
+            }, label: {
                 Image("icon_signin_google")
                     .frame(width: 30 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
-            }
-            
-            Button(action: appleAction) {
+            })
+
+            Button(action: {
+                appleAction()
+            }, label: {
                 Image("icon_signin_apple")
                     .frame(width: 30 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
-            }
+            })
         }
     }
 }

@@ -63,6 +63,9 @@ struct SignUpView: View {
                 HStack {
                     Button(action: {
                         NavigationUtil.popToRootView()
+                        if isOAuthRegistration { // 소셜 회원가입 중 취소
+                            KeychainHelper.deleteOAuthUserData()
+                        }
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()

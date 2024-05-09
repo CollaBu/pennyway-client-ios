@@ -44,7 +44,7 @@ class GoogleOAuthViewModel: ObservableObject {
         let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
         let oauthAccountViewModel = OAuthAccountViewModel()
 
-        if isLoggedIn {//로그인 한 경우
+        if isLoggedIn { // 로그인 한 경우
             oauthAccountViewModel.linkOAuthAccountApi { success in
                 if success {
                     self.isOAuthExistUser = true
@@ -52,7 +52,7 @@ class GoogleOAuthViewModel: ObservableObject {
                     self.isOAuthExistUser = false
                 }
             }
-        } else {//로그인하지 않은 경우
+        } else { // 로그인하지 않은 경우
             oauthLoginViewModel.oauthLoginApi { success, error in
                 if success {
                     self.isOAuthExistUser = true
