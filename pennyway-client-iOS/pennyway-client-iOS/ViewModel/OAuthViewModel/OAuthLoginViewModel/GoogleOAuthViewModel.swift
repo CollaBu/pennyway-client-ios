@@ -71,8 +71,7 @@ class GoogleOAuthViewModel: ObservableObject {
     }
     
     func signIn() {
-        
-        if isLoggedIn && existOAuthAccount{
+        if isLoggedIn && existOAuthAccount {
             oauthAccountViewModel.unlinkOAuthAccountApi { success in
                 if success {
                     self.existOAuthAccount = false
@@ -82,7 +81,6 @@ class GoogleOAuthViewModel: ObservableObject {
             }
             
         } else {
-            
             guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
                 return
             }

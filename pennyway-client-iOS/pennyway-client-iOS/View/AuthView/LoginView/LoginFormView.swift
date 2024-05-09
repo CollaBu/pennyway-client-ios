@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct LoginFormView: View {
-    @ObservedObject var viewModel: LoginFormViewModel
+    @ObservedObject var loginFormViewModel: LoginFormViewModel
 
     var body: some View {
         NavigationAvailable {
             ZStack {
                 VStack {
                     ScrollView {
-                        InputFormView(viewModel: viewModel) // Id, Pw 입력 폼
+                        InputFormView(loginFormViewModel: loginFormViewModel) // Id, Pw 입력 폼
 
                         LoginOAuthButtonView()
 
@@ -35,11 +35,11 @@ struct LoginFormView: View {
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
-            NavigationLink(destination: MainTabView(), isActive: $viewModel.isLoginSuccessful) {}
+            NavigationLink(destination: MainTabView(), isActive: $loginFormViewModel.isLoginSuccessful) {}
         }
     }
 }
 
 #Preview {
-    LoginFormView(viewModel: LoginFormViewModel(appViewModel: AppViewModel()))
+    LoginFormView(loginFormViewModel: LoginFormViewModel())
 }

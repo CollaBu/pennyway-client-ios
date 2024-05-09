@@ -3,7 +3,7 @@ import SwiftUI
 struct LoginView: View {
     // MARK: Private
 
-    @EnvironmentObject var appViewModel: AppViewModel
+    @StateObject var loginFormViewModel = LoginFormViewModel()
     @State private var isSplashShown = true
     @State private var isActiveLink = false
 
@@ -19,7 +19,7 @@ struct LoginView: View {
                         }
                     }
             } else {
-                LoginFormView(viewModel: LoginFormViewModel(appViewModel: appViewModel))
+                LoginFormView(loginFormViewModel: loginFormViewModel)
             }
         }
     }

@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct InputFormView: View {
-    @ObservedObject var viewModel: LoginFormViewModel
+    @ObservedObject var loginFormViewModel: LoginFormViewModel
+    @EnvironmentObject var authViewModel: AppViewModel
 
     @State private var isLoginSuccessful = true
 
@@ -19,7 +20,7 @@ struct InputFormView: View {
 
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-            if viewModel.showErrorCodeContent {
+            if loginFormViewModel.showErrorCodeContent {
                 ErrorCodeContentView()
             }
 
@@ -31,7 +32,7 @@ struct InputFormView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    TextField("아이디 입력", text: $viewModel.username)
+                    TextField("아이디 입력", text: $loginFormViewModel.username)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .AutoCorrectionExtensions()
@@ -46,7 +47,7 @@ struct InputFormView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    SecureField("비밀번호 입력", text: $viewModel.password)
+                    SecureField("비밀번호 입력", text: $loginFormViewModel.password)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .textContentType(.password)
@@ -58,7 +59,7 @@ struct InputFormView: View {
 
                 VStack {
                     CustomBottomButton(action: {
-                        viewModel.loginApi()
+                        handleLogin()
 
                     }, label: "로그인", isFormValid: .constant(true)) 
                 }
@@ -67,8 +68,20 @@ struct InputFormView: View {
             }
         }
     }
+
+    func handleLogin() {
+        loginFormViewModel.loginApi { success in
+            DispatchQueue.main.async {
+                if success {
+                    authViewModel.login()
+                } else {
+                    Log.error("fail login")
+                }
+            }
+        }
+    }
 }
 
 #Preview {
-    InputFormView(viewModel: LoginFormViewModel(appViewModel: AppViewModel()))
+    InputFormView(loginFormViewModel: LoginFormViewModel())
 }

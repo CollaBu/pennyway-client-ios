@@ -63,9 +63,7 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func signIn() {
-        
-        if isLoggedIn && existOAuthAccount{
-            
+        if isLoggedIn && existOAuthAccount {
             oauthAccountViewModel.unlinkOAuthAccountApi { success in
                 if success {
                     self.existOAuthAccount = false
@@ -73,11 +71,11 @@ class KakaoOAuthViewModel: ObservableObject {
                     self.existOAuthAccount = true
                 }
             }
-            
+
         } else {
             let randomNonce = CryptoHelper.randomNonceString()
             oauthUserData.nonce = CryptoHelper.sha256(randomNonce)
-            
+
             // 카카오 로그인 실행
             UserApi.shared.loginWithKakaoAccount(prompts: [.Login], nonce: oauthUserData.nonce) { oauthToken, error in
                 if let error = error {
@@ -85,7 +83,7 @@ class KakaoOAuthViewModel: ObservableObject {
                 } else {
                     print("loginWithKakaoAccount() success.")
                     self.oauthUserData.idToken = oauthToken!.idToken ?? ""
-                    
+
                     // 로그인 성공 시 처리
                     self.checkUserInfo()
                 }

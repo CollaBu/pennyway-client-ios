@@ -7,4 +7,8 @@ class AppViewModel: ObservableObject {
     func logout() {
         isLoggedIn = false
     }
+
+    func login() {
+        isLoggedIn = true
+    }
 }
