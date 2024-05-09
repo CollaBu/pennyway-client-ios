@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ResetPwFormView: View {
     @ObservedObject var formViewModel: SignUpFormViewModel
+//    @ObservedObject var resetPwViewModel: ResetPwViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 21 * DynamicSizeFactor.factor()) {
@@ -14,7 +15,7 @@ struct ResetPwFormView: View {
                         formViewModel.validatePwForm()
                     }, isSecureText: true)
                     
-                    closeButton(isVisible: formViewModel.showErrorPassword && !formViewModel.password.isEmpty, action: {
+                    closeButton(isVisible: !formViewModel.password.isEmpty, action: {
                         formViewModel.password = ""
                         formViewModel.showErrorPassword = false
                     })
@@ -32,7 +33,7 @@ struct ResetPwFormView: View {
                         formViewModel.validatePwForm()
                     }, isSecureText: true)
                     
-                    closeButton(isVisible: formViewModel.showErrorConfirmPw && !formViewModel.confirmPw.isEmpty, action: {
+                    closeButton(isVisible: !formViewModel.confirmPw.isEmpty, action: {
                         formViewModel.confirmPw = ""
                         formViewModel.showErrorConfirmPw = false
                     })
@@ -60,10 +61,10 @@ struct ResetPwFormView: View {
                     Image("icon_close_filled_primary")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                        .frame(width: 24, height: 24)
                 }
-                .padding(.leading, 268 * DynamicSizeFactor.factor())
-                .padding(.top, 30 * DynamicSizeFactor.factor())
+                .padding(.leading, 268)
+                .padding(.top, 30)
                 .frame(maxWidth: .infinity)
             })
         }

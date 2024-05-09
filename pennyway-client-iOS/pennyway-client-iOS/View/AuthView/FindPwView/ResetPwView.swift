@@ -5,8 +5,6 @@ struct ResetPwView: View {
     @State private var navigateView = false
     @StateObject var resetPwViewModel = ResetPwViewModel()
     
-    //    @StateObject var viewModel = SignUpNavigationViewModel()
-    
     var body: some View {
         NavigationAvailable {
             VStack(spacing: 0) {
@@ -64,9 +62,16 @@ struct ResetPwView: View {
     
     private func continueButtonAction() {
         if formViewModel.isFormValid {
-            resetPwViewModel.RequestResetPwApi {
-                Log.debug("RequestResetPwApi 실행")
-                navigateView = true
+            resetPwViewModel.newPassword = formViewModel.password
+            resetPwViewModel.requestResetPwApi { success in
+                DispatchQueue.main.async {
+                    if success {
+                        Log.debug("RequestResetPwApi 실행")
+                        navigateView = true
+                    } else {
+                        Log.fault("fail ResetPw")
+                    }
+                }
             }
             
             RegistrationManager.shared.password = formViewModel.password

@@ -222,7 +222,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
@@ -263,7 +263,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
@@ -304,7 +304,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
@@ -321,6 +321,7 @@ class PhoneVerificationViewModel: ObservableObject {
     // MARK: 비밀번호 찾기 번호 검증 API
 
     func requestPwVerifyVerificationCodeApi(completion: @escaping () -> Void) {
+        validatePhoneNumber()
         let verificationDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
 
         if isFormValid {
@@ -334,17 +335,15 @@ class PhoneVerificationViewModel: ObservableObject {
         switch result {
         case let .success(data):
             if let responseData = data {
-                do {
-                    let response = try JSONDecoder().decode(ResponseResetPwDto.self, from: responseData)
-                    showErrorVerificationCode = false
-                    Log.debug(response)
-                } catch {
-                    Log.fault("Error decoding JSON: \(error)")
-                }
+                showErrorVerificationCode = false
+                Log.debug("비밀번호 찾기 인증번호 검증 성공")
+                Log.debug("value: \(formattedPhoneNumber)")
+                RegistrationManager.shared.phoneNumber = formattedPhoneNumber
+                RegistrationManager.shared.code = code
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false

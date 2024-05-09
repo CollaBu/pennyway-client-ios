@@ -74,7 +74,6 @@ struct FindPwView: View {
             isNavigateToFindPwView = true
             viewModel.continueButtonTapped()
 
-            RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
             RegistrationManager.shared.code = phoneVerificationViewModel.code
             
         } else {

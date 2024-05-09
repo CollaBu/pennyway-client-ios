@@ -123,10 +123,6 @@ enum AuthRouter: URLRequestConvertible {
             }
             let accessToken = KeychainHelper.loadAccessToken() ?? ""
             request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-            
-//        case let .requestResetPw(dto):
-//            let queryParameters = [URLQueryItem(name: "phone", value: dto.phone), URLQueryItem(name: "code", value: dto.code), URLQueryItem(name: "newPassword", value: dto.newPassword)]
-//            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }
         return request
     }
