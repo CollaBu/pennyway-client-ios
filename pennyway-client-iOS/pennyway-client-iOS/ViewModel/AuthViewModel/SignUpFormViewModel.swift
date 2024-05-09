@@ -47,7 +47,7 @@ class SignUpFormViewModel: ObservableObject {
     }
     
     func validatePwForm() {
-        if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
+        if !password.isEmpty && password == confirmPw && !confirmPw.isEmpty && !showErrorPassword && !showErrorConfirmPw {
             isFormValid = true
         }
     }

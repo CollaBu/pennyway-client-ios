@@ -11,11 +11,11 @@ class ResetPwViewModel: ObservableObject {
         AuthAlamofire.shared.requestResetPw(resetPwDto) { result in
             switch result {
             case let .success(data):
-                if let responseData = data {
-                    Log.debug("비밀번호 재설정 api 요청 성공")
-                    self.isResetPwSuccessful = true
-                    completion(true)
-                }
+
+                Log.debug("비밀번호 재설정 api 요청 성공")
+                self.isResetPwSuccessful = true
+                completion(true)
+
             case let .failure(error):
                 if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                     Log.info("Failed to verify: \(errorWithDomainErrorAndMessage)")
