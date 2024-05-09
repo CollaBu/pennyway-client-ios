@@ -20,6 +20,7 @@ class UserAccountAlamofire: TokenHandler {
         
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserAccountRouter.getUserProfile, completion: completion)
     }
+
     func deleteUserAccount(completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("UserAccountAlamofire - deleteUserAccount() called", log: .default, type: .info)
         
