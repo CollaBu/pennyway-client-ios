@@ -26,12 +26,21 @@ struct pennyway_client_iOSApp: App {
                     }
                     .environmentObject(appViewModel)
             } else {
-                LoginView()
-                    .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-                    .onOpenURL { url in
-                        GIDSignIn.sharedInstance.handle(url)
-                    }
-                    .environmentObject(appViewModel)
+                if appViewModel.isSplashShown {
+                    LoginView()
+                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                        .onOpenURL { url in
+                            GIDSignIn.sharedInstance.handle(url)
+                        }
+                        .environmentObject(appViewModel)
+                } else {
+                    MainView()
+                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                        .onOpenURL { url in
+                            GIDSignIn.sharedInstance.handle(url)
+                        }
+                        .environmentObject(appViewModel)
+                }
             }
         }
     }

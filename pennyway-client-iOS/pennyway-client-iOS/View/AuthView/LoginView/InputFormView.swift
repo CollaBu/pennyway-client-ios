@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct InputFormView: View {
-    @ObservedObject var loginFormViewModel: LoginFormViewModel
+    @ObservedObject var loginViewModel: LoginViewModel
     @EnvironmentObject var authViewModel: AppViewModel
 
     @State private var isLoginSuccessful = true
@@ -20,7 +20,7 @@ struct InputFormView: View {
 
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-            if loginFormViewModel.showErrorCodeContent {
+            if loginViewModel.showErrorCodeContent {
                 ErrorCodeContentView()
             }
 
@@ -32,7 +32,7 @@ struct InputFormView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    TextField("아이디 입력", text: $loginFormViewModel.username)
+                    TextField("아이디 입력", text: $loginViewModel.username)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .AutoCorrectionExtensions()
@@ -47,7 +47,7 @@ struct InputFormView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    SecureField("비밀번호 입력", text: $loginFormViewModel.password)
+                    SecureField("비밀번호 입력", text: $loginViewModel.password)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .textContentType(.password)
@@ -70,7 +70,7 @@ struct InputFormView: View {
     }
 
     func handleLogin() {
-        loginFormViewModel.loginApi { success in
+        loginViewModel.loginApi { success in
             DispatchQueue.main.async {
                 if success {
                     authViewModel.login()
@@ -83,5 +83,5 @@ struct InputFormView: View {
 }
 
 #Preview {
-    InputFormView(loginFormViewModel: LoginFormViewModel())
+    InputFormView(loginViewModel: LoginViewModel())
 }

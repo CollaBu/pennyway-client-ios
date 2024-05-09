@@ -1,7 +1,7 @@
 import os.log
 import SwiftUI
 
-class LoginFormViewModel: ObservableObject {
+class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var isFormValid = false

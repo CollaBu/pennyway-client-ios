@@ -2,6 +2,7 @@
 import Foundation
 
 class OAuthAccountViewModel: ObservableObject {
+    /// 소셜 계정 연동/연동 해제 완료시 UserDefaults 업데이트
     let profileInfoViewModel = ProfileInfoViewModel()
 
     func linkOAuthAccountApi(completion: @escaping (Bool) -> Void) {
