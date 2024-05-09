@@ -8,7 +8,7 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var isLoggedIn: Bool = false // 로그인 여부
 
-    private var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
+    private var existOAuthAccount: Bool = getUserData()?.oauthAccount.kakao ?? false
     private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     let oauthAccountViewModel = OAuthAccountViewModel()
 
@@ -35,7 +35,10 @@ class KakaoOAuthViewModel: ObservableObject {
     func oauthLoginApi() {
         let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
 
+        Log.debug(oauthUserData)
+
         let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
+        KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)
 
         if isLoggedIn { // 로그인 한 경우
             oauthAccountViewModel.linkOAuthAccountApi { success in
@@ -55,7 +58,6 @@ class KakaoOAuthViewModel: ObservableObject {
                     } else {
                         self.isOAuthExistUser = false
                         OAuthRegistrationManager.shared.isOAuthRegistration = true
-                        KeychainHelper.saveOAuthUserData(oauthUserData: self.oauthUserData)
                     }
                 }
             }

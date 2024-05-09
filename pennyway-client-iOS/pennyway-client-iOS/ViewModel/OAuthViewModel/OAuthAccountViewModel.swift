@@ -9,7 +9,7 @@ class OAuthAccountViewModel: ObservableObject {
             switch result {
             case let .success(data):
                 if let responseData = data {
-                    Log.debug(responseData)
+                    Log.debug("소셜 계정 연동 완료")
                     KeychainHelper.deleteOAuthUserData()
                     completion(true)
                 }
@@ -33,7 +33,7 @@ class OAuthAccountViewModel: ObservableObject {
             switch result {
             case let .success(data):
                 if let responseData = data {
-                    Log.debug(responseData)
+                    Log.debug("소셜 계정 연동 해제 완료")
                     completion(true)
                 }
             case let .failure(error):

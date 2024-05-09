@@ -15,14 +15,14 @@ class UserAuthAlamofire: TokenHandler {
     }
     
     func linkOAuthAccount(_ dto: OAuthUserData, completion: @escaping (Result<Data?, Error>) -> Void) {
-        Log.info("UserAuthAlamofire - linkOAuthAccount() called")
+        Log.info("UserAuthAlamofire - linkOAuthAccount() called \(dto)")
         
-        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserAuthRouter.linkOAuthAccount(dto: dto), completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAuthRouter.linkOAuthAccount(dto: dto), completion: completion)
     }
     
     func unlinkOAuthAccount(completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("UserAuthAlamofire - unlinkOAuthAccount() called")
         
-        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserAuthRouter.unlinkOAuthAccount, completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAuthRouter.unlinkOAuthAccount, completion: completion)
     }
 }

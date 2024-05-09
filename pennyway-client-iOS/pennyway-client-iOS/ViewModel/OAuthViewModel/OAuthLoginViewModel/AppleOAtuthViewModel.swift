@@ -64,7 +64,9 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             
             let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
             let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
-
+            
+            KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)
+            
             if isLoggedIn { // 로그인 한 경우
                 oauthAccountViewModel.linkOAuthAccountApi { success in
                     if success {
@@ -83,7 +85,6 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
                         } else {
                             self.isOAuthExistUser = false
                             OAuthRegistrationManager.shared.isOAuthRegistration = true
-                            KeychainHelper.saveOAuthUserData(oauthUserData: self.oauthUserData)
                         }
                     }
                 }
