@@ -2,15 +2,18 @@
 import Foundation
 
 class OAuthAccountViewModel: ObservableObject {
+    let profileInfoViewModel = ProfileInfoViewModel()
+
     func linkOAuthAccountApi(completion: @escaping (Bool) -> Void) {
         let oauthUserData = OAuthUserData(oauthId: KeychainHelper.loadOAuthUserData()?.oauthId ?? "", idToken: KeychainHelper.loadOAuthUserData()?.idToken ?? "", nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "")
 
         UserAuthAlamofire.shared.linkOAuthAccount(oauthUserData) { result in
             switch result {
             case let .success(data):
-                if let responseData = data {
+                if data != nil {
                     Log.debug("소셜 계정 연동 완료")
                     KeychainHelper.deleteOAuthUserData()
+                    self.profileInfoViewModel.getUserProfileApi()
                     completion(true)
                 }
             case let .failure(error):
@@ -32,8 +35,9 @@ class OAuthAccountViewModel: ObservableObject {
         UserAuthAlamofire.shared.unlinkOAuthAccount { result in
             switch result {
             case let .success(data):
-                if let responseData = data {
+                if data != nil {
                     Log.debug("소셜 계정 연동 해제 완료")
+                    self.profileInfoViewModel.getUserProfileApi()
                     completion(true)
                 }
             case let .failure(error):
