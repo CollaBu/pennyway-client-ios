@@ -21,9 +21,7 @@ enum UserAuthRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .linkOAuthAccount:
-            return "v1/link-oauth"
-        case .unlinkOAuthAccount:
+        case .linkOAuthAccount, .unlinkOAuthAccount:
             return "v1/link-oauth"
         }
     }
