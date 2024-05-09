@@ -6,9 +6,9 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
+    @Published var isLoggedIn: Bool = false // 로그인 여부 
     
-    var oauthId = ""
-    var nonce = ""
+    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     
     func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
@@ -17,9 +17,9 @@ class GoogleOAuthViewModel: ObservableObject {
                 return
             }
             let givenName = user.profile?.givenName
-            oauthId = user.userID ?? ""
+            oauthUserData.oauthId = user.userID ?? ""
+            oauthUserData.idToken = user.idToken?.tokenString ?? ""
             self.givenName = givenName ?? ""
-            KeychainHelper.saveIdToken(accessToken: user.idToken?.tokenString ?? "")
             
             let jwtParts = user.idToken?.tokenString.components(separatedBy: ".")
             guard jwtParts?.count == 3, let payloadData = Data(base64Encoded: jwtParts?[1] ?? "", options: .ignoreUnknownCharacters) else {
@@ -28,8 +28,7 @@ class GoogleOAuthViewModel: ObservableObject {
             }
             do {
                 let payloadJSON = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any]
-                nonce = payloadJSON?["nonce"] as? String ?? ""
-                OAuthRegistrationManager.shared.nonce = nonce
+                oauthUserData.nonce = payloadJSON?["nonce"] as? String ?? ""
             } catch {
                 print("Error decoding JSON: \(error)")
             }
@@ -41,19 +40,30 @@ class GoogleOAuthViewModel: ObservableObject {
     }
     
     func oauthLoginApi() {
-        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthId, idToken: KeychainHelper.loadIdToken() ?? "", nonce: nonce, provider: OAuthRegistrationManager.shared.provider)
-        let viewModel = OAuthLoginViewModel(dto: oauthLoginDto)
+        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
+        let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
+        let oauthAccountViewModel = OAuthAccountViewModel()
 
-        viewModel.oauthLoginApi { success, error in
-            if success {
-                self.isOAuthExistUser = true
-            } else {
-                if let error = error {
-                    self.errorMessage = error
+        if isLoggedIn { // 로그인 한 경우
+            oauthAccountViewModel.linkOAuthAccountApi { success in
+                if success {
+                    self.isOAuthExistUser = true
                 } else {
                     self.isOAuthExistUser = false
-                    OAuthRegistrationManager.shared.isOAuthRegistration = true
-                    OAuthRegistrationManager.shared.oauthId = self.oauthId
+                }
+            }
+        } else { // 로그인하지 않은 경우
+            oauthLoginViewModel.oauthLoginApi { success, error in
+                if success {
+                    self.isOAuthExistUser = true
+                } else {
+                    if let error = error {
+                        self.errorMessage = error
+                    } else {
+                        self.isOAuthExistUser = false
+                        OAuthRegistrationManager.shared.isOAuthRegistration = true
+                        KeychainHelper.saveOAuthUserData(oauthUserData: self.oauthUserData)
+                    }
                 }
             }
         }

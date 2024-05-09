@@ -10,7 +10,7 @@ struct LoginFormView: View {
                     ScrollView {
                         InputFormView(viewModel: viewModel) // Id, Pw 입력 폼
 
-                        OauthButtonView()
+                        LoginOAuthButtonView()
 
                         AdditionalOptionView()
                         Spacer()

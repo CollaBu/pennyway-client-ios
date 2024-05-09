@@ -89,14 +89,13 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
             } else {
                 Log.error("Network request failed: \(error)")
             }
         }
         completion()
     }
-
 
     // MARK: 일반 인증번호 검증 API
 
@@ -110,7 +109,7 @@ class PhoneVerificationViewModel: ObservableObject {
         }
     }
 
-     private func handleVerificationApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+    private func handleVerificationApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
         switch result {
         case let .success(data):
             if let responseData = data {
@@ -128,7 +127,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
@@ -178,7 +177,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
@@ -195,7 +194,6 @@ class PhoneVerificationViewModel: ObservableObject {
         }
         completion()
     }
-
 
     // MARK: 아이디 찾기 인증번호 코드 요청 API
 
@@ -224,7 +222,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
@@ -237,6 +235,7 @@ class PhoneVerificationViewModel: ObservableObject {
         }
         completion()
     }
+
     // MARK: 아이디 찾기 인증번호 검증 API
 
     func requestUserNameVerifyVerificationCodeApi(completion: @escaping () -> Void) {
@@ -264,7 +263,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false

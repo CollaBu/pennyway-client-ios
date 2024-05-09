@@ -8,6 +8,7 @@ class LoginFormViewModel: ObservableObject {
     @Published var isLoginSuccessful = false
     @Published var showErrorCodeContent = false
 
+    let profileInfoViewModel = ProfileInfoViewModel()
     let appViewModel: AppViewModel
 
     init(appViewModel: AppViewModel) {
@@ -28,6 +29,7 @@ class LoginFormViewModel: ObservableObject {
                             self.appViewModel.isLoggedIn = true
                             self.username = ""
                             self.password = ""
+                            self.profileInfoViewModel.getUserProfileApi()
                             print(response)
                         } catch {
                             print("Error parsing response JSON: \(error)")

@@ -15,7 +15,7 @@ class OAuthAlamofire: TokenHandler {
     }
     
     func oauthLogin(_ dto: OAuthLoginRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@", log: .default, type: .info, dto.oauthId, dto.idToken, dto.provider)
+        os_log("OAuthAlamofire - oauthLogin() called : %@ ,,  %@ ,, %@ ,, %@", log: .default, type: .info, dto.oauthId, dto.idToken, dto.nonce, dto.provider)
         
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: OAuthRouter.oauthLogin(dto: dto), completion: completion)
     }

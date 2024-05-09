@@ -4,7 +4,7 @@ struct PhoneVerificationView: View {
     @State private var showingPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
-    @StateObject var oauthAccountLinkingViewModel = OAuthAccountLinkingViewModel()
+    @StateObject var oauthAccountLinkingViewModel = LinkOAuthToAccountViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
    
@@ -44,10 +44,15 @@ struct PhoneVerificationView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+                    NavigationBackButton(action: {
+                        if isOAuthRegistration { // 소셜 회원가입 중 취소
+                            KeychainHelper.deleteOAuthUserData()
+                        }
+                    })
+                    
+                    .padding(.leading, 5)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
                     
                 }.offset(x: -10)
             }

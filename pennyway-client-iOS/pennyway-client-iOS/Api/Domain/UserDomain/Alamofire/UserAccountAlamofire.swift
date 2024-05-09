@@ -3,8 +3,8 @@ import Alamofire
 import Foundation
 import os.log
 
-class UserAlamofire: TokenHandler {
-    static let shared = UserAlamofire()
+class UserAccountAlamofire: TokenHandler {
+    static let shared = UserAccountAlamofire()
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
 
@@ -16,8 +16,8 @@ class UserAlamofire: TokenHandler {
     }
     
     func getUserProfile(completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("UserAlamofire - getUserProfile() called", log: .default, type: .info)
+        os_log("UserAccountAlamofire - getUserProfile() called", log: .default, type: .info)
         
-        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserRouter.getUserProfile, completion: completion)
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserAccountRouter.getUserProfile, completion: completion)
     }
 }

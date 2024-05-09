@@ -17,7 +17,7 @@ struct UserData: Codable {
     let id: Int
     let username: String
     let name: String
-    let isOauthAccount: Bool
+    let isGeneralSignUp: Bool
     let passwordUpdatedAt: String
     let profileImageUrl: String
     let phone: String
@@ -25,6 +25,7 @@ struct UserData: Codable {
     let locked: Bool
     let notifySetting: NotifySetting
     let createdAt: String
+    let oauthAccount: OauthAccount
 }
 
 // MARK: - NotifySetting
@@ -33,4 +34,12 @@ struct NotifySetting: Codable {
     let accountBookNotify: Bool
     let feedNotify: Bool
     let chatNotify: Bool
+}
+
+// MARK: - OauthAccount
+
+struct OauthAccount: Codable {
+    let kakao: Bool
+    let google: Bool
+    let apple: Bool
 }
