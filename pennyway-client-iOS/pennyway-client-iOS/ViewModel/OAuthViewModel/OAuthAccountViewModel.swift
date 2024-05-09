@@ -3,7 +3,7 @@ import Foundation
 
 class OAuthAccountViewModel: ObservableObject {
     /// 소셜 계정 연동/연동 해제 완료시 UserDefaults 업데이트
-    let profileInfoViewModel = ProfileInfoViewModel()
+    let profileInfoViewModel = UserAccountViewModel()
 
     func linkOAuthAccountApi(completion: @escaping (Bool) -> Void) {
         let oauthUserData = OAuthUserData(oauthId: KeychainHelper.loadOAuthUserData()?.oauthId ?? "", idToken: KeychainHelper.loadOAuthUserData()?.idToken ?? "", nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "")

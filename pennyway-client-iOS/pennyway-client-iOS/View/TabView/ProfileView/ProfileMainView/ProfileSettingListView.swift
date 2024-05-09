@@ -5,7 +5,7 @@ import SwiftUI
 
 struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
-    @ObservedObject var userProfileViewModel: UserProfileViewModel
+    @StateObject var userProfileViewModel = UserProfileViewModel()
     @State private var showingPopUp = false
 
     var body: some View {
@@ -45,7 +45,20 @@ struct ProfileSettingListView: View {
                     authViewModel.logout()
                     showingPopUp = false
                 } else {
-                    os_log("fail logout", log: .default, type: .debug)
+                    Log.error("Fail logout")
+                }
+            }
+        }
+    }
+    
+    func handleDeleteUserAccount() {
+        userProfileViewModel.logout { success in
+            DispatchQueue.main.async {
+                if success {
+                    authViewModel.logout()
+                    showingPopUp = false
+                } else {
+                    Log.error("Fail delete UserAccount")
                 }
             }
         }
@@ -73,6 +86,9 @@ struct SectionView: View {
                 Button(action: {
                     if item == "로그아웃" {
                         showingPopUp = true
+                    }
+                    if item == "회원탈퇴"{
+                        
                     }
                 }, label: {
                     HStack {
