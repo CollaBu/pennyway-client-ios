@@ -134,7 +134,6 @@
 		D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */; };
 		D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */; };
 		D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78E2BEBB42200899AA3 /* RequestResetPwDto.swift */; };
-		D847A7912BEBD25D00899AA3 /* ResponseResetPwDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A7902BEBD25D00899AA3 /* ResponseResetPwDto.swift */; };
 		D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927ED2BE6842A00653391 /* CustomPopUpView.swift */; };
 		D85927F22BE69C6A00653391 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */; };
 		D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F32BE9116700653391 /* SignUpFormViewModel.swift */; };
@@ -286,7 +285,6 @@
 		D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwViewModel.swift; sourceTree = "<group>"; };
 		D847A78E2BEBB42200899AA3 /* RequestResetPwDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestResetPwDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/RequestResetPwDto.swift"; sourceTree = SOURCE_ROOT; };
-		D847A7902BEBD25D00899AA3 /* ResponseResetPwDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResponseResetPwDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/ResponseResetPwDto.swift"; sourceTree = SOURCE_ROOT; };
 		D85927ED2BE6842A00653391 /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
 		D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		D85927F32BE9116700653391 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
@@ -517,7 +515,6 @@
 				4A4703AA2BCEE52300AEE04E /* VerificationResponseDto.swift */,
 				4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */,
 				D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */,
-				D847A7902BEBD25D00899AA3 /* ResponseResetPwDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1196,7 +1193,6 @@
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
 				4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
-				D847A7912BEBD25D00899AA3 /* ResponseResetPwDto.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,

@@ -69,7 +69,7 @@ struct FindPwView: View {
     
     private func checkFormValid() {
         if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
-            Log.debug("if문 시작")
+            Log.debug("비밀번호 찾기 checkFormValid if문 시작")
             showingPopUp = false
             isNavigateToFindPwView = true
             viewModel.continueButtonTapped()
@@ -77,7 +77,7 @@ struct FindPwView: View {
             RegistrationManager.shared.code = phoneVerificationViewModel.code
             
         } else {
-            Log.debug("else문 시작")
+            Log.debug("비밀번호 찾기 checkFormValid else문 시작")
             if phoneVerificationViewModel.showErrorVerificationCode {
                 showingPopUp = true
                 isVerificationError = true
