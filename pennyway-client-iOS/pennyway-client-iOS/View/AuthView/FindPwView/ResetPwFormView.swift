@@ -25,7 +25,7 @@ struct ResetPwFormView: View {
                             isPwCloseButtonVisible = true
                         }
                     
-                    closeButton(isVisible: !formViewModel.password.isEmpty && isPwCloseButtonVisible, action: {
+                    handleDeleteButtonTapped(isVisible: !formViewModel.password.isEmpty && isPwCloseButtonVisible, action: {
                         formViewModel.password = ""
                         formViewModel.showErrorPassword = false
                         formViewModel.validatePwForm()
@@ -52,7 +52,7 @@ struct ResetPwFormView: View {
                             isConfirmPwCloseButtonVisible = true
                         }
                     
-                    closeButton(isVisible: !formViewModel.confirmPw.isEmpty && isConfirmPwCloseButtonVisible, action: {
+                    handleDeleteButtonTapped(isVisible: !formViewModel.confirmPw.isEmpty && isConfirmPwCloseButtonVisible, action: {
                         formViewModel.confirmPw = ""
                         formViewModel.showErrorConfirmPw = false
                         formViewModel.validatePwForm()
@@ -75,7 +75,7 @@ struct ResetPwFormView: View {
     }
     
     @ViewBuilder
-    private func closeButton(isVisible: Bool, action: @escaping () -> Void) -> some View {
+    private func handleDeleteButtonTapped(isVisible: Bool, action: @escaping () -> Void) -> some View {
         if isVisible {
             Button(action: {
                        action()
