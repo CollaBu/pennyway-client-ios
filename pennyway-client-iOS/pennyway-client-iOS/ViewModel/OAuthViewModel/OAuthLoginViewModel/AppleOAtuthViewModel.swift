@@ -8,22 +8,35 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
     @Published var givenName: String = ""
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
-    @Published var isLoggedIn: Bool = false // 로그인 여부 
+    @Published var isLoggedIn: Bool = false // 로그인 여부
     
+    private var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
     var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    let oauthAccountViewModel = OAuthAccountViewModel()
     
     func signIn() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        let randomNonce = CryptoHelper.randomNonceString()
-        oauthUserData.nonce = CryptoHelper.sha256(randomNonce)
-        request.requestedScopes = [.fullName, .email]
-        request.nonce = oauthUserData.nonce
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
+        if isLoggedIn && existOAuthAccount {
+            oauthAccountViewModel.unlinkOAuthAccountApi { success in
+                if success {
+                    self.existOAuthAccount = false
+                } else {
+                    self.existOAuthAccount = true
+                }
+            }
+            
+        } else {
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            let request = appleIDProvider.createRequest()
+            let randomNonce = CryptoHelper.randomNonceString()
+            oauthUserData.nonce = CryptoHelper.sha256(randomNonce)
+            request.requestedScopes = [.fullName, .email]
+            request.nonce = oauthUserData.nonce
+            
+            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+            authorizationController.delegate = self
+            authorizationController.presentationContextProvider = self
+            authorizationController.performRequests()
+        }
     }
     
     func signOut() {
@@ -51,14 +64,15 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
             
             let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
             let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
-            let oauthAccountViewModel = OAuthAccountViewModel()
-
+            
+            KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)
+            
             if isLoggedIn { // 로그인 한 경우
                 oauthAccountViewModel.linkOAuthAccountApi { success in
                     if success {
-                        self.isOAuthExistUser = true
+                        self.existOAuthAccount = true
                     } else {
-                        self.isOAuthExistUser = false
+                        self.existOAuthAccount = false
                     }
                 }
             } else { // 로그인하지 않은 경우
@@ -71,7 +85,6 @@ extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProv
                         } else {
                             self.isOAuthExistUser = false
                             OAuthRegistrationManager.shared.isOAuthRegistration = true
-                            KeychainHelper.saveOAuthUserData(oauthUserData: self.oauthUserData)
                         }
                     }
                 }

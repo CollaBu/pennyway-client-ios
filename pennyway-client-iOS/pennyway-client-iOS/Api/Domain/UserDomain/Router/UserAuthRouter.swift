@@ -4,11 +4,14 @@ import Foundation
 
 enum UserAuthRouter: URLRequestConvertible {
     case linkOAuthAccount(dto: OAuthUserData)
+    case unlinkOAuthAccount
     
     var method: HTTPMethod {
         switch self {
         case .linkOAuthAccount:
             return .put
+        case .unlinkOAuthAccount:
+            return .delete
         }
     }
     
@@ -18,7 +21,7 @@ enum UserAuthRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .linkOAuthAccount:
+        case .linkOAuthAccount, .unlinkOAuthAccount:
             return "v1/link-oauth"
         }
     }
@@ -27,6 +30,8 @@ enum UserAuthRouter: URLRequestConvertible {
         switch self {
         case let .linkOAuthAccount(dto):
             return try? dto.asDictionary()
+        case .unlinkOAuthAccount:
+            return [:]
         }
     }
 
@@ -38,6 +43,10 @@ enum UserAuthRouter: URLRequestConvertible {
         case .linkOAuthAccount:
             let queryParameters = [URLQueryItem(name: "provider", value: OAuthRegistrationManager.shared.provider)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
+  
+        case .unlinkOAuthAccount:
+            let queryParameters = [URLQueryItem(name: "provider", value: OAuthRegistrationManager.shared.provider)]
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }
         return request
     }

@@ -4,11 +4,13 @@ import SwiftUI
 
 class KakaoOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
-    @Published var isOAuthExistUser: Bool = true // oauth 계정 존재 여부
+    @Published var isOAuthExistUser: Bool = true 
     @Published var errorMessage: String = ""
     @Published var isLoggedIn: Bool = false // 로그인 여부
 
-    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    private var existOAuthAccount: Bool = getUserData()?.oauthAccount.kakao ?? false
+    private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    let oauthAccountViewModel = OAuthAccountViewModel()
 
     func checkUserInfo() {
         if AuthApi.hasToken() {
@@ -34,16 +36,16 @@ class KakaoOAuthViewModel: ObservableObject {
         let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
 
         let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
-        let oauthAccountViewModel = OAuthAccountViewModel()
+        KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)
 
         if isLoggedIn { // 로그인 한 경우
             oauthAccountViewModel.linkOAuthAccountApi { success in
                 if success {
-                    self.isOAuthExistUser = true
+                    self.existOAuthAccount = true
                 } else {
-                    self.isOAuthExistUser = false
+                    self.existOAuthAccount = false
                 }
-            }           
+            }
         } else { // 로그인하지 않은 경우
             oauthLoginViewModel.oauthLoginApi { success, error in
                 if success {
@@ -54,7 +56,6 @@ class KakaoOAuthViewModel: ObservableObject {
                     } else {
                         self.isOAuthExistUser = false
                         OAuthRegistrationManager.shared.isOAuthRegistration = true
-                        KeychainHelper.saveOAuthUserData(oauthUserData: self.oauthUserData)
                     }
                 }
             }
@@ -62,19 +63,30 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func signIn() {
-        let randomNonce = CryptoHelper.randomNonceString()
-        oauthUserData.nonce = CryptoHelper.sha256(randomNonce)
+        if isLoggedIn && existOAuthAccount {
+            oauthAccountViewModel.unlinkOAuthAccountApi { success in
+                if success {
+                    self.existOAuthAccount = false
+                } else {
+                    self.existOAuthAccount = true
+                }
+            }
 
-        // 카카오 로그인 실행
-        UserApi.shared.loginWithKakaoAccount(prompts: [.Login], nonce: oauthUserData.nonce) { oauthToken, error in
-            if let error = error {
-                print(error)
-            } else {
-                print("loginWithKakaoAccount() success.")
-                self.oauthUserData.idToken = oauthToken!.idToken ?? ""
+        } else {
+            let randomNonce = CryptoHelper.randomNonceString()
+            oauthUserData.nonce = CryptoHelper.sha256(randomNonce)
 
-                // 로그인 성공 시 처리
-                self.checkUserInfo()
+            // 카카오 로그인 실행
+            UserApi.shared.loginWithKakaoAccount(prompts: [.Login], nonce: oauthUserData.nonce) { oauthToken, error in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("loginWithKakaoAccount() success.")
+                    self.oauthUserData.idToken = oauthToken!.idToken ?? ""
+
+                    // 로그인 성공 시 처리
+                    self.checkUserInfo()
+                }
             }
         }
     }

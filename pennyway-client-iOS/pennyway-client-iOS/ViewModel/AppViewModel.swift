@@ -3,8 +3,13 @@ import SwiftUI
 
 class AppViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
+    @Published var isSplashShown: Bool = false
 
     func logout() {
         isLoggedIn = false
+    }
+
+    func login() {
+        isLoggedIn = true
     }
 }
