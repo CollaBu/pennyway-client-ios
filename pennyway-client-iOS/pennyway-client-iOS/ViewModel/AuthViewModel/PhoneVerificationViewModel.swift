@@ -50,14 +50,6 @@ class PhoneVerificationViewModel: ObservableObject {
         isFormValid = (!phoneNumber.isEmpty && !code.isEmpty && timerSeconds > 0)
     }
 
-    func validateRequestVerificationCode() {
-        if hasSentVerificationCodeRequest && RegistrationManager.shared.phoneNumber != "" && RegistrationManager.shared.phoneNumber != phoneNumber {
-            isDisabledButton = false
-        } else if hasSentVerificationCodeRequest && RegistrationManager.shared.phoneNumber != "" && RegistrationManager.shared.phoneNumber == phoneNumber {
-            isDisabledButton = true
-        }
-    }
-
     // MARK: 인증번호 코드 요청 API
 
     func requestVerificationCodeApi(completion: @escaping () -> Void) {

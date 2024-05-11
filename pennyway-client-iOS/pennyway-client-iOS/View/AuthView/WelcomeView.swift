@@ -1,7 +1,10 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    let profileInfoViewModel = UserAccountViewModel()
     var name = OAuthRegistrationManager.shared.isOAuthRegistration ? OAuthRegistrationManager.shared.name : RegistrationManager.shared.name
+
+    @EnvironmentObject var authViewModel: AppViewModel
 
     var body: some View {
         ZStack {
@@ -26,7 +29,10 @@ struct WelcomeView: View {
 
                     Spacer()
 
-                    CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
+                    CustomBottomButton(action: {
+                        authViewModel.login()
+                        profileInfoViewModel.getUserProfileApi()
+                    }, label: "확인", isFormValid: .constant(true))
                         .padding(.bottom, 34)
                 }
             }
