@@ -17,16 +17,16 @@ struct SignUpView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 47) {
+            VStack(spacing: 47 * DynamicSizeFactor.factor()) {
                 VStack {
-                    Spacer().frame(height: 15)
+                    Spacer().frame(height: 15 * DynamicSizeFactor.factor())
                     
                     NavigationCountView(selectedText: $viewModel.selectedText)
                         .onAppear {
                             viewModel.selectedText = 2
                         }
                     
-                    Spacer().frame(height: 14)
+                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                     
                     SignUpFormView(formViewModel: formViewModel)
                 }

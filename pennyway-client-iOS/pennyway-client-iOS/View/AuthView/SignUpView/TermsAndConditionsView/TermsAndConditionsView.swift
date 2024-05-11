@@ -12,14 +12,14 @@ struct TermsAndConditionsView: View {
         ScrollView {
             VStack {
                 VStack {
-                    Spacer().frame(height: 15)
+                    Spacer().frame(height: 15 * DynamicSizeFactor.factor())
                     
                     NavigationCountView(selectedText: $viewModel.selectedText)
                         .onAppear {
                             viewModel.selectedText = 3
                         }
                     
-                    Spacer().frame(height: 14)
+                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                     
                     TermsAndConditionsContentView(isSelectedAllBtn: $isAllAgreed)
                     

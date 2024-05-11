@@ -14,16 +14,16 @@ struct TermsAndConditionsContentView: View {
             ScrollView {
                 HStack {
                     Text("이용 약관 동의")
-                        .font(.pretendard(.semibold, size: 24))
+                        .font(.H1SemiboldFont())
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.leading, 20)
 
-                Spacer().frame(height: 49)
+                Spacer().frame(height: 49 * DynamicSizeFactor.factor())
 
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading, spacing: 28) {
+                    VStack(alignment: .leading) {
                         Button(action: {
                             let newSelection = !isSelectedAllBtn
                             isSelectedAllBtn = newSelection
@@ -32,7 +32,7 @@ struct TermsAndConditionsContentView: View {
                         }, label: {
                             ZStack(alignment: .leading) {
                                 Rectangle()
-                                    .frame(maxWidth: .infinity, minHeight: 44)
+                                    .frame(maxWidth: .infinity, minHeight: 44 * DynamicSizeFactor.factor())
                                     .platformTextColor(color: isSelectedAllBtn ? Color("Gray05") : Color("Gray02"))
                                     .cornerRadius(4)
 
@@ -43,17 +43,21 @@ struct TermsAndConditionsContentView: View {
                                     .platformTextColor(color: isSelectedAllBtn ? Color("White01") : Color("Gray04"))
                                     .padding(.horizontal, 10)
                                 Text("모두 동의할게요")
-                                    .font(.pretendard(.medium, size: 14))
+                                    .font(.H4MediumFont())
                                     .platformTextColor(color: isSelectedAllBtn ? Color("White01") : Color("Gray04"))
                                     .padding(.horizontal, 36)
                             }
                         })
 
-                        VStack(alignment: .leading, spacing: 7) {
-                            // 수정
+                        Spacer().frame(height: 29 * DynamicSizeFactor.factor())
+
+                        VStack(alignment: .leading) {
+                            // 하단 text내용 수정필요
                             AgreementSectionView(isSelected: $isSelectedUseBtn, title: "이용약관 (필수)", contentText: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit")
 
-                            // 수정
+                            Spacer().frame(height: 20 * DynamicSizeFactor.factor())
+
+                            // 하단 text내용 수정필요
                             AgreementSectionView(isSelected: $isSelectedInfoBtn, title: "개인정보 처리방침 (필수)", contentText: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit")
                         }
                     }

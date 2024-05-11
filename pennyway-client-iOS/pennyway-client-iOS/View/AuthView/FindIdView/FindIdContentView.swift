@@ -7,11 +7,11 @@ struct FindIdContentView: View {
 
     var body: some View {
         VStack {
-            Spacer().frame(height: 36)
+            Spacer().frame(height: 36 * DynamicSizeFactor.factor())
 
             FindIdPhoneVerificationView(viewModel: phoneVerificationViewModel)
 
-            Spacer().frame(height: 21)
+            Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 
             NumberInputSectionView(viewModel: phoneVerificationViewModel)
         }

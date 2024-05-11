@@ -10,21 +10,21 @@ struct NumberInputSectionView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 13) {
+        VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
             Text("인증 번호")
                 .padding(.horizontal, 20)
-                .font(.pretendard(.regular, size: 12))
+                .font(.B1RegularFont())
                 .platformTextColor(color: Color("Gray04"))
 
             HStack(spacing: 11) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
-                        .frame(height: 46)
+                        .frame(height: 46 * DynamicSizeFactor.factor())
                     HStack {
                         TextField("", text: $viewModel.code)
-                            .padding(.leading, 13)
-                            .font(.pretendard(.medium, size: 14))
+                            .padding(.leading, 13 * DynamicSizeFactor.factor())
+                            .font(.H4MediumFont())
                             .keyboardType(.numberPad)
                             .onChange(of: viewModel.code) { newValue in
                                 if Int(newValue) != nil {
@@ -38,8 +38,8 @@ struct NumberInputSectionView: View {
                         Spacer()
                         if !viewModel.isTimerHidden {
                             Text(timerString)
-                                .padding(.trailing, 13)
-                                .font(.pretendard(.regular, size: 12))
+                                .padding(.trailing, 13 * DynamicSizeFactor.factor())
+                                .font(.B1RegularFont())
                                 .platformTextColor(color: Color("Mint03"))
                         }
                     }

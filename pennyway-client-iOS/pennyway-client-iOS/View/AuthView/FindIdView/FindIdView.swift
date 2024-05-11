@@ -10,24 +10,24 @@ struct FindIdView: View {
     var body: some View {
         NavigationAvailable {
             VStack {
-                Spacer().frame(height: 147)
+                Spacer().frame(height: 147 * DynamicSizeFactor.factor())
                     
                 Image("icon_illust_completion")
                     .frame(width: 68, height: 68)
                     .padding(.horizontal, 126)
                     
-                Spacer().frame(height: 17)
+                Spacer().frame(height: 17 * DynamicSizeFactor.factor())
                     
                 Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
                     .font(.H3SemiboldFont())
                     .multilineTextAlignment(.center)
                     
-                Spacer().frame(height: 30)
+                Spacer().frame(height: 30 * DynamicSizeFactor.factor())
                     
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: 280, height: 62)
+                        .frame(width: 280 * DynamicSizeFactor.factor(), height: 62 * DynamicSizeFactor.factor())
                         .background(Color("Gray01"))
                         .cornerRadius(4)
                         .overlay(
@@ -41,7 +41,7 @@ struct FindIdView: View {
                         .multilineTextAlignment(.center)
                 }
                     
-                Spacer().frame(height: 120)
+                Spacer().frame(height: 120 * DynamicSizeFactor.factor())
                 Spacer()
                     
                 bottomButton()
@@ -52,19 +52,19 @@ struct FindIdView: View {
     }
     
     private func bottomButton() -> some View {
-        HStack(alignment: .center, spacing: 12) {
+        HStack(alignment: .center, spacing: 12 * DynamicSizeFactor.factor()) {
             Button(action: {
                 goToPwView = true
             }, label: {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: .infinity, height: 47)
+                        .frame(width: .infinity, height: 47 * DynamicSizeFactor.factor())
                         .background(Color("Mint01"))
                         .cornerRadius(4)
                     
                     Text("비밀번호 찾기")
-                        .font(.pretendard(.semibold, size: 14))
+                        .font(.ButtonH4SemiboldFont())
                         .multilineTextAlignment(.center)
                         .platformTextColor(color: Color("Mint03"))
                     
@@ -81,12 +81,12 @@ struct FindIdView: View {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: .infinity, height: 47)
+                        .frame(width: .infinity, height: 47 * DynamicSizeFactor.factor())
                         .background(Color("Mint03"))
                         .cornerRadius(4)
                     
                     Text("확인")
-                        .font(.pretendard(.semibold, size: 14))
+                        .font(.ButtonH4SemiboldFont())
                         .multilineTextAlignment(.center)
                         .platformTextColor(color: Color("White01"))
                 }

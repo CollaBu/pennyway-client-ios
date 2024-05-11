@@ -11,7 +11,7 @@ struct ResetPwView: View {
                 ScrollView {
                     HStack(alignment: .top) {
                         Text("새로운 비밀번호를\n설정해주세요")
-                            .font(.pretendard(.semibold, size: 24))
+                            .font(.H1SemiboldFont())
                             .multilineTextAlignment(.leading)
                             .padding(.top, 15 * DynamicSizeFactor.factor())
                         
@@ -27,6 +27,7 @@ struct ResetPwView: View {
                 
                 CustomBottomButton(action: {
                     continueButtonAction()
+                    formViewModel.validatePwForm()
                     
                 }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, 34)
@@ -66,10 +67,10 @@ struct ResetPwView: View {
             resetPwViewModel.requestResetPwApi { success in
                 DispatchQueue.main.async {
                     if success {
-                        Log.debug("RequestResetPwApi 실행")
+                        Log.debug("비밀번호 재설정 성공")
                         navigateView = true
                     } else {
-                        Log.fault("fail ResetPw")
+                        Log.fault("비밀번호 재설정 실패")
                     }
                 }
             }

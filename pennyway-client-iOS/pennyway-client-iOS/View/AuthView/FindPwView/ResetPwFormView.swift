@@ -1,10 +1,9 @@
-
 import SwiftUI
 
 struct ResetPwFormView: View {
     @ObservedObject var formViewModel: SignUpFormViewModel
-    @State private var isPwCloseButtonVisible: Bool = false
-    @State private var isConfirmPwCloseButtonVisible: Bool = false
+    @State private var isPwDeleteButtonVisible: Bool = false
+    @State private var isConfirmPwDeleteButtonVisible: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 21 * DynamicSizeFactor.factor()) {
@@ -16,48 +15,48 @@ struct ResetPwFormView: View {
                         onCommit: {
                             Log.debug("pw: \(formViewModel.password)")
                             formViewModel.validatePassword()
-                            isPwCloseButtonVisible = false
+                            isPwDeleteButtonVisible = false
                         }, isSecureText: true)
-                        .onChange(of: formViewModel.password) { newValue in
-                            isPwCloseButtonVisible = !newValue.isEmpty
-                        }
-                        .onTapGesture {
-                            isPwCloseButtonVisible = true
-                        }
-                    
-                    handleDeleteButtonTapped(isVisible: !formViewModel.password.isEmpty && isPwCloseButtonVisible, action: {
+
+                    handleDeleteButtonTapped(isVisible: !formViewModel.password.isEmpty && isPwDeleteButtonVisible, action: {
                         formViewModel.password = ""
                         formViewModel.showErrorPassword = false
                         formViewModel.validatePwForm()
-                        isPwCloseButtonVisible = false
+                        isPwDeleteButtonVisible = false
                     })
+                    .onChange(of: formViewModel.password) { newValue in
+                        isPwDeleteButtonVisible = !newValue.isEmpty
+                    }
+                    .onTapGesture {
+                        isPwDeleteButtonVisible = true
+                    }
                 }
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                 if formViewModel.showErrorPassword {
                     errorMessage("숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요")
                 }
-    
+
                 Spacer().frame(height: 21 * DynamicSizeFactor.factor())
-                
+
                 ZStack {
                     CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
                         Log.debug("confirm pw: \(formViewModel.confirmPw)")
                         formViewModel.validateConfirmPw()
-                        isConfirmPwCloseButtonVisible = false
+                        isConfirmPwDeleteButtonVisible = false
                     }, isSecureText: true)
-                        .onChange(of: formViewModel.confirmPw) { newValue in
-                            isConfirmPwCloseButtonVisible = !newValue.isEmpty
-                        }
-                        .onTapGesture {
-                            isConfirmPwCloseButtonVisible = true
-                        }
-                    
-                    handleDeleteButtonTapped(isVisible: !formViewModel.confirmPw.isEmpty && isConfirmPwCloseButtonVisible, action: {
+
+                    handleDeleteButtonTapped(isVisible: !formViewModel.confirmPw.isEmpty && isConfirmPwDeleteButtonVisible, action: {
                         formViewModel.confirmPw = ""
                         formViewModel.showErrorConfirmPw = false
                         formViewModel.validatePwForm()
-                        isConfirmPwCloseButtonVisible = false
+                        isConfirmPwDeleteButtonVisible = false
                     })
+                    .onChange(of: formViewModel.confirmPw) { newValue in
+                        isConfirmPwDeleteButtonVisible = !newValue.isEmpty
+                    }
+                    .onTapGesture {
+                        isConfirmPwDeleteButtonVisible = true
+                    }
                 }
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                 if formViewModel.showErrorConfirmPw {
@@ -66,14 +65,14 @@ struct ResetPwFormView: View {
             }
         }
     }
-    
+
     private func errorMessage(_ message: String) -> some View {
         Text(message)
             .padding(.leading, 20 * DynamicSizeFactor.factor())
             .font(.B1MediumFont())
             .platformTextColor(color: Color("Red03"))
     }
-    
+
     @ViewBuilder
     private func handleDeleteButtonTapped(isVisible: Bool, action: @escaping () -> Void) -> some View {
         if isVisible {

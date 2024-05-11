@@ -10,12 +10,12 @@ struct SignUpFormView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 Text("회원가입")
-                    .font(.pretendard(.semibold, size: 24))
+                    .font(.H1SemiboldFont())
                     .padding(.horizontal, 20)
                 
-                Spacer().frame(height: 32)
+                Spacer().frame(height: 32 * DynamicSizeFactor.factor())
                 
-                VStack(alignment: .leading, spacing: 21) {
+                VStack(alignment: .leading, spacing: 21 * DynamicSizeFactor.factor()) {
                     if !isOAuthRegistration && (!isExistUser && !isOAuthUser) {
                         allInputFields()
                     } else if isOAuthRegistration && !isExistUser {
@@ -30,7 +30,7 @@ struct SignUpFormView: View {
     
     /// All input fields
     private func allInputFields() -> some View {
-        VStack(alignment: .leading, spacing: 9) {
+        VStack(alignment: .leading, spacing: 9 * DynamicSizeFactor.factor()) {
             CustomInputView(inputText: $formViewModel.name, titleText: "이름", onCommit: {
                 formViewModel.validateName()
                 formViewModel.validateForm()
@@ -58,7 +58,7 @@ struct SignUpFormView: View {
     
     /// Name and ID fields
     private func nameAndIDFields() -> some View {
-        VStack(alignment: .leading, spacing: 9) {
+        VStack(alignment: .leading, spacing: 9 * DynamicSizeFactor.factor()) {
             CustomInputView(inputText: $formViewModel.name, titleText: "이름", onCommit: {
                 formViewModel.validateName()
                 formViewModel.validateForm()
@@ -85,7 +85,7 @@ struct SignUpFormView: View {
     
     /// Password fields
     private func passwordFields() -> some View {
-        VStack(alignment: .leading, spacing: 9) {
+        VStack(alignment: .leading, spacing: 9 * DynamicSizeFactor.factor()) {
             CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
                 formViewModel.validatePassword()
                 formViewModel.validateForm()
@@ -110,7 +110,7 @@ struct SignUpFormView: View {
     private func errorMessage(_ message: String) -> some View {
         Text(message)
             .padding(.leading, 20)
-            .font(.pretendard(.medium, size: 12))
+            .font(.B1MediumFont())
             .platformTextColor(color: Color("Red03"))
     }
 }
