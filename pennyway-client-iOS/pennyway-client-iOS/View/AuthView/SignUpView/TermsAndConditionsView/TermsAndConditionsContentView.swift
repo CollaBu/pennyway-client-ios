@@ -60,6 +60,8 @@ struct TermsAndConditionsContentView: View {
                             // 하단 text내용 수정필요
                             AgreementSectionView(isSelected: $isSelectedInfoBtn, title: "개인정보 처리방침 (필수)", contentText: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit")
                         }
+
+                        Spacer().frame(height: 32 * DynamicSizeFactor.factor())
                     }
                 }
                 .padding(.horizontal, 20)

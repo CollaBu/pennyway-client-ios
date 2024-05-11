@@ -24,14 +24,14 @@ struct ResetPwFormView: View {
                         formViewModel.validatePwForm()
                         isPwDeleteButtonVisible = false
                     })
-                    .onChange(of: formViewModel.password) { newValue in
-                        isPwDeleteButtonVisible = !newValue.isEmpty
-                    }
-                    .onTapGesture {
-                        isPwDeleteButtonVisible = true
-                    }
                 }
+                .onChange(of: formViewModel.password) { newValue in
+                    isPwDeleteButtonVisible = !newValue.isEmpty
+                }
+
+
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+
                 if formViewModel.showErrorPassword {
                     errorMessage("숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요")
                 }
@@ -51,13 +51,12 @@ struct ResetPwFormView: View {
                         formViewModel.validatePwForm()
                         isConfirmPwDeleteButtonVisible = false
                     })
-                    .onChange(of: formViewModel.confirmPw) { newValue in
-                        isConfirmPwDeleteButtonVisible = !newValue.isEmpty
-                    }
-                    .onTapGesture {
-                        isConfirmPwDeleteButtonVisible = true
-                    }
                 }
+                .onChange(of: formViewModel.confirmPw) { newValue in
+                    isConfirmPwDeleteButtonVisible = !newValue.isEmpty
+                }
+
+
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                 if formViewModel.showErrorConfirmPw {
                     errorMessage("비밀번호가 일치하지 않아요")

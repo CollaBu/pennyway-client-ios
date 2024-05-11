@@ -17,7 +17,7 @@ struct ResetPwView: View {
                         
                         Spacer()
                     }
-                    .padding(.leading, 20 * DynamicSizeFactor.factor())
+                    .padding(.leading, 20)
                     
                     Spacer().frame(height: 33 * DynamicSizeFactor.factor())
                     
@@ -63,6 +63,7 @@ struct ResetPwView: View {
     
     private func continueButtonAction() {
         if formViewModel.isFormValid {
+            formViewModel.validatePwForm()
             resetPwViewModel.newPassword = formViewModel.password
             resetPwViewModel.requestResetPwApi { success in
                 DispatchQueue.main.async {
