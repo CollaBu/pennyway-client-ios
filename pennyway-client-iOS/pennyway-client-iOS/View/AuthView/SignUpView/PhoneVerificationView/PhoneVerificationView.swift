@@ -62,6 +62,7 @@ struct PhoneVerificationView: View {
     }
     
     private func continueButtonAction() {
+        Log.debug("??? : \(isOAuthRegistration)")
         if isOAuthRegistration {
             phoneVerificationViewModel.requestOAuthVerifyVerificationCodeApi {
                 checkFormValid()

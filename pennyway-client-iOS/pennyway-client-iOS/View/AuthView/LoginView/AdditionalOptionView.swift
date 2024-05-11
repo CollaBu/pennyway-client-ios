@@ -13,6 +13,7 @@ struct AdditionalOptionView: View {
                 OAuthRegistrationManager.shared.isOAuthRegistration = false
                 OAuthRegistrationManager.shared.isExistUser = false
                 OAuthRegistrationManager.shared.isOAuthUser = false
+                Log.debug("??? : \(OAuthRegistrationManager.shared.isOAuthRegistration)")
             })
 
             Image("icon_line_gray")

@@ -41,8 +41,12 @@ struct SignUpFormView: View {
             }
             
             CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
-                formViewModel.validateID()
-                formViewModel.validateForm()
+                formViewModel.checkDuplicateUserNameApi { isDuplicate in
+                    if !isDuplicate {
+                        formViewModel.validateID()
+                        formViewModel.validateForm()
+                    }
+                }
             }, isSecureText: false)
             
             if formViewModel.showErrorID {
@@ -69,8 +73,12 @@ struct SignUpFormView: View {
             }
             
             CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
-                formViewModel.validateID()
-                formViewModel.validateForm()
+                formViewModel.checkDuplicateUserNameApi { isDuplicate in
+                    if !isDuplicate {
+                        formViewModel.validateID()
+                        formViewModel.validateForm()
+                    }
+                }
             }, isSecureText: false)
             
             if formViewModel.showErrorID {

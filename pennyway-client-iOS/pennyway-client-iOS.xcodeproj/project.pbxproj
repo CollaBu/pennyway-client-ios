@@ -57,6 +57,7 @@
 		4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D884C2BD81A62009EADB0 /* KeychainHelper.swift */; };
 		4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D884E2BD81F82009EADB0 /* CryptoHelper.swift */; };
 		4A5050332BC3DA7700EE5666 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */; };
+		4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */; };
 		4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */; };
 		4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57896E2BDBF01500AFEB26 /* BadRequestErrorCode.swift */; };
 		4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789702BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift */; };
@@ -210,6 +211,7 @@
 		4A4D884C2BD81A62009EADB0 /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		4A4D884E2BD81F82009EADB0 /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
 		4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
+		4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAccountToOAuthViewModel.swift; sourceTree = "<group>"; };
 		4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomButton.swift; sourceTree = "<group>"; };
 		4A57896E2BDBF01500AFEB26 /* BadRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequestErrorCode.swift; sourceTree = "<group>"; };
 		4A5789702BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedErrorCode.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 				4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */,
 				4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */,
 				4A3560822BEBF12D00BA58F3 /* OAuthAccountViewModel.swift */,
+				4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */,
 			);
 			path = OAuthViewModel;
 			sourceTree = "<group>";
@@ -1267,6 +1270,7 @@
 				D8180C0A2BE531C500F837FB /* (null) in Sources */,
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
+				4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */,
 				4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */,
 				4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */,
 				D85927F92BE9116700653391 /* PhoneVerificationViewModel.swift in Sources */,

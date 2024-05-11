@@ -18,32 +18,25 @@ class SignUpFormViewModel: ObservableObject {
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     
     func validateForm() {
-        func handleValidationResult(isDuplicate: Bool) {
-            if isDuplicate {
-                isFormValid = false
+        if isOAuthRegistration {
+            if !isExistUser && !name.isEmpty && !id.isEmpty && !showErrorName && !showErrorID && !isDuplicateUserName {
+                isFormValid = true
             } else {
-                if isOAuthRegistration {
-                    if !isExistUser && !name.isEmpty && !id.isEmpty && !showErrorName && !showErrorID {
-                        isFormValid = true
-                    } else {
-                        isFormValid = false
-                    }
-                } else if isOAuthUser {
-                    if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
-                        isFormValid = true
-                    } else {
-                        isFormValid = false
-                    }
-                } else {
-                    if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw {
-                        isFormValid = true
-                    } else {
-                        isFormValid = false
-                    }
-                }
+                isFormValid = false
+            }
+        } else if isOAuthUser {
+            if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
+                isFormValid = true
+            } else {
+                isFormValid = false
+            }
+        } else {
+            if !name.isEmpty && !id.isEmpty && !password.isEmpty && password == confirmPw && !showErrorName && !showErrorID && !showErrorPassword && !showErrorConfirmPw && !isDuplicateUserName {
+                isFormValid = true
+            } else {
+                isFormValid = false
             }
         }
-        checkDuplicateUserNameApi(completion: handleValidationResult)
     }
     
     func validatePwForm() {
