@@ -4,9 +4,12 @@ struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var accountLinkingViewModel = LinkOAuthToAccountViewModel()
+    @EnvironmentObject var authViewModel: AppViewModel
+    let profileInfoViewModel = UserAccountViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
+    
     private var buttonText: String {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
             return "연동하기"
@@ -85,9 +88,16 @@ struct SignUpView: View {
     @ViewBuilder
     private func destinationView() -> some View {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
+            handleLinkAccountToOAuth()
         } else {
             TermsAndConditionsView(viewModel: viewModel)
         }
+    }
+    
+    func handleLinkAccountToOAuth() -> some View {
+        authViewModel.login()
+        profileInfoViewModel.getUserProfileApi()
+        return EmptyView()
     }
 }
 
