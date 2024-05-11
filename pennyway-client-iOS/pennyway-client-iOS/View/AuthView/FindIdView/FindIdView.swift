@@ -8,46 +8,44 @@ struct FindIdView: View {
     var username = RegistrationManager.shared.username
 
     var body: some View {
-        NavigationAvailable {
-            VStack {
-                Spacer().frame(height: 147)
-                    
-                Image("icon_illust_completion")
-                    .frame(width: 68, height: 68)
-                    .padding(.horizontal, 126)
-                    
-                Spacer().frame(height: 17)
-                    
-                Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
-                    .font(.pretendard(.semibold, size: 16))
+        VStack {
+            Spacer().frame(height: 147)
+            
+            Image("icon_illust_completion")
+                .frame(width: 68, height: 68)
+                .padding(.horizontal, 126)
+            
+            Spacer().frame(height: 17)
+            
+            Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
+                .font(.pretendard(.semibold, size: 16))
+                .multilineTextAlignment(.center)
+            
+            Spacer().frame(height: 30)
+            
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 280, height: 62)
+                    .background(Color("Gray01"))
+                    .cornerRadius(4)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .inset(by: 0.5)
+                            .stroke(Color("Gray02"), lineWidth: 1)
+                    )
+                
+                Text("\(username)")
+                    .font(.pretendard(.semibold, size: 18))
                     .multilineTextAlignment(.center)
-                    
-                Spacer().frame(height: 30)
-                    
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 280, height: 62)
-                        .background(Color("Gray01"))
-                        .cornerRadius(4)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .inset(by: 0.5)
-                                .stroke(Color("Gray02"), lineWidth: 1)
-                        )
-                        
-                    Text("\(username)")
-                        .font(.pretendard(.semibold, size: 18))
-                        .multilineTextAlignment(.center)
-                }
-                    
-                Spacer().frame(height: 120)
-                Spacer()
-                    
-                bottomButton()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            Spacer().frame(height: 120)
+            Spacer()
+            
+            bottomButton()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationBarBackButtonHidden(true)
     }
     

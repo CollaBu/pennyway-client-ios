@@ -54,7 +54,7 @@ class AuthAlamofire: TokenHandler {
     
     func linkAccountToOAuth(_ dto: LinkAccountToOAuthRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - linkAccountToOAuth() called userInput : %@ ,, %@ ,, %@", log: .default, type: .info, dto.password, dto.phone, dto.code)
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.linkAccountToOAuth(dto: dto), completion: completion)
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.linkAccountToOAuth(dto: dto), completion: completion)
     }
     
     func findUserName(_ dto: FindUserNameRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {

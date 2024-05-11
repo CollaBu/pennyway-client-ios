@@ -7,50 +7,49 @@ struct FindPwView: View {
     @StateObject var viewModel = SignUpNavigationViewModel()
     
     var body: some View {
-        NavigationAvailable {
-            ZStack {
-                ScrollView {
-                    VStack {
-                        Spacer().frame(height: 36)
-                        
-                        PhoneNumberInputSectionView(viewModel: phoneVerificationViewModel) //
-                        
-                        Spacer().frame(height: 21)
-                        
-                        NumberInputSectionView(viewModel: phoneVerificationViewModel)
-                    }
-                }
-                Spacer().frame(height: 203)
-
-                Spacer()
-                
+        ZStack {
+            ScrollView {
                 VStack {
-                    Spacer()
-                    CustomBottomButton(action: {
-                        // phoneVerificationViewModel.validateNumberVerification()
-                        ResetPwView(formViewModel: SignUpFormViewModel())
-                        // numberVerificationViewModel.requestVerifyVerificationCodeApi()
-                        if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
-                            showingPopUp = false
-                            viewModel.continueButtonTapped()
-                            
-                            RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
-                            RegistrationManager.shared.code = phoneVerificationViewModel.code
-                            
-                            navigateToFindPwView = true
-                            
-                        } else {
-                            showingPopUp = true
-                        }
-                    }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
+                    Spacer().frame(height: 36)
+                    
+                    PhoneNumberInputSectionView(viewModel: phoneVerificationViewModel) //
+                    
+                    Spacer().frame(height: 21)
+                    
+                    NumberInputSectionView(viewModel: phoneVerificationViewModel)
                 }
-                .padding(.bottom, 34)
-                
-                NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel()), isActive: $navigateToFindPwView) {
-                    EmptyView()
-                }.hidden()
             }
+            Spacer().frame(height: 203)
+            
+            Spacer()
+            
+            VStack {
+                Spacer()
+                CustomBottomButton(action: {
+                    // phoneVerificationViewModel.validateNumberVerification()
+                    ResetPwView(formViewModel: SignUpFormViewModel())
+                    // numberVerificationViewModel.requestVerifyVerificationCodeApi()
+                    if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
+                        showingPopUp = false
+                        viewModel.continueButtonTapped()
+                        
+                        RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
+                        RegistrationManager.shared.code = phoneVerificationViewModel.code
+                        
+                        navigateToFindPwView = true
+                        
+                    } else {
+                        showingPopUp = true
+                    }
+                }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
+            }
+            .padding(.bottom, 34)
+            
+            NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel()), isActive: $navigateToFindPwView) {
+                EmptyView()
+            }.hidden()
         }
+        
         .navigationTitle(Text("비밀번호 찾기"))
         .navigationBarBackButtonHidden(true)
         .toolbar {
