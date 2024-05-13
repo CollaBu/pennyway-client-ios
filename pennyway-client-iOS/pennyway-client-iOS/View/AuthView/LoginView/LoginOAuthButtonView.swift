@@ -6,6 +6,8 @@ struct LoginOAuthButtonView: View {
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
     @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
 
+    @EnvironmentObject var authViewModel: AppViewModel
+    @State private var isLoginSuccessful = false
     @State private var isActiveLink = false
 
     var body: some View {
@@ -42,6 +44,11 @@ struct LoginOAuthButtonView: View {
             NavigationLink(destination: PhoneVerificationView(), isActive: $isActiveLink) {
                 EmptyView()
             }
+        }
+    }
+    func handleOAuthLogin() {
+        if isLoginSuccessful {
+            authViewModel.login()
         }
     }
 }
