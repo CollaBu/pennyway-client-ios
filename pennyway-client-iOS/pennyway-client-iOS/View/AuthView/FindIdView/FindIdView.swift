@@ -13,7 +13,7 @@ struct FindIdView: View {
                 Spacer().frame(height: 147 * DynamicSizeFactor.factor())
                     
                 Image("icon_illust_completion")
-                    .frame(width: 68, height: 68)
+                    .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
                     .padding(.horizontal, 126)
                     
                 Spacer().frame(height: 17 * DynamicSizeFactor.factor())
@@ -59,7 +59,7 @@ struct FindIdView: View {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: .infinity, height: 47 * DynamicSizeFactor.factor())
+                        .frame(width: 134 * DynamicSizeFactor.factor(), height: 47 * DynamicSizeFactor.factor())
                         .background(Color("Mint01"))
                         .cornerRadius(4)
                     
@@ -81,7 +81,7 @@ struct FindIdView: View {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: .infinity, height: 47 * DynamicSizeFactor.factor())
+                        .frame(width: 134 * DynamicSizeFactor.factor(), height: 47 * DynamicSizeFactor.factor())
                         .background(Color("Mint03"))
                         .cornerRadius(4)
                     
