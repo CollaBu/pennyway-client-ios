@@ -5,7 +5,7 @@ class OAuthSignUpViewModel: ObservableObject {
     @Published var isSignUpSuccess = false
 
     func oauthSignUpApi() { // 소셜 회원가입
-        let oauthSignUpDto = OAuthSignUpRequestDto(oauthId: OAuthRegistrationManager.shared.oauthId, idToken: KeychainHelper.loadIdToken() ?? "", nonce: OAuthRegistrationManager.shared.nonce, name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
+        let oauthSignUpDto = OAuthSignUpRequestDto(oauthId: KeychainHelper.loadOAuthUserData()?.oauthId ?? "", idToken: KeychainHelper.loadOAuthUserData()?.idToken ?? "", nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
 
         OAuthAlamofire.shared.oauthSignUp(oauthSignUpDto) { result in
             switch result {
@@ -15,6 +15,7 @@ class OAuthSignUpViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         print(response)
                         self.isSignUpSuccess = true
+                        KeychainHelper.deleteOAuthUserData()
                     } catch {
                         print("Error parsing response JSON: \(error)")
                     }

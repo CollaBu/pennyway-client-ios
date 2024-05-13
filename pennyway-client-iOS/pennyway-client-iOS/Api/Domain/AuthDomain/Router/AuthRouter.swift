@@ -77,7 +77,7 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .findUserName(dto):
             return try? dto.asDictionary()
-        case .logout:
+        case .checkDuplicateUserName, .logout:
             return [:]
             
         case let .requestResetPw(dto):

@@ -3,10 +3,13 @@ import SwiftUI
 struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
-    @StateObject var accountLinkingViewModel = OAuthAccountLinkingViewModel()
+    @StateObject var accountLinkingViewModel = LinkOAuthToAccountViewModel()
+    @EnvironmentObject var authViewModel: AppViewModel
+    let profileInfoViewModel = UserAccountViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
+    
     private var buttonText: String {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
             return "연동하기"
@@ -62,6 +65,9 @@ struct SignUpView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
                     Button(action: {
+                        if isOAuthRegistration { // 소셜 회원가입 중 취소
+                            KeychainHelper.deleteOAuthUserData()
+                        }
                         NavigationUtil.popToRootView()
                     }, label: {
                         Image("icon_arrow_back")
@@ -82,9 +88,16 @@ struct SignUpView: View {
     @ViewBuilder
     private func destinationView() -> some View {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
+            handleLinkAccountToOAuth()
         } else {
             TermsAndConditionsView(viewModel: viewModel)
         }
+    }
+    
+    func handleLinkAccountToOAuth() -> some View {
+        authViewModel.login()
+        profileInfoViewModel.getUserProfileApi()
+        return EmptyView()
     }
 }
 

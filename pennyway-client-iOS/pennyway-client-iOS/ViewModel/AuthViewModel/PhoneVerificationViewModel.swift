@@ -83,13 +83,14 @@ class PhoneVerificationViewModel: ObservableObject {
                 do {
                     let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
                     Log.debug(response)
+                    RegistrationManager.shared.phoneNumber = phoneNumber
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
                 }
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
             } else {
                 Log.error("Network request failed: \(error)")
             }
@@ -127,7 +128,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
@@ -177,7 +178,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         case let .failure(error):
             if let StatusSpecificError = error as? StatusSpecificError {
-                Log.error("StatusSpecificError occurred: \(StatusSpecificError)")
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
@@ -363,6 +364,8 @@ class PhoneVerificationViewModel: ObservableObject {
         if !showErrorPhoneNumberFormat && !isTimerHidden {
             if isTimerRunning {
                 stopTimer()
+                isTimerHidden = false
+                startTimer()
             } else {
                 startTimer()
             }

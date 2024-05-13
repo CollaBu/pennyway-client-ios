@@ -53,7 +53,7 @@ struct FindIdPhoneVerificationView: View {
                 .padding(.horizontal, 20)
             }
             if viewModel.showErrorPhoneNumberFormat {
-                Text("010, 011으로 시작하는 11자리 문자열을 입력해주세요")
+                Text("올바른 전화번호 형식이 아니에요")
                     .padding(.horizontal, 20)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Red03"))

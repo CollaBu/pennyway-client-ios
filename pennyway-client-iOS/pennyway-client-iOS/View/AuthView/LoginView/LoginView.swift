@@ -1,30 +1,44 @@
 import SwiftUI
 
 struct LoginView: View {
-    // MARK: Private
-
-    @EnvironmentObject var appViewModel: AppViewModel
-    @State private var isSplashShown = true
-    @State private var isActiveLink = false
+    @StateObject var loginViewModel = LoginViewModel()
 
     var body: some View {
-        VStack {
-            if isSplashShown {
-                SplashView()
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            withAnimation {
-                                isSplashShown = false
-                            }
-                        }
+        NavigationAvailable {
+            ZStack {
+                VStack {
+                    ScrollView {
+                        InputFormView(loginViewModel: loginViewModel) // Id, Pw 입력 폼
+
+                        LoginOAuthButtonView()
+
+                        AdditionalOptionView()
+                        Spacer()
                     }
-            } else {
-                LoginFormView(viewModel: LoginFormViewModel(appViewModel: appViewModel))
+                }
+
+                VStack {
+                    Spacer()
+                    Button(action: {}, label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 14)
+                                .frame(maxWidth: 115 * DynamicSizeFactor.factor(), maxHeight: 25 * DynamicSizeFactor.factor())
+                                .platformTextColor(color: Color("Gray02"))
+
+                            Text("로그인에 문제가 발생했나요?")
+                                .platformTextColor(color: Color("Gray04"))
+                                .font(.B3MediumFont())
+                                .padding(.horizontal, 8 * DynamicSizeFactor.factor())
+                        }
+                        .padding(.bottom, 34)
+                    })
+                }
+                .edgesIgnoringSafeArea(.bottom)
             }
         }
     }
 }
 
 #Preview {
-    LoginView()
+    LoginView(loginViewModel: LoginViewModel())
 }
