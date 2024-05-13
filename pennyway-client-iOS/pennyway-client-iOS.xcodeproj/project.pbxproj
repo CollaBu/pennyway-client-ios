@@ -32,7 +32,6 @@
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
-		4A3560742BEB9A9100BA58F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A3560732BEB9A9100BA58F3 /* GoogleService-Info.plist */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -125,6 +124,8 @@
 		4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */; };
 		4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */; };
 		4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */; };
+		D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809412D2BF276460015CFF9 /* ResetPwFormView.swift */; };
+		D80941302BF283700015CFF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D809412F2BF283700015CFF9 /* GoogleService-Info.plist */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8157E642BBEF2040083844B /* InputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E632BBEF2040083844B /* InputFormView.swift */; };
@@ -137,6 +138,10 @@
 		D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */; };
 		D8180C082BE5168800F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8180C0A2BE531C500F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A7882BEBABC700899AA3 /* FindPwContentView.swift */; };
+		D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */; };
+		D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */; };
+		D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78E2BEBB42200899AA3 /* RequestResetPwDto.swift */; };
 		D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927ED2BE6842A00653391 /* CustomPopUpView.swift */; };
 		D85927F22BE69C6A00653391 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */; };
 		D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F32BE9116700653391 /* SignUpFormViewModel.swift */; };
@@ -147,7 +152,6 @@
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
 		D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */; };
 		D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */; };
-		D87CB0D62BC5B56600BD882A /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D52BC5B56600BD882A /* ResetPwFormView.swift */; };
 		D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E182BCEBEE700922894 /* DynamicFontSize.swift */; };
 		D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */; };
 		D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */; };
@@ -186,7 +190,6 @@
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
-		4A3560732BEB9A9100BA58F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 		4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListItem.swift; sourceTree = "<group>"; };
 		4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		D809412D2BF276460015CFF9 /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
+		D809412F2BF283700015CFF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		D8157E632BBEF2040083844B /* InputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormView.swift; sourceTree = "<group>"; };
 		D8157E652BBEF2740083844B /* OAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthButtonView.swift; sourceTree = "<group>"; };
@@ -290,6 +295,10 @@
 		D8180C012BE507FD00F837FB /* FindIdFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdFormView.swift; sourceTree = "<group>"; };
 		D8180C032BE5081F00F837FB /* FindIdContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdContentView.swift; sourceTree = "<group>"; };
 		D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
+		D847A7882BEBABC700899AA3 /* FindPwContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwContentView.swift; sourceTree = "<group>"; };
+		D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwPhoneVerificationView.swift; sourceTree = "<group>"; };
+		D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwViewModel.swift; sourceTree = "<group>"; };
+		D847A78E2BEBB42200899AA3 /* RequestResetPwDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestResetPwDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/RequestResetPwDto.swift"; sourceTree = SOURCE_ROOT; };
 		D85927ED2BE6842A00653391 /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
 		D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		D85927F32BE9116700653391 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
@@ -300,7 +309,6 @@
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
-		D87CB0D52BC5B56600BD882A /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
 		D8880E182BCEBEE700922894 /* DynamicFontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFontSize.swift; sourceTree = "<group>"; };
 		D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -475,6 +483,7 @@
 				4A0FFBF62BCDA18C00EFEC56 /* LoginRequestDto.swift */,
 				4A0FFBF82BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift */,
 				D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */,
+				D847A78E2BEBB42200899AA3 /* RequestResetPwDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -701,7 +710,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4A3560732BEB9A9100BA58F3 /* GoogleService-Info.plist */,
+				D809412F2BF283700015CFF9 /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
 				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
@@ -958,6 +967,7 @@
 				D85927F32BE9116700653391 /* SignUpFormViewModel.swift */,
 				D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */,
 				D85927F72BE9116700653391 /* TermsAndConditionsViewModel.swift */,
+				D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */,
 			);
 			path = AuthViewModel;
 			sourceTree = "<group>";
@@ -1003,7 +1013,9 @@
 				D87CB0CF2BC5A47800BD882A /* FindPwView.swift */,
 				D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */,
 				D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */,
-				D87CB0D52BC5B56600BD882A /* ResetPwFormView.swift */,
+				D847A7882BEBABC700899AA3 /* FindPwContentView.swift */,
+				D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */,
+				D809412D2BF276460015CFF9 /* ResetPwFormView.swift */,
 			);
 			path = FindPwView;
 			sourceTree = "<group>";
@@ -1081,7 +1093,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A3560742BEB9A9100BA58F3 /* GoogleService-Info.plist in Resources */,
+				D80941302BF283700015CFF9 /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
@@ -1166,6 +1178,7 @@
 			files = (
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
+				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
 				4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */,
 				4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */,
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */,
@@ -1212,17 +1225,18 @@
 				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
 				4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */,
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
+				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */,
 				D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */,
-				D87CB0D62BC5B56600BD882A /* ResetPwFormView.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
 				4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift in Sources */,
 				D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */,
 				4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */,
+				D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */,
 				D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */,
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDto.swift in Sources */,
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
@@ -1260,6 +1274,7 @@
 				4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */,
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
+				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
@@ -1268,6 +1283,7 @@
 				4A5789952BDC29E700AFEB26 /* ConflictError.swift in Sources */,
 				D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
+				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
 				4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */,

@@ -3,8 +3,7 @@ import SwiftUI
 struct ResetPwView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @State private var navigateView = false
-    
-    //    @StateObject var viewModel = SignUpNavigationViewModel()
+    @StateObject var resetPwViewModel = ResetPwViewModel()
     
     var body: some View {
         NavigationAvailable {
@@ -12,30 +11,23 @@ struct ResetPwView: View {
                 ScrollView {
                     HStack(alignment: .top) {
                         Text("새로운 비밀번호를\n설정해주세요")
-                            .font(.pretendard(.semibold, size: 24))
+                            .font(.H1SemiboldFont())
                             .multilineTextAlignment(.leading)
-                            .padding(.top, 15)
+                            .padding(.top, 15 * DynamicSizeFactor.factor())
                         
                         Spacer()
                     }
                     .padding(.leading, 20)
                     
-                    Spacer().frame(height: 33)
+                    Spacer().frame(height: 33 * DynamicSizeFactor.factor())
                     
                     ResetPwFormView(formViewModel: formViewModel)
                 }
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    if formViewModel.isFormValid {
-                        // CompleteChangePwView()
-                        print(formViewModel.isFormValid)
-                        // formViewModel.checkDuplicateUserNameApi()
-                        
-                        RegistrationManager.shared.password = formViewModel.password
-                        
-                        navigateView = true
-                    } else {}
+                    continueButtonAction()
+                    formViewModel.validatePwForm()
                     
                 }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, 34)
@@ -66,6 +58,28 @@ struct ResetPwView: View {
                     }.offset(x: -10)
                 }
             }
+        }
+    }
+    
+    private func continueButtonAction() {
+        if formViewModel.isFormValid {
+            formViewModel.validatePwForm()
+            resetPwViewModel.newPassword = formViewModel.password
+            resetPwViewModel.requestResetPwApi { success in
+                DispatchQueue.main.async {
+                    if success {
+                        Log.debug("비밀번호 재설정 성공")
+                        navigateView = true
+                    } else {
+                        Log.fault("비밀번호 재설정 실패")
+                    }
+                }
+            }
+            
+            RegistrationManager.shared.password = formViewModel.password
+            
+        } else {
+            Log.fault("유효하지 않은 형식")
         }
     }
 }
