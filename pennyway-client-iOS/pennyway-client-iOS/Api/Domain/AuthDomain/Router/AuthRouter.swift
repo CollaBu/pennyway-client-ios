@@ -58,15 +58,13 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .receiveUserNameVerificationCode(dto):
             return try? dto.asDictionary()
-        case .checkDuplicateUserName:
-            return [:]
         case let .login(dto):
             return try? dto.asDictionary()
         case let .linkAccountToOAuth(dto):
             return try? dto.asDictionary()
         case let .findUserName(dto):
             return try? dto.asDictionary()
-        case .logout:
+        case .checkDuplicateUserName, .logout:
             return [:]
         }
     }
