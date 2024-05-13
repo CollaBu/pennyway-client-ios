@@ -35,7 +35,6 @@ struct LoginView: View {
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
-            NavigationLink(destination: MainTabView(), isActive: $loginViewModel.isLoginSuccessful) {}
         }
     }
 }

@@ -8,7 +8,7 @@ class LoginViewModel: ObservableObject {
     @Published var isLoginSuccessful = false
     @Published var showErrorCodeContent = false
 
-    let profileInfoViewModel = ProfileInfoViewModel()
+    let profileInfoViewModel = UserAccountViewModel()
 
     func loginApi(completion: @escaping (Bool) -> Void) {
         if !isFormValid {

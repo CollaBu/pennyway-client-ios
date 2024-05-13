@@ -18,7 +18,7 @@ struct UserData: Codable {
     let username: String
     let name: String
     let isGeneralSignUp: Bool
-    let passwordUpdatedAt: String
+    let passwordUpdatedAt: String?
     let profileImageUrl: String
     let phone: String
     let profileVisibility: String

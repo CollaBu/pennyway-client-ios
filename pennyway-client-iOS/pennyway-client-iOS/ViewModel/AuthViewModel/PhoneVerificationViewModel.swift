@@ -83,6 +83,7 @@ class PhoneVerificationViewModel: ObservableObject {
                 do {
                     let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
                     Log.debug(response)
+                    RegistrationManager.shared.phoneNumber = phoneNumber
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
                 }
@@ -283,6 +284,8 @@ class PhoneVerificationViewModel: ObservableObject {
         if !showErrorPhoneNumberFormat && !isTimerHidden {
             if isTimerRunning {
                 stopTimer()
+                isTimerHidden = false
+                startTimer()
             } else {
                 startTimer()
             }

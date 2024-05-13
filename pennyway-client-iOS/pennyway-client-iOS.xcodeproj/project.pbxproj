@@ -122,7 +122,8 @@
 		4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */; };
 		4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */; };
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
-		4ADBFAF52BE2C83600C3ECE4 /* ProfileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF42BE2C83600C3ECE4 /* ProfileInfoViewModel.swift */; };
+		4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */; };
+		4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */; };
 		4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -276,7 +277,8 @@
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
 		4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRouter.swift; sourceTree = "<group>"; };
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
-		4ADBFAF42BE2C83600C3ECE4 /* ProfileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoViewModel.swift; sourceTree = "<group>"; };
+		4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewModel.swift; sourceTree = "<group>"; };
+		4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListItem.swift; sourceTree = "<group>"; };
 		4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 		4A762AFA2B99A1A5001C1188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4ADE80232BF23D10007FFB01 /* ListItem */,
 				4A058F062BD051D9004B6F89 /* Network */,
 			);
 			path = Model;
@@ -962,9 +965,17 @@
 		4ADBFAF32BE2C7F500C3ECE4 /* UserViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4ADBFAF42BE2C83600C3ECE4 /* ProfileInfoViewModel.swift */,
+				4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */,
 			);
 			path = UserViewModel;
+			sourceTree = "<group>";
+		};
+		4ADE80232BF23D10007FFB01 /* ListItem */ = {
+			isa = PBXGroup;
+			children = (
+				4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */,
+			);
+			path = ListItem;
 			sourceTree = "<group>";
 		};
 		C2F5B21500B89F9F684EBF8B /* Frameworks */ = {
@@ -1221,6 +1232,7 @@
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
 				D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */,
+				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
@@ -1283,7 +1295,7 @@
 				4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */,
 				4A3560832BEBF12D00BA58F3 /* OAuthAccountViewModel.swift in Sources */,
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
-				4ADBFAF52BE2C83600C3ECE4 /* ProfileInfoViewModel.swift in Sources */,
+				4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */,
 				4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */,
 				4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,

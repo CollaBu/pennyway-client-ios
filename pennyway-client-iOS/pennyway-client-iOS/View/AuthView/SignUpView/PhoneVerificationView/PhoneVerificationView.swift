@@ -5,6 +5,8 @@ struct PhoneVerificationView: View {
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @StateObject var oauthAccountLinkingViewModel = LinkOAuthToAccountViewModel()
+    @EnvironmentObject var authViewModel: AppViewModel
+    let profileInfoViewModel = UserAccountViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
    
@@ -98,10 +100,17 @@ struct PhoneVerificationView: View {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
             OAuthAccountLinkingView(signUpViewModel: viewModel)
           
-        } else if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser {
+        } else if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser { // 이미 계정이 있는 경우
+            handleExistUserLogin()
         } else {
             SignUpView(viewModel: viewModel)
         }
+    }
+    
+    func handleExistUserLogin() -> some View {
+        authViewModel.login()
+        profileInfoViewModel.getUserProfileApi()
+        return EmptyView()
     }
 }
 
