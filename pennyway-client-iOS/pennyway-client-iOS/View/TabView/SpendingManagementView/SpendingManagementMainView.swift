@@ -7,10 +7,12 @@ struct SpendingManagementMainView: View {
             ScrollView {
                 VStack {
                     SpendingCheckBoxView()
+                        .padding(.horizontal, 20)
 
-                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-                    ProfileOAuthButtonView()
+                    CalenderView(month: Date())
+                        .padding(.horizontal, 20)
 
                     Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 

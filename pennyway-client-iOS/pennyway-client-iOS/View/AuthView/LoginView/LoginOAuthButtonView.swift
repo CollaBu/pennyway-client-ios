@@ -29,16 +29,22 @@ struct LoginOAuthButtonView: View {
             .onReceive(kakaoOAuthViewModel.$isOAuthExistUser) { newValue in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     isActiveLink = !newValue
+                    isLoginSuccessful = kakaoOAuthViewModel.isLoginSuccessful
+                    handleOAuthLogin()
                 }
             }
             .onReceive(googleOAuthViewModel.$isOAuthExistUser) { newValue in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     isActiveLink = !newValue
+                    isLoginSuccessful = googleOAuthViewModel.isLoginSuccessful
+                    handleOAuthLogin()
                 }
             }
             .onReceive(appleOAtuthViewModel.$isOAuthExistUser) { newValue in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     isActiveLink = !newValue
+                    isLoginSuccessful = appleOAtuthViewModel.isLoginSuccessful
+                    handleOAuthLogin()
                 }
             }
             NavigationLink(destination: PhoneVerificationView(), isActive: $isActiveLink) {
@@ -46,6 +52,7 @@ struct LoginOAuthButtonView: View {
             }
         }
     }
+
     func handleOAuthLogin() {
         if isLoginSuccessful {
             authViewModel.login()

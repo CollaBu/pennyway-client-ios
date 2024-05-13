@@ -16,38 +16,62 @@ struct SpendingCheckBoxView: View {
     var body: some View {
         VStack {
             // 텍스트 뷰
-            Text("반가워요 붕어빵님!\n이번 달에 총 ")
-                .font(.H1BoldFont())
-                .platformTextColor(color: Color("Gray07"))
-//                + Text("\(totalSpent)원")
-//                .font(.H3SemiboldFont())
-//                // .platformTextColor(color: Color("Mint03"))
-//                + Text(" 썼어요")
-//                .font(.H3SemiboldFont())
+            
+            Spacer().frame(height: 18 * DynamicSizeFactor.factor())
+            
+            HStack {
+                Text("반가워요 붕어빵님!\n이번 달에 총 ")
+                    .font(.H3SemiboldFont())
+                    // .platformTextColor(color: Color("Gray07"))
+                    + Text("\(totalSpent)원")
+                    .font(.H3SemiboldFont())
+                    // .platformTextColor(color: Color("Mint03"))
+                    + Text(" 썼어요")
+                    .font(.H3SemiboldFont())
+                Spacer()
+            }
+            .frame(height: 44 * DynamicSizeFactor.factor())
+            .padding(.leading, 18 * DynamicSizeFactor.factor())
+
+            Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
             // 프로그래스 바
             ZStack(alignment: .leading) {
                 Rectangle()
                     .frame(width: 244 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                     .platformTextColor(color: Color("Gray01"))
-                
+                    
                 Rectangle()
                     .frame(width: min(progressValue / 100 * 300, 300), height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
                     .platformTextColor(color: Color("Mint03"))
             }
-            .cornerRadius(10)
-            .padding(.top, 10)
+            .cornerRadius(15)
+            .padding(.horizontal, 18 * DynamicSizeFactor.factor())
+            
+            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
             
             HStack {
                 Text("0")
-                    .foregroundColor(.black)
-                    .padding(.leading, 5)
+                    .font(.B1SemiboldeFont())
+                    .platformTextColor(color: Color("Mint03"))
+                    .padding(.leading, 4 * DynamicSizeFactor.factor())
                 Spacer()
-                Text("100000")
-                    .foregroundColor(.black)
-                    .padding(.trailing, 5)
+                
+                HStack {
+                    Text("100000")
+                        .font(.B1SemiboldeFont())
+                        .platformTextColor(color: Color("Gray07"))
+                        .padding(.trailing, 4 * DynamicSizeFactor.factor())
+                    
+                    // 버튼 추가
+                }
             }
+            .frame(width: 244 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+            
+            Spacer().frame(height: 16)
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: 144 * DynamicSizeFactor.factor())
+        .background(Color("White01"))
+        .cornerRadius(8)
     }
 }
