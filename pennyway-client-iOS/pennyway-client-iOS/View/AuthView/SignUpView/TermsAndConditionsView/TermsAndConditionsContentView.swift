@@ -39,13 +39,13 @@ struct TermsAndConditionsContentView: View {
                                 Image("icon_check")
                                     .renderingMode(.template)
                                     .resizable()
-                                    .frame(width: 24, height: 24)
+                                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                     .platformTextColor(color: isSelectedAllBtn ? Color("White01") : Color("Gray04"))
                                     .padding(.horizontal, 10)
                                 Text("모두 동의할게요")
                                     .font(.H4MediumFont())
                                     .platformTextColor(color: isSelectedAllBtn ? Color("White01") : Color("Gray04"))
-                                    .padding(.horizontal, 36)
+                                    .offset(x: 34 * DynamicSizeFactor.factor())
                             }
                         })
 
