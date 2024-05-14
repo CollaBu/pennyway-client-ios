@@ -34,10 +34,10 @@ struct InputFormView: View {
 
                     TextField("아이디 입력", text: $loginViewModel.username)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
+                        .platformTextColor(color: Color("Gray03"))
                         .font(.H4MediumFont())
                         .AutoCorrectionExtensions()
                         .TextAutocapitalization()
-
                         .ignoresSafeArea(.keyboard)
                 }
                 .padding(.horizontal, 20)
@@ -49,6 +49,7 @@ struct InputFormView: View {
 
                     SecureField("비밀번호 입력", text: $loginViewModel.password)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
+                        .platformTextColor(color: Color("Gray03"))
                         .font(.H4MediumFont())
                         .textContentType(.password)
                         .ignoresSafeArea(.keyboard)

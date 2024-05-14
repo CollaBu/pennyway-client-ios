@@ -6,28 +6,29 @@ struct AgreementSectionView: View {
     var contentText: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 7) {
+        VStack(alignment: .leading, spacing: 6 * DynamicSizeFactor.factor()) {
             ZStack {
                 HStack {
                     Button(action: {
                         isSelected.toggle()
                     }, label: {
                         let selected = isSelected == true ? Image("icon_checkone_on_small") : Image("icon_checkone_off_small")
-                        
+
                         selected
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24, height: 24)
-                            .padding(.leading, 4)
+
                     })
-                    
+                    .padding(.leading, 8 * DynamicSizeFactor.factor())
+
                     Text(title)
-                        .font(.pretendard(.medium, size: 11))
+                        .font(.B2MediumFont())
                         .multilineTextAlignment(.leading)
-                        .platformTextColor(color: Color("Gray04"))
+                        .platformTextColor(color: isSelected ? .black : Color("Gray04"))
                 }
             }
-            
+
             ZStack {
                 Rectangle()
                     .platformTextColor(color: .clear)
@@ -36,19 +37,17 @@ struct AgreementSectionView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
                             .inset(by: 0.5)
-                            .stroke(.black.opacity(0.5), lineWidth: 1)
+                            .stroke(Color("Gray01"), lineWidth: 1)
                     )
-                
+
                 Text(contentText)
-                    .font(.pretendard(.medium, size: 12))
+                    .font(.B1RegularFont())
                     .minimumScaleFactor(0.001)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .platformTextColor(color: Color("Gray04"))
-                    .padding(12)
+                    .padding(12 * DynamicSizeFactor.factor())
             }
-            
-            Spacer().frame(height: 0)
         }
     }
 }

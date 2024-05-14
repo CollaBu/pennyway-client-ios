@@ -209,8 +209,7 @@ private struct CellView: View {
     }
     
     private func isSpecialDay(_ day: Int) -> Bool {
-        
-        //TODO: month,day,money를 합친 model 생성 필요
+        // TODO: month,day,money를 합친 model 생성 필요
         var month: Int {
             let calendar = Calendar.current
             return calendar.component(.month, from: date)

@@ -47,8 +47,10 @@ class SignUpFormViewModel: ObservableObject {
     }
     
     func validatePwForm() {
-        if !password.isEmpty && password == confirmPw && !showErrorPassword && !showErrorConfirmPw {
+        if !password.isEmpty && password == confirmPw && !confirmPw.isEmpty && !showErrorPassword && !showErrorConfirmPw {
             isFormValid = true
+        } else {
+            isFormValid = false
         }
     }
     
@@ -65,10 +67,12 @@ class SignUpFormViewModel: ObservableObject {
     func validatePassword() {
         let passwordRegex = "^(?=.*[a-z])(?=.*[0-9])([A-Za-z0-9!@#$%^&*()_+={}?:~<>;,-./`]{8,16})$"
         showErrorPassword = !NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
+        validatePwForm()
     }
     
     func validateConfirmPw() {
         showErrorConfirmPw = password != confirmPw
+        validatePwForm()
     }
     
     func checkDuplicateUserNameApi(completion: @escaping (Bool) -> Void) {

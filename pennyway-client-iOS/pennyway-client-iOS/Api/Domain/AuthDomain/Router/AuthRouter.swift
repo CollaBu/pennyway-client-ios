@@ -12,14 +12,19 @@ enum AuthRouter: URLRequestConvertible {
     case linkAccountToOAuth(dto: LinkAccountToOAuthRequestDto)
     case findUserName(dto: FindUserNameRequestDto)
     case receiveUserNameVerificationCode(dto: VerificationCodeRequestDto)
+    case receivePwVerificationCode(dto: VerificationCodeRequestDto)
     case logout
+    case requestResetPw(dto: RequestResetPwDto)
+    case receivePwVerifyVerificationCode(dto: VerificationRequestDto)
     
     var method: HTTPMethod {
         switch self {
-        case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToOAuth, .receiveUserNameVerificationCode:
+        case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToOAuth, .receiveUserNameVerificationCode, .receivePwVerificationCode, .receivePwVerifyVerificationCode:
             return .post
         case .checkDuplicateUserName, .findUserName, .logout:
             return .get
+        case .requestResetPw:  
+            return .patch
         }
     }
     
@@ -31,7 +36,7 @@ enum AuthRouter: URLRequestConvertible {
         switch self {
         case .signup:
             return "v1/auth/sign-up"
-        case .receiveVerificationCode, .receiveUserNameVerificationCode:
+        case .receiveVerificationCode, .receiveUserNameVerificationCode, .receivePwVerificationCode:
             return "v1/phone"
         case .verifyVerificationCode:
             return "v1/auth/phone/verification"
@@ -45,6 +50,10 @@ enum AuthRouter: URLRequestConvertible {
             return "v1/find/username"
         case .logout:
             return "v1/sign-out"
+        case .requestResetPw:
+            return "v1/find/password"
+        case .receivePwVerifyVerificationCode:
+            return "v1/find/password/verification"
         }
     }
     
@@ -58,6 +67,8 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .receiveUserNameVerificationCode(dto):
             return try? dto.asDictionary()
+        case let .receivePwVerificationCode(dto):
+            return try? dto.asDictionary()
         case .checkDuplicateUserName:
             return [:]
         case let .login(dto):
@@ -66,8 +77,13 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .findUserName(dto):
             return try? dto.asDictionary()
-        case .logout:
+        case .checkDuplicateUserName, .logout:
             return [:]
+            
+        case let .requestResetPw(dto):
+            return try? dto.asDictionary()
+        case let .receivePwVerifyVerificationCode(dto):
+            return try? dto.asDictionary()
         }
     }
     
@@ -76,7 +92,7 @@ enum AuthRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .signup, .verifyVerificationCode, .login, .linkAccountToOAuth:
+        case .signup, .verifyVerificationCode, .login, .linkAccountToOAuth, .receivePwVerifyVerificationCode, .requestResetPw:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
             
         case let .receiveVerificationCode:
@@ -85,6 +101,10 @@ enum AuthRouter: URLRequestConvertible {
             
         case let .receiveUserNameVerificationCode: // 아이디 찾기 번호 인증
             let queryParameters = [URLQueryItem(name: "type", value: "username")]
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
+            
+        case let .receivePwVerificationCode:
+            let queryParameters = [URLQueryItem(name: "type", value: "password")]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
             
         case let .checkDuplicateUserName(dto):

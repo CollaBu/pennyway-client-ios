@@ -4,7 +4,7 @@ import SwiftUI
 
 class KakaoOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
-    @Published var isOAuthExistUser: Bool = true 
+    @Published var isOAuthExistUser: Bool = false
     @Published var errorMessage: String = ""
     @Published var isLoggedIn: Bool = false // 로그인 여부
     @Published var isLoginSuccessful = false
