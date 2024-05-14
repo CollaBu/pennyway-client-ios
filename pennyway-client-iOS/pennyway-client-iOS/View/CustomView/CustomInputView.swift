@@ -9,17 +9,17 @@ struct CustomInputView: View {
     var isSecureText: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 13) {
+        VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
             Text(titleText!)
                 .padding(.horizontal, 20)
                 .font(.pretendard(.regular, size: 12))
                 .platformTextColor(color: Color("Gray04"))
 
-            HStack(spacing: 11) {
+            HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
-                        .frame(height: 46)
+                        .frame(height: 46 * DynamicSizeFactor.factor())
 
                     if isSecureText {
                         SecureField("", text: $inputText, onCommit: {
@@ -27,8 +27,8 @@ struct CustomInputView: View {
                         })
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                        .padding(.leading, 13)
-                        .padding(.vertical, 16)
+                        .padding(.leading, 13 * DynamicSizeFactor.factor())
+                        .padding(.vertical, 16 * DynamicSizeFactor.factor())
                         .font(.pretendard(.medium, size: 14))
 
                     } else {
@@ -37,8 +37,8 @@ struct CustomInputView: View {
                         })
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                        .padding(.leading, 13)
-                        .padding(.vertical, 16)
+                        .padding(.leading, 13 * DynamicSizeFactor.factor())
+                        .padding(.vertical, 16 * DynamicSizeFactor.factor())
                         .font(.pretendard(.medium, size: 14))
                     }
                 }
