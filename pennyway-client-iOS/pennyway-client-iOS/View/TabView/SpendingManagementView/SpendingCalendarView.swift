@@ -5,6 +5,7 @@ import SwiftUI
 struct CalenderView: View {
     @State private var date: Date = Date()
     @State private var clickedCurrentMonthDates: Date?
+    let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
   
     init(
         month: Date = Date(),
@@ -16,8 +17,7 @@ struct CalenderView: View {
   
     var body: some View {
         VStack {
-            
-            Spacer().frame(height: 22 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 22)
             
             headerView
             
@@ -25,6 +25,8 @@ struct CalenderView: View {
             
             calendarGridView
                 .padding(.horizontal, 11)
+            
+            Spacer().frame(height: 22)
         }
         .background(Color("White01"))
         .cornerRadius(8)
@@ -35,15 +37,14 @@ struct CalenderView: View {
     private var headerView: some View {
         VStack {
             yearMonthView
-                .padding(.horizontal, 10)
-                .padding(.bottom, 5)
             
             Spacer().frame(height: 12 * DynamicSizeFactor.factor())
       
             HStack {
-                ForEach(Self.weekdaySymbols.indices, id: \.self) { symbol in
-                    Text(Self.weekdaySymbols[symbol].uppercased())
-                        .foregroundColor(.gray)
+                ForEach(0 ..< 7, id: \.self) { index in
+                    Text(self.weekdaySymbols[index])
+                        .font(.B2MediumFont())
+                        .platformTextColor(color: Color("Gray04"))
                         .frame(maxWidth: .infinity)
                 }
             }
@@ -54,32 +55,33 @@ struct CalenderView: View {
     // MARK: - 연월 표시
 
     private var yearMonthView: some View {
-        HStack(alignment: .center, spacing: 20) {
+        HStack(alignment: .center, spacing: 2 * DynamicSizeFactor.factor()) {
             Button(
                 action: {
                     changeMonth(by: -1)
                 },
                 label: {
-                    Image(systemName: "chevron.left")
-                        .font(.title)
-                        .foregroundColor(canMoveToPreviousMonth() ? .black : .gray)
+                    Image(!canMoveToPreviousMonth() ? "icon_calender_left_off" : "icon_calender_left_on")
+                        .frame(width: 21 * DynamicSizeFactor.factor(), height: 21 * DynamicSizeFactor.factor())
                 }
             )
+            .frame(width: 44, height: 44)
             .disabled(!canMoveToPreviousMonth())
       
             Text(date, formatter: Self.calendarHeaderDateFormatter)
-                .font(.title.bold())
+                .font(.B1SemiboldeFont())
+                .platformTextColor(color: Color("Gray07"))
       
             Button(
                 action: {
                     changeMonth(by: 1)
                 },
                 label: {
-                    Image(systemName: "chevron.right")
-                        .font(.title)
-                        .foregroundColor(canMoveToNextMonth() ? .black : .gray)
+                    Image(!canMoveToNextMonth() ? "icon_calender_right_off" : "icon_calender_right_on")
+                        .frame(width: 21 * DynamicSizeFactor.factor(), height: 21 * DynamicSizeFactor.factor())
                 }
             )
+            .frame(width: 44, height: 44)
             .disabled(!canMoveToNextMonth())
         }
     }
@@ -137,9 +139,15 @@ private struct CellView: View {
         if clicked {
             return Color.white
         } else if isCurrentMonthDay {
-            return Color.black
+            if isToday {
+                return Color("Mint03")
+            } else if isSpecialDay(day) {
+                return Color("Gray06")
+            } else {
+                return Color("Gray03")
+            }
         } else {
-            return Color.gray
+            return Color("White01")
         }
     }
 
@@ -148,7 +156,7 @@ private struct CellView: View {
             print(date, day)
             return Color.black
         } else if isToday {
-            return Color.gray
+            return Color("Mint01")
         } else {
             return Color.white
         }
@@ -172,40 +180,47 @@ private struct CellView: View {
         VStack {
             Circle()
                 .fill(backgroundColor)
-                .overlay(Text(String(day)))
+                .overlay(
+                    Text(String(day))
+                        .font(.B2MediumFont())
+                )
                 .foregroundColor(textColor)
-      
-            Spacer()
+                .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
             
-            if isSpecialDay(day) {
-                Text("-10000")
-                    .font(.B4MediumFont())
-            }
+            Spacer()
+                .frame(height: 1 * DynamicSizeFactor.factor())
 
             if clicked {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.red)
-                    .frame(width: 10, height: 10)
-            } else {
                 Spacer()
                     .frame(height: 10)
+            } else {
+                if isSpecialDay(day) {
+                    Text("-10000")
+                        .font(.B4MediumFont())
+                        .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
+//                        .frame(height: 10)
+                } else {
+                    Spacer()
+                        .frame(height: 10)
+                }
             }
         }
-        .frame(height: 50)
+        .frame(height: 30 * DynamicSizeFactor.factor())
     }
     
     private func isSpecialDay(_ day: Int) -> Bool {
+        
+        //TODO: month,day,money를 합친 model 생성 필요
         var month: Int {
             let calendar = Calendar.current
             return calendar.component(.month, from: date)
         }
-        let specialDays = [8, 13] // 특별한 날짜 목록
+        let specialDays = [8, 13, 14]
         if month == 5 {
             return specialDays.contains(day)
-        }else if month == 4 {
+        } else if month == 4 {
             return specialDays.contains(day)
-        }
-        else{
+        } else {
             return false
         }
     }
@@ -299,7 +314,7 @@ private extension CalenderView {
     func canMoveToNextMonth() -> Bool {
         let currentDate = Date()
         let calendar = Calendar.current
-        let targetDate = calendar.date(byAdding: .month, value: 5, to: currentDate) ?? currentDate
+        let targetDate = calendar.date(byAdding: .month, value: 0, to: currentDate) ?? currentDate
     
         if adjustedMonth(by: 1) > targetDate {
             return false

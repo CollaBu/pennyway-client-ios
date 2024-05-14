@@ -716,8 +716,8 @@
 				4A762AFC2B99A1CB001C1188 /* ViewModel */,
 				4A762AFB2B99A1C4001C1188 /* View */,
 				4A762AFA2B99A1A5001C1188 /* Model */,
-				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
 				4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */,
+				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
 				4A762AF02B99A16D001C1188 /* Assets.xcassets */,
 				4A762AF22B99A16D001C1188 /* Preview Content */,
 			);
