@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct TermsAndConditionsView: View {
-
     @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
     @State private var isAllAgreed = false
     @ObservedObject var viewModel: SignUpNavigationViewModel
