@@ -141,7 +141,7 @@ private struct CellView: View {
         } else if isCurrentMonthDay {
             if isToday {
                 return Color("Mint03")
-            } else if isSpecialDay(day) {
+            } else if isSpendingDay(day) {
                 return Color("Gray06")
             } else {
                 return Color("Gray03")
@@ -153,7 +153,7 @@ private struct CellView: View {
 
     private var backgroundColor: Color {
         if clicked {
-            print(date, day)
+            Log.debug(date)
             return Color("Gray07")
         } else if isToday {
             return Color("Mint01")
@@ -190,7 +190,7 @@ private struct CellView: View {
             Spacer()
                 .frame(height: 1 * DynamicSizeFactor.factor())
 
-            if isSpecialDay(day) {
+            if isSpendingDay(day) {
                 Text("-10,000")
                     .font(.B4MediumFont())
                     .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
@@ -203,7 +203,7 @@ private struct CellView: View {
         .frame(height: 32 * DynamicSizeFactor.factor())
     }
     
-    private func isSpecialDay(_ day: Int) -> Bool {
+    private func isSpendingDay(_ day: Int) -> Bool {
         // TODO: month,day,money를 합친 model 생성 필요
         var month: Int {
             let calendar = Calendar.current

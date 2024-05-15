@@ -27,9 +27,10 @@ struct ProfileMainView: View {
                             Image("icon_navigationbar_bell_dot")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 34, height: 34)
+                                .frame(width: 34 , height: 34)
                                 .padding(5)
                         })
+                        .frame(width: 44, height: 44)
                     }
                 }
             }
