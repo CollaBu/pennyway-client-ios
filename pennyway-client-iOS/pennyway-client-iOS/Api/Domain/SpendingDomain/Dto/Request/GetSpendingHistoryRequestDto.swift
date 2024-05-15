@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct CheckSpendingHistoryRequestDto: Encodable {
+public struct GetSpendingHistoryRequestDto: Encodable {
     let year: String
     let month: String
 

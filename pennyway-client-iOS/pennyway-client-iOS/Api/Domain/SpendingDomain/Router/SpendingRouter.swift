@@ -3,11 +3,11 @@ import Alamofire
 import Foundation
 
 enum SpendingRouter: URLRequestConvertible {
-    case checkSpendingHistory(dto: CheckSpendingHistoryRequestDto)
+    case getSpendingHistory(dto: GetSpendingHistoryRequestDto)
     
     var method: HTTPMethod {
         switch self {
-        case .checkSpendingHistory:
+        case .getSpendingHistory:
             return .get
         }
     }
@@ -18,14 +18,14 @@ enum SpendingRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .checkSpendingHistory:
+        case .getSpendingHistory:
             return "v2/spendings"
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .checkSpendingHistory:
+        case .getSpendingHistory:
             return [:]
         }
     }
@@ -35,9 +35,9 @@ enum SpendingRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case let .checkSpendingHistory(dto):
+        case let .getSpendingHistory(dto):
             let queryParameters = [URLQueryItem(name: "year", value: dto.year), URLQueryItem(name: "month", value: dto.month)]
-            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }
         return request
     }

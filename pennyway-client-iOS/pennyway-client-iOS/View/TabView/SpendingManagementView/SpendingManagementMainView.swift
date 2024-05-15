@@ -61,6 +61,9 @@ struct SpendingManagementMainView: View {
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
             }
+            .onAppear {
+                spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
+            }
             .background(Color("Gray01"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {

@@ -1,10 +1,14 @@
 import Foundation
 
-// MARK: - CheckSpendingHistoryResponseDto
+// MARK: - GetSpendingHistoryResponseDto
 
-struct CheckSpendingHistoryResponseDto: Codable {
+struct GetSpendingHistoryResponseDto: Codable {
     let code: String
-    let data: Spending
+    let data: SpendingData
+
+    struct SpendingData: Codable {
+        let spendings: Spending
+    }
 }
 
 // MARK: - Spending

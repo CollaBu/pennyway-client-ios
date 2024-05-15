@@ -14,9 +14,9 @@ class SpendingAlamofire: TokenHandler {
         session = Session(interceptor: interceptors, eventMonitors: monitors)
     }
     
-    func checkSpendingHistory(_ dto: CheckSpendingHistoryRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
-        Log.info("SpendingAlamofire - checkSpendingHistory() called \(dto)")
+    func getSpendingHistory(_ dto: GetSpendingHistoryRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - getSpendingHistory() called \(dto)")
         
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.checkSpendingHistory(dto: dto), completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.getSpendingHistory(dto: dto), completion: completion)
     }
 }
