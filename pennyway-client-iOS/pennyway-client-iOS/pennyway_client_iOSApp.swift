@@ -17,26 +17,32 @@ struct pennyway_client_iOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Group {
-                NavigationAvailable {
-                    if appViewModel.isLoggedIn {
-                        MainTabView()
-
-                    } else {
-                        if appViewModel.isSplashShown {
-                            LoginView()
-
-                        } else {
-                            MainView()
-                        }
+            if appViewModel.isLoggedIn {
+                MainTabView()
+                    .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                    .onOpenURL { url in
+                        GIDSignIn.sharedInstance.handle(url)
                     }
+                    .environmentObject(appViewModel)
+
+            } else {
+                if appViewModel.isSplashShown {
+                    LoginView()
+                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                        .onOpenURL { url in
+                            GIDSignIn.sharedInstance.handle(url)
+                        }
+                        .environmentObject(appViewModel)
+
+                } else {
+                    MainView()
+                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                        .onOpenURL { url in
+                            GIDSignIn.sharedInstance.handle(url)
+                        }
+                        .environmentObject(appViewModel)
                 }
             }
-            .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-            .onOpenURL { url in
-                GIDSignIn.sharedInstance.handle(url)
-            }
-            .environmentObject(appViewModel)
         }
     }
 }

@@ -3,19 +3,21 @@ import SwiftUI
 
 struct ProfileMainView: View {
     var body: some View {
-        ScrollView {
-            VStack {
-                ProfileUserInfoView()
+        NavigationAvailable {
+            ScrollView {
+                VStack {
+                    ProfileUserInfoView()
                     
-                Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                     
-                ProfileOAuthButtonView()
+                    ProfileOAuthButtonView()
                     
-                Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                     
-                ProfileSettingListView()
+                    ProfileSettingListView()
+                }
+                .background(Color("Gray01"))
             }
-            .background(Color("Gray01"))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationBarTitle("프로필", displayMode: .inline)
