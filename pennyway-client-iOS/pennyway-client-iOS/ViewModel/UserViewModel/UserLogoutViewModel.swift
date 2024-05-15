@@ -2,7 +2,7 @@
 import os.log
 import SwiftUI
 
-class UserProfileViewModel: ObservableObject {
+class UserLogoutViewModel: ObservableObject {
     @Published var isLoggedOut = false
 
     func logout(completion: @escaping (Bool) -> Void) {

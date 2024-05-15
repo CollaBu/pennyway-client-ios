@@ -3,7 +3,6 @@ import SwiftUI
 
 struct ProfileMainView: View {
     var body: some View {
-//        NavigationAvailable {
         ScrollView {
             VStack {
                 ProfileUserInfoView()
@@ -33,7 +32,6 @@ struct ProfileMainView: View {
                 }
             }
         }
-//        }
     }
 }
 

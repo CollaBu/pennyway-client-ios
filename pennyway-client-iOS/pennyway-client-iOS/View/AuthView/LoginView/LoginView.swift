@@ -4,7 +4,6 @@ struct LoginView: View {
     @StateObject var loginViewModel = LoginViewModel()
 
     var body: some View {
-//        NavigationAvailable {
         ZStack {
             VStack {
                 ScrollView {

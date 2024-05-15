@@ -102,7 +102,7 @@ struct SignUpView: View {
                 authViewModel.login()
                 profileInfoViewModel.getUserProfileApi()
             } else {
-                Log.error("기존 계정에 소셜 계정 연동 싪패")
+                Log.error("기존 계정에 소셜 계정 연동 실패")
             }
         }
     }

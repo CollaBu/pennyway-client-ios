@@ -5,7 +5,7 @@ import SwiftUI
 
 struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
-    @StateObject var userProfileViewModel = UserProfileViewModel()
+    @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
     @State private var showingPopUp = false
 

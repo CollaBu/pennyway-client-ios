@@ -1,4 +1,3 @@
-
 import GoogleSignIn
 import KakaoSDKAuth
 import KakaoSDKCommon
@@ -18,32 +17,26 @@ struct pennyway_client_iOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationAvailable {
-                if appViewModel.isLoggedIn {
-                    MainTabView()
-                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-                        .onOpenURL { url in
-                            GIDSignIn.sharedInstance.handle(url)
-                        }
-                        .environmentObject(appViewModel)
-                } else {
-                    if appViewModel.isSplashShown {
-                        LoginView()
-                            .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-                            .onOpenURL { url in
-                                GIDSignIn.sharedInstance.handle(url)
-                            }
-                            .environmentObject(appViewModel)
+            Group {
+                NavigationAvailable {
+                    if appViewModel.isLoggedIn {
+                        MainTabView()
+
                     } else {
-                        MainView()
-                            .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-                            .onOpenURL { url in
-                                GIDSignIn.sharedInstance.handle(url)
-                            }
-                            .environmentObject(appViewModel)
+                        if appViewModel.isSplashShown {
+                            LoginView()
+
+                        } else {
+                            MainView()
+                        }
                     }
                 }
             }
+            .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+            .onOpenURL { url in
+                GIDSignIn.sharedInstance.handle(url)
+            }
+            .environmentObject(appViewModel)
         }
     }
 }

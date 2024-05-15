@@ -138,7 +138,7 @@
 		D8180C082BE5168800F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8180C0A2BE531C500F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927ED2BE6842A00653391 /* CustomPopUpView.swift */; };
-		D85927F22BE69C6A00653391 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */; };
+		D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */; };
 		D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F32BE9116700653391 /* SignUpFormViewModel.swift */; };
 		D85927F92BE9116700653391 /* PhoneVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F42BE9116700653391 /* PhoneVerificationViewModel.swift */; };
 		D85927FA2BE9116700653391 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F52BE9116700653391 /* LoginViewModel.swift */; };
@@ -291,7 +291,7 @@
 		D8180C032BE5081F00F837FB /* FindIdContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdContentView.swift; sourceTree = "<group>"; };
 		D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D85927ED2BE6842A00653391 /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
-		D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogoutViewModel.swift; sourceTree = "<group>"; };
 		D85927F32BE9116700653391 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
 		D85927F42BE9116700653391 /* PhoneVerificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewModel.swift; sourceTree = "<group>"; };
 		D85927F52BE9116700653391 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -712,9 +712,9 @@
 				4A762AFC2B99A1CB001C1188 /* ViewModel */,
 				4A762AFB2B99A1C4001C1188 /* View */,
 				4A762AFA2B99A1A5001C1188 /* Model */,
-				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
 				4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */,
 				4A762AF02B99A16D001C1188 /* Assets.xcassets */,
+				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
 				4A762AF22B99A16D001C1188 /* Preview Content */,
 			);
 			path = "pennyway-client-iOS";
@@ -755,7 +755,6 @@
 				4ADBFAF32BE2C7F500C3ECE4 /* UserViewModel */,
 				4ADBFAF22BE2C7D600C3ECE4 /* AuthViewModel */,
 				4AC4FD062BBDCC010027ACD5 /* OAuthViewModel */,
-				D85927F12BE69C6A00653391 /* UserProfileViewModel.swift */,
 				4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */,
 			);
 			path = ViewModel;
@@ -859,7 +858,6 @@
 				4AD70E1F2BE013380058A52A /* FeedView */,
 				4AD70E1E2BE011970058A52A /* SpendManagementView */,
 				4AD70E1D2BE011370058A52A /* ProfileView */,
-				4AD70E2A2BE0A8D30058A52A /* MainTabView.swift */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -867,6 +865,7 @@
 		4AD70E1D2BE011370058A52A /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				4AD70E2A2BE0A8D30058A52A /* MainTabView.swift */,
 				4AD70E232BE014C40058A52A /* ProfileMainView */,
 			);
 			path = ProfileView;
@@ -966,6 +965,7 @@
 			isa = PBXGroup;
 			children = (
 				4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */,
+				D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */,
 			);
 			path = UserViewModel;
 			sourceTree = "<group>";
@@ -1194,7 +1194,7 @@
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */,
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
-				D85927F22BE69C6A00653391 /* UserProfileViewModel.swift in Sources */,
+				D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
 				D888329C2BBC612600F49B27 /* LoginView.swift in Sources */,
