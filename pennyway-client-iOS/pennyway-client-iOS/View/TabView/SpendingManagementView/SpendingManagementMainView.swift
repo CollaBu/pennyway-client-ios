@@ -76,9 +76,9 @@ struct SpendingManagementMainView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
-                                .padding(5)
+                                .padding(5 * DynamicSizeFactor.factor())
                         })
-                        .padding(.trailing, 5)
+                        .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
 
                         Button(action: {}, label: {
@@ -86,9 +86,9 @@ struct SpendingManagementMainView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                .padding(5)
+                                .padding(5 * DynamicSizeFactor.factor())
                         })
-                        .padding(.trailing, 5)
+                        .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
                     }
                     .offset(x: 10)
