@@ -33,8 +33,7 @@ struct FindIdView: View {
                         RoundedRectangle(cornerRadius: 4)
                             .inset(by: 0.5)
                             .stroke(Color("Gray02"), lineWidth: 1)
-                    )
-                        
+                    )                        
                 Text("\(username)")
                     .font(.H2SemiboldFont())
                     .multilineTextAlignment(.center)

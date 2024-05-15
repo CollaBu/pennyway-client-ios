@@ -30,7 +30,7 @@ struct ResetPwView: View {
                     
             }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                
+
             NavigationLink(destination: CompleteChangePwView(), isActive: $navigateView) {
                 EmptyView()
             }.hidden()
@@ -53,7 +53,7 @@ struct ResetPwView: View {
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
-                        
+
                 }.offset(x: -10)
             }
         }

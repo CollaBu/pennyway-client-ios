@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "IDEPreferLogStreaming=YES"
+            argument = "IDEPreferLogStreaming=YES "
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

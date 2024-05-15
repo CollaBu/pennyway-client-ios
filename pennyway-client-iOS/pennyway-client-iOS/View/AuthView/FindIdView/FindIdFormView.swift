@@ -18,7 +18,6 @@ struct FindIdFormView: View {
             
             Spacer()
             
-            
             CustomBottomButton(action: {
                 continueButtonAction()
             }, label: "아이디 찾기", isFormValid: $phoneVerificationViewModel.isFormValid)
@@ -43,7 +42,7 @@ struct FindIdFormView: View {
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-                        
+
                 }.offset(x: -10)
             }
         }

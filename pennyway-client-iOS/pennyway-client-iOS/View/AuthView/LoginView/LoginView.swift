@@ -18,7 +18,6 @@ struct LoginView: View {
                         Spacer()
                     }
                 }
-
                 VStack {
                     Spacer()
                     Button(action: {}, label: {
