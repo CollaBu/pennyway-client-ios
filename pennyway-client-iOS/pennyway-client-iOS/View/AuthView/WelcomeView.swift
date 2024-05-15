@@ -28,6 +28,7 @@ struct WelcomeView: View {
                         .platformTextColor(color: Color("Gray04"))
 
                     Spacer()
+
                     CustomBottomButton(action: {
                         authViewModel.login()
                         profileInfoViewModel.getUserProfileApi()
