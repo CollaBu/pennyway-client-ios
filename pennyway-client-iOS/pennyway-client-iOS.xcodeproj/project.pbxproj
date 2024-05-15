@@ -12,6 +12,10 @@
 		4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F002BD046C1004B6F89 /* OAuthLoginViewModel.swift */; };
 		4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */; };
 		4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F082BD055F9004B6F89 /* ApiRequstHandler.swift */; };
+		4A0BC68F2BF538A40036D900 /* SpendingAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC68E2BF538A40036D900 /* SpendingAlamofire.swift */; };
+		4A0BC6912BF538B50036D900 /* SpendingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6902BF538B50036D900 /* SpendingRouter.swift */; };
+		4A0BC6932BF539DA0036D900 /* CheckSpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6922BF539DA0036D900 /* CheckSpendingHistoryResponseDto.swift */; };
+		4A0BC6952BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6942BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift */; };
 		4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */; };
 		4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */; };
 		4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */; };
@@ -172,6 +176,10 @@
 		4A058F002BD046C1004B6F89 /* OAuthLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginViewModel.swift; sourceTree = "<group>"; };
 		4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateResponseDto.swift; sourceTree = "<group>"; };
 		4A058F082BD055F9004B6F89 /* ApiRequstHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequstHandler.swift; sourceTree = "<group>"; };
+		4A0BC68E2BF538A40036D900 /* SpendingAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingAlamofire.swift; sourceTree = "<group>"; };
+		4A0BC6902BF538B50036D900 /* SpendingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingRouter.swift; sourceTree = "<group>"; };
+		4A0BC6922BF539DA0036D900 /* CheckSpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
+		4A0BC6942BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateRequestDto.swift; sourceTree = "<group>"; };
@@ -399,9 +407,61 @@
 			path = Handler;
 			sourceTree = "<group>";
 		};
+		4A0BC6882BF5384C0036D900 /* SpendingDomain */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC68B2BF538690036D900 /* Dto */,
+				4A0BC68A2BF538640036D900 /* Router */,
+				4A0BC6892BF5385E0036D900 /* Alamofire */,
+			);
+			path = SpendingDomain;
+			sourceTree = "<group>";
+		};
+		4A0BC6892BF5385E0036D900 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC68E2BF538A40036D900 /* SpendingAlamofire.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		4A0BC68A2BF538640036D900 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC6902BF538B50036D900 /* SpendingRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4A0BC68B2BF538690036D900 /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC68D2BF538740036D900 /* Request */,
+				4A0BC68C2BF5386F0036D900 /* Response */,
+			);
+			path = Dto;
+			sourceTree = "<group>";
+		};
+		4A0BC68C2BF5386F0036D900 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC6922BF539DA0036D900 /* CheckSpendingHistoryResponseDto.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		4A0BC68D2BF538740036D900 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC6942BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		4A0FFBE42BCD9F2200EFEC56 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				4A0BC6882BF5384C0036D900 /* SpendingDomain */,
 				4ADBFAE72BE2C32800C3ECE4 /* UserDomain */,
 				4A0FFBE92BCD9FC200EFEC56 /* OAuthDomain */,
 				4A0FFBE62BCD9F5D00EFEC56 /* AuthDomain */,
@@ -1237,6 +1297,7 @@
 				4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */,
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
+				4A0BC6912BF538B50036D900 /* SpendingRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
@@ -1307,8 +1368,11 @@
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
 				4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */,
+				4A0BC68F2BF538A40036D900 /* SpendingAlamofire.swift in Sources */,
+				4A0BC6952BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift in Sources */,
 				4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */,
 				D85927F92BE9116700653391 /* PhoneVerificationViewModel.swift in Sources */,
+				4A0BC6932BF539DA0036D900 /* CheckSpendingHistoryResponseDto.swift in Sources */,
 				D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */,
 				4A5789772BDC1D5500AFEB26 /* MethodNotAllowedErrorCode.swift in Sources */,
 				4A585F622BF2A6F5007DC01A /* SpendingCalendarView.swift in Sources */,
