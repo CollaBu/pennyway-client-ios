@@ -38,7 +38,6 @@ enum SpendingRouter: URLRequestConvertible {
         case let .checkSpendingHistory(dto):
             let queryParameters = [URLQueryItem(name: "year", value: dto.year), URLQueryItem(name: "month", value: dto.month)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-  
         }
         return request
     }

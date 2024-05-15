@@ -10,7 +10,7 @@ class TermsAndConditionsViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
-    
+
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("회원가입 \(jsonString)")
                         }

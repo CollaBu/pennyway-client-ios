@@ -2,13 +2,15 @@
 import SwiftUI
 
 struct SpendingCheckBoxView: View {
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    
     /// 총 지출량
     var totalSpent: Int = 600_000
     
     /// 프로그래스 바에 사용될 최대 값
     let targetValue: CGFloat = 500_000
     
-    /// 프로그래스 바의 현재 값 (0부터 maxValue까지)
+    /// 프로그래스 바의 현재 값 (0부터 targetValue까지)
     var progressValue: CGFloat {
         return CGFloat(totalSpent) / targetValue * 100
     }

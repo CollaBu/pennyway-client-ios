@@ -1,12 +1,14 @@
 import Foundation
 
 // MARK: - CheckSpendingHistoryResponseDto
+
 struct CheckSpendingHistoryResponseDto: Codable {
     let code: String
     let data: Spending
 }
 
 // MARK: - Spending
+
 struct Spending: Codable {
     let year: Int
     let month: Int
@@ -15,6 +17,7 @@ struct Spending: Codable {
 }
 
 // MARK: - DailySpending
+
 struct DailySpending: Codable {
     let day: Int
     let dailyTotalAmount: Int
@@ -22,6 +25,7 @@ struct DailySpending: Codable {
 }
 
 // MARK: - IndividualSpending
+
 struct IndividualSpending: Codable {
     let id: Int
     let amount: Int
@@ -32,6 +36,7 @@ struct IndividualSpending: Codable {
 }
 
 // MARK: - SpendingCategory
+
 struct SpendingCategory: Codable {
     let isCustom: Bool
     let id: Int

@@ -19,5 +19,4 @@ class SpendingAlamofire: TokenHandler {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.checkSpendingHistory(dto: dto), completion: completion)
     }
-    
 }

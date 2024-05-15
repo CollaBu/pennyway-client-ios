@@ -1,19 +1,13 @@
 import SwiftUI
 
-// MARK: - CalenderView
+// MARK: - SpendingCalenderView
 
-struct CalenderView: View {
+struct SpendingCalenderView: View {
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    
     @State private var date: Date = Date()
     @State private var clickedCurrentMonthDates: Date?
     let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
-  
-    init(
-        month: Date = Date(),
-        clickedCurrentMonthDates: Date? = nil
-    ) {
-        _date = State(initialValue: month)
-        _clickedCurrentMonthDates = State(initialValue: clickedCurrentMonthDates)
-    }
   
     var body: some View {
         VStack {
@@ -104,7 +98,7 @@ struct CalenderView: View {
                         let clicked = clickedCurrentMonthDates == date
                         let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
             
-                        CellView(date: date, day: day, clicked: clicked, isToday: isToday)
+                        SpendingCalendarCellView(date: date, day: day, clicked: clicked, isToday: isToday)
                     } else if let prevMonthDate = Calendar.current.date(
                         byAdding: .day,
                         value: index + lastDayOfMonthBefore,
@@ -112,7 +106,7 @@ struct CalenderView: View {
                     ) {
                         let day = Calendar.current.component(.day, from: prevMonthDate)
             
-                        CellView(date: date, day: day, isCurrentMonthDay: false)
+                        SpendingCalendarCellView(date: date, day: day, isCurrentMonthDay: false)
                     }
                 }
                 .onTapGesture {
@@ -126,103 +120,9 @@ struct CalenderView: View {
     }
 }
 
-// MARK: - CellView
-
-private struct CellView: View {
-    private var date: Date
-    private var day: Int
-    private var clicked: Bool
-    private var isToday: Bool
-    private var isCurrentMonthDay: Bool
-
-    private var textColor: Color {
-        if clicked {
-            return Color("White01")
-        } else if isCurrentMonthDay {
-            if isToday {
-                return Color("Mint03")
-            } else if isSpendingDay(day) {
-                return Color("Gray06")
-            } else {
-                return Color("Gray03")
-            }
-        } else {
-            return Color("White01")
-        }
-    }
-
-    private var backgroundColor: Color {
-        if clicked {
-            Log.debug(date)
-            return Color("Gray07")
-        } else if isToday {
-            return Color("Mint01")
-        } else {
-            return Color("White01")
-        }
-    }
-  
-    fileprivate init(
-        date: Date,
-        day: Int,
-        clicked: Bool = false,
-        isToday: Bool = false,
-        isCurrentMonthDay: Bool = true
-    ) {
-        self.date = date
-        self.day = day
-        self.clicked = clicked
-        self.isToday = isToday
-        self.isCurrentMonthDay = isCurrentMonthDay
-    }
-  
-    fileprivate var body: some View {
-        VStack {
-            Circle()
-                .fill(backgroundColor)
-                .overlay(
-                    Text(String(day))
-                        .font(.B2MediumFont())
-                )
-                .platformTextColor(color: textColor)
-                .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor())
-            
-            Spacer()
-                .frame(height: 1 * DynamicSizeFactor.factor())
-
-            if isSpendingDay(day) {
-                Text("-10,000")
-                    .font(.B4MediumFont())
-                    .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
-                    .frame(height: 10 * DynamicSizeFactor.factor())
-            } else {
-                Spacer()
-                    .frame(height: 10 * DynamicSizeFactor.factor())
-            }
-        }
-        .frame(height: 32 * DynamicSizeFactor.factor())
-    }
-    
-    private func isSpendingDay(_ day: Int) -> Bool {
-        // TODO: month,day,money를 합친 model 생성 필요
-        var month: Int {
-            let calendar = Calendar.current
-            return calendar.component(.month, from: date)
-        }
-        let specialDays = [8, 13, 15]
-        if month == 5 {
-            return specialDays.contains(day)
-        } else if month == 4 {
-            return specialDays.contains(day)
-        } else {
-            return false
-        }
-    }
-}
-
 // MARK: - CalendarView Static 프로퍼티
 
-private extension CalenderView {
+private extension SpendingCalenderView {
     var today: Date {
         let now = Date()
         let components = Calendar.current.dateComponents([.year, .month, .day], from: now)
@@ -240,7 +140,7 @@ private extension CalenderView {
 
 // MARK: - 내부 로직 메서드
 
-private extension CalenderView {
+private extension SpendingCalenderView {
     /// 특정 해당 날짜
     func getDate(for index: Int) -> Date {
         let calendar = Calendar.current

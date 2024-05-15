@@ -16,6 +16,8 @@
 		4A0BC6912BF538B50036D900 /* SpendingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6902BF538B50036D900 /* SpendingRouter.swift */; };
 		4A0BC6932BF539DA0036D900 /* CheckSpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6922BF539DA0036D900 /* CheckSpendingHistoryResponseDto.swift */; };
 		4A0BC6952BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6942BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift */; };
+		4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6972BF53D6F0036D900 /* SpendingHistoryViewModel.swift */; };
+		4A0BC69B2BF540140036D900 /* SpendingCalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC69A2BF540140036D900 /* SpendingCalendarCellView.swift */; };
 		4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */; };
 		4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */; };
 		4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */; };
@@ -180,6 +182,8 @@
 		4A0BC6902BF538B50036D900 /* SpendingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingRouter.swift; sourceTree = "<group>"; };
 		4A0BC6922BF539DA0036D900 /* CheckSpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4A0BC6942BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
+		4A0BC6972BF53D6F0036D900 /* SpendingHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingHistoryViewModel.swift; sourceTree = "<group>"; };
+		4A0BC69A2BF540140036D900 /* SpendingCalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCalendarCellView.swift; sourceTree = "<group>"; };
 		4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateRequestDto.swift; sourceTree = "<group>"; };
@@ -456,6 +460,23 @@
 				4A0BC6942BF53AA60036D900 /* CheckSpendingHistoryRequestDto.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		4A0BC6962BF53D520036D900 /* SpendingViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC6972BF53D6F0036D900 /* SpendingHistoryViewModel.swift */,
+			);
+			path = SpendingViewModel;
+			sourceTree = "<group>";
+		};
+		4A0BC6992BF53FA70036D900 /* SpendingCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */,
+				4A0BC69A2BF540140036D900 /* SpendingCalendarCellView.swift */,
+			);
+			path = SpendingCalendarView;
 			sourceTree = "<group>";
 		};
 		4A0FFBE42BCD9F2200EFEC56 /* Domain */ = {
@@ -828,6 +849,7 @@
 		4A762AFC2B99A1CB001C1188 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4A0BC6962BF53D520036D900 /* SpendingViewModel */,
 				4ADBFAF32BE2C7F500C3ECE4 /* UserViewModel */,
 				4ADBFAF22BE2C7D600C3ECE4 /* AuthViewModel */,
 				4AC4FD062BBDCC010027ACD5 /* OAuthViewModel */,
@@ -950,9 +972,9 @@
 		4AD70E1E2BE011970058A52A /* SpendingManagementView */ = {
 			isa = PBXGroup;
 			children = (
+				4A0BC6992BF53FA70036D900 /* SpendingCalendarView */,
 				4ADE802D2BF29192007FFB01 /* SpendingManagementMainView.swift */,
 				4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */,
-				4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */,
 			);
 			path = SpendingManagementView;
 			sourceTree = "<group>";
@@ -1247,6 +1269,7 @@
 			files = (
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
+				4A0BC69B2BF540140036D900 /* SpendingCalendarCellView.swift in Sources */,
 				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
 				4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */,
 				4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */,
@@ -1287,6 +1310,7 @@
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
 				D85927F22BE69C6A00653391 /* UserProfileViewModel.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
+				4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */,
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
 				D888329C2BBC612600F49B27 /* LoginView.swift in Sources */,
 				4A69C1562BE69DEA00A27B82 /* Log.swift in Sources */,
