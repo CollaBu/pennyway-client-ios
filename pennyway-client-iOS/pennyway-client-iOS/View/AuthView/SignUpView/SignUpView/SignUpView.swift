@@ -33,10 +33,11 @@ struct SignUpView: View {
                         Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                         
                         SignUpFormView(formViewModel: formViewModel)
+                        
+                        Spacer().frame(height: 65 * DynamicSizeFactor.factor())
                     }
                 }
             }
-            
             Spacer()
             
             CustomBottomButton(action: {

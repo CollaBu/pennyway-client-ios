@@ -38,6 +38,9 @@ struct SignUpFormView: View {
             
             if formViewModel.showErrorName {
                 errorMessage("한글과 영문 대, 소문자만 가능해요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
             
             CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
@@ -52,6 +55,7 @@ struct SignUpFormView: View {
             if formViewModel.isDuplicateUserName {
                 errorMessage("이미 사용 중인 아이디예요")
             }
+            Spacer().frame(height: 3 * DynamicSizeFactor.factor())
             passwordFields()
         }
     }
@@ -66,6 +70,10 @@ struct SignUpFormView: View {
             
             if formViewModel.showErrorName {
                 errorMessage("한글과 영문 대, 소문자만 가능해요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
             
             CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
@@ -75,10 +83,18 @@ struct SignUpFormView: View {
             
             if formViewModel.showErrorID {
                 errorMessage("영문 소문자, 특수기호 (-), (_), (.) 만 사용하여,\n5~20자의 아이디를 입력해 주세요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
  
             if formViewModel.isDuplicateUserName {
                 errorMessage("이미 사용 중인 아이디예요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
         }
     }
@@ -93,6 +109,10 @@ struct SignUpFormView: View {
             
             if formViewModel.showErrorPassword {
                 errorMessage("숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
             
             CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
@@ -102,6 +122,10 @@ struct SignUpFormView: View {
             
             if formViewModel.showErrorConfirmPw {
                 errorMessage("비밀번호가 일치하지 않아요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
         }
     }
