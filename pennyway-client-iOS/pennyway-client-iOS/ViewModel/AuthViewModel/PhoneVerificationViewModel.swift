@@ -29,7 +29,6 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var timerSeconds = 300
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
-
     func requestVerificationCodeAction() {
         if !showErrorPhoneNumberFormat && !isDisabledButton {
             isDisabledButton = true
@@ -84,6 +83,7 @@ class PhoneVerificationViewModel: ObservableObject {
                     let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
                     Log.debug(response)
                     RegistrationManager.shared.phoneNumber = phoneNumber
+
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
                 }

@@ -8,6 +8,8 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selection) {
             Text("The First Tab")
+                .navigationBarTitle("지출관리")
+
                 .tabItem {
                     Image(systemName: "1.square.fill")
                     Text("지출관리")
@@ -25,14 +27,16 @@ struct MainTabView: View {
                     Text("채팅")
                 }
                 .tag(2)
+
             ProfileMainView()
+
                 .tabItem {
                     selection == 3 ? Image("icon_tapbar_profile_on") : Image("icon_tapbar_profile_off")
                     Text("프로필")
                 }
                 .tag(3)
         }
-        .navigationBarBackButtonHidden(true)
+//        .navigationBarBackButtonHidden(true)
         .accentColor(Color("Mint03"))
         .onAppear {
             UITabBar.appearance().barTintColor = .white
