@@ -28,15 +28,12 @@ struct MainTabView: View {
                 }
                 .tag(2)
 
-            NavigationAvailable {
-                ProfileMainView()
-            }
-
-            .tabItem {
-                selection == 3 ? Image("icon_tapbar_profile_on") : Image("icon_tapbar_profile_off")
-                Text("프로필")
-            }
-            .tag(3)
+            ProfileMainView()
+                .tabItem {
+                    selection == 3 ? Image("icon_tapbar_profile_on") : Image("icon_tapbar_profile_off")
+                    Text("프로필")
+                }
+                .tag(3)
         }
         .navigationBarBackButtonHidden(true)
         .accentColor(Color("Mint03"))

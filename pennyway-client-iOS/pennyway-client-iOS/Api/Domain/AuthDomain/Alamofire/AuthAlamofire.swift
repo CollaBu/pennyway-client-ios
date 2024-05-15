@@ -41,7 +41,7 @@ class AuthAlamofire: TokenHandler {
     }
 
     func signup(_ dto: SignUpRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("AuthAlamofire - signup() called userInput : %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.username, dto.name, dto.phone, dto.code)
+        os_log("AuthAlamofire - signup() called userInput : %@ ,, %@ ,, %@ ,, %@ ,, %@", log: .default, type: .info, dto.username, dto.name, dto.phone, dto.code, dto.password)
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.signup(dto: dto), completion: completion)
     }
     

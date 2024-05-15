@@ -16,6 +16,9 @@ class TermsAndConditionsViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
+
+                print("Failed to verify: \(error)")
+
                 if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                     print("Failed to verify: \(errorWithDomainErrorAndMessage)")
                 } else {

@@ -17,16 +17,16 @@ struct CalenderView: View {
   
     var body: some View {
         VStack {
-            Spacer().frame(height: 22)
+            Spacer().frame(height: 10 * DynamicSizeFactor.factor())
             
             headerView
             
             Spacer().frame(height: 10 * DynamicSizeFactor.factor())
             
             calendarGridView
-                .padding(.horizontal, 11)
+                .padding(.horizontal, 11 * DynamicSizeFactor.factor())
             
-            Spacer().frame(height: 22)
+            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
         }
         .background(Color("White01"))
         .cornerRadius(8)
@@ -48,7 +48,7 @@ struct CalenderView: View {
                         .frame(maxWidth: .infinity)
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 11 * DynamicSizeFactor.factor())
         }
     }
   
@@ -137,7 +137,7 @@ private struct CellView: View {
 
     private var textColor: Color {
         if clicked {
-            return Color.white
+            return Color("White01")
         } else if isCurrentMonthDay {
             if isToday {
                 return Color("Mint03")
@@ -154,11 +154,11 @@ private struct CellView: View {
     private var backgroundColor: Color {
         if clicked {
             print(date, day)
-            return Color.black
+            return Color("Gray07")
         } else if isToday {
             return Color("Mint01")
         } else {
-            return Color.white
+            return Color("White01")
         }
     }
   
@@ -184,28 +184,23 @@ private struct CellView: View {
                     Text(String(day))
                         .font(.B2MediumFont())
                 )
-                .foregroundColor(textColor)
-                .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
+                .platformTextColor(color: textColor)
+                .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor())
             
             Spacer()
                 .frame(height: 1 * DynamicSizeFactor.factor())
 
-            if clicked {
-                Spacer()
-                    .frame(height: 10)
+            if isSpecialDay(day) {
+                Text("-10,000")
+                    .font(.B4MediumFont())
+                    .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
+                    .frame(height: 10 * DynamicSizeFactor.factor())
             } else {
-                if isSpecialDay(day) {
-                    Text("-10000")
-                        .font(.B4MediumFont())
-                        .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
-//                        .frame(height: 10)
-                } else {
-                    Spacer()
-                        .frame(height: 10)
-                }
+                Spacer()
+                    .frame(height: 10 * DynamicSizeFactor.factor())
             }
         }
-        .frame(height: 30 * DynamicSizeFactor.factor())
+        .frame(height: 32 * DynamicSizeFactor.factor())
     }
     
     private func isSpecialDay(_ day: Int) -> Bool {
