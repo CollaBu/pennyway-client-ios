@@ -1,4 +1,3 @@
-
 import GoogleSignIn
 import KakaoSDKAuth
 import KakaoSDKCommon
@@ -25,6 +24,7 @@ struct pennyway_client_iOSApp: App {
                         GIDSignIn.sharedInstance.handle(url)
                     }
                     .environmentObject(appViewModel)
+
             } else {
                 if appViewModel.isSplashShown {
                     LoginView()
@@ -33,6 +33,7 @@ struct pennyway_client_iOSApp: App {
                             GIDSignIn.sharedInstance.handle(url)
                         }
                         .environmentObject(appViewModel)
+
                 } else {
                     MainView()
                         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)

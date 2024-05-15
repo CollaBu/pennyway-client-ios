@@ -30,32 +30,9 @@ struct SignUpFormView: View {
     
     /// All input fields
     private func allInputFields() -> some View {
-        VStack(alignment: .leading, spacing: 9 * DynamicSizeFactor.factor()) {
-            CustomInputView(inputText: $formViewModel.name, titleText: "이름", onCommit: {
-                formViewModel.validateName()
-                formViewModel.validateForm()
-            }, isSecureText: false)
-            
-            if formViewModel.showErrorName {
-                errorMessage("한글과 영문 대, 소문자만 가능해요")
-                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
-            } else {
-                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
-            }
-            
-            CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
-                formViewModel.validateID()
-                formViewModel.validateForm()
-            }, isSecureText: false)
-            
-            if formViewModel.showErrorID {
-                errorMessage("영문 소문자, 특수기호 (-), (_), (.) 만 사용하여,\n5~20자의 아이디를 입력해 주세요")
-            }
+        VStack(alignment: .leading, spacing: 9) {
+            nameAndIDFields()
 
-            if formViewModel.isDuplicateUserName {
-                errorMessage("이미 사용 중인 아이디예요")
-            }
-            Spacer().frame(height: 3 * DynamicSizeFactor.factor())
             passwordFields()
         }
     }
@@ -77,8 +54,12 @@ struct SignUpFormView: View {
             }
             
             CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
-                formViewModel.validateID()
-                formViewModel.validateForm()
+                formViewModel.checkDuplicateUserNameApi { isDuplicate in
+                    if !isDuplicate {
+                        formViewModel.validateID()
+                        formViewModel.validateForm()
+                    }
+                }
             }, isSecureText: false)
             
             if formViewModel.showErrorID {

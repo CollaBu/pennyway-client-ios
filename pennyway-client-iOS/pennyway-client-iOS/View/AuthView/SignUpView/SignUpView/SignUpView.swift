@@ -3,7 +3,8 @@ import SwiftUI
 struct SignUpView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
-    @StateObject var accountLinkingViewModel = LinkOAuthToAccountViewModel()
+    @StateObject var linkAccountToOAuthViewModel = LinkAccountToOAuthViewModel()
+
     @EnvironmentObject var authViewModel: AppViewModel
     let profileInfoViewModel = UserAccountViewModel()
     
@@ -52,6 +53,9 @@ struct SignUpView: View {
                         RegistrationManager.shared.name = formViewModel.name
                         RegistrationManager.shared.username = formViewModel.id
                         RegistrationManager.shared.password = formViewModel.password
+                        if !isOAuthRegistration, OAuthRegistrationManager.shared.isOAuthUser {
+                            handleLinkAccountToOAuth()
+                        }
                     }
                     
                 } else {}
@@ -93,16 +97,20 @@ struct SignUpView: View {
     @ViewBuilder
     private func destinationView() -> some View {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
-            handleLinkAccountToOAuth()
         } else {
             TermsAndConditionsView(viewModel: viewModel)
         }
     }
     
-    func handleLinkAccountToOAuth() -> some View {
-        authViewModel.login()
-        profileInfoViewModel.getUserProfileApi()
-        return EmptyView()
+    func handleLinkAccountToOAuth() {
+        linkAccountToOAuthViewModel.linkAccountToOAuthApi { success in
+            if success {
+                authViewModel.login()
+                profileInfoViewModel.getUserProfileApi()
+            } else {
+                Log.error("기존 계정에 소셜 계정 연동 실패")
+            }
+        }
     }
 }
 

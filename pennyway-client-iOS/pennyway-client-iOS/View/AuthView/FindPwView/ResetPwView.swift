@@ -12,8 +12,7 @@ struct ResetPwView: View {
                     Text("새로운 비밀번호를\n설정해주세요")
                         .font(.H1SemiboldFont())
                         .multilineTextAlignment(.leading)
-                        .padding(.top, 15 * DynamicSizeFactor.factor())
-                        
+                        .padding(.top, 15 * DynamicSizeFactor.factor())                        
                     Spacer()
                 }
                 .padding(.leading, 20)
@@ -53,7 +52,6 @@ struct ResetPwView: View {
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
-                        
                 }.offset(x: -10)
             }
         }
