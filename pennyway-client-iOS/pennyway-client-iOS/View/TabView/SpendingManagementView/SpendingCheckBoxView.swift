@@ -3,7 +3,7 @@ import SwiftUI
 
 struct SpendingCheckBoxView: View {
     /// 총 지출량
-    var totalSpent: Int = 130_000
+    var totalSpent: Int = 600_000
     
     /// 프로그래스 바에 사용될 최대 값
     let targetValue: CGFloat = 500_000
@@ -25,7 +25,7 @@ struct SpendingCheckBoxView: View {
                             .foregroundStyle(Color("Gray07"))
                             + Text("\(totalSpent)원 ")
                             .font(.H3SemiboldFont())
-                            .foregroundStyle(Color("Mint03"))
+                            .foregroundStyle(CGFloat(totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
                             + Text("썼어요")
                             .font(.H3SemiboldFont())
                             .foregroundStyle(Color("Gray07"))
@@ -35,7 +35,7 @@ struct SpendingCheckBoxView: View {
                             .foregroundColor(Color("Gray07"))
                             + Text("\(totalSpent)원 ")
                             .font(.H3SemiboldFont())
-                            .foregroundColor(Color("Mint03"))
+                            .foregroundColor(CGFloat(totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
                             + Text("썼어요 ")
                             .font(.H3SemiboldFont())
                             .foregroundColor(Color("Gray07"))
@@ -46,7 +46,7 @@ struct SpendingCheckBoxView: View {
                         .foregroundColor(Color("Gray07"))
                         + Text("\(totalSpent)원 ")
                         .font(.H3SemiboldFont())
-                        .foregroundColor(Color("Mint03"))
+                        .foregroundColor(CGFloat(totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
                         + Text("썼어요 ")
                         .font(.H3SemiboldFont())
                         .foregroundColor(Color("Gray07"))

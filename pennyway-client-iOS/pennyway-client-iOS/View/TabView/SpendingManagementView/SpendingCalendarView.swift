@@ -209,7 +209,7 @@ private struct CellView: View {
             let calendar = Calendar.current
             return calendar.component(.month, from: date)
         }
-        let specialDays = [8, 13, 14]
+        let specialDays = [8, 13, 15]
         if month == 5 {
             return specialDays.contains(day)
         } else if month == 4 {
