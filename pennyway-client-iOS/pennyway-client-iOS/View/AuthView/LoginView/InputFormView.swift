@@ -27,12 +27,18 @@ struct InputFormView: View {
             }
 
             VStack(spacing: 9 * DynamicSizeFactor.factor()) {
-                ZStack {
+                ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    TextField("아이디 입력", text: $loginViewModel.username)
+                    if loginViewModel.username.isEmpty {
+                        Text("아이디 입력")
+                            .platformTextColor(color: Color("Gray03"))
+                            .padding(.leading, 13 * DynamicSizeFactor.factor())
+                            .font(.H4MediumFont())
+                    }
+                    TextField("", text: $loginViewModel.username)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .AutoCorrectionExtensions()
@@ -41,12 +47,18 @@ struct InputFormView: View {
                 }
                 .padding(.horizontal, 20)
 
-                ZStack {
+                ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    SecureField("비밀번호 입력", text: $loginViewModel.password)
+                    if loginViewModel.password.isEmpty {
+                        Text("비밀번호 입력")
+                            .platformTextColor(color: Color("Gray03"))
+                            .padding(.leading, 13 * DynamicSizeFactor.factor())
+                            .font(.H4MediumFont())
+                    }
+                    SecureField("", text: $loginViewModel.password)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .textContentType(.password)
