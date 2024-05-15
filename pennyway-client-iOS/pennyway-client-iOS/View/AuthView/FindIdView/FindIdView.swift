@@ -8,46 +8,43 @@ struct FindIdView: View {
     var username = RegistrationManager.shared.username
 
     var body: some View {
-        NavigationAvailable {
-            VStack {
-                Spacer().frame(height: 147 * DynamicSizeFactor.factor())
+        VStack {
+            Spacer().frame(height: 147 * DynamicSizeFactor.factor())
                     
-                Image("icon_illust_completion")
-                    .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
-                    .padding(.horizontal, 126)
+            Image("icon_illust_completion")
+                .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
+                .padding(.horizontal, 126)
                     
-                Spacer().frame(height: 17 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 17 * DynamicSizeFactor.factor())
                     
-                Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
-                    .font(.H3SemiboldFont())
-                    .multilineTextAlignment(.center)
+            Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
+                .font(.H3SemiboldFont())
+                .multilineTextAlignment(.center)
                     
-                Spacer().frame(height: 30 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 30 * DynamicSizeFactor.factor())
                     
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 280 * DynamicSizeFactor.factor(), height: 62 * DynamicSizeFactor.factor())
-                        .background(Color("Gray01"))
-                        .cornerRadius(4)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .inset(by: 0.5)
-                                .stroke(Color("Gray02"), lineWidth: 1)
-                        )
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 280 * DynamicSizeFactor.factor(), height: 62 * DynamicSizeFactor.factor())
+                    .background(Color("Gray01"))
+                    .cornerRadius(4)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .inset(by: 0.5)
+                            .stroke(Color("Gray02"), lineWidth: 1)
+                    )
                         
-                    Text("\(username)")
-                        .font(.H2SemiboldFont())
-                        .multilineTextAlignment(.center)
-                }
-                    
-                Spacer().frame(height: 120 * DynamicSizeFactor.factor())
-                Spacer()
-                    
-                bottomButton()
+                Text("\(username)")
+                    .font(.H2SemiboldFont())
+                    .multilineTextAlignment(.center)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Spacer()
+                    
+            bottomButton()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
     }
     

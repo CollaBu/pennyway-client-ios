@@ -9,7 +9,7 @@ struct CustomInputView: View {
     var isSecureText: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
+        VStack(alignment: .leading, spacing: 13) {
             Text(titleText!)
                 .padding(.horizontal, 20)
                 .font(.pretendard(.regular, size: 12))

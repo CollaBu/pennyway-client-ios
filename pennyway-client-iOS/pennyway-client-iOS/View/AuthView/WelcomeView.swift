@@ -7,7 +7,7 @@ struct WelcomeView: View {
     @EnvironmentObject var authViewModel: AppViewModel
 
     var body: some View {
-        ZStack {
+        VStack {
             NavigationAvailable {
                 VStack {
                     Image("icon_illust_welcome")
@@ -33,11 +33,13 @@ struct WelcomeView: View {
                         authViewModel.login()
                         profileInfoViewModel.getUserProfileApi()
                     }, label: "확인", isFormValid: .constant(true))
-                        .padding(.bottom, 34)
+                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 }
+                .edgesIgnoringSafeArea(.bottom)
             }
-            .navigationBarBackButtonHidden(true)
         }
+        .edgesIgnoringSafeArea(.bottom)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

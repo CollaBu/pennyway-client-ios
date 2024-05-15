@@ -41,7 +41,7 @@ struct AgreementSectionView: View {
                     )
 
                 Text(contentText)
-                    .font(.B1RegularFont())
+                    .font(.B1MediumFont())
                     .minimumScaleFactor(0.001)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

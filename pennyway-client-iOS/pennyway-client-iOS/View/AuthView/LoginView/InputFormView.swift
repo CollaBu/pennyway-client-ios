@@ -18,13 +18,13 @@ struct InputFormView: View {
             }
             .padding(.leading, 20)
 
-            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-
             if loginViewModel.showErrorCodeContent {
+                Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                 ErrorCodeContentView()
+                Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+            } else {
+                Spacer().frame(height: 49 * DynamicSizeFactor.factor())
             }
-
-            Spacer().frame(height: 35 * DynamicSizeFactor.factor())
 
             VStack(spacing: 9 * DynamicSizeFactor.factor()) {
                 ZStack {
@@ -34,7 +34,6 @@ struct InputFormView: View {
 
                     TextField("아이디 입력", text: $loginViewModel.username)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-                        .platformTextColor(color: Color("Gray03"))
                         .font(.H4MediumFont())
                         .AutoCorrectionExtensions()
                         .TextAutocapitalization()
@@ -49,14 +48,13 @@ struct InputFormView: View {
 
                     SecureField("비밀번호 입력", text: $loginViewModel.password)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-                        .platformTextColor(color: Color("Gray03"))
                         .font(.H4MediumFont())
                         .textContentType(.password)
                         .ignoresSafeArea(.keyboard)
                 }
                 .padding(.horizontal, 20)
 
-                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 0 * DynamicSizeFactor.factor()) // 확인 필요
 
                 VStack {
                     CustomBottomButton(action: {

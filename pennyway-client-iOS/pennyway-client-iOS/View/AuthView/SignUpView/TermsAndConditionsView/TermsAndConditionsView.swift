@@ -9,29 +9,31 @@ struct TermsAndConditionsView: View {
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
 
     var body: some View {
-        ScrollView {
-            VStack {
+        VStack {
+            ScrollView {
                 VStack {
-                    Spacer().frame(height: 15 * DynamicSizeFactor.factor())
-                    
-                    NavigationCountView(selectedText: $viewModel.selectedText)
-                        .onAppear {
-                            viewModel.selectedText = 3
-                        }
-                    
-                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-                    
-                    TermsAndConditionsContentView(isSelectedAllBtn: $isAllAgreed)
-                    
-                    Spacer()
+                    VStack {
+                        Spacer().frame(height: 15 * DynamicSizeFactor.factor())
+                        
+                        NavigationCountView(selectedText: $viewModel.selectedText)
+                            .onAppear {
+                                viewModel.selectedText = 3
+                            }
+                        
+                        Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+                        
+                        TermsAndConditionsContentView(isSelectedAllBtn: $isAllAgreed)
+                        
+                        Spacer()
+                    }
                 }
             }
-        }
-        VStack {
+            Spacer()
+            
             CustomBottomButton(action: {
                 if isAllAgreed {
                     viewModel.continueButtonTapped()
-                    
+                        
                     if isOAuthRegistration {
                         oauthSignUpViewModel.oauthSignUpApi()
                     } else {
@@ -39,12 +41,14 @@ struct TermsAndConditionsView: View {
                     }
                 }
             }, label: "계속하기", isFormValid: $isAllAgreed)
-                .padding(.bottom, 34)
-            
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                
             NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {
                 EmptyView()
             }
         }
+        
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
