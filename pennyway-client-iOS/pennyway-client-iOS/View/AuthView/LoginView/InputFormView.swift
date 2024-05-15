@@ -67,16 +67,13 @@ struct InputFormView: View {
                 }
                 .padding(.horizontal, 20)
 
-                Spacer().frame(height: 0 * DynamicSizeFactor.factor()) // 확인 필요
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
+            }
+            VStack {
+                CustomBottomButton(action: {
+                    handleLogin()
 
-                VStack {
-                    CustomBottomButton(action: {
-                        handleLogin()
-
-                    }, label: "로그인", isFormValid: .constant(true))
-                }
-
-                Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+                }, label: "로그인", isFormValid: .constant(true))
             }
         }
         .onAppear {
