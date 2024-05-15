@@ -18,7 +18,6 @@ struct FindIdFormView: View {
             
             Spacer()
             
-            Spacer()
             
             CustomBottomButton(action: {
                 continueButtonAction()

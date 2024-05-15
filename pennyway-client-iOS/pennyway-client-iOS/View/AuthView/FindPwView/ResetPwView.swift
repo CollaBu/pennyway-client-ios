@@ -29,7 +29,7 @@ struct ResetPwView: View {
                 formViewModel.validatePwForm()
                     
             }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
-                .padding(.bottom, 34)
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
             NavigationLink(destination: CompleteChangePwView(), isActive: $navigateView) {
                 EmptyView()

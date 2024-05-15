@@ -18,7 +18,6 @@ struct FindPwView: View {
 
             Spacer()
                 
-            Spacer()
             CustomBottomButton(action: {
                 continueButtonAction()
             }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
