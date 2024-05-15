@@ -20,8 +20,9 @@ struct InputFormView: View {
 
             if loginViewModel.showErrorCodeContent {
                 Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-                ErrorCodeContentView()
+                ErrorCodeContentView(isCloseErrorPopUpView: $loginViewModel.isLoginSuccessful)
                 Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+
             } else {
                 Spacer().frame(height: 49 * DynamicSizeFactor.factor())
             }
@@ -72,11 +73,14 @@ struct InputFormView: View {
                     CustomBottomButton(action: {
                         handleLogin()
 
-                    }, label: "로그인", isFormValid: .constant(true)) 
+                    }, label: "로그인", isFormValid: .constant(true))
                 }
 
                 Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             }
+        }
+        .onAppear {
+            loginViewModel.isLoginSuccessful = false
         }
     }
 
@@ -87,6 +91,9 @@ struct InputFormView: View {
                     authViewModel.login()
                 } else {
                     Log.error("fail login")
+                    loginViewModel.isLoginSuccessful = true
+                    loginViewModel.username = ""
+                    loginViewModel.password = ""
                 }
             }
         }
