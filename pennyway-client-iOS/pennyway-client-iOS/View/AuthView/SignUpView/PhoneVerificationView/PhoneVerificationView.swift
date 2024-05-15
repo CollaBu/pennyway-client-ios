@@ -97,7 +97,7 @@ struct PhoneVerificationView: View {
     private func destinationView() -> some View {
         if !OAuthRegistrationManager.shared.isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
             OAuthAccountLinkingView(signUpViewModel: viewModel)
-          
+
         } else if OAuthRegistrationManager.shared.isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser { // 이미 계정이 있는 경우
             handleExistUserLogin()
         } else {

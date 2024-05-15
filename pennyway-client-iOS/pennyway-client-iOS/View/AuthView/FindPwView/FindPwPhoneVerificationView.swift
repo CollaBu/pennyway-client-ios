@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct FindIdPhoneVerificationView: View {
+struct FindPwPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
     @State private var isFindUser = true
 
@@ -11,7 +11,7 @@ struct FindIdPhoneVerificationView: View {
             VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
                 Text("휴대폰 번호")
                     .padding(.horizontal, 20)
-                    .font(.B1RegularFont())
+                    .font(.pretendard(.regular, size: 12))
                     .platformTextColor(color: Color("Gray04"))
                 HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                     ZStack {
@@ -36,15 +36,14 @@ struct FindIdPhoneVerificationView: View {
                     }
                     Button(action: {
                         if isFindUser {
-                            Log.debug("아이디 찾기 api 요청")
-                            viewModel.requestUserNameVerificationCodeApi { viewModel.judgeTimerRunning() }
+                            viewModel.requestPwVerificationCodeApi { viewModel.judgeTimerRunning() }
                         }
                     }, label: {
                         Text("인증번호 받기")
-                            .font(.pretendard(.medium, size: 13)) // DynamicFontSize에 없음
+                            .font(.pretendard(.medium, size: 13))
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
-                    .padding(.horizontal, 13)
+                    .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                     .frame(height: 46 * DynamicSizeFactor.factor())
                     .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05") : Color("Gray03"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
@@ -53,7 +52,7 @@ struct FindIdPhoneVerificationView: View {
                 .padding(.horizontal, 20)
             }
             if viewModel.showErrorPhoneNumberFormat {
-                Text("올바른 전화번호 형식이 아니에요")
+                Text("010, 011으로 시작하는 11자리 문자열을 입력해주세요")
                     .padding(.horizontal, 20)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Red03"))

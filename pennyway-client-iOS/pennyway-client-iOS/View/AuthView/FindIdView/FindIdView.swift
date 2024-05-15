@@ -50,19 +50,19 @@ struct FindIdView: View {
     }
     
     private func bottomButton() -> some View {
-        HStack(alignment: .center, spacing: 12) {
+        HStack(alignment: .center, spacing: 12 * DynamicSizeFactor.factor()) {
             Button(action: {
                 goToPwView = true
             }, label: {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: .infinity, height: 47)
+                        .frame(width: 134 * DynamicSizeFactor.factor(), height: 47 * DynamicSizeFactor.factor())
                         .background(Color("Mint01"))
                         .cornerRadius(4)
                     
                     Text("비밀번호 찾기")
-                        .font(.pretendard(.semibold, size: 14))
+                        .font(.ButtonH4SemiboldFont())
                         .multilineTextAlignment(.center)
                         .platformTextColor(color: Color("Mint03"))
                     
@@ -79,12 +79,12 @@ struct FindIdView: View {
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: .infinity, height: 47)
+                        .frame(width: 134 * DynamicSizeFactor.factor(), height: 47 * DynamicSizeFactor.factor())
                         .background(Color("Mint03"))
                         .cornerRadius(4)
                     
                     Text("확인")
-                        .font(.pretendard(.semibold, size: 14))
+                        .font(.ButtonH4SemiboldFont())
                         .multilineTextAlignment(.center)
                         .platformTextColor(color: Color("White01"))
                 }

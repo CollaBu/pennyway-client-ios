@@ -5,6 +5,7 @@ import SwiftUI
 
 struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
+
     @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
     @State private var showingPopUp = false
@@ -15,21 +16,21 @@ struct ProfileSettingListView: View {
                 Spacer().frame(height: 32 * DynamicSizeFactor.factor())
 
                 LazyVStack(spacing: 0) {
-                    SectionView(showingPopUp: $showingPopUp, title: "내 정보", itemsWithActions: [
-                        MenuItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {}),
-                        MenuItem(title: "내가 쓴 글", icon: "icon_list", action: {}),
-                        MenuItem(title: "스크랩", icon: "icon_modifyingprofile", action: {}),
-                        MenuItem(title: "비밀번호 변경", icon: "icon_modifyingprofile", action: {})
+                    ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "내 정보", itemsWithActions: [
+                        ProfileSettingListItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {}),
+                        ProfileSettingListItem(title: "내가 쓴 글", icon: "icon_list", action: {}),
+                        ProfileSettingListItem(title: "스크랩", icon: "icon_modifyingprofile", action: {}),
+                        ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_modifyingprofile", action: {})
                     ])
-                    SectionView(showingPopUp: $showingPopUp, title: "앱 설정", itemsWithActions: [
-                        MenuItem(title: "알림 설정", icon: "icon_notificationsetting", action: {})
+                    ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "앱 설정", itemsWithActions: [
+                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: {})
                     ])
-                    SectionView(showingPopUp: $showingPopUp, title: "이용안내", itemsWithActions: [
-                        MenuItem(title: "문의하기", icon: "icon_checkwithsomeone", action: {})
+                    ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "이용안내", itemsWithActions: [
+                        ProfileSettingListItem(title: "문의하기", icon: "icon_checkwithsomeone", action: {})
                     ])
-                    SectionView(showingPopUp: $showingPopUp, title: "기타", itemsWithActions: [
-                        MenuItem(title: "로그아웃", icon: "icon_logout", action: { self.showingPopUp = true }),
-                        MenuItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: handleDeleteUserAccount)
+                    ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "기타", itemsWithActions: [
+                        ProfileSettingListItem(title: "로그아웃", icon: "icon_logout", action: { self.showingPopUp = true }),
+                        ProfileSettingListItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: handleDeleteUserAccount)
                     ])
                 }
             }
@@ -85,13 +86,14 @@ struct MenuItem {
     let action: () -> Void
 }
 
-// MARK: - SectionView
+// MARK: - ProfileSettingSectionView
 
-struct SectionView: View {
+struct ProfileSettingSectionView: View {
     @Binding var showingPopUp: Bool
 
     let title: String
-    let itemsWithActions: [MenuItem] // MenuItem 배열로 변경
+
+    let itemsWithActions: [ProfileSettingListItem] // ProfileSettingListItem 배열로 변경
 
     var body: some View {
         VStack(alignment: .leading) {

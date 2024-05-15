@@ -59,7 +59,7 @@ struct FindIdFormView: View {
     
     private func checkFormValid() {
         if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
-            os_log("if문 시작", log: .default, type: .debug)
+            Log.debug("if문 시작")
             showingPopUp = false
             isNavigateToFindIDView = true
             viewModel.continueButtonTapped()
@@ -68,7 +68,7 @@ struct FindIdFormView: View {
             RegistrationManager.shared.code = phoneVerificationViewModel.code
             
         } else {
-            os_log("else문 시작", log: .default, type: .debug)
+            Log.debug("else문 시작")
             if phoneVerificationViewModel.showErrorVerificationCode {
                 showingPopUp = true
                 isVerificationError = true

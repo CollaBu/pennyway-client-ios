@@ -3,53 +3,38 @@ import SwiftUI
 struct FindPwView: View {
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var showingPopUp = false
-    @State private var navigateToFindPwView = false
+    @State private var isNavigateToFindPwView: Bool = false
     @StateObject var viewModel = SignUpNavigationViewModel()
-    
+    @State private var isVerificationError: Bool = false
+
     var body: some View {
         ZStack {
             ScrollView {
                 VStack {
-                    Spacer().frame(height: 36)
-                    
-                    PhoneNumberInputSectionView(viewModel: phoneVerificationViewModel) //
-                    
-                    Spacer().frame(height: 21)
-                    
-                    NumberInputSectionView(viewModel: phoneVerificationViewModel)
+                    FindPwContentView(phoneVerificationViewModel: phoneVerificationViewModel)
                 }
             }
-            Spacer().frame(height: 203)
+            Spacer().frame(height: 203 * DynamicSizeFactor.factor())
             
             Spacer()
             
             VStack {
                 Spacer()
                 CustomBottomButton(action: {
-                    // phoneVerificationViewModel.validateNumberVerification()
-                    ResetPwView(formViewModel: SignUpFormViewModel())
-                    // numberVerificationViewModel.requestVerifyVerificationCodeApi()
-                    if !phoneVerificationViewModel.showErrorVerificationCode, phoneVerificationViewModel.isFormValid {
-                        showingPopUp = false
-                        viewModel.continueButtonTapped()
-                        
-                        RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
-                        RegistrationManager.shared.code = phoneVerificationViewModel.code
-                        
-                        navigateToFindPwView = true
-                        
-                    } else {
-                        showingPopUp = true
-                    }
+                    continueButtonAction()
                 }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
             }
             .padding(.bottom, 34)
             
-            NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel()), isActive: $navigateToFindPwView) {
+            NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel()), isActive: $isNavigateToFindPwView) {
                 EmptyView()
             }.hidden()
+            
+            if showingPopUp == true {
+                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "사용자 정보를 찾을 수 없어요")
+            }
         }
-        
         .navigationTitle(Text("비밀번호 찾기"))
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -69,6 +54,31 @@ struct FindPwView: View {
                     .contentShape(Rectangle())
                     
                 }.offset(x: -10)
+            }
+        }
+    }
+    
+    private func continueButtonAction() {
+        phoneVerificationViewModel.requestPwVerifyVerificationCodeApi {
+            checkFormValid()
+            Log.debug("requestPwVerifyVerificationCodeApi 실행")
+        }
+    }
+    
+    private func checkFormValid() {
+        if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
+            Log.debug("비밀번호 찾기 checkFormValid if문 시작")
+            showingPopUp = false
+            isNavigateToFindPwView = true
+            viewModel.continueButtonTapped()
+
+            RegistrationManager.shared.code = phoneVerificationViewModel.code
+            
+        } else {
+            Log.debug("비밀번호 찾기 checkFormValid else문 시작")
+            if phoneVerificationViewModel.showErrorVerificationCode {
+                showingPopUp = true
+                isVerificationError = true
             }
         }
     }
