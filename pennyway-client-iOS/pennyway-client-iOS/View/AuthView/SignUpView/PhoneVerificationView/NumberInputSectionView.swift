@@ -13,7 +13,7 @@ struct NumberInputSectionView: View {
         VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
             Text("인증 번호")
                 .padding(.horizontal, 20)
-                .font(.B1MediumFont())
+                .font(.B1RegularFont())
                 .platformTextColor(color: Color("Gray04"))
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {

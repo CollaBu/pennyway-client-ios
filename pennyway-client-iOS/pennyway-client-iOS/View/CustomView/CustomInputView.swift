@@ -9,10 +9,10 @@ struct CustomInputView: View {
     var isSecureText: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 13) {
+        VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
             Text(titleText!)
                 .padding(.horizontal, 20)
-                .font(.pretendard(.regular, size: 12))
+                .font(.B1RegularFont())
                 .platformTextColor(color: Color("Gray04"))
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
@@ -29,7 +29,7 @@ struct CustomInputView: View {
                         .disableAutocorrection(true)
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
-                        .font(.pretendard(.medium, size: 14))
+                        .font(.H4MediumFont())
 
                     } else {
                         TextField("", text: $inputText, onCommit: {
@@ -39,7 +39,7 @@ struct CustomInputView: View {
                         .disableAutocorrection(true)
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
-                        .font(.pretendard(.medium, size: 14))
+                        .font(.H4MediumFont())
                     }
                 }
             }
