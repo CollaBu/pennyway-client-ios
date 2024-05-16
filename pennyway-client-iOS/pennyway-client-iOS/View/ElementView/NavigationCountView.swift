@@ -32,6 +32,6 @@ struct NavigationCountView: View {
             Spacer()
         }
         .padding(.horizontal, 20)
-        .frame(height: 18 * DynamicSizeFactor.factor())
+        .frame(height: 18)
     }
 }
