@@ -6,13 +6,13 @@ struct PhoneNumberInputSectionView: View {
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 11) {
-            VStack(alignment: .leading, spacing: 13) {
+        VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
+            VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
                 Text("휴대폰 번호")
                     .padding(.horizontal, 20)
-                    .font(.pretendard(.regular, size: 12))
+                    .font(.B1RegularFont())
                     .platformTextColor(color: Color("Gray04"))
-                HStack(spacing: 11) {
+                HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color("Gray01"))
@@ -54,7 +54,7 @@ struct PhoneNumberInputSectionView: View {
                             .font(.pretendard(.medium, size: 13)) // 폰트 리스트에 없는 예외
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
-                    .padding(.horizontal, 13 * DynamicSizeFactor.factor())
+                    .padding(.horizontal, 13)
                     .frame(height: 46 * DynamicSizeFactor.factor())
                     .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05") : Color("Gray03"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))

@@ -16,7 +16,7 @@ struct NumberInputSectionView: View {
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray04"))
 
-            HStack(spacing: 11) {
+            HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))

@@ -8,11 +8,7 @@ struct ErrorCodePopUpView: View {
     let label: String
 
     var body: some View {
-        if UIScreen.main.bounds.width <= 375 { // iPhone SE/iPhone mini
-            PopupContent(imageSize: CGSize(width: 44, height: 44), frameHeight: 150, contentHeight: 70, titleFontSize: 16, subtitleFontSize: 12, label: label, showingPopUp: $showingPopUp)
-        } else {
-            PopupContent(imageSize: CGSize(width: 55, height: 55), frameHeight: 180, contentHeight: 90, titleFontSize: 20, subtitleFontSize: 15, label: label, showingPopUp: $showingPopUp)
-        }
+        PopupContent(imageSize: CGSize(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor()), frameHeight: 145 * DynamicSizeFactor.factor(), contentHeight: 70 * DynamicSizeFactor.factor(), label: label, showingPopUp: $showingPopUp)
     }
 }
 
@@ -23,8 +19,6 @@ extension ErrorCodePopUpView {
         var imageSize: CGSize
         var frameHeight: CGFloat
         var contentHeight: CGFloat
-        var titleFontSize: CGFloat
-        var subtitleFontSize: CGFloat
         let label: String
 
         @Binding var showingPopUp: Bool
@@ -43,10 +37,10 @@ extension ErrorCodePopUpView {
                                 }) {
                                     Image("icon_close")
                                         .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 24, height: 24)
-                                        .padding(10)
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                 }
+                                .frame(width: 44, height: 44)
                             }
                             .alignmentGuide(.top, computeValue: { _ in
                                 geometry.frame(in: .global).midY
@@ -57,29 +51,31 @@ extension ErrorCodePopUpView {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: imageSize.width, height: imageSize.height)
-                            .offset(y: 10)
+                            .offset(y: 10 * DynamicSizeFactor.factor())
 
                         Spacer()
                     }
                     .frame(height: contentHeight)
 
-                    Spacer().frame(height: 9)
+                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 
-                    VStack(spacing: 2) {
+                    VStack(spacing: 2 * DynamicSizeFactor.factor()) {
                         Text(label)
                             .platformTextColor(color: Color("Gray07"))
-                            .font(.pretendard(.semibold, size: titleFontSize))
+                            .font(.H3SemiboldFont())
                         Text("다시 한 번 확인해주세요")
                             .platformTextColor(color: Color("Gray04"))
-                            .font(.pretendard(.medium, size: subtitleFontSize))
+                            .font(.B1MediumFont())
                     }
                     Spacer()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(height: frameHeight)
+                .border(Color.black)
             }
-            .frame(width: UIScreen.main.bounds.width - 120, height: frameHeight)
+            .frame(maxWidth: .infinity)
             .background(Color("White01"))
             .cornerRadius(10)
+            .padding(.horizontal, 40)
         }
     }
 }
