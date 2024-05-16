@@ -30,7 +30,7 @@ struct SignUpFormView: View {
     
     /// All input fields
     private func allInputFields() -> some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 9 * DynamicSizeFactor.factor()) {
             nameAndIDFields()
             Spacer()
             passwordFields()

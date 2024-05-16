@@ -14,7 +14,6 @@ struct FindIdFormView: View {
             ScrollView {
                 FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel)
             }
-            Spacer().frame(height: 203 * DynamicSizeFactor.factor())
             
             Spacer()
             
