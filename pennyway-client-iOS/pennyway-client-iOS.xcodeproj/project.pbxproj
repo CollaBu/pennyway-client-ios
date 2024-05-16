@@ -162,6 +162,8 @@
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8C9AC342BF508D7006D1FCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */; };
+		D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */; };
+		D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -321,6 +323,8 @@
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
 		D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryView.swift; sourceTree = "<group>"; };
+		D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryListView.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -757,6 +761,8 @@
 				4A1179812BA86D6C00A9CF4C /* CustomView */,
 				4A762B002B99A239001C1188 /* SplashView.swift */,
 				4A762AEE2B99A16B001C1188 /* MainView.swift */,
+				D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */,
+				D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1179,6 +1185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
 				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
@@ -1282,6 +1289,7 @@
 				4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */,
+				D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */,
 				4A4703AB2BCEE52300AEE04E /* VerificationResponseDto.swift in Sources */,
 				4A5789952BDC29E700AFEB26 /* ConflictError.swift in Sources */,
 				D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */,
