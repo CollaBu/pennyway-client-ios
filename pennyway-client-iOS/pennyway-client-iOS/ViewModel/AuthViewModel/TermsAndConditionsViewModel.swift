@@ -10,16 +10,20 @@ class TermsAndConditionsViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
-                        print(response)
+
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("회원가입 \(jsonString)")
+                        }
                     } catch {
-                        print("Error parsing response JSON: \(error)")
+                        Log.fault("Error decoding JSON: \(error)")
                     }
                 }
             case let .failure(error):
-                if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                    print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                 } else {
-                    print("Failed to verify: \(error)")
+                    Log.error("Network request failed: \(error)")
                 }
             }
         }

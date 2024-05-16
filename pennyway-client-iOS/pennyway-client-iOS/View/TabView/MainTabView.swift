@@ -7,14 +7,14 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $selection) {
-            Text("The First Tab")
-                .navigationBarTitle("지출관리")
-
-                .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("지출관리")
-                }
-                .tag(0)
+            NavigationAvailable {
+                SpendingManagementMainView()
+            }
+            .tabItem {
+                Image(systemName: "1.square.fill")
+                Text("지출관리")
+            }
+            .tag(0)
             Text("Another Tab")
                 .tabItem {
                     Image(systemName: "2.square.fill")

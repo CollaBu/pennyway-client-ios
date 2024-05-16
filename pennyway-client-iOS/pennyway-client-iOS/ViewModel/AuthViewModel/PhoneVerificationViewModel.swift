@@ -7,7 +7,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     private var timer: Timer?
     private var formattedPhoneNumber: String {
-        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber) ?? ""
+        return PhoneNumberFormatterUtil.formatPhoneNumber(from: phoneNumber) ?? ""
     }
 
     // MARK: Internal
