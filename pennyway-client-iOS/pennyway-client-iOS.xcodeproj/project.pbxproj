@@ -12,6 +12,8 @@
 		4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F002BD046C1004B6F89 /* OAuthLoginViewModel.swift */; };
 		4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */; };
 		4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F082BD055F9004B6F89 /* ApiRequstHandler.swift */; };
+		4A0BC6A12BF5F12B0036D900 /* SpendingCalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A02BF5F12B0036D900 /* SpendingCalendarCellView.swift */; };
+		4A0BC6A42BF5F1930036D900 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A32BF5F1930036D900 /* DateExtensions.swift */; };
 		4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */; };
 		4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */; };
 		4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */; };
@@ -172,6 +174,8 @@
 		4A058F002BD046C1004B6F89 /* OAuthLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginViewModel.swift; sourceTree = "<group>"; };
 		4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateResponseDto.swift; sourceTree = "<group>"; };
 		4A058F082BD055F9004B6F89 /* ApiRequstHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequstHandler.swift; sourceTree = "<group>"; };
+		4A0BC6A02BF5F12B0036D900 /* SpendingCalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCalendarCellView.swift; sourceTree = "<group>"; };
+		4A0BC6A32BF5F1930036D900 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateRequestDto.swift; sourceTree = "<group>"; };
@@ -397,6 +401,23 @@
 				4A058F082BD055F9004B6F89 /* ApiRequstHandler.swift */,
 			);
 			path = Handler;
+			sourceTree = "<group>";
+		};
+		4A0BC69F2BF5F0F70036D900 /* SpendingCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */,
+				4A0BC6A02BF5F12B0036D900 /* SpendingCalendarCellView.swift */,
+			);
+			path = SpendingCalendarView;
+			sourceTree = "<group>";
+		};
+		4A0BC6A22BF5F1870036D900 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC6A32BF5F1930036D900 /* DateExtensions.swift */,
+			);
+			path = Date;
 			sourceTree = "<group>";
 		};
 		4A0FFBE42BCD9F2200EFEC56 /* Domain */ = {
@@ -795,6 +816,7 @@
 		4A762AFE2B99A1D7001C1188 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4A0BC6A22BF5F1870036D900 /* Date */,
 				4A058F042BD050ED004B6F89 /* Text */,
 				4A8571452BC85E1B0082CE47 /* Font */,
 				D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */,
@@ -890,9 +912,9 @@
 		4AD70E1E2BE011970058A52A /* SpendingManagementView */ = {
 			isa = PBXGroup;
 			children = (
+				4A0BC69F2BF5F0F70036D900 /* SpendingCalendarView */,
 				4ADE802D2BF29192007FFB01 /* SpendingManagementMainView.swift */,
 				4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */,
-				4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */,
 			);
 			path = SpendingManagementView;
 			sourceTree = "<group>";
@@ -1238,6 +1260,7 @@
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
+				4A0BC6A42BF5F1930036D900 /* DateExtensions.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */,
@@ -1277,6 +1300,7 @@
 				4AD70E222BE013C10058A52A /* ProfileMainView.swift in Sources */,
 				4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDto.swift in Sources */,
 				4A5789812BDC1FF300AFEB26 /* InternalServerErrorCode.swift in Sources */,
+				4A0BC6A12BF5F12B0036D900 /* SpendingCalendarCellView.swift in Sources */,
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
