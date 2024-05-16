@@ -1,4 +1,6 @@
 
+import SwiftUI
+
 // MARK: - Date 익스텐션
 
 extension Date {
@@ -7,7 +9,7 @@ extension Date {
         formatter.dateFormat = "MMMM yyyy dd"
         return formatter
     }()
-  
+
     var formattedCalendarDayDate: String {
         return Date.calendarDayDateFormatter.string(from: self)
     }

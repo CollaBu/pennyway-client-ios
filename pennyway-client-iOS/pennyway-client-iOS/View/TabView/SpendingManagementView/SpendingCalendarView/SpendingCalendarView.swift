@@ -104,7 +104,7 @@ struct CalenderView: View {
                         let clicked = clickedCurrentMonthDates == date
                         let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
             
-                        CellView(date: date, day: day, clicked: clicked, isToday: isToday)
+                        SpendingCalendarCellView(date: date, day: day, clicked: clicked, isToday: isToday)
                     } else if let prevMonthDate = Calendar.current.date(
                         byAdding: .day,
                         value: index + lastDayOfMonthBefore,
@@ -112,7 +112,7 @@ struct CalenderView: View {
                     ) {
                         let day = Calendar.current.component(.day, from: prevMonthDate)
             
-                        CellView(date: date, day: day, isCurrentMonthDay: false)
+                        SpendingCalendarCellView(date: date, day: day, isCurrentMonthDay: false)
                     }
                 }
                 .onTapGesture {

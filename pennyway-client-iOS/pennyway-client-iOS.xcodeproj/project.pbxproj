@@ -14,6 +14,9 @@
 		4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F082BD055F9004B6F89 /* ApiRequstHandler.swift */; };
 		4A0BC6A12BF5F12B0036D900 /* SpendingCalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A02BF5F12B0036D900 /* SpendingCalendarCellView.swift */; };
 		4A0BC6A42BF5F1930036D900 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A32BF5F1930036D900 /* DateExtensions.swift */; };
+		4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A62BF5F4E10036D900 /* StringAttributeProtocol.swift */; };
+		4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A92BF5F5DA0036D900 /* StringAttributeExtensions.swift */; };
+		4A0BC6AD2BF5FA130036D900 /* NumberFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6AC2BF5FA130036D900 /* NumberFormatterUtil.swift */; };
 		4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */; };
 		4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */; };
 		4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */; };
@@ -57,7 +60,7 @@
 		4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56792BADEFF90071D00E /* NavigationBackButton.swift */; };
 		4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D884C2BD81A62009EADB0 /* KeychainHelper.swift */; };
 		4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D884E2BD81F82009EADB0 /* CryptoHelper.swift */; };
-		4A5050332BC3DA7700EE5666 /* PhoneNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */; };
+		4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5050322BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift */; };
 		4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */; };
 		4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57896E2BDBF01500AFEB26 /* BadRequestErrorCode.swift */; };
 		4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789702BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift */; };
@@ -176,6 +179,9 @@
 		4A058F082BD055F9004B6F89 /* ApiRequstHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequstHandler.swift; sourceTree = "<group>"; };
 		4A0BC6A02BF5F12B0036D900 /* SpendingCalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCalendarCellView.swift; sourceTree = "<group>"; };
 		4A0BC6A32BF5F1930036D900 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		4A0BC6A62BF5F4E10036D900 /* StringAttributeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringAttributeProtocol.swift; sourceTree = "<group>"; };
+		4A0BC6A92BF5F5DA0036D900 /* StringAttributeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringAttributeExtensions.swift; sourceTree = "<group>"; };
+		4A0BC6AC2BF5FA130036D900 /* NumberFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterUtil.swift; sourceTree = "<group>"; };
 		4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateRequestDto.swift; sourceTree = "<group>"; };
@@ -220,7 +226,7 @@
 		4A4A56792BADEFF90071D00E /* NavigationBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackButton.swift; sourceTree = "<group>"; };
 		4A4D884C2BD81A62009EADB0 /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		4A4D884E2BD81F82009EADB0 /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
-		4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatter.swift; sourceTree = "<group>"; };
+		4A5050322BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatterUtil.swift; sourceTree = "<group>"; };
 		4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomButton.swift; sourceTree = "<group>"; };
 		4A57896E2BDBF01500AFEB26 /* BadRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequestErrorCode.swift; sourceTree = "<group>"; };
 		4A5789702BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedErrorCode.swift; sourceTree = "<group>"; };
@@ -418,6 +424,31 @@
 				4A0BC6A32BF5F1930036D900 /* DateExtensions.swift */,
 			);
 			path = Date;
+			sourceTree = "<group>";
+		};
+		4A0BC6A52BF5F2660036D900 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC6A62BF5F4E10036D900 /* StringAttributeProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		4A0BC6A82BF5F5BC0036D900 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BC6A92BF5F5DA0036D900 /* StringAttributeExtensions.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		4A0BC6AB2BF5FA010036D900 /* Formatter */ = {
+			isa = PBXGroup;
+			children = (
+				4A5050322BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift */,
+				4A0BC6AC2BF5FA130036D900 /* NumberFormatterUtil.swift */,
+			);
+			path = Formatter;
 			sourceTree = "<group>";
 		};
 		4A0FFBE42BCD9F2200EFEC56 /* Domain */ = {
@@ -816,6 +847,7 @@
 		4A762AFE2B99A1D7001C1188 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4A0BC6A82BF5F5BC0036D900 /* String */,
 				4A0BC6A22BF5F1870036D900 /* Date */,
 				4A058F042BD050ED004B6F89 /* Text */,
 				4A8571452BC85E1B0082CE47 /* Font */,
@@ -829,9 +861,10 @@
 		4A762AFF2B99A1DF001C1188 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4A0BC6AB2BF5FA010036D900 /* Formatter */,
+				4A0BC6A52BF5F2660036D900 /* Protocol */,
 				4A058F052BD051C5004B6F89 /* Manager */,
 				4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */,
-				4A5050322BC3DA7700EE5666 /* PhoneNumberFormatter.swift */,
 				4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */,
 				D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */,
 				4A69C1552BE69DEA00A27B82 /* Log.swift */,
@@ -1277,6 +1310,7 @@
 				4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
+				4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
 				D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */,
@@ -1293,8 +1327,9 @@
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
-				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatter.swift in Sources */,
+				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
+				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
 				D8180C042BE5081F00F837FB /* FindIdContentView.swift in Sources */,
 				4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */,
 				4AD70E222BE013C10058A52A /* ProfileMainView.swift in Sources */,
@@ -1346,6 +1381,7 @@
 				4A57898B2BDC28F100AFEB26 /* UnauthorizedError.swift in Sources */,
 				4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */,
 				4A3560832BEBF12D00BA58F3 /* OAuthAccountViewModel.swift in Sources */,
+				4A0BC6AD2BF5FA130036D900 /* NumberFormatterUtil.swift in Sources */,
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
 				4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */,
 				4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */,

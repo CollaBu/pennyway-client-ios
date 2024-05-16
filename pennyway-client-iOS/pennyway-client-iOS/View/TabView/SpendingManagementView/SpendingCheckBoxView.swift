@@ -3,7 +3,7 @@ import SwiftUI
 
 struct SpendingCheckBoxView: View {
     /// 총 지출량
-    var totalSpent: Int = 600_000
+    var totalSpent: Int = 500_000
     
     /// 프로그래스 바에 사용될 최대 값
     let targetValue: CGFloat = 500_000
@@ -13,44 +13,27 @@ struct SpendingCheckBoxView: View {
         return CGFloat(totalSpent) / targetValue * 100
     }
     
+    let baseAttribute: BaseAttribute
+    let stringAttribute: StringAttribute
+    var formattedTotalSpent: String
+    
+    var myString: String {
+        return "반가워요 붕어빵님! \n이번 달에 총 \(formattedTotalSpent)원 썼어요"
+    }
+    
+    init(totalSpent: Int) {
+        self.totalSpent = totalSpent
+        baseAttribute = BaseAttribute(font: .H3SemiboldFont(), color: Color("Gray07"))
+        formattedTotalSpent = NumberFormatterUtil.formatNumber(totalSpent)
+        stringAttribute = StringAttribute(text: "\(formattedTotalSpent)원", font: .H3SemiboldFont(), color: CGFloat(totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
+    }
+    
     var body: some View {
         VStack {
             Spacer().frame(height: 18 * DynamicSizeFactor.factor())
             
             HStack {
-                if #available(iOS 15.0, *) {
-                    if #available(iOS 17.0, *) {
-                        Text("반가워요 붕어빵님!\n이번 달에 총 ")
-                            .font(.H3SemiboldFont())
-                            .foregroundStyle(Color("Gray07"))
-                            + Text("\(totalSpent)원 ")
-                            .font(.H3SemiboldFont())
-                            .foregroundStyle(CGFloat(totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
-                            + Text("썼어요")
-                            .font(.H3SemiboldFont())
-                            .foregroundStyle(Color("Gray07"))
-                    } else {
-                        Text("반가워요 붕어빵님!\n이번 달에 총 ")
-                            .font(.H3SemiboldFont())
-                            .foregroundColor(Color("Gray07"))
-                            + Text("\(totalSpent)원 ")
-                            .font(.H3SemiboldFont())
-                            .foregroundColor(CGFloat(totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
-                            + Text("썼어요 ")
-                            .font(.H3SemiboldFont())
-                            .foregroundColor(Color("Gray07"))
-                    }
-                } else {
-                    Text("반가워요 붕어빵님!\n이번 달에 총 ")
-                        .font(.H3SemiboldFont())
-                        .foregroundColor(Color("Gray07"))
-                        + Text("\(totalSpent)원 ")
-                        .font(.H3SemiboldFont())
-                        .foregroundColor(CGFloat(totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
-                        + Text("썼어요 ")
-                        .font(.H3SemiboldFont())
-                        .foregroundColor(Color("Gray07"))
-                }
+                myString.toAttributesText(base: baseAttribute, stringAttribute)
                 Spacer()
             }
             .frame(height: 44 * DynamicSizeFactor.factor())

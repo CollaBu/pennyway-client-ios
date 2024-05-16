@@ -13,7 +13,7 @@ struct OAuthRegistrationManager {
     var password = ""
     var phone = ""
     var formattedPhoneNumber: String? {
-        return PhoneNumberFormatter.formattedPhoneNumber(from: phone)
+        return PhoneNumberFormatterUtil.formatPhoneNumber(from: phone)
     }
 
     var code = ""

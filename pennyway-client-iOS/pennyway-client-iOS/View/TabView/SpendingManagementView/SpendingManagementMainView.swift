@@ -19,7 +19,7 @@ struct SpendingManagementMainView: View {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                    SpendingCheckBoxView()
+                    SpendingCheckBoxView(totalSpent: 400_000)
                         .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
