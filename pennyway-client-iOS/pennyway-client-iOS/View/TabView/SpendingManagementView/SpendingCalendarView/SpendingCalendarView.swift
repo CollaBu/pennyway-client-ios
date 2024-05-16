@@ -190,6 +190,8 @@ private extension SpendingCalenderView {
     /// 월 변경
     func changeMonth(by value: Int) {
         date = adjustedMonth(by: value)
+        spendingHistoryViewModel.currentDate = date
+        spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
     }
   
     /// 이전 월로 이동 가능한지 확인

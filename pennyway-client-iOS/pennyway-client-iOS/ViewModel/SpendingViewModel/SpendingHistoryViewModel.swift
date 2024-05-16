@@ -3,22 +3,21 @@ import SwiftUI
 
 class SpendingHistoryViewModel: ObservableObject {
     @Published var currentDate: Date = Date()
+    private var year: String {
+        return String(Date.year(from: currentDate))
+    }
+
+    private var month: String {
+        return String(Date.month(from: currentDate))
+    }
 
     func checkSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
-        let checkSpendingHistoryRequestDto = GetSpendingHistoryRequestDto(year: String(Date.year(from: currentDate)), month: String(Date.month(from: currentDate)))
+        let checkSpendingHistoryRequestDto = GetSpendingHistoryRequestDto(year: year, month: month)
 
         SpendingAlamofire.shared.getSpendingHistory(checkSpendingHistoryRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
-//                    if let jsonString = String(data: responseData, encoding: .utf8) {
-//                        print("Response Data: \(jsonString)")
-//                        // 성공적으로 데이터를 출력한 경우 completion을 호출하여 true 전달
-//                        completion(true)
-//                    } else {
-//                        print("Failed to convert response data to string.")
-//                        completion(false)
-//                    }
                     do {
                         let response = try JSONDecoder().decode(GetSpendingHistoryResponseDto.self, from: responseData)
                         if let jsonString = String(data: responseData, encoding: .utf8) {
