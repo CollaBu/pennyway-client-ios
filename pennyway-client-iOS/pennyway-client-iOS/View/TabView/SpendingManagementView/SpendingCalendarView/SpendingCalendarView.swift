@@ -4,7 +4,6 @@ import SwiftUI
 
 struct SpendingCalenderView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
-    
     @State private var date: Date = Date()
     @State private var clickedCurrentMonthDates: Date?
     let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]

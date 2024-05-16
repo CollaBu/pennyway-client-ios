@@ -7,7 +7,7 @@ struct RegistrationManager {
     var password = ""
     var phoneNumber = ""
     var formattedPhoneNumber: String? {
-        return PhoneNumberFormatter.formattedPhoneNumber(from: phoneNumber)
+        return PhoneNumberFormatterUtil.formatPhoneNumber(from: phoneNumber)
     }
 
     var code = ""

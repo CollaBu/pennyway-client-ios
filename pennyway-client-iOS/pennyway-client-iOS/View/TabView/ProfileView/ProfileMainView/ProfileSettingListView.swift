@@ -5,7 +5,8 @@ import SwiftUI
 
 struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
-    @StateObject var userProfileViewModel = UserProfileViewModel()
+
+    @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
     @State private var showingPopUp = false
 
@@ -77,12 +78,21 @@ struct ProfileSettingListView: View {
     }
 }
 
+// MARK: - MenuItem
+
+struct MenuItem {
+    let title: String
+    let icon: String
+    let action: () -> Void
+}
+
 // MARK: - ProfileSettingSectionView
 
 struct ProfileSettingSectionView: View {
     @Binding var showingPopUp: Bool
 
     let title: String
+
     let itemsWithActions: [ProfileSettingListItem] // ProfileSettingListItem 배열로 변경
 
     var body: some View {

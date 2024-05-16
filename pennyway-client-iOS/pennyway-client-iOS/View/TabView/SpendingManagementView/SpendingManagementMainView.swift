@@ -2,8 +2,9 @@
 import SwiftUI
 
 struct SpendingManagementMainView: View {
-    @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
 
+    @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
+    
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()

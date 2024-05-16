@@ -12,11 +12,12 @@ struct LoginView: View {
 
                         LoginOAuthButtonView()
 
+                        Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
                         AdditionalOptionView()
                         Spacer()
                     }
                 }
-
                 VStack {
                     Spacer()
                     Button(action: {}, label: {

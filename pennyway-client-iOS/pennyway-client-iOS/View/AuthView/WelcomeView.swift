@@ -7,7 +7,7 @@ struct WelcomeView: View {
     @EnvironmentObject var authViewModel: AppViewModel
 
     var body: some View {
-        ZStack {
+        VStack {
             NavigationAvailable {
                 VStack {
                     Image("icon_illust_welcome")
@@ -19,12 +19,12 @@ struct WelcomeView: View {
                         .padding(.bottom, 20 * DynamicSizeFactor.factor())
 
                     Text("\(name)님 환영합니다.")
-                        .font(.H1SemiboldFont())
+                        .font(.pretendard(.semibold, size: 24))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 73)
-                        .padding(.bottom, 12 * DynamicSizeFactor.factor())
+                        .padding(.bottom, 12)
                     Text("페니웨이와 절약을 시작해볼까요?")
-                        .font(.H4MediumFont())
+                        .font(.pretendard(.medium, size: 14))
                         .platformTextColor(color: Color("Gray04"))
 
                     Spacer()
@@ -33,11 +33,13 @@ struct WelcomeView: View {
                         authViewModel.login()
                         profileInfoViewModel.getUserProfileApi()
                     }, label: "확인", isFormValid: .constant(true))
-                        .padding(.bottom, 34)
+                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 }
+                .edgesIgnoringSafeArea(.bottom)
             }
-            .navigationBarBackButtonHidden(true)
         }
+        .edgesIgnoringSafeArea(.bottom)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

@@ -3,6 +3,8 @@ import SwiftUI
 
 class SpendingHistoryViewModel: ObservableObject {
     @Published var currentDate: Date = Date()
+    @Published var totalSpent = 500_000
+    
     private var year: String {
         return String(Date.year(from: currentDate))
     }

@@ -1,3 +1,4 @@
+
 import Foundation
 
 extension Date {
@@ -12,13 +13,11 @@ extension Date {
         let components = calendar.dateComponents([.month], from: date)
         return components.month ?? 0
     }
-    
     static let calendarDayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy dd"
         return formatter
     }()
-  
     var formattedCalendarDayDate: String {
         return Date.calendarDayDateFormatter.string(from: self)
     }
