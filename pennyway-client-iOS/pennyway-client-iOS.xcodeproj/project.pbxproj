@@ -18,12 +18,10 @@
 		4A0BC6952BF53AA60036D900 /* GetSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6942BF53AA60036D900 /* GetSpendingHistoryRequestDto.swift */; };
 		4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6972BF53D6F0036D900 /* SpendingHistoryViewModel.swift */; };
 		4A0BC69B2BF540140036D900 /* SpendingCalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC69A2BF540140036D900 /* SpendingCalendarCellView.swift */; };
-		4A0BC69E2BF543850036D900 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC69D2BF543850036D900 /* DateExtensions.swift */; };
-		4A0BC6A12BF5F12B0036D900 /* SpendingCalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A02BF5F12B0036D900 /* SpendingCalendarCellView.swift */; };
-		4A0BC6A42BF5F1930036D900 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A32BF5F1930036D900 /* DateExtensions.swift */; };
 		4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A62BF5F4E10036D900 /* StringAttributeProtocol.swift */; };
 		4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6A92BF5F5DA0036D900 /* StringAttributeExtensions.swift */; };
 		4A0BC6AD2BF5FA130036D900 /* NumberFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6AC2BF5FA130036D900 /* NumberFormatterUtil.swift */; };
+		4A0BC6AF2BF6459B0036D900 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BC6AE2BF6459B0036D900 /* DateExtensions.swift */; };
 		4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */; };
 		4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */; };
 		4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */; };
@@ -177,7 +175,6 @@
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
-		D8C9AC342BF508D7006D1FCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,12 +189,10 @@
 		4A0BC6942BF53AA60036D900 /* GetSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A0BC6972BF53D6F0036D900 /* SpendingHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingHistoryViewModel.swift; sourceTree = "<group>"; };
 		4A0BC69A2BF540140036D900 /* SpendingCalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCalendarCellView.swift; sourceTree = "<group>"; };
-		4A0BC69D2BF543850036D900 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
-		4A0BC6A02BF5F12B0036D900 /* SpendingCalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCalendarCellView.swift; sourceTree = "<group>"; };
-		4A0BC6A32BF5F1930036D900 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		4A0BC6A62BF5F4E10036D900 /* StringAttributeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringAttributeProtocol.swift; sourceTree = "<group>"; };
 		4A0BC6A92BF5F5DA0036D900 /* StringAttributeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringAttributeExtensions.swift; sourceTree = "<group>"; };
 		4A0BC6AC2BF5FA130036D900 /* NumberFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterUtil.swift; sourceTree = "<group>"; };
+		4A0BC6AE2BF6459B0036D900 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		4A0FFBEE2BCDA05B00EFEC56 /* SignUpRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF22BCDA13500EFEC56 /* VerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationRequestDto.swift; sourceTree = "<group>"; };
 		4A0FFBF42BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateRequestDto.swift; sourceTree = "<group>"; };
@@ -352,7 +347,6 @@
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
-		D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -498,12 +492,11 @@
 		4A0BC69C2BF543740036D900 /* Date */ = {
 			isa = PBXGroup;
 			children = (
-				4A0BC69D2BF543850036D900 /* DateExtensions.swift */,
+				4A0BC6AE2BF6459B0036D900 /* DateExtensions.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
 		};
-
 		4A0BC6A52BF5F2660036D900 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,7 +852,6 @@
 				4A762AFB2B99A1C4001C1188 /* View */,
 				4A762AFA2B99A1A5001C1188 /* Model */,
 				4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */,
-				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
 				4A762AF02B99A16D001C1188 /* Assets.xcassets */,
 				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
 				4A762AF22B99A16D001C1188 /* Preview Content */,
@@ -1018,7 +1010,6 @@
 		4AD70E1D2BE011370058A52A /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
-				4AD70E2A2BE0A8D30058A52A /* MainTabView.swift */,
 				4AD70E232BE014C40058A52A /* ProfileMainView */,
 			);
 			path = ProfileView;
@@ -1379,10 +1370,8 @@
 				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
 				4A0BC6912BF538B50036D900 /* SpendingRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
-				4A0BC6A42BF5F1930036D900 /* DateExtensions.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
-				4A0BC69E2BF543850036D900 /* DateExtensions.swift in Sources */,
 				4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */,
 				D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
@@ -1421,8 +1410,8 @@
 				4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */,
 				4AD70E222BE013C10058A52A /* ProfileMainView.swift in Sources */,
 				4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDto.swift in Sources */,
+				4A0BC6AF2BF6459B0036D900 /* DateExtensions.swift in Sources */,
 				4A5789812BDC1FF300AFEB26 /* InternalServerErrorCode.swift in Sources */,
-				4A0BC6A12BF5F12B0036D900 /* SpendingCalendarCellView.swift in Sources */,
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,

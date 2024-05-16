@@ -97,7 +97,7 @@ struct SpendingCalenderView: View {
                         let clicked = clickedCurrentMonthDates == date
                         let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
             
-                        SpendingCalendarCellView(date: date, day: day, clicked: clicked, isToday: isToday)
+                        SpendingCalendarCellView(spendingHistoryViewModel: spendingHistoryViewModel, date: date, day: day, clicked: clicked, isToday: isToday)
                     } else if let prevMonthDate = Calendar.current.date(
                         byAdding: .day,
                         value: index + lastDayOfMonthBefore,
@@ -105,7 +105,7 @@ struct SpendingCalenderView: View {
                     ) {
                         let day = Calendar.current.component(.day, from: prevMonthDate)
             
-                        SpendingCalendarCellView(date: date, day: day, isCurrentMonthDay: false)
+                        SpendingCalendarCellView(spendingHistoryViewModel: spendingHistoryViewModel, date: date, day: day, isCurrentMonthDay: false)
                     }
                 }
                 .onTapGesture {
@@ -191,6 +191,7 @@ private extension SpendingCalenderView {
         date = adjustedMonth(by: value)
         spendingHistoryViewModel.currentDate = date
         spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
+        
     }
   
     /// 이전 월로 이동 가능한지 확인

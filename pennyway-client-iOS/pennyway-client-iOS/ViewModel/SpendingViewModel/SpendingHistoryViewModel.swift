@@ -3,8 +3,10 @@ import SwiftUI
 
 class SpendingHistoryViewModel: ObservableObject {
     @Published var currentDate: Date = Date()
-    @Published var totalSpent = 500_000
-    
+    @Published var totalSpent = 600_000
+
+    @Published var dailySpendings: [DailySpending] = [] // 데일리 지출 내역
+
     private var year: String {
         return String(Date.year(from: currentDate))
     }
@@ -22,6 +24,9 @@ class SpendingHistoryViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(GetSpendingHistoryResponseDto.self, from: responseData)
+
+                        self.dailySpendings = response.data.spending.dailySpendings
+
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("지출 내역 조회 완료 \(jsonString)")
                         }

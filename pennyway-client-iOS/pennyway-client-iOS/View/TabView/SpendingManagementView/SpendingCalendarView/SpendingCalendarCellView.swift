@@ -4,6 +4,8 @@ import SwiftUI
 // MARK: - SpendingCalendarCellView
 
 struct SpendingCalendarCellView: View {
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+
     var date: Date
     var day: Int
     var clicked: Bool
@@ -38,12 +40,14 @@ struct SpendingCalendarCellView: View {
     }
 
     init(
+        spendingHistoryViewModel: SpendingHistoryViewModel,
         date: Date,
         day: Int,
         clicked: Bool = false,
         isToday: Bool = false,
         isCurrentMonthDay: Bool = true
     ) {
+        self.spendingHistoryViewModel = spendingHistoryViewModel
         self.date = date
         self.day = day
         self.clicked = clicked
@@ -65,32 +69,26 @@ struct SpendingCalendarCellView: View {
             Spacer()
                 .frame(height: 1 * DynamicSizeFactor.factor())
 
-            if isSpendingDay(day) {
-                Text("-10,000")
-                    .font(.B4MediumFont())
-                    .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
-                    .frame(height: 10 * DynamicSizeFactor.factor())
-            } else {
-                Spacer()
-                    .frame(height: 10 * DynamicSizeFactor.factor())
+            if isCurrentMonthDay {
+                if let dailyTotalAmount = getSpendingAmount(for: day) {
+                    Text("\(dailyTotalAmount)")
+                        .font(.B4MediumFont())
+                        .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
+                        .frame(height: 10 * DynamicSizeFactor.factor())
+                } else {
+                    Spacer()
+                        .frame(height: 10 * DynamicSizeFactor.factor())
+                }
             }
         }
         .frame(height: 32 * DynamicSizeFactor.factor())
     }
 
     private func isSpendingDay(_ day: Int) -> Bool {
-        // TODO: month,day,money를 합친 model 생성 필요
-        var month: Int {
-            let calendar = Calendar.current
-            return calendar.component(.month, from: date)
-        }
-        let specialDays = [8, 13, 15]
-        if month == 5 {
-            return specialDays.contains(day)
-        } else if month == 4 {
-            return specialDays.contains(day)
-        } else {
-            return false
-        }
+        return spendingHistoryViewModel.dailySpendings.contains { $0.day == day }
+    }
+
+    private func getSpendingAmount(for day: Int) -> Int? {
+        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
 }

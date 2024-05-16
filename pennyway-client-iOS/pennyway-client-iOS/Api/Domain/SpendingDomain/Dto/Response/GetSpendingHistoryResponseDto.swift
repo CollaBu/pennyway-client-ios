@@ -7,7 +7,7 @@ struct GetSpendingHistoryResponseDto: Codable {
     let data: SpendingData
 
     struct SpendingData: Codable {
-        let spendings: Spending
+        let spending: Spending
     }
 }
 
@@ -16,7 +16,6 @@ struct GetSpendingHistoryResponseDto: Codable {
 struct Spending: Codable {
     let year: Int
     let month: Int
-    let monthlyTotalAmount: Int
     let dailySpendings: [DailySpending]
 }
 
@@ -34,7 +33,7 @@ struct IndividualSpending: Codable {
     let id: Int
     let amount: Int
     let category: SpendingCategory
-    let spendAt: Date
+    let spendAt: String
     let accountName: String
     let memo: String
 }
