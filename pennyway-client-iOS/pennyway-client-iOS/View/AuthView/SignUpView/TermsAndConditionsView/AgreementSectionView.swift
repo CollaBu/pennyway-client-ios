@@ -6,9 +6,9 @@ struct AgreementSectionView: View {
     var contentText: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6 * DynamicSizeFactor.factor()) {
+        VStack(alignment: .leading, spacing: 7 * DynamicSizeFactor.factor()) {
             ZStack {
-                HStack {
+                HStack(spacing: 3) {
                     Button(action: {
                         isSelected.toggle()
                     }, label: {
@@ -25,7 +25,7 @@ struct AgreementSectionView: View {
                     Text(title)
                         .font(.B2MediumFont())
                         .multilineTextAlignment(.leading)
-                        .platformTextColor(color: isSelected ? .black : Color("Gray04"))
+                        .platformTextColor(color: isSelected ? .black : Color("Gray05"))
                 }
             }
 
@@ -41,7 +41,7 @@ struct AgreementSectionView: View {
                     )
 
                 Text(contentText)
-                    .font(.B1RegularFont())
+                    .font(.B1MediumFont())
                     .minimumScaleFactor(0.001)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

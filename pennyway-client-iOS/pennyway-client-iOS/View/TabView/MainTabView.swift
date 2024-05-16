@@ -29,13 +29,14 @@ struct MainTabView: View {
                 .tag(2)
 
             ProfileMainView()
+
                 .tabItem {
                     selection == 3 ? Image("icon_tapbar_profile_on") : Image("icon_tapbar_profile_off")
                     Text("프로필")
                 }
                 .tag(3)
         }
-        .navigationBarBackButtonHidden(true)
+//        .navigationBarBackButtonHidden(true)
         .accentColor(Color("Mint03"))
         .onAppear {
             UITabBar.appearance().barTintColor = .white

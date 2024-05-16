@@ -7,8 +7,6 @@ struct PhoneVerificationView: View {
     @StateObject var oauthAccountLinkingViewModel = LinkOAuthToAccountViewModel()
     @EnvironmentObject var authViewModel: AppViewModel
     let profileInfoViewModel = UserAccountViewModel()
-    
-    @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
    
     var body: some View {
         ZStack {
@@ -47,7 +45,7 @@ struct PhoneVerificationView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
                     NavigationBackButton(action: {
-                        if isOAuthRegistration { // 소셜 회원가입 중 취소
+                        if OAuthRegistrationManager.shared.isOAuthRegistration { 
                             KeychainHelper.deleteOAuthUserData()
                         }
                     })
@@ -62,7 +60,7 @@ struct PhoneVerificationView: View {
     }
     
     private func continueButtonAction() {
-        if isOAuthRegistration {
+        if OAuthRegistrationManager.shared.isOAuthRegistration {
             phoneVerificationViewModel.requestOAuthVerifyVerificationCodeApi {
                 checkFormValid()
             }
@@ -78,7 +76,7 @@ struct PhoneVerificationView: View {
             showingPopUp = false
             viewModel.continueButtonTapped()
             
-            if isOAuthRegistration {
+            if OAuthRegistrationManager.shared.isOAuthRegistration {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
                 OAuthRegistrationManager.shared.code = phoneVerificationViewModel.code
                 if OAuthRegistrationManager.shared.isExistUser {
@@ -97,10 +95,10 @@ struct PhoneVerificationView: View {
     
     @ViewBuilder
     private func destinationView() -> some View {
-        if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
+        if !OAuthRegistrationManager.shared.isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
             OAuthAccountLinkingView(signUpViewModel: viewModel)
-          
-        } else if isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser { // 이미 계정이 있는 경우
+
+        } else if OAuthRegistrationManager.shared.isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser { // 이미 계정이 있는 경우
             handleExistUserLogin()
         } else {
             SignUpView(viewModel: viewModel)

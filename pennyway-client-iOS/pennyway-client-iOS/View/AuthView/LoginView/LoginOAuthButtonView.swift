@@ -51,6 +51,7 @@ struct LoginOAuthButtonView: View {
                 EmptyView()
             }
         }
+        .padding(.top, 14 * DynamicSizeFactor.factor())
     }
 
     func handleOAuthLogin() {
