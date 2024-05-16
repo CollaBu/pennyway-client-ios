@@ -10,6 +10,7 @@ protocol StringAttributeProtocol {
 
 // MARK: - BaseAttribute
 
+/// 전체 text
 public struct BaseAttribute: StringAttributeProtocol {
     let font: Font
     let color: Color
@@ -22,6 +23,7 @@ public struct BaseAttribute: StringAttributeProtocol {
 
 // MARK: - StringAttribute
 
+/// 특정 text
 public struct StringAttribute: StringAttributeProtocol {
     let text: String
     let font: Font

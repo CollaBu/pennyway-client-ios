@@ -2,6 +2,7 @@
 import SwiftUI
 
 extension String {
+    /// 전체 텍스트와 특정 텍스트 조합하여 만들기
     public func toAttributesText(
         base: BaseAttribute,
         _ attribute: StringAttribute
@@ -28,6 +29,7 @@ extension String {
         return text
     }
   
+    /// font와 color 지정한 Text 반환
     private func _makeAttributeText(
         text: String, attribute: StringAttributeProtocol
     ) -> Text {
