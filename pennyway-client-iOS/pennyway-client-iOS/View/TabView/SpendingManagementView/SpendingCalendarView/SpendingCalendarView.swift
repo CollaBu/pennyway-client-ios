@@ -7,6 +7,8 @@ struct SpendingCalenderView: View {
     @State private var date: Date = Date()
     @State private var clickedCurrentMonthDates: Date?
     let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
+    
+    var checkChangeMonth = false
   
     var body: some View {
         VStack {
@@ -98,13 +100,14 @@ struct SpendingCalenderView: View {
                         let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
             
                         SpendingCalendarCellView(spendingHistoryViewModel: spendingHistoryViewModel, date: date, day: day, clicked: clicked, isToday: isToday)
+                        
                     } else if let prevMonthDate = Calendar.current.date(
                         byAdding: .day,
                         value: index + lastDayOfMonthBefore,
                         to: previousMonth()
                     ) {
                         let day = Calendar.current.component(.day, from: prevMonthDate)
-            
+                        
                         SpendingCalendarCellView(spendingHistoryViewModel: spendingHistoryViewModel, date: date, day: day, isCurrentMonthDay: false)
                     }
                 }
@@ -188,17 +191,19 @@ private extension SpendingCalenderView {
   
     /// 월 변경
     func changeMonth(by value: Int) {
-        date = adjustedMonth(by: value)
-        spendingHistoryViewModel.currentDate = date
-        spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
-        
+        spendingHistoryViewModel.currentDate = adjustedMonth(by: value)
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+            if success {
+                date = adjustedMonth(by: value)
+            }
+        }
     }
   
     /// 이전 월로 이동 가능한지 확인
     func canMoveToPreviousMonth() -> Bool {
         let currentDate = Date()
         let calendar = Calendar.current
-        let targetDate = calendar.date(byAdding: .month, value: -5, to: currentDate) ?? currentDate
+        let targetDate = calendar.date(byAdding: .month, value: -5, to: currentDate) ?? currentDate // 2000년도까지???
     
         if adjustedMonth(by: -1) < targetDate {
             return false
