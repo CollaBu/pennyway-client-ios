@@ -20,24 +20,27 @@ struct SignUpView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 47 * DynamicSizeFactor.factor()) {
-                VStack {
-                    Spacer().frame(height: 15 * DynamicSizeFactor.factor())
-                    
-                    NavigationCountView(selectedText: $viewModel.selectedText)
-                        .onAppear {
-                            viewModel.selectedText = 2
-                        }
-                    
-                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-                    
-                    SignUpFormView(formViewModel: formViewModel)
+        VStack {
+            ScrollView {
+                VStack(spacing: 47 * DynamicSizeFactor.factor()) {
+                    VStack {
+                        Spacer().frame(height: 15 * DynamicSizeFactor.factor())
+                        
+                        NavigationCountView(selectedText: $viewModel.selectedText)
+                            .onAppear {
+                                viewModel.selectedText = 2
+                            }
+                        
+                        Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+                        
+                        SignUpFormView(formViewModel: formViewModel)
+                        
+                        Spacer().frame(height: 65 * DynamicSizeFactor.factor())
+                    }
                 }
             }
-        }
-        
-        VStack {
+            Spacer()
+            
             CustomBottomButton(action: {
                 if formViewModel.isFormValid {
                     viewModel.continueButtonTapped()
@@ -58,12 +61,14 @@ struct SignUpView: View {
                 } else {}
                 
             }, label: buttonText, isFormValid: $formViewModel.isFormValid)
-                .padding(.bottom, 34)
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
             
             NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
                 EmptyView()
             }
         }
+        
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

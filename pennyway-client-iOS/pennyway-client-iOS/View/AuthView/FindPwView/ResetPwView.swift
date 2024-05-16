@@ -13,29 +13,29 @@ struct ResetPwView: View {
                         .font(.H1SemiboldFont())
                         .multilineTextAlignment(.leading)
                         .padding(.top, 15 * DynamicSizeFactor.factor())
-                    
+                        
                     Spacer()
                 }
                 .padding(.leading, 20)
-                
+                    
                 Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-                
+                    
                 ResetPwFormView(formViewModel: formViewModel)
             }
             Spacer()
-            
+                
             CustomBottomButton(action: {
                 continueButtonAction()
                 formViewModel.validatePwForm()
-                
+                    
             }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
-                .padding(.bottom, 34)
-            
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
             NavigationLink(destination: CompleteChangePwView(), isActive: $navigateView) {
                 EmptyView()
             }.hidden()
         }
-        
+        .edgesIgnoringSafeArea(.bottom)
         .frame(maxHeight: .infinity)
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -53,7 +53,7 @@ struct ResetPwView: View {
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
-                    
+
                 }.offset(x: -10)
             }
         }

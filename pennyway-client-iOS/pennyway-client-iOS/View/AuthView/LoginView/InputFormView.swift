@@ -18,23 +18,29 @@ struct InputFormView: View {
             }
             .padding(.leading, 20)
 
-            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-
             if loginViewModel.showErrorCodeContent {
-                ErrorCodeContentView()
+                Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+                ErrorCodeContentView(isCloseErrorPopUpView: $loginViewModel.isLoginSuccessful)
+                Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 49 * DynamicSizeFactor.factor())
             }
 
-            Spacer().frame(height: 35 * DynamicSizeFactor.factor())
-
             VStack(spacing: 9 * DynamicSizeFactor.factor()) {
-                ZStack {
+                ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    TextField("아이디 입력", text: $loginViewModel.username)
+                    if loginViewModel.username.isEmpty {
+                        Text("아이디 입력")
+                            .platformTextColor(color: Color("Gray03"))
+                            .padding(.leading, 13 * DynamicSizeFactor.factor())
+                            .font(.H4MediumFont())
+                    }
+                    TextField("", text: $loginViewModel.username)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-                        .platformTextColor(color: Color("Gray03"))
                         .font(.H4MediumFont())
                         .AutoCorrectionExtensions()
                         .TextAutocapitalization()
@@ -42,14 +48,19 @@ struct InputFormView: View {
                 }
                 .padding(.horizontal, 20)
 
-                ZStack {
+                ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    SecureField("비밀번호 입력", text: $loginViewModel.password)
+                    if loginViewModel.password.isEmpty {
+                        Text("비밀번호 입력")
+                            .platformTextColor(color: Color("Gray03"))
+                            .padding(.leading, 13 * DynamicSizeFactor.factor())
+                            .font(.H4MediumFont())
+                    }
+                    SecureField("", text: $loginViewModel.password)
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-                        .platformTextColor(color: Color("Gray03"))
                         .font(.H4MediumFont())
                         .textContentType(.password)
                         .ignoresSafeArea(.keyboard)
@@ -57,16 +68,16 @@ struct InputFormView: View {
                 .padding(.horizontal, 20)
 
                 Spacer().frame(height: 4 * DynamicSizeFactor.factor())
-
-                VStack {
-                    CustomBottomButton(action: {
-                        handleLogin()
-
-                    }, label: "로그인", isFormValid: .constant(true)) 
-                }
-
-                Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             }
+            VStack {
+                CustomBottomButton(action: {
+                    handleLogin()
+
+                }, label: "로그인", isFormValid: .constant(true))
+            }
+        }
+        .onAppear {
+            loginViewModel.isLoginSuccessful = false
         }
     }
 
@@ -77,6 +88,9 @@ struct InputFormView: View {
                     authViewModel.login()
                 } else {
                     Log.error("fail login")
+                    loginViewModel.isLoginSuccessful = true
+                    loginViewModel.username = ""
+                    loginViewModel.password = ""
                 }
             }
         }

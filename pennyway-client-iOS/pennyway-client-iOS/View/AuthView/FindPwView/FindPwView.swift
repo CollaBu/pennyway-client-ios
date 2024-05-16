@@ -8,11 +8,29 @@ struct FindPwView: View {
     @State private var isVerificationError: Bool = false
 
     var body: some View {
-        ZStack {
+        VStack {
             ScrollView {
                 VStack {
                     FindPwContentView(phoneVerificationViewModel: phoneVerificationViewModel)
                 }
+            }
+            Spacer().frame(height: 203 * DynamicSizeFactor.factor())
+
+            Spacer()
+                
+            CustomBottomButton(action: {
+                continueButtonAction()
+            }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
+                
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                
+            NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel()), isActive: $isNavigateToFindPwView) {
+                EmptyView()
+            }.hidden()
+                
+            if showingPopUp == true {
+                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "사용자 정보를 찾을 수 없어요")
             }
             Spacer().frame(height: 203 * DynamicSizeFactor.factor())
             
@@ -35,6 +53,8 @@ struct FindPwView: View {
                 ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "사용자 정보를 찾을 수 없어요")
             }
         }
+        
+        .edgesIgnoringSafeArea(.bottom)
         .navigationTitle(Text("비밀번호 찾기"))
         .navigationBarBackButtonHidden(true)
         .toolbar {

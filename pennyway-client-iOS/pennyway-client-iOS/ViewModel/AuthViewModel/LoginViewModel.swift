@@ -5,8 +5,8 @@ class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var isFormValid = false
-    @Published var isLoginSuccessful = false
-    @Published var showErrorCodeContent = false
+    @Published var isLoginSuccessful: Bool = false
+    @Published var showErrorCodeContent: Bool = false
 
     let profileInfoViewModel = UserAccountViewModel()
 
@@ -43,5 +43,9 @@ class LoginViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    func dismissError() {
+        showErrorCodeContent = false
     }
 }

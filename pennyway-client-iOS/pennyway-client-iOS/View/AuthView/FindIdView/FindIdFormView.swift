@@ -10,32 +10,28 @@ struct FindIdFormView: View {
     @State private var isVerificationError: Bool = false
     
     var body: some View {
-        ZStack {
+        VStack {
             ScrollView {
                 FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel)
             }
-            Spacer().frame(height: 203)
             
             Spacer()
             
-            VStack {
-                Spacer()
-                
-                CustomBottomButton(action: {
-                    continueButtonAction()
-                    
-                }, label: "아이디 찾기", isFormValid: $phoneVerificationViewModel.isFormValid)
-                    .padding(.bottom, 34)
-                
-                NavigationLink(destination: FindIdView(phoneVerificationViewModel: PhoneVerificationViewModel()), isActive: $isNavigateToFindIDView) {
-                    EmptyView()
-                }.hidden()
-            }
+            CustomBottomButton(action: {
+                continueButtonAction()
+            }, label: "아이디 찾기", isFormValid: $phoneVerificationViewModel.isFormValid)
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+            
+            NavigationLink(destination: FindIdView(phoneVerificationViewModel: PhoneVerificationViewModel()), isActive: $isNavigateToFindIDView) {
+                EmptyView()
+            }.hidden()
+            
             if showingPopUp == true {
                 Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "사용자 정보를 찾을 수 없어요")
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
         .navigationTitle(Text("아이디 찾기"))
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -45,12 +41,12 @@ struct FindIdFormView: View {
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-                    
+
                 }.offset(x: -10)
             }
         }
     }
-    
+
     private func continueButtonAction() {
         phoneVerificationViewModel.requestUserNameVerifyVerificationCodeApi {
             checkFormValid()

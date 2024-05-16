@@ -9,43 +9,41 @@ struct FindIdView: View {
 
     var body: some View {
         VStack {
-            Spacer().frame(height: 147)
-            
+            Spacer().frame(height: 147 * DynamicSizeFactor.factor())
+                    
             Image("icon_illust_completion")
-                .frame(width: 68, height: 68)
+                .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
                 .padding(.horizontal, 126)
-            
-            Spacer().frame(height: 17)
-            
+                    
+            Spacer().frame(height: 17 * DynamicSizeFactor.factor())
+                    
             Text("휴대폰 번호 정보와\n일치하는 아이디를 가져왔어요")
-                .font(.pretendard(.semibold, size: 16))
+                .font(.H3SemiboldFont())
                 .multilineTextAlignment(.center)
-            
-            Spacer().frame(height: 30)
-            
+                    
+            Spacer().frame(height: 30 * DynamicSizeFactor.factor())
+                    
             ZStack {
                 Rectangle()
                     .foregroundColor(.clear)
-                    .frame(width: 280, height: 62)
+                    .frame(width: 280 * DynamicSizeFactor.factor(), height: 62 * DynamicSizeFactor.factor())
                     .background(Color("Gray01"))
                     .cornerRadius(4)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
                             .inset(by: 0.5)
                             .stroke(Color("Gray02"), lineWidth: 1)
-                    )
-                
+                    )                        
                 Text("\(username)")
-                    .font(.pretendard(.semibold, size: 18))
+                    .font(.H2SemiboldFont())
                     .multilineTextAlignment(.center)
             }
-            
-            Spacer().frame(height: 120)
             Spacer()
-            
+                    
             bottomButton()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
     }
     

@@ -30,8 +30,9 @@ struct SignUpFormView: View {
     
     /// All input fields
     private func allInputFields() -> some View {
-        VStack(alignment: .leading, spacing: 9) {
+        VStack(alignment: .leading, spacing: 9 * DynamicSizeFactor.factor()) {
             nameAndIDFields()
+            Spacer()
             passwordFields()
         }
     }
@@ -46,6 +47,10 @@ struct SignUpFormView: View {
             
             if formViewModel.showErrorName {
                 errorMessage("한글과 영문 대, 소문자만 가능해요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
             
             CustomInputView(inputText: $formViewModel.id, titleText: "아이디", onCommit: {
@@ -77,6 +82,10 @@ struct SignUpFormView: View {
             
             if formViewModel.showErrorPassword {
                 errorMessage("숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
             
             CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
@@ -86,6 +95,10 @@ struct SignUpFormView: View {
             
             if formViewModel.showErrorConfirmPw {
                 errorMessage("비밀번호가 일치하지 않아요")
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+            } else {
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
         }
     }

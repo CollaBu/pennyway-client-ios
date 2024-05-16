@@ -32,7 +32,6 @@
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
-		4A328AC02BF4DFF600C585C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A328ABF2BF4DFF600C585C7 /* GoogleService-Info.plist */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -162,6 +161,7 @@
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
+		D8C9AC342BF508D7006D1FCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,7 +191,6 @@
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
-		4A328ABF2BF4DFF600C585C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -321,6 +320,7 @@
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
+		D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -712,7 +712,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4A328ABF2BF4DFF600C585C7 /* GoogleService-Info.plist */,
+				D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
 				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
@@ -1096,7 +1096,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A328AC02BF4DFF600C585C7 /* GoogleService-Info.plist in Resources */,
+				D8C9AC342BF508D7006D1FCD /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,

@@ -31,8 +31,10 @@ struct CompleteChangePwView: View {
                 NavigationUtil.popToRootView()
                 Log.debug("버튼 누름")
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
-                .padding(.bottom, 34)
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
+        
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
     }
 }
