@@ -32,7 +32,7 @@ class SpendingHistoryViewModel: ObservableObject {
                         }
                         completion(true)
                     } catch {
-                        print("Error parsing response JSON: \(error)")
+                        Log.fault("Error decoding JSON: \(error)")
                         completion(false)
                     }
                 }

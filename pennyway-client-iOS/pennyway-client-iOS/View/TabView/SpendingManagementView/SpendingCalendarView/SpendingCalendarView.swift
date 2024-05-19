@@ -195,6 +195,8 @@ private extension SpendingCalenderView {
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
                 date = adjustedMonth(by: value)
+            }else{
+                Log.fault("지출내역 조회 Api 연동 실패")
             }
         }
     }
