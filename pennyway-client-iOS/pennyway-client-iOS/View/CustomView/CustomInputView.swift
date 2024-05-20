@@ -23,7 +23,7 @@ struct CustomInputView: View {
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
                     if inputText.isEmpty {
-                        Text(placeholder!)
+                        Text(placeholder ?? "")
                             .platformTextColor(color: Color("Gray03"))
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                             .font(.H4MediumFont())
