@@ -1,42 +1,62 @@
 import SwiftUI
 
 struct AddSpendingCompleteView: View {
-    let profileInfoViewModel = UserAccountViewModel()
-    var name = OAuthRegistrationManager.shared.isOAuthRegistration ? OAuthRegistrationManager.shared.name : RegistrationManager.shared.name
-
-    @EnvironmentObject var authViewModel: AppViewModel
-
     var body: some View {
         VStack {
-            NavigationAvailable {
-                VStack {
-                    Image("icon_illust_welcome")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: .infinity, maxHeight: 160 * DynamicSizeFactor.factor())
-                        .padding(.top, 71 * DynamicSizeFactor.factor())
-                        .padding(.horizontal, 80)
-                        .padding(.bottom, 20 * DynamicSizeFactor.factor())
-
-                    Text("\(name)님 환영합니다.")
-                        .font(.pretendard(.semibold, size: 24))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 73)
-                        .padding(.bottom, 12)
-                    Text("페니웨이와 절약을 시작해볼까요?")
-                        .font(.pretendard(.medium, size: 14))
+            Image("icon_illust_add history")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 160 * DynamicSizeFactor.factor(), height: 160 * DynamicSizeFactor.factor())
+                .padding(.top, 65 * DynamicSizeFactor.factor())
+            
+            Text("소비 내역 추가 완료!")
+                .font(.H1SemiboldFont())
+            
+            Spacer()
+           
+            VStack(spacing: 16 * DynamicSizeFactor.factor()) {
+                HStack {
+                    Text("금액")
+                        .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
-
                     Spacer()
-
-                    CustomBottomButton(action: {
-                        authViewModel.login()
-                        profileInfoViewModel.getUserProfileApi()
-                    }, label: "확인", isFormValid: .constant(true))
-                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                    Text("가격")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: Color("Gray07"))
                 }
-                .edgesIgnoringSafeArea(.bottom)
+                HStack {
+                    Text("카테고리")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: Color("Gray04"))
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 5 * DynamicSizeFactor.factor()){
+                        Image("icon_checkone_on_small")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor())
+                        Text("카테고리")
+                            .font(.B1MediumFont())
+                            .platformTextColor(color: Color("Gray07"))
+                    }
+                }
+                HStack {
+                    Text("금액")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: Color("Gray04"))
+                    Spacer()
+                    Text("날짜")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: Color("Gray07"))
+                }
             }
+            .padding(.horizontal, 20)
+           
+            Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+            
+            CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
@@ -44,5 +64,5 @@ struct AddSpendingCompleteView: View {
 }
 
 #Preview {
-    WelcomeView()
+    AddSpendingCompleteView()
 }
