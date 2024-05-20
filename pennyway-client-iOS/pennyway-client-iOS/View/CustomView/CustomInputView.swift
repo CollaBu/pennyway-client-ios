@@ -38,7 +38,7 @@ struct CustomInputView: View {
                         })
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                        .padding(.leading, 13 * DynamicSizeFactor.factor())
+                        .padding(.leading, 12 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
 
@@ -48,7 +48,7 @@ struct CustomInputView: View {
                         })
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                        .padding(.leading, 13 * DynamicSizeFactor.factor())
+                        .padding(.leading, 12 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                     }
