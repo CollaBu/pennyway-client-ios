@@ -9,26 +9,26 @@ struct OAuthAccountLinkingView: View {
     var body: some View {
         ZStack {
             VStack(alignment: .center) {
-                Spacer().frame(height: 110)
+                Spacer().frame(height: 110 * DynamicSizeFactor.factor())
                 
                 Image("icon_illust_completion")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 68, height: 68)
+                    .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
                 
-                Spacer().frame(height: 16)
+                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                 
                 Text("현재 사용 중인 계정이 있어요\n이 아이디와 연동할까요?")
                     .multilineTextAlignment(.center)
-                    .font(.pretendard(.semibold, size: 16))
+                    .font(.H3SemiboldFont())
                 
-                Spacer().frame(height: 30)
+                Spacer().frame(height: 30 * DynamicSizeFactor.factor())
                 
                 ZStack {
                     Text("\(OAuthRegistrationManager.shared.username)")
-                        .font(.pretendard(.medium, size: 16))
+                        .font(.H3SemiboldFont())
                         .platformTextColor(color: Color("Gray07"))
-                        .padding(.vertical, 20)
+                        .padding(.vertical, 20 * DynamicSizeFactor.factor())
                         .frame(maxWidth: .infinity)
                 }
                 .background(Color("Gray01"))
@@ -40,12 +40,13 @@ struct OAuthAccountLinkingView: View {
                     isActiveButton = true
                     
                 }, label: "연동하기", isFormValid: .constant(true))
-                    .padding(.bottom, 34)
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 NavigationLink(destination: SignUpView(viewModel: signUpViewModel), isActive: $isActiveButton) {
                     EmptyView()
                 }
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

@@ -9,14 +9,14 @@ struct PhoneVerificationContentView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("번호인증")
-                .font(.pretendard(.semibold, size: 24))
+                .font(.H1SemiboldFont())
                 .padding(.horizontal, 20)
 
-            Spacer().frame(height: 32)
+            Spacer().frame(height: 32 * DynamicSizeFactor.factor())
 
             PhoneNumberInputSectionView(viewModel: phoneVerificationViewModel) 
 
-            Spacer().frame(height: 21)
+            Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 
             NumberInputSectionView(viewModel: phoneVerificationViewModel)
         }
