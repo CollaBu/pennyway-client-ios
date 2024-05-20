@@ -2,8 +2,6 @@ import SwiftUI
 
 struct InquiryListView: View {
     @State private var isSelectedCategory: Bool = false
-    @State var show = true
-    @State var name = "Item1"
     @State var listArray: [String] = ["이용 관련", "오류 신고", "서비스 제안", "기타"]
     @State var selectedItem: String? = nil
     
@@ -77,8 +75,6 @@ struct InquiryListView: View {
                     }, alignment: .topLeading
                 )
             }
-            
-//            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
         }
     }
 }

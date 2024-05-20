@@ -125,7 +125,6 @@
 		4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */; };
 		4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */; };
 		4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */; };
-		D80676032BFA5E3600D91BC0 /* InquiryListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80676022BFA5E3600D91BC0 /* InquiryListContentView.swift */; };
 		D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809412D2BF276460015CFF9 /* ResetPwFormView.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -289,7 +288,6 @@
 		4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListItem.swift; sourceTree = "<group>"; };
 		4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		D80676022BFA5E3600D91BC0 /* InquiryListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryListContentView.swift; sourceTree = "<group>"; };
 		D809412D2BF276460015CFF9 /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		D8157E632BBEF2040083844B /* InputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormView.swift; sourceTree = "<group>"; };
@@ -765,7 +763,6 @@
 				4A762AEE2B99A16B001C1188 /* MainView.swift */,
 				D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */,
 				D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */,
-				D80676022BFA5E3600D91BC0 /* InquiryListContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1206,7 +1203,6 @@
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
-				D80676032BFA5E3600D91BC0 /* InquiryListContentView.swift in Sources */,
 				D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
 				4A5789752BDC1CBF00AFEB26 /* NotFoundErrorCode.swift in Sources */,

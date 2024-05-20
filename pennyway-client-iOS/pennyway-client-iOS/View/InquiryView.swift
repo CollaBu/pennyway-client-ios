@@ -53,6 +53,9 @@ struct InquiryView: View {
                                 .zIndex(0)
                                 .colorMultiply(Color("Gray01"))
                                 .cornerRadius(6)
+                                .clipShape(RoundedRectangle(cornerRadius: 6))
+                                .TextAutocapitalization()
+                                .AutoCorrectionExtensions()
                             
                             if content.isEmpty {
                                 Text(placeholder)
@@ -60,8 +63,11 @@ struct InquiryView: View {
                                     .padding(.leading, 14)
                                     .padding(.top, 16)
                                     .platformTextColor(color: Color("Gray03"))
+                                    .cornerRadius(6)
+
                             }
                         }
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
                         .background(Color("Gray01"))
                     }
                     .padding(.horizontal, 20)
