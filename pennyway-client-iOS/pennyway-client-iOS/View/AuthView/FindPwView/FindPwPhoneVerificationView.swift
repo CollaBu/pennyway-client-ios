@@ -11,17 +11,25 @@ struct FindPwPhoneVerificationView: View {
             VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
                 Text("휴대폰 번호")
                     .padding(.horizontal, 20)
-                    .font(.pretendard(.regular, size: 12))
+                    .font(.B1RegularFont())
                     .platformTextColor(color: Color("Gray04"))
                 HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color("Gray01"))
                             .frame(height: 46 * DynamicSizeFactor.factor())
-                        TextField("'-' 제외 입력", text: $viewModel.phoneNumber)
+                        if viewModel.phoneNumber.isEmpty {
+                            Text("01012345678")
+                                .platformTextColor(color: Color("Gray03"))
+                                .padding(.leading, 13 * DynamicSizeFactor.factor())
+                                .font(.H4MediumFont())
+                        }
+
+                        TextField("", text: $viewModel.phoneNumber)
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                             .font(.H4MediumFont())
                             .keyboardType(.numberPad)
+                            .platformTextColor(color: Color("Gray07"))
 
                             .onChange(of: viewModel.phoneNumber) { newValue in
                                 if Int(newValue) != nil {
@@ -40,7 +48,7 @@ struct FindPwPhoneVerificationView: View {
                         }
                     }, label: {
                         Text("인증번호 받기")
-                            .font(.pretendard(.medium, size: 13))
+                            .font(.pretendard(.medium, size: 13)) // 폰트 리스트에 없는 예외
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
                     .padding(.horizontal, 13 * DynamicSizeFactor.factor())

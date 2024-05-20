@@ -21,7 +21,7 @@ struct InputFormView: View {
             if loginViewModel.showErrorCodeContent {
                 Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                 ErrorCodeContentView(isCloseErrorPopUpView: $loginViewModel.isLoginSuccessful)
-                Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 35)
 
             } else {
                 Spacer().frame(height: 49 * DynamicSizeFactor.factor())
