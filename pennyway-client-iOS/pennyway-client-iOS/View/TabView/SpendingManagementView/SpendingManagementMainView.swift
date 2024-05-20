@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct SpendingManagementMainView: View {
+    @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
+
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -19,12 +21,12 @@ struct SpendingManagementMainView: View {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                    SpendingCheckBoxView(totalSpent: 400_000)
+                    SpendingCheckBoxView(spendingHistoryViewModel: spendingHistoryViewModel)
                         .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-                    CalenderView(month: Date())
+                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel)
                         .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
@@ -58,6 +60,9 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
+            }
+            .onAppear {
+                spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
             }
             .background(Color("Gray01"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
