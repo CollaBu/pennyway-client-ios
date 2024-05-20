@@ -195,7 +195,7 @@ private extension SpendingCalenderView {
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
                 date = adjustedMonth(by: value)
-            }else{
+            } else {
                 Log.fault("지출내역 조회 Api 연동 실패")
             }
         }
@@ -203,14 +203,23 @@ private extension SpendingCalenderView {
   
     /// 이전 월로 이동 가능한지 확인
     func canMoveToPreviousMonth() -> Bool {
-        let currentDate = Date()
         let calendar = Calendar.current
-        let targetDate = calendar.date(byAdding: .month, value: -5, to: currentDate) ?? currentDate // 2000년도까지???
-    
-        if adjustedMonth(by: -1) < targetDate {
+        
+        // 2000년 1월 1일을 생성
+        var components = DateComponents()
+        components.year = 2000
+        components.month = 1
+        components.day = 1
+        guard let targetDate = calendar.date(from: components) else {
             return false
         }
-        return true
+
+        // 이전 월이 targetDate(2000년 1월 1일)보다 크거나 같으면 이동 가능
+        if adjustedMonth(by: -1) >= targetDate {
+            return true
+        } else {
+            return false
+        }
     }
   
     /// 다음 월로 이동 가능한지 확인
