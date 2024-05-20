@@ -14,7 +14,6 @@ struct FindPwView: View {
                     FindPwContentView(phoneVerificationViewModel: phoneVerificationViewModel)
                 }
             }
-            
             Spacer()
                 
             CustomBottomButton(action: {

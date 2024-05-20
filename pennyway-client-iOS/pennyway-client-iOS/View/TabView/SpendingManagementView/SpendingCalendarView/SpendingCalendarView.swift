@@ -1,19 +1,14 @@
 import SwiftUI
 
-// MARK: - CalenderView
+// MARK: - SpendingCalenderView
 
-struct CalenderView: View {
+struct SpendingCalenderView: View {
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State private var date: Date = Date()
     @State private var clickedCurrentMonthDates: Date?
     let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
-  
-    init(
-        month: Date = Date(),
-        clickedCurrentMonthDates: Date? = nil
-    ) {
-        _date = State(initialValue: month)
-        _clickedCurrentMonthDates = State(initialValue: clickedCurrentMonthDates)
-    }
+    
+    var checkChangeMonth = false
   
     var body: some View {
         VStack {
@@ -104,15 +99,16 @@ struct CalenderView: View {
                         let clicked = clickedCurrentMonthDates == date
                         let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
             
-                        SpendingCalendarCellView(date: date, day: day, clicked: clicked, isToday: isToday)
+                        SpendingCalendarCellView(spendingHistoryViewModel: spendingHistoryViewModel, date: date, day: day, clicked: clicked, isToday: isToday)
+                        
                     } else if let prevMonthDate = Calendar.current.date(
                         byAdding: .day,
                         value: index + lastDayOfMonthBefore,
                         to: previousMonth()
                     ) {
                         let day = Calendar.current.component(.day, from: prevMonthDate)
-            
-                        SpendingCalendarCellView(date: date, day: day, isCurrentMonthDay: false)
+                        
+                        SpendingCalendarCellView(spendingHistoryViewModel: spendingHistoryViewModel, date: date, day: day, isCurrentMonthDay: false)
                     }
                 }
                 .onTapGesture {
@@ -128,7 +124,7 @@ struct CalenderView: View {
 
 // MARK: - CalendarView Static 프로퍼티
 
-private extension CalenderView {
+private extension SpendingCalenderView {
     var today: Date {
         let now = Date()
         let components = Calendar.current.dateComponents([.year, .month, .day], from: now)
@@ -146,7 +142,7 @@ private extension CalenderView {
 
 // MARK: - 내부 로직 메서드
 
-private extension CalenderView {
+private extension SpendingCalenderView {
     /// 특정 해당 날짜
     func getDate(for index: Int) -> Date {
         let calendar = Calendar.current
@@ -195,19 +191,35 @@ private extension CalenderView {
   
     /// 월 변경
     func changeMonth(by value: Int) {
-        date = adjustedMonth(by: value)
+        spendingHistoryViewModel.currentDate = adjustedMonth(by: value)
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+            if success {
+                date = adjustedMonth(by: value)
+            } else {
+                Log.fault("지출내역 조회 Api 연동 실패")
+            }
+        }
     }
   
     /// 이전 월로 이동 가능한지 확인
     func canMoveToPreviousMonth() -> Bool {
-        let currentDate = Date()
         let calendar = Calendar.current
-        let targetDate = calendar.date(byAdding: .month, value: -5, to: currentDate) ?? currentDate
-    
-        if adjustedMonth(by: -1) < targetDate {
+        
+        // 2000년 1월 1일을 생성
+        var components = DateComponents()
+        components.year = 2000
+        components.month = 1
+        components.day = 1
+        guard let targetDate = calendar.date(from: components) else {
             return false
         }
-        return true
+
+        // 이전 월이 targetDate(2000년 1월 1일)보다 크거나 같으면 이동 가능
+        if adjustedMonth(by: -1) >= targetDate {
+            return true
+        } else {
+            return false
+        }
     }
   
     /// 다음 월로 이동 가능한지 확인
