@@ -7,6 +7,7 @@ struct InquiryView: View {
     @State private var isSelectedCategory: Bool = false
     @State private var isSelectedAgreeBtn: Bool = false
     @State private var showAgreement: Bool = false
+    let placeholder: String = "문의 내용을 입력해주세요"
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -15,6 +16,7 @@ struct InquiryView: View {
                 
                 HStack {
                     InquiryListView()
+                        .padding(.leading, 20)
                     
                     Spacer()
                     
@@ -23,6 +25,7 @@ struct InquiryView: View {
                         .font(.H4MediumFont())
                         .padding(.trailing, 43 * DynamicSizeFactor.factor())
                 }
+                .zIndex(10)
                 
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                 
@@ -39,17 +42,27 @@ struct InquiryView: View {
                         .platformTextColor(color: Color("Gray04"))
 
                     HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                        ZStack {
+                        ZStack(alignment: .topLeading) {
                             RoundedRectangle(cornerRadius: 6)
                                 .fill(Color("Gray01"))
                                 .frame(height: 123 * DynamicSizeFactor.factor())
                             
                             TextEditor(text: $content)
-                                .border(Color.black)
-//                                .platformTextColor(color: Color("Gray01"))
+                                .padding(.leading, 10)
+                                .padding(.top, 6)
+                                .zIndex(0)
+                                .colorMultiply(Color("Gray01"))
                                 .cornerRadius(6)
-                                .background(Color("Gray01"))
+                            
+                            if content.isEmpty {
+                                Text(placeholder)
+                                    .font(.B1MediumFont())
+                                    .padding(.leading, 14)
+                                    .padding(.top, 16)
+                                    .platformTextColor(color: Color("Gray03"))
+                            }
                         }
+                        .background(Color("Gray01"))
                     }
                     .padding(.horizontal, 20)
                     
@@ -139,7 +152,6 @@ struct InquiryView: View {
                 .padding(.vertical, 13 * DynamicSizeFactor.factor())
         }
         .padding(.horizontal, 20)
-        .border(Color.black)
     }
 }
 
