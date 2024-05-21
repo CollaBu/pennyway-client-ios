@@ -164,6 +164,7 @@
 		D8C9AC342BF508D7006D1FCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */; };
 		D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */; };
 		D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */; };
+		D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D8C2BFC7FE4006E8046 /* InquiryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -325,6 +326,7 @@
 		D8C9AC332BF508D7006D1FCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryView.swift; sourceTree = "<group>"; };
 		D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryListView.swift; sourceTree = "<group>"; };
+		D8E24D8C2BFC7FE4006E8046 /* InquiryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewModel.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -774,6 +776,7 @@
 				4ADBFAF22BE2C7D600C3ECE4 /* AuthViewModel */,
 				4AC4FD062BBDCC010027ACD5 /* OAuthViewModel */,
 				4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */,
+				D8E24D8C2BFC7FE4006E8046 /* InquiryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1215,6 +1218,7 @@
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
 				4A5789972BDC29FD00AFEB26 /* PreconditionFailedError.swift in Sources */,
+				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */,

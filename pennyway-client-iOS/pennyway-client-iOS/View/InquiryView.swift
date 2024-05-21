@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct InquiryView: View {
-    @State private var email = ""
+    @ObservedObject var viewModel: InquiryViewModel
     @State private var content = ""
     @State private var isSelectedCategory: Bool = false
     @State private var isSelectedAgreeBtn: Bool = false
@@ -30,7 +30,7 @@ struct InquiryView: View {
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                 
                 ZStack(alignment: .bottomLeading) {
-                    CustomInputView(inputText: $email, titleText: "이메일", placeholder: "이메일 입력", isSecureText: false)
+                    CustomInputView(inputText: $viewModel.email, titleText: "이메일", placeholder: "이메일 입력", isSecureText: false)
                 }
                 
                 Spacer().frame(height: 24 * DynamicSizeFactor.factor())
@@ -56,6 +56,11 @@ struct InquiryView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 6))
                                 .TextAutocapitalization()
                                 .AutoCorrectionExtensions()
+                                .onChange(of: content) { _ in
+                                    if content.count > 600 {
+                                        content = String(content.prefix(600))
+                                    }
+                                }
                             
                             if content.isEmpty {
                                 Text(placeholder)
@@ -64,7 +69,6 @@ struct InquiryView: View {
                                     .padding(.top, 16)
                                     .platformTextColor(color: Color("Gray03"))
                                     .cornerRadius(6)
-
                             }
                         }
                         .clipShape(RoundedRectangle(cornerRadius: 6))
@@ -162,5 +166,5 @@ struct InquiryView: View {
 }
 
 #Preview {
-    InquiryView()
+    InquiryView(viewModel: InquiryViewModel())
 }

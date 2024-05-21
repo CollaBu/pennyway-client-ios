@@ -38,7 +38,7 @@ struct LoginView: View {
                 }
                 .edgesIgnoringSafeArea(.bottom)
 
-                NavigationLink(destination: InquiryView(), isActive: $goToInquiryView) {
+                NavigationLink(destination: InquiryView(viewModel: InquiryViewModel()), isActive: $goToInquiryView) {
                     EmptyView()
                 }
             }
