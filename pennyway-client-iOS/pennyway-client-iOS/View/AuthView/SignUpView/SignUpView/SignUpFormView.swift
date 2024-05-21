@@ -43,7 +43,7 @@ struct SignUpFormView: View {
             CustomInputView(inputText: $formViewModel.name, titleText: "이름", onCommit: {
                 formViewModel.validateName()
                 formViewModel.validateForm()
-            }, isSecureText: false, isCustom: false)
+            }, isSecureText: false)
             
             if formViewModel.showErrorName {
                 errorMessage("한글과 영문 대, 소문자만 가능해요")
@@ -60,7 +60,7 @@ struct SignUpFormView: View {
                         formViewModel.validateForm()
                     }
                 }
-            }, isSecureText: false, isCustom: false)
+            }, isSecureText: false)
             
             if formViewModel.showErrorID {
                 errorMessage("영문 소문자, 특수기호 (-), (_), (.) 만 사용하여,\n5~20자의 아이디를 입력해 주세요")
@@ -78,7 +78,7 @@ struct SignUpFormView: View {
             CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
                 formViewModel.validatePassword()
                 formViewModel.validateForm()
-            }, isSecureText: true, isCustom: false)
+            }, isSecureText: true)
             
             if formViewModel.showErrorPassword {
                 errorMessage("숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요")
@@ -91,7 +91,7 @@ struct SignUpFormView: View {
             CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
                 formViewModel.validateConfirmPw()
                 formViewModel.validateForm()
-            }, isSecureText: true, isCustom: false)
+            }, isSecureText: true)
             
             if formViewModel.showErrorConfirmPw {
                 errorMessage("비밀번호가 일치하지 않아요")

@@ -1,6 +1,5 @@
 
 import SwiftUI
-import UIKit
 
 // MARK: - AddSpendingHistoryView
 

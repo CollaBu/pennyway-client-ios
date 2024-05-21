@@ -18,7 +18,7 @@ struct AddSpendingInputFormView: View {
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())
             
             // TODO: placeholder 수정
-            CustomInputView(inputText: .constant("소비할 금액"), titleText: "금액*", isSecureText: false, isCustom: true)
+            CustomInputView(inputText: .constant(""), titleText: "금액*", placeholder: "소비 금액을 작성해 주세요", isSecureText: false, isCustom: true)
             
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
             
@@ -70,7 +70,7 @@ struct AddSpendingInputFormView: View {
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
             
             // TODO: placeholder 수정
-            CustomInputView(inputText: .constant("카페일 수혈"), titleText: "소비처", isSecureText: false, isCustom: true)
+            CustomInputView(inputText: .constant(""), titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true)
             
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             
