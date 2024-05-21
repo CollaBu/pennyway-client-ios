@@ -29,9 +29,7 @@ struct InquiryView: View {
                 
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                 
-                ZStack(alignment: .bottomLeading) {
-                    CustomInputView(inputText: $viewModel.email, titleText: "이메일", placeholder: "이메일 입력", isSecureText: false)
-                }
+                CustomInputView(inputText: $viewModel.email, titleText: "이메일", placeholder: "이메일 입력", isSecureText: false)
                 
                 Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                 
@@ -155,9 +153,11 @@ struct InquiryView: View {
                 .minimumScaleFactor(0.001)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .border(Color.black)
                 .platformTextColor(color: Color("Gray04"))
                 .padding(.horizontal, 12 * DynamicSizeFactor.factor())
                 .padding(.vertical, 13 * DynamicSizeFactor.factor())
+                .border(Color.black)
         }
         .padding(.horizontal, 20)
     }

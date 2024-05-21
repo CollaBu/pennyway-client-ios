@@ -4,7 +4,7 @@ struct InquiryListView: View {
     @State private var isSelectedCategory: Bool = false
     @State var listArray: [String] = ["이용 관련", "오류 신고", "서비스 제안", "기타"]
     @State var selectedItem: String? = nil
-    
+
     var body: some View {
         VStack {
             ZStack(alignment: .leading) {
@@ -13,24 +13,24 @@ struct InquiryListView: View {
                     .frame(width: 159 * DynamicSizeFactor.factor(), height: 46 * DynamicSizeFactor.factor())
                     .background(Color("Gray01"))
                     .cornerRadius(3)
-                
+
                 Text(selectedItem ?? "카테고리 선택")
                     .font(.B1MediumFont())
                     .platformTextColor(color: selectedItem != nil ? Color("Gray07") : Color("Gray03"))
                     .padding(.leading, 13 * DynamicSizeFactor.factor())
-                
+
                 Spacer()
-                
+
                 Button(action: {
                     isSelectedCategory.toggle()
                 }, label: {
                     let selected = isSelectedCategory == true ? Image("icon_arrow_up") : Image("icon_arrow_down")
-                    
+
                     selected
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                    
+
                 })
                 .offset(x: 124 * DynamicSizeFactor.factor())
                 .overlay(
@@ -61,7 +61,7 @@ struct InquiryListView: View {
                                             }
                                             .padding(.horizontal, 11)
                                             .background(selectedItem == item ? Color("Gray03") : Color("White01"))
-                                            
+
                                         })
                                     }
                                     .cornerRadius(3)
