@@ -7,7 +7,7 @@ struct ErrorCodeContentView: View {
         ZStack(alignment: .leading) {
             if isCloseErrorPopUpView {
                 Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight: 28 * DynamicSizeFactor.factor())
+                    .frame(height: 28 * DynamicSizeFactor.factor())
                     .platformTextColor(color: Color("Red01"))
                     .cornerRadius(17)
 
@@ -16,9 +16,10 @@ struct ErrorCodeContentView: View {
 
                 }, label: {
                     Image("icon_close_filled_red")
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .foregroundColor(Color("Red03"))
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                        .padding(.leading, 9)
                 })
 
                 Text("아이디 또는 비밀번호가 잘못 입력되었어요")
@@ -27,6 +28,7 @@ struct ErrorCodeContentView: View {
                     .padding(.leading, 34 * DynamicSizeFactor.factor())
             }
         }
+        .frame(maxWidth: .infinity)
         .padding(.horizontal, 20 * DynamicSizeFactor.factor())
     }
 }

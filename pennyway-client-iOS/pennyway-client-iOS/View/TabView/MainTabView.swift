@@ -7,11 +7,10 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $selection) {
-            Text("The First Tab")
-                .navigationBarTitle("지출관리")
+            SpendingManagementMainView()
 
                 .tabItem {
-                    Image(systemName: "1.square.fill")
+                    selection == 0 ? Image("icon_tabbar_expenditure_on") : Image("icon_tabbar_expenditure_off")
                     Text("지출관리")
                 }
                 .tag(0)
@@ -31,7 +30,7 @@ struct MainTabView: View {
             ProfileMainView()
 
                 .tabItem {
-                    selection == 3 ? Image("icon_tapbar_profile_on") : Image("icon_tapbar_profile_off")
+                    selection == 3 ? Image("icon_tabbar_profile_on") : Image("icon_tabbar_profile_off")
                     Text("프로필")
                 }
                 .tag(3)

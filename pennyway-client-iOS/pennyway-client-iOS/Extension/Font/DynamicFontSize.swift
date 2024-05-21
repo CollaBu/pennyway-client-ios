@@ -17,6 +17,10 @@ extension Font {
         return Font.custom("Pretendard-SemiBold", size: 16 * DynamicSizeFactor.factor())
     }
 
+    static func H3BoldFont() -> Font {
+        return Font.custom("Pretendard-Bold", size: 16 * DynamicSizeFactor.factor())
+    }
+
     static func H4MediumFont() -> Font {
         return Font.custom("Pretendard-Medium", size: 14 * DynamicSizeFactor.factor())
     }

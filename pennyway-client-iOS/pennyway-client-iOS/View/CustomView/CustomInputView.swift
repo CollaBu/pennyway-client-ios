@@ -36,7 +36,7 @@ struct CustomInputView: View {
                         .disableAutocorrection(true)
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
-                        .font(.pretendard(.medium, size: 14))
+                        .font(.H4MediumFont())
 
                     } else {
                         TextField("", text: $inputText, onCommit: {
@@ -46,7 +46,7 @@ struct CustomInputView: View {
                         .disableAutocorrection(true)
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
-                        .font(.pretendard(.medium, size: 14))
+                        .font(.H4MediumFont())
                     }
                 }
             }

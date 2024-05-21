@@ -18,10 +18,19 @@ struct FindIdPhoneVerificationView: View {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color("Gray01"))
                             .frame(height: 46 * DynamicSizeFactor.factor())
-                        TextField("'-' 제외 입력", text: $viewModel.phoneNumber)
+
+                        if viewModel.phoneNumber.isEmpty {
+                            Text("01012345678")
+                                .platformTextColor(color: Color("Gray03"))
+                                .padding(.leading, 13 * DynamicSizeFactor.factor())
+                                .font(.H4MediumFont())
+                        }
+
+                        TextField("", text: $viewModel.phoneNumber)
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                             .font(.H4MediumFont())
                             .keyboardType(.numberPad)
+                            .platformTextColor(color: Color("Gray07"))
 
                             .onChange(of: viewModel.phoneNumber) { newValue in
                                 if Int(newValue) != nil {
