@@ -7,36 +7,37 @@ struct InquiryListView: View {
 
     var body: some View {
         VStack {
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 159 * DynamicSizeFactor.factor(), height: 46 * DynamicSizeFactor.factor())
-                    .background(Color("Gray01"))
-                    .cornerRadius(3)
-
-                Text(selectedItem ?? "카테고리 선택")
-                    .font(.B1MediumFont())
-                    .platformTextColor(color: selectedItem != nil ? Color("Gray07") : Color("Gray03"))
-                    .padding(.leading, 13 * DynamicSizeFactor.factor())
-
-                Spacer()
-
                 Button(action: {
                     isSelectedCategory.toggle()
                 }, label: {
+                    ZStack(alignment: .leading) {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 159 * DynamicSizeFactor.factor(), height: 46 * DynamicSizeFactor.factor())
+                        .background(Color("Gray01"))
+                        .cornerRadius(3)
+                    
+                    Text(selectedItem ?? "카테고리 선택")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: selectedItem != nil ? Color("Gray07") : Color("Gray03"))
+                        .padding(.leading, 13 * DynamicSizeFactor.factor())
+                    
+                    Spacer()
                     let selected = isSelectedCategory == true ? Image("icon_arrow_up") : Image("icon_arrow_down")
-
+                    
                     selected
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                        .offset(x: 124 * DynamicSizeFactor.factor())
+
+                }
 
                 })
-                .offset(x: 124 * DynamicSizeFactor.factor())
                 .overlay(
-                    VStack(alignment: .center, spacing: 45) { // 동적ui 적용하면 간격 너무 넓어짐
+                    VStack(alignment: .center, spacing: 60) { // 동적ui 적용하면 간격 너무 넓어짐
+                        Spacer().frame(height: 6)
                         if isSelectedCategory {
-                            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
                             ZStack {
                                 Rectangle()
                                     .cornerRadius(3)
@@ -74,7 +75,7 @@ struct InquiryListView: View {
                         }
                     }, alignment: .topLeading
                 )
-            }
+            
         }
     }
 }
