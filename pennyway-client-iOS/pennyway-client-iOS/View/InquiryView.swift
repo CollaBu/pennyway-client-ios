@@ -19,11 +19,10 @@ struct InquiryView: View {
                         .padding(.leading, 20)
                     
                     Spacer()
-                    
                     Text("문의가 필요해요")
                         .platformTextColor(color: Color("Gray05"))
                         .font(.H4MediumFont())
-                        .padding(.trailing, 43 * DynamicSizeFactor.factor())
+                        .padding(.trailing, 44 * DynamicSizeFactor.factor())
                 }
                 .zIndex(10)
                 
@@ -39,38 +38,41 @@ struct InquiryView: View {
                         .font(.B1RegularFont())
                         .platformTextColor(color: Color("Gray04"))
 
-                    HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                        ZStack(alignment: .topLeading) {
-                            RoundedRectangle(cornerRadius: 6)
-                                .fill(Color("Gray01"))
-                                .frame(height: 123 * DynamicSizeFactor.factor())
-                            
-                            TextEditor(text: $content)
-                                .padding(.leading, 10)
-                                .padding(.top, 6)
-                                .zIndex(0)
-                                .colorMultiply(Color("Gray01"))
-                                .cornerRadius(6)
-                                .TextAutocapitalization()
-                                .AutoCorrectionExtensions()
-                                .onChange(of: content) { _ in
-                                    if content.count > 600 {
-                                        content = String(content.prefix(600))
-                                    }
-                                }
-                            
-                            if content.isEmpty {
-                                Text(placeholder)
+                    ScrollView(.vertical, showsIndicators: false) {
+                        HStack(spacing: 11 * DynamicSizeFactor.factor()) {
+                            ZStack(alignment: .topLeading) {
+                                RoundedRectangle(cornerRadius: 6)
+                                    .fill(Color("Gray01"))
+                                    .frame(height: 123 * DynamicSizeFactor.factor())
+                                
+                                TextEditor(text: $content)
                                     .font(.B1MediumFont())
-                                    .padding(.leading, 14)
-                                    .padding(.top, 16)
-                                    .platformTextColor(color: Color("Gray03"))
+                                    .padding(.horizontal, 10)
+                                    .padding(.top, 8)
+                                    .zIndex(0)
+                                    .colorMultiply(Color("Gray01"))
                                     .cornerRadius(6)
+                                    .TextAutocapitalization()
+                                    .AutoCorrectionExtensions()
+                                    .onChange(of: content) { _ in
+                                        if content.count > 600 {
+                                            content = String(content.prefix(600))
+                                        }
+                                    }
+                                
+                                if content.isEmpty {
+                                    Text(placeholder)
+                                        .font(.B1MediumFont())
+                                        .padding(.leading, 14)
+                                        .padding(.top, 16)
+                                        .platformTextColor(color: Color("Gray03"))
+                                        .cornerRadius(6)
+                                }
                             }
+                            .clipShape(RoundedRectangle(cornerRadius: 6))
                         }
-                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.horizontal, 20)
                     
                     Spacer().frame(height: 2 * DynamicSizeFactor.factor())
                     
@@ -116,7 +118,8 @@ struct InquiryView: View {
                 
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
             }
-                
+            .frame(minHeight: 123 * DynamicSizeFactor.factor())
+
             CustomBottomButton(action: {}, label: "문의하기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
