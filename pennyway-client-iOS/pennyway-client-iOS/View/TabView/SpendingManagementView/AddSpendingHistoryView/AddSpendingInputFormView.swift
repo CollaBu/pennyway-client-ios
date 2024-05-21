@@ -9,7 +9,7 @@ struct AddSpendingInputFormView: View {
     
     let titleCustomTextList: [String] = ["카테고리*", "날짜*"]
     
-    @State private var memoText: String = "Placeholder"
+    @State private var memoText: String = ""
     @State private var characterCount: Int = 0
     let maxCharacterCount: Int = 100
 
@@ -81,20 +81,35 @@ struct AddSpendingInputFormView: View {
                 
                 Spacer().frame(height: 13 * DynamicSizeFactor.factor())
                 
-                ZStack {
+                ZStack(alignment: .topLeading) {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
                         .frame(height: 104 * DynamicSizeFactor.factor())
                     
                     TextEditor(text: $memoText)
                         .font(.H4MediumFont())
-                        .padding(12 * DynamicSizeFactor.factor())
-                        .scrollContentBackgroundHidden()
-                        .background(Color("Gray01"))
-                        .textEditorBackground {
-                            Color("Gray01") // Color works with earlier versions
+                        .padding(.horizontal, 8 * DynamicSizeFactor.factor())
+                        .padding(.vertical, 5 * DynamicSizeFactor.factor())
+                        .zIndex(0)
+                        .colorMultiply(Color("Gray01"))
+                        .cornerRadius(4)
+                        .TextAutocapitalization()
+                        .AutoCorrectionExtensions()
+                        .onChange(of: memoText) { _ in
+                            if memoText.count > 100 {
+                                memoText = String(memoText.prefix(100))
+                            }
                         }
+                        .frame(height: 104 * DynamicSizeFactor.factor())
+                    
+                    if memoText.isEmpty {
+                        Text("더 하고 싶은 말이 있나요?")
+                            .font(.H4MediumFont())
+                            .padding(12 * DynamicSizeFactor.factor())
+                            .platformTextColor(color: Color("Gray03"))
+                    }
                 }
+                .clipShape(RoundedRectangle(cornerRadius: 4))
                 
                 Spacer().frame(height: 4 * DynamicSizeFactor.factor())
                 
@@ -106,25 +121,8 @@ struct AddSpendingInputFormView: View {
                 }
             }
             .padding(.horizontal, 20)
+            
+            Spacer().frame(height: 15 * DynamicSizeFactor.factor())
         }
-    }
-}
-
-extension View {
-    func scrollContentBackgroundHidden() -> some View {
-        if #available(iOS 16.0, *) {
-            return self.scrollContentBackground(.hidden)
-        } else {
-            return self
-        }
-    }
-    
-    /// Layers the given views behind this ``TextEditor``.
-    ///
-    func textEditorBackground<V>(@ViewBuilder _ content: () -> V) -> some View where V: View {
-        onAppear {
-            UITextView.appearance().backgroundColor = .clear
-        }
-        .background(content())
     }
 }

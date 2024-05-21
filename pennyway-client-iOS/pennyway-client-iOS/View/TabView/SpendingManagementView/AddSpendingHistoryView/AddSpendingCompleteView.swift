@@ -31,7 +31,7 @@ struct AddSpendingCompleteView: View {
                     
                     Spacer()
                     
-                    HStack(spacing: 5 * DynamicSizeFactor.factor()){
+                    HStack(spacing: 5 * DynamicSizeFactor.factor()) {
                         Image("icon_checkone_on_small")
                             .resizable()
                             .aspectRatio(contentMode: .fill)

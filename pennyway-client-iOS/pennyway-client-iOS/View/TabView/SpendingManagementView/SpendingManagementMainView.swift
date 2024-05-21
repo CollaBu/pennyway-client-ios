@@ -3,17 +3,7 @@ import SwiftUI
 
 struct SpendingManagementMainView: View {
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
-
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "Gray01")
-        appearance.shadowColor = .clear // 구분선 hide
-
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
-    }
+    @State private var navigateToAddSpendingHistory = false
 
     var body: some View {
         NavigationAvailable {
@@ -64,6 +54,8 @@ struct SpendingManagementMainView: View {
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
             }
+            .navigationBarColor(UIColor(named: "Gray01"))
+            .setTabBarVisibility(isHidden: false)
             .background(Color("Gray01"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
@@ -76,7 +68,9 @@ struct SpendingManagementMainView: View {
 
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
-                        Button(action: {}, label: {
+                        Button(action: {
+                            navigateToAddSpendingHistory = true
+                        }, label: {
                             Image("icon_navigation_add")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -98,6 +92,9 @@ struct SpendingManagementMainView: View {
                     }
                     .offset(x: 10)
                 }
+            }
+            NavigationLink(destination: AddSpendingHistoryView(), isActive: $navigateToAddSpendingHistory) {
+                EmptyView()
             }
         }
     }
