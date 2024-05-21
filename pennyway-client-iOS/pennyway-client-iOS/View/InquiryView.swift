@@ -59,6 +59,7 @@ struct InquiryView: View {
                                             content = String(content.prefix(600))
                                         }
                                     }
+                                    .frame(height: 123)
                                 
                                 if content.isEmpty {
                                     Text(placeholder)
