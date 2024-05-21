@@ -12,6 +12,8 @@ struct AddSpendingInputFormView: View {
     @State private var memoText: String = ""
     @State private var isCategoryListViewPresented: Bool = false
     
+    @State private var selectedCategory: (String, String)? = nil
+    
     let maxCharacterCount: Int = 100
 
     var body: some View {
@@ -31,16 +33,29 @@ struct AddSpendingInputFormView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text("카테고리를 선택해 주세요")
-                        .font(.B1MediumFont())
-                        .platformTextColor(color: Color("Gray04"))
+                    if let category = selectedCategory {
+                        HStack {
+                            Image(category.0)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            
+                            Text(category.1)
+                                .font(.B1MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                        }
+                    } else {
+                        Text("카테고리를 선택해 주세요")
+                            .font(.B1MediumFont())
+                            .platformTextColor(color: Color("Gray04"))
+                    }
                     
                     Image("icon_arrow_front_small")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                 }
-                .frame(width: 160 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor())
+                .frame(width: 160 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor(), alignment: .trailing)
                 .onTapGesture {
                     isCategoryListViewPresented = true
                 }
@@ -66,7 +81,7 @@ struct AddSpendingInputFormView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                 }
-                .frame(width: 82 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor())
+                .frame(width: 82 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor(), alignment: .trailing)
             }
             .padding(.horizontal, 20)
             
@@ -128,7 +143,7 @@ struct AddSpendingInputFormView: View {
             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
         }
         .fullScreenCover(isPresented: $isCategoryListViewPresented, content: {
-            SpendingCategoryListView(isPresented: $isCategoryListViewPresented)
+            SpendingCategoryListView(isPresented: $isCategoryListViewPresented, selectedCategory: $selectedCategory)
         })
     }
 }

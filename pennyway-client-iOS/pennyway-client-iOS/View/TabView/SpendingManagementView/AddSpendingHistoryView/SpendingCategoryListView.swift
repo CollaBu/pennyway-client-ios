@@ -5,6 +5,7 @@ import SwiftUI
 
 struct SpendingCategoryListView: View {
     @Binding var isPresented: Bool
+    @Binding var selectedCategory: (String, String)?
 
     let categories = [
         ("icon_category_food_on", "식비"),
@@ -38,7 +39,6 @@ struct SpendingCategoryListView: View {
 
             ScrollView {
                 VStack(alignment: .leading) {
-                    
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
                     Text("카테고리를 선택해 주세요")
@@ -46,23 +46,23 @@ struct SpendingCategoryListView: View {
 
                     Spacer().frame(height: 40 * DynamicSizeFactor.factor())
 
-                    ForEach(categories, id: \.1) { category in
+                    ForEach(categories, id: \.1) { image, title in
                         HStack {
-                            Image(category.0) 
+                            Image(image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
                                 .padding(.trailing, 8)
 
-                            Text(category.1)
+                            Text(title)
                                 .font(.B1SemiboldeFont())
-                                .platformTextColor(color: Color("Gray07"))
+                                .platformTextColor(color: title == "추가하기" ? Color("Gray04") : Color("Gray07"))
                         }
                         .onTapGesture {
-                            // 액션
+                            selectedCategory = (image, title)
+                            isPresented = false
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .border(Color.black)
                     }
                     Spacer().frame(height: 21 * DynamicSizeFactor.factor())
                 }
@@ -75,5 +75,5 @@ struct SpendingCategoryListView: View {
 }
 
 #Preview {
-    SpendingCategoryListView(isPresented: .constant(true))
+    SpendingCategoryListView(isPresented: .constant(true), selectedCategory: .constant(("", "")))
 }
