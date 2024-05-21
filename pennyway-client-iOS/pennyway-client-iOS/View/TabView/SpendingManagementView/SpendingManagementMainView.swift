@@ -54,7 +54,7 @@ struct SpendingManagementMainView: View {
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
             }
-            .navigationBarColor(UIColor(named: "Gray01"))
+            .navigationBarColor(UIColor(named: "Gray01"), title: "")
             .setTabBarVisibility(isHidden: false)
             .background(Color("Gray01"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)

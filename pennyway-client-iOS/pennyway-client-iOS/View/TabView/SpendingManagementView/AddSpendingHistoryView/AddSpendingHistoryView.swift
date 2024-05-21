@@ -15,7 +15,7 @@ struct AddSpendingHistoryView: View {
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .background(Color("White01"))
-        .navigationBarColor(UIColor(named: "White01"))
+        .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
