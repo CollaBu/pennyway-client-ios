@@ -53,7 +53,6 @@ struct InquiryView: View {
                                 .zIndex(0)
                                 .colorMultiply(Color("Gray01"))
                                 .cornerRadius(6)
-                                .clipShape(RoundedRectangle(cornerRadius: 6))
                                 .TextAutocapitalization()
                                 .AutoCorrectionExtensions()
                                 .onChange(of: content) { _ in
@@ -72,7 +71,6 @@ struct InquiryView: View {
                             }
                         }
                         .clipShape(RoundedRectangle(cornerRadius: 6))
-                        .background(Color("Gray01"))
                     }
                     .padding(.horizontal, 20)
                     
