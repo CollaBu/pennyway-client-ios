@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject var loginViewModel = LoginViewModel()
-
+    @State private var goToInquiryView: Bool = false
     var body: some View {
         NavigationAvailable {
             ZStack {
@@ -20,7 +20,9 @@ struct LoginView: View {
                 }
                 VStack {
                     Spacer()
-                    Button(action: {}, label: {
+                    Button(action: {
+                        goToInquiryView = true
+                    }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 14)
                                 .frame(maxWidth: 115 * DynamicSizeFactor.factor(), maxHeight: 25 * DynamicSizeFactor.factor())
@@ -35,6 +37,10 @@ struct LoginView: View {
                     })
                 }
                 .edgesIgnoringSafeArea(.bottom)
+
+                NavigationLink(destination: InquiryView(viewModel: InquiryViewModel()), isActive: $goToInquiryView) {
+                    EmptyView()
+                }
             }
         }
     }
