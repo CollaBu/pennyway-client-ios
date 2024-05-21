@@ -19,7 +19,6 @@ struct AddSpendingHistoryView: View {
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
-        .navigationBarTitle("소비 내역 추가하기", displayMode: .inline)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

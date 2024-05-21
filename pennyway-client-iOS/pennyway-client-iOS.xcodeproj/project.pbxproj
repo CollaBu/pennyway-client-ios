@@ -131,6 +131,7 @@
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
 		4AD0D8462BFD20F700A0808F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0D8452BFD20F700A0808F /* GoogleService-Info.plist */; };
+		4AD0D8482BFD384900A0808F /* SpendingCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8472BFD384900A0808F /* SpendingCategoryListView.swift */; };
 		4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */; };
 		4AD70E222BE013C10058A52A /* ProfileMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E212BE013C10058A52A /* ProfileMainView.swift */; };
 		4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */; };
@@ -312,6 +313,7 @@
 		4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTabBarVisibilityExtension.swift; sourceTree = "<group>"; };
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
 		4AD0D8452BFD20F700A0808F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4AD0D8472BFD384900A0808F /* SpendingCategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryListView.swift; sourceTree = "<group>"; };
 		4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		4AD70E212BE013C10058A52A /* ProfileMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainView.swift; sourceTree = "<group>"; };
 		4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
@@ -829,7 +831,6 @@
 				4A4A56762BACAD5A0071D00E /* TermsAndConditionsView */,
 				4A4A56752BACACEE0071D00E /* SignUpView */,
 				4A4A566D2BAC96A10071D00E /* PhoneVerificationView */,
-				4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */,
 			);
 			path = SignUpView;
 			sourceTree = "<group>";
@@ -1008,6 +1009,7 @@
 				4ACBAC832BFBC1100030D935 /* AddSpendingHistoryView.swift */,
 				4ACBAC862BFBD88C0030D935 /* AddSpendingInputFormView.swift */,
 				4A3172B52BFBDF7E00923D5F /* AddSpendingCompleteView.swift */,
+				4AD0D8472BFD384900A0808F /* SpendingCategoryListView.swift */,
 			);
 			path = AddSpendingHistoryView;
 			sourceTree = "<group>";
@@ -1026,6 +1028,7 @@
 			isa = PBXGroup;
 			children = (
 				4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */,
+				4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */,
 				D87CB0CE2BC5A43B00BD882A /* FindPwView */,
 				D8180BFE2BE507D200F837FB /* FindIdView */,
 				D88832962BBC60C400F49B27 /* LoginView */,
@@ -1500,6 +1503,7 @@
 				4A5789772BDC1D5500AFEB26 /* MethodNotAllowedErrorCode.swift in Sources */,
 				4A585F622BF2A6F5007DC01A /* SpendingCalendarView.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
+				4AD0D8482BFD384900A0808F /* SpendingCategoryListView.swift in Sources */,
 				4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */,
 				D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */,
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
