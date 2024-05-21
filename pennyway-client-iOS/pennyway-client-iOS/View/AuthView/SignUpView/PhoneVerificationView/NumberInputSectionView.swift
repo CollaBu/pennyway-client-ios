@@ -11,7 +11,7 @@ struct NumberInputSectionView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-            Text("인증 번호")
+            Text("인증번호")
                 .padding(.horizontal, 20)
                 .font(.B1RegularFont())
                 .platformTextColor(color: Color("Gray04"))
