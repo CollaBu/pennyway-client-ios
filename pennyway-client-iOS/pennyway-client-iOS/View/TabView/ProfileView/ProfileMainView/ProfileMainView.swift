@@ -2,19 +2,14 @@
 import SwiftUI
 
 struct ProfileMainView: View {
+    @State private var isSelectedToolBar = false
     var body: some View {
         NavigationAvailable {
             ScrollView {
                 VStack {
                     ProfileUserInfoView()
-                    
+
                     Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-                    
-                    ProfileOAuthButtonView()
-                    
-                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-                    
-                    ProfileSettingListView()
                 }
                 .background(Color("Gray01"))
             }
@@ -23,7 +18,9 @@ struct ProfileMainView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     HStack {
-                        Button(action: {}, label: {
+                        Button(action: {
+                            isSelectedToolBar = true
+                        }, label: {
                             Image("icon_navigationbar_bell_dot")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -34,6 +31,9 @@ struct ProfileMainView: View {
                     }
                 }
             }
+            NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
+                EmptyView()
+            }.hidden()
         }
     }
 }

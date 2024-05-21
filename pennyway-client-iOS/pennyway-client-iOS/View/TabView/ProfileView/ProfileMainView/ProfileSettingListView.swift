@@ -9,6 +9,7 @@ struct ProfileSettingListView: View {
     @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
     @State private var showingPopUp = false
+    @State private var isNavigateToInquiryView = false
 
     var body: some View {
         ZStack {
@@ -22,12 +23,42 @@ struct ProfileSettingListView: View {
                         ProfileSettingListItem(title: "스크랩", icon: "icon_modifyingprofile", action: {}),
                         ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_modifyingprofile", action: {})
                     ])
+
+                    Rectangle()
+                        .frame(width: .infinity, height: 1)
+                        .platformTextColor(color: Color("Gray02"))
+                        .padding(.horizontal, 10)
+
+                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "앱 설정", itemsWithActions: [
                         ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: {})
                     ])
+
+                    Rectangle()
+                        .frame(width: .infinity, height: 1)
+                        .platformTextColor(color: Color("Gray02"))
+                        .padding(.horizontal, 10)
+
+                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "이용안내", itemsWithActions: [
-                        ProfileSettingListItem(title: "문의하기", icon: "icon_checkwithsomeone", action: {})
+                        ProfileSettingListItem(title: "문의하기", icon: "icon_checkwithsomeone", action: {
+                            isNavigateToInquiryView = true
+                        })
                     ])
+
+//                    NavigationLink(destination: , isActive: $isNavigateToInquiryView) {
+//                        EmptyView()
+//                    }.hidden() 
+
+                    Rectangle()
+                        .frame(width: .infinity, height: 1)
+                        .platformTextColor(color: Color("Gray02"))
+                        .padding(.horizontal, 10)
+
+                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "기타", itemsWithActions: [
                         ProfileSettingListItem(title: "로그아웃", icon: "icon_logout", action: { self.showingPopUp = true }),
                         ProfileSettingListItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: handleDeleteUserAccount)

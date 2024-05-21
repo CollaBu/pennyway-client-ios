@@ -16,6 +16,8 @@ struct ProfileOAuthButtonView: View {
                 .font(.B2MediumFont())
                 .platformTextColor(color: Color("Gray04"))
 
+            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+
             OAuthButtonView(
                 kakaoAction: { // Kakao 로그인 액션 처리
                     kakaoOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
