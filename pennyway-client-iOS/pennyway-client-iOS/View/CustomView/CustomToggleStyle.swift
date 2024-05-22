@@ -3,7 +3,7 @@ import SwiftUI
 struct CustomToggleStyle: ToggleStyle {
     var offColor = Color("Mint03")
     var onColor = Color("Gray05")
-    var thumbColor = Color("White01")
+    var thumbColor = Color("White0")
 
     func makeBody(configuration: Self.Configuration) -> some View {
         HStack {

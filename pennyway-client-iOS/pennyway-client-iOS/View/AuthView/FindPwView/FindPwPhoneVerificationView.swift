@@ -14,15 +14,15 @@ struct FindPwPhoneVerificationView: View {
                     .font(.B1RegularFont())
                     .platformTextColor(color: Color("Gray04"))
                 HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                    ZStack {
+                    ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color("Gray01"))
                             .frame(height: 46 * DynamicSizeFactor.factor())
                         if viewModel.phoneNumber.isEmpty {
                             Text("01012345678")
                                 .platformTextColor(color: Color("Gray03"))
-                                .padding(.leading, 13 * DynamicSizeFactor.factor())
                                 .font(.H4MediumFont())
+                                .padding(.leading, 13 * DynamicSizeFactor.factor())
                         }
 
                         TextField("", text: $viewModel.phoneNumber)
