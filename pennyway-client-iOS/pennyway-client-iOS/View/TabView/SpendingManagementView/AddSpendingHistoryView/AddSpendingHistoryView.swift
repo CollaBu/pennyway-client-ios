@@ -13,7 +13,7 @@ struct AddSpendingHistoryView: View {
             }
             Spacer()
 
-            CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
+            CustomBottomButton(action: {}, label: "확인", isFormValid: $viewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .background(Color("White01"))
@@ -42,7 +42,7 @@ struct AddSpendingHistoryView: View {
             }
         }
         .fullScreenCover(isPresented: $viewModel.isCategoryListViewPresented, content: {
-            SpendingCategoryListView(isPresented: $viewModel.isCategoryListViewPresented, selectedCategory: $viewModel.selectedCategory)
+            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented, selectedCategory: $viewModel.selectedCategory)
         })
         .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
             SelectSpendingDayView(isPresented: $viewModel.isSelectDayViewPresented, selectedDate: $viewModel.selectedDate)

@@ -4,6 +4,8 @@ import SwiftUI
 // MARK: - SpendingCategoryListView
 
 struct SpendingCategoryListView: View {
+    @ObservedObject var viewModel: AddSpendingHistoryViewModel
+
     @Binding var isPresented: Bool
     @Binding var selectedCategory: (String, String)?
 
@@ -61,6 +63,7 @@ struct SpendingCategoryListView: View {
                         .onTapGesture {
                             selectedCategory = (image, title)
                             isPresented = false
+                            viewModel.validateForm()
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -74,5 +77,5 @@ struct SpendingCategoryListView: View {
 }
 
 #Preview {
-    SpendingCategoryListView(isPresented: .constant(true), selectedCategory: .constant(("", "")))
+    SpendingCategoryListView(viewModel: AddSpendingHistoryViewModel(), isPresented: .constant(true), selectedCategory: .constant(("", "")))
 }

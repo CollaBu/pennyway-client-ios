@@ -9,21 +9,51 @@ struct AddSpendingInputFormView: View {
     let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
     let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
     
-    let titleCustomTextList: [String] = ["카테고리*", "날짜*"]
+    let titleCustomTextList: [String] = ["금액*", "카테고리*", "날짜*"]
     let maxCharacterCount: Int = 100
 
     var body: some View {
-        VStack(spacing: 0)
-        {
+        VStack(spacing: 0) {
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())
             
-            CustomInputView(inputText: .constant(""), titleText: "금액*", placeholder: "소비 금액을 작성해 주세요", isSecureText: false, isCustom: true)
+            VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
+                titleCustomTextList[0].toAttributesText(base: baseAttribute, stringAttribute)
+                    .font(.B1MediumFont())
+                    .platformTextColor(color: Color("Gray07"))
+                HStack(spacing: 11 * DynamicSizeFactor.factor()) {
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color("Gray01"))
+                            .frame(height: 46 * DynamicSizeFactor.factor())
+                        
+                        if viewModel.amountSpentText.isEmpty {
+                            Text("소비 금액을 작성해 주세요")
+                                .platformTextColor(color: Color("Gray03"))
+                                .padding(.leading, 13 * DynamicSizeFactor.factor())
+                                .font(.H4MediumFont())
+                        }
+                        
+                        TextField("", text: $viewModel.amountSpentText)
+                            .padding(.leading, 13 * DynamicSizeFactor.factor())
+                            .font(.H4MediumFont())
+                            .keyboardType(.numberPad)
+                            .platformTextColor(color: Color("Gray07"))
+                            .onChange(of: viewModel.amountSpentText) { newValue in
+                                if Int(newValue) == nil {
+                                    viewModel.amountSpentText = ""
+                                }
+                                viewModel.validateForm()
+                            }
+                    }
+                }
+            }     
+            .padding(.horizontal, 20)
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             
             // 카테고리
             HStack {
-                titleCustomTextList[0].toAttributesText(base: baseAttribute, stringAttribute)
+                titleCustomTextList[1].toAttributesText(base: baseAttribute, stringAttribute)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
                 
@@ -61,7 +91,7 @@ struct AddSpendingInputFormView: View {
             
             // 날짜
             HStack {
-                titleCustomTextList[1].toAttributesText(base: baseAttribute, stringAttribute)
+                titleCustomTextList[2].toAttributesText(base: baseAttribute, stringAttribute)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
                 
@@ -86,7 +116,7 @@ struct AddSpendingInputFormView: View {
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             
-            CustomInputView(inputText: .constant(""), titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true)
+            CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true)
             
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             
