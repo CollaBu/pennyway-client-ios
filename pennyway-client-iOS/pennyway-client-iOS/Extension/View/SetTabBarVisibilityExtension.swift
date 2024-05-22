@@ -28,7 +28,7 @@ struct TabBarAccessor: UIViewControllerRepresentable {
 
     typealias UIViewControllerType = UIViewController
 
-    /// viewWillAppear 가 탈때 가지고 있는 탭바를 클로저 콜백으로 넘겨준다.
+    /// viewWillAppear가 나타날 때 가지고 있는 탭바를 클로저 콜백으로 넘겨준다.
     private class ViewController: UIViewController {
         var callback: (UITabBar) -> Void = { _ in }
 
