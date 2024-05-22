@@ -70,7 +70,6 @@ struct SpendingCategoryListView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .edgesIgnoringSafeArea(.top)
     }
 }
 

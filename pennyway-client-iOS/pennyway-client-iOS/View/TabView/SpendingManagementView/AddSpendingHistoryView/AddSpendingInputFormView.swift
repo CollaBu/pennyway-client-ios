@@ -4,27 +4,24 @@ import SwiftUI
 // MARK: - AddSpendingInputFormView
 
 struct AddSpendingInputFormView: View {
+    @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    
     let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
     let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
     
     let titleCustomTextList: [String] = ["카테고리*", "날짜*"]
-    
-    @State private var memoText: String = ""
-    @State private var isCategoryListViewPresented: Bool = false
-    
-    @State private var selectedCategory: (String, String)? = nil
-    
     let maxCharacterCount: Int = 100
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0)
+        {
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())
             
             CustomInputView(inputText: .constant(""), titleText: "금액*", placeholder: "소비 금액을 작성해 주세요", isSecureText: false, isCustom: true)
             
-            Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             
-            // TODO: 박스 터치영역 고려 필요
+            // 카테고리
             HStack {
                 titleCustomTextList[0].toAttributesText(base: baseAttribute, stringAttribute)
                     .font(.B1MediumFont())
@@ -33,7 +30,7 @@ struct AddSpendingInputFormView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    if let category = selectedCategory {
+                    if let category = viewModel.selectedCategory {
                         HStack {
                             Image(category.0)
                                 .resizable()
@@ -57,13 +54,12 @@ struct AddSpendingInputFormView: View {
                 }
                 .frame(width: 160 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor(), alignment: .trailing)
                 .onTapGesture {
-                    isCategoryListViewPresented = true
+                    viewModel.isCategoryListViewPresented = true
                 }
             }
             .padding(.horizontal, 20)
             
-            Spacer().frame(height: 20 * DynamicSizeFactor.factor())
-            
+            // 날짜
             HStack {
                 titleCustomTextList[1].toAttributesText(base: baseAttribute, stringAttribute)
                     .font(.B1MediumFont())
@@ -72,7 +68,7 @@ struct AddSpendingInputFormView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text("몇월 몇일")
+                    Text(Date.getFormattedDate(from: viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                    
@@ -84,10 +80,12 @@ struct AddSpendingInputFormView: View {
                 .frame(width: 82 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor(), alignment: .trailing)
             }
             .padding(.horizontal, 20)
+            .onTapGesture {
+                viewModel.isSelectDayViewPresented = true
+            }
             
-            Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             
-            // TODO: placeholder 수정
             CustomInputView(inputText: .constant(""), titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true)
             
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
@@ -104,7 +102,7 @@ struct AddSpendingInputFormView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 104 * DynamicSizeFactor.factor())
                     
-                    TextEditor(text: $memoText)
+                    TextEditor(text: $viewModel.memoText)
                         .font(.H4MediumFont())
                         .padding(.horizontal, 8 * DynamicSizeFactor.factor())
                         .padding(.vertical, 5 * DynamicSizeFactor.factor())
@@ -113,14 +111,14 @@ struct AddSpendingInputFormView: View {
                         .cornerRadius(4)
                         .TextAutocapitalization()
                         .AutoCorrectionExtensions()
-                        .onChange(of: memoText) { _ in
-                            if memoText.count > 100 {
-                                memoText = String(memoText.prefix(100))
+                        .onChange(of: viewModel.memoText) { _ in
+                            if viewModel.memoText.count > 100 {
+                                viewModel.memoText = String(viewModel.memoText.prefix(100))
                             }
                         }
                         .frame(height: 104 * DynamicSizeFactor.factor())
                     
-                    if memoText.isEmpty {
+                    if viewModel.memoText.isEmpty {
                         Text("더 하고 싶은 말이 있나요?")
                             .font(.H4MediumFont())
                             .padding(12 * DynamicSizeFactor.factor())
@@ -133,7 +131,7 @@ struct AddSpendingInputFormView: View {
                 
                 HStack {
                     Spacer()
-                    Text("\(memoText.count)/\(maxCharacterCount)")
+                    Text("\(viewModel.memoText.count)/\(maxCharacterCount)")
                         .font(.B2MediumFont())
                         .platformTextColor(color: Color("Gray03"))
                 }
@@ -142,8 +140,5 @@ struct AddSpendingInputFormView: View {
             
             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
         }
-        .fullScreenCover(isPresented: $isCategoryListViewPresented, content: {
-            SpendingCategoryListView(isPresented: $isCategoryListViewPresented, selectedCategory: $selectedCategory)
-        })
     }
 }
