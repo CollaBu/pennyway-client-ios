@@ -33,7 +33,8 @@ struct SettingAlarmView: View {
                                     .font(.H4MediumFont())
                                     .platformTextColor(color: Color("Gray07"))
                             })
-                            .toggleStyle(SwitchToggleStyle(tint: Color("Mint03"))).padding(.trailing, 42)
+                            .toggleStyle(CustomToggleStyle())
+                            .padding(.trailing, 42)
                             .padding(.vertical, 18)
                         }
                     }
@@ -42,7 +43,6 @@ struct SettingAlarmView: View {
             }
             .padding(.horizontal, 20)
         }
-        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
