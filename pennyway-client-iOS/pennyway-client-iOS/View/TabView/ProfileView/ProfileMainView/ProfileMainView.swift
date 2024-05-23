@@ -18,8 +18,8 @@ struct ProfileMainView: View {
                 }
                 .background(Color("Gray01"))
             }
+            .navigationBarColor(UIColor(named: "White01"), title: "프로필")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationBarTitle("프로필", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     HStack {

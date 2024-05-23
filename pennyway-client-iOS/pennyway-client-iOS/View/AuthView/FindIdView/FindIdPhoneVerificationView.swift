@@ -43,6 +43,7 @@ struct FindIdPhoneVerificationView: View {
                                 viewModel.validateForm()
                             }
                     }
+
                     Button(action: {
                         if isFindUser {
                             Log.debug("아이디 찾기 api 요청")

@@ -43,6 +43,8 @@ struct SettingAlarmView: View {
             }
             .padding(.horizontal, 20)
         }
+        .navigationBarColor(UIColor(named: "White01"), title: "")
+        .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

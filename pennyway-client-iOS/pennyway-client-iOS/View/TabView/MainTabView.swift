@@ -1,6 +1,8 @@
 
 import SwiftUI
 
+// MARK: - MainTabView
+
 struct MainTabView: View {
     @State private var selection = 0
     @EnvironmentObject var authViewModel: AppViewModel
@@ -8,7 +10,6 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selection) {
             SpendingManagementMainView()
-
                 .tabItem {
                     selection == 0 ? Image("icon_tabbar_expenditure_on") : Image("icon_tabbar_expenditure_off")
                     Text("지출관리")
@@ -35,7 +36,6 @@ struct MainTabView: View {
                 }
                 .tag(3)
         }
-//        .navigationBarBackButtonHidden(true)
         .accentColor(Color("Mint03"))
         .onAppear {
             UITabBar.appearance().barTintColor = .white

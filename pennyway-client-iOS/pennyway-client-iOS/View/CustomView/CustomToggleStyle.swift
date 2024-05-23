@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct CustomToggleStyle: ToggleStyle {
-    var offColor = Color("Mint03")
-    var onColor = Color("Gray05")
+    var onColor = Color("Mint03")
+    var offColor = Color("Gray05")
     var thumbColor = Color("White01")
 
     func makeBody(configuration: Self.Configuration) -> some View {
