@@ -14,6 +14,8 @@ struct ProfileMenuBarListView: View {
             .background(Color("Gray01"))
         }
         .edgesIgnoringSafeArea(.bottom)
+        .setTabBarVisibility(isHidden: false)
+        .navigationBarColor(UIColor(named: "White01"), title: "")
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

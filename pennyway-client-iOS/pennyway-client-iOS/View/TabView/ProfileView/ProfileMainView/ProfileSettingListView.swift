@@ -86,6 +86,7 @@ struct ProfileSettingListView: View {
 //            }.hidden()
         }
         .setTabBarVisibility(isHidden: true)
+        .navigationBarColor(UIColor(named: "White01"), title: "")
     }
 
     func handleLogout() {
