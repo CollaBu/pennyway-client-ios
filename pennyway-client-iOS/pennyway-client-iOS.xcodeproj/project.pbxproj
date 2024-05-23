@@ -131,7 +131,6 @@
 		4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */; };
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
-		4AD0D8462BFD20F700A0808F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AD0D8452BFD20F700A0808F /* GoogleService-Info.plist */; };
 		4AD0D8482BFD384900A0808F /* SpendingCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8472BFD384900A0808F /* SpendingCategoryListView.swift */; };
 		4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */; };
 		4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */; };
@@ -193,6 +192,7 @@
 		D8E24D932BFCF885006E8046 /* ProfileMenuBarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */; };
 		D8E24D952BFD12BB006E8046 /* SettingAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D942BFD12BB006E8046 /* SettingAlarmView.swift */; };
 		D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01648F6A2404D638E6615EDB /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -777,6 +777,7 @@
 			isa = PBXGroup;
 			children = (
 				D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */,
+				D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
