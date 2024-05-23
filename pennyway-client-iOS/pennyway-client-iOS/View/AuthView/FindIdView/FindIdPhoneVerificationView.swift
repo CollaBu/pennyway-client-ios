@@ -14,7 +14,7 @@ struct FindIdPhoneVerificationView: View {
                     .font(.B1RegularFont())
                     .platformTextColor(color: Color("Gray04"))
                 HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                    ZStack {
+                    ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color("Gray01"))
                             .frame(height: 46 * DynamicSizeFactor.factor())
@@ -43,6 +43,7 @@ struct FindIdPhoneVerificationView: View {
                                 viewModel.validateForm()
                             }
                     }
+
                     Button(action: {
                         if isFindUser {
                             Log.debug("아이디 찾기 api 요청")

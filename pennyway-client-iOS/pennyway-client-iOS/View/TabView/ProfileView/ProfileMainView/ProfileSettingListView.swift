@@ -10,6 +10,7 @@ struct ProfileSettingListView: View {
     @StateObject var userAccountViewModel = UserAccountViewModel()
     @State private var showingPopUp = false
     @State private var isNavigateToInquiryView = false
+    @State private var isNavigateToSettingAlarmView = false
 
     var body: some View {
         ZStack {
@@ -20,14 +21,13 @@ struct ProfileSettingListView: View {
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "내 정보", itemsWithActions: [
                         ProfileSettingListItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {}),
                         ProfileSettingListItem(title: "내가 쓴 글", icon: "icon_list", action: {}),
-                        ProfileSettingListItem(title: "스크랩", icon: "icon_modifyingprofile", action: {}),
-                        ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_modifyingprofile", action: {})
+                        ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
+                        ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {})
                     ])
 
-                    Rectangle()
-                        .frame(width: .infinity, height: 1)
-                        .platformTextColor(color: Color("Gray02"))
-                        .padding(.horizontal, 10)
+                    Divider()
+                        .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
+                        .overlay(Color("Gray02"))
 
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
@@ -35,10 +35,9 @@ struct ProfileSettingListView: View {
                         ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: {})
                     ])
 
-                    Rectangle()
-                        .frame(width: .infinity, height: 1)
-                        .platformTextColor(color: Color("Gray02"))
-                        .padding(.horizontal, 10)
+                    Divider()
+                        .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
+                        .overlay(Color("Gray02"))
 
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
@@ -48,14 +47,9 @@ struct ProfileSettingListView: View {
                         })
                     ])
 
-//                    NavigationLink(destination: , isActive: $isNavigateToInquiryView) {
-//                        EmptyView()
-//                    }.hidden() 
-
-                    Rectangle()
-                        .frame(width: .infinity, height: 1)
-                        .platformTextColor(color: Color("Gray02"))
-                        .padding(.horizontal, 10)
+                    Divider()
+                        .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
+                        .overlay(Color("Gray02"))
 
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
@@ -80,7 +74,18 @@ struct ProfileSettingListView: View {
                                 secondBtnColor: Color("Red03")
                 )
             }
+
+            // NaivgationLink
+
+            NavigationLink(destination: InquiryView(viewModel: InquiryViewModel()), isActive: $isNavigateToInquiryView) {
+                EmptyView()
+            }.hidden()
+
+//            NavigationLink(destination: , isActive: $isNavigateToSettingAlarmView) {
+//                EmptyView()
+//            }.hidden()
         }
+        .setTabBarVisibility(isHidden: true)
     }
 
     func handleLogout() {
@@ -132,6 +137,7 @@ struct ProfileSettingSectionView: View {
                 .font(.B2SemiboldFont())
                 .platformTextColor(color: Color("Gray04"))
                 .background(Color(UIColor.systemBackground))
+                .padding(.horizontal, 21)
 
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
@@ -142,8 +148,8 @@ struct ProfileSettingSectionView: View {
                     HStack {
                         Image(item.icon)
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor(), alignment: .leading)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor(), alignment: .leading)
 
                         Text(item.title)
                             .font(.H4MediumFont())
@@ -151,10 +157,10 @@ struct ProfileSettingSectionView: View {
                             .padding(.vertical, 7)
                     }
                 })
+                .padding(.horizontal, 17)
             }
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 21)
     }
 }
