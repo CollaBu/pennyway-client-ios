@@ -9,6 +9,7 @@ struct ProfileSettingListView: View {
     @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
     @State private var showingPopUp = false
+    @State private var isNavigateToSettingAlarmView = false
 
     var body: some View {
         ZStack {
@@ -23,7 +24,7 @@ struct ProfileSettingListView: View {
                         ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_modifyingprofile", action: {})
                     ])
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "앱 설정", itemsWithActions: [
-                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: {})
+                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: { isNavigateToSettingAlarmView = true })
                     ])
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "이용안내", itemsWithActions: [
                         ProfileSettingListItem(title: "문의하기", icon: "icon_checkwithsomeone", action: {})
@@ -33,6 +34,9 @@ struct ProfileSettingListView: View {
                         ProfileSettingListItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: handleDeleteUserAccount)
                     ])
                 }
+                NavigationLink(destination: SettingAlarmView(), isActive: $isNavigateToSettingAlarmView) {
+                    EmptyView()
+                }.hidden()
             }
             .frame(maxWidth: .infinity)
             .background(Color("White01"))

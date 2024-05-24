@@ -70,7 +70,6 @@ extension ErrorCodePopUpView {
                     Spacer()
                 }
                 .frame(height: frameHeight)
-                .border(Color.black)
             }
             .frame(maxWidth: .infinity)
             .background(Color("White01"))

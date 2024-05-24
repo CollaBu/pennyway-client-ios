@@ -21,8 +21,8 @@ struct FindPwPhoneVerificationView: View {
                         if viewModel.phoneNumber.isEmpty {
                             Text("01012345678")
                                 .platformTextColor(color: Color("Gray03"))
-                                .padding(.leading, 13 * DynamicSizeFactor.factor())
                                 .font(.H4MediumFont())
+                                .padding(.leading, 13 * DynamicSizeFactor.factor())
                         }
 
                         TextField("", text: $viewModel.phoneNumber)
