@@ -32,7 +32,7 @@ struct ProfileSettingListView: View {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "앱 설정", itemsWithActions: [
-                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: {})
+                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: { isNavigateToSettingAlarmView = true })
                     ])
 
                     Divider()
@@ -81,9 +81,9 @@ struct ProfileSettingListView: View {
                 EmptyView()
             }.hidden()
 
-//            NavigationLink(destination: , isActive: $isNavigateToSettingAlarmView) {
-//                EmptyView()
-//            }.hidden()
+            NavigationLink(destination: SettingAlarmView(), isActive: $isNavigateToSettingAlarmView) {
+                EmptyView()
+            }.hidden()
         }
         .setTabBarVisibility(isHidden: true)
         .navigationBarColor(UIColor(named: "White01"), title: "")

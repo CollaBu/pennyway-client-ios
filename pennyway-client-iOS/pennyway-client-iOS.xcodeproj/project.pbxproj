@@ -177,14 +177,16 @@
 		D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */; };
 		D888329C2BBC612600F49B27 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329B2BBC612600F49B27 /* LoginView.swift */; };
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
-		D89F31B02BFF300800A51CFA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D89F31AF2BFF300800A51CFA /* GoogleService-Info.plist */; };
+		D89F31B02BFF300800A51CFA /* (null) in Resources */ = {isa = PBXBuildFile; };
+		D89F31C22C0049A100A51CFA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */; };
 		D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */; };
 		D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D8C2BFC7FE4006E8046 /* InquiryViewModel.swift */; };
-		D8E24D912BFCF39E006E8046 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		D8E24D932BFCF885006E8046 /* ProfileMenuBarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */; };
+		D8E24D952BFD12BB006E8046 /* SettingAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D942BFD12BB006E8046 /* SettingAlarmView.swift */; };
+		D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -358,7 +360,7 @@
 		D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
 		D888329B2BBC612600F49B27 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodeContentView.swift; sourceTree = "<group>"; };
-		D89F31AF2BFF300800A51CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
@@ -366,6 +368,8 @@
 		D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryListView.swift; sourceTree = "<group>"; };
 		D8E24D8C2BFC7FE4006E8046 /* InquiryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewModel.swift; sourceTree = "<group>"; };
 		D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuBarListView.swift; sourceTree = "<group>"; };
+		D8E24D942BFD12BB006E8046 /* SettingAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlarmView.swift; sourceTree = "<group>"; };
+		D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -643,6 +647,7 @@
 				4A11797F2BA86AF400A9CF4C /* CustomInputView.swift */,
 				4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */,
 				D85927ED2BE6842A00653391 /* CustomPopUpView.swift */,
+				D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -859,7 +864,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D89F31AF2BFF300800A51CFA /* GoogleService-Info.plist */,
+				D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
 				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
@@ -913,6 +918,7 @@
 		4A762AFC2B99A1CB001C1188 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				D8E24D982BFD20A0006E8046 /* ProfileViewModel */,
 				4A0BC6962BF53D520036D900 /* SpendingViewModel */,
 				4ADBFAF32BE2C7F500C3ECE4 /* UserViewModel */,
 				4ADBFAF22BE2C7D600C3ECE4 /* AuthViewModel */,
@@ -1053,6 +1059,7 @@
 			isa = PBXGroup;
 			children = (
 				4AD70E232BE014C40058A52A /* ProfileMainView */,
+				D8E24D942BFD12BB006E8046 /* SettingAlarmView.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -1214,6 +1221,13 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
+		D8E24D982BFD20A0006E8046 /* ProfileViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ProfileViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1275,7 +1289,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8E24D912BFCF39E006E8046 /* (null) in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
@@ -1288,7 +1301,8 @@
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
-				D89F31B02BFF300800A51CFA /* GoogleService-Info.plist in Resources */,
+				D89F31B02BFF300800A51CFA /* (null) in Resources */,
+				D89F31C22C0049A100A51CFA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1393,6 +1407,7 @@
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
 				4A5789972BDC29FD00AFEB26 /* PreconditionFailedError.swift in Sources */,
+				D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */,
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
@@ -1495,6 +1510,7 @@
 				D8180C0A2BE531C500F837FB /* (null) in Sources */,
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
+				D8E24D952BFD12BB006E8046 /* SettingAlarmView.swift in Sources */,
 				4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */,
 				4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */,
 				4A0BC68F2BF538A40036D900 /* SpendingAlamofire.swift in Sources */,
