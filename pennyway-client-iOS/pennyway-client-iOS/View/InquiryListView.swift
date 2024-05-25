@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct InquiryListView: View {
+    @ObservedObject var viewModel: InquiryViewModel
     @State private var isSelectedCategory: Bool = false
     @State var listArray: [String] = ["이용 관련", "오류 신고", "서비스 제안", "기타"]
     @State var selectedItem: String? = nil
@@ -47,6 +48,7 @@ struct InquiryListView: View {
                                 ForEach(listArray, id: \.self) { item in
                                     Button(action: {
                                         self.selectedItem = item
+                                        self.viewModel.category = item
                                     }, label: {
                                         ZStack(alignment: .leading) {
                                             Rectangle()
@@ -80,5 +82,5 @@ struct InquiryListView: View {
 }
 
 #Preview {
-    InquiryListView()
+    InquiryListView(viewModel: InquiryViewModel())
 }

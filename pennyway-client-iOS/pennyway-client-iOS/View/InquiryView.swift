@@ -2,8 +2,7 @@
 import SwiftUI
 
 struct InquiryView: View {
-    @ObservedObject var viewModel: InquiryViewModel
-    @State private var content = ""
+    @StateObject var viewModel = InquiryViewModel()
     @State private var isSelectedCategory: Bool = false
     @State private var isSelectedAgreeBtn: Bool = false
     @State private var showAgreement: Bool = false
@@ -13,39 +12,49 @@ struct InquiryView: View {
         VStack(alignment: .leading) {
             ScrollView {
                 Spacer().frame(height: 31 * DynamicSizeFactor.factor())
-                
+                        
                 HStack {
-                    InquiryListView()
+                    InquiryListView(viewModel: viewModel)
                         .padding(.leading, 20)
-                    
+                            
                     Spacer()
+                    
                     Text("문의가 필요해요")
                         .platformTextColor(color: Color("Gray05"))
                         .font(.H4MediumFont())
                         .padding(.trailing, 44 * DynamicSizeFactor.factor())
                 }
                 .zIndex(10)
-                
+                        
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
-                
-                CustomInputView(inputText: $viewModel.email, titleText: "이메일", placeholder: "이메일 입력", isSecureText: false)
-                
+                        
+                CustomInputView(inputText: $viewModel.email, titleText: "이메일", placeholder: "이메일 입력", onCommit: {
+                    viewModel.validateEmail()
+                    viewModel.validateForm()
+                }, isSecureText: false)
+                            
+                if viewModel.showErrorEmail {
+                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                    errorMessage("유효하지 않는 이메일 형식이에요")
+                        .offset(x: -72.5 * DynamicSizeFactor.factor())
+                }
+                                                    
                 Spacer().frame(height: 24 * DynamicSizeFactor.factor())
-                
-                VStack(alignment: .leading, spacing: 13) {
+
+                VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
                     Text("문의내용")
                         .padding(.horizontal, 20)
                         .font(.B1RegularFont())
                         .platformTextColor(color: Color("Gray04"))
-
+                            
                     ScrollView(.vertical, showsIndicators: false) {
                         HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                             ZStack(alignment: .topLeading) {
                                 RoundedRectangle(cornerRadius: 6)
                                     .fill(Color("Gray01"))
                                     .frame(height: 123 * DynamicSizeFactor.factor())
-                                
-                                TextEditor(text: $content)
+                                        
+                                TextEditor(text: $viewModel.content)
                                     .font(.B1MediumFont())
                                     .padding(.horizontal, 10)
                                     .padding(.top, 8)
@@ -54,14 +63,16 @@ struct InquiryView: View {
                                     .cornerRadius(6)
                                     .TextAutocapitalization()
                                     .AutoCorrectionExtensions()
-                                    .onChange(of: content) { _ in
-                                        if content.count > 600 {
-                                            content = String(content.prefix(600))
+                                    .onChange(of: viewModel.content) { _ in
+                                        if viewModel.content.count > 500 {
+                                            viewModel.content = String(viewModel.content.prefix(500))
                                         }
+                                                
+                                        viewModel.validateForm()
                                     }
                                     .frame(height: 123)
-                                
-                                if content.isEmpty {
+                                        
+                                if viewModel.content.isEmpty {
                                     Text(placeholder)
                                         .font(.B1MediumFont())
                                         .padding(.leading, 14)
@@ -74,56 +85,58 @@ struct InquiryView: View {
                         }
                         .padding(.horizontal, 20)
                     }
-                    
+                            
                     Spacer().frame(height: 2 * DynamicSizeFactor.factor())
-                    
+                            
                     HStack(spacing: 0) {
                         Button(action: {
                             isSelectedAgreeBtn.toggle()
-                            
+                                    
                         }, label: {
                             let selected = isSelectedAgreeBtn == true ? Image("icon_checkone_on_small") : Image("icon_checkone_off_small")
-
+                                    
                             selected
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                         })
                         .padding(.leading, 20 * DynamicSizeFactor.factor())
-                        
+                                
                         Text("정보 제공에 동의할게요")
                             .font(.B1MediumFont())
                             .platformTextColor(color: Color("Gray05"))
                             .padding(.leading, 7 * DynamicSizeFactor.factor())
-                        
+                                
                         Spacer()
-                        
+                                
                         Button(action: {
                             showAgreement.toggle()
                         }, label: {
                             let selected = showAgreement == true ? Image("icon_arrow_up") : Image("icon_arrow_down")
-
+                                    
                             selected
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                        
+                                    
                         })
                         .padding(.trailing, 20 * DynamicSizeFactor.factor())
                     }
                 }
-                
+                        
                 if showAgreement {
                     agreementSection()
                 }
-                
+                        
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
             }
-            .frame(minHeight: 123 * DynamicSizeFactor.factor())
-
-            CustomBottomButton(action: {}, label: "문의하기", isFormValid: .constant(true))
+            CustomBottomButton(action: {
+                continueButtonAction()
+            }, label: "문의하기", isFormValid: $viewModel.isFormValid)
+                .disabled(!viewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
+        
         .edgesIgnoringSafeArea(.bottom)
         .navigationTitle(Text("문의하기"))
         .navigationBarBackButtonHidden(true)
@@ -137,6 +150,23 @@ struct InquiryView: View {
 
                 }.offset(x: -10)
             }
+        }
+    }
+    
+    private func continueButtonAction() {
+        if viewModel.isFormValid {
+            viewModel.sendInquiryMailApi()
+        }
+    }
+    
+    /// Error message
+    private func errorMessage(_ message: String) -> some View {
+        ZStack(alignment: .leading) {
+            Text(message)
+                .padding(.leading, 20)
+                .font(.B1MediumFont())
+                .platformTextColor(color: Color("Red03"))
+                .multilineTextAlignment(.leading)
         }
     }
     
@@ -157,16 +187,14 @@ struct InquiryView: View {
                 .minimumScaleFactor(0.001)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .border(Color.black)
                 .platformTextColor(color: Color("Gray04"))
                 .padding(.horizontal, 12 * DynamicSizeFactor.factor())
                 .padding(.vertical, 13 * DynamicSizeFactor.factor())
-                .border(Color.black)
         }
         .padding(.horizontal, 20)
     }
 }
 
 #Preview {
-    InquiryView(viewModel: InquiryViewModel())
+    InquiryView()
 }
