@@ -66,6 +66,8 @@ struct SpendingCategoryListView: View {
                             viewModel.validateForm()
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
+
+                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     }
                     Spacer().frame(height: 21 * DynamicSizeFactor.factor())
                 }

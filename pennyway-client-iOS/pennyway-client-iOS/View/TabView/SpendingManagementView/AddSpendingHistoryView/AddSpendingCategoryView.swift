@@ -8,6 +8,7 @@ struct AddSpendingCategoryView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             ZStack {
                 Image("icon_illust_error")
                     .resizable()
@@ -21,6 +22,7 @@ struct AddSpendingCategoryView: View {
                     .offset(x: 20 * DynamicSizeFactor.factor(), y: 20 * DynamicSizeFactor.factor())
             }
 
+            Spacer().frame(height: 20 * DynamicSizeFactor.factor())
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 4)
@@ -40,6 +42,7 @@ struct AddSpendingCategoryView: View {
                         .platformTextColor(color: Color("Gray07"))
                 }
             }
+            .padding(.horizontal, 20)
 
             Spacer()
 

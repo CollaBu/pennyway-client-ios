@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct AddSpendingCompleteView: View {
+    @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    
     var body: some View {
         VStack {
             Image("icon_illust_add history")
@@ -20,7 +22,7 @@ struct AddSpendingCompleteView: View {
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
                     Spacer()
-                    Text("가격")
+                    Text("\(viewModel.amountSpentText)원")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                 }
@@ -31,22 +33,24 @@ struct AddSpendingCompleteView: View {
                     
                     Spacer()
                     
-                    HStack(spacing: 5 * DynamicSizeFactor.factor()) {
-                        Image("icon_checkone_on_small")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor())
-                        Text("카테고리")
-                            .font(.B1MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
+                    if let category = viewModel.selectedCategory {
+                        HStack(spacing: 10 * DynamicSizeFactor.factor()) {
+                            Image(category.0)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor())
+                            Text(category.1)
+                                .font(.B1MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                        }
                     }
                 }
                 HStack {
-                    Text("금액")
+                    Text("날짜")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
                     Spacer()
-                    Text("날짜")
+                    Text(Date.getFormattedDate(from: viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                 }
@@ -55,7 +59,9 @@ struct AddSpendingCompleteView: View {
            
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
             
-            CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
+            CustomBottomButton(action: {
+                NavigationUtil.popToRootView()
+            }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -64,5 +70,5 @@ struct AddSpendingCompleteView: View {
 }
 
 #Preview {
-    AddSpendingCompleteView()
+    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel())
 }
