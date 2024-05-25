@@ -4,6 +4,7 @@ func unauthorizedError(_ code: String, message: String) -> StatusSpecificError? 
         return nil
     }
     let defaultMessage: String
+    let fieldErrors = ErrorResponseData(field: unauthorizedError.rawValue)
 
     switch unauthorizedError {
     case .missingOrInvalidCredentials:
@@ -17,5 +18,5 @@ func unauthorizedError(_ code: String, message: String) -> StatusSpecificError? 
     case .withoutOwnership:
         defaultMessage = "Without Ownership"
     }
-    return StatusSpecificError(domainError: .unauthorized, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .unauthorized, code: code, message: message.isEmpty ? defaultMessage : message, fieldErrors: fieldErrors)
 }

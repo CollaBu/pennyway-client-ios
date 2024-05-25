@@ -4,6 +4,7 @@ func forbiddenError(_ code: String, message: String) -> StatusSpecificError? {
         return nil
     }
     let defaultMessage: String
+    let fieldErrors = ErrorResponseData(field: forbiddenError.rawValue)
 
     switch forbiddenError {
     case .accessForbidden:
@@ -15,5 +16,5 @@ func forbiddenError(_ code: String, message: String) -> StatusSpecificError? {
     case .accessNotAllowedForUserRole:
         defaultMessage = "Access to resource not allowed for user role"
     }
-    return StatusSpecificError(domainError: .forbidden, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .forbidden, code: code, message: message.isEmpty ? defaultMessage : message, fieldErrors: fieldErrors)
 }

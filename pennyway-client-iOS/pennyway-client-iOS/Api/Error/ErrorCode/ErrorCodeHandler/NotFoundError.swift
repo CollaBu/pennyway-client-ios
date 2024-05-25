@@ -4,6 +4,7 @@ func notFoundError(_ code: String, message: String) -> StatusSpecificError? {
         return nil
     }
     let defaultMessage: String
+    let fieldErrors = ErrorResponseData(field: notFoundError.rawValue)
 
     switch notFoundError {
     case .resourceNotFound:
@@ -14,5 +15,5 @@ func notFoundError(_ code: String, message: String) -> StatusSpecificError? {
         defaultMessage = "Resource deleted or moved"
     }
 
-    return StatusSpecificError(domainError: .notFound, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .notFound, code: code, message: message.isEmpty ? defaultMessage : message, fieldErrors: fieldErrors)
 }

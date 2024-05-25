@@ -5,6 +5,7 @@ func methodNotAllowedError(_ code: String, message: String) -> StatusSpecificErr
     }
 
     var defaultMessage: String
+    let fieldErrors = ErrorResponseData(field: methodNotAllowedError.rawValue)
 
     switch methodNotAllowedError {
     case .methodNotSupported:
@@ -13,5 +14,5 @@ func methodNotAllowedError(_ code: String, message: String) -> StatusSpecificErr
         defaultMessage = "Attempted to access unsupported method"
     }
 
-    return StatusSpecificError(domainError: .methodNotAllowed, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .methodNotAllowed, code: code, message: message.isEmpty ? defaultMessage : message, fieldErrors: fieldErrors)
 }

@@ -4,6 +4,7 @@ func badRequestError(_ code: String, message: String) -> StatusSpecificError? {
         return nil
     }
     let defaultMessage: String
+    let fieldErrors = ErrorResponseData(field: badRequestError.rawValue)
 
     switch badRequestError {
     case .invalidRequestSyntax:
@@ -19,5 +20,5 @@ func badRequestError(_ code: String, message: String) -> StatusSpecificError? {
     case .clientError:
         defaultMessage = "Client Error"
     }
-    return StatusSpecificError(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message)
+    return StatusSpecificError(domainError: .badRequest, code: code, message: message.isEmpty ? defaultMessage : message, fieldErrors: fieldErrors)
 }
