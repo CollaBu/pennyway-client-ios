@@ -147,7 +147,7 @@ struct AddSpendingInputFormView: View {
                             }
                         }
                         .frame(height: 104 * DynamicSizeFactor.factor())
-                    
+                   
                     if viewModel.memoText.isEmpty {
                         Text("더 하고 싶은 말이 있나요?")
                             .font(.H4MediumFont())
