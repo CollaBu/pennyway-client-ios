@@ -4,18 +4,17 @@ import SwiftUI
 // MARK: - AddSpendingCategoryView
 
 struct AddSpendingCategoryView: View {
-    @State var categoryName = ""
     @State var maxCategoryNameCount = "8"
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
 
-    @State var isSelectAddSpendingViewPresented: Bool = false
+    @State private var navigateAddSpendingView = false
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             ZStack {
-                Image("icon_category_etc_on")
+                Image(viewModel.selectedCategoryIcon ?? "icon_category_etc_on")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)
@@ -29,7 +28,11 @@ struct AddSpendingCategoryView: View {
                     .offset(x: 20 * DynamicSizeFactor.factor(), y: 20 * DynamicSizeFactor.factor())
             }
             .onTapGesture {
-                isSelectAddSpendingViewPresented = true
+                viewModel.isSelectAddCategoryViewPresented = true
+                
+                if viewModel.selectedCategoryIcon == nil {
+                    viewModel.selectedCategoryIcon = "icon_category_etc_on"
+                }
             }
 
             Spacer().frame(height: 20 * DynamicSizeFactor.factor())
@@ -40,21 +43,22 @@ struct AddSpendingCategoryView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    if categoryName.isEmpty {
+                    if viewModel.categoryName.isEmpty {
                         Text("카테고리명을 입력하세요")
                             .platformTextColor(color: Color("Gray03"))
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                             .font(.H4MediumFont())
                     }
 
-                    TextField("", text: $categoryName)
+                    TextField("", text: $viewModel.categoryName)
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))
-                        .onChange(of: categoryName) { _ in
-                            if categoryName.count > 8 {
-                                categoryName = String(categoryName.prefix(8))
+                        .onChange(of: viewModel.categoryName) { _ in
+                            if viewModel.categoryName.count > 8 {
+                                viewModel.categoryName = String(viewModel.categoryName.prefix(8))
                             }
+                            viewModel.validateAddCategoryForm()
                         }
                 }
             }
@@ -62,7 +66,7 @@ struct AddSpendingCategoryView: View {
 
             HStack {
                 Spacer()
-                Text("\(categoryName.count)/\(maxCategoryNameCount)")
+                Text("\(viewModel.categoryName.count)/\(maxCategoryNameCount)")
                     .font(.B2MediumFont())
                     .platformTextColor(color: Color("Gray03"))
             }
@@ -70,7 +74,15 @@ struct AddSpendingCategoryView: View {
 
             Spacer()
 
-            CustomBottomButton(action: {}, label: "추가하기", isFormValid: .constant(false))
+            CustomBottomButton(action: {
+                if viewModel.isAddCategoryFormValid {
+                    navigateAddSpendingView = true
+                    presentationMode.wrappedValue.dismiss()
+                    if viewModel.selectedCategoryIcon == nil {
+                        viewModel.selectedCategoryIcon = "icon_category_etc_on"
+                    }
+                }
+            }, label: "추가하기", isFormValid: $viewModel.isAddCategoryFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -83,6 +95,8 @@ struct AddSpendingCategoryView: View {
                 HStack {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
+                        viewModel.selectedCategoryIcon = nil
+                        viewModel.categoryName = ""
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
@@ -97,8 +111,8 @@ struct AddSpendingCategoryView: View {
                 }.offset(x: -10)
             }
         }
-        .bottomSheet(isPresented: $isSelectAddSpendingViewPresented, maxHeight: 347 * DynamicSizeFactor.factor()) {
-            SelectCategoryIconView(isPresented: .constant(true))
+        .bottomSheet(isPresented: $viewModel.isSelectAddCategoryViewPresented, maxHeight: 347 * DynamicSizeFactor.factor()) {
+            SelectCategoryIconView(isPresented: $viewModel.isSelectAddCategoryViewPresented, viewModel: viewModel)
         }
     }
 }

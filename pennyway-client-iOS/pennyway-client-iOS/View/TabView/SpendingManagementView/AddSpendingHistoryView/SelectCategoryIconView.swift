@@ -13,8 +13,7 @@ struct CategoryIcon: Identifiable, Hashable {
 
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
-    ///    @Binding var selectedIcon: (String, String)?
-    @State private var selectedIcon: String? = nil
+    @ObservedObject var viewModel: AddSpendingHistoryViewModel
 
     let columns = [
         GridItem(.flexible()),
@@ -35,7 +34,7 @@ struct SelectCategoryIconView: View {
         CategoryIcon(offIcon: "icon_category_travel_off", onIcon: "icon_category_travel_on"),
         CategoryIcon(offIcon: "icon_category_drink_off", onIcon: "icon_category_drink_on"),
         CategoryIcon(offIcon: "icon_category_event_off", onIcon: "icon_category_event_on"),
-        CategoryIcon(offIcon: "icon_category_plus_off", onIcon: "icon_category_plus_on")
+        CategoryIcon(offIcon: "icon_category_etc_off", onIcon: "icon_category_etc_on")
     ]
 
     var body: some View {
@@ -52,12 +51,12 @@ struct SelectCategoryIconView: View {
 
             LazyVGrid(columns: columns, spacing: 20 * DynamicSizeFactor.factor()) {
                 ForEach(icons) { icon in
-                    Image(selectedIcon == icon.onIcon ? icon.onIcon : icon.offIcon)
+                    Image(viewModel.selectedCategoryIcon == icon.onIcon ? icon.onIcon : icon.offIcon)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
                         .onTapGesture {
-                            selectedIcon = icon.onIcon
+                            viewModel.selectedCategoryIcon = icon.onIcon
                         }
                 }
             }

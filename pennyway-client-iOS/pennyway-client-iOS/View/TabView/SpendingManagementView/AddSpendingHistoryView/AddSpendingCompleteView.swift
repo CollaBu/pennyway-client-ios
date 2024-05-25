@@ -33,13 +33,13 @@ struct AddSpendingCompleteView: View {
                     
                     Spacer()
                     
-                    if let category = viewModel.selectedCategory {
+                    if let categoryIcon = viewModel.selectedCategoryIcon {
                         HStack(spacing: 10 * DynamicSizeFactor.factor()) {
-                            Image(category.0)
+                            Image(categoryIcon)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor())
-                            Text(category.1)
+                            Text(viewModel.categoryName)
                                 .font(.B1MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
                         }

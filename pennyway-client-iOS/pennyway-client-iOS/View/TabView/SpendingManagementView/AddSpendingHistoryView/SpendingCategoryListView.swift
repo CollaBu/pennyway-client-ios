@@ -7,7 +7,6 @@ struct SpendingCategoryListView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
 
     @Binding var isPresented: Bool
-    @Binding var selectedCategory: (String, String)?
 
     let categories = [
         ("icon_category_food_on", "식비"),
@@ -48,9 +47,9 @@ struct SpendingCategoryListView: View {
 
                     Spacer().frame(height: 40 * DynamicSizeFactor.factor())
 
-                    ForEach(categories, id: \.1) { image, title in
+                    ForEach(categories, id: \.1) { icon, title in
                         HStack {
-                            Image(image)
+                            Image(icon)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
@@ -65,7 +64,8 @@ struct SpendingCategoryListView: View {
                                 viewModel.navigateToAddCategory = true
                                 isPresented = false
                             } else {
-                                selectedCategory = (image, title)
+                                viewModel.categoryName = title
+                                viewModel.selectedCategoryIcon = icon
                                 isPresented = false
                                 viewModel.validateForm()
                             }
@@ -84,5 +84,5 @@ struct SpendingCategoryListView: View {
 }
 
 #Preview {
-    SpendingCategoryListView(viewModel: AddSpendingHistoryViewModel(), isPresented: .constant(true), selectedCategory: .constant(("", "")))
+    SpendingCategoryListView(viewModel: AddSpendingHistoryViewModel(), isPresented: .constant(true))
 }

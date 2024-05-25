@@ -55,7 +55,7 @@ struct AddSpendingHistoryView: View {
             }
         }
         .sheet(isPresented: $viewModel.isCategoryListViewPresented, content: {
-            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented, selectedCategory: $viewModel.selectedCategory)
+            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
         })
         .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
             SelectSpendingDayView(isPresented: $viewModel.isSelectDayViewPresented, selectedDate: $viewModel.selectedDate)
