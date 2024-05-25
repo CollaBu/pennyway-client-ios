@@ -15,6 +15,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
     @Published var memoText: String = ""
 
     @Published var isFormValid = false
+    @Published var navigateToAddCategory = false
 
     func validateForm() {
         isFormValid = (selectedCategory != nil && !amountSpentText.isEmpty)

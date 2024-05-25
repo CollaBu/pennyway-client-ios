@@ -23,6 +23,11 @@ struct AddSpendingHistoryView: View {
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
             NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel), isActive: $navigateToAddSpendingCategory) {}
+
+            NavigationLink(
+                destination: AddSpendingCategoryView(viewModel: viewModel),
+                isActive: $viewModel.navigateToAddCategory
+            ) {}
         }
         .background(Color("White01"))
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")
@@ -49,7 +54,7 @@ struct AddSpendingHistoryView: View {
                 }.offset(x: -10)
             }
         }
-        .fullScreenCover(isPresented: $viewModel.isCategoryListViewPresented, content: {
+        .sheet(isPresented: $viewModel.isCategoryListViewPresented, content: {
             SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented, selectedCategory: $viewModel.selectedCategory)
         })
         .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {

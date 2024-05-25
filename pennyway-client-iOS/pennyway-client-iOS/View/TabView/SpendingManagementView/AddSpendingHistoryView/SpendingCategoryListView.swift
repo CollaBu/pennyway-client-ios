@@ -61,9 +61,14 @@ struct SpendingCategoryListView: View {
                                 .platformTextColor(color: title == "추가하기" ? Color("Gray04") : Color("Gray07"))
                         }
                         .onTapGesture {
-                            selectedCategory = (image, title)
-                            isPresented = false
-                            viewModel.validateForm()
+                            if title == "추가하기" {
+                                viewModel.navigateToAddCategory = true
+                                isPresented = false
+                            } else {
+                                selectedCategory = (image, title)
+                                isPresented = false
+                                viewModel.validateForm()
+                            }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
 
