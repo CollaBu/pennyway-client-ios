@@ -4,14 +4,16 @@ import SwiftUI
 // MARK: - AddSpendingHistoryView
 
 struct AddSpendingHistoryView: View {
+    @StateObject var viewModel = AddSpendingHistoryViewModel()
+
     var body: some View {
         VStack {
             ScrollView {
-                AddSpendingInputFormView()
+                AddSpendingInputFormView(viewModel: viewModel)
             }
             Spacer()
 
-            CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
+            CustomBottomButton(action: {}, label: "확인", isFormValid: $viewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .background(Color("White01"))
@@ -38,6 +40,12 @@ struct AddSpendingHistoryView: View {
 
                 }.offset(x: -10)
             }
+        }
+        .fullScreenCover(isPresented: $viewModel.isCategoryListViewPresented, content: {
+            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented, selectedCategory: $viewModel.selectedCategory)
+        })
+        .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
+            SelectSpendingDayView(isPresented: $viewModel.isSelectDayViewPresented, selectedDate: $viewModel.selectedDate)
         }
     }
 }

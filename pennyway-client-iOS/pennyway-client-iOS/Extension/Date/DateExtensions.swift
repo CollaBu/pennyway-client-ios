@@ -16,6 +16,13 @@ extension Date {
         return components.month ?? 0
     }
 
+    static func getFormattedDate(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "M월 dd일"
+        return formatter.string(from: date)
+    }
+
     static let calendarDayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy dd"
