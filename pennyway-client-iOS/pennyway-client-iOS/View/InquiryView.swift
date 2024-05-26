@@ -6,6 +6,7 @@ struct InquiryView: View {
     @State private var isSelectedCategory: Bool = false
     @State private var isSelectedAgreeBtn: Bool = false
     @State private var showAgreement: Bool = false
+
     let placeholder: String = "문의 내용을 입력해주세요"
 
     var body: some View {
@@ -91,7 +92,7 @@ struct InquiryView: View {
                     HStack(spacing: 0) {
                         Button(action: {
                             isSelectedAgreeBtn.toggle()
-                                    
+
                         }, label: {
                             let selected = isSelectedAgreeBtn == true ? Image("icon_checkone_on_small") : Image("icon_checkone_off_small")
                                     
@@ -132,8 +133,8 @@ struct InquiryView: View {
             }
             CustomBottomButton(action: {
                 continueButtonAction()
-            }, label: "문의하기", isFormValid: $viewModel.isFormValid)
-                .disabled(!viewModel.isFormValid)
+            }, label: "문의하기", isFormValid: $viewModel.isFormValid, isSelectedAgreeBtn: $isSelectedAgreeBtn)
+                .disabled(!(viewModel.isFormValid && isSelectedAgreeBtn))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         
