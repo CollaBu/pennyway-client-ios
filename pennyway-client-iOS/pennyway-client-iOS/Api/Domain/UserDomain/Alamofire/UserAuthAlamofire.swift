@@ -25,4 +25,10 @@ class UserAuthAlamofire: TokenHandler {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAuthRouter.unlinkOAuthAccount, completion: completion)
     }
+    
+    func checkLoginState(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAuthAlamofire - checkLoginState() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAuthRouter.checkLoginState, completion: completion)
+    }
 }
