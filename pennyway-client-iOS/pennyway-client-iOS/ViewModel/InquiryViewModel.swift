@@ -6,6 +6,7 @@ class InquiryViewModel: ObservableObject {
     @Published var category: String = ""
     @Published var showErrorEmail = false
     @Published var isFormValid: Bool = false
+    @Published var isSelectedAgreeBtn = false
 
     let categoryMapping: [String: String] = [
         "이용 관련": "UTILIZATION",
@@ -24,7 +25,7 @@ class InquiryViewModel: ObservableObject {
     }
 
     func validateForm() {
-        if !email.isEmpty && !content.isEmpty && !category.isEmpty && !showErrorEmail {
+        if !email.isEmpty && !content.isEmpty && !category.isEmpty && !showErrorEmail && isSelectedAgreeBtn {
             isFormValid = true
         } else {
             isFormValid = false

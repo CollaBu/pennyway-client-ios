@@ -1,4 +1,3 @@
-
 import Alamofire
 import Foundation
 import os.log
@@ -15,7 +14,8 @@ class InquiryAlamofire: TokenHandler {
     }
 
     func sendInquiryMail(_ dto: InquiryRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
-        os_log("InquiryAlamofire - sendInquiryMail() called userInput : %@ ,, %@ ,, %@  ", log: .default, type: .info, dto.email, dto.content, dto.category)
+        Log.info("InquiryAlamofire - sendInquiryMail() called userInput \(dto)")
+
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: InquiryRouter.sendInquiryMail(dto: dto), completion: completion)
     }
 }

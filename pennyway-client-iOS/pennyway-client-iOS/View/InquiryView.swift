@@ -91,10 +91,10 @@ struct InquiryView: View {
                             
                     HStack(spacing: 0) {
                         Button(action: {
-                            isSelectedAgreeBtn.toggle()
-
+                            viewModel.isSelectedAgreeBtn.toggle()
+                            viewModel.validateForm()
                         }, label: {
-                            let selected = isSelectedAgreeBtn == true ? Image("icon_checkone_on_small") : Image("icon_checkone_off_small")
+                            let selected = viewModel.isSelectedAgreeBtn == true ? Image("icon_checkone_on_small") : Image("icon_checkone_off_small")
                                     
                             selected
                                 .resizable()
@@ -133,8 +133,7 @@ struct InquiryView: View {
             }
             CustomBottomButton(action: {
                 continueButtonAction()
-            }, label: "문의하기", isFormValid: $viewModel.isFormValid, isSelectedAgreeBtn: $isSelectedAgreeBtn)
-                .disabled(!(viewModel.isFormValid && isSelectedAgreeBtn))
+            }, label: "문의하기", isFormValid: $viewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         
@@ -153,7 +152,7 @@ struct InquiryView: View {
             }
         }
     }
-    
+
     private func continueButtonAction() {
         if viewModel.isFormValid {
             viewModel.sendInquiryMailApi()
