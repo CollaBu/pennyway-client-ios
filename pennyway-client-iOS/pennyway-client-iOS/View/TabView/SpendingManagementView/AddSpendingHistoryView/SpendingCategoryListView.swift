@@ -54,11 +54,11 @@ struct SpendingCategoryListView: View {
                         }
                         .onTapGesture {
                             if title == "추가하기" {
+                                viewModel.selectedCategoryIcon = "icon_category_etc_on" // icon 초기화
                                 viewModel.navigateToAddCategory = true
                                 isPresented = false
                             } else {
-                                viewModel.categoryName = title
-                                viewModel.selectedCategoryIcon = icon
+                                viewModel.selectedCategory = (icon, title)
                                 isPresented = false
                                 viewModel.validateForm()
                             }

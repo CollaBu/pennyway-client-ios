@@ -17,8 +17,10 @@ struct BottomSheet<SheetContent: View>: ViewModifier {
                     self.sheetContent()
                         .frame(maxWidth: .infinity)
                         .frame(height: maxHeight)
-                        .background(Color("White01"))
-                    RoundedCorner(radius: 20, corners: [.topLeft, .topRight])
+                        .background(
+                            RoundedCorner(radius: 20, corners: [.topLeft, .topRight])
+                                .fill(Color("White01"))
+                        )
                 }
                 .background(
                     Color.black.opacity(0.3)

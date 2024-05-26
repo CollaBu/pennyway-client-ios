@@ -1,19 +1,12 @@
 
 import SwiftUI
 
-// MARK: - CategoryIcon
-
-struct CategoryIcon: Identifiable, Hashable {
-    let id = UUID()
-    let offIcon: String
-    let onIcon: String
-}
-
 // MARK: - SelectCategoryIconView
 
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    @State var selectedCategoryIcon: String = "icon_category_etc_on"
 
     let columns = [
         GridItem(.flexible()),
@@ -22,19 +15,19 @@ struct SelectCategoryIconView: View {
         GridItem(.flexible())
     ]
 
-    let icons: [CategoryIcon] = [
-        CategoryIcon(offIcon: "icon_category_food_off", onIcon: "icon_category_food_on"),
-        CategoryIcon(offIcon: "icon_category_traffic_off", onIcon: "icon_category_traffic_on"),
-        CategoryIcon(offIcon: "icon_category_beauty_off", onIcon: "icon_category_beauty_on"),
-        CategoryIcon(offIcon: "icon_category_market_off", onIcon: "icon_category_market_on"),
-        CategoryIcon(offIcon: "icon_category_education_off", onIcon: "icon_category_education_on"),
-        CategoryIcon(offIcon: "icon_category_life_off", onIcon: "icon_category_life_on"),
-        CategoryIcon(offIcon: "icon_category_health_off", onIcon: "icon_category_health_on"),
-        CategoryIcon(offIcon: "icon_category_hobby_off", onIcon: "icon_category_hobby_on"),
-        CategoryIcon(offIcon: "icon_category_travel_off", onIcon: "icon_category_travel_on"),
-        CategoryIcon(offIcon: "icon_category_drink_off", onIcon: "icon_category_drink_on"),
-        CategoryIcon(offIcon: "icon_category_event_off", onIcon: "icon_category_event_on"),
-        CategoryIcon(offIcon: "icon_category_etc_off", onIcon: "icon_category_etc_on")
+    let icons: [CategoryIconListItem] = [
+        CategoryIconListItem(offIcon: "icon_category_food_off", onIcon: "icon_category_food_on"),
+        CategoryIconListItem(offIcon: "icon_category_traffic_off", onIcon: "icon_category_traffic_on"),
+        CategoryIconListItem(offIcon: "icon_category_beauty_off", onIcon: "icon_category_beauty_on"),
+        CategoryIconListItem(offIcon: "icon_category_market_off", onIcon: "icon_category_market_on"),
+        CategoryIconListItem(offIcon: "icon_category_education_off", onIcon: "icon_category_education_on"),
+        CategoryIconListItem(offIcon: "icon_category_life_off", onIcon: "icon_category_life_on"),
+        CategoryIconListItem(offIcon: "icon_category_health_off", onIcon: "icon_category_health_on"),
+        CategoryIconListItem(offIcon: "icon_category_hobby_off", onIcon: "icon_category_hobby_on"),
+        CategoryIconListItem(offIcon: "icon_category_travel_off", onIcon: "icon_category_travel_on"),
+        CategoryIconListItem(offIcon: "icon_category_drink_off", onIcon: "icon_category_drink_on"),
+        CategoryIconListItem(offIcon: "icon_category_event_off", onIcon: "icon_category_event_on"),
+        CategoryIconListItem(offIcon: "icon_category_etc_off", onIcon: "icon_category_etc_on")
     ]
 
     var body: some View {
@@ -51,12 +44,12 @@ struct SelectCategoryIconView: View {
 
             LazyVGrid(columns: columns, spacing: 20 * DynamicSizeFactor.factor()) {
                 ForEach(icons) { icon in
-                    Image(viewModel.selectedCategoryIcon == icon.onIcon ? icon.onIcon : icon.offIcon)
+                    Image(selectedCategoryIcon == icon.onIcon ? icon.onIcon : icon.offIcon)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
                         .onTapGesture {
-                            viewModel.selectedCategoryIcon = icon.onIcon
+                            selectedCategoryIcon = icon.onIcon
                         }
                 }
             }
@@ -64,6 +57,7 @@ struct SelectCategoryIconView: View {
             Spacer()
 
             CustomBottomButton(action: {
+                viewModel.selectedCategoryIcon = selectedCategoryIcon
                 isPresented = false
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())

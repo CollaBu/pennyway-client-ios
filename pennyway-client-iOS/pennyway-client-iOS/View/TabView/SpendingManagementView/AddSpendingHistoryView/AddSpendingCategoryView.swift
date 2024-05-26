@@ -4,11 +4,11 @@ import SwiftUI
 // MARK: - AddSpendingCategoryView
 
 struct AddSpendingCategoryView: View {
-    @State var maxCategoryNameCount = "8"
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
 
-    @State private var navigateAddSpendingView = false
+    @State var maxCategoryNameCount = "8"
+    @State var categoryName: String = ""
 
     var body: some View {
         VStack(spacing: 0) {
@@ -29,10 +29,6 @@ struct AddSpendingCategoryView: View {
             }
             .onTapGesture {
                 viewModel.isSelectAddCategoryViewPresented = true
-
-                if viewModel.selectedCategoryIcon == nil {
-                    viewModel.selectedCategoryIcon = "icon_category_etc_on"
-                }
             }
 
             Spacer().frame(height: 20 * DynamicSizeFactor.factor())
@@ -43,22 +39,26 @@ struct AddSpendingCategoryView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    if viewModel.categoryName.isEmpty {
+                    if categoryName.isEmpty {
                         Text("카테고리명을 입력하세요")
                             .platformTextColor(color: Color("Gray03"))
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                             .font(.H4MediumFont())
                     }
 
-                    TextField("", text: $viewModel.categoryName)
+                    TextField("", text: $categoryName)
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))
-                        .onChange(of: viewModel.categoryName) { _ in
-                            if viewModel.categoryName.count > 8 {
-                                viewModel.categoryName = String(viewModel.categoryName.prefix(8))
+                        .onChange(of: categoryName) { _ in
+                            if categoryName.count > 8 {
+                                categoryName = String(categoryName.prefix(8))
                             }
-                            viewModel.validateAddCategoryForm()
+                            if !categoryName.isEmpty {
+                                viewModel.isAddCategoryFormValid = true
+                            } else {
+                                viewModel.isAddCategoryFormValid = false
+                            }
                         }
                 }
             }
@@ -66,7 +66,7 @@ struct AddSpendingCategoryView: View {
 
             HStack {
                 Spacer()
-                Text("\(viewModel.categoryName.count)/\(maxCategoryNameCount)")
+                Text("\(categoryName.count)/\(maxCategoryNameCount)")
                     .font(.B2MediumFont())
                     .platformTextColor(color: Color("Gray03"))
             }
@@ -75,12 +75,10 @@ struct AddSpendingCategoryView: View {
             Spacer()
 
             CustomBottomButton(action: {
-                if viewModel.isAddCategoryFormValid {
-                    navigateAddSpendingView = true
+                if !categoryName.isEmpty {
+                    viewModel.selectedCategory = (viewModel.selectedCategoryIcon ?? "icon_category_etc_on", categoryName)
+                    viewModel.validateForm()
                     presentationMode.wrappedValue.dismiss()
-                    if viewModel.selectedCategoryIcon == nil {
-                        viewModel.selectedCategoryIcon = "icon_category_etc_on"
-                    }
                 }
             }, label: "추가하기", isFormValid: $viewModel.isAddCategoryFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
@@ -95,8 +93,6 @@ struct AddSpendingCategoryView: View {
                 HStack {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
-                        viewModel.selectedCategoryIcon = nil
-                        viewModel.categoryName = ""
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
