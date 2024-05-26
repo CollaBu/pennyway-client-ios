@@ -29,7 +29,7 @@ struct AddSpendingCategoryView: View {
             }
             .onTapGesture {
                 viewModel.isSelectAddCategoryViewPresented = true
-                
+
                 if viewModel.selectedCategoryIcon == nil {
                     viewModel.selectedCategoryIcon = "icon_category_etc_on"
                 }

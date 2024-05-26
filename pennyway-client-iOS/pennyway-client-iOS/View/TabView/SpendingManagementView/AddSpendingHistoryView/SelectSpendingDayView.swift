@@ -22,6 +22,7 @@ struct SelectSpendingDayView: View {
                     .labelsHidden()
                     .environment(\.locale, Locale(identifier: "ko_KR"))
             }
+            .frame(height: 114 * DynamicSizeFactor.factor())
 
             Spacer()
 

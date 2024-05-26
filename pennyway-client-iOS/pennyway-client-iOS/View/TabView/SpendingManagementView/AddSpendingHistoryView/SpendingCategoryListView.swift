@@ -25,18 +25,11 @@ struct SpendingCategoryListView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Button(action: {
-                    isPresented = false
-                }) {
-                    Image("icon_close")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
-                }
-                .frame(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor())
-                Spacer()
-            }
+            RoundedRectangle(cornerRadius: 5)
+                .frame(width: 40, height: 5)
+                .foregroundColor(.gray)
+                .padding(.top, 10)
+                .padding(.bottom, 10)
 
             ScrollView {
                 VStack(alignment: .leading) {
