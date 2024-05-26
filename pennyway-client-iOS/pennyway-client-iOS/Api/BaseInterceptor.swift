@@ -4,7 +4,7 @@ import Foundation
 
 class BaseInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for _: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        print("BaseInterceptor - adapt() ")
+        Log.info("BaseInterceptor - adapt()")
 
         var adaptedRequest = urlRequest
         let accessToken = KeychainHelper.loadAccessToken()
@@ -19,11 +19,29 @@ class BaseInterceptor: RequestInterceptor {
     }
 
     func retry(_ request: Request, for _: Session, dueTo _: Error, completion _: @escaping (RetryResult) -> Void) {
-        print("BaseInterceptor - retry()")
+        Log.info("BaseInterceptor - retry()")
 
-        Log.debug(request)
-
-        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
+        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 || response.statusCode == 403{
+            UserAuthAlamofire.shared.refresh{ result in
+                switch result {
+                case let .success(data):
+                    if let responseData = data {
+                        do {
+                            let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                            Log.debug(response)
+                           
+                        } catch {
+                            Log.fault("Error parsing response JSON: \(error)")
+                        }
+                    }
+                case let .failure(error):
+                    if let statusSpecificError = error as? StatusSpecificError {
+                        Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+                    } else {
+                        Log.error("Network request failed: \(error)")
+                    }
+                }
+            }
         } else {}
     }
 }

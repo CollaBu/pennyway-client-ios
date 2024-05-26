@@ -31,4 +31,10 @@ class UserAuthAlamofire: TokenHandler {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAuthRouter.checkLoginState, completion: completion)
     }
+    
+    func refresh(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAuthAlamofire - refresh() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAuthRouter.refresh, completion: completion)
+    }
 }
