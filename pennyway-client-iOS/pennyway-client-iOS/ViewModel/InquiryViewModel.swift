@@ -35,9 +35,9 @@ class InquiryViewModel: ObservableObject {
     func sendInquiryMailApi() {
         let categoryCode = getCategoryCode(for: category)
 
-        let inquiryRequestDto = InquiryRequestDto(email: email, content: content, category: categoryCode)
+        let inquiryRequestDto = BackofficeRequestDto(email: email, content: content, category: categoryCode)
 
-        InquiryAlamofire.shared.sendInquiryMail(inquiryRequestDto) { result in
+        BackofficeAlamofire.shared.sendInquiryMail(inquiryRequestDto) { result in
             switch result {
             case let .success(data):
                 do {
