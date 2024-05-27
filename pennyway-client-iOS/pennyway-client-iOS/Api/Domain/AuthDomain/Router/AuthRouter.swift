@@ -130,7 +130,8 @@ enum AuthRouter: URLRequestConvertible {
                 let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)
                 request.allHTTPHeaderFields = cookieHeader
                 
-                print(cookieHeader)
+                Log.debug(KeychainHelper.loadAccessToken())
+                Log.debug(cookieHeader)
             }
         }
         return request

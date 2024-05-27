@@ -1,6 +1,8 @@
 
 import SwiftUI
 
+// MARK: - AppViewModel
+
 class AppViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var isSplashShown: Bool = false
@@ -18,16 +20,11 @@ class AppViewModel: ObservableObject {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         Log.debug(response)
-                        DispatchQueue.main.async {
-                            self?.checkLoginState = true
-                        }
+                        self?.checkLoginState = true
 
-                        Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
-                        DispatchQueue.main.async {
-                            self?.checkLoginState = false
-                        }
+                        self?.checkLoginState = false
                     }
                 }
             case let .failure(error):
@@ -36,15 +33,15 @@ class AppViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
-                DispatchQueue.main.async {
-                    self?.checkLoginState = false
-                }
+
+                self?.checkLoginState = false
             }
         }
     }
 
     func logout() {
         isLoggedIn = false
+        checkLoginState = false
     }
 
     func login() {
