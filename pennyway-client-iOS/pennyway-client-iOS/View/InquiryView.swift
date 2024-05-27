@@ -14,17 +14,21 @@ struct InquiryView: View {
             ScrollView {
                 Spacer().frame(height: 31 * DynamicSizeFactor.factor())
                         
-                HStack {
-                    InquiryListView(viewModel: viewModel)
-                        .padding(.leading, 20)
-                            
-                    Spacer()
-                    
-                    Text("문의가 필요해요")
-                        .platformTextColor(color: Color("Gray05"))
-                        .font(.H4MediumFont())
-                        .padding(.trailing, 44 * DynamicSizeFactor.factor())
+                ZStack(alignment: .leading) {
+                    HStack {
+                        InquiryListView(viewModel: viewModel)
+                        
+                        Spacer()
+                        
+                        Text("문의가 필요해요")
+                            .platformTextColor(color: Color("Gray05"))
+                            .font(.H4MediumFont())
+//                            .padding(.leading, 15 * DynamicSizeFactor.factor())
+                            .multilineTextAlignment(.leading)
+                    }
                 }
+                .padding(.leading, 20)
+                .padding(.trailing, 44)
                 .zIndex(10)
                         
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
@@ -86,9 +90,7 @@ struct InquiryView: View {
                         }
                         .padding(.horizontal, 20)
                     }
-                            
-                    Spacer().frame(height: 2 * DynamicSizeFactor.factor())
-                            
+                                                        
                     HStack(spacing: 0) {
                         Button(action: {
                             viewModel.isSelectedAgreeBtn.toggle()
@@ -98,7 +100,7 @@ struct InquiryView: View {
                                     
                             selected
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
+                                .aspectRatio(contentMode: .fill)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                         })
                         .padding(.leading, 20 * DynamicSizeFactor.factor())
@@ -123,6 +125,7 @@ struct InquiryView: View {
                         })
                         .padding(.trailing, 20 * DynamicSizeFactor.factor())
                     }
+                    .padding(.vertical, 1)
                 }
                         
                 if showAgreement {

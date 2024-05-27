@@ -24,16 +24,20 @@ struct InquiryListView: View {
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
 
                     Spacer()
-                    let selected = isSelectedCategory == true ? Image("icon_arrow_up") : Image("icon_arrow_down")
+//                    Image("icon_arrow_down")
+//                    let selected = isSelectedCategory == true ? Image("icon_arrow_up") : Image("icon_arrow_down")
 
-                    selected
+                    Image("icon_arrow_down")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .rotationEffect(.degrees(isSelectedCategory ? 0 : 180))
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                         .offset(x: 124 * DynamicSizeFactor.factor())
                 }
 
             })
+            .transition(AnyTransition.move(edge: .top).combined(with: AnyTransition.opacity))
+            .buttonStyle(PlainButtonStyle())
             .overlay(
                 VStack(alignment: .center, spacing: 60 * DynamicSizeFactor.factor()) { // 동적ui 적용하면 간격 너무 넓어짐
                     Spacer().frame(height: 6 * DynamicSizeFactor.factor())
@@ -49,6 +53,7 @@ struct InquiryListView: View {
                                     Button(action: {
                                         self.selectedItem = item
                                         self.viewModel.category = item
+                                        isSelectedCategory = false
                                     }, label: {
                                         ZStack(alignment: .leading) {
                                             Rectangle()
@@ -66,6 +71,8 @@ struct InquiryListView: View {
                                         .background(selectedItem == item ? Color("Gray03") : Color("White01"))
 
                                     })
+                                    .transition(AnyTransition.move(edge: .top).combined(with: AnyTransition.opacity))
+                                    .buttonStyle(PlainButtonStyle())
                                 }
                                 .cornerRadius(3)
                             }
@@ -78,6 +85,7 @@ struct InquiryListView: View {
                 }, alignment: .topLeading
             )
         }
+        .animation(.easeInOut(duration: 0.3))
     }
 }
 
