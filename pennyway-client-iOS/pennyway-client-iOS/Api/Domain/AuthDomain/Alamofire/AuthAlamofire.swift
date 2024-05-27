@@ -8,7 +8,6 @@ class AuthAlamofire: TokenHandler {
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
 
-    /// let interceptors = Interceptor(interceptors: [BaseInterceptor()])
     var session: Session
     
     private init() {
@@ -75,5 +74,11 @@ class AuthAlamofire: TokenHandler {
     func requestResetPw(_ dto: RequestResetPwDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("AuthAlamofire - requestResetPw() called userInput : %@ ,, %@ ,, %@", log: .default, type: .info, dto.phone, dto.code, dto.newPassword)
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.requestResetPw(dto: dto), completion: completion)
+    }
+    
+    func refresh(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAuthAlamofire - refresh() called")
+        
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.refresh, completion: completion)
     }
 }

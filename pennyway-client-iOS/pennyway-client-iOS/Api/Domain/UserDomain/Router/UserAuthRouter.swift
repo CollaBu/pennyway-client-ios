@@ -4,7 +4,7 @@ import Foundation
 
 enum UserAuthRouter: URLRequestConvertible {
     case linkOAuthAccount(dto: OAuthUserData)
-    case unlinkOAuthAccount, checkLoginState, refresh
+    case unlinkOAuthAccount, checkLoginState
     
     var method: HTTPMethod {
         switch self {
@@ -12,7 +12,7 @@ enum UserAuthRouter: URLRequestConvertible {
             return .put
         case .unlinkOAuthAccount:
             return .delete
-        case .checkLoginState, .refresh:
+        case .checkLoginState:
             return .get
         }
     }
@@ -27,8 +27,6 @@ enum UserAuthRouter: URLRequestConvertible {
             return "v1/link-oauth"
         case .checkLoginState:
             return "v1/auth"
-        case .refresh:
-            return "v1/auth/refresh"
         }
     }
     
@@ -36,7 +34,7 @@ enum UserAuthRouter: URLRequestConvertible {
         switch self {
         case let .linkOAuthAccount(dto):
             return try? dto.asDictionary()
-        case .unlinkOAuthAccount, .checkLoginState, .refresh:
+        case .unlinkOAuthAccount, .checkLoginState:
             return [:]
         }
     }
@@ -56,14 +54,6 @@ enum UserAuthRouter: URLRequestConvertible {
         
         case .checkLoginState:
             request = URLRequest.createURLRequest(url: url, method: method)
-        
-        case .refresh:
-            request = URLRequest.createURLRequest(url: url, method: method)
-            
-            if let cookies = HTTPCookieStorage.shared.cookies(for: url) {
-                let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)
-                request.allHTTPHeaderFields = cookieHeader
-            }
         }
         return request
     }

@@ -13,7 +13,7 @@ enum AuthRouter: URLRequestConvertible {
     case findUserName(dto: FindUserNameRequestDto)
     case receiveUserNameVerificationCode(dto: VerificationCodeRequestDto)
     case receivePwVerificationCode(dto: VerificationCodeRequestDto)
-    case logout
+    case logout, refresh
     case requestResetPw(dto: RequestResetPwDto)
     case receivePwVerifyVerificationCode(dto: VerificationRequestDto)
     
@@ -21,7 +21,7 @@ enum AuthRouter: URLRequestConvertible {
         switch self {
         case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToOAuth, .receiveUserNameVerificationCode, .receivePwVerificationCode, .receivePwVerifyVerificationCode:
             return .post
-        case .checkDuplicateUserName, .findUserName, .logout:
+        case .checkDuplicateUserName, .findUserName, .logout, .refresh:
             return .get
         case .requestResetPw:  
             return .patch
@@ -54,6 +54,8 @@ enum AuthRouter: URLRequestConvertible {
             return "v1/find/password"
         case .receivePwVerifyVerificationCode:
             return "v1/find/password/verification"
+        case .refresh:
+            return "v1/auth/refresh"
         }
     }
     
@@ -69,21 +71,18 @@ enum AuthRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .receivePwVerificationCode(dto):
             return try? dto.asDictionary()
-        case .checkDuplicateUserName:
-            return [:]
         case let .login(dto):
             return try? dto.asDictionary()
         case let .linkAccountToOAuth(dto):
             return try? dto.asDictionary()
         case let .findUserName(dto):
             return try? dto.asDictionary()
-        case .checkDuplicateUserName, .logout:
-            return [:]
-            
         case let .requestResetPw(dto):
             return try? dto.asDictionary()
         case let .receivePwVerifyVerificationCode(dto):
             return try? dto.asDictionary()
+        case .checkDuplicateUserName, .logout, .refresh:
+            return [:]
         }
     }
     
@@ -95,15 +94,15 @@ enum AuthRouter: URLRequestConvertible {
         case .signup, .verifyVerificationCode, .login, .linkAccountToOAuth, .receivePwVerifyVerificationCode, .requestResetPw:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
             
-        case let .receiveVerificationCode:
+        case .receiveVerificationCode:
             let queryParameters = [URLQueryItem(name: "type", value: "general")]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
             
-        case let .receiveUserNameVerificationCode: // 아이디 찾기 번호 인증
+        case .receiveUserNameVerificationCode: // 아이디 찾기 번호 인증
             let queryParameters = [URLQueryItem(name: "type", value: "username")]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
             
-        case let .receivePwVerificationCode:
+        case .receivePwVerificationCode:
             let queryParameters = [URLQueryItem(name: "type", value: "password")]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
             
@@ -123,6 +122,16 @@ enum AuthRouter: URLRequestConvertible {
             }
             let accessToken = KeychainHelper.loadAccessToken() ?? ""
             request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
+            
+        case .refresh:
+            
+            request = URLRequest.createURLRequest(url: url, method: method)
+            if let cookies = HTTPCookieStorage.shared.cookies(for: url) {
+                let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)
+                request.allHTTPHeaderFields = cookieHeader
+                
+                print(cookieHeader)
+            }
         }
         return request
     }

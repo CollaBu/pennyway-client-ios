@@ -13,6 +13,7 @@ struct pennyway_client_iOSApp: App {
     init() {
         let kakaoAppKey = Bundle.main.infoDictionary?["KakaoAppKey"] as! String
         KakaoSDK.initSDK(appKey: kakaoAppKey, loggingEnable: false)
+        KeychainHelper.saveAccessToken(accessToken: "eyJyZWdEYXRlIjoxNzE2ODIxNzE0MDA4LCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjYyIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcxNjgyMzUxNH0.B4HDsDxsXwdWRyPijSj85oBhSWTc1xfMFWfxe8QHe7I")
     }
 
     var body: some Scene {

@@ -18,20 +18,23 @@ class BaseInterceptor: RequestInterceptor {
         completion(.success(adaptedRequest))
     }
 
-    func retry(_ request: Request, for _: Session, dueTo _: Error, completion _: @escaping (RetryResult) -> Void) {
+    func retry(_ request: Request, for _: Session, dueTo _: Error, completion: @escaping (RetryResult) -> Void) {
         Log.info("BaseInterceptor - retry()")
 
-        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 || response.statusCode == 403{
-            UserAuthAlamofire.shared.refresh{ result in
+        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
+            AuthAlamofire.shared.refresh { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {
                         do {
                             let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                             Log.debug(response)
-                           
+
+                            completion(.retry)
+
                         } catch {
                             Log.fault("Error parsing response JSON: \(error)")
+                            completion(.doNotRetry)
                         }
                     }
                 case let .failure(error):
@@ -40,6 +43,7 @@ class BaseInterceptor: RequestInterceptor {
                     } else {
                         Log.error("Network request failed: \(error)")
                     }
+                    completion(.doNotRetry)
                 }
             }
         } else {}

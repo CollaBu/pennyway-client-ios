@@ -21,6 +21,8 @@ class AppViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             self?.checkLoginState = true
                         }
+
+                        Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                         DispatchQueue.main.async {
