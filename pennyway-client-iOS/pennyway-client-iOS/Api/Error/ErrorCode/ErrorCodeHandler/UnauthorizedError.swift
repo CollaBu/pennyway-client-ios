@@ -4,7 +4,7 @@ func unauthorizedError(_ code: String, message: String) -> StatusSpecificError? 
         return nil
     }
     let defaultMessage: String
-    let fieldErrors = ErrorResponseData(field: unauthorizedError.rawValue)
+    let fieldErrors: ErrorResponseData? = nil
 
     switch unauthorizedError {
     case .missingOrInvalidCredentials:

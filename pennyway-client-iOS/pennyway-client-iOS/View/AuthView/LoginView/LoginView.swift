@@ -31,7 +31,7 @@ struct LoginView: View {
                             Text("로그인에 문제가 발생했나요?")
                                 .platformTextColor(color: Color("Gray04"))
                                 .font(.B3MediumFont())
-                                .padding(.horizontal,8 * DynamicSizeFactor.factor())
+                                .padding(.horizontal, 8 * DynamicSizeFactor.factor())
                         }
                         .padding(.bottom, 34)
                     })

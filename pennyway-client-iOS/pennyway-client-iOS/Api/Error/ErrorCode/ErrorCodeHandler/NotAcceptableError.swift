@@ -5,7 +5,7 @@ func notAcceptableError(_ code: String, message: String) -> StatusSpecificError?
     }
 
     let defaultMessage = "Requested resource format not supported"
-    let fieldErrors = ErrorResponseData(field: notAcceptableError.rawValue)
+    let fieldErrors: ErrorResponseData? = nil
 
     return StatusSpecificError(domainError: .notAcceptable, code: code, message: message.isEmpty ? defaultMessage : message, fieldErrors: fieldErrors)
 }

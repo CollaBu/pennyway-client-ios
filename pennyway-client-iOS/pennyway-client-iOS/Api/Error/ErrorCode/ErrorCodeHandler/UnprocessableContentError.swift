@@ -5,6 +5,7 @@ func unprocessableContentError(_ code: String, message: String) -> StatusSpecifi
     }
 
     var defaultMessage: String
+
     let fieldErrors = ErrorResponseData(field: unprocessableContentError.rawValue)
 
     switch unprocessableContentError {

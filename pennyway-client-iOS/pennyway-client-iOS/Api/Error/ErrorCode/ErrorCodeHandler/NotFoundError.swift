@@ -4,7 +4,7 @@ func notFoundError(_ code: String, message: String) -> StatusSpecificError? {
         return nil
     }
     let defaultMessage: String
-    let fieldErrors = ErrorResponseData(field: notFoundError.rawValue)
+    let fieldErrors: ErrorResponseData? = nil
 
     switch notFoundError {
     case .resourceNotFound:

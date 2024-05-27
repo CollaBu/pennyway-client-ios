@@ -5,7 +5,7 @@ func methodNotAllowedError(_ code: String, message: String) -> StatusSpecificErr
     }
 
     var defaultMessage: String
-    let fieldErrors = ErrorResponseData(field: methodNotAllowedError.rawValue)
+    let fieldErrors: ErrorResponseData? = nil
 
     switch methodNotAllowedError {
     case .methodNotSupported:

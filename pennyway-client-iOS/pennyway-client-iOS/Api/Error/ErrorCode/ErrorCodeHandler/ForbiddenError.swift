@@ -4,7 +4,7 @@ func forbiddenError(_ code: String, message: String) -> StatusSpecificError? {
         return nil
     }
     let defaultMessage: String
-    let fieldErrors = ErrorResponseData(field: forbiddenError.rawValue)
+    let fieldErrors: ErrorResponseData? = nil
 
     switch forbiddenError {
     case .accessForbidden:

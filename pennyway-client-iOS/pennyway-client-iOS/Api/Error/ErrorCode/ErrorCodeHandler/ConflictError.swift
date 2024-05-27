@@ -5,7 +5,7 @@ func conflictError(_ code: String, message: String) -> StatusSpecificError? {
     }
 
     var defaultMessage: String
-    let fieldErrors = ErrorResponseData(field: conflictError.rawValue)
+    let fieldErrors: ErrorResponseData? = nil
 
     switch conflictError {
     case .requestConflictWithResourceState:

@@ -5,7 +5,7 @@ func preconditionFailedError(_ code: String, message: String) -> StatusSpecificE
     }
 
     var defaultMessage: String
-    let fieldErrors = ErrorResponseData(field: preconditionFailedError.rawValue)
+    let fieldErrors: ErrorResponseData? = nil
 
     switch preconditionFailedError {
     case .preconditionRequestHeaderNotMatched:
