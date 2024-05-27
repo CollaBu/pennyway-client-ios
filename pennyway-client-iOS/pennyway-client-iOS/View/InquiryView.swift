@@ -43,7 +43,7 @@ struct InquiryView: View {
                 Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
                 VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-                    Text("문의내용")
+                    Text("문의 내용")
                         .padding(.horizontal, 20)
                         .font(.B1RegularFont())
                         .platformTextColor(color: Color("Gray04"))

@@ -164,9 +164,9 @@
 		D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */; };
 		D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */; };
 		D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78E2BEBB42200899AA3 /* RequestResetPwDto.swift */; };
-		D851E71B2C0273BD00316DB3 /* InquiryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E71A2C0273BD00316DB3 /* InquiryRequestDto.swift */; };
-		D851E7202C0273FA00316DB3 /* InquiryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E71F2C0273FA00316DB3 /* InquiryRouter.swift */; };
-		D851E7232C02743C00316DB3 /* InquiryAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E7222C02743C00316DB3 /* InquiryAlamofire.swift */; };
+		D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E71A2C0273BD00316DB3 /* BackofficeRequestDto.swift */; };
+		D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E71F2C0273FA00316DB3 /* BackofficeRouter.swift */; };
+		D851E7232C02743C00316DB3 /* BackofficeAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E7222C02743C00316DB3 /* BackofficeAlamofire.swift */; };
 		D851E7252C02750E00316DB3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D851E7242C02750E00316DB3 /* GoogleService-Info.plist */; };
 		D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927ED2BE6842A00653391 /* CustomPopUpView.swift */; };
 		D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */; };
@@ -186,7 +186,6 @@
 		D888329C2BBC612600F49B27 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329B2BBC612600F49B27 /* LoginView.swift */; };
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
 		D89F31B02BFF300800A51CFA /* (null) in Resources */ = {isa = PBXBuildFile; };
-		D89F31C22C0049A100A51CFA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */; };
@@ -355,9 +354,9 @@
 		D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwViewModel.swift; sourceTree = "<group>"; };
 		D847A78E2BEBB42200899AA3 /* RequestResetPwDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestResetPwDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/RequestResetPwDto.swift"; sourceTree = SOURCE_ROOT; };
-		D851E71A2C0273BD00316DB3 /* InquiryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryRequestDto.swift; sourceTree = "<group>"; };
-		D851E71F2C0273FA00316DB3 /* InquiryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryRouter.swift; sourceTree = "<group>"; };
-		D851E7222C02743C00316DB3 /* InquiryAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryAlamofire.swift; sourceTree = "<group>"; };
+		D851E71A2C0273BD00316DB3 /* BackofficeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeRequestDto.swift; sourceTree = "<group>"; };
+		D851E71F2C0273FA00316DB3 /* BackofficeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeRouter.swift; sourceTree = "<group>"; };
+		D851E7222C02743C00316DB3 /* BackofficeAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeAlamofire.swift; sourceTree = "<group>"; };
 		D851E7242C02750E00316DB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D85927ED2BE6842A00653391 /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
 		D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogoutViewModel.swift; sourceTree = "<group>"; };
@@ -1239,7 +1238,7 @@
 		D851E71D2C0273D400316DB3 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				D851E71A2C0273BD00316DB3 /* InquiryRequestDto.swift */,
+				D851E71A2C0273BD00316DB3 /* BackofficeRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1247,7 +1246,7 @@
 		D851E71E2C0273E500316DB3 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				D851E71F2C0273FA00316DB3 /* InquiryRouter.swift */,
+				D851E71F2C0273FA00316DB3 /* BackofficeRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1255,7 +1254,7 @@
 		D851E7212C02740F00316DB3 /* Alamofire */ = {
 			isa = PBXGroup;
 			children = (
-				D851E7222C02743C00316DB3 /* InquiryAlamofire.swift */,
+				D851E7222C02743C00316DB3 /* BackofficeAlamofire.swift */,
 			);
 			path = Alamofire;
 			sourceTree = "<group>";
@@ -1457,7 +1456,7 @@
 				4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
-				D851E7202C0273FA00316DB3 /* InquiryRouter.swift in Sources */,
+				D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */,
 				4A585F602BF29531007DC01A /* SpendingCheckBoxView.swift in Sources */,
 				D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
@@ -1477,7 +1476,7 @@
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */,
-				D851E71B2C0273BD00316DB3 /* InquiryRequestDto.swift in Sources */,
+				D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
 				4A69C1522BE695FF00A27B82 /* FindUserNameViewModel.swift in Sources */,
 				4A0FFBF92BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift in Sources */,
@@ -1581,7 +1580,7 @@
 				D8E24D952BFD12BB006E8046 /* SettingAlarmView.swift in Sources */,
 				4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */,
 				4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */,
-				D851E7232C02743C00316DB3 /* InquiryAlamofire.swift in Sources */,
+				D851E7232C02743C00316DB3 /* BackofficeAlamofire.swift in Sources */,
 				4A0BC68F2BF538A40036D900 /* SpendingAlamofire.swift in Sources */,
 				4A0BC6952BF53AA60036D900 /* GetSpendingHistoryRequestDto.swift in Sources */,
 				4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */,

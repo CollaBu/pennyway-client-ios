@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct InquiryRequestDto: Encodable {
+public struct BackofficeRequestDto: Encodable {
     let email: String
     let content: String
     let category: String

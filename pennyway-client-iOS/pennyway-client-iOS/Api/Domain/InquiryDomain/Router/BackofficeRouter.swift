@@ -2,8 +2,8 @@
 import Alamofire
 import Foundation
 
-enum InquiryRouter: URLRequestConvertible {
-    case sendInquiryMail(dto: InquiryRequestDto)
+enum BackofficeRouter: URLRequestConvertible {
+    case sendInquiryMail(dto: BackofficeRequestDto)
     
     var method: HTTPMethod {
         switch self {
