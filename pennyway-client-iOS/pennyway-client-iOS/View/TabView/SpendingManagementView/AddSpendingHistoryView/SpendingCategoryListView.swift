@@ -27,7 +27,7 @@ struct SpendingCategoryListView: View {
                     VStack(spacing: 0) {
                         ForEach(viewModel.spendingCategories) { category in
                             HStack(spacing: 10) {
-                                Image(category.icon)
+                                Image(category.icon.rawValue)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
@@ -40,11 +40,11 @@ struct SpendingCategoryListView: View {
                             .padding(.vertical, 6 * DynamicSizeFactor.factor())
                             .onTapGesture {
                                 if category.name == "추가하기" {
-                                    viewModel.selectedCategoryIcon = "icon_category_etc_on" // icon 초기화
+                                    viewModel.selectedCategoryIcon = .etcOn // icon 초기화
                                     viewModel.navigateToAddCategory = true
                                     isPresented = false
                                 } else {
-                                    viewModel.selectedCategory = (category.icon, category.name)
+                                    viewModel.selectedCategory = (category.icon.rawValue, category.name)
                                     isPresented = false
                                     viewModel.validateForm()
                                 }
