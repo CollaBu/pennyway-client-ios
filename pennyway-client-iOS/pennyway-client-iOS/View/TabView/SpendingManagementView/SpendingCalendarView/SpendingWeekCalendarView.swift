@@ -9,15 +9,20 @@ struct SpendingWeekCalendarView: View {
     private let calendar = Calendar.current
   
     var body: some View {
-        VStack(alignment: .leading, spacing: 20 * DynamicSizeFactor.factor()) {
-            monthView
-      
-            ZStack {
-                dayView
+        ZStack {
+            VStack(alignment: .leading, spacing: 20 * DynamicSizeFactor.factor()) {
+                monthView
+                
+                ZStack {
+                    dayView
+                }
+                .frame(height: 30)
+                .padding(.horizontal, 10)
             }
-            .frame(height: 30)
-            .padding(.horizontal, 10)
         }
+//        .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
+//            ChangeMonthContentView(viewModel: MySpendingListViewModel(), isPresented: $viewModel.ishidden)
+//        }
     }
   
     // MARK: - 월 표시 뷰
@@ -55,9 +60,6 @@ struct SpendingWeekCalendarView: View {
                         }
                     )
                 }
-            }
-            .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
-                ChangeMonthContentView(viewModel: MySpendingListViewModel(), isPresented: $viewModel.ishidden)
             }
         }
         .padding(.horizontal, 20)

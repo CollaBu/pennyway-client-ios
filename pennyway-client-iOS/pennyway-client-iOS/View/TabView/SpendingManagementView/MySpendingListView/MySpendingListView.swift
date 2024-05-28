@@ -4,6 +4,7 @@ import SwiftUI
 // MARK: - MySpendingListView
 
 struct MySpendingListView: View {
+    @ObservedObject var viewModel: MySpendingListViewModel
     var listItem: [MySpendingHistoryListItem]
 
     let categories = [
@@ -24,7 +25,7 @@ struct MySpendingListView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(spacing: 36 * DynamicSizeFactor.factor()) {
-                SpendingWeekCalendarView(viewModel: MySpendingListViewModel())
+                SpendingWeekCalendarView(viewModel: viewModel)
 
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0 * DynamicSizeFactor.factor()) {
@@ -41,9 +42,14 @@ struct MySpendingListView: View {
                 }
             }
         }
+        .padding(.top, 20)
+        .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
+            ChangeMonthContentView(viewModel: viewModel, isPresented: $viewModel.isChangeMonth)
+        }
+        .border(Color.black)
         .setTabBarVisibility(isHidden: true)
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
-        .edgesIgnoringSafeArea(.bottom)
+        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -97,6 +103,7 @@ struct ExpenseRow: View {
                 Text(expense.category)
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: Color("Gray06"))
+
                 Spacer()
 
                 Text("\(expense.amount)원")
@@ -113,7 +120,7 @@ struct ExpenseRow: View {
 }
 
 #Preview {
-    MySpendingListView(listItem: [
+    MySpendingListView(viewModel: MySpendingListViewModel(), listItem: [
         MySpendingHistoryListItem(category: "식비", amount: 32000, date: Date()),
         MySpendingHistoryListItem(category: "교통", amount: 8000, date: Date()),
         MySpendingHistoryListItem(category: "쇼핑", amount: 15000, date: Date())

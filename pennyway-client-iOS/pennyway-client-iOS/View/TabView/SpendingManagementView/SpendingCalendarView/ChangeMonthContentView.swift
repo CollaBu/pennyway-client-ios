@@ -23,13 +23,14 @@ struct ChangeMonthContentView: View {
                 date = calendar.date(byAdding: .month, value: 1, to: date) ?? date
             }
 
-            return dates.reversed() // 최신 날짜가 상단에 오도록 배열을 역순으로 정렬
+            return dates.reversed() 
         }()
     }
 
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
+                Spacer().frame(height: 28 * DynamicSizeFactor.factor())
                 HStack {
                     Text("월 변경하기")
                         .font(.H3SemiboldFont())
@@ -38,7 +39,7 @@ struct ChangeMonthContentView: View {
                     Spacer()
 
                     Button(action: {
-                        viewModel.ishidden = true
+                        viewModel.isChangeMonth = true
                         isPresented = false
 
                     }, label: {
@@ -49,32 +50,29 @@ struct ChangeMonthContentView: View {
                 }
                 .padding(.horizontal, 20)
 
+                Spacer().frame(height: 32 * DynamicSizeFactor.factor())
+
                 ScrollView {
                     ForEach(months, id: \.self) { month in
                         HStack {
                             Text(monthTitle(from: month))
-                                .font(.system(size: 18, weight: calendars.isDate(selectedMonth, equalTo: month, toGranularity: .month) ? .bold : .regular))
-                                .foregroundColor(calendars.isDate(selectedMonth, equalTo: month, toGranularity: .month) ? Color("Mint01") : Color("Gray06"))
-                                .padding(.vertical, 8)
+                                .font(.H4MediumFont())
+                                .platformTextColor(color: calendars.isDate(selectedMonth, equalTo: month, toGranularity: .month) ? Color("Mint03") : Color("Gray05"))
+                                .padding(.vertical, 14)
 
                             Spacer()
-
-                            if calendars.isDate(selectedMonth, equalTo: month, toGranularity: .month) {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(Color("Mint01"))
-                            }
                         }
-                        .padding(.horizontal)
-                        .background(calendars.isDate(selectedMonth, equalTo: month, toGranularity: .month) ? Color("Mint03") : Color.clear)
-                        .cornerRadius(8)
                         .onTapGesture {
                             selectedMonth = month
                         }
                     }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
             }
         }
+//        .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
+//            ChangeMonthContentView(viewModel: viewModel, isPresented: $viewModel.isChangeMonth)
+//        }
     }
 
     func monthTitle(from date: Date) -> String {
