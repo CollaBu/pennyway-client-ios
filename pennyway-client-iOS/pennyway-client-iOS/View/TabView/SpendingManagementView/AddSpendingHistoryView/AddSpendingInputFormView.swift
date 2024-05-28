@@ -65,7 +65,7 @@ struct AddSpendingInputFormView: View {
                             Image(category.0)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                             
                             Text(category.1)
                                 .font(.B1MediumFont())
@@ -82,7 +82,9 @@ struct AddSpendingInputFormView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                 }
-                .frame(width: 160 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor(), alignment: .trailing)
+                .frame(alignment: .trailing)
+                .padding(.leading, 12)
+                .padding(.vertical, 14)
                 .onTapGesture {
                     viewModel.isCategoryListViewPresented = true
                 }
@@ -107,7 +109,9 @@ struct AddSpendingInputFormView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                 }
-                .frame(width: 82 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor(), alignment: .trailing)
+                .frame(alignment: .trailing)
+                .padding(.leading, 12)
+                .padding(.vertical, 14)
             }
             .padding(.horizontal, 20)
             .onTapGesture {

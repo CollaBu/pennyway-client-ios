@@ -64,6 +64,8 @@ struct AddSpendingCategoryView: View {
             }
             .padding(.horizontal, 20)
 
+            Spacer().frame(height: 4 * DynamicSizeFactor.factor())
+
             HStack {
                 Spacer()
                 Text("\(categoryName.count)/\(maxCategoryNameCount)")

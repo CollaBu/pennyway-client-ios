@@ -26,48 +26,47 @@ struct SpendingCategoryListView: View {
     var body: some View {
         VStack(spacing: 0) {
             RoundedRectangle(cornerRadius: 5)
-                .frame(width: 40, height: 5)
-                .foregroundColor(.gray)
-                .padding(.top, 10)
-                .padding(.bottom, 10)
+                .frame(width: 40, height: 4)
+                .platformTextColor(color: Color("Gray03"))
+                .padding(.top, 12)
 
             ScrollView {
                 VStack(alignment: .leading) {
-                    Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
                     Text("카테고리를 선택해 주세요")
-                        .font(.H2SemiboldFont())
+                        .font(.H3SemiboldFont())
 
-                    Spacer().frame(height: 40 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
-                    ForEach(categories, id: \.1) { icon, title in
-                        HStack {
-                            Image(icon)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-                                .padding(.trailing, 8)
+                    VStack(spacing: 0) {
+                        ForEach(categories, id: \.1) { icon, title in
+                            HStack(spacing: 10) {
+                                Image(icon)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
 
-                            Text(title)
-                                .font(.B1SemiboldeFont())
-                                .platformTextColor(color: title == "추가하기" ? Color("Gray04") : Color("Gray07"))
-                        }
-                        .onTapGesture {
-                            if title == "추가하기" {
-                                viewModel.selectedCategoryIcon = "icon_category_etc_on" // icon 초기화
-                                viewModel.navigateToAddCategory = true
-                                isPresented = false
-                            } else {
-                                viewModel.selectedCategory = (icon, title)
-                                isPresented = false
-                                viewModel.validateForm()
+                                Text(title)
+                                    .font(.B1SemiboldeFont())
+                                    .platformTextColor(color: title == "추가하기" ? Color("Gray04") : Color("Gray07"))
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 6 * DynamicSizeFactor.factor())
+                            .onTapGesture {
+                                if title == "추가하기" {
+                                    viewModel.selectedCategoryIcon = "icon_category_etc_on" // icon 초기화
+                                    viewModel.navigateToAddCategory = true
+                                    isPresented = false
+                                } else {
+                                    viewModel.selectedCategory = (icon, title)
+                                    isPresented = false
+                                    viewModel.validateForm()
+                                }
                             }
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 21 * DynamicSizeFactor.factor())
                     }
-                    Spacer().frame(height: 21 * DynamicSizeFactor.factor())
                 }
                 .padding(.horizontal, 20)
             }

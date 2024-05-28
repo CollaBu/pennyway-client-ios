@@ -38,7 +38,7 @@ struct AddSpendingCompleteView: View {
                             Image(category.0)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor())
+                                .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                             Text(category.1)
                                 .font(.B1MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
