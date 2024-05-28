@@ -24,8 +24,8 @@ struct LoginView: View {
                         goToInquiryView = true
                     }, label: {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 14)
-                                .frame(maxWidth: 115 * DynamicSizeFactor.factor(), maxHeight: 25 * DynamicSizeFactor.factor())
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(maxWidth: 123 * DynamicSizeFactor.factor(), maxHeight: 28 * DynamicSizeFactor.factor())
                                 .platformTextColor(color: Color("Gray02"))
 
                             Text("로그인에 문제가 발생했나요?")
