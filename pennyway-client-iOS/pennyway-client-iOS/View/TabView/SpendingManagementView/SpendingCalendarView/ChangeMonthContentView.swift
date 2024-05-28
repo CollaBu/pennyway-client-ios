@@ -70,9 +70,6 @@ struct ChangeMonthContentView: View {
                 .padding(.horizontal, 20)
             }
         }
-//        .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
-//            ChangeMonthContentView(viewModel: viewModel, isPresented: $viewModel.isChangeMonth)
-//        }
     }
 
     func monthTitle(from date: Date) -> String {

@@ -42,14 +42,12 @@ struct MySpendingListView: View {
                 }
             }
         }
-        .padding(.top, 20)
         .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
             ChangeMonthContentView(viewModel: viewModel, isPresented: $viewModel.isChangeMonth)
         }
-        .border(Color.black)
         .setTabBarVisibility(isHidden: true)
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -115,7 +113,7 @@ struct ExpenseRow: View {
     }
 
     private var categoryIconName: String {
-        categories.first { $0.title == expense.category }?.iconName ?? "icon_category_plus_off"
+        categories.first { $0.title == expense.category }!.iconName
     }
 }
 

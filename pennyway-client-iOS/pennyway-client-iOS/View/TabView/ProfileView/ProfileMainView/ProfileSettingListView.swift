@@ -19,7 +19,6 @@ struct ProfileSettingListView: View {
                 LazyVStack(spacing: 0) {
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "내 정보", itemsWithActions: [
                         ProfileSettingListItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {}),
-                        ProfileSettingListItem(title: "내가 쓴 글", icon: "icon_list", action: {}),
                         ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
                         ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {})
                     ])

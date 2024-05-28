@@ -20,16 +20,13 @@ struct SpendingWeekCalendarView: View {
                 .padding(.horizontal, 10)
             }
         }
-//        .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
-//            ChangeMonthContentView(viewModel: MySpendingListViewModel(), isPresented: $viewModel.ishidden)
-//        }
     }
   
     // MARK: - 월 표시 뷰
 
     private var monthView: some View {
         ZStack(alignment: .leading) {
-            HStack {
+            HStack(spacing: 0) {
                 Text(monthTitle(from: selectedDate))
                     .font(.ButtonH4SemiboldFont())
                 
