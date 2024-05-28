@@ -3,7 +3,7 @@ import Alamofire
 import Foundation
 import os.log
 
-class UserAccountAlamofire: TokenHandler {
+class UserAccountAlamofire {
     static let shared = UserAccountAlamofire()
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
