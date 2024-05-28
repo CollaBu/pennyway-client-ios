@@ -1,11 +1,15 @@
 
 import Foundation
 
+// MARK: - CategoryIconListItem
+
 struct CategoryIconListItem: Identifiable {
     let id = UUID()
     let offIcon: String
     let onIcon: String
 }
+
+// MARK: - SpendingCategoryIconList
 
 enum SpendingCategoryIconList: String {
     case other = "OTHER"
@@ -21,4 +25,3 @@ enum SpendingCategoryIconList: String {
     case alcoholOrEntertainment = "ALCOHOL_OR_ENTERTAINMENT"
     case membershipOrFamilyEvent = "MEMBERSHIP_OR_FAMILY_EVENT"
 }
-

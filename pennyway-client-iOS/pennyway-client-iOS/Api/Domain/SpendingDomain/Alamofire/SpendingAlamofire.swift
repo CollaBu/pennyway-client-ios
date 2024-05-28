@@ -21,8 +21,14 @@ class SpendingAlamofire {
     }
     
     func getSpendingCustomCategoryList(completion: @escaping (Result<Data?, Error>) -> Void) {
-        Log.info("SpendingAlamofire - getSpendingCustomCategoryList() called \(dto)")
+        Log.info("SpendingAlamofire - getSpendingCustomCategoryList() called")
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.getSpendingCustomCategoryList, completion: completion)
+    }
+    
+    func addSpendingCustomCategory(_ dto: AddSpendingCustomCategoryRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - addSpendingCustomCategory() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.addSpendingCustomCategory(dto: dto), completion: completion)
     }
 }
