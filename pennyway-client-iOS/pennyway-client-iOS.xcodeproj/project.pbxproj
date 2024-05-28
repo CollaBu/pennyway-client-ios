@@ -201,6 +201,8 @@
 		D8E24D932BFCF885006E8046 /* ProfileMenuBarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */; };
 		D8E24D952BFD12BB006E8046 /* SettingAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D942BFD12BB006E8046 /* SettingAlarmView.swift */; };
 		D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */; };
+		D8E637502C06303D00D43BB6 /* MySpendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */; };
+		D8E637522C0631DE00D43BB6 /* ChangeMonthContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E637512C0631DE00D43BB6 /* ChangeMonthContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -400,6 +402,8 @@
 		D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuBarListView.swift; sourceTree = "<group>"; };
 		D8E24D942BFD12BB006E8046 /* SettingAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlarmView.swift; sourceTree = "<group>"; };
 		D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
+		D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListViewModel.swift; sourceTree = "<group>"; };
+		D8E637512C0631DE00D43BB6 /* ChangeMonthContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMonthContentView.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -530,6 +534,7 @@
 			children = (
 				4A0BC6972BF53D6F0036D900 /* SpendingHistoryViewModel.swift */,
 				4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */,
+				D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */,
 			);
 			path = SpendingViewModel;
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */,
 				4A0BC69A2BF540140036D900 /* SpendingCalendarCellView.swift */,
 				D851E73C2C0613CF00316DB3 /* SpendingWeekCalendarView.swift */,
+				D8E637512C0631DE00D43BB6 /* ChangeMonthContentView.swift */,
 			);
 			path = SpendingCalendarView;
 			sourceTree = "<group>";
@@ -1554,6 +1560,7 @@
 				4AF69F662BFDFA5A001D49F8 /* SelectSpendingDayView.swift in Sources */,
 				D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */,
 				4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */,
+				D8E637502C06303D00D43BB6 /* MySpendingListViewModel.swift in Sources */,
 				D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */,
 				D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */,
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDto.swift in Sources */,
@@ -1589,6 +1596,7 @@
 				4A0BC6AF2BF6459B0036D900 /* DateExtensions.swift in Sources */,
 				4A5789812BDC1FF300AFEB26 /* InternalServerErrorCode.swift in Sources */,
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
+				D8E637522C0631DE00D43BB6 /* ChangeMonthContentView.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
 				4A058EFF2BD03E01004B6F89 /* AuthResponseDto.swift in Sources */,

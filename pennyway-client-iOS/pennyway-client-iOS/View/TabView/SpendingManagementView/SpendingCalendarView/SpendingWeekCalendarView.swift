@@ -4,6 +4,8 @@ import SwiftUI
 
 struct SpendingWeekCalendarView: View {
     @State private var selectedDate = Date()
+    @ObservedObject var viewModel: MySpendingListViewModel
+
     private let calendar = Calendar.current
   
     var body: some View {
@@ -26,7 +28,9 @@ struct SpendingWeekCalendarView: View {
                 Text(monthTitle(from: selectedDate))
                     .font(.ButtonH4SemiboldFont())
                 
-                Button(action: {}, label: {
+                Button(action: {
+                    viewModel.isChangeMonth = true
+                }, label: {
                     Image("icon_arrow_down_rect")
                 })
                 
@@ -51,6 +55,9 @@ struct SpendingWeekCalendarView: View {
                         }
                     )
                 }
+            }
+            .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
+                ChangeMonthContentView(viewModel: MySpendingListViewModel(), isPresented: $viewModel.ishidden)
             }
         }
         .padding(.horizontal, 20)
@@ -151,5 +158,5 @@ private extension SpendingWeekCalendarView {
 // MARK: - SpendingWeekCalendarView_Previews
 
 #Preview {
-    SpendingWeekCalendarView()
+    SpendingWeekCalendarView(viewModel: MySpendingListViewModel())
 }

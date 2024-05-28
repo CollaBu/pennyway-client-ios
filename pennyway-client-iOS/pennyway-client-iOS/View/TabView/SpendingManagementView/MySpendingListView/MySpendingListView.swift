@@ -24,7 +24,7 @@ struct MySpendingListView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(spacing: 36 * DynamicSizeFactor.factor()) {
-                SpendingWeekCalendarView()
+                SpendingWeekCalendarView(viewModel: MySpendingListViewModel())
 
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0 * DynamicSizeFactor.factor()) {
