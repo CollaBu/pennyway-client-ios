@@ -8,8 +8,6 @@ struct SpendingCategoryListView: View {
 
     @Binding var isPresented: Bool
 
-    let categories: [SpendingCategoryData] = SpendingCategoryIconList.allCases.map { $0.details }
-    
     var body: some View {
         VStack(spacing: 0) {
             RoundedRectangle(cornerRadius: 5)
@@ -27,7 +25,7 @@ struct SpendingCategoryListView: View {
                     Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
                     VStack(spacing: 0) {
-                        ForEach(categories) { category in
+                        ForEach(viewModel.spendingCategories) { category in
                             HStack(spacing: 10) {
                                 Image(category.icon)
                                     .resizable()

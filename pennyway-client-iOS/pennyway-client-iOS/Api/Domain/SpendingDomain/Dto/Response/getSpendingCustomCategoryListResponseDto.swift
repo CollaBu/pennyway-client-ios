@@ -5,9 +5,9 @@ import Foundation
 
 struct getSpendingCustomCategoryListResponseDto: Codable {
     let code: String
-    let data: SpendingCategory
-    
+    let data: SpendingData
+
     struct SpendingData: Codable {
-        let spendingCategories: SpendingCategory
+        let spendingCategories: [SpendingCategory]
     }
 }
