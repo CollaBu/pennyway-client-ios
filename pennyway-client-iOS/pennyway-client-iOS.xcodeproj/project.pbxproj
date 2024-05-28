@@ -113,6 +113,7 @@
 		4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */; };
 		4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */; };
 		4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */; };
+		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
@@ -305,6 +306,7 @@
 		4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
 		4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOAuthToAccountViewModel.swift; sourceTree = "<group>"; };
 		4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpViewModel.swift; sourceTree = "<group>"; };
+		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
@@ -976,6 +978,7 @@
 		4A762AFF2B99A1DF001C1188 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4AA52F3D2C05C38F00B21521 /* View */,
 				4A0BC6AB2BF5FA010036D900 /* Formatter */,
 				4A0BC6A52BF5F2660036D900 /* Protocol */,
 				4A058F052BD051C5004B6F89 /* Manager */,
@@ -1003,6 +1006,14 @@
 				D8880E182BCEBEE700922894 /* DynamicFontSize.swift */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		4AA52F3D2C05C38F00B21521 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		4AB5AB532BB4AA2A00D2C9EA /* Logger */ = {
@@ -1540,6 +1551,7 @@
 				4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */,
 				4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */,
 				4A0BC68F2BF538A40036D900 /* SpendingAlamofire.swift in Sources */,
+				4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */,
 				4A0BC6952BF53AA60036D900 /* GetSpendingHistoryRequestDto.swift in Sources */,
 				4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */,
 				D85927F92BE9116700653391 /* PhoneVerificationViewModel.swift in Sources */,

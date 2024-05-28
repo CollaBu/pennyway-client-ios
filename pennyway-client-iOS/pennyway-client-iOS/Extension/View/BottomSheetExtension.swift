@@ -18,7 +18,7 @@ struct BottomSheet<SheetContent: View>: ViewModifier {
                         .frame(maxWidth: .infinity)
                         .frame(height: maxHeight)
                         .background(
-                            RoundedCorner(radius: 20, corners: [.topLeft, .topRight])
+                            RoundedCornerUtil(radius: 20, corners: [.topLeft, .topRight])
                                 .fill(Color("White01"))
                         )
                 }
@@ -32,18 +32,6 @@ struct BottomSheet<SheetContent: View>: ViewModifier {
             }
         }
         .edgesIgnoringSafeArea(.bottom)
-    }
-}
-
-// MARK: - RoundedCorner
-
-struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
     }
 }
 
