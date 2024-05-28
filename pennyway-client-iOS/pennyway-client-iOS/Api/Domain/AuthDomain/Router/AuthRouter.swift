@@ -126,6 +126,7 @@ enum AuthRouter: URLRequestConvertible {
         case .refresh:
             
             request = URLRequest.createURLRequest(url: url, method: method)
+            
             if let cookies = HTTPCookieStorage.shared.cookies(for: url) {
                 let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)
                 request.allHTTPHeaderFields = cookieHeader

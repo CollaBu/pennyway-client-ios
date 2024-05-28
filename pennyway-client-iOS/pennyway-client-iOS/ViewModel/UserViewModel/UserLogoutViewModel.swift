@@ -13,6 +13,7 @@ class UserLogoutViewModel: ObservableObject {
                 self.isLoggedOut = true
                 Log.debug("Success Logout")
                 KeychainHelper.deleteAccessToken()
+                TokenHandler.deleteAllRefreshTokens()
                 completion(true)
 
             case let .failure(error):

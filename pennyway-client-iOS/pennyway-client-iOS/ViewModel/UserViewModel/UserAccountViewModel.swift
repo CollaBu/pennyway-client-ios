@@ -34,6 +34,7 @@ class UserAccountViewModel: ObservableObject {
             case let .success(data):
                 Log.debug("사용자 계정 삭제 완료")
                 KeychainHelper.deleteAccessToken()
+                TokenHandler.deleteAllRefreshTokens()
                 completion(true)
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {

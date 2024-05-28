@@ -2,7 +2,7 @@ import Alamofire
 import Foundation
 import os.log
 
-class AuthAlamofire: TokenHandler {
+class AuthAlamofire {
     static let shared = AuthAlamofire()
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
@@ -55,7 +55,7 @@ class AuthAlamofire: TokenHandler {
     
     func logout(completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("AuthAlamofire - logout() called")
-        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: AuthRouter.logout, completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.logout, completion: completion)
     }
     
     func linkAccountToOAuth(_ dto: LinkAccountToOAuthRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
