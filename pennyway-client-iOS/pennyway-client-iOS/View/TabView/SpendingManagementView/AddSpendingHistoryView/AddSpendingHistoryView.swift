@@ -5,6 +5,7 @@ import SwiftUI
 
 struct AddSpendingHistoryView: View {
     @StateObject var viewModel = AddSpendingHistoryViewModel()
+    @State private var navigateToAddSpendingCategory = false
 
     var body: some View {
         VStack {
@@ -13,8 +14,20 @@ struct AddSpendingHistoryView: View {
             }
             Spacer()
 
-            CustomBottomButton(action: {}, label: "확인", isFormValid: $viewModel.isFormValid)
+            CustomBottomButton(action: {
+                if viewModel.isFormValid {
+                    navigateToAddSpendingCategory = true
+                }
+
+            }, label: "확인", isFormValid: $viewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
+            NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel), isActive: $navigateToAddSpendingCategory) {}
+
+            NavigationLink(
+                destination: AddSpendingCategoryView(viewModel: viewModel),
+                isActive: $viewModel.navigateToAddCategory
+            ) {}
         }
         .background(Color("White01"))
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")
@@ -41,8 +54,8 @@ struct AddSpendingHistoryView: View {
                 }.offset(x: -10)
             }
         }
-        .fullScreenCover(isPresented: $viewModel.isCategoryListViewPresented, content: {
-            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented, selectedCategory: $viewModel.selectedCategory)
+        .sheet(isPresented: $viewModel.isCategoryListViewPresented, content: {
+            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
         })
         .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
             SelectSpendingDayView(isPresented: $viewModel.isSelectDayViewPresented, selectedDate: $viewModel.selectedDate)

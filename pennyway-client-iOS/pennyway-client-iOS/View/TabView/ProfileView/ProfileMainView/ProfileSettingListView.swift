@@ -5,10 +5,9 @@ import SwiftUI
 
 struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
-
-    @StateObject var userProfileViewModel = UserLogoutViewModel()
+    @Binding var showingPopUp: Bool
     @StateObject var userAccountViewModel = UserAccountViewModel()
-    @State private var showingPopUp = false
+    ///    @State private var showingPopUp = false
     @State private var isNavigateToInquiryView = false
     @State private var isNavigateToSettingAlarmView = false
 
@@ -62,18 +61,18 @@ struct ProfileSettingListView: View {
             .frame(maxWidth: .infinity)
             .background(Color("White01"))
 
-            if showingPopUp {
-                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                CustomPopUpView(showingPopUp: $showingPopUp,
-                                titleLabel: "로그아웃",
-                                subTitleLabel: "로그아웃하시겠어요?",
-                                firstBtnAction: { self.showingPopUp = false },
-                                firstBtnLabel: "취소",
-                                secondBtnAction: handleLogout,
-                                secondBtnLabel: "로그아웃",
-                                secondBtnColor: Color("Red03")
-                )
-            }
+//            if showingPopUp {
+//                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
+//                CustomPopUpView(showingPopUp: $showingPopUp,
+//                                titleLabel: "로그아웃",
+//                                subTitleLabel: "로그아웃하시겠어요?",
+//                                firstBtnAction: { self.showingPopUp = false },
+//                                firstBtnLabel: "취소",
+//                                secondBtnAction: handleLogout,
+//                                secondBtnLabel: "로그아웃",
+//                                secondBtnColor: Color("Red03")
+//                )
+//            }
 
             // NaivgationLink
 
@@ -87,19 +86,6 @@ struct ProfileSettingListView: View {
         }
         .setTabBarVisibility(isHidden: true)
         .navigationBarColor(UIColor(named: "White01"), title: "")
-    }
-
-    func handleLogout() {
-        userProfileViewModel.logout { success in
-            DispatchQueue.main.async {
-                if success {
-                    authViewModel.logout()
-                    showingPopUp = false
-                } else {
-                    Log.error("Fail logout")
-                }
-            }
-        }
     }
 
     func handleDeleteUserAccount() {

@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "icon_category_travel_off_gray.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
