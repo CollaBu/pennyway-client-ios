@@ -4,10 +4,11 @@ import Foundation
 
 enum SpendingRouter: URLRequestConvertible {
     case getSpendingHistory(dto: GetSpendingHistoryRequestDto)
+    case getSpendingCustomCategoryList
     
     var method: HTTPMethod {
         switch self {
-        case .getSpendingHistory:
+        case .getSpendingHistory, .getSpendingCustomCategoryList:
             return .get
         }
     }
@@ -20,12 +21,14 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case .getSpendingHistory:
             return "v2/spendings"
+        case .getSpendingCustomCategoryList:
+            return "v2/spending-categories"
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .getSpendingHistory:
+        case .getSpendingHistory, .getSpendingCustomCategoryList:
             return [:]
         }
     }
@@ -38,6 +41,8 @@ enum SpendingRouter: URLRequestConvertible {
         case let .getSpendingHistory(dto):
             let queryParameters = [URLQueryItem(name: "year", value: dto.year), URLQueryItem(name: "month", value: dto.month)]
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
+        case .getSpendingCustomCategoryList:
+            request = URLRequest.createURLRequest(url: url, method: method)
         }
         return request
     }

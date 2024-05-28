@@ -19,4 +19,10 @@ class SpendingAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.getSpendingHistory(dto: dto), completion: completion)
     }
+    
+    func getSpendingCustomCategoryList(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - getSpendingCustomCategoryList() called \(dto)")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.getSpendingCustomCategoryList, completion: completion)
+    }
 }
