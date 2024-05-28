@@ -8,7 +8,7 @@ struct SmsResponseDto: Codable {
 // MARK: - SmsData
 
 struct SmsData: Codable {
-    let sms: SmsDetails
+    let sms: SmsDetails?
 }
 
 // MARK: - SmsDetails

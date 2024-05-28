@@ -28,7 +28,7 @@ struct FindPwView: View {
                 }.hidden()
             }
             if showingPopUp == true {
-                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "사용자 정보를 찾을 수 없어요")
             }
         }
