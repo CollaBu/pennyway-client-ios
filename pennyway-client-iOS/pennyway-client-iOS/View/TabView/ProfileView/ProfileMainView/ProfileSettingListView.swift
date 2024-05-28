@@ -61,21 +61,6 @@ struct ProfileSettingListView: View {
             .frame(maxWidth: .infinity)
             .background(Color("White01"))
 
-//            if showingPopUp {
-//                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-//                CustomPopUpView(showingPopUp: $showingPopUp,
-//                                titleLabel: "로그아웃",
-//                                subTitleLabel: "로그아웃하시겠어요?",
-//                                firstBtnAction: { self.showingPopUp = false },
-//                                firstBtnLabel: "취소",
-//                                secondBtnAction: handleLogout,
-//                                secondBtnLabel: "로그아웃",
-//                                secondBtnColor: Color("Red03")
-//                )
-//            }
-
-            // NaivgationLink
-
             NavigationLink(destination: InquiryView(viewModel: InquiryViewModel()), isActive: $isNavigateToInquiryView) {
                 EmptyView()
             }.hidden()

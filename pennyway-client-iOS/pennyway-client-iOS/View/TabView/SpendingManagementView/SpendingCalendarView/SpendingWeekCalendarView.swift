@@ -27,7 +27,7 @@ struct SpendingWeekCalendarView: View {
                     .font(.ButtonH4SemiboldFont())
                 
                 Button(action: {}, label: {
-                    Image("icon_arrow_back_small")
+                    Image("icon_arrow_down_rect")
                 })
                 
                 Spacer()
@@ -80,9 +80,9 @@ struct SpendingWeekCalendarView: View {
                             .frame(width: 23 * DynamicSizeFactor.factor(), height: 26 * DynamicSizeFactor.factor())
                             .background(
                                 Circle()
-                                    .platformTextColor(color: calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) ? Color("Mint01") : Color.clear)
+                                    .platformTextColor(color: circleColor(for: date))
                             )
-                            .platformTextColor(color: calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) ? Color("Mint03") : Color("Gray06"))
+                            .platformTextColor(color: textColor(for: date))
                             .padding(.horizontal, 7)
                     }
                     .cornerRadius(30)
@@ -94,40 +94,26 @@ struct SpendingWeekCalendarView: View {
             .frame(height: 45 * DynamicSizeFactor.factor())
         }
     }
+    
+    private func circleColor(for date: Date) -> Color {
+        if calendar.isDateInToday(date) {
+            return Color("Mint01")
+        } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
+            return Color("Gray03")
+        } else {
+            return Color.clear
+        }
+    }
   
-    // MARK: - 블러 뷰
-
-//    private var blurView: some View {
-//        HStack {
-//            LinearGradient(
-//                gradient: Gradient(
-//                    colors: [
-//                        Color.white.opacity(1),
-//                        Color.white.opacity(0)
-//                    ]
-//                ),
-//                startPoint: .leading,
-//                endPoint: .trailing
-//            )
-//            .frame(width: 20)
-//            .edgesIgnoringSafeArea(.leading)
-//
-//            Spacer()
-//
-//            LinearGradient(
-//                gradient: Gradient(
-//                    colors: [
-//                        Color.white.opacity(1),
-//                        Color.white.opacity(0)
-//                    ]
-//                ),
-//                startPoint: .trailing,
-//                endPoint: .leading
-//            )
-//            .frame(width: 20)
-//            .edgesIgnoringSafeArea(.leading)
-//        }
-//    }
+    private func textColor(for date: Date) -> Color {
+        if calendar.isDateInToday(date) {
+            return Color("Mint03")
+        } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
+            return Color("Gray05")
+        } else {
+            return Color("Gray06")
+        }
+    }
 }
 
 // MARK: - 로직
@@ -136,7 +122,7 @@ private extension SpendingWeekCalendarView {
     /// 월 표시
     func monthTitle(from date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월"
+        dateFormatter.dateFormat = "yyyy년 M월"
         return dateFormatter.string(from: date)
     }
   
