@@ -3,8 +3,8 @@
 import SwiftUI
 
 class TargetAmountViewModel: ObservableObject {
-    @Published var totalSpent = 600_000
-    @Published var targetValue: CGFloat = 500_000
+    @Published var totalSpent = 0
+    @Published var targetValue: CGFloat = 0
 
     func getTotalTargetAmountApi(completion: @escaping (Bool) -> Void) {
         let getTotalTargetAmountRequestDto = GetTotalTargetAmountRequestDto(date: Date.getBasicformattedDate(from: Date()))
@@ -21,10 +21,8 @@ class TargetAmountViewModel: ObservableObject {
                         if let firstValidTargetAmount = validTargetAmounts.first {
                             self.totalSpent = firstValidTargetAmount.totalSpending
                             self.targetValue = CGFloat(firstValidTargetAmount.targetAmount.amount)
-                            print("Amount: \(firstValidTargetAmount.targetAmount.amount)")
-                            print("Total Spending: \(firstValidTargetAmount.totalSpending)")
                         } else {
-                            print("No valid target amounts found")
+                            Log.fault("No valid target amounts found")//TODO: 데이터가 없는 경우 처리 필요
                         }
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
