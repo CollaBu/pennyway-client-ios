@@ -9,22 +9,19 @@ class UserLogoutViewModel: ObservableObject {
         AuthAlamofire.shared.logout { result in
             switch result {
             case let .success(data):
-                if let responseData = data {
-                    do {
-                        self.isLoggedOut = true
-                        os_log("Success Logout", log: .default, type: .debug)
-                        completion(true)
-                    } catch {
-                        print("Error parsing response JSON: \(error)")
-                        completion(false)
-                    }
-                }
+
+                self.isLoggedOut = true
+                Log.debug("Success Logout")
+                KeychainHelper.deleteAccessToken()
+                TokenHandler.deleteAllRefreshTokens()
+                completion(true)
+
             case let .failure(error):
 
                 if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                    print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                    Log.info("Failed to verify: \(errorWithDomainErrorAndMessage)")
                 } else {
-                    print("Failed to verify: \(error)")
+                    Log.error("Failed to verify: \(error)")
                 }
                 completion(false)
             }

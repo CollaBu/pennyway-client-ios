@@ -42,7 +42,6 @@ struct MySpendingListView: View {
                         }
                     }
                 }
-                //            .edgesIgnoringSafeArea(.all)
             }
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")

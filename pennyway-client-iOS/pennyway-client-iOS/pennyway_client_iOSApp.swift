@@ -17,7 +17,7 @@ struct pennyway_client_iOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if appViewModel.isLoggedIn {
+            if appViewModel.isLoggedIn || appViewModel.checkLoginState {
                 MainTabView()
                     .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
                     .onOpenURL { url in

@@ -8,42 +8,23 @@ struct ChangeMonthContentView: View {
     private let calendars = Calendar.current
     private let months: [Date]
 
-//    init(viewModel: MySpendingListViewModel, isPresented: Binding<Bool>) {
-//        self.viewModel = viewModel
-//        _isPresented = isPresented
-//        months = {
-//            let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
-//            let endDate = Date()
-//            let calendar = Calendar.current
-//            var dates = [Date]()
-//            var date = startDate
-//
-//            while date <= endDate {
-//                dates.append(date)
-//                date = calendar.date(byAdding: .month, value: 1, to: date) ?? date
-//            }
-//
-//            return dates.reversed() 
-//        }()
-//    }
     init(viewModel: MySpendingListViewModel, isPresented: Binding<Bool>) {
         self.viewModel = viewModel
         _isPresented = isPresented
-        months = ChangeMonthContentView.generateMonths()
-    }
+        months = {
+            let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
+            let endDate = Date()
+            let calendar = Calendar.current
+            var dates = [Date]()
+            var date = startDate
 
-    private static func generateMonths() -> [Date] {
-        var dateArray = [Date]()
-        let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
-        let endDate = Date()
-        var date = startDate
+            while date <= endDate {
+                dates.append(date)
+                date = calendar.date(byAdding: .month, value: 1, to: date) ?? date
+            }
 
-        while date <= endDate {
-            dateArray.append(date)
-            date = Calendar.current.date(byAdding: .month, value: 1, to: date) ?? date
-        }
-
-        return dateArray.reversed()
+            return dates.reversed() 
+        }()
     }
 
     var body: some View {
