@@ -8,26 +8,27 @@ struct FindIdFormView: View {
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var findUserNameViewModel = FindUserNameViewModel()
     @State private var isVerificationError: Bool = false
-    
+
     var body: some View {
-        VStack {
-            ScrollView {
-                FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel)
+        ZStack {
+            VStack {
+                ScrollView {
+                    FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel)
+                }
+
+                Spacer()
+
+                CustomBottomButton(action: {
+                    continueButtonAction()
+                }, label: "아이디 찾기", isFormValid: $phoneVerificationViewModel.isFormValid)
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
+                NavigationLink(destination: FindIdView(phoneVerificationViewModel: PhoneVerificationViewModel()), isActive: $isNavigateToFindIDView) {
+                    EmptyView()
+                }.hidden()
             }
-            
-            Spacer()
-            
-            CustomBottomButton(action: {
-                continueButtonAction()
-            }, label: "아이디 찾기", isFormValid: $phoneVerificationViewModel.isFormValid)
-                .padding(.bottom, 34 * DynamicSizeFactor.factor())
-            
-            NavigationLink(destination: FindIdView(phoneVerificationViewModel: PhoneVerificationViewModel()), isActive: $isNavigateToFindIDView) {
-                EmptyView()
-            }.hidden()
-            
             if showingPopUp == true {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "사용자 정보를 찾을 수 없어요")
             }
         }
@@ -52,7 +53,7 @@ struct FindIdFormView: View {
             checkFormValid()
         }
     }
-    
+
     private func checkFormValid() {
         if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
             Log.debug("if문 시작")
@@ -62,7 +63,7 @@ struct FindIdFormView: View {
 
             RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
             RegistrationManager.shared.code = phoneVerificationViewModel.code
-            
+
         } else {
             Log.debug("else문 시작")
             if phoneVerificationViewModel.showErrorVerificationCode {

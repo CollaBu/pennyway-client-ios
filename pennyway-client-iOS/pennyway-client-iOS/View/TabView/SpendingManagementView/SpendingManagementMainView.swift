@@ -4,6 +4,7 @@ import SwiftUI
 struct SpendingManagementMainView: View {
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
     @State private var navigateToAddSpendingHistory = false
+    @State private var navigateToMySpendingList = false
 
     var body: some View {
         NavigationAvailable {
@@ -21,27 +22,32 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-                    ZStack {
-                        Rectangle()
-                            .frame(height: 50 * DynamicSizeFactor.factor())
-                            .cornerRadius(8)
-                            .platformTextColor(color: Color("White01"))
+                    Button(action: {
+                        navigateToMySpendingList = true
+                    }, label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(height: 50 * DynamicSizeFactor.factor())
+                                .cornerRadius(8)
+                                .platformTextColor(color: Color("White01"))
 
-                        HStack {
-                            Text("나의 소비 내역")
-                                .font(.ButtonH4SemiboldFont())
-                                .platformTextColor(color: Color("Gray07"))
-                                .padding(.leading, 18 * DynamicSizeFactor.factor())
+                            HStack {
+                                Text("나의 소비 내역")
+                                    .font(.ButtonH4SemiboldFont())
+                                    .platformTextColor(color: Color("Gray07"))
+                                    .padding(.leading, 18 * DynamicSizeFactor.factor())
 
-                            Spacer()
+                                Spacer()
 
-                            Image("icon_arrow_front_small")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                .padding(.trailing, 10 * DynamicSizeFactor.factor())
+                                Image("icon_arrow_front_small")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                    .padding(.trailing, 10 * DynamicSizeFactor.factor())
+                            }
                         }
-                    }
+
+                    })
                     .onTapGesture {
                         Log.debug("나의 소비 내역 click")
                     }
@@ -94,6 +100,10 @@ struct SpendingManagementMainView: View {
                 }
             }
             NavigationLink(destination: AddSpendingHistoryView(), isActive: $navigateToAddSpendingHistory) {
+                EmptyView()
+            }
+
+            NavigationLink(destination: MySpendingListView(viewModel: MySpendingListViewModel(), listItem: [MySpendingHistoryListItem(category: "식비", amount: 32000, date: Date())]), isActive: $navigateToMySpendingList) {
                 EmptyView()
             }
         }

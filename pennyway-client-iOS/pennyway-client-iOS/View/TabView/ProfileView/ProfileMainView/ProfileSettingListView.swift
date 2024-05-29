@@ -19,7 +19,6 @@ struct ProfileSettingListView: View {
                 LazyVStack(spacing: 0) {
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "내 정보", itemsWithActions: [
                         ProfileSettingListItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {}),
-                        ProfileSettingListItem(title: "내가 쓴 글", icon: "icon_list", action: {}),
                         ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
                         ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {})
                     ])
@@ -60,21 +59,6 @@ struct ProfileSettingListView: View {
             }
             .frame(maxWidth: .infinity)
             .background(Color("White01"))
-
-//            if showingPopUp {
-//                Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-//                CustomPopUpView(showingPopUp: $showingPopUp,
-//                                titleLabel: "로그아웃",
-//                                subTitleLabel: "로그아웃하시겠어요?",
-//                                firstBtnAction: { self.showingPopUp = false },
-//                                firstBtnLabel: "취소",
-//                                secondBtnAction: handleLogout,
-//                                secondBtnLabel: "로그아웃",
-//                                secondBtnColor: Color("Red03")
-//                )
-//            }
-
-            // NaivgationLink
 
             NavigationLink(destination: InquiryView(viewModel: InquiryViewModel()), isActive: $isNavigateToInquiryView) {
                 EmptyView()

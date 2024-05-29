@@ -9,7 +9,7 @@ class BackofficeAlamofire {
 
     var session: Session
 
-    private init() {
+    private override init() {
         session = Session(eventMonitors: monitors)
     }
 
