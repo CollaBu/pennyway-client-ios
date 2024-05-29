@@ -13,7 +13,7 @@ class KeychainHelper {
         if status == errSecDuplicateItem {
             SecItemUpdate(keychainQuery as CFDictionary, [kSecValueData: accessToken.data(using: .utf8)!] as CFDictionary)
         } else if status != noErr {
-            print("Failed to save AccessToken to Keychain")
+            Log.error("Failed to save AccessToken to Keychain")
         }
     }
     
@@ -31,6 +31,18 @@ class KeychainHelper {
             return token
         } else {
             return nil
+        }
+    }
+    
+    static func deleteAccessToken() {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: "accessToken",
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        if status != noErr {
+            Log.error("Failed to delete AccessToken from Keychain")
         }
     }
     

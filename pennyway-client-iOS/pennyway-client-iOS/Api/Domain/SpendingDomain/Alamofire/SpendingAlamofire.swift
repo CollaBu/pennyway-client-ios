@@ -2,7 +2,7 @@
 import Alamofire
 import Foundation
 
-class SpendingAlamofire: TokenHandler {
+class SpendingAlamofire {
     static let shared = SpendingAlamofire()
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]

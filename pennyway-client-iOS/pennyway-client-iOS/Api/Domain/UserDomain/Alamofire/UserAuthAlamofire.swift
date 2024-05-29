@@ -2,7 +2,7 @@
 import Alamofire
 import Foundation
 
-class UserAuthAlamofire: TokenHandler {
+class UserAuthAlamofire {
     static let shared = UserAuthAlamofire()
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
@@ -24,5 +24,11 @@ class UserAuthAlamofire: TokenHandler {
         Log.info("UserAuthAlamofire - unlinkOAuthAccount() called")
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAuthRouter.unlinkOAuthAccount, completion: completion)
+    }
+    
+    func checkLoginState(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAuthAlamofire - checkLoginState() called")
+        
+        ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: UserAuthRouter.checkLoginState, completion: completion)
     }
 }

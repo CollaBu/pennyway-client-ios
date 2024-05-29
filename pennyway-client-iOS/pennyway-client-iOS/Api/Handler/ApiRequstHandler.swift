@@ -2,7 +2,7 @@
 import Alamofire
 import Foundation
 
-class ApiRequstHandler: TokenHandler {
+class ApiRequstHandler {
     static let shared = ApiRequstHandler()
 
     func requestWithErrorHandling(session: Session, router: URLRequestConvertible, completion: @escaping (Result<Data?, Error>) -> Void) {
@@ -35,7 +35,7 @@ class ApiRequstHandler: TokenHandler {
             .response { response in
                 switch response.result {
                 case let .success(data):
-                    self.extractAndStoreToken(from: response)
+                    TokenHandler.extractAndStoreToken(from: response)
                     completion(.success(data))
                 case let .failure(error):
                     if let responseData = response.data,
