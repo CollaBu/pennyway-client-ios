@@ -41,7 +41,6 @@
 		4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */; };
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
 		4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */; };
-		4A12BC932C03C7F100AACBCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A12BC922C03C7F100AACBCA /* GoogleService-Info.plist */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
 		4A3172B62BFBDF7E00923D5F /* AddSpendingCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3172B52BFBDF7E00923D5F /* AddSpendingCompleteView.swift */; };
@@ -145,6 +144,8 @@
 		4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */; };
 		4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */; };
 		4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E282BE015970058A52A /* ProfileSettingListView.swift */; };
+		4ADACD5A2C0760320069EB63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ADACD592C0760320069EB63 /* GoogleService-Info.plist */; };
+		4ADACD5C2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD5B2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift */; };
 		4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */; };
 		4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */; };
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
@@ -175,7 +176,6 @@
 		D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E71A2C0273BD00316DB3 /* BackofficeRequestDto.swift */; };
 		D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E71F2C0273FA00316DB3 /* BackofficeRouter.swift */; };
 		D851E7232C02743C00316DB3 /* BackofficeAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E7222C02743C00316DB3 /* BackofficeAlamofire.swift */; };
-		D851E7362C0612C100316DB3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D851E7352C0612C100316DB3 /* GoogleService-Info.plist */; };
 		D851E7392C06134200316DB3 /* MySpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E7382C06134200316DB3 /* MySpendingListView.swift */; };
 		D851E73B2C06135100316DB3 /* NoSpendingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E73A2C06135100316DB3 /* NoSpendingHistoryView.swift */; };
 		D851E73D2C0613CF00316DB3 /* SpendingWeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E73C2C0613CF00316DB3 /* SpendingWeekCalendarView.swift */; };
@@ -245,7 +245,6 @@
 		4A1179B32BA958ED00A9CF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
 		4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconListItem.swift; sourceTree = "<group>"; };
-		4A12BC922C03C7F100AACBCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
 		4A3172B52BFBDF7E00923D5F /* AddSpendingCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingCompleteView.swift; sourceTree = "<group>"; };
@@ -350,6 +349,8 @@
 		4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
 		4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOAuthButtonView.swift; sourceTree = "<group>"; };
 		4AD70E282BE015970058A52A /* ProfileSettingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListView.swift; sourceTree = "<group>"; };
+		4ADACD592C0760320069EB63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4ADACD5B2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
 		4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRouter.swift; sourceTree = "<group>"; };
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
@@ -378,7 +379,6 @@
 		D851E71A2C0273BD00316DB3 /* BackofficeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeRequestDto.swift; sourceTree = "<group>"; };
 		D851E71F2C0273FA00316DB3 /* BackofficeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeRouter.swift; sourceTree = "<group>"; };
 		D851E7222C02743C00316DB3 /* BackofficeAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeAlamofire.swift; sourceTree = "<group>"; };
-		D851E7352C0612C100316DB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D851E7382C06134200316DB3 /* MySpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListView.swift; sourceTree = "<group>"; };
 		D851E73A2C06135100316DB3 /* NoSpendingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSpendingHistoryView.swift; sourceTree = "<group>"; };
 		D851E73C2C0613CF00316DB3 /* SpendingWeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingWeekCalendarView.swift; sourceTree = "<group>"; };
@@ -536,6 +536,7 @@
 			children = (
 				4A0BC6942BF53AA60036D900 /* GetSpendingHistoryRequestDto.swift */,
 				4AA52F402C064F5B00B21521 /* AddSpendingCustomCategoryRequestDto.swift */,
+				4ADACD5B2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -914,7 +915,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D851E7352C0612C100316DB3 /* GoogleService-Info.plist */,
+				4ADACD592C0760320069EB63 /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
 				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
@@ -1408,7 +1409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D851E7362C0612C100316DB3 /* GoogleService-Info.plist in Resources */,
+				4ADACD5A2C0760320069EB63 /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
@@ -1654,6 +1655,7 @@
 				D85927F92BE9116700653391 /* PhoneVerificationViewModel.swift in Sources */,
 				4A0BC6932BF539DA0036D900 /* GetSpendingHistoryResponseDto.swift in Sources */,
 				D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */,
+				4ADACD5C2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift in Sources */,
 				4A5789772BDC1D5500AFEB26 /* MethodNotAllowedErrorCode.swift in Sources */,
 				4A585F622BF2A6F5007DC01A /* SpendingCalendarView.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,

@@ -117,7 +117,7 @@ enum SpendingCategoryIconList: String, CaseIterable {
         case .eventOn:
             return .membershipOrFamilyEvent
         case .etcOn:
-            return .other
+            return .other//TODO: 추후 수정 필요
         default:
             return nil
         }
