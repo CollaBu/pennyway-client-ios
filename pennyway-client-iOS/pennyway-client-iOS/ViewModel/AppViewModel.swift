@@ -22,6 +22,8 @@ class AppViewModel: ObservableObject {
                         Log.debug(response)
                         self?.checkLoginState = true
 
+                        Log.debug(KeychainHelper.loadAccessToken())
+
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                         self?.checkLoginState = false
