@@ -89,6 +89,7 @@ struct ChangeMonthContentView: View {
                 .padding(.horizontal, 20)
             }
         }
+        .edgesIgnoringSafeArea(.all)
     }
 
     func monthTitle(from date: Date) -> String {

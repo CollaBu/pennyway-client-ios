@@ -23,31 +23,35 @@ struct MySpendingListView: View {
     ]
 
     var body: some View {
-        ZStack(alignment: .leading) {
-            VStack(spacing: 36 * DynamicSizeFactor.factor()) {
-                SpendingWeekCalendarView(viewModel: viewModel)
+        NavigationAvailable {
+            ZStack(alignment: .leading) {
+                VStack(spacing: 36 * DynamicSizeFactor.factor()) {
+                    SpendingWeekCalendarView(viewModel: viewModel)
 
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 0 * DynamicSizeFactor.factor()) {
-                        ForEach(listItem.groupedByDate(), id: \.key) { group in
-                            Section(header: headerView(for: group.key)) {
-                                ForEach(group.values) { item in
-                                    ExpenseRow(expense: item, categories: categories)
-                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 0 * DynamicSizeFactor.factor()) {
+                            ForEach(listItem.groupedByDate(), id: \.key) { group in
+                                Section(header: headerView(for: group.key)) {
+                                    ForEach(group.values) { item in
+                                        ExpenseRow(expense: item, categories: categories)
+                                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                    }
                                 }
                             }
+                            Spacer().frame(height: 16 * DynamicSizeFactor.factor()) // 패딩값 수정 필요해보임
                         }
-                        Spacer().frame(height: 16 * DynamicSizeFactor.factor()) // 패딩값 수정 필요해보임
                     }
                 }
+                //            .edgesIgnoringSafeArea(.all)
             }
         }
+        .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
+        .edgesIgnoringSafeArea(.bottom)
+        .frame(maxHeight: .infinity)
         .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
             ChangeMonthContentView(viewModel: viewModel, isPresented: $viewModel.isChangeMonth)
         }
         .setTabBarVisibility(isHidden: true)
-        .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
-        .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -114,7 +118,6 @@ struct ExpenseRow: View {
 
     private var categoryIconName: String {
         categories.first { $0.title == expense.category }?.iconName ?? "default_icon_name" // 이렇게 안해주니까 preview crashed 발생
-
     }
 }
 

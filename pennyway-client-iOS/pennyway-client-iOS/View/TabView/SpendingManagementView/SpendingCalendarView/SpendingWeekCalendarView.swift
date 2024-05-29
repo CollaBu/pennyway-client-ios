@@ -11,16 +11,14 @@ struct SpendingWeekCalendarView: View {
     private let calendar = Calendar.current
   
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading, spacing: 20 * DynamicSizeFactor.factor()) {
-                monthView
+        VStack(alignment: .leading, spacing: 20 * DynamicSizeFactor.factor()) {
+            monthView
                 
-                ZStack {
-                    dayView
-                }
-                .frame(height: 30)
-                .padding(.horizontal, 10)
+            ZStack(alignment: .top) {
+                dayView
             }
+            .frame(height: 40 * DynamicSizeFactor.factor())
+            .padding(.horizontal, 10)
         }
     }
   
