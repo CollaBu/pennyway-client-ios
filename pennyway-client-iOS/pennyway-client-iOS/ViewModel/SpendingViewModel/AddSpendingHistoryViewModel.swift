@@ -102,47 +102,49 @@ class AddSpendingHistoryViewModel: ObservableObject {
         }
     }
 
-    func addSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
+    func addSpendingHistoryApi(completion _: @escaping (Bool) -> Void) {
         let amount = Int(amountSpentText) ?? 0
         var categoryId = -1
         let spendAt = Date.getBasicformattedDate(from: selectedDate)
-        
-        if selectedCategory?.id ?? -1 < 0 {//id < 0 인 경우 -> 정의된 카테고리
+
+        if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
             if let category = SpendingCategoryIconList.fromIcon(CategoryIconName(rawValue: (selectedCategory?.icon)!.rawValue)!) {
                 selectedCategoryIconTitle = category.rawValue
                 categoryId = -1
             }
-        } else {//사용자 정의 카테고리
+        } else { // 사용자 정의 카테고리
             selectedCategoryIconTitle = "OTHER"
             categoryId = selectedCategory?.id ?? 0
         }
 
         let addSpendingHistoryRequestDto = AddSpendingHistoryRequestDto(amount: amount, categoryId: categoryId, icon: selectedCategoryIconTitle, spendAt: spendAt, accountName: consumerText, memo: memoText)
 
-        SpendingAlamofire.shared.addSpendingHistory(addSpendingHistoryRequestDto) { result in
-            switch result {
-            case let .success(data):
-                if let responseData = data {
-                    do {
-                        _ = try JSONDecoder().decode(AddSpendingHistoryResponseDto.self, from: responseData)
+        Log.debug(addSpendingHistoryRequestDto)
 
-                        if let jsonString = String(data: responseData, encoding: .utf8) {
-                            Log.debug("지출내역 추가 완료 \(jsonString)")
-                        }
-                        completion(true)
-                    } catch {
-                        Log.fault("Error decoding JSON: \(error)")
-                        completion(false)
-                    }
-                }
-            case let .failure(error):
-                if let StatusSpecificError = error as? StatusSpecificError {
-                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-                } else {
-                    Log.error("Network request failed: \(error)")
-                }
-                completion(false)
-            }
-        }
+//        SpendingAlamofire.shared.addSpendingHistory(addSpendingHistoryRequestDto) { result in
+//            switch result {
+//            case let .success(data):
+//                if let responseData = data {
+//                    do {
+//                        _ = try JSONDecoder().decode(AddSpendingHistoryResponseDto.self, from: responseData)
+//
+//                        if let jsonString = String(data: responseData, encoding: .utf8) {
+//                            Log.debug("지출내역 추가 완료 \(jsonString)")
+//                        }
+//                        completion(true)
+//                    } catch {
+//                        Log.fault("Error decoding JSON: \(error)")
+//                        completion(false)
+//                    }
+//                }
+//            case let .failure(error):
+//                if let StatusSpecificError = error as? StatusSpecificError {
+//                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+//                } else {
+//                    Log.error("Network request failed: \(error)")
+//                }
+//                completion(false)
+//            }
+//        }
     }
 }
