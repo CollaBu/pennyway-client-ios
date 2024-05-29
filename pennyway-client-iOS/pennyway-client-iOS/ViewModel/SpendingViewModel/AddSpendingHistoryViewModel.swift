@@ -6,7 +6,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
     // 카테고리
 
     /// 카테고리 선택
-    @Published var selectedCategory: (String, String)? = nil
+    @Published var selectedCategory: SpendingCategoryData? = nil
     @Published var isCategoryListViewPresented: Bool = false
 
     /// 카테고리 생성
@@ -70,7 +70,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
         guard let iconList = SpendingCategoryIconList(rawValue: spendingCategory.icon) else {
             return nil
         }
-        return SpendingCategoryData(icon: iconList.details.icon, name: spendingCategory.name)
+        return SpendingCategoryData(id: spendingCategory.id, isCustom: spendingCategory.isCustom, name: spendingCategory.name, icon: iconList.details.icon)
     }
 
     func addSpendingCustomCategoryApi(completion: @escaping (Bool) -> Void) {

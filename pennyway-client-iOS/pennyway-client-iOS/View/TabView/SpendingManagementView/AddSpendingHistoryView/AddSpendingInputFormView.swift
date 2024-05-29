@@ -62,12 +62,12 @@ struct AddSpendingInputFormView: View {
                 HStack(spacing: 0) {
                     if let category = viewModel.selectedCategory {
                         HStack {
-                            Image(category.0)
+                            Image(category.icon.rawValue)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                             
-                            Text(category.1)
+                            Text(category.name)
                                 .font(.B1MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
                         }

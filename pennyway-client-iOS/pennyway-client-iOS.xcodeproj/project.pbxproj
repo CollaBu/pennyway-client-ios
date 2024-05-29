@@ -146,6 +146,7 @@
 		4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E282BE015970058A52A /* ProfileSettingListView.swift */; };
 		4ADACD5A2C0760320069EB63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ADACD592C0760320069EB63 /* GoogleService-Info.plist */; };
 		4ADACD5C2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD5B2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift */; };
+		4ADACD5E2C0774AA0069EB63 /* AddSpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD5D2C0774AA0069EB63 /* AddSpendingHistoryResponseDto.swift */; };
 		4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */; };
 		4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */; };
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
@@ -351,6 +352,7 @@
 		4AD70E282BE015970058A52A /* ProfileSettingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListView.swift; sourceTree = "<group>"; };
 		4ADACD592C0760320069EB63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ADACD5B2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
+		4ADACD5D2C0774AA0069EB63 /* AddSpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
 		4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRouter.swift; sourceTree = "<group>"; };
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 				4A0BC6922BF539DA0036D900 /* GetSpendingHistoryResponseDto.swift */,
 				4AA52F422C06530D00B21521 /* AddSpendingCustomCategoryResponseDto.swift */,
 				4AA52F442C0653C300B21521 /* getSpendingCustomCategoryListResponseDto.swift */,
+				4ADACD5D2C0774AA0069EB63 /* AddSpendingHistoryResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1579,6 +1582,7 @@
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
 				4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
+				4ADACD5E2C0774AA0069EB63 /* AddSpendingHistoryResponseDto.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,

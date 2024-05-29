@@ -42,9 +42,10 @@ enum CategoryIconName: String {
 // MARK: - SpendingCategoryData
 
 struct SpendingCategoryData: Identifiable {
-    let id = UUID()
-    let icon: CategoryIconName
+    let id: Int
+    let isCustom: Bool
     let name: String
+    let icon: CategoryIconName
 }
 
 // MARK: - SpendingCategoryIconList
@@ -66,29 +67,29 @@ enum SpendingCategoryIconList: String, CaseIterable {
     var details: SpendingCategoryData {
         switch self {
         case .food:
-            return SpendingCategoryData(icon: .foodOn, name: "식비")
+            return SpendingCategoryData(id: -1, isCustom: false, name: "식비", icon: .foodOn)
         case .transportation:
-            return SpendingCategoryData(icon: .trafficOn, name: "교통")
+            return SpendingCategoryData(id: -2, isCustom: false, name: "교통", icon: .trafficOn)
         case .beautyOrFashion:
-            return SpendingCategoryData(icon: .beautyOn, name: "미용/패션")
+            return SpendingCategoryData(id: -3, isCustom: false, name: "미용/패션", icon: .beautyOn)
         case .convenienceStore:
-            return SpendingCategoryData(icon: .marketOn, name: "편의점/마트")
+            return SpendingCategoryData(id: -4, isCustom: false, name: "편의점/마트", icon: .marketOn)
         case .education:
-            return SpendingCategoryData(icon: .educationOn, name: "교육")
+            return SpendingCategoryData(id: -5, isCustom: false, name: "교육", icon: .educationOn)
         case .living:
-            return SpendingCategoryData(icon: .lifeOn, name: "생활")
+            return SpendingCategoryData(id: -6, isCustom: false, name: "생활", icon: .lifeOn)
         case .health:
-            return SpendingCategoryData(icon: .healthOn, name: "건강")
+            return SpendingCategoryData(id: -7, isCustom: false, name: "건강", icon: .healthOn)
         case .hobby:
-            return SpendingCategoryData(icon: .hobbyOn, name: "취미/여가")
+            return SpendingCategoryData(id: -8, isCustom: false, name: "취미/여가", icon: .hobbyOn)
         case .travel:
-            return SpendingCategoryData(icon: .travelOn, name: "여행/숙박")
+            return SpendingCategoryData(id: -9, isCustom: false, name: "여행/숙박", icon: .travelOn)
         case .alcoholOrEntertainment:
-            return SpendingCategoryData(icon: .drinkOn, name: "술/유흥")
+            return SpendingCategoryData(id: -10, isCustom: false, name: "술/유흥", icon: .drinkOn)
         case .membershipOrFamilyEvent:
-            return SpendingCategoryData(icon: .eventOn, name: "회비/경조사")
+            return SpendingCategoryData(id: -11, isCustom: false, name: "회비/경조사", icon: .eventOn)
         case .other:
-            return SpendingCategoryData(icon: .otherOff, name: "추가하기")
+            return SpendingCategoryData(id: -12, isCustom: false, name: "추가하기", icon: .otherOff)
         }
     }
 
@@ -117,7 +118,7 @@ enum SpendingCategoryIconList: String, CaseIterable {
         case .eventOn:
             return .membershipOrFamilyEvent
         case .etcOn:
-            return .other//TODO: 추후 수정 필요
+            return .other // TODO: 추후 수정 필요
         default:
             return nil
         }

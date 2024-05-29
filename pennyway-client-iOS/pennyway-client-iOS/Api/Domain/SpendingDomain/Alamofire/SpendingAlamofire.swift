@@ -37,5 +37,4 @@ class SpendingAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.addSpendingHistory(dto: dto), completion: completion)
     }
-    
 }
