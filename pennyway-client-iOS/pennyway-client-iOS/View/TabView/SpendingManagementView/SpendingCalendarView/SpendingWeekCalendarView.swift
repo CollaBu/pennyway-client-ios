@@ -6,9 +6,15 @@ struct SpendingWeekCalendarView: View {
     @State private var selectedDate = Date()
     @State private var changeMonth = false
 
-    @ObservedObject var viewModel: MySpendingListViewModel
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
     private let calendar = Calendar.current
+    
+    init(
+        spendingHistoryViewModel: SpendingHistoryViewModel
+    ) {
+        self.spendingHistoryViewModel = spendingHistoryViewModel
+    }
   
     var body: some View {
         VStack(alignment: .leading, spacing: 20 * DynamicSizeFactor.factor()) {
@@ -19,6 +25,15 @@ struct SpendingWeekCalendarView: View {
             }
             .frame(height: 40 * DynamicSizeFactor.factor())
             .padding(.horizontal, 10)
+        }
+        .onAppear {
+            spendingHistoryViewModel.checkSpendingHistoryApi { success in
+                if success {
+                    Log.debug("소비내역 조회 api 연동 성공")
+                } else {
+                    Log.debug("소비내역 조회 api 연동 실패")
+                }
+            }
         }
     }
   
@@ -31,7 +46,7 @@ struct SpendingWeekCalendarView: View {
                     .font(.ButtonH4SemiboldFont())
                 
                 Button(action: {
-                    viewModel.isChangeMonth = true
+                    spendingHistoryViewModel.isChangeMonth = true
                 }, label: {
                     Image("icon_arrow_down_rect")
                 })
@@ -77,10 +92,12 @@ struct SpendingWeekCalendarView: View {
                     }
         
                 ForEach(components, id: \.self) { date in
-                    VStack(spacing: 10) {
+                    VStack(spacing: 0) {
                         Text(day(from: date))
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray04"))
+//                            Spacer().frame(height: 12)
+                            
                         Text("\(calendar.component(.day, from: date))")
                             .font(.B2MediumFont())
                             .frame(width: 23 * DynamicSizeFactor.factor(), height: 26 * DynamicSizeFactor.factor())
@@ -90,15 +107,37 @@ struct SpendingWeekCalendarView: View {
                             )
                             .platformTextColor(color: textColor(for: date))
                             .padding(.horizontal, 7)
+                            
+//                            Spacer().frame(height: 8  * DynamicSizeFactor.factor())
+                            
+                        if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
+                            Text("\(amount)원")
+                                .font(.B4MediumFont())
+                                .platformTextColor(color: Color("Gray06"))
+                        } else {
+                            Text("") 
+                        }
                     }
+//                        .padding(.top, 20)
+                    .frame(height: 60 * DynamicSizeFactor.factor())
+                    .border(Color.black)
+                    
                     .cornerRadius(30)
                     .onTapGesture {
                         selectedDate = date
                     }
                 }
+                .border(.yellow)
             }
-            .frame(height: 45 * DynamicSizeFactor.factor())
+            .padding(.top, 20)
+            .border(Color.black)
+//            .frame(height: 80 * DynamicSizeFactor.factor())
         }
+    }
+    
+    private func getSpendingAmount(for date: Date) -> Int? {
+        let day = calendar.component(.day, from: date)
+        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
     
     private func circleColor(for date: Date) -> Color {
@@ -157,5 +196,5 @@ private extension SpendingWeekCalendarView {
 // MARK: - SpendingWeekCalendarView_Previews
 
 #Preview {
-    SpendingWeekCalendarView(viewModel: MySpendingListViewModel())
+    SpendingWeekCalendarView(spendingHistoryViewModel: SpendingHistoryViewModel())
 }

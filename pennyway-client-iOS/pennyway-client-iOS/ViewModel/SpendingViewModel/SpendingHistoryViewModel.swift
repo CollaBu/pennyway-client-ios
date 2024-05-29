@@ -4,8 +4,10 @@ import SwiftUI
 class SpendingHistoryViewModel: ObservableObject {
     @Published var currentDate: Date = Date()
     @Published var totalSpent = 600_000
+    @Published var isChangeMonth: Bool = false
 
     @Published var dailySpendings: [DailySpending] = [] // 데일리 지출 내역
+    @Published var dailyDetailSpendings: [IndividualSpending] = [] // 데일리 지출 목록
 
     private var year: String {
         return String(Date.year(from: currentDate))
@@ -13,6 +15,12 @@ class SpendingHistoryViewModel: ObservableObject {
 
     private var month: String {
         return String(Date.month(from: currentDate))
+    }
+
+    func getDailyTotalAmount(for date: Date) -> Int? {
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: date)
+        return dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
 
     func checkSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
@@ -26,6 +34,7 @@ class SpendingHistoryViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(GetSpendingHistoryResponseDto.self, from: responseData)
 
                         self.dailySpendings = response.data.spending.dailySpendings
+//                        self.dailyDetailSpendings = response.data.spending.dailyDetailSpendings
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("지출 내역 조회 완료 \(jsonString)")

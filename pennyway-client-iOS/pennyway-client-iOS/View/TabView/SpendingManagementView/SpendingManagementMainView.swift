@@ -103,7 +103,7 @@ struct SpendingManagementMainView: View {
                 EmptyView()
             }
 
-            NavigationLink(destination: MySpendingListView(viewModel: MySpendingListViewModel(), listItem: [MySpendingHistoryListItem(category: "식비", amount: 32000, date: Date())]), isActive: $navigateToMySpendingList) {
+            NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel()), isActive: $navigateToMySpendingList) {
                 EmptyView()
             }
         }

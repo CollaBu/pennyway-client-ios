@@ -4,8 +4,7 @@ import SwiftUI
 // MARK: - MySpendingListView
 
 struct MySpendingListView: View {
-    @ObservedObject var viewModel: MySpendingListViewModel
-    var listItem: [MySpendingHistoryListItem]
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
     let categories = [
         ("icon_category_food_on", "식비"),
@@ -25,21 +24,22 @@ struct MySpendingListView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(spacing: 36 * DynamicSizeFactor.factor()) {
-                SpendingWeekCalendarView(viewModel: viewModel)
+                SpendingWeekCalendarView(spendingHistoryViewModel: spendingHistoryViewModel)
 
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0 * DynamicSizeFactor.factor()) {
-                        ForEach(listItem.groupedByDate(), id: \.key) { group in
-                            Section(header: headerView(for: group.key)) {
-                                ForEach(group.values) { item in
-                                    ExpenseRow(expense: item, categories: categories)
-                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                                }
-                            }
-                        }
+//                        ForEach(listItem.groupedByDate(), id: \.key) { group in
+//                            Section(header: headerView(for: group.key)) {
+//                                ForEach(group.values) { item in
+//                                    ExpenseRow(expense: item, categories: categories)
+//                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+//                                }
+//                            }
+//                        }
                         Spacer().frame(height: 16 * DynamicSizeFactor.factor()) // 패딩값 수정 필요해보임
                     }
                 }
+                .border(Color.black)
             }
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
@@ -58,8 +58,8 @@ struct MySpendingListView: View {
                 }.offset(x: -10)
             }
         }
-        .bottomSheet(isPresented: $viewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
-            ChangeMonthContentView(viewModel: viewModel, isPresented: $viewModel.isChangeMonth)
+        .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
+            ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
         }
     }
 
@@ -123,12 +123,6 @@ struct ExpenseRow: View {
 struct MySpendingListView_Previews: PreviewProvider {
     static var previews: some View {
         MySpendingListView(
-            viewModel: MySpendingListViewModel(),
-            listItem: [
-                MySpendingHistoryListItem(category: "식비", amount: 32000, date: Date()),
-                MySpendingHistoryListItem(category: "교통", amount: 8000, date: Date()),
-                MySpendingHistoryListItem(category: "쇼핑", amount: 15000, date: Date())
-            ]
-        )
+            spendingHistoryViewModel: SpendingHistoryViewModel())
     }
 }

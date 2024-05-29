@@ -2,13 +2,13 @@
 import SwiftUI
 
 struct ChangeMonthContentView: View {
-    @ObservedObject var viewModel: MySpendingListViewModel
+    @ObservedObject var viewModel: SpendingHistoryViewModel
     @Binding var isPresented: Bool
     @State private var selectedMonth: Date = Date()
     private let calendars = Calendar.current
     private let months: [Date]
 
-    init(viewModel: MySpendingListViewModel, isPresented: Binding<Bool>) {
+    init(viewModel: SpendingHistoryViewModel, isPresented: Binding<Bool>) {
         self.viewModel = viewModel
         _isPresented = isPresented
         months = {
@@ -81,5 +81,5 @@ struct ChangeMonthContentView: View {
 }
 
 #Preview {
-    ChangeMonthContentView(viewModel: MySpendingListViewModel(), isPresented: .constant(true))
+    ChangeMonthContentView(viewModel: SpendingHistoryViewModel(), isPresented: .constant(true))
 }
