@@ -21,6 +21,10 @@ class BaseInterceptor: RequestInterceptor {
     func retry(_ request: Request, for _: Session, dueTo _: Error, completion: @escaping (RetryResult) -> Void) {
         Log.info("BaseInterceptor - retry()")
 
+        if let response = request.task?.response as? HTTPURLResponse {
+            Log.debug(response.statusCode)
+        }
+
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
             AuthAlamofire.shared.refresh { result in
                 switch result {

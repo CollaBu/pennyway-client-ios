@@ -46,8 +46,6 @@ struct SpendingCategoryListView: View {
                                 } else {
                                     viewModel.selectedCategory = category
                                     isPresented = false
-
-                                    Log.debug(viewModel.selectedCategory)
                                     viewModel.validateForm()
                                 }
                             }

@@ -117,6 +117,7 @@ struct AddSpendingInputFormView: View {
             .padding(.horizontal, 20)
             .onTapGesture {
                 viewModel.isSelectDayViewPresented = true
+                Log.debug(viewModel.selectedDate)
             }
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())

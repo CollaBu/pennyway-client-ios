@@ -1077,13 +1077,11 @@
 		4ACBAC852BFBD8680030D935 /* AddSpendingHistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				4ADACD5F2C07770A0069EB63 /* SpendingCategory */,
 				4ACBAC832BFBC1100030D935 /* AddSpendingHistoryView.swift */,
 				4ACBAC862BFBD88C0030D935 /* AddSpendingInputFormView.swift */,
 				4A3172B52BFBDF7E00923D5F /* AddSpendingCompleteView.swift */,
-				4AD0D8472BFD384900A0808F /* SpendingCategoryListView.swift */,
 				4AF69F652BFDFA5A001D49F8 /* SelectSpendingDayView.swift */,
-				4A451C5F2BFF31FB00A68D6B /* AddSpendingCategoryView.swift */,
-				4ABC41EC2C026F3C00954015 /* SelectCategoryIconView.swift */,
 			);
 			path = AddSpendingHistoryView;
 			sourceTree = "<group>";
@@ -1169,6 +1167,16 @@
 				D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */,
 			);
 			path = ProfileMainView;
+			sourceTree = "<group>";
+		};
+		4ADACD5F2C07770A0069EB63 /* SpendingCategory */ = {
+			isa = PBXGroup;
+			children = (
+				4AD0D8472BFD384900A0808F /* SpendingCategoryListView.swift */,
+				4A451C5F2BFF31FB00A68D6B /* AddSpendingCategoryView.swift */,
+				4ABC41EC2C026F3C00954015 /* SelectCategoryIconView.swift */,
+			);
+			path = SpendingCategory;
 			sourceTree = "<group>";
 		};
 		4ADBFAE72BE2C32800C3ECE4 /* UserDomain */ = {
