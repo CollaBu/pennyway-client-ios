@@ -4,6 +4,8 @@ import SwiftUI
 
 struct SpendingWeekCalendarView: View {
     @State private var selectedDate = Date()
+    @State private var changeMonth = false
+
     @ObservedObject var viewModel: MySpendingListViewModel
 
     private let calendar = Calendar.current
@@ -50,7 +52,7 @@ struct SpendingWeekCalendarView: View {
                     
                     Button(
                         action: {
-                            changeMonth(1)
+//                            changeMonth(1)
                         },
                         label: {
                             Image("icon_arrow_front_small")

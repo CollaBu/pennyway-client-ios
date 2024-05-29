@@ -8,23 +8,42 @@ struct ChangeMonthContentView: View {
     private let calendars = Calendar.current
     private let months: [Date]
 
+//    init(viewModel: MySpendingListViewModel, isPresented: Binding<Bool>) {
+//        self.viewModel = viewModel
+//        _isPresented = isPresented
+//        months = {
+//            let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
+//            let endDate = Date()
+//            let calendar = Calendar.current
+//            var dates = [Date]()
+//            var date = startDate
+//
+//            while date <= endDate {
+//                dates.append(date)
+//                date = calendar.date(byAdding: .month, value: 1, to: date) ?? date
+//            }
+//
+//            return dates.reversed() 
+//        }()
+//    }
     init(viewModel: MySpendingListViewModel, isPresented: Binding<Bool>) {
         self.viewModel = viewModel
         _isPresented = isPresented
-        months = {
-            let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
-            let endDate = Date()
-            let calendar = Calendar.current
-            var dates = [Date]()
-            var date = startDate
+        months = ChangeMonthContentView.generateMonths()
+    }
 
-            while date <= endDate {
-                dates.append(date)
-                date = calendar.date(byAdding: .month, value: 1, to: date) ?? date
-            }
+    private static func generateMonths() -> [Date] {
+        var dateArray = [Date]()
+        let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
+        let endDate = Date()
+        var date = startDate
 
-            return dates.reversed() 
-        }()
+        while date <= endDate {
+            dateArray.append(date)
+            date = Calendar.current.date(byAdding: .month, value: 1, to: date) ?? date
+        }
+
+        return dateArray.reversed()
     }
 
     var body: some View {
@@ -45,7 +64,7 @@ struct ChangeMonthContentView: View {
                     }, label: {
                         Image("icon_close")
                             .resizable()
-                            .frame(width: 28, height: 28)
+                            .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                     })
                 }
                 .padding(.horizontal, 20)

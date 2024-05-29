@@ -113,14 +113,22 @@ struct ExpenseRow: View {
     }
 
     private var categoryIconName: String {
-        categories.first { $0.title == expense.category }!.iconName
+        categories.first { $0.title == expense.category }?.iconName ?? "default_icon_name" // 이렇게 안해주니까 preview crashed 발생
+
     }
 }
 
-#Preview {
-    MySpendingListView(viewModel: MySpendingListViewModel(), listItem: [
-        MySpendingHistoryListItem(category: "식비", amount: 32000, date: Date()),
-        MySpendingHistoryListItem(category: "교통", amount: 8000, date: Date()),
-        MySpendingHistoryListItem(category: "쇼핑", amount: 15000, date: Date())
-    ])
+// MARK: - MySpendingListView_Previews
+
+struct MySpendingListView_Previews: PreviewProvider {
+    static var previews: some View {
+        MySpendingListView(
+            viewModel: MySpendingListViewModel(),
+            listItem: [
+                MySpendingHistoryListItem(category: "식비", amount: 32000, date: Date()),
+                MySpendingHistoryListItem(category: "교통", amount: 8000, date: Date()),
+                MySpendingHistoryListItem(category: "쇼핑", amount: 15000, date: Date())
+            ]
+        )
+    }
 }
