@@ -16,13 +16,16 @@ class TargetAmountViewModel: ObservableObject {
                     do {
                         let response = try JSONDecoder().decode(GetTotalTargetAmountResponseDto.self, from: responseData)
 
+                        if let firstValidTotalSpending = response.data.targetAmounts.first {//현재 달의 총 지출 금액 찾기
+                            self.totalSpent = firstValidTotalSpending.totalSpending
+                        }
+
                         let validTargetAmounts = response.data.targetAmounts.filter { $0.targetAmount.id != -1 && $0.targetAmount.amount != -1 }
 
-                        if let firstValidTargetAmount = validTargetAmounts.first {
-                            self.totalSpent = firstValidTargetAmount.totalSpending
+                        if let firstValidTargetAmount = validTargetAmounts.first {//가장 최근에 설정한 목표 금액 찾기
                             self.targetValue = CGFloat(firstValidTargetAmount.targetAmount.amount)
                         } else {
-                            Log.fault("No valid target amounts found")//TODO: 데이터가 없는 경우 처리 필요
+                            Log.fault("No valid target amounts found") // TODO: 데이터가 없는 경우 처리 필요
                         }
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
