@@ -87,6 +87,7 @@ struct AddSpendingInputFormView: View {
                 .padding(.vertical, 14)
                 .onTapGesture {
                     viewModel.isCategoryListViewPresented = true
+                    viewModel.getSpendingCustomCategoryListApi()
                 }
             }
             .padding(.horizontal, 20)

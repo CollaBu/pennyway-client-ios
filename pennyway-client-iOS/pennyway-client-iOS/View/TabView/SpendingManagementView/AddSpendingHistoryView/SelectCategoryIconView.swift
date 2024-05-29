@@ -6,7 +6,7 @@ import SwiftUI
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    @State var selectedCategoryIcon: String = "icon_category_etc_on"
+    @State var selectedCategoryIcon: CategoryIconName = .etcOn
 
     let columns = [
         GridItem(.flexible()),
@@ -16,18 +16,18 @@ struct SelectCategoryIconView: View {
     ]
 
     let icons: [CategoryIconListItem] = [
-        CategoryIconListItem(offIcon: "icon_category_food_off", onIcon: "icon_category_food_on"),
-        CategoryIconListItem(offIcon: "icon_category_traffic_off", onIcon: "icon_category_traffic_on"),
-        CategoryIconListItem(offIcon: "icon_category_beauty_off", onIcon: "icon_category_beauty_on"),
-        CategoryIconListItem(offIcon: "icon_category_market_off", onIcon: "icon_category_market_on"),
-        CategoryIconListItem(offIcon: "icon_category_education_off", onIcon: "icon_category_education_on"),
-        CategoryIconListItem(offIcon: "icon_category_life_off", onIcon: "icon_category_life_on"),
-        CategoryIconListItem(offIcon: "icon_category_health_off", onIcon: "icon_category_health_on"),
-        CategoryIconListItem(offIcon: "icon_category_hobby_off", onIcon: "icon_category_hobby_on"),
-        CategoryIconListItem(offIcon: "icon_category_travel_off", onIcon: "icon_category_travel_on"),
-        CategoryIconListItem(offIcon: "icon_category_drink_off", onIcon: "icon_category_drink_on"),
-        CategoryIconListItem(offIcon: "icon_category_event_off", onIcon: "icon_category_event_on"),
-        CategoryIconListItem(offIcon: "icon_category_etc_off", onIcon: "icon_category_etc_on")
+        CategoryIconListItem(offIcon: .foodOff, onIcon: .foodOn),
+        CategoryIconListItem(offIcon: .trafficOff, onIcon: .trafficOn),
+        CategoryIconListItem(offIcon: .beautyOff, onIcon: .beautyOn),
+        CategoryIconListItem(offIcon: .marketOff, onIcon: .marketOn),
+        CategoryIconListItem(offIcon: .educationOff, onIcon: .educationOn),
+        CategoryIconListItem(offIcon: .lifeOff, onIcon: .lifeOn),
+        CategoryIconListItem(offIcon: .healthOff, onIcon: .healthOn),
+        CategoryIconListItem(offIcon: .hobbyOff, onIcon: .hobbyOn),
+        CategoryIconListItem(offIcon: .travelOff, onIcon: .travelOn),
+        CategoryIconListItem(offIcon: .drinkOff, onIcon: .drinkOn),
+        CategoryIconListItem(offIcon: .eventOff, onIcon: .eventOn),
+        CategoryIconListItem(offIcon: .etcOff, onIcon: .etcOn)
     ]
 
     var body: some View {
@@ -44,7 +44,7 @@ struct SelectCategoryIconView: View {
 
             LazyVGrid(columns: columns, spacing: 20 * DynamicSizeFactor.factor()) {
                 ForEach(icons) { icon in
-                    Image(selectedCategoryIcon == icon.onIcon ? icon.onIcon : icon.offIcon)
+                    Image((selectedCategoryIcon.rawValue == icon.onIcon.rawValue ? icon.onIcon : icon.offIcon).rawValue)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
@@ -57,8 +57,11 @@ struct SelectCategoryIconView: View {
             Spacer()
 
             CustomBottomButton(action: {
-                viewModel.selectedCategoryIcon = selectedCategoryIcon
-                isPresented = false
+                if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
+                    viewModel.selectedCategoryIconName = selectedCategory.rawValue
+                    viewModel.selectedCategoryIcon = selectedCategoryIcon
+                    isPresented = false
+                }
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }

@@ -40,8 +40,8 @@
 		4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A82BA9572F00A9CF4C /* Pretendard-Medium.otf */; };
 		4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */; };
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
-		4A12BC932C03C7F100AACBCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A12BC922C03C7F100AACBCA /* GoogleService-Info.plist */; };
 		4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */; };
+		4A12BC932C03C7F100AACBCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A12BC922C03C7F100AACBCA /* GoogleService-Info.plist */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
 		4A3172B62BFBDF7E00923D5F /* AddSpendingCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3172B52BFBDF7E00923D5F /* AddSpendingCompleteView.swift */; };
@@ -115,6 +115,9 @@
 		4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */; };
 		4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
+		4AA52F412C064F5B00B21521 /* AddSpendingCustomCategoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F402C064F5B00B21521 /* AddSpendingCustomCategoryRequestDto.swift */; };
+		4AA52F432C06530D00B21521 /* AddSpendingCustomCategoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F422C06530D00B21521 /* AddSpendingCustomCategoryResponseDto.swift */; };
+		4AA52F452C0653C300B21521 /* getSpendingCustomCategoryListResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F442C0653C300B21521 /* getSpendingCustomCategoryListResponseDto.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
@@ -241,8 +244,8 @@
 		4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		4A1179B32BA958ED00A9CF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
-		4A12BC922C03C7F100AACBCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconListItem.swift; sourceTree = "<group>"; };
+		4A12BC922C03C7F100AACBCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
 		4A3172B52BFBDF7E00923D5F /* AddSpendingCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingCompleteView.swift; sourceTree = "<group>"; };
@@ -318,6 +321,9 @@
 		4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOAuthToAccountViewModel.swift; sourceTree = "<group>"; };
 		4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpViewModel.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
+		4AA52F402C064F5B00B21521 /* AddSpendingCustomCategoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingCustomCategoryRequestDto.swift; sourceTree = "<group>"; };
+		4AA52F422C06530D00B21521 /* AddSpendingCustomCategoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingCustomCategoryResponseDto.swift; sourceTree = "<group>"; };
+		4AA52F442C0653C300B21521 /* getSpendingCustomCategoryListResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getSpendingCustomCategoryListResponseDto.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
@@ -519,6 +525,8 @@
 			isa = PBXGroup;
 			children = (
 				4A0BC6922BF539DA0036D900 /* GetSpendingHistoryResponseDto.swift */,
+				4AA52F422C06530D00B21521 /* AddSpendingCustomCategoryResponseDto.swift */,
+				4AA52F442C0653C300B21521 /* getSpendingCustomCategoryListResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -527,6 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				4A0BC6942BF53AA60036D900 /* GetSpendingHistoryRequestDto.swift */,
+				4AA52F402C064F5B00B21521 /* AddSpendingCustomCategoryRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1572,6 +1581,7 @@
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
+				4AA52F452C0653C300B21521 /* getSpendingCustomCategoryListResponseDto.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
 				D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */,
 				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
@@ -1600,6 +1610,7 @@
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
 				D8E637522C0631DE00D43BB6 /* ChangeMonthContentView.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
+				4AA52F432C06530D00B21521 /* AddSpendingCustomCategoryResponseDto.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
 				4A058EFF2BD03E01004B6F89 /* AuthResponseDto.swift in Sources */,
 				4A4703A72BCEDD9800AEE04E /* VerificationCodeRequestDto.swift in Sources */,
@@ -1633,6 +1644,7 @@
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
 				D8E24D952BFD12BB006E8046 /* SettingAlarmView.swift in Sources */,
 				4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */,
+				4AA52F412C064F5B00B21521 /* AddSpendingCustomCategoryRequestDto.swift in Sources */,
 				4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */,
 				D851E7232C02743C00316DB3 /* BackofficeAlamofire.swift in Sources */,
 				4A0BC68F2BF538A40036D900 /* SpendingAlamofire.swift in Sources */,

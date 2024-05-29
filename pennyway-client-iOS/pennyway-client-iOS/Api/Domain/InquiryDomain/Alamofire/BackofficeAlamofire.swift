@@ -2,7 +2,7 @@ import Alamofire
 import Foundation
 import os.log
 
-class BackofficeAlamofire: TokenHandler {
+class BackofficeAlamofire {
     static let shared = BackofficeAlamofire()
 
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]

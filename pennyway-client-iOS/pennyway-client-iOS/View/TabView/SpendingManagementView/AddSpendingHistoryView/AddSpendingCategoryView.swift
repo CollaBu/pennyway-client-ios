@@ -8,13 +8,12 @@ struct AddSpendingCategoryView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
 
     @State var maxCategoryNameCount = "8"
-    @State var categoryName: String = ""
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             ZStack {
-                Image(viewModel.selectedCategoryIcon ?? "icon_category_etc_on")
+                Image((viewModel.selectedCategoryIcon ?? .etcOn).rawValue)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)
@@ -39,22 +38,22 @@ struct AddSpendingCategoryView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    if categoryName.isEmpty {
+                    if viewModel.categoryName.isEmpty {
                         Text("카테고리명을 입력하세요")
                             .platformTextColor(color: Color("Gray03"))
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                             .font(.H4MediumFont())
                     }
 
-                    TextField("", text: $categoryName)
+                    TextField("", text: $viewModel.categoryName)
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))
-                        .onChange(of: categoryName) { _ in
-                            if categoryName.count > 8 {
-                                categoryName = String(categoryName.prefix(8))
+                        .onChange(of: viewModel.categoryName) { _ in
+                            if viewModel.categoryName.count > 8 {
+                                viewModel.categoryName = String(viewModel.categoryName.prefix(8))
                             }
-                            if !categoryName.isEmpty {
+                            if !viewModel.categoryName.isEmpty {
                                 viewModel.isAddCategoryFormValid = true
                             } else {
                                 viewModel.isAddCategoryFormValid = false
@@ -68,7 +67,7 @@ struct AddSpendingCategoryView: View {
 
             HStack {
                 Spacer()
-                Text("\(categoryName.count)/\(maxCategoryNameCount)")
+                Text("\(viewModel.categoryName.count)/\(maxCategoryNameCount)")
                     .font(.B2MediumFont())
                     .platformTextColor(color: Color("Gray03"))
             }
@@ -77,9 +76,16 @@ struct AddSpendingCategoryView: View {
             Spacer()
 
             CustomBottomButton(action: {
-                if !categoryName.isEmpty {
-                    viewModel.selectedCategory = (viewModel.selectedCategoryIcon ?? "icon_category_etc_on", categoryName)
-                    viewModel.validateForm()
+                if !viewModel.categoryName.isEmpty {
+                    viewModel.selectedCategory = ((viewModel.selectedCategoryIcon ?? .etcOn).rawValue, viewModel.categoryName)
+                    viewModel.addSpendingCustomCategoryApi { success in
+                        if success {
+                            Log.debug("카테고리 생성 완료")
+                            presentationMode.wrappedValue.dismiss()
+                        } else {
+                            Log.debug("카테고리 생성 실패")
+                        }
+                    }
                     presentationMode.wrappedValue.dismiss()
                 }
             }, label: "추가하기", isFormValid: $viewModel.isAddCategoryFormValid)
