@@ -149,6 +149,7 @@
 		4ADACD652C07A7C70069EB63 /* TargetAmountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD642C07A7C70069EB63 /* TargetAmountRouter.swift */; };
 		4ADACD6E2C07A88A0069EB63 /* GetTotalTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD6D2C07A88A0069EB63 /* GetTotalTargetAmountRequestDto.swift */; };
 		4ADACD712C07A9270069EB63 /* TargetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD702C07A9270069EB63 /* TargetAmountViewModel.swift */; };
+		4ADACD732C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD722C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift */; };
 		4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */; };
 		4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */; };
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
@@ -357,6 +358,7 @@
 		4ADACD642C07A7C70069EB63 /* TargetAmountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountRouter.swift; sourceTree = "<group>"; };
 		4ADACD6D2C07A88A0069EB63 /* GetTotalTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountRequestDto.swift; sourceTree = "<group>"; };
 		4ADACD702C07A9270069EB63 /* TargetAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountViewModel.swift; sourceTree = "<group>"; };
+		4ADACD722C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
 		4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRouter.swift; sourceTree = "<group>"; };
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
@@ -1205,6 +1207,7 @@
 		4ADACD6A2C07A8530069EB63 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				4ADACD722C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1599,6 +1602,7 @@
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
+				4ADACD732C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift in Sources */,
 				D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */,
 				D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,

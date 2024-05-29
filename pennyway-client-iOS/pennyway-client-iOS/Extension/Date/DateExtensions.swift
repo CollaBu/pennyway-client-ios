@@ -23,6 +23,12 @@ extension Date {
         return formatter.string(from: date)
     }
 
+    static func getBasicformattedDate(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
+
     static let calendarDayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy dd"
