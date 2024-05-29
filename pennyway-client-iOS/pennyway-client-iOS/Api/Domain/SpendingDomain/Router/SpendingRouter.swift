@@ -24,9 +24,7 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case .getSpendingHistory:
             return "v2/spendings"
-        case .getSpendingCustomCategoryList:
-            return "v2/spending-categories"
-        case .addSpendingCustomCategory:
+        case .getSpendingCustomCategoryList, .addSpendingCustomCategory:
             return "v2/spending-categories"
         }
     }
