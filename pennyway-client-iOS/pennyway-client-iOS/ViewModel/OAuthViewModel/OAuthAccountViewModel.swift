@@ -14,8 +14,9 @@ class OAuthAccountViewModel: ObservableObject {
                 if data != nil {
                     Log.debug("소셜 계정 연동 완료")
                     KeychainHelper.deleteOAuthUserData()
-                    self.profileInfoViewModel.getUserProfileApi()
-                    completion(true)
+                    self.profileInfoViewModel.getUserProfileApi { _ in 
+                        completion(true)
+                    }
                 }
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {
@@ -38,8 +39,9 @@ class OAuthAccountViewModel: ObservableObject {
             case let .success(data):
                 if data != nil {
                     Log.debug("소셜 계정 연동 해제 완료")
-                    self.profileInfoViewModel.getUserProfileApi()
-                    completion(true)
+                    self.profileInfoViewModel.getUserProfileApi { _ in
+                        completion(true)
+                    }
                 }
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {

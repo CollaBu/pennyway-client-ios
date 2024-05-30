@@ -36,16 +36,24 @@ struct SpendingCheckBoxView: View {
             // 프로그래스 바
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .frame(width: 244 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                    .platformTextColor(color: Color("Gray01"))
+                    .frame(width: UIScreen.main.bounds.width - 76, height: 24 * DynamicSizeFactor.factor())
+                    .foregroundColor(Color("Gray01"))
+                    .cornerRadius(15)
+
+                let progressWidth: CGFloat = {
+                    if viewModel.targetValue <= 0 {
+                        return 0
+                    }
+                    let ratio = CGFloat(viewModel.totalSpent) / viewModel.targetValue
+                    let width = ratio * (UIScreen.main.bounds.width - 76)
+                    return min(max(width, 0), UIScreen.main.bounds.width - 76)
+                }()
 
                 Rectangle()
-                    .frame(width: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? 244 * DynamicSizeFactor.factor() : min(CGFloat(viewModel.totalSpent) / viewModel.targetValue * 100 / 100 * 300, 300), height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
-                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
+                    .frame(width: progressWidth, height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
+                    .foregroundColor(CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
                     .cornerRadius(15)
             }
-            .cornerRadius(15)
-            .padding(.horizontal, 18)
 
             Spacer().frame(height: 2)
 
@@ -72,7 +80,6 @@ struct SpendingCheckBoxView: View {
                     Log.debug("목표 금액 클릭")
                 }
             }
-            .frame(height: 24 * DynamicSizeFactor.factor())
             .padding(.leading, 22)
             .padding(.trailing, 13)
 

@@ -103,7 +103,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
     }
 
     func addSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
-        let amount = Int(amountSpentText) ?? 0
+        let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
         var categoryId = -1
         let spendAt = Date.getBasicformattedDate(from: selectedDate)
 

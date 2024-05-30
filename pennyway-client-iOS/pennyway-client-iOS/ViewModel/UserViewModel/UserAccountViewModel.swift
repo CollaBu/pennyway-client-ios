@@ -3,7 +3,7 @@ import os.log
 import SwiftUI
 
 class UserAccountViewModel: ObservableObject {
-    func getUserProfileApi() {
+    func getUserProfileApi(completion: @escaping (Bool) -> Void) {
         UserAccountAlamofire.shared.getUserProfile { result in
             switch result {
             case let .success(data):
@@ -14,8 +14,10 @@ class UserAccountViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("사용자 계정 조회 완료 \(jsonString)")
                         }
+                        completion(true)
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
+                        completion(false)
                     }
                 }
             case let .failure(error):
@@ -24,6 +26,7 @@ class UserAccountViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
             }
         }
     }
