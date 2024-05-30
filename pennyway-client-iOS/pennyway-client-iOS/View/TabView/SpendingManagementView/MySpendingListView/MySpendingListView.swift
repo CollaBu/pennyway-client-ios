@@ -4,6 +4,7 @@ import SwiftUI
 
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    @State var selectedDateToScroll: String? = nil
 
     let categories = [
         ("icon_category_food_on", "식비"),
@@ -23,43 +24,56 @@ struct MySpendingListView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(spacing: 40 * DynamicSizeFactor.factor()) {
-                SpendingWeekCalendarView(spendingHistoryViewModel: spendingHistoryViewModel)
+                SpendingWeekCalendarView(
+                    spendingHistoryViewModel: spendingHistoryViewModel,
+                    selectedDateToScroll: $selectedDateToScroll
+                )
 
-                ScrollView {
-                    LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
-                        ForEach(groupedSpendings(), id: \.key) { date, spendings in
-                            Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
+                            ForEach(groupedSpendings(), id: \.key) { date, spendings in
+                                Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
-                            Section(header: headerView(for: date)) {
-                                Spacer().frame(height: 8 * DynamicSizeFactor.factor())
-                                ForEach(spendings, id: \.id) { item in
-                                    ExpenseRow(category: item.category.name, amount: item.amount, memo: item.memo, categories: categories)
-                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                Section(header: headerView(for: date)) {
+                                    Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                                    ForEach(spendings, id: \.id) { item in
+                                        ExpenseRow(category: item.category.name, amount: item.amount, memo: item.memo, categories: categories)
+                                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                    }
+                                    .onAppear {
+                                        Log.debug("spendings: \(spendings)")
+                                        Log.debug("group: \(groupedSpendings())")
+                                    }
                                 }
-                                .onAppear {
-                                    Log.debug("spendings: \(spendings)")
-                                    Log.debug("group: \(groupedSpendings())")
+                                .id(date) // ScrollViewReader를 위한 ID 추가
+                            }
+                            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+
+                            Button(action: {}, label: {
+                                ZStack {
+                                    Rectangle()
+                                        .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
+                                        .platformTextColor(color: Color("Gray01"))
+                                        .cornerRadius(26)
+
+                                    Text("5월 내역 보기")
+                                        .font(.B1SemiboldeFont())
+                                        .platformTextColor(color: Color("Gray04"))
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 12)
                                 }
+                            })
+
+                            Spacer().frame(height: 48 * DynamicSizeFactor.factor())
+                        }
+                    }
+                    .onChange(of: selectedDateToScroll) { date in
+                        if let date = date {
+                            withAnimation {
+                                proxy.scrollTo(date, anchor: .top)
                             }
                         }
-                        Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
-                        Button(action: {}, label: {
-                            ZStack {
-                                Rectangle()
-                                    .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-                                    .platformTextColor(color: Color("Gray01"))
-                                    .cornerRadius(26)
-
-                                Text("5월 내역 보기")
-                                    .font(.B1SemiboldeFont())
-                                    .platformTextColor(color: Color("Gray04"))
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 12)
-                            }
-                        })
-
-                        Spacer().frame(height: 48 * DynamicSizeFactor.factor())
                     }
                 }
             }

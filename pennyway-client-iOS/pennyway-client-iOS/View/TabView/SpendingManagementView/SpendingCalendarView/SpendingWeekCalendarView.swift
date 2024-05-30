@@ -7,13 +7,16 @@ struct SpendingWeekCalendarView: View {
     @State private var changeMonth = false
 
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    @Binding var selectedDateToScroll: String?
 
     private let calendar = Calendar.current
     
     init(
-        spendingHistoryViewModel: SpendingHistoryViewModel
+        spendingHistoryViewModel: SpendingHistoryViewModel,
+        selectedDateToScroll: Binding<String?>
     ) {
         self.spendingHistoryViewModel = spendingHistoryViewModel
+        _selectedDateToScroll = selectedDateToScroll
     }
     
     var body: some View {
@@ -117,13 +120,13 @@ struct SpendingWeekCalendarView: View {
                                 .font(.B4MediumFont())
                                 .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
                         } else {
-                            Text("") 
+                            Text("")
                         }
                     }
                     .frame(height: 65 * DynamicSizeFactor.factor())
                     .cornerRadius(30)
                     .onTapGesture {
-                        selectedDate = date
+                        selectedDateToScroll = dateFormatter(date: date)
                     }
                 }
             }
@@ -131,6 +134,12 @@ struct SpendingWeekCalendarView: View {
         }
     }
     
+    private func dateFormatter(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
+
     private func getSpendingAmount(for date: Date) -> Int? {
         let day = calendar.component(.day, from: date)
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
@@ -192,5 +201,5 @@ private extension SpendingWeekCalendarView {
 // MARK: - SpendingWeekCalendarView_Previews
 
 #Preview {
-    SpendingWeekCalendarView(spendingHistoryViewModel: SpendingHistoryViewModel())
+    SpendingWeekCalendarView(spendingHistoryViewModel: SpendingHistoryViewModel(), selectedDateToScroll: .constant(nil))
 }
