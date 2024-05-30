@@ -3,7 +3,7 @@ import SwiftUI
 
 class SpendingHistoryViewModel: ObservableObject {
     @Published var currentDate: Date = Date()
-    @Published var totalSpent = 600_000
+    @Published var totalSpent = 100_000
 
     @Published var dailySpendings: [DailySpending] = [] // 데일리 지출 내역
 

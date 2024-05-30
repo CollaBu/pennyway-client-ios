@@ -18,7 +18,7 @@ struct SpendingCheckBoxView: View {
 
     var body: some View {
         VStack {
-            Spacer().frame(height: 18 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 18)
 
             HStack {
                 spentInfoText.toAttributesText(base: baseAttribute,
@@ -30,9 +30,9 @@ struct SpendingCheckBoxView: View {
                 Spacer()
             }
             .frame(height: 44 * DynamicSizeFactor.factor())
-            .padding(.leading, 18 * DynamicSizeFactor.factor())
+            .padding(.leading, 18)
 
-            Spacer().frame(height: 20 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 20)
 
             // 프로그래스 바
             ZStack(alignment: .leading) {
@@ -43,17 +43,17 @@ struct SpendingCheckBoxView: View {
                 Rectangle()
                     .frame(width: CGFloat(spendingHistoryViewModel.totalSpent) > targetValue ? 244 * DynamicSizeFactor.factor() : min(CGFloat(spendingHistoryViewModel.totalSpent) / targetValue * 100 / 100 * 300, 300), height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
                     .platformTextColor(color: CGFloat(spendingHistoryViewModel.totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
+                    .cornerRadius(15)
             }
             .cornerRadius(15)
-            .padding(.horizontal, 18 * DynamicSizeFactor.factor())
+            .padding(.horizontal, 18)
 
-            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 2)
 
             HStack {
                 Text("\(spendingHistoryViewModel.totalSpent)")
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: CGFloat(spendingHistoryViewModel.totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
-                    .padding(.leading, 4 * DynamicSizeFactor.factor())
                 Spacer()
 
                 HStack(spacing: 0) {
@@ -68,8 +68,11 @@ struct SpendingCheckBoxView: View {
                             .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                     })
                 }
+                .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
             }
-            .frame(width: 244 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+            .frame(height: 24 * DynamicSizeFactor.factor())
+            .padding(.leading, 22)
+            .padding(.trailing, 13)
 
             Spacer().frame(height: 16)
         }

@@ -41,7 +41,6 @@
 		4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */; };
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
 		4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */; };
-		4A12BC932C03C7F100AACBCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A12BC922C03C7F100AACBCA /* GoogleService-Info.plist */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
 		4A3172B62BFBDF7E00923D5F /* AddSpendingCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3172B52BFBDF7E00923D5F /* AddSpendingCompleteView.swift */; };
@@ -126,6 +125,7 @@
 		4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */; };
 		4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */; };
 		4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */; };
+		4AB80AF42C08A31200973DE2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AB80AF32C08A31200973DE2 /* GoogleService-Info.plist */; };
 		4ABC41ED2C026F3C00954015 /* SelectCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC41EC2C026F3C00954015 /* SelectCategoryIconView.swift */; };
 		4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD072BBDCC190027ACD5 /* KakaoOAuthViewModel.swift */; };
 		4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD092BBDCE080027ACD5 /* GoogleOAuthViewModel.swift */; };
@@ -175,7 +175,6 @@
 		D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E71A2C0273BD00316DB3 /* BackofficeRequestDto.swift */; };
 		D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E71F2C0273FA00316DB3 /* BackofficeRouter.swift */; };
 		D851E7232C02743C00316DB3 /* BackofficeAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E7222C02743C00316DB3 /* BackofficeAlamofire.swift */; };
-		D851E7362C0612C100316DB3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D851E7352C0612C100316DB3 /* GoogleService-Info.plist */; };
 		D851E7392C06134200316DB3 /* MySpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E7382C06134200316DB3 /* MySpendingListView.swift */; };
 		D851E73B2C06135100316DB3 /* NoSpendingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E73A2C06135100316DB3 /* NoSpendingHistoryView.swift */; };
 		D851E73D2C0613CF00316DB3 /* SpendingWeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E73C2C0613CF00316DB3 /* SpendingWeekCalendarView.swift */; };
@@ -245,7 +244,6 @@
 		4A1179B32BA958ED00A9CF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
 		4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconListItem.swift; sourceTree = "<group>"; };
-		4A12BC922C03C7F100AACBCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
 		4A3172B52BFBDF7E00923D5F /* AddSpendingCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingCompleteView.swift; sourceTree = "<group>"; };
@@ -332,6 +330,7 @@
 		4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterceptor.swift; sourceTree = "<group>"; };
 		4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationManager.swift; sourceTree = "<group>"; };
 		4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormView.swift; sourceTree = "<group>"; };
+		4AB80AF32C08A31200973DE2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ABC41EC2C026F3C00954015 /* SelectCategoryIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryIconView.swift; sourceTree = "<group>"; };
 		4AC4FD072BBDCC190027ACD5 /* KakaoOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC4FD092BBDCE080027ACD5 /* GoogleOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleOAuthViewModel.swift; sourceTree = "<group>"; };
@@ -378,7 +377,6 @@
 		D851E71A2C0273BD00316DB3 /* BackofficeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeRequestDto.swift; sourceTree = "<group>"; };
 		D851E71F2C0273FA00316DB3 /* BackofficeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeRouter.swift; sourceTree = "<group>"; };
 		D851E7222C02743C00316DB3 /* BackofficeAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeAlamofire.swift; sourceTree = "<group>"; };
-		D851E7352C0612C100316DB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D851E7382C06134200316DB3 /* MySpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListView.swift; sourceTree = "<group>"; };
 		D851E73A2C06135100316DB3 /* NoSpendingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSpendingHistoryView.swift; sourceTree = "<group>"; };
 		D851E73C2C0613CF00316DB3 /* SpendingWeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingWeekCalendarView.swift; sourceTree = "<group>"; };
@@ -914,7 +912,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D851E7352C0612C100316DB3 /* GoogleService-Info.plist */,
+				4AB80AF32C08A31200973DE2 /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
 				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
@@ -1408,7 +1406,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D851E7362C0612C100316DB3 /* GoogleService-Info.plist in Resources */,
+				4AB80AF42C08A31200973DE2 /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
