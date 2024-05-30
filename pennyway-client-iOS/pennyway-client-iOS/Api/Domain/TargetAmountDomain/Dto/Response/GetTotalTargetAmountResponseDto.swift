@@ -8,7 +8,7 @@ struct GetTotalTargetAmountResponseDto: Codable {
     let data: targetAmountData
 
     struct targetAmountData: Codable {
-        let targetAmounts: [TargetAmount]
+        let targetAmount: TargetAmount
     }
 }
 

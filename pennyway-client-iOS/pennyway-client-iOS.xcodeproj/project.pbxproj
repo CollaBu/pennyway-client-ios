@@ -147,7 +147,6 @@
 		4ADACD612C07A3EB0069EB63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ADACD602C07A3EB0069EB63 /* GoogleService-Info.plist */; };
 		4ADACD632C07A7970069EB63 /* TargetAmountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD622C07A7970069EB63 /* TargetAmountAlamofire.swift */; };
 		4ADACD652C07A7C70069EB63 /* TargetAmountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD642C07A7C70069EB63 /* TargetAmountRouter.swift */; };
-		4ADACD6E2C07A88A0069EB63 /* GetTotalTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD6D2C07A88A0069EB63 /* GetTotalTargetAmountRequestDto.swift */; };
 		4ADACD712C07A9270069EB63 /* TargetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD702C07A9270069EB63 /* TargetAmountViewModel.swift */; };
 		4ADACD732C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD722C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift */; };
 		4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */; };
@@ -356,7 +355,6 @@
 		4ADACD602C07A3EB0069EB63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ADACD622C07A7970069EB63 /* TargetAmountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountAlamofire.swift; sourceTree = "<group>"; };
 		4ADACD642C07A7C70069EB63 /* TargetAmountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountRouter.swift; sourceTree = "<group>"; };
-		4ADACD6D2C07A88A0069EB63 /* GetTotalTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountRequestDto.swift; sourceTree = "<group>"; };
 		4ADACD702C07A9270069EB63 /* TargetAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountViewModel.swift; sourceTree = "<group>"; };
 		4ADACD722C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
@@ -1199,7 +1197,6 @@
 		4ADACD692C07A84D0069EB63 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				4ADACD6D2C07A88A0069EB63 /* GetTotalTargetAmountRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1594,7 +1591,6 @@
 				4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */,
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
-				4ADACD6E2C07A88A0069EB63 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
 				4A5789972BDC29FD00AFEB26 /* PreconditionFailedError.swift in Sources */,

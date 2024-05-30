@@ -14,9 +14,9 @@ class TargetAmountAlamofire {
         session = Session(interceptor: interceptors, eventMonitors: monitors)
     }
     
-    func getTotalTargetAmount(_ dto: GetTotalTargetAmountRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
-        Log.info("SpendingAlamofire - getTotalTargetAmount() called \(dto)")
+    func getTotalTargetAmount(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - getTotalTargetAmount() called")
         
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.getTotalTargetAmount(dto: dto), completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.getTotalTargetAmount, completion: completion)
     }
 }
