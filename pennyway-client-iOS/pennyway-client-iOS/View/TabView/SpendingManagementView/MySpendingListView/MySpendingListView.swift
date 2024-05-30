@@ -28,14 +28,14 @@ struct MySpendingListView: View {
 
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0 * DynamicSizeFactor.factor()) {
-//                        ForEach(listItem.groupedByDate(), id: \.key) { group in
-//                            Section(header: headerView(for: group.key)) {
-//                                ForEach(group.values) { item in
-//                                    ExpenseRow(expense: item, categories: categories)
-//                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-//                                }
-//                            }
-//                        }
+                        ForEach(groupedSpendings(), id: \.key) { date, spendings in
+                            Section(header: headerView(for: date)) {
+                                ForEach(spendings, id: \.id) { item in
+                                    ExpenseRow(category: item.category.name, amount: item.amount, memo: item.memo, categories: categories)
+                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                }
+                            }
+                        }
                         Spacer().frame(height: 16 * DynamicSizeFactor.factor()) // 패딩값 수정 필요해보임
                     }
                 }
@@ -61,10 +61,19 @@ struct MySpendingListView: View {
         .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
             ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
         }
+        .onAppear {
+            spendingHistoryViewModel.checkSpendingHistoryApi { success in
+                if success {
+                    Log.debug("소비내역 조회 api 연동 성공")
+                } else {
+                    Log.debug("소비내역 조회 api 연동 실패")
+                }
+            }
+        }
     }
 
-    private func headerView(for date: Date) -> some View {
-        Text(itemFormatter.string(from: date))
+    private func headerView(for date: String) -> some View {
+        Text(dateFormatter(from: date))
             .font(.B2MediumFont())
             .platformTextColor(color: Color("Gray04"))
             .padding(.leading, 20)
@@ -72,25 +81,44 @@ struct MySpendingListView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private let itemFormatter: DateFormatter = {
+    ///    private let itemFormatter: DateFormatter = {
+    ///        let formatter = DateFormatter()
+    ///        formatter.locale = Locale(identifier: "ko_KR")
+    ///        formatter.dateFormat = "MMMM d일"
+    ///        return formatter
+    ///    }()
+    private func dateFormatter(from dateString: String) -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "MMMM d일"
-        return formatter
-    }()
-}
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        if let date = formatter.date(from: dateString) {
+            formatter.dateFormat = "MMMM d일"
+            formatter.locale = Locale(identifier: "ko_KR")
+            return formatter.string(from: date)
+        }
+        return dateString
+    }
 
-extension Sequence where Iterator.Element == MySpendingHistoryListItem {
-    func groupedByDate() -> [(key: Date, values: [MySpendingHistoryListItem])] {
-        let grouped = Dictionary(grouping: self, by: { Calendar.current.startOfDay(for: $0.date) })
+    private func groupedSpendings() -> [(key: String, values: [IndividualSpending])] {
+//            let allSpendings = spendingHistoryViewModel.dailyDetailSpendings.flatMap { $0.spendAt }
+        let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { $0.spendAt })
         return grouped.map { (key: $0.key, values: $0.value) }.sorted { $0.key > $1.key }
     }
 }
 
 // MARK: - ExpenseRow
 
+// extension Sequence where Iterator.Element == DailySpending {
+//    func groupedByDate() -> [(key: Date, values: [DailySpending])] {
+//        let grouped = Dictionary(grouping: self, by: { Calendar.current.startOfDay(for: $0.day) })
+//        return grouped.map { (key: $0.key, values: $0.value) }.sorted { $0.key > $1.key }
+//    }
+// }
+
 struct ExpenseRow: View {
-    var expense: MySpendingHistoryListItem
+    var category: String
+    var amount: Int
+    var memo: String
+    ///    var expense: MySpendingHistoryListItem
     let categories: [(iconName: String, title: String)]
     var body: some View {
         ZStack(alignment: .leading) {
@@ -99,13 +127,13 @@ struct ExpenseRow: View {
                     .resizable()
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
 
-                Text(expense.category)
+                Text(category)
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: Color("Gray06"))
 
                 Spacer()
 
-                Text("\(expense.amount)원")
+                Text("\(amount)원")
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: Color("Gray06"))
             }
@@ -114,7 +142,7 @@ struct ExpenseRow: View {
     }
 
     private var categoryIconName: String {
-        categories.first { $0.title == expense.category }?.iconName ?? "default_icon_name" // 이렇게 안해주니까 preview crashed 발생
+        categories.first { $0.title == category }?.iconName ?? "default_icon_name" // 나중에 빈 값 넘겨주도록 수정
     }
 }
 

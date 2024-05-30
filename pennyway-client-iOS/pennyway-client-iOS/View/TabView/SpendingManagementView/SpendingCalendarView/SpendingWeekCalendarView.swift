@@ -15,6 +15,28 @@ struct SpendingWeekCalendarView: View {
     ) {
         self.spendingHistoryViewModel = spendingHistoryViewModel
     }
+    
+//    var date: Date
+//    var day: Int
+//    var clicked: Bool
+//    var isToday: Bool
+//    var isCurrentMonthDay: Bool
+//    
+//    init(
+//        spendingHistoryViewModel: SpendingHistoryViewModel,
+//        date: Date,
+//        day: Int,
+//        clicked: Bool = false,
+//        isToday: Bool = false,
+//        isCurrentMonthDay: Bool = true
+//    ) {
+//        self.spendingHistoryViewModel = spendingHistoryViewModel
+//        self.date = date
+//        self.day = day
+//        self.clicked = clicked
+//        self.isToday = isToday
+//        self.isCurrentMonthDay = isCurrentMonthDay
+//    }
   
     var body: some View {
         VStack(alignment: .leading, spacing: 20 * DynamicSizeFactor.factor()) {
@@ -111,12 +133,23 @@ struct SpendingWeekCalendarView: View {
 //                            Spacer().frame(height: 8  * DynamicSizeFactor.factor())
                             
                         if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
-                            Text("\(amount)원")
+                            Text("-\(amount)")
                                 .font(.B4MediumFont())
                                 .platformTextColor(color: Color("Gray06"))
                         } else {
                             Text("") 
                         }
+//                        if isCurrentMonthDay {
+//                            if let dailyTotalAmount = getSpendingAmount(for: day) {
+//                                Text("\(dailyTotalAmount)")
+//                                    .font(.B4MediumFont())
+//                                    .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
+//                                    .frame(height: 10 * DynamicSizeFactor.factor())
+//                            } else {
+//                                Spacer()
+//                                    .frame(height: 10 * DynamicSizeFactor.factor())
+//                            }
+//                        }
                     }
 //                        .padding(.top, 20)
                     .frame(height: 60 * DynamicSizeFactor.factor())

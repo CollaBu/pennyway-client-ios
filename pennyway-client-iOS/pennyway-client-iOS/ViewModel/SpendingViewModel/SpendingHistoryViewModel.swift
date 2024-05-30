@@ -34,7 +34,10 @@ class SpendingHistoryViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(GetSpendingHistoryResponseDto.self, from: responseData)
 
                         self.dailySpendings = response.data.spending.dailySpendings
-//                        self.dailyDetailSpendings = response.data.spending.dailyDetailSpendings
+
+                        for i in 0 ..< self.dailySpendings.count {
+                            self.dailyDetailSpendings += self.dailySpendings[i].individuals
+                        }
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("지출 내역 조회 완료 \(jsonString)")
