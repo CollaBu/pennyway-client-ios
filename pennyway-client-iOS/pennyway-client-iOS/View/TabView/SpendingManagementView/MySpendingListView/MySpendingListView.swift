@@ -27,19 +27,42 @@ struct MySpendingListView: View {
                 SpendingWeekCalendarView(spendingHistoryViewModel: spendingHistoryViewModel)
 
                 ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 0 * DynamicSizeFactor.factor()) {
+                    LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
                         ForEach(groupedSpendings(), id: \.key) { date, spendings in
+                            Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+
                             Section(header: headerView(for: date)) {
+                                Spacer().frame(height: 8 * DynamicSizeFactor.factor())
                                 ForEach(spendings, id: \.id) { item in
                                     ExpenseRow(category: item.category.name, amount: item.amount, memo: item.memo, categories: categories)
                                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                 }
+                                .onAppear {
+                                    Log.debug("spendings: \(spendings)")
+                                    Log.debug("group: \(groupedSpendings())")
+                                }
                             }
                         }
-                        Spacer().frame(height: 16 * DynamicSizeFactor.factor()) // 패딩값 수정 필요해보임
+                        Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+
+                        Button(action: {}, label: {
+                            ZStack {
+                                Rectangle()
+                                    .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
+                                    .platformTextColor(color: Color("Gray01"))
+                                    .cornerRadius(26)
+
+                                Text("5월 내역 보기")
+                                    .font(.B1SemiboldeFont())
+                                    .platformTextColor(color: Color("Gray04"))
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 12)
+                            }
+                        })
+
+                        Spacer().frame(height: 48 * DynamicSizeFactor.factor())
                     }
                 }
-                .border(Color.black)
             }
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
@@ -77,7 +100,7 @@ struct MySpendingListView: View {
             .font(.B2MediumFont())
             .platformTextColor(color: Color("Gray04"))
             .padding(.leading, 20)
-            .padding(.bottom, 20)
+            .padding(.bottom, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
@@ -100,8 +123,12 @@ struct MySpendingListView: View {
 
     private func groupedSpendings() -> [(key: String, values: [IndividualSpending])] {
 //            let allSpendings = spendingHistoryViewModel.dailyDetailSpendings.flatMap { $0.spendAt }
-        let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { $0.spendAt })
-        return grouped.map { (key: $0.key, values: $0.value) }.sorted { $0.key > $1.key }
+        let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { dateFormatter(from: $0.spendAt) })
+
+        Log.debug("??????: \(grouped)")
+
+        let group = grouped.map { (key: $0.key, values: $0.value) }
+        return group.sorted { $0.key > $1.key }
     }
 }
 
@@ -130,6 +157,8 @@ struct ExpenseRow: View {
                 Text(category)
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: Color("Gray06"))
+
+                // 메모 추가해야함
 
                 Spacer()
 
