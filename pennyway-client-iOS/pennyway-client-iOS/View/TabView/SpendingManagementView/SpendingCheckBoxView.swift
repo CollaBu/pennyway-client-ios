@@ -69,6 +69,9 @@ struct SpendingCheckBoxView: View {
                     })
                 }
                 .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
+                .onTapGesture {
+                    Log.debug("목표 금액 클릭")
+                }
             }
             .frame(height: 24 * DynamicSizeFactor.factor())
             .padding(.leading, 22)

@@ -51,7 +51,7 @@ struct PhoneNumberInputSectionView: View {
                         }
                     }, label: {
                         Text("인증번호 받기")
-                            .font(.pretendard(.medium, size: 13)) // 폰트 리스트에 없는 예외
+                            .font(.B1MediumFont())
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
                     .padding(.horizontal, 13)
