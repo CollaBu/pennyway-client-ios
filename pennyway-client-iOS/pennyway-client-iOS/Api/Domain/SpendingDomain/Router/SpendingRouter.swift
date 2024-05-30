@@ -4,6 +4,7 @@ import Foundation
 
 enum SpendingRouter: URLRequestConvertible {
     case getSpendingHistory(dto: GetSpendingHistoryRequestDto)
+    case addSpendingHistory(dto: AddSpendingHistoryRequestDto)
     case addSpendingCustomCategory(dto: AddSpendingCustomCategoryRequestDto)
     case getSpendingCustomCategoryList
     
@@ -11,7 +12,7 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case .getSpendingHistory, .getSpendingCustomCategoryList:
             return .get
-        case .addSpendingCustomCategory:
+        case .addSpendingCustomCategory, .addSpendingHistory:
             return .post
         }
     }
@@ -22,7 +23,7 @@ enum SpendingRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .getSpendingHistory:
+        case .getSpendingHistory, .addSpendingHistory:
             return "v2/spendings"
         case .getSpendingCustomCategoryList, .addSpendingCustomCategory:
             return "v2/spending-categories"
@@ -33,6 +34,8 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case .getSpendingHistory, .getSpendingCustomCategoryList, .addSpendingCustomCategory:
             return [:]
+        case let .addSpendingHistory(dto):
+            return try? dto.asDictionary()
         }
     }
     
@@ -42,7 +45,7 @@ enum SpendingRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .addSpendingCustomCategory(dto):
             return try? dto.asDictionary()
-        case .getSpendingCustomCategoryList:
+        case .getSpendingCustomCategoryList, .addSpendingHistory:
             return [:]
         }
     }
@@ -55,6 +58,8 @@ enum SpendingRouter: URLRequestConvertible {
         case .getSpendingHistory:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
+        case .addSpendingHistory:
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
         case .addSpendingCustomCategory:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)

@@ -32,7 +32,7 @@ struct SpendingCalendarCellView: View {
         if clicked {
             if isSpendingDay(day) {
                 return Color("Gray03")
-            }else{
+            } else {
                 return Color("Gray02")
             }
         } else if isToday {

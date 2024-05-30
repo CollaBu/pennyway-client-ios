@@ -44,7 +44,7 @@ struct SpendingCategoryListView: View {
                                     viewModel.navigateToAddCategory = true
                                     isPresented = false
                                 } else {
-                                    viewModel.selectedCategory = (category.icon.rawValue, category.name)
+                                    viewModel.selectedCategory = category
                                     isPresented = false
                                     viewModel.validateForm()
                                 }

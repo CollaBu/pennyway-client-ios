@@ -2,14 +2,13 @@
 import SwiftUI
 
 struct SpendingCheckBoxView: View {
-    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    @ObservedObject var viewModel: TargetAmountViewModel
 
     /// 프로그래스 바에 사용될 최대 값
-    let targetValue: CGFloat = 500_000
     let baseAttribute = BaseAttribute(font: .H3SemiboldFont(), color: Color("Gray07"))
 
     var formattedTotalSpent: String {
-        NumberFormatterUtil.formatNumber(spendingHistoryViewModel.totalSpent)
+        NumberFormatterUtil.formatNumber(viewModel.totalSpent)
     }
 
     var spentInfoText: String {
@@ -25,7 +24,7 @@ struct SpendingCheckBoxView: View {
                                                StringAttribute(
                                                    text: "\(formattedTotalSpent)원",
                                                    font: .H3SemiboldFont(),
-                                                   color: CGFloat(spendingHistoryViewModel.totalSpent) > targetValue ? Color("Red03") : Color("Mint03")
+                                                   color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03")
                                                ))
                 Spacer()
             }
@@ -41,8 +40,8 @@ struct SpendingCheckBoxView: View {
                     .platformTextColor(color: Color("Gray01"))
 
                 Rectangle()
-                    .frame(width: CGFloat(spendingHistoryViewModel.totalSpent) > targetValue ? 244 * DynamicSizeFactor.factor() : min(CGFloat(spendingHistoryViewModel.totalSpent) / targetValue * 100 / 100 * 300, 300), height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
-                    .platformTextColor(color: CGFloat(spendingHistoryViewModel.totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
+                    .frame(width: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? 244 * DynamicSizeFactor.factor() : min(CGFloat(viewModel.totalSpent) / viewModel.targetValue * 100 / 100 * 300, 300), height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
+                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
                     .cornerRadius(15)
             }
             .cornerRadius(15)
@@ -51,13 +50,13 @@ struct SpendingCheckBoxView: View {
             Spacer().frame(height: 2)
 
             HStack {
-                Text("\(spendingHistoryViewModel.totalSpent)")
+                Text("\(viewModel.totalSpent)")
                     .font(.B1SemiboldeFont())
-                    .platformTextColor(color: CGFloat(spendingHistoryViewModel.totalSpent) > targetValue ? Color("Red03") : Color("Mint03"))
+                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
                 Spacer()
 
                 HStack(spacing: 0) {
-                    Text("\(Int(targetValue))")
+                    Text("\(Int(viewModel.targetValue))")
                         .font(.B1SemiboldeFont())
                         .platformTextColor(color: Color("Gray07"))
 

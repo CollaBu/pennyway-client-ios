@@ -58,7 +58,7 @@ struct SelectCategoryIconView: View {
 
             CustomBottomButton(action: {
                 if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
-                    viewModel.selectedCategoryIconName = selectedCategory.rawValue
+                    viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                     viewModel.selectedCategoryIcon = selectedCategoryIcon
                     isPresented = false
                 }
