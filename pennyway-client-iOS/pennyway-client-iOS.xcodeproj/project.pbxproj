@@ -144,6 +144,10 @@
 		4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */; };
 		4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */; };
 		4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E282BE015970058A52A /* ProfileSettingListView.swift */; };
+		4ADACD632C07A7970069EB63 /* TargetAmountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD622C07A7970069EB63 /* TargetAmountAlamofire.swift */; };
+		4ADACD652C07A7C70069EB63 /* TargetAmountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD642C07A7C70069EB63 /* TargetAmountRouter.swift */; };
+		4ADACD712C07A9270069EB63 /* TargetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD702C07A9270069EB63 /* TargetAmountViewModel.swift */; };
+		4ADACD732C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD722C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift */; };
 		4ADACD5A2C0760320069EB63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ADACD592C0760320069EB63 /* GoogleService-Info.plist */; };
 		4ADACD5C2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD5B2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift */; };
 		4ADACD5E2C0774AA0069EB63 /* AddSpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACD5D2C0774AA0069EB63 /* AddSpendingHistoryResponseDto.swift */; };
@@ -350,7 +354,11 @@
 		4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
 		4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOAuthButtonView.swift; sourceTree = "<group>"; };
 		4AD70E282BE015970058A52A /* ProfileSettingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListView.swift; sourceTree = "<group>"; };
-		4ADACD592C0760320069EB63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4ADACD602C07A3EB0069EB63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4ADACD622C07A7970069EB63 /* TargetAmountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountAlamofire.swift; sourceTree = "<group>"; };
+		4ADACD642C07A7C70069EB63 /* TargetAmountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountRouter.swift; sourceTree = "<group>"; };
+		4ADACD702C07A9270069EB63 /* TargetAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountViewModel.swift; sourceTree = "<group>"; };
+		4ADACD722C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
 		4ADACD5B2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4ADACD5D2C0774AA0069EB63 /* AddSpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
@@ -601,6 +609,7 @@
 		4A0FFBE42BCD9F2200EFEC56 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				4ADACD672C07A83B0069EB63 /* TargetAmountDomain */,
 				D851E7192C0273A300316DB3 /* InquiryDomain */,
 				4A0BC6882BF5384C0036D900 /* SpendingDomain */,
 				4ADBFAE72BE2C32800C3ECE4 /* UserDomain */,
@@ -972,6 +981,7 @@
 		4A762AFC2B99A1CB001C1188 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4ADACD6F2C07A8F20069EB63 /* TargetAmountViewModel */,
 				D8E24D982BFD20A0006E8046 /* ProfileViewModel */,
 				4A0BC6962BF53D520036D900 /* SpendingViewModel */,
 				4ADBFAF32BE2C7F500C3ECE4 /* UserViewModel */,
@@ -1169,6 +1179,62 @@
 			path = ProfileMainView;
 			sourceTree = "<group>";
 		};
+		4ADACD672C07A83B0069EB63 /* TargetAmountDomain */ = {
+			isa = PBXGroup;
+			children = (
+				4ADACD6C2C07A8630069EB63 /* Alamofire */,
+				4ADACD6B2C07A85E0069EB63 /* Router */,
+				4ADACD682C07A8490069EB63 /* Dto */,
+			);
+			path = TargetAmountDomain;
+			sourceTree = "<group>";
+		};
+		4ADACD682C07A8490069EB63 /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				4ADACD6A2C07A8530069EB63 /* Response */,
+				4ADACD692C07A84D0069EB63 /* Request */,
+			);
+			path = Dto;
+			sourceTree = "<group>";
+		};
+		4ADACD692C07A84D0069EB63 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		4ADACD6A2C07A8530069EB63 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				4ADACD722C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		4ADACD6B2C07A85E0069EB63 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4ADACD642C07A7C70069EB63 /* TargetAmountRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		4ADACD6C2C07A8630069EB63 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				4ADACD622C07A7970069EB63 /* TargetAmountAlamofire.swift */,
+			);
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		4ADACD6F2C07A8F20069EB63 /* TargetAmountViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4ADACD702C07A9270069EB63 /* TargetAmountViewModel.swift */,
+			);
+			path = TargetAmountViewModel;
 		4ADACD5F2C07770A0069EB63 /* SpendingCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -1544,6 +1610,7 @@
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
+				4ADACD732C07A9C00069EB63 /* GetTotalTargetAmountResponseDto.swift in Sources */,
 				D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */,
 				D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
@@ -1557,6 +1624,7 @@
 				4A3172B62BFBDF7E00923D5F /* AddSpendingCompleteView.swift in Sources */,
 				D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
+				4ADACD712C07A9270069EB63 /* TargetAmountViewModel.swift in Sources */,
 				4ACBAC872BFBD88C0030D935 /* AddSpendingInputFormView.swift in Sources */,
 				4A451C602BFF31FB00A68D6B /* AddSpendingCategoryView.swift in Sources */,
 				4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */,
@@ -1667,8 +1735,10 @@
 				D85927F92BE9116700653391 /* PhoneVerificationViewModel.swift in Sources */,
 				4A0BC6932BF539DA0036D900 /* GetSpendingHistoryResponseDto.swift in Sources */,
 				D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */,
+				4ADACD652C07A7C70069EB63 /* TargetAmountRouter.swift in Sources */,
 				4ADACD5C2C0762050069EB63 /* AddSpendingHistoryRequestDto.swift in Sources */,
 				4A5789772BDC1D5500AFEB26 /* MethodNotAllowedErrorCode.swift in Sources */,
+				4ADACD632C07A7970069EB63 /* TargetAmountAlamofire.swift in Sources */,
 				4A585F622BF2A6F5007DC01A /* SpendingCalendarView.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
 				4AD0D8482BFD384900A0808F /* SpendingCategoryListView.swift in Sources */,
