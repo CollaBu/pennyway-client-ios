@@ -31,43 +31,46 @@ struct MySpendingListView: View {
 
                 ScrollViewReader { proxy in
                     ScrollView {
-                        LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
-                            ForEach(groupedSpendings(), id: \.key) { date, spendings in
-                                Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                        VStack {
+                            LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
+                                ForEach(groupedSpendings(), id: \.key) { date, spendings in
+                                    Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
-                                Section(header: headerView(for: date)) {
-                                    Spacer().frame(height: 8 * DynamicSizeFactor.factor())
-                                    ForEach(spendings, id: \.id) { item in
-                                        let iconName = categories[item.category.icon] ?? ""
-                                        ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                    Section(header: headerView(for: date)) {
+                                        Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                                        ForEach(spendings, id: \.id) { item in
+                                            let iconName = categories[item.category.icon] ?? ""
+                                            ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                        }
+                                        .onAppear {
+                                            Log.debug("spendings: \(spendings)")
+                                            Log.debug("group: \(groupedSpendings())")
+                                        }
                                     }
-                                    .onAppear {
-                                        Log.debug("spendings: \(spendings)")
-                                        Log.debug("group: \(groupedSpendings())")
-                                    }
+                                    .id(date) // ScrollViewReader를 위한 ID 추가
                                 }
-                                .id(date) // ScrollViewReader를 위한 ID 추가
+                                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                             }
-                            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
-                            Button(action: {}, label: {
-                                ZStack {
-                                    Rectangle()
-                                        .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-                                        .platformTextColor(color: Color("Gray01"))
-                                        .cornerRadius(26)
-
-                                    Text("5월 내역 보기")
-                                        .font(.B1SemiboldeFont())
-                                        .platformTextColor(color: Color("Gray04"))
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 12)
-                                }
-                            })
-
-                            Spacer().frame(height: 48 * DynamicSizeFactor.factor())
                         }
+                        // 수정필요
+
+                        Button(action: {}, label: {
+                            ZStack {
+                                Rectangle()
+                                    .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
+                                    .platformTextColor(color: Color("Gray01"))
+                                    .cornerRadius(26)
+
+                                Text("5월 내역 보기")
+                                    .font(.B1SemiboldeFont())
+                                    .platformTextColor(color: Color("Gray04"))
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 12)
+                            }
+
+                        })
+                        .padding(.bottom, 48)
                     }
                     .onChange(of: selectedDateToScroll) { date in
                         if let date = date {
@@ -157,7 +160,6 @@ struct ExpenseRow: View {
     var category: String
     var amount: Int
     var memo: String
-//    let categories: [(iconName: String, title: String)]
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -187,10 +189,6 @@ struct ExpenseRow: View {
         }
         .padding(.horizontal, 20)
     }
-
-//    private var categoryIconName: String {
-//        categories.first { $0.title == category }?.iconName ?? "default_icon_name"
-//    }
 }
 
 // MARK: - MySpendingListView_Previews

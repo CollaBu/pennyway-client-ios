@@ -40,8 +40,6 @@ class SpendingHistoryViewModel: ObservableObject {
                             self.dailyDetailSpendings += self.dailySpendings[i].individuals
                         }
 
-                        Log.debug("왜: \(self.dailyDetailSpendings)")
-
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("지출 내역 조회 완료 \(jsonString)")
                         }
