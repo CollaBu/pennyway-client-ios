@@ -6,19 +6,19 @@ struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State var selectedDateToScroll: String? = nil
 
-    let categories = [
-        ("icon_category_food_on", "식비"),
-        ("icon_category_traffic_on", "교통"),
-        ("icon_category_beauty_on", "미용/패션"),
-        ("icon_category_market_on", "편의점/마트"),
-        ("icon_category_education_on", "교육"),
-        ("icon_category_life_on", "생활"),
-        ("icon_category_health_on", "건강"),
-        ("icon_category_hobby_on", "취미/여가"),
-        ("icon_category_travel_on", "여행/숙박"),
-        ("icon_category_drink_on", "술/유흥"),
-        ("icon_category_event_on", "회비/경조사"),
-        ("icon_category_plus_off", "추가하기")
+    let categories: [String: String] = [
+        "FOOD": "icon_category_food_on",
+        "TRANSPORTATION": "icon_category_traffic_on",
+        "BEAUTY_OR_FASHION": "icon_category_beauty_on",
+        "CONVENIENCE_STORE": "icon_category_market_on",
+        "EDUCATION": "icon_category_education_on",
+        "LIVING": "icon_category_life_on",
+        "HEALTH": "icon_category_health_on",
+        "HOBBY": "icon_category_hobby_on",
+        "TRAVEL": "icon_category_travel_on",
+        "ALCOHOL_OR_ENTERTAINMENT": "icon_category_drink_on",
+        "MEMBERSHIP_OR_FAMILY_EVENT": "icon_category_event_on",
+        "OTHER": "icon_category_plus_off"
     ]
 
     var body: some View {
@@ -38,7 +38,8 @@ struct MySpendingListView: View {
                                 Section(header: headerView(for: date)) {
                                     Spacer().frame(height: 8 * DynamicSizeFactor.factor())
                                     ForEach(spendings, id: \.id) { item in
-                                        ExpenseRow(category: item.category.name, amount: item.amount, memo: item.memo, categories: categories)
+                                        let iconName = categories[item.category.icon] ?? ""
+                                        ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                         Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                     }
                                     .onAppear {
@@ -152,15 +153,16 @@ struct MySpendingListView: View {
 // MARK: - ExpenseRow
 
 struct ExpenseRow: View {
+    var categoryIcon: String
     var category: String
     var amount: Int
     var memo: String
-    let categories: [(iconName: String, title: String)]
+//    let categories: [(iconName: String, title: String)]
 
     var body: some View {
         ZStack(alignment: .leading) {
             HStack(spacing: 10 * DynamicSizeFactor.factor()) {
-                Image("\(categoryIconName)")
+                Image(categoryIcon)
                     .resizable()
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
 
@@ -186,9 +188,9 @@ struct ExpenseRow: View {
         .padding(.horizontal, 20)
     }
 
-    private var categoryIconName: String {
-        categories.first { $0.title == category }?.iconName ?? "default_icon_name"
-    }
+//    private var categoryIconName: String {
+//        categories.first { $0.title == category }?.iconName ?? "default_icon_name"
+//    }
 }
 
 // MARK: - MySpendingListView_Previews
