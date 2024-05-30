@@ -16,7 +16,11 @@ struct AddSpendingHistoryView: View {
 
             CustomBottomButton(action: {
                 if viewModel.isFormValid {
-                    navigateToAddSpendingCategory = true
+                    viewModel.addSpendingHistoryApi { success in
+                        if success {
+                            navigateToAddSpendingCategory = true
+                        }
+                    }
                 }
 
             }, label: "확인", isFormValid: $viewModel.isFormValid)
