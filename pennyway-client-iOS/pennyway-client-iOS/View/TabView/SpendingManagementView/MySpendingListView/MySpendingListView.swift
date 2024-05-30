@@ -22,7 +22,7 @@ struct MySpendingListView: View {
 
     var body: some View {
         ZStack(alignment: .leading) {
-            VStack(spacing: 36 * DynamicSizeFactor.factor()) {
+            VStack(spacing: 40 * DynamicSizeFactor.factor()) {
                 SpendingWeekCalendarView(spendingHistoryViewModel: spendingHistoryViewModel)
 
                 ScrollView {
@@ -114,6 +114,7 @@ struct MySpendingListView: View {
         return dateString
     }
 
+    /// 받아온 날짜가 string이기 때문에 날짜 문자열을 Date객체로 변환
     private func dateFromString(_ dateString: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -121,8 +122,7 @@ struct MySpendingListView: View {
     }
 
     private func groupedSpendings() -> [(key: String, values: [IndividualSpending])] {
-        let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { String($0.spendAt.prefix(10)) }) // 날짜의 앞 10글자 (yyyy-MM-dd)로 그룹화
-
+        let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { String($0.spendAt.prefix(10)) })
         let sortedGroup = grouped.map { (key: $0.key, values: $0.value) }
             .sorted { group1, group2 -> Bool in
                 if let date1 = dateFromString(group1.key + " 00:00:00"), let date2 = dateFromString(group2.key + " 00:00:00") {
@@ -150,9 +150,17 @@ struct ExpenseRow: View {
                     .resizable()
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
 
-                Text(category)
-                    .font(.B1SemiboldeFont())
-                    .platformTextColor(color: Color("Gray06"))
+                VStack(alignment: .leading, spacing: 1) { //Spacer는 Line heigth 적용하면 없애기
+                    Text(category)
+                        .font(.B1SemiboldeFont())
+                        .platformTextColor(color: Color("Gray06"))
+                        .multilineTextAlignment(.leading)
+
+                    Text(memo)
+                        .font(.B3MediumFont())
+                        .platformTextColor(color: Color("Gray04"))
+                        .multilineTextAlignment(.leading)
+                }
 
                 Spacer()
 

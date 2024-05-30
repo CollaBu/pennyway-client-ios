@@ -93,10 +93,12 @@ struct SpendingWeekCalendarView: View {
                     }
         
                 ForEach(components, id: \.self) { date in
-                    VStack(spacing: 0) {
+                    VStack {
                         Text(day(from: date))
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray04"))
+                        
+                        Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                             
                         Text("\(calendar.component(.day, from: date))")
                             .font(.B2MediumFont())
@@ -107,7 +109,9 @@ struct SpendingWeekCalendarView: View {
                             )
                             .platformTextColor(color: textColor(for: date))
                             .padding(.horizontal, 7)
-                            
+                        
+                        Spacer().frame(height: 2 * DynamicSizeFactor.factor())
+
                         if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
                             Text("-\(amount)")
                                 .font(.B4MediumFont())
@@ -116,7 +120,7 @@ struct SpendingWeekCalendarView: View {
                             Text("") 
                         }
                     }
-                    .frame(height: 60 * DynamicSizeFactor.factor())
+                    .frame(height: 65 * DynamicSizeFactor.factor())
                     .cornerRadius(30)
                     .onTapGesture {
                         selectedDate = date
