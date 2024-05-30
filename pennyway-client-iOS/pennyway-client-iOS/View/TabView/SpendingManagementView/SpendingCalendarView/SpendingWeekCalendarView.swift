@@ -115,7 +115,7 @@ struct SpendingWeekCalendarView: View {
                         if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
                             Text("-\(amount)")
                                 .font(.B4MediumFont())
-                                .platformTextColor(color: Color("Gray06"))
+                                .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
                         } else {
                             Text("") 
                         }
@@ -140,7 +140,7 @@ struct SpendingWeekCalendarView: View {
         if calendar.isDateInToday(date) {
             return Color("Mint01")
         } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
-            return Color("Gray03")
+            return spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil ? Color("Gray02") : Color("Gray03")
         } else {
             return Color.clear
         }
@@ -150,7 +150,7 @@ struct SpendingWeekCalendarView: View {
         if calendar.isDateInToday(date) {
             return Color("Mint03")
         } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
-            return Color("Gray05")
+            return spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil ? Color("Gray04") : Color("Gray05")
         } else {
             return Color("Gray06")
         }
