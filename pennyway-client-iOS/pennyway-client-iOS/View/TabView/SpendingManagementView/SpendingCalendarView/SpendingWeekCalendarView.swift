@@ -26,6 +26,7 @@ struct SpendingWeekCalendarView: View {
             .frame(height: 40 * DynamicSizeFactor.factor())
             .padding(.horizontal, 10)
         }
+        .padding(.top, 16)
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
@@ -107,7 +108,6 @@ struct SpendingWeekCalendarView: View {
                             .platformTextColor(color: textColor(for: date))
                             .padding(.horizontal, 7)
                             
-                            
                         if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
                             Text("-\(amount)")
                                 .font(.B4MediumFont())
@@ -115,11 +115,8 @@ struct SpendingWeekCalendarView: View {
                         } else {
                             Text("") 
                         }
-
                     }
                     .frame(height: 60 * DynamicSizeFactor.factor())
-                    .border(Color.black)
-                    
                     .cornerRadius(30)
                     .onTapGesture {
                         selectedDate = date

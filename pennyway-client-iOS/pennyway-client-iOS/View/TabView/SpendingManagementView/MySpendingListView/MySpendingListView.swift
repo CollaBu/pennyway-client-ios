@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 // MARK: - MySpendingListView
@@ -104,15 +103,9 @@ struct MySpendingListView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    ///    private let itemFormatter: DateFormatter = {
-    ///        let formatter = DateFormatter()
-    ///        formatter.locale = Locale(identifier: "ko_KR")
-    ///        formatter.dateFormat = "MMMM d일"
-    ///        return formatter
-    ///    }()
     private func dateFormatter(from dateString: String) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd"
         if let date = formatter.date(from: dateString) {
             formatter.dateFormat = "MMMM d일"
             formatter.locale = Locale(identifier: "ko_KR")
@@ -121,32 +114,35 @@ struct MySpendingListView: View {
         return dateString
     }
 
+    private func dateFromString(_ dateString: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.date(from: dateString)
+    }
+
     private func groupedSpendings() -> [(key: String, values: [IndividualSpending])] {
-//            let allSpendings = spendingHistoryViewModel.dailyDetailSpendings.flatMap { $0.spendAt }
-        let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { dateFormatter(from: $0.spendAt) })
+        let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { String($0.spendAt.prefix(10)) }) // 날짜의 앞 10글자 (yyyy-MM-dd)로 그룹화
 
-        Log.debug("??????: \(grouped)")
+        let sortedGroup = grouped.map { (key: $0.key, values: $0.value) }
+            .sorted { group1, group2 -> Bool in
+                if let date1 = dateFromString(group1.key + " 00:00:00"), let date2 = dateFromString(group2.key + " 00:00:00") {
+                    return date1 > date2
+                }
+                return false
+            }
 
-        let group = grouped.map { (key: $0.key, values: $0.value) }
-        return group.sorted { $0.key > $1.key }
+        return sortedGroup
     }
 }
 
 // MARK: - ExpenseRow
 
-// extension Sequence where Iterator.Element == DailySpending {
-//    func groupedByDate() -> [(key: Date, values: [DailySpending])] {
-//        let grouped = Dictionary(grouping: self, by: { Calendar.current.startOfDay(for: $0.day) })
-//        return grouped.map { (key: $0.key, values: $0.value) }.sorted { $0.key > $1.key }
-//    }
-// }
-
 struct ExpenseRow: View {
     var category: String
     var amount: Int
     var memo: String
-    ///    var expense: MySpendingHistoryListItem
     let categories: [(iconName: String, title: String)]
+
     var body: some View {
         ZStack(alignment: .leading) {
             HStack(spacing: 10 * DynamicSizeFactor.factor()) {
@@ -157,8 +153,6 @@ struct ExpenseRow: View {
                 Text(category)
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: Color("Gray06"))
-
-                // 메모 추가해야함
 
                 Spacer()
 
@@ -171,7 +165,7 @@ struct ExpenseRow: View {
     }
 
     private var categoryIconName: String {
-        categories.first { $0.title == category }?.iconName ?? "default_icon_name" // 나중에 빈 값 넘겨주도록 수정
+        categories.first { $0.title == category }?.iconName ?? "default_icon_name"
     }
 }
 
@@ -180,6 +174,7 @@ struct ExpenseRow: View {
 struct MySpendingListView_Previews: PreviewProvider {
     static var previews: some View {
         MySpendingListView(
-            spendingHistoryViewModel: SpendingHistoryViewModel())
+            spendingHistoryViewModel: SpendingHistoryViewModel()
+        )
     }
 }
