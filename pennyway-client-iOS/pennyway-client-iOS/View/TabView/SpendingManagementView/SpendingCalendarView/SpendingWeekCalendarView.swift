@@ -69,7 +69,7 @@ struct SpendingWeekCalendarView: View {
                     
                     Button(
                         action: {
-//                            changeMonth(1)
+                            changeMonth(1)
                         },
                         label: {
                             Image("icon_arrow_front_small")
@@ -128,7 +128,6 @@ struct SpendingWeekCalendarView: View {
                         selectedDateToScroll = dateFormatter(date: date)
                     }
                     .frame(height: 65 * DynamicSizeFactor.factor())
-                    .cornerRadius(30)
                 }
             }
             .padding(.top, 20)
@@ -157,7 +156,9 @@ struct SpendingWeekCalendarView: View {
     }
   
     private func textColor(for date: Date) -> Color {
-        if calendar.isDateInToday(date) {
+        if spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil {
+            return Color("Gray03")
+        } else if calendar.isDateInToday(date) {
             return Color("Mint03")
         } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
             return spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil ? Color("Gray04") : Color("Gray05")

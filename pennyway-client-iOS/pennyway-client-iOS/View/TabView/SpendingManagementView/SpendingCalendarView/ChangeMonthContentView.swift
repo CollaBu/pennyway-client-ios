@@ -39,7 +39,6 @@ struct ChangeMonthContentView: View {
                     Spacer()
 
                     Button(action: {
-//                        viewModel.isChangeMonth = true
                         isPresented = false
 
                     }, label: {
