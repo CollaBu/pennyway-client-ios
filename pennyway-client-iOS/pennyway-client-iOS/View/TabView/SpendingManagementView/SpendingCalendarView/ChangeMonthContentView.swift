@@ -50,7 +50,7 @@ struct ChangeMonthContentView: View {
                 }
                 .padding(.horizontal, 20)
 
-                Spacer().frame(height: 32 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 32) // 동적 ui 제외
 
                 ScrollView {
                     ForEach(months, id: \.self) { month in

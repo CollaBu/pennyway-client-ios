@@ -123,11 +123,12 @@ struct SpendingWeekCalendarView: View {
                             Text("")
                         }
                     }
-                    .frame(height: 65 * DynamicSizeFactor.factor())
-                    .cornerRadius(30)
                     .onTapGesture {
+                        selectedDate = date
                         selectedDateToScroll = dateFormatter(date: date)
                     }
+                    .frame(height: 65 * DynamicSizeFactor.factor())
+                    .cornerRadius(30)
                 }
             }
             .padding(.top, 20)
