@@ -39,7 +39,7 @@ struct AddSpendingInputFormView: View {
                             .keyboardType(.numberPad)
                             .platformTextColor(color: Color("Gray07"))
                             .onChange(of: viewModel.amountSpentText) { _ in
-                                viewModel.amountSpentText = formatNumber(viewModel.amountSpentText)
+                                viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
                                 viewModel.validateForm()
                             }
                     }
@@ -172,29 +172,6 @@ struct AddSpendingInputFormView: View {
             .padding(.horizontal, 20)
             
             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
-        }
-    }
-    
-    func formatNumber(_ number: String) -> String {
-        let digits = number.filter { $0.isNumber }
-           
-        if digits.isEmpty {
-            return ""
-        }
-                
-        if let number = Int(digits), number <= MaxValue.maxValue {
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            return numberFormatter.string(from: NSNumber(value: number)) ?? String(number)
-        } else {
-            let truncatedDigits = String(digits.prefix(digits.count - 1))
-            if let truncatedNumber = Int(truncatedDigits), truncatedNumber <= MaxValue.maxValue {
-                let numberFormatter = NumberFormatter()
-                numberFormatter.numberStyle = .decimal
-                return numberFormatter.string(from: NSNumber(value: truncatedNumber)) ?? String(truncatedNumber)
-            } else {
-                return truncatedDigits
-            }
         }
     }
 }

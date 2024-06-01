@@ -8,7 +8,7 @@ struct SpendingCheckBoxView: View {
     let baseAttribute = BaseAttribute(font: .H3SemiboldFont(), color: Color("Gray07"))
 
     var formattedTotalSpent: String {
-        NumberFormatterUtil.formatNumber(viewModel.totalSpent)
+        NumberFormatterUtil.formatIntToDecimalString(viewModel.totalSpent)
     }
 
     var spentInfoText: String {
