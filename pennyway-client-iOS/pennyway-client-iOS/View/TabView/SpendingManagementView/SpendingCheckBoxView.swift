@@ -51,7 +51,7 @@ struct SpendingCheckBoxView: View {
 
                 Rectangle()
                     .frame(width: progressWidth, height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
-                    .foregroundColor(CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
+                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
                     .cornerRadius(15)
             }
 

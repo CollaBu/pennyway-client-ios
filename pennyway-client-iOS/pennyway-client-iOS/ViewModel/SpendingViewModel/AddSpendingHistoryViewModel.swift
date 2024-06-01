@@ -110,7 +110,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
         }
     }
 
-    func addSpendingHistoryApi(completion _: @escaping (Bool) -> Void) {
+    func addSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
         let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
         var categoryId = -1
         let spendAt = Date.getBasicformattedDate(from: selectedDate)
@@ -127,32 +127,30 @@ class AddSpendingHistoryViewModel: ObservableObject {
 
         let addSpendingHistoryRequestDto = AddSpendingHistoryRequestDto(amount: amount, categoryId: categoryId, icon: selectedCategoryIconTitle, spendAt: spendAt, accountName: consumerText, memo: memoText)
 
-        Log.debug(addSpendingHistoryRequestDto)
+        SpendingAlamofire.shared.addSpendingHistory(addSpendingHistoryRequestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        _ = try JSONDecoder().decode(AddSpendingHistoryResponseDto.self, from: responseData)
 
-//        SpendingAlamofire.shared.addSpendingHistory(addSpendingHistoryRequestDto) { result in
-//            switch result {
-//            case let .success(data):
-//                if let responseData = data {
-//                    do {
-//                        _ = try JSONDecoder().decode(AddSpendingHistoryResponseDto.self, from: responseData)
-//
-//                        if let jsonString = String(data: responseData, encoding: .utf8) {
-//                            Log.debug("지출내역 추가 완료 \(jsonString)")
-//                        }
-//                        completion(true)
-//                    } catch {
-//                        Log.fault("Error decoding JSON: \(error)")
-//                        completion(false)
-//                    }
-//                }
-//            case let .failure(error):
-//                if let StatusSpecificError = error as? StatusSpecificError {
-//                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-//                } else {
-//                    Log.error("Network request failed: \(error)")
-//                }
-//                completion(false)
-//            }
-//        }
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("지출내역 추가 완료 \(jsonString)")
+                        }
+                        completion(true)
+                    } catch {
+                        Log.fault("Error decoding JSON: \(error)")
+                        completion(false)
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
     }
 }
