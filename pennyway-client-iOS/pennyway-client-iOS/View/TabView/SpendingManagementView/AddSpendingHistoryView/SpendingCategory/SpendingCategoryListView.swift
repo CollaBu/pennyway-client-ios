@@ -41,6 +41,7 @@ struct SpendingCategoryListView: View {
                             .onTapGesture {
                                 if category.name == "추가하기" {
                                     viewModel.selectedCategoryIcon = .etcOn // icon 초기화
+                                    viewModel.categoryName = "" // name 초기화
                                     viewModel.navigateToAddCategory = true
                                     isPresented = false
                                 } else {

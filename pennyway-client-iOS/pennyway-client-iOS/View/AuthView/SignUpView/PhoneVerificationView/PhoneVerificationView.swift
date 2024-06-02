@@ -107,7 +107,7 @@ struct PhoneVerificationView: View {
     
     func handleExistUserLogin() -> some View {
         authViewModel.login()
-        profileInfoViewModel.getUserProfileApi()
+        profileInfoViewModel.getUserProfileApi { _ in }
         return EmptyView()
     }
 }

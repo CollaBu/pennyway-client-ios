@@ -38,10 +38,8 @@ struct AddSpendingInputFormView: View {
                             .font(.H4MediumFont())
                             .keyboardType(.numberPad)
                             .platformTextColor(color: Color("Gray07"))
-                            .onChange(of: viewModel.amountSpentText) { newValue in
-                                if Int(newValue) == nil {
-                                    viewModel.amountSpentText = ""
-                                }
+                            .onChange(of: viewModel.amountSpentText) { _ in
+                                viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
                                 viewModel.validateForm()
                             }
                     }

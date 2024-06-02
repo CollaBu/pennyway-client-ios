@@ -23,23 +23,24 @@ class LoginViewModel: ObservableObject {
                             self.showErrorCodeContent = false
                             self.username = ""
                             self.password = ""
-                            self.profileInfoViewModel.getUserProfileApi()
-                            print(response)
-                            completion(true)
+                            self.profileInfoViewModel.getUserProfileApi { _ in 
+                                Log.debug(response)
+                                completion(true)
+                            }
                         } catch {
-                            print("Error parsing response JSON: \(error)")
+                            Log.fault("Error parsing response JSON: \(error)")
                             completion(false)
                         }
                     }
                 case let .failure(error):
                     self.isLoginSuccessful = false
                     self.showErrorCodeContent = true
-                    completion(false)
                     if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                        print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                        Log.info("Failed to verify: \(errorWithDomainErrorAndMessage)")
                     } else {
-                        print("Failed to verify: \(error)")
+                        Log.error("Failed to verify: \(error)")
                     }
+                    completion(false)
                 }
             }
         }

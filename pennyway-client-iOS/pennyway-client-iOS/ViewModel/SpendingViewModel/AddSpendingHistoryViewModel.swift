@@ -85,6 +85,14 @@ class AddSpendingHistoryViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("카테고리 생성 완료 \(jsonString)")
                         }
+
+                        self.selectedCategory =
+                            SpendingCategoryData(
+                                id: response.data.spendingCategory.id,
+                                isCustom: true,
+                                name: self.categoryName,
+                                icon: self.selectedCategoryIcon ?? .etcOn
+                            )
                         completion(true)
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
@@ -103,7 +111,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
     }
 
     func addSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
-        let amount = Int(amountSpentText) ?? 0
+        let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
         var categoryId = -1
         let spendAt = Date.getBasicformattedDate(from: selectedDate)
 

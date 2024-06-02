@@ -36,7 +36,7 @@ struct SpendingManagementMainView: View {
                                 Text("나의 소비 내역")
                                     .font(.ButtonH4SemiboldFont())
                                     .platformTextColor(color: Color("Gray07"))
-                                    .padding(.leading, 18 * DynamicSizeFactor.factor())
+                                    .padding(.leading, 18)
 
                                 Spacer()
 
@@ -44,7 +44,7 @@ struct SpendingManagementMainView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                    .padding(.trailing, 10 * DynamicSizeFactor.factor())
+                                    .padding(.trailing, 10)
                             }
                         }
 

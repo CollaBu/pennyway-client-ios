@@ -19,7 +19,7 @@ class TargetAmountViewModel: ObservableObject {
 
                         if validTotalSpending.targetAmount.id != -1 && validTotalSpending.targetAmount.amount != -1 {
                             self.targetValue = CGFloat(validTotalSpending.targetAmount.amount)
-                            //TODO: -1인 경우 목표 금액이 없으므로, 목표 금액 설정하기 화면 보여주기
+                            // TODO: -1인 경우 목표 금액이 없으므로, 목표 금액 설정하기 화면 보여주기
                         }
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {

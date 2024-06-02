@@ -8,7 +8,7 @@ struct SpendingCheckBoxView: View {
     let baseAttribute = BaseAttribute(font: .H3SemiboldFont(), color: Color("Gray07"))
 
     var formattedTotalSpent: String {
-        NumberFormatterUtil.formatNumber(viewModel.totalSpent)
+        NumberFormatterUtil.formatIntToDecimalString(viewModel.totalSpent)
     }
 
     var spentInfoText: String {
@@ -17,7 +17,7 @@ struct SpendingCheckBoxView: View {
 
     var body: some View {
         VStack {
-            Spacer().frame(height: 18 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 18)
 
             HStack {
                 spentInfoText.toAttributesText(base: baseAttribute,
@@ -29,30 +29,38 @@ struct SpendingCheckBoxView: View {
                 Spacer()
             }
             .frame(height: 44 * DynamicSizeFactor.factor())
-            .padding(.leading, 18 * DynamicSizeFactor.factor())
+            .padding(.leading, 18)
 
-            Spacer().frame(height: 20 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 20)
 
             // 프로그래스 바
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .frame(width: 244 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                    .platformTextColor(color: Color("Gray01"))
+                    .frame(width: UIScreen.main.bounds.width - 76, height: 24 * DynamicSizeFactor.factor())
+                    .foregroundColor(Color("Gray01"))
+                    .cornerRadius(15)
+
+                let progressWidth: CGFloat = {
+                    if viewModel.targetValue <= 0 {
+                        return 0
+                    }
+                    let ratio = CGFloat(viewModel.totalSpent) / viewModel.targetValue
+                    let width = ratio * (UIScreen.main.bounds.width - 76)
+                    return min(max(width, 0), UIScreen.main.bounds.width - 76)
+                }()
 
                 Rectangle()
-                    .frame(width: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? 244 * DynamicSizeFactor.factor() : min(CGFloat(viewModel.totalSpent) / viewModel.targetValue * 100 / 100 * 300, 300), height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
+                    .frame(width: progressWidth, height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
                     .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
+                    .cornerRadius(15)
             }
-            .cornerRadius(15)
-            .padding(.horizontal, 18 * DynamicSizeFactor.factor())
 
-            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 2)
 
             HStack {
                 Text("\(viewModel.totalSpent)")
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
-                    .padding(.leading, 4 * DynamicSizeFactor.factor())
                 Spacer()
 
                 HStack(spacing: 0) {
@@ -67,8 +75,13 @@ struct SpendingCheckBoxView: View {
                             .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                     })
                 }
+                .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
+                .onTapGesture {
+                    Log.debug("목표 금액 클릭")
+                }
             }
-            .frame(width: 244 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+            .padding(.leading, 22)
+            .padding(.trailing, 13)
 
             Spacer().frame(height: 16)
         }
