@@ -123,12 +123,6 @@ struct InquiryView: View {
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                 .rotationEffect(.degrees(showAgreement ? 180 : 0))
 
-//                            let selected = showAgreement == true ? Image("icon_arrow_up") : Image("icon_arrow_down")
-//                                    
-//                            selected
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                     
                         })
                         .padding(.trailing, 20 * DynamicSizeFactor.factor())
