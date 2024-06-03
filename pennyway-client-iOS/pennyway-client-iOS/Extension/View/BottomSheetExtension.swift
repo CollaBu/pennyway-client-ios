@@ -18,7 +18,7 @@ struct BottomSheet<SheetContent: View>: ViewModifier {
                         .frame(maxWidth: .infinity)
                         .frame(height: maxHeight)
                         .background(
-                            RoundedCornerUtil(radius: 20, corners: [.topLeft, .topRight])
+                            RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight])
                                 .fill(Color("White01"))
                         )
                 }
@@ -65,8 +65,10 @@ struct DragBottomSheet<SheetContent: View>: ViewModifier {
                     Spacer()
                     sheetContent
                         .frame(maxWidth: .infinity)
-                        .background(Color.white)
-                        .cornerRadius(15)
+                        .background(
+                            RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight])
+                                .fill(Color("White01"))
+                        )
                         .offset(y: max(0, offset))
                         .gesture(
                             DragGesture()

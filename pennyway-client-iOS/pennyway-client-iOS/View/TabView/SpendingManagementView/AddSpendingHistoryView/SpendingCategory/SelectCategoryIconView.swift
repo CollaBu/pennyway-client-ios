@@ -6,6 +6,7 @@ import SwiftUI
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    @State var selectedCategoryIcon: CategoryIconName = .etcOn
 
     let columns = [
         GridItem(.flexible(), spacing: 32),
@@ -43,12 +44,12 @@ struct SelectCategoryIconView: View {
 
             LazyVGrid(columns: columns, spacing: 20 * DynamicSizeFactor.factor()) {
                 ForEach(icons) { icon in
-                    Image((viewModel.selectedCategoryIcon?.rawValue == icon.onIcon.rawValue ? icon.onIcon : icon.offIcon).rawValue)
+                    Image((selectedCategoryIcon.rawValue == icon.onIcon.rawValue ? icon.onIcon : icon.offIcon).rawValue)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
                         .onTapGesture {
-                            viewModel.selectedCategoryIcon = icon.onIcon
+                            selectedCategoryIcon = icon.onIcon
                         }
                 }
             }
@@ -59,6 +60,7 @@ struct SelectCategoryIconView: View {
             CustomBottomButton(action: {
                 if let selectedCategory = SpendingCategoryIconList.fromIcon(viewModel.selectedCategoryIcon ?? .etcOn) {
                     viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
+                    viewModel.selectedCategoryIcon = selectedCategoryIcon
                     isPresented = false
                 }
             }, label: "확인", isFormValid: .constant(true))
@@ -66,5 +68,10 @@ struct SelectCategoryIconView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            if let icon = viewModel.selectedCategoryIcon {
+                selectedCategoryIcon = icon
+            }
+        }
     }
 }
