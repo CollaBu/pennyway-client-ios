@@ -43,8 +43,9 @@ struct DragBottomSheet<SheetContent: View>: ViewModifier {
 
     @State private var offset: CGFloat = 0
     @State private var lastDragValue: DragGesture.Value?
+    @State private var currentHeight: CGFloat = UIScreen.main.bounds.height
 
-    init(isPresented: Binding<Bool>, @ViewBuilder sheetContent: () -> SheetContent) {
+    init(isPresented: Binding<Bool>, @ViewBuilder sheetContent: @escaping () -> SheetContent) {
         _isPresented = isPresented
         self.sheetContent = sheetContent()
     }

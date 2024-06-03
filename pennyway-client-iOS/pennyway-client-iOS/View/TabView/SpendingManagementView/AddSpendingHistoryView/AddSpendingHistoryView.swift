@@ -63,6 +63,9 @@ struct AddSpendingHistoryView: View {
         .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
             SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
         }
+//        .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) { offset in
+//            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented, offset: offset)
+//        }
 
         .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
             SelectSpendingDayView(isPresented: $viewModel.isSelectDayViewPresented, selectedDate: $viewModel.selectedDate)
