@@ -6,13 +6,12 @@ import SwiftUI
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    @State var selectedCategoryIcon: CategoryIconName = .etcOn
 
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(), spacing: 32),
+        GridItem(.flexible(), spacing: 32),
+        GridItem(.flexible(), spacing: 32),
+        GridItem(.flexible(), spacing: 32)
     ]
 
     let icons: [CategoryIconListItem] = [
@@ -44,22 +43,22 @@ struct SelectCategoryIconView: View {
 
             LazyVGrid(columns: columns, spacing: 20 * DynamicSizeFactor.factor()) {
                 ForEach(icons) { icon in
-                    Image((selectedCategoryIcon.rawValue == icon.onIcon.rawValue ? icon.onIcon : icon.offIcon).rawValue)
+                    Image((viewModel.selectedCategoryIcon?.rawValue == icon.onIcon.rawValue ? icon.onIcon : icon.offIcon).rawValue)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
                         .onTapGesture {
-                            selectedCategoryIcon = icon.onIcon
+                            viewModel.selectedCategoryIcon = icon.onIcon
                         }
                 }
             }
+            .padding(.horizontal, 32)
 
             Spacer()
 
             CustomBottomButton(action: {
-                if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
+                if let selectedCategory = SpendingCategoryIconList.fromIcon(viewModel.selectedCategoryIcon ?? .etcOn) {
                     viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                    viewModel.selectedCategoryIcon = selectedCategoryIcon
                     isPresented = false
                 }
             }, label: "확인", isFormValid: .constant(true))
