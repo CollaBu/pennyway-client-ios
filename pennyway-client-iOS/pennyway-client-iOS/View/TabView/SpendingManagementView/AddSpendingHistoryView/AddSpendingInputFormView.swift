@@ -38,10 +38,8 @@ struct AddSpendingInputFormView: View {
                             .font(.H4MediumFont())
                             .keyboardType(.numberPad)
                             .platformTextColor(color: Color("Gray07"))
-                            .onChange(of: viewModel.amountSpentText) { newValue in
-                                if Int(newValue) == nil {
-                                    viewModel.amountSpentText = ""
-                                }
+                            .onChange(of: viewModel.amountSpentText) { _ in
+                                viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
                                 viewModel.validateForm()
                             }
                     }
@@ -62,12 +60,12 @@ struct AddSpendingInputFormView: View {
                 HStack(spacing: 0) {
                     if let category = viewModel.selectedCategory {
                         HStack {
-                            Image(category.0)
+                            Image(category.icon.rawValue)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                             
-                            Text(category.1)
+                            Text(category.name)
                                 .font(.B1MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
                         }
@@ -117,6 +115,7 @@ struct AddSpendingInputFormView: View {
             .padding(.horizontal, 20)
             .onTapGesture {
                 viewModel.isSelectDayViewPresented = true
+                Log.debug(viewModel.selectedDate)
             }
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())

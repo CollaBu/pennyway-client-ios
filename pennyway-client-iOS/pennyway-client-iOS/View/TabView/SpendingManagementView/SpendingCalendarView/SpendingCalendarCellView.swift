@@ -14,7 +14,7 @@ struct SpendingCalendarCellView: View {
 
     private var textColor: Color {
         if clicked {
-            return Color("White01")
+            return Color("Gray05")
         } else if isCurrentMonthDay {
             if isToday {
                 return Color("Mint03")
@@ -30,8 +30,11 @@ struct SpendingCalendarCellView: View {
 
     private var backgroundColor: Color {
         if clicked {
-            Log.debug(date)
-            return Color("Gray07")
+            if isSpendingDay(day) {
+                return Color("Gray03")
+            } else {
+                return Color("Gray02")
+            }
         } else if isToday {
             return Color("Mint01")
         } else {

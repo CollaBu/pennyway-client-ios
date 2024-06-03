@@ -77,7 +77,6 @@ struct AddSpendingCategoryView: View {
 
             CustomBottomButton(action: {
                 if !viewModel.categoryName.isEmpty {
-                    viewModel.selectedCategory = ((viewModel.selectedCategoryIcon ?? .etcOn).rawValue, viewModel.categoryName)
                     viewModel.addSpendingCustomCategoryApi { success in
                         if success {
                             Log.debug("카테고리 생성 완료")

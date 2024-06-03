@@ -33,7 +33,7 @@ struct SpendingCalenderView: View {
         VStack {
             yearMonthView
             
-            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
       
             HStack {
                 ForEach(0 ..< 7, id: \.self) { index in

@@ -3,6 +3,7 @@ import SwiftUI
 
 struct SpendingManagementMainView: View {
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
+    @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToAddSpendingHistory = false
     @State private var navigateToMySpendingList = false
 
@@ -12,7 +13,7 @@ struct SpendingManagementMainView: View {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                    SpendingCheckBoxView(spendingHistoryViewModel: spendingHistoryViewModel)
+                    SpendingCheckBoxView(viewModel: targetAmountViewModel)
                         .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
@@ -35,7 +36,7 @@ struct SpendingManagementMainView: View {
                                 Text("나의 소비 내역")
                                     .font(.ButtonH4SemiboldFont())
                                     .platformTextColor(color: Color("Gray07"))
-                                    .padding(.leading, 18 * DynamicSizeFactor.factor())
+                                    .padding(.leading, 18)
 
                                 Spacer()
 
@@ -43,7 +44,7 @@ struct SpendingManagementMainView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                    .padding(.trailing, 10 * DynamicSizeFactor.factor())
+                                    .padding(.trailing, 10)
                             }
                         }
 
@@ -59,6 +60,7 @@ struct SpendingManagementMainView: View {
             }
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
+                targetAmountViewModel.getTotalTargetAmountApi { _ in }
             }
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
             .setTabBarVisibility(isHidden: false)
