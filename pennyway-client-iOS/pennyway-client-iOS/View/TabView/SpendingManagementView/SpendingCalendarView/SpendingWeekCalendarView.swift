@@ -24,9 +24,10 @@ struct SpendingWeekCalendarView: View {
             monthView
                 
             ZStack(alignment: .top) {
+                dayHeaderView
                 dayView
             }
-            .frame(height: 40 * DynamicSizeFactor.factor())
+            .frame(height: 70 * DynamicSizeFactor.factor())
             .padding(.horizontal, 10)
         }
         .padding(.top, 16)
@@ -80,27 +81,35 @@ struct SpendingWeekCalendarView: View {
         }
         .padding(.horizontal, 20)
     }
+    
+    // MARK: - 요일 헤더 뷰
+
+    private var dayHeaderView: some View {
+        HStack(spacing: 34 * DynamicSizeFactor.factor()) {
+            ForEach(["일", "월", "화", "수", "목", "금", "토"], id: \.self) { day in
+                Text(day)
+                    .font(.B2MediumFont())
+                    .platformTextColor(color: Color("Gray04"))
+                    .frame(maxWidth: .infinity)
+            }
+        }
+        .padding(.horizontal, 10)
+    }
   
     // MARK: - 일자 표시 뷰
 
     @ViewBuilder
     private var dayView: some View {
-        let startDate = calendar.date(from: Calendar.current.dateComponents([.year, .month], from: selectedDate))!
-    
+        let today = Date()
+        let weekday = calendar.component(.weekday, from: today) - 1
+        let startOfWeek = calendar.date(byAdding: .day, value: -weekday, to: today)!
+
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10 * DynamicSizeFactor.factor()) {
-                let components = (
-                    0 ..< calendar.range(of: .day, in: .month, for: startDate)!.count)
-                    .map {
-                        calendar.date(byAdding: .day, value: $0, to: startDate)!
-                    }
-        
+            HStack(spacing: 14 * DynamicSizeFactor.factor()) {
+                let components = dateRange(for: startOfWeek)
+                
                 ForEach(components, id: \.self) { date in
                     VStack {
-                        Text(day(from: date))
-                            .font(.B2MediumFont())
-                            .platformTextColor(color: Color("Gray04"))
-                        
                         Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                             
                         Text("\(calendar.component(.day, from: date))")
@@ -108,9 +117,9 @@ struct SpendingWeekCalendarView: View {
                             .frame(width: 23 * DynamicSizeFactor.factor(), height: 26 * DynamicSizeFactor.factor())
                             .background(
                                 Circle()
-                                    .platformTextColor(color: circleColor(for: date))
+                                    .foregroundColor(circleColor(for: date))
                             )
-                            .platformTextColor(color: textColor(for: date))
+                            .foregroundColor(textColor(for: date))
                             .padding(.horizontal, 7)
                         
                         Spacer().frame(height: 2 * DynamicSizeFactor.factor())
@@ -118,19 +127,21 @@ struct SpendingWeekCalendarView: View {
                         if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
                             Text("-\(amount)")
                                 .font(.B4MediumFont())
-                                .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
+                                .foregroundColor(calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
                         } else {
                             Text("")
                         }
                     }
                     .onTapGesture {
-                        selectedDate = date
-                        selectedDateToScroll = dateFormatter(date: date)
+                        if !calendar.isDateInFuture(date) {
+                            selectedDate = date
+                            selectedDateToScroll = dateFormatter(date: date)
+                        }
                     }
                     .frame(height: 65 * DynamicSizeFactor.factor())
                 }
             }
-            .padding(.top, 20)
+            .padding(.top, 7 * DynamicSizeFactor.factor())
         }
     }
     
@@ -156,15 +167,25 @@ struct SpendingWeekCalendarView: View {
     }
   
     private func textColor(for date: Date) -> Color {
-        if spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil {
-            return Color("Gray03")
-        } else if calendar.isDateInToday(date) {
+        if calendar.isDateInToday(date) {
             return Color("Mint03")
+        } else if spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil {
+            return Color("Gray03")
         } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
             return spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil ? Color("Gray04") : Color("Gray05")
         } else {
             return Color("Gray06")
         }
+    }
+
+    private func dateRange(for startOfWeek: Date) -> [Date] {
+        var dates = [Date]()
+        for i in 0 ..< 7 {
+            if let date = calendar.date(byAdding: .day, value: i, to: startOfWeek) {
+                dates.append(date)
+            }
+        }
+        return dates
     }
 }
 
@@ -197,6 +218,12 @@ private extension SpendingWeekCalendarView {
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateFormat = "EEEEE"
         return formatter.string(from: date)
+    }
+}
+
+extension Calendar {
+    func isDateInFuture(_ date: Date) -> Bool {
+        return date > Date()
     }
 }
 
