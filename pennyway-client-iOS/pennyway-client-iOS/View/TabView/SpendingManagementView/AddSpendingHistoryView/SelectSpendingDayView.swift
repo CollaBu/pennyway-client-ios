@@ -16,13 +16,12 @@ struct SelectSpendingDayView: View {
 
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
-            VStack {
-                DatePicker("", selection: $selectedDate, displayedComponents: [.date])
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .labelsHidden()
-                    .environment(\.locale, Locale(identifier: "ko_KR"))
-            }
-            .frame(height: 114 * DynamicSizeFactor.factor())
+            DatePicker("", selection: $selectedDate, in: dateRange, displayedComponents: [.date])
+                .datePickerStyle(WheelDatePickerStyle())
+                .labelsHidden()
+                .environment(\.locale, Locale(identifier: "ko_KR"))
+                .frame(height: 114 * DynamicSizeFactor.factor())
+                .clipped()
 
             Spacer()
 
@@ -33,5 +32,12 @@ struct SelectSpendingDayView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
+    }
+
+    private var dateRange: ClosedRange<Date> { // 2000년도부터 현재까지로 제한
+        let calendar = Calendar.current
+        let startDate = calendar.date(from: DateComponents(year: 2000, month: 1, day: 1))!
+        let endDate = Date()
+        return startDate ... endDate
     }
 }

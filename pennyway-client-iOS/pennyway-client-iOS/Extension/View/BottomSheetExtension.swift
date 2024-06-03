@@ -75,7 +75,7 @@ struct DragBottomSheet<SheetContent: View>: ViewModifier {
                                     self.lastDragValue = value
                                 }
                                 .onEnded { _ in
-                                    if self.offset > 400 {//수정 필요
+                                    if self.offset > 400 { // 수정 필요
                                         self.offset = 0
                                         self.lastDragValue = nil
                                         self.isPresented = false
