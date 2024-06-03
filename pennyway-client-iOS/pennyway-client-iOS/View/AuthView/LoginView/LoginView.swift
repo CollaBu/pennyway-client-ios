@@ -33,8 +33,9 @@ struct LoginView: View {
                                 .font(.B3MediumFont())
                                 .padding(.horizontal, 8 * DynamicSizeFactor.factor())
                         }
-                        .padding(.bottom, 34)
+
                     })
+                    .padding(.bottom, 34)
                 }
                 .edgesIgnoringSafeArea(.bottom)
 

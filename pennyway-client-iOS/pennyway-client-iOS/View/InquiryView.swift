@@ -113,14 +113,16 @@ struct InquiryView: View {
                         Spacer()
                                 
                         Button(action: {
-                            showAgreement.toggle()
+                            withAnimation {
+                                showAgreement.toggle()
+                            }
                         }, label: {
-                            let selected = showAgreement == true ? Image("icon_arrow_up") : Image("icon_arrow_down")
-                                    
-                            selected
+                            Image("icon_arrow_down")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                .rotationEffect(.degrees(showAgreement ? 180 : 0))
+
                                     
                         })
                         .padding(.trailing, 20 * DynamicSizeFactor.factor())
@@ -130,6 +132,7 @@ struct InquiryView: View {
                         
                 if showAgreement {
                     agreementSection()
+                        .transition(.opacity.animation(.easeOut))
                 }
                         
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())

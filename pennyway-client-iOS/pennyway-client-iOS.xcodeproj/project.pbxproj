@@ -185,7 +185,6 @@
 		D851E7392C06134200316DB3 /* MySpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E7382C06134200316DB3 /* MySpendingListView.swift */; };
 		D851E73B2C06135100316DB3 /* NoSpendingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E73A2C06135100316DB3 /* NoSpendingHistoryView.swift */; };
 		D851E73D2C0613CF00316DB3 /* SpendingWeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E73C2C0613CF00316DB3 /* SpendingWeekCalendarView.swift */; };
-		D851E73F2C0613F900316DB3 /* MySpendingHistoryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D851E73E2C0613F900316DB3 /* MySpendingHistoryListItem.swift */; };
 		D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927ED2BE6842A00653391 /* CustomPopUpView.swift */; };
 		D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */; };
 		D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F32BE9116700653391 /* SignUpFormViewModel.swift */; };
@@ -394,7 +393,6 @@
 		D851E7382C06134200316DB3 /* MySpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListView.swift; sourceTree = "<group>"; };
 		D851E73A2C06135100316DB3 /* NoSpendingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSpendingHistoryView.swift; sourceTree = "<group>"; };
 		D851E73C2C0613CF00316DB3 /* SpendingWeekCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingWeekCalendarView.swift; sourceTree = "<group>"; };
-		D851E73E2C0613F900316DB3 /* MySpendingHistoryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingHistoryListItem.swift; sourceTree = "<group>"; };
 		D85927ED2BE6842A00653391 /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
 		D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogoutViewModel.swift; sourceTree = "<group>"; };
 		D85927F32BE9116700653391 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
@@ -1323,7 +1321,6 @@
 			children = (
 				4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */,
 				4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */,
-				D851E73E2C0613F900316DB3 /* MySpendingHistoryListItem.swift */,
 			);
 			path = ListItem;
 			sourceTree = "<group>";
@@ -1751,7 +1748,6 @@
 				4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */,
 				D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */,
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
-				D851E73F2C0613F900316DB3 /* MySpendingHistoryListItem.swift in Sources */,
 				D8180C002BE507E100F837FB /* FindIdView.swift in Sources */,
 				D8180C082BE5168800F837FB /* (null) in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,

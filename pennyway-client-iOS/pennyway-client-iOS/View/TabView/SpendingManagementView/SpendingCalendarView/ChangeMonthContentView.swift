@@ -2,13 +2,13 @@
 import SwiftUI
 
 struct ChangeMonthContentView: View {
-    @ObservedObject var viewModel: MySpendingListViewModel
+    @ObservedObject var viewModel: SpendingHistoryViewModel
     @Binding var isPresented: Bool
     @State private var selectedMonth: Date = Date()
     private let calendars = Calendar.current
     private let months: [Date]
 
-    init(viewModel: MySpendingListViewModel, isPresented: Binding<Bool>) {
+    init(viewModel: SpendingHistoryViewModel, isPresented: Binding<Bool>) {
         self.viewModel = viewModel
         _isPresented = isPresented
         months = {
@@ -39,7 +39,6 @@ struct ChangeMonthContentView: View {
                     Spacer()
 
                     Button(action: {
-                        viewModel.isChangeMonth = true
                         isPresented = false
 
                     }, label: {
@@ -50,7 +49,7 @@ struct ChangeMonthContentView: View {
                 }
                 .padding(.horizontal, 20)
 
-                Spacer().frame(height: 32 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 32) // 동적 ui 제외
 
                 ScrollView {
                     ForEach(months, id: \.self) { month in
@@ -81,5 +80,5 @@ struct ChangeMonthContentView: View {
 }
 
 #Preview {
-    ChangeMonthContentView(viewModel: MySpendingListViewModel(), isPresented: .constant(true))
+    ChangeMonthContentView(viewModel: SpendingHistoryViewModel(), isPresented: .constant(true))
 }

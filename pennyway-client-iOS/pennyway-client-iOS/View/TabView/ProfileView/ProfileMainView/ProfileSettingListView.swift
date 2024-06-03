@@ -116,7 +116,7 @@ struct ProfileSettingSectionView: View {
                 Button(action: {
                     item.action() // 항목별 액션 실행
                 }, label: {
-                    HStack {
+                    HStack(spacing: 13) { // 동적 ui 적용하니까 너무 간격 넓음
                         Image(item.icon)
                             .resizable()
                             .aspectRatio(contentMode: .fit)

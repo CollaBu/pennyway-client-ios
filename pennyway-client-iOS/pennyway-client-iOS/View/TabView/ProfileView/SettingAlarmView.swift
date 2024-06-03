@@ -34,7 +34,7 @@ struct SettingAlarmView: View {
                                     .platformTextColor(color: Color("Gray07"))
                             })
                             .toggleStyle(CustomToggleStyle())
-                            .padding(.trailing, 42)
+                            .padding(.trailing, 30)
                             .padding(.vertical, 18)
                         }
                     }
