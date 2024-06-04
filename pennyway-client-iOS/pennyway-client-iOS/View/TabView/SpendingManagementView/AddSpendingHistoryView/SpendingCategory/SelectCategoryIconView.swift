@@ -9,10 +9,10 @@ struct SelectCategoryIconView: View {
     @State var selectedCategoryIcon: CategoryIconName = .etcOn
 
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(), spacing: 32),
+        GridItem(.flexible(), spacing: 32),
+        GridItem(.flexible(), spacing: 32),
+        GridItem(.flexible(), spacing: 32)
     ]
 
     let icons: [CategoryIconListItem] = [
@@ -46,18 +46,19 @@ struct SelectCategoryIconView: View {
                 ForEach(icons) { icon in
                     Image((selectedCategoryIcon.rawValue == icon.onIcon.rawValue ? icon.onIcon : icon.offIcon).rawValue)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
                         .onTapGesture {
                             selectedCategoryIcon = icon.onIcon
                         }
                 }
             }
+            .padding(.horizontal, 32)
 
             Spacer()
 
             CustomBottomButton(action: {
-                if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
+                if let selectedCategory = SpendingCategoryIconList.fromIcon(viewModel.selectedCategoryIcon ?? .etcOn) {
                     viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                     viewModel.selectedCategoryIcon = selectedCategoryIcon
                     isPresented = false
@@ -67,5 +68,10 @@ struct SelectCategoryIconView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            if let icon = viewModel.selectedCategoryIcon {
+                selectedCategoryIcon = icon
+            }
+        }
     }
 }

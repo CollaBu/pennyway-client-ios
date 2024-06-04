@@ -18,10 +18,10 @@ struct AddSpendingCategoryView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)
 
-                Image("icon_navigationbar_write_gray")
+                Image("icon_navigationbar_write_gray_bg")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
+                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                     .background(Color("Gray04"))
                     .clipShape(Circle())
                     .offset(x: 20 * DynamicSizeFactor.factor(), y: 20 * DynamicSizeFactor.factor())
