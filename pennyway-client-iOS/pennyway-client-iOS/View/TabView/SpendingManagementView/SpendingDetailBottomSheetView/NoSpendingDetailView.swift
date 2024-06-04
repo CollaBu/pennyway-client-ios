@@ -12,26 +12,20 @@ struct NoSpendingDetailView: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        
-                    }, label: {
+                    Button(action: {}, label: {
                         Image("icon_expenditure_share")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 24, height: 24)
 
-
                     })
                     .padding(10)
                     
-                    Button(action: {
-                        
-                    }, label: {
+                    Button(action: {}, label: {
                         Image("icon_navigationbar_write_gray")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 20, height: 20)
-
 
                     })
                 }
@@ -54,7 +48,7 @@ struct NoSpendingDetailView: View {
                 Text("-0원")
                     .font(.H1BoldFont())
                     .platformTextColor(color: Color("Gray07"))
-                    .padding(.vertical, 3 * DynamicSizeFactor.factor()) //line-height 적용하면 지울것
+                    .padding(.vertical, 3 * DynamicSizeFactor.factor()) // line-height 적용하면 지울것
                 
                 Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                 
@@ -66,7 +60,6 @@ struct NoSpendingDetailView: View {
         .border(Color.black)
         .padding(.leading, 20)
         .padding(.trailing, 17)
-
     }
 }
 
