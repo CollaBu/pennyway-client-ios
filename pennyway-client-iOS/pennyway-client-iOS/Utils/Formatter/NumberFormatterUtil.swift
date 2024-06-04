@@ -17,11 +17,11 @@ class NumberFormatterUtil {
             return ""
         }
                 
-        if let number = Int(digits), number <= MaxValue.maxValue {//정수 최댓값 넘지 않은 경우
+        if let number = Int(digits), number <= MaxValue.maxValue { // 정수 최댓값 넘지 않은 경우
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .decimal
             return numberFormatter.string(from: NSNumber(value: number)) ?? String(number)
-        } else {//정수 최댓값 넘은 경우
+        } else { // 정수 최댓값 넘은 경우
             let truncatedDigits = String(digits.prefix(digits.count - 1))
             if let truncatedNumber = Int(truncatedDigits), truncatedNumber <= MaxValue.maxValue {
                 let numberFormatter = NumberFormatter()
