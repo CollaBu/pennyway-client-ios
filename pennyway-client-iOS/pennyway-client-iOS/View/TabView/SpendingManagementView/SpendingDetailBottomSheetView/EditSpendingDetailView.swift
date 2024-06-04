@@ -47,6 +47,13 @@ struct EditSpendingDetailView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
+                
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(width: 40, height: 4)
+                    .platformTextColor(color: Color("Gray03"))
+                    .padding(.top, 12)
+                    .padding(.horizontal, 140)
+                                
                 HStack(spacing: 0) {
                     Button(action: {}, label: {
                         Image("icon_arrow_back")
@@ -71,7 +78,7 @@ struct EditSpendingDetailView: View {
                             .padding(8)
                     })
                 }
-                
+                ScrollView {
                 Spacer().frame(height: 11 * DynamicSizeFactor.factor())
                 
                 HStack(spacing: 4 * DynamicSizeFactor.factor()) {
@@ -97,7 +104,6 @@ struct EditSpendingDetailView: View {
                 
                 Spacer().frame(height: 20 * DynamicSizeFactor.factor())
                 
-                ScrollView {
                     VStack(spacing: 0) {
                         ForEach(spendingDetails.indices, id: \.self) { index in
                             HStack(spacing: 0) {
@@ -142,12 +148,10 @@ struct EditSpendingDetailView: View {
                 }
                 
                 Spacer() // 바텀시트 높이에 따라 조건문으로 spacer()처리해야 함.
-                
             }
             CustomBottomButton(action: { isActive = true }, label: "완료", isFormValid: .constant(true))
                 .offset(y: 217 * DynamicSizeFactor.factor())
                 .zIndex(1)
-                
         }
         .padding(.leading, 3)
         .padding(.trailing, 5)
