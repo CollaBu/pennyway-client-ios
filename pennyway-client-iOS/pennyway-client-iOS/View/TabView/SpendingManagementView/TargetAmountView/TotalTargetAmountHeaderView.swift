@@ -25,9 +25,11 @@ struct TotalTargetAmountHeaderView: View {
             .padding(.horizontal, 20)
                 
             HStack {
-                HStack {
-                    Text("0원") // 이미지로 변경
-                        .font(.headline)
+                HStack(spacing: 0) {
+                    Image("icon_arrow_front_small")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                     
                     Text("현재 소비 금액")
                         .font(.B1MediumFont())

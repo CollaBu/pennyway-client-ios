@@ -109,6 +109,7 @@
 		4A641A0D2C0EE2650041B053 /* TotalTargetAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A641A0C2C0EE2650041B053 /* TotalTargetAmountView.swift */; };
 		4A641A0F2C0F5A840041B053 /* TotalTargetAmountHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A641A0E2C0F5A840041B053 /* TotalTargetAmountHeaderView.swift */; };
 		4A641A112C0F6F640041B053 /* TotalTargetAmountContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A641A102C0F6F640041B053 /* TotalTargetAmountContentView.swift */; };
+		4A641A132C0F7BA20041B053 /* TotalTargetAmountGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A641A122C0F7BA20041B053 /* TotalTargetAmountGraphView.swift */; };
 		4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */; };
 		4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */; };
 		4A69C1522BE695FF00A27B82 /* FindUserNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */; };
@@ -321,6 +322,7 @@
 		4A641A0C2C0EE2650041B053 /* TotalTargetAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTargetAmountView.swift; sourceTree = "<group>"; };
 		4A641A0E2C0F5A840041B053 /* TotalTargetAmountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTargetAmountHeaderView.swift; sourceTree = "<group>"; };
 		4A641A102C0F6F640041B053 /* TotalTargetAmountContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTargetAmountContentView.swift; sourceTree = "<group>"; };
+		4A641A122C0F7BA20041B053 /* TotalTargetAmountGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTargetAmountGraphView.swift; sourceTree = "<group>"; };
 		4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
@@ -975,6 +977,7 @@
 				4A641A0C2C0EE2650041B053 /* TotalTargetAmountView.swift */,
 				4A641A0E2C0F5A840041B053 /* TotalTargetAmountHeaderView.swift */,
 				4A641A102C0F6F640041B053 /* TotalTargetAmountContentView.swift */,
+				4A641A122C0F7BA20041B053 /* TotalTargetAmountGraphView.swift */,
 			);
 			path = TargetAmountView;
 			sourceTree = "<group>";
@@ -1602,6 +1605,7 @@
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
+				4A641A132C0F7BA20041B053 /* TotalTargetAmountGraphView.swift in Sources */,
 				4A3701B22C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
