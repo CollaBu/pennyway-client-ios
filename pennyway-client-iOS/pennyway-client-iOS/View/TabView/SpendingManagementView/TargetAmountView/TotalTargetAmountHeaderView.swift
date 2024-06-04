@@ -24,10 +24,31 @@ struct TotalTargetAmountHeaderView: View {
             .frame(height: 135 * DynamicSizeFactor.factor())
             .padding(.horizontal, 20)
                 
-            Rectangle()
-                .frame(width: 280 * DynamicSizeFactor.factor(), height: 38 * DynamicSizeFactor.factor())
-                .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
-                .platformTextColor(color: Color("White01"))
+            HStack {
+                HStack {
+                    Text("0원") // 이미지로 변경
+                        .font(.headline)
+                    
+                    Text("현재 소비 금액")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: Color("Gray04"))
+                }
+                .padding(.leading, 14)
+                .padding(.top, 12)
+                
+                Spacer()
+                
+                Text("0원")
+                    .font(.B1SemiboldeFont())
+                    .platformTextColor(color: Color("Gray07"))
+                    .padding(.trailing, 16)
+                    .padding(.top, 12)
+            }
+            .frame(width: 280 * DynamicSizeFactor.factor(), height: 38 * DynamicSizeFactor.factor())
+            .background(
+                RoundedCornerUtil(radius: 8, corners: [.topLeft, .topRight])
+                    .fill(Color("White01"))
+            )
         }
         .frame(maxWidth: .infinity)
         .background(Color("Mint03"))
