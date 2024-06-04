@@ -98,9 +98,9 @@ struct MySpendingListView: View {
                 }.offset(x: -10)
             }
         }
-        .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
-            ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
-        }
+//        .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
+//            ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
+//        }
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {

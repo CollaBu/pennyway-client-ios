@@ -123,7 +123,6 @@ struct InquiryView: View {
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                 .rotationEffect(.degrees(showAgreement ? 180 : 0))
 
-                                    
                         })
                         .padding(.trailing, 20 * DynamicSizeFactor.factor())
                     }
