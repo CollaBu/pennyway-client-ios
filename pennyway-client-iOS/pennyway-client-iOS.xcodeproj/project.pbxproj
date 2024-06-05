@@ -107,6 +107,7 @@
 		4A585F602BF29531007DC01A /* SpendingCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */; };
 		4A585F622BF2A6F5007DC01A /* SpendingCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */; };
 		4A59B9C72C10C385008AD80A /* RecentTargetAmountSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59B9C62C10C385008AD80A /* RecentTargetAmountSuggestionView.swift */; };
+		4A59B9C92C10D362008AD80A /* CustomToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59B9C82C10D362008AD80A /* CustomToastView.swift */; };
 		4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */; };
 		4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */; };
 		4A69C1522BE695FF00A27B82 /* FindUserNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */; };
@@ -317,6 +318,7 @@
 		4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCheckBoxView.swift; sourceTree = "<group>"; };
 		4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCalendarView.swift; sourceTree = "<group>"; };
 		4A59B9C62C10C385008AD80A /* RecentTargetAmountSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTargetAmountSuggestionView.swift; sourceTree = "<group>"; };
+		4A59B9C82C10D362008AD80A /* CustomToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToastView.swift; sourceTree = "<group>"; };
 		4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 				4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */,
 				D85927ED2BE6842A00653391 /* CustomPopUpView.swift */,
 				D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */,
+				4A59B9C82C10D362008AD80A /* CustomToastView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1671,6 +1674,7 @@
 				4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */,
 				D8E637502C06303D00D43BB6 /* MySpendingListViewModel.swift in Sources */,
 				D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */,
+				4A59B9C92C10D362008AD80A /* CustomToastView.swift in Sources */,
 				D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */,
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDto.swift in Sources */,
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,

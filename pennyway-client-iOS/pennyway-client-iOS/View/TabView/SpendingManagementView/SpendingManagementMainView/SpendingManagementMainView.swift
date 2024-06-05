@@ -7,13 +7,15 @@ struct SpendingManagementMainView: View {
     @State private var navigateToAddSpendingHistory = false
     @State private var navigateToMySpendingList = false
 
+    @State private var showToastPopup = false
+
     var body: some View {
         NavigationAvailable {
             ScrollView {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                    RecentTargetAmountSuggestionView()
+                    RecentTargetAmountSuggestionView(showToastPopup: $showToastPopup)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
@@ -105,6 +107,17 @@ struct SpendingManagementMainView: View {
                     .offset(x: 10)
                 }
             }
+            .overlay(
+                Group {
+                    if showToastPopup {
+                        CustomToastView(message: "7월의 새로운 목표금액을 설정했어요")
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut(duration: 0.5))
+                            .padding(.bottom, 10)
+                    }
+                }, alignment: .bottom
+            )
+
             NavigationLink(destination: AddSpendingHistoryView(), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
