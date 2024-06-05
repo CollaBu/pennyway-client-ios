@@ -18,7 +18,7 @@ struct CustomToastView: View {
             .padding(.horizontal, 12 * DynamicSizeFactor.factor())
         }
         .frame(maxWidth: .infinity, maxHeight: 40 * DynamicSizeFactor.factor(), alignment: .leading)
-        .background(Color.gray) // TODO: 색상 변경 필요
+        .background(Color("ToastGray")) // TODO: 색상 변경 필요
         .cornerRadius(6)
         .padding(.horizontal, 20)
     }
