@@ -48,7 +48,7 @@ struct SpendingWeekCalendarView: View {
     private var monthView: some View {
         ZStack(alignment: .leading) {
             HStack(spacing: 0) {
-                Text(monthTitle(from: selectedDate))
+                Text(monthTitle(from: spendingHistoryViewModel.currentDate))
                     .font(.ButtonH4SemiboldFont())
                 
                 Button(action: {
@@ -82,20 +82,7 @@ struct SpendingWeekCalendarView: View {
         }
         .padding(.horizontal, 20)
     }
-    
-//    // MARK: - 요일 헤더 뷰
-//
-//    private var dayHeaderView: some View {
-//        HStack(spacing: 34 * DynamicSizeFactor.factor()) {
-//            ForEach(["일", "월", "화", "수", "목", "금", "토"], id: \.self) { day in
-//                Text(day)
-//                    .font(.B2MediumFont())
-//                    .platformTextColor(color: Color("Gray04"))
-//                    .frame(maxWidth: .infinity)
-//            }
-//        }
-//        .padding(.horizontal, 10)
-//    }
+
   
     // MARK: - 일자 표시 뷰
 
@@ -206,38 +193,22 @@ private extension SpendingWeekCalendarView {
         return dateFormatter.string(from: date)
     }
   
-//    /// 월 변경
-//    func changeMonth(_ value: Int) {
-//        guard let date = calendar.date(
-//            byAdding: .month,
-//            value: value,
-//            to: selectedDate
-//        ) else {
-//            return
-//        }
-//    
-//        selectedDate = date
-//    }
     
-    /// 월 변경
+    // MARK: - 월 변경
+
     func changeMonth(by value: Int) {
-        guard canMoveToPreviousMonth() || canMoveToNextMonth() else {
-            // 이동할 수 없는 경우에는 변경하지 않음
-            return
-        }
+        let newDate = Calendar.current.date(byAdding: .month, value: value, to: selectedDate) ?? selectedDate
+        selectedDate = newDate
+        spendingHistoryViewModel.currentDate = selectedDate
         
-        // 변경된 달로 업데이트
-        date = adjustedMonth(by: value)
-        spendingHistoryViewModel.currentDate = date
-        
-        // 지출내역 API 조회
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
-                // API 조회 성공한 경우, monthTitle 업데이트
-                // 현재 선택된 날짜를 기준으로 월의 제목 업데이트
-                selectedDate = date
+                Log.debug("지출내역 조회 API 연동 성공")
+                DispatchQueue.main.async {
+                    self.selectedDate = newDate
+                }
             } else {
-                Log.fault("지출내역 조회 Api 연동 실패")
+                Log.fault("지출내역 조회 API 연동 실패")
             }
         }
     }
