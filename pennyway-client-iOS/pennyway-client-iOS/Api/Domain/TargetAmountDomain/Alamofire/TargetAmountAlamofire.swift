@@ -19,4 +19,10 @@ class TargetAmountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.getTargetAmountForDate, completion: completion)
     }
+    
+    func getTotalTargetAmount(dto: GetTotalTargetAmountRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - getTotalTargetAmount() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.getTotalTargetAmount(dto: dto), completion: completion)
+    }
 }

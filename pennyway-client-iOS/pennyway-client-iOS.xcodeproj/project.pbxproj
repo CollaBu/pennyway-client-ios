@@ -46,7 +46,7 @@
 		4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A35607F2BEBE99A00BA58F3 /* LoginOAuthButtonView.swift */; };
 		4A3560832BEBF12D00BA58F3 /* OAuthAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560822BEBF12D00BA58F3 /* OAuthAccountViewModel.swift */; };
 		4A3701B12C08F74E00F0AEBA /* TargetAmountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701A82C08F74E00F0AEBA /* TargetAmountAlamofire.swift */; };
-		4A3701B22C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701AB2C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift */; };
+		4A3701B22C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */; };
 		4A3701B32C08F74E00F0AEBA /* TargetAmountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701AE2C08F74E00F0AEBA /* TargetAmountRouter.swift */; };
 		4A3701B82C08F76C00F0AEBA /* AddSpendingCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701B42C08F76C00F0AEBA /* AddSpendingCategoryView.swift */; };
 		4A3701B92C08F76C00F0AEBA /* SelectCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701B52C08F76C00F0AEBA /* SelectCategoryIconView.swift */; };
@@ -125,6 +125,8 @@
 		4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */; };
 		4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */; };
 		4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */; };
+		4A98BD742C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */; };
+		4A98BD762C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
@@ -255,7 +257,7 @@
 		4A35607F2BEBE99A00BA58F3 /* LoginOAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOAuthButtonView.swift; sourceTree = "<group>"; };
 		4A3560822BEBF12D00BA58F3 /* OAuthAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountViewModel.swift; sourceTree = "<group>"; };
 		4A3701A82C08F74E00F0AEBA /* TargetAmountAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAmountAlamofire.swift; sourceTree = "<group>"; };
-		4A3701AB2C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
+		4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTargetAmountForDateResponseDto.swift; sourceTree = "<group>"; };
 		4A3701AE2C08F74E00F0AEBA /* TargetAmountRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAmountRouter.swift; sourceTree = "<group>"; };
 		4A3701B42C08F76C00F0AEBA /* AddSpendingCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSpendingCategoryView.swift; sourceTree = "<group>"; };
 		4A3701B52C08F76C00F0AEBA /* SelectCategoryIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryIconView.swift; sourceTree = "<group>"; };
@@ -336,6 +338,8 @@
 		4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
 		4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOAuthToAccountViewModel.swift; sourceTree = "<group>"; };
 		4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpViewModel.swift; sourceTree = "<group>"; };
+		4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountRequestDto.swift; sourceTree = "<group>"; };
+		4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
@@ -720,6 +724,7 @@
 		4A3701AA2C08F74E00F0AEBA /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -727,7 +732,8 @@
 		4A3701AC2C08F74E00F0AEBA /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				4A3701AB2C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift */,
+				4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */,
+				4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1585,7 +1591,7 @@
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
-				4A3701B22C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift in Sources */,
+				4A3701B22C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
@@ -1616,6 +1622,7 @@
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
+				4A98BD762C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift in Sources */,
 				4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */,
 				D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */,
 				D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */,
@@ -1715,6 +1722,7 @@
 				4A5789952BDC29E700AFEB26 /* ConflictError.swift in Sources */,
 				D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
+				4A98BD742C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				4A3701B82C08F76C00F0AEBA /* AddSpendingCategoryView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
