@@ -17,12 +17,13 @@ struct GetTotalTargetAmountResponseDto: Codable {
 struct TargetAmount: Codable {
     let year: Int
     let month: Int
-    let targetAmount: Amount
+    let targetAmountDetail: AmountDetail
     let totalSpending: Int
     let diffAmount: Int
 
-    struct Amount: Codable {
+    struct AmountDetail: Codable {
         let id: Int
         let amount: Int
+        let isRead: Bool
     }
 }

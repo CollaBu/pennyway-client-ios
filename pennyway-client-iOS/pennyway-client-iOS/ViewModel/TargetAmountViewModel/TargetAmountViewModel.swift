@@ -7,7 +7,7 @@ class TargetAmountViewModel: ObservableObject {
     @Published var targetValue: CGFloat = 0
 
     func getTotalTargetAmountApi(completion: @escaping (Bool) -> Void) {
-        TargetAmountAlamofire.shared.getTotalTargetAmount { result in
+        TargetAmountAlamofire.shared.getTargetAmountForDate { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

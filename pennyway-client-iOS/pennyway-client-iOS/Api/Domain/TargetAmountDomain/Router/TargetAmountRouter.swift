@@ -3,11 +3,11 @@ import Alamofire
 import Foundation
 
 enum TargetAmountRouter: URLRequestConvertible {
-    case getTotalTargetAmount
+    case getTargetAmountForDate
  
     var method: HTTPMethod {
         switch self {
-        case .getTotalTargetAmount:
+        case .getTargetAmountForDate:
             return .get
         }
     }
@@ -18,21 +18,21 @@ enum TargetAmountRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .getTotalTargetAmount:
-            return "v2/targets/\(Date.getBasicformattedDate(from: Date()))"
+        case .getTargetAmountForDate:
+            return "v2/targets-amounts/\(Date.getBasicformattedDate(from: Date()))"
         }
     }
     
     var bodyParameters: Parameters? {
         switch self {
-        case .getTotalTargetAmount:
+        case .getTargetAmountForDate:
             return [:]
         }
     }
     
     var queryParameters: Parameters? {
         switch self {
-        case .getTotalTargetAmount:
+        case .getTargetAmountForDate:
             return [:]
         }
     }
@@ -42,7 +42,7 @@ enum TargetAmountRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .getTotalTargetAmount:
+        case .getTargetAmountForDate:
             request = URLRequest.createURLRequest(url: url, method: method)
         }
         return request
