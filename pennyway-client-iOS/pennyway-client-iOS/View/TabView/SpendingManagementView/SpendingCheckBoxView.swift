@@ -12,7 +12,7 @@ struct SpendingCheckBoxView: View {
     }
 
     var spentInfoText: String {
-        "반가워요 \(String(describing: getUserData()?.username ?? ""))님! \n이번 달에 총 \(formattedTotalSpent)원 썼어요"
+        "반가워요 \(String(describing: getUserData()?.username ?? ""))님! \n이번 달에 \(formattedTotalSpent)원 썼어요"
     }
 
     var body: some View {
@@ -26,6 +26,7 @@ struct SpendingCheckBoxView: View {
                                                    font: .H3SemiboldFont(),
                                                    color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03")
                                                ))
+                                               .lineSpacing(3)
                 Spacer()
             }
             .frame(height: 44 * DynamicSizeFactor.factor())

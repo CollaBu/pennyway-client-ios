@@ -16,11 +16,11 @@ extension Date {
         return components.month ?? 0
     }
 
-    /// 1월 01일 형식
+    /// 1월 1일 형식
     static func getFormattedDate(from date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "M월 dd일"
+        formatter.dateFormat = "M월 d일"
         return formatter.string(from: date)
     }
 
