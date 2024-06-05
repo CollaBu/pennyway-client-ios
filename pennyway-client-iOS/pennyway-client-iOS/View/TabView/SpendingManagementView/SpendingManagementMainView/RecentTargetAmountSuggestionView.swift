@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RecentTargetAmountSuggestionView: View {
     @Binding var showToastPopup: Bool
+    @Binding var isHidden: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -14,7 +15,9 @@ struct RecentTargetAmountSuggestionView: View {
                 
                 Spacer()
                 
-                Button(action: {}, label: {
+                Button(action: {
+                    isHidden = true
+                }, label: {
                     Image("icon_close")
                         .resizable()
                         .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
@@ -40,6 +43,7 @@ struct RecentTargetAmountSuggestionView: View {
                 Spacer()
                 
                 Button(action: {
+                    isHidden = true
                     showToastPopup = true
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -61,7 +65,7 @@ struct RecentTargetAmountSuggestionView: View {
         .frame(height: 145 * DynamicSizeFactor.factor())
         .background(Color("Mint03"))
         .cornerRadius(8)
-        .shadow(color: Color(red: 0, green: 0.83, blue: 0.88).opacity(0.15), radius: 5, x: 0, y: 1) //TODO: 색상 변경 필요
+        .shadow(color: Color(red: 0, green: 0.83, blue: 0.88).opacity(0.15), radius: 5, x: 0, y: 1) // TODO: 색상 변경 필요
         .padding(.horizontal, 20)
     }
 }

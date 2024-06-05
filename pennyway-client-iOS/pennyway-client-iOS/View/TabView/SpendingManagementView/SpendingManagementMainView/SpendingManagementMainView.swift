@@ -8,6 +8,7 @@ struct SpendingManagementMainView: View {
     @State private var navigateToMySpendingList = false
 
     @State private var showToastPopup = false
+    @State private var isHiddenSuggestionView = false
 
     var body: some View {
         NavigationAvailable {
@@ -15,9 +16,11 @@ struct SpendingManagementMainView: View {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                    RecentTargetAmountSuggestionView(showToastPopup: $showToastPopup)
+                    if !isHiddenSuggestionView {
+                        RecentTargetAmountSuggestionView(showToastPopup: $showToastPopup, isHidden: $isHiddenSuggestionView)
 
-                    Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+                    }
 
                     SpendingCheckBoxView(viewModel: targetAmountViewModel)
                         .padding(.horizontal, 20)
