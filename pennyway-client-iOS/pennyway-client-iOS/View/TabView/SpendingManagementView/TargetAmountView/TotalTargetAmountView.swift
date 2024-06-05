@@ -17,7 +17,7 @@ struct TotalTargetAmountView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Gray01"))
-        .navigationBarColor(UIColor(named: "Mint03"), title: "")
+        .navigationBarColor(UIColor(named: "Gray01"), title: "")
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)

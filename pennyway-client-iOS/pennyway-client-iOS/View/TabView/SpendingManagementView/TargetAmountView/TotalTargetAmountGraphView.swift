@@ -9,14 +9,14 @@ struct TotalTargetAmountGraphView: View {
                 VStack {
                     Text("\(content.totalSpending / 10000)")
                         .font(.B3MediumFont())
-                        .platformTextColor(color: content.month == 8 ? (content.diffAmount < 0 ? Color("Red03") : Color("Mint03")) : Color("Gray04"))
+                        .platformTextColor(color: determineColorGray04(for: content))
                     Rectangle()
                         .frame(width: 16 * DynamicSizeFactor.factor(), height: CGFloat(content.totalSpending / 10000) * DynamicSizeFactor.factor())
-                        .platformTextColor(color: determineColor(for: content))
+                        .platformTextColor(color: determineColorGray03(for: content))
                         .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
                     Text("\(content.month)월")
                         .font(.B3MediumFont())
-                        .platformTextColor(color: determineColor(for: content))
+                        .platformTextColor(color: determineColorGray06(for: content))
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
@@ -25,11 +25,27 @@ struct TotalTargetAmountGraphView: View {
         .frame(height: 140 * DynamicSizeFactor.factor(), alignment: .center) // TODO: height 수정 필요
     }
 
-    func determineColor(for content: TargetAmountData) -> Color {
-        if content.month == 8 {
+    func determineColorGray03(for content: TargetAmountData) -> Color {
+        if content.month == Date.month(from: Date()) {
             return content.diffAmount < 0 ? Color("Red03") : Color("Mint03")
         } else {
             return Color("Gray03")
+        }
+    }
+
+    func determineColorGray04(for content: TargetAmountData) -> Color {
+        if content.month == Date.month(from: Date()) {
+            return content.diffAmount < 0 ? Color("Red03") : Color("Mint03")
+        } else {
+            return Color("Gray04")
+        }
+    }
+
+    func determineColorGray06(for content: TargetAmountData) -> Color {
+        if content.month == Date.month(from: Date()) {
+            return content.diffAmount < 0 ? Color("Red03") : Color("Mint03")
+        } else {
+            return Color("Gray06")
         }
     }
 }

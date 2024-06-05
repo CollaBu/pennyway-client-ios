@@ -114,8 +114,10 @@ struct TotalTargetAmountContentView: View {
     }
     
     func determineText(for diffAmount: Int) -> String {
+        let diffAmountValue = (NumberFormatterUtil.formatIntToDecimalString(abs(diffAmount)))
+        
         if diffAmount != 0 {
-            return diffAmount > 0 ? "\(abs(diffAmount))원 절약했어요" : "\(abs(diffAmount))원 더 썼어요"
+            return diffAmount > 0 ? "\(diffAmountValue)원 절약했어요" : "\(diffAmountValue)원 더 썼어요"
         } else {
             return "짝짝 소비 천재네요!"
         }
