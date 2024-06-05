@@ -38,7 +38,7 @@ struct SpendingCheckBoxView: View {
             ZStack(alignment: .leading) {
                 Rectangle()
                     .frame(width: UIScreen.main.bounds.width - 76, height: 24 * DynamicSizeFactor.factor())
-                    .foregroundColor(Color("Gray01"))
+                    .platformTextColor(color: Color("Gray01"))
                     .cornerRadius(15)
 
                 let progressWidth: CGFloat = {

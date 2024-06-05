@@ -25,7 +25,7 @@ struct FindIdView: View {
                     
             ZStack {
                 Rectangle()
-                    .foregroundColor(.clear)
+                    .platformTextColor(color: .clear)
                     .frame(width: 280 * DynamicSizeFactor.factor(), height: 62 * DynamicSizeFactor.factor())
                     .background(Color("Gray01"))
                     .cornerRadius(4)
@@ -54,7 +54,7 @@ struct FindIdView: View {
             }, label: {
                 ZStack {
                     Rectangle()
-                        .foregroundColor(.clear)
+                        .platformTextColor(color: .clear)
                         .frame(width: 134 * DynamicSizeFactor.factor(), height: 47 * DynamicSizeFactor.factor())
                         .background(Color("Mint01"))
                         .cornerRadius(4)
@@ -76,7 +76,7 @@ struct FindIdView: View {
             }, label: {
                 ZStack {
                     Rectangle()
-                        .foregroundColor(.clear)
+                        .platformTextColor(color: .clear)
                         .frame(width: 134 * DynamicSizeFactor.factor(), height: 47 * DynamicSizeFactor.factor())
                         .background(Color("Mint03"))
                         .cornerRadius(4)

@@ -14,8 +14,8 @@ struct DiffAmountDynamicWidthView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 15)
                 .frame(width: textWidth, height: 24 * DynamicSizeFactor.factor())
-                .foregroundColor(backgroundColor)
-
+                .platformTextColor(color: backgroundColor)
+            
             Text(text)
                 .platformTextColor(color: textColor)
                 .font(.B2SemiboldFont())

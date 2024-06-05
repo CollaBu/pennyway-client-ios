@@ -17,7 +17,7 @@ struct ErrorCodeContentView: View {
                 }, label: {
                     Image("icon_close_filled_red")
                         .aspectRatio(contentMode: .fill)
-                        .foregroundColor(Color("Red03"))
+                        .platformTextColor(color: Color("Red03"))
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                         .padding(.leading, 9)
                 })
