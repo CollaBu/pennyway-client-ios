@@ -8,7 +8,7 @@ struct TotalTargetAmountHeaderView: View {
         VStack(spacing: 0) {
             Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                 
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 8 * DynamicSizeFactor.factor()) {
                 Text("\(String(viewModel.currentData.year))년 \(viewModel.currentData.month)월 목표금액")
                     .font(.ButtonH4SemiboldFont())
                     .platformTextColor(color: Color("White01"))
