@@ -39,22 +39,6 @@ enum CategoryIconName: String {
     case otherOff = "icon_category_plus_off"
 }
 
-// MARK: - TargetAmountData
-
-struct TargetAmountData: Identifiable {
-    let id = UUID()
-    let year: Int
-    let month: Int
-    let targetAmount: Amount
-    let totalSpending: Int
-    let diffAmount: Int
-
-    struct Amount: Codable {
-        let id: Int
-        let amount: Int
-    }
-}
-
 // MARK: - SpendingCategoryData
 
 struct SpendingCategoryData: Identifiable {

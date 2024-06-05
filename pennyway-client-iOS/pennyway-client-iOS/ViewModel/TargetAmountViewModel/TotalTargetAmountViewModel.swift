@@ -2,7 +2,24 @@
 
 import SwiftUI
 
+// MARK: - TargetAmountData
+//임시 데이터 모델 설정
+struct TargetAmountData: Identifiable {
+    let id = UUID()
+    let year: Int
+    let month: Int
+    let targetAmount: Amount
+    let totalSpending: Int
+    let diffAmount: Int
+
+    struct Amount: Codable {
+        let id: Int
+        let amount: Int
+    }
+}
+
 class TotalTargetAmountViewModel: ObservableObject {
+    
     @Published var targetAmounts: [TargetAmountData] = []
     @Published var sortTargetAmounts: [TargetAmountData] = []
     @Published var currentData: TargetAmountData = TargetAmountData(year: 2024, month: 8, targetAmount: TargetAmountData.Amount(id: 1, amount: 100_000), totalSpending: 40000, diffAmount: 60000)
