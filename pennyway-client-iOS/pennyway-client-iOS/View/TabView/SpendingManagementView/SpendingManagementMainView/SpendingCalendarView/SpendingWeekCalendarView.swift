@@ -50,7 +50,7 @@ struct SpendingWeekCalendarView: View {
                     .font(.ButtonH4SemiboldFont())
                 
                 Button(action: {
-                    spendingHistoryViewModel.isChangeMonth = true
+//                    spendingHistoryViewModel.isChangeMonth = true
                 }, label: {
                     Image("icon_arrow_down_rect")
                 })

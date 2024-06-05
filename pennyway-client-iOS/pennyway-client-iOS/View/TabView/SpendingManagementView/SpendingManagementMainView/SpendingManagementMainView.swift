@@ -13,6 +13,10 @@ struct SpendingManagementMainView: View {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
+                    RecentTargetAmountSuggestionView()
+
+                    Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+
                     SpendingCheckBoxView(viewModel: targetAmountViewModel)
                         .padding(.horizontal, 20)
 

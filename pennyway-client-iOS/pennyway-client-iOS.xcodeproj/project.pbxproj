@@ -106,6 +106,7 @@
 		4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */; };
 		4A585F602BF29531007DC01A /* SpendingCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */; };
 		4A585F622BF2A6F5007DC01A /* SpendingCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */; };
+		4A59B9C72C10C385008AD80A /* RecentTargetAmountSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59B9C62C10C385008AD80A /* RecentTargetAmountSuggestionView.swift */; };
 		4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */; };
 		4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */; };
 		4A69C1522BE695FF00A27B82 /* FindUserNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */; };
@@ -315,6 +316,7 @@
 		4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalServerError.swift; sourceTree = "<group>"; };
 		4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCheckBoxView.swift; sourceTree = "<group>"; };
 		4A585F612BF2A6F5007DC01A /* SpendingCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCalendarView.swift; sourceTree = "<group>"; };
+		4A59B9C62C10C385008AD80A /* RecentTargetAmountSuggestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTargetAmountSuggestionView.swift; sourceTree = "<group>"; };
 		4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
@@ -969,6 +971,7 @@
 				4ADE802D2BF29192007FFB01 /* SpendingManagementMainView.swift */,
 				4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */,
 				4A0BC6992BF53FA70036D900 /* SpendingCalendarView */,
+				4A59B9C62C10C385008AD80A /* RecentTargetAmountSuggestionView.swift */,
 			);
 			path = SpendingManagementMainView;
 			sourceTree = "<group>";
@@ -1675,6 +1678,7 @@
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */,
+				4A59B9C72C10C385008AD80A /* RecentTargetAmountSuggestionView.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
 				D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */,
