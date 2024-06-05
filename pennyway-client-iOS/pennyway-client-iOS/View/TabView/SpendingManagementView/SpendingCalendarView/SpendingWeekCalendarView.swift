@@ -4,13 +4,15 @@ import SwiftUI
 
 struct SpendingWeekCalendarView: View {
     @State private var selectedDate = Date()
+    @State private var date: Date = Date()
     @State private var changeMonth = false
 
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @Binding var selectedDateToScroll: String?
 
     private let calendar = Calendar.current
-    
+    var checkChangeMonth = false
+
     init(
         spendingHistoryViewModel: SpendingHistoryViewModel,
         selectedDateToScroll: Binding<String?>
@@ -24,10 +26,9 @@ struct SpendingWeekCalendarView: View {
             monthView
                 
             ZStack(alignment: .top) {
-                dayHeaderView
                 dayView
             }
-            .frame(height: 70 * DynamicSizeFactor.factor())
+            .frame(height: 40 * DynamicSizeFactor.factor())
             .padding(.horizontal, 10)
         }
         .padding(.top, 16)
@@ -61,7 +62,7 @@ struct SpendingWeekCalendarView: View {
                 HStack(spacing: 16 * DynamicSizeFactor.factor()) {
                     Button(
                         action: {
-                            changeMonth(-1)
+                            changeMonth(by: -1)
                         },
                         label: {
                             Image("icon_arrow_back_small")
@@ -70,10 +71,10 @@ struct SpendingWeekCalendarView: View {
                     
                     Button(
                         action: {
-                            changeMonth(1)
+                            changeMonth(by: 1)
                         },
                         label: {
-                            Image("icon_arrow_front_small")
+                            Image(!canMoveToNextMonth() ? "icon_arrow_front_small_off" : "icon_arrow_front_small")
                         }
                     )
                 }
@@ -82,52 +83,58 @@ struct SpendingWeekCalendarView: View {
         .padding(.horizontal, 20)
     }
     
-    // MARK: - 요일 헤더 뷰
-
-    private var dayHeaderView: some View {
-        HStack(spacing: 34 * DynamicSizeFactor.factor()) {
-            ForEach(["일", "월", "화", "수", "목", "금", "토"], id: \.self) { day in
-                Text(day)
-                    .font(.B2MediumFont())
-                    .platformTextColor(color: Color("Gray04"))
-                    .frame(maxWidth: .infinity)
-            }
-        }
-        .padding(.horizontal, 10)
-    }
+//    // MARK: - 요일 헤더 뷰
+//
+//    private var dayHeaderView: some View {
+//        HStack(spacing: 34 * DynamicSizeFactor.factor()) {
+//            ForEach(["일", "월", "화", "수", "목", "금", "토"], id: \.self) { day in
+//                Text(day)
+//                    .font(.B2MediumFont())
+//                    .platformTextColor(color: Color("Gray04"))
+//                    .frame(maxWidth: .infinity)
+//            }
+//        }
+//        .padding(.horizontal, 10)
+//    }
   
     // MARK: - 일자 표시 뷰
 
     @ViewBuilder
     private var dayView: some View {
-        let today = Date()
-        let weekday = calendar.component(.weekday, from: today) - 1
-        let startOfWeek = calendar.date(byAdding: .day, value: -weekday, to: today)!
-
+        let startDate = calendar.date(from: Calendar.current.dateComponents([.year, .month], from: selectedDate))!
+        
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 14 * DynamicSizeFactor.factor()) {
-                let components = dateRange(for: startOfWeek)
-                
+            HStack(spacing: 10 * DynamicSizeFactor.factor()) {
+                let components = (
+                    0 ..< calendar.range(of: .day, in: .month, for: startDate)!.count)
+                    .map {
+                        calendar.date(byAdding: .day, value: $0, to: startDate)!
+                    }
+            
                 ForEach(components, id: \.self) { date in
                     VStack {
-                        Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                        Text(day(from: date))
+                            .font(.B2MediumFont())
+                            .platformTextColor(color: Color("Gray04"))
                             
+                        Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                                
                         Text("\(calendar.component(.day, from: date))")
                             .font(.B2MediumFont())
                             .frame(width: 23 * DynamicSizeFactor.factor(), height: 26 * DynamicSizeFactor.factor())
                             .background(
                                 Circle()
-                                    .foregroundColor(circleColor(for: date))
+                                    .platformTextColor(color: circleColor(for: date))
                             )
-                            .foregroundColor(textColor(for: date))
+                            .platformTextColor(color: textColor(for: date))
                             .padding(.horizontal, 7)
-                        
+                            
                         Spacer().frame(height: 2 * DynamicSizeFactor.factor())
 
                         if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
                             Text("-\(amount)")
                                 .font(.B4MediumFont())
-                                .foregroundColor(calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
+                                .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
                         } else {
                             Text("")
                         }
@@ -141,10 +148,10 @@ struct SpendingWeekCalendarView: View {
                     .frame(height: 65 * DynamicSizeFactor.factor())
                 }
             }
-            .padding(.top, 7 * DynamicSizeFactor.factor())
+            .padding(.top, 20)
         }
     }
-    
+
     private func dateFormatter(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -199,25 +206,89 @@ private extension SpendingWeekCalendarView {
         return dateFormatter.string(from: date)
     }
   
+//    /// 월 변경
+//    func changeMonth(_ value: Int) {
+//        guard let date = calendar.date(
+//            byAdding: .month,
+//            value: value,
+//            to: selectedDate
+//        ) else {
+//            return
+//        }
+//    
+//        selectedDate = date
+//    }
+    
     /// 월 변경
-    func changeMonth(_ value: Int) {
-        guard let date = calendar.date(
-            byAdding: .month,
-            value: value,
-            to: selectedDate
-        ) else {
+    func changeMonth(by value: Int) {
+        guard canMoveToPreviousMonth() || canMoveToNextMonth() else {
+            // 이동할 수 없는 경우에는 변경하지 않음
             return
         }
-    
-        selectedDate = date
+        
+        // 변경된 달로 업데이트
+        date = adjustedMonth(by: value)
+        spendingHistoryViewModel.currentDate = date
+        
+        // 지출내역 API 조회
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+            if success {
+                // API 조회 성공한 경우, monthTitle 업데이트
+                // 현재 선택된 날짜를 기준으로 월의 제목 업데이트
+                selectedDate = date
+            } else {
+                Log.fault("지출내역 조회 Api 연동 실패")
+            }
+        }
     }
-  
+
     /// 요일 추출
     func day(from date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateFormat = "EEEEE"
         return formatter.string(from: date)
+    }
+    
+    /// 이전 월로 이동 가능한지 확인
+    func canMoveToPreviousMonth() -> Bool {
+        let calendar = Calendar.current
+        
+        // 2000년 1월 1일을 생성
+        var components = DateComponents()
+        components.year = 2000
+        components.month = 1
+        components.day = 1
+        guard let targetDate = calendar.date(from: components) else {
+            return false
+        }
+
+        // 이전 월이 targetDate(2000년 1월 1일)보다 크거나 같으면 이동 가능
+        if adjustedMonth(by: -1) >= targetDate {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    /// 다음 월로 이동 가능한지 확인
+    func canMoveToNextMonth() -> Bool {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let targetDate = calendar.date(byAdding: .month, value: 0, to: currentDate) ?? currentDate
+    
+        if adjustedMonth(by: 1) > targetDate {
+            return false
+        }
+        return true
+    }
+    
+    /// 변경하려는 월 반환
+    func adjustedMonth(by value: Int) -> Date {
+        if let newMonth = Calendar.current.date(byAdding: .month, value: value, to: date) {
+            return newMonth
+        }
+        return date
     }
 }
 

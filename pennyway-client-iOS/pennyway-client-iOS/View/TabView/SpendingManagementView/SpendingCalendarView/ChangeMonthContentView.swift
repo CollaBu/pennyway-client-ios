@@ -1,10 +1,10 @@
-
 import SwiftUI
 
 struct ChangeMonthContentView: View {
     @ObservedObject var viewModel: SpendingHistoryViewModel
     @Binding var isPresented: Bool
     @State private var selectedMonth: Date = Date()
+
     private let calendars = Calendar.current
     private let months: [Date]
 
@@ -23,7 +23,7 @@ struct ChangeMonthContentView: View {
                 date = calendar.date(byAdding: .month, value: 1, to: date) ?? date
             }
 
-            return dates.reversed() 
+            return dates.reversed()
         }()
     }
 
@@ -40,7 +40,6 @@ struct ChangeMonthContentView: View {
 
                     Button(action: {
                         isPresented = false
-
                     }, label: {
                         Image("icon_close")
                             .resizable()
@@ -54,15 +53,25 @@ struct ChangeMonthContentView: View {
                 ScrollView {
                     ForEach(months, id: \.self) { month in
                         HStack {
-                            Text(monthTitle(from: month))
-                                .font(.H4MediumFont())
-                                .platformTextColor(color: calendars.isDate(selectedMonth, equalTo: month, toGranularity: .month) ? Color("Mint03") : Color("Gray05"))
-                                .padding(.vertical, 14)
+                            Button(action: {
+                                selectedMonth = month
+                                viewModel.currentDate = month
+                                viewModel.checkSpendingHistoryApi { success in
+                                    if success {
+                                        Log.debug("해당날짜 소비내역 가져오기 성공")
+                                    } else {
+                                        Log.debug("해당날짜 소비내역 가져오기 실패")
+                                    }
+                                }
+                            }, label: {
+                                Text(monthTitle(from: month))
+                                    .font(.H4MediumFont())
+                                    .platformTextColor(color: calendars.isDate(selectedMonth, equalTo: month, toGranularity: .month) ? Color("Mint03") : Color("Gray05"))
+                                    .padding(.vertical, 14)
+                            })
+                            .buttonStyle(PlainButtonStyle())
 
                             Spacer()
-                        }
-                        .onTapGesture {
-                            selectedMonth = month
                         }
                     }
                 }
