@@ -963,6 +963,16 @@
 			path = ErrorCodeHandler;
 			sourceTree = "<group>";
 		};
+		4A59B9C52C10C2D4008AD80A /* SpendingManagementMainView */ = {
+			isa = PBXGroup;
+			children = (
+				4ADE802D2BF29192007FFB01 /* SpendingManagementMainView.swift */,
+				4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */,
+				4A0BC6992BF53FA70036D900 /* SpendingCalendarView */,
+			);
+			path = SpendingManagementMainView;
+			sourceTree = "<group>";
+		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1213,11 +1223,9 @@
 		4AD70E1E2BE011970058A52A /* SpendingManagementView */ = {
 			isa = PBXGroup;
 			children = (
+				4A59B9C52C10C2D4008AD80A /* SpendingManagementMainView */,
 				D851E7372C06132C00316DB3 /* MySpendingListView */,
 				4ACBAC852BFBD8680030D935 /* AddSpendingHistoryView */,
-				4A0BC6992BF53FA70036D900 /* SpendingCalendarView */,
-				4ADE802D2BF29192007FFB01 /* SpendingManagementMainView.swift */,
-				4A585F5F2BF29531007DC01A /* SpendingCheckBoxView.swift */,
 			);
 			path = SpendingManagementView;
 			sourceTree = "<group>";
