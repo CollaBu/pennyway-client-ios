@@ -74,16 +74,11 @@ struct TotalTargetAmountContentView: View {
                             
                             Spacer()
                             
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15) // TODO: 동적 width 적용
-                                    .frame(maxWidth: 111 * DynamicSizeFactor.factor(), maxHeight: 24 * DynamicSizeFactor.factor())
-                                    .foregroundColor(determineBackgroundColor(for: content.diffAmount))
-                                
-                                Text(determineText(for: content.diffAmount))
-                                    .platformTextColor(color: determineTextColor(for: content.diffAmount))
-                                    .font(.B2SemiboldFont())
-                                    .padding(.horizontal, 10)
-                            }
+                            DiffAmountDynamicWidthView(
+                                text: determineText(for: content.diffAmount),
+                                backgroundColor: determineBackgroundColor(for: content.diffAmount),
+                                textColor: determineTextColor(for: content.diffAmount)
+                            )
                         }
                     }
                     .padding(.horizontal, 18)
@@ -107,11 +102,11 @@ struct TotalTargetAmountContentView: View {
     }
     
     func determineBackgroundColor(for diffAmount: Int) -> Color {
-        return diffAmount <= 0 ? Color("Red01") : Color("Ashblue01")
+        return diffAmount < 0 ? Color("Red01") : Color("Ashblue01")
     }
     
     func determineTextColor(for diffAmount: Int) -> Color {
-        return diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+        return diffAmount < 0 ? Color("Red03") : Color("Mint03")
     }
     
     func determineText(for diffAmount: Int) -> String {
