@@ -1,8 +1,8 @@
-
 import SwiftUI
 
 struct TotalTargetAmountContentView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
+    
     var body: some View {
         VStack {
             HStack {
@@ -23,7 +23,7 @@ struct TotalTargetAmountContentView: View {
                 
                 Text("\(viewModel.currentData.diffAmount)원")
                     .font(.B1SemiboldeFont())
-                    .platformTextColor(color: viewModel.currentData.diffAmount < 0 ? Color("Red03") : Color("Gray07"))
+                    .platformTextColor(color: determineDiffAmountColor(for: viewModel.currentData.diffAmount))
                     .padding(.trailing, 16)
                     .padding(.bottom, 12)
             }
@@ -65,7 +65,7 @@ struct TotalTargetAmountContentView: View {
                             .platformTextColor(color: Color("Gray05"))
                         
                         Spacer().frame(height: 8)
-
+                        
                         HStack {
                             Text("\(content.totalSpending)원")
                                 .font(.ButtonH4SemiboldFont())
@@ -76,10 +76,10 @@ struct TotalTargetAmountContentView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 15) // TODO: 동적 width 적용
                                     .frame(maxWidth: 111 * DynamicSizeFactor.factor(), maxHeight: 24 * DynamicSizeFactor.factor())
-                                    .platformTextColor(color: content.diffAmount < 0 ? Color("Red01") : Color("Ashblue01"))
+                                    .foregroundColor(determineBackgroundColor(for: content.diffAmount))
                                 
-                                Text(content.diffAmount != 0 ? (content.diffAmount > 0 ? "\(abs(content.diffAmount))원 절약했어요" : "\(abs(content.diffAmount))원 더 썼어요") : "짝짝 소비 천재네요!")
-                                    .platformTextColor(color: content.diffAmount < 0 ? Color("Red03") : Color("Mint03"))
+                                Text(determineText(for: content.diffAmount))
+                                    .platformTextColor(color: determineTextColor(for: content.diffAmount))
                                     .font(.B2SemiboldFont())
                                     .padding(.horizontal, 10)
                             }
@@ -97,5 +97,27 @@ struct TotalTargetAmountContentView: View {
         .padding(.horizontal, 20)
         
         Spacer()
+    }
+    
+    // Color 설정
+    
+    func determineDiffAmountColor(for diffAmount: Int) -> Color {
+        return diffAmount < 0 ? Color("Red03") : Color("Gray07")
+    }
+    
+    func determineBackgroundColor(for diffAmount: Int) -> Color {
+        return diffAmount < 0 ? Color("Red01") : Color("Ashblue01")
+    }
+    
+    func determineTextColor(for diffAmount: Int) -> Color {
+        return diffAmount < 0 ? Color("Red03") : Color("Mint03")
+    }
+    
+    func determineText(for diffAmount: Int) -> String {
+        if diffAmount != 0 {
+            return diffAmount > 0 ? "\(abs(diffAmount))원 절약했어요" : "\(abs(diffAmount))원 더 썼어요"
+        } else {
+            return "짝짝 소비 천재네요!"
+        }
     }
 }
