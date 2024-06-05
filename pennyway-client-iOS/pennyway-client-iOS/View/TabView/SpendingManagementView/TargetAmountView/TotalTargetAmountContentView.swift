@@ -52,11 +52,11 @@ struct TotalTargetAmountContentView: View {
                 }
                 .padding(.top, 18)
                 
-                Spacer().frame(height: 13 * DynamicSizeFactor.factor()) // TODO: height 수정 필요
+                Spacer().frame(height: 11 * DynamicSizeFactor.factor()) // TODO: height 수정 필요
                 
                 TotalTargetAmountGraphView(viewModel: viewModel)
                 
-                Spacer().frame(height: 13 * DynamicSizeFactor.factor()) // TODO: height 수정 필요
+                Spacer().frame(height: 36 * DynamicSizeFactor.factor()) // TODO: height 수정 필요
                 
                 ForEach(viewModel.targetAmounts) { content in
                     VStack(alignment: .leading) {
