@@ -25,4 +25,10 @@ class TargetAmountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.getTotalTargetAmount(dto: dto), completion: completion)
     }
+    
+    func generateCurrentMonthDummyData(dto: GenerateCurrentMonthDummyDataRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - generateCurrentMonthDummyData() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.generateCurrentMonthDummyData(dto: dto), completion: completion)
+    }
 }

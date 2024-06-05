@@ -127,6 +127,8 @@
 		4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */; };
 		4A98BD742C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */; };
 		4A98BD762C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */; };
+		4A98BD782C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD772C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift */; };
+		4A98BD7A2C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD792C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
@@ -340,6 +342,8 @@
 		4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpViewModel.swift; sourceTree = "<group>"; };
 		4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountRequestDto.swift; sourceTree = "<group>"; };
 		4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
+		4A98BD772C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCurrentMonthDummyDataRequestDto.swift; sourceTree = "<group>"; };
+		4A98BD792C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCurrentMonthDummyDataResponseDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
@@ -725,6 +729,7 @@
 			isa = PBXGroup;
 			children = (
 				4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */,
+				4A98BD772C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -734,6 +739,7 @@
 			children = (
 				4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */,
 				4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */,
+				4A98BD792C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1590,6 +1596,7 @@
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
+				4A98BD7A2C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				4A3701B22C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
@@ -1691,6 +1698,7 @@
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */,
+				4A98BD782C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,

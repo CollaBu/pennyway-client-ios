@@ -21,9 +21,10 @@ struct TargetAmount: Codable {
     let totalSpending: Int
     let diffAmount: Int
 
-    struct AmountDetail: Codable {
-        let id: Int
-        let amount: Int
-        let isRead: Bool
-    }
+}
+
+struct AmountDetail: Codable {
+    let id: Int
+    let amount: Int
+    let isRead: Bool
 }
