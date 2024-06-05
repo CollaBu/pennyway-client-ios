@@ -17,7 +17,7 @@ struct TotalTargetAmountView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Gray01"))
-        .navigationBarColor(UIColor(named: "Gray01"), title: "")
+        .navigationBarColor(UIColor(named: "Mint03"), title: "")
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
@@ -27,7 +27,7 @@ struct TotalTargetAmountView: View {
                     Button(action: {
                         NavigationUtil.popToRootView()
                     }, label: {
-                        Image("icon_arrow_back")
+                        Image("icon_arrow_back_white")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 34, height: 34)
@@ -42,7 +42,7 @@ struct TotalTargetAmountView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 0) {
                     Button(action: {}, label: {
-                        Image("icon_navigationbar_kebabmenu")
+                        Image("icon_navigationbar_kebabmenu_white")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())

@@ -11,7 +11,7 @@ struct TotalTargetAmountGraphView: View {
                         .font(.B3MediumFont())
                         .platformTextColor(color: determineColorGray04(for: content))
                     Rectangle()
-                        .frame(width: 16 * DynamicSizeFactor.factor(), height: CGFloat(content.totalSpending / 10000) * DynamicSizeFactor.factor())
+                        .frame(maxWidth: 16 * DynamicSizeFactor.factor(), maxHeight: CGFloat(content.totalSpending / 10000) * DynamicSizeFactor.factor())
                         .platformTextColor(color: determineColorGray03(for: content))
                         .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
                     Text("\(content.month)월")
@@ -22,7 +22,7 @@ struct TotalTargetAmountGraphView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 140 * DynamicSizeFactor.factor(), alignment: .center) // TODO: height 수정 필요
+        .frame(height: 140 * DynamicSizeFactor.factor(), alignment: .center)
     }
 
     func determineColorGray03(for content: TargetAmountData) -> Color {

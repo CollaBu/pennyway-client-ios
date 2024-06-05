@@ -25,11 +25,11 @@ struct TotalTargetAmountHeaderView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 20)
             
-            Spacer().frame(height: 29 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                 
             HStack {
-                HStack(spacing: 0) {
-                    Image("icon_arrow_front_small")
+                HStack(spacing: 4) {
+                    Image("icon_ current_spending")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -49,11 +49,13 @@ struct TotalTargetAmountHeaderView: View {
                     .padding(.trailing, 16)
                     .padding(.top, 12)
             }
-            .frame(width: 280 * DynamicSizeFactor.factor(), height: 38 * DynamicSizeFactor.factor())
+            .frame(maxWidth: .infinity)
+            .frame(height: 38 * DynamicSizeFactor.factor())
             .background(
                 RoundedCornerUtil(radius: 8, corners: [.topLeft, .topRight])
                     .fill(Color("White01"))
             )
+            .padding(.horizontal, 20)
         }
         .frame(maxWidth: .infinity)
         .background(Color("Mint03"))

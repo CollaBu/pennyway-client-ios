@@ -6,8 +6,8 @@ struct TotalTargetAmountContentView: View {
     var body: some View {
         VStack {
             HStack {
-                HStack(spacing: 0) {
-                    Image("icon_arrow_front_small")
+                HStack(spacing: 4) {
+                    Image("icon_remaining_amount")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -27,7 +27,8 @@ struct TotalTargetAmountContentView: View {
                     .padding(.trailing, 16)
                     .padding(.bottom, 12)
             }
-            .frame(width: 280 * DynamicSizeFactor.factor(), height: 38 * DynamicSizeFactor.factor())
+            .frame(maxWidth: .infinity)
+            .frame(height: 38 * DynamicSizeFactor.factor())
             .background(
                 RoundedCornerUtil(radius: 8, corners: [.bottomLeft, .bottomRight])
                     .fill(Color("White01"))
@@ -52,11 +53,11 @@ struct TotalTargetAmountContentView: View {
                 }
                 .padding(.top, 18)
                 
-                Spacer().frame(height: 11 * DynamicSizeFactor.factor()) // TODO: height 수정 필요
+                Spacer().frame(height: 11 * DynamicSizeFactor.factor())
                 
                 TotalTargetAmountGraphView(viewModel: viewModel)
                 
-                Spacer().frame(height: 36 * DynamicSizeFactor.factor()) // TODO: height 수정 필요
+                Spacer().frame(height: 36 * DynamicSizeFactor.factor())
                 
                 ForEach(viewModel.targetAmounts) { content in
                     VStack(alignment: .leading) {
@@ -89,7 +90,7 @@ struct TotalTargetAmountContentView: View {
                 }
                 .frame(height: 60 * DynamicSizeFactor.factor())
                 
-                Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             }
             .background(Color("White01"))
             .cornerRadius(8)
