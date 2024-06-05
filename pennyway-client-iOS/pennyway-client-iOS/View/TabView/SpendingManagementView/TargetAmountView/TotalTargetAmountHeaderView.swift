@@ -2,17 +2,19 @@
 import SwiftUI
 
 struct TotalTargetAmountHeaderView: View {
+    @ObservedObject var viewModel: TotalTargetAmountViewModel
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                 
             VStack(alignment: .leading, spacing: 8) {
-                Text("2024년 6월 목표금액")
+                Text("\(String(viewModel.currentData.year))년 \(viewModel.currentData.month)월 목표금액")
                     .font(.ButtonH4SemiboldFont())
                     .platformTextColor(color: Color("White01"))
-                    
+                        
                 HStack(spacing: 0) {
-                    Text("500,000")
+                    Text("\(viewModel.currentData.targetAmount.amount)")
                         .font(.H1BoldFont())
                         .platformTextColor(color: Color("White01"))
                     Text("원")
@@ -21,8 +23,9 @@ struct TotalTargetAmountHeaderView: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .frame(height: 135 * DynamicSizeFactor.factor())
             .padding(.horizontal, 20)
+            
+            Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                 
             HStack {
                 HStack(spacing: 0) {
@@ -39,8 +42,8 @@ struct TotalTargetAmountHeaderView: View {
                 .padding(.top, 12)
                 
                 Spacer()
-                
-                Text("0원")
+                            
+                Text("\(viewModel.currentData.totalSpending)원")
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: Color("Gray07"))
                     .padding(.trailing, 16)

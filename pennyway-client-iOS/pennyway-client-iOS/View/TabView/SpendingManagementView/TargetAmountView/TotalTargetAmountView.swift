@@ -1,19 +1,24 @@
 import SwiftUI
 
 struct TotalTargetAmountView: View {
+    @StateObject var viewModel = TotalTargetAmountViewModel()
+
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                TotalTargetAmountHeaderView()
+        ZStack {
+            ScrollView {
+                VStack(spacing: 0) {
+                    TotalTargetAmountHeaderView(viewModel: viewModel)
 
-                TotalTargetAmountContentView()
+                    TotalTargetAmountContentView(viewModel: viewModel)
 
-                Spacer().frame(height: 29 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 29 * DynamicSizeFactor.factor())
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Gray01"))
         .navigationBarColor(UIColor(named: "Mint03"), title: "")
+        .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
         .toolbar {

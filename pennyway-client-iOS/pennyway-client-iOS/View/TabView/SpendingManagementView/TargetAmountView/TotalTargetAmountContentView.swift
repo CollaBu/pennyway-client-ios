@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct TotalTargetAmountContentView: View {
+    @ObservedObject var viewModel: TotalTargetAmountViewModel
     var body: some View {
         VStack {
             HStack {
@@ -20,9 +21,9 @@ struct TotalTargetAmountContentView: View {
                 
                 Spacer()
                 
-                Text("500,000원")
+                Text("\(viewModel.currentData.diffAmount)원")
                     .font(.B1SemiboldeFont())
-                    .platformTextColor(color: Color("Gray07"))
+                    .platformTextColor(color: viewModel.currentData.diffAmount < 0 ? Color("Red03") : Color("Gray07"))
                     .padding(.trailing, 16)
                     .padding(.bottom, 12)
             }
@@ -53,20 +54,20 @@ struct TotalTargetAmountContentView: View {
                 
                 Spacer().frame(height: 13 * DynamicSizeFactor.factor()) // TODO: height 수정 필요
                 
-                TotalTargetAmountGraphView()
+                TotalTargetAmountGraphView(viewModel: viewModel)
                 
                 Spacer().frame(height: 13 * DynamicSizeFactor.factor()) // TODO: height 수정 필요
                 
-                ForEach(0 ..< 3) { i in
+                ForEach(viewModel.targetAmounts) { content in
                     VStack(alignment: .leading) {
-                        Text("2024년 \(5 - i)월")
+                        Text("\(String(content.year))년 \(content.month)월")
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray05"))
                         
-                        Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 8)
 
                         HStack {
-                            Text("\(Int.random(in: 700_000 ... 900_000))원")
+                            Text("\(content.totalSpending)원")
                                 .font(.ButtonH4SemiboldFont())
                                 .platformTextColor(color: Color("Gray07"))
                             
@@ -75,10 +76,10 @@ struct TotalTargetAmountContentView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 15) // TODO: 동적 width 적용
                                     .frame(maxWidth: 111 * DynamicSizeFactor.factor(), maxHeight: 24 * DynamicSizeFactor.factor())
-                                    .platformTextColor(color: Color("Red01"))
+                                    .platformTextColor(color: content.diffAmount < 0 ? Color("Red01") : Color("Ashblue01"))
                                 
-                                Text("\(Int.random(in: 5000 ... 200_000))원 더 썼어요")
-                                    .platformTextColor(color: Color("Red03"))
+                                Text(content.diffAmount != 0 ? (content.diffAmount > 0 ? "\(abs(content.diffAmount))원 절약했어요" : "\(abs(content.diffAmount))원 더 썼어요") : "짝짝 소비 천재네요!")
+                                    .platformTextColor(color: content.diffAmount < 0 ? Color("Red03") : Color("Mint03"))
                                     .font(.B2SemiboldFont())
                                     .padding(.horizontal, 10)
                             }

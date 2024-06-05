@@ -64,21 +64,18 @@ struct SpendingCheckBoxView: View {
                     .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
                 Spacer()
 
-                HStack(spacing: 0) {
-                    Text("\(Int(viewModel.targetValue))")
-                        .font(.B1SemiboldeFont())
-                        .platformTextColor(color: Color("Gray07"))
+                NavigationLink(destination: TotalTargetAmountView()) {
+                    HStack(spacing: 0) {
+                        Text("\(Int(viewModel.targetValue))")
+                            .font(.B1SemiboldeFont())
+                            .platformTextColor(color: Color("Gray07"))
 
-                    Button(action: {}, label: {
                         Image("icon_arrow_front_small")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                    })
-                }
-                .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
-                .onTapGesture {
-                    Log.debug("목표 금액 클릭")
+                    }
+                    .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
                 }
             }
             .padding(.leading, 22)

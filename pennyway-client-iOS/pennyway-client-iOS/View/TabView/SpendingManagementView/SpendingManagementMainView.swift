@@ -79,7 +79,7 @@ struct SpendingManagementMainView: View {
                         Button(action: {
                             navigateToAddSpendingHistory = true
                         }, label: {
-                            Image("icon_navigation_add")
+                            Image("icon_navigation_add_black")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())

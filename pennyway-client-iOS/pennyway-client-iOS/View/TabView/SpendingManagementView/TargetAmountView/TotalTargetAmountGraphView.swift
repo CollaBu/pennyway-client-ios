@@ -2,20 +2,21 @@
 import SwiftUI
 
 struct TotalTargetAmountGraphView: View {
+    @ObservedObject var viewModel: TotalTargetAmountViewModel
     var body: some View {
         HStack(spacing: 24 * DynamicSizeFactor.factor()) {
-            ForEach(1 ..< 7) { month in
+            ForEach(viewModel.sortTargetAmounts) { content in
                 VStack {
-                    Text("\(Int.random(in: 50 ... 90))")
+                    Text("\(content.totalSpending / 10000)")
                         .font(.B3MediumFont())
-                        .platformTextColor(color: Color("Gray04"))
+                        .platformTextColor(color: content.month == 8 ? (content.diffAmount < 0 ? Color("Red03") : Color("Mint03")) : Color("Gray04"))
                     Rectangle()
-                        .frame(width: 16 * DynamicSizeFactor.factor(), height: CGFloat(Int.random(in: 99 ... 100)) * DynamicSizeFactor.factor())
-                        .platformTextColor(color: Color("Gray03"))
+                        .frame(width: 16 * DynamicSizeFactor.factor(), height: CGFloat(content.totalSpending / 10000) * DynamicSizeFactor.factor())
+                        .platformTextColor(color: content.month == 8 ? (content.diffAmount < 0 ? Color("Red03") : Color("Mint03")) : Color("Gray03"))
                         .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
-                    Text("\(month)월")
+                    Text("\(content.month)월")
                         .font(.B3MediumFont())
-                        .platformTextColor(color: Color("Gray06"))
+                        .platformTextColor(color: content.month == 8 ? (content.diffAmount < 0 ? Color("Red03") : Color("Mint03")) : Color("Gray06"))
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
