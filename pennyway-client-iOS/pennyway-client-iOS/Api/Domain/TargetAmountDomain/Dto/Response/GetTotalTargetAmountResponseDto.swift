@@ -1,6 +1,3 @@
-
-import Foundation
-
 // MARK: - GetTotalTargetAmountResponseDto
 
 struct GetTotalTargetAmountResponseDto: Codable {
@@ -8,21 +5,6 @@ struct GetTotalTargetAmountResponseDto: Codable {
     let data: targetAmountData
 
     struct targetAmountData: Codable {
-        let targetAmount: TargetAmount
-    }
-}
-
-// MARK: - TargetAmount
-
-struct TargetAmount: Codable {
-    let year: Int
-    let month: Int
-    let targetAmount: Amount
-    let totalSpending: Int
-    let diffAmount: Int
-
-    struct Amount: Codable {
-        let id: Int
-        let amount: Int
+        let targetAmounts: [TargetAmount]
     }
 }
