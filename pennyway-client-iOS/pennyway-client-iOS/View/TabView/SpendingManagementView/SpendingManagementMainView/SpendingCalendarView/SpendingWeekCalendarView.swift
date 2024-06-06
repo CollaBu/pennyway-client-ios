@@ -4,6 +4,7 @@ import SwiftUI
 
 struct SpendingWeekCalendarView: View {
     @State private var selectedDate = Date()
+    @State private var currentMonth = Date()
     @State private var date: Date = Date()
     @State private var changeMonth = false
     @State private var proxy: ScrollViewProxy?
@@ -34,6 +35,7 @@ struct SpendingWeekCalendarView: View {
                 .frame(height: 40 * DynamicSizeFactor.factor())
                 .padding(.horizontal, 10)
             }
+            .padding(.top, 8)
             .onChange(of: spendingHistoryViewModel.selectedDateToScroll) { newValue in
                 if let newDateStr = newValue, let date = parseDate(from: newDateStr) {
                     selectedDate = date
@@ -46,7 +48,6 @@ struct SpendingWeekCalendarView: View {
                 proxy = scrollProxy
             }
         }
-        .padding(.top, 16)
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
@@ -64,7 +65,7 @@ struct SpendingWeekCalendarView: View {
         ZStack(alignment: .leading) {
             HStack(spacing: 0) {
                 Button(action: {
-//                    spendingHistoryViewModel.isChangeMonth = true
+                    spendingHistoryViewModel.isChangeMonth = true
                 }, label: {
                     HStack(spacing: 0) {
                         Text(monthTitle(from: spendingHistoryViewModel.currentDate))
@@ -148,7 +149,6 @@ struct SpendingWeekCalendarView: View {
                         Spacer().frame(height: 4) // 동적 ui 적용하니 너무 넓어짐
 
                         if let amount = getSpendingAmount(for: date) {
-                            /* if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { */ // nil 값을 처리하여 지출 금액 표시
                             Text("-\(amount)")
                                 .font(.B4MediumFont())
                                 .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
@@ -169,17 +169,6 @@ struct SpendingWeekCalendarView: View {
             }
             .padding(.top, 20)
         }
-//                    .onChange(of: spendingHistoryViewModel.selectedDate) { newDate in
-//                        withAnimation {
-//                            _.scrollTo(newDate, anchor: .center)
-//                        }
-//                    }
-//
-//                .onChange(of: spendingHistoryViewModel.selectedDate) { newDate in
-//                    withAnimation {
-//                        proxy.scrollTo(newDate, anchor: .center)
-//                    }
-//                }
     }
 
     private func dateFormatter(date: Date) -> String {
@@ -196,7 +185,11 @@ struct SpendingWeekCalendarView: View {
     private func circleColor(for date: Date) -> Color {
         if calendar.isDateInToday(date) {
             return Color("Mint01")
-        } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
+        } else if spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil {
+            return Color.clear
+        }
+
+        else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
             return spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil ? Color("Gray02") : Color("Gray03")
         } else {
             return Color.clear
@@ -299,12 +292,9 @@ private extension SpendingWeekCalendarView {
         let currentDate = Date()
         let calendar = Calendar.current
 
-        // Get the start of the next month
-        guard let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: selectedDate) else {
+        guard let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: currentMonth) else {
             return false
         }
-
-        // If the next month date is in the future, return false
         if nextMonthDate > currentDate {
             return false
         }

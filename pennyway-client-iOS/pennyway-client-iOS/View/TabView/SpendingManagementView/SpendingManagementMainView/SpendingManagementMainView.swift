@@ -37,8 +37,8 @@ struct SpendingManagementMainView: View {
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
                     Button(action: {
-                        //                            navigateToMySpendingList = true
-                        showSpendingDetailView = true
+                        navigateToMySpendingList = true
+//                        showSpendingDetailView = true
                     }, label: {
                         ZStack {
                             Rectangle()
@@ -141,7 +141,6 @@ struct SpendingManagementMainView: View {
                 .zIndex(2)
         }
         .onChange(of: showSpendingDetailView) { isPresented in
-            Log.debug("?? : \(isPresented)")
             ishidden = isPresented
         }
         .id(ishidden)

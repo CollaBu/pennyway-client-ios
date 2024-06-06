@@ -1,21 +1,20 @@
 import SwiftUI
 
-// MARK: - SpendingListID
-
-struct SpendingListID: Identifiable {
-    let id: Int
-    let description: String
-    // 필요한 다른 속성 추가
-}
-
 // MARK: - MySpendingListView
+
+//// MARK: - SpendingListID
+//
+// struct SpendingListID: Identifiable {
+//    let id: Int
+//    let description: String
+//    // 필요한 다른 속성 추가
+// }
 
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State var selectedDateToScroll: String? = nil
     @State private var currentMonth: Date = Date()
     @State private var buttonTitle: String = "5월 내역 보기"
-//    let months: [Date]
 
     let categories: [String: String] = [
         "FOOD": "icon_category_food_on",
@@ -101,6 +100,7 @@ struct MySpendingListView: View {
                     }
                 }
             }
+            .border(.black)
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
         .edgesIgnoringSafeArea(.bottom)
@@ -115,9 +115,9 @@ struct MySpendingListView: View {
                     .contentShape(Rectangle())
             }
         }
-//        .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
-//            ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
-//        }
+        .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
+            ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
+        }
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
