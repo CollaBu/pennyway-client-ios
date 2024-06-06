@@ -26,7 +26,7 @@ struct SpendingWeekCalendarView: View {
 
     var body: some View {
         ScrollViewReader { scrollProxy in
-            VStack(alignment: .leading, spacing: 20 * DynamicSizeFactor.factor()) {
+            VStack(alignment: .leading, spacing: 15 * DynamicSizeFactor.factor()) {
                 monthView
 
                 ZStack(alignment: .top) {
@@ -35,6 +35,7 @@ struct SpendingWeekCalendarView: View {
                 .frame(height: 40 * DynamicSizeFactor.factor())
                 .padding(.horizontal, 10)
             }
+            .padding(.bottom, 6)
             .padding(.top, 8)
             .onChange(of: spendingHistoryViewModel.selectedDateToScroll) { newValue in
                 if let newDateStr = newValue, let date = parseDate(from: newDateStr) {
@@ -128,6 +129,7 @@ struct SpendingWeekCalendarView: View {
                     }
 
                 ForEach(components, id: \.self) { date in
+
                     VStack {
                         Text(day(from: date))
                             .font(.B2MediumFont())
