@@ -112,6 +112,8 @@ struct MySpendingListView: View {
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
+                    .border(Color.black)
+                    .offset(x: -15 * DynamicSizeFactor.factor())
             }
         }
         .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
