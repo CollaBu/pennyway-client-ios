@@ -124,3 +124,52 @@ enum SpendingCategoryIconList: String, CaseIterable {
         }
     }
 }
+
+// MARK: - SpendingListViewCategoryIconList
+
+/// 소비내역 상세조회 카테고리 리스트
+enum SpendingListViewCategoryIconList: String, CaseIterable, Identifiable {
+    case food = "FOOD"
+    case transportation = "TRANSPORTATION"
+    case beautyOrFashion = "BEAUTY_OR_FASHION"
+    case convenienceStore = "CONVENIENCE_STORE"
+    case education = "EDUCATION"
+    case living = "LIVING"
+    case health = "HEALTH"
+    case hobby = "HOBBY"
+    case travel = "TRAVEL"
+    case alcoholOrEntertainment = "ALCOHOL_OR_ENTERTAINMENT"
+    case membershipOrFamilyEvent = "MEMBERSHIP_OR_FAMILY_EVENT"
+    case other = "OTHER"
+
+    var id: String { rawValue }
+
+    var iconName: String {
+        switch self {
+        case .food:
+            return "icon_category_food_on"
+        case .transportation:
+            return "icon_category_traffic_on_gray"
+        case .beautyOrFashion:
+            return "icon_category_beauty_on"
+        case .convenienceStore:
+            return "icon_category_market_on_gray"
+        case .education:
+            return "icon_category_education_on"
+        case .living:
+            return "icon_category_life_on"
+        case .health:
+            return "icon_category_health_on"
+        case .hobby:
+            return "icon_category_hobby_on"
+        case .travel:
+            return "icon_category_travel_on"
+        case .alcoholOrEntertainment:
+            return "icon_category_drink_on"
+        case .membershipOrFamilyEvent:
+            return "icon_category_event_on"
+        case .other:
+            return "icon_category_plus_off"
+        }
+    }
+}

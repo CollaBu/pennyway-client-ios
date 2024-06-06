@@ -13,7 +13,7 @@ struct InquiryListView: View {
             }, label: {
                 ZStack(alignment: .leading) {
                     Rectangle()
-                        .foregroundColor(.clear)
+                        .platformTextColor(color: .clear)
                         .frame(width: 159 * DynamicSizeFactor.factor(), height: 46 * DynamicSizeFactor.factor())
                         .background(Color("Gray01"))
                         .cornerRadius(3)
@@ -57,7 +57,7 @@ struct InquiryListView: View {
                                     }, label: {
                                         ZStack(alignment: .leading) {
                                             Rectangle()
-                                                .foregroundColor(.clear)
+                                                .platformTextColor(color: .clear)
                                                 .frame(width: 148, height: 36 * DynamicSizeFactor.factor())
                                                 .cornerRadius(3)
                                                 .transition(.move(edge: .top))

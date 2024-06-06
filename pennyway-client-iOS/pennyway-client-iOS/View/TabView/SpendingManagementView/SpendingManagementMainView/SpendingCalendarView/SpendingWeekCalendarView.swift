@@ -64,7 +64,7 @@ struct SpendingWeekCalendarView: View {
         ZStack(alignment: .leading) {
             HStack(spacing: 0) {
                 Button(action: {
-                    spendingHistoryViewModel.isChangeMonth = true
+//                    spendingHistoryViewModel.isChangeMonth = true
                 }, label: {
                     HStack(spacing: 0) {
                         Text(monthTitle(from: spendingHistoryViewModel.currentDate))
