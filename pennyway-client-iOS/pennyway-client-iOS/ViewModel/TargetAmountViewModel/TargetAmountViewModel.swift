@@ -4,8 +4,8 @@ import SwiftUI
 
 class TargetAmountViewModel: ObservableObject {
     @Published var targetAmountData: TargetAmount? = nil
-    @Published var isHiddenSuggestionView = true
-    @Published var isPresentTargetAmount = true // 당월 목표 금액 존재 여부
+    @Published var isHiddenSuggestionView = true//추천 금액 뷰
+    @Published var isPresentTargetAmount = true//당월 목표 금액 존재 여부
 
     func getTargetAmountForDateApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.getTargetAmountForDate { result in
@@ -20,8 +20,18 @@ class TargetAmountViewModel: ObservableObject {
                         if validTargetAmount.targetAmountDetail.isRead == true {
                             self.targetAmountData = validTargetAmount
                             self.isHiddenSuggestionView = true
-                            // TODO: targetAmountData가 nil이 아니면 화면 안 나오도록
+                            self.isPresentTargetAmount = false
                         } else {
+                            
+                            self.getTargetAmountForPreviousMonthApi{ isPresent in
+                                if isPresent{
+                                    self.targetAmountData = validTargetAmount
+                                    self.isHiddenSuggestionView = false
+                                    self.isPresentTargetAmount = false
+                                }else{
+                                    self.deleteCurrentMonthTargetAmountApi{ _ in}
+                                }
+                            }
                             // TODO: getTargetAmountForPreviousMonth 요청
                         }
 
@@ -39,7 +49,6 @@ class TargetAmountViewModel: ObservableObject {
                 if let StatusSpecificError = error as? StatusSpecificError {
                     Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                     
-                    // TODO: 404 오류 처리
                     if StatusSpecificError.domainError == .notFound {
                         self.isHiddenSuggestionView = true
                         self.isPresentTargetAmount = false
@@ -60,19 +69,22 @@ class TargetAmountViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(GetTargetAmountForPreviousMonthResponseDto.self, from: responseData)
+                       
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("당월 이전 사용자 최신 목표 금액 조회 완료 \(jsonString)")
+                        }
                         
                         let isPresent = response.data.targetAmount.isPresent
                         
                         if isPresent == true {
                             // TODO: 추천 금액 보여주기 + 목표 금액 설정하기 UI
+                            completion(true)
                         } else {
                             // TODO: deleteCurrentMonthTargetAmount 요청
+                            completion(false)
                         }
 
-                        if let jsonString = String(data: responseData, encoding: .utf8) {
-                            Log.debug("당월 이전 사용자 최신 목표 금액 조회 완료 \(jsonString)")
-                        }
-                        completion(true)
+                        
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                         completion(false)
