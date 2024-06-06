@@ -12,8 +12,7 @@ struct SpendingWeekCalendarView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @Binding var selectedDateToScroll: String?
 
-    private let calendar = Calendar.current
-    ///    let dailyTotalAmount = getSpendingAmount(for: day)
+    let calendar = Calendar.current
     var checkChangeMonth = false
 
     init(
@@ -47,6 +46,7 @@ struct SpendingWeekCalendarView: View {
             }
             .onAppear {
                 proxy = scrollProxy
+                setToToday()
             }
         }
         .onAppear {
@@ -119,7 +119,6 @@ struct SpendingWeekCalendarView: View {
     @ViewBuilder
     private var dayView: some View {
         let startDate = calendar.date(from: Calendar.current.dateComponents([.year, .month], from: selectedDate))!
-//                ScrollViewReader { pro in
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10 * DynamicSizeFactor.factor()) {
                 let components = (
@@ -185,13 +184,12 @@ struct SpendingWeekCalendarView: View {
     }
 
     private func circleColor(for date: Date) -> Color {
+
         if calendar.isDateInToday(date) {
             return Color("Mint01")
         } else if spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil {
             return Color.clear
-        }
-
-        else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
+        } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
             return spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil ? Color("Gray02") : Color("Gray03")
         } else {
             return Color.clear
@@ -210,8 +208,14 @@ struct SpendingWeekCalendarView: View {
         }
     }
 
-    private func dateRange(for startOfWeek: Date) -> [Date] {
+    private func dateRange(forToday today: Date = Date()) -> [Date] {
         var dates = [Date]()
+        let calendar = Calendar.current
+
+        guard let startOfWeek = calendar.dateInterval(of: .weekOfYear, for: today)?.start else {
+            return dates
+        }
+
         for i in 0 ..< 7 {
             if let date = calendar.date(byAdding: .day, value: i, to: startOfWeek) {
                 dates.append(date)
@@ -228,6 +232,11 @@ struct SpendingWeekCalendarView: View {
 
     private func getSpendingAmount(for day: Int) -> Int? {
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
+    }
+
+    private func setToToday() {
+        selectedDate = Date()
+        spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: Date())
     }
 }
 
@@ -251,12 +260,18 @@ private extension SpendingWeekCalendarView {
         let newDate = Calendar.current.date(byAdding: .month, value: value, to: currentMonth) ?? currentMonth
         currentMonth = newDate
         spendingHistoryViewModel.currentDate = currentMonth
-
+//        selectedDate = Date() // 초기화
+        // 선택된 날짜를 새로운 달의 첫날로 설정
+        if let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate)) {
+            selectedDate = firstDayOfMonth
+            selectedDateToScroll = dateFormatter(date: firstDayOfMonth)
+            spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: firstDayOfMonth)
+        }
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
                 Log.debug("지출내역 조회 API 연동 성공")
                 DispatchQueue.main.async {
-                    self.selectedDate = newDate
+                    self.selectedDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate))!
                 }
             } else {
                 Log.fault("지출내역 조회 API 연동 실패")
@@ -330,6 +345,12 @@ extension Calendar {
         } else {
             return false
         }
+    }
+
+    func isDate(_ date1: Date, inSameMonthAs date2: Date) -> Bool {
+        let components1 = dateComponents([.year, .month], from: date1)
+        let components2 = dateComponents([.year, .month], from: date2)
+        return components1.year == components2.year && components1.month == components2.month
     }
 }
 

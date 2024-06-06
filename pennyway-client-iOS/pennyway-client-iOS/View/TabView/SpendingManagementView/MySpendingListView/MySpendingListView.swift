@@ -14,7 +14,6 @@ struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State var selectedDateToScroll: String? = nil
     @State private var currentMonth: Date = Date()
-    @State private var buttonTitle: String = "5월 내역 보기"
 
     let categories: [String: String] = [
         "FOOD": "icon_category_food_on",
