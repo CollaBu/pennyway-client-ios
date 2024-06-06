@@ -18,27 +18,26 @@ struct RecentTargetAmountSuggestionView: View {
                 Button(action: {
                     isHidden = true
                 }, label: {
-                    Image("icon_close")
+                    Image("icon_close_white")
                         .resizable()
                         .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                 })
             }
-            .padding(.leading, 18)
-            .padding(.trailing, 13)
+            .padding(.leading, 18 * DynamicSizeFactor.factor())
+            .padding(.trailing, 13 * DynamicSizeFactor.factor())
     
             Text("6월 목표금액: 500,000원")
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Mint02"))
-                .padding(.leading, 18)
+                .padding(.leading, 18 * DynamicSizeFactor.factor())
             
             Spacer()
             
             HStack {
-                Image("icon_illust_error")
+                Image("icon_illust_maintain goal")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100 * DynamicSizeFactor.factor(), height: 75 * DynamicSizeFactor.factor())
-                    .border(Color.black)
+                    .frame(width: 85 * DynamicSizeFactor.factor(), height: 85 * DynamicSizeFactor.factor())
                 
                 Spacer()
                 
@@ -58,9 +57,10 @@ struct RecentTargetAmountSuggestionView: View {
                         .background(Color("White01"))
                         .cornerRadius(30)
                 }).frame(maxHeight: .infinity, alignment: .bottom)
-                    .padding(.bottom, 18)
+                    .padding(.bottom, 18 * DynamicSizeFactor.factor())
             }
-            .padding(.horizontal, 18)
+            .padding(.leading, 28 * DynamicSizeFactor.factor())
+            .padding(.trailing, 19 * DynamicSizeFactor.factor())
         }
         .frame(height: 145 * DynamicSizeFactor.factor())
         .background(Color("Mint03"))
