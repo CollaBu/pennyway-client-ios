@@ -4,8 +4,7 @@ import SwiftUI
 
 class TargetAmountViewModel: ObservableObject {
     @Published var totalSpent = 0
-    @Published var targetAmountValue: CGFloat = 0
-    
+    @Published var targetAmountData: TargetAmount? = nil
 
     func getTargetAmountForDateApi(completion : @escaping (Bool) -> Void) {
         
@@ -19,11 +18,9 @@ class TargetAmountViewModel: ObservableObject {
                         let validTargetAmount = response.data.targetAmount
                        
                         if validTargetAmount.targetAmountDetail.isRead == true{
-                            self.totalSpent = validTargetAmount.totalSpending
-                            self.targetAmountValue = CGFloat(validTargetAmount.targetAmountDetail.amount)
-                            //TODO: 화면 안나오도록
+                            self.targetAmountData = validTargetAmount
+                            //TODO: targetAmountData가 nil이 아니면 화면 안 나오도록
                         }else{
-                            
                             //TODO: getTargetAmountForPreviousMonth 요청
                         }
 
@@ -44,10 +41,8 @@ class TargetAmountViewModel: ObservableObject {
                     //TODO: 404 오류 처리
                     if StatusSpecificError.domainError == .notFound{
                         //TODO: deleteCurrentMonthTargetAmount 요청
-                    } else {
-                       
+                        self.deleteCurrentMonthTargetAmountApi{_ in }
                     }
-                    
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
