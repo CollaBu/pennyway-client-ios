@@ -44,7 +44,7 @@
 		4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A35607F2BEBE99A00BA58F3 /* LoginOAuthButtonView.swift */; };
 		4A3560832BEBF12D00BA58F3 /* OAuthAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560822BEBF12D00BA58F3 /* OAuthAccountViewModel.swift */; };
 		4A3701B12C08F74E00F0AEBA /* TargetAmountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701A82C08F74E00F0AEBA /* TargetAmountAlamofire.swift */; };
-		4A3701B22C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701AB2C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift */; };
+		4A3701B22C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */; };
 		4A3701B32C08F74E00F0AEBA /* TargetAmountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701AE2C08F74E00F0AEBA /* TargetAmountRouter.swift */; };
 		4A3701BD2C08F7B600F0AEBA /* TargetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701BB2C08F7B600F0AEBA /* TargetAmountViewModel.swift */; };
 		4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701BE2C08F7F600F0AEBA /* SpendingAlamofire.swift */; };
@@ -119,6 +119,11 @@
 		4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */; };
 		4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */; };
 		4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */; };
+		4A98BD742C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */; };
+		4A98BD762C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */; };
+		4A98BD782C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD772C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift */; };
+		4A98BD7A2C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD792C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift */; };
+		4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
@@ -129,6 +134,7 @@
 		4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */; };
 		4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */; };
 		4AB80AF42C08A31200973DE2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AB80AF32C08A31200973DE2 /* GoogleService-Info.plist */; };
+		4AC320632C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC320622C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift */; };
 		4AC3203F2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3201E2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift */; };
 		4AC320402C11D5AC00DDB4B6 /* SelectCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3201F2C11D5AC00DDB4B6 /* SelectCategoryIconView.swift */; };
 		4AC320412C11D5AC00DDB4B6 /* SpendingCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC320202C11D5AC00DDB4B6 /* SpendingCategoryListView.swift */; };
@@ -265,7 +271,7 @@
 		4A35607F2BEBE99A00BA58F3 /* LoginOAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOAuthButtonView.swift; sourceTree = "<group>"; };
 		4A3560822BEBF12D00BA58F3 /* OAuthAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountViewModel.swift; sourceTree = "<group>"; };
 		4A3701A82C08F74E00F0AEBA /* TargetAmountAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAmountAlamofire.swift; sourceTree = "<group>"; };
-		4A3701AB2C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
+		4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTargetAmountForDateResponseDto.swift; sourceTree = "<group>"; };
 		4A3701AE2C08F74E00F0AEBA /* TargetAmountRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAmountRouter.swift; sourceTree = "<group>"; };
 		4A3701BB2C08F7B600F0AEBA /* TargetAmountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAmountViewModel.swift; sourceTree = "<group>"; };
 		4A3701BE2C08F7F600F0AEBA /* SpendingAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendingAlamofire.swift; sourceTree = "<group>"; };
@@ -342,6 +348,11 @@
 		4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
 		4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOAuthToAccountViewModel.swift; sourceTree = "<group>"; };
 		4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpViewModel.swift; sourceTree = "<group>"; };
+		4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountRequestDto.swift; sourceTree = "<group>"; };
+		4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
+		4A98BD772C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCurrentMonthDummyDataRequestDto.swift; sourceTree = "<group>"; };
+		4A98BD792C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCurrentMonthDummyDataResponseDto.swift; sourceTree = "<group>"; };
+		4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCurrentMonthTargetAmountRequestDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
@@ -352,6 +363,7 @@
 		4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationManager.swift; sourceTree = "<group>"; };
 		4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormView.swift; sourceTree = "<group>"; };
 		4AB80AF32C08A31200973DE2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4AC320622C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTargetAmountForPreviousMonthResponseDto.swift; sourceTree = "<group>"; };
 		4AC3201E2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSpendingCategoryView.swift; sourceTree = "<group>"; };
 		4AC3201F2C11D5AC00DDB4B6 /* SelectCategoryIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryIconView.swift; sourceTree = "<group>"; };
 		4AC320202C11D5AC00DDB4B6 /* SpendingCategoryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendingCategoryListView.swift; sourceTree = "<group>"; };
@@ -734,6 +746,9 @@
 		4A3701AA2C08F74E00F0AEBA /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				4A98BD732C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift */,
+				4A98BD772C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift */,
+				4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -741,7 +756,10 @@
 		4A3701AC2C08F74E00F0AEBA /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				4A3701AB2C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift */,
+				4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */,
+				4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */,
+				4A98BD792C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift */,
+				4AC320622C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1643,8 +1661,9 @@
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
+				4A98BD7A2C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
-				4A3701B22C08F74E00F0AEBA /* GetTotalTargetAmountResponseDto.swift in Sources */,
+				4A3701B22C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
@@ -1654,6 +1673,7 @@
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
+				4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
 				D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */,
 				D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */,
@@ -1676,6 +1696,7 @@
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
+				4A98BD762C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift in Sources */,
 				4AC320482C11D5AC00DDB4B6 /* EditNoSpendingHistoryView.swift in Sources */,
 				4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */,
 				4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */,
@@ -1750,6 +1771,7 @@
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */,
+				4A98BD782C10F76B0044A352 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
@@ -1773,6 +1795,7 @@
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
+				4AC320632C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4AC320472C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift in Sources */,
 				4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */,
@@ -1785,6 +1808,7 @@
 				D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */,
 				4AC3204B2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
+				4A98BD742C10F5D20044A352 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,

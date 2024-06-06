@@ -7,12 +7,12 @@ class TargetAmountViewModel: ObservableObject {
     @Published var targetValue: CGFloat = 0
 
     func getTotalTargetAmountApi(completion: @escaping (Bool) -> Void) {
-        TargetAmountAlamofire.shared.getTotalTargetAmount { result in
+        TargetAmountAlamofire.shared.getTargetAmountForDate { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(GetTotalTargetAmountResponseDto.self, from: responseData)
+                        let response = try JSONDecoder().decode(GetTargetAmountForDateResponseDto.self, from: responseData)
 
                         let validTotalSpending = response.data.targetAmount // 현재 달의 총 지출 금액 찾기
                         self.totalSpent = validTotalSpending.totalSpending
