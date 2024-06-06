@@ -22,6 +22,7 @@ struct SpendingWeekCalendarView: View {
     }
     
     var body: some View {
+//        ScrollViewReader { _ in
         VStack(alignment: .leading, spacing: 20 * DynamicSizeFactor.factor()) {
             monthView
                 
@@ -31,6 +32,17 @@ struct SpendingWeekCalendarView: View {
             .frame(height: 40 * DynamicSizeFactor.factor())
             .padding(.horizontal, 10)
         }
+//            .onChange(of: spendingHistoryViewModel.selectedDate) { newDate in
+//                withAnimation {
+//                    _.scrollTo(newDate, anchor: .center)
+//                }
+//            }
+        
+//        .onChange(of: spendingHistoryViewModel.selectedDate) { newDate in
+//            withAnimation {
+//                proxy.scrollTo(newDate, anchor: .center)
+//            }
+//        }
         .padding(.top, 16)
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
@@ -83,7 +95,6 @@ struct SpendingWeekCalendarView: View {
         .padding(.horizontal, 20)
     }
 
-  
     // MARK: - 일자 표시 뷰
 
     @ViewBuilder
@@ -134,6 +145,7 @@ struct SpendingWeekCalendarView: View {
                     }
                     .frame(height: 65 * DynamicSizeFactor.factor())
                 }
+                .id(date)
             }
             .padding(.top, 20)
         }
@@ -193,7 +205,6 @@ private extension SpendingWeekCalendarView {
         return dateFormatter.string(from: date)
     }
   
-    
     // MARK: - 월 변경
 
     func changeMonth(by value: Int) {
