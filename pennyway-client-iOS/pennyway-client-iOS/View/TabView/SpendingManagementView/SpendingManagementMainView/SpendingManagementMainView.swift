@@ -38,7 +38,6 @@ struct SpendingManagementMainView: View {
 
                     Button(action: {
                         navigateToMySpendingList = true
-//                        showSpendingDetailView = true
                     }, label: {
                         ZStack {
                             Rectangle()

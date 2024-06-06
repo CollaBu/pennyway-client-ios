@@ -294,15 +294,12 @@ private extension SpendingWeekCalendarView {
     /// 다음 월로 이동 가능한지 확인
     private func canMoveToNextMonth() -> Bool {
         let calendar = Calendar.current
-
-        // 현재 시스템 날짜
         let currentDate = Date()
         let currentMonthComponents = calendar.dateComponents([.year, .month], from: currentDate)
         guard let currentMonthDate = calendar.date(from: currentMonthComponents) else {
             return false
         }
 
-        // 선택된 날짜의 다음 달
         let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: selectedDate)!
         let nextMonthComponents = calendar.dateComponents([.year, .month], from: nextMonthDate)
         guard let nextMonthStartDate = calendar.date(from: nextMonthComponents) else {

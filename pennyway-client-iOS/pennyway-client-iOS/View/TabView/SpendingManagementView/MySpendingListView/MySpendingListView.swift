@@ -189,13 +189,9 @@ struct MySpendingListView: View {
     func monthTitle(from date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M월 내역보기"
-
-        // 입력된 날짜에서 한 달을 뺀 날짜를 계산합니다.
         if let previousMonthDate = Calendar.current.date(byAdding: .month, value: -1, to: date) {
             return dateFormatter.string(from: previousMonthDate)
         }
-
-        // 한 달을 뺀 날짜 계산에 실패하면 입력된 날짜를 그대로 사용합니다.
         return dateFormatter.string(from: date)
     }
 }

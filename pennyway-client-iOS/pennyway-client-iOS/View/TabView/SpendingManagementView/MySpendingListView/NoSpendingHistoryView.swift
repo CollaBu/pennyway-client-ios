@@ -6,7 +6,7 @@ struct NoSpendingHistoryView: View {
     @State var navigateToAddSpendingHistory = false
 
     var body: some View {
-        VStack(spacing: 0) { // 상단 패딩값 확인 필요
+        VStack(spacing: 0) { 
             Spacer().frame(height: 50 * DynamicSizeFactor.factor())
             Image("icon_illust_nohistory")
                 .frame(width: 32 * DynamicSizeFactor.factor(), height: 42 * DynamicSizeFactor.factor())
