@@ -28,13 +28,13 @@ enum TargetAmountRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .getTotalTargetAmount, .generateCurrentMonthDummyData:
-            return "v2/targets-amounts"
+            return "v2/target-amounts"
         case .getTargetAmountForDate:
-            return "v2/targets-amounts/\(Date.getBasicformattedDate(from: Date()))"
+            return "v2/target-amounts/\(Date.getBasicformattedDate(from: Date()))"
         case .deleteCurrentMonthTargetAmount, .editCurrentMonthTargetAmount:
-            return "v2/targets-amounts/id값"
+            return "v2/target-amounts/id값"
         case .getTargetAmountForPreviousMonth:
-            return "v2/targets-amounts/recent"
+            return "v2/target-amounts/recent"
         }
     }
     

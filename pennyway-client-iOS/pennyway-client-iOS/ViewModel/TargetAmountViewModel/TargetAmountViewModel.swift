@@ -3,11 +3,11 @@
 import SwiftUI
 
 class TargetAmountViewModel: ObservableObject {
-    @Published var totalSpent = 0
     @Published var targetAmountData: TargetAmount? = nil
+    @Published var isHiddenSuggestionView = true
+    @Published var isPresentTargetAmount = true // 당월 목표 금액 존재 여부
 
-    func getTargetAmountForDateApi(completion : @escaping (Bool) -> Void) {
-        
+    func getTargetAmountForDateApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.getTargetAmountForDate { result in
             switch result {
             case let .success(data):
@@ -17,11 +17,12 @@ class TargetAmountViewModel: ObservableObject {
 
                         let validTargetAmount = response.data.targetAmount
                        
-                        if validTargetAmount.targetAmountDetail.isRead == true{
+                        if validTargetAmount.targetAmountDetail.isRead == true {
                             self.targetAmountData = validTargetAmount
-                            //TODO: targetAmountData가 nil이 아니면 화면 안 나오도록
-                        }else{
-                            //TODO: getTargetAmountForPreviousMonth 요청
+                            self.isHiddenSuggestionView = true
+                            // TODO: targetAmountData가 nil이 아니면 화면 안 나오도록
+                        } else {
+                            // TODO: getTargetAmountForPreviousMonth 요청
                         }
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
@@ -34,14 +35,15 @@ class TargetAmountViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-                
+    
                 if let StatusSpecificError = error as? StatusSpecificError {
                     Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                     
-                    //TODO: 404 오류 처리
-                    if StatusSpecificError.domainError == .notFound{
-                        //TODO: deleteCurrentMonthTargetAmount 요청
-                        self.deleteCurrentMonthTargetAmountApi{_ in }
+                    // TODO: 404 오류 처리
+                    if StatusSpecificError.domainError == .notFound {
+                        self.isHiddenSuggestionView = true
+                        self.isPresentTargetAmount = false
+                        // TODO: generateCurrentMonthDummyData 요청 + 추천 금액 보여주기 x + 목표 금액 설정하기 UI
                     }
                 } else {
                     Log.error("Network request failed: \(error)")
@@ -51,8 +53,7 @@ class TargetAmountViewModel: ObservableObject {
         }
     }
     
-    
-    func getTargetAmountForPreviousMonthApi(completion : @escaping (Bool) -> Void) {
+    func getTargetAmountForPreviousMonthApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.getTargetAmountForPreviousMonth { result in
             switch result {
             case let .success(data):
@@ -62,10 +63,10 @@ class TargetAmountViewModel: ObservableObject {
                         
                         let isPresent = response.data.targetAmount.isPresent
                         
-                        if isPresent == true{
-                            //TODO: 추천 금액 보여주기 + 목표 금액 설정하기 UI
-                        }else{
-                            //TODO: deleteCurrentMonthTargetAmount 요청
+                        if isPresent == true {
+                            // TODO: 추천 금액 보여주기 + 목표 금액 설정하기 UI
+                        } else {
+                            // TODO: deleteCurrentMonthTargetAmount 요청
                         }
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
@@ -88,12 +89,11 @@ class TargetAmountViewModel: ObservableObject {
         }
     }
     
-    func deleteCurrentMonthTargetAmountApi(completion : @escaping (Bool) -> Void) {
+    func deleteCurrentMonthTargetAmountApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.deleteCurrentMonthTargetAmount { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
-           
                     if let jsonString = String(data: responseData, encoding: .utf8) {
                         Log.debug("당월 목표 금액 삭제 완료 \(jsonString)")
                     }
@@ -110,15 +110,13 @@ class TargetAmountViewModel: ObservableObject {
         }
     }
     
-    func editCurrentMonthTargetAmountApi(completion : @escaping (Bool) -> Void) {
-         
+    func editCurrentMonthTargetAmountApi(completion: @escaping (Bool) -> Void) {
         let editCurrentMonthTargetAmountRequestDto = EditCurrentMonthTargetAmountRequestDto(amount: 0)
         
         TargetAmountAlamofire.shared.editCurrentMonthTargetAmount(editCurrentMonthTargetAmountRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
-           
                     if let jsonString = String(data: responseData, encoding: .utf8) {
                         Log.debug("당월 목표 금액 수정 완료 \(jsonString)")
                     }
@@ -134,6 +132,4 @@ class TargetAmountViewModel: ObservableObject {
             }
         }
     }
-    
-    
 }

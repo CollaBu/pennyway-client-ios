@@ -1,4 +1,3 @@
-
 // MARK: - TargetAmount
 
 struct TargetAmount: Codable {

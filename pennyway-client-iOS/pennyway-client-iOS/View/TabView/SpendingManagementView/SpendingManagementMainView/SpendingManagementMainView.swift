@@ -9,10 +9,9 @@ struct SpendingManagementMainView: View {
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
 
-    @State private var ishidden = false
+    @State private var ishidden = false // 변수명 바꿀 필요
 
     @State private var showToastPopup = false
-    @State private var isHiddenSuggestionView = false
 
     var body: some View {
         NavigationAvailable {
@@ -20,8 +19,8 @@ struct SpendingManagementMainView: View {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                    if !isHiddenSuggestionView {
-                        RecentTargetAmountSuggestionView(showToastPopup: $showToastPopup, isHidden: $isHiddenSuggestionView)
+                    if !targetAmountViewModel.isHiddenSuggestionView {
+                        RecentTargetAmountSuggestionView(showToastPopup: $showToastPopup, isHidden: $targetAmountViewModel.isHiddenSuggestionView)
 
                         Spacer().frame(height: 13 * DynamicSizeFactor.factor())
                     }

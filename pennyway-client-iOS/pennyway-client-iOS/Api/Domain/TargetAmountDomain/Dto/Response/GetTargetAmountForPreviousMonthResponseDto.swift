@@ -6,12 +6,10 @@ struct GetTargetAmountForPreviousMonthResponseDto: Codable {
 
     struct AmountDetailData: Codable {
         let targetAmount: PreviousTargetAmount
-    
+
         struct PreviousTargetAmount: Codable {
             let isPresent: Bool
             let amount: Int
         }
     }
 }
-
-
