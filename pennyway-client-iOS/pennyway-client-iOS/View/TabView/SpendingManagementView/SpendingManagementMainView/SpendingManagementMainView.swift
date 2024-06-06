@@ -20,7 +20,7 @@ struct SpendingManagementMainView: View {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
                     if !targetAmountViewModel.isHiddenSuggestionView {
-                        RecentTargetAmountSuggestionView(showToastPopup: $showToastPopup, isHidden: $targetAmountViewModel.isHiddenSuggestionView)
+                        RecentTargetAmountSuggestionView(viewModel: targetAmountViewModel, showToastPopup: $showToastPopup, isHidden: $targetAmountViewModel.isHiddenSuggestionView)
 
                         Spacer().frame(height: 13 * DynamicSizeFactor.factor())
                     }
@@ -118,7 +118,7 @@ struct SpendingManagementMainView: View {
             .overlay(
                 Group {
                     if showToastPopup {
-                        CustomToastView(message: "7월의 새로운 목표금액을 설정했어요")
+                        CustomToastView(message: "\(Date.month(from: Date()))월의 새로운 목표금액을 설정했어요")
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.5))
                             .padding(.bottom, 10)

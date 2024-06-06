@@ -32,16 +32,16 @@ class TargetAmountAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.generateCurrentMonthDummyData(dto: dto), completion: completion)
     }
         
-    func deleteCurrentMonthTargetAmount(completion: @escaping (Result<Data?, Error>) -> Void) {
+    func deleteCurrentMonthTargetAmount(targetAmountId: Int, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("SpendingAlamofire - deleteCurrentMonthTargetAmount() called")
     
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.deleteCurrentMonthTargetAmount, completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.deleteCurrentMonthTargetAmount(targetAmountId: targetAmountId), completion: completion)
     }
     
-    func editCurrentMonthTargetAmount(_ dto: EditCurrentMonthTargetAmountRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func editCurrentMonthTargetAmount(targetAmountId: Int, dto: EditCurrentMonthTargetAmountRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("SpendingAlamofire - editCurrentMonthTargetAmount() called")
         
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.editCurrentMonthTargetAmount(dto: dto), completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.editCurrentMonthTargetAmount(targetAmountId: targetAmountId, dto: dto), completion: completion)
     }
     
     func getTargetAmountForPreviousMonth(completion: @escaping (Result<Data?, Error>) -> Void) {

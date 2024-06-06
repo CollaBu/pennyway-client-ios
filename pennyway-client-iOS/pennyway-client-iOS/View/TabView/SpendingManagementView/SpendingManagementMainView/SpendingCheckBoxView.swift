@@ -35,7 +35,7 @@ struct SpendingCheckBoxView: View {
                                                StringAttribute(
                                                    text: "\(formattedTotalSpent)원",
                                                    font: .H3SemiboldFont(),
-                                                   color: totalSpending > targetAmount ? Color("Red03") : Color("Mint03")
+                                                   color: targetAmount != -1 && totalSpending > targetAmount ? Color("Red03") : Color("Mint03")
                                                ))
                                                .lineSpacing(3)
                 Spacer()
@@ -70,12 +70,13 @@ struct SpendingCheckBoxView: View {
             Spacer().frame(height: 2)
 
             HStack {
-                Text("\(totalSpending)")
-                    .font(.B1SemiboldeFont())
-                    .platformTextColor(color: totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
-                Spacer()
-
                 if viewModel.isPresentTargetAmount == true {
+                    Text("\(totalSpending)")
+                        .font(.B1SemiboldeFont())
+                        .platformTextColor(color: totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
+
+                    Spacer()
+
                     NavigationLink(destination: TotalTargetAmountView()) {
                         HStack(spacing: 0) {
                             Text("\(targetAmount)")
@@ -90,6 +91,8 @@ struct SpendingCheckBoxView: View {
                         .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
                     }
                 } else {
+                    Spacer()
+
                     HStack(spacing: 0) {
                         Text("목표금액 설정하기")
                             .font(.B1SemiboldeFont())

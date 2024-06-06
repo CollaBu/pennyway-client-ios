@@ -15,3 +15,10 @@ struct AmountDetail: Codable {
     var amount: Int
     var isRead: Bool
 }
+
+// MARK: - RecentTargetAmount
+
+struct RecentTargetAmount: Codable {
+    let isPresent: Bool
+    let amount: Int
+}

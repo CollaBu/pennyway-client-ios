@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct RecentTargetAmountSuggestionView: View {
+    @ObservedObject var viewModel: TargetAmountViewModel
     @Binding var showToastPopup: Bool
     @Binding var isHidden: Bool
     
@@ -17,6 +18,7 @@ struct RecentTargetAmountSuggestionView: View {
                 
                 Button(action: {
                     isHidden = true
+                    viewModel.deleteCurrentMonthTargetAmountApi()
                 }, label: {
                     Image("icon_close_white")
                         .resizable()
@@ -26,7 +28,7 @@ struct RecentTargetAmountSuggestionView: View {
             .padding(.leading, 18 * DynamicSizeFactor.factor())
             .padding(.trailing, 13 * DynamicSizeFactor.factor())
     
-            Text("6월 목표금액: 500,000원")
+            Text("6월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(viewModel.recentTargetAmountData?.amount ?? 0))원") // 백엔드에게 월 데이터 요청
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Mint02"))
                 .padding(.leading, 18 * DynamicSizeFactor.factor())
@@ -44,6 +46,7 @@ struct RecentTargetAmountSuggestionView: View {
                 Button(action: {
                     isHidden = true
                     showToastPopup = true
+                    viewModel.editCurrentMonthTargetAmountApi()
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         showToastPopup = false
