@@ -6,6 +6,10 @@ struct SpendingManagementMainView: View {
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToAddSpendingHistory = false
     @State private var navigateToMySpendingList = false
+    @State private var showSpendingDetailView = false
+    @State private var showEditSpendingDetailView: Bool = false
+
+    @State private var ishidden = false
 
     @State private var showToastPopup = false
     @State private var isHiddenSuggestionView = false
@@ -33,7 +37,8 @@ struct SpendingManagementMainView: View {
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
                     Button(action: {
-                        navigateToMySpendingList = true
+                        //                            navigateToMySpendingList = true
+                        showSpendingDetailView = true
                     }, label: {
                         ZStack {
                             Rectangle()
@@ -67,12 +72,13 @@ struct SpendingManagementMainView: View {
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
             }
+
+            .setTabBarVisibility(isHidden: ishidden)
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                 targetAmountViewModel.getTotalTargetAmountApi { _ in }
             }
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
-            .setTabBarVisibility(isHidden: false)
             .background(Color("Gray01"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
@@ -128,6 +134,24 @@ struct SpendingManagementMainView: View {
             NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel()), isActive: $navigateToMySpendingList) {
                 EmptyView()
             }
+        }
+        .dragBottomSheet(isPresented: $showSpendingDetailView) {
+            changeSheetView()
+                // EditSpendingDetailView()
+                .zIndex(2)
+        }
+        .onChange(of: showSpendingDetailView) { isPresented in
+            Log.debug("?? : \(isPresented)")
+            ishidden = isPresented
+        }
+        .id(ishidden)
+    }
+
+    func changeSheetView() -> some View {
+        if showEditSpendingDetailView == true {
+            return AnyView(EditSpendingDetailView(showEditSpendingDetailView: $showEditSpendingDetailView))
+        } else {
+            return AnyView(SpendingDetailSheetView(showEditSpendingDetailView: $showEditSpendingDetailView))
         }
     }
 }
