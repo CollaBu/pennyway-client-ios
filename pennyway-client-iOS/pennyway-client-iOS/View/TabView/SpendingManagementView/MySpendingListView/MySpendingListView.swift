@@ -51,7 +51,7 @@ struct MySpendingListView: View {
                                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
                                         Section(header: headerView(for: date)) {
-                                            Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                                            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = categories[item.category.icon] ?? ""
                                                 ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
@@ -64,7 +64,7 @@ struct MySpendingListView: View {
                                         }
                                         .id(date) // ScrollViewReader를 위한 ID 추가
                                     }
-                                    Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+                                    Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                                 }
                             }
                         }

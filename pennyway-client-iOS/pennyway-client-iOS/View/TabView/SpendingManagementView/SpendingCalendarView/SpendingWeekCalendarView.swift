@@ -132,7 +132,7 @@ struct SpendingWeekCalendarView: View {
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray04"))
 
-                        Spacer().frame(height: 9)
+                        Spacer().frame(height: 9) // 동적 ui 적용하니 너무 넓어짐
 
                         Text("\(calendar.component(.day, from: date))")
                             .font(.B2MediumFont())
@@ -145,7 +145,7 @@ struct SpendingWeekCalendarView: View {
                             .padding(.horizontal, 7)
                             .padding(.vertical, 3)
 
-                        Spacer().frame(height: 5) // 동적 ui 적용하니 너무 넓어짐
+                        Spacer().frame(height: 4) // 동적 ui 적용하니 너무 넓어짐
 
                         if let amount = getSpendingAmount(for: date) {
                             /* if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { */ // nil 값을 처리하여 지출 금액 표시
