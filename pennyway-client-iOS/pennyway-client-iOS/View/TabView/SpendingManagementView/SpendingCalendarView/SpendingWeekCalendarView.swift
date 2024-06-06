@@ -154,8 +154,9 @@ struct SpendingWeekCalendarView: View {
                             )
                             .platformTextColor(color: textColor(for: date))
                             .padding(.horizontal, 7)
+                            .padding(.vertical, 3)
 
-                        Spacer().frame(height: 2 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 5) // 동적 ui 적용하니 너무 넓어짐
 
                         if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
                             Text("-\(amount)")
@@ -166,9 +167,10 @@ struct SpendingWeekCalendarView: View {
                         }
                     }
                     .onTapGesture {
-                        if !calendar.isDateInFuture(date) {
+                        if !calendar.isDateInFuture(date, comparedTo: self.date) {
                             selectedDate = date
                             selectedDateToScroll = dateFormatter(date: date)
+                            spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: date)
                         }
                     }
                     .frame(height: 65 * DynamicSizeFactor.factor())
@@ -337,8 +339,14 @@ private extension SpendingWeekCalendarView {
 }
 
 extension Calendar {
-    func isDateInFuture(_ date: Date) -> Bool {
-        return date > Date()
+    func isDateInFuture(_ date: Date, comparedTo currentMonth: Date) -> Bool {
+        let currentYearMonth = dateComponents([.year, .month], from: currentMonth)
+        let dateYearMonth = dateComponents([.year, .month], from: date)
+        if currentYearMonth == dateYearMonth {
+            return date > Date()
+        } else {
+            return false
+        }
     }
 }
 

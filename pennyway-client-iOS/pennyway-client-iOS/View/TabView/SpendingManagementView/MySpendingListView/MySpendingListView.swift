@@ -43,20 +43,25 @@ struct MySpendingListView: View {
                             if groupedSpendings().isEmpty {
                                 NoSpendingHistoryView()
                             } else {
-                                LazyVStack(spacing: 0) {
+                                LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
                                     ForEach(groupedSpendings(), id: \.key) { date, spendings in
+                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+
                                         Section(header: headerView(for: date)) {
+                                            Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = categories[item.category.icon] ?? ""
                                                 ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                                    .id(date)
-                                                    .onTapGesture {
-                                                        spendingHistoryViewModel.selectedDateToScroll = date
-                                                    }
+                                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }
-                                            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                            .onAppear {
+                                                Log.debug("spendings: \(spendings)")
+                                                Log.debug("group: \(groupedSpendings())")
+                                            }
                                         }
+                                        .id(date) // ScrollViewReader를 위한 ID 추가
                                     }
+                                    Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                                 }
                             }
                         }
