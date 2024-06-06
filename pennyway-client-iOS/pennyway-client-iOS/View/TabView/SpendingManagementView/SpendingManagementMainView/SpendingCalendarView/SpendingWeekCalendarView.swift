@@ -242,9 +242,13 @@ private extension SpendingWeekCalendarView {
     // MARK: - 월 변경
 
     func changeMonth(by value: Int) {
-        let newDate = Calendar.current.date(byAdding: .month, value: value, to: selectedDate) ?? selectedDate
-        selectedDate = newDate
-        spendingHistoryViewModel.currentDate = selectedDate
+        guard (value > 0 && canMoveToNextMonth()) || value <= 0 else {
+            return
+        }
+
+        let newDate = Calendar.current.date(byAdding: .month, value: value, to: currentMonth) ?? currentMonth
+        currentMonth = newDate
+        spendingHistoryViewModel.currentDate = currentMonth
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
@@ -288,19 +292,6 @@ private extension SpendingWeekCalendarView {
     }
 
     /// 다음 월로 이동 가능한지 확인
-    ///    private func canMoveToNextMonth() -> Bool {
-    ///        let currentDate = Date()
-    ///        let calendar = Calendar.current
-    ///
-    ///        guard let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: currentDate) else {
-    ///            return false
-    ///        }
-    ///        if nextMonthDate > currentDate {
-    ///            return false
-    ///        }
-    ///
-    ///        return true
-    ///    }
     private func canMoveToNextMonth() -> Bool {
         let calendar = Calendar.current
 
@@ -311,14 +302,15 @@ private extension SpendingWeekCalendarView {
             return false
         }
 
-        // 선택된 날짜의 월
-        let selectedDateMonthComponents = calendar.dateComponents([.year, .month], from: selectedDate)
-        guard let selectedMonthDate = calendar.date(from: selectedDateMonthComponents) else {
+        // 선택된 날짜의 다음 달
+        let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: selectedDate)!
+        let nextMonthComponents = calendar.dateComponents([.year, .month], from: nextMonthDate)
+        guard let nextMonthStartDate = calendar.date(from: nextMonthComponents) else {
             return false
         }
 
-        // 선택된 달이 현재 달이면 다음 달로 이동 불가
-        return selectedMonthDate < currentMonthDate
+        // 다음 달이 현재 달보다 미래이면 이동 불가
+        return nextMonthStartDate <= currentMonthDate
     }
 
     /// 변경하려는 월 반환
