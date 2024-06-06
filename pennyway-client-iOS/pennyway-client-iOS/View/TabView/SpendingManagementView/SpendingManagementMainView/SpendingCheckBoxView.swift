@@ -24,7 +24,7 @@ struct SpendingCheckBoxView: View {
                                                StringAttribute(
                                                    text: "\(formattedTotalSpent)원",
                                                    font: .H3SemiboldFont(),
-                                                   color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03")
+                                                   color: CGFloat(viewModel.totalSpent) > viewModel.targetAmountValue ? Color("Red03") : Color("Mint03")
                                                ))
                                                .lineSpacing(3)
                 Spacer()
@@ -42,17 +42,17 @@ struct SpendingCheckBoxView: View {
                     .cornerRadius(15)
 
                 let progressWidth: CGFloat = {
-                    if viewModel.targetValue <= 0 {
+                    if viewModel.targetAmountValue <= 0 {
                         return 0
                     }
-                    let ratio = CGFloat(viewModel.totalSpent) / viewModel.targetValue
+                    let ratio = CGFloat(viewModel.totalSpent) / viewModel.targetAmountValue
                     let width = ratio * (UIScreen.main.bounds.width - 76)
                     return min(max(width, 0), UIScreen.main.bounds.width - 76)
                 }()
 
                 Rectangle()
                     .frame(width: progressWidth, height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
-                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
+                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetAmountValue ? Color("Red03") : Color("Mint03"))
                     .cornerRadius(15)
             }
 
@@ -61,12 +61,12 @@ struct SpendingCheckBoxView: View {
             HStack {
                 Text("\(viewModel.totalSpent)")
                     .font(.B1SemiboldeFont())
-                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
+                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetAmountValue ? Color("Red03") : Color("Mint03"))
                 Spacer()
 
                 NavigationLink(destination: TotalTargetAmountView()) {
                     HStack(spacing: 0) {
-                        Text("\(Int(viewModel.targetValue))")
+                        Text("\(Int(viewModel.targetAmountValue))")
                             .font(.B1SemiboldeFont())
                             .platformTextColor(color: Color("Gray07"))
 

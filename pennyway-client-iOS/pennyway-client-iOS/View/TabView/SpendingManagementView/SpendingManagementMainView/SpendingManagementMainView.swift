@@ -76,7 +76,7 @@ struct SpendingManagementMainView: View {
             .setTabBarVisibility(isHidden: ishidden)
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
-                targetAmountViewModel.getTotalTargetAmountApi { _ in }
+                targetAmountViewModel.getTargetAmountForDateApi { _ in }
             }
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
             .background(Color("Gray01"))
