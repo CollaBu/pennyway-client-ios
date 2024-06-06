@@ -140,6 +140,7 @@
 		4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */; };
 		4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */; };
 		4AB80AF42C08A31200973DE2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AB80AF32C08A31200973DE2 /* GoogleService-Info.plist */; };
+		4AC320632C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC320622C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift */; };
 		4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD072BBDCC190027ACD5 /* KakaoOAuthViewModel.swift */; };
 		4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD092BBDCE080027ACD5 /* GoogleOAuthViewModel.swift */; };
 		4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift */; };
@@ -356,6 +357,7 @@
 		4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationManager.swift; sourceTree = "<group>"; };
 		4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormView.swift; sourceTree = "<group>"; };
 		4AB80AF32C08A31200973DE2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4AC320622C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTargetAmountForPreviousMonthResponseDto.swift; sourceTree = "<group>"; };
 		4AC4FD072BBDCC190027ACD5 /* KakaoOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC4FD092BBDCE080027ACD5 /* GoogleOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleOAtuthViewModel.swift; sourceTree = "<group>"; };
@@ -743,6 +745,7 @@
 				4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */,
 				4A98BD752C10F6AE0044A352 /* GetTotalTargetAmountResponseDto.swift */,
 				4A98BD792C10F80D0044A352 /* GenerateCurrentMonthDummyDataResponseDto.swift */,
+				4AC320622C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1724,6 +1727,7 @@
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
+				4AC320632C11FE7A00DDB4B6 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,

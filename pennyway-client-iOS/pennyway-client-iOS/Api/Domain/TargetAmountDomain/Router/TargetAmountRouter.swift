@@ -5,12 +5,12 @@ import Foundation
 enum TargetAmountRouter: URLRequestConvertible {
     case getTotalTargetAmount(dto: GetTotalTargetAmountRequestDto)
     case generateCurrentMonthDummyData(dto: GenerateCurrentMonthDummyDataRequestDto)
-    case getTargetAmountForDate, deleteCurrentMonthTargetAmount
+    case getTargetAmountForDate, deleteCurrentMonthTargetAmount, getTargetAmountForPreviousMonth
     case editCurrentMonthTargetAmount(dto: EditCurrentMonthTargetAmountRequestDto)
  
     var method: HTTPMethod {
         switch self {
-        case .getTargetAmountForDate, .getTotalTargetAmount:
+        case .getTargetAmountForDate, .getTotalTargetAmount, .getTargetAmountForPreviousMonth:
             return .get
         case .generateCurrentMonthDummyData:
             return .post
@@ -34,12 +34,14 @@ enum TargetAmountRouter: URLRequestConvertible {
             return "v2/targets-amounts/\(Date.getBasicformattedDate(from: Date()))"
         case .deleteCurrentMonthTargetAmount, .editCurrentMonthTargetAmount:
             return "v2/targets-amounts/id값"
+        case .getTargetAmountForPreviousMonth:
+            return "v2/targets-amounts/recent"
         }
     }
     
     var bodyParameters: Parameters? {
         switch self {
-        case .getTargetAmountForDate, .getTotalTargetAmount, .generateCurrentMonthDummyData, .deleteCurrentMonthTargetAmount, .editCurrentMonthTargetAmount:
+        case .getTargetAmountForDate, .getTotalTargetAmount, .generateCurrentMonthDummyData, .deleteCurrentMonthTargetAmount, .editCurrentMonthTargetAmount, .getTargetAmountForPreviousMonth:
             return [:]
         }
     }
@@ -52,7 +54,7 @@ enum TargetAmountRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .editCurrentMonthTargetAmount(dto):
             return try? dto.asDictionary()
-        case .getTargetAmountForDate, .deleteCurrentMonthTargetAmount:
+        case .getTargetAmountForDate, .deleteCurrentMonthTargetAmount, .getTargetAmountForPreviousMonth:
             return [:]
         }
     }
@@ -65,7 +67,7 @@ enum TargetAmountRouter: URLRequestConvertible {
         case .getTotalTargetAmount, .generateCurrentMonthDummyData, .editCurrentMonthTargetAmount:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
-        case .getTargetAmountForDate, .deleteCurrentMonthTargetAmount:
+        case .getTargetAmountForDate, .deleteCurrentMonthTargetAmount, .getTargetAmountForPreviousMonth:
             request = URLRequest.createURLRequest(url: url, method: method)
         }
         return request

@@ -43,4 +43,10 @@ class TargetAmountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.editCurrentMonthTargetAmount(dto: dto), completion: completion)
     }
+    
+    func getTargetAmountForPreviousMonth(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - getTargetAmountForPreviousMonth() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.getTargetAmountForPreviousMonth, completion: completion)
+    }
 }
