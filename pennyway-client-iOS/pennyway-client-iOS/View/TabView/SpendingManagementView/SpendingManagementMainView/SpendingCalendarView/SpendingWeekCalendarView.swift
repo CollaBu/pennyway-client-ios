@@ -288,18 +288,37 @@ private extension SpendingWeekCalendarView {
     }
 
     /// 다음 월로 이동 가능한지 확인
+    ///    private func canMoveToNextMonth() -> Bool {
+    ///        let currentDate = Date()
+    ///        let calendar = Calendar.current
+    ///
+    ///        guard let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: currentDate) else {
+    ///            return false
+    ///        }
+    ///        if nextMonthDate > currentDate {
+    ///            return false
+    ///        }
+    ///
+    ///        return true
+    ///    }
     private func canMoveToNextMonth() -> Bool {
-        let currentDate = Date()
         let calendar = Calendar.current
 
-        guard let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: currentMonth) else {
-            return false
-        }
-        if nextMonthDate > currentDate {
+        // 현재 시스템 날짜
+        let currentDate = Date()
+        let currentMonthComponents = calendar.dateComponents([.year, .month], from: currentDate)
+        guard let currentMonthDate = calendar.date(from: currentMonthComponents) else {
             return false
         }
 
-        return true
+        // 선택된 날짜의 월
+        let selectedDateMonthComponents = calendar.dateComponents([.year, .month], from: selectedDate)
+        guard let selectedMonthDate = calendar.date(from: selectedDateMonthComponents) else {
+            return false
+        }
+
+        // 선택된 달이 현재 달이면 다음 달로 이동 불가
+        return selectedMonthDate < currentMonthDate
     }
 
     /// 변경하려는 월 반환
