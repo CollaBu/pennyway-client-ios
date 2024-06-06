@@ -45,18 +45,6 @@ struct SpendingWeekCalendarView: View {
                 proxy = scrollProxy
             }
         }
-
-//            .onChange(of: spendingHistoryViewModel.selectedDate) { newDate in
-//                withAnimation {
-//                    _.scrollTo(newDate, anchor: .center)
-//                }
-//            }
-
-//        .onChange(of: spendingHistoryViewModel.selectedDate) { newDate in
-//            withAnimation {
-//                proxy.scrollTo(newDate, anchor: .center)
-//            }
-//        }
         .padding(.top, 16)
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
@@ -143,7 +131,7 @@ struct SpendingWeekCalendarView: View {
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray04"))
 
-                        Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 9)
 
                         Text("\(calendar.component(.day, from: date))")
                             .font(.B2MediumFont())

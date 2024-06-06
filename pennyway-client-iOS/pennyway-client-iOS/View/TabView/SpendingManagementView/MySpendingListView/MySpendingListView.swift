@@ -13,6 +13,9 @@ struct SpendingListID: Identifiable {
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State var selectedDateToScroll: String? = nil
+    @State private var currentMonth: Date = Date()
+    @State private var buttonTitle: String = "5월 내역 보기"
+//    let months: [Date]
 
     let categories: [String: String] = [
         "FOOD": "icon_category_food_on",
@@ -67,7 +70,8 @@ struct MySpendingListView: View {
                         }
                         if !groupedSpendings().isEmpty {
                             Button(action: {
-                                // 버튼 액션 추가
+                                changeMonth(by: -1)
+
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -75,7 +79,7 @@ struct MySpendingListView: View {
                                         .foregroundColor(Color("Gray01"))
                                         .cornerRadius(26)
 
-                                    Text("5월 내역 보기")
+                                    Text(monthTitle(from: spendingHistoryViewModel.currentDate))
                                         .font(.B1SemiboldeFont())
                                         .foregroundColor(Color("Gray04"))
                                         .padding(.horizontal, 20)
@@ -163,6 +167,37 @@ struct MySpendingListView: View {
             }
 
         return sortedGroup
+    }
+
+    private func changeMonth(by value: Int) {
+        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
+        currentMonth = spendingHistoryViewModel.currentDate
+        spendingHistoryViewModel.currentDate = newDate
+        currentMonth = newDate
+
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+            if success {
+                Log.debug("지출내역 조회 API 연동 성공")
+                DispatchQueue.main.async {
+                    self.currentMonth = newDate
+                }
+            } else {
+                Log.fault("지출내역 조회 API 연동 실패")
+            }
+        }
+    }
+
+    func monthTitle(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월 내역보기"
+
+        // 입력된 날짜에서 한 달을 뺀 날짜를 계산합니다.
+        if let previousMonthDate = Calendar.current.date(byAdding: .month, value: -1, to: date) {
+            return dateFormatter.string(from: previousMonthDate)
+        }
+
+        // 한 달을 뺀 날짜 계산에 실패하면 입력된 날짜를 그대로 사용합니다.
+        return dateFormatter.string(from: date)
     }
 }
 
