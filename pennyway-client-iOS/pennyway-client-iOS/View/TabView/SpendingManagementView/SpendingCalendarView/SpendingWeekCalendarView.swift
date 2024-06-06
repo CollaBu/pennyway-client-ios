@@ -12,6 +12,7 @@ struct SpendingWeekCalendarView: View {
     @Binding var selectedDateToScroll: String?
 
     private let calendar = Calendar.current
+    ///    let dailyTotalAmount = getSpendingAmount(for: day)
     var checkChangeMonth = false
 
     init(
@@ -146,7 +147,8 @@ struct SpendingWeekCalendarView: View {
 
                         Spacer().frame(height: 5) // 동적 ui 적용하니 너무 넓어짐
 
-                        if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { // nil 값을 처리하여 지출 금액 표시
+                        if let amount = getSpendingAmount(for: date) {
+                            /* if let amount = spendingHistoryViewModel.getDailyTotalAmount(for: date) { */ // nil 값을 처리하여 지출 금액 표시
                             Text("-\(amount)")
                                 .font(.B4MediumFont())
                                 .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
@@ -228,6 +230,10 @@ struct SpendingWeekCalendarView: View {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.date(from: dateString)
     }
+
+    private func getSpendingAmount(for day: Int) -> Int? {
+        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
+    }
 }
 
 // MARK: - 로직
@@ -305,17 +311,6 @@ private extension SpendingWeekCalendarView {
 
         return true
     }
-
-//    func canMoveToNextMonth() -> Bool {
-//        let currentDate = Date()
-//        let calendar = Calendar.current
-//        let targetDate = calendar.date(byAdding: .month, value: 0, to: currentDate) ?? currentDate
-//
-//        if adjustedMonth(by: 1) > targetDate {
-//            return false
-//        }
-//        return true
-//    }
 
     /// 변경하려는 월 반환
     func adjustedMonth(by value: Int) -> Date {
