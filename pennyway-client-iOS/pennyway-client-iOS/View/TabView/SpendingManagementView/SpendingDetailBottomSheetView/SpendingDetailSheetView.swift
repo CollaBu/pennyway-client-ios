@@ -16,22 +16,7 @@ struct SpendingDetail: Identifiable {
 
 struct SpendingDetailSheetView: View {
     @Binding var showEditSpendingDetailView: Bool
-    
-    let categories: [String: String] = [
-        "FOOD": "icon_category_food_on",
-        "TRANSPORTATION": "icon_category_traffic_on_gray",
-        "BEAUTY_OR_FASHION": "icon_category_beauty_on",
-        "CONVENIENCE_STORE": "icon_category_market_on_gray",
-        "EDUCATION": "icon_category_education_on",
-        "LIVING": "icon_category_life_on",
-        "HEALTH": "icon_category_health_on",
-        "HOBBY": "icon_category_hobby_on",
-        "TRAVEL": "icon_category_travel_on",
-        "ALCOHOL_OR_ENTERTAINMENT": "icon_category_drink_on",
-        "MEMBERSHIP_OR_FAMILY_EVENT": "icon_category_event_on",
-        "OTHER": "icon_category_plus_off"
-    ]
-    
+
     @State var spendingDetails: [SpendingDetail] = [
         SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
         SpendingDetail(category: "교육", description: "스터디용 메모장", amount: "6,000원", icon: "icon_category_education_on"),
@@ -128,7 +113,6 @@ struct SpendingDetailSheetView: View {
         }
         .setTabBarVisibility(isHidden: true)
         .padding(.leading, 20)
-//        .padding(.trailing, 17)
     }
 }
 
