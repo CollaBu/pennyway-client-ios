@@ -6,40 +6,45 @@ struct SpendingManagementMainView: View {
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToAddSpendingHistory = false
     @State private var navigateToMySpendingList = false
+    @State private var showSpendingDetailView = false
+    @State private var showEditSpendingDetailView: Bool = false
+    
+    @State private var ishidden = false
 
     var body: some View {
         NavigationAvailable {
             ScrollView {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
+                        
                     SpendingCheckBoxView(viewModel: targetAmountViewModel)
                         .padding(.horizontal, 20)
-
+                        
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-
+                        
                     SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel)
                         .padding(.horizontal, 20)
-
+                        
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-
+                        
                     Button(action: {
-                        navigateToMySpendingList = true
+                        //                            navigateToMySpendingList = true
+                        showSpendingDetailView = true
                     }, label: {
                         ZStack {
                             Rectangle()
                                 .frame(height: 50 * DynamicSizeFactor.factor())
                                 .cornerRadius(8)
                                 .platformTextColor(color: Color("White01"))
-
+                                
                             HStack {
                                 Text("나의 소비 내역")
                                     .font(.ButtonH4SemiboldFont())
                                     .platformTextColor(color: Color("Gray07"))
                                     .padding(.leading, 18)
-
+                                    
                                 Spacer()
-
+                                    
                                 Image("icon_arrow_front_small")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -47,23 +52,24 @@ struct SpendingManagementMainView: View {
                                     .padding(.trailing, 10)
                             }
                         }
-
+                            
                     })
                     .onTapGesture {
                         Log.debug("나의 소비 내역 click")
                     }
                     .frame(maxWidth: .infinity, maxHeight: 50 * DynamicSizeFactor.factor())
                     .padding(.horizontal, 20)
-
+                        
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
             }
+            
+            .setTabBarVisibility(isHidden: ishidden)
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                 targetAmountViewModel.getTotalTargetAmountApi { _ in }
             }
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
-            .setTabBarVisibility(isHidden: false)
             .background(Color("Gray01"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
@@ -108,6 +114,24 @@ struct SpendingManagementMainView: View {
             NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel()), isActive: $navigateToMySpendingList) {
                 EmptyView()
             }
+        }
+        .dragBottomSheet(isPresented: $showSpendingDetailView) {
+            changeSheetView()
+                // EditSpendingDetailView()
+                .zIndex(2)
+        }
+        .onChange(of: showSpendingDetailView) { isPresented in
+            Log.debug("?? : \(isPresented)")
+            ishidden = isPresented
+        }
+        .id(ishidden)
+    }
+    
+    func changeSheetView() -> some View {
+        if showEditSpendingDetailView == true {
+            return AnyView(EditSpendingDetailView(showEditSpendingDetailView: $showEditSpendingDetailView))
+        } else {
+            return AnyView(SpendingDetailSheetView(showEditSpendingDetailView: $showEditSpendingDetailView))
         }
     }
 }

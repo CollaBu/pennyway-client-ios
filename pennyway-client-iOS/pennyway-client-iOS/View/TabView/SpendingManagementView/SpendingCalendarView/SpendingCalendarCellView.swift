@@ -85,6 +85,7 @@ struct SpendingCalendarCellView: View {
             }
         }
         .frame(height: 32 * DynamicSizeFactor.factor())
+        .edgesIgnoringSafeArea(.all)
     }
 
     private func isSpendingDay(_ day: Int) -> Bool {
