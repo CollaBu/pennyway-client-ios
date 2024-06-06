@@ -15,7 +15,7 @@ struct DiffAmountDynamicWidthView: View {
             RoundedRectangle(cornerRadius: 15)
                 .frame(width: textWidth, height: 24 * DynamicSizeFactor.factor())
                 .platformTextColor(color: backgroundColor)
-            
+
             Text(text)
                 .platformTextColor(color: textColor)
                 .font(.B2SemiboldFont())
