@@ -36,7 +36,7 @@ extension String {
         if #available(iOS 17.0, *) {
             return Text(text)
                 .font(attribute.font)
-                .foregroundColor(attribute.color)
+                .foregroundStyle(attribute.color)
         } else {
             return Text(text)
                 .font(attribute.font)

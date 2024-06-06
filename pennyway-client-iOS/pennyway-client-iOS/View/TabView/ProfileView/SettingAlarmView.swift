@@ -20,7 +20,7 @@ struct SettingAlarmView: View {
                     ForEach(toggleListArray.indices, id: \.self) { item in
                         ZStack(alignment: .leading) {
                             Rectangle()
-                                .foregroundColor(.clear)
+                                .platformTextColor(color: .clear)
                                 .frame(width: 280 * DynamicSizeFactor.factor(), height: 56 * DynamicSizeFactor.factor())
                                 .background(Color("Gray01"))
                                 .cornerRadius(7)
