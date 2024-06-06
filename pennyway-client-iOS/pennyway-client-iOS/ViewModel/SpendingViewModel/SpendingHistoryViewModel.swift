@@ -5,8 +5,8 @@ class SpendingHistoryViewModel: ObservableObject {
     @Published var currentDate: Date = Date() // 현재 날짜
     @Published var dailySpendings: [DailySpending] = [] // 데일리 지출 내역
     @Published var dailyDetailSpendings: [IndividualSpending] = [] // 데일리 지출 목록
-    ///    @Published var monthlySpending: [SpendingItem] = []
     @Published var isChangeMonth: Bool = false
+    @Published var selectedDateToScroll: String? = nil
 
     private var year: String {
         return String(Date.year(from: currentDate))

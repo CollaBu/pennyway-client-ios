@@ -1,5 +1,13 @@
 import SwiftUI
 
+// MARK: - SpendingListID
+
+struct SpendingListID: Identifiable {
+    let id: Int
+    let description: String
+    // 필요한 다른 속성 추가
+}
+
 // MARK: - MySpendingListView
 
 struct MySpendingListView: View {
@@ -31,53 +39,54 @@ struct MySpendingListView: View {
 
                 ScrollViewReader { proxy in
                     ScrollView {
-                        if groupedSpendings().isEmpty {
-                            NoSpendingHistoryView()
-                        } else {
-                            VStack {
-                                LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
+                        VStack {
+                            if groupedSpendings().isEmpty {
+                                NoSpendingHistoryView()
+                            } else {
+                                LazyVStack(spacing: 0) {
                                     ForEach(groupedSpendings(), id: \.key) { date, spendings in
-                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-
                                         Section(header: headerView(for: date)) {
-                                            Spacer().frame(height: 8 * DynamicSizeFactor.factor())
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = categories[item.category.icon] ?? ""
                                                 ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                                    .id(date)
+                                                    .onTapGesture {
+                                                        spendingHistoryViewModel.selectedDateToScroll = date
+                                                    }
                                             }
-                                            .onAppear {
-                                                Log.debug("spendings: \(spendings)")
-                                                Log.debug("group: \(groupedSpendings())")
-                                            }
+                                            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                         }
-                                        .id(date) // ScrollViewReader를 위한 ID 추가
                                     }
-                                    Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                                 }
                             }
                         }
-                        Button(action: {}, label: {
-                            ZStack {
-                                Rectangle()
-                                    .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-                                    .platformTextColor(color: Color("Gray01"))
-                                    .cornerRadius(26)
+                        if !groupedSpendings().isEmpty {
+                            Button(action: {
+                                // 버튼 액션 추가
+                            }, label: {
+                                ZStack {
+                                    Rectangle()
+                                        .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
+                                        .foregroundColor(Color("Gray01"))
+                                        .cornerRadius(26)
 
-                                Text("5월 내역 보기")
-                                    .font(.B1SemiboldeFont())
-                                    .platformTextColor(color: Color("Gray04"))
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 12)
+                                    Text("5월 내역 보기")
+                                        .font(.B1SemiboldeFont())
+                                        .foregroundColor(Color("Gray04"))
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 12)
+                                }
+                            })
+                            .padding(.bottom, 48)
+                            .onChange(of: selectedDateToScroll) { date in
+                                if let date = date {
+                                    withAnimation {
+                                        proxy.scrollTo(date, anchor: .top)
+                                    }
+                                }
                             }
-
-                        })
-                        .padding(.bottom, 48)
-                    }
-                    .onChange(of: selectedDateToScroll) { date in
-                        if let date = date {
-                            withAnimation {
-                                proxy.scrollTo(date, anchor: .top)
+                            .onAppear {
+                                proxy.scrollTo(selectedDateToScroll, anchor: .top)
                             }
                         }
                     }
@@ -91,13 +100,10 @@ struct MySpendingListView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-
-                }.offset(x: -10)
+                NavigationBackButton()
+                    .padding(.leading, 5)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
             }
         }
         .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
