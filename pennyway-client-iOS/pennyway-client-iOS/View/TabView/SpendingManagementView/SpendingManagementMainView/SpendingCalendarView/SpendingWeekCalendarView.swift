@@ -86,7 +86,7 @@ struct SpendingWeekCalendarView: View {
 
                 Spacer()
 
-                HStack(spacing: 16 * DynamicSizeFactor.factor()) {
+                HStack(spacing: 22 * DynamicSizeFactor.factor()) {
                     Button(
                         action: {
                             changeMonth(by: -1)
@@ -184,7 +184,6 @@ struct SpendingWeekCalendarView: View {
     }
 
     private func circleColor(for date: Date) -> Color {
-
         if calendar.isDateInToday(date) {
             return Color("Mint01")
         } else if spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil {

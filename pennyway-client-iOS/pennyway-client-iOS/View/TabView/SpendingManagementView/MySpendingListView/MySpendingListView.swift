@@ -15,21 +15,6 @@ struct MySpendingListView: View {
     @State var selectedDateToScroll: String? = nil
     @State private var currentMonth: Date = Date()
 
-    let categories: [String: String] = [
-        "FOOD": "icon_category_food_on",
-        "TRANSPORTATION": "icon_category_traffic_on",
-        "BEAUTY_OR_FASHION": "icon_category_beauty_on",
-        "CONVENIENCE_STORE": "icon_category_market_on",
-        "EDUCATION": "icon_category_education_on",
-        "LIVING": "icon_category_life_on",
-        "HEALTH": "icon_category_health_on",
-        "HOBBY": "icon_category_hobby_on",
-        "TRAVEL": "icon_category_travel_on",
-        "ALCOHOL_OR_ENTERTAINMENT": "icon_category_drink_on",
-        "MEMBERSHIP_OR_FAMILY_EVENT": "icon_category_event_on",
-        "OTHER": "icon_category_plus_off"
-    ]
-
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(spacing: 40 * DynamicSizeFactor.factor()) {
@@ -51,7 +36,7 @@ struct MySpendingListView: View {
                                         Section(header: headerView(for: date)) {
                                             Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             ForEach(spendings, id: \.id) { item in
-                                                let iconName = categories[item.category.icon] ?? ""
+                                                let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
                                                 ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }
@@ -108,10 +93,10 @@ struct MySpendingListView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 NavigationBackButton()
+                    .offset(x: -13 * DynamicSizeFactor.factor())
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
-                    .offset(x: -15 * DynamicSizeFactor.factor())
             }
         }
         .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
