@@ -37,7 +37,7 @@ struct SpendingWeekCalendarView: View {
             .padding(.bottom, 6)
             .padding(.top, 8)
             .onChange(of: spendingHistoryViewModel.selectedDateToScroll) { newValue in
-                if let newDateStr = newValue, let date = parseDate(from: newDateStr) {
+                if let newDateStr = newValue, let date = ScrollToDateUtil.parseDate(from: newDateStr) {
                     selectedDate = date
                     withAnimation {
                         scrollProxy.scrollTo(date, anchor: .center)
@@ -221,12 +221,6 @@ struct SpendingWeekCalendarView: View {
             }
         }
         return dates
-    }
-
-    private func parseDate(from dateString: String) -> Date? { // 지출 리스트에서 스크롤된 날짜를 감지하기 위해 date를 반환하는 함수
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.date(from: dateString)
     }
 
     private func getSpendingAmount(for day: Int) -> Int? {
