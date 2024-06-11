@@ -2,24 +2,18 @@ import SwiftUI
 
 // MARK: - MySpendingListView
 
+//// MARK: - SpendingListID
+//
+// struct SpendingListID: Identifiable {
+//    let id: Int
+//    let description: String
+//    // 필요한 다른 속성 추가
+// }
+
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State var selectedDateToScroll: String? = nil
-
-    let categories: [String: String] = [
-        "FOOD": "icon_category_food_on",
-        "TRANSPORTATION": "icon_category_traffic_on",
-        "BEAUTY_OR_FASHION": "icon_category_beauty_on",
-        "CONVENIENCE_STORE": "icon_category_market_on",
-        "EDUCATION": "icon_category_education_on",
-        "LIVING": "icon_category_life_on",
-        "HEALTH": "icon_category_health_on",
-        "HOBBY": "icon_category_hobby_on",
-        "TRAVEL": "icon_category_travel_on",
-        "ALCOHOL_OR_ENTERTAINMENT": "icon_category_drink_on",
-        "MEMBERSHIP_OR_FAMILY_EVENT": "icon_category_event_on",
-        "OTHER": "icon_category_plus_off"
-    ]
+    @State private var currentMonth: Date = Date()
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -32,50 +26,59 @@ struct MySpendingListView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack {
-                            LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
-                                ForEach(groupedSpendings(), id: \.key) { date, spendings in
-                                    Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                            if groupedSpendings().isEmpty {
+                                NoSpendingHistoryView()
+                            } else {
+                                LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
+                                    ForEach(groupedSpendings(), id: \.key) { date, spendings in
+                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
-                                    Section(header: headerView(for: date)) {
-                                        Spacer().frame(height: 8 * DynamicSizeFactor.factor())
-                                        ForEach(spendings, id: \.id) { item in
-                                            let iconName = categories[item.category.icon] ?? ""
-                                            ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                        Section(header: headerView(for: date)) {
                                             Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                            ForEach(spendings, id: \.id) { item in
+                                                let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+                                                ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                            }
+                                            .onAppear {
+                                                Log.debug("spendings: \(spendings)")
+                                                Log.debug("group: \(groupedSpendings())")
+                                            }
                                         }
-                                        .onAppear {
-                                            Log.debug("spendings: \(spendings)")
-                                            Log.debug("group: \(groupedSpendings())")
-                                        }
+                                        .id(date) // ScrollViewReader를 위한 ID 추가
                                     }
-                                    .id(date) // ScrollViewReader를 위한 ID 추가
+                                    Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                                 }
-                                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                             }
                         }
-                        // 수정필요
+                        if !groupedSpendings().isEmpty {
+                            Button(action: {
+                                changeMonth(by: -1)
 
-                        Button(action: {}, label: {
-                            ZStack {
-                                Rectangle()
-                                    .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-                                    .platformTextColor(color: Color("Gray01"))
-                                    .cornerRadius(26)
+                            }, label: {
+                                ZStack {
+                                    Rectangle()
+                                        .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
+                                        .foregroundColor(Color("Gray01"))
+                                        .cornerRadius(26)
 
-                                Text("5월 내역 보기")
-                                    .font(.B1SemiboldeFont())
-                                    .platformTextColor(color: Color("Gray04"))
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 12)
+                                    Text(monthTitle(from: spendingHistoryViewModel.currentDate))
+                                        .font(.B1SemiboldeFont())
+                                        .foregroundColor(Color("Gray04"))
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 12)
+                                }
+                            })
+                            .padding(.bottom, 48)
+                            .onChange(of: selectedDateToScroll) { date in
+                                if let date = date {
+                                    withAnimation {
+                                        proxy.scrollTo(date, anchor: .top)
+                                    }
+                                }
                             }
-
-                        })
-                        .padding(.bottom, 48)
-                    }
-                    .onChange(of: selectedDateToScroll) { date in
-                        if let date = date {
-                            withAnimation {
-                                proxy.scrollTo(date, anchor: .top)
+                            .onAppear {
+                                proxy.scrollTo(selectedDateToScroll, anchor: .top)
                             }
                         }
                     }
@@ -89,18 +92,16 @@ struct MySpendingListView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-
-                }.offset(x: -10)
+                NavigationBackButton()
+                    .offset(x: -13 * DynamicSizeFactor.factor())
+                    .padding(.leading, 5)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
             }
         }
-//        .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
-//            ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
-//        }
+        .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
+            ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
+        }
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
@@ -151,6 +152,33 @@ struct MySpendingListView: View {
 
         return sortedGroup
     }
+
+    private func changeMonth(by value: Int) {
+        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
+        currentMonth = spendingHistoryViewModel.currentDate
+        spendingHistoryViewModel.currentDate = newDate
+        currentMonth = newDate
+
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+            if success {
+                Log.debug("지출내역 조회 API 연동 성공")
+                DispatchQueue.main.async {
+                    self.currentMonth = newDate
+                }
+            } else {
+                Log.fault("지출내역 조회 API 연동 실패")
+            }
+        }
+    }
+
+    func monthTitle(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월 내역보기"
+        if let previousMonthDate = Calendar.current.date(byAdding: .month, value: -1, to: date) {
+            return dateFormatter.string(from: previousMonthDate)
+        }
+        return dateFormatter.string(from: date)
+    }
 }
 
 // MARK: - ExpenseRow
@@ -169,15 +197,22 @@ struct ExpenseRow: View {
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
 
                 VStack(alignment: .leading, spacing: 1) { // Spacer는 Line heigth 적용하면 없애기
-                    Text(category)
-                        .font(.B1SemiboldeFont())
-                        .platformTextColor(color: Color("Gray06"))
-                        .multilineTextAlignment(.leading)
+                    if memo.isEmpty {
+                        Text(category)
+                            .font(.B1SemiboldeFont())
+                            .platformTextColor(color: Color("Gray06"))
+                            .multilineTextAlignment(.leading)
+                    } else {
+                        Text(category)
+                            .font(.B1SemiboldeFont())
+                            .platformTextColor(color: Color("Gray06"))
+                            .multilineTextAlignment(.leading)
 
-                    Text(memo)
-                        .font(.B3MediumFont())
-                        .platformTextColor(color: Color("Gray04"))
-                        .multilineTextAlignment(.leading)
+                        Text(memo)
+                            .font(.B3MediumFont())
+                            .platformTextColor(color: Color("Gray04"))
+                            .multilineTextAlignment(.leading)
+                    }
                 }
 
                 Spacer()
