@@ -24,9 +24,9 @@ struct ProfileSettingListView: View {
                     ])
 
                     Divider()
-                        .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
-                        .overlay(Color("Gray02"))
-
+                            .overlay(Color("Gray02"))
+                            .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
+                    
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "앱 설정", itemsWithActions: [
@@ -34,8 +34,8 @@ struct ProfileSettingListView: View {
                     ])
 
                     Divider()
-                        .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
                         .overlay(Color("Gray02"))
+                        .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
 
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
@@ -46,8 +46,8 @@ struct ProfileSettingListView: View {
                     ])
 
                     Divider()
-                        .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
                         .overlay(Color("Gray02"))
+                        .frame(width: 301 * DynamicSizeFactor.factor(), height: 0.43)
 
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
