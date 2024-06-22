@@ -36,8 +36,7 @@ struct SpendingManagementMainView: View {
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
                     Button(action: {
-                        //                            navigateToMySpendingList = true
-                        showSpendingDetailView = true
+                        navigateToMySpendingList = true
                     }, label: {
                         ZStack {
                             Rectangle()
@@ -102,7 +101,10 @@ struct SpendingManagementMainView: View {
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
 
-                        Button(action: {}, label: {
+                        Button(action: {
+                            showSpendingDetailView = true
+
+                        }, label: {
                             Image("icon_navigationbar_bell")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -140,7 +142,6 @@ struct SpendingManagementMainView: View {
                 .zIndex(2)
         }
         .onChange(of: showSpendingDetailView) { isPresented in
-            Log.debug("?? : \(isPresented)")
             ishidden = isPresented
         }
         .id(ishidden)

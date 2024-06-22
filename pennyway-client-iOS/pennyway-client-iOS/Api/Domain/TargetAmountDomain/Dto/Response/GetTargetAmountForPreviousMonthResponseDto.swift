@@ -1,3 +1,4 @@
+
 // MARK: - GetTargetAmountForPreviousMonthResponseDto
 
 struct GetTargetAmountForPreviousMonthResponseDto: Codable {

@@ -2,10 +2,11 @@
 import SwiftUI
 
 class SpendingHistoryViewModel: ObservableObject {
-    @Published var currentDate: Date = Date()
-    @Published var isChangeMonth: Bool = false
+    @Published var currentDate: Date = Date() // 현재 날짜
     @Published var dailySpendings: [DailySpending] = [] // 데일리 지출 내역
     @Published var dailyDetailSpendings: [IndividualSpending] = [] // 데일리 지출 목록
+    @Published var isChangeMonth: Bool = false
+    @Published var selectedDateToScroll: String? = nil
 
     private var year: String {
         return String(Date.year(from: currentDate))
@@ -22,7 +23,14 @@ class SpendingHistoryViewModel: ObservableObject {
     }
 
     func checkSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
-        let checkSpendingHistoryRequestDto = GetSpendingHistoryRequestDto(year: year, month: month)
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: currentDate)
+        let month = calendar.component(.month, from: currentDate)
+
+        let yearString = String(year)
+        let monthString = String(month)
+
+        let checkSpendingHistoryRequestDto = GetSpendingHistoryRequestDto(year: yearString, month: monthString)
 
         SpendingAlamofire.shared.getSpendingHistory(checkSpendingHistoryRequestDto) { result in
             switch result {
