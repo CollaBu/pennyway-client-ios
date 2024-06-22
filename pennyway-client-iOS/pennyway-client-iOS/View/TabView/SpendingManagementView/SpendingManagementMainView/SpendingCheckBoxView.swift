@@ -93,17 +93,19 @@ struct SpendingCheckBoxView: View {
                 } else {
                     Spacer()
 
-                    HStack(spacing: 0) {
-                        Text("목표금액 설정하기")
-                            .font(.B1SemiboldeFont())
-                            .platformTextColor(color: Color("Mint03"))
+                    NavigationLink(destination: TotalTargetAmountView()) {
+                        HStack(spacing: 0) {
+                            Text("목표금액 설정하기")
+                                .font(.B1SemiboldeFont())
+                                .platformTextColor(color: Color("Mint03"))
 
-                        Image("icon_arrow_front_small")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            Image("icon_arrow_front_small")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                        }
+                        .frame(width: 110 * DynamicSizeFactor.factor(), alignment: .trailing)
                     }
-                    .frame(width: 110 * DynamicSizeFactor.factor(), alignment: .trailing)
                 }
             }
             .padding(.leading, 22)

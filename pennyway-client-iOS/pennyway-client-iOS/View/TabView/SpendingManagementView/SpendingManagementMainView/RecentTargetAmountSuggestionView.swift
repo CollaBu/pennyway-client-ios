@@ -28,7 +28,7 @@ struct RecentTargetAmountSuggestionView: View {
             .padding(.leading, 18 * DynamicSizeFactor.factor())
             .padding(.trailing, 13 * DynamicSizeFactor.factor())
     
-            Text("6월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(viewModel.recentTargetAmountData?.amount ?? 0))원") // 백엔드에게 월 데이터 요청
+            Text("5월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(viewModel.recentTargetAmountData?.amount ?? 0))원") // 백엔드에게 월 데이터 요청
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Mint02"))
                 .padding(.leading, 18 * DynamicSizeFactor.factor())

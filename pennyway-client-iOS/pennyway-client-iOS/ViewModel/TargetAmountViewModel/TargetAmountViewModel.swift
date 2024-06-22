@@ -24,7 +24,12 @@ class TargetAmountViewModel: ObservableObject {
                             // 추천 금액 보여주기 x + 목표 금액 데이터 적용
                             self.isHiddenSuggestionView = true
                             self.isPresentTargetAmount = true
-                        } else {                            
+                        } else if validTargetAmount.targetAmountDetail.amount == -1 {
+                            self.isHiddenSuggestionView = true
+                            self.isPresentTargetAmount = false
+                            
+                            self.getTargetAmountForPreviousMonthApi()
+                        } else {
                             self.getTargetAmountForPreviousMonthApi()
                         }
 
@@ -75,7 +80,6 @@ class TargetAmountViewModel: ObservableObject {
                             self.isHiddenSuggestionView = false
                             self.isPresentTargetAmount = false
                             // 추천 금액 보여주기 + 목표 금액 설정하기 UI
-         
                         } else {
                             self.deleteCurrentMonthTargetAmountApi()
                         }
@@ -137,7 +141,7 @@ class TargetAmountViewModel: ObservableObject {
     }
     
     func editCurrentMonthTargetAmountApi() {
-        let editCurrentMonthTargetAmountRequestDto = EditCurrentMonthTargetAmountRequestDto(amount: recentTargetAmountData!.amount)
+        let editCurrentMonthTargetAmountRequestDto = EditCurrentMonthTargetAmountRequestDto(amount: recentTargetAmountData!.amount ?? 0)
         
         TargetAmountAlamofire.shared.editCurrentMonthTargetAmount(targetAmountId: targetAmountData?.targetAmountDetail.id ?? -1, dto: editCurrentMonthTargetAmountRequestDto) { result in
             switch result {

@@ -20,5 +20,5 @@ struct AmountDetail: Codable {
 
 struct RecentTargetAmount: Codable {
     let isPresent: Bool
-    let amount: Int
+    let amount: Int?
 }

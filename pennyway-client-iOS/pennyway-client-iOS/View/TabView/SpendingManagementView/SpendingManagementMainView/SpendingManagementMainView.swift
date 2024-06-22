@@ -122,7 +122,7 @@ struct SpendingManagementMainView: View {
                     if showToastPopup {
                         CustomToastView(message: "\(Date.month(from: Date()))월의 새로운 목표금액을 설정했어요")
                             .transition(.move(edge: .bottom))
-                            .animation(.easeInOut(duration: 0.5))
+                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
                             .padding(.bottom, 10)
                     }
                 }, alignment: .bottom
