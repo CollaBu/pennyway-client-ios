@@ -16,7 +16,6 @@ struct SpendingDetail: Identifiable {
 
 struct SpendingDetailSheetView: View {
     @Environment(\.presentationMode) var presentationMode
-    ///    @Binding var showEditSpendingDetailView: Bool
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
 

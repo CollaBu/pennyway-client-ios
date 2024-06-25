@@ -5,8 +5,7 @@ import SwiftUI
 struct EditSpendingDetailView: View {
     @State var isActive: Bool = false
     @Environment(\.presentationMode) var presentationMode
-
-//    @Binding var showEditSpendingDetailView: Bool
+    @State private var isItemSelected: Bool = false
 
     @State var spendingDetails: [SpendingDetail] = [
         SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
@@ -21,7 +20,6 @@ struct EditSpendingDetailView: View {
     ]
 
     var body: some View {
-        // ZStack(alignment: .leading) {
         VStack {
             ScrollView {
                 Spacer().frame(height: 20 * DynamicSizeFactor.factor())
@@ -55,6 +53,7 @@ struct EditSpendingDetailView: View {
                         HStack(spacing: 0) {
                             Button(action: {
                                 spendingDetails[index].isSelected.toggle()
+                                updateSelectionState()
                             }) {
                                 Image(spendingDetails[index].isSelected ? "icon_checkone_on_small" : "icon_checkone_off_small")
                                     .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -96,11 +95,9 @@ struct EditSpendingDetailView: View {
             
             Spacer() // 바텀시트 높이에 따라 조건문으로 spacer()처리해야 함.
             
-            CustomBottomButton(action: { isActive = true }, label: "완료", isFormValid: .constant(true))
+            CustomBottomButton(action: { isActive = true }, label: "삭제하기", isFormValid: $isItemSelected)
                 .padding(.bottom, 34)
         }
-            
-        // }
         .navigationBarColor(UIColor(named: "White01"), title: "편집하기")
         .setTabBarVisibility(isHidden: true)
         .toolbar {
@@ -113,7 +110,6 @@ struct EditSpendingDetailView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 36, height: 36)
-//                            .padding(5)
                     })
                     .padding(.leading, 11)
                     .frame(width: 44, height: 44)
@@ -128,10 +124,14 @@ struct EditSpendingDetailView: View {
 
     private func toggleAllSelections() {
         let allSelected = spendingDetails.allSatisfy { $0.isSelected }
-//        spendingDetails.indices.forEach { spendingDetails[$0].isSelected = !allSelected }
         for index in spendingDetails.indices {
             spendingDetails[index].isSelected = !allSelected
         }
+        updateSelectionState()
+    }
+    
+    private func updateSelectionState() {
+        isItemSelected = spendingDetails.contains { $0.isSelected }
     }
 }
 
