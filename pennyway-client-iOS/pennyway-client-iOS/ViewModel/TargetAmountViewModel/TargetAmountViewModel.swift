@@ -17,8 +17,8 @@ class TargetAmountViewModel: ObservableObject {
                         let validTotalSpending = response.data.targetAmount // 현재 달의 총 지출 금액 찾기
                         self.totalSpent = validTotalSpending.totalSpending
 
-                        if validTotalSpending.targetAmount.id != -1 && validTotalSpending.targetAmount.amount != -1 {
-                            self.targetValue = CGFloat(validTotalSpending.targetAmount.amount)
+                        if validTotalSpending.targetAmountDetail.id != -1 && validTotalSpending.targetAmountDetail.amount != -1 {
+                            self.targetValue = CGFloat(validTotalSpending.targetAmountDetail.amount)
                             // TODO: -1인 경우 목표 금액이 없으므로, 목표 금액 설정하기 화면 보여주기
                         }
 

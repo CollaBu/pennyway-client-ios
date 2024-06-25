@@ -27,7 +27,6 @@ enum TargetAmountRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-            
         case .getTotalTargetAmount, .generateCurrentMonthDummyData:
             return "v2/targets-amounts"
         case .getTargetAmountForDate:

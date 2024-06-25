@@ -20,8 +20,9 @@ struct TargetAmount: Codable {
     let targetAmountDetail: AmountDetail
     let totalSpending: Int
     let diffAmount: Int
-
 }
+
+// MARK: - AmountDetail
 
 struct AmountDetail: Codable {
     let id: Int
