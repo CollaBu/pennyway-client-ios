@@ -29,8 +29,6 @@ class TargetAmountViewModel: ObservableObject {
                             self.isPresentTargetAmount = false
                             
                             self.getTargetAmountForPreviousMonthApi()
-                        } else {
-                            self.getTargetAmountForPreviousMonthApi()
                         }
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
