@@ -6,6 +6,7 @@ import SwiftUI
 struct AddSpendingHistoryView: View {
     @StateObject var viewModel = AddSpendingHistoryViewModel()
     @State private var navigateToAddSpendingCategory = false
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         ZStack {
@@ -44,7 +45,8 @@ struct AddSpendingHistoryView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Button(action: {
-                            NavigationUtil.popToRootView()
+//                            NavigationUtil.popToRootView()
+                            self.presentationMode.wrappedValue.dismiss() 
                         }, label: {
                             Image("icon_arrow_back")
                                 .resizable()

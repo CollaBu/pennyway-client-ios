@@ -15,7 +15,9 @@ struct SpendingDetail: Identifiable {
 // MARK: - SpendingDetailSheetView
 
 struct SpendingDetailSheetView: View {
+    @Environment(\.presentationMode) var presentationMode
     @Binding var showEditSpendingDetailView: Bool
+    @State private var showAddSpendingHistoryView = false
 
     @State var spendingDetails: [SpendingDetail] = [
         SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
@@ -44,8 +46,10 @@ struct SpendingDetailSheetView: View {
                         
                     Spacer()
                         
-                    Button(action: {}, label: {
-                        Image("icon_expenditure_share")
+                    Button(action: {
+                        showEditSpendingDetailView = true
+                    }, label: {
+                        Image("icon_navigationbar_write_gray05")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 24, height: 24)
@@ -54,12 +58,12 @@ struct SpendingDetailSheetView: View {
                     .padding(10)
                         
                     Button(action: {
-                        showEditSpendingDetailView = true
+                        showAddSpendingHistoryView = true
                     }, label: {
-                        Image("icon_navigationbar_write_gray")
+                        Image("icon_navigation_add")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 34, height: 34)
                             
                     })
                 }
@@ -108,6 +112,11 @@ struct SpendingDetailSheetView: View {
                             .padding(.vertical, 8)
                         }
                     }
+                }
+            }
+            .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
+                NavigationView {
+                    AddSpendingHistoryView()
                 }
             }
         }

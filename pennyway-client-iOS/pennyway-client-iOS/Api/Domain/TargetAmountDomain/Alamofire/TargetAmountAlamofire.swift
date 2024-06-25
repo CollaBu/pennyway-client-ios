@@ -38,7 +38,7 @@ class TargetAmountAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.deleteCurrentMonthTargetAmount, completion: completion)
     }
     
-    func editCurrentMonthTargetAmount(_ dto: EditCurrentMonthTargetAmountRequestDto,completion: @escaping (Result<Data?, Error>) -> Void) {
+    func editCurrentMonthTargetAmount(_ dto: EditCurrentMonthTargetAmountRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("SpendingAlamofire - editCurrentMonthTargetAmount() called")
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: TargetAmountRouter.editCurrentMonthTargetAmount(dto: dto), completion: completion)
