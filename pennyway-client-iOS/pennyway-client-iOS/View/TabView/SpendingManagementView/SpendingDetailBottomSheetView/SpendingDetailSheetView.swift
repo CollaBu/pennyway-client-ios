@@ -9,14 +9,15 @@ struct SpendingDetail: Identifiable {
     let description: String
     let amount: String
     let icon: String
-    @State var isSelected: Bool = false
+    var isSelected: Bool = false
 }
 
 // MARK: - SpendingDetailSheetView
 
 struct SpendingDetailSheetView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Binding var showEditSpendingDetailView: Bool
+    ///    @Binding var showEditSpendingDetailView: Bool
+    @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
 
     @State var spendingDetails: [SpendingDetail] = [
@@ -114,6 +115,11 @@ struct SpendingDetailSheetView: View {
                     }
                 }
             }
+            .fullScreenCover(isPresented: $showEditSpendingDetailView) {
+                NavigationView {
+                    EditSpendingDetailView()
+                }
+            }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationView {
                     AddSpendingHistoryView()
@@ -126,5 +132,5 @@ struct SpendingDetailSheetView: View {
 }
 
 #Preview {
-    SpendingDetailSheetView(showEditSpendingDetailView: .constant(true))
+    SpendingDetailSheetView()
 }

@@ -138,8 +138,8 @@ struct SpendingManagementMainView: View {
             }
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView) {
-            changeSheetView()
-                // EditSpendingDetailView()
+            //            changeSheetView()
+            SpendingDetailSheetView()
                 .zIndex(2)
         }
         .onChange(of: showSpendingDetailView) { isPresented in
@@ -148,13 +148,13 @@ struct SpendingManagementMainView: View {
         .id(ishidden)
     }
 
-    func changeSheetView() -> some View {
-        if showEditSpendingDetailView == true {
-            return AnyView(EditSpendingDetailView(showEditSpendingDetailView: $showEditSpendingDetailView))
-        } else {
-            return AnyView(SpendingDetailSheetView(showEditSpendingDetailView: $showEditSpendingDetailView))
-        }
-    }
+//    func changeSheetView() -> some View {
+//        if showEditSpendingDetailView == true {
+//            return AnyView(EditSpendingDetailView(showEditSpendingDetailView: $showEditSpendingDetailView))
+//        } else {
+//            return AnyView(SpendingDetailSheetView(showEditSpendingDetailView: $showEditSpendingDetailView))
+//        }
+//    }
 }
 
 #Preview {
