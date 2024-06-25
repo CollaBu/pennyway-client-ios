@@ -55,13 +55,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: MessagingDelegate {
     /// fcm 등록 토큰을 받았을 때
     func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("토큰을 받았다")
+        Log.debug("토큰을 받았다")
         // Store this token to firebase and retrieve when to send message to someone...
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
 
         // Store token in Firestore For Sending Notifications From Server in Future...
 
-        print(dataDict)
+        Log.debug(dataDict)
     }
 }
 
@@ -79,10 +79,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         // Do Something With MSG Data...
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            Log.debug("Message ID: \(messageID)")
         }
 
-        print(userInfo)
+        Log.debug(userInfo)
 
         completionHandler([[.banner, .badge, .sound]])
     }
@@ -96,10 +96,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         // Do Something With MSG Data...
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            Log.debug("Message ID: \(messageID)")
         }
 
-        print(userInfo)
+        Log.debug(userInfo)
 
         completionHandler()
     }
@@ -111,7 +111,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 struct pennyway_client_iOSApp: App {
     @StateObject private var appViewModel = AppViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
+    
     init() {
         let kakaoAppKey = Bundle.main.infoDictionary?["KakaoAppKey"] as! String
         KakaoSDK.initSDK(appKey: kakaoAppKey, loggingEnable: false)
