@@ -130,6 +130,7 @@
 		4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */; };
 		4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */; };
 		4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */; };
+		4AC289FC2C2C0405001A6393 /* GetTotalTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC289FB2C2C0405001A6393 /* GetTotalTargetAmountResponseDto.swift */; };
 		4AC3203F2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3201E2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift */; };
 		4AC320402C11D5AC00DDB4B6 /* SelectCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3201F2C11D5AC00DDB4B6 /* SelectCategoryIconView.swift */; };
 		4AC320412C11D5AC00DDB4B6 /* SpendingCategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC320202C11D5AC00DDB4B6 /* SpendingCategoryListView.swift */; };
@@ -361,6 +362,7 @@
 		4AB5AB542BB4AAF200D2C9EA /* BaseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterceptor.swift; sourceTree = "<group>"; };
 		4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationManager.swift; sourceTree = "<group>"; };
 		4AB5AB582BB5E93900D2C9EA /* SignUpFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormView.swift; sourceTree = "<group>"; };
+		4AC289FB2C2C0405001A6393 /* GetTotalTargetAmountResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTotalTargetAmountResponseDto.swift; sourceTree = "<group>"; };
 		4AC3201E2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSpendingCategoryView.swift; sourceTree = "<group>"; };
 		4AC3201F2C11D5AC00DDB4B6 /* SelectCategoryIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryIconView.swift; sourceTree = "<group>"; };
 		4AC320202C11D5AC00DDB4B6 /* SpendingCategoryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendingCategoryListView.swift; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 		4A3701AC2C08F74E00F0AEBA /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				4AC289FB2C2C0405001A6393 /* GetTotalTargetAmountResponseDto.swift */,
 				4A3701AB2C08F74E00F0AEBA /* GetTargetAmountForDateResponseDto.swift */,
 				4AC3205E2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift */,
 				4AC320602C11F39300DDB4B6 /* GetTargetAmountForDateResponseDto.swift */,
@@ -1787,6 +1790,7 @@
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
 				D8180C042BE5081F00F837FB /* FindIdContentView.swift in Sources */,
 				4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */,
+				4AC289FC2C2C0405001A6393 /* GetTotalTargetAmountResponseDto.swift in Sources */,
 				4AD70E222BE013C10058A52A /* ProfileMainView.swift in Sources */,
 				4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDto.swift in Sources */,
 				4A0BC6AF2BF6459B0036D900 /* DateExtensions.swift in Sources */,

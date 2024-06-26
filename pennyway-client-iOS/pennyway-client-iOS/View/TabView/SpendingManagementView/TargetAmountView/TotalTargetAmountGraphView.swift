@@ -5,7 +5,8 @@ struct TotalTargetAmountGraphView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     var body: some View {
         HStack(spacing: 24 * DynamicSizeFactor.factor()) {
-            ForEach(viewModel.sortTargetAmounts.prefix(6)) { content in
+            ForEach(Array(viewModel.targetAmounts.prefix(6).enumerated()), id: \.offset) { _, content in
+
                 VStack {
                     Text("\(content.totalSpending / 10000)")
                         .font(.B3MediumFont())
@@ -25,7 +26,7 @@ struct TotalTargetAmountGraphView: View {
         .frame(height: 140 * DynamicSizeFactor.factor(), alignment: .center)
     }
 
-    func determineColorGray03(for content: TargetAmountData) -> Color {
+    func determineColorGray03(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
         } else {
@@ -33,7 +34,7 @@ struct TotalTargetAmountGraphView: View {
         }
     }
 
-    func determineColorGray04(for content: TargetAmountData) -> Color {
+    func determineColorGray04(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
         } else {
@@ -41,7 +42,7 @@ struct TotalTargetAmountGraphView: View {
         }
     }
 
-    func determineColorGray06(for content: TargetAmountData) -> Color {
+    func determineColorGray06(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
         } else {

@@ -54,6 +54,10 @@ struct TotalTargetAmountView: View {
                 .offset(x: 10)
             }
         }
+        .onAppear {
+            viewModel.getTotalTargetAmountApi { _ in 
+            }
+        }
     }
 }
 
