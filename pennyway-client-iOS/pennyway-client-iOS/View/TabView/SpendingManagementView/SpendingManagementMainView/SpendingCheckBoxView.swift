@@ -4,15 +4,26 @@ import SwiftUI
 struct SpendingCheckBoxView: View {
     @ObservedObject var viewModel: TargetAmountViewModel
 
-    /// 프로그래스 바에 사용될 최대 값
     let baseAttribute = BaseAttribute(font: .H3SemiboldFont(), color: Color("Gray07"))
 
     var formattedTotalSpent: String {
-        NumberFormatterUtil.formatIntToDecimalString(viewModel.totalSpent)
+        if let targetAmountData = viewModel.targetAmountData {
+            return NumberFormatterUtil.formatIntToDecimalString(targetAmountData.totalSpending)
+        } else {
+            return "0"
+        }
     }
 
     var spentInfoText: String {
         "반가워요 \(String(describing: getUserData()?.username ?? ""))님! \n이번 달에 \(formattedTotalSpent)원 썼어요"
+    }
+
+    var totalSpending: Int {
+        viewModel.targetAmountData?.totalSpending ?? 0
+    }
+
+    var targetAmount: Int {
+        viewModel.targetAmountData?.targetAmountDetail.amount ?? 0
     }
 
     var body: some View {
@@ -24,7 +35,7 @@ struct SpendingCheckBoxView: View {
                                                StringAttribute(
                                                    text: "\(formattedTotalSpent)원",
                                                    font: .H3SemiboldFont(),
-                                                   color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03")
+                                                   color: targetAmount != -1 && totalSpending > targetAmount ? Color("Red03") : Color("Mint03")
                                                ))
                                                .lineSpacing(3)
                 Spacer()
@@ -42,40 +53,59 @@ struct SpendingCheckBoxView: View {
                     .cornerRadius(15)
 
                 let progressWidth: CGFloat = {
-                    if viewModel.targetValue <= 0 {
+                    if targetAmount <= 0 {
                         return 0
                     }
-                    let ratio = CGFloat(viewModel.totalSpent) / viewModel.targetValue
+                    let ratio = CGFloat(totalSpending) / CGFloat(targetAmount)
                     let width = ratio * (UIScreen.main.bounds.width - 76)
                     return min(max(width, 0), UIScreen.main.bounds.width - 76)
                 }()
 
                 Rectangle()
                     .frame(width: progressWidth, height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
-                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
+                    .platformTextColor(color: totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
                     .cornerRadius(15)
             }
 
             Spacer().frame(height: 2)
 
             HStack {
-                Text("\(viewModel.totalSpent)")
-                    .font(.B1SemiboldeFont())
-                    .platformTextColor(color: CGFloat(viewModel.totalSpent) > viewModel.targetValue ? Color("Red03") : Color("Mint03"))
-                Spacer()
+                if viewModel.isPresentTargetAmount == true {
+                    Text("\(totalSpending)")
+                        .font(.B1SemiboldeFont())
+                        .platformTextColor(color: totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
 
-                NavigationLink(destination: TotalTargetAmountView()) {
-                    HStack(spacing: 0) {
-                        Text("\(Int(viewModel.targetValue))")
-                            .font(.B1SemiboldeFont())
-                            .platformTextColor(color: Color("Gray07"))
+                    Spacer()
 
-                        Image("icon_arrow_front_small")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                    NavigationLink(destination: TotalTargetAmountView()) {
+                        HStack(spacing: 0) {
+                            Text("\(targetAmount)")
+                                .font(.B1SemiboldeFont())
+                                .platformTextColor(color: Color("Gray07"))
+
+                            Image("icon_arrow_front_small")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                        }
+                        .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
                     }
-                    .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
+                } else {
+                    Spacer()
+
+                    NavigationLink(destination: TotalTargetAmountView()) {
+                        HStack(spacing: 0) {
+                            Text("목표금액 설정하기")
+                                .font(.B1SemiboldeFont())
+                                .platformTextColor(color: Color("Mint03"))
+
+                            Image("icon_arrow_front_small")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                        }
+                        .frame(width: 110 * DynamicSizeFactor.factor(), alignment: .trailing)
+                    }
                 }
             }
             .padding(.leading, 22)

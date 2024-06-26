@@ -25,7 +25,6 @@ struct EditSpendingDetailView: View {
                     .frame(width: 40, height: 4)
                     .platformTextColor(color: Color("Gray03"))
                     .padding(.top, 12)
-                    .padding(.horizontal, 140)
 
                 HStack(spacing: 0) {
                     Button(action: {
@@ -47,7 +46,7 @@ struct EditSpendingDetailView: View {
                     })
 
                     Button(action: {}, label: {
-                        Image("icon_navigation_add")
+                        Image("icon_navigation_add_black")
                             .scaledToFill()
                             .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                             .padding(8)

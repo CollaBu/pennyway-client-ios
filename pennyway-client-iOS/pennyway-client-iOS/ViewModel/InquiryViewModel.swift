@@ -32,7 +32,7 @@ class InquiryViewModel: ObservableObject {
         }
     }
 
-    func sendInquiryMailApi() {
+    func sendInquiryMailApi(completion: @escaping (Bool) -> Void) {
         let categoryCode = getCategoryCode(for: category)
 
         let inquiryRequestDto = BackofficeRequestDto(email: email, content: content, category: categoryCode)
@@ -43,9 +43,9 @@ class InquiryViewModel: ObservableObject {
                 do {
                     if let responseData = data {
                         let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
-                        NavigationUtil.popToRootView()
 
                         Log.debug("문의하기 api 응답 성공 : \(response)")
+                        completion(true)
                     }
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
@@ -56,6 +56,7 @@ class InquiryViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
             }
         }
     }

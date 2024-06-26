@@ -58,9 +58,10 @@ struct SelectCategoryIconView: View {
             Spacer()
 
             CustomBottomButton(action: {
-                if let selectedCategory = SpendingCategoryIconList.fromIcon(viewModel.selectedCategoryIcon ?? .etcOn) {
+                if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
                     viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                     viewModel.selectedCategoryIcon = selectedCategoryIcon
+                    Log.debug(viewModel.selectedCategoryIconTitle)
                     isPresented = false
                 }
             }, label: "확인", isFormValid: .constant(true))

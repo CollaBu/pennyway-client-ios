@@ -11,20 +11,3 @@ struct GetTargetAmountForDateResponseDto: Codable {
         let targetAmount: TargetAmount
     }
 }
-
-// MARK: - TargetAmount
-
-struct TargetAmount: Codable {
-    let year: Int
-    let month: Int
-    let targetAmountDetail: AmountDetail
-    let totalSpending: Int
-    let diffAmount: Int
-
-}
-
-struct AmountDetail: Codable {
-    let id: Int
-    let amount: Int
-    let isRead: Bool
-}

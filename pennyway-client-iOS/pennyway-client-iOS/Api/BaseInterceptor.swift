@@ -50,6 +50,8 @@ class BaseInterceptor: RequestInterceptor {
                     completion(.doNotRetry)
                 }
             }
-        } else {}
+        } else {
+            completion(.doNotRetry)
+        }
     }
 }
