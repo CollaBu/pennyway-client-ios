@@ -118,9 +118,8 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showEditSpendingDetailView) {
                 NavigationAvailable {
-                    EditSpendingDetailView( /* showingDeletePopUp: $showingDeletePopUp, showingClosePopUp: $showingClosePopUp */ )
+                    EditSpendingDetailView()
                 }
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {

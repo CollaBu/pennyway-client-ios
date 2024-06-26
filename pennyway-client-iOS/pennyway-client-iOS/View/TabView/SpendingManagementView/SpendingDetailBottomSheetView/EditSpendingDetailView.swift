@@ -171,7 +171,6 @@ struct EditSpendingDetailView: View {
     }
 }
 
-
- #Preview {
+#Preview {
     EditSpendingDetailView()
- }
+}

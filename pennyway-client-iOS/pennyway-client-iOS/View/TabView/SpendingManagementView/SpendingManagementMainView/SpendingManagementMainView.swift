@@ -31,8 +31,8 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel)
-//                        .padding(.horizontal, 20)
+                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView)
+                        .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
@@ -103,7 +103,6 @@ struct SpendingManagementMainView: View {
                         .frame(width: 44, height: 44)
 
                         Button(action: {
-                            showSpendingDetailView = true
 
                         }, label: {
                             Image("icon_navigationbar_bell")
