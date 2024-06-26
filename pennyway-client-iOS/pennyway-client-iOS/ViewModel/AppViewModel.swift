@@ -8,7 +8,6 @@ class AppViewModel: ObservableObject {
     @Published var isSplashShown: Bool = false
     @Published var checkLoginState = false
 
-
     init() {
         checkLoginStateApi()
     }

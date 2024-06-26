@@ -5,6 +5,7 @@ import SwiftUI
 struct SpendingCalenderView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
+    ///    @State private var selectedDate: Date?
     @State private var date: Date = Date()
     @State private var clickedCurrentMonthDates: Date?
     let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
@@ -116,6 +117,9 @@ struct SpendingCalenderView: View {
                     if 0 <= index && index < daysInMonth {
                         let date = getDate(for: index)
                         clickedCurrentMonthDates = date
+//                        NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: spendingHistoryViewModel, selectedDateToScroll: date.toString())) {
+//                            SpendingCalenderCellView(spendingHistoryViewModel: spendingHistoryViewModel, date: date, day: Calendar.current.component(.day, from: date))
+//                        }
                     }
                 }
             }

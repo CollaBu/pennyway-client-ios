@@ -32,7 +32,7 @@ struct SpendingManagementMainView: View {
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
                     SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel)
-                        .padding(.horizontal, 20)
+//                        .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
