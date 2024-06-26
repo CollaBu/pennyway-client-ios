@@ -98,8 +98,10 @@ struct EditSpendingDetailView: View {
                 Spacer() // 바텀시트 높이에 따라 조건문으로 spacer()처리해야 함.
                     
                 CustomBottomButton(action: {
-                    showingDeletePopUp = true
-                    Log.debug("showingDeletePopUp: \(showingDeletePopUp)")
+                    if isItemSelected {
+                        showingDeletePopUp = true
+                        Log.debug("showingDeletePopUp: \(showingDeletePopUp)")
+                    }
                         
                 }, label: "삭제하기", isFormValid: $isItemSelected)
                     .padding(.bottom, 34)
@@ -139,10 +141,8 @@ struct EditSpendingDetailView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
                     Button(action: {
-                        if isItemSelected {
-                            showingClosePopUp = true
-                            Log.debug("showingClosePopUp: \(showingClosePopUp)")
-                        }
+                        showingClosePopUp = true
+                        Log.debug("showingClosePopUp: \(showingClosePopUp)")
                     }, label: {
                         Image("icon_close")
                             .resizable()
