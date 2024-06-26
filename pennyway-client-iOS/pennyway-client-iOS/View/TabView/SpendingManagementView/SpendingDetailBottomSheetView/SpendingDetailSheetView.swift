@@ -18,6 +18,8 @@ struct SpendingDetailSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
+    @State var showingClosePopUp = false
+    @State var showingDeletePopUp = false
 
     @State var spendingDetails: [SpendingDetail] = [
         SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
@@ -116,13 +118,38 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showEditSpendingDetailView) {
                 NavigationView {
-                    EditSpendingDetailView()
+                    EditSpendingDetailView(showingDeletePopUp: $showingDeletePopUp, showingClosePopUp: $showingClosePopUp)
                 }
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationView {
                     AddSpendingHistoryView()
                 }
+            }
+            if showingClosePopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showingClosePopUp,
+                                titleLabel: "편집을 끝낼까요?",
+                                subTitleLabel: "변경된 내용은 자동 저장돼요",
+                                firstBtnAction: { self.showingClosePopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: { self.presentationMode.wrappedValue.dismiss() },
+                                secondBtnLabel: "끝낼래요",
+                                secondBtnColor: Color("Mint03")
+                )
+            }
+            
+            if showingDeletePopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showingDeletePopUp,
+                                titleLabel: "8개의 내역을 삭제할까요?",
+                                subTitleLabel: "선택한 소비 내역이 사라져요",
+                                firstBtnAction: { self.showingDeletePopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: { self.presentationMode.wrappedValue.dismiss() },
+                                secondBtnLabel: "삭제하기",
+                                secondBtnColor: Color("Red03")
+                )
             }
         }
         .setTabBarVisibility(isHidden: true)
