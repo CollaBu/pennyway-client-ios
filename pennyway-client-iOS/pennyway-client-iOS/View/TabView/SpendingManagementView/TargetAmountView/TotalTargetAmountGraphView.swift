@@ -16,6 +16,9 @@ struct TotalTargetAmountGraphView: View {
                             .frame(maxWidth: 16 * DynamicSizeFactor.factor(), maxHeight: CGFloat(content.totalSpending / 10000) * DynamicSizeFactor.factor())
                             .platformTextColor(color: determineColorGray03(for: content))
                             .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
+
+                        Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+
                         Text("\(content.month)월")
                             .font(.B3MediumFont())
                             .platformTextColor(color: determineColorGray06(for: content))
@@ -25,13 +28,12 @@ struct TotalTargetAmountGraphView: View {
                     VStack {
                         Text("0")
                             .font(.B3MediumFont())
-                            .platformTextColor(color: Color("Gray03"))
+                            .platformTextColor(color: Color("Gray04"))
                         Rectangle()
                             .frame(maxWidth: 16 * DynamicSizeFactor.factor(), maxHeight: 0)
-                            .foregroundColor(.clear)
                         Text("\(viewModel.currentData.month - (6 - (index + 1)))월")
                             .font(.B3MediumFont())
-                            .platformTextColor(color: Color("Gray03")) 
+                            .platformTextColor(color: Color("Gray06"))
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
                 }
@@ -42,26 +44,38 @@ struct TotalTargetAmountGraphView: View {
     }
 
     func determineColorGray03(for content: TargetAmount) -> Color {
-        if content.month == Date.month(from: Date()) {
-            return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+        if content.targetAmountDetail.amount != -1 {
+            if content.month == Date.month(from: Date()) {
+                return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+            } else {
+                return Color("Gray03")
+            }
         } else {
-            return Color("Gray03")
+            return Color("Mint03")
         }
     }
 
     func determineColorGray04(for content: TargetAmount) -> Color {
-        if content.month == Date.month(from: Date()) {
-            return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+        if content.targetAmountDetail.amount != -1 {
+            if content.month == Date.month(from: Date()) {
+                return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+            } else {
+                return Color("Gray04")
+            }
         } else {
-            return Color("Gray04")
+            return Color("Mint03")
         }
     }
 
     func determineColorGray06(for content: TargetAmount) -> Color {
-        if content.month == Date.month(from: Date()) {
-            return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+        if content.targetAmountDetail.amount != -1 {
+            if content.month == Date.month(from: Date()) {
+                return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+            } else {
+                return Color("Gray06")
+            }
         } else {
-            return Color("Gray06")
+            return Color("Mint03")
         }
     }
 }
