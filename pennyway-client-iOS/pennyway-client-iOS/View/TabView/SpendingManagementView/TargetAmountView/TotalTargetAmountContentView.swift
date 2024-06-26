@@ -21,7 +21,7 @@ struct TotalTargetAmountContentView: View {
                 
                 Spacer()
                 
-                Text("\(viewModel.currentData.diffAmount)원")
+                Text(viewModel.currentData.targetAmountDetail.amount != -1 ? "\(viewModel.currentData.diffAmount)원" : "-원")
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: determineDiffAmountColor(for: viewModel.currentData.diffAmount))
                     .padding(.trailing, 16)
@@ -98,7 +98,11 @@ struct TotalTargetAmountContentView: View {
     // Color 설정
     
     func determineDiffAmountColor(for diffAmount: Int) -> Color {
-        return diffAmount <= 0 ? Color("Red03") : Color("Gray07")
+        if viewModel.currentData.targetAmountDetail.amount != -1 {
+            return diffAmount <= 0 ? Color("Red03") : Color("Gray07")
+        } else {
+            return Color("Gray07")
+        }
     }
     
     func determineBackgroundColor(for diffAmount: Int) -> Color {
