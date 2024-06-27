@@ -18,8 +18,7 @@ struct SpendingDetailSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
-    @State var showingClosePopUp = false
-    @State var showingDeletePopUp = false
+
 
     @State var spendingDetails: [SpendingDetail] = [
         SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),

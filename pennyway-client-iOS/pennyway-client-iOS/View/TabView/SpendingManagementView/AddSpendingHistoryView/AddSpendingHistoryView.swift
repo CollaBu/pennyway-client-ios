@@ -45,7 +45,6 @@ struct AddSpendingHistoryView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Button(action: {
-//                            NavigationUtil.popToRootView()
                             self.presentationMode.wrappedValue.dismiss() 
                         }, label: {
                             Image("icon_arrow_back")
