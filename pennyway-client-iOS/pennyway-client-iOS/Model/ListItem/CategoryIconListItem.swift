@@ -154,11 +154,11 @@ enum SpendingListViewCategoryIconList: String, CaseIterable, Identifiable {
         case .food:
             return "icon_category_food_on"
         case .transportation:
-            return "icon_category_traffic_on_gray"
+            return "icon_category_traffic_on"
         case .beautyOrFashion:
             return "icon_category_beauty_on"
         case .convenienceStore:
-            return "icon_category_market_on_gray"
+            return "icon_category_market_on"
         case .education:
             return "icon_category_education_on"
         case .living:
