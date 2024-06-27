@@ -20,7 +20,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Setting Up Notifications...
         // 원격 알림 등록
         if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
 
             let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -55,12 +54,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: MessagingDelegate {
     /// fcm 등록 토큰을 받았을 때
     func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        // Store this token to firebase and retrieve when to send message to someone...
-        let dataDict: [String: String] = ["token": fcmToken ?? ""]
-
-        // Store token in Firestore For Sending Notifications From Server in Future...
-
-        Log.debug(dataDict)
+        if let fcmToken = fcmToken {
+            KeychainHelper.saveFcmToken(fcmToken: fcmToken)
+            Log.debug("fcmToken: \(fcmToken)")
+            Log.debug("load fcmToken: \(String(describing: KeychainHelper.loadFcmToken()))")
+        }
     }
 }
 
