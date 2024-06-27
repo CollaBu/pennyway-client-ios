@@ -1,5 +1,4 @@
 
-
 public struct GenerateCurrentMonthDummyDataRequestDto: Encodable {
     let year: Int
     let month: Int

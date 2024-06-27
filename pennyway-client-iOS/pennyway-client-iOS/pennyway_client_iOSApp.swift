@@ -55,7 +55,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 extension AppDelegate: MessagingDelegate {
     /// fcm 등록 토큰을 받았을 때
     func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        Log.debug("토큰을 받았다")
         // Store this token to firebase and retrieve when to send message to someone...
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
 
@@ -111,7 +110,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 struct pennyway_client_iOSApp: App {
     @StateObject private var appViewModel = AppViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+
     init() {
         let kakaoAppKey = Bundle.main.infoDictionary?["KakaoAppKey"] as! String
         KakaoSDK.initSDK(appKey: kakaoAppKey, loggingEnable: false)

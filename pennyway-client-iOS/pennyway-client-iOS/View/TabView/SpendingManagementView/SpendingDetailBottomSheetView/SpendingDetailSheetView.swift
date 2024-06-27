@@ -30,12 +30,11 @@ struct SpendingDetailSheetView: View {
     ]
     var body: some View {
         ZStack(alignment: .leading) {
-            VStack(alignment: .leading) {
+            VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 40, height: 4)
                     .platformTextColor(color: Color("Gray03"))
                     .padding(.top, 12)
-                    .padding(.horizontal, 140)
                 
                 HStack {
                     Text("6월 4일")

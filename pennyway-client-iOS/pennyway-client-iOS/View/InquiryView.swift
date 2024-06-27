@@ -6,6 +6,8 @@ struct InquiryView: View {
     @State private var isSelectedCategory: Bool = false
     @State private var isSelectedAgreeBtn: Bool = false
     @State private var showAgreement: Bool = false
+    
+    @Environment(\.presentationMode) var presentationMode
 
     let placeholder: String = "문의 내용을 입력해주세요"
 
@@ -160,7 +162,11 @@ struct InquiryView: View {
 
     private func continueButtonAction() {
         if viewModel.isFormValid {
-            viewModel.sendInquiryMailApi()
+            viewModel.sendInquiryMailApi { success in
+                if success {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            }
         }
     }
     

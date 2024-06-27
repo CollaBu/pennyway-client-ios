@@ -36,7 +36,7 @@ enum CategoryIconName: String {
     case eventOn = "icon_category_event_on"
     case etcOff = "icon_category_etc_off"
     case etcOn = "icon_category_etc_on"
-    case otherOff = "icon_category_plus_off"
+    case plusOff = "icon_category_plus_off"
 }
 
 // MARK: - SpendingCategoryData
@@ -63,6 +63,7 @@ enum SpendingCategoryIconList: String, CaseIterable {
     case alcoholOrEntertainment = "ALCOHOL_OR_ENTERTAINMENT"
     case membershipOrFamilyEvent = "MEMBERSHIP_OR_FAMILY_EVENT"
     case other = "OTHER"
+    case plus = "PLUS"
 
     var details: SpendingCategoryData {
         switch self {
@@ -89,7 +90,9 @@ enum SpendingCategoryIconList: String, CaseIterable {
         case .membershipOrFamilyEvent:
             return SpendingCategoryData(id: -11, isCustom: false, name: "회비/경조사", icon: .eventOn)
         case .other:
-            return SpendingCategoryData(id: -12, isCustom: false, name: "추가하기", icon: .otherOff)
+            return SpendingCategoryData(id: -12, isCustom: false, name: "기타", icon: .etcOn)
+        case .plus:
+            return SpendingCategoryData(id: -13, isCustom: false, name: "추가하기", icon: .plusOff)
         }
     }
 
@@ -118,7 +121,9 @@ enum SpendingCategoryIconList: String, CaseIterable {
         case .eventOn:
             return .membershipOrFamilyEvent
         case .etcOn:
-            return .other // TODO: 추후 수정 필요
+            return .other
+        case .plusOff:
+            return .plus // TODO: 추후 수정 필요
         default:
             return nil
         }

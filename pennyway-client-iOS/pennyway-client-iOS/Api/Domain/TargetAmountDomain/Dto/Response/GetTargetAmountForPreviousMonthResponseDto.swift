@@ -1,3 +1,4 @@
+
 // MARK: - GetTargetAmountForPreviousMonthResponseDto
 
 struct GetTargetAmountForPreviousMonthResponseDto: Codable {
@@ -5,13 +6,6 @@ struct GetTargetAmountForPreviousMonthResponseDto: Codable {
     let data: AmountDetailData
 
     struct AmountDetailData: Codable {
-        let targetAmount: PreviousTargetAmount
+        let targetAmount: RecentTargetAmount
     }
-}
-
-// MARK: - PreviousTargetAmount
-
-struct PreviousTargetAmount: Codable {
-    let isPresent: Bool
-    let amount: Int
 }

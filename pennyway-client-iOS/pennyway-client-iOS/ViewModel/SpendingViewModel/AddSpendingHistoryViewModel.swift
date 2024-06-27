@@ -45,10 +45,10 @@ class AddSpendingHistoryViewModel: ObservableObject {
                             Log.debug("사용자 정의 카테고리 조회 완료 \(jsonString)")
                         }
                         let staticCategories = SpendingCategoryIconList.allCases
-                            .filter { $0 != .other }
+                            .filter { $0 != .other && $0 != .plus }
                             .map { $0.details }
 
-                        let otherCategory = SpendingCategoryIconList.other.details
+                        let otherCategory = SpendingCategoryIconList.plus.details
                         let dynamicCategories = response.data.spendingCategories.compactMap { self.convertToSpendingCategoryData(from: $0) }
                         self.spendingCategories = staticCategories + dynamicCategories + [otherCategory]
                     } catch {
@@ -121,7 +121,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
                 categoryId = -1
             }
         } else { // 사용자 정의 카테고리
-            selectedCategoryIconTitle = "OTHER"
+            selectedCategoryIconTitle = "CUSTOM"
             categoryId = selectedCategory?.id ?? 0
         }
 
