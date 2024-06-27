@@ -9,13 +9,15 @@ struct SpendingDetail: Identifiable {
     let description: String
     let amount: String
     let icon: String
-    @State var isSelected: Bool = false
+    var isSelected: Bool = false
 }
 
 // MARK: - SpendingDetailSheetView
 
 struct SpendingDetailSheetView: View {
-    @Binding var showEditSpendingDetailView: Bool
+    @Environment(\.presentationMode) var presentationMode
+    @State private var showEditSpendingDetailView = false
+    @State private var showAddSpendingHistoryView = false
 
     @State var spendingDetails: [SpendingDetail] = [
         SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
@@ -43,8 +45,10 @@ struct SpendingDetailSheetView: View {
                         
                     Spacer()
                         
-                    Button(action: {}, label: {
-                        Image("icon_expenditure_share")
+                    Button(action: {
+                        showEditSpendingDetailView = true
+                    }, label: {
+                        Image("icon_navigationbar_write_gray05")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 24, height: 24)
@@ -53,12 +57,12 @@ struct SpendingDetailSheetView: View {
                     .padding(10)
                         
                     Button(action: {
-                        showEditSpendingDetailView = true
+                        showAddSpendingHistoryView = true
                     }, label: {
-                        Image("icon_navigationbar_write_gray")
+                        Image("icon_navigation_add")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 34, height: 34)
                             
                     })
                 }
@@ -109,12 +113,23 @@ struct SpendingDetailSheetView: View {
                     }
                 }
             }
+            .fullScreenCover(isPresented: $showEditSpendingDetailView) {
+                NavigationAvailable {
+                    EditSpendingDetailView()
+                }
+            }
+            .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
+                NavigationAvailable {
+                    AddSpendingHistoryView()
+                }
+            }
         }
+    
         .setTabBarVisibility(isHidden: true)
         .padding(.leading, 20)
     }
 }
 
 #Preview {
-    SpendingDetailSheetView(showEditSpendingDetailView: .constant(true))
+    SpendingDetailSheetView()
 }
