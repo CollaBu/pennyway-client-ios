@@ -3,10 +3,13 @@
 import SwiftUI
 
 class TargetAmountViewModel: ObservableObject {
-    @Published var totalSpent = 0
-    @Published var targetValue: CGFloat = 0
+    @Published var targetAmountData: TargetAmount? = nil
+    @Published var isHiddenSuggestionView = true // 추천 금액 뷰
+    @Published var isPresentTargetAmount = true // 당월 목표 금액 존재 여부
+    
+    @Published var recentTargetAmountData: RecentTargetAmount? = nil // 당월 이전 사용자의 최신 목표 금액
 
-    func getTotalTargetAmountApi(completion: @escaping (Bool) -> Void) {
+    func getTargetAmountForDateApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.getTargetAmountForDate { result in
             switch result {
             case let .success(data):
@@ -14,16 +17,22 @@ class TargetAmountViewModel: ObservableObject {
                     do {
                         let response = try JSONDecoder().decode(GetTargetAmountForDateResponseDto.self, from: responseData)
 
-                        let validTotalSpending = response.data.targetAmount // 현재 달의 총 지출 금액 찾기
-                        self.totalSpent = validTotalSpending.totalSpending
-
-//                        if validTotalSpending.targetAmount.id != -1 && validTotalSpending.targetAmount.amount != -1 {
-//                            self.targetValue = CGFloat(validTotalSpending.targetAmount.amount)
-//                            // TODO: -1인 경우 목표 금액이 없으므로, 목표 금액 설정하기 화면 보여주기
-//                        }
+                        let validTargetAmount = response.data.targetAmount
+                        self.targetAmountData = validTargetAmount
+                       
+                        if validTargetAmount.targetAmountDetail.isRead == true {
+                            // 추천 금액 보여주기 x + 목표 금액 데이터 적용
+                            self.isHiddenSuggestionView = true
+                            self.isPresentTargetAmount = true
+                        } else if validTargetAmount.targetAmountDetail.amount == -1 {
+                            self.isHiddenSuggestionView = true
+                            self.isPresentTargetAmount = false
+                            
+                            self.getTargetAmountForPreviousMonthApi()
+                        }
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
-                            Log.debug("지출 내역 조회 완료 \(jsonString)")
+                            Log.debug("당월 목표 금액 조회 \(jsonString)")
                         }
                         completion(true)
                     } catch {
@@ -32,12 +41,122 @@ class TargetAmountViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
+    
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                    
+                    if StatusSpecificError.domainError == .notFound {
+                        // 추천 금액 보여주기 x + 목표 금액 설정하기 UI
+                        self.isHiddenSuggestionView = true
+                        self.isPresentTargetAmount = false
+                        self.generateCurrentMonthDummyDataApi()
+                    }
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    func getTargetAmountForPreviousMonthApi() {
+        TargetAmountAlamofire.shared.getTargetAmountForPreviousMonth { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(GetTargetAmountForPreviousMonthResponseDto.self, from: responseData)
+                       
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("당월 이전 사용자 최신 목표 금액 조회 완료 \(jsonString)")
+                        }
+                        
+                        self.recentTargetAmountData = response.data.targetAmount
+                        let isPresent = response.data.targetAmount.isPresent
+                        
+                        if isPresent == true {
+                            self.isHiddenSuggestionView = false
+                            self.isPresentTargetAmount = false
+                            // 추천 금액 보여주기 + 목표 금액 설정하기 UI
+                        } else {
+                            self.deleteCurrentMonthTargetAmountApi()
+                        }
+               
+                    } catch {
+                        Log.fault("Error decoding JSON: \(error)")
+                    }
+                }
+            case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {
                     Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
-                completion(false)
+            }
+        }
+    }
+    
+    func generateCurrentMonthDummyDataApi() {
+        let generateCurrentMonthDummyDataRequestDto = GenerateCurrentMonthDummyDataRequestDto(year: Date.year(from: Date()), month: Date.month(from: Date()))
+        
+        TargetAmountAlamofire.shared.generateCurrentMonthDummyData(generateCurrentMonthDummyDataRequestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("당월 목표 금액 더미값 생성 \(jsonString)")
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+            }
+        }
+    }
+    
+    func deleteCurrentMonthTargetAmountApi() {
+        TargetAmountAlamofire.shared.deleteCurrentMonthTargetAmount(targetAmountId: (targetAmountData?.targetAmountDetail.id)!) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("당월 목표 금액 삭제 완료 \(jsonString)")
+                    }
+                    self.isHiddenSuggestionView = true
+                    self.isPresentTargetAmount = false
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+            }
+        }
+    }
+    
+    func editCurrentMonthTargetAmountApi() {
+        let editCurrentMonthTargetAmountRequestDto = EditCurrentMonthTargetAmountRequestDto(amount: recentTargetAmountData!.amount ?? 0)
+        
+        TargetAmountAlamofire.shared.editCurrentMonthTargetAmount(targetAmountId: targetAmountData?.targetAmountDetail.id ?? -1, dto: editCurrentMonthTargetAmountRequestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("당월 목표 금액 수정 완료 \(jsonString)")
+                    }
+                    // 당월 목표 금액 조회 재요청
+                    self.getTargetAmountForDateApi { _ in }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
             }
         }
     }

@@ -19,7 +19,6 @@ struct SpendingDetailSheetView: View {
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
 
-
     @State var spendingDetails: [SpendingDetail] = [
         SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
         SpendingDetail(category: "교육", description: "스터디용 메모장", amount: "6,000원", icon: "icon_category_education_on"),
@@ -33,12 +32,11 @@ struct SpendingDetailSheetView: View {
     ]
     var body: some View {
         ZStack(alignment: .leading) {
-            VStack(alignment: .leading) {
+            VStack {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 40, height: 4)
                     .platformTextColor(color: Color("Gray03"))
                     .padding(.top, 12)
-                    .padding(.horizontal, 140)
                 
                 HStack {
                     Text("6월 4일")

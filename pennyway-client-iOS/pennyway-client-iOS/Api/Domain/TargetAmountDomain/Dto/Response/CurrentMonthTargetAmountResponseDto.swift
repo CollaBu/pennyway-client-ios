@@ -1,7 +1,6 @@
-
 // MARK: - CurrentMonthTargetAmountResponseDto
 
-/// generateCurrentMonthDummyData, editCurrentMonthTargetAmount 응답 포ㅁ
+/// generateCurrentMonthDummyData, editCurrentMonthTargetAmount 응답 포멧
 struct CurrentMonthTargetAmountResponseDto: Codable {
     let code: String
     let data: AmountDetailData

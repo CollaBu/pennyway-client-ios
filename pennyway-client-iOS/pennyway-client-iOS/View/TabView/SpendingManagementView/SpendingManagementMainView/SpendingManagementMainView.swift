@@ -9,10 +9,9 @@ struct SpendingManagementMainView: View {
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
 
-    @State private var ishidden = false
+    @State private var ishidden = false // 변수명 바꿀 필요
 
     @State private var showToastPopup = false
-    @State private var isHiddenSuggestionView = false
 
     var body: some View {
         NavigationAvailable {
@@ -20,8 +19,8 @@ struct SpendingManagementMainView: View {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                    if !isHiddenSuggestionView {
-                        RecentTargetAmountSuggestionView(showToastPopup: $showToastPopup, isHidden: $isHiddenSuggestionView)
+                    if !targetAmountViewModel.isHiddenSuggestionView {
+                        RecentTargetAmountSuggestionView(viewModel: targetAmountViewModel, showToastPopup: $showToastPopup, isHidden: $targetAmountViewModel.isHiddenSuggestionView)
 
                         Spacer().frame(height: 13 * DynamicSizeFactor.factor())
                     }
@@ -75,7 +74,7 @@ struct SpendingManagementMainView: View {
             .setTabBarVisibility(isHidden: ishidden)
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
-                targetAmountViewModel.getTotalTargetAmountApi { _ in }
+                targetAmountViewModel.getTargetAmountForDateApi { _ in }
             }
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
             .background(Color("Gray01"))
@@ -118,9 +117,9 @@ struct SpendingManagementMainView: View {
             .overlay(
                 Group {
                     if showToastPopup {
-                        CustomToastView(message: "7월의 새로운 목표금액을 설정했어요")
+                        CustomToastView(message: "\(Date.month(from: Date()))월의 새로운 목표금액을 설정했어요")
                             .transition(.move(edge: .bottom))
-                            .animation(.easeInOut(duration: 0.5))
+                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
                             .padding(.bottom, 10)
                     }
                 }, alignment: .bottom

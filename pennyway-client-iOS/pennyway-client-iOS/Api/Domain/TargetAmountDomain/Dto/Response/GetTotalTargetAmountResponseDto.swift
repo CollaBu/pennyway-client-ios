@@ -1,6 +1,3 @@
-
-import Foundation
-
 // MARK: - GetTotalTargetAmountResponseDto
 
 struct GetTotalTargetAmountResponseDto: Codable {
