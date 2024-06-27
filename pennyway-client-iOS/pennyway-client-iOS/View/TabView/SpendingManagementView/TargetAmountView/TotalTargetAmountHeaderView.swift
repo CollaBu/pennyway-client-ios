@@ -14,10 +14,10 @@ struct TotalTargetAmountHeaderView: View {
                     .platformTextColor(color: Color("White01"))
                         
                 HStack(spacing: 0) {
-                    Text("\(viewModel.currentData.targetAmount.amount)")
+                    Text(viewModel.currentData.targetAmountDetail.amount != -1 ? "\(viewModel.currentData.targetAmountDetail.amount)" : "-")
                         .font(.H1BoldFont())
                         .platformTextColor(color: Color("White01"))
-                    Text("원")
+                    Text(" 원")
                         .font(.H3SemiboldFont())
                         .platformTextColor(color: Color("White01"))
                 }
