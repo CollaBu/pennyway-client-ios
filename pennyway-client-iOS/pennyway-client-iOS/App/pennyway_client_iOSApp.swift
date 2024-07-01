@@ -9,6 +9,7 @@ import SwiftUI
 @main
 struct pennyway_client_iOSApp: App {
     @StateObject private var appViewModel = AppViewModel()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     init() {
         let kakaoAppKey = Bundle.main.infoDictionary?["KakaoAppKey"] as! String

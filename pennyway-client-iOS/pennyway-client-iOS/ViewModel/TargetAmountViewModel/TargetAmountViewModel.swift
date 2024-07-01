@@ -16,7 +16,6 @@ class TargetAmountViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(GetTargetAmountForDateResponseDto.self, from: responseData)
-
                         let validTargetAmount = response.data.targetAmount
                         self.targetAmountData = validTargetAmount
                        
@@ -27,7 +26,6 @@ class TargetAmountViewModel: ObservableObject {
                         } else if validTargetAmount.targetAmountDetail.amount == -1 {
                             self.isHiddenSuggestionView = true
                             self.isPresentTargetAmount = false
-                            
                             self.getTargetAmountForPreviousMonthApi()
                         }
 
