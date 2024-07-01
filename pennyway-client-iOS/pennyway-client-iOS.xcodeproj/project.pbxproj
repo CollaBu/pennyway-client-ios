@@ -185,6 +185,7 @@
 		4AE8F3A82C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3A72C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift */; };
 		4AE8F3AA2C32ABA50014F0D4 /* GetTargetAmountForDateResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3A92C32ABA50014F0D4 /* GetTargetAmountForDateResponseDto.swift */; };
 		4AE8F3AD2C32AED30014F0D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3AC2C32AED30014F0D4 /* AppDelegate.swift */; };
+		4AE8F3AF2C3307940014F0D4 /* CustomDropDownMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */; };
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
 		D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809412D2BF276460015CFF9 /* ResetPwFormView.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
@@ -416,6 +417,7 @@
 		4AE8F3A72C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTargetAmountForPreviousMonthResponseDto.swift; sourceTree = "<group>"; };
 		4AE8F3A92C32ABA50014F0D4 /* GetTargetAmountForDateResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTargetAmountForDateResponseDto.swift; sourceTree = "<group>"; };
 		4AE8F3AC2C32AED30014F0D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropDownMenuView.swift; sourceTree = "<group>"; };
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D809412D2BF276460015CFF9 /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 				D85927ED2BE6842A00653391 /* CustomPopUpView.swift */,
 				D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */,
 				4AC320582C11D5D500DDB4B6 /* CustomToastView.swift */,
+				4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1856,6 +1859,7 @@
 				4A3701D32C08F7F600F0AEBA /* getSpendingCustomCategoryListResponseDto.swift in Sources */,
 				D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */,
 				4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */,
+				4AE8F3AF2C3307940014F0D4 /* CustomDropDownMenuView.swift in Sources */,
 				4AC320492C11D5AC00DDB4B6 /* EditSpendingDetailView.swift in Sources */,
 				4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */,
 				D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */,

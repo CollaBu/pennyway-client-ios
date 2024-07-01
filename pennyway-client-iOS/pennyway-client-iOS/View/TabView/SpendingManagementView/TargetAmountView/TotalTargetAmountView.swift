@@ -1,7 +1,12 @@
 import SwiftUI
 
+// MARK: - TotalTargetAmountView
+
 struct TotalTargetAmountView: View {
     @StateObject var viewModel = TotalTargetAmountViewModel()
+    @State var isClickMenu = false
+    @State private var selectedMenu: String? = nil // 선택한 메뉴
+    @State var listArray: [String] = ["목표금액 수정", "초기화하기"]
 
     var body: some View {
         ZStack {
@@ -13,6 +18,20 @@ struct TotalTargetAmountView: View {
 
                     Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                 }
+                .overlay(
+                    VStack(alignment: .leading) {
+                        if isClickMenu {
+                            CustomDropdownMenuView(
+                                isClickMenu: $isClickMenu,
+                                selectedMenu: $selectedMenu,
+                                listArray: listArray,
+                                onItemSelected: { item in
+                                    Log.debug("Selected item: \(item)")
+                                }
+                            ).padding(.trailing, 20)
+                        }
+                    }, alignment: .topTrailing
+                )
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -41,7 +60,10 @@ struct TotalTargetAmountView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 0) {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        isClickMenu = true
+                        selectedMenu = nil
+                    }, label: {
                         Image("icon_navigationbar_kebabmenu_white")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
