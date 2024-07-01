@@ -8,6 +8,7 @@ struct SpendingManagementMainView: View {
     @State private var navigateToMySpendingList = false
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
+    @State private var showDetailView = false // 지출내역 상세조회 view 임시 연결
 
     @State private var ishidden = false // 변수명 바꿀 필요
 
@@ -101,7 +102,9 @@ struct SpendingManagementMainView: View {
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
 
-                        Button(action: {}, label: {
+                        Button(action: {
+                            showDetailView = true
+                        }, label: {
                             Image("icon_navigationbar_bell")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -130,6 +133,10 @@ struct SpendingManagementMainView: View {
             }
 
             NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel()), isActive: $navigateToMySpendingList) {
+                EmptyView()
+            }
+
+            NavigationLink(destination: DetailSpendingView(), isActive: $showDetailView) {
                 EmptyView()
             }
         }
