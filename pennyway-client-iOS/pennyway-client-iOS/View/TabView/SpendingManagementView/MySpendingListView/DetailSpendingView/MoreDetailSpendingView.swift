@@ -58,9 +58,8 @@ struct MoreDetailSpendingView: View {
                 }
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 
-                ZStack(alignment: .leading) {
+                ZStack(alignment: .topLeading) {
                     Rectangle()
-                        //                  .foregroundColor(.clear)
                         .frame(width: 280 * DynamicSizeFactor.factor(), height: 72 * DynamicSizeFactor.factor())
                         .platformTextColor(color: Color("Gray01"))
                         .cornerRadius(4)
