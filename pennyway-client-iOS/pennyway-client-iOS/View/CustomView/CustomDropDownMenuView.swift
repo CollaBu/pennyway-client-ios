@@ -29,7 +29,7 @@ struct CustomDropdownMenuView: View {
                             Rectangle()
                                 .frame(width: 110 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                                 .cornerRadius(3)
-                                .platformTextColor(color: selectedMenu == item ? Color("Gray03") : Color("White01"))
+                                .platformTextColor(color: selectedMenu == item ? Color("Gray02") : Color("White01"))
                             Text(item)
                                 .font(.B2MediumFont())
                                 .platformTextColor(color: selectedMenu == item ? Color("Gray05") : Color("Gray04"))

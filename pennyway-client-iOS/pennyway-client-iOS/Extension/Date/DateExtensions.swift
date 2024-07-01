@@ -31,6 +31,14 @@ extension Date {
         return formatter.string(from: date)
     }
 
+    /// 2000년 1월 형식
+    static func getYearMonthFormattedDate(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy년 M월"
+        return formatter.string(from: date)
+    }
+
     static let calendarDayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy dd"
