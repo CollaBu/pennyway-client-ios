@@ -103,7 +103,6 @@ struct SpendingManagementMainView: View {
                         .frame(width: 44, height: 44)
 
                         Button(action: {
-                            showDetailView = true
                         }, label: {
                             Image("icon_navigationbar_bell")
                                 .resizable()
@@ -136,9 +135,6 @@ struct SpendingManagementMainView: View {
                 EmptyView()
             }
 
-            NavigationLink(destination: DetailSpendingView(), isActive: $showDetailView) {
-                EmptyView()
-            }
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView) {
             SpendingDetailSheetView()
