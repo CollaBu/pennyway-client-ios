@@ -22,8 +22,8 @@ struct CustomDropdownMenuView: View {
                         selectedMenu = item
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                             isClickMenu = false
+                            onItemSelected(item)
                         }
-                        onItemSelected(item)
                     }, label: {
                         ZStack(alignment: .leading) {
                             Rectangle()

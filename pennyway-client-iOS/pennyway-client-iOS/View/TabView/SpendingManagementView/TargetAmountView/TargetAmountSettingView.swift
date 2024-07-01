@@ -38,6 +38,7 @@ struct TargetAmountSettingView: View {
                             .keyboardType(.numberPad)
                             .onChange(of: viewModel.inputTargetAmount) { _ in
                                 viewModel.inputTargetAmount = NumberFormatterUtil.formatStringToDecimalString(viewModel.inputTargetAmount)
+                                viewModel.validateForm()
                             }
                     }
                 }

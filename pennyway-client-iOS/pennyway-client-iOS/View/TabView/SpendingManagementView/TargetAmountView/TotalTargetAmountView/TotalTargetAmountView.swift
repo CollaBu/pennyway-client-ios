@@ -4,9 +4,10 @@ import SwiftUI
 
 struct TotalTargetAmountView: View {
     @StateObject var viewModel = TotalTargetAmountViewModel()
-    @State var isClickMenu = false
+    @State private var isClickMenu = false
     @State private var selectedMenu: String? = nil // 선택한 메뉴
-    @State var listArray: [String] = ["목표금액 수정", "초기화하기"]
+    @State private var listArray: [String] = ["목표금액 수정", "초기화하기"]
+    @State private var navigateToEditTarget = false
 
     var body: some View {
         ZStack {
@@ -26,6 +27,9 @@ struct TotalTargetAmountView: View {
                                 selectedMenu: $selectedMenu,
                                 listArray: listArray,
                                 onItemSelected: { item in
+                                    if item == "목표금액 수정" {
+                                        navigateToEditTarget = true
+                                    }
                                     Log.debug("Selected item: \(item)")
                                 }
                             ).padding(.trailing, 20)
@@ -33,6 +37,7 @@ struct TotalTargetAmountView: View {
                     }, alignment: .topTrailing
                 )
             }
+            NavigationLink(destination: TargetAmountSettingView(targetAmount: .constant(nil)), isActive: $navigateToEditTarget) {}
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Gray01"))
