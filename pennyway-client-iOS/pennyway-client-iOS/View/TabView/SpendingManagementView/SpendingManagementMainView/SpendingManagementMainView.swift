@@ -8,8 +8,6 @@ struct SpendingManagementMainView: View {
     @State private var navigateToMySpendingList = false
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
-    @State private var showDetailView = false // 지출내역 상세조회 view 임시 연결
-
     @State private var ishidden = false // 변수명 바꿀 필요
 
     @State private var showToastPopup = false
