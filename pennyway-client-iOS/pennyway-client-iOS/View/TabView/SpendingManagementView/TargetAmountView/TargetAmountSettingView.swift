@@ -4,6 +4,7 @@ import SwiftUI
 struct TargetAmountSettingView: View {
     @Binding var targetAmount: String?
     @StateObject var viewModel = TargetAmountSettingViewModel()
+    @State private var navigateToCompleteTarget = false
     
     var body: some View {
         ZStack {
@@ -46,12 +47,14 @@ struct TargetAmountSettingView: View {
                 
                 Spacer()
                 
-                CustomBottomButton(action: {}, label: "확인", isFormValid: $viewModel.isFormValid)
+                CustomBottomButton(action: {
+                    if viewModel.isFormValid {
+                        navigateToCompleteTarget = true
+                    }
+                }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
-//                NavigationLink(destination: destinationView(), tag: 2, selection: $viewModel.selectedText) {
-//                    EmptyView()
-//                }
+                NavigationLink(destination: TargetAmountSetCompleteView(viewModel: viewModel)) {}
             }
         }
         .edgesIgnoringSafeArea(.bottom)

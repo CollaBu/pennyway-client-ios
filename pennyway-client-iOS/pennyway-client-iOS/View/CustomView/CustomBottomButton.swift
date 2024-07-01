@@ -17,5 +17,6 @@ struct CustomBottomButton: View {
         .background(isFormValid ? Color("Mint03") : Color("Gray03"))
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .padding(.horizontal, 20)
+        .buttonStyle(PlainButtonStyle())
     }
 }
