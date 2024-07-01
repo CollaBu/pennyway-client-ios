@@ -102,4 +102,4 @@ extension View {
     func dragBottomSheet<SheetContent: View>(isPresented: Binding<Bool>, @ViewBuilder sheetContent: @escaping () -> SheetContent) -> some View {
         modifier(DragBottomSheet(isPresented: isPresented, sheetContent: sheetContent))
     }
-}
+} 

@@ -30,7 +30,7 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel)
+                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView)
                         .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
@@ -101,10 +101,7 @@ struct SpendingManagementMainView: View {
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
 
-                        Button(action: {
-                            showSpendingDetailView = true
-
-                        }, label: {
+                        Button(action: {}, label: {
                             Image("icon_navigationbar_bell")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -137,22 +134,13 @@ struct SpendingManagementMainView: View {
             }
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView) {
-            changeSheetView()
-                // EditSpendingDetailView()
+            SpendingDetailSheetView()
                 .zIndex(2)
         }
         .onChange(of: showSpendingDetailView) { isPresented in
             ishidden = isPresented
         }
         .id(ishidden)
-    }
-
-    func changeSheetView() -> some View {
-        if showEditSpendingDetailView == true {
-            return AnyView(EditSpendingDetailView(showEditSpendingDetailView: $showEditSpendingDetailView))
-        } else {
-            return AnyView(SpendingDetailSheetView(showEditSpendingDetailView: $showEditSpendingDetailView))
-        }
     }
 }
 
