@@ -7,6 +7,7 @@ enum SpendingRouter: URLRequestConvertible {
     case addSpendingHistory(dto: AddSpendingHistoryRequestDto)
     case addSpendingCustomCategory(dto: AddSpendingCustomCategoryRequestDto)
     case getSpendingCustomCategoryList
+    case deleteSpendingHistory(spendingId: Int)
     
     var method: HTTPMethod {
         switch self {
@@ -14,6 +15,8 @@ enum SpendingRouter: URLRequestConvertible {
             return .get
         case .addSpendingCustomCategory, .addSpendingHistory:
             return .post
+        case .deleteSpendingHistory:
+            return  .delete
         }
     }
     
@@ -27,12 +30,14 @@ enum SpendingRouter: URLRequestConvertible {
             return "v2/spendings"
         case .getSpendingCustomCategoryList, .addSpendingCustomCategory:
             return "v2/spending-categories"
+        case let .deleteSpendingHistory(spendingId):
+            return "v2/spendings/\(spendingId)"
         }
     }
     
     var bodyParameters: Parameters? {
         switch self {
-        case .getSpendingHistory, .getSpendingCustomCategoryList, .addSpendingCustomCategory:
+        case .getSpendingHistory, .getSpendingCustomCategoryList, .addSpendingCustomCategory, .deleteSpendingHistory:
             return [:]
         case let .addSpendingHistory(dto):
             return try? dto.asDictionary()
@@ -45,7 +50,7 @@ enum SpendingRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .addSpendingCustomCategory(dto):
             return try? dto.asDictionary()
-        case .getSpendingCustomCategoryList, .addSpendingHistory:
+        case .getSpendingCustomCategoryList, .addSpendingHistory, .deleteSpendingHistory:
             return [:]
         }
     }
@@ -63,7 +68,7 @@ enum SpendingRouter: URLRequestConvertible {
         case .addSpendingCustomCategory:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
-        case .getSpendingCustomCategoryList:
+        case .getSpendingCustomCategoryList, .deleteSpendingHistory:
             request = URLRequest.createURLRequest(url: url, method: method)
         }
         return request
