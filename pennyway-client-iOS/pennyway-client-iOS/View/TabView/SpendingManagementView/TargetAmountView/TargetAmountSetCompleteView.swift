@@ -30,7 +30,7 @@ struct TargetAmountSetCompleteView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-//                    goToSecondView()
+                    goToTotalTargetAmountView()
                 }, label: "확인", isFormValid: .constant(true))
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
@@ -38,15 +38,10 @@ struct TargetAmountSetCompleteView: View {
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
     }
-    
-//    private func goToSecondView() {
-//        if let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController {
-//            navigationController.popToRootViewController(animated: true)
-//            if let rootView = navigationController.viewControllers.first as? TotalTargetAmountView {
-//                rootView.navigateToEditTarget = true
-//            }
-//        }
-//    }
+
+    private func goToTotalTargetAmountView() {
+        NavigationUtil.popToView(at: 1)
+    }
 }
 
 #Preview {

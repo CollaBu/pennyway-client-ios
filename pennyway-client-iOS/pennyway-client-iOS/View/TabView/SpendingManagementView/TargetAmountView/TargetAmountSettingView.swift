@@ -54,7 +54,7 @@ struct TargetAmountSettingView: View {
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
-                NavigationLink(destination: TargetAmountSetCompleteView(viewModel: viewModel)) {}
+                NavigationLink(destination: TargetAmountSetCompleteView(viewModel: viewModel), isActive: $navigateToCompleteTarget) {}
             }
         }
         .edgesIgnoringSafeArea(.bottom)
