@@ -37,7 +37,10 @@ struct MySpendingListView: View {
                                             Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-                                                ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                                NavigationLink(destination: DetailSpendingView()) {
+                                                    ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                                }
+
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }
                                             .onAppear {
