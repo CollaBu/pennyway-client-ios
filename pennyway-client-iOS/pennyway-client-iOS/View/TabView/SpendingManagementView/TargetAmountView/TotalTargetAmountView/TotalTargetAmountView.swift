@@ -1,7 +1,13 @@
 import SwiftUI
 
+// MARK: - TotalTargetAmountView
+
 struct TotalTargetAmountView: View {
     @StateObject var viewModel = TotalTargetAmountViewModel()
+    @State private var isClickMenu = false
+    @State private var selectedMenu: String? = nil // 선택한 메뉴
+    @State private var listArray: [String] = ["목표금액 수정", "초기화하기"]
+    @State private var navigateToEditTarget = false
 
     var body: some View {
         ZStack {
@@ -13,7 +19,25 @@ struct TotalTargetAmountView: View {
 
                     Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                 }
+                .overlay(
+                    VStack(alignment: .leading) {
+                        if isClickMenu {
+                            CustomDropdownMenuView(
+                                isClickMenu: $isClickMenu,
+                                selectedMenu: $selectedMenu,
+                                listArray: listArray,
+                                onItemSelected: { item in
+                                    if item == "목표금액 수정" {
+                                        navigateToEditTarget = true
+                                    }
+                                    Log.debug("Selected item: \(item)")
+                                }
+                            ).padding(.trailing, 20)
+                        }
+                    }, alignment: .topTrailing
+                )
             }
+            NavigationLink(destination: TargetAmountSettingView(targetAmount: .constant(nil)), isActive: $navigateToEditTarget) {}
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Gray01"))
@@ -41,7 +65,10 @@ struct TotalTargetAmountView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 0) {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        isClickMenu = true
+                        selectedMenu = nil
+                    }, label: {
                         Image("icon_navigationbar_kebabmenu_white")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
