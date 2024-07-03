@@ -96,19 +96,40 @@ struct EditSpendingDetailView: View {
                 }
                     
                 Spacer() // 바텀시트 높이에 따라 조건문으로 spacer()처리해야 함.
-                    
+                
                 CustomBottomButton(action: {
                     if isItemSelected {
                         showingDeletePopUp = true
                         Log.debug("showingDeletePopUp: \(showingDeletePopUp)")
                     }
-                        
+                    
                 }, label: "삭제하기", isFormValid: $isItemSelected)
                     .padding(.bottom, 34)
             }
             .padding(.leading, 3)
             .padding(.trailing, 5)
-                
+            .setTabBarVisibility(isHidden: true)
+            .navigationBarColor(UIColor(named: "White01"), title: "편집하기")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        Button(action: {
+                            showingClosePopUp = true
+                            Log.debug("showingClosePopUp: \(showingClosePopUp)")
+                        }, label: {
+                            Image("icon_close")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 36, height: 36)
+                        })
+                        .padding(.leading, 11)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+
+                    }.offset(x: -10)
+                }
+            }
+
             if showingClosePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingClosePopUp,
@@ -121,9 +142,10 @@ struct EditSpendingDetailView: View {
                                 secondBtnColor: Color("Mint03")
                 )
             }
-            
+                
             if showingDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+//                    .zIndex(1)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
                                 titleLabel: "8개의 내역을 삭제할까요?",
                                 subTitleLabel: "선택한 소비 내역이 사라져요",
@@ -133,27 +155,7 @@ struct EditSpendingDetailView: View {
                                 secondBtnLabel: "삭제하기",
                                 secondBtnColor: Color("Red03")
                 )
-            }
-        }
-        .navigationBarTitle("편집하기", displayMode: .inline)
-        .setTabBarVisibility(isHidden: true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    Button(action: {
-                        showingClosePopUp = true
-                        Log.debug("showingClosePopUp: \(showingClosePopUp)")
-                    }, label: {
-                        Image("icon_close")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 36, height: 36)
-                    })
-                    .padding(.leading, 11)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
-
-                }.offset(x: -10)
+//                .zIndex(2)
             }
         }
     }

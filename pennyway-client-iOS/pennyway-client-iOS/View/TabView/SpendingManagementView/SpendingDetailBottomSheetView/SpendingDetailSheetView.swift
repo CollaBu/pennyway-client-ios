@@ -37,7 +37,7 @@ struct SpendingDetailSheetView: View {
                     .frame(width: 40, height: 4)
                     .platformTextColor(color: Color("Gray03"))
                     .padding(.top, 12)
-                
+                    
                 HStack {
                     Text("6월 4일")
                         .font(.B1SemiboldeFont())
@@ -68,18 +68,18 @@ struct SpendingDetailSheetView: View {
                 }
                 .padding(.trailing, 17)
                 .padding(.top, 12)
-                
-//                NoSpendingHistorySheetView() //소비내역 없을 경우
+                    
+                //                NoSpendingHistorySheetView() //소비내역 없을 경우
                 ScrollView {
                     VStack(alignment: .leading) {
                         Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-                        
+                            
                         Text("-10,000")
                             .font(.H1SemiboldFont())
                             .platformTextColor(color: Color("Gray07"))
-                        
+                            
                         Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-                        
+                            
                         ForEach(spendingDetails) { detail in
                             HStack(spacing: 0) {
                                 Image(detail.icon)
@@ -87,12 +87,12 @@ struct SpendingDetailSheetView: View {
                                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
                                     .aspectRatio(contentMode: .fill)
                                     .padding(.leading, 4 * DynamicSizeFactor.factor())
-
+                                    
                                 VStack(alignment: .leading, spacing: 1 * DynamicSizeFactor.factor()) {
                                     Text(detail.category)
                                         .font(.B1SemiboldeFont())
                                         .platformTextColor(color: Color("Gray06"))
-                                                            
+                                        
                                     if !detail.description.isEmpty {
                                         Text(detail.description)
                                             .font(.B3MediumFont())
@@ -100,9 +100,9 @@ struct SpendingDetailSheetView: View {
                                     }
                                 }
                                 .padding(.leading, 10 * DynamicSizeFactor.factor())
-                                                        
+                                    
                                 Spacer()
-                                                        
+                                    
                                 Text(detail.amount)
                                     .font(.B1SemiboldeFont())
                                     .platformTextColor(color: Color("Gray06"))
@@ -124,7 +124,7 @@ struct SpendingDetailSheetView: View {
                 }
             }
         }
-    
+        
         .setTabBarVisibility(isHidden: true)
         .padding(.leading, 20)
     }

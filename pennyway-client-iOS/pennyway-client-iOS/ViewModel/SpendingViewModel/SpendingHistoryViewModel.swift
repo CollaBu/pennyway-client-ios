@@ -65,4 +65,49 @@ class SpendingHistoryViewModel: ObservableObject {
             }
         }
     }
+
+    // 지출내역 삭제 api
+    //    func deleteSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
+    //        SpendingAlamofire.shared.deleteSpendingHistory(spendingId: spendingId) { result in
+    //            switch result {
+    //            case let .success(data):
+    //                if let responseData = data {
+    //                    if let jsonString = String(data: responseData, encoding: .utf8) {
+    //                        Log.debug("지출내역 삭제: \(jsonString)")
+    //                    }
+    //
+    //                }
+    //            case let .failure(error):
+    //                if let StatusSpecificError = error as? StatusSpecificError {
+    //                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+    //                } else {
+    //                    Log.error("Network request failed: \(error)")
+    //                }
+    //            }
+    //        }
+    //    }
+
+    // 지출 내역 수정 api
+//    func editCurrentMonthTargetAmountApi() {
+//        let editCurrentMonthTargetAmountRequestDto = AddSpendingHistoryRequestDto(amount: recentTargetAmountData!.amount ?? 0)
+//        
+//        TargetAmountAlamofire.shared.editCurrentMonthTargetAmount(targetAmountId: targetAmountData?.targetAmountDetail.id ?? -1, dto: editCurrentMonthTargetAmountRequestDto) { result in
+//            switch result {
+//            case let .success(data):
+//                if let responseData = data {
+//                    if let jsonString = String(data: responseData, encoding: .utf8) {
+//                        Log.debug("당월 목표 금액 수정 완료 \(jsonString)")
+//                    }
+//                    // 당월 목표 금액 조회 재요청
+//                    self.getTargetAmountForDateApi { _ in }
+//                }
+//            case let .failure(error):
+//                if let StatusSpecificError = error as? StatusSpecificError {
+//                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+//                } else {
+//                    Log.error("Network request failed: \(error)")
+//                }
+//            }
+//        }
+//    }
 }
