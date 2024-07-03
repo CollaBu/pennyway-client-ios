@@ -107,6 +107,7 @@
 		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
+		4A73E9AA2C34F5610017EED9 /* SpendingCategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
 		4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEE2B99A16B001C1188 /* MainView.swift */; };
 		4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A762AF02B99A16D001C1188 /* Assets.xcassets */; };
@@ -344,6 +345,7 @@
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryGridView.swift; sourceTree = "<group>"; };
 		4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pennyway-client-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pennyway_client_iOSApp.swift; sourceTree = "<group>"; };
 		4A762AEE2B99A16B001C1188 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -1192,6 +1194,7 @@
 				4AC3201E2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift */,
 				4AC3201F2C11D5AC00DDB4B6 /* SelectCategoryIconView.swift */,
 				4AC320202C11D5AC00DDB4B6 /* SpendingCategoryListView.swift */,
+				4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */,
 			);
 			path = SpendingCategory;
 			sourceTree = "<group>";
@@ -1832,6 +1835,7 @@
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
+				4A73E9AA2C34F5610017EED9 /* SpendingCategoryGridView.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
 				D8180C042BE5081F00F837FB /* FindIdContentView.swift in Sources */,
