@@ -108,6 +108,7 @@
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A73E9AA2C34F5610017EED9 /* SpendingCategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */; };
+		4A73E9AD2C35137F0017EED9 /* CategorySpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
 		4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEE2B99A16B001C1188 /* MainView.swift */; };
 		4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A762AF02B99A16D001C1188 /* Assets.xcassets */; };
@@ -346,6 +347,7 @@
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryGridView.swift; sourceTree = "<group>"; };
+		4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySpendingListView.swift; sourceTree = "<group>"; };
 		4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pennyway-client-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pennyway_client_iOSApp.swift; sourceTree = "<group>"; };
 		4A762AEE2B99A16B001C1188 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -1019,6 +1021,15 @@
 			path = SignUpView;
 			sourceTree = "<group>";
 		};
+		4A73E9AB2C3512660017EED9 /* SpendingCategoryManagementView */ = {
+			isa = PBXGroup;
+			children = (
+				4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */,
+				4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */,
+			);
+			path = SpendingCategoryManagementView;
+			sourceTree = "<group>";
+		};
 		4A762AE02B99A16B001C1188 = {
 			isa = PBXGroup;
 			children = (
@@ -1194,7 +1205,6 @@
 				4AC3201E2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift */,
 				4AC3201F2C11D5AC00DDB4B6 /* SelectCategoryIconView.swift */,
 				4AC320202C11D5AC00DDB4B6 /* SpendingCategoryListView.swift */,
-				4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */,
 			);
 			path = SpendingCategory;
 			sourceTree = "<group>";
@@ -1202,6 +1212,7 @@
 		4AC320262C11D5AC00DDB4B6 /* AddSpendingHistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				4A73E9AB2C3512660017EED9 /* SpendingCategoryManagementView */,
 				4AC320212C11D5AC00DDB4B6 /* SpendingCategory */,
 				4AC320222C11D5AC00DDB4B6 /* AddSpendingCompleteView.swift */,
 				4AC320232C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift */,
@@ -1871,6 +1882,7 @@
 				4AC3204B2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
+				4A73E9AD2C35137F0017EED9 /* CategorySpendingListView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
 				4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */,

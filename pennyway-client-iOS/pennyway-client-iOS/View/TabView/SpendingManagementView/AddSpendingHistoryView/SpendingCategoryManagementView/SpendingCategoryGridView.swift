@@ -15,53 +15,55 @@ struct SpendingCategoryGridView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(viewModel.systemCategories) { category in
-                            VStack(spacing: 0) {
-                                Image("\(category.icon.rawValue)")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 52 * DynamicSizeFactor.factor(), height: 52 * DynamicSizeFactor.factor())
-                                
-                                Text(category.name)
-                                    .font(.B1MediumFont())
-                                    .platformTextColor(color: Color("Gray07"))
+                            NavigationLink(destination: CategorySpendingListView(viewModel: viewModel, category: category)) {
+                                VStack(spacing: 0) {
+                                    Image("\(category.icon.rawValue)")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 52 * DynamicSizeFactor.factor(), height: 52 * DynamicSizeFactor.factor())
+                                                        
+                                    Text(category.name)
+                                        .font(.B1MediumFont())
+                                        .platformTextColor(color: Color("Gray07"))
+                                }
+                                .frame(width: 88 * DynamicSizeFactor.factor(), height: 92 * DynamicSizeFactor.factor())
+                                .background(Color("White01"))
+                                .cornerRadius(8)
                             }
-                            .frame(width: 88 * DynamicSizeFactor.factor(), height: 92 * DynamicSizeFactor.factor())
-                            .background(Color("White01"))
-                            .cornerRadius(8)
-                            .onTapGesture {}
                         }
                     }
                     .padding(.horizontal, 20)
-                    
+                                        
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
-                    
+                                        
                     Text("내가 추가한")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.horizontal, 20)
-                    
+                                        
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                    
+                                        
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(viewModel.customCategories) { category in
-                            VStack(spacing: 0) {
-                                Image("\(category.icon.rawValue)")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 52 * DynamicSizeFactor.factor(), height: 52 * DynamicSizeFactor.factor())
-                                
-                                Text(category.name)
-                                    .font(.B1MediumFont())
-                                    .platformTextColor(color: Color("Gray07"))
+                            NavigationLink(destination: CategorySpendingListView(viewModel: viewModel, category: category)) {
+                                VStack(spacing: 0) {
+                                    Image("\(category.icon.rawValue)")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 52 * DynamicSizeFactor.factor(), height: 52 * DynamicSizeFactor.factor())
+                                                        
+                                    Text(category.name)
+                                        .font(.B1MediumFont())
+                                        .platformTextColor(color: Color("Gray07"))
+                                }
+                                .frame(width: 88 * DynamicSizeFactor.factor(), height: 92 * DynamicSizeFactor.factor())
+                                .background(Color("White01"))
+                                .cornerRadius(8)
                             }
-                            .frame(width: 88 * DynamicSizeFactor.factor(), height: 92 * DynamicSizeFactor.factor())
-                            .background(Color("White01"))
-                            .cornerRadius(8)
-                            .onTapGesture {}
                         }
                     }
                     .padding(.horizontal, 20)
-                    
+                                        
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                 }
             }
@@ -90,9 +92,7 @@ struct SpendingCategoryGridView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
-                        Button(action: {
-                            
-                        }, label: {
+                        Button(action: {}, label: {
                             Image("icon_navigation_add_black")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
