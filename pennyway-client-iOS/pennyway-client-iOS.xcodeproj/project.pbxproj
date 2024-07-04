@@ -37,6 +37,8 @@
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
 		4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */; };
 		4A148B5E2C364A3C005C6D4E /* SpendingCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B5D2C364A3C005C6D4E /* SpendingCategoryViewModel.swift */; };
+		4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */; };
+		4A148B622C3702E2005C6D4E /* CategoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
@@ -276,6 +278,8 @@
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
 		4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconListItem.swift; sourceTree = "<group>"; };
 		4A148B5D2C364A3C005C6D4E /* SpendingCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryViewModel.swift; sourceTree = "<group>"; };
+		4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSpendingRow.swift; sourceTree = "<group>"; };
+		4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsView.swift; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
@@ -708,6 +712,7 @@
 				D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */,
 				4AC320582C11D5D500DDB4B6 /* CustomToastView.swift */,
 				4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */,
+				4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1029,6 +1034,7 @@
 			children = (
 				4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */,
 				4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */,
+				4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */,
 			);
 			path = SpendingCategoryManagementView;
 			sourceTree = "<group>";
@@ -1760,6 +1766,7 @@
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
 				4A148B5E2C364A3C005C6D4E /* SpendingCategoryViewModel.swift in Sources */,
+				4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */,
 				4AE8F3AD2C32AED30014F0D4 /* AppDelegate.swift in Sources */,
 				4A5789972BDC29FD00AFEB26 /* PreconditionFailedError.swift in Sources */,
 				D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */,
@@ -1831,6 +1838,7 @@
 				4AC320522C11D5AC00DDB4B6 /* SpendingManagementMainView.swift in Sources */,
 				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,
+				4A148B622C3702E2005C6D4E /* CategoryDetailsView.swift in Sources */,
 				D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,

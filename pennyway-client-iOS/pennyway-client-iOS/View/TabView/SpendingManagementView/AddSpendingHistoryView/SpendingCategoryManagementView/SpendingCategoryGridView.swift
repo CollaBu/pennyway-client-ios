@@ -18,7 +18,7 @@ struct SpendingCategoryGridView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(SpendingCategoryViewModel.systemCategories) { category in
-                            NavigationLink(destination: CategorySpendingListView(viewModel: SpendingCategoryViewModel, category: category)) {
+                            NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel, category: category)) {
                                 VStack(spacing: 0) {
                                     Image("\(category.icon.rawValue)")
                                         .resizable()
@@ -49,7 +49,7 @@ struct SpendingCategoryGridView: View {
                                         
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(SpendingCategoryViewModel.customCategories) { category in
-                            NavigationLink(destination: CategorySpendingListView(viewModel: SpendingCategoryViewModel, category: category)) {
+                            NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel, category: category)) {
                                 VStack(spacing: 0) {
                                     Image("\(category.icon.rawValue)")
                                         .resizable()
