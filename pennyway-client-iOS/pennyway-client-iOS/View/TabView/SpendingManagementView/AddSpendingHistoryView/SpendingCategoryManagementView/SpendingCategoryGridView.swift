@@ -4,8 +4,11 @@ import SwiftUI
 // MARK: - SpendingCategoryGridView
 
 struct SpendingCategoryGridView: View {
-    @ObservedObject var viewModel: SpendingCategoryViewModel
+    @ObservedObject var SpendingCategoryViewModel: SpendingCategoryViewModel
+    @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel
     @Environment(\.presentationMode) var presentationMode
+    
+    @State var navigateToAddCategoryView = false
 
     var body: some View {
         ZStack {
@@ -14,8 +17,8 @@ struct SpendingCategoryGridView: View {
                 
                 VStack(alignment: .leading, spacing: 0) {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
-                        ForEach(viewModel.systemCategories) { category in
-                            NavigationLink(destination: CategorySpendingListView(viewModel: viewModel, category: category)) {
+                        ForEach(SpendingCategoryViewModel.systemCategories) { category in
+                            NavigationLink(destination: CategorySpendingListView(viewModel: SpendingCategoryViewModel, category: category)) {
                                 VStack(spacing: 0) {
                                     Image("\(category.icon.rawValue)")
                                         .resizable()
@@ -45,8 +48,8 @@ struct SpendingCategoryGridView: View {
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                         
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
-                        ForEach(viewModel.customCategories) { category in
-                            NavigationLink(destination: CategorySpendingListView(viewModel: viewModel, category: category)) {
+                        ForEach(SpendingCategoryViewModel.customCategories) { category in
+                            NavigationLink(destination: CategorySpendingListView(viewModel: SpendingCategoryViewModel, category: category)) {
                                 VStack(spacing: 0) {
                                     Image("\(category.icon.rawValue)")
                                         .resizable()
@@ -89,12 +92,13 @@ struct SpendingCategoryGridView: View {
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-
                     }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
-                        Button(action: {}, label: {
+                        Button(action: {
+                            navigateToAddCategoryView = true
+                        }, label: {
                             Image("icon_navigation_add")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -103,13 +107,15 @@ struct SpendingCategoryGridView: View {
                         })
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
+                        .buttonStyle(PlainButtonStyle())
                     }.offset(x: 10)
                 }
             }
         }
+        NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: SpendingCategoryViewModel), isActive: $navigateToAddCategoryView) {}
     }
 }
 
 #Preview {
-    SpendingCategoryGridView(viewModel: SpendingCategoryViewModel())
+    SpendingCategoryGridView(SpendingCategoryViewModel: SpendingCategoryViewModel(), addSpendingHistoryViewModel: AddSpendingHistoryViewModel())
 }

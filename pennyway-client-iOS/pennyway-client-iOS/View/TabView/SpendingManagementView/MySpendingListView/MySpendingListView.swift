@@ -97,24 +97,26 @@ struct MySpendingListView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                NavigationBackButton()
-                    .offset(x: -13 * DynamicSizeFactor.factor())
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
+                HStack {
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+
+                }.offset(x: -10)
             }
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 0) {
                     Button(action: {
                         navigateToCategoryGridView = true
-                        spendingCategoryViewModel.getSpendingCustomCategoryListApi()
+                        spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in }
                     }, label: {
                         Text("카테고리")
-                            .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
-                            .padding(5 * DynamicSizeFactor.factor())
+                            .font(.B2MediumFont())
+                            .platformTextColor(color: Color("Gray05"))
                     })
-                    .padding(.trailing, 5 * DynamicSizeFactor.factor())
-                    .frame(width: 44, height: 44)
+                    .padding(.trailing, 20)
+                    .frame(width: 38 * DynamicSizeFactor.factor(), height: 44)
                 }
             }
         }
@@ -131,7 +133,7 @@ struct MySpendingListView: View {
             }
         }
 
-        NavigationLink(destination: SpendingCategoryGridView(viewModel: spendingCategoryViewModel), isActive: $navigateToCategoryGridView) {}
+        NavigationLink(destination: SpendingCategoryGridView(SpendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
     }
 
     private func headerView(for date: String) -> some View {

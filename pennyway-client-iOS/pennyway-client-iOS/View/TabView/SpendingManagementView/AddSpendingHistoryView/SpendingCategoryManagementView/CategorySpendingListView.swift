@@ -147,7 +147,7 @@ struct CategorySpendingListView: View {
                         .resizable()
                         .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
 
-                    VStack(alignment: .leading, spacing: 1) { // Spacer는 Line heigth 적용하면 없애기
+                    VStack(alignment: .leading, spacing: 1) {
                         if memo.isEmpty {
                             Text(category)
                                 .font(.B1SemiboldeFont())

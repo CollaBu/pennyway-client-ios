@@ -6,6 +6,7 @@ import SwiftUI
 struct AddSpendingCategoryView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
     @State var maxCategoryNameCount = "8"
 
@@ -80,7 +81,9 @@ struct AddSpendingCategoryView: View {
                     viewModel.addSpendingCustomCategoryApi { success in
                         if success {
                             Log.debug("카테고리 생성 완료")
-                            presentationMode.wrappedValue.dismiss()
+                            spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         } else {
                             Log.debug("카테고리 생성 실패")
                         }
@@ -121,5 +124,5 @@ struct AddSpendingCategoryView: View {
 }
 
 #Preview {
-    AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel())
+    AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: SpendingCategoryViewModel())
 }

@@ -16,7 +16,7 @@ class SpendingCategoryViewModel: ObservableObject {
     
     @Published var dailyDetailSpendings: [IndividualSpending] = [IndividualSpending(id: 0, amount: 10000, category: SpendingCategory(isCustom: false, id: 0, name: "식비", icon: "FOOD"), spendAt: "2024-07-04", accountName: "abc", memo: "그냥"), IndividualSpending(id: 1, amount: 10000, category: SpendingCategory(isCustom: false, id: 1, name: "식비", icon: "FOOD"), spendAt: "2024-07-04", accountName: "abc", memo: "그냥"), IndividualSpending(id: 2, amount: 10000, category: SpendingCategory(isCustom: false, id: 2, name: "식비", icon: "FOOD"), spendAt: "2024-07-04", accountName: "abc", memo: "그냥"), IndividualSpending(id: 3, amount: 30000, category: SpendingCategory(isCustom: false, id: 3, name: "식비", icon: "TRAVEL"), spendAt: "2024-07-02", accountName: "abc", memo: "그냥"), IndividualSpending(id: 4, amount: 40000, category: SpendingCategory(isCustom: false, id: 4, name: "여행", icon: "TRAVEL"), spendAt: "2024-07-02", accountName: "abc", memo: "몰라")]
     
-    func getSpendingCustomCategoryListApi() {
+    func getSpendingCustomCategoryListApi(completion: @escaping (Bool) -> Void) {
         SpendingAlamofire.shared.getSpendingCustomCategoryList { result in
             switch result {
             case let .success(data):
@@ -34,6 +34,8 @@ class SpendingCategoryViewModel: ObservableObject {
                         let otherCategory = SpendingCategoryIconList.plus.details
                         self.customCategories = response.data.spendingCategories.compactMap { self.convertToSpendingCategoryData(from: $0) }
                         self.spendingCategories = self.systemCategories + self.customCategories + [otherCategory]
+                        
+                        completion(true)
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }
@@ -44,6 +46,7 @@ class SpendingCategoryViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
             }
         }
     }
