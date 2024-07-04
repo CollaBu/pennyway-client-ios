@@ -30,6 +30,7 @@ struct SpendingCategoryGridView: View {
                                 .background(Color("White01"))
                                 .cornerRadius(8)
                             }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .padding(.horizontal, 20)
@@ -60,6 +61,7 @@ struct SpendingCategoryGridView: View {
                                 .background(Color("White01"))
                                 .cornerRadius(8)
                             }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .padding(.horizontal, 20)
@@ -93,11 +95,11 @@ struct SpendingCategoryGridView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
                         Button(action: {}, label: {
-                            Image("icon_navigation_add_black")
+                            Image("icon_navigation_add")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
-                                .padding(5 * DynamicSizeFactor.factor())
+                                .padding(5)
                         })
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)

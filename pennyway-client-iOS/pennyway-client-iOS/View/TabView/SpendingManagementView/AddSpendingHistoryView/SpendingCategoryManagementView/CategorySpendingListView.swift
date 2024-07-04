@@ -53,10 +53,8 @@ struct CategorySpendingListView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 if category.isCustom {
-                    HStack(spacing: 0) {
-                        Button(action: {
-                            // Add your action here
-                        }, label: {
+                    HStack {
+                        Button(action: {}, label: {
                             Image("icon_navigationbar_kebabmenu")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
