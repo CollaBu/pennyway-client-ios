@@ -5,7 +5,7 @@ import SwiftUI
 
 struct SpendingCategoryGridView: View {
     @ObservedObject var SpendingCategoryViewModel: SpendingCategoryViewModel
-    @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel
+    @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel//카테고리 생성 연동 처리
     @Environment(\.presentationMode) var presentationMode
     
     @State var navigateToAddCategoryView = false
@@ -16,10 +16,13 @@ struct SpendingCategoryGridView: View {
                 Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                 
                 VStack(alignment: .leading, spacing: 0) {
+                    //시스템 카테고리
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(SpendingCategoryViewModel.systemCategories) { category in
                             NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel, category: category)) {
-                                VStack(spacing: 0) {
+                                VStack(spacing: 2 * DynamicSizeFactor.factor()) {
+                                    Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                                    
                                     Image("\(category.icon.rawValue)")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -28,6 +31,8 @@ struct SpendingCategoryGridView: View {
                                     Text(category.name)
                                         .font(.B1MediumFont())
                                         .platformTextColor(color: Color("Gray07"))
+                                    
+                                    Spacer()
                                 }
                                 .frame(width: 88 * DynamicSizeFactor.factor(), height: 92 * DynamicSizeFactor.factor())
                                 .background(Color("White01"))
@@ -46,7 +51,8 @@ struct SpendingCategoryGridView: View {
                         .padding(.horizontal, 20)
                                         
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                                        
+                           
+                    //사용자 정의 카테고리
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(SpendingCategoryViewModel.customCategories) { category in
                             NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel, category: category)) {

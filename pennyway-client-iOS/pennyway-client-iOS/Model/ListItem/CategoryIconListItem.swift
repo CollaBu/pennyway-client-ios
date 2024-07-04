@@ -77,7 +77,7 @@ enum SpendingCategoryIconList: String, CaseIterable {
     case other = "OTHER"
     case plus = "PLUS"
 
-    var details: SpendingCategoryData {
+    var details: SpendingCategoryData { // 배경색 회색인 경우
         switch self {
         case .food:
             return SpendingCategoryData(id: -1, isCustom: false, name: "식비", icon: .foodOn)
@@ -108,7 +108,7 @@ enum SpendingCategoryIconList: String, CaseIterable {
         }
     }
 
-    var detailsWhite: SpendingCategoryData {
+    var detailsWhite: SpendingCategoryData { // 배경색 흰색인 경우
         switch self {
         case .food:
             return SpendingCategoryData(id: -1, isCustom: false, name: "식비", icon: .foodOnWhite)
