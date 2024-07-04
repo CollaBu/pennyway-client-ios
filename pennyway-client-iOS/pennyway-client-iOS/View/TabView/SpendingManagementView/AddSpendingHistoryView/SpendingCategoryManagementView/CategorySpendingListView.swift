@@ -11,60 +11,77 @@ struct CategorySpendingListView: View {
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]
 
+    @State private var showingPopUp = false
+
     var body: some View {
-        ScrollView {
-            VStack {
-                Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+        ZStack {
+            ScrollView {
+                VStack {
+                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-                Image("\(category.icon.rawValue.split(separator: "_").dropLast().joined(separator: "_"))")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())
+                    Image("\(category.icon.rawValue.split(separator: "_").dropLast().joined(separator: "_"))")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())
 
-                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
 
-                Text(category.name)
-                    .font(.H3SemiboldFont())
-                    .platformTextColor(color: Color("Gray07"))
+                    Text(category.name)
+                        .font(.H3SemiboldFont())
+                        .platformTextColor(color: Color("Gray07"))
 
-                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 4 * DynamicSizeFactor.factor())
 
-                Text("몇개의 소비 내역")
-                    .font(.B1MediumFont())
-                    .platformTextColor(color: Color("Gray04"))
+                    Text("몇개의 소비 내역")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: Color("Gray04"))
 
-                Spacer().frame(height: 28 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 28 * DynamicSizeFactor.factor())
 
-                Rectangle()
-                    .platformTextColor(color: Color("Gray01"))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 8 * DynamicSizeFactor.factor())
+                    Rectangle()
+                        .platformTextColor(color: Color("Gray01"))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 8 * DynamicSizeFactor.factor())
 
-                Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
-                LazyVStack(spacing: 0) {
-                    ForEach(groupedSpendings(), id: \.key) { date, spendings in
-                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                    LazyVStack(spacing: 0) {
+                        ForEach(groupedSpendings(), id: \.key) { date, spendings in
+                            Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
-                        Section(header: headerView(for: date)) {
-                            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                            ForEach(spendings, id: \.id) { item in
-                                let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-                                NavigationLink(destination: DetailSpendingView()) {
-                                    ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-
+                            Section(header: headerView(for: date)) {
                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                            }
-                            .onAppear {
-                                Log.debug("spendings: \(spendings)")
-                                Log.debug("group: \(groupedSpendings())")
+                                ForEach(spendings, id: \.id) { item in
+                                    let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+                                    NavigationLink(destination: DetailSpendingView()) {
+                                        ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+
+                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                }
+                                .onAppear {
+                                    Log.debug("spendings: \(spendings)")
+                                    Log.debug("group: \(groupedSpendings())")
+                                }
                             }
                         }
+                        Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                     }
-                    Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                 }
+            }
+
+            if showingPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showingPopUp,
+                                titleLabel: "카테고리를 삭제할까요?",
+                                subTitleLabel: "몇개의 소비 내역이 모두 사라져요🥲",
+                                firstBtnAction: { self.showingPopUp = false },
+                                firstBtnLabel: "내역 옮기기",
+                                secondBtnAction: { self.showingPopUp = false },
+                                secondBtnLabel: "삭제하기",
+                                secondBtnColor: Color("Red03")
+                )
             }
         }
         .overlay(
@@ -75,14 +92,17 @@ struct CategorySpendingListView: View {
                         selectedMenu: $selectedMenu,
                         listArray: listArray,
                         onItemSelected: { item in
+
+                            if item == "카테고리 삭제" {
+                                showingPopUp = true
+                            }
+
                             Log.debug("Selected item: \(item)")
                         }
                     ).padding(.trailing, 20)
                 }
             }, alignment: .topTrailing
         )
-
-        .navigationBarColor(UIColor(named: "White01"), title: "")
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
