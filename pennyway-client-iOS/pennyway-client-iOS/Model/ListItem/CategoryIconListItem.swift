@@ -14,28 +14,40 @@ struct CategoryIconListItem: Identifiable {
 enum CategoryIconName: String {
     case foodOff = "icon_category_food_off"
     case foodOn = "icon_category_food_on"
+    case foodOnWhite = "icon_category_food_on_white"
     case trafficOff = "icon_category_traffic_off"
     case trafficOn = "icon_category_traffic_on"
+    case trafficOnWhite = "icon_category_traffic_on_white"
     case beautyOff = "icon_category_beauty_off"
     case beautyOn = "icon_category_beauty_on"
+    case beautyOnWhite = "icon_category_beauty_on_white"
     case marketOff = "icon_category_market_off"
     case marketOn = "icon_category_market_on"
+    case marketOnWhite = "icon_category_market_on_white"
     case educationOff = "icon_category_education_off"
     case educationOn = "icon_category_education_on"
+    case educationOnWhite = "icon_category_education_on_white"
     case lifeOff = "icon_category_life_off"
     case lifeOn = "icon_category_life_on"
+    case lifeOnWhite = "icon_category_life_on_white"
     case healthOff = "icon_category_health_off"
     case healthOn = "icon_category_health_on"
+    case healthOnWhite = "icon_category_health_on_white"
     case hobbyOff = "icon_category_hobby_off"
     case hobbyOn = "icon_category_hobby_on"
+    case hobbyOnWhite = "icon_category_hobby_on_white"
     case travelOff = "icon_category_travel_off"
     case travelOn = "icon_category_travel_on"
+    case travelOnWhite = "icon_category_travel_on_white"
     case drinkOff = "icon_category_drink_off"
     case drinkOn = "icon_category_drink_on"
+    case drinkOnWhite = "icon_category_drink_on_white"
     case eventOff = "icon_category_event_off"
     case eventOn = "icon_category_event_on"
+    case eventOnWhite = "icon_category_event_on_white"
     case etcOff = "icon_category_etc_off"
     case etcOn = "icon_category_etc_on"
+    case etcOnWhite = "icon_category_etc_on_white"
     case plusOff = "icon_category_plus_off"
 }
 
@@ -95,6 +107,7 @@ enum SpendingCategoryIconList: String, CaseIterable {
             return SpendingCategoryData(id: -13, isCustom: false, name: "추가하기", icon: .plusOff)
         }
     }
+    
     var detailsWhite: SpendingCategoryData {
         switch self {
         case .food:
