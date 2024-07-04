@@ -12,6 +12,10 @@ import SwiftUI
 
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+<<<<<<< HEAD
+=======
+    @StateObject var spendingCategoryViewModel = SpendingCategoryViewModel()
+>>>>>>> e983252 (feat: 카테고리 아이콘 white와 gray 매칭)
     @State var selectedDateToScroll: String? = nil
     @State private var currentMonth: Date = Date()
 
@@ -101,6 +105,20 @@ struct MySpendingListView: View {
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
             }
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack(spacing: 0) {
+                    Button(action: {
+                        navigateToCategoryGridView = true
+                        spendingCategoryViewModel.getSpendingCustomCategoryListApi()
+                    }, label: {
+                        Text("카테고리")
+                            .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
+                            .padding(5 * DynamicSizeFactor.factor())
+                    })
+                    .padding(.trailing, 5 * DynamicSizeFactor.factor())
+                    .frame(width: 44, height: 44)
+                }
+            }
         }
         .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
             ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
@@ -114,6 +132,8 @@ struct MySpendingListView: View {
                 }
             }
         }
+
+        NavigationLink(destination: SpendingCategoryGridView(viewModel: spendingCategoryViewModel), isActive: $navigateToCategoryGridView) {}
     }
 
     private func headerView(for date: String) -> some View {

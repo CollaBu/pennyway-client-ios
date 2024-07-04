@@ -95,6 +95,36 @@ enum SpendingCategoryIconList: String, CaseIterable {
             return SpendingCategoryData(id: -13, isCustom: false, name: "추가하기", icon: .plusOff)
         }
     }
+    var detailsWhite: SpendingCategoryData {
+        switch self {
+        case .food:
+            return SpendingCategoryData(id: -1, isCustom: false, name: "식비", icon: .foodOnWhite)
+        case .transportation:
+            return SpendingCategoryData(id: -2, isCustom: false, name: "교통", icon: .trafficOnWhite)
+        case .beautyOrFashion:
+            return SpendingCategoryData(id: -3, isCustom: false, name: "미용/패션", icon: .beautyOnWhite)
+        case .convenienceStore:
+            return SpendingCategoryData(id: -4, isCustom: false, name: "편의점/마트", icon: .marketOnWhite)
+        case .education:
+            return SpendingCategoryData(id: -5, isCustom: false, name: "교육", icon: .educationOnWhite)
+        case .living:
+            return SpendingCategoryData(id: -6, isCustom: false, name: "생활", icon: .lifeOnWhite)
+        case .health:
+            return SpendingCategoryData(id: -7, isCustom: false, name: "건강", icon: .healthOnWhite)
+        case .hobby:
+            return SpendingCategoryData(id: -8, isCustom: false, name: "취미/여가", icon: .hobbyOnWhite)
+        case .travel:
+            return SpendingCategoryData(id: -9, isCustom: false, name: "여행/숙박", icon: .travelOnWhite)
+        case .alcoholOrEntertainment:
+            return SpendingCategoryData(id: -10, isCustom: false, name: "술/유흥", icon: .drinkOnWhite)
+        case .membershipOrFamilyEvent:
+            return SpendingCategoryData(id: -11, isCustom: false, name: "회비/경조사", icon: .eventOnWhite)
+        case .other:
+            return SpendingCategoryData(id: -12, isCustom: false, name: "기타", icon: .etcOnWhite)
+        case .plus:
+            return SpendingCategoryData(id: -13, isCustom: false, name: "", icon: .etcOnWhite)
+        }
+    }
 
     static func fromIcon(_ icon: CategoryIconName) -> SpendingCategoryIconList? {
         switch icon {
