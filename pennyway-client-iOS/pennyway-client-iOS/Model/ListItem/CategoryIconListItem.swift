@@ -107,7 +107,7 @@ enum SpendingCategoryIconList: String, CaseIterable {
             return SpendingCategoryData(id: -13, isCustom: false, name: "추가하기", icon: .plusOff)
         }
     }
-    
+
     var detailsWhite: SpendingCategoryData {
         switch self {
         case .food:

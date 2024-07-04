@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - CategorySpendingListView
 
 struct CategorySpendingListView: View {
-    @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    @ObservedObject var viewModel: SpendingCategoryViewModel
     @Environment(\.presentationMode) var presentationMode
     var category: SpendingCategoryData
 
@@ -12,7 +12,7 @@ struct CategorySpendingListView: View {
         VStack {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-            Image("\(category.icon.rawValue)")
+            Image("\(category.icon.rawValue.split(separator: "_").dropLast().joined(separator: "_"))")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())

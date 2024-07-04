@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - SpendingCategoryGridView
 
 struct SpendingCategoryGridView: View {
-    @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    @ObservedObject var viewModel: SpendingCategoryViewModel
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -111,5 +111,5 @@ struct SpendingCategoryGridView: View {
 }
 
 #Preview {
-    SpendingCategoryGridView(viewModel: AddSpendingHistoryViewModel())
+    SpendingCategoryGridView(viewModel: SpendingCategoryViewModel())
 }

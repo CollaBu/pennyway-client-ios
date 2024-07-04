@@ -12,7 +12,7 @@ import SwiftUI
 
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
-    @StateObject var addSpendingHistoryViewModel = AddSpendingHistoryViewModel()
+    @StateObject var spendingCategoryViewModel = SpendingCategoryViewModel()
     @State var selectedDateToScroll: String? = nil
     @State private var currentMonth: Date = Date()
     @State private var navigateToCategoryGridView = false
@@ -107,7 +107,7 @@ struct MySpendingListView: View {
                 HStack(spacing: 0) {
                     Button(action: {
                         navigateToCategoryGridView = true
-                        addSpendingHistoryViewModel.getSpendingCustomCategoryListApi()
+                        spendingCategoryViewModel.getSpendingCustomCategoryListApi()
                     }, label: {
                         Text("카테고리")
                             .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
@@ -131,7 +131,7 @@ struct MySpendingListView: View {
             }
         }
 
-        NavigationLink(destination: SpendingCategoryGridView(viewModel: addSpendingHistoryViewModel), isActive: $navigateToCategoryGridView) {}
+        NavigationLink(destination: SpendingCategoryGridView(viewModel: spendingCategoryViewModel), isActive: $navigateToCategoryGridView) {}
     }
 
     private func headerView(for date: String) -> some View {
