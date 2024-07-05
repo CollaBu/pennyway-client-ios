@@ -9,7 +9,7 @@ struct SpendingManagementMainView: View {
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
     @State private var ishidden = false // 변수명 바꿀 필요
-
+    @State private var selectedDate: Date = Date() // 선택된 날짜 저장
     @State private var showToastPopup = false
 
     var body: some View {
@@ -124,7 +124,7 @@ struct SpendingManagementMainView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: AddSpendingHistoryView(), isActive: $navigateToAddSpendingHistory) {
+            NavigationLink(destination: AddSpendingHistoryView(selectedDate: selectedDate), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
 
@@ -133,7 +133,8 @@ struct SpendingManagementMainView: View {
             }
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView) {
-            SpendingDetailSheetView()
+            SpendingDetailSheetView( // selectedDate: selectedDate,
+                viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel())
                 .zIndex(2)
         }
         .onChange(of: showSpendingDetailView) { isPresented in

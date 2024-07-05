@@ -118,7 +118,8 @@ struct SpendingCalenderView: View {
                     if 0 <= index && index < daysInMonth {
                         let date = getDate(for: index)
                         clickedCurrentMonthDates = date
-                        self.selectedDate = date
+                        isClickDay(Date.day(from: date))
+//                        self.selectedDate = date
                         self.showSpendingDetailView = true
                     }
                 }
@@ -245,5 +246,14 @@ private extension SpendingCalenderView {
             return newMonth
         }
         return date
+    }
+    
+    func isClickDay(_ day: Int) {
+        let data = spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.individuals[0]
+
+        Log.debug(data?.id)
+        Log.debug(data)
+
+        spendingHistoryViewModel.selectedDateId = data?.id ?? 0
     }
 }

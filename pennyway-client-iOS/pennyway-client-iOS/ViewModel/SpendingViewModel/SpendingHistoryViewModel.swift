@@ -8,6 +8,9 @@ class SpendingHistoryViewModel: ObservableObject {
     @Published var isChangeMonth: Bool = false
     @Published var selectedDateToScroll: String? = nil
 
+    @Published var selectedDateId = 0
+    @Published var selectedDate: Date?
+
     private var year: String {
         return String(Date.year(from: currentDate))
     }

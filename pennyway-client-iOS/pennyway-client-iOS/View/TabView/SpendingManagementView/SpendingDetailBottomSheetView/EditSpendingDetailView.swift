@@ -31,7 +31,7 @@ struct EditSpendingDetailView: View {
                             toggleAllSelections()
                                 
                         }, label: {
-                            Image(spendingDetails.allSatisfy { $0.isSelected } ? "icon_checkone_on_small" : "icon_checkone_off_small")
+                            Image(spendingDetails.allSatisfy { $0.isSelected } ? "icon_checkone_on_small" : "icon_checkone_off_small_gray03")
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                 
@@ -57,7 +57,7 @@ struct EditSpendingDetailView: View {
                                     spendingDetails[index].isSelected.toggle()
                                     updateSelectionState()
                                 }) {
-                                    Image(spendingDetails[index].isSelected ? "icon_checkone_on_small" : "icon_checkone_off_small")
+                                    Image(spendingDetails[index].isSelected ? "icon_checkone_on_small" : "icon_checkone_off_small_gray03")
                                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                         .aspectRatio(contentMode: .fill)
                                 }
@@ -95,7 +95,7 @@ struct EditSpendingDetailView: View {
                     .padding(.bottom, 103)
                 }
                     
-                Spacer() // 바텀시트 높이에 따라 조건문으로 spacer()처리해야 함.
+                Spacer() 
                 
                 CustomBottomButton(action: {
                     if isItemSelected {
@@ -145,7 +145,6 @@ struct EditSpendingDetailView: View {
                 
             if showingDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-//                    .zIndex(1)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
                                 titleLabel: "8개의 내역을 삭제할까요?",
                                 subTitleLabel: "선택한 소비 내역이 사라져요",
@@ -155,7 +154,6 @@ struct EditSpendingDetailView: View {
                                 secondBtnLabel: "삭제하기",
                                 secondBtnColor: Color("Red03")
                 )
-//                .zIndex(2)
             }
         }
     }

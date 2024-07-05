@@ -7,6 +7,7 @@ struct AddSpendingHistoryView: View {
     @StateObject var viewModel = AddSpendingHistoryViewModel()
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
+    var selectedDate: Date
 
     var body: some View {
         ZStack {
@@ -61,6 +62,9 @@ struct AddSpendingHistoryView: View {
                 }
             }
         }
+//        .onAppear {
+//            viewModel.selectedDate = selectedDate
+//        }
         .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
             SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
         }
@@ -72,5 +76,5 @@ struct AddSpendingHistoryView: View {
 }
 
 #Preview {
-    AddSpendingHistoryView()
+    AddSpendingHistoryView(selectedDate: Date())
 }

@@ -18,6 +18,11 @@ struct SpendingDetailSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
+//    @State var selectedDate: Date
+//    @State private var selectedDate: Int
+
+    @StateObject var viewModel: AddSpendingHistoryViewModel
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
     @State var spendingDetails: [SpendingDetail] = [
         SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
@@ -30,6 +35,7 @@ struct SpendingDetailSheetView: View {
         SpendingDetail(category: "교통", description: "", amount: "10,000원", icon: "icon_category_traffic_on"),
         SpendingDetail(category: "교통", description: "", amount: "3,000원", icon: "icon_category_traffic_on")
     ]
+    
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
@@ -39,9 +45,11 @@ struct SpendingDetailSheetView: View {
                     .padding(.top, 12)
                     
                 HStack {
-                    Text("6월 4일")
-                        .font(.B1SemiboldeFont())
-                        .platformTextColor(color: Color("Gray07"))
+                    if let selectedDate = spendingHistoryViewModel.selectedDate {
+                        Text(Date.getFormattedDate(from: selectedDate))
+                            .font(.B1SemiboldeFont())
+                            .platformTextColor(color: Color("Gray07"))
+                    }
                         
                     Spacer()
                         
@@ -69,15 +77,19 @@ struct SpendingDetailSheetView: View {
                 .padding(.trailing, 17)
                 .padding(.top, 12)
                     
-                //                NoSpendingHistorySheetView() //소비내역 없을 경우
+                // NoSpendingHistorySheetView() //소비내역 없을 경우
                 ScrollView {
                     VStack(alignment: .leading) {
                         Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                             
-                        Text("-10,000")
-                            .font(.H1SemiboldFont())
-                            .platformTextColor(color: Color("Gray07"))
-                            
+                        if let selectedDate = spendingHistoryViewModel.selectedDate,
+                           let dailyTotalAmount = getSpendingAmount(for: selectedDate)
+                        {
+                            Text("-\(dailyTotalAmount)원")
+                                .font(.H1SemiboldFont())
+                                .platformTextColor(color: Color("Gray07"))
+                        }
+                        
                         Spacer().frame(height: 32 * DynamicSizeFactor.factor())
                             
                         ForEach(spendingDetails) { detail in
@@ -120,7 +132,7 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView()
+                    AddSpendingHistoryView(selectedDate: spendingHistoryViewModel.selectedDate!)
                 }
             }
         }
@@ -128,8 +140,15 @@ struct SpendingDetailSheetView: View {
         .setTabBarVisibility(isHidden: true)
         .padding(.leading, 20)
     }
+    
+    private func getSpendingAmount(for date: Date) -> Int? {
+        let day = Calendar.current.component(.day, from: date)
+        Log.debug(day)
+        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
+    }
 }
 
-#Preview {
-    SpendingDetailSheetView()
-}
+//
+// #Preview {
+//    SpendingDetailSheetView(selectedDate: Date(), viewModel: AddSpendingHistoryViewModel())
+// }
