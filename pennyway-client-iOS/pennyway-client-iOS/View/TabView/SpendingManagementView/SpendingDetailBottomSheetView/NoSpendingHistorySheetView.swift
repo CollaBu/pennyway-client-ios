@@ -34,6 +34,6 @@ struct NoSpendingHistorySheetView: View {
     }
 }
 
-#Preview {
-    NoSpendingHistoryView()
-}
+// #Preview {
+//    NoSpendingHistoryView()
+// }

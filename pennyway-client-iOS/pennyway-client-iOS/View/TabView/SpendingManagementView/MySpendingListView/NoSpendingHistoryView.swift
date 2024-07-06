@@ -4,6 +4,7 @@ import SwiftUI
 
 struct NoSpendingHistoryView: View {
     @State var navigateToAddSpendingHistory = false
+    @Binding var clickDate: Date?
 
     var body: some View {
         VStack(spacing: 0) { 
@@ -34,7 +35,7 @@ struct NoSpendingHistoryView: View {
                     .background(Color("Mint03"))
                     .cornerRadius(30)
 
-                    NavigationLink(destination: AddSpendingHistoryView(selectedDate: Date()), isActive: $navigateToAddSpendingHistory) { // 수정
+                    NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, selectedDate: $clickDate), isActive: $navigateToAddSpendingHistory) { // 수정
                         EmptyView()
                     }.hidden()
                 }
@@ -43,6 +44,6 @@ struct NoSpendingHistoryView: View {
     }
 }
 
-#Preview {
-    NoSpendingHistoryView()
-}
+// #Preview {
+//    NoSpendingHistoryView(clickDate: clickDate)
+// }

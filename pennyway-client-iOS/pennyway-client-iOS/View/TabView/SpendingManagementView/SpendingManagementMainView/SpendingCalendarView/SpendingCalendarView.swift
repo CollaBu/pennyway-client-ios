@@ -9,6 +9,8 @@ struct SpendingCalenderView: View {
     @Binding var showSpendingDetailView: Bool
     @State private var date: Date = Date()
     @State private var clickedCurrentMonthDates: Date?
+    @Binding var clickDate: Date?
+
     let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
     
     var checkChangeMonth = false
@@ -119,9 +121,14 @@ struct SpendingCalenderView: View {
                         let date = getDate(for: index)
                         clickedCurrentMonthDates = date
                         isClickDay(Date.day(from: date))
+                        clickDate = date
+                        spendingHistoryViewModel.selectedDate = date
 //                        self.selectedDate = date
                         self.showSpendingDetailView = true
                     }
+                }
+                .onChange(of: spendingHistoryViewModel.selectedDate) { newValue in
+                    Log.debug("Selected date updated: \(String(describing: newValue))")
                 }
             }
         }

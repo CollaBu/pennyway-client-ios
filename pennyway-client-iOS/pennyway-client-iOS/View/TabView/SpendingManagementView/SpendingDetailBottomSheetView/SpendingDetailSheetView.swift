@@ -18,8 +18,8 @@ struct SpendingDetailSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
-//    @State var selectedDate: Date
-//    @State private var selectedDate: Int
+    @State private var forceUpdate: Bool = false
+    @Binding var clickDate: Date?
 
     @StateObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
@@ -45,8 +45,8 @@ struct SpendingDetailSheetView: View {
                     .padding(.top, 12)
                     
                 HStack {
-                    if let selectedDate = spendingHistoryViewModel.selectedDate {
-                        Text(Date.getFormattedDate(from: selectedDate))
+                    if let date = clickDate {
+                        Text(Date.getFormattedDate(from: date))
                             .font(.B1SemiboldeFont())
                             .platformTextColor(color: Color("Gray07"))
                     }
@@ -82,9 +82,7 @@ struct SpendingDetailSheetView: View {
                     VStack(alignment: .leading) {
                         Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                             
-                        if let selectedDate = spendingHistoryViewModel.selectedDate,
-                           let dailyTotalAmount = getSpendingAmount(for: selectedDate)
-                        {
+                        if let clickDate = clickDate, let dailyTotalAmount = getSpendingAmount(for: clickDate) {
                             Text("-\(dailyTotalAmount)원")
                                 .font(.H1SemiboldFont())
                                 .platformTextColor(color: Color("Gray07"))
@@ -132,9 +130,16 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView(selectedDate: spendingHistoryViewModel.selectedDate!)
+                    AddSpendingHistoryView(clickDate: $clickDate, selectedDate: $clickDate)
                 }
             }
+        }
+        .onAppear {
+            Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
+        }
+        .onChange(of: clickDate) { _ in
+            Log.debug("clickDate changed to: \(String(describing: clickDate))")
+            forceUpdate.toggle()
         }
         
         .setTabBarVisibility(isHidden: true)
@@ -148,7 +153,7 @@ struct SpendingDetailSheetView: View {
     }
 }
 
-//
+
 // #Preview {
-//    SpendingDetailSheetView(selectedDate: Date(), viewModel: AddSpendingHistoryViewModel())
+//     SpendingDetailSheetView(clickDate: $clickDate, viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel())
 // }

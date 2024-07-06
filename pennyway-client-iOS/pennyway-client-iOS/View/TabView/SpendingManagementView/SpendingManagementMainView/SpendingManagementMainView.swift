@@ -9,7 +9,11 @@ struct SpendingManagementMainView: View {
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
     @State private var ishidden = false // 변수명 바꿀 필요
-    @State private var selectedDate: Date = Date() // 선택된 날짜 저장
+    @State private var selectedDate: Date? // 선택된 날짜 저장
+    @State private var clickDate: Date?
+    @State private var addSpendingClickDate: Date?
+    @State private var addSpendingSelectedDate: Date?
+
     @State private var showToastPopup = false
 
     var body: some View {
@@ -29,7 +33,7 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView)
+                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView, clickDate: $clickDate)
                         .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
@@ -124,21 +128,27 @@ struct SpendingManagementMainView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: AddSpendingHistoryView(selectedDate: selectedDate), isActive: $navigateToAddSpendingHistory) {
+            NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, selectedDate: $clickDate), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
 
-            NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel()), isActive: $navigateToMySpendingList) {
+            NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
                 EmptyView()
             }
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView) {
-            SpendingDetailSheetView( // selectedDate: selectedDate,
-                viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel())
+            SpendingDetailSheetView(clickDate: $clickDate,
+                                    viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
                 .zIndex(2)
         }
         .onChange(of: showSpendingDetailView) { isPresented in
             ishidden = isPresented
+        }
+        .onChange(of: navigateToAddSpendingHistory) { newValue in
+            if newValue {
+                addSpendingClickDate = clickDate
+                addSpendingSelectedDate = clickDate ?? Date()
+            }
         }
         .id(ishidden)
     }

@@ -14,6 +14,7 @@ struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State var selectedDateToScroll: String? = nil
     @State private var currentMonth: Date = Date()
+    @Binding var clickDate: Date?
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -27,7 +28,7 @@ struct MySpendingListView: View {
                     ScrollView {
                         VStack {
                             if groupedSpendings().isEmpty {
-                                NoSpendingHistoryView()
+                                NoSpendingHistoryView(clickDate: $clickDate)
                             } else {
                                 LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
                                     ForEach(groupedSpendings(), id: \.key) { date, spendings in
@@ -231,10 +232,10 @@ struct ExpenseRow: View {
 
 // MARK: - MySpendingListView_Previews
 
-struct MySpendingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        MySpendingListView(
-            spendingHistoryViewModel: SpendingHistoryViewModel()
-        )
-    }
-}
+// struct MySpendingListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MySpendingListView(
+//            spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: $clickDate
+//        )
+//    }
+// }
