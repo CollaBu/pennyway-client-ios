@@ -153,7 +153,6 @@ struct SpendingDetailSheetView: View {
     }
 }
 
-
 // #Preview {
 //     SpendingDetailSheetView(clickDate: $clickDate, viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel())
 // }

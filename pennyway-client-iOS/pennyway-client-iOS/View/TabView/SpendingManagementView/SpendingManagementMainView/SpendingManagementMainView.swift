@@ -143,6 +143,9 @@ struct SpendingManagementMainView: View {
         }
         .onChange(of: showSpendingDetailView) { isPresented in
             ishidden = isPresented
+            if !ishidden {
+                Log.debug("Sheet 닫은 상태")
+            }
         }
         .onChange(of: navigateToAddSpendingHistory) { newValue in
             if newValue {
@@ -150,7 +153,7 @@ struct SpendingManagementMainView: View {
                 addSpendingSelectedDate = clickDate ?? Date()
             }
         }
-        .id(ishidden)
+//        .id(ishidden)
     }
 }
 
