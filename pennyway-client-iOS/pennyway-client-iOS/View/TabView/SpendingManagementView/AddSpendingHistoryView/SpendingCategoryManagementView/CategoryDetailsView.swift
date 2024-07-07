@@ -6,7 +6,7 @@ import SwiftUI
 struct CategoryDetailsView: View {
     @ObservedObject var viewModel: SpendingCategoryViewModel
     @Environment(\.presentationMode) var presentationMode
-    var category: SpendingCategoryData //받아온 카테고리 정보
+    var category: SpendingCategoryData // 받아온 카테고리 정보
     @State private var isClickMenu = false
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]

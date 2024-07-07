@@ -17,7 +17,9 @@ struct TotalTargetAmountGraphView: View {
                             .platformTextColor(color: determineColorGray03(for: content))
                             .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
 
-                        Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                        if content.totalSpending != 0 {
+                            Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                        }
 
                         Text("\(content.month)월")
                             .font(.B3MediumFont())
@@ -44,38 +46,35 @@ struct TotalTargetAmountGraphView: View {
     }
 
     func determineColorGray03(for content: TargetAmount) -> Color {
-        if content.targetAmountDetail.amount != -1 {
-            if content.month == Date.month(from: Date()) {
+        if content.month == Date.month(from: Date()) {
+            if content.targetAmountDetail.amount != -1 {
                 return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
-            } else {
-                return Color("Gray03")
             }
-        } else {
             return Color("Mint03")
+        } else {
+            return Color("Gray03")
         }
     }
 
     func determineColorGray04(for content: TargetAmount) -> Color {
-        if content.targetAmountDetail.amount != -1 {
-            if content.month == Date.month(from: Date()) {
+        if content.month == Date.month(from: Date()) {
+            if content.targetAmountDetail.amount != -1 {
                 return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
-            } else {
-                return Color("Gray04")
             }
-        } else {
             return Color("Mint03")
+        } else {
+            return Color("Gray04")
         }
     }
 
     func determineColorGray06(for content: TargetAmount) -> Color {
-        if content.targetAmountDetail.amount != -1 {
-            if content.month == Date.month(from: Date()) {
+        if content.month == Date.month(from: Date()) {
+            if content.targetAmountDetail.amount != -1 {
                 return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
-            } else {
-                return Color("Gray06")
             }
-        } else {
             return Color("Mint03")
+        } else {
+            return Color("Gray06")
         }
     }
 }
