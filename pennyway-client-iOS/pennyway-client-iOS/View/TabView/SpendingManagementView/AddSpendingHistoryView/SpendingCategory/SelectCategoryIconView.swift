@@ -16,18 +16,18 @@ struct SelectCategoryIconView: View {
     ]
 
     let icons: [CategoryIconListItem] = [
-        CategoryIconListItem(offIcon: .foodOff, onIcon: .foodOn),
-        CategoryIconListItem(offIcon: .trafficOff, onIcon: .trafficOn),
-        CategoryIconListItem(offIcon: .beautyOff, onIcon: .beautyOn),
-        CategoryIconListItem(offIcon: .marketOff, onIcon: .marketOn),
-        CategoryIconListItem(offIcon: .educationOff, onIcon: .educationOn),
-        CategoryIconListItem(offIcon: .lifeOff, onIcon: .lifeOn),
-        CategoryIconListItem(offIcon: .healthOff, onIcon: .healthOn),
-        CategoryIconListItem(offIcon: .hobbyOff, onIcon: .hobbyOn),
-        CategoryIconListItem(offIcon: .travelOff, onIcon: .travelOn),
-        CategoryIconListItem(offIcon: .drinkOff, onIcon: .drinkOn),
-        CategoryIconListItem(offIcon: .eventOff, onIcon: .eventOn),
-        CategoryIconListItem(offIcon: .etcOff, onIcon: .etcOn)
+        CategoryIconListItem(offIcon: .foodOff, onIcon: .foodOnMint),
+        CategoryIconListItem(offIcon: .trafficOff, onIcon: .trafficOnMint),
+        CategoryIconListItem(offIcon: .beautyOff, onIcon: .beautyOnMint),
+        CategoryIconListItem(offIcon: .marketOff, onIcon: .marketOnMint),
+        CategoryIconListItem(offIcon: .educationOff, onIcon: .educationOnMint),
+        CategoryIconListItem(offIcon: .lifeOff, onIcon: .lifeOnMint),
+        CategoryIconListItem(offIcon: .healthOff, onIcon: .healthOnMint),
+        CategoryIconListItem(offIcon: .hobbyOff, onIcon: .hobbyOnMint),
+        CategoryIconListItem(offIcon: .travelOff, onIcon: .travelOnMint),
+        CategoryIconListItem(offIcon: .drinkOff, onIcon: .drinkOnMint),
+        CategoryIconListItem(offIcon: .eventOff, onIcon: .eventOnMint),
+        CategoryIconListItem(offIcon: .etcOff, onIcon: .etcOnMint)
     ]
 
     var body: some View {

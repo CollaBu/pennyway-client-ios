@@ -15,40 +15,61 @@ enum CategoryIconName: String {
     case foodOff = "icon_category_food_off"
     case foodOn = "icon_category_food_on"
     case foodOnWhite = "icon_category_food_on_white"
+    case foodOnMint = "icon_category_food_on_mint"
     case trafficOff = "icon_category_traffic_off"
     case trafficOn = "icon_category_traffic_on"
     case trafficOnWhite = "icon_category_traffic_on_white"
+    case trafficOnMint = "icon_category_traffic_on_mint"
     case beautyOff = "icon_category_beauty_off"
     case beautyOn = "icon_category_beauty_on"
     case beautyOnWhite = "icon_category_beauty_on_white"
+    case beautyOnMint = "icon_category_beauty_on_mint"
     case marketOff = "icon_category_market_off"
     case marketOn = "icon_category_market_on"
     case marketOnWhite = "icon_category_market_on_white"
+    case marketOnMint = "icon_category_market_on_mint"
     case educationOff = "icon_category_education_off"
     case educationOn = "icon_category_education_on"
     case educationOnWhite = "icon_category_education_on_white"
+    case educationOnMint = "icon_category_education_on_mint"
     case lifeOff = "icon_category_life_off"
     case lifeOn = "icon_category_life_on"
     case lifeOnWhite = "icon_category_life_on_white"
+    case lifeOnMint = "icon_category_life_on_mint"
     case healthOff = "icon_category_health_off"
     case healthOn = "icon_category_health_on"
     case healthOnWhite = "icon_category_health_on_white"
+    case healthOnMint = "icon_category_health_on_mint"
     case hobbyOff = "icon_category_hobby_off"
     case hobbyOn = "icon_category_hobby_on"
     case hobbyOnWhite = "icon_category_hobby_on_white"
+    case hobbyOnMint = "icon_category_hobby_on_mint"
     case travelOff = "icon_category_travel_off"
     case travelOn = "icon_category_travel_on"
     case travelOnWhite = "icon_category_travel_on_white"
+    case travelOnMint = "icon_category_travel_on_mint"
     case drinkOff = "icon_category_drink_off"
     case drinkOn = "icon_category_drink_on"
     case drinkOnWhite = "icon_category_drink_on_white"
+    case drinkOnMint = "icon_category_drink_on_mint"
     case eventOff = "icon_category_event_off"
     case eventOn = "icon_category_event_on"
     case eventOnWhite = "icon_category_event_on_white"
+    case eventOnMint = "icon_category_event_on_mint"
     case etcOff = "icon_category_etc_off"
     case etcOn = "icon_category_etc_on"
     case etcOnWhite = "icon_category_etc_on_white"
+    case etcOnMint = "icon_category_etc_on_mint"
     case plusOff = "icon_category_plus_off"
+}
+
+// MARK: - IconState
+
+enum IconState: String {
+    case off = "off"
+    case on = "on"
+    case onWhite = "on_white"
+    case onMint = "on_mint"
 }
 
 // MARK: - SpendingCategoryData
@@ -77,96 +98,108 @@ enum SpendingCategoryIconList: String, CaseIterable {
     case other = "OTHER"
     case plus = "PLUS"
 
-    var details: SpendingCategoryData {
+    var baseName: String {
         switch self {
-        case .food:
-            return SpendingCategoryData(id: -1, isCustom: false, name: "식비", icon: .foodOn)
-        case .transportation:
-            return SpendingCategoryData(id: -2, isCustom: false, name: "교통", icon: .trafficOn)
-        case .beautyOrFashion:
-            return SpendingCategoryData(id: -3, isCustom: false, name: "미용/패션", icon: .beautyOn)
-        case .convenienceStore:
-            return SpendingCategoryData(id: -4, isCustom: false, name: "편의점/마트", icon: .marketOn)
-        case .education:
-            return SpendingCategoryData(id: -5, isCustom: false, name: "교육", icon: .educationOn)
-        case .living:
-            return SpendingCategoryData(id: -6, isCustom: false, name: "생활", icon: .lifeOn)
-        case .health:
-            return SpendingCategoryData(id: -7, isCustom: false, name: "건강", icon: .healthOn)
-        case .hobby:
-            return SpendingCategoryData(id: -8, isCustom: false, name: "취미/여가", icon: .hobbyOn)
-        case .travel:
-            return SpendingCategoryData(id: -9, isCustom: false, name: "여행/숙박", icon: .travelOn)
-        case .alcoholOrEntertainment:
-            return SpendingCategoryData(id: -10, isCustom: false, name: "술/유흥", icon: .drinkOn)
-        case .membershipOrFamilyEvent:
-            return SpendingCategoryData(id: -11, isCustom: false, name: "회비/경조사", icon: .eventOn)
-        case .other:
-            return SpendingCategoryData(id: -12, isCustom: false, name: "기타", icon: .etcOn)
-        case .plus:
-            return SpendingCategoryData(id: -13, isCustom: false, name: "추가하기", icon: .plusOff)
+        case .food: return "food"
+        case .transportation: return "traffic"
+        case .beautyOrFashion: return "beauty"
+        case .convenienceStore: return "market"
+        case .education: return "education"
+        case .living: return "life"
+        case .health: return "health"
+        case .hobby: return "hobby"
+        case .travel: return "travel"
+        case .alcoholOrEntertainment: return "drink"
+        case .membershipOrFamilyEvent: return "event"
+        case .other: return "etc"
+        case .plus: return "plus"
         }
     }
-    
-    var detailsWhite: SpendingCategoryData {
+
+    var id: Int {
         switch self {
-        case .food:
-            return SpendingCategoryData(id: -1, isCustom: false, name: "식비", icon: .foodOnWhite)
-        case .transportation:
-            return SpendingCategoryData(id: -2, isCustom: false, name: "교통", icon: .trafficOnWhite)
-        case .beautyOrFashion:
-            return SpendingCategoryData(id: -3, isCustom: false, name: "미용/패션", icon: .beautyOnWhite)
-        case .convenienceStore:
-            return SpendingCategoryData(id: -4, isCustom: false, name: "편의점/마트", icon: .marketOnWhite)
-        case .education:
-            return SpendingCategoryData(id: -5, isCustom: false, name: "교육", icon: .educationOnWhite)
-        case .living:
-            return SpendingCategoryData(id: -6, isCustom: false, name: "생활", icon: .lifeOnWhite)
-        case .health:
-            return SpendingCategoryData(id: -7, isCustom: false, name: "건강", icon: .healthOnWhite)
-        case .hobby:
-            return SpendingCategoryData(id: -8, isCustom: false, name: "취미/여가", icon: .hobbyOnWhite)
-        case .travel:
-            return SpendingCategoryData(id: -9, isCustom: false, name: "여행/숙박", icon: .travelOnWhite)
-        case .alcoholOrEntertainment:
-            return SpendingCategoryData(id: -10, isCustom: false, name: "술/유흥", icon: .drinkOnWhite)
-        case .membershipOrFamilyEvent:
-            return SpendingCategoryData(id: -11, isCustom: false, name: "회비/경조사", icon: .eventOnWhite)
-        case .other:
-            return SpendingCategoryData(id: -12, isCustom: false, name: "기타", icon: .etcOnWhite)
-        case .plus:
-            return SpendingCategoryData(id: -13, isCustom: false, name: "", icon: .etcOnWhite)
+        case .food: return -1
+        case .transportation: return -2
+        case .beautyOrFashion: return -3
+        case .convenienceStore: return -4
+        case .education: return -5
+        case .living: return -6
+        case .health: return -7
+        case .hobby: return -8
+        case .travel: return -9
+        case .alcoholOrEntertainment: return -10
+        case .membershipOrFamilyEvent: return -11
+        case .other: return -12
+        case .plus: return -13
         }
+    }
+
+    var displayName: String {
+        switch self {
+        case .food: return "식비"
+        case .transportation: return "교통"
+        case .beautyOrFashion: return "미용/패션"
+        case .convenienceStore: return "편의점/마트"
+        case .education: return "교육"
+        case .living: return "생활"
+        case .health: return "건강"
+        case .hobby: return "취미/여가"
+        case .travel: return "여행/숙박"
+        case .alcoholOrEntertainment: return "술/유흥"
+        case .membershipOrFamilyEvent: return "회비/경조사"
+        case .other: return "기타"
+        case .plus: return "추가하기"
+        }
+    }
+
+    var details: SpendingCategoryData {
+        let iconName: String
+        if self == .plus {
+            iconName = "icon_category_plus_off"
+        } else {
+            iconName = "icon_category_\(baseName)_\(IconState.on.rawValue)"
+        }
+        return SpendingCategoryData(id: id, isCustom: false, name: displayName, icon: CategoryIconName(rawValue: iconName)!)
+    }
+
+    var detailsWhite: SpendingCategoryData {
+        let iconName: String
+        if self == .plus {
+            iconName = "icon_category_plus_off"
+        } else {
+            iconName = "icon_category_\(baseName)_\(IconState.onWhite.rawValue)"
+        }
+        return SpendingCategoryData(id: id, isCustom: false, name: displayName, icon: CategoryIconName(rawValue: iconName)!)
     }
 
     static func fromIcon(_ icon: CategoryIconName) -> SpendingCategoryIconList? {
         switch icon {
-        case .foodOn:
+        case .foodOnMint:
             return .food
-        case .trafficOn:
+        case .trafficOnMint:
             return .transportation
-        case .beautyOn:
+        case .beautyOnMint:
             return .beautyOrFashion
-        case .marketOn:
+        case .marketOnMint:
             return .convenienceStore
-        case .educationOn:
+        case .educationOnMint:
             return .education
-        case .lifeOn:
+        case .lifeOnMint:
             return .living
-        case .healthOn:
+        case .healthOnMint:
             return .health
-        case .hobbyOn:
+        case .hobbyOnMint:
             return .hobby
-        case .travelOn:
+        case .travelOnMint:
             return .travel
-        case .drinkOn:
+        case .drinkOnMint:
             return .alcoholOrEntertainment
-        case .eventOn:
+        case .eventOnMint:
             return .membershipOrFamilyEvent
-        case .etcOn:
+        case .etcOnMint:
             return .other
         case .plusOff:
-            return .plus // TODO: 추후 수정 필요
+            return .plus
         default:
             return nil
         }

@@ -20,12 +20,12 @@ enum NavigationUtil {
         }
 
         if let navigationController = viewController as? UINavigationController {
-             Log.debug(navigationController)
+            Log.debug(navigationController)
             return navigationController
         }
 
         for childViewController in viewController.children {
-             Log.debug(childViewController)
+            Log.debug(childViewController)
             return findNavigationController(viewController: childViewController)
         }
 
