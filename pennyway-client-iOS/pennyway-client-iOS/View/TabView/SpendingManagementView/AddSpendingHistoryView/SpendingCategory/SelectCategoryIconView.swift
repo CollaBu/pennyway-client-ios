@@ -6,7 +6,7 @@ import SwiftUI
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    @State var selectedCategoryIcon: CategoryIconName = .etcOn
+    @State var selectedCategoryIcon: CategoryIconName = .etcOnMint
 
     let columns = [
         GridItem(.flexible(), spacing: 32),
@@ -60,7 +60,7 @@ struct SelectCategoryIconView: View {
             CustomBottomButton(action: {
                 if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
                     viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                    viewModel.selectedCategoryIcon = selectedCategoryIcon
+                    viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
                     Log.debug(viewModel.selectedCategoryIconTitle)
                     isPresented = false
                 }
@@ -73,6 +73,24 @@ struct SelectCategoryIconView: View {
             if let icon = viewModel.selectedCategoryIcon {
                 selectedCategoryIcon = icon
             }
+        }
+    }
+
+    private func mapToOnIcon(_ icon: CategoryIconName) -> CategoryIconName {
+        switch icon {
+        case .foodOnMint: return .foodOn
+        case .trafficOnMint: return .trafficOn
+        case .beautyOnMint: return .beautyOn
+        case .marketOnMint: return .marketOn
+        case .educationOnMint: return .educationOn
+        case .lifeOnMint: return .lifeOn
+        case .healthOnMint: return .healthOn
+        case .hobbyOnMint: return .hobbyOn
+        case .travelOnMint: return .travelOn
+        case .drinkOnMint: return .drinkOn
+        case .eventOnMint: return .eventOn
+        case .etcOnMint: return .etcOn
+        default: return icon
         }
     }
 }
