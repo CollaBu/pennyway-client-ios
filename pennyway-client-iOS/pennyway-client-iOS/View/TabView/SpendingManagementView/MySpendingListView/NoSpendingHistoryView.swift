@@ -7,13 +7,13 @@ struct NoSpendingHistoryView: View {
     @Binding var clickDate: Date?
 
     var body: some View {
-        VStack(spacing: 0) { 
+        VStack(spacing: 0) {
             Spacer().frame(height: 50 * DynamicSizeFactor.factor())
             Image("icon_illust_nohistory")
                 .frame(width: 32 * DynamicSizeFactor.factor(), height: 42 * DynamicSizeFactor.factor())
                 .padding()
 
-            Spacer().frame(height: 11 * DynamicSizeFactor.factor()) 
+            Spacer().frame(height: 11 * DynamicSizeFactor.factor())
 
             Text("소비 내역이 없어요")
                 .platformTextColor(color: Color("Gray04"))

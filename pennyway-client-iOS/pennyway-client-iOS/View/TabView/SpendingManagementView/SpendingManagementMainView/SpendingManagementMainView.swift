@@ -1,5 +1,6 @@
-
 import SwiftUI
+
+// MARK: - SpendingManagementMainView
 
 struct SpendingManagementMainView: View {
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
@@ -73,8 +74,6 @@ struct SpendingManagementMainView: View {
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
             }
-
-            .setTabBarVisibility(isHidden: ishidden)
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                 targetAmountViewModel.getTargetAmountForDateApi { _ in }
@@ -127,6 +126,7 @@ struct SpendingManagementMainView: View {
                     }
                 }, alignment: .bottom
             )
+            .setTabBarVisibility(isHidden: ishidden)
 
             NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, selectedDate: $clickDate), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
@@ -143,9 +143,7 @@ struct SpendingManagementMainView: View {
         }
         .onChange(of: showSpendingDetailView) { isPresented in
             ishidden = isPresented
-            if !ishidden {
-                Log.debug("Sheet 닫은 상태")
-            }
+            Log.debug("ishidden: \(isPresented)")
         }
         .onChange(of: navigateToAddSpendingHistory) { newValue in
             if newValue {

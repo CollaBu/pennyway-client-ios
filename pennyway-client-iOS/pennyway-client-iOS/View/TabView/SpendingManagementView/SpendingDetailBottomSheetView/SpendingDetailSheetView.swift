@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 // MARK: - SpendingDetail
@@ -52,18 +51,22 @@ struct SpendingDetailSheetView: View {
                     }
                         
                     Spacer()
-                        
-                    Button(action: {
-                        showEditSpendingDetailView = true
-                    }, label: {
-                        Image("icon_navigationbar_write_gray05")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 24, height: 24)
-                            
-                    })
-                    .padding(10)
-                        
+                    
+                    if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil {
+                        // 지출내역이 없을 경우 편집버튼 없음
+                    } else {
+                        Button(action: {
+                            showEditSpendingDetailView = true
+                        }, label: {
+                            Image("icon_navigationbar_write_gray05")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 24, height: 24)
+                                
+                        })
+                        .padding(10)
+                    }
+                
                     Button(action: {
                         showAddSpendingHistoryView = true
                     }, label: {
@@ -76,49 +79,51 @@ struct SpendingDetailSheetView: View {
                 }
                 .padding(.trailing, 17)
                 .padding(.top, 12)
-                    
-                // NoSpendingHistorySheetView() //소비내역 없을 경우
-                ScrollView {
-                    VStack(alignment: .leading) {
-                        Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-                            
-                        if let clickDate = clickDate, let dailyTotalAmount = getSpendingAmount(for: clickDate) {
-                            Text("-\(dailyTotalAmount)원")
-                                .font(.H1SemiboldFont())
-                                .platformTextColor(color: Color("Gray07"))
-                        }
-                        
-                        Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-                            
-                        ForEach(spendingDetails) { detail in
-                            HStack(spacing: 0) {
-                                Image(detail.icon)
-                                    .resizable()
-                                    .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-                                    .aspectRatio(contentMode: .fill)
-                                    .padding(.leading, 4 * DynamicSizeFactor.factor())
-                                    
-                                VStack(alignment: .leading, spacing: 1 * DynamicSizeFactor.factor()) {
-                                    Text(detail.category)
+                
+                if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil {
+                    NoSpendingHistorySheetView() 
+                } else {
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+                            if let clickDate = clickDate, let dailyTotalAmount = getSpendingAmount(for: clickDate) {
+                                Text("-\(dailyTotalAmount)원")
+                                    .font(.H1SemiboldFont())
+                                    .platformTextColor(color: Color("Gray07"))
+                            }
+                                
+                            Spacer().frame(height: 32 * DynamicSizeFactor.factor())
+                                
+                            ForEach(spendingDetails) { detail in
+                                HStack(spacing: 0) {
+                                    Image(detail.icon)
+                                        .resizable()
+                                        .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
+                                        .aspectRatio(contentMode: .fill)
+                                        .padding(.leading, 4 * DynamicSizeFactor.factor())
+                                        
+                                    VStack(alignment: .leading, spacing: 1 * DynamicSizeFactor.factor()) {
+                                        Text(detail.category)
+                                            .font(.B1SemiboldeFont())
+                                            .platformTextColor(color: Color("Gray06"))
+                                            
+                                        if !detail.description.isEmpty {
+                                            Text(detail.description)
+                                                .font(.B3MediumFont())
+                                                .platformTextColor(color: Color("Gray04"))
+                                        }
+                                    }
+                                    .padding(.leading, 10 * DynamicSizeFactor.factor())
+                                        
+                                    Spacer()
+                                        
+                                    Text(detail.amount)
                                         .font(.B1SemiboldeFont())
                                         .platformTextColor(color: Color("Gray06"))
-                                        
-                                    if !detail.description.isEmpty {
-                                        Text(detail.description)
-                                            .font(.B3MediumFont())
-                                            .platformTextColor(color: Color("Gray04"))
-                                    }
+                                        .padding(.trailing, 20)
                                 }
-                                .padding(.leading, 10 * DynamicSizeFactor.factor())
-                                    
-                                Spacer()
-                                    
-                                Text(detail.amount)
-                                    .font(.B1SemiboldeFont())
-                                    .platformTextColor(color: Color("Gray06"))
-                                    .padding(.trailing, 20)
+                                .padding(.vertical, 8)
                             }
-                            .padding(.vertical, 8)
                         }
                     }
                 }
