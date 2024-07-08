@@ -1,71 +1,52 @@
 
 import SwiftUI
 
-// MARK: - CategorySpendingListView
-
 struct CategorySpendingListView: View {
-    @ObservedObject var viewModel: SpendingCategoryViewModel
-    @Environment(\.presentationMode) var presentationMode
-    var category: SpendingCategoryData
-
+    var groupedSpendings: [(key: String, values: [IndividualSpending])]
+    var onItemAppear: ((IndividualSpending) -> Void)?
+    
     var body: some View {
-        VStack {
-            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-
-            Image("\(category.icon.rawValue.split(separator: "_").dropLast().joined(separator: "_"))")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())
-
-            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-
-            Text(category.name)
-                .font(.H3SemiboldFont())
-                .platformTextColor(color: Color("Gray07"))
-
-            Spacer().frame(height: 4 * DynamicSizeFactor.factor())
-
-            Text("몇개의 소비 내역")
-                .font(.B1MediumFont())
-                .platformTextColor(color: Color("Gray04"))
-
-            Spacer()
-        }
-        .navigationBarColor(UIColor(named: "White01"), title: "")
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("icon_arrow_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 34, height: 34)
-                            .padding(5)
-                    })
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
-
-                }.offset(x: -10)
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                if category.isCustom {
-                    HStack {
-                        Button(action: {}, label: {
-                            Image("icon_navigationbar_kebabmenu")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                .padding(5)
-                        })
-                        .padding(.trailing, 5)
-                        .frame(width: 44, height: 44)
-                    }.offset(x: 10)
+        LazyVStack(spacing: 0) {
+            ForEach(groupedSpendings, id: \.key) { date, spendings in
+                Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                
+                Section(header: headerView(for: date)) {
+                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                    ForEach(spendings, id: \.id) { item in
+                        let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+                        NavigationLink(destination: DetailSpendingView()) {
+                            CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                            .onAppear {
+                                onItemAppear?(item)
+                            }
+                    }
                 }
             }
+            Spacer().frame(height: 18 * DynamicSizeFactor.factor())
         }
+    }
+    
+    private func headerView(for date: String) -> some View {
+        Text(dateFormatter(from: date))
+            .font(.B2MediumFont())
+            .platformTextColor(color: Color("Gray04"))
+            .padding(.leading, 20)
+            .padding(.bottom, 10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private func dateFormatter(from dateString: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let date = formatter.date(from: dateString) {
+            formatter.dateFormat = "MMMM d일"
+            formatter.locale = Locale(identifier: "ko_KR")
+            return formatter.string(from: date)
+        }
+        return dateString
     }
 }

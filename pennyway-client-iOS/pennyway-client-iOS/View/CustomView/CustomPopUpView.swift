@@ -57,13 +57,13 @@ extension CustomPopUpView {
                 VStack {
                     Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                     Text(titleLabel)
-                        .font(.pretendard(.semibold, size: titleFontSize))
+                        .font(.H3SemiboldFont())
 
                     Spacer().frame(height: 7 * DynamicSizeFactor.factor())
 
                     Text(subTitleLabel)
                         .platformTextColor(color: Color("Gray04"))
-                        .font(.pretendard(.medium, size: subtitleFontSize))
+                        .font(.B1MediumFont())
 
                     Spacer().frame(height: 25 * DynamicSizeFactor.factor())
 
@@ -77,7 +77,7 @@ extension CustomPopUpView {
 
                                 Text(firstBtnLabel)
                                     .platformTextColor(color: Color("Gray04"))
-                                    .font(.pretendard(.medium, size: subtitleFontSize))
+                                    .font(.B1MediumFont())
                             }
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                         }
@@ -91,7 +91,7 @@ extension CustomPopUpView {
 
                                 Text(secondBtnLabel)
                                     .platformTextColor(color: Color("White01"))
-                                    .font(.pretendard(.medium, size: subtitleFontSize))
+                                    .font(.B1MediumFont())
                             }
                             .padding(.trailing, 13 * DynamicSizeFactor.factor())
                         }
