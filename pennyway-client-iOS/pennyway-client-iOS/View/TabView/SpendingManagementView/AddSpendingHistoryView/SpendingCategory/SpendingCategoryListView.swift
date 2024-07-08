@@ -41,9 +41,10 @@ struct SpendingCategoryListView: View {
                         .contentShape(Rectangle()) // This makes the entire HStack touchable
                         .onTapGesture {
                             if category.name == "추가하기" {
-                                viewModel.selectedCategoryIcon = .etcOn // icon 초기화
+                                viewModel.selectedCategoryIcon = CategoryIconName(baseName: CategoryBaseName.etc, state: .on) // icon 초기화
                                 viewModel.categoryName = "" // name 초기화
                                 viewModel.navigateToAddCategory = true
+                                viewModel.isAddCategoryFormValid = false
                                 isPresented = false
                             } else {
                                 viewModel.selectedCategory = category

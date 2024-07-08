@@ -6,7 +6,7 @@ import SwiftUI
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    @State var selectedCategoryIcon: CategoryIconName = .etcOnMint
+    @State var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: CategoryBaseName.etc, state: .onMint)
 
     let columns = [
         GridItem(.flexible(), spacing: 32),
@@ -16,18 +16,18 @@ struct SelectCategoryIconView: View {
     ]
 
     let icons: [CategoryIconListItem] = [
-        CategoryIconListItem(offIcon: .foodOff, onIcon: .foodOnMint),
-        CategoryIconListItem(offIcon: .trafficOff, onIcon: .trafficOnMint),
-        CategoryIconListItem(offIcon: .beautyOff, onIcon: .beautyOnMint),
-        CategoryIconListItem(offIcon: .marketOff, onIcon: .marketOnMint),
-        CategoryIconListItem(offIcon: .educationOff, onIcon: .educationOnMint),
-        CategoryIconListItem(offIcon: .lifeOff, onIcon: .lifeOnMint),
-        CategoryIconListItem(offIcon: .healthOff, onIcon: .healthOnMint),
-        CategoryIconListItem(offIcon: .hobbyOff, onIcon: .hobbyOnMint),
-        CategoryIconListItem(offIcon: .travelOff, onIcon: .travelOnMint),
-        CategoryIconListItem(offIcon: .drinkOff, onIcon: .drinkOnMint),
-        CategoryIconListItem(offIcon: .eventOff, onIcon: .eventOnMint),
-        CategoryIconListItem(offIcon: .etcOff, onIcon: .etcOnMint)
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.food, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.food, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.traffic, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.traffic, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.beauty, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.beauty, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.market, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.market, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.education, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.education, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.life, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.life, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.health, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.health, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.hobby, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.hobby, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.travel, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.travel, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.drink, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.drink, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.event, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.event, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.etc, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.etc, state: .onMint))
     ]
 
     var body: some View {
@@ -77,38 +77,16 @@ struct SelectCategoryIconView: View {
     }
 
     private func mapToOnIcon(_ icon: CategoryIconName) -> CategoryIconName {
-        switch icon {
-        case .foodOnMint: return .foodOn
-        case .trafficOnMint: return .trafficOn
-        case .beautyOnMint: return .beautyOn
-        case .marketOnMint: return .marketOn
-        case .educationOnMint: return .educationOn
-        case .lifeOnMint: return .lifeOn
-        case .healthOnMint: return .healthOn
-        case .hobbyOnMint: return .hobbyOn
-        case .travelOnMint: return .travelOn
-        case .drinkOnMint: return .drinkOn
-        case .eventOnMint: return .eventOn
-        case .etcOnMint: return .etcOn
-        default: return icon
+        if icon.state == .onMint {
+            return CategoryIconName(baseName: icon.baseName, state: .on)
         }
+        return icon
     }
 
     private func mapToOnMintIcon(_ icon: CategoryIconName) -> CategoryIconName {
-        switch icon {
-        case .foodOn: return .foodOnMint
-        case .trafficOn: return .trafficOnMint
-        case .beautyOn: return .beautyOnMint
-        case .marketOn: return .marketOnMint
-        case .educationOn: return .educationOnMint
-        case .lifeOn: return .lifeOnMint
-        case .healthOn: return .healthOnMint
-        case .hobbyOn: return .hobbyOnMint
-        case .travelOn: return .travelOnMint
-        case .drinkOn: return .drinkOnMint
-        case .eventOn: return .eventOnMint
-        case .etcOn: return .etcOnMint
-        default: return icon
+        if icon.state == .on {
+            return CategoryIconName(baseName: icon.baseName, state: .onMint)
         }
+        return icon
     }
 }
