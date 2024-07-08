@@ -27,6 +27,12 @@ class AddSpendingHistoryViewModel: ObservableObject {
     /// 총 카테고리 리스트
     @Published var spendingCategories: [SpendingCategoryData] = []
 
+    /// 시스템 카테고리 리스트
+    @Published var systemCategories: [SpendingCategoryData] = []
+
+    /// 사용자 정의 카테고리 리스트
+    @Published var customCategories: [SpendingCategoryData] = []
+
     @Published var isFormValid = false // 지출내역 추가 valid
 
     init(selectedDate: Date = Date()) {
@@ -48,13 +54,13 @@ class AddSpendingHistoryViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("사용자 정의 카테고리 조회 완료 \(jsonString)")
                         }
-                        let staticCategories = SpendingCategoryIconList.allCases
+                        self.systemCategories = SpendingCategoryIconList.allCases
                             .filter { $0 != .other && $0 != .plus }
                             .map { $0.details }
 
                         let otherCategory = SpendingCategoryIconList.plus.details
-                        let dynamicCategories = response.data.spendingCategories.compactMap { self.convertToSpendingCategoryData(from: $0) }
-                        self.spendingCategories = staticCategories + dynamicCategories + [otherCategory]
+                        self.customCategories = response.data.spendingCategories.compactMap { self.convertToSpendingCategoryData(from: $0) }
+                        self.spendingCategories = self.systemCategories + self.customCategories + [otherCategory]
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }

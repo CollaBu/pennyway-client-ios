@@ -54,6 +54,7 @@ struct SpendingDetailSheetView: View {
                             
                     })
                 }
+                .padding(.leading, 20)
                 .padding(.trailing, 17)
                 .padding(.top, 12)
                 
@@ -67,14 +68,17 @@ struct SpendingDetailSheetView: View {
                                 Text("-\(dailyTotalAmount)원")
                                     .font(.H1SemiboldFont())
                                     .platformTextColor(color: Color("Gray07"))
+                                    .padding(.leading, 20)
                             }
                                 
                             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
 
-//                            ForEach(filteredSpendings(), id: \.id) { detail in
-//                                ExpenseRow(categoryIcon: SpendingListViewCategoryIconList(rawValue: detail.category.icon, category: detail.category.name, amount: detail.amount, memo: detail.memo)
-//                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-//                            }
+                            ForEach(filteredSpendings(), id: \.id) { item in
+                                let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+
+                                CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                            }
                         }
                     }
                 }
@@ -97,9 +101,7 @@ struct SpendingDetailSheetView: View {
             Log.debug("clickDate changed to: \(String(describing: clickDate))")
             forceUpdate.toggle()
         }
-        
         .setTabBarVisibility(isHidden: true)
-        .padding(.leading, 20)
     }
     
     private func getSpendingAmount(for date: Date) -> Int? {
@@ -113,7 +115,7 @@ struct SpendingDetailSheetView: View {
             return []
         }
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // adjust the format as per your date string format
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         return spendingHistoryViewModel.dailyDetailSpendings.filter { spending in
             if let spendDate = formatter.date(from: spending.spendAt) {

@@ -12,9 +12,11 @@ import SwiftUI
 
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    @StateObject var spendingCategoryViewModel = SpendingCategoryViewModel()
     @State var selectedDateToScroll: String? = nil
     @State private var currentMonth: Date = Date()
     @Binding var clickDate: Date?
+    @State private var navigateToCategoryGridView = false
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -39,7 +41,7 @@ struct MySpendingListView: View {
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
                                                 NavigationLink(destination: DetailSpendingView()) {
-                                                    ExpenseRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                                    CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                                 }
 
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
@@ -96,11 +98,27 @@ struct MySpendingListView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                NavigationBackButton()
-                    .offset(x: -13 * DynamicSizeFactor.factor())
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
+                HStack {
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+
+                }.offset(x: -10)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack(spacing: 0) {
+                    Button(action: {
+                        navigateToCategoryGridView = true
+                        spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in }
+                    }, label: {
+                        Text("카테고리")
+                            .font(.B2MediumFont())
+                            .platformTextColor(color: Color("Gray05"))
+                    })
+                    .padding(.trailing, 20)
+                    .frame(width: 38 * DynamicSizeFactor.factor(), height: 44)
+                }
             }
         }
         .bottomSheet(isPresented: $spendingHistoryViewModel.isChangeMonth, maxHeight: 384 * DynamicSizeFactor.factor()) {
@@ -115,6 +133,8 @@ struct MySpendingListView: View {
                 }
             }
         }
+
+        NavigationLink(destination: SpendingCategoryGridView(SpendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
     }
 
     private func headerView(for date: String) -> some View {
@@ -182,51 +202,6 @@ struct MySpendingListView: View {
             return dateFormatter.string(from: previousMonthDate)
         }
         return dateFormatter.string(from: date)
-    }
-}
-
-// MARK: - ExpenseRow
-
-struct ExpenseRow: View {
-    var categoryIcon: String
-    var category: String
-    var amount: Int
-    var memo: String
-
-    var body: some View {
-        ZStack(alignment: .leading) {
-            HStack(spacing: 10 * DynamicSizeFactor.factor()) {
-                Image(categoryIcon)
-                    .resizable()
-                    .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-
-                VStack(alignment: .leading, spacing: 1) { // Spacer는 Line heigth 적용하면 없애기
-                    if memo.isEmpty {
-                        Text(category)
-                            .font(.B1SemiboldeFont())
-                            .platformTextColor(color: Color("Gray06"))
-                            .multilineTextAlignment(.leading)
-                    } else {
-                        Text(category)
-                            .font(.B1SemiboldeFont())
-                            .platformTextColor(color: Color("Gray06"))
-                            .multilineTextAlignment(.leading)
-
-                        Text(memo)
-                            .font(.B3MediumFont())
-                            .platformTextColor(color: Color("Gray04"))
-                            .multilineTextAlignment(.leading)
-                    }
-                }
-
-                Spacer()
-
-                Text("\(amount)원")
-                    .font(.B1SemiboldeFont())
-                    .platformTextColor(color: Color("Gray06"))
-            }
-        }
-        .padding(.horizontal, 20)
     }
 }
 

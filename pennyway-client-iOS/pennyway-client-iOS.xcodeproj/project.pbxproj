@@ -36,6 +36,9 @@
 		4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */; };
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
 		4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */; };
+		4A148B5E2C364A3C005C6D4E /* SpendingCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B5D2C364A3C005C6D4E /* SpendingCategoryViewModel.swift */; };
+		4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */; };
+		4A148B622C3702E2005C6D4E /* CategoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
@@ -107,6 +110,8 @@
 		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
+		4A73E9AA2C34F5610017EED9 /* SpendingCategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */; };
+		4A73E9AD2C35137F0017EED9 /* CategorySpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
 		4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEE2B99A16B001C1188 /* MainView.swift */; };
 		4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A762AF02B99A16D001C1188 /* Assets.xcassets */; };
@@ -272,6 +277,9 @@
 		4A1179B32BA958ED00A9CF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
 		4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconListItem.swift; sourceTree = "<group>"; };
+		4A148B5D2C364A3C005C6D4E /* SpendingCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryViewModel.swift; sourceTree = "<group>"; };
+		4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSpendingRow.swift; sourceTree = "<group>"; };
+		4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsView.swift; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
@@ -344,6 +352,8 @@
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryGridView.swift; sourceTree = "<group>"; };
+		4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySpendingListView.swift; sourceTree = "<group>"; };
 		4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pennyway-client-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pennyway_client_iOSApp.swift; sourceTree = "<group>"; };
 		4A762AEE2B99A16B001C1188 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -556,6 +566,7 @@
 				4A0BC6972BF53D6F0036D900 /* SpendingHistoryViewModel.swift */,
 				4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */,
 				D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */,
+				4A148B5D2C364A3C005C6D4E /* SpendingCategoryViewModel.swift */,
 			);
 			path = SpendingViewModel;
 			sourceTree = "<group>";
@@ -701,6 +712,7 @@
 				D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */,
 				4AC320582C11D5D500DDB4B6 /* CustomToastView.swift */,
 				4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */,
+				4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1017,6 +1029,16 @@
 			path = SignUpView;
 			sourceTree = "<group>";
 		};
+		4A73E9AB2C3512660017EED9 /* SpendingCategoryManagementView */ = {
+			isa = PBXGroup;
+			children = (
+				4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */,
+				4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */,
+				4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */,
+			);
+			path = SpendingCategoryManagementView;
+			sourceTree = "<group>";
+		};
 		4A762AE02B99A16B001C1188 = {
 			isa = PBXGroup;
 			children = (
@@ -1199,6 +1221,7 @@
 		4AC320262C11D5AC00DDB4B6 /* AddSpendingHistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				4A73E9AB2C3512660017EED9 /* SpendingCategoryManagementView */,
 				4AC320212C11D5AC00DDB4B6 /* SpendingCategory */,
 				4AC320222C11D5AC00DDB4B6 /* AddSpendingCompleteView.swift */,
 				4AC320232C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift */,
@@ -1742,6 +1765,8 @@
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
+				4A148B5E2C364A3C005C6D4E /* SpendingCategoryViewModel.swift in Sources */,
+				4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */,
 				4AE8F3AD2C32AED30014F0D4 /* AppDelegate.swift in Sources */,
 				4A5789972BDC29FD00AFEB26 /* PreconditionFailedError.swift in Sources */,
 				D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */,
@@ -1813,6 +1838,7 @@
 				4AC320522C11D5AC00DDB4B6 /* SpendingManagementMainView.swift in Sources */,
 				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,
+				4A148B622C3702E2005C6D4E /* CategoryDetailsView.swift in Sources */,
 				D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
@@ -1832,6 +1858,7 @@
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
+				4A73E9AA2C34F5610017EED9 /* SpendingCategoryGridView.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
 				D8180C042BE5081F00F837FB /* FindIdContentView.swift in Sources */,
@@ -1867,6 +1894,7 @@
 				4AC3204B2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
+				4A73E9AD2C35137F0017EED9 /* CategorySpendingListView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
 				4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */,
