@@ -101,7 +101,7 @@ struct MySpendingListView: View {
                     NavigationBackButton()
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
-                         .contentShape(Rectangle())
+                        .contentShape(Rectangle())
 
                 }.offset(x: -10)
             }
