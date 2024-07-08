@@ -7,18 +7,9 @@ struct EditSpendingDetailView: View {
     @State var showingClosePopUp = false
     @Environment(\.presentationMode) var presentationMode
     @State private var isItemSelected: Bool = false
-
-//    @State var spendingDetails: [SpendingDetail] = [
-//        SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
-//        SpendingDetail(category: "교육", description: "스터디용 메모장", amount: "6,000원", icon: "icon_category_education_on"),
-//        SpendingDetail(category: "교통", description: "", amount: "3,000원", icon: "icon_category_traffic_on"),
-//        SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
-//        SpendingDetail(category: "교육", description: "스터디용 메모장", amount: "6,000원", icon: "icon_category_education_on"),
-//        SpendingDetail(category: "교통", description: "", amount: "3,000원", icon: "icon_category_traffic_on"),
-//        SpendingDetail(category: "교통", description: "", amount: "1,000원", icon: "icon_category_traffic_on"),
-//        SpendingDetail(category: "교통", description: "", amount: "10,000원", icon: "icon_category_traffic_on"),
-//        SpendingDetail(category: "교통", description: "", amount: "3,000원", icon: "icon_category_traffic_on")
-//    ]
+    @Binding var clickDate: Date?
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    @State private var selectedIds: Set<Int> = []
 
     var body: some View {
         ZStack {
@@ -28,12 +19,11 @@ struct EditSpendingDetailView: View {
                         
                     HStack(spacing: 4 * DynamicSizeFactor.factor()) {
                         Button(action: {
-//                            toggleAllSelections()
-                                
+                            toggleAllSelections()
                         }, label: {
-//                            Image(spendingDetails.allSatisfy { $0.isSelected } ? "icon_checkone_on_small" : "icon_checkone_off_small_gray03")
-//                                .aspectRatio(contentMode: .fill)
-//                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            Image(selectedIds.count == spendingHistoryViewModel.filteredSpendings(for: clickDate).count ? "icon_checkone_on_small" : "icon_checkone_off_small_gray03")
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                 
                             Text("전체 선택")
                                 .font(.B2MediumFont())
@@ -50,52 +40,31 @@ struct EditSpendingDetailView: View {
                         
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
                         
-//                    VStack(spacing: 0) {
-//                        ForEach(spendingDetails.indices, id: \.self) { index in
-//                            HStack(spacing: 0) {
-//                                Button(action: {
-//                                    spendingDetails[index].isSelected.toggle()
-//                                    updateSelectionState()
-//                                }) {
-//                                    Image(spendingDetails[index].isSelected ? "icon_checkone_on_small" : "icon_checkone_off_small_gray03")
-//                                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-//                                        .aspectRatio(contentMode: .fill)
-//                                }
-//                                    
-//                                Image(spendingDetails[index].icon)
-//                                    .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-//                                    .aspectRatio(contentMode: .fill)
-//                                    .padding(.leading, 4 * DynamicSizeFactor.factor())
-//                                    
-//                                VStack(alignment: .leading, spacing: 1 * DynamicSizeFactor.factor()) {
-//                                    Text(spendingDetails[index].category)
-//                                        .font(.B1SemiboldeFont())
-//                                        .platformTextColor(color: Color("Gray06"))
-//                                        
-//                                    if !spendingDetails[index].description.isEmpty {
-//                                        Text(spendingDetails[index].description)
-//                                            .font(.B3MediumFont())
-//                                            .platformTextColor(color: Color("Gray04"))
-//                                    }
-//                                }
-//                                .padding(.leading, 10 * DynamicSizeFactor.factor())
-//                                    
-//                                Spacer()
-//                                    
-//                                Text(spendingDetails[index].amount)
-//                                    .font(.B1SemiboldeFont())
-//                                    .platformTextColor(color: Color("Gray06"))
-//                            }
-//                            .padding(.leading, 14)
-//                            .padding(.trailing, 20)
-//                                
-//                            Spacer().frame(height: 12) // 동적 ui 적용하니 너무 커짐
-//                        }
-//                    }
-//                    .padding(.bottom, 103)
+                    VStack(spacing: 0) {
+                        ForEach(spendingHistoryViewModel.filteredSpendings(for: clickDate), id: \.id) { item in
+                            let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+                            ZStack(alignment: .leading) {
+                                Button(action: {
+                                    toggleSelection(for: item)
+                                }) {
+                                    Image(selectedIds.contains(item.id) ? "icon_checkone_on_small" : "icon_checkone_off_small_gray03")
+                                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                        .aspectRatio(contentMode: .fill)
+                                }
+                                
+                                CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                    .padding(.leading, 13 * DynamicSizeFactor.factor())
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.leading, 14)
+
+                            Spacer().frame(height: 12) // 동적 ui 적용하니 너무 커짐
+                        }
+                    }
+                    .padding(.bottom, 103)
                 }
                     
-                Spacer() 
+                Spacer()
                 
                 CustomBottomButton(action: {
                     if isItemSelected {
@@ -146,11 +115,11 @@ struct EditSpendingDetailView: View {
             if showingDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
-                                titleLabel: "8개의 내역을 삭제할까요?",
+                                titleLabel: "선택한 내역을 삭제할까요?",
                                 subTitleLabel: "선택한 소비 내역이 사라져요",
                                 firstBtnAction: { self.showingDeletePopUp = false },
                                 firstBtnLabel: "취소",
-                                secondBtnAction: { self.presentationMode.wrappedValue.dismiss() },
+                                secondBtnAction: { self.deleteSelectedItems() },
                                 secondBtnLabel: "삭제하기",
                                 secondBtnColor: Color("Red03")
                 )
@@ -158,19 +127,37 @@ struct EditSpendingDetailView: View {
         }
     }
     
-//    private func toggleAllSelections() {
-//        let allSelected = spendingDetails.allSatisfy { $0.isSelected }
-//        for index in spendingDetails.indices {
-//            spendingDetails[index].isSelected = !allSelected
-//        }
-//        updateSelectionState()
-//    }
-//    
-//    private func updateSelectionState() {
-//        isItemSelected = spendingDetails.contains { $0.isSelected }
-//    }
+    private func toggleAllSelections() {
+        let allSelected = selectedIds.count == spendingHistoryViewModel.filteredSpendings(for: clickDate).count
+        if allSelected {
+            selectedIds.removeAll()
+        } else {
+            selectedIds = Set(spendingHistoryViewModel.filteredSpendings(for: clickDate).map { $0.id })
+        }
+        updateSelectionState() 
+    }
+    
+    private func updateSelectionState() {
+        isItemSelected = !selectedIds.isEmpty
+    }
+
+    private func toggleSelection(for item: IndividualSpending) {
+        if selectedIds.contains(item.id) {
+            selectedIds.remove(item.id)
+        } else {
+            selectedIds.insert(item.id)
+        }
+        updateSelectionState()
+    }
+
+    private func deleteSelectedItems() {
+        spendingHistoryViewModel.dailyDetailSpendings.removeAll { selectedIds.contains($0.id) }
+        selectedIds.removeAll()
+        updateSelectionState()
+        showingDeletePopUp = false
+    }
 }
 
 #Preview {
-    EditSpendingDetailView()
+    EditSpendingDetailView(clickDate: .constant(Date()), spendingHistoryViewModel: SpendingHistoryViewModel())
 }

@@ -78,6 +78,7 @@ struct SpendingManagementMainView: View {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                 targetAmountViewModel.getTargetAmountForDateApi { _ in }
             }
+            .setTabBarVisibility(isHidden: ishidden)
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
             .background(Color("Gray01"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -126,7 +127,6 @@ struct SpendingManagementMainView: View {
                     }
                 }, alignment: .bottom
             )
-            .setTabBarVisibility(isHidden: ishidden)
 
             NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, selectedDate: $clickDate), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
@@ -151,7 +151,7 @@ struct SpendingManagementMainView: View {
                 addSpendingSelectedDate = clickDate ?? Date()
             }
         }
-//        .id(ishidden)
+        .id(ishidden)
     }
 }
 

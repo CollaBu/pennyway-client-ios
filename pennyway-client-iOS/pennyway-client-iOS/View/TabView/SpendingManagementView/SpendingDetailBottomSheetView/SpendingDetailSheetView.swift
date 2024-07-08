@@ -73,7 +73,7 @@ struct SpendingDetailSheetView: View {
                                 
                             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
 
-                            ForEach(filteredSpendings(), id: \.id) { item in
+                            ForEach(spendingHistoryViewModel.filteredSpendings(for: clickDate), id: \.id) { item in
                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
 
                                 CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
@@ -85,7 +85,7 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showEditSpendingDetailView) {
                 NavigationAvailable {
-                    EditSpendingDetailView()
+                    EditSpendingDetailView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel)
                 }
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
@@ -110,15 +110,15 @@ struct SpendingDetailSheetView: View {
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
     
-    private func filteredSpendings() -> [IndividualSpending] {
-        guard let clickDate = clickDate else {
-            return []
-        }
-        return spendingHistoryViewModel.dailyDetailSpendings.filter { spending in
-            if let spendDate = spendingHistoryViewModel.dateFromString(spending.spendAt) {
-                return Calendar.current.isDate(spendDate, inSameDayAs: clickDate)
-            }
-            return false
-        }
-    }
+//    private func filteredSpendings() -> [IndividualSpending] {
+//        guard let clickDate = clickDate else {
+//            return []
+//        }
+//        return spendingHistoryViewModel.dailyDetailSpendings.filter { spending in
+//            if let spendDate = spendingHistoryViewModel.dateFromString(spending.spendAt) {
+//                return Calendar.current.isDate(spendDate, inSameDayAs: clickDate)
+//            }
+//            return false
+//        }
+//    }
 }
