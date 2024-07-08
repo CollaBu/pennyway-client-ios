@@ -71,7 +71,7 @@ struct SelectCategoryIconView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             if let icon = viewModel.selectedCategoryIcon {
-                selectedCategoryIcon = icon
+                selectedCategoryIcon = mapToOnMintIcon(icon)
             }
         }
     }
@@ -90,6 +90,24 @@ struct SelectCategoryIconView: View {
         case .drinkOnMint: return .drinkOn
         case .eventOnMint: return .eventOn
         case .etcOnMint: return .etcOn
+        default: return icon
+        }
+    }
+
+    private func mapToOnMintIcon(_ icon: CategoryIconName) -> CategoryIconName {
+        switch icon {
+        case .foodOn: return .foodOnMint
+        case .trafficOn: return .trafficOnMint
+        case .beautyOn: return .beautyOnMint
+        case .marketOn: return .marketOnMint
+        case .educationOn: return .educationOnMint
+        case .lifeOn: return .lifeOnMint
+        case .healthOn: return .healthOnMint
+        case .hobbyOn: return .hobbyOnMint
+        case .travelOn: return .travelOnMint
+        case .drinkOn: return .drinkOnMint
+        case .eventOn: return .eventOnMint
+        case .etcOn: return .etcOnMint
         default: return icon
         }
     }
