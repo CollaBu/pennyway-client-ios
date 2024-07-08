@@ -144,7 +144,6 @@
 		4AC320452C11D5AC00DDB4B6 /* SelectSpendingDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC320252C11D5AC00DDB4B6 /* SelectSpendingDayView.swift */; };
 		4AC320462C11D5AC00DDB4B6 /* MySpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC320272C11D5AC00DDB4B6 /* MySpendingListView.swift */; };
 		4AC320472C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC320282C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift */; };
-		4AC320482C11D5AC00DDB4B6 /* EditNoSpendingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3202A2C11D5AC00DDB4B6 /* EditNoSpendingHistoryView.swift */; };
 		4AC320492C11D5AC00DDB4B6 /* EditSpendingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3202B2C11D5AC00DDB4B6 /* EditSpendingDetailView.swift */; };
 		4AC3204A2C11D5AC00DDB4B6 /* NoSpendingHistorySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3202C2C11D5AC00DDB4B6 /* NoSpendingHistorySheetView.swift */; };
 		4AC3204B2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3202D2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift */; };
@@ -387,7 +386,6 @@
 		4AC320252C11D5AC00DDB4B6 /* SelectSpendingDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSpendingDayView.swift; sourceTree = "<group>"; };
 		4AC320272C11D5AC00DDB4B6 /* MySpendingListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySpendingListView.swift; sourceTree = "<group>"; };
 		4AC320282C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSpendingHistoryView.swift; sourceTree = "<group>"; };
-		4AC3202A2C11D5AC00DDB4B6 /* EditNoSpendingHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNoSpendingHistoryView.swift; sourceTree = "<group>"; };
 		4AC3202B2C11D5AC00DDB4B6 /* EditSpendingDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSpendingDetailView.swift; sourceTree = "<group>"; };
 		4AC3202C2C11D5AC00DDB4B6 /* NoSpendingHistorySheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSpendingHistorySheetView.swift; sourceTree = "<group>"; };
 		4AC3202D2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendingDetailSheetView.swift; sourceTree = "<group>"; };
@@ -1244,7 +1242,6 @@
 		4AC3202E2C11D5AC00DDB4B6 /* SpendingDetailBottomSheetView */ = {
 			isa = PBXGroup;
 			children = (
-				4AC3202A2C11D5AC00DDB4B6 /* EditNoSpendingHistoryView.swift */,
 				4AC3202B2C11D5AC00DDB4B6 /* EditSpendingDetailView.swift */,
 				4AC3202C2C11D5AC00DDB4B6 /* NoSpendingHistorySheetView.swift */,
 				4AC3202D2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift */,
@@ -1773,7 +1770,6 @@
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
-				4AC320482C11D5AC00DDB4B6 /* EditNoSpendingHistoryView.swift in Sources */,
 				4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */,
 				4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */,
 				4AE8F3A82C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */,
