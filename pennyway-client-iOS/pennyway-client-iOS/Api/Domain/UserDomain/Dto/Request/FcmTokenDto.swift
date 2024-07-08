@@ -1,9 +1,9 @@
 
 public struct FcmTokenDto: Encodable {
-    let token: Int
+    let token: String
 
     public init(
-        token: Int
+        token: String
     ) {
         self.token = token
     }
