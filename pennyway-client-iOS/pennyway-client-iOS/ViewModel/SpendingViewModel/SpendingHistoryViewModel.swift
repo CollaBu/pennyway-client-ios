@@ -11,6 +11,13 @@ class SpendingHistoryViewModel: ObservableObject {
     @Published var selectedDateId = 0
     @Published var selectedDate: Date?
 
+    /// 받아온 날짜가 string이기 때문에 날짜 문자열을 Date객체로 변환
+    func dateFromString(_ dateString: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.date(from: dateString)
+    }
+
     private var year: String {
         return String(Date.year(from: currentDate))
     }

@@ -109,23 +109,16 @@ struct SpendingDetailSheetView: View {
         Log.debug(day)
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
-
+    
     private func filteredSpendings() -> [IndividualSpending] {
         guard let clickDate = clickDate else {
             return []
         }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
         return spendingHistoryViewModel.dailyDetailSpendings.filter { spending in
-            if let spendDate = formatter.date(from: spending.spendAt) {
+            if let spendDate = spendingHistoryViewModel.dateFromString(spending.spendAt) {
                 return Calendar.current.isDate(spendDate, inSameDayAs: clickDate)
             }
             return false
         }
     }
 }
-
-// #Preview {
-//     SpendingDetailSheetView(clickDate: $clickDate, viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel())
-// }
