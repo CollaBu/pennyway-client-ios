@@ -1,16 +1,5 @@
 import SwiftUI
 
-// MARK: - SpendingDetail
-
-struct SpendingDetail: Identifiable {
-    let id = UUID()
-    let category: String
-    let description: String
-    let amount: String
-    let icon: String
-    var isSelected: Bool = false
-}
-
 // MARK: - SpendingDetailSheetView
 
 struct SpendingDetailSheetView: View {
@@ -23,18 +12,6 @@ struct SpendingDetailSheetView: View {
     @StateObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
-    @State var spendingDetails: [SpendingDetail] = [
-        SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
-        SpendingDetail(category: "교육", description: "스터디용 메모장", amount: "6,000원", icon: "icon_category_education_on"),
-        SpendingDetail(category: "교통", description: "", amount: "3,000원", icon: "icon_category_traffic_on"),
-        SpendingDetail(category: "편의점/마트", description: "", amount: "1,000원", icon: "icon_category_market_on"),
-        SpendingDetail(category: "교육", description: "스터디용 메모장", amount: "6,000원", icon: "icon_category_education_on"),
-        SpendingDetail(category: "교통", description: "", amount: "3,000원", icon: "icon_category_traffic_on"),
-        SpendingDetail(category: "교통", description: "", amount: "1,000원", icon: "icon_category_traffic_on"),
-        SpendingDetail(category: "교통", description: "", amount: "10,000원", icon: "icon_category_traffic_on"),
-        SpendingDetail(category: "교통", description: "", amount: "3,000원", icon: "icon_category_traffic_on")
-    ]
-    
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
@@ -81,7 +58,7 @@ struct SpendingDetailSheetView: View {
                 .padding(.top, 12)
                 
                 if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil {
-                    NoSpendingHistorySheetView() 
+                    NoSpendingHistorySheetView()
                 } else {
                     ScrollView {
                         VStack(alignment: .leading) {
@@ -93,37 +70,11 @@ struct SpendingDetailSheetView: View {
                             }
                                 
                             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-                                
-                            ForEach(spendingDetails) { detail in
-                                HStack(spacing: 0) {
-                                    Image(detail.icon)
-                                        .resizable()
-                                        .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-                                        .aspectRatio(contentMode: .fill)
-                                        .padding(.leading, 4 * DynamicSizeFactor.factor())
-                                        
-                                    VStack(alignment: .leading, spacing: 1 * DynamicSizeFactor.factor()) {
-                                        Text(detail.category)
-                                            .font(.B1SemiboldeFont())
-                                            .platformTextColor(color: Color("Gray06"))
-                                            
-                                        if !detail.description.isEmpty {
-                                            Text(detail.description)
-                                                .font(.B3MediumFont())
-                                                .platformTextColor(color: Color("Gray04"))
-                                        }
-                                    }
-                                    .padding(.leading, 10 * DynamicSizeFactor.factor())
-                                        
-                                    Spacer()
-                                        
-                                    Text(detail.amount)
-                                        .font(.B1SemiboldeFont())
-                                        .platformTextColor(color: Color("Gray06"))
-                                        .padding(.trailing, 20)
-                                }
-                                .padding(.vertical, 8)
-                            }
+
+//                            ForEach(filteredSpendings(), id: \.id) { detail in
+//                                ExpenseRow(categoryIcon: SpendingListViewCategoryIconList(rawValue: detail.category.icon, category: detail.category.name, amount: detail.amount, memo: detail.memo)
+//                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+//                            }
                         }
                     }
                 }
@@ -155,6 +106,21 @@ struct SpendingDetailSheetView: View {
         let day = Calendar.current.component(.day, from: date)
         Log.debug(day)
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
+    }
+
+    private func filteredSpendings() -> [IndividualSpending] {
+        guard let clickDate = clickDate else {
+            return []
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // adjust the format as per your date string format
+        
+        return spendingHistoryViewModel.dailyDetailSpendings.filter { spending in
+            if let spendDate = formatter.date(from: spending.spendAt) {
+                return Calendar.current.isDate(spendDate, inSameDayAs: clickDate)
+            }
+            return false
+        }
     }
 }
 
