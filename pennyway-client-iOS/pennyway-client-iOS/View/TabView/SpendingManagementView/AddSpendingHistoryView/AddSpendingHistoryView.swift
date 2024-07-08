@@ -31,7 +31,7 @@ struct AddSpendingHistoryView: View {
                 NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel), isActive: $navigateToAddSpendingCategory) {}
 
                 NavigationLink(
-                    destination: AddSpendingCategoryView(viewModel: viewModel),
+                    destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel()),
                     isActive: $viewModel.navigateToAddCategory
                 ) {}
             }

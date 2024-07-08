@@ -100,8 +100,7 @@ struct SpendingManagementMainView: View {
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
 
-                        Button(action: {
-                        }, label: {
+                        Button(action: {}, label: {
                             Image("icon_navigationbar_bell")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -132,7 +131,6 @@ struct SpendingManagementMainView: View {
             NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel()), isActive: $navigateToMySpendingList) {
                 EmptyView()
             }
-
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView) {
             SpendingDetailSheetView()
