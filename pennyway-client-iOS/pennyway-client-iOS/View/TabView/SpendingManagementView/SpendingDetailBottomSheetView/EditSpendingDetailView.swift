@@ -118,7 +118,7 @@ struct EditSpendingDetailView: View {
             if showingDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
-                                titleLabel: "선택한 내역을 삭제할까요?",
+                                titleLabel: "\(selectedIds.count)개의 내역을 삭제할까요?",
                                 subTitleLabel: "선택한 소비 내역이 사라져요",
                                 firstBtnAction: { self.showingDeletePopUp = false },
                                 firstBtnLabel: "취소",
@@ -137,10 +137,6 @@ struct EditSpendingDetailView: View {
         } else {
             selectedIds = Set(spendingHistoryViewModel.filteredSpendings(for: clickDate).map { $0.id })
         }
-        updateSelectionState() 
-    }
-
-    private func updateSelectionState() {
         isItemSelected = !selectedIds.isEmpty
     }
 
@@ -150,13 +146,13 @@ struct EditSpendingDetailView: View {
         } else {
             selectedIds.insert(item.id)
         }
-        updateSelectionState()
+        isItemSelected = !selectedIds.isEmpty
     }
 
     private func deleteSelectedItems() {
         spendingHistoryViewModel.dailyDetailSpendings.removeAll { selectedIds.contains($0.id) }
         selectedIds.removeAll()
-        updateSelectionState()
+        isItemSelected = !selectedIds.isEmpty
         showingDeletePopUp = false
         presentationMode.wrappedValue.dismiss()
         isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
