@@ -7,8 +7,10 @@ struct SpendingDetailSheetView: View {
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
     @State private var forceUpdate: Bool = false
-    @Binding var clickDate: Date?
+    @State private var isDeleted: Bool = false
 
+    @Binding var clickDate: Date?
+    
     @StateObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
@@ -29,7 +31,7 @@ struct SpendingDetailSheetView: View {
                         
                     Spacer()
                     
-                    if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil {
+                    if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil || isDeleted {
                         // 지출내역이 없을 경우 편집버튼 없음
                     } else {
                         Button(action: {
@@ -58,7 +60,7 @@ struct SpendingDetailSheetView: View {
                 .padding(.trailing, 17)
                 .padding(.top, 12)
                 
-                if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil {
+                if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil || isDeleted {
                     NoSpendingHistorySheetView()
                 } else {
                     ScrollView {
@@ -85,7 +87,7 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showEditSpendingDetailView) {
                 NavigationAvailable {
-                    EditSpendingDetailView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel)
+                    EditSpendingDetailView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isDeleted: $isDeleted)
                 }
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
@@ -109,16 +111,4 @@ struct SpendingDetailSheetView: View {
         Log.debug(day)
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
-    
-//    private func filteredSpendings() -> [IndividualSpending] {
-//        guard let clickDate = clickDate else {
-//            return []
-//        }
-//        return spendingHistoryViewModel.dailyDetailSpendings.filter { spending in
-//            if let spendDate = spendingHistoryViewModel.dateFromString(spending.spendAt) {
-//                return Calendar.current.isDate(spendDate, inSameDayAs: clickDate)
-//            }
-//            return false
-//        }
-//    }
 }

@@ -3,20 +3,23 @@ import SwiftUI
 // MARK: - EditSpendingDetailView
 
 struct EditSpendingDetailView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+
     @State var showingDeletePopUp = false
     @State var showingClosePopUp = false
-    @Environment(\.presentationMode) var presentationMode
     @State private var isItemSelected: Bool = false
-    @Binding var clickDate: Date?
-    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State private var selectedIds: Set<Int> = []
+
+    @Binding var clickDate: Date?
+    @Binding var isDeleted: Bool
 
     var body: some View {
         ZStack {
             VStack {
                 ScrollView {
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
-                        
+
                     HStack(spacing: 4 * DynamicSizeFactor.factor()) {
                         Button(action: {
                             toggleAllSelections()
@@ -24,7 +27,7 @@ struct EditSpendingDetailView: View {
                             Image(selectedIds.count == spendingHistoryViewModel.filteredSpendings(for: clickDate).count ? "icon_checkone_on_small" : "icon_checkone_off_small_gray03")
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                
+
                             Text("전체 선택")
                                 .font(.B2MediumFont())
                                 .platformTextColor(color: Color("Gray05"))
@@ -32,14 +35,14 @@ struct EditSpendingDetailView: View {
                         })
                         .padding(.vertical, 4)
                         .padding(.trailing, 8)
-                            
+
                         Spacer()
                     }
                     .padding(.leading, 14)
                     // EditNoHistorySpendingView() -> 달의 소비내역이 없으면
-                        
+
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
-                        
+
                     VStack(spacing: 0) {
                         ForEach(spendingHistoryViewModel.filteredSpendings(for: clickDate), id: \.id) { item in
                             let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
@@ -51,7 +54,7 @@ struct EditSpendingDetailView: View {
                                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                         .aspectRatio(contentMode: .fill)
                                 }
-                                
+
                                 CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                     .padding(.leading, 13 * DynamicSizeFactor.factor())
                             }
@@ -63,15 +66,15 @@ struct EditSpendingDetailView: View {
                     }
                     .padding(.bottom, 103)
                 }
-                    
+
                 Spacer()
-                
+
                 CustomBottomButton(action: {
                     if isItemSelected {
                         showingDeletePopUp = true
                         Log.debug("showingDeletePopUp: \(showingDeletePopUp)")
                     }
-                    
+
                 }, label: "삭제하기", isFormValid: $isItemSelected)
                     .padding(.bottom, 34)
             }
@@ -111,7 +114,7 @@ struct EditSpendingDetailView: View {
                                 secondBtnColor: Color("Mint03")
                 )
             }
-                
+
             if showingDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
@@ -126,7 +129,7 @@ struct EditSpendingDetailView: View {
             }
         }
     }
-    
+
     private func toggleAllSelections() {
         let allSelected = selectedIds.count == spendingHistoryViewModel.filteredSpendings(for: clickDate).count
         if allSelected {
@@ -136,7 +139,7 @@ struct EditSpendingDetailView: View {
         }
         updateSelectionState() 
     }
-    
+
     private func updateSelectionState() {
         isItemSelected = !selectedIds.isEmpty
     }
@@ -155,9 +158,11 @@ struct EditSpendingDetailView: View {
         selectedIds.removeAll()
         updateSelectionState()
         showingDeletePopUp = false
+        presentationMode.wrappedValue.dismiss()
+        isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
     }
 }
 
 #Preview {
-    EditSpendingDetailView(clickDate: .constant(Date()), spendingHistoryViewModel: SpendingHistoryViewModel())
+    EditSpendingDetailView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), isDeleted: .constant(true))
 }
