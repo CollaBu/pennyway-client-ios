@@ -96,7 +96,7 @@ struct MySpendingListView: View {
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 HStack {
                     NavigationBackButton()
                         .padding(.leading, 5)
