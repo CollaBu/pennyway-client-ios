@@ -22,7 +22,6 @@ struct SpendingCategoryGridView: View {
                             NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel, category: category)) {
                                 VStack(spacing: 2 * DynamicSizeFactor.factor()) {
                                     Spacer().frame(height: 8 * DynamicSizeFactor.factor())
-                                    
                                     Image("\(category.icon.rawValue)")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -118,6 +117,7 @@ struct SpendingCategoryGridView: View {
                 }
             }
         }
+
         NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: SpendingCategoryViewModel), isActive: $navigateToAddCategoryView) {}
     }
 }
