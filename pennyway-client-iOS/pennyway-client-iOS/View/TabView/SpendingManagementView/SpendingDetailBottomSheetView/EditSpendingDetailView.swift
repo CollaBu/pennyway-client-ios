@@ -130,7 +130,7 @@ struct EditSpendingDetailView: View {
         }
     }
 
-    private func toggleAllSelections() {
+    private func toggleAllSelections() { // 전체 선택시
         let allSelected = selectedIds.count == spendingHistoryViewModel.filteredSpendings(for: clickDate).count
         if allSelected {
             selectedIds.removeAll()
@@ -140,7 +140,7 @@ struct EditSpendingDetailView: View {
         isItemSelected = !selectedIds.isEmpty
     }
 
-    private func toggleSelection(for item: IndividualSpending) {
+    private func toggleSelection(for item: IndividualSpending) { // 개인 선택 시
         if selectedIds.contains(item.id) {
             selectedIds.remove(item.id)
         } else {
@@ -150,11 +150,19 @@ struct EditSpendingDetailView: View {
     }
 
     private func deleteSelectedItems() {
+        let totalSelectedCount = selectedIds.count
+        let totalSpendingsCount = spendingHistoryViewModel.filteredSpendings(for: clickDate).count
+
         spendingHistoryViewModel.dailyDetailSpendings.removeAll { selectedIds.contains($0.id) }
         selectedIds.removeAll()
         isItemSelected = !selectedIds.isEmpty
         showingDeletePopUp = false
-        presentationMode.wrappedValue.dismiss()
+
+        // 내역을 전체 삭제한 경우에만 현재 창을 닫기
+        if totalSelectedCount == totalSpendingsCount {
+            presentationMode.wrappedValue.dismiss()
+        }
+
         isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
     }
 }

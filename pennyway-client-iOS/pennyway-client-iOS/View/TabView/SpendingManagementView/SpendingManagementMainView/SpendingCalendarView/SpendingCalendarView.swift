@@ -7,13 +7,20 @@ struct SpendingCalenderView: View {
 
     @State private var selectedDate: Date?
     @Binding var showSpendingDetailView: Bool
-    @State private var date: Date = Date()
+    @State private var date: Date
     @State private var clickedCurrentMonthDates: Date?
     @Binding var clickDate: Date?
 
     let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
     
     var checkChangeMonth = false
+    
+    init(spendingHistoryViewModel: SpendingHistoryViewModel, showSpendingDetailView: Binding<Bool>, date _: Binding<Date>, clickDate: Binding<Date?>) {
+        self.spendingHistoryViewModel = spendingHistoryViewModel
+        _showSpendingDetailView = showSpendingDetailView 
+        _date = State(initialValue: spendingHistoryViewModel.currentDate)
+        _clickDate = clickDate
+    }
   
     var body: some View {
         VStack {

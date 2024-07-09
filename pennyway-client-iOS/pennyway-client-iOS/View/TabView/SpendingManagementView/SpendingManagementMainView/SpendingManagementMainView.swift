@@ -34,7 +34,7 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView, clickDate: $clickDate)
+                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView, date: $spendingHistoryViewModel.currentDate, clickDate: $clickDate)
                         .padding(.horizontal, 20)
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
