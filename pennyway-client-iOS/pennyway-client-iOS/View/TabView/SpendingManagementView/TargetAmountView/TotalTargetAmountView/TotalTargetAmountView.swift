@@ -37,7 +37,7 @@ struct TotalTargetAmountView: View {
                     }, alignment: .topTrailing
                 )
             }
-            NavigationLink(destination: TargetAmountSettingView(targetAmount: .constant(nil)), isActive: $navigateToEditTarget) {}
+            NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData), isActive: $navigateToEditTarget) {}
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Gray01"))

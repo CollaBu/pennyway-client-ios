@@ -43,7 +43,3 @@ struct TargetAmountSetCompleteView: View {
         NavigationUtil.popToView(at: 1)
     }
 }
-
-#Preview {
-    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel())
-}

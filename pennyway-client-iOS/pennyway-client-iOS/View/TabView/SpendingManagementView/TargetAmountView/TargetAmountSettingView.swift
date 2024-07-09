@@ -2,9 +2,14 @@
 import SwiftUI
 
 struct TargetAmountSettingView: View {
-    @Binding var targetAmount: String?
-    @StateObject var viewModel = TargetAmountSettingViewModel()
+    @Binding var currentData: TargetAmount
+    @StateObject var viewModel: TargetAmountSettingViewModel
     @State private var navigateToCompleteTarget = false
+
+    init(currentData: Binding<TargetAmount>) {
+        _currentData = currentData
+        _viewModel = StateObject(wrappedValue: TargetAmountSettingViewModel(currentData: currentData.wrappedValue))
+    }
     
     var body: some View {
         ZStack {
@@ -27,8 +32,8 @@ struct TargetAmountSettingView: View {
                             .fill(Color("Gray01"))
                             .frame(height: 46 * DynamicSizeFactor.factor())
 
-                        if targetAmount != nil {
-                            Text("\(String(describing: targetAmount))")
+                        if currentData.targetAmountDetail.id != -1 {
+                            Text("\(currentData.targetAmountDetail.amount)")
                                 .platformTextColor(color: Color("Gray03"))
                                 .padding(.leading, 13 * DynamicSizeFactor.factor())
                                 .font(.H2SemiboldFont())
@@ -63,17 +68,11 @@ struct TargetAmountSettingView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
                     NavigationBackButton(action: {})
-                    
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-                    
                 }.offset(x: -10)
             }
         }
     }
-}
-
-#Preview {
-    TargetAmountSettingView(targetAmount: .constant(nil), viewModel: TargetAmountSettingViewModel())
 }
