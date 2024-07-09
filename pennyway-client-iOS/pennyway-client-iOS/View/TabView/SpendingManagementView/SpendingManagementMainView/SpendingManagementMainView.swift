@@ -9,9 +9,9 @@ struct SpendingManagementMainView: View {
     @State private var navigateToMySpendingList = false
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
-    @State private var ishidden = false // 변수명 바꿀 필요
-    @State private var selectedDate: Date? // 선택된 날짜 저장
-    @State private var clickDate: Date?
+    @State private var ishidden = false
+    ///    @State private var selectedDate: Date?
+    @State private var clickDate: Date? // 선택된 날짜 저장
     @State private var addSpendingClickDate: Date?
     @State private var addSpendingSelectedDate: Date?
 
