@@ -14,7 +14,7 @@ struct AddSpendingCategoryView: View {
         VStack(spacing: 0) {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             ZStack {
-                Image((viewModel.selectedCategoryIcon ?? .etcOn).rawValue)
+                Image((viewModel.selectedCategoryIcon ?? CategoryIconName(baseName: CategoryBaseName.etc, state: .on)).rawValue)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)

@@ -6,7 +6,7 @@ import SwiftUI
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    @State var selectedCategoryIcon: CategoryIconName = .etcOn
+    @State var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: CategoryBaseName.etc, state: .onMint)
 
     let columns = [
         GridItem(.flexible(), spacing: 32),
@@ -16,18 +16,18 @@ struct SelectCategoryIconView: View {
     ]
 
     let icons: [CategoryIconListItem] = [
-        CategoryIconListItem(offIcon: .foodOff, onIcon: .foodOn),
-        CategoryIconListItem(offIcon: .trafficOff, onIcon: .trafficOn),
-        CategoryIconListItem(offIcon: .beautyOff, onIcon: .beautyOn),
-        CategoryIconListItem(offIcon: .marketOff, onIcon: .marketOn),
-        CategoryIconListItem(offIcon: .educationOff, onIcon: .educationOn),
-        CategoryIconListItem(offIcon: .lifeOff, onIcon: .lifeOn),
-        CategoryIconListItem(offIcon: .healthOff, onIcon: .healthOn),
-        CategoryIconListItem(offIcon: .hobbyOff, onIcon: .hobbyOn),
-        CategoryIconListItem(offIcon: .travelOff, onIcon: .travelOn),
-        CategoryIconListItem(offIcon: .drinkOff, onIcon: .drinkOn),
-        CategoryIconListItem(offIcon: .eventOff, onIcon: .eventOn),
-        CategoryIconListItem(offIcon: .etcOff, onIcon: .etcOn)
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.food, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.food, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.traffic, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.traffic, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.beauty, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.beauty, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.market, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.market, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.education, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.education, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.life, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.life, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.health, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.health, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.hobby, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.hobby, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.travel, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.travel, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.drink, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.drink, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.event, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.event, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.etc, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.etc, state: .onMint))
     ]
 
     var body: some View {
@@ -60,7 +60,7 @@ struct SelectCategoryIconView: View {
             CustomBottomButton(action: {
                 if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
                     viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                    viewModel.selectedCategoryIcon = selectedCategoryIcon
+                    viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
                     Log.debug(viewModel.selectedCategoryIconTitle)
                     isPresented = false
                 }
@@ -71,8 +71,22 @@ struct SelectCategoryIconView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             if let icon = viewModel.selectedCategoryIcon {
-                selectedCategoryIcon = icon
+                selectedCategoryIcon = mapToOnMintIcon(icon)
             }
         }
+    }
+
+    private func mapToOnIcon(_ icon: CategoryIconName) -> CategoryIconName {
+        if icon.state == .onMint {
+            return CategoryIconName(baseName: icon.baseName, state: .on)
+        }
+        return icon
+    }
+
+    private func mapToOnMintIcon(_ icon: CategoryIconName) -> CategoryIconName {
+        if icon.state == .on {
+            return CategoryIconName(baseName: icon.baseName, state: .onMint)
+        }
+        return icon
     }
 }

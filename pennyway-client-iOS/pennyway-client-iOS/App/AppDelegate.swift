@@ -54,12 +54,12 @@ extension AppDelegate: MessagingDelegate {
             if let storedFcmToken = KeychainHelper.loadFcmToken() {
                 // 2. fcmToken이 KeychainHelper에 저장되어 있는 경우
                 if storedFcmToken != fcmToken {
-                    // 2.1 저장된 값과 비교해서 다르면 -> registDeviceToken() 호출
+                    // 2.1 저장된 값과 비교해서 다르면 -> registDeviceTokenApi() 호출
                     KeychainHelper.saveFcmToken(fcmToken: fcmToken)
                     Log.info("fcmToken updated: \(fcmToken)")
                     registDeviceTokenApi(fcmToken: fcmToken)
                 } else {
-                    // 2.2 저장된 값과 같으면 -> registDeviceToken() 호출 x
+                    // 2.2 저장된 값과 같으면 -> registDeviceTokenApi() 호출 x
                     Log.info("fcmToken이 저장된 값과 같다")
                 }
             } else {
