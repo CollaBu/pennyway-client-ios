@@ -10,15 +10,14 @@ class TargetAmountSettingViewModel: ObservableObject {
 
     init(currentData: TargetAmount) {
         self.currentData = currentData
-        inputTargetAmount = String(currentData.targetAmountDetail.amount)
     }
 
     func validateForm() {
         isFormValid = !inputTargetAmount.isEmpty
     }
 
-    func editCurrentMonthTargetAmountApi() {
-        let editCurrentMonthTargetAmountRequestDto = EditCurrentMonthTargetAmountRequestDto(amount: currentData?.targetAmountDetail.amount ?? 0)
+    func editCurrentMonthTargetAmountApi(completion: @escaping (Bool) -> Void) {
+        let editCurrentMonthTargetAmountRequestDto = EditCurrentMonthTargetAmountRequestDto(amount: Int(inputTargetAmount.replacingOccurrences(of: ",", with: "")) ?? 0)
 
         TargetAmountAlamofire.shared.editCurrentMonthTargetAmount(targetAmountId: currentData?.targetAmountDetail.id ?? -1, dto: editCurrentMonthTargetAmountRequestDto) { result in
             switch result {
@@ -26,6 +25,7 @@ class TargetAmountSettingViewModel: ObservableObject {
                 if let responseData = data {
                     if let jsonString = String(data: responseData, encoding: .utf8) {
                         Log.debug("당월 목표 금액 수정 완료 \(jsonString)")
+                        completion(true)
                     }
                 }
             case let .failure(error):
@@ -34,6 +34,7 @@ class TargetAmountSettingViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
             }
         }
     }

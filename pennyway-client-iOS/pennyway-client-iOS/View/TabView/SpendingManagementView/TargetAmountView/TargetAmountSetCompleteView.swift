@@ -43,3 +43,7 @@ struct TargetAmountSetCompleteView: View {
         NavigationUtil.popToView(at: 1)
     }
 }
+
+#Preview {
+    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel(currentData: TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)))
+}

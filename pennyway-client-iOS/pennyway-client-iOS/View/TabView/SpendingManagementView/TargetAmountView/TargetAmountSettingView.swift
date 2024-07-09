@@ -32,7 +32,7 @@ struct TargetAmountSettingView: View {
                             .fill(Color("Gray01"))
                             .frame(height: 46 * DynamicSizeFactor.factor())
 
-                        if currentData.targetAmountDetail.id != -1 {
+                        if currentData.targetAmountDetail.amount != -1 && viewModel.inputTargetAmount.isEmpty {
                             Text("\(currentData.targetAmountDetail.amount)")
                                 .platformTextColor(color: Color("Gray03"))
                                 .padding(.leading, 13 * DynamicSizeFactor.factor())
@@ -44,6 +44,7 @@ struct TargetAmountSettingView: View {
                             .keyboardType(.numberPad)
                             .onChange(of: viewModel.inputTargetAmount) { _ in
                                 viewModel.inputTargetAmount = NumberFormatterUtil.formatStringToDecimalString(viewModel.inputTargetAmount)
+                                Log.debug(viewModel.inputTargetAmount)
                                 viewModel.validateForm()
                             }
                     }
@@ -54,7 +55,14 @@ struct TargetAmountSettingView: View {
                 
                 CustomBottomButton(action: {
                     if viewModel.isFormValid {
-                        navigateToCompleteTarget = true
+                        viewModel.editCurrentMonthTargetAmountApi { success in
+                            if success {
+                                Log.debug("목표 금액 수정 성공")
+                                navigateToCompleteTarget = true
+                            } else {
+                                Log.debug("목표 금액 수정 실패")
+                            }
+                        }
                     }
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
@@ -75,4 +83,8 @@ struct TargetAmountSettingView: View {
             }
         }
     }
+}
+
+#Preview {
+    TargetAmountSettingView(currentData: .constant(TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)))
 }
