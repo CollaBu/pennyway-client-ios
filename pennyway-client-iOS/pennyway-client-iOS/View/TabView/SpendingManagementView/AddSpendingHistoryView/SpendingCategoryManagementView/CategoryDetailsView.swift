@@ -81,6 +81,7 @@ struct CategoryDetailsView: View {
                 }
             }, alignment: .topTrailing
         )
+        .navigationBarColor(UIColor(named: "White01"), title: "")
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -103,7 +104,7 @@ struct CategoryDetailsView: View {
                 if category.isCustom {
                     HStack {
                         Button(action: {
-                            isClickMenu = true
+                            isClickMenu.toggle()
                             selectedMenu = nil
                         }, label: {
                             Image("icon_navigationbar_kebabmenu")
