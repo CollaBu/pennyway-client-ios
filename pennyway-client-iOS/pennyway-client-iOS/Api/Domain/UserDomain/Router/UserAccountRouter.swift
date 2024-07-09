@@ -5,6 +5,7 @@ import Foundation
 enum UserAccountRouter: URLRequestConvertible {
     case getUserProfile
     case deleteUserAccount
+    case registDeviceToken(dto: FcmTokenDto)
     
     var method: HTTPMethod {
         switch self {
@@ -12,6 +13,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return .get
         case .deleteUserAccount:
             return .delete
+        case .registDeviceToken:
+            return .put
         }
     }
     
@@ -23,6 +26,8 @@ enum UserAccountRouter: URLRequestConvertible {
         switch self {
         case .getUserProfile, .deleteUserAccount:
             return "v2/users/me"
+        case .registDeviceToken:
+            return "v2/users/me/device-tokens"
         }
     }
     
@@ -30,6 +35,8 @@ enum UserAccountRouter: URLRequestConvertible {
         switch self {
         case .getUserProfile, .deleteUserAccount:
             return [:]
+        case let .registDeviceToken(dto):
+            return try? dto.asDictionary()
         }
     }
 
@@ -40,6 +47,8 @@ enum UserAccountRouter: URLRequestConvertible {
         switch self {
         case .getUserProfile, .deleteUserAccount:
             request = URLRequest.createURLRequest(url: url, method: method)
+        case .registDeviceToken:
+            request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         }
         return request
     }

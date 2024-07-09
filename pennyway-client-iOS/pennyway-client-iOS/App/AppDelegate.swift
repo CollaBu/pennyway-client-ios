@@ -51,8 +51,47 @@ extension AppDelegate: MessagingDelegate {
     /// fcm 등록 토큰을 받았을 때
     func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let fcmToken = fcmToken {
-            KeychainHelper.saveFcmToken(fcmToken: fcmToken)
-            Log.debug("fcmToken: \(fcmToken)")
+            if let storedFcmToken = KeychainHelper.loadFcmToken() {
+                // 2. fcmToken이 KeychainHelper에 저장되어 있는 경우
+                if storedFcmToken != fcmToken {
+                    // 2.1 저장된 값과 비교해서 다르면 -> registDeviceTokenApi() 호출
+                    KeychainHelper.saveFcmToken(fcmToken: fcmToken)
+                    Log.info("fcmToken updated: \(fcmToken)")
+                    registDeviceTokenApi(fcmToken: fcmToken)
+                } else {
+                    // 2.2 저장된 값과 같으면 -> registDeviceTokenApi() 호출 x
+                    Log.info("fcmToken이 저장된 값과 같다")
+                }
+            } else {
+                // 1. fcmToken이 KeychainHelper에 저장되지 않은 경우 -> fcmToken 저장
+                KeychainHelper.saveFcmToken(fcmToken: fcmToken)
+                Log.info("fcmToken saved: \(fcmToken)")
+                registDeviceTokenApi(fcmToken: fcmToken)
+            }
+        }
+    }
+
+    private func registDeviceTokenApi(fcmToken: String) {
+        let fcmTokenDto = FcmTokenDto(token: fcmToken)
+
+        UserAccountAlamofire.shared.registDeviceToken(fcmTokenDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        Log.debug(response)
+                    } catch {
+                        Log.fault("Error parsing response JSON: \(error)")
+                    }
+                }
+            case let .failure(error):
+                if let statusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+            }
         }
     }
 }
@@ -69,7 +108,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     {
         let userInfo = notification.request.content.userInfo
 
-        // Do Something With MSG Data...
         if let messageID = userInfo[gcmMessageIDKey] {
             Log.debug("Message ID: \(messageID)")
         }
@@ -86,7 +124,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     {
         let userInfo = response.notification.request.content.userInfo
 
-        // Do Something With MSG Data...
         if let messageID = userInfo[gcmMessageIDKey] {
             Log.debug("Message ID: \(messageID)")
         }
