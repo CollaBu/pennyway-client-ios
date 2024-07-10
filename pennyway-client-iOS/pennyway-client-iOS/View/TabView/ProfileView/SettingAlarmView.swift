@@ -1,12 +1,10 @@
-
 import SwiftUI
 
 struct SettingAlarmView: View {
-    @State private var toggleStates: [Bool] = [false, false, false]
     @StateObject var viewModel = UserAccountViewModel()
 
     var toggleListArray: [String] = ["지출 관리", "채팅방", "피드"]
-    var alarmTypes: [String] = ["ACCOUNT_BOOK", "FEED", "CHAT"]
+    var alarmTypes: [String] = ["ACCOUNT_BOOK", "CHAT", "FEED"]
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -30,7 +28,17 @@ struct SettingAlarmView: View {
 
                             Spacer()
 
-                            Toggle(isOn: $toggleStates[item], label: {
+                            Toggle(isOn: Binding(
+                                get: { viewModel.toggleStates[item]},
+                                set: { newValue in
+                                    viewModel.toggleStates[item] = newValue
+                                    if newValue { // 토글 상태가 on
+                                        settingOnAlarm(type: alarmTypes[item])
+                                    } else { // 토글 상태가 off
+                                        settingOffAlarm(type: alarmTypes[item])
+                                    }
+                                }
+                            ), label: {
                                 Text(toggleListArray[item])
                                     .padding(.leading, 17)
                                     .font(.H4MediumFont())
@@ -39,19 +47,21 @@ struct SettingAlarmView: View {
                             .toggleStyle(CustomToggleStyle())
                             .padding(.trailing, 30)
                             .padding(.vertical, 18)
-                            .onChange(of: toggleStates[item]) { newValue in
-                                if newValue { // 토글 상태가 on
-                                    settingOnAlarm(type: alarmTypes[item])
-                                } else { // 토글 상태가 off
-                                    settingOffAlarm(type: alarmTypes[item])
-                                }
-                            }
                         }
                     }
                 }
                 Spacer()
             }
             .padding(.horizontal, 20)
+            .onAppear {
+                viewModel.getUserProfileApi { success in
+                    if success {
+                        Log.debug("알람 설정 조회 성공")
+                    } else {
+                        Log.debug("알람 설정 조회 실패")
+                    }
+                }
+            }
         }
         .navigationBarColor(UIColor(named: "White01"), title: "")
         .setTabBarVisibility(isHidden: true)
@@ -70,25 +80,23 @@ struct SettingAlarmView: View {
     }
 
     private func settingOnAlarm(type: String) { // 알람 활성화
-        Log.debug("알람 \(type)을(를) 활성화")
-
         viewModel.settingOnAlarmApi(type: type) { success in
             if success {
                 Log.debug("알람 활성화 성공")
+                viewModel.refreshToggleStates()
             } else {
-                Log.error("알람 활성화 실패")
+                Log.debug("알람 활성화 실패")
             }
         }
     }
 
     private func settingOffAlarm(type: String) { // 알람 비활성화
-        Log.debug("알람 \(type)을(를) 비활성화")
-
         viewModel.settingOffAlarmApi(type: type) { success in
             if success {
                 Log.debug("알람 비활성화 성공")
+                viewModel.refreshToggleStates()
             } else {
-                Log.error("알람 비활성화 실패")
+                Log.debug("알람 비활성화 실패")
             }
         }
     }
