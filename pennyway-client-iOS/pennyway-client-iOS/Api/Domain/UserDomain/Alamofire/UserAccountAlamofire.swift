@@ -38,4 +38,10 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.settingOnAlarm(type: type), completion: completion)
     }
+    
+    func settingOffAlarm(type: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - settingOffAlarm() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.settingOffAlarm(type: type), completion: completion)
+    }
 }

@@ -40,7 +40,11 @@ struct SettingAlarmView: View {
                             .padding(.trailing, 30)
                             .padding(.vertical, 18)
                             .onChange(of: toggleStates[item]) { newValue in
-                                settingOnAlarm(type: alarmTypes[item], isOn: newValue)
+                                if newValue { // 토글 상태가 on
+                                    settingOnAlarm(type: alarmTypes[item])
+                                } else { // 토글 상태가 off
+                                    settingOffAlarm(type: alarmTypes[item])
+                                }
                             }
                         }
                     }
@@ -65,15 +69,28 @@ struct SettingAlarmView: View {
         }
     }
 
-    private func settingOnAlarm(type: String, isOn: Bool) { // 알람 활성화
-        let action = isOn ? "활성화" : "비활성화"
-        Log.debug("알람 \(type)을(를) \(action)합니다.")
+    private func settingOnAlarm(type: String) { // 알람 활성화
+//        let action = isOn ? "활성화" : "비활성화"
+        Log.debug("알람 \(type)을(를) 활성화")
 
         viewModel.settingOnAlarmApi(type: type) { success in
             if success {
-                Log.debug("알람 설정 성공")
+                Log.debug("알람 활성화 성공")
             } else {
-                Log.error("알람 설정 실패")
+                Log.error("알람 활성화 실패")
+            }
+        }
+    }
+
+    private func settingOffAlarm(type: String) { // 알람 비활성화
+//        let action = isOn ? "활성화" : "비활성화"
+        Log.debug("알람 \(type)을(를) 비활성화")
+
+        viewModel.settingOffAlarmApi(type: type) { success in
+            if success {
+                Log.debug("알람 비활성화 성공")
+            } else {
+                Log.error("알람 비활성화 실패")
             }
         }
     }
