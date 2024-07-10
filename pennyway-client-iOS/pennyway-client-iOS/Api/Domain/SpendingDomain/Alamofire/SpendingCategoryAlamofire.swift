@@ -25,4 +25,10 @@ class SpendingCategoryAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingCategoryRouter.addSpendingCustomCategory(dto: dto), completion: completion)
     }
+    
+    func getCategorySpendingCount(_ categoryId: Int ,_ dto: GetCategorySpendingCountRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingCategoryAlamofire - getCategorySpendingCount() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingCategoryRouter.getCategorySpendingCount(categoryId: categoryId,dto: dto), completion: completion)
+    }
 }

@@ -61,6 +61,7 @@
 		4A3701D72C090CD600F0AEBA /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701D62C090CD500F0AEBA /* Value.swift */; };
 		4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE20D2C3E41EC00817589 /* SpendingCategoryAlamofire.swift */; };
 		4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE20F2C3E423800817589 /* SpendingCategoryRouter.swift */; };
+		4A3DE2162C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */; };
 		4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */; };
 		4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */; };
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */; };
@@ -305,6 +306,7 @@
 		4A3701D62C090CD500F0AEBA /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		4A3DE20D2C3E41EC00817589 /* SpendingCategoryAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryAlamofire.swift; sourceTree = "<group>"; };
 		4A3DE20F2C3E423800817589 /* SpendingCategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryRouter.swift; sourceTree = "<group>"; };
+		4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingCountRequestDto.swift; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -851,9 +853,8 @@
 		4A3701C32C08F7F600F0AEBA /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				4A3701C02C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift */,
-				4A3701C12C08F7F600F0AEBA /* AddSpendingHistoryRequestDto.swift */,
-				4A3701C22C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift */,
+				4A3DE2122C3E443B00817589 /* Spending */,
+				4A3DE2112C3E442C00817589 /* SpendingCategory */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -861,10 +862,8 @@
 		4A3701C82C08F7F600F0AEBA /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				4A3701C42C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift */,
-				4A3701C52C08F7F600F0AEBA /* AddSpendingHistoryResponseDto.swift */,
-				4A3701C62C08F7F600F0AEBA /* getSpendingCustomCategoryListResponseDto.swift */,
-				4A3701C72C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift */,
+				4A3DE2142C3E445A00817589 /* SpendingCategory */,
+				4A3DE2132C3E444600817589 /* Spending */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -895,6 +894,42 @@
 				4A3701CB2C08F7F600F0AEBA /* Router */,
 			);
 			path = SpendingDomain;
+			sourceTree = "<group>";
+		};
+		4A3DE2112C3E442C00817589 /* SpendingCategory */ = {
+			isa = PBXGroup;
+			children = (
+				4A3701C02C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift */,
+				4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */,
+			);
+			path = SpendingCategory;
+			sourceTree = "<group>";
+		};
+		4A3DE2122C3E443B00817589 /* Spending */ = {
+			isa = PBXGroup;
+			children = (
+				4A3701C12C08F7F600F0AEBA /* AddSpendingHistoryRequestDto.swift */,
+				4A3701C22C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift */,
+			);
+			path = Spending;
+			sourceTree = "<group>";
+		};
+		4A3DE2132C3E444600817589 /* Spending */ = {
+			isa = PBXGroup;
+			children = (
+				4A3701C52C08F7F600F0AEBA /* AddSpendingHistoryResponseDto.swift */,
+				4A3701C72C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift */,
+			);
+			path = Spending;
+			sourceTree = "<group>";
+		};
+		4A3DE2142C3E445A00817589 /* SpendingCategory */ = {
+			isa = PBXGroup;
+			children = (
+				4A3701C42C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift */,
+				4A3701C62C08F7F600F0AEBA /* getSpendingCustomCategoryListResponseDto.swift */,
+			);
+			path = SpendingCategory;
 			sourceTree = "<group>";
 		};
 		4A4703972BCED80000AEE04E /* Response */ = {
@@ -1764,6 +1799,7 @@
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
 				4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
+				4A3DE2162C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift in Sources */,
 				4AC320652C120C0D00DDB4B6 /* TargetAmountModel.swift in Sources */,
 				D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */,
 				D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */,
