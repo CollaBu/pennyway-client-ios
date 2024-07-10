@@ -64,6 +64,8 @@
 		4A3DE2162C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */; };
 		4A3DE2182C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */; };
 		4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */; };
+		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
+		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
 		4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */; };
 		4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */; };
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */; };
@@ -310,6 +312,8 @@
 		4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingCountRequestDto.swift; sourceTree = "<group>"; };
 		4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingCountResponseDto.swift; sourceTree = "<group>"; };
 		4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
+		4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
+		4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingResponseDto.swift; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -557,6 +561,7 @@
 				4A058EFE2BD03E01004B6F89 /* AuthResponseDto.swift */,
 				4A4703AF2BCF897300AEE04E /* ErrorResponseDto.swift */,
 				4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */,
+				4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -932,6 +937,7 @@
 				4A3701C42C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift */,
 				4A3701C62C08F7F600F0AEBA /* getSpendingCustomCategoryListResponseDto.swift */,
 				4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */,
+				4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */,
 			);
 			path = SpendingCategory;
 			sourceTree = "<group>";
@@ -1781,6 +1787,7 @@
 				D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
+				4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */,
 				4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */,
 				4AC320432C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift in Sources */,
 				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
@@ -1838,6 +1845,7 @@
 				4AC3204A2C11D5AC00DDB4B6 /* NoSpendingHistorySheetView.swift in Sources */,
 				4AC320532C11D5AC00DDB4B6 /* DiffAmountDynamicWidthView.swift in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
+				4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */,
 				4A69C1522BE695FF00A27B82 /* FindUserNameViewModel.swift in Sources */,
 				4A0FFBF92BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
