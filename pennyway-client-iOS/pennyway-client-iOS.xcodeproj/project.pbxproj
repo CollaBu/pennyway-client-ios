@@ -62,6 +62,7 @@
 		4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE20D2C3E41EC00817589 /* SpendingCategoryAlamofire.swift */; };
 		4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE20F2C3E423800817589 /* SpendingCategoryRouter.swift */; };
 		4A3DE2162C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */; };
+		4A3DE2182C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */; };
 		4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */; };
 		4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */; };
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */; };
@@ -307,6 +308,7 @@
 		4A3DE20D2C3E41EC00817589 /* SpendingCategoryAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryAlamofire.swift; sourceTree = "<group>"; };
 		4A3DE20F2C3E423800817589 /* SpendingCategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryRouter.swift; sourceTree = "<group>"; };
 		4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingCountRequestDto.swift; sourceTree = "<group>"; };
+		4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingCountResponseDto.swift; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -928,6 +930,7 @@
 			children = (
 				4A3701C42C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift */,
 				4A3701C62C08F7F600F0AEBA /* getSpendingCustomCategoryListResponseDto.swift */,
+				4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */,
 			);
 			path = SpendingCategory;
 			sourceTree = "<group>";
@@ -1998,6 +2001,7 @@
 				4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */,
 				4AC320542C11D5AC00DDB4B6 /* TotalTargetAmountContentView.swift in Sources */,
 				4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */,
+				4A3DE2182C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
 				4A5DA8C12C3C498D00685F77 /* FcmTokenDto.swift in Sources */,
 				4A5789732BDC1C0B00AFEB26 /* ForbiddenErrorCode.swift in Sources */,

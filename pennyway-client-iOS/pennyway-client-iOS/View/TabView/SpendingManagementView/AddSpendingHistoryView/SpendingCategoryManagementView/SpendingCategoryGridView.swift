@@ -8,6 +8,7 @@ struct SpendingCategoryGridView: View {
     @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel // 카테고리 생성 연동 처리
     @Environment(\.presentationMode) var presentationMode
     
+    @State var navigateToCategoryDetails = false
     @State var navigateToAddCategoryView = false
 
     var body: some View {
@@ -19,14 +20,18 @@ struct SpendingCategoryGridView: View {
                     // 시스템 카테고리
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(SpendingCategoryViewModel.systemCategories) { category in
-                            NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel, category: category)) {
+                            Button(action: {
+                                SpendingCategoryViewModel.selectedCategory = category
+                                navigateToCategoryDetails = true
+                                SpendingCategoryViewModel.getCategorySpendingCountApi { _ in }
+                            }) {
                                 VStack(spacing: 2 * DynamicSizeFactor.factor()) {
                                     Spacer().frame(height: 8 * DynamicSizeFactor.factor())
                                     Image("\(category.icon.rawValue)")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 52 * DynamicSizeFactor.factor(), height: 52 * DynamicSizeFactor.factor())
-                                                        
+                                    
                                     Text(category.name)
                                         .font(.B1MediumFont())
                                         .platformTextColor(color: Color("Gray07"))
@@ -41,29 +46,36 @@ struct SpendingCategoryGridView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-                                        
+                    
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
-                                        
+                    
                     Text("내가 추가한")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.horizontal, 20)
-                                        
+                    
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                           
+                    
                     // 사용자 정의 카테고리
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(SpendingCategoryViewModel.customCategories) { category in
-                            NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel, category: category)) {
-                                VStack(spacing: 0) {
+                            Button(action: {
+                                SpendingCategoryViewModel.selectedCategory = category
+                                navigateToCategoryDetails = true
+                                SpendingCategoryViewModel.getCategorySpendingCountApi { _ in }
+                            }) {
+                                VStack(spacing: 2 * DynamicSizeFactor.factor()) {
+                                    Spacer().frame(height: 8 * DynamicSizeFactor.factor())
                                     Image("\(category.icon.rawValue)")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 52 * DynamicSizeFactor.factor(), height: 52 * DynamicSizeFactor.factor())
-                                                        
+                                    
                                     Text(category.name)
                                         .font(.B1MediumFont())
                                         .platformTextColor(color: Color("Gray07"))
+                                    
+                                    Spacer()
                                 }
                                 .frame(width: 88 * DynamicSizeFactor.factor(), height: 92 * DynamicSizeFactor.factor())
                                 .background(Color("White01"))
@@ -117,6 +129,8 @@ struct SpendingCategoryGridView: View {
                 }
             }
         }
+        
+        NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel), isActive: $navigateToCategoryDetails) {}
 
         NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: SpendingCategoryViewModel), isActive: $navigateToAddCategoryView) {}
     }

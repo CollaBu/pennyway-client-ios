@@ -5,7 +5,7 @@ import Foundation
 enum SpendingCategoryRouter: URLRequestConvertible {
     case addSpendingCustomCategory(dto: AddSpendingCustomCategoryRequestDto)
     case getSpendingCustomCategoryList
-    case getCategorySpendingCount(categoryId: Int,dto: GetCategorySpendingCountRequestDto)
+    case getCategorySpendingCount(categoryId: Int, dto: GetCategorySpendingCountRequestDto)
     
     var method: HTTPMethod {
         switch self {

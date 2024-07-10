@@ -6,7 +6,7 @@ import SwiftUI
 struct CategoryDetailsView: View {
     @ObservedObject var viewModel: SpendingCategoryViewModel
     @Environment(\.presentationMode) var presentationMode
-    var category: SpendingCategoryData // 받아온 카테고리 정보
+    ///    var category: SpendingCategoryData // 받아온 카테고리 정보
     @State private var isClickMenu = false
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]
@@ -18,20 +18,20 @@ struct CategoryDetailsView: View {
                 VStack {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-                    Image("\(category.icon.rawValue.split(separator: "_").dropLast().joined(separator: "_"))")
+                    Image("\(viewModel.selectedCategory!.icon.rawValue.split(separator: "_").dropLast().joined(separator: "_"))")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())
 
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
 
-                    Text(category.name)
+                    Text(viewModel.selectedCategory!.name)
                         .font(.H3SemiboldFont())
                         .platformTextColor(color: Color("Gray07"))
 
                     Spacer().frame(height: 4 * DynamicSizeFactor.factor())
 
-                    Text("몇개의 소비 내역")
+                    Text("\(viewModel.spedingHistoryTotalCount)개의 소비 내역")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
 
@@ -100,7 +100,7 @@ struct CategoryDetailsView: View {
                 }.offset(x: -10)
             }
             ToolbarItem(placement: .topBarTrailing) {
-                if category.isCustom {
+                if viewModel.selectedCategory!.isCustom {
                     HStack {
                         Button(action: {
                             isClickMenu = true
