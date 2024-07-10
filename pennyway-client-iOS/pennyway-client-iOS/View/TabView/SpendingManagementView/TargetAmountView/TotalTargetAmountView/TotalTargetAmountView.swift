@@ -19,25 +19,25 @@ struct TotalTargetAmountView: View {
 
                     Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                 }
-                .overlay(
-                    VStack(alignment: .leading) {
-                        if isClickMenu {
-                            CustomDropdownMenuView(
-                                isClickMenu: $isClickMenu,
-                                selectedMenu: $selectedMenu,
-                                listArray: listArray,
-                                onItemSelected: { item in
-                                    if item == "목표금액 수정" {
-                                        navigateToEditTarget = true
-                                    }
-                                    Log.debug("Selected item: \(item)")
-                                }
-                            ).padding(.trailing, 20)
-                        }
-                    }, alignment: .topTrailing
-                )
             }
-            NavigationLink(destination: TargetAmountSettingView(targetAmount: .constant(nil)), isActive: $navigateToEditTarget) {}
+            .overlay(
+                VStack(alignment: .leading) {
+                    if isClickMenu {
+                        CustomDropdownMenuView(
+                            isClickMenu: $isClickMenu,
+                            selectedMenu: $selectedMenu,
+                            listArray: listArray,
+                            onItemSelected: { item in
+                                if item == "목표금액 수정" {
+                                    navigateToEditTarget = true
+                                }
+                                Log.debug("Selected item: \(item)")
+                            }
+                        ).padding(.trailing, 20)
+                    }
+                }, alignment: .topTrailing
+            )
+            NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData), isActive: $navigateToEditTarget) {}
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Gray01"))
@@ -66,7 +66,7 @@ struct TotalTargetAmountView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 0) {
                     Button(action: {
-                        isClickMenu = true
+                        isClickMenu.toggle()
                         selectedMenu = nil
                     }, label: {
                         Image("icon_navigationbar_kebabmenu_white")

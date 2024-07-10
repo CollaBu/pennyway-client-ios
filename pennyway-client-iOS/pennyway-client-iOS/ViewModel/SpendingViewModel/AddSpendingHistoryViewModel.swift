@@ -35,6 +35,10 @@ class AddSpendingHistoryViewModel: ObservableObject {
 
     @Published var isFormValid = false // 지출내역 추가 valid
 
+    init(selectedDate: Date = Date()) {
+        self.selectedDate = selectedDate
+    }
+
     func validateForm() {
         isFormValid = (selectedCategory != nil && !amountSpentText.isEmpty)
     }
