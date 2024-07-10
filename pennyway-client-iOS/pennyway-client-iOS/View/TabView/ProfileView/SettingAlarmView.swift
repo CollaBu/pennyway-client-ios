@@ -70,7 +70,6 @@ struct SettingAlarmView: View {
     }
 
     private func settingOnAlarm(type: String) { // 알람 활성화
-//        let action = isOn ? "활성화" : "비활성화"
         Log.debug("알람 \(type)을(를) 활성화")
 
         viewModel.settingOnAlarmApi(type: type) { success in
@@ -83,7 +82,6 @@ struct SettingAlarmView: View {
     }
 
     private func settingOffAlarm(type: String) { // 알람 비활성화
-//        let action = isOn ? "활성화" : "비활성화"
         Log.debug("알람 \(type)을(를) 비활성화")
 
         viewModel.settingOffAlarmApi(type: type) { success in
