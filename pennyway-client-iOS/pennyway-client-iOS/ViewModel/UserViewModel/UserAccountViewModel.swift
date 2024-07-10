@@ -49,4 +49,31 @@ class UserAccountViewModel: ObservableObject {
             }
         }
     }
+
+    func settingOnAlarmApi(type: String, completion: @escaping (Bool) -> Void) {
+        UserAccountAlamofire.shared.settingOnAlarm(type: type) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(SettingAlarmResponseDto.self, from: responseData)
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("사용자 알람 활성화 \(jsonString)")
+                        }
+                        completion(true)
+                    } catch {
+                        Log.fault("Error decoding JSON: \(error)")
+                        completion(false)
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
 }

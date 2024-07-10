@@ -3,7 +3,10 @@ import SwiftUI
 
 struct SettingAlarmView: View {
     @State private var toggleStates: [Bool] = [false, false, false]
+    @StateObject var viewModel = UserAccountViewModel()
+
     var toggleListArray: [String] = ["지출 관리", "채팅방", "피드"]
+    var alarmTypes: [String] = ["ACCOUNT_BOOK", "FEED", "CHAT"]
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -36,6 +39,9 @@ struct SettingAlarmView: View {
                             .toggleStyle(CustomToggleStyle())
                             .padding(.trailing, 30)
                             .padding(.vertical, 18)
+                            .onChange(of: toggleStates[item]) { newValue in
+                                settingOnAlarm(type: alarmTypes[item], isOn: newValue)
+                            }
                         }
                     }
                 }
@@ -55,6 +61,19 @@ struct SettingAlarmView: View {
                         .contentShape(Rectangle())
 
                 }.offset(x: -10)
+            }
+        }
+    }
+
+    private func settingOnAlarm(type: String, isOn: Bool) { // 알람 활성화
+        let action = isOn ? "활성화" : "비활성화"
+        Log.debug("알람 \(type)을(를) \(action)합니다.")
+
+        viewModel.settingOnAlarmApi(type: type) { success in
+            if success {
+                Log.debug("알람 설정 성공")
+            } else {
+                Log.error("알람 설정 실패")
             }
         }
     }

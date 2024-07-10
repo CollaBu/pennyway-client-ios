@@ -6,6 +6,7 @@ enum UserAccountRouter: URLRequestConvertible {
     case getUserProfile
     case deleteUserAccount
     case registDeviceToken(dto: FcmTokenDto)
+    case settingOnAlarm(type: String)
     
     var method: HTTPMethod {
         switch self {
@@ -15,6 +16,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return .delete
         case .registDeviceToken:
             return .put
+        case .settingOnAlarm:
+            return .patch
         }
     }
     
@@ -28,6 +31,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return "v2/users/me"
         case .registDeviceToken:
             return "v2/users/me/device-tokens"
+        case .settingOnAlarm:
+            return "v2/users/me/notifications"
         }
     }
     
@@ -37,6 +42,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return [:]
         case let .registDeviceToken(dto):
             return try? dto.asDictionary()
+        case let .settingOnAlarm(type):
+            return ["type": type]
         }
     }
 
@@ -49,6 +56,9 @@ enum UserAccountRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method)
         case .registDeviceToken:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
+        case .settingOnAlarm:
+            let queryParameters = parameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }
         return request
     }

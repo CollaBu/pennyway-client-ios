@@ -115,7 +115,7 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showEditSpendingDetailView) {
                 NavigationAvailable {
-                    EditSpendingDetailView()
+//                    EditSpendingDetailView()
                 }
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
