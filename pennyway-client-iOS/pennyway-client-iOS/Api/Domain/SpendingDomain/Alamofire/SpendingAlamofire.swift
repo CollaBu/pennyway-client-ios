@@ -49,4 +49,10 @@ class SpendingAlamofire {
     
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.getDetailSpendingHistory(spendingId: spendingId), completion: completion)
     }
+    
+    func editSpendingHistory(spendingId: Int, _ dto: AddSpendingHistoryRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - editSpendingHistory() called")
+    
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.editSpendingHistory(spendingId: spendingId, dto: dto), completion: completion)
+    }
 }

@@ -109,7 +109,10 @@ struct EditSpendingDetailView: View {
                                 subTitleLabel: "변경된 내용은 자동 저장돼요",
                                 firstBtnAction: { self.showingClosePopUp = false },
                                 firstBtnLabel: "취소",
-                                secondBtnAction: { self.presentationMode.wrappedValue.dismiss() },
+                                secondBtnAction: {
+//                    self.presentationMode.wrappedValue.dismiss()
+                                    self.saveChangesAndClose()
+                                },
                                 secondBtnLabel: "끝낼래요",
                                 secondBtnColor: Color("Mint03")
                 )
@@ -164,6 +167,53 @@ struct EditSpendingDetailView: View {
         }
 
         isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
+    }
+
+    private func saveChangesAndClose() {
+        guard let clickDate = clickDate else {
+            presentationMode.wrappedValue.dismiss()
+            return
+        }
+
+        let changedSpendings = spendingHistoryViewModel.filteredSpendings(for: clickDate)
+
+        if changedSpendings.isEmpty {
+            presentationMode.wrappedValue.dismiss()
+            return
+        }
+
+        for spending in changedSpendings {
+            let spendAt = Date.getBasicformattedDate(from: clickDate)
+
+            let dto = AddSpendingHistoryRequestDto(
+                amount: spending.amount,
+                categoryId: spending.category.id,
+                icon: spending.category.icon,
+                spendAt: spendAt,
+                accountName: spending.accountName,
+                memo: spending.memo
+            )
+
+            Log.debug("생성된 dto: \(dto)")
+
+            spendingHistoryViewModel.editSpendingHistoryApi(spendingId: spending.id, dto: dto) { success in
+                if success {
+                    Log.debug("지출내역을 수정하기 성공")
+                    self.presentationMode.wrappedValue.dismiss()
+
+                } else {
+                    // 실패 시 처리
+                    Log.debug("ID \(spending.id)의 변경사항을 저장하는 데 실패")
+                }
+
+//                // 모든 API 호출이 완료되었는지 확인
+//                if spending == changedSpendings.last {
+//                    DispatchQueue.main.async {
+//                        self.presentationMode.wrappedValue.dismiss()
+//                    }
+//                }
+            }
+        }
     }
 }
 
