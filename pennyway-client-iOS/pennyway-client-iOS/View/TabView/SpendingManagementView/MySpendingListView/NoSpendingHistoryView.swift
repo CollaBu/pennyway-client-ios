@@ -35,7 +35,7 @@ struct NoSpendingHistoryView: View {
                     .background(Color("Mint03"))
                     .cornerRadius(30)
 
-                    NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, selectedDate: $clickDate), isActive: $navigateToAddSpendingHistory) { // 수정
+                    NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate), isActive: $navigateToAddSpendingHistory) {
                         EmptyView()
                     }.hidden()
                 }
@@ -44,6 +44,6 @@ struct NoSpendingHistoryView: View {
     }
 }
 
-// #Preview {
-//    NoSpendingHistoryView(clickDate: clickDate)
-// }
+#Preview {
+    NoSpendingHistoryView(clickDate: .constant(Date()))
+}

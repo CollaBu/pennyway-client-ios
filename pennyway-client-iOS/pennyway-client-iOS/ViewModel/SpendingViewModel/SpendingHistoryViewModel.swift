@@ -19,12 +19,12 @@ class SpendingHistoryViewModel: ObservableObject {
         return String(Date.month(from: currentDate))
     }
 
-    /// 받아온 날짜가 string이기 때문에 날짜 문자열을 Date객체로 변환
-    func dateFromString(_ dateString: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.date(from: dateString)
-    }
+//    /// 받아온 날짜가 string이기 때문에 날짜 문자열을 Date객체로 변환
+//    func dateFromString(_ dateString: String) -> Date? {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        return formatter.date(from: dateString)
+//    }
 
     /// 선택한 날짜에 해당하는 소비내역을 필터링
     func filteredSpendings(for date: Date?) -> [IndividualSpending] {
@@ -32,7 +32,7 @@ class SpendingHistoryViewModel: ObservableObject {
             return []
         }
         return dailyDetailSpendings.filter { spending in
-            if let spendDate = dateFromString(spending.spendAt) {
+            if let spendDate = DateFormatterUtil.dateFromString(spending.spendAt) {
                 return Calendar.current.isDate(spendDate, inSameDayAs: date)
             }
             return false

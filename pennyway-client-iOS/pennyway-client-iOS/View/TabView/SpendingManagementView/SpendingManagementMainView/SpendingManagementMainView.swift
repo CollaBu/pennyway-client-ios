@@ -128,7 +128,7 @@ struct SpendingManagementMainView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, selectedDate: $clickDate), isActive: $navigateToAddSpendingHistory) {
+            NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
 

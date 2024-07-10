@@ -92,7 +92,7 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView(clickDate: $clickDate, selectedDate: $clickDate)
+                    AddSpendingHistoryView(clickDate: $clickDate)
                 }
             }
         }

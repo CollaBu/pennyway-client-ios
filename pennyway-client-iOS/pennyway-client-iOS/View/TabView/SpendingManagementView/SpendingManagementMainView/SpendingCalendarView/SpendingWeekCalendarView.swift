@@ -37,7 +37,7 @@ struct SpendingWeekCalendarView: View {
             .padding(.bottom, 6)
             .padding(.top, 8)
             .onChange(of: spendingHistoryViewModel.selectedDateToScroll) { newValue in
-                if let newDateStr = newValue, let date = ScrollToDateUtil.parseDate(from: newDateStr) {
+                if let newDateStr = newValue, let date = DateFormatterUtil.parseDate(from: newDateStr) {
                     selectedDate = date
                     withAnimation {
                         scrollProxy.scrollTo(date, anchor: .center)

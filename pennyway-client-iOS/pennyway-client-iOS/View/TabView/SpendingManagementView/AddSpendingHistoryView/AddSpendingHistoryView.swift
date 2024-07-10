@@ -8,7 +8,7 @@ struct AddSpendingHistoryView: View {
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
-    @Binding var selectedDate: Date?
+//    @Binding var selectedDate: Date?
 
     var body: some View {
         ZStack {
@@ -75,5 +75,5 @@ struct AddSpendingHistoryView: View {
 }
 
 #Preview {
-    AddSpendingHistoryView(clickDate: .constant(Date()), selectedDate: .constant(Date()))
+    AddSpendingHistoryView(clickDate: .constant(Date()))
 }

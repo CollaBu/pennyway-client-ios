@@ -5,7 +5,6 @@ import SwiftUI
 struct SpendingCalenderView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
-    @State private var selectedDate: Date?
     @Binding var showSpendingDetailView: Bool
     @State private var date: Date
     @State private var clickedCurrentMonthDates: Date?
@@ -128,10 +127,13 @@ struct SpendingCalenderView: View {
                         let date = getDate(for: index)
                         clickedCurrentMonthDates = date
                         isClickDay(Date.day(from: date))
-                        clickDate = date
-                        spendingHistoryViewModel.selectedDate = date
-//                        self.selectedDate = date
-                        self.showSpendingDetailView = true
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            clickDate = date
+                            spendingHistoryViewModel.selectedDate = date
+
+                            self.showSpendingDetailView = true
+                        }
                     }
                 }
                 .onChange(of: spendingHistoryViewModel.selectedDate) { newValue in
