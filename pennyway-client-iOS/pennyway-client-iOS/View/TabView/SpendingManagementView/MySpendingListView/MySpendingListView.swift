@@ -15,6 +15,7 @@ struct MySpendingListView: View {
     @StateObject var spendingCategoryViewModel = SpendingCategoryViewModel()
     @State var selectedDateToScroll: String? = nil
     @State private var currentMonth: Date = Date()
+    @Binding var clickDate: Date?
     @State private var navigateToCategoryGridView = false
 
     var body: some View {
@@ -29,7 +30,7 @@ struct MySpendingListView: View {
                     ScrollView {
                         VStack {
                             if groupedSpendings().isEmpty {
-                                NoSpendingHistoryView()
+                                NoSpendingHistoryView(clickDate: $clickDate)
                             } else {
                                 LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
                                     ForEach(groupedSpendings(), id: \.key) { date, spendings in
@@ -156,18 +157,11 @@ struct MySpendingListView: View {
         return dateString
     }
 
-    /// 받아온 날짜가 string이기 때문에 날짜 문자열을 Date객체로 변환
-    private func dateFromString(_ dateString: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.date(from: dateString)
-    }
-
     private func groupedSpendings() -> [(key: String, values: [IndividualSpending])] {
         let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { String($0.spendAt.prefix(10)) })
         let sortedGroup = grouped.map { (key: $0.key, values: $0.value) }
             .sorted { group1, group2 -> Bool in
-                if let date1 = dateFromString(group1.key + " 00:00:00"), let date2 = dateFromString(group2.key + " 00:00:00") {
+                if let date1 = DateFormatterUtil.dateFromString(group1.key + " 00:00:00"), let date2 = DateFormatterUtil.dateFromString(group2.key + " 00:00:00") {
                     return date1 > date2
                 }
                 return false
@@ -201,15 +195,5 @@ struct MySpendingListView: View {
             return dateFormatter.string(from: previousMonthDate)
         }
         return dateFormatter.string(from: date)
-    }
-}
-
-// MARK: - MySpendingListView_Previews
-
-struct MySpendingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        MySpendingListView(
-            spendingHistoryViewModel: SpendingHistoryViewModel()
-        )
     }
 }

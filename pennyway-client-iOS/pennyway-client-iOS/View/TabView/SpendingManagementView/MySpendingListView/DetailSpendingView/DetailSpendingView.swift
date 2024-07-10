@@ -43,7 +43,7 @@ struct DetailSpendingView: View {
                         isSelectedCategory.toggle()
                         Log.debug("isSelectedCategory: \(isSelectedCategory)")
                     }, label: {
-                        Image("icon_arrow_back")
+                        Image("icon_navigationbar_kebabmenu")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -85,7 +85,7 @@ struct DetailSpendingView: View {
                                             .padding(.leading, 3)
                                     }
                                     .padding(.horizontal, 7)
-                                    .padding(.vertical, 11)
+                                    .padding(.vertical, 9)
                                     .background(selectedItem == item ? Color("Gray02") : Color("White01"))
 
                                 })

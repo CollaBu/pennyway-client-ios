@@ -13,12 +13,13 @@ struct MoreDetailSpendingView: View {
                         .platformTextColor(color: Color("Gray07"))
                         .font(.B1SemiboldeFont())
                 }
-                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
-
+                Spacer().frame(height: 5 * DynamicSizeFactor.factor())
+                
                 Text("6,000원")
+                    .padding(.vertical, 4)
                     .platformTextColor(color: Color("Gray07"))
                     .font(.H1BoldFont())
-
+                    
                 Spacer()
 
                 HStack {
