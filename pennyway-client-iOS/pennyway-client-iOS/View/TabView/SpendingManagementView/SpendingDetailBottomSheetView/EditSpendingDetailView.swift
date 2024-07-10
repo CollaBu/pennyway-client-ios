@@ -39,7 +39,6 @@ struct EditSpendingDetailView: View {
                         Spacer()
                     }
                     .padding(.leading, 14)
-                    // EditNoHistorySpendingView() -> 달의 소비내역이 없으면
 
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
@@ -150,20 +149,26 @@ struct EditSpendingDetailView: View {
     }
 
     private func deleteSelectedItems() {
+        let spendingIds = Array(selectedIds)
         let totalSelectedCount = selectedIds.count
         let totalSpendingsCount = spendingHistoryViewModel.filteredSpendings(for: clickDate).count
 
-        spendingHistoryViewModel.dailyDetailSpendings.removeAll { selectedIds.contains($0.id) }
-        selectedIds.removeAll()
-        isItemSelected = !selectedIds.isEmpty
-        showingDeletePopUp = false
+        spendingHistoryViewModel.deleteSpendingHistory(spendingIds: spendingIds) { success in
+            if success {
+                Log.debug("지출내역 삭제 성공")
+                selectedIds.removeAll()
+                isItemSelected = false
+                isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
+                self.showingDeletePopUp = false
 
-        // 내역을 전체 삭제한 경우에만 현재 창을 닫기
-        if totalSelectedCount == totalSpendingsCount {
-            presentationMode.wrappedValue.dismiss()
+                // 내역을 전체 삭제한 경우에만 현재 창을 닫기
+                if totalSelectedCount == totalSpendingsCount {
+                    presentationMode.wrappedValue.dismiss()
+                } 
+            } else {
+                Log.debug("지출내역 삭제 실패")
+            }
         }
-
-        isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
     }
 }
 
