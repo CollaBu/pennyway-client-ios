@@ -132,5 +132,4 @@ struct CategoryDetailsView: View {
             }
         return sortedGroup
     }
-
 }

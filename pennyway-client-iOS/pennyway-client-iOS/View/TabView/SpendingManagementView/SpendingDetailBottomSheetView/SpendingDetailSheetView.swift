@@ -99,6 +99,15 @@ struct SpendingDetailSheetView: View {
         .onAppear {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
         }
+        .onChange(of: showEditSpendingDetailView) { _ in
+            spendingHistoryViewModel.checkSpendingHistoryApi { success in
+                if success {
+                    Log.debug("뷰 새로고침 성공")
+                } else {
+                    Log.debug("뷰 새로고침 실패")
+                }
+            }
+        }
         .onChange(of: clickDate) { _ in
             Log.debug("clickDate changed to: \(String(describing: clickDate))")
             forceUpdate.toggle()
