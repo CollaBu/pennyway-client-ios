@@ -12,6 +12,8 @@ struct getCategorySpendingHistoryResponseDto: Codable {
     }
 }
 
+// MARK: - SpendingDataPage
+
 struct SpendingDataPage: Codable {
     let content: [Spending]
     let currentPageNumber: Int

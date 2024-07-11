@@ -94,8 +94,16 @@ struct SpendingCategoryGridView: View {
     private func categoryVGridView(for category: SpendingCategoryData) -> some View {
         Button(action: {
             SpendingCategoryViewModel.selectedCategory = category
-            navigateToCategoryDetails = true
-            SpendingCategoryViewModel.getCategorySpendingCountApi { _ in }
+            SpendingCategoryViewModel.dailyDetailSpendings = []//데이터 초기화
+            SpendingCategoryViewModel.currentPageNumber = 0//페이지 초기화
+            SpendingCategoryViewModel.hasNext = true//다음 페이지 존재 여부 초기화
+            SpendingCategoryViewModel.getCategorySpendingCountApi { _ in }//총 개수 조회
+            SpendingCategoryViewModel.getCategorySpendingHistoryApi { success in//지출 내역 조회
+                if success {
+                    navigateToCategoryDetails = true
+                    Log.debug(SpendingCategoryViewModel.dailyDetailSpendings)
+                }
+            }
         }) {
             VStack(spacing: 2 * DynamicSizeFactor.factor()) {
                 Spacer().frame(height: 8 * DynamicSizeFactor.factor())

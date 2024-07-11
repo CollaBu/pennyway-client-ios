@@ -1,4 +1,3 @@
-
 // MARK: - Spending
 
 struct Spending: Codable {
