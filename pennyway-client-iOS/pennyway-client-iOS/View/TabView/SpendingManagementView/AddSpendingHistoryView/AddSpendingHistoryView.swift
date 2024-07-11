@@ -60,6 +60,9 @@ struct AddSpendingHistoryView: View {
                 }
             }
         }
+//        .onAppear {
+//            viewModel.selectedDate = selectedDate
+//        }
         .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
             SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
         }
