@@ -18,6 +18,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
     /// 날짜 선택
     @Published var isSelectDayViewPresented: Bool = false
     @Published var selectedDate: Date = Date()
+    @Published var clickDate: Date?
 
     /// 가격, 소비처, 메모 text
     @Published var amountSpentText: String = ""
@@ -34,6 +35,10 @@ class AddSpendingHistoryViewModel: ObservableObject {
     @Published var customCategories: [SpendingCategoryData] = []
 
     @Published var isFormValid = false // 지출내역 추가 valid
+
+    init(selectedDate: Date = Date()) {
+        self.selectedDate = selectedDate
+    }
 
     func validateForm() {
         isFormValid = (selectedCategory != nil && !amountSpentText.isEmpty)
@@ -119,7 +124,9 @@ class AddSpendingHistoryViewModel: ObservableObject {
     func addSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
         let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
         var categoryId = -1
-        let spendAt = Date.getBasicformattedDate(from: selectedDate)
+        let spendAt = Date.getBasicformattedDate(from: clickDate ?? selectedDate)
+
+        Log.debug("clickDate: \(String(describing: clickDate)), selectedDate: \(selectedDate), spendAt: \(spendAt)")
 
         if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
             if let icon = selectedCategory?.icon {

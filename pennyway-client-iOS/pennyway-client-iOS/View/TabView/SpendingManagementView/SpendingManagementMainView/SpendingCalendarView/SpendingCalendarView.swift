@@ -5,13 +5,21 @@ import SwiftUI
 struct SpendingCalenderView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
-    @State private var selectedDate: Date?
     @Binding var showSpendingDetailView: Bool
-    @State private var date: Date = Date()
+    @State private var date: Date
     @State private var clickedCurrentMonthDates: Date?
+    @Binding var clickDate: Date?
+
     let weekdaySymbols = ["일", "월", "화", "수", "목", "금", "토"]
     
     var checkChangeMonth = false
+    
+    init(spendingHistoryViewModel: SpendingHistoryViewModel, showSpendingDetailView: Binding<Bool>, date _: Binding<Date>, clickDate: Binding<Date?>) {
+        self.spendingHistoryViewModel = spendingHistoryViewModel
+        _showSpendingDetailView = showSpendingDetailView 
+        _date = State(initialValue: spendingHistoryViewModel.currentDate)
+        _clickDate = clickDate
+    }
   
     var body: some View {
         VStack {
@@ -118,9 +126,18 @@ struct SpendingCalenderView: View {
                     if 0 <= index && index < daysInMonth {
                         let date = getDate(for: index)
                         clickedCurrentMonthDates = date
-                        self.selectedDate = date
-                        self.showSpendingDetailView = true
+                        isClickDay(Date.day(from: date))
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            clickDate = date
+                            spendingHistoryViewModel.selectedDate = date
+
+                            self.showSpendingDetailView = true
+                        }
                     }
+                }
+                .onChange(of: spendingHistoryViewModel.selectedDate) { newValue in
+                    Log.debug("Selected date updated: \(String(describing: newValue))")
                 }
             }
         }
@@ -245,5 +262,14 @@ private extension SpendingCalenderView {
             return newMonth
         }
         return date
+    }
+    
+    func isClickDay(_ day: Int) {
+        let data = spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.individuals[0]
+
+        Log.debug(data?.id)
+        Log.debug(data)
+
+        spendingHistoryViewModel.selectedDateId = data?.id ?? 0
     }
 }

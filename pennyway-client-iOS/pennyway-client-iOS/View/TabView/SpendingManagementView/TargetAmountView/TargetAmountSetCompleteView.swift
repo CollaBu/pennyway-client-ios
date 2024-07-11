@@ -45,5 +45,5 @@ struct TargetAmountSetCompleteView: View {
 }
 
 #Preview {
-    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel())
+    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel(currentData: TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)))
 }

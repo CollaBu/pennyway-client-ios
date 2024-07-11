@@ -16,6 +16,13 @@ extension Date {
         return components.month ?? 0
     }
 
+    /// date만 반환
+    static func day(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: date)
+        return components.day ?? 0
+    }
+
     /// 1월 1일 형식
     static func getFormattedDate(from date: Date) -> String {
         let formatter = DateFormatter()

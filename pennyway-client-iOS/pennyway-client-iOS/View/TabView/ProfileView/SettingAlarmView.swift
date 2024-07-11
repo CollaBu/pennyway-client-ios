@@ -29,7 +29,7 @@ struct SettingAlarmView: View {
                             Spacer()
 
                             Toggle(isOn: Binding(
-                                get: { viewModel.toggleStates[item]},
+                                get: { viewModel.toggleStates[item] },
                                 set: { newValue in
                                     viewModel.toggleStates[item] = newValue
                                     if newValue { // 토글 상태가 on

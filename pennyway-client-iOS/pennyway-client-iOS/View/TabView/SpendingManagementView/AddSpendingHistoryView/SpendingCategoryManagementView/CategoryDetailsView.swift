@@ -81,6 +81,7 @@ struct CategoryDetailsView: View {
                 }
             }, alignment: .topTrailing
         )
+        .navigationBarColor(UIColor(named: "White01"), title: "")
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -103,7 +104,7 @@ struct CategoryDetailsView: View {
                 if category.isCustom {
                     HStack {
                         Button(action: {
-                            isClickMenu = true
+                            isClickMenu.toggle()
                             selectedMenu = nil
                         }, label: {
                             Image("icon_navigationbar_kebabmenu")
@@ -124,18 +125,11 @@ struct CategoryDetailsView: View {
         let grouped = Dictionary(grouping: viewModel.dailyDetailSpendings, by: { String($0.spendAt.prefix(10)) })
         let sortedGroup = grouped.map { (key: $0.key, values: $0.value) }
             .sorted { group1, group2 -> Bool in
-                if let date1 = dateFromString(group1.key + " 00:00:00"), let date2 = dateFromString(group2.key + " 00:00:00") {
+                if let date1 = DateFormatterUtil.dateFromString(group1.key + " 00:00:00"), let date2 = DateFormatterUtil.dateFromString(group2.key + " 00:00:00") {
                     return date1 > date2
                 }
                 return false
             }
         return sortedGroup
-    }
-
-    /// 받아온 날짜가 string이기 때문에 날짜 문자열을 Date객체로 변환
-    private func dateFromString(_ dateString: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.date(from: dateString)
     }
 }

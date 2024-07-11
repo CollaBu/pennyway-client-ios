@@ -8,12 +8,28 @@ class SpendingHistoryViewModel: ObservableObject {
     @Published var isChangeMonth: Bool = false
     @Published var selectedDateToScroll: String? = nil
 
+    @Published var selectedDateId = 0
+    @Published var selectedDate: Date?
+
     private var year: String {
         return String(Date.year(from: currentDate))
     }
 
     private var month: String {
         return String(Date.month(from: currentDate))
+    }
+
+    /// 선택한 날짜에 해당하는 소비내역을 필터링
+    func filteredSpendings(for date: Date?) -> [IndividualSpending] {
+        guard let date = date else {
+            return []
+        }
+        return dailyDetailSpendings.filter { spending in
+            if let spendDate = DateFormatterUtil.dateFromString(spending.spendAt) {
+                return Calendar.current.isDate(spendDate, inSameDayAs: date)
+            }
+            return false
+        }
     }
 
     func getDailyTotalAmount(for date: Date) -> Int? {
@@ -61,6 +77,21 @@ class SpendingHistoryViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
+            }
+        }
+    }
+
+    func deleteSpendingHistory(spendingIds: [Int], completion: @escaping (Bool) -> Void) {
+        let dto = DeleteSpendingHistoryRequestDto(spendingIds: spendingIds)
+        SpendingAlamofire.shared.deleteSpendingHistory(dto) { result in
+            switch result {
+            case .success:
+                Log.debug("지출 내역 삭제 완료")
+                self.dailyDetailSpendings.removeAll { spendingIds.contains($0.id) }
+                completion(true)
+            case let .failure(error):
+                Log.error("지출 내역 삭제 실패: \(error)")
                 completion(false)
             }
         }

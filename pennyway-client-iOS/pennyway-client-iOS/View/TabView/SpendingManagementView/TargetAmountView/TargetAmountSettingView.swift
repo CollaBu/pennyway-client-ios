@@ -2,9 +2,14 @@
 import SwiftUI
 
 struct TargetAmountSettingView: View {
-    @Binding var targetAmount: String?
-    @StateObject var viewModel = TargetAmountSettingViewModel()
+    @Binding var currentData: TargetAmount
+    @StateObject var viewModel: TargetAmountSettingViewModel
     @State private var navigateToCompleteTarget = false
+
+    init(currentData: Binding<TargetAmount>) {
+        _currentData = currentData
+        _viewModel = StateObject(wrappedValue: TargetAmountSettingViewModel(currentData: currentData.wrappedValue))
+    }
     
     var body: some View {
         ZStack {
@@ -27,8 +32,8 @@ struct TargetAmountSettingView: View {
                             .fill(Color("Gray01"))
                             .frame(height: 46 * DynamicSizeFactor.factor())
 
-                        if targetAmount != nil {
-                            Text("\(String(describing: targetAmount))")
+                        if currentData.targetAmountDetail.amount != -1 && viewModel.inputTargetAmount.isEmpty {
+                            Text("\(currentData.targetAmountDetail.amount)")
                                 .platformTextColor(color: Color("Gray03"))
                                 .padding(.leading, 13 * DynamicSizeFactor.factor())
                                 .font(.H2SemiboldFont())
@@ -39,6 +44,7 @@ struct TargetAmountSettingView: View {
                             .keyboardType(.numberPad)
                             .onChange(of: viewModel.inputTargetAmount) { _ in
                                 viewModel.inputTargetAmount = NumberFormatterUtil.formatStringToDecimalString(viewModel.inputTargetAmount)
+                                Log.debug(viewModel.inputTargetAmount)
                                 viewModel.validateForm()
                             }
                     }
@@ -49,7 +55,14 @@ struct TargetAmountSettingView: View {
                 
                 CustomBottomButton(action: {
                     if viewModel.isFormValid {
-                        navigateToCompleteTarget = true
+                        viewModel.editCurrentMonthTargetAmountApi { success in
+                            if success {
+                                Log.debug("목표 금액 수정 성공")
+                                navigateToCompleteTarget = true
+                            } else {
+                                Log.debug("목표 금액 수정 실패")
+                            }
+                        }
                     }
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
@@ -63,11 +76,9 @@ struct TargetAmountSettingView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
                     NavigationBackButton(action: {})
-                    
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-                    
                 }.offset(x: -10)
             }
         }
@@ -75,5 +86,5 @@ struct TargetAmountSettingView: View {
 }
 
 #Preview {
-    TargetAmountSettingView(targetAmount: .constant(nil), viewModel: TargetAmountSettingViewModel())
+    TargetAmountSettingView(currentData: .constant(TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)))
 }

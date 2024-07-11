@@ -7,33 +7,32 @@ struct AddSpendingHistoryView: View {
     @StateObject var viewModel = AddSpendingHistoryViewModel()
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
+    @Binding var clickDate: Date?
 
     var body: some View {
         ZStack {
             VStack {
                 ScrollView {
-                    AddSpendingInputFormView(viewModel: viewModel)
+                    AddSpendingInputFormView(viewModel: viewModel, clickDate: $clickDate)
                 }
                 Spacer()
 
                 CustomBottomButton(action: {
-                    if viewModel.isFormValid {
+                    if viewModel.isFormValid, let date = clickDate {
+                        viewModel.clickDate = date
                         viewModel.addSpendingHistoryApi { success in
                             if success {
                                 navigateToAddSpendingCategory = true
                             }
                         }
                     }
-
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel), isActive: $navigateToAddSpendingCategory) {}
+                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate), isActive: $navigateToAddSpendingCategory) {}
 
                 NavigationLink(
-                    destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel()),
-                    isActive: $viewModel.navigateToAddCategory
-                ) {}
+                    destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $viewModel.navigateToAddCategory) {}
             }
             .background(Color("White01"))
             .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")
@@ -61,6 +60,9 @@ struct AddSpendingHistoryView: View {
                 }
             }
         }
+//        .onAppear {
+//            viewModel.selectedDate = selectedDate
+//        }
         .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
             SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
         }
@@ -72,5 +74,5 @@ struct AddSpendingHistoryView: View {
 }
 
 #Preview {
-    AddSpendingHistoryView()
+    AddSpendingHistoryView(clickDate: .constant(Date()))
 }

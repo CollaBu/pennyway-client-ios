@@ -5,6 +5,7 @@ import SwiftUI
 
 struct AddSpendingInputFormView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    @Binding var clickDate: Date?
     
     let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
     let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
@@ -99,7 +100,7 @@ struct AddSpendingInputFormView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text(Date.getFormattedDate(from: viewModel.selectedDate))
+                    Text(Date.getFormattedDate(from: clickDate ?? viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                    
