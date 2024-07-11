@@ -43,9 +43,7 @@ struct CategoryDetailsView: View {
 
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
-                    CategorySpendingListView(onItemAppear: { item in
-                        Log.debug("spendings: \(item)")
-                    }, viewModel: viewModel)
+                    CategorySpendingListView(viewModel: viewModel)
                 }
             }
 

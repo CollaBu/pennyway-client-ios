@@ -2,7 +2,6 @@
 import SwiftUI
 
 struct CategorySpendingListView: View {
-    var onItemAppear: ((IndividualSpending) -> Void)?
     @ObservedObject var viewModel: SpendingCategoryViewModel
     
     var body: some View {
@@ -25,7 +24,7 @@ struct CategorySpendingListView: View {
                             // 해당 index가 마지막 index라면 데이터 추가
                             if index == viewModel.dailyDetailSpendings.count - 1 {
                                 Log.debug("지출 내역 index: \(index)")
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
                                     viewModel.getCategorySpendingHistoryApi { _ in }
                                 }
                             }

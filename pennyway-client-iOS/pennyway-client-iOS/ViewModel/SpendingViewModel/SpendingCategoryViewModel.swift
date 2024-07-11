@@ -15,11 +15,9 @@ class SpendingCategoryViewModel: ObservableObject {
     @Published var customCategories: [SpendingCategoryData] = []
     @Published var dailyDetailSpendings: [IndividualSpending] = [] // 지출내역 리스트 임시 데이터
     
-//    IndividualSpending(id: 0, amount: 10000, category: SpendingCategory(isCustom: false, id: 0, name: "식비", icon: "FOOD"), spendAt: "2024-07-04", accountName: "abc", memo: "그냥"), IndividualSpending(id: 1, amount: 10000, category: SpendingCategory(isCustom: false, id: 1, name: "식비", icon: "FOOD"), spendAt: "2024-07-04", accountName: "abc", memo: "그냥"), IndividualSpending(id: 2, amount: 10000, category: SpendingCategory(isCustom: false, id: 2, name: "식비", icon: "FOOD"), spendAt: "2024-07-04", accountName: "abc", memo: "그냥"), IndividualSpending(id: 3, amount: 30000, category: SpendingCategory(isCustom: false, id: 3, name: "식비", icon: "TRAVEL"), spendAt: "2024-07-02", accountName: "abc", memo: "그냥"), IndividualSpending(id: 4, amount: 40000, category: SpendingCategory(isCustom: false, id: 4, name: "여행", icon: "TRAVEL"), spendAt: "2024-07-02", accountName: "abc", memo: "몰라")]
-    
     @Published var spedingHistoryTotalCount = 0 // 지출 내역 리스트 총 개수
-    @Published var currentPageNumber: Int = 0
-    @Published var hasNext: Bool = true
+    private var currentPageNumber: Int = 0
+    private var hasNext: Bool = true
     
     func getSpendingCustomCategoryListApi(completion: @escaping (Bool) -> Void) {
         SpendingCategoryAlamofire.shared.getSpendingCustomCategoryList { result in
@@ -94,7 +92,7 @@ class SpendingCategoryViewModel: ObservableObject {
             return
         }
         
-        let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "5", page: "\(currentPageNumber)", sort: "spending.spendAt", direction: "DESC")
+        let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "5", page: "\(currentPageNumber)")
         
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
         
@@ -127,6 +125,12 @@ class SpendingCategoryViewModel: ObservableObject {
                 completion(false)
             }
         }
+    }
+    
+    func initPage(){
+        dailyDetailSpendings = []
+        currentPageNumber = 0
+        hasNext = true
     }
     
     private func mergeNewSpendings(newSpendings: [Spending]) {
