@@ -105,6 +105,20 @@ class SpendingHistoryViewModel: ObservableObject {
                 } else {
                     Log.error("Network request faile: \(error)")
                 }
+            }
+        }
+    }
+
+    func deleteSpendingHistory(spendingIds: [Int], completion: @escaping (Bool) -> Void) {
+        let dto = DeleteSpendingHistoryRequestDto(spendingIds: spendingIds)
+        SpendingAlamofire.shared.deleteSpendingHistory(dto) { result in
+            switch result {
+            case .success:
+                Log.debug("지출 내역 삭제 완료")
+                self.dailyDetailSpendings.removeAll { spendingIds.contains($0.id) }
+                completion(true)
+            case let .failure(error):
+                Log.error("지출 내역 삭제 실패: \(error)")
                 completion(false)
             }
         }

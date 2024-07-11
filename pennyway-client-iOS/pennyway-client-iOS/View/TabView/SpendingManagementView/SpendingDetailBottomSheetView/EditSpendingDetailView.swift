@@ -39,7 +39,6 @@ struct EditSpendingDetailView: View {
                         Spacer()
                     }
                     .padding(.leading, 14)
-                    // EditNoHistorySpendingView() -> 달의 소비내역이 없으면
 
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
@@ -110,8 +109,7 @@ struct EditSpendingDetailView: View {
                                 firstBtnAction: { self.showingClosePopUp = false },
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
-//                    self.presentationMode.wrappedValue.dismiss()
-                                    self.saveChangesAndClose()
+                                    self.presentationMode.wrappedValue.dismiss()
                                 },
                                 secondBtnLabel: "끝낼래요",
                                 secondBtnColor: Color("Mint03")
@@ -153,67 +151,27 @@ struct EditSpendingDetailView: View {
     }
 
     private func deleteSelectedItems() {
+        let spendingIds = Array(selectedIds)
         let totalSelectedCount = selectedIds.count
         let totalSpendingsCount = spendingHistoryViewModel.filteredSpendings(for: clickDate).count
 
-        spendingHistoryViewModel.dailyDetailSpendings.removeAll { selectedIds.contains($0.id) }
-        selectedIds.removeAll()
-        isItemSelected = !selectedIds.isEmpty
-        showingDeletePopUp = false
+        spendingHistoryViewModel.deleteSpendingHistory(spendingIds: spendingIds) { success in
+            if success {
+                Log.debug("지출내역 삭제 성공")
+                selectedIds.removeAll()
+                isItemSelected = false
+                isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
+                self.showingDeletePopUp = false
 
-        // 내역을 전체 삭제한 경우에만 현재 창을 닫기
-        if totalSelectedCount == totalSpendingsCount {
-            presentationMode.wrappedValue.dismiss()
-        }
-
-        isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
-    }
-
-    private func saveChangesAndClose() {
-        guard let clickDate = clickDate else {
-            presentationMode.wrappedValue.dismiss()
-            return
-        }
-
-        let changedSpendings = spendingHistoryViewModel.filteredSpendings(for: clickDate)
-
-        if changedSpendings.isEmpty {
-            presentationMode.wrappedValue.dismiss()
-            return
-        }
-
-        for spending in changedSpendings {
-            let spendAt = Date.getBasicformattedDate(from: clickDate)
-
-            let dto = AddSpendingHistoryRequestDto(
-                amount: spending.amount,
-                categoryId: spending.category.id,
-                icon: spending.category.icon,
-                spendAt: spendAt,
-                accountName: spending.accountName,
-                memo: spending.memo
-            )
-
-            Log.debug("생성된 dto: \(dto)")
-
-            spendingHistoryViewModel.editSpendingHistoryApi(spendingId: spending.id, dto: dto) { success in
-                if success {
-                    Log.debug("지출내역을 수정하기 성공")
-                    self.presentationMode.wrappedValue.dismiss()
-
-                } else {
-                    // 실패 시 처리
-                    Log.debug("ID \(spending.id)의 변경사항을 저장하는 데 실패")
-                }
-
-//                // 모든 API 호출이 완료되었는지 확인
-//                if spending == changedSpendings.last {
-//                    DispatchQueue.main.async {
-//                        self.presentationMode.wrappedValue.dismiss()
-//                    }
-//                }
+                // 내역을 전체 삭제한 경우에만 현재 창을 닫기
+                if totalSelectedCount == totalSpendingsCount {
+                    presentationMode.wrappedValue.dismiss()
+                } 
+            } else {
+                Log.debug("지출내역 삭제 실패")
             }
         }
+        isItemSelected = !selectedIds.isEmpty
     }
 }
 

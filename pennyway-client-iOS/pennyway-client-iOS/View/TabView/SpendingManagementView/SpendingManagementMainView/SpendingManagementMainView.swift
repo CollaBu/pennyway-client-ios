@@ -92,6 +92,7 @@ struct SpendingManagementMainView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
                         Button(action: {
+                            clickDate = Date() // +아이콘을 통해 들어간 경우 현재날짜 고정
                             navigateToAddSpendingHistory = true
                         }, label: {
                             Image("icon_navigation_add_black")
