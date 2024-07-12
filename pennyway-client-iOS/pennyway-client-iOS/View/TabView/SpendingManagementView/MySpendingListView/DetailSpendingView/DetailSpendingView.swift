@@ -4,6 +4,10 @@ struct DetailSpendingView: View {
     @State private var isSelectedCategory: Bool = false
     @State var selectedItem: String? = nil
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
+    @StateObject var viewModel = SpendingHistoryViewModel()
+
+    @State var spendingId: Int = 0
+    @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -71,6 +75,9 @@ struct DetailSpendingView: View {
                             ForEach(listArray, id: \.self) { item in
                                 Button(action: {
                                     self.selectedItem = item
+//                                    if item == "수정하기" {
+//                                        editSpending()
+//                                    }
                                 }, label: {
                                     ZStack(alignment: .leading) {
                                         Rectangle()
@@ -103,6 +110,16 @@ struct DetailSpendingView: View {
                 }
             }, alignment: .topLeading)
     }
+
+//    private func editSpending() {
+//        viewModel.editSpendingHistoryApi(spendingId: spendingId, dto: newDetails) { success in
+//            if success {
+//                Log.debug("지출 내역 수정 성공")
+//            } else {
+//                Log.error("지출 내역 수정 실패")
+//            }
+//        }
+//    }
 }
 
 #Preview {

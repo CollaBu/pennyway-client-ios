@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct CustomToggleStyle: ToggleStyle {
+    @Binding var hasAppeared: Bool
+
     var onColor = Color("Mint03")
     var offColor = Color("Gray05")
     var thumbColor = Color("White01")
@@ -18,7 +20,8 @@ struct CustomToggleStyle: ToggleStyle {
                         .shadow(radius: 1, x: 0, y: 1)
                         .padding(1.5)
                         .offset(x: configuration.isOn ? 10 : -10))
-                .animation(Animation.easeInOut(duration: 0.3))
+                .animation(hasAppeared ? .easeInOut(duration: 0.3) : nil)
+//                .animation(nil)
                 .onTapGesture { configuration.isOn.toggle() }
         }
     }
