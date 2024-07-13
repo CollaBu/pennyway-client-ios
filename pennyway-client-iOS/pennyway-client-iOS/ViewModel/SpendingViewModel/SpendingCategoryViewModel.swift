@@ -127,7 +127,7 @@ class SpendingCategoryViewModel: ObservableObject {
         }
     }
     
-    func initPage(){
+    func initPage() {
         dailyDetailSpendings = []
         currentPageNumber = 0
         hasNext = true

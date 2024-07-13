@@ -19,7 +19,7 @@ struct EditSpendingDetailView: View {
             VStack {
                 ScrollView {
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
-
+                    
                     HStack(spacing: 4 * DynamicSizeFactor.factor()) {
                         Button(action: {
                             toggleAllSelections()
@@ -27,7 +27,7 @@ struct EditSpendingDetailView: View {
                             Image(selectedIds.count == spendingHistoryViewModel.filteredSpendings(for: clickDate).count ? "icon_checkone_on_small" : "icon_checkone_off_small_gray03")
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-
+                            
                             Text("전체 선택")
                                 .font(.B2MediumFont())
                                 .platformTextColor(color: Color("Gray05"))
@@ -35,14 +35,13 @@ struct EditSpendingDetailView: View {
                         })
                         .padding(.vertical, 4)
                         .padding(.trailing, 8)
-
+                        
                         Spacer()
                     }
                     .padding(.leading, 14)
-                    // EditNoHistorySpendingView() -> 달의 소비내역이 없으면
-
+                    
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
-
+                    
                     VStack(spacing: 0) {
                         ForEach(spendingHistoryViewModel.filteredSpendings(for: clickDate), id: \.id) { item in
                             let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
@@ -54,27 +53,27 @@ struct EditSpendingDetailView: View {
                                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                         .aspectRatio(contentMode: .fill)
                                 }
-
+                                
                                 CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                     .padding(.leading, 13 * DynamicSizeFactor.factor())
                             }
                             .frame(maxWidth: .infinity)
                             .padding(.leading, 14)
-
+                            
                             Spacer().frame(height: 12) // 동적 ui 적용하니 너무 커짐
                         }
                     }
                     .padding(.bottom, 103)
                 }
-
+                
                 Spacer()
-
+                
                 CustomBottomButton(action: {
                     if isItemSelected {
                         showingDeletePopUp = true
                         Log.debug("showingDeletePopUp: \(showingDeletePopUp)")
                     }
-
+                    
                 }, label: "삭제하기", isFormValid: $isItemSelected)
                     .padding(.bottom, 34)
             }
@@ -97,11 +96,11 @@ struct EditSpendingDetailView: View {
                         .padding(.leading, 11)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-
+                        
                     }.offset(x: -10)
                 }
             }
-
+            
             if showingClosePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingClosePopUp,
@@ -114,7 +113,7 @@ struct EditSpendingDetailView: View {
                                 secondBtnColor: Color("Mint03")
                 )
             }
-
+            
             if showingDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
@@ -150,20 +149,27 @@ struct EditSpendingDetailView: View {
     }
 
     private func deleteSelectedItems() {
+        let spendingIds = Array(selectedIds)
         let totalSelectedCount = selectedIds.count
         let totalSpendingsCount = spendingHistoryViewModel.filteredSpendings(for: clickDate).count
 
-        spendingHistoryViewModel.dailyDetailSpendings.removeAll { selectedIds.contains($0.id) }
-        selectedIds.removeAll()
-        isItemSelected = !selectedIds.isEmpty
-        showingDeletePopUp = false
+        spendingHistoryViewModel.deleteSpendingHistory(spendingIds: spendingIds) { success in
+            if success {
+                Log.debug("지출내역 삭제 성공")
+                selectedIds.removeAll()
+                isItemSelected = false
+                isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
+                self.showingDeletePopUp = false
 
-        // 내역을 전체 삭제한 경우에만 현재 창을 닫기
-        if totalSelectedCount == totalSpendingsCount {
-            presentationMode.wrappedValue.dismiss()
+                // 내역을 전체 삭제한 경우에만 현재 창을 닫기
+                if totalSelectedCount == totalSpendingsCount {
+                    presentationMode.wrappedValue.dismiss()
+                } 
+            } else {
+                Log.debug("지출내역 삭제 실패")
+            }
         }
-
-        isDeleted = spendingHistoryViewModel.filteredSpendings(for: clickDate).isEmpty
+        isItemSelected = !selectedIds.isEmpty
     }
 }
 

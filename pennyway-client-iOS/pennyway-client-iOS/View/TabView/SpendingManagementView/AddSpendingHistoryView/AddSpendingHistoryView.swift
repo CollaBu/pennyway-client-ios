@@ -8,29 +8,28 @@ struct AddSpendingHistoryView: View {
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
-//    @Binding var selectedDate: Date?
 
     var body: some View {
         ZStack {
             VStack {
                 ScrollView {
-                    AddSpendingInputFormView(viewModel: viewModel)
+                    AddSpendingInputFormView(viewModel: viewModel, clickDate: $clickDate)
                 }
                 Spacer()
 
                 CustomBottomButton(action: {
-                    if viewModel.isFormValid {
+                    if viewModel.isFormValid, let date = clickDate {
+                        viewModel.clickDate = date
                         viewModel.addSpendingHistoryApi { success in
                             if success {
                                 navigateToAddSpendingCategory = true
                             }
                         }
                     }
-
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel), isActive: $navigateToAddSpendingCategory) {}
+                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate), isActive: $navigateToAddSpendingCategory) {}
 
                 NavigationLink(
                     destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $viewModel.navigateToAddCategory) {}

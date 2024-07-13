@@ -5,7 +5,7 @@ import Foundation
 enum SpendingRouter: URLRequestConvertible {
     case getSpendingHistory(dto: GetSpendingHistoryRequestDto)
     case addSpendingHistory(dto: AddSpendingHistoryRequestDto)
-    case deleteSpendingHistory(spendingId: Int)
+    case deleteSpendingHistory(dto: DeleteSpendingHistoryRequestDto)
     case getDetailSpendingHistory(spendingId: Int)
     case editSpendingHistory(Spending: Int, dto: AddSpendingHistoryRequestDto)
     
@@ -26,20 +26,23 @@ enum SpendingRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .getSpendingHistory, .addSpendingHistory:
+        case .getSpendingHistory, .addSpendingHistory, .deleteSpendingHistory:
             return "v2/spendings"
-        case let .deleteSpendingHistory(spendingId), let .getDetailSpendingHistory(spendingId), let .editSpendingHistory(spendingId, _):
+
+        case let .getDetailSpendingHistory(spendingId), let .editSpendingHistory(spendingId, _):
             return "v2/spendings/\(spendingId)"
         }
     }
     
     var bodyParameters: Parameters? {
         switch self {
-        case .getSpendingHistory, .deleteSpendingHistory, .getDetailSpendingHistory:
+        case .getSpendingHistory, .getDetailSpendingHistory:
             return [:]
         case let .addSpendingHistory(dto):
             return try? dto.asDictionary()
         case let .editSpendingHistory(_, dto):
+            return try? dto.asDictionary()
+        case let .deleteSpendingHistory(dto):
             return try? dto.asDictionary()
         }
     }
@@ -61,9 +64,9 @@ enum SpendingRouter: URLRequestConvertible {
         case .getSpendingHistory:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
-        case .addSpendingHistory, .editSpendingHistory: // .?
+        case .addSpendingHistory, .editSpendingHistory, .deleteSpendingHistory:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
-        case .deleteSpendingHistory, .getDetailSpendingHistory:
+        case .getDetailSpendingHistory:
             request = URLRequest.createURLRequest(url: url, method: method)
         }
         return request

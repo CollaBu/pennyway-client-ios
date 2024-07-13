@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct AddSpendingCompleteView: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    
+    @Binding var clickDate: Date?
+
     var body: some View {
         VStack {
             Image("icon_illust_add history")
@@ -50,7 +52,8 @@ struct AddSpendingCompleteView: View {
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
                     Spacer()
-                    Text(Date.getFormattedDate(from: viewModel.selectedDate))
+                    
+                    Text(Date.getFormattedDate(from: clickDate ?? viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                 }
@@ -60,7 +63,14 @@ struct AddSpendingCompleteView: View {
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
             
             CustomBottomButton(action: {
-                NavigationUtil.popToRootView()
+                if let date = clickDate {
+                    if Calendar.current.isDateInToday(date) { // 현재 날짜로 등록한 경우 메인화면 -> 메인화면에서 +아이콘을 통해 들어간 경우
+                        NavigationUtil.popToRootView()
+                    } else { // 클릭한 지출내역의 sheet로 
+//                                self.presentationMode.wrappedValue.dismiss() // 수정필요
+                    }
+                }
+                
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
@@ -70,5 +80,5 @@ struct AddSpendingCompleteView: View {
 }
 
 #Preview {
-    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel())
+    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel(), clickDate: .constant(Date()))
 }
