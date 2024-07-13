@@ -138,23 +138,12 @@ struct MySpendingListView: View {
     }
 
     private func headerView(for date: String) -> some View {
-        Text(dateFormatter(from: date))
+        Text(DateFormatterUtil.dateFormatString(from: date))
             .font(.B2MediumFont())
             .platformTextColor(color: Color("Gray04"))
             .padding(.leading, 20)
             .padding(.bottom, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private func dateFormatter(from dateString: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        if let date = formatter.date(from: dateString) {
-            formatter.dateFormat = "MMMM d일"
-            formatter.locale = Locale(identifier: "ko_KR")
-            return formatter.string(from: date)
-        }
-        return dateString
     }
 
     private func groupedSpendings() -> [(key: String, values: [IndividualSpending])] {
