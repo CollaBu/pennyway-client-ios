@@ -15,7 +15,7 @@ enum DateFormatterUtil {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter.date(from: dateString)
     }
-    
+
     static func dateFormatString(from dateString: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

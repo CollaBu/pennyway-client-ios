@@ -6,7 +6,7 @@ struct CategorySpendingListView: View {
     
     var body: some View {
         LazyVStack(spacing: 0) {
-            ForEach(groupedSpendings(from: viewModel.dailyDetailSpendings), id: \.key) { date, spendings in
+            ForEach(SpendingListGroupUtil.groupedSpendings(from: viewModel.dailyDetailSpendings), id: \.key) { date, spendings in
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 
                 Section(header: headerView(for: date)) {
@@ -45,17 +45,5 @@ struct CategorySpendingListView: View {
             .padding(.leading, 20)
             .padding(.bottom, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
-    private func groupedSpendings(from spendings: [IndividualSpending]) -> [(key: String, values: [IndividualSpending])] {
-        let grouped = Dictionary(grouping: spendings, by: { String($0.spendAt.prefix(10)) })
-        let sortedGroup = grouped.map { (key: $0.key, values: $0.value) }
-            .sorted { group1, group2 -> Bool in
-                if let date1 = DateFormatterUtil.dateFromString(group1.key + " 00:00:00"), let date2 = DateFormatterUtil.dateFromString(group2.key + " 00:00:00") {
-                    return date1 > date2
-                }
-                return false
-            }
-        return sortedGroup
     }
 }

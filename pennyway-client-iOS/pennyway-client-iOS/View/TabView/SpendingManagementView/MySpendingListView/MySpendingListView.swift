@@ -29,11 +29,11 @@ struct MySpendingListView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack {
-                            if groupedSpendings().isEmpty {
+                            if SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                                 NoSpendingHistoryView(clickDate: $clickDate)
                             } else {
                                 LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
-                                    ForEach(groupedSpendings(), id: \.key) { date, spendings in
+                                    ForEach(SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings), id: \.key) { date, spendings in
                                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
                                         Section(header: headerView(for: date)) {
@@ -48,7 +48,7 @@ struct MySpendingListView: View {
                                             }
                                             .onAppear {
                                                 Log.debug("spendings: \(spendings)")
-                                                Log.debug("group: \(groupedSpendings())")
+                                                Log.debug("group: \(SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings))")
                                             }
                                         }
                                         .id(date) // ScrollViewReader를 위한 ID 추가
@@ -57,7 +57,7 @@ struct MySpendingListView: View {
                                 }
                             }
                         }
-                        if !groupedSpendings().isEmpty {
+                        if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
                                 changeMonth(by: -1)
 
@@ -144,19 +144,6 @@ struct MySpendingListView: View {
             .padding(.leading, 20)
             .padding(.bottom, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private func groupedSpendings() -> [(key: String, values: [IndividualSpending])] {
-        let grouped = Dictionary(grouping: spendingHistoryViewModel.dailyDetailSpendings, by: { String($0.spendAt.prefix(10)) })
-        let sortedGroup = grouped.map { (key: $0.key, values: $0.value) }
-            .sorted { group1, group2 -> Bool in
-                if let date1 = DateFormatterUtil.dateFromString(group1.key + " 00:00:00"), let date2 = DateFormatterUtil.dateFromString(group2.key + " 00:00:00") {
-                    return date1 > date2
-                }
-                return false
-            }
-
-        return sortedGroup
     }
 
     private func changeMonth(by value: Int) {
