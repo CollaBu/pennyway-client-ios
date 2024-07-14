@@ -15,4 +15,15 @@ enum DateFormatterUtil {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter.date(from: dateString)
     }
+
+    static func dateFormatString(from dateString: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let date = formatter.date(from: dateString) {
+            formatter.dateFormat = "MMMM d일"
+            formatter.locale = Locale(identifier: "ko_KR")
+            return formatter.string(from: date)
+        }
+        return dateString
+    }
 }

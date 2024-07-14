@@ -20,15 +20,21 @@ class TargetAmountViewModel: ObservableObject {
                         self.targetAmountData = validTargetAmount
                        
                         if validTargetAmount.targetAmountDetail.isRead == true {
-                            // 추천 금액 보여주기 x + 목표 금액 데이터 적용
+                            // 추천 금액 보여주기 x
                             self.isHiddenSuggestionView = true
-                            self.isPresentTargetAmount = true
-                        } else if validTargetAmount.targetAmountDetail.amount == -1 {
-                            self.isHiddenSuggestionView = true
-                            self.isPresentTargetAmount = false
+
+                        } else {
+                            self.isHiddenSuggestionView = false
                             self.getTargetAmountForPreviousMonthApi()
                         }
-
+                        
+                        if validTargetAmount.targetAmountDetail.amount == -1 {
+                            // 목표 금액 데이터 적용 x
+                            self.isPresentTargetAmount = false
+                        } else {
+                            self.isPresentTargetAmount = true
+                        }
+    
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("당월 목표 금액 조회 \(jsonString)")
                         }
@@ -68,6 +74,7 @@ class TargetAmountViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("당월 이전 사용자 최신 목표 금액 조회 완료 \(jsonString)")
                         }
+                        Log.debug("??")
                         
                         self.recentTargetAmountData = response.data.targetAmount
                         let isPresent = response.data.targetAmount.isPresent

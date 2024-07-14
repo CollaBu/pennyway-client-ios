@@ -61,6 +61,7 @@ extension AppDelegate: MessagingDelegate {
                 } else {
                     // 2.2 저장된 값과 같으면 -> registDeviceTokenApi() 호출 x
                     Log.info("fcmToken이 저장된 값과 같다")
+                    Log.info("fcmToken updated: \(fcmToken)")
                 }
             } else {
                 // 1. fcmToken이 KeychainHelper에 저장되지 않은 경우 -> fcmToken 저장
