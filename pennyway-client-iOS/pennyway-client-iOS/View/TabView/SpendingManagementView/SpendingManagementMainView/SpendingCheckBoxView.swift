@@ -88,7 +88,7 @@ struct SpendingCheckBoxView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                         }
-                        .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
+                        .frame(alignment: .trailing)
                     }
                 } else {
                     Spacer()
