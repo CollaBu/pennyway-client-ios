@@ -68,11 +68,8 @@ struct AddSpendingCompleteView: View {
                 if entryPoint == .main {
                     NavigationUtil.popToRootView()
                 } else {
-//                    isPresented = false
                     NavigationUtil.popToView(at: 1)
                 }
-
-//                NavigationUtil.popToRootView()
 
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
