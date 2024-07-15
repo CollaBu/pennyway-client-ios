@@ -59,6 +59,13 @@
 		4A3701D42C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701C72C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift */; };
 		4A3701D52C08F7F600F0AEBA /* SpendingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701CA2C08F7F600F0AEBA /* SpendingRouter.swift */; };
 		4A3701D72C090CD600F0AEBA /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3701D62C090CD500F0AEBA /* Value.swift */; };
+		4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE20D2C3E41EC00817589 /* SpendingCategoryAlamofire.swift */; };
+		4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE20F2C3E423800817589 /* SpendingCategoryRouter.swift */; };
+		4A3DE2162C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */; };
+		4A3DE2182C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */; };
+		4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */; };
+		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
+		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
 		4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */; };
 		4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */; };
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */; };
@@ -125,6 +132,8 @@
 		4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */; };
 		4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */; };
 		4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */; };
+		4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */; };
+		4A9634B22C42EAF6000A218A /* SpendingListGroupUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */; };
 		4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
@@ -225,7 +234,6 @@
 		D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F72BE9116700653391 /* TermsAndConditionsViewModel.swift */; };
 		D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D874F52A2C32888E00936886 /* DetailSpendingView.swift */; };
 		D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */; };
-		D87A9F382C3E79590092B1B1 /* DeleteSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87A9F372C3E79590092B1B1 /* DeleteSpendingHistoryRequestDto.swift */; };
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
 		D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */; };
 		D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */; };
@@ -302,6 +310,13 @@
 		4A3701C72C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4A3701CA2C08F7F600F0AEBA /* SpendingRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendingRouter.swift; sourceTree = "<group>"; };
 		4A3701D62C090CD500F0AEBA /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		4A3DE20D2C3E41EC00817589 /* SpendingCategoryAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryAlamofire.swift; sourceTree = "<group>"; };
+		4A3DE20F2C3E423800817589 /* SpendingCategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryRouter.swift; sourceTree = "<group>"; };
+		4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingCountRequestDto.swift; sourceTree = "<group>"; };
+		4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingCountResponseDto.swift; sourceTree = "<group>"; };
+		4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
+		4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
+		4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingResponseDto.swift; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -370,6 +385,8 @@
 		4A8571392BC6FFD30082CE47 /* NumberInputSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInputSectionView.swift; sourceTree = "<group>"; };
 		4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOAuthToAccountViewModel.swift; sourceTree = "<group>"; };
 		4A8571432BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthSignUpViewModel.swift; sourceTree = "<group>"; };
+		4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
+		4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingListGroupUtil.swift; sourceTree = "<group>"; };
 		4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCurrentMonthTargetAmountRequestDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
@@ -467,7 +484,6 @@
 		D85927F72BE9116700653391 /* TermsAndConditionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModel.swift; sourceTree = "<group>"; };
 		D874F52A2C32888E00936886 /* DetailSpendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpendingView.swift; sourceTree = "<group>"; };
 		D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlarmResponseDto.swift; sourceTree = "<group>"; };
-		D87A9F372C3E79590092B1B1 /* DeleteSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
@@ -551,6 +567,7 @@
 				4A058EFE2BD03E01004B6F89 /* AuthResponseDto.swift */,
 				4A4703AF2BCF897300AEE04E /* ErrorResponseDto.swift */,
 				4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */,
+				4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -841,6 +858,7 @@
 			isa = PBXGroup;
 			children = (
 				4A3701BE2C08F7F600F0AEBA /* SpendingAlamofire.swift */,
+				4A3DE20D2C3E41EC00817589 /* SpendingCategoryAlamofire.swift */,
 			);
 			path = Alamofire;
 			sourceTree = "<group>";
@@ -848,10 +866,8 @@
 		4A3701C32C08F7F600F0AEBA /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				4A3701C02C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift */,
-				4A3701C12C08F7F600F0AEBA /* AddSpendingHistoryRequestDto.swift */,
-				4A3701C22C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift */,
-				D87A9F372C3E79590092B1B1 /* DeleteSpendingHistoryRequestDto.swift */,
+				4A3DE2122C3E443B00817589 /* Spending */,
+				4A3DE2112C3E442C00817589 /* SpendingCategory */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -859,10 +875,8 @@
 		4A3701C82C08F7F600F0AEBA /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				4A3701C42C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift */,
-				4A3701C52C08F7F600F0AEBA /* AddSpendingHistoryResponseDto.swift */,
-				4A3701C62C08F7F600F0AEBA /* getSpendingCustomCategoryListResponseDto.swift */,
-				4A3701C72C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift */,
+				4A3DE2142C3E445A00817589 /* SpendingCategory */,
+				4A3DE2132C3E444600817589 /* Spending */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -880,6 +894,7 @@
 			isa = PBXGroup;
 			children = (
 				4A3701CA2C08F7F600F0AEBA /* SpendingRouter.swift */,
+				4A3DE20F2C3E423800817589 /* SpendingCategoryRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -892,6 +907,46 @@
 				4A3701CB2C08F7F600F0AEBA /* Router */,
 			);
 			path = SpendingDomain;
+			sourceTree = "<group>";
+		};
+		4A3DE2112C3E442C00817589 /* SpendingCategory */ = {
+			isa = PBXGroup;
+			children = (
+				4A3701C02C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift */,
+				4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */,
+				4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */,
+			);
+			path = SpendingCategory;
+			sourceTree = "<group>";
+		};
+		4A3DE2122C3E443B00817589 /* Spending */ = {
+			isa = PBXGroup;
+			children = (
+				4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */,
+				4A3701C12C08F7F600F0AEBA /* AddSpendingHistoryRequestDto.swift */,
+				4A3701C22C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift */,
+			);
+			path = Spending;
+			sourceTree = "<group>";
+		};
+		4A3DE2132C3E444600817589 /* Spending */ = {
+			isa = PBXGroup;
+			children = (
+				4A3701C52C08F7F600F0AEBA /* AddSpendingHistoryResponseDto.swift */,
+				4A3701C72C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift */,
+			);
+			path = Spending;
+			sourceTree = "<group>";
+		};
+		4A3DE2142C3E445A00817589 /* SpendingCategory */ = {
+			isa = PBXGroup;
+			children = (
+				4A3701C42C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift */,
+				4A3701C62C08F7F600F0AEBA /* getSpendingCustomCategoryListResponseDto.swift */,
+				4A3DE2172C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift */,
+				4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */,
+			);
+			path = SpendingCategory;
 			sourceTree = "<group>";
 		};
 		4A4703972BCED80000AEE04E /* Response */ = {
@@ -1208,6 +1263,7 @@
 			isa = PBXGroup;
 			children = (
 				4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */,
+				4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1740,6 +1796,7 @@
 				D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
+				4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */,
 				4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */,
 				4AC320432C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift in Sources */,
 				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
@@ -1761,6 +1818,7 @@
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
 				4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
+				4A3DE2162C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift in Sources */,
 				4AC320652C120C0D00DDB4B6 /* TargetAmountModel.swift in Sources */,
 				D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */,
 				D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */,
@@ -1771,7 +1829,6 @@
 				4A57898F2BDC298500AFEB26 /* NotFoundError.swift in Sources */,
 				D8180C022BE507FD00F837FB /* FindIdFormView.swift in Sources */,
 				4AC3204E2C11D5AC00DDB4B6 /* SpendingCalendarView.swift in Sources */,
-				D87A9F382C3E79590092B1B1 /* DeleteSpendingHistoryRequestDto.swift in Sources */,
 				4AC3205F2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift in Sources */,
 				4A3701D42C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift in Sources */,
 				4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */,
@@ -1797,6 +1854,7 @@
 				4AC3204A2C11D5AC00DDB4B6 /* NoSpendingHistorySheetView.swift in Sources */,
 				4AC320532C11D5AC00DDB4B6 /* DiffAmountDynamicWidthView.swift in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
+				4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */,
 				4A69C1522BE695FF00A27B82 /* FindUserNameViewModel.swift in Sources */,
 				4A0FFBF92BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
@@ -1811,6 +1869,7 @@
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
 				D888329C2BBC612600F49B27 /* LoginView.swift in Sources */,
 				4A69C1562BE69DEA00A27B82 /* Log.swift in Sources */,
+				4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */,
 				D8157E642BBEF2040083844B /* InputFormView.swift in Sources */,
 				D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */,
 				4ADE802C2BF29055007FFB01 /* MainTabView.swift in Sources */,
@@ -1820,6 +1879,7 @@
 				4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */,
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
+				4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
@@ -1856,6 +1916,7 @@
 				4A148B622C3702E2005C6D4E /* CategoryDetailsView.swift in Sources */,
 				D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,
+				4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
 				4AC320402C11D5AC00DDB4B6 /* SelectCategoryIconView.swift in Sources */,
@@ -1893,6 +1954,7 @@
 				4A4703A72BCEDD9800AEE04E /* VerificationCodeRequestDto.swift in Sources */,
 				4AC3204D2C11D5AC00DDB4B6 /* SpendingCalendarCellView.swift in Sources */,
 				4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */,
+				4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */,
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
@@ -1922,6 +1984,7 @@
 				4A3701B32C08F74E00F0AEBA /* TargetAmountRouter.swift in Sources */,
 				4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */,
 				D8180C0A2BE531C500F837FB /* (null) in Sources */,
+				4A9634B22C42EAF6000A218A /* SpendingListGroupUtil.swift in Sources */,
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
 				D8E24D952BFD12BB006E8046 /* SettingAlarmView.swift in Sources */,
@@ -1958,6 +2021,7 @@
 				4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */,
 				4AC320542C11D5AC00DDB4B6 /* TotalTargetAmountContentView.swift in Sources */,
 				4A85713A2BC6FFD30082CE47 /* NumberInputSectionView.swift in Sources */,
+				4A3DE2182C3E48EE00817589 /* getCategorySpendingCountResponseDto.swift in Sources */,
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
 				4A5DA8C12C3C498D00685F77 /* FcmTokenDto.swift in Sources */,
 				4A5789732BDC1C0B00AFEB26 /* ForbiddenErrorCode.swift in Sources */,

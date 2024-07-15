@@ -2,12 +2,11 @@
 import SwiftUI
 
 struct CategorySpendingListView: View {
-    var groupedSpendings: [(key: String, values: [IndividualSpending])]
-    var onItemAppear: ((IndividualSpending) -> Void)?
+    @ObservedObject var viewModel: SpendingCategoryViewModel
     
     var body: some View {
         LazyVStack(spacing: 0) {
-            ForEach(groupedSpendings, id: \.key) { date, spendings in
+            ForEach(SpendingListGroupUtil.groupedSpendings(from: viewModel.dailyDetailSpendings), id: \.key) { date, spendings in
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 
                 Section(header: headerView(for: date)) {
@@ -18,11 +17,20 @@ struct CategorySpendingListView: View {
                             CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .onAppear {
+                            guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
+                                return
+                            }
+                            // 해당 index가 마지막 index라면 데이터 추가
+                            if index == viewModel.dailyDetailSpendings.count - 1 {
+                                Log.debug("지출 내역 index: \(index)")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
+                                    viewModel.getCategorySpendingHistoryApi { _ in }
+                                }
+                            }
+                        }
                         
                         Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                            .onAppear {
-                                onItemAppear?(item)
-                            }
                     }
                 }
             }
@@ -31,22 +39,11 @@ struct CategorySpendingListView: View {
     }
     
     private func headerView(for date: String) -> some View {
-        Text(dateFormatter(from: date))
+        Text(DateFormatterUtil.dateFormatString(from: date))
             .font(.B2MediumFont())
             .platformTextColor(color: Color("Gray04"))
             .padding(.leading, 20)
             .padding(.bottom, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
-    private func dateFormatter(from dateString: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        if let date = formatter.date(from: dateString) {
-            formatter.dateFormat = "MMMM d일"
-            formatter.locale = Locale(identifier: "ko_KR")
-            return formatter.string(from: date)
-        }
-        return dateString
     }
 }

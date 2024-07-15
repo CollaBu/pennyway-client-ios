@@ -45,7 +45,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
     }
 
     func getSpendingCustomCategoryListApi() {
-        SpendingAlamofire.shared.getSpendingCustomCategoryList { result in
+        SpendingCategoryAlamofire.shared.getSpendingCustomCategoryList { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -86,7 +86,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
     func addSpendingCustomCategoryApi(completion: @escaping (Bool) -> Void) {
         let addSpendingCustomCategoryRequestDto = AddSpendingCustomCategoryRequestDto(name: categoryName, icon: selectedCategoryIconTitle)
 
-        SpendingAlamofire.shared.addSpendingCustomCategory(addSpendingCustomCategoryRequestDto) { result in
+        SpendingCategoryAlamofire.shared.addSpendingCustomCategory(addSpendingCustomCategoryRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

@@ -5,17 +5,15 @@ import Foundation
 enum SpendingRouter: URLRequestConvertible {
     case getSpendingHistory(dto: GetSpendingHistoryRequestDto)
     case addSpendingHistory(dto: AddSpendingHistoryRequestDto)
-    case addSpendingCustomCategory(dto: AddSpendingCustomCategoryRequestDto)
-    case getSpendingCustomCategoryList
     case deleteSpendingHistory(dto: DeleteSpendingHistoryRequestDto)
     case getDetailSpendingHistory(spendingId: Int)
     case editSpendingHistory(spendingId: Int, dto: AddSpendingHistoryRequestDto)
     
     var method: HTTPMethod {
         switch self {
-        case .getSpendingHistory, .getSpendingCustomCategoryList, .getDetailSpendingHistory:
+        case .getSpendingHistory, .getDetailSpendingHistory:
             return .get
-        case .addSpendingCustomCategory, .addSpendingHistory, .editSpendingHistory:
+        case .addSpendingHistory, .editSpendingHistory:
             return .post
         case .deleteSpendingHistory:
             return .delete
@@ -32,8 +30,7 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case .getSpendingHistory, .addSpendingHistory, .deleteSpendingHistory:
             return "v2/spendings"
-        case .getSpendingCustomCategoryList, .addSpendingCustomCategory:
-            return "v2/spending-categories"
+
         case let .getDetailSpendingHistory(spendingId), let .editSpendingHistory(spendingId, _):
             return "v2/spendings/\(spendingId)"
         }
@@ -41,7 +38,7 @@ enum SpendingRouter: URLRequestConvertible {
     
     var bodyParameters: Parameters? {
         switch self {
-        case .getSpendingHistory, .getSpendingCustomCategoryList, .addSpendingCustomCategory, .getDetailSpendingHistory:
+        case .getSpendingHistory, .getDetailSpendingHistory:
             return [:]
         case let .addSpendingHistory(dto):
             return try? dto.asDictionary()
@@ -56,10 +53,7 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case let .getSpendingHistory(dto):
             return try? dto.asDictionary()
-        case let .addSpendingCustomCategory(dto):
-            return try? dto.asDictionary()
-        
-        case .getSpendingCustomCategoryList, .addSpendingHistory, .deleteSpendingHistory, .getDetailSpendingHistory, .editSpendingHistory:
+        case .addSpendingHistory, .deleteSpendingHistory, .getDetailSpendingHistory, .editSpendingHistory:
             return [:]
         }
     }
@@ -74,10 +68,7 @@ enum SpendingRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         case .addSpendingHistory, .editSpendingHistory, .deleteSpendingHistory:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
-        case .addSpendingCustomCategory:
-            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
-            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
-        case .getSpendingCustomCategoryList, .getDetailSpendingHistory:
+        case .getDetailSpendingHistory:
             request = URLRequest.createURLRequest(url: url, method: method)
         }
         return request
