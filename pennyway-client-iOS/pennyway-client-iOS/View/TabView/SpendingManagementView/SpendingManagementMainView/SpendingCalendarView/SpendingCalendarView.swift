@@ -181,14 +181,14 @@ private extension SpendingCalenderView {
         var dateComponents = DateComponents()
         dateComponents.day = index
     
-        let timeZone = TimeZone.current
-        let offset = Double(timeZone.secondsFromGMT(for: firstDayOfMonth))
-        dateComponents.second = Int(offset)
+//        let timeZone = TimeZone.current
+//        let offset = Double(timeZone.secondsFromGMT(for: firstDayOfMonth))
+//        dateComponents.second = Int(offset)
     
         let date = calendar.date(byAdding: dateComponents, to: firstDayOfMonth) ?? Date()
         return date
     }
-  
+
     /// 해당 월에 존재하는 일자 수
     func numberOfDays(in date: Date) -> Int {
         return Calendar.current.range(of: .day, in: .month, for: date)?.count ?? 0

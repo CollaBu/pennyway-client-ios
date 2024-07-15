@@ -13,6 +13,7 @@ struct SpendingManagementMainView: View {
     @State private var clickDate: Date? // 선택된 날짜 저장
     @State private var addSpendingClickDate: Date?
     @State private var addSpendingSelectedDate: Date?
+    @State private var entryPoint: EntryPoint = .main
 
     @State private var showToastPopup = false
 
@@ -93,6 +94,7 @@ struct SpendingManagementMainView: View {
                     HStack(spacing: 0) {
                         Button(action: {
                             clickDate = Date() // +아이콘을 통해 들어간 경우 현재날짜 고정
+                            entryPoint = .main
                             navigateToAddSpendingHistory = true
                         }, label: {
                             Image("icon_navigation_add_black")
@@ -128,7 +130,7 @@ struct SpendingManagementMainView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate), isActive: $navigateToAddSpendingHistory) {
+            NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
 

@@ -33,6 +33,7 @@ struct SelectSpendingDayView: View {
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
                 .environment(\.locale, Locale(identifier: "ko_KR"))
+                .environment(\.timeZone, TimeZone(secondsFromGMT: 0)!)
                 .frame(height: 114 * DynamicSizeFactor.factor())
                 .clipped()
 

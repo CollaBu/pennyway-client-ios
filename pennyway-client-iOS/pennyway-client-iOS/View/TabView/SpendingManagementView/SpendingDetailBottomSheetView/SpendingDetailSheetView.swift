@@ -13,7 +13,7 @@ struct SpendingDetailSheetView: View {
     
     @StateObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
-
+    
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
@@ -30,7 +30,7 @@ struct SpendingDetailSheetView: View {
                     }
                         
                     Spacer()
-                    
+                        
                     if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil || isDeleted {
                         // 지출내역이 없을 경우 편집버튼 없음
                     } else {
@@ -45,7 +45,7 @@ struct SpendingDetailSheetView: View {
                         })
                         .padding(10)
                     }
-                
+                        
                     Button(action: {
                         showAddSpendingHistoryView = true
                     }, label: {
@@ -59,7 +59,7 @@ struct SpendingDetailSheetView: View {
                 .padding(.leading, 20)
                 .padding(.trailing, 17)
                 .padding(.top, 12)
-                
+                    
                 if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil || isDeleted {
                     NoSpendingHistorySheetView()
                 } else {
@@ -74,10 +74,10 @@ struct SpendingDetailSheetView: View {
                             }
                                 
                             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-
+                                
                             ForEach(spendingHistoryViewModel.filteredSpendings(for: clickDate), id: \.id) { item in
                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-
+                                    
                                 CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                             }
@@ -92,7 +92,7 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView(clickDate: $clickDate)
+                    AddSpendingHistoryView(clickDate: $clickDate, entryPoint: .detailSheet)
                 }
             }
         }
