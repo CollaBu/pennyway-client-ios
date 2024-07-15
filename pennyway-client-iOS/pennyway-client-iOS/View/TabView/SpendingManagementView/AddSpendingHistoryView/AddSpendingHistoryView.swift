@@ -23,6 +23,7 @@ struct AddSpendingHistoryView: View {
                         viewModel.addSpendingHistoryApi { success in
                             if success {
                                 navigateToAddSpendingCategory = true
+                                Log.debug("\(date)에 해당하는 지출내역 추가 성공")
                             }
                         }
                     }
