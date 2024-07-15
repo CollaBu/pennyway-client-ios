@@ -74,10 +74,10 @@ struct SpendingCalendarCellView: View {
 
             if isCurrentMonthDay {
                 if let dailyTotalAmount = getSpendingAmount(for: day) {
-                    Text("\(dailyTotalAmount)")
+                    Text("-\(dailyTotalAmount)")
                         .font(.B4MediumFont())
                         .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
-                        .frame(height: 10 * DynamicSizeFactor.factor())
+                        .frame(width: 34 * DynamicSizeFactor.factor(), height: 10 * DynamicSizeFactor.factor())
                 } else {
                     Spacer()
                         .frame(height: 10 * DynamicSizeFactor.factor())
