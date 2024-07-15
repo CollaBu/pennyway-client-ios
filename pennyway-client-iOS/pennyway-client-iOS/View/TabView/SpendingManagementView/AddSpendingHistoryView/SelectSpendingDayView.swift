@@ -1,8 +1,21 @@
 import SwiftUI
 
+// MARK: - SelectSpendingDayView
+
 struct SelectSpendingDayView: View {
+    @ObservedObject var viewModel: AddSpendingHistoryViewModel
+
     @Binding var isPresented: Bool
-    @Binding var selectedDate: Date
+    @Binding var clickDate: Date?
+
+    @State private var selectedDate: Date
+
+    init(viewModel: AddSpendingHistoryViewModel, isPresented: Binding<Bool>, clickDate: Binding<Date?>) {
+        _viewModel = ObservedObject(wrappedValue: viewModel)
+        _isPresented = isPresented
+        _clickDate = clickDate
+        _selectedDate = State(initialValue: clickDate.wrappedValue ?? Date())
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -26,7 +39,9 @@ struct SelectSpendingDayView: View {
             Spacer()
 
             CustomBottomButton(action: {
+                clickDate = selectedDate
                 isPresented = false
+                Log.debug("clickDate: \(self.clickDate)")
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
