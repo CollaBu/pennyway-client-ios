@@ -48,7 +48,7 @@ class SignUpFormViewModel: ObservableObject {
     }
     
     func validateName() {
-        let nameRegex = "^[가-힣a-z]{2,8}$"
+        let nameRegex = "^[가-힣a-zA-Z]{2,8}$"
         showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
     }
     
