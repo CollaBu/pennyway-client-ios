@@ -5,6 +5,7 @@ struct AddSpendingCompleteView: View {
 
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @Binding var clickDate: Date?
+    @Binding var isPresented: Bool
     var entryPoint: EntryPoint
     
     var body: some View {
@@ -68,7 +69,9 @@ struct AddSpendingCompleteView: View {
                 if entryPoint == .main {
                     NavigationUtil.popToRootView()
                 } else {
-                    NavigationUtil.popToView(at: 1)
+                    isPresented = false
+                    Log.debug("isPresented: \(isPresented)")
+                    Log.debug("entryPoint: \(entryPoint)")
                 }
 
             }, label: "확인", isFormValid: .constant(true))
@@ -81,5 +84,5 @@ struct AddSpendingCompleteView: View {
 }
 
 #Preview {
-    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel(), clickDate: .constant(Date()), entryPoint: .main)
+    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
 }

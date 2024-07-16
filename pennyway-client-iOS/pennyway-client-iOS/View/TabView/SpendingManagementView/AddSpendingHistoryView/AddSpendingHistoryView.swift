@@ -15,6 +15,7 @@ struct AddSpendingHistoryView: View {
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
+    @Binding var isPresented: Bool
     var entryPoint: EntryPoint
 
     var body: some View {
@@ -39,7 +40,7 @@ struct AddSpendingHistoryView: View {
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, entryPoint: entryPoint), isActive: $navigateToAddSpendingCategory) {}
+                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingCategory) {}
 
                 NavigationLink(
                     destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $viewModel.navigateToAddCategory) {}
@@ -81,5 +82,5 @@ struct AddSpendingHistoryView: View {
 }
 
 #Preview {
-    AddSpendingHistoryView(clickDate: .constant(Date()), entryPoint: .main)
+    AddSpendingHistoryView(clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
 }

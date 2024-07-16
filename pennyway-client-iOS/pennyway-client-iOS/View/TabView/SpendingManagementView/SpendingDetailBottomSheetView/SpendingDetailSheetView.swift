@@ -92,20 +92,21 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView(clickDate: $clickDate, entryPoint: .detailSheet)
+                    AddSpendingHistoryView(clickDate: $clickDate, isPresented: $showAddSpendingHistoryView, entryPoint: .detailSheet)
                 }
             }
         }
         .onAppear {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
+            getDailyHistoryData()
         }
         .onChange(of: showEditSpendingDetailView) { _ in
-            spendingHistoryViewModel.checkSpendingHistoryApi { success in
-                if success {
-                    Log.debug("뷰 새로고침 성공")
-                } else {
-                    Log.debug("뷰 새로고침 실패")
-                }
+            getDailyHistoryData()
+        }
+        .onChange(of: showAddSpendingHistoryView) { isPresented in
+            if !isPresented {
+                // AddSpendingHistoryView가 닫힐 때 새로고침
+                getDailyHistoryData()
             }
         }
         .onChange(of: clickDate) { _ in
@@ -119,5 +120,15 @@ struct SpendingDetailSheetView: View {
         let day = Calendar.current.component(.day, from: date)
         Log.debug(day)
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
+    }
+    
+    private func getDailyHistoryData() {
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+            if success {
+                Log.debug("뷰 새로고침 성공")
+            } else {
+                Log.debug("뷰 새로고침 실패")
+            }
+        }
     }
 }
