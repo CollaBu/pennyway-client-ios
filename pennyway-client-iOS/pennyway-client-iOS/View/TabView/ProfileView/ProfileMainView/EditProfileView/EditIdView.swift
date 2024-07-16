@@ -1,23 +1,24 @@
 
+
 import SwiftUI
 
-struct EditProfileListView: View {
+struct EditIdView: View {
     @Environment(\.presentationMode) var presentationMode
-    
+    @StateObject var editIdViewModel = EditIdViewModel()
+
     var body: some View {
-        ScrollView {
-            VStack {
-                CustomRectangleButton(action: {}, label: "아이디 변경")
-                
-                Spacer().frame(height: 15 * DynamicSizeFactor.factor())
-                
-                CustomRectangleButton(action: {}, label: "전화번호 변경")
-            }
+        VStack {
+            Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+
+            CustomInputView(inputText: $editIdViewModel.inputId, titleText: "아이디", placeholder: "", isSecureText: false, isCustom: false)
+
+            Spacer()
         }
+
         .setTabBarVisibility(isHidden: true)
-        .navigationBarColor(UIColor(named: "Gray01"), title: "내 정보 수정")
+        .navigationBarColor(UIColor(named: "White01"), title: "아이디 변경")
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("Gray01"))
+        .background(Color("White01"))
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 HStack {
@@ -40,5 +41,5 @@ struct EditProfileListView: View {
 }
 
 #Preview {
-    EditProfileListView()
+    EditIdView()
 }

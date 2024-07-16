@@ -118,6 +118,8 @@
 		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6C79D22C46310B009463E4 /* EditProfileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D12C46310B009463E4 /* EditProfileListView.swift */; };
 		4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D32C463C0B009463E4 /* CustomRectangleButton.swift */; };
+		4A6C79D62C463DB1009463E4 /* EditIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D52C463DB1009463E4 /* EditIdView.swift */; };
+		4A6C79D82C46CD9A009463E4 /* EditIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A73E9AA2C34F5610017EED9 /* SpendingCategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */; };
@@ -371,6 +373,8 @@
 		4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A6C79D12C46310B009463E4 /* EditProfileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileListView.swift; sourceTree = "<group>"; };
 		4A6C79D32C463C0B009463E4 /* CustomRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangleButton.swift; sourceTree = "<group>"; };
+		4A6C79D52C463DB1009463E4 /* EditIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIdView.swift; sourceTree = "<group>"; };
+		4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditIdViewModel.swift; path = "pennyway-client-iOS/View/TabView/ProfileView/ProfileMainView/EditProfileView/EditIdViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -1096,6 +1100,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6C79D12C46310B009463E4 /* EditProfileListView.swift */,
+				4A6C79D52C463DB1009463E4 /* EditIdView.swift */,
 			);
 			path = EditProfileView;
 			sourceTree = "<group>";
@@ -1659,6 +1664,7 @@
 		D8E24D982BFD20A0006E8046 /* ProfileViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */,
 			);
 			path = ProfileViewModel;
 			sourceTree = "<group>";
@@ -1838,6 +1844,7 @@
 				D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
 				4A5789752BDC1CBF00AFEB26 /* NotFoundErrorCode.swift in Sources */,
+				4A6C79D62C463DB1009463E4 /* EditIdView.swift in Sources */,
 				4A3701D72C090CD600F0AEBA /* Value.swift in Sources */,
 				4AC320592C11D5D500DDB4B6 /* CustomToastView.swift in Sources */,
 				4A57898F2BDC298500AFEB26 /* NotFoundError.swift in Sources */,
@@ -1991,6 +1998,7 @@
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
 				4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */,
+				4A6C79D82C46CD9A009463E4 /* EditIdViewModel.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
 				4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */,
 				D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */,
