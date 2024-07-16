@@ -5,17 +5,22 @@ struct EditProfileListView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var isNavigateToEditIdView = false
+    @State var isNavigateToEditPhoneView = false
     
     var body: some View {
         ScrollView {
             VStack {
+                Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+                
                 CustomRectangleButton(action: {
                     isNavigateToEditIdView = true
                 }, label: "아이디 변경")
                 
                 Spacer().frame(height: 15 * DynamicSizeFactor.factor())
                 
-                CustomRectangleButton(action: {}, label: "전화번호 변경")
+                CustomRectangleButton(action: {
+                    isNavigateToEditPhoneView = true
+                }, label: "전화번호 변경")
             }
         }
         .setTabBarVisibility(isHidden: true)
@@ -43,6 +48,7 @@ struct EditProfileListView: View {
         }
         
         NavigationLink(destination: EditIdView(), isActive: $isNavigateToEditIdView) {}
+        NavigationLink(destination: EditPhoneNumberView(), isActive: $isNavigateToEditPhoneView) {}
     }
 }
 

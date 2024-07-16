@@ -15,7 +15,7 @@ struct CodeInputSectionView: View {
                 .padding(.horizontal, 20)
                 .font(.B1RegularFont())
                 .platformTextColor(color: Color("Gray04"))
-            
+
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                 CodeInputField(
                     code: $viewModel.code,
@@ -28,7 +28,7 @@ struct CodeInputSectionView: View {
             .padding(.horizontal, 20)
         }
     }
-    
+
     private func handleCodeChange(_ newValue: String) {
         if Int(newValue) != nil {
             viewModel.code = String(newValue)

@@ -13,7 +13,7 @@ struct FindIdContentView: View {
 
             Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 
-            NumberInputSectionView(viewModel: phoneVerificationViewModel)
+            CodeInputSectionView(viewModel: phoneVerificationViewModel)
         }
     }
 }

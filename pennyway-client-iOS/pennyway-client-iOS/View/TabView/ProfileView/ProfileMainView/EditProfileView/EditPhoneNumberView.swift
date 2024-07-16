@@ -5,65 +5,50 @@ struct EditPhoneNumberView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = EditPhoneNumberViewModel()
 
+    var timerString: String {
+        let minutes = viewModel.timerSeconds / 60
+        let seconds = viewModel.timerSeconds % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
-            Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-
-            Text("휴대폰 번호")
-                .padding(.horizontal, 20)
-                .font(.B1RegularFont())
-                .platformTextColor(color: Color("Gray04"))
-            HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color("Gray01"))
-                        .frame(height: 46 * DynamicSizeFactor.factor())
-
-                    if viewModel.phoneNumber.isEmpty {
-                        Text("01012345678")
-                            .platformTextColor(color: Color("Gray03"))
-                            .padding(.leading, 13 * DynamicSizeFactor.factor())
-                            .font(.H4MediumFont())
-                    }
-
-                    TextField("", text: $viewModel.phoneNumber)
-                        .padding(.leading, 13 * DynamicSizeFactor.factor())
-                        .font(.H4MediumFont())
-                        .keyboardType(.numberPad)
-                        .platformTextColor(color: Color("Gray07"))
-
-                        .onChange(of: viewModel.phoneNumber) { newValue in
-                            if Int(newValue) != nil {
-                                if newValue.count > 11 {
-                                    viewModel.phoneNumber = String(newValue.prefix(11))
-                                }
-                            } else {
-                                viewModel.phoneNumber = ""
-                            }
-//                            viewModel.validateForm()
-                        }
+            VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
+                phoneNumberSection
+                if viewModel.showErrorPhoneNumberFormat {
+                    ErrorText(message: "올바른 전화번호 형식이 아니에요")
                 }
-
-                Button(action: {
-//                        viewModel.requestVerificationCodeApi { viewModel.judgeTimerRunning() }
-                }, label: {
-                    Text("인증번호 받기")
-                        .font(.B1MediumFont())
-                        .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
-                })
-                .padding(.horizontal, 13)
-                .frame(height: 46 * DynamicSizeFactor.factor())
-                .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05") : Color("Gray03"))
-                .clipShape(RoundedRectangle(cornerRadius: 4))
-                .disabled(viewModel.isDisabledButton)
+                if viewModel.showErrorExistingUser {
+                    ErrorText(message: "이미 가입된 전화번호예요")
+                }
             }
-            .padding(.horizontal, 20)
 
             Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 
-//            NumberInputSectionView(viewModel: phoneVerificationViewModel)
-        }
+            VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
+                Text("인증번호")
+                    .padding(.horizontal, 20)
+                    .font(.B1RegularFont())
+                    .platformTextColor(color: Color("Gray04"))
 
+                HStack(spacing: 11 * DynamicSizeFactor.factor()) {
+                    CodeInputField(
+                        code: $viewModel.code,
+                        onCodeChange: handleCodeChange,
+                        isTimerHidden: viewModel.isTimerHidden,
+                        timerString: timerString,
+                        isDisabled: !viewModel.isDisabledButton
+                    )
+                }
+                .padding(.horizontal, 20)
+            }
+
+            Spacer()
+
+            CustomBottomButton(action: {}, label: "변경 완료", isFormValid: .constant(true))
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+        }
+        .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
         .navigationBarColor(UIColor(named: "White01"), title: "아이디 변경")
@@ -87,6 +72,46 @@ struct EditPhoneNumberView: View {
                 }.offset(x: -10)
             }
         }
+    }
+
+    @ViewBuilder
+    private var phoneNumberSection: some View {
+        VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
+            Text("휴대폰 번호")
+                .padding(.horizontal, 20)
+                .font(.B1RegularFont())
+                .platformTextColor(color: Color("Gray04"))
+
+            HStack(spacing: 11 * DynamicSizeFactor.factor()) {
+                PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange)
+                VerificationButton(isEnabled: !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11, action: handleVerificationButtonTap)
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+
+    private func handlePhoneNumberChange(_ newValue: String) {
+        if Int(newValue) != nil {
+            if newValue.count > 11 {
+                viewModel.phoneNumber = String(newValue.prefix(11))
+            }
+        } else {
+            viewModel.phoneNumber = ""
+        }
+        viewModel.validateForm()
+    }
+
+    private func handleVerificationButtonTap() {
+        viewModel.validatePhoneNumber()
+    }
+
+    private func handleCodeChange(_ newValue: String) {
+        if Int(newValue) != nil {
+            viewModel.code = String(newValue)
+        } else {
+            viewModel.code = ""
+        }
+        viewModel.validateForm()
     }
 }
 

@@ -13,8 +13,11 @@ struct EditIdView: View {
             CustomInputView(inputText: $editIdViewModel.inputId, titleText: "아이디", placeholder: "", isSecureText: false, isCustom: false)
 
             Spacer()
-        }
 
+            CustomBottomButton(action: {}, label: "변경 완료", isFormValid: .constant(true))
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+        }
+        .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
         .navigationBarColor(UIColor(named: "White01"), title: "아이디 변경")
