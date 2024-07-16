@@ -7,7 +7,7 @@ struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     @Binding var showingPopUp: Bool
     @StateObject var userAccountViewModel = UserAccountViewModel()
-    
+
     @State private var activeNavigation: ProfileActiveNavigation?
 
     var body: some View {
@@ -60,13 +60,13 @@ struct ProfileSettingListView: View {
             }
             .frame(maxWidth: .infinity)
             .background(Color("White01"))
-            
+
             navigationLinks
         }
         .setTabBarVisibility(isHidden: true)
         .navigationBarColor(UIColor(named: "White01"), title: "")
     }
-    
+
     @ViewBuilder
     private var navigationLinks: some View {
         ForEach(ProfileActiveNavigation.allCases, id: \.self) { destination in
@@ -75,8 +75,8 @@ struct ProfileSettingListView: View {
             }
         }
     }
-    
-    //이동할 뷰 정리
+
+    /// 이동할 뷰 정리
     @ViewBuilder
     private func destinationView(for destination: ProfileActiveNavigation) -> some View {
         switch destination {
@@ -113,7 +113,6 @@ struct MenuItem {
 // MARK: - ProfileSettingSectionView
 
 struct ProfileSettingSectionView: View {
-
     let title: String
     let itemsWithActions: [ProfileSettingListItem] // ProfileSettingListItem 배열로 변경
 

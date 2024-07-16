@@ -16,6 +16,7 @@ struct EditIdView: View {
         }
 
         .setTabBarVisibility(isHidden: true)
+        .navigationBarBackButtonHidden(true)
         .navigationBarColor(UIColor(named: "White01"), title: "아이디 변경")
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("White01"))

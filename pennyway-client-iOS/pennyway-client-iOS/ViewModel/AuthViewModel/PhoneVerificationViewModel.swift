@@ -29,6 +29,7 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var timerSeconds = 300
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
+
     func requestVerificationCodeAction() {
         if !showErrorPhoneNumberFormat && !isDisabledButton {
             isDisabledButton = true
