@@ -54,7 +54,7 @@ struct SpendingCheckBoxView: View {
 
                 let progressWidth: CGFloat = {
                     if targetAmount <= 0 {
-                        return 0
+                        return UIScreen.main.bounds.width - 76
                     }
                     let ratio = CGFloat(totalSpending) / CGFloat(targetAmount)
                     let width = ratio * (UIScreen.main.bounds.width - 76)
@@ -62,8 +62,8 @@ struct SpendingCheckBoxView: View {
                 }()
 
                 Rectangle()
-                    .frame(width: progressWidth, height: 24 * DynamicSizeFactor.factor()) // 현재 지출에 따른 프로그래스 바
-                    .platformTextColor(color: totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
+                    .frame(width: progressWidth, height: 24 * DynamicSizeFactor.factor())
+                    .platformTextColor(color: targetAmount == 0 || totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
                     .cornerRadius(15)
             }
 
@@ -88,7 +88,7 @@ struct SpendingCheckBoxView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                         }
-                        .frame(width: 79 * DynamicSizeFactor.factor(), alignment: .trailing)
+                        .frame(alignment: .trailing)
                     }
                 } else {
                     Spacer()

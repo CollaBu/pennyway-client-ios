@@ -26,4 +26,15 @@ enum DateFormatterUtil {
         }
         return dateString
     }
+
+    static func getYear(from date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: date) else {
+            return ""
+        }
+        let yearFormatter = DateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        return yearFormatter.string(from: date)
+    }
 }

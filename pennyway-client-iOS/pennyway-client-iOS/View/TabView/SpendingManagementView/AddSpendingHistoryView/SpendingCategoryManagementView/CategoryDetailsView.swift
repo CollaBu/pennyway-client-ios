@@ -39,7 +39,7 @@ struct CategoryDetailsView: View {
                     Rectangle()
                         .platformTextColor(color: Color("Gray01"))
                         .frame(maxWidth: .infinity)
-                        .frame(height: 8 * DynamicSizeFactor.factor())
+                        .frame(height: 1 * DynamicSizeFactor.factor())
 
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
