@@ -3,7 +3,7 @@ import SwiftUI
 
 struct EditPhoneNumberView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var viewModel = EditPhoneNumberViewModel()
+    @StateObject var viewModel = PhoneVerificationViewModel()
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
@@ -102,7 +102,7 @@ struct EditPhoneNumberView: View {
     }
 
     private func handleVerificationButtonTap() {
-        viewModel.validatePhoneNumber()
+        viewModel.requestVerificationCodeApi { viewModel.judgeTimerRunning() }
     }
 
     private func handleCodeChange(_ newValue: String) {

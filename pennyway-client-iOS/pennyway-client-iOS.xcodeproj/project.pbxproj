@@ -122,7 +122,6 @@
 		4A6C79D82C46CD9A009463E4 /* EditIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */; };
 		4A6C79DB2C46D067009463E4 /* ProfileActiveNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79DA2C46D067009463E4 /* ProfileActiveNavigation.swift */; };
 		4A6C79DD2C46D28B009463E4 /* EditPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79DC2C46D28B009463E4 /* EditPhoneNumberView.swift */; };
-		4A6C79DF2C46DAD6009463E4 /* EditPhoneNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79DE2C46DAD6009463E4 /* EditPhoneNumberViewModel.swift */; };
 		4A6C79E22C46DE77009463E4 /* PhoneNumberInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E12C46DE77009463E4 /* PhoneNumberInputField.swift */; };
 		4A6C79E42C46DE8B009463E4 /* VerificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E32C46DE8B009463E4 /* VerificationButton.swift */; };
 		4A6C79E62C46DEA7009463E4 /* ErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E52C46DEA7009463E4 /* ErrorText.swift */; };
@@ -381,10 +380,9 @@
 		4A6C79D12C46310B009463E4 /* EditProfileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileListView.swift; sourceTree = "<group>"; };
 		4A6C79D32C463C0B009463E4 /* CustomRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangleButton.swift; sourceTree = "<group>"; };
 		4A6C79D52C463DB1009463E4 /* EditIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIdView.swift; sourceTree = "<group>"; };
-		4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditIdViewModel.swift; path = "pennyway-client-iOS/View/TabView/ProfileView/ProfileMainView/EditProfileView/EditIdViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditIdViewModel.swift; path = "pennyway-client-iOS/ViewModel/ProfileViewModel/EditIdViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		4A6C79DA2C46D067009463E4 /* ProfileActiveNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActiveNavigation.swift; sourceTree = "<group>"; };
 		4A6C79DC2C46D28B009463E4 /* EditPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNumberView.swift; sourceTree = "<group>"; };
-		4A6C79DE2C46DAD6009463E4 /* EditPhoneNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditPhoneNumberViewModel.swift; path = "pennyway-client-iOS/View/TabView/ProfileView/ProfileMainView/EditProfileView/EditPhoneNumberViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		4A6C79E12C46DE77009463E4 /* PhoneNumberInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputField.swift; sourceTree = "<group>"; };
 		4A6C79E32C46DE8B009463E4 /* VerificationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationButton.swift; sourceTree = "<group>"; };
 		4A6C79E52C46DEA7009463E4 /* ErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorText.swift; sourceTree = "<group>"; };
@@ -1140,6 +1138,14 @@
 			path = CustomInputPhoneView;
 			sourceTree = "<group>";
 		};
+		4A6C79EB2C46EEAE009463E4 /* ProfileViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */,
+			);
+			path = ProfileViewModel;
+			sourceTree = "<group>";
+		};
 		4A6E62D42BA5F7CC00111246 /* SignUpView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1238,8 +1244,8 @@
 		4A762AFC2B99A1CB001C1188 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4A6C79EB2C46EEAE009463E4 /* ProfileViewModel */,
 				4A3701BC2C08F7B600F0AEBA /* TargetAmountViewModel */,
-				D8E24D982BFD20A0006E8046 /* ProfileViewModel */,
 				4A0BC6962BF53D520036D900 /* SpendingViewModel */,
 				4ADBFAF32BE2C7F500C3ECE4 /* UserViewModel */,
 				4ADBFAF22BE2C7D600C3ECE4 /* AuthViewModel */,
@@ -1697,15 +1703,6 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
-		D8E24D982BFD20A0006E8046 /* ProfileViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */,
-				4A6C79DE2C46DAD6009463E4 /* EditPhoneNumberViewModel.swift */,
-			);
-			path = ProfileViewModel;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1873,7 +1870,6 @@
 				4AC320552C11D5AC00DDB4B6 /* TotalTargetAmountGraphView.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */,
-				4A6C79DF2C46DAD6009463E4 /* EditPhoneNumberViewModel.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
 				4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
