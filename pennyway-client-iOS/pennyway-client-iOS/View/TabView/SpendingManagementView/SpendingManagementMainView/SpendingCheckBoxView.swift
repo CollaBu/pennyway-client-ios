@@ -63,7 +63,7 @@ struct SpendingCheckBoxView: View {
 
                 Rectangle()
                     .frame(width: progressWidth, height: 24 * DynamicSizeFactor.factor())
-                    .platformTextColor(color: targetAmount <= 0 || totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
+                    .platformTextColor(color: targetAmount == 0 || totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
                     .cornerRadius(15)
             }
 
