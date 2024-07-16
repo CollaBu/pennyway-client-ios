@@ -7,8 +7,8 @@ struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     @Binding var showingPopUp: Bool
     @StateObject var userAccountViewModel = UserAccountViewModel()
-    @State private var isNavigateToInquiryView = false
-    @State private var isNavigateToSettingAlarmView = false
+    
+    @State private var activeNavigation: ProfileActiveNavigation?
 
     var body: some View {
         ZStack {
@@ -18,7 +18,7 @@ struct ProfileSettingListView: View {
                 LazyVStack(spacing: 0) {
                     ProfileSettingSectionView(title: "내 정보", itemsWithActions: [
                         ProfileSettingListItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {
-                           
+                            activeNavigation = .editProfile
                         }),
                         ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
                         ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {})
@@ -31,7 +31,7 @@ struct ProfileSettingListView: View {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
                     ProfileSettingSectionView(title: "앱 설정", itemsWithActions: [
-                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: { isNavigateToSettingAlarmView = true })
+                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: { activeNavigation = .settingAlarm })
                     ])
 
                     Divider()
@@ -42,7 +42,7 @@ struct ProfileSettingListView: View {
 
                     ProfileSettingSectionView(title: "이용안내", itemsWithActions: [
                         ProfileSettingListItem(title: "문의하기", icon: "icon_checkwithsomeone", action: {
-                            isNavigateToInquiryView = true
+                            activeNavigation = .inquiry
                         })
                     ])
 
@@ -60,17 +60,33 @@ struct ProfileSettingListView: View {
             }
             .frame(maxWidth: .infinity)
             .background(Color("White01"))
-
-            NavigationLink(destination: InquiryView(viewModel: InquiryViewModel()), isActive: $isNavigateToInquiryView) {
-                EmptyView()
-            }.hidden()
-
-            NavigationLink(destination: SettingAlarmView(), isActive: $isNavigateToSettingAlarmView) {
-                EmptyView()
-            }.hidden()
+            
+            navigationLinks
         }
         .setTabBarVisibility(isHidden: true)
         .navigationBarColor(UIColor(named: "White01"), title: "")
+    }
+    
+    @ViewBuilder
+    private var navigationLinks: some View {
+        ForEach(ProfileActiveNavigation.allCases, id: \.self) { destination in
+            NavigationLink(destination: destinationView(for: destination), tag: destination, selection: $activeNavigation) {
+                EmptyView()
+            }
+        }
+    }
+    
+    //이동할 뷰 정리
+    @ViewBuilder
+    private func destinationView(for destination: ProfileActiveNavigation) -> some View {
+        switch destination {
+        case .inquiry:
+            InquiryView(viewModel: InquiryViewModel())
+        case .settingAlarm:
+            SettingAlarmView()
+        case .editProfile:
+            EditProfileListView()
+        }
     }
 
     func handleDeleteUserAccount() {
