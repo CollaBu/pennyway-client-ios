@@ -13,6 +13,8 @@ struct EditPhoneNumberView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+
             VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
                 phoneNumberSection
                 if viewModel.showErrorPhoneNumberFormat {
@@ -45,13 +47,18 @@ struct EditPhoneNumberView: View {
 
             Spacer()
 
-            CustomBottomButton(action: {}, label: "변경 완료", isFormValid: .constant(true))
+            CustomBottomButton(action: {
+                if viewModel.isFormValid {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+
+            }, label: "변경 완료", isFormValid: $viewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
-        .navigationBarColor(UIColor(named: "White01"), title: "아이디 변경")
+        .navigationBarColor(UIColor(named: "White01"), title: "전화번호 변경")
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("White01"))
         .toolbar {

@@ -5,16 +5,35 @@ import SwiftUI
 struct EditIdView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var editIdViewModel = EditIdViewModel()
-
+    
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Spacer().frame(height: 35 * DynamicSizeFactor.factor())
-
-            CustomInputView(inputText: $editIdViewModel.inputId, titleText: "아이디", placeholder: "", isSecureText: false, isCustom: false)
-
+            
+            CustomInputView(inputText: $editIdViewModel.inputId, titleText: "아이디", placeholder: "", onCommit: {
+                editIdViewModel.validateId()
+            }, isSecureText: false, isCustom: false)
+            
+            if editIdViewModel.showErrorId {
+                errorMessage("영문 소문자, 특수기호 (-), (_), (.) 만 사용하여,\n5~20자의 아이디를 입력해 주세요", Color("Red03"))
+            }
+            
+            if editIdViewModel.isDuplicateId {
+                errorMessage("이미 사용 중인 아이디예요", Color("Red03"))
+            }
+            
+            if editIdViewModel.isFormValid {
+                errorMessage("사용 가능한 아이디예요", Color("Mint03"))
+            }
+            
             Spacer()
+            
+            CustomBottomButton(action: {
+                if editIdViewModel.isFormValid {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
 
-            CustomBottomButton(action: {}, label: "변경 완료", isFormValid: .constant(true))
+            }, label: "변경 완료", isFormValid: $editIdViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -41,6 +60,14 @@ struct EditIdView: View {
                 }.offset(x: -10)
             }
         }
+    }
+
+    /// Error messiage
+    private func errorMessage(_ message: String, _ color: Color) -> some View {
+        Text(message)
+            .padding(.leading, 20)
+            .font(.B1MediumFont())
+            .platformTextColor(color: color)
     }
 }
 

@@ -210,8 +210,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         }
     }
-    
-    
+
     // MARK: 비밀번호 찾기 인증번호 코드 요청 API
 
     func requestPwVerificationCodeApi(completion: @escaping () -> Void) {
