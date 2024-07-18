@@ -3,13 +3,14 @@ import SwiftUI
 struct MoreDetailSpendingView: View {
     @Binding var clickDate: Date?
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
-
+    
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
                     HStack(spacing: 10 * DynamicSizeFactor.factor()) {
                         let iconName = SpendingListViewCategoryIconList(rawValue: spendingDetail.category.icon)?.iconName ?? ""
+
                         Image(iconName)
                             .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor())
                             .scaledToFill()

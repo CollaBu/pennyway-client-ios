@@ -130,7 +130,7 @@ struct SpendingManagementMainView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
+            NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
 

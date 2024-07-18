@@ -13,7 +13,7 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case .getSpendingHistory, .getDetailSpendingHistory:
             return .get
-        case .addSpendingHistory, .editSpendingHistory:
+        case .addSpendingHistory:
             return .post
         case .deleteSpendingHistory:
             return .delete

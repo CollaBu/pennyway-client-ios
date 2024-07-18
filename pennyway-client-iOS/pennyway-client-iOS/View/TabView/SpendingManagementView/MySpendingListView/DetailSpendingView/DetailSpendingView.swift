@@ -93,9 +93,9 @@ struct DetailSpendingView: View {
                                 Button(action: {
                                     self.selectedItem = item
                                     navigateModifySpendingHistoryView = true
-//                                    if item == "수정하기" {
-//                                        editSpending()
-//                                    }
+                                    if item == "수정하기" {
+                                        navigateModifySpendingHistoryView = true
+                                    }
                                 }, label: {
                                     ZStack(alignment: .leading) {
                                         Rectangle()
@@ -128,18 +128,8 @@ struct DetailSpendingView: View {
                 }
             }, alignment: .topLeading)
 
-//        NavigationLink(destination: AddSpendingHistoryView(clickDate: <#T##Binding<Date?>#>), isActive: $navigateModifySpendingHistoryView) {}
+        NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
     }
-
-//    private func editSpending() {
-//        viewModel.editSpendingHistoryApi(spendingId: spendingId, dto: newDetails) { success in
-//            if success {
-//                Log.debug("지출 내역 수정 성공")
-//            } else {
-//                Log.error("지출 내역 수정 실패")
-//            }
-//        }
-//    }
 
     private func loadDataForSelectedDate() {
         guard let date = clickDate else {

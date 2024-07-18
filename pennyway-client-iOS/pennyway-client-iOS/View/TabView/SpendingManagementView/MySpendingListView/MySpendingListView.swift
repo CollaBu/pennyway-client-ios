@@ -18,6 +18,7 @@ struct MySpendingListView: View {
     @Binding var clickDate: Date?
     @State private var navigateToCategoryGridView = false
     @State private var showDetailSpendingView = false
+    @State private var selectedSpendingId: Int? = nil
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -31,12 +32,12 @@ struct MySpendingListView: View {
                     ScrollView {
                         VStack {
                             if SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
-                                NoSpendingHistoryView(clickDate: $clickDate)
+                                NoSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate)
                             } else {
                                 LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
                                     ForEach(SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings), id: \.key) { date, spendings in
 
-//                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
                                         Section(header: headerView(for: date)) {
                                             Spacer().frame(height: 12 * DynamicSizeFactor.factor())
@@ -50,9 +51,7 @@ struct MySpendingListView: View {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
 
                                                 })
-                                                .buttonStyle(PlainButtonStyle()) //                                                NavigationLink(destination: DetailSpendingView(clickDate: $clickDate)) {
-//                                                    CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-//                                                }
+                                                .buttonStyle(PlainButtonStyle()) 
 
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }

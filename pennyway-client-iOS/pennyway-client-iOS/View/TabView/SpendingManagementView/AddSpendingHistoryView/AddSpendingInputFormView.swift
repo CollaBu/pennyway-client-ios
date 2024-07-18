@@ -5,8 +5,12 @@ import SwiftUI
 
 struct AddSpendingInputFormView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+
     @Binding var clickDate: Date?
-    
+    var entryPoint: EntryPoint
+    @Binding var spendingId: Int
+
     let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
     let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
     
@@ -43,6 +47,28 @@ struct AddSpendingInputFormView: View {
                                 viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
                                 viewModel.validateForm()
                             }
+                            .onAppear {
+                                if entryPoint == .detailSpendingView, let clickDate = clickDate {
+                                    if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                                        viewModel.amountSpentText = String(spendingDetail.amount)
+                                        spendingId = spendingDetail.id
+//                                        if let baseName = CategoryBaseName(rawValue: spendingDetail.category.icon.lowercased()) {
+                                        if let categoryIcon = SpendingListViewCategoryIconList(rawValue: spendingDetail.category.icon)?.iconName {
+                                            viewModel.selectedCategory = SpendingCategoryData(
+                                                id: spendingDetail.category.id,
+                                                isCustom: spendingDetail.category.isCustom,
+                                                name: spendingDetail.category.name,
+                                                icon: CategoryIconName(baseName: CategoryBaseName(rawValue: categoryIcon) ?? .etc, state: .on)
+                                            )
+                                        }
+                                        viewModel.consumerText = spendingDetail.accountName
+                                        viewModel.memoText = spendingDetail.memo
+                                        viewModel.validateForm()
+                                        
+                                        Log.debug("?: \(viewModel.amountSpentText), \(viewModel.selectedCategory)")
+                                    }
+                                }
+                            }
                     }
                 }
             }
@@ -71,16 +97,38 @@ struct AddSpendingInputFormView: View {
                                 .platformTextColor(color: Color("Gray07"))
                         }
                     } else {
-                        Text("카테고리를 선택해 주세요")
-                            .font(.B1MediumFont())
-                            .platformTextColor(color: Color("Gray04"))
+                        if entryPoint == .detailSpendingView, let clickDate = clickDate { // 지출내역 수정하기 시 선택된 카테고리
+                            if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                                HStack {
+                                    let iconName = SpendingListViewCategoryIconList(rawValue: spendingDetail.category.icon)?.iconName ?? ""
+                                    Image(iconName)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
+                                    
+                                    Text(spendingDetail.category.name)
+                                        .font(.B1MediumFont())
+                                        .platformTextColor(color: Color("Gray07"))
+                                }
+                            } else {
+                                Text("카테고리를 선택해 주세요")
+                                    .font(.B1MediumFont())
+                                    .platformTextColor(color: Color("Gray04"))
+                            }
+                            
+                        } else {
+                            Text("카테고리를 선택해 주세요")
+                                .font(.B1MediumFont())
+                                .platformTextColor(color: Color("Gray04"))
+                        }
                     }
-                    
+                        
                     Image("icon_arrow_front_small")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                 }
+                
                 .frame(alignment: .trailing)
                 .padding(.leading, 12)
                 .padding(.vertical, 14)
@@ -122,7 +170,15 @@ struct AddSpendingInputFormView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             
             CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true)
-            
+
+                .onAppear {
+                    if entryPoint == .detailSpendingView, let clickDate = clickDate {
+                        if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                            viewModel.consumerText = spendingDetail.accountName
+                        }
+                    }
+                }
+                
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             
             VStack(alignment: .leading) {
@@ -149,6 +205,13 @@ struct AddSpendingInputFormView: View {
                         .onChange(of: viewModel.memoText) { _ in
                             if viewModel.memoText.count > 100 {
                                 viewModel.memoText = String(viewModel.memoText.prefix(100))
+                            }
+                        }
+                        .onAppear {
+                            if entryPoint == .detailSpendingView, let clickDate = clickDate {
+                                if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                                    viewModel.memoText = spendingDetail.memo
+                                }
                             }
                         }
                         .frame(height: 104 * DynamicSizeFactor.factor())

@@ -76,6 +76,33 @@ class AddSpendingHistoryViewModel: ObservableObject {
         }
     }
 
+    func editSpendingHistoryApi(spendingId: Int, dto: AddSpendingHistoryRequestDto, completion: @escaping (Bool) -> Void) { 
+        SpendingAlamofire.shared.editSpendingHistory(spendingId: spendingId, dto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(AddSpendingHistoryResponseDto.self, from: responseData)
+
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("지출 내역 수정 완료 \(jsonString)")
+                        }
+                        completion(true)
+                    } catch {
+                        Log.fault("Error decoding JSON: \(error)")
+                        completion(false)
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request faile: \(error)")
+                }
+            }
+        }
+    }
+
     func convertToSpendingCategoryData(from spendingCategory: SpendingCategory) -> SpendingCategoryData? {
         guard let iconList = SpendingCategoryIconList(rawValue: spendingCategory.icon) else {
             return nil
