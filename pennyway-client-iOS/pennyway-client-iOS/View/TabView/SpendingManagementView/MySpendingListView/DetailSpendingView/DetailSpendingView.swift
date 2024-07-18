@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct DetailSpendingView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var isSelectedCategory: Bool = false
     @State var selectedItem: String? = nil
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
@@ -23,7 +24,7 @@ struct DetailSpendingView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
                     Button(action: {
-                        NavigationUtil.popToRootView()
+                        self.presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()

@@ -1,10 +1,13 @@
 import SwiftUI
 
 struct AddSpendingCompleteView: View {
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
+
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @Binding var clickDate: Date?
-
+    @Binding var isPresented: Bool
+    var entryPoint: EntryPoint
+    
     var body: some View {
         VStack {
             Image("icon_illust_add history")
@@ -12,12 +15,12 @@ struct AddSpendingCompleteView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 160 * DynamicSizeFactor.factor(), height: 160 * DynamicSizeFactor.factor())
                 .padding(.top, 65 * DynamicSizeFactor.factor())
-            
+                
             Text("소비 내역 추가 완료!")
                 .font(.H1SemiboldFont())
-            
+                
             Spacer()
-           
+                
             VStack(spacing: 16 * DynamicSizeFactor.factor()) {
                 HStack {
                     Text("금액")
@@ -32,9 +35,9 @@ struct AddSpendingCompleteView: View {
                     Text("카테고리")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
-                    
+                        
                     Spacer()
-                    
+                        
                     if let category = viewModel.selectedCategory {
                         HStack(spacing: 10 * DynamicSizeFactor.factor()) {
                             Image(category.icon.rawValue)
@@ -52,33 +55,34 @@ struct AddSpendingCompleteView: View {
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
                     Spacer()
-                    
+                        
                     Text(Date.getFormattedDate(from: clickDate ?? viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                 }
             }
             .padding(.horizontal, 20)
-           
-            Spacer().frame(height: 24 * DynamicSizeFactor.factor())
-            
-            CustomBottomButton(action: {
-                if let date = clickDate {
-                    if Calendar.current.isDateInToday(date) { // 현재 날짜로 등록한 경우 메인화면 -> 메인화면에서 +아이콘을 통해 들어간 경우
-                        NavigationUtil.popToRootView()
-                    } else { // 클릭한 지출내역의 sheet로 
-//                                self.presentationMode.wrappedValue.dismiss() // 수정필요
-                    }
-                }
                 
+            Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+                
+            CustomBottomButton(action: {
+                if entryPoint == .main {
+                    NavigationUtil.popToRootView()
+                } else {
+                    isPresented = false
+                    Log.debug("isPresented: \(isPresented)")
+                    Log.debug("entryPoint: \(entryPoint)")
+                }
+
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
+        
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel(), clickDate: .constant(Date()))
+    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
 }
