@@ -15,15 +15,15 @@ struct EditIdView: View {
             }, isSecureText: false, isCustom: false)
             
             if editIdViewModel.showErrorId {
-                errorMessage("영문 소문자, 특수기호 (-), (_), (.) 만 사용하여,\n5~20자의 아이디를 입력해 주세요", Color("Red03"))
+                ErrorText(message: "영문 소문자, 특수기호 (-), (_), (.) 만 사용하여,\n5~20자의 아이디를 입력해 주세요", color: Color("Red03"))
             }
             
             if editIdViewModel.isDuplicateId {
-                errorMessage("이미 사용 중인 아이디예요", Color("Red03"))
+                ErrorText(message: "이미 사용 중인 아이디예요", color: Color("Red03"))
             }
             
             if editIdViewModel.isFormValid {
-                errorMessage("사용 가능한 아이디예요", Color("Mint03"))
+                ErrorText(message: "사용 가능한 아이디예요", color: Color("Mint03"))
             }
             
             Spacer()
@@ -62,13 +62,13 @@ struct EditIdView: View {
         }
     }
 
-    /// Error messiage
-    private func errorMessage(_ message: String, _ color: Color) -> some View {
-        Text(message)
-            .padding(.leading, 20)
-            .font(.B1MediumFont())
-            .platformTextColor(color: color)
-    }
+//    /// Error messiage
+//    private func errorMessage(_ message: String, _ color: Color) -> some View {
+//        Text(message)
+//            .padding(.leading, 20)
+//            .font(.B1MediumFont())
+//            .platformTextColor(color: color)
+//    }
 }
 
 #Preview {

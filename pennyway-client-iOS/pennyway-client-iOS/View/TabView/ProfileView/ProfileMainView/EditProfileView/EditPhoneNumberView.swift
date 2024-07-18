@@ -18,10 +18,10 @@ struct EditPhoneNumberView: View {
             VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
                 phoneNumberSection
                 if viewModel.showErrorPhoneNumberFormat {
-                    ErrorText(message: "올바른 전화번호 형식이 아니에요")
+                    ErrorText(message: "올바른 전화번호 형식이 아니에요", color: Color("Red03"))
                 }
                 if viewModel.showErrorExistingUser {
-                    ErrorText(message: "이미 가입된 전화번호예요")
+                    ErrorText(message: "이미 가입된 전화번호예요", color: Color("Red03"))
                 }
             }
 
