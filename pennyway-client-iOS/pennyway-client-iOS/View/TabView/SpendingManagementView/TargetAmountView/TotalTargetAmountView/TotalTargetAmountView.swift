@@ -9,6 +9,7 @@ struct TotalTargetAmountView: View {
     @State private var listArray: [String] = ["목표금액 수정", "초기화하기"]
     @State private var navigateToEditTarget = false
     @State private var showingDeletePopUp = false
+    @State private var showToastPopup = false
 
     var body: some View {
         ZStack {
@@ -39,6 +40,16 @@ struct TotalTargetAmountView: View {
                         ).padding(.trailing, 20)
                     }
                 }, alignment: .topTrailing
+            )
+            .overlay(
+                Group {
+                    if showToastPopup {
+                        CustomToastView(message: "목표금액이 초기화되었어요")
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                            .padding(.bottom, 34)
+                    }
+                }, alignment: .bottom
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color("Gray01"))
@@ -90,7 +101,21 @@ struct TotalTargetAmountView: View {
                                 subTitleLabel: "이번 달 목표금액이 사라져요",
                                 firstBtnAction: { self.showingDeletePopUp = false },
                                 firstBtnLabel: "취소",
-                                secondBtnAction: {},
+                                secondBtnAction: {
+                                    viewModel.deleteCurrentMonthTargetAmountApi { success in
+                                        if success {
+                                            self.showingDeletePopUp = false
+                                            showToastPopup = true
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                                showToastPopup = false
+                                            }
+                                            viewModel.getTotalTargetAmountApi { _ in
+                                            }
+                                        } else {
+                                            Log.fault("목표 금액 초기화 실패")
+                                        }
+                                    }
+                                },
                                 secondBtnLabel: "초기화하기",
                                 secondBtnColor: Color("Mint03")
                 )
