@@ -17,6 +17,7 @@ struct MySpendingListView: View {
     @State private var currentMonth: Date = Date()
     @Binding var clickDate: Date?
     @State private var navigateToCategoryGridView = false
+    @State private var showDetailSpendingView = false
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -34,15 +35,24 @@ struct MySpendingListView: View {
                             } else {
                                 LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
                                     ForEach(SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings), id: \.key) { date, spendings in
-                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+
+//                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
                                         Section(header: headerView(for: date)) {
                                             Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-                                                NavigationLink(destination: DetailSpendingView()) {
+                                                Button(action: {
+                                                    clickDate = DateFormatterUtil.parseDate(from: date)
+                                                    spendingHistoryViewModel.selectedDate = clickDate
+                                                    showDetailSpendingView = true
+                                                }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                                }
+
+                                                })
+                                                .buttonStyle(PlainButtonStyle()) //                                                NavigationLink(destination: DetailSpendingView(clickDate: $clickDate)) {
+//                                                    CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+//                                                }
 
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }
@@ -90,6 +100,8 @@ struct MySpendingListView: View {
                     }
                 }
             }
+
+            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate), isActive: $showDetailSpendingView) {}
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
         .edgesIgnoringSafeArea(.bottom)
