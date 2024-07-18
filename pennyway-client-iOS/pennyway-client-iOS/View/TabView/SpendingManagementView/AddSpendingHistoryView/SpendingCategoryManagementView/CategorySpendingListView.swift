@@ -5,11 +5,23 @@ struct CategorySpendingListView: View {
     @ObservedObject var viewModel: SpendingCategoryViewModel
     @State private var clickDate: Date? = nil
 
+    var currentYear = String(Date.year(from: Date()))
+                
     var body: some View {
         LazyVStack(spacing: 0) {
             ForEach(SpendingListGroupUtil.groupedSpendings(from: viewModel.dailyDetailSpendings), id: \.key) { date, spendings in
-//                Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-
+                            
+                if DateFormatterUtil.getYear(from: date) != currentYear {
+                    Spacer().frame(height: 5 * DynamicSizeFactor.factor())
+                                
+                    yearSeparatorView(for: DateFormatterUtil.getYear(from: date))
+                        .padding(.horizontal, 20)
+                                
+                    Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                } else {
+                    Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                }
+                            
                 Section(header: headerView(for: date)) {
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     ForEach(spendings, id: \.id) { item in
@@ -30,7 +42,7 @@ struct CategorySpendingListView: View {
                                 }
                             }
                         }
-
+                                    
                         Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     }
                 }
@@ -38,7 +50,7 @@ struct CategorySpendingListView: View {
             Spacer().frame(height: 18 * DynamicSizeFactor.factor())
         }
     }
-
+                
     private func headerView(for date: String) -> some View {
         Text(DateFormatterUtil.dateFormatString(from: date))
             .font(.B2MediumFont())
@@ -46,5 +58,21 @@ struct CategorySpendingListView: View {
             .padding(.leading, 20)
             .padding(.bottom, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
+    }
+                
+    private func yearSeparatorView(for year: String) -> some View {
+        HStack {
+            Rectangle()
+                .fill(Color("Gray03"))
+                .frame(height: 1 * DynamicSizeFactor.factor())
+            Text("\(year)년")
+                .font(.B1MediumFont())
+                .platformTextColor(color: Color("Gray04"))
+                .padding(.vertical, 9 * DynamicSizeFactor.factor())
+            Rectangle()
+                .fill(Color("Gray03"))
+                .frame(height: 1 * DynamicSizeFactor.factor())
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 }

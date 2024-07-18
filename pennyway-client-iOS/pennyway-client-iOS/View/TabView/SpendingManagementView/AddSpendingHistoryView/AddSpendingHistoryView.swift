@@ -1,6 +1,13 @@
 
 import SwiftUI
 
+// MARK: - EntryPoint
+
+enum EntryPoint {
+    case main
+    case detailSheet
+}
+
 // MARK: - AddSpendingHistoryView
 
 struct AddSpendingHistoryView: View {
@@ -8,7 +15,9 @@ struct AddSpendingHistoryView: View {
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
-    
+    @Binding var isPresented: Bool
+    var entryPoint: EntryPoint
+
     var body: some View {
         ZStack {
             VStack {
@@ -16,21 +25,23 @@ struct AddSpendingHistoryView: View {
                     AddSpendingInputFormView(viewModel: viewModel, clickDate: $clickDate)
                 }
                 Spacer()
-                
+
                 CustomBottomButton(action: {
                     if viewModel.isFormValid, let date = clickDate {
                         viewModel.clickDate = date
+
                         viewModel.addSpendingHistoryApi { success in
                             if success {
                                 navigateToAddSpendingCategory = true
+                                Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
                             }
                         }
                     }
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate), isActive: $navigateToAddSpendingCategory) {}
-                
+
+                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingCategory) {}
+
                 NavigationLink(
                     destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $viewModel.navigateToAddCategory) {}
             }
@@ -55,14 +66,13 @@ struct AddSpendingHistoryView: View {
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-                        
+
                     }.offset(x: -10)
                 }
             }
             .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
                 SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
             }
-            
             .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
                 SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
             }
@@ -71,5 +81,5 @@ struct AddSpendingHistoryView: View {
 }
 
 #Preview {
-    AddSpendingHistoryView(clickDate: .constant(Date()))
+    AddSpendingHistoryView(clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
 }

@@ -33,13 +33,18 @@ struct SelectSpendingDayView: View {
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
                 .environment(\.locale, Locale(identifier: "ko_KR"))
+                .environment(\.timeZone, TimeZone.autoupdatingCurrent)
                 .frame(height: 114 * DynamicSizeFactor.factor())
                 .clipped()
 
             Spacer()
 
             CustomBottomButton(action: {
-                clickDate = selectedDate
+                let today = Date()
+                let timezone = TimeZone.autoupdatingCurrent
+                let secondsFromGMT = timezone.secondsFromGMT(for: today)
+                let localizedDate = selectedDate.addingTimeInterval(TimeInterval(secondsFromGMT))
+                clickDate = localizedDate
                 isPresented = false
                 Log.debug("clickDate: \(self.clickDate)")
             }, label: "확인", isFormValid: .constant(true))

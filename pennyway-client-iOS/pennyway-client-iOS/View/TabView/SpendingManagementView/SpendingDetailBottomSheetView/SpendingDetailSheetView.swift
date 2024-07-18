@@ -13,7 +13,7 @@ struct SpendingDetailSheetView: View {
     
     @StateObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
-
+    
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
@@ -30,7 +30,7 @@ struct SpendingDetailSheetView: View {
                     }
                         
                     Spacer()
-                    
+                        
                     if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil || isDeleted {
                         // 지출내역이 없을 경우 편집버튼 없음
                     } else {
@@ -45,7 +45,7 @@ struct SpendingDetailSheetView: View {
                         })
                         .padding(10)
                     }
-                
+                        
                     Button(action: {
                         showAddSpendingHistoryView = true
                     }, label: {
@@ -59,7 +59,7 @@ struct SpendingDetailSheetView: View {
                 .padding(.leading, 20)
                 .padding(.trailing, 17)
                 .padding(.top, 12)
-                
+                    
                 if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil || isDeleted {
                     NoSpendingHistorySheetView()
                 } else {
@@ -74,10 +74,10 @@ struct SpendingDetailSheetView: View {
                             }
                                 
                             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-
+                                
                             ForEach(spendingHistoryViewModel.filteredSpendings(for: clickDate), id: \.id) { item in
                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-
+                                    
                                 CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                             }
@@ -92,20 +92,21 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView(clickDate: $clickDate)
+                    AddSpendingHistoryView(clickDate: $clickDate, isPresented: $showAddSpendingHistoryView, entryPoint: .detailSheet)
                 }
             }
         }
         .onAppear {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
+            getDailyHistoryData()
         }
         .onChange(of: showEditSpendingDetailView) { _ in
-            spendingHistoryViewModel.checkSpendingHistoryApi { success in
-                if success {
-                    Log.debug("뷰 새로고침 성공")
-                } else {
-                    Log.debug("뷰 새로고침 실패")
-                }
+            getDailyHistoryData()
+        }
+        .onChange(of: showAddSpendingHistoryView) { isPresented in
+            if !isPresented {
+                // AddSpendingHistoryView가 닫힐 때 새로고침
+                getDailyHistoryData()
             }
         }
         .onChange(of: clickDate) { _ in
@@ -119,5 +120,15 @@ struct SpendingDetailSheetView: View {
         let day = Calendar.current.component(.day, from: date)
         Log.debug(day)
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
+    }
+    
+    private func getDailyHistoryData() {
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+            if success {
+                Log.debug("뷰 새로고침 성공")
+            } else {
+                Log.debug("뷰 새로고침 실패")
+            }
+        }
     }
 }
