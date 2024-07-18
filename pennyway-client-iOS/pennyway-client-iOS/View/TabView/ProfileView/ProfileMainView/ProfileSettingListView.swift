@@ -10,6 +10,7 @@ struct ProfileSettingListView: View {
     ///    @State private var showingPopUp = false
     @State private var isNavigateToInquiryView = false
     @State private var isNavigateToSettingAlarmView = false
+    @State private var isNavigateToModifyPwView = false
 
     var body: some View {
         ZStack {
@@ -20,7 +21,9 @@ struct ProfileSettingListView: View {
                     ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "내 정보", itemsWithActions: [
                         ProfileSettingListItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {}),
                         ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
-                        ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {})
+                        ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {
+                            isNavigateToModifyPwView = true
+                        })
                     ])
 
                     Divider()
@@ -65,6 +68,10 @@ struct ProfileSettingListView: View {
             }.hidden()
 
             NavigationLink(destination: SettingAlarmView(), isActive: $isNavigateToSettingAlarmView) {
+                EmptyView()
+            }.hidden()
+
+            NavigationLink(destination: ProfileModifyPwView(), isActive: $isNavigateToModifyPwView) {
                 EmptyView()
             }.hidden()
         }
