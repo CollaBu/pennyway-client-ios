@@ -41,9 +41,7 @@ struct OAuthAccountLinkingView: View {
                     
                 }, label: "연동하기", isFormValid: .constant(true))
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                NavigationLink(destination: SignUpView(viewModel: signUpViewModel), isActive: $isActiveButton) {
-                    EmptyView()
-                }
+                NavigationLink(destination: SignUpView(viewModel: signUpViewModel), isActive: $isActiveButton) {}
             }
         }
         .edgesIgnoringSafeArea(.bottom)
