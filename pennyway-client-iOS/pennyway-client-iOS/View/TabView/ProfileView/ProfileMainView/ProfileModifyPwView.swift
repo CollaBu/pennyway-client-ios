@@ -30,7 +30,7 @@ struct ProfileModifyPwView: View {
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     
                     if formViewModel.showErrorPassword {
-                        errorMessage("비밀번호가 일치하지 않아요")
+                        ErrorText(message: "비밀번호가 일치하지 않아요", color: Color("Red03"))
                     }
                     
                     Spacer()
@@ -71,12 +71,12 @@ struct ProfileModifyPwView: View {
         }
     }
 
-    private func errorMessage(_ message: String) -> some View {
-        Text(message)
-            .padding(.leading, 20 * DynamicSizeFactor.factor())
-            .font(.B1MediumFont())
-            .platformTextColor(color: Color("Red03"))
-    }
+//    private func errorMessage(_ message: String) -> some View {
+//        Text(message)
+//            .padding(.leading, 20 * DynamicSizeFactor.factor())
+//            .font(.B1MediumFont())
+//            .platformTextColor(color: Color("Red03"))
+//    }
 }
 
 #Preview {

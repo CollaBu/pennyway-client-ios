@@ -51,7 +51,7 @@ struct SpendingCategoryGridView: View {
             .navigationBarBackButtonHidden(true)
             .edgesIgnoringSafeArea(.bottom)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     HStack {
                         Button(action: {
                             self.presentationMode.wrappedValue.dismiss()
