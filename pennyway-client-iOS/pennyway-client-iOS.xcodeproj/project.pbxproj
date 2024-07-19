@@ -257,6 +257,7 @@
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
+		D8BDAF712C4928D10095D8E7 /* ProfileModifyPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */; };
 		D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */; };
 		D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */; };
 		D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CEFB722C32BDF000E61C51 /* MoreDetailSpendingView.swift */; };
@@ -520,6 +521,7 @@
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
+		D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyPwView.swift; sourceTree = "<group>"; };
 		D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryView.swift; sourceTree = "<group>"; };
 		D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryListView.swift; sourceTree = "<group>"; };
 		D8CEFB722C32BDF000E61C51 /* MoreDetailSpendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailSpendingView.swift; sourceTree = "<group>"; };
@@ -1506,6 +1508,7 @@
 				4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */,
 				4AD70E282BE015970058A52A /* ProfileSettingListView.swift */,
 				D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */,
+				D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */,
 			);
 			path = ProfileMainView;
 			sourceTree = "<group>";
@@ -2079,6 +2082,7 @@
 				D8180C082BE5168800F837FB /* (null) in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
 				4A57898B2BDC28F100AFEB26 /* UnauthorizedError.swift in Sources */,
+				D8BDAF712C4928D10095D8E7 /* ProfileModifyPwView.swift in Sources */,
 				4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */,
 				4A3560832BEBF12D00BA58F3 /* OAuthAccountViewModel.swift in Sources */,
 				4AC3203F2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift in Sources */,

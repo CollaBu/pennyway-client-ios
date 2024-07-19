@@ -7,4 +7,5 @@ enum ProfileActiveNavigation: String, CaseIterable {
     case inquiry
     case settingAlarm
     case editProfile
+    case modifyPw
 }

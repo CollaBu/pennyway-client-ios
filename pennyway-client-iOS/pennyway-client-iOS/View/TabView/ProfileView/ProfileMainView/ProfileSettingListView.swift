@@ -21,7 +21,9 @@ struct ProfileSettingListView: View {
                             activeNavigation = .editProfile
                         }),
                         ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
-                        ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {})
+                        ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {
+                            activeNavigation = .modifyPw
+                        })
                     ])
 
                     Divider()
@@ -86,6 +88,8 @@ struct ProfileSettingListView: View {
             SettingAlarmView()
         case .editProfile:
             EditProfileListView()
+        case .modifyPw:
+            ProfileModifyPwView()
         }
     }
 
