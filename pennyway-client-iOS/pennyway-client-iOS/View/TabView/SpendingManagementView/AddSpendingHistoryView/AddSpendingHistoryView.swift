@@ -34,7 +34,7 @@ struct AddSpendingHistoryView: View {
                 CustomBottomButton(action: {
                     if viewModel.isFormValid, let date = clickDate {
                         viewModel.clickDate = date
-                        if entryPoint == .detailSpendingView { //수정하기 api
+                        if entryPoint == .detailSpendingView { // 수정하기 api
                             viewModel.editSpendingHistoryApi(spendingId: spendingId, dto: newDetails) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()

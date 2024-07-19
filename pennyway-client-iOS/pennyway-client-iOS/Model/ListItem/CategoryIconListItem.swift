@@ -21,11 +21,16 @@ enum IconState: String {
 // MARK: - CategoryIconName
 
 struct CategoryIconName: Hashable {
-    let baseName: CategoryBaseName
-    let state: IconState
+    let baseName: CategoryBaseName?
+    let state: IconState?
+    let totalName: String?
 
     var rawValue: String {
-        return "icon_category_\(baseName)_\(state.rawValue)"
+        if totalName != nil {
+            return "\(String(describing: totalName!))"
+        } else {
+            return "icon_category_\(baseName ?? .food)_\(state?.rawValue ?? ".on")"
+        }
     }
 }
 
@@ -130,9 +135,9 @@ enum SpendingCategoryIconList: String, CaseIterable {
     var details: SpendingCategoryData {
         let icon: CategoryIconName
         if self == .plus {
-            icon = CategoryIconName(baseName: .plus, state: .off)
+            icon = CategoryIconName(baseName: .plus, state: .off, totalName: nil)
         } else {
-            icon = CategoryIconName(baseName: baseName, state: .on)
+            icon = CategoryIconName(baseName: baseName, state: .on, totalName: nil)
         }
         return SpendingCategoryData(id: id, isCustom: false, name: displayName, icon: icon)
     }
@@ -140,9 +145,9 @@ enum SpendingCategoryIconList: String, CaseIterable {
     var detailsWhite: SpendingCategoryData {
         let icon: CategoryIconName
         if self == .plus {
-            icon = CategoryIconName(baseName: .plus, state: .off)
+            icon = CategoryIconName(baseName: .plus, state: .off, totalName: nil)
         } else {
-            icon = CategoryIconName(baseName: baseName, state: .onWhite)
+            icon = CategoryIconName(baseName: baseName, state: .onWhite, totalName: nil)
         }
         return SpendingCategoryData(id: id, isCustom: false, name: displayName, icon: icon)
     }

@@ -52,20 +52,25 @@ struct AddSpendingInputFormView: View {
                                     if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
                                         viewModel.amountSpentText = String(spendingDetail.amount)
                                         spendingId = spendingDetail.id
-//                                        if let baseName = CategoryBaseName(rawValue: spendingDetail.category.icon.lowercased()) {
+                                        let categoryIconName = spendingDetail.category.icon.lowercased()
+
+//                                        if let baseName = CategoryBaseName(rawValue: categoryIconName) {
+                                        //                                        let categoryIconName = CategoryIconName(baseName: baseName, state: .on)
                                         if let categoryIcon = SpendingListViewCategoryIconList(rawValue: spendingDetail.category.icon)?.iconName {
                                             viewModel.selectedCategory = SpendingCategoryData(
                                                 id: spendingDetail.category.id,
                                                 isCustom: spendingDetail.category.isCustom,
                                                 name: spendingDetail.category.name,
-                                                icon: CategoryIconName(baseName: CategoryBaseName(rawValue: categoryIcon) ?? .etc, state: .on)
+                                                icon: CategoryIconName(baseName: nil, state: .on, totalName: categoryIcon)
                                             )
                                         }
                                         viewModel.consumerText = spendingDetail.accountName
                                         viewModel.memoText = spendingDetail.memo
                                         viewModel.validateForm()
                                         
-                                        Log.debug("?: \(viewModel.amountSpentText), \(viewModel.selectedCategory)")
+                                        Log.debug("?: \(viewModel.amountSpentText), \(viewModel.selectedCategory?.icon)")
+                                        Log.debug("???:\(spendingDetail.category.icon)")
+//                                        Log.debug("???????/:\(baseName)")
                                     }
                                 }
                             }

@@ -129,7 +129,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
                                 id: response.data.spendingCategory.id,
                                 isCustom: true,
                                 name: self.categoryName,
-                                icon: self.selectedCategoryIcon ?? CategoryIconName(baseName: CategoryBaseName.etc, state: .on)
+                                icon: self.selectedCategoryIcon ?? CategoryIconName(baseName: CategoryBaseName.etc, state: .on, totalName: nil)
                             )
                         completion(true)
                     } catch {
@@ -157,7 +157,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
 
         if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
             if let icon = selectedCategory?.icon {
-                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state)
+                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state, totalName: nil)
                 if let category = SpendingCategoryIconList.fromIcon(categoryIconName) {
                     selectedCategoryIconTitle = category.rawValue
                     categoryId = -1
