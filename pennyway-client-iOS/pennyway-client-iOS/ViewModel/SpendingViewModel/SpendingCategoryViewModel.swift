@@ -4,6 +4,7 @@ import SwiftUI
 class SpendingCategoryViewModel: ObservableObject {
     /// 카테고리 선택
     @Published var selectedCategory: SpendingCategoryData? = nil
+    @Published var categoryName = ""
     
     /// 총 카테고리 리스트
     @Published var spendingCategories: [SpendingCategoryData] = []

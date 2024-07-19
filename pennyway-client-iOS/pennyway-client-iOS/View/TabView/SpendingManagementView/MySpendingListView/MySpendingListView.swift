@@ -134,7 +134,7 @@ struct MySpendingListView: View {
             }
         }
 
-        NavigationLink(destination: SpendingCategoryGridView(SpendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
+        NavigationLink(destination: SpendingCategoryGridView(spendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
     }
 
     private func headerView(for date: String) -> some View {

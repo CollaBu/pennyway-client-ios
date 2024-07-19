@@ -1,6 +1,13 @@
 
 import SwiftUI
 
+// MARK: - AddCategoryEntryPoint
+
+enum AddCategoryEntryPoint {
+    case create
+    case modify
+}
+
 // MARK: - AddSpendingCategoryView
 
 struct AddSpendingCategoryView: View {
@@ -9,15 +16,24 @@ struct AddSpendingCategoryView: View {
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
     @State var maxCategoryNameCount = "8"
+    let entryPoint: AddCategoryEntryPoint
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             ZStack {
-                Image((viewModel.selectedCategoryIcon ?? CategoryIconName(baseName: CategoryBaseName.etc, state: .on)).rawValue)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)
+                switch entryPoint {
+                case .create:
+                    Image(viewModel.selectedCategoryIcon?.rawValue ?? CategoryIconName(baseName: .etc, state: .on).rawValue)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)
+                case .modify:
+                    Image(spendingCategoryViewModel.selectedCategory?.icon.rawValue ?? CategoryIconName(baseName: .etc, state: .on).rawValue)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)
+                }
 
                 Image("icon_navigationbar_write_gray_bg")
                     .resizable()
@@ -39,22 +55,43 @@ struct AddSpendingCategoryView: View {
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
 
-                    if viewModel.categoryName.isEmpty {
-                        Text("카테고리명을 입력하세요")
-                            .platformTextColor(color: Color("Gray03"))
-                            .padding(.leading, 13 * DynamicSizeFactor.factor())
-                            .font(.H4MediumFont())
+                    if viewModel.categoryName.isEmpty && spendingCategoryViewModel.categoryName.isEmpty {
+                        switch entryPoint {
+                        case .create:
+                            Text("카테고리명을 입력하세요")
+                                .platformTextColor(color: Color("Gray03"))
+                                .padding(.leading, 13 * DynamicSizeFactor.factor())
+                                .font(.H4MediumFont())
+
+                        case .modify:
+                            Text("\(spendingCategoryViewModel.selectedCategory!.name)")
+                                .platformTextColor(color: Color("Gray03"))
+                                .padding(.leading, 13 * DynamicSizeFactor.factor())
+                                .font(.H4MediumFont())
+                        }
                     }
 
-                    TextField("", text: $viewModel.categoryName)
+                    TextField("", text: entryPoint == .create ? $viewModel.categoryName : $spendingCategoryViewModel.categoryName)
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                         .onChange(of: viewModel.categoryName) { _ in
-                            if viewModel.categoryName.count > 8 {
-                                viewModel.categoryName = String(viewModel.categoryName.prefix(8))
+//                            if viewModel.categoryName.count > 8 {
+//                                viewModel.categoryName = String(viewModel.categoryName.prefix(8))
+//                            }
+//                            if !viewModel.categoryName.isEmpty {
+//                                viewModel.isAddCategoryFormValid = true
+//                            } else {
+//                                viewModel.isAddCategoryFormValid = false
+//                            }
+                            if (entryPoint == .create ? viewModel.categoryName.count : spendingCategoryViewModel.categoryName.count) > 8 {
+                                if entryPoint == .create {
+                                    viewModel.categoryName = String(viewModel.categoryName.prefix(8))
+                                } else {
+                                    spendingCategoryViewModel.categoryName = String(spendingCategoryViewModel.categoryName.prefix(8))
+                                }
                             }
-                            if !viewModel.categoryName.isEmpty {
+                            if !(entryPoint == .create ? viewModel.categoryName.isEmpty : spendingCategoryViewModel.categoryName.isEmpty) {
                                 viewModel.isAddCategoryFormValid = true
                             } else {
                                 viewModel.isAddCategoryFormValid = false
@@ -68,7 +105,7 @@ struct AddSpendingCategoryView: View {
 
             HStack {
                 Spacer()
-                Text("\(viewModel.categoryName.count)/\(maxCategoryNameCount)")
+                Text("\(entryPoint == .create ? viewModel.categoryName.count : spendingCategoryViewModel.categoryName.count)/\(maxCategoryNameCount)")
                     .font(.B2MediumFont())
                     .platformTextColor(color: Color("Gray03"))
             }
@@ -77,16 +114,30 @@ struct AddSpendingCategoryView: View {
             Spacer()
 
             CustomBottomButton(action: {
-                if !viewModel.categoryName.isEmpty {
-                    viewModel.addSpendingCustomCategoryApi { success in
-                        if success {
-                            Log.debug("카테고리 생성 완료")
-                            spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in
-                                presentationMode.wrappedValue.dismiss()
+                if !viewModel.categoryName.isEmpty || !spendingCategoryViewModel.categoryName.isEmpty {
+                    switch entryPoint {
+                    case .create:
+                        viewModel.addSpendingCustomCategoryApi { success in
+                            if success {
+                                Log.debug("카테고리 생성 완료")
+                                spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            } else {
+                                Log.debug("카테고리 생성 실패")
                             }
-                        } else {
-                            Log.debug("카테고리 생성 실패")
                         }
+                    case .modify: break
+//                        viewModel.modifySpendingCustomCategoryApi { success in
+//                            if success {
+//                                Log.debug("카테고리 수정 완료")
+                        ////                                spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in
+                        ////                                    presentationMode.wrappedValue.dismiss()
+                        ////                                }
+//                            } else {
+//                                Log.debug("카테고리 수정 실패")
+//                            }
+//                        }
                     }
                     presentationMode.wrappedValue.dismiss()
                 }
@@ -124,5 +175,5 @@ struct AddSpendingCategoryView: View {
 }
 
 #Preview {
-    AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: SpendingCategoryViewModel())
+    AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: SpendingCategoryViewModel(), entryPoint: .create)
 }
