@@ -10,15 +10,15 @@ struct TotalTargetAmountView: View {
     @State private var navigateToEditTarget = false
     @State private var showingDeletePopUp = false
     @State private var showToastPopup = false
-
+    
     var body: some View {
         ZStack {
             ScrollView {
                 VStack(spacing: 0) {
                     TotalTargetAmountHeaderView(viewModel: viewModel)
-
+                    
                     TotalTargetAmountContentView(viewModel: viewModel)
-
+                    
                     Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                 }
             }
@@ -72,7 +72,7 @@ struct TotalTargetAmountView: View {
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-
+                        
                     }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -93,7 +93,7 @@ struct TotalTargetAmountView: View {
                     .offset(x: 10)
                 }
             }
-
+            
             if showingDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
@@ -102,19 +102,7 @@ struct TotalTargetAmountView: View {
                                 firstBtnAction: { self.showingDeletePopUp = false },
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
-                                    viewModel.deleteCurrentMonthTargetAmountApi { success in
-                                        if success {
-                                            self.showingDeletePopUp = false
-                                            showToastPopup = true
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                                showToastPopup = false
-                                            }
-                                            viewModel.getTotalTargetAmountApi { _ in
-                                            }
-                                        } else {
-                                            Log.fault("목표 금액 초기화 실패")
-                                        }
-                                    }
+                                    deleteTargetAmountApi()
                                 },
                                 secondBtnLabel: "초기화하기",
                                 secondBtnColor: Color("Mint03")
@@ -125,8 +113,24 @@ struct TotalTargetAmountView: View {
             viewModel.getTotalTargetAmountApi { _ in
             }
         }
-
+        
         NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData), isActive: $navigateToEditTarget) {}
+    }
+
+    private func deleteTargetAmountApi() {
+        viewModel.deleteCurrentMonthTargetAmountApi { success in
+            if success {
+                self.showingDeletePopUp = false
+                showToastPopup = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    showToastPopup = false
+                }
+                viewModel.getTotalTargetAmountApi { _ in
+                }
+            } else {
+                Log.fault("목표 금액 초기화 실패")
+            }
+        }
     }
 }
 
