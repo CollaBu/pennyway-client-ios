@@ -70,13 +70,6 @@ struct ProfileModifyPwView: View {
             }
         }
     }
-
-//    private func errorMessage(_ message: String) -> some View {
-//        Text(message)
-//            .padding(.leading, 20 * DynamicSizeFactor.factor())
-//            .font(.B1MediumFont())
-//            .platformTextColor(color: Color("Red03"))
-//    }
 }
 
 #Preview {
