@@ -53,7 +53,7 @@ struct SpendingCheckBoxView: View {
                     .cornerRadius(15)
 
                 let progressWidth: CGFloat = {
-                    if targetAmount <= 0 {
+                    if targetAmount == 0 {
                         return UIScreen.main.bounds.width - 76
                     }
                     let ratio = CGFloat(totalSpending) / CGFloat(targetAmount)

@@ -77,6 +77,8 @@ class AddSpendingHistoryViewModel: ObservableObject {
     }
 
     func editSpendingHistoryApi(spendingId: Int, dto: AddSpendingHistoryRequestDto, completion: @escaping (Bool) -> Void) { 
+        Log.debug(dto)
+
         SpendingAlamofire.shared.editSpendingHistory(spendingId: spendingId, dto) { result in
             switch result {
             case let .success(data):
@@ -129,7 +131,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
                                 id: response.data.spendingCategory.id,
                                 isCustom: true,
                                 name: self.categoryName,
-                                icon: self.selectedCategoryIcon ?? CategoryIconName(baseName: CategoryBaseName.etc, state: .on, totalName: nil)
+                                icon: self.selectedCategoryIcon ?? CategoryIconName(baseName: CategoryBaseName.etc, state: .on)
                             )
                         completion(true)
                     } catch {
@@ -157,7 +159,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
 
         if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
             if let icon = selectedCategory?.icon {
-                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state, totalName: nil)
+                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state)
                 if let category = SpendingCategoryIconList.fromIcon(categoryIconName) {
                     selectedCategoryIconTitle = category.rawValue
                     categoryId = -1

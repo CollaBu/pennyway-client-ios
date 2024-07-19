@@ -61,7 +61,8 @@ struct AddSpendingInputFormView: View {
                                                 id: spendingDetail.category.id,
                                                 isCustom: spendingDetail.category.isCustom,
                                                 name: spendingDetail.category.name,
-                                                icon: CategoryIconName(baseName: nil, state: .on, totalName: categoryIcon)
+                                                icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
+                                                // CategoryIconName(baseName: nil, state: .on, totalName: categoryIcon)
                                             )
                                         }
                                         viewModel.consumerText = spendingDetail.accountName
@@ -242,5 +243,12 @@ struct AddSpendingInputFormView: View {
             
             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
         }
+    }
+
+    func convertToSpendingCategoryData(from spendingCategory: SpendingCategory) -> SpendingCategoryData? {
+        guard let iconList = SpendingCategoryIconList(rawValue: spendingCategory.icon) else {
+            return nil
+        }
+        return SpendingCategoryData(id: spendingCategory.id, isCustom: spendingCategory.isCustom, name: spendingCategory.name, icon: iconList.details.icon)
     }
 }
