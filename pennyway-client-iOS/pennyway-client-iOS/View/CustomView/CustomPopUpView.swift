@@ -57,6 +57,7 @@ extension CustomPopUpView {
                 VStack {
                     Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                     Text(titleLabel)
+                        .platformTextColor(color: Color("Gray07"))
                         .font(.H3SemiboldFont())
 
                     Spacer().frame(height: 7 * DynamicSizeFactor.factor())
@@ -81,6 +82,7 @@ extension CustomPopUpView {
                             }
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                         }
+                        .buttonStyle(PlainButtonStyle())
 
                         Button(action: secondBtnAction) {
                             ZStack {
@@ -95,6 +97,7 @@ extension CustomPopUpView {
                             }
                             .padding(.trailing, 13 * DynamicSizeFactor.factor())
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
                     .padding(.horizontal, 14 * DynamicSizeFactor.factor())
                     .padding(.bottom, 11 * DynamicSizeFactor.factor())
