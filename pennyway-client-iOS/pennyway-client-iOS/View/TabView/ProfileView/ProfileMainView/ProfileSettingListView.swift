@@ -7,9 +7,8 @@ struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     @Binding var showingPopUp: Bool
     @StateObject var userAccountViewModel = UserAccountViewModel()
-    ///    @State private var showingPopUp = false
-    @State private var isNavigateToInquiryView = false
-    @State private var isNavigateToSettingAlarmView = false
+
+    @State private var activeNavigation: ProfileActiveNavigation?
 
     var body: some View {
         ZStack {
@@ -17,8 +16,10 @@ struct ProfileSettingListView: View {
                 Spacer().frame(height: 32 * DynamicSizeFactor.factor())
 
                 LazyVStack(spacing: 0) {
-                    ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "내 정보", itemsWithActions: [
-                        ProfileSettingListItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {}),
+                    ProfileSettingSectionView(title: "내 정보", itemsWithActions: [
+                        ProfileSettingListItem(title: "내 정보 수정", icon: "icon_modifyingprofile", action: {
+                            activeNavigation = .editProfile
+                        }),
                         ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
                         ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {})
                     ])
@@ -29,8 +30,8 @@ struct ProfileSettingListView: View {
 
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-                    ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "앱 설정", itemsWithActions: [
-                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: { isNavigateToSettingAlarmView = true })
+                    ProfileSettingSectionView(title: "앱 설정", itemsWithActions: [
+                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: { activeNavigation = .settingAlarm })
                     ])
 
                     Divider()
@@ -39,9 +40,9 @@ struct ProfileSettingListView: View {
 
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-                    ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "이용안내", itemsWithActions: [
+                    ProfileSettingSectionView(title: "이용안내", itemsWithActions: [
                         ProfileSettingListItem(title: "문의하기", icon: "icon_checkwithsomeone", action: {
-                            isNavigateToInquiryView = true
+                            activeNavigation = .inquiry
                         })
                     ])
 
@@ -51,7 +52,7 @@ struct ProfileSettingListView: View {
 
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-                    ProfileSettingSectionView(showingPopUp: $showingPopUp, title: "기타", itemsWithActions: [
+                    ProfileSettingSectionView(title: "기타", itemsWithActions: [
                         ProfileSettingListItem(title: "로그아웃", icon: "icon_logout", action: { self.showingPopUp = true }),
                         ProfileSettingListItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: handleDeleteUserAccount)
                     ])
@@ -60,16 +61,32 @@ struct ProfileSettingListView: View {
             .frame(maxWidth: .infinity)
             .background(Color("White01"))
 
-            NavigationLink(destination: InquiryView(viewModel: InquiryViewModel()), isActive: $isNavigateToInquiryView) {
-                EmptyView()
-            }.hidden()
-
-            NavigationLink(destination: SettingAlarmView(), isActive: $isNavigateToSettingAlarmView) {
-                EmptyView()
-            }.hidden()
+            navigationLinks
         }
         .setTabBarVisibility(isHidden: true)
         .navigationBarColor(UIColor(named: "White01"), title: "")
+    }
+
+    @ViewBuilder
+    private var navigationLinks: some View {
+        ForEach(ProfileActiveNavigation.allCases, id: \.self) { destination in
+            NavigationLink(destination: destinationView(for: destination), tag: destination, selection: $activeNavigation) {
+                EmptyView()
+            }
+        }
+    }
+
+    /// 이동할 뷰 정리
+    @ViewBuilder
+    private func destinationView(for destination: ProfileActiveNavigation) -> some View {
+        switch destination {
+        case .inquiry:
+            InquiryView(viewModel: InquiryViewModel())
+        case .settingAlarm:
+            SettingAlarmView()
+        case .editProfile:
+            EditProfileListView()
+        }
     }
 
     func handleDeleteUserAccount() {
@@ -96,10 +113,7 @@ struct MenuItem {
 // MARK: - ProfileSettingSectionView
 
 struct ProfileSettingSectionView: View {
-    @Binding var showingPopUp: Bool
-
     let title: String
-
     let itemsWithActions: [ProfileSettingListItem] // ProfileSettingListItem 배열로 변경
 
     var body: some View {

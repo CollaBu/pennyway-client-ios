@@ -42,7 +42,8 @@ struct InquiryView: View {
                             
                 if viewModel.showErrorEmail {
                     Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-                    errorMessage("유효하지 않는 이메일 형식이에요")
+                    
+                    ErrorText(message: "유효하지 않는 이메일 형식이에요", color: Color("Red03"))
                         .offset(x: -72.5 * DynamicSizeFactor.factor())
                 }
                                                     
@@ -167,17 +168,6 @@ struct InquiryView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }
-        }
-    }
-    
-    /// Error message
-    private func errorMessage(_ message: String) -> some View {
-        ZStack(alignment: .leading) {
-            Text(message)
-                .padding(.leading, 20)
-                .font(.B1MediumFont())
-                .platformTextColor(color: Color("Red03"))
-                .multilineTextAlignment(.leading)
         }
     }
     

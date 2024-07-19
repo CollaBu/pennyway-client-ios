@@ -29,6 +29,7 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var timerSeconds = 300
     @Published var isTimerRunning = false
     @Published var isDisabledButton = false
+
     func requestVerificationCodeAction() {
         if !showErrorPhoneNumberFormat && !isDisabledButton {
             isDisabledButton = true
@@ -205,12 +206,26 @@ class PhoneVerificationViewModel: ObservableObject {
 
         if !showErrorPhoneNumberFormat {
             AuthAlamofire.shared.receiveUserNameVerificationCode(usernameVerificationCodeDto) { result in
-                self.handleUserNameVerificationCodeApiResult(result: result, completion: completion)
+                self.handleFindVerificationCodeApiResult(result: result, completion: completion)
             }
         }
     }
 
-    private func handleUserNameVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) { // 아이디 찾기 번호 인증
+    // MARK: 비밀번호 찾기 인증번호 코드 요청 API
+
+    func requestPwVerificationCodeApi(completion: @escaping () -> Void) {
+        validatePhoneNumber()
+        requestVerificationCodeAction()
+        let passwordVerificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
+
+        if !showErrorPhoneNumberFormat {
+            AuthAlamofire.shared.receivePwVerificationCode(passwordVerificationCodeDto) { result in
+                self.handleFindVerificationCodeApiResult(result: result, completion: completion)
+            }
+        }
+    }
+
+    private func handleFindVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) { // 아이디/비밀번호 찾기 번호 인증
         switch result {
         case let .success(data):
             if let responseData = data {
@@ -257,47 +272,6 @@ class PhoneVerificationViewModel: ObservableObject {
                     let response = try JSONDecoder().decode(FindUserNameResponseDto.self, from: responseData)
                     RegistrationManager.shared.username = response.data.user.username
                     showErrorVerificationCode = false
-                    Log.debug(response)
-                } catch {
-                    Log.fault("Error decoding JSON: \(error)")
-                }
-            }
-        case let .failure(error):
-            if let StatusSpecificError = error as? StatusSpecificError {
-                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-
-                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-                    showErrorExistingUser = false
-                } else {
-                    showErrorVerificationCode = true
-                }
-            } else {
-                Log.error("Network request failed: \(error)")
-            }
-        }
-        completion()
-    }
-
-    // MARK: 비밀번호 찾기 인증번호 코드 요청 API
-
-    func requestPwVerificationCodeApi(completion: @escaping () -> Void) { 
-        validatePhoneNumber()
-        requestVerificationCodeAction()
-        let passwordVerificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
-
-        if !showErrorPhoneNumberFormat {
-            AuthAlamofire.shared.receivePwVerificationCode(passwordVerificationCodeDto) { result in
-                self.handlePwVerificationCodeApiResult(result: result, completion: completion)
-            }
-        }
-    }
-
-    private func handlePwVerificationCodeApiResult(result: Result<Data?, Error>, completion: @escaping () -> Void) {
-        switch result {
-        case let .success(data):
-            if let responseData = data {
-                do {
-                    let response = try JSONDecoder().decode(SmsResponseDto.self, from: responseData)
                     Log.debug(response)
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")

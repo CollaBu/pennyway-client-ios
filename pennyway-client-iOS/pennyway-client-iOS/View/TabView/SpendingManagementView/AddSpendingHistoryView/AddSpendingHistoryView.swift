@@ -1,6 +1,13 @@
 
 import SwiftUI
 
+// MARK: - EntryPoint
+
+enum EntryPoint {
+    case main
+    case detailSheet
+}
+
 // MARK: - AddSpendingHistoryView
 
 struct AddSpendingHistoryView: View {
@@ -8,6 +15,8 @@ struct AddSpendingHistoryView: View {
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
+    @Binding var isPresented: Bool
+    var entryPoint: EntryPoint
 
     var body: some View {
         ZStack {
@@ -20,16 +29,18 @@ struct AddSpendingHistoryView: View {
                 CustomBottomButton(action: {
                     if viewModel.isFormValid, let date = clickDate {
                         viewModel.clickDate = date
+
                         viewModel.addSpendingHistoryApi { success in
                             if success {
                                 navigateToAddSpendingCategory = true
+                                Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
                             }
                         }
                     }
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate), isActive: $navigateToAddSpendingCategory) {}
+                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingCategory) {}
 
                 NavigationLink(
                     destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $viewModel.navigateToAddCategory) {}
@@ -44,7 +55,7 @@ struct AddSpendingHistoryView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Button(action: {
-                            self.presentationMode.wrappedValue.dismiss() 
+                            self.presentationMode.wrappedValue.dismiss()
                         }, label: {
                             Image("icon_arrow_back")
                                 .resizable()
@@ -59,20 +70,17 @@ struct AddSpendingHistoryView: View {
                     }.offset(x: -10)
                 }
             }
-        }
-//        .onAppear {
-//            viewModel.selectedDate = selectedDate
-//        }
-        .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
-            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
-        }
+            .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
+                SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
+            }
 
-        .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
-            SelectSpendingDayView(isPresented: $viewModel.isSelectDayViewPresented, selectedDate: $viewModel.selectedDate)
+            .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
+                SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
+            }
         }
     }
 }
 
 #Preview {
-    AddSpendingHistoryView(clickDate: .constant(Date()))
+    AddSpendingHistoryView(clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
 }

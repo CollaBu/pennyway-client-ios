@@ -13,6 +13,7 @@ struct SpendingManagementMainView: View {
     @State private var clickDate: Date? // 선택된 날짜 저장
     @State private var addSpendingClickDate: Date?
     @State private var addSpendingSelectedDate: Date?
+    @State private var entryPoint: EntryPoint = .main
 
     @State private var showToastPopup = false
 
@@ -38,37 +39,9 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-                    Button(action: {
+                    CustomRectangleButton(action: {
                         navigateToMySpendingList = true
-                    }, label: {
-                        ZStack {
-                            Rectangle()
-                                .frame(height: 50 * DynamicSizeFactor.factor())
-                                .cornerRadius(8)
-                                .platformTextColor(color: Color("White01"))
-
-                            HStack {
-                                Text("나의 소비 내역")
-                                    .font(.ButtonH4SemiboldFont())
-                                    .platformTextColor(color: Color("Gray07"))
-                                    .padding(.leading, 18)
-
-                                Spacer()
-
-                                Image("icon_arrow_front_small")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                    .padding(.trailing, 10)
-                            }
-                        }
-
-                    })
-                    .onTapGesture {
-                        Log.debug("나의 소비 내역 click")
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 50 * DynamicSizeFactor.factor())
-                    .padding(.horizontal, 20)
+                    }, label: "나의 소비 내역")
 
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
@@ -93,6 +66,7 @@ struct SpendingManagementMainView: View {
                     HStack(spacing: 0) {
                         Button(action: {
                             clickDate = Date() // +아이콘을 통해 들어간 경우 현재날짜 고정
+                            entryPoint = .main
                             navigateToAddSpendingHistory = true
                         }, label: {
                             Image("icon_navigation_add_black")
@@ -128,7 +102,7 @@ struct SpendingManagementMainView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate), isActive: $navigateToAddSpendingHistory) {
+            NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
 

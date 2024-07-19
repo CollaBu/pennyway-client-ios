@@ -54,7 +54,8 @@ struct ResetPwFormView: View {
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 
                 if formViewModel.showErrorPassword {
-                    errorMessage("숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요")
+                    ErrorText(message: "숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요", color: Color("Red03"))
+
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
                 } else {
@@ -102,17 +103,10 @@ struct ResetPwFormView: View {
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 
                 if formViewModel.showErrorConfirmPw {
-                    errorMessage("비밀번호가 일치하지 않아요")
+                    ErrorText(message: "비밀번호가 일치하지 않아요", color: Color("Red03"))
                 }
             }
         }
-    }
-
-    private func errorMessage(_ message: String) -> some View {
-        Text(message)
-            .padding(.leading, 20 * DynamicSizeFactor.factor())
-            .font(.B1MediumFont())
-            .platformTextColor(color: Color("Red03"))
     }
 
     @ViewBuilder
