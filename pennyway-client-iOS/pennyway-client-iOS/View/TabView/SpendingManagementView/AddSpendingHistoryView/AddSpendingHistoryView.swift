@@ -35,7 +35,7 @@ struct AddSpendingHistoryView: View {
                     if viewModel.isFormValid, let date = clickDate {
                         viewModel.clickDate = date
                         if entryPoint == .detailSpendingView { // 수정하기 api
-                            viewModel.editSpendingHistoryApi(spendingId: spendingId, dto: newDetails) { success in
+                            viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()
                                     Log.debug("지출 내역 수정 성공")

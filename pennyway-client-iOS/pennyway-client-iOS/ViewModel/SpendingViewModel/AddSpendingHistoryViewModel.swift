@@ -76,10 +76,29 @@ class AddSpendingHistoryViewModel: ObservableObject {
         }
     }
 
-    func editSpendingHistoryApi(spendingId: Int, dto: AddSpendingHistoryRequestDto, completion: @escaping (Bool) -> Void) { 
-        Log.debug(dto)
+    func editSpendingHistoryApi(spendingId: Int, completion: @escaping (Bool) -> Void) {
+        let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
+        let spendAt = Date.getBasicformattedDate(from: clickDate ?? selectedDate)
+        var categoryId = -1
 
-        SpendingAlamofire.shared.editSpendingHistory(spendingId: spendingId, dto) { result in
+        if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
+            if let icon = selectedCategory?.icon {
+                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state)
+                if let category = SpendingCategoryIconList.fromIcon(categoryIconName) {
+                    selectedCategoryIconTitle = category.rawValue
+                    categoryId = -1
+                }
+            }
+        } else { // 사용자 정의 카테고리
+            selectedCategoryIconTitle = "CUSTOM"
+            categoryId = selectedCategory?.id ?? 0
+        }
+
+        Log.debug(selectedCategory?.icon)
+
+        let addSpendingHistoryRequestDto = AddSpendingHistoryRequestDto(amount: amount, categoryId: categoryId, icon: selectedCategoryIconTitle, spendAt: spendAt, accountName: consumerText, memo: memoText)
+
+        SpendingAlamofire.shared.editSpendingHistory(spendingId: spendingId, addSpendingHistoryRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
