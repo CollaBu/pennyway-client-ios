@@ -2,7 +2,8 @@ import SwiftUI
 
 struct DetailSpendingView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var isSelectedCategory: Bool = false
+    @State var isSelectedCategory: Bool = false
+
     @State var selectedItem: String? = nil
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
     @State var navigateModifySpendingHistoryView = false
@@ -73,6 +74,8 @@ struct DetailSpendingView: View {
         }
         .onAppear {
             loadDataForSelectedDate()
+            isSelectedCategory = false
+            self.selectedItem = nil
         }
         .onChange(of: clickDate) { _ in
             loadDataForSelectedDate()
@@ -92,9 +95,10 @@ struct DetailSpendingView: View {
                             ForEach(listArray, id: \.self) { item in
                                 Button(action: {
                                     self.selectedItem = item
-                                    navigateModifySpendingHistoryView = true
                                     if item == "수정하기" {
-                                        navigateModifySpendingHistoryView = true
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
+                                            navigateModifySpendingHistoryView = true
+                                        }
                                     }
                                 }, label: {
                                     ZStack(alignment: .leading) {
