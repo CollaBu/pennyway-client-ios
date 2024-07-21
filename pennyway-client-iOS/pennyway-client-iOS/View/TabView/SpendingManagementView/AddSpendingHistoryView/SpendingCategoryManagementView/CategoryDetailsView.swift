@@ -74,6 +74,8 @@ struct CategoryDetailsView: View {
                                 showingPopUp = true
                             } else {
                                 isNavigateToEditCategoryView = true
+                                viewModel.categoryName = ""
+                                viewModel.selectedCategoryIcon = viewModel.selectedCategory?.icon
                             }
                             Log.debug("Selected item: \(item)")
                         }

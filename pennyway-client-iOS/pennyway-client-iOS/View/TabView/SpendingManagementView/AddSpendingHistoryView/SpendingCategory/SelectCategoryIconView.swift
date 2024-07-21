@@ -65,7 +65,7 @@ struct SelectCategoryIconView: View {
                         viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                         viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
                     } else {
-                        spendingCategoryViewModel.selectedCategory?.icon = mapToOnIcon(selectedCategoryIcon)
+                        spendingCategoryViewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
                     }
                     isPresented = false
                     Log.debug(selectedCategory.rawValue)

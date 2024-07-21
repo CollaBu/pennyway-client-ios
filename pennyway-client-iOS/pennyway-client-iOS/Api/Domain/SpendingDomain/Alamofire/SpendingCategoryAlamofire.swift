@@ -37,6 +37,7 @@ class SpendingCategoryAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingCategoryRouter.getCategorySpendingHistory(categoryId: categoryId, dto: dto), completion: completion)
     }
+
     func modifyCategory(_ categoryId: Int, _ dto: AddSpendingCustomCategoryRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("SpendingCategoryAlamofire - modifyCategory() called")
         
