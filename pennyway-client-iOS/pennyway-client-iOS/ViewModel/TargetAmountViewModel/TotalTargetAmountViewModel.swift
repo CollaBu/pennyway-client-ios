@@ -44,4 +44,25 @@ class TotalTargetAmountViewModel: ObservableObject {
             }
         }
     }
+
+    func deleteCurrentMonthTargetAmountApi(completion: @escaping (Bool) -> Void) {
+        TargetAmountAlamofire.shared.deleteCurrentMonthTargetAmount(targetAmountId: currentData.targetAmountDetail.id) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("당월 목표 금액 삭제 완료 \(jsonString)")
+                        completion(true)
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
 }
