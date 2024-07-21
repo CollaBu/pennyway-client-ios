@@ -54,24 +54,19 @@ struct AddSpendingInputFormView: View {
                                         spendingId = spendingDetail.id
                                         let categoryIconName = spendingDetail.category.icon.lowercased()
 
-//                                        if let baseName = CategoryBaseName(rawValue: categoryIconName) {
-                                        //                                        let categoryIconName = CategoryIconName(baseName: baseName, state: .on)
                                         if let categoryIcon = SpendingListViewCategoryIconList(rawValue: spendingDetail.category.icon)?.iconName {
                                             viewModel.selectedCategory = SpendingCategoryData(
                                                 id: spendingDetail.category.id,
                                                 isCustom: spendingDetail.category.isCustom,
                                                 name: spendingDetail.category.name,
                                                 icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
-                                                // CategoryIconName(baseName: nil, state: .on, totalName: categoryIcon)
+
                                             )
                                         }
                                         viewModel.consumerText = spendingDetail.accountName
                                         viewModel.memoText = spendingDetail.memo
                                         viewModel.validateForm()
-                                        
-                                        Log.debug("?: \(viewModel.amountSpentText), \(viewModel.selectedCategory?.icon)")
-                                        Log.debug("???:\(spendingDetail.category.icon)")
-//                                        Log.debug("???????/:\(baseName)")
+
                                     }
                                 }
                             }

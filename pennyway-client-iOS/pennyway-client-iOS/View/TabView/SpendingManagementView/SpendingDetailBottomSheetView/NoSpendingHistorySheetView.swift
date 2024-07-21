@@ -41,7 +41,3 @@ struct NoSpendingHistorySheetView: View {
         .padding(.leading, 20)
     }
 }
-
-// #Preview {
-//    NoSpendingHistoryView()
-// }

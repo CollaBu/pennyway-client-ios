@@ -21,7 +21,6 @@ struct AddSpendingHistoryView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
     @Binding var isPresented: Bool
-    ///    @Binding var isSelectedCategory: Bool?
     var entryPoint: EntryPoint
 
     var body: some View {
@@ -39,10 +38,9 @@ struct AddSpendingHistoryView: View {
                             viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()
-//                                    isSelectedCategory = false
                                     Log.debug("지출 내역 수정 성공")
                                 } else {
-                                    Log.error("지출 내역 수정 실패")
+                                    Log.debug("지출 내역 수정 실패")
                                 }
                             }
 
