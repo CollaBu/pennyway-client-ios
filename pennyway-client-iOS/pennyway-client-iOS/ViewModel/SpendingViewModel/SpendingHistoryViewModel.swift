@@ -84,16 +84,30 @@ class SpendingHistoryViewModel: ObservableObject {
         }
     }
 
-    func deleteSpendingHistory(spendingIds: [Int], completion: @escaping (Bool) -> Void) {
+    func deleteSpendingHistory(spendingIds: [Int], completion: @escaping (Bool) -> Void) { // 지출내역 복수 삭제
         let dto = DeleteSpendingHistoryRequestDto(spendingIds: spendingIds)
         SpendingAlamofire.shared.deleteSpendingHistory(dto) { result in
             switch result {
             case .success:
-                Log.debug("지출 내역 삭제 완료")
+                Log.debug("지출내역 복수 삭제 완료")
                 self.dailyDetailSpendings.removeAll { spendingIds.contains($0.id) }
                 completion(true)
             case let .failure(error):
-                Log.error("지출 내역 삭제 실패: \(error)")
+                Log.error("지출내역 복수 삭제 실패: \(error)")
+                completion(false)
+            }
+        }
+    }
+
+    func deleteSingleSpendingHistory(spendingId: Int, completion: @escaping (Bool) -> Void) { // 지출내역 단일 삭제
+        SpendingAlamofire.shared.deleteSingleSpendingHistory(spendingId: spendingId) { result in
+            switch result {
+            case .success:
+                Log.debug("지출내역 단일 삭제 완료")
+//                self.dailyDetailSpendings.removeAll { spendingId.contains($0.id) }
+                completion(true)
+            case let .failure(error):
+                Log.error("지출내역 단일 삭제 실패: \(error)")
                 completion(false)
             }
         }

@@ -4,6 +4,8 @@ struct DetailSpendingView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isSelectedCategory: Bool = false
     @State var selectedItem: String? = nil
+    @State var spendingId: Int = 0
+    @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
 
     var body: some View {
@@ -72,6 +74,9 @@ struct DetailSpendingView: View {
                             ForEach(listArray, id: \.self) { item in
                                 Button(action: {
                                     self.selectedItem = item
+                                    if item == "내역 삭제" {
+                                        deleteSingleSpendingApi()
+                                    }
                                 }, label: {
                                     ZStack(alignment: .leading) {
                                         Rectangle()
@@ -103,6 +108,17 @@ struct DetailSpendingView: View {
                     .offset(x: 175 * DynamicSizeFactor.factor(), y: 13 * DynamicSizeFactor.factor())
                 }
             }, alignment: .topLeading)
+    }
+
+    private func deleteSingleSpendingApi() {
+        spendingHistoryViewModel.deleteSingleSpendingHistory(spendingId: spendingId) { success in
+            if success {
+                self.presentationMode.wrappedValue.dismiss()
+                Log.debug("detailSpendingView 지출내역 삭제 성공 실패")
+            } else {
+                Log.debug("detailSpendingView 지출내역 단일 삭제 실패")
+            }
+        }
     }
 }
 

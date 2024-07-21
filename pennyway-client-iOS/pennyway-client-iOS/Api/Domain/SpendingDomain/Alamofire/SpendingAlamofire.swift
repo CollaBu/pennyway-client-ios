@@ -37,4 +37,10 @@ class SpendingAlamofire {
     
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.getDetailSpendingHistory(spendingId: spendingId), completion: completion)
     }
+    
+    func deleteSingleSpendingHistory(spendingId: Int, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - deleteSingleSpendingHistory() called")
+    
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.deleteSingleSpendingHistory(spendingId: spendingId), completion: completion)
+    }
 }
