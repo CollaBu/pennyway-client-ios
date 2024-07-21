@@ -6,7 +6,9 @@ import SwiftUI
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    @State var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: CategoryBaseName.etc, state: .onMint)
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
+    @State var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: .etc, state: .on)
+    let entryPoint: AddCategoryEntryPoint
 
     let columns = [
         GridItem(.flexible(), spacing: 32),
@@ -59,9 +61,15 @@ struct SelectCategoryIconView: View {
 
             CustomBottomButton(action: {
                 if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
-                    viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                    viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
-                    Log.debug(viewModel.selectedCategoryIconTitle)
+                    if entryPoint == .create {
+                        viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
+                        viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
+                        Log.debug(viewModel.selectedCategoryIconTitle)
+                    } else {
+                        spendingCategoryViewModel.selectedCategory?.icon = mapToOnIcon(selectedCategoryIcon)
+                        Log.debug(selectedCategory.rawValue)
+                        Log.debug(spendingCategoryViewModel.selectedCategory?.icon)
+                    }
                     isPresented = false
                 }
             }, label: "확인", isFormValid: .constant(true))
@@ -70,8 +78,9 @@ struct SelectCategoryIconView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            if let icon = viewModel.selectedCategoryIcon {
+            if let icon = (entryPoint == .create ? viewModel.selectedCategoryIcon : spendingCategoryViewModel.selectedCategory?.icon) {
                 selectedCategoryIcon = mapToOnMintIcon(icon)
+                Log.debug(selectedCategoryIcon)
             }
         }
     }
@@ -84,7 +93,7 @@ struct SelectCategoryIconView: View {
     }
 
     private func mapToOnMintIcon(_ icon: CategoryIconName) -> CategoryIconName {
-        if icon.state == .on {
+        if icon.state == .on || icon.state == .onWhite {
             return CategoryIconName(baseName: icon.baseName, state: .onMint)
         }
         return icon

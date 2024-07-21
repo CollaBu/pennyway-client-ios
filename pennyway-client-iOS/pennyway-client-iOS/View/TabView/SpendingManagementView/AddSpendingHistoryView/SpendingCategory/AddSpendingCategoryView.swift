@@ -15,7 +15,8 @@ struct AddSpendingCategoryView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
-    @State var maxCategoryNameCount = "8"
+    @State private var maxCategoryNameCount = 8
+    @State private var isFormValid = false
     let entryPoint: AddCategoryEntryPoint
 
     var body: some View {
@@ -29,7 +30,7 @@ struct AddSpendingCategoryView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)
                 case .modify:
-                    Image(spendingCategoryViewModel.selectedCategory?.icon.rawValue ?? CategoryIconName(baseName: .etc, state: .on).rawValue)
+                    Image(spendingCategoryViewModel.selectedCategory!.icon.rawValue)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor(), alignment: .leading)
@@ -75,26 +76,18 @@ struct AddSpendingCategoryView: View {
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))
-                        .onChange(of: viewModel.categoryName) { _ in
-//                            if viewModel.categoryName.count > 8 {
-//                                viewModel.categoryName = String(viewModel.categoryName.prefix(8))
-//                            }
-//                            if !viewModel.categoryName.isEmpty {
-//                                viewModel.isAddCategoryFormValid = true
-//                            } else {
-//                                viewModel.isAddCategoryFormValid = false
-//                            }
-                            if (entryPoint == .create ? viewModel.categoryName.count : spendingCategoryViewModel.categoryName.count) > 8 {
+                        .onChange(of: entryPoint == .create ? viewModel.categoryName : spendingCategoryViewModel.categoryName) { _ in
+                            if (entryPoint == .create ? viewModel.categoryName.count : spendingCategoryViewModel.categoryName.count) > maxCategoryNameCount {
                                 if entryPoint == .create {
-                                    viewModel.categoryName = String(viewModel.categoryName.prefix(8))
+                                    viewModel.categoryName = String(viewModel.categoryName.prefix(maxCategoryNameCount))
                                 } else {
-                                    spendingCategoryViewModel.categoryName = String(spendingCategoryViewModel.categoryName.prefix(8))
+                                    spendingCategoryViewModel.categoryName = String(spendingCategoryViewModel.categoryName.prefix(maxCategoryNameCount))
                                 }
                             }
                             if !(entryPoint == .create ? viewModel.categoryName.isEmpty : spendingCategoryViewModel.categoryName.isEmpty) {
-                                viewModel.isAddCategoryFormValid = true
+                                isFormValid = true
                             } else {
-                                viewModel.isAddCategoryFormValid = false
+                                isFormValid = false
                             }
                         }
                 }
@@ -127,7 +120,9 @@ struct AddSpendingCategoryView: View {
                                 Log.debug("카테고리 생성 실패")
                             }
                         }
-                    case .modify: break
+                    case .modify: Log.debug("카테고리 수정 완료")
+                        spendingCategoryViewModel.selectedCategory?.name = spendingCategoryViewModel.categoryName
+                        Log.debug(spendingCategoryViewModel.selectedCategory?.name)
 //                        viewModel.modifySpendingCustomCategoryApi { success in
 //                            if success {
 //                                Log.debug("카테고리 수정 완료")
@@ -141,7 +136,7 @@ struct AddSpendingCategoryView: View {
                     }
                     presentationMode.wrappedValue.dismiss()
                 }
-            }, label: "추가하기", isFormValid: $viewModel.isAddCategoryFormValid)
+            }, label: "추가하기", isFormValid: $isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -169,7 +164,7 @@ struct AddSpendingCategoryView: View {
             }
         }
         .bottomSheet(isPresented: $viewModel.isSelectAddCategoryViewPresented, maxHeight: 347 * DynamicSizeFactor.factor()) {
-            SelectCategoryIconView(isPresented: $viewModel.isSelectAddCategoryViewPresented, viewModel: viewModel)
+            SelectCategoryIconView(isPresented: $viewModel.isSelectAddCategoryViewPresented, viewModel: viewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: entryPoint)
         }
     }
 }

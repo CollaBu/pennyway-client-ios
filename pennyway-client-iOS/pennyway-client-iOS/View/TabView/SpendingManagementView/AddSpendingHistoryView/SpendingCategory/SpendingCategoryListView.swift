@@ -44,7 +44,6 @@ struct SpendingCategoryListView: View {
                                 viewModel.selectedCategoryIcon = CategoryIconName(baseName: CategoryBaseName.etc, state: .on) // icon 초기화
                                 viewModel.categoryName = "" // name 초기화
                                 viewModel.navigateToAddCategory = true
-                                viewModel.isAddCategoryFormValid = false
                                 isPresented = false
                             } else {
                                 viewModel.selectedCategory = category

@@ -34,8 +34,8 @@ struct CategoryIconName: Hashable {
 struct SpendingCategoryData: Identifiable {
     let id: Int
     let isCustom: Bool
-    let name: String
-    let icon: CategoryIconName
+    var name: String
+    var icon: CategoryIconName
 }
 
 // MARK: - CategoryBaseName
