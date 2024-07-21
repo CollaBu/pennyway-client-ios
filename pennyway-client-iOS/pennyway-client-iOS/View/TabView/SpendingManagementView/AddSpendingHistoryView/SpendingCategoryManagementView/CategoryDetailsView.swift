@@ -18,7 +18,7 @@ struct CategoryDetailsView: View {
                 VStack {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-                    Image("\(viewModel.selectedCategory!.icon.rawValue.split(separator: "_").dropLast().joined(separator: "_"))")
+                    Image("\(viewModel.selectedCategory!.icon.rawValue)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())

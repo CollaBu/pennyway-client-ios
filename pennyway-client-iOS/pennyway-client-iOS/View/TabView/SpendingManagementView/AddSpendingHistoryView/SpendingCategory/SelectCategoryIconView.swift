@@ -64,13 +64,11 @@ struct SelectCategoryIconView: View {
                     if entryPoint == .create {
                         viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                         viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
-                        Log.debug(viewModel.selectedCategoryIconTitle)
                     } else {
                         spendingCategoryViewModel.selectedCategory?.icon = mapToOnIcon(selectedCategoryIcon)
-                        Log.debug(selectedCategory.rawValue)
-                        Log.debug(spendingCategoryViewModel.selectedCategory?.icon)
                     }
                     isPresented = false
+                    Log.debug(selectedCategory.rawValue)
                 }
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
@@ -80,7 +78,6 @@ struct SelectCategoryIconView: View {
         .onAppear {
             if let icon = (entryPoint == .create ? viewModel.selectedCategoryIcon : spendingCategoryViewModel.selectedCategory?.icon) {
                 selectedCategoryIcon = mapToOnMintIcon(icon)
-                Log.debug(selectedCategoryIcon)
             }
         }
     }
