@@ -7,6 +7,7 @@ enum SpendingCategoryRouter: URLRequestConvertible {
     case getSpendingCustomCategoryList
     case getCategorySpendingCount(categoryId: Int, dto: GetCategorySpendingCountRequestDto)
     case getCategorySpendingHistory(categoryId: Int, dto: GetCategorySpendingHistoryRequestDto)
+    case modifyCategory(categoryId: Int, dto: AddSpendingCustomCategoryRequestDto)
     
     var method: HTTPMethod {
         switch self {
@@ -14,6 +15,8 @@ enum SpendingCategoryRouter: URLRequestConvertible {
             return .get
         case .addSpendingCustomCategory:
             return .post
+        case .modifyCategory:
+            return .patch
         }
     }
     
@@ -29,12 +32,14 @@ enum SpendingCategoryRouter: URLRequestConvertible {
             return "v2/spending-categories/\(categoryId)/spendings"
         case let .getCategorySpendingCount(categoryId, _):
             return "v2/spending-categories/\(categoryId)/spendings/count"
+        case let .modifyCategory(categoryId, _):
+            return "v2/spending-categories/\(categoryId)"
         }
     }
     
     var bodyParameters: Parameters? {
         switch self {
-        case .getSpendingCustomCategoryList, .addSpendingCustomCategory, .getCategorySpendingCount, .getCategorySpendingHistory:
+        case .getSpendingCustomCategoryList, .addSpendingCustomCategory, .getCategorySpendingCount, .getCategorySpendingHistory, .modifyCategory:
             return [:]
         }
     }
@@ -47,6 +52,8 @@ enum SpendingCategoryRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .getCategorySpendingHistory(_, dto):
             return try? dto.asDictionary()
+        case let .modifyCategory(_, dto):
+            return try? dto.asDictionary()
         case .getSpendingCustomCategoryList:
             return [:]
         }
@@ -57,7 +64,7 @@ enum SpendingCategoryRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .addSpendingCustomCategory, .getCategorySpendingCount, .getCategorySpendingHistory:
+        case .addSpendingCustomCategory, .getCategorySpendingCount, .getCategorySpendingHistory, .modifyCategory:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         case .getSpendingCustomCategoryList:

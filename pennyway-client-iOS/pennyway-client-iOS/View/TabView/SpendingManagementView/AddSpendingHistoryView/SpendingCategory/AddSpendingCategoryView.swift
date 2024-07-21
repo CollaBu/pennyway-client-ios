@@ -14,11 +14,11 @@ struct AddSpendingCategoryView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
-
+    
     @State private var maxCategoryNameCount = 8
     @State private var isFormValid = false
     let entryPoint: AddCategoryEntryPoint
-
+    
     var body: some View {
         VStack(spacing: 0) {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
@@ -159,7 +159,7 @@ struct AddSpendingCategoryView: View {
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
-
+                    
                 }.offset(x: -10)
             }
         }
