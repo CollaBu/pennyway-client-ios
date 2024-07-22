@@ -171,23 +171,13 @@ class AddSpendingHistoryViewModel: ObservableObject {
 
     func addSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
         let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
-        var categoryId = -1
         let spendAt = Date.getBasicformattedDate(from: clickDate ?? selectedDate)
 
         Log.debug("clickDate: \(String(describing: clickDate)), selectedDate: \(selectedDate), spendAt: \(spendAt)")
 
-        if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
-            if let icon = selectedCategory?.icon {
-                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state)
-                if let category = SpendingCategoryIconList.fromIcon(categoryIconName) {
-                    selectedCategoryIconTitle = category.rawValue
-                    categoryId = -1
-                }
-            }
-        } else { // 사용자 정의 카테고리
-            selectedCategoryIconTitle = "CUSTOM"
-            categoryId = selectedCategory?.id ?? 0
-        }
+        let categoryDetails = getCategoryDetails()
+        selectedCategoryIconTitle = categoryDetails.categoryIconTitle
+        let categoryId = categoryDetails.categoryId
 
         let addSpendingHistoryRequestDto = AddSpendingHistoryRequestDto(amount: amount, categoryId: categoryId, icon: selectedCategoryIconTitle, spendAt: spendAt, accountName: consumerText, memo: memoText)
 
@@ -216,5 +206,25 @@ class AddSpendingHistoryViewModel: ObservableObject {
                 completion(false)
             }
         }
+    }
+
+    func getCategoryDetails() -> (categoryIconTitle: String, categoryId: Int) {
+        var categoryIconTitle = ""
+        var categoryId = -1
+
+        if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
+            if let icon = selectedCategory?.icon {
+                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state)
+                if let category = SpendingCategoryIconList.fromIcon(categoryIconName) {
+                    categoryIconTitle = category.rawValue
+                    categoryId = -1
+                }
+            }
+        } else { // 사용자 정의 카테고리
+            categoryIconTitle = "CUSTOM"
+            categoryId = selectedCategory?.id ?? 0
+        }
+
+        return (categoryIconTitle, categoryId)
     }
 }

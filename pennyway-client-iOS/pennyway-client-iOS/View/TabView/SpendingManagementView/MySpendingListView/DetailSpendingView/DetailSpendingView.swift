@@ -77,9 +77,6 @@ struct DetailSpendingView: View {
             isSelectedCategory = false
             self.selectedItem = nil
         }
-        .onChange(of: clickDate) { _ in
-            loadDataForSelectedDate()
-        }
         .overlay(
             VStack(alignment: .center) {
                 Spacer().frame(height: 6 * DynamicSizeFactor.factor())

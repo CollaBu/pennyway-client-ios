@@ -19,6 +19,7 @@ struct MySpendingListView: View {
     @State private var navigateToCategoryGridView = false
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
+    @State private var refreshView = false
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -99,6 +100,7 @@ struct MySpendingListView: View {
                     }
                 }
             }
+            .id(refreshView)
 
             NavigationLink(destination: DetailSpendingView(clickDate: $clickDate), isActive: $showDetailSpendingView) {}
         }
@@ -139,6 +141,7 @@ struct MySpendingListView: View {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
+                    refreshView = true
                 } else {
                     Log.debug("소비내역 조회 api 연동 실패")
                 }
