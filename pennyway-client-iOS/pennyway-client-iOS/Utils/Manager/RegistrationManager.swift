@@ -4,6 +4,7 @@ struct RegistrationManager {
 
     var name = ""
     var username = ""
+    var oldPassword = ""
     var password = ""
     var phoneNumber = ""
     var formattedPhoneNumber: String? {

@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ResetPwFormView: View {
     @ObservedObject var formViewModel: SignUpFormViewModel
+    @ObservedObject var accountViewModel: UserAccountViewModel
     @State private var isPwDeleteButtonVisible: Bool = false
     @State private var isConfirmPwDeleteButtonVisible: Bool = false
 
@@ -67,6 +68,8 @@ struct ResetPwFormView: View {
                     .font(.pretendard(.regular, size: 12))
                     .platformTextColor(color: Color("Gray04"))
 
+                Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+
                 HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 4)
@@ -75,6 +78,7 @@ struct ResetPwFormView: View {
 
                         SecureField("", text: $formViewModel.confirmPw, onCommit: {
                             Log.debug("confirmPw: \(formViewModel.confirmPw)")
+                            RegistrationManager.shared.password = formViewModel.confirmPw
                             formViewModel.validateConfirmPw()
                             isConfirmPwDeleteButtonVisible = false
                         })
@@ -128,5 +132,5 @@ struct ResetPwFormView: View {
 }
 
 #Preview {
-    ResetPwFormView(formViewModel: SignUpFormViewModel())
+    ResetPwFormView(formViewModel: SignUpFormViewModel(), accountViewModel: UserAccountViewModel())
 }

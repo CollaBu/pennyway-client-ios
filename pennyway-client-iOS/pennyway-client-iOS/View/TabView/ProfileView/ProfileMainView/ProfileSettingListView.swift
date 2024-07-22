@@ -89,7 +89,7 @@ struct ProfileSettingListView: View {
         case .editProfile:
             EditProfileListView()
         case .modifyPw:
-            ProfileModifyPwView()
+            ProfileModifyPwView(entryPoint: .modifyPw)
         }
     }
 

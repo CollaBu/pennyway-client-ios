@@ -50,4 +50,10 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.validatePw(dto: dto), completion: completion)
     }
+    
+    func resetMyPw(_ dto: ResetMyPwRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - resetMyPw() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.resetMyPw(dto: dto), completion: completion)
+    }
 }

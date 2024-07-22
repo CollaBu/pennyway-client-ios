@@ -3,11 +3,10 @@ import SwiftUI
 
 struct ProfileModifyPwView: View {
     @Environment(\.presentationMode) var presentationMode
-
-    ///    @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = UserAccountViewModel()
     @State private var navigateView = false
     @State private var isFormValid = false
+    let entryPoint: PasswordChangeTypeNavigation
 
     var body: some View {
         NavigationAvailable {
@@ -26,7 +25,7 @@ struct ProfileModifyPwView: View {
                     Spacer().frame(height: 33 * DynamicSizeFactor.factor())
 
                     CustomInputView(inputText: $viewModel.password, titleText: "비밀번호", onCommit: {
-                        RegistrationManager.shared.password = viewModel.password
+                        RegistrationManager.shared.oldPassword = viewModel.password
 
                         validatePwApi()
                     }, isSecureText: true)
@@ -46,7 +45,7 @@ struct ProfileModifyPwView: View {
                     }, label: "완료", isFormValid: $isFormValid)
                         .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-                    NavigationLink(destination: ResetPwView(), isActive: $navigateView) {
+                    NavigationLink(destination: ResetPwView(entryPoint: .modifyPw), isActive: $navigateView) {
                         EmptyView()
                     }.hidden()
                 }
@@ -92,5 +91,5 @@ struct ProfileModifyPwView: View {
 }
 
 #Preview {
-    ProfileModifyPwView()
+    ProfileModifyPwView(entryPoint: .modifyPw)
 }
