@@ -4,6 +4,8 @@ import SwiftUI
 
 class UserAccountViewModel: ObservableObject {
     @Published var toggleStates: [Bool] = [false, false, false]
+    @Published var password: String = ""
+    @Published var showErrorPassword: Bool = false
 
     func getUserProfileApi(completion: @escaping (Bool) -> Void) {
         UserAccountAlamofire.shared.getUserProfile { result in
@@ -116,6 +118,28 @@ class UserAccountViewModel: ObservableObject {
                 Log.debug("알람 설정 갱신 완료")
             } else {
                 Log.error("알람 설정 갱신 실패")
+            }
+        }
+    }
+
+    func validatePwApi(completion: @escaping (Bool) -> Void) {
+        Log.debug("value: \(RegistrationManager.shared.password)")
+
+        let validatePwRequestDto = ValidatePwRequestDto(password: RegistrationManager.shared.password)
+
+        UserAccountAlamofire.shared.validatePw(validatePwRequestDto) { result in
+            switch result {
+            case let .success(data):
+                Log.debug("사용자 비밀번호 검증 완료")
+                completion(true)
+
+            case let .failure(error):
+                if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
+                    Log.info("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                } else {
+                    Log.error("Failed to verify: \(error)")
+                }
+                completion(false)
             }
         }
     }

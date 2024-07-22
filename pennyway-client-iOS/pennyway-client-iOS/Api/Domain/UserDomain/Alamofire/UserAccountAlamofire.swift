@@ -44,4 +44,10 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.settingOffAlarm(type: type), completion: completion)
     }
+    
+    func validatePw(_ dto: ValidatePwRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - validatePw() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.validatePw(dto: dto), completion: completion)
+    }
 }
