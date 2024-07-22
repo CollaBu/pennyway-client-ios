@@ -31,7 +31,7 @@ struct AddSpendingCategoryView: View {
             categoryInputView()
             characterCountView()
             Spacer()
-            CustomBottomButton(action: addAction, label: "추가하기", isFormValid: $isFormValid)
+            CustomBottomButton(action: addAction, label: entryPoint == .create ? "추가하기" : "확인", isFormValid: $isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -164,7 +164,7 @@ struct AddSpendingCategoryView: View {
                         Log.debug("카테고리 수정 완료")
                         spendingCategoryViewModel.initPage()
                         
-                        // 카테고리 수정 후 데이터 카테고리 관련 데이터 다시 조회
+                        // 카테고리 수정 후 카테고리 관련 데이터 다시 조회
                         spendingCategoryViewModel.getCategorySpendingHistoryApi { _ in }
                         spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in }
                         presentationMode.wrappedValue.dismiss()
