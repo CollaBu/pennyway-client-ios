@@ -8,7 +8,7 @@ struct SelectCategoryIconView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @State var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: .etc, state: .on)
-    let entryPoint: AddCategoryEntryPoint
+    let entryPoint: CustomCategoryEntryPoint
 
     let columns = [
         GridItem(.flexible(), spacing: 32),
@@ -65,6 +65,7 @@ struct SelectCategoryIconView: View {
                         viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                         viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
                     } else {
+                        spendingCategoryViewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                         spendingCategoryViewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
                     }
                     isPresented = false

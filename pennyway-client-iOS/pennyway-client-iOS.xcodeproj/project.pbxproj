@@ -147,6 +147,7 @@
 		4A9634B22C42EAF6000A218A /* SpendingListGroupUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */; };
 		4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
+		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
@@ -412,6 +413,7 @@
 		4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingListGroupUtil.swift; sourceTree = "<group>"; };
 		4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCurrentMonthTargetAmountRequestDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
+		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
@@ -1127,6 +1129,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6C79DA2C46D067009463E4 /* ProfileActiveNavigation.swift */,
+				4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -1873,6 +1876,7 @@
 				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
 				D85927FA2BE9116700653391 /* LoginViewModel.swift in Sources */,
 				4A6C79E42C46DE8B009463E4 /* VerificationButton.swift in Sources */,
+				4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */,
 				4AC320552C11D5AC00DDB4B6 /* TotalTargetAmountGraphView.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */,
