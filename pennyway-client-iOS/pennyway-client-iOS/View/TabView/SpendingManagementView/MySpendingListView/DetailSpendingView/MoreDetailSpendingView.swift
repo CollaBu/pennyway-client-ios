@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct MoreDetailSpendingView: View {
-//    @Binding var spendingId: Int
-
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(alignment: .leading) {

@@ -17,6 +17,8 @@ struct MySpendingListView: View {
     @State private var currentMonth: Date = Date()
     @Binding var clickDate: Date?
     @State private var navigateToCategoryGridView = false
+    @State private var showToastPopup = false
+    @State private var isDeleteSuccess = false
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -30,7 +32,7 @@ struct MySpendingListView: View {
                     ScrollView {
                         VStack {
                             if SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
-//                                NoSpendingHistoryView()
+                                NoSpendingHistoryView(clickDate: $clickDate)
                             } else {
                                 LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
                                     ForEach(SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings), id: \.key) { date, spendings in
@@ -133,6 +135,112 @@ struct MySpendingListView: View {
                 }
             }
         }
+        .overlay(
+                    Group {
+                        if isDeleteSuccess {
+                            CustomToastView(message: "지출 내역이 성공적으로 삭제되었습니다.")
+                                .transition(.move(edge: .bottom))
+                                .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                                .padding(.bottom, 10)
+                                .onAppear {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        isDeleteSuccess = false
+                                    }
+                                }
+                        }
+                    }, alignment: .bottom
+                )
+
+                NavigationLink(destination: SpendingCategoryGridView(SpendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
+            }
+
+            private func headerView(for date: String) -> some View {
+                Text(DateFormatterUtil.dateFormatString(from: date))
+                    .font(.B2MediumFont())
+                    .platformTextColor(color: Color("Gray04"))
+                    .padding(.leading, 20)
+                    .padding(.bottom, 10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+
+            private func changeMonth(by value: Int) {
+                let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
+                currentMonth = spendingHistoryViewModel.currentDate
+                spendingHistoryViewModel.currentDate = newDate
+                currentMonth = newDate
+
+                spendingHistoryViewModel.checkSpendingHistoryApi { success in
+                    if success {
+                        Log.debug("지출내역 조회 API 연동 성공")
+                        DispatchQueue.main.async {
+                            self.currentMonth = newDate
+                        }
+                    } else {
+                        Log.fault("지출내역 조회 API 연동 실패")
+                    }
+                }
+            }
+
+            func monthTitle(from date: Date) -> String {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "M월 내역보기"
+                if let previousMonthDate = Calendar.current.date(byAdding: .month, value: -1, to: date) {
+                    return dateFormatter.string(from: previousMonthDate)
+                }
+                return dateFormatter.string(from: date)
+            }
+        }
+        Step 2: DetailSpendingView 수정
+        DetailSpendingView에서 삭제가 성공했을 때 Binding 변수를 업데이트하도록 수정합니다.
+
+        swift
+        코드 복사
+        struct DetailSpendingView: View {
+            @Environment(\.presentationMode) var presentationMode
+            @State private var isSelectedCategory: Bool = false
+            @State var selectedItem: String? = nil
+            @State var spendingId: Int
+            @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
+            @State var listArray: [String] = ["수정하기", "내역 삭제"]
+            @Binding var isDeleteSuccess: Bool
+
+            init(spendingId: Int, isDeleteSuccess: Binding<Bool>) {
+                self._spendingId = State(initialValue: spendingId)
+                self._isDeleteSuccess = isDeleteSuccess
+            }
+
+            var body: some View {
+                ZStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        Spacer().frame(height: 26 * DynamicSizeFactor.factor())
+
+                        MoreDetailSpendingView()
+                    }
+                }
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                .padding(.horizontal, 20)
+                .setTabBarVisibility(isHidden: true)
+                .edgesIgnoringSafeArea(.bottom)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarColor(UIColor(named: "White01"), title: "")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        HStack {
+                            Button(action: {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }, label: {
+                                Image("icon_arrow_back")
+                                    .resizable()
+                                    .aspectRatio(contentMode:
+
+
+
+
+
+
+
+        계속 생성하기
+            
 
         NavigationLink(destination: SpendingCategoryGridView(SpendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
     }

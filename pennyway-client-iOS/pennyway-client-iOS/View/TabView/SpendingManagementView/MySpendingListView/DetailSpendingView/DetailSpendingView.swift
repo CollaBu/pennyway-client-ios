@@ -9,6 +9,7 @@ struct DetailSpendingView: View {
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
     @Binding var isDeleteSuccess: Bool
 
+
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(alignment: .leading) {
