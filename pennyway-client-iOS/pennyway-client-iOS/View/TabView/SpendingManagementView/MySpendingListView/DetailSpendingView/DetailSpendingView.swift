@@ -7,8 +7,6 @@ struct DetailSpendingView: View {
     @State var spendingId: Int = 0
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
-    @Binding var isDeleteSuccess: Bool
-
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -116,8 +114,7 @@ struct DetailSpendingView: View {
         spendingHistoryViewModel.deleteSingleSpendingHistory(spendingId: spendingId) { success in
             if success {
                 self.presentationMode.wrappedValue.dismiss()
-                self.isDeleteSuccess = true
-                Log.debug("detailSpendingView 지출내역 삭제 성공 성공")
+                Log.debug("detailSpendingView 지출내역 삭제 성공 실패")
             } else {
                 Log.debug("detailSpendingView 지출내역 단일 삭제 실패")
             }
@@ -126,5 +123,5 @@ struct DetailSpendingView: View {
 }
 
 #Preview {
-    DetailSpendingView(spendingId: 0, isDeleteSuccess: .constant(true))
+    DetailSpendingView()
 }
