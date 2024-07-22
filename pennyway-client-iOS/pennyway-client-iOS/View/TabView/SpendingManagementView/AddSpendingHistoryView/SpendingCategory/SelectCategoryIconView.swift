@@ -64,7 +64,7 @@ struct SelectCategoryIconView: View {
                     if entryPoint == .create {
                         viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                         viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
-                    } else {
+                    } else {//수정인 경우
                         spendingCategoryViewModel.selectedCategoryIconTitle = selectedCategory.rawValue
                         spendingCategoryViewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
                     }
@@ -77,12 +77,14 @@ struct SelectCategoryIconView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
+            //mint 아이콘으로 매칭
             if let icon = (entryPoint == .create ? viewModel.selectedCategoryIcon : spendingCategoryViewModel.selectedCategory?.icon) {
                 selectedCategoryIcon = mapToOnMintIcon(icon)
             }
         }
     }
 
+    //on 아이콘으로 매칭
     private func mapToOnIcon(_ icon: CategoryIconName) -> CategoryIconName {
         if icon.state == .onMint {
             return CategoryIconName(baseName: icon.baseName, state: .on)
@@ -90,8 +92,9 @@ struct SelectCategoryIconView: View {
         return icon
     }
 
+    //onMint 아이콘으로 매칭
     private func mapToOnMintIcon(_ icon: CategoryIconName) -> CategoryIconName {
-        if icon.state == .on || icon.state == .onWhite {
+        if icon.state == .on {
             return CategoryIconName(baseName: icon.baseName, state: .onMint)
         }
         return icon

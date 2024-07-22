@@ -27,7 +27,7 @@ struct AddSpendingCategoryView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            topImageView()
+            topCategoryView()
             categoryInputView()
             characterCountView()
             Spacer()
@@ -64,7 +64,7 @@ struct AddSpendingCategoryView: View {
     }
 
     @ViewBuilder
-    private func topImageView() -> some View {
+    private func topCategoryView() -> some View {
         Spacer().frame(height: 14 * DynamicSizeFactor.factor())
         ZStack {
             Image(selectedCategoryIcon())
@@ -164,13 +164,13 @@ struct AddSpendingCategoryView: View {
                         Log.debug("카테고리 수정 완료")
                         spendingCategoryViewModel.initPage()
                         
-                        //카테고리 수정 후 데이터 카테고리 관련 데이터 다시 조회
+                        // 카테고리 수정 후 데이터 카테고리 관련 데이터 다시 조회
                         spendingCategoryViewModel.getCategorySpendingHistoryApi { _ in }
                         spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in }
                         presentationMode.wrappedValue.dismiss()
                             
                     } else {
-                        Log.debug("카테고리 생성 실패")
+                        Log.debug("카테고리 수정 실패")
                     }
                 }
             }
