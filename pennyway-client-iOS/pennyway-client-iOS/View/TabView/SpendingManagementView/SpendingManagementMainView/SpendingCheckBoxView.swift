@@ -35,7 +35,7 @@ struct SpendingCheckBoxView: View {
                                                StringAttribute(
                                                    text: "\(formattedTotalSpent)원",
                                                    font: .H3SemiboldFont(),
-                                                   color: targetAmount != -1 && totalSpending > targetAmount ? Color("Red03") : Color("Mint03")
+                                                   color: determineColor()
                                                ))
                                                .lineSpacing(3)
                 Spacer()
@@ -73,7 +73,7 @@ struct SpendingCheckBoxView: View {
                 if viewModel.isPresentTargetAmount == true {
                     Text("\(totalSpending)")
                         .font(.B1SemiboldeFont())
-                        .platformTextColor(color: totalSpending > targetAmount ? Color("Red03") : Color("Mint03"))
+                        .platformTextColor(color: determineColor())
 
                     Spacer()
 
@@ -117,4 +117,14 @@ struct SpendingCheckBoxView: View {
         .background(Color("White01"))
         .cornerRadius(8)
     }
+    
+    private func determineColor() -> Color{
+        if viewModel.isPresentTargetAmount{
+            if totalSpending > targetAmount || (totalSpending == 0 && targetAmount == 0){
+                return Color("Red03")
+            }
+        }
+        return Color("Mint03")
+    }
 }
+
