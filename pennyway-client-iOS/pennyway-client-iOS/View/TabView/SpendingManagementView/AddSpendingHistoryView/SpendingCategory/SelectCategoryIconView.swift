@@ -63,10 +63,10 @@ struct SelectCategoryIconView: View {
                 if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
                     if entryPoint == .create {
                         viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                        viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
+                        viewModel.selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(selectedCategoryIcon, outputState: .on)//onMint -> on
                     } else { // 수정인 경우
                         spendingCategoryViewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                        spendingCategoryViewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
+                        spendingCategoryViewModel.selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(selectedCategoryIcon, outputState: .on)//onMint -> on
                     }
                     isPresented = false
                     Log.debug(selectedCategory.rawValue)
@@ -79,24 +79,8 @@ struct SelectCategoryIconView: View {
         .onAppear {
             // onMint 아이콘으로 매칭
             if let icon = (entryPoint == .create ? viewModel.selectedCategoryIcon : spendingCategoryViewModel.selectedCategory?.icon) {
-                selectedCategoryIcon = mapToOnMintIcon(icon)
+                selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(icon, outputState: .onMint)//on -> onMint
             }
         }
-    }
-
-    /// onMint -> on 아이콘으로 매칭
-    private func mapToOnIcon(_ icon: CategoryIconName) -> CategoryIconName {
-        if icon.state == .onMint {
-            return CategoryIconName(baseName: icon.baseName, state: .on)
-        }
-        return icon
-    }
-
-    /// on -> onMint 아이콘으로 매칭
-    private func mapToOnMintIcon(_ icon: CategoryIconName) -> CategoryIconName {
-        if icon.state == .on {
-            return CategoryIconName(baseName: icon.baseName, state: .onMint)
-        }
-        return icon
     }
 }
