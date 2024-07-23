@@ -7,6 +7,7 @@ struct ProfileSettingListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     @Binding var showingPopUp: Bool
     @StateObject var userAccountViewModel = UserAccountViewModel()
+    @State var firstNaviLinkActive = true
 
     @State private var activeNavigation: ProfileActiveNavigation?
 
@@ -89,7 +90,7 @@ struct ProfileSettingListView: View {
         case .editProfile:
             EditProfileListView()
         case .modifyPw:
-            ProfileModifyPwView()
+            ProfileModifyPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw)
         }
     }
 

@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct CompleteChangePwView: View {
+    @Binding var firstNaviLinkActive: Bool
+
     var body: some View {
         VStack {
             ScrollView {
@@ -28,8 +30,10 @@ struct CompleteChangePwView: View {
             }
                 
             CustomBottomButton(action: {
+                firstNaviLinkActive = false
                 NavigationUtil.popToRootView()
-                Log.debug("버튼 누름")
+                    
+                Log.debug("firstNaviLinkActive: \(firstNaviLinkActive)")
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
@@ -40,5 +44,5 @@ struct CompleteChangePwView: View {
 }
 
 #Preview {
-    CompleteChangePwView()
+    CompleteChangePwView(firstNaviLinkActive: .constant(true))
 }

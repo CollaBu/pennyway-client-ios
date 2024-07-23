@@ -23,7 +23,7 @@ struct FindPwView: View {
                 
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
-                NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel()), isActive: $isNavigateToFindPwView) {
+                NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel(), firstNaviLinkActive: .constant(true), entryPoint: .findPw), isActive: $isNavigateToFindPwView) {
                     EmptyView()
                 }.hidden()
             }

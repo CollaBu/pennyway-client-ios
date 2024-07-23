@@ -4,6 +4,9 @@ struct ResetPwView: View {
     @StateObject var formViewModel = SignUpFormViewModel()
     @State private var navigateView = false
     @StateObject var resetPwViewModel = ResetPwViewModel()
+    @StateObject var accountViewModel = UserAccountViewModel()
+    @Binding var firstNaviLinkActive: Bool
+    let entryPoint: PasswordChangeTypeNavigation
     
     var body: some View {
         VStack(spacing: 0) {
@@ -20,7 +23,7 @@ struct ResetPwView: View {
                     
                 Spacer().frame(height: 33 * DynamicSizeFactor.factor())
                     
-                ResetPwFormView(formViewModel: formViewModel)
+                ResetPwFormView(formViewModel: formViewModel, accountViewModel: accountViewModel)
             }
             Spacer()
                 
@@ -30,11 +33,12 @@ struct ResetPwView: View {
                     
             }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
-
-            NavigationLink(destination: CompleteChangePwView(), isActive: $navigateView) {
+                
+            NavigationLink(destination: CompleteChangePwView(firstNaviLinkActive: $firstNaviLinkActive), isActive: $navigateView) {
                 EmptyView()
             }.hidden()
         }
+        
         .edgesIgnoringSafeArea(.bottom)
         .frame(maxHeight: .infinity)
         .navigationBarBackButtonHidden(true)
@@ -43,6 +47,7 @@ struct ResetPwView: View {
                 HStack {
                     Button(action: {
                         NavigationUtil.popToRootView()
+                        firstNaviLinkActive = false
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
@@ -63,13 +68,26 @@ struct ResetPwView: View {
         if formViewModel.isFormValid {
             formViewModel.validatePwForm()
             resetPwViewModel.newPassword = formViewModel.password
-            resetPwViewModel.requestResetPwApi { success in
-                DispatchQueue.main.async {
+
+            if entryPoint == .modifyPw { // 프로필 비밀번호 변경 시
+                accountViewModel.resetMyPwApi { success in
                     if success {
-                        Log.debug("비밀번호 재설정 성공")
+                        Log.debug("사용자 비밀번호 변경 성공")
                         navigateView = true
+
                     } else {
-                        Log.fault("비밀번호 재설정 실패")
+                        Log.debug("사용자 비밀번호 변경 실패")
+                    }
+                }
+            } else { // 비밀번호 찾기에서 진입했을 시
+                resetPwViewModel.requestResetPwApi { success in
+                    DispatchQueue.main.async {
+                        if success {
+                            Log.debug("비밀번호 재설정 성공")
+                            navigateView = true
+                        } else {
+                            Log.fault("비밀번호 재설정 실패")
+                        }
                     }
                 }
             }
@@ -83,5 +101,5 @@ struct ResetPwView: View {
 }
 
 #Preview {
-    ResetPwView()
+    ResetPwView(firstNaviLinkActive: .constant(true), entryPoint: .modifyPw)
 }
