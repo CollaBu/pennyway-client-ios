@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - SpendingCategoryGridView
 
 struct SpendingCategoryGridView: View {
-    @ObservedObject var SpendingCategoryViewModel: SpendingCategoryViewModel
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel // 카테고리 생성 연동 처리
     @Environment(\.presentationMode) var presentationMode
     
@@ -19,7 +19,7 @@ struct SpendingCategoryGridView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     // 시스템 카테고리
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
-                        ForEach(SpendingCategoryViewModel.systemCategories) { category in
+                        ForEach(spendingCategoryViewModel.systemCategories) { category in
                             categoryVGridView(for: category)
                         }
                     }
@@ -36,7 +36,7 @@ struct SpendingCategoryGridView: View {
                     
                     // 사용자 정의 카테고리
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
-                        ForEach(SpendingCategoryViewModel.customCategories) { category in
+                        ForEach(spendingCategoryViewModel.customCategories) { category in
                             categoryVGridView(for: category)
                         }
                     }
@@ -86,20 +86,21 @@ struct SpendingCategoryGridView: View {
             }
         }
         
-        NavigationLink(destination: CategoryDetailsView(viewModel: SpendingCategoryViewModel), isActive: $navigateToCategoryDetails) {}
+        NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel), isActive: $navigateToCategoryDetails) {}
 
-        NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: SpendingCategoryViewModel), isActive: $navigateToAddCategoryView) {}
+        NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
     }
     
     private func categoryVGridView(for category: SpendingCategoryData) -> some View {
         Button(action: {
-            SpendingCategoryViewModel.selectedCategory = category
-            SpendingCategoryViewModel.initPage() // 데이터 초기화
-            SpendingCategoryViewModel.getCategorySpendingCountApi { _ in } // 총 개수 조회
-            SpendingCategoryViewModel.getCategorySpendingHistoryApi { success in // 지출 내역 조회
+            spendingCategoryViewModel.selectedCategory = category
+            spendingCategoryViewModel.selectedCategory?.icon = MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .on) // onWhite -> on
+            spendingCategoryViewModel.initPage() // 데이터 초기화
+            spendingCategoryViewModel.getCategorySpendingCountApi { _ in } // 총 개수 조회
+            spendingCategoryViewModel.getCategorySpendingHistoryApi { success in // 지출 내역 조회
                 if success {
                     navigateToCategoryDetails = true
-                    Log.debug(SpendingCategoryViewModel.dailyDetailSpendings)
+                    Log.debug(spendingCategoryViewModel.dailyDetailSpendings)
                 }
             }
         }) {
@@ -125,5 +126,5 @@ struct SpendingCategoryGridView: View {
 }
 
 #Preview {
-    SpendingCategoryGridView(SpendingCategoryViewModel: SpendingCategoryViewModel(), addSpendingHistoryViewModel: AddSpendingHistoryViewModel())
+    SpendingCategoryGridView(spendingCategoryViewModel: SpendingCategoryViewModel(), addSpendingHistoryViewModel: AddSpendingHistoryViewModel())
 }

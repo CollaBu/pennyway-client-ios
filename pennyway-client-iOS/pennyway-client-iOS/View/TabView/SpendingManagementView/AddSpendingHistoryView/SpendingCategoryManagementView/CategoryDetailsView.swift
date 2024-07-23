@@ -10,6 +10,7 @@ struct CategoryDetailsView: View {
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]
     @State private var showingPopUp = false
+    @State private var isNavigateToEditCategoryView = false
 
     var body: some View {
         ZStack {
@@ -17,7 +18,7 @@ struct CategoryDetailsView: View {
                 VStack {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
-                    Image("\(viewModel.selectedCategory!.icon.rawValue.split(separator: "_").dropLast().joined(separator: "_"))")
+                    Image("\(viewModel.selectedCategory!.icon.rawValue)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())
@@ -71,6 +72,10 @@ struct CategoryDetailsView: View {
                         onItemSelected: { item in
                             if item == "카테고리 삭제" {
                                 showingPopUp = true
+                            } else {
+                                isNavigateToEditCategoryView = true
+                                viewModel.categoryName = ""
+                                viewModel.selectedCategoryIcon = viewModel.selectedCategory?.icon
                             }
                             Log.debug("Selected item: \(item)")
                         }
@@ -116,5 +121,6 @@ struct CategoryDetailsView: View {
                 }
             }
         }
+        NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
     }
 }

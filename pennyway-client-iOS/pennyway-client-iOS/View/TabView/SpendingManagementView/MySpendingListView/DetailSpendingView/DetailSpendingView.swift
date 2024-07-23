@@ -2,18 +2,31 @@ import SwiftUI
 
 struct DetailSpendingView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var isSelectedCategory: Bool = false
+    @State var isSelectedCategory: Bool = false
+
     @State var selectedItem: String? = nil
-    @State var spendingId: Int = 0
-    @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
+    @State var navigateModifySpendingHistoryView = false
+    @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
+    @Binding var clickDate: Date?
+    @State private var forceUpdate: Bool = false
+
+    @State var spendingId: Int = 0
+    @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
+
+    init(clickDate: Binding<Date?>) {
+        _clickDate = clickDate
+        _spendingHistoryViewModel = StateObject(wrappedValue: SpendingHistoryViewModel())
+    }
 
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
 
-                MoreDetailSpendingView()
+                if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel)
+                }
             }
         }
         .padding(.bottom, 34 * DynamicSizeFactor.factor())
@@ -59,6 +72,11 @@ struct DetailSpendingView: View {
                 .offset(x: 10)
             }
         }
+        .onAppear {
+            loadDataForSelectedDate()
+            isSelectedCategory = false
+            self.selectedItem = nil
+        }
         .overlay(
             VStack(alignment: .center) {
                 Spacer().frame(height: 6 * DynamicSizeFactor.factor())
@@ -74,8 +92,10 @@ struct DetailSpendingView: View {
                             ForEach(listArray, id: \.self) { item in
                                 Button(action: {
                                     self.selectedItem = item
-                                    if item == "내역 삭제" {
-                                        deleteSingleSpendingApi()
+                                    if item == "수정하기" {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
+                                            navigateModifySpendingHistoryView = true
+                                        }
                                     }
                                 }, label: {
                                     ZStack(alignment: .leading) {
@@ -108,20 +128,26 @@ struct DetailSpendingView: View {
                     .offset(x: 175 * DynamicSizeFactor.factor(), y: 13 * DynamicSizeFactor.factor())
                 }
             }, alignment: .topLeading)
+
+        NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
     }
 
-    private func deleteSingleSpendingApi() {
-        spendingHistoryViewModel.deleteSingleSpendingHistory(spendingId: spendingId) { success in
+    private func loadDataForSelectedDate() {
+        guard let date = clickDate else {
+            return
+        }
+        spendingHistoryViewModel.selectedDate = date
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
-                self.presentationMode.wrappedValue.dismiss()
-                Log.debug("detailSpendingView 지출내역 삭제 성공 실패")
+                Log.debug("선택한 날짜의 지출 내역 조회 성공")
+                forceUpdate.toggle()
             } else {
-                Log.debug("detailSpendingView 지출내역 단일 삭제 실패")
+                Log.debug("선택한 날짜의 지출 내역 조회 실패")
             }
         }
     }
 }
 
 #Preview {
-    DetailSpendingView()
+    DetailSpendingView(clickDate: .constant(Date()))
 }

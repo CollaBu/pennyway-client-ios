@@ -40,7 +40,13 @@ class SpendingAlamofire {
     
     func deleteSingleSpendingHistory(spendingId: Int, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("SpendingAlamofire - deleteSingleSpendingHistory() called")
-    
+        
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.deleteSingleSpendingHistory(spendingId: spendingId), completion: completion)
+    }
+        
+    func editSpendingHistory(spendingId: Int, _ dto: AddSpendingHistoryRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingAlamofire - editSpendingHistory() called")
+    
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.editSpendingHistory(spendingId: spendingId, dto: dto), completion: completion)
     }
 }
