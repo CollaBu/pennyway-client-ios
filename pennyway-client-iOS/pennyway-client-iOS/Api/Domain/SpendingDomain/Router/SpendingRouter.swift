@@ -7,16 +7,18 @@ enum SpendingRouter: URLRequestConvertible {
     case addSpendingHistory(dto: AddSpendingHistoryRequestDto)
     case deleteSpendingHistory(dto: DeleteSpendingHistoryRequestDto)
     case getDetailSpendingHistory(spendingId: Int)
-    case editSpendingHistory(Spending: Int, dto: AddSpendingHistoryRequestDto)
+    case editSpendingHistory(spendingId: Int, dto: AddSpendingHistoryRequestDto)
     
     var method: HTTPMethod {
         switch self {
         case .getSpendingHistory, .getDetailSpendingHistory:
             return .get
-        case .addSpendingHistory, .editSpendingHistory:
+        case .addSpendingHistory:
             return .post
         case .deleteSpendingHistory:
             return .delete
+        case .editSpendingHistory:
+            return .put
         }
     }
     

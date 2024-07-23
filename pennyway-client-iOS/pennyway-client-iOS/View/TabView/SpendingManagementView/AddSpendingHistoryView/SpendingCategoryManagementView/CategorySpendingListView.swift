@@ -3,28 +3,30 @@ import SwiftUI
 
 struct CategorySpendingListView: View {
     @ObservedObject var viewModel: SpendingCategoryViewModel
+    @State private var clickDate: Date? = nil
+
     var currentYear = String(Date.year(from: Date()))
-    
+                
     var body: some View {
         LazyVStack(spacing: 0) {
             ForEach(SpendingListGroupUtil.groupedSpendings(from: viewModel.dailyDetailSpendings), id: \.key) { date, spendings in
-                
+                            
                 if DateFormatterUtil.getYear(from: date) != currentYear {
                     Spacer().frame(height: 5 * DynamicSizeFactor.factor())
-                    
+                                
                     yearSeparatorView(for: DateFormatterUtil.getYear(from: date))
                         .padding(.horizontal, 20)
-                    
+                                
                     Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 } else {
                     Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 }
-                
+                            
                 Section(header: headerView(for: date)) {
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     ForEach(spendings, id: \.id) { item in
                         let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-                        NavigationLink(destination: DetailSpendingView()) {
+                        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate)) {
                             CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -40,7 +42,7 @@ struct CategorySpendingListView: View {
                                 }
                             }
                         }
-                        
+                                    
                         Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     }
                 }
@@ -48,7 +50,7 @@ struct CategorySpendingListView: View {
             Spacer().frame(height: 18 * DynamicSizeFactor.factor())
         }
     }
-    
+                
     private func headerView(for date: String) -> some View {
         Text(DateFormatterUtil.dateFormatString(from: date))
             .font(.B2MediumFont())
@@ -57,7 +59,7 @@ struct CategorySpendingListView: View {
             .padding(.bottom, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
+                
     private func yearSeparatorView(for year: String) -> some View {
         HStack {
             Rectangle()

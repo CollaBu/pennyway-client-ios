@@ -2,6 +2,17 @@ import SwiftUI
 
 struct SettingAlarmView: View {
     @StateObject var viewModel = UserAccountViewModel()
+    @State var hasAppeared = false
+    @State private var notifySetting = NotifySetting(accountBookNotify: false, feedNotify: false, chatNotify: false)
+
+    private func loadUserData() {
+        if let userData = getUserData() {
+            notifySetting = userData.notifySetting
+            viewModel.toggleStates[0] = notifySetting.accountBookNotify
+            viewModel.toggleStates[1] = notifySetting.chatNotify
+            viewModel.toggleStates[2] = notifySetting.feedNotify
+        }
+    }
 
     var toggleListArray: [String] = ["지출 관리", "채팅방", "피드"]
     var alarmTypes: [String] = ["ACCOUNT_BOOK", "CHAT", "FEED"]
@@ -44,7 +55,7 @@ struct SettingAlarmView: View {
                                     .font(.H4MediumFont())
                                     .platformTextColor(color: Color("Gray07"))
                             })
-                            .toggleStyle(CustomToggleStyle())
+                            .toggleStyle(CustomToggleStyle(hasAppeared: $hasAppeared))
                             .padding(.trailing, 30)
                             .padding(.vertical, 18)
                         }
@@ -54,12 +65,9 @@ struct SettingAlarmView: View {
             }
             .padding(.horizontal, 20)
             .onAppear {
-                viewModel.getUserProfileApi { success in
-                    if success {
-                        Log.debug("알람 설정 조회 성공")
-                    } else {
-                        Log.debug("알람 설정 조회 실패")
-                    }
+                loadUserData()
+                DispatchQueue.main.async {
+                    hasAppeared = true
                 }
             }
         }

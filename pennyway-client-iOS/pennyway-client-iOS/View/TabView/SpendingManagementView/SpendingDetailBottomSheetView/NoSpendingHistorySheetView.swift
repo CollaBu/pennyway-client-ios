@@ -19,13 +19,16 @@ struct NoSpendingHistorySheetView: View {
                     .cornerRadius(15)
                         
                     Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                    
+                    HStack {
+                        Text("-0원")
+                            .font(.H1BoldFont())
+                            .platformTextColor(color: Color("Gray07"))
+                            .padding(.vertical, 3 * DynamicSizeFactor.factor()) // line-height 적용하면 지울것
                         
-                    Text("-0원")
-                        .font(.H1BoldFont())
-                        .platformTextColor(color: Color("Gray07"))
-                        .padding(.vertical, 3 * DynamicSizeFactor.factor()) // line-height 적용하면 지울것
-                        .padding(.trailing, 254 * DynamicSizeFactor.factor())
-                        
+                        Spacer()
+                    }
+
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                         
                     Text("절약왕이 될 상이에요!\n친구들에게 자랑해 볼까요?")
@@ -38,7 +41,3 @@ struct NoSpendingHistorySheetView: View {
         .padding(.leading, 20)
     }
 }
-
-// #Preview {
-//    NoSpendingHistoryView()
-// }

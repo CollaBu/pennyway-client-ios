@@ -17,6 +17,9 @@ struct MySpendingListView: View {
     @State private var currentMonth: Date = Date()
     @Binding var clickDate: Date?
     @State private var navigateToCategoryGridView = false
+    @State private var showDetailSpendingView = false
+    @State private var selectedSpendingId: Int? = nil
+    @State private var refreshView = false
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -30,19 +33,26 @@ struct MySpendingListView: View {
                     ScrollView {
                         VStack {
                             if SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
-                                NoSpendingHistoryView(clickDate: $clickDate)
+                                NoSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate)
                             } else {
                                 LazyVStack(spacing: 0 * DynamicSizeFactor.factor()) {
                                     ForEach(SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings), id: \.key) { date, spendings in
+
                                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
                                         Section(header: headerView(for: date)) {
                                             Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-                                                NavigationLink(destination: DetailSpendingView()) {
+                                                Button(action: {
+                                                    clickDate = DateFormatterUtil.parseDate(from: date)
+                                                    spendingHistoryViewModel.selectedDate = clickDate
+                                                    showDetailSpendingView = true
+                                                }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                                }
+
+                                                })
+                                                .buttonStyle(PlainButtonStyle()) 
 
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }
@@ -90,6 +100,9 @@ struct MySpendingListView: View {
                     }
                 }
             }
+            .id(refreshView)
+
+            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate), isActive: $showDetailSpendingView) {}
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
         .edgesIgnoringSafeArea(.bottom)
@@ -128,6 +141,7 @@ struct MySpendingListView: View {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
+                    refreshView = true
                 } else {
                     Log.debug("소비내역 조회 api 연동 실패")
                 }

@@ -76,6 +76,54 @@ class AddSpendingHistoryViewModel: ObservableObject {
         }
     }
 
+    func editSpendingHistoryApi(spendingId: Int, completion: @escaping (Bool) -> Void) {
+        let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
+        let spendAt = Date.getBasicformattedDate(from: clickDate ?? selectedDate)
+        var categoryId = -1
+
+        if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
+            if let icon = selectedCategory?.icon {
+                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state)
+                if let category = SpendingCategoryIconList.fromIcon(categoryIconName) {
+                    selectedCategoryIconTitle = category.rawValue
+                    categoryId = -1
+                }
+            }
+        } else { // 사용자 정의 카테고리
+            selectedCategoryIconTitle = "CUSTOM"
+            categoryId = selectedCategory?.id ?? 0
+        }
+
+        Log.debug(selectedCategory?.icon)
+
+        let addSpendingHistoryRequestDto = AddSpendingHistoryRequestDto(amount: amount, categoryId: categoryId, icon: selectedCategoryIconTitle, spendAt: spendAt, accountName: consumerText, memo: memoText)
+
+        SpendingAlamofire.shared.editSpendingHistory(spendingId: spendingId, addSpendingHistoryRequestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(AddSpendingHistoryResponseDto.self, from: responseData)
+
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("지출 내역 수정 완료 \(jsonString)")
+                        }
+                        completion(true)
+                    } catch {
+                        Log.fault("Error decoding JSON: \(error)")
+                        completion(false)
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request faile: \(error)")
+                }
+            }
+        }
+    }
+
     func convertToSpendingCategoryData(from spendingCategory: SpendingCategory) -> SpendingCategoryData? {
         guard let iconList = SpendingCategoryIconList(rawValue: spendingCategory.icon) else {
             return nil
@@ -123,23 +171,13 @@ class AddSpendingHistoryViewModel: ObservableObject {
 
     func addSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
         let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
-        var categoryId = -1
         let spendAt = Date.getBasicformattedDate(from: clickDate ?? selectedDate)
 
         Log.debug("clickDate: \(String(describing: clickDate)), selectedDate: \(selectedDate), spendAt: \(spendAt)")
 
-        if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
-            if let icon = selectedCategory?.icon {
-                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state)
-                if let category = SpendingCategoryIconList.fromIcon(categoryIconName) {
-                    selectedCategoryIconTitle = category.rawValue
-                    categoryId = -1
-                }
-            }
-        } else { // 사용자 정의 카테고리
-            selectedCategoryIconTitle = "CUSTOM"
-            categoryId = selectedCategory?.id ?? 0
-        }
+        let categoryDetails = getCategoryDetails()
+        selectedCategoryIconTitle = categoryDetails.categoryIconTitle
+        let categoryId = categoryDetails.categoryId
 
         let addSpendingHistoryRequestDto = AddSpendingHistoryRequestDto(amount: amount, categoryId: categoryId, icon: selectedCategoryIconTitle, spendAt: spendAt, accountName: consumerText, memo: memoText)
 
@@ -168,5 +206,25 @@ class AddSpendingHistoryViewModel: ObservableObject {
                 completion(false)
             }
         }
+    }
+
+    func getCategoryDetails() -> (categoryIconTitle: String, categoryId: Int) {
+        var categoryIconTitle = ""
+        var categoryId = -1
+
+        if selectedCategory?.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
+            if let icon = selectedCategory?.icon {
+                let categoryIconName = CategoryIconName(baseName: icon.baseName, state: icon.state)
+                if let category = SpendingCategoryIconList.fromIcon(categoryIconName) {
+                    categoryIconTitle = category.rawValue
+                    categoryId = -1
+                }
+            }
+        } else { // 사용자 정의 카테고리
+            categoryIconTitle = "CUSTOM"
+            categoryId = selectedCategory?.id ?? 0
+        }
+
+        return (categoryIconTitle, categoryId)
     }
 }
