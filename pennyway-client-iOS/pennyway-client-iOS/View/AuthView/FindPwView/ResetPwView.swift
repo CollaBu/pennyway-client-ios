@@ -5,38 +5,40 @@ struct ResetPwView: View {
     @State private var navigateView = false
     @StateObject var resetPwViewModel = ResetPwViewModel()
     @StateObject var accountViewModel = UserAccountViewModel()
+    @Binding var firstNaviLinkActive: Bool
     let entryPoint: PasswordChangeTypeNavigation
     
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView {
-                HStack(alignment: .top) {
-                    Text("새로운 비밀번호를\n설정해주세요")
-                        .font(.H1SemiboldFont())
-                        .multilineTextAlignment(.leading)
-                        .padding(.top, 15 * DynamicSizeFactor.factor())
+            VStack(spacing: 0) {
+                ScrollView {
+                    HStack(alignment: .top) {
+                        Text("새로운 비밀번호를\n설정해주세요")
+                            .font(.H1SemiboldFont())
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 15 * DynamicSizeFactor.factor())
                         
-                    Spacer()
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    
+                    Spacer().frame(height: 33 * DynamicSizeFactor.factor())
+                    
+                    ResetPwFormView(formViewModel: formViewModel, accountViewModel: accountViewModel)
                 }
-                .padding(.leading, 20)
-                    
-                Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-                    
-                ResetPwFormView(formViewModel: formViewModel, accountViewModel: accountViewModel)
-            }
-            Spacer()
+                Spacer()
                 
-            CustomBottomButton(action: {
-                continueButtonAction()
-                formViewModel.validatePwForm()
+                CustomBottomButton(action: {
+                    continueButtonAction()
+                    formViewModel.validatePwForm()
                     
-            }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
-                .padding(.bottom, 34 * DynamicSizeFactor.factor())
-
-            NavigationLink(destination: CompleteChangePwView(), isActive: $navigateView) {
-                EmptyView()
-            }.hidden()
-        }
+                }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                
+                NavigationLink(destination: CompleteChangePwView(firstNaviLinkActive: $firstNaviLinkActive), isActive: $navigateView) {
+                    EmptyView()
+                }.hidden()
+            }
+        
         .edgesIgnoringSafeArea(.bottom)
         .frame(maxHeight: .infinity)
         .navigationBarBackButtonHidden(true)
@@ -45,6 +47,7 @@ struct ResetPwView: View {
                 HStack {
                     Button(action: {
                         NavigationUtil.popToRootView()
+                        firstNaviLinkActive = false
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
@@ -98,5 +101,5 @@ struct ResetPwView: View {
 }
 
 #Preview {
-    ResetPwView(entryPoint: .modifyPw)
+    ResetPwView(firstNaviLinkActive: .constant(true), entryPoint: .modifyPw)
 }

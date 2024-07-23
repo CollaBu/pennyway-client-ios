@@ -6,6 +6,8 @@ struct ProfileModifyPwView: View {
     @StateObject var viewModel = UserAccountViewModel()
     @State private var navigateView = false
     @State private var isFormValid = false
+    @State var firstNaviLinkActive = true
+
     let entryPoint: PasswordChangeTypeNavigation
 
     var body: some View {
@@ -45,7 +47,7 @@ struct ProfileModifyPwView: View {
                     }, label: "완료", isFormValid: $isFormValid)
                         .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-                    NavigationLink(destination: ResetPwView(entryPoint: .modifyPw), isActive: $navigateView) {
+                    NavigationLink(destination: ResetPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw), isActive: $navigateView) {
                         EmptyView()
                     }.hidden()
                 }

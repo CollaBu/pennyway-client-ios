@@ -34,7 +34,7 @@ struct ProfileMainView: View {
             }
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
                 EmptyView()
-            }
+            }.hidden()
         }
     }
 }

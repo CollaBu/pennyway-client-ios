@@ -6,7 +6,6 @@ struct FindPwView: View {
     @State private var isNavigateToFindPwView: Bool = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @State private var isVerificationError: Bool = false
-//    let entryPoint: PasswordChangeTypeNavigation
 
     var body: some View {
         ZStack {
@@ -24,7 +23,7 @@ struct FindPwView: View {
                 
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
-                NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel(), entryPoint: .findPw), isActive: $isNavigateToFindPwView) {
+                NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel(), firstNaviLinkActive: .constant(true), entryPoint: .findPw), isActive: $isNavigateToFindPwView) {
                     EmptyView()
                 }.hidden()
             }
