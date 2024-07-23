@@ -6,7 +6,9 @@ import SwiftUI
 struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    @State var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: CategoryBaseName.etc, state: .onMint)
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
+    @State var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: .etc, state: .on)
+    let entryPoint: CustomCategoryEntryPoint
 
     let columns = [
         GridItem(.flexible(), spacing: 32),
@@ -59,10 +61,15 @@ struct SelectCategoryIconView: View {
 
             CustomBottomButton(action: {
                 if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
-                    viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                    viewModel.selectedCategoryIcon = mapToOnIcon(selectedCategoryIcon)
-                    Log.debug(viewModel.selectedCategoryIconTitle)
+                    if entryPoint == .create {
+                        viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
+                        viewModel.selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(selectedCategoryIcon, outputState: .on)//onMint -> on
+                    } else { // 수정인 경우
+                        spendingCategoryViewModel.selectedCategoryIconTitle = selectedCategory.rawValue
+                        spendingCategoryViewModel.selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(selectedCategoryIcon, outputState: .on)//onMint -> on
+                    }
                     isPresented = false
+                    Log.debug(selectedCategory.rawValue)
                 }
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
@@ -70,23 +77,10 @@ struct SelectCategoryIconView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            if let icon = viewModel.selectedCategoryIcon {
-                selectedCategoryIcon = mapToOnMintIcon(icon)
+            // onMint 아이콘으로 매칭
+            if let icon = (entryPoint == .create ? viewModel.selectedCategoryIcon : spendingCategoryViewModel.selectedCategory?.icon) {
+                selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(icon, outputState: .onMint)//on -> onMint
             }
         }
-    }
-
-    private func mapToOnIcon(_ icon: CategoryIconName) -> CategoryIconName {
-        if icon.state == .onMint {
-            return CategoryIconName(baseName: icon.baseName, state: .on)
-        }
-        return icon
-    }
-
-    private func mapToOnMintIcon(_ icon: CategoryIconName) -> CategoryIconName {
-        if icon.state == .on {
-            return CategoryIconName(baseName: icon.baseName, state: .onMint)
-        }
-        return icon
     }
 }
