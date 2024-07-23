@@ -6,7 +6,7 @@ struct ProfileModifyPwView: View {
     @StateObject var viewModel = UserAccountViewModel()
     @State private var navigateView = false
     @State private var isFormValid = false
-    @State var firstNaviLinkActive = true
+    @Binding var firstNaviLinkActive: Bool
 
     let entryPoint: PasswordChangeTypeNavigation
 
@@ -93,5 +93,5 @@ struct ProfileModifyPwView: View {
 }
 
 #Preview {
-    ProfileModifyPwView(entryPoint: .modifyPw)
+    ProfileModifyPwView(firstNaviLinkActive: .constant(true), entryPoint: .modifyPw)
 }

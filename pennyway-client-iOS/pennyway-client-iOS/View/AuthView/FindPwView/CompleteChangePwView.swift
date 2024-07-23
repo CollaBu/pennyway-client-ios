@@ -31,7 +31,7 @@ struct CompleteChangePwView: View {
                 
             CustomBottomButton(action: {
                 firstNaviLinkActive = false
-                    NavigationUtil.popToRootView()
+                NavigationUtil.popToRootView()
                     
                 Log.debug("firstNaviLinkActive: \(firstNaviLinkActive)")
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
