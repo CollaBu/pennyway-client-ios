@@ -11,7 +11,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
     @Published var selectedCategoryIconTitle: String = ""
     @Published var selectedCategoryIcon: CategoryIconName? = nil
     @Published var categoryName: String = ""
-    @Published var isAddCategoryFormValid = false
+
     @Published var navigateToAddCategory = false // 추가하기 버튼 누른 경우
     @Published var isSelectAddCategoryViewPresented: Bool = false
 
