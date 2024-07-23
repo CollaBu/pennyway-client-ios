@@ -11,15 +11,15 @@ struct DetailSpendingView: View {
     @Binding var clickDate: Date?
     @Binding var spendingId: Int?
     @Binding var isDeleted: Bool
+    @Binding var showToastPopup: Bool
     @State private var forceUpdate: Bool = false
-
-    ///    @State var spendingId: Int = 0
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
-    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>) {
+    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>) {
         _clickDate = clickDate
         _spendingId = spendingId
         _isDeleted = isDeleted
+        _showToastPopup = showToastPopup
         _spendingHistoryViewModel = StateObject(wrappedValue: SpendingHistoryViewModel())
     }
 
@@ -160,11 +160,12 @@ struct DetailSpendingView: View {
         guard let spendingId = spendingId else {
             return
         }
-//            spendingId = spendingDetail.id
         spendingHistoryViewModel.deleteSingleSpendingHistory(spendingId: spendingId) { success in
             if success {
                 Log.debug("지출내역 단일 삭제 성공")
                 self.presentationMode.wrappedValue.dismiss()
+                showToastPopup = true
+                isDeleted = true
             } else {
                 Log.debug("지출내역 단일 삭제 실패")
             }
@@ -172,7 +173,3 @@ struct DetailSpendingView: View {
         }
     }
 }
-
-// #Preview {
-//    DetailSpendingView(clickDate: .constant(Date()), spendingId: 0)
-// }
