@@ -257,6 +257,7 @@
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
+		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
 		D8BDAF712C4928D10095D8E7 /* ProfileModifyPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */; };
 		D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */; };
 		D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */; };
@@ -424,9 +425,9 @@
 		4AC3201E2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSpendingCategoryView.swift; sourceTree = "<group>"; };
 		4AC3201F2C11D5AC00DDB4B6 /* SelectCategoryIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCategoryIconView.swift; sourceTree = "<group>"; };
 		4AC320202C11D5AC00DDB4B6 /* SpendingCategoryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendingCategoryListView.swift; sourceTree = "<group>"; };
-		4AC320222C11D5AC00DDB4B6 /* AddSpendingCompleteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSpendingCompleteView.swift; sourceTree = "<group>"; };
-		4AC320232C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryView.swift; sourceTree = "<group>"; };
-		4AC320242C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSpendingInputFormView.swift; sourceTree = "<group>"; };
+		4AC320222C11D5AC00DDB4B6 /* AddSpendingCompleteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddSpendingCompleteView.swift; path = ../AddSpendingCompleteView.swift; sourceTree = "<group>"; };
+		4AC320232C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddSpendingHistoryView.swift; path = ../AddSpendingHistoryView.swift; sourceTree = "<group>"; };
+		4AC320242C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddSpendingInputFormView.swift; path = ../AddSpendingInputFormView.swift; sourceTree = "<group>"; };
 		4AC320252C11D5AC00DDB4B6 /* SelectSpendingDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSpendingDayView.swift; sourceTree = "<group>"; };
 		4AC320272C11D5AC00DDB4B6 /* MySpendingListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySpendingListView.swift; sourceTree = "<group>"; };
 		4AC320282C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSpendingHistoryView.swift; sourceTree = "<group>"; };
@@ -521,6 +522,7 @@
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
+		D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingFormFieldsView.swift; sourceTree = "<group>"; };
 		D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyPwView.swift; sourceTree = "<group>"; };
 		D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryView.swift; sourceTree = "<group>"; };
 		D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryListView.swift; sourceTree = "<group>"; };
@@ -1354,11 +1356,9 @@
 		4AC320262C11D5AC00DDB4B6 /* AddSpendingHistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				D8B0A9222C4E5CDA00716ECB /* AddSpendingHistoryView */,
 				4A73E9AB2C3512660017EED9 /* SpendingCategoryManagementView */,
 				4AC320212C11D5AC00DDB4B6 /* SpendingCategory */,
-				4AC320222C11D5AC00DDB4B6 /* AddSpendingCompleteView.swift */,
-				4AC320232C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift */,
-				4AC320242C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift */,
 				4AC320252C11D5AC00DDB4B6 /* SelectSpendingDayView.swift */,
 			);
 			path = AddSpendingHistoryView;
@@ -1709,6 +1709,17 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
+		D8B0A9222C4E5CDA00716ECB /* AddSpendingHistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				4AC320222C11D5AC00DDB4B6 /* AddSpendingCompleteView.swift */,
+				4AC320232C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift */,
+				4AC320242C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift */,
+				D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */,
+			);
+			path = AddSpendingHistoryView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1864,6 +1875,7 @@
 				4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */,
 				4A3701D12C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift in Sources */,
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */,
+				D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,

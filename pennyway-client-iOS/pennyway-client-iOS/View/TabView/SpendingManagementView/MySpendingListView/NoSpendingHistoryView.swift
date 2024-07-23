@@ -4,6 +4,8 @@ import SwiftUI
 
 struct NoSpendingHistoryView: View {
     @State var navigateToAddSpendingHistory = false
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+
     @Binding var clickDate: Date?
 
     var body: some View {
@@ -35,7 +37,7 @@ struct NoSpendingHistoryView: View {
                     .background(Color("Mint03"))
                     .cornerRadius(30)
 
-                    NavigationLink(destination: AddSpendingHistoryView(clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .detailSheet), isActive: $navigateToAddSpendingHistory) {
+                    NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .detailSheet), isActive: $navigateToAddSpendingHistory) {
                         EmptyView()
                     }.hidden()
                 }
@@ -45,5 +47,5 @@ struct NoSpendingHistoryView: View {
 }
 
 #Preview {
-    NoSpendingHistoryView(clickDate: .constant(Date()))
+    NoSpendingHistoryView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()))
 }

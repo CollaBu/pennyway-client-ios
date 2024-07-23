@@ -6,12 +6,17 @@ import SwiftUI
 enum EntryPoint {
     case main
     case detailSheet
+    case detailSpendingView
+    case NoSpendingHistoryView
 }
 
 // MARK: - AddSpendingHistoryView
 
 struct AddSpendingHistoryView: View {
     @StateObject var viewModel = AddSpendingHistoryViewModel()
+    @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    @State var spendingId: Int = 0
+    @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
@@ -22,18 +27,29 @@ struct AddSpendingHistoryView: View {
         ZStack {
             VStack {
                 ScrollView {
-                    AddSpendingInputFormView(viewModel: viewModel, clickDate: $clickDate)
+                    AddSpendingInputFormView(viewModel: viewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, entryPoint: entryPoint, spendingId: $spendingId)
                 }
                 Spacer()
 
                 CustomBottomButton(action: {
                     if viewModel.isFormValid, let date = clickDate {
                         viewModel.clickDate = date
+                        if entryPoint == .detailSpendingView { // 수정하기 api
+                            viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
+                                if success {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                    Log.debug("지출 내역 수정 성공")
+                                } else {
+                                    Log.debug("지출 내역 수정 실패")
+                                }
+                            }
 
-                        viewModel.addSpendingHistoryApi { success in
-                            if success {
-                                navigateToAddSpendingCategory = true
-                                Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
+                        } else {
+                            viewModel.addSpendingHistoryApi { success in
+                                if success {
+                                    navigateToAddSpendingCategory = true
+                                    Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
+                                }
                             }
                         }
                     }
@@ -73,7 +89,6 @@ struct AddSpendingHistoryView: View {
             .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
                 SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
             }
-
             .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
                 SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
             }
@@ -82,5 +97,5 @@ struct AddSpendingHistoryView: View {
 }
 
 #Preview {
-    AddSpendingHistoryView(clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
+    AddSpendingHistoryView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
 }
