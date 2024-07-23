@@ -74,11 +74,13 @@ struct TotalTargetAmountContentView: View {
                             
                             Spacer()
                             
-                            DiffAmountDynamicWidthView(
-                                text: determineText(for: content.diffAmount),
-                                backgroundColor: determineBackgroundColor(for: content.diffAmount),
-                                textColor: determineTextColor(for: content.diffAmount)
-                            )
+                            if content.targetAmountDetail.amount != -1 {
+                                DiffAmountDynamicWidthView(
+                                    text: determineText(for: content.diffAmount),
+                                    backgroundColor: determineBackgroundColor(for: content.diffAmount),
+                                    textColor: determineTextColor(for: content.diffAmount)
+                                )
+                            }
                         }
                     }
                     .padding(.horizontal, 18)
