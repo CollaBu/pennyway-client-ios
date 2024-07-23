@@ -44,7 +44,7 @@ struct CategoryDetailsView: View {
 
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
-                    CategorySpendingListView(viewModel: viewModel)
+//                    CategorySpendingListView(viewModel: viewModel)
                 }
             }
 

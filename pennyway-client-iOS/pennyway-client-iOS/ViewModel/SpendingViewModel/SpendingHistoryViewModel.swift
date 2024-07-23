@@ -40,6 +40,11 @@ class SpendingHistoryViewModel: ObservableObject {
         return dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
 
+    /// 특정 ID에 해당하는 지출내역 검색
+    func getSpendingDetail(by id: Int) -> IndividualSpending? {
+        return dailyDetailSpendings.first { $0.id == id }
+    }
+
     func checkSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: currentDate)
@@ -104,7 +109,7 @@ class SpendingHistoryViewModel: ObservableObject {
             switch result {
             case .success:
                 Log.debug("지출내역 단일 삭제 완료")
-//                self.dailyDetailSpendings.removeAll { spendingId.contains($0.id) }
+                self.dailyDetailSpendings.removeAll { $0.id == spendingId }
                 completion(true)
             case let .failure(error):
                 Log.error("지출내역 단일 삭제 실패: \(error)")
