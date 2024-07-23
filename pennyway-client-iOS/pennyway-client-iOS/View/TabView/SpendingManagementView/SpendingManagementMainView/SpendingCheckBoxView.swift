@@ -99,7 +99,7 @@ struct SpendingCheckBoxView: View {
                                 .font(.B1SemiboldeFont())
                                 .platformTextColor(color: Color("Mint03"))
 
-                            Image("icon_arrow_front_small")
+                            Image("icon_arrow_front_small_mint")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -117,14 +117,13 @@ struct SpendingCheckBoxView: View {
         .background(Color("White01"))
         .cornerRadius(8)
     }
-    
-    private func determineColor() -> Color{
-        if viewModel.isPresentTargetAmount{
-            if totalSpending > targetAmount || (totalSpending == 0 && targetAmount == 0){
+
+    private func determineColor() -> Color {
+        if viewModel.isPresentTargetAmount {
+            if totalSpending > targetAmount || (totalSpending == 0 && targetAmount == 0) {
                 return Color("Red03")
             }
         }
         return Color("Mint03")
     }
 }
-
