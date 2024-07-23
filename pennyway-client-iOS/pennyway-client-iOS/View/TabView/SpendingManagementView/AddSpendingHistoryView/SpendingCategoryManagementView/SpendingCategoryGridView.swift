@@ -94,7 +94,7 @@ struct SpendingCategoryGridView: View {
     private func categoryVGridView(for category: SpendingCategoryData) -> some View {
         Button(action: {
             spendingCategoryViewModel.selectedCategory = category
-            spendingCategoryViewModel.selectedCategory?.icon = MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .on)//onWhite -> on
+            spendingCategoryViewModel.selectedCategory?.icon = MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .on) // onWhite -> on
             spendingCategoryViewModel.initPage() // 데이터 초기화
             spendingCategoryViewModel.getCategorySpendingCountApi { _ in } // 총 개수 조회
             spendingCategoryViewModel.getCategorySpendingHistoryApi { success in // 지출 내역 조회
