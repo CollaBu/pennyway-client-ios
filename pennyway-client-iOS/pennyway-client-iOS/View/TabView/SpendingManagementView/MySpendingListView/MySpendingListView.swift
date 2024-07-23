@@ -67,8 +67,8 @@ struct MySpendingListView: View {
                                         }
                                         .id(date) // ScrollViewReader를 위한 ID 추가
                                     }
-                                    Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                                 }
+                                Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                             }
                         }
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
