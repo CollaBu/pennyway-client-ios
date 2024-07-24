@@ -56,4 +56,10 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.resetMyPw(dto: dto), completion: completion)
     }
+    
+    func editUserId(username: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - editUserId() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.editUserId(username: username), completion: completion)
+    }
 }
