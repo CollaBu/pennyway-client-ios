@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct MoreDetailSpendingView: View {
+    @State var showingPopUp = false
     @Binding var clickDate: Date?
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
@@ -88,7 +89,23 @@ struct MoreDetailSpendingView: View {
                     }
                 }
             }
+//            if showingPopUp {
+//                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+//                CustomPopUpView(showingPopUp: $showingPopUp,
+//                                titleLabel: "내역을 삭제할까요?",
+//                                subTitleLabel: "선택한 소비 내역이 사라져요",
+//                                firstBtnAction: { self.showingPopUp = false },
+//                                firstBtnLabel: "취소",
+//                                secondBtnAction: { DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
+//                                    deleteSingleSpending()
+//                    
+//                                }},
+//                                secondBtnLabel: "삭제하기",
+//                                secondBtnColor: Color("Red03"))
+//            }
         }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 34 * DynamicSizeFactor.factor())
         .onAppear {
             Log.debug("MoreDetailSpendingView :\(spendingCategoryViewModel.dailyDetailSpendings), \(spendingCategoryViewModel.amount), \(clickDate)")
         }

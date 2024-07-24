@@ -14,6 +14,8 @@ struct DetailSpendingView: View {
     @Binding var isDeleted: Bool
     @Binding var showToastPopup: Bool
     @State private var forceUpdate: Bool = false
+    @State private var showingPopUp: Bool = false
+//    @Binding var showingPopUp: Bool
 
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
@@ -27,7 +29,7 @@ struct DetailSpendingView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .leading) {
+        ZStack {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
 
@@ -40,13 +42,25 @@ struct DetailSpendingView: View {
                     }
                 }
             }
+            if showingPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showingPopUp,
+                                titleLabel: "내역을 삭제할까요?",
+                                subTitleLabel: "선택한 소비 내역이 사라져요",
+                                firstBtnAction: { self.showingPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: { DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
+                                    deleteSingleSpending()
+
+                                }},
+                                secondBtnLabel: "삭제하기",
+                                secondBtnColor: Color("Red03"))
+            }
         }
-        .padding(.bottom, 34 * DynamicSizeFactor.factor())
-        .padding(.horizontal, 20)
+        .navigationBarTitle("", displayMode: .inline)
         .setTabBarVisibility(isHidden: true)
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
-        .navigationBarColor(UIColor(named: "White01"), title: "")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
@@ -69,6 +83,7 @@ struct DetailSpendingView: View {
                 HStack(spacing: 0) {
                     Button(action: {
                         isSelectedCategory.toggle()
+                        self.selectedItem = nil
                         Log.debug("isSelectedCategory: \(isSelectedCategory)")
                     }, label: {
                         Image("icon_navigationbar_kebabmenu")
@@ -109,9 +124,8 @@ struct DetailSpendingView: View {
                                             navigateModifySpendingHistoryView = true
                                         }
                                     } else if item == "내역 삭제" {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
-                                            deleteSingleSpending()
-                                        }
+                                        showingPopUp = true
+                                        isSelectedCategory = false
                                     }
                                 }, label: {
                                     ZStack(alignment: .leading) {
