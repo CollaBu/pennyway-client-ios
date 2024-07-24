@@ -4,6 +4,7 @@ import SwiftUI
 struct EditPhoneNumberView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = PhoneVerificationViewModel()
+    @StateObject var editPhoneNumberViewModel = EditPhoneNumberViewModel()
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
