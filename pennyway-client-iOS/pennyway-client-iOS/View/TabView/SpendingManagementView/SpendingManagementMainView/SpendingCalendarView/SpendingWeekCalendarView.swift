@@ -48,7 +48,6 @@ struct SpendingWeekCalendarView: View {
                 proxy = scrollProxy
                 setToToday()
                 scrollToDate(proxy: scrollProxy)
-
             }
         }
         .onAppear {
