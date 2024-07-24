@@ -68,8 +68,8 @@ class EditIdViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
 
                         Log.debug("아이디 수정 완료")
+                        updateUserField(fieldName: "username", value: self.inputId)
 
-                        Log.debug(response)
                         completion(true)
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
