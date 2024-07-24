@@ -56,7 +56,7 @@ struct MySpendingListView: View {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
 
                                                 })
-                                                .buttonStyle(PlainButtonStyle()) 
+                                                .buttonStyle(PlainButtonStyle())
 
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }

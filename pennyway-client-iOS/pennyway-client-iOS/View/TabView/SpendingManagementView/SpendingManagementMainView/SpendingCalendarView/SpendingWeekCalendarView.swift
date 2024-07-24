@@ -47,12 +47,19 @@ struct SpendingWeekCalendarView: View {
             .onAppear {
                 proxy = scrollProxy
                 setToToday()
+                scrollToDate(proxy: scrollProxy)
+
             }
         }
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
+                    if let dateToScroll = selectedDateToScroll, let date = DateFormatterUtil.parseDate(from: dateToScroll) {
+                        DispatchQueue.main.async {
+                            scrollToDate(proxy: proxy)
+                        }
+                    }
                 } else {
                     Log.debug("소비내역 조회 api 연동 실패")
                 }
@@ -229,7 +236,14 @@ struct SpendingWeekCalendarView: View {
 
     private func setToToday() {
         selectedDate = Date()
+        selectedDateToScroll = dateFormatter(date: Date())
         spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: Date())
+    }
+
+    private func scrollToDate(proxy: ScrollViewProxy?) {
+        if let dateToScroll = selectedDateToScroll, let date = DateFormatterUtil.parseDate(from: dateToScroll) {
+            proxy?.scrollTo(date, anchor: .center)
+        }
     }
 }
 
