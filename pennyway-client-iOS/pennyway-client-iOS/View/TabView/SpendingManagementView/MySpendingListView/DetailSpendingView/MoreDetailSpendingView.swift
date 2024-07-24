@@ -2,7 +2,6 @@ import SwiftUI
 
 struct MoreDetailSpendingView: View {
     @Binding var clickDate: Date?
-
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     
@@ -45,6 +44,7 @@ struct MoreDetailSpendingView: View {
                                 .platformTextColor(color: Color("Gray07"))
                                 .font(.B1MediumFont())
                         } else {
+                            // 지출 카테고리에서 진입한 경우
                             let date = DateFormatterUtil.dateFromString(spendingDetail.spendAt)
                             Text(Date.getFormattedDate(from: date ?? Date()))
                                 .platformTextColor(color: Color("Gray07"))

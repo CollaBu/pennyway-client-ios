@@ -33,14 +33,7 @@ struct CategorySpendingListView: View {
                                 Button(action: {
                                     spendingId = item.id
                                     viewModel.dailyDetailSpendings = [item]
-                                    Log.debug("viewModel.dailyDetailSpendings: \(viewModel.dailyDetailSpendings)")
-
-                                    clickDate = DateFormatterUtil.dateFromString(date)
                                     showDetailSpendingView = true
-//                                    DispatchQueue.main.async {
-//                                        showDetailSpendingView = true
-//                                    }
-                                    Log.debug("CategorySpendingListView: \(spendingId)")
 
                                 }, label: {
                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
@@ -67,6 +60,10 @@ struct CategorySpendingListView: View {
             }
             Spacer().frame(height: 18 * DynamicSizeFactor.factor())
         }
+        .onAppear {
+            refreshView()
+        }
+
         NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: .constant(false), showToastPopup: .constant(false), spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
     }
 
@@ -93,5 +90,16 @@ struct CategorySpendingListView: View {
                 .frame(height: 1 * DynamicSizeFactor.factor())
         }
         .frame(maxWidth: .infinity, alignment: .center)
+    }
+
+    private func refreshView() {
+        viewModel.initPage()
+        viewModel.getCategorySpendingHistoryApi { success in
+            if success {
+                Log.debug("카테고리 지출내역 조회 성공")
+            } else {
+                Log.debug("카테고리 지출내역 조회 실패")
+            }
+        }
     }
 }

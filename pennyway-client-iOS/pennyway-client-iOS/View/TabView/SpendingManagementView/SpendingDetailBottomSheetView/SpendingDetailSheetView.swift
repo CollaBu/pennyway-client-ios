@@ -128,7 +128,6 @@ struct SpendingDetailSheetView: View {
         }
         .setTabBarVisibility(isHidden: true)
         
-//        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: .constant(false), showToastPopup: .constant(false)), isActive: $showDetailSpendingView) {}
     }
     
     private func getSpendingAmount(for date: Date) -> Int? {

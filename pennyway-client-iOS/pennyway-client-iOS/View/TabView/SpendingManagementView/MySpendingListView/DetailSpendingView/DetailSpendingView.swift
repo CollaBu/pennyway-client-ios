@@ -31,7 +31,8 @@ struct DetailSpendingView: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
 
-                if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first { // 지출 카테고리 리스트로 조회시
+                if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first { 
+                    // 지출 카테고리 리스트로 조회시
                     MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingDetail.id)
                 } else {
                     if let spendingId = spendingId {
@@ -87,7 +88,6 @@ struct DetailSpendingView: View {
             loadDataForSelectedDate()
             isSelectedCategory = false
             self.selectedItem = nil
-            Log.debug("DetailSpendingView: \(spendingId)")
         }
         .overlay(
             VStack(alignment: .center) {
