@@ -48,7 +48,7 @@ struct TotalTargetAmountGraphView: View {
     func determineColorGray03(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             if content.targetAmountDetail.amount != -1 {
-                return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
             }
             return Color("Mint03")
         } else {
@@ -59,7 +59,7 @@ struct TotalTargetAmountGraphView: View {
     func determineColorGray04(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             if content.targetAmountDetail.amount != -1 {
-                return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
             }
             return Color("Mint03")
         } else {
@@ -70,7 +70,7 @@ struct TotalTargetAmountGraphView: View {
     func determineColorGray06(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             if content.targetAmountDetail.amount != -1 {
-                return content.diffAmount <= 0 ? Color("Red03") : Color("Mint03")
+                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
             }
             return Color("Mint03")
         } else {

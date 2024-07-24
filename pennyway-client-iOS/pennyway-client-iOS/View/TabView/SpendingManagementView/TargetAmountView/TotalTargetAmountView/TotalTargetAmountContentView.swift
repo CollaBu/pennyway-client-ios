@@ -21,7 +21,7 @@ struct TotalTargetAmountContentView: View {
                 
                 Spacer()
                 
-                Text(viewModel.currentData.targetAmountDetail.amount != -1 ? "\(viewModel.currentData.diffAmount)원" : "-원")
+                Text(viewModel.currentData.targetAmountDetail.amount != -1 ? "\(viewModel.currentData.diffAmount < 0 ? "" : "-")\(abs(viewModel.currentData.diffAmount))원" : "-원")
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: determineDiffAmountColor(for: viewModel.currentData.diffAmount))
                     .padding(.trailing, 16)
@@ -74,11 +74,13 @@ struct TotalTargetAmountContentView: View {
                             
                             Spacer()
                             
-                            DiffAmountDynamicWidthView(
-                                text: determineText(for: content.diffAmount),
-                                backgroundColor: determineBackgroundColor(for: content.diffAmount),
-                                textColor: determineTextColor(for: content.diffAmount)
-                            )
+                            if content.targetAmountDetail.amount != -1 {
+                                DiffAmountDynamicWidthView(
+                                    text: determineText(for: content.diffAmount),
+                                    backgroundColor: determineBackgroundColor(for: content.diffAmount),
+                                    textColor: determineTextColor(for: content.diffAmount)
+                                )
+                            }
                         }
                     }
                     .padding(.horizontal, 18)
@@ -99,25 +101,25 @@ struct TotalTargetAmountContentView: View {
     
     func determineDiffAmountColor(for diffAmount: Int) -> Color {
         if viewModel.currentData.targetAmountDetail.amount != -1 {
-            return diffAmount <= 0 ? Color("Red03") : Color("Gray07")
+            return diffAmount > 0 ? Color("Red03") : Color("Gray07")
         } else {
             return Color("Gray07")
         }
     }
     
     func determineBackgroundColor(for diffAmount: Int) -> Color {
-        return diffAmount < 0 ? Color("Red01") : Color("Ashblue01")
+        return diffAmount > 0 ? Color("Red01") : Color("Ashblue01")
     }
     
     func determineTextColor(for diffAmount: Int) -> Color {
-        return diffAmount < 0 ? Color("Red03") : Color("Mint03")
+        return diffAmount > 0 ? Color("Red03") : Color("Mint03")
     }
     
     func determineText(for diffAmount: Int) -> String {
         let diffAmountValue = (NumberFormatterUtil.formatIntToDecimalString(abs(diffAmount)))
         
         if diffAmount != 0 {
-            return diffAmount > 0 ? "\(diffAmountValue)원 절약했어요" : "\(diffAmountValue)원 더 썼어요"
+            return diffAmount < 0 ? "\(diffAmountValue)원 절약했어요" : "\(diffAmountValue)원 더 썼어요"
         } else {
             return "짝짝 소비 천재네요!"
         }
