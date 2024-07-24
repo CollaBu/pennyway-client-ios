@@ -10,7 +10,7 @@ enum UserAccountRouter: URLRequestConvertible {
     case settingOffAlarm(type: String)
     case validatePw(dto: ValidatePwRequestDto)
     case resetMyPw(dto: ResetMyPwRequestDto)
-    case editUserId(username: String)
+    case editUserId(dto: CheckDuplicateRequestDto)
     
     var method: HTTPMethod {
         switch self {
@@ -60,8 +60,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .settingOnAlarm(type), let .settingOffAlarm(type):
             return ["type": type]
-        case let .editUserId(username):
-            return ["username": username]
+        case let .editUserId(dto):
+            return try? dto.asDictionary()
         }
     }
 

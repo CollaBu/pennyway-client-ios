@@ -61,14 +61,6 @@ struct EditIdView: View {
             }
         }
     }
-
-//    /// Error messiage
-//    private func errorMessage(_ message: String, _ color: Color) -> some View {
-//        Text(message)
-//            .padding(.leading, 20)
-//            .font(.B1MediumFont())
-//            .platformTextColor(color: color)
-//    }
 }
 
 #Preview {
