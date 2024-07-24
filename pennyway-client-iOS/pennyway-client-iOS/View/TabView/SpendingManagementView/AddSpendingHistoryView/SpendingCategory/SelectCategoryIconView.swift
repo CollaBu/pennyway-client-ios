@@ -63,10 +63,10 @@ struct SelectCategoryIconView: View {
                 if let selectedCategory = SpendingCategoryIconList.fromIcon(selectedCategoryIcon) {
                     if entryPoint == .create {
                         viewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                        viewModel.selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(selectedCategoryIcon, outputState: .on)//onMint -> on
+                        viewModel.selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(selectedCategoryIcon, outputState: .on) // onMint -> on
                     } else { // 수정인 경우
                         spendingCategoryViewModel.selectedCategoryIconTitle = selectedCategory.rawValue
-                        spendingCategoryViewModel.selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(selectedCategoryIcon, outputState: .on)//onMint -> on
+                        spendingCategoryViewModel.selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(selectedCategoryIcon, outputState: .on) // onMint -> on
                     }
                     isPresented = false
                     Log.debug(selectedCategory.rawValue)
@@ -79,7 +79,7 @@ struct SelectCategoryIconView: View {
         .onAppear {
             // onMint 아이콘으로 매칭
             if let icon = (entryPoint == .create ? viewModel.selectedCategoryIcon : spendingCategoryViewModel.selectedCategory?.icon) {
-                selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(icon, outputState: .onMint)//on -> onMint
+                selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(icon, outputState: .onMint) // on -> onMint
             }
         }
     }
