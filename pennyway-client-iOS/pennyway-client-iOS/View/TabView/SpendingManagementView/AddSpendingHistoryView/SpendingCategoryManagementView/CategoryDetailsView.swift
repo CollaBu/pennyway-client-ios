@@ -10,6 +10,8 @@ struct CategoryDetailsView: View {
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]
     @State private var showingPopUp = false
+    @State private var showToastPopup = false
+    @State var isDeleted = false
     @State private var isNavigateToEditCategoryView = false
 
     var body: some View {
@@ -44,7 +46,7 @@ struct CategoryDetailsView: View {
 
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
-                    CategorySpendingListView(viewModel: viewModel)
+                    CategorySpendingListView(viewModel: viewModel, showToastPopup: $showToastPopup, isDeleted: $isDeleted)
                 }
             }
 
@@ -62,6 +64,31 @@ struct CategoryDetailsView: View {
                 )
             }
         }
+        .onAppear {
+            refreshView {}
+        }
+        .onChange(of: isDeleted) { newValue in
+            if newValue {
+                refreshView {
+                    showToastPopup = true
+                }
+                isDeleted = false
+            }
+        }
+        .overlay(
+            Group {
+                if showToastPopup {
+                    CustomToastView(message: "소비내역이 삭제되었어요")
+                        .transition(.move(edge: .bottom))
+                        .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                showToastPopup = false
+                            }
+                        }
+                }
+            }, alignment: .bottom
+        )
         .overlay(
             VStack(alignment: .leading) {
                 if isClickMenu {
@@ -122,5 +149,17 @@ struct CategoryDetailsView: View {
             }
         }
         NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
+    }
+
+    private func refreshView(completion: @escaping () -> Void) {
+        viewModel.initPage()
+        viewModel.getCategorySpendingHistoryApi { success in
+            if success {
+                Log.debug("카테고리 지출내역 조회 성공")
+            } else {
+                Log.debug("카테고리 지출내역 조회 실패")
+            }
+            completion()
+        }
     }
 }

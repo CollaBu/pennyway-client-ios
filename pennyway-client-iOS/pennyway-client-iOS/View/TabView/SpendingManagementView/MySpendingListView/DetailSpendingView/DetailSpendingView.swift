@@ -15,7 +15,6 @@ struct DetailSpendingView: View {
     @Binding var showToastPopup: Bool
     @State private var forceUpdate: Bool = false
     @State private var showingPopUp: Bool = false
-//    @Binding var showingPopUp: Bool
 
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
@@ -103,6 +102,7 @@ struct DetailSpendingView: View {
             loadDataForSelectedDate()
             isSelectedCategory = false
             self.selectedItem = nil
+            isDeleted = false
         }
         .overlay(
             VStack(alignment: .center) {
@@ -189,6 +189,7 @@ struct DetailSpendingView: View {
                 isDeleted = true
             } else {
                 Log.debug("지출내역 단일 삭제 실패")
+                isDeleted = false
             }
             isSelectedCategory = false
         }

@@ -85,7 +85,7 @@ struct SpendingCategoryGridView: View {
                 }
             }
         }
-        
+
         NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel), isActive: $navigateToCategoryDetails) {}
 
         NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}

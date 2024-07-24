@@ -3,7 +3,6 @@ import SwiftUI
 struct ChangeMonthContentView: View {
     @ObservedObject var viewModel: SpendingHistoryViewModel
     @Binding var isPresented: Bool
-    ///    @State private var selectedMonth: Date = Date()
     @State private var selectedMonth: Date
 
     private let calendars = Calendar.current

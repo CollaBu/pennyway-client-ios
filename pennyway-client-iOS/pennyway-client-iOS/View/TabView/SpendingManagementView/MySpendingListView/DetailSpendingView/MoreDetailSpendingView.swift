@@ -78,10 +78,11 @@ struct MoreDetailSpendingView: View {
 
                     ZStack(alignment: .topLeading) {
                         Rectangle()
-                            .frame(width: 280 * DynamicSizeFactor.factor(), height: 72 * DynamicSizeFactor.factor())
+                            .frame(height: 72 * DynamicSizeFactor.factor())
                             .platformTextColor(color: Color("Gray01"))
                             .cornerRadius(4)
-                            
+                            .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
                         Text(spendingDetail.memo)
                             .platformTextColor(color: Color("Gray07"))
                             .font(.B1MediumFont())
@@ -89,23 +90,9 @@ struct MoreDetailSpendingView: View {
                     }
                 }
             }
-//            if showingPopUp {
-//                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-//                CustomPopUpView(showingPopUp: $showingPopUp,
-//                                titleLabel: "내역을 삭제할까요?",
-//                                subTitleLabel: "선택한 소비 내역이 사라져요",
-//                                firstBtnAction: { self.showingPopUp = false },
-//                                firstBtnLabel: "취소",
-//                                secondBtnAction: { DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
-//                                    deleteSingleSpending()
-//                    
-//                                }},
-//                                secondBtnLabel: "삭제하기",
-//                                secondBtnColor: Color("Red03"))
-//            }
         }
+        .border(.black)
         .padding(.horizontal, 20)
-        .padding(.bottom, 34 * DynamicSizeFactor.factor())
         .onAppear {
             Log.debug("MoreDetailSpendingView :\(spendingCategoryViewModel.dailyDetailSpendings), \(spendingCategoryViewModel.amount), \(clickDate)")
         }
