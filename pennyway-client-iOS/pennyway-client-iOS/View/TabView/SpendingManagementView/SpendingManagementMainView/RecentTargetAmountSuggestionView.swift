@@ -28,7 +28,7 @@ struct RecentTargetAmountSuggestionView: View {
             .padding(.leading, 18 * DynamicSizeFactor.factor())
             .padding(.trailing, 13 * DynamicSizeFactor.factor())
     
-            Text("\(viewModel.recentTargetAmountData?.month ?? 0)월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(viewModel.recentTargetAmountData?.amount ?? 0))원")
+            Text(getRecentTargetAmount())
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Mint02"))
                 .padding(.leading, 18 * DynamicSizeFactor.factor())
@@ -70,5 +70,16 @@ struct RecentTargetAmountSuggestionView: View {
         .cornerRadius(8)
         .shadow(color: Color(red: 0, green: 0.83, blue: 0.88).opacity(0.15), radius: 5, x: 0, y: 1) // TODO: 색상 변경 필요
         .padding(.horizontal, 20)
+    }
+    
+    private func getRecentTargetAmount() -> String {
+        let year = Date.year(from: Date())
+        let data = "\(viewModel.recentTargetAmountData?.month ?? 0)월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(viewModel.recentTargetAmountData?.amount ?? 0))원"
+        
+        if viewModel.recentTargetAmountData?.year != year {
+            return "\(year)년 \(data)"
+        }
+        
+        return data
     }
 }
