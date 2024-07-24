@@ -2,7 +2,10 @@ import SwiftUI
 
 struct CategorySpendingListView: View {
     @ObservedObject var viewModel: SpendingCategoryViewModel
+
     @State private var clickDate: Date? = nil
+    @State private var spendingId: Int? = nil
+    @State private var showDetailSpendingView = false
 
     var currentYear = String(Date.year(from: Date()))
 
@@ -26,10 +29,24 @@ struct CategorySpendingListView: View {
                             Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                             ForEach(spendings, id: \.id) { item in
                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-                                NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: .constant(item.id), isDeleted: .constant(false), showToastPopup: .constant(false))) {
+
+                                Button(action: {
+                                    spendingId = item.id
+                                    viewModel.dailyDetailSpendings = [item]
+                                    Log.debug("viewModel.dailyDetailSpendings: \(viewModel.dailyDetailSpendings)")
+
+                                    clickDate = DateFormatterUtil.dateFromString(date)
+                                    showDetailSpendingView = true
+//                                    DispatchQueue.main.async {
+//                                        showDetailSpendingView = true
+//                                    }
+                                    Log.debug("CategorySpendingListView: \(spendingId)")
+
+                                }, label: {
                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                }
+                                })
                                 .buttonStyle(PlainButtonStyle())
+
                                 .onAppear {
                                     guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
                                         return
@@ -50,6 +67,7 @@ struct CategorySpendingListView: View {
             }
             Spacer().frame(height: 18 * DynamicSizeFactor.factor())
         }
+        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: .constant(false), showToastPopup: .constant(false), spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
     }
 
     private func headerView(for date: String) -> some View {

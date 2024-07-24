@@ -8,18 +8,21 @@ struct DetailSpendingView: View {
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
     @State var navigateModifySpendingHistoryView = false
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @Binding var clickDate: Date?
     @Binding var spendingId: Int?
     @Binding var isDeleted: Bool
     @Binding var showToastPopup: Bool
     @State private var forceUpdate: Bool = false
+
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
-    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>) {
+    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>, spendingCategoryViewModel: SpendingCategoryViewModel) {
         _clickDate = clickDate
         _spendingId = spendingId
         _isDeleted = isDeleted
         _showToastPopup = showToastPopup
+        _spendingCategoryViewModel = ObservedObject(wrappedValue: spendingCategoryViewModel)
         _spendingHistoryViewModel = StateObject(wrappedValue: SpendingHistoryViewModel())
     }
 
@@ -28,8 +31,12 @@ struct DetailSpendingView: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
 
-                if let spendingId = spendingId, let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
-                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: spendingId)
+                if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first { // 지출 카테고리 리스트로 조회시
+                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingDetail.id)
+                } else {
+                    if let spendingId = spendingId {
+                        MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingId)
+                    }
                 }
             }
         }
@@ -171,5 +178,9 @@ struct DetailSpendingView: View {
             }
             isSelectedCategory = false
         }
+    }
+
+    private func getSpendingDetail(by id: Int) -> IndividualSpending? {
+        return spendingHistoryViewModel.getSpendingDetail(by: id) ?? spendingCategoryViewModel.getSpendingDetail(by: id)
     }
 }

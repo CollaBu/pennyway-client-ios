@@ -105,8 +105,7 @@ struct SpendingDetailSheetView: View {
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
-                NavigationAvailable {
-                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: .constant(false), showToastPopup: .constant(false))
+                NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: .constant(false), showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
                 }
             }
         }
