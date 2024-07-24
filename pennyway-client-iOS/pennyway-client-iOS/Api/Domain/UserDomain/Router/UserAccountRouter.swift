@@ -72,9 +72,9 @@ enum UserAccountRouter: URLRequestConvertible {
         switch self {
         case .getUserProfile, .deleteUserAccount:
             request = URLRequest.createURLRequest(url: url, method: method)
-        case .registDeviceToken, .validatePw, .resetMyPw:
+        case .registDeviceToken, .validatePw, .resetMyPw, .editUserId:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
-        case .settingOnAlarm, .settingOffAlarm, .editUserId:
+        case .settingOnAlarm, .settingOffAlarm:
             let queryParameters = parameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }

@@ -30,7 +30,11 @@ struct EditIdView: View {
             
             CustomBottomButton(action: {
                 if editIdViewModel.isFormValid {
-                    self.presentationMode.wrappedValue.dismiss()
+                    editIdViewModel.editUserIdApi { success in
+                        if success {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                    }
                 }
 
             }, label: "변경 완료", isFormValid: $editIdViewModel.isFormValid)

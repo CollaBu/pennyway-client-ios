@@ -8,7 +8,8 @@ func saveUserData(userData: UserData) {
 
         UserDefaults.standard.set(userDataJSON, forKey: "userData")
         if let jsonString = String(data: userDataJSON, encoding: .utf8) {
-            os_log("UserDefaults data: %@", log: .default, type: .debug, jsonString)
+            Log.default("UserDefaults data: \(jsonString)")
+            
         }
     } catch {
         os_log("Error encoding UserData: %@", log: .default, type: .fault, error.localizedDescription)
@@ -25,4 +26,29 @@ func getUserData() -> UserData? {
         }
     }
     return nil
+}
+
+func updateUserField<T>(fieldName: String, value: T) {
+    if var userData = getUserData() {
+        switch fieldName {
+        case "username":
+            userData.username = value as! String
+        case "name":
+            userData.name = value as! String
+        case "profileImageUrl":
+            userData.profileImageUrl = value as! String
+        case "phone":
+            userData.phone = value as! String
+        case "notifySetting":
+            userData.notifySetting = value as! NotifySetting
+        case "oauthAccount":
+            userData.oauthAccount = value as! OauthAccount
+        default:
+            Log.default("Invalid field name: \(fieldName)")
+            return
+        }
+        saveUserData(userData: userData)
+    } else {
+        Log.default("No user data found to update")
+    }
 }

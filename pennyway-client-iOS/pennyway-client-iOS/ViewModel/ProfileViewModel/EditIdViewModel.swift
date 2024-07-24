@@ -11,22 +11,20 @@ class EditIdViewModel: ObservableObject {
     func validateId() {
         let idRegex = "^[a-z0-9._-]{5,20}$"
         showErrorId = !NSPredicate(format: "SELF MATCHES %@", idRegex).evaluate(with: inputId)
-        checkDuplicateUserNameApi{ success in
-            if success {
-                self.validateForm()
-            }
+        checkDuplicateUserNameApi { _ in
+            self.validateForm()
         }
     }
 
     func validateForm() {
-        if !showErrorId && !inputId.isEmpty {
+        if !isDuplicateId && !showErrorId && !inputId.isEmpty {
             isFormValid = true
         } else {
             isFormValid = false
         }
     }
-    
-    //아이디 중복 확인
+
+    /// 아이디 중복 확인
     func checkDuplicateUserNameApi(completion: @escaping (Bool) -> Void) {
         let checkDuplicateRequestDto = CheckDuplicateRequestDto(username: inputId)
         AuthAlamofire.shared.checkDuplicateUserName(checkDuplicateRequestDto) { result in
@@ -35,25 +33,62 @@ class EditIdViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(CheckDuplicateResponseDto.self, from: responseData)
-                            
+
                         if response.data.isDuplicate {
                             self.isDuplicateId = true
-                            completion(true)
+                            completion(false)
                         } else {
                             self.isDuplicateId = false
-                            completion(false)
+                            completion(true)
                         }
-                        print(response)
+                        Log.debug(response)
                     } catch {
-                        print("Error parsing response JSON: \(error)")
+                        Log.fault("Error parsing response JSON: \(error)")
                     }
                 }
             case let .failure(error):
                 if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                    print("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                    Log.info("Failed to verify: \(errorWithDomainErrorAndMessage)")
                 } else {
-                    print("Failed to verify: \(error)")
+                    Log.error("Failed to verify: \(error)")
                 }
+            }
+        }
+    }
+
+    /// 아이디 수정
+    func editUserIdApi(completion: @escaping (Bool) -> Void) {
+        let editUserIdDto = CheckDuplicateRequestDto(username: inputId)
+
+        UserAccountAlamofire.shared.editUserId(dto: editUserIdDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
+
+                        Log.debug("아이디 수정 완료")
+
+                        Log.debug(response)
+                        completion(true)
+                    } catch {
+                        Log.fault("Error parsing response JSON: \(error)")
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("Failed to verify: \(StatusSpecificError)")
+
+                    if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                        self.isDuplicateId = true
+                        self.validateForm()
+                    }
+
+                } else {
+                    Log.error("Failed to verify: \(error)")
+                }
+                Log.debug("아이디 수정 실패")
+                completion(false)
             }
         }
     }
