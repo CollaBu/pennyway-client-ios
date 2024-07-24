@@ -3,7 +3,8 @@ import SwiftUI
 struct ChangeMonthContentView: View {
     @ObservedObject var viewModel: SpendingHistoryViewModel
     @Binding var isPresented: Bool
-    @State private var selectedMonth: Date = Date()
+    ///    @State private var selectedMonth: Date = Date()
+    @State private var selectedMonth: Date
 
     private let calendars = Calendar.current
     private let months: [Date]
@@ -11,6 +12,8 @@ struct ChangeMonthContentView: View {
     init(viewModel: SpendingHistoryViewModel, isPresented: Binding<Bool>) {
         self.viewModel = viewModel
         _isPresented = isPresented
+        _selectedMonth = State(initialValue: viewModel.currentDate)
+
         months = {
             let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
             let endDate = Date()

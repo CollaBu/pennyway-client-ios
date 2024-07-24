@@ -127,7 +127,6 @@ struct SpendingDetailSheetView: View {
             forceUpdate.toggle()
         }
         .setTabBarVisibility(isHidden: true)
-        
     }
     
     private func getSpendingAmount(for date: Date) -> Int? {
