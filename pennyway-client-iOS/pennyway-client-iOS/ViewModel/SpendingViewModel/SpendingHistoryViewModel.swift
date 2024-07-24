@@ -40,6 +40,11 @@ class SpendingHistoryViewModel: ObservableObject {
         return dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
 
+    /// 특정 ID에 해당하는 지출내역 검색
+    func getSpendingDetail(by id: Int) -> IndividualSpending? {
+        return dailyDetailSpendings.first { $0.id == id }
+    }
+
     func checkSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: currentDate)
@@ -84,16 +89,30 @@ class SpendingHistoryViewModel: ObservableObject {
         }
     }
 
-    func deleteSpendingHistory(spendingIds: [Int], completion: @escaping (Bool) -> Void) {
+    func deleteSpendingHistory(spendingIds: [Int], completion: @escaping (Bool) -> Void) { // 지출내역 복수 삭제
         let dto = DeleteSpendingHistoryRequestDto(spendingIds: spendingIds)
         SpendingAlamofire.shared.deleteSpendingHistory(dto) { result in
             switch result {
             case .success:
-                Log.debug("지출 내역 삭제 완료")
+                Log.debug("지출내역 복수 삭제 완료")
                 self.dailyDetailSpendings.removeAll { spendingIds.contains($0.id) }
                 completion(true)
             case let .failure(error):
-                Log.error("지출 내역 삭제 실패: \(error)")
+                Log.error("지출내역 복수 삭제 실패: \(error)")
+                completion(false)
+            }
+        }
+    }
+
+    func deleteSingleSpendingHistory(spendingId: Int, completion: @escaping (Bool) -> Void) { // 지출내역 단일 삭제
+        SpendingAlamofire.shared.deleteSingleSpendingHistory(spendingId: spendingId) { result in
+            switch result {
+            case .success:
+                Log.debug("지출내역 단일 삭제 완료")
+                self.dailyDetailSpendings.removeAll { $0.id == spendingId }
+                completion(true)
+            case let .failure(error):
+                Log.error("지출내역 단일 삭제 실패: \(error)")
                 completion(false)
             }
         }

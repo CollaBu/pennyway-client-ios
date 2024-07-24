@@ -3,11 +3,12 @@ import SwiftUI
 struct MoreDetailSpendingView: View {
     @Binding var clickDate: Date?
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
-    
+    var spendingId: Int
+
     var body: some View {
         ZStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
                     HStack(spacing: 10 * DynamicSizeFactor.factor()) {
                         let iconName = SpendingListViewCategoryIconList(rawValue: spendingDetail.category.icon)?.iconName ?? ""
 
@@ -21,7 +22,7 @@ struct MoreDetailSpendingView: View {
                     }
                 }
                 Spacer().frame(height: 5 * DynamicSizeFactor.factor())
-                if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
                     Text("\(spendingDetail.amount)원")
                         .padding(.vertical, 4)
                         .platformTextColor(color: Color("Gray07"))
@@ -52,7 +53,7 @@ struct MoreDetailSpendingView: View {
                     
                     Spacer()
                     
-                    if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                    if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
                         Text(spendingDetail.accountName)
                             .platformTextColor(color: Color("Gray07"))
                             .font(.B1MediumFont())
@@ -69,7 +70,7 @@ struct MoreDetailSpendingView: View {
                 }
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 
-                if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
+                if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
                     ZStack(alignment: .topLeading) {
                         Rectangle()
                             .frame(width: 280 * DynamicSizeFactor.factor(), height: 72 * DynamicSizeFactor.factor())

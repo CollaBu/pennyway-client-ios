@@ -20,6 +20,8 @@ struct MySpendingListView: View {
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
     @State private var refreshView = false
+    @State private var showToastPopup = false
+    @State private var isDeleted = false
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -47,6 +49,8 @@ struct MySpendingListView: View {
                                                 Button(action: {
                                                     clickDate = DateFormatterUtil.parseDate(from: date)
                                                     spendingHistoryViewModel.selectedDate = clickDate
+                                                    selectedSpendingId = item.id
+                                                    Log.debug("Id: \(selectedSpendingId)")
                                                     showDetailSpendingView = true
                                                 }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
@@ -63,8 +67,8 @@ struct MySpendingListView: View {
                                         }
                                         .id(date) // ScrollViewReader를 위한 ID 추가
                                     }
-                                    Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                                 }
+                                Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                             }
                         }
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
@@ -101,8 +105,25 @@ struct MySpendingListView: View {
                 }
             }
             .id(refreshView)
+            .overlay(
+                Group {
+                    if showToastPopup {
+                        CustomToastView(message: "소비 내역을 삭제했어요")
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                            .padding(.bottom, 34)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    withAnimation {
+                                        showToastPopup = false
+                                    }
+                                }
+                            }
+                    }
+                }, alignment: .bottom
+            )
 
-            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate), isActive: $showDetailSpendingView) {}
+            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup), isActive: $showDetailSpendingView) {}
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
         .edgesIgnoringSafeArea(.bottom)

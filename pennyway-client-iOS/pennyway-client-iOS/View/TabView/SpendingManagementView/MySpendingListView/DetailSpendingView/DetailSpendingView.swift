@@ -9,13 +9,17 @@ struct DetailSpendingView: View {
     @State var navigateModifySpendingHistoryView = false
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
     @Binding var clickDate: Date?
+    @Binding var spendingId: Int?
+    @Binding var isDeleted: Bool
+    @Binding var showToastPopup: Bool
     @State private var forceUpdate: Bool = false
-
-    @State var spendingId: Int = 0
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
-    init(clickDate: Binding<Date?>) {
+    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>) {
         _clickDate = clickDate
+        _spendingId = spendingId
+        _isDeleted = isDeleted
+        _showToastPopup = showToastPopup
         _spendingHistoryViewModel = StateObject(wrappedValue: SpendingHistoryViewModel())
     }
 
@@ -24,8 +28,8 @@ struct DetailSpendingView: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
 
-                if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
-                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel)
+                if let spendingId = spendingId, let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
+                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: spendingId)
                 }
             }
         }
@@ -76,6 +80,7 @@ struct DetailSpendingView: View {
             loadDataForSelectedDate()
             isSelectedCategory = false
             self.selectedItem = nil
+            Log.debug("DetailSpendingView: \(spendingId)")
         }
         .overlay(
             VStack(alignment: .center) {
@@ -95,6 +100,10 @@ struct DetailSpendingView: View {
                                     if item == "수정하기" {
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
                                             navigateModifySpendingHistoryView = true
+                                        }
+                                    } else if item == "내역 삭제" {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
+                                            deleteSingleSpending()
                                         }
                                     }
                                 }, label: {
@@ -146,8 +155,21 @@ struct DetailSpendingView: View {
             }
         }
     }
-}
 
-#Preview {
-    DetailSpendingView(clickDate: .constant(Date()))
+    private func deleteSingleSpending() {
+        guard let spendingId = spendingId else {
+            return
+        }
+        spendingHistoryViewModel.deleteSingleSpendingHistory(spendingId: spendingId) { success in
+            if success {
+                Log.debug("지출내역 단일 삭제 성공")
+                self.presentationMode.wrappedValue.dismiss()
+                showToastPopup = true
+                isDeleted = true
+            } else {
+                Log.debug("지출내역 단일 삭제 실패")
+            }
+            isSelectedCategory = false
+        }
+    }
 }
