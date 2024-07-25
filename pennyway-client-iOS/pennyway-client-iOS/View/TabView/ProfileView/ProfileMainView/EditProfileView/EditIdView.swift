@@ -30,7 +30,11 @@ struct EditIdView: View {
             
             CustomBottomButton(action: {
                 if editIdViewModel.isFormValid {
-                    self.presentationMode.wrappedValue.dismiss()
+                    editIdViewModel.editUserIdApi { success in
+                        if success {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                    }
                 }
 
             }, label: "변경 완료", isFormValid: $editIdViewModel.isFormValid)
@@ -61,14 +65,6 @@ struct EditIdView: View {
             }
         }
     }
-
-//    /// Error messiage
-//    private func errorMessage(_ message: String, _ color: Color) -> some View {
-//        Text(message)
-//            .padding(.leading, 20)
-//            .font(.B1MediumFont())
-//            .platformTextColor(color: color)
-//    }
 }
 
 #Preview {

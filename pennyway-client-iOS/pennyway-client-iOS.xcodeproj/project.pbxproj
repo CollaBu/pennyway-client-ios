@@ -1162,6 +1162,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */,
+				4A57762C2C48C2B900979D1A /* EditPhoneNumberViewModel.swift */,
 			);
 			path = ProfileViewModel;
 			sourceTree = "<group>";
@@ -1592,7 +1593,6 @@
 		4ADBFAF32BE2C7F500C3ECE4 /* UserViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4A57762C2C48C2B900979D1A /* EditPhoneNumberViewModel.swift */,
 				4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */,
 				D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */,
 			);
