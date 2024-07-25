@@ -56,7 +56,7 @@ struct MySpendingListView: View {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
 
                                                 })
-                                                .buttonStyle(PlainButtonStyle()) 
+                                                .buttonStyle(PlainButtonStyle())
 
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }
@@ -123,7 +123,7 @@ struct MySpendingListView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup), isActive: $showDetailSpendingView) {}
+            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $showDetailSpendingView) {}
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
         .edgesIgnoringSafeArea(.bottom)

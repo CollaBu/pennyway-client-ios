@@ -3,53 +3,71 @@ import SwiftUI
 struct CategorySpendingListView: View {
     @ObservedObject var viewModel: SpendingCategoryViewModel
     @State private var clickDate: Date? = nil
+    @State private var spendingId: Int? = nil
+    @State private var showDetailSpendingView = false
+    @State private var needRefresh = false
+    @Binding var showToastPopup: Bool
+    @Binding var isDeleted: Bool
 
     var currentYear = String(Date.year(from: Date()))
 
     var body: some View {
-        LazyVStack(spacing: 0) {
-            ForEach(SpendingListGroupUtil.groupedSpendings(from: viewModel.dailyDetailSpendings), id: \.key) { date, spendings in
-                VStack(spacing: 0) {
-                    if DateFormatterUtil.getYear(from: date) != currentYear {
-                        VStack(spacing: 0) {
-                            Spacer().frame(height: 5 * DynamicSizeFactor.factor())
-                            yearSeparatorView(for: DateFormatterUtil.getYear(from: date))
-                                .padding(.horizontal, 20)
+        ZStack {
+            LazyVStack(spacing: 0) {
+                ForEach(SpendingListGroupUtil.groupedSpendings(from: viewModel.dailyDetailSpendings), id: \.key) { date, spendings in
+                    VStack(spacing: 0) {
+                        if DateFormatterUtil.getYear(from: date) != currentYear {
+                            VStack(spacing: 0) {
+                                Spacer().frame(height: 5 * DynamicSizeFactor.factor())
+                                yearSeparatorView(for: DateFormatterUtil.getYear(from: date))
+                                    .padding(.horizontal, 20)
+                                Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                            }
+                        } else {
                             Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                         }
-                    } else {
-                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-                    }
 
-                    Section(header: headerView(for: date)) {
-                        VStack(spacing: 0) {
-                            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                            ForEach(spendings, id: \.id) { item in
-                                let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-                                NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: .constant(item.id), isDeleted: .constant(false), showToastPopup: .constant(false))) {
-                                    CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                .onAppear {
-                                    guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
-                                        return
-                                    }
-                                    // 해당 index가 마지막 index라면 데이터 추가
-                                    if index == viewModel.dailyDetailSpendings.count - 1 {
-                                        Log.debug("지출 내역 index: \(index)")
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
-                                            viewModel.getCategorySpendingHistoryApi { _ in }
+                        Section(header: headerView(for: date)) {
+                            VStack(spacing: 0) {
+                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                ForEach(spendings, id: \.id) { item in
+                                    let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+
+                                    Button(action: {
+                                        spendingId = item.id
+                                        viewModel.dailyDetailSpendings = [item]
+                                        showDetailSpendingView = true
+
+                                    }, label: {
+                                        CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                    })
+                                    .buttonStyle(PlainButtonStyle())
+
+                                    .onAppear {
+                                        guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
+                                            return
+                                        }
+                                        // 해당 index가 마지막 index라면 데이터 추가
+                                        if index == viewModel.dailyDetailSpendings.count - 1 {
+                                            Log.debug("지출 내역 index: \(index)")
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
+                                                viewModel.getCategorySpendingHistoryApi { _ in }
+                                            }
                                         }
                                     }
+                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                 }
-                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                             }
                         }
+
+                        Spacer()
                     }
                 }
+                Spacer().frame(height: 18 * DynamicSizeFactor.factor())
             }
-            Spacer().frame(height: 18 * DynamicSizeFactor.factor())
         }
+
+        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
     }
 
     private func headerView(for date: String) -> some View {

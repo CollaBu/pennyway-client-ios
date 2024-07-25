@@ -8,6 +8,14 @@ class SpendingCategoryViewModel: ObservableObject {
     @Published var selectedCategoryIcon: CategoryIconName? = nil
     @Published var selectedCategoryIconTitle: String = ""
     
+    /// 카테고리 리스트 데이터
+    @Published var amount: Int? = nil
+    ///    @Published var categoryName: String? = nil
+    @Published var categoryIcon: String? = nil
+    @Published var memo: String? = nil
+    @Published var accountName: String? = nil
+    @Published var spendAt: Date? = nil
+    
     /// 총 카테고리 리스트
     @Published var spendingCategories: [SpendingCategoryData] = []
     
@@ -186,5 +194,10 @@ class SpendingCategoryViewModel: ObservableObject {
                 completion(false)
             }
         }
+    }
+    
+    /// 특정 ID에 해당하는 지출내역 검색
+    func getSpendingDetail(by id: Int) -> IndividualSpending? {
+        return dailyDetailSpendings.first { $0.id == id }
     }
 }

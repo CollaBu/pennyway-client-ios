@@ -8,37 +8,58 @@ struct DetailSpendingView: View {
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
     @State var navigateModifySpendingHistoryView = false
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @Binding var clickDate: Date?
     @Binding var spendingId: Int?
     @Binding var isDeleted: Bool
     @Binding var showToastPopup: Bool
     @State private var forceUpdate: Bool = false
+    @State private var showingPopUp: Bool = false
+
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
-    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>) {
+    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>, spendingCategoryViewModel: SpendingCategoryViewModel) {
         _clickDate = clickDate
         _spendingId = spendingId
         _isDeleted = isDeleted
         _showToastPopup = showToastPopup
+        _spendingCategoryViewModel = ObservedObject(wrappedValue: spendingCategoryViewModel)
         _spendingHistoryViewModel = StateObject(wrappedValue: SpendingHistoryViewModel())
     }
 
     var body: some View {
-        ZStack(alignment: .leading) {
+        ZStack {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
 
-                if let spendingId = spendingId, let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
-                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: spendingId)
+                if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first { 
+                    // 지출 카테고리 리스트로 조회시
+                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingDetail.id)
+                } else {
+                    if let spendingId = spendingId {
+                        MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingId)
+                    }
                 }
             }
+            if showingPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showingPopUp,
+                                titleLabel: "내역을 삭제할까요?",
+                                subTitleLabel: "선택한 소비 내역이 사라져요",
+                                firstBtnAction: { self.showingPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: { DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
+                                    deleteSingleSpending()
+
+                                }},
+                                secondBtnLabel: "삭제하기",
+                                secondBtnColor: Color("Red03"))
+            }
         }
-        .padding(.bottom, 34 * DynamicSizeFactor.factor())
-        .padding(.horizontal, 20)
+        .navigationBarTitle("", displayMode: .inline)
         .setTabBarVisibility(isHidden: true)
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
-        .navigationBarColor(UIColor(named: "White01"), title: "")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
@@ -61,6 +82,7 @@ struct DetailSpendingView: View {
                 HStack(spacing: 0) {
                     Button(action: {
                         isSelectedCategory.toggle()
+                        self.selectedItem = nil
                         Log.debug("isSelectedCategory: \(isSelectedCategory)")
                     }, label: {
                         Image("icon_navigationbar_kebabmenu")
@@ -80,7 +102,7 @@ struct DetailSpendingView: View {
             loadDataForSelectedDate()
             isSelectedCategory = false
             self.selectedItem = nil
-            Log.debug("DetailSpendingView: \(spendingId)")
+            isDeleted = false
         }
         .overlay(
             VStack(alignment: .center) {
@@ -102,9 +124,8 @@ struct DetailSpendingView: View {
                                             navigateModifySpendingHistoryView = true
                                         }
                                     } else if item == "내역 삭제" {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
-                                            deleteSingleSpending()
-                                        }
+                                        showingPopUp = true
+                                        isSelectedCategory = false
                                     }
                                 }, label: {
                                     ZStack(alignment: .leading) {
@@ -168,8 +189,13 @@ struct DetailSpendingView: View {
                 isDeleted = true
             } else {
                 Log.debug("지출내역 단일 삭제 실패")
+                isDeleted = false
             }
             isSelectedCategory = false
         }
+    }
+
+    private func getSpendingDetail(by id: Int) -> IndividualSpending? {
+        return spendingHistoryViewModel.getSpendingDetail(by: id) ?? spendingCategoryViewModel.getSpendingDetail(by: id)
     }
 }
