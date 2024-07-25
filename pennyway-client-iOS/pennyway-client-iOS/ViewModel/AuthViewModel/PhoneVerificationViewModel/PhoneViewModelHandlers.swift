@@ -16,6 +16,7 @@ extension PhoneVerificationViewModel {
                         RegistrationManager.shared.phoneNumber = phoneNumber
                     }
                     firstPhoneNumber = phoneNumber
+                    showErrorExistingUser = false
 
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
@@ -184,7 +185,7 @@ extension PhoneVerificationViewModel {
                     let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
 
                     Log.debug("전화번호 수정 완료 \(response)")
-                    updateUserField(fieldName: "phone", value: self.phoneNumber)
+                    updateUserField(fieldName: "phone", value: phoneNumber)
                 } catch {
                     Log.fault("Error parsing response JSON: \(error)")
                 }

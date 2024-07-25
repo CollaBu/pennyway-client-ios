@@ -68,13 +68,11 @@ struct EditPhoneNumberView: View {
                 ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "잘못된 인증번호예요")
             }
         }
-
+        .background(Color("White01"))
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
-        .navigationBarColor(UIColor(named: "White01"), title: "전화번호 변경")
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("White01"))
+        .navigationBarColor(UIColor(named: "White01"), title: "휴대폰 번호 변경")
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 HStack {

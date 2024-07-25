@@ -21,7 +21,7 @@ struct EditProfileListView: View {
                     
                     CustomRectangleButton(action: {
                         isNavigateToEditPhoneView = true
-                    }, label: "전화번호 변경")
+                    }, label: "휴대폰 번호 변경")
                 }
             }
         }
