@@ -91,11 +91,7 @@ struct MoreDetailSpendingView: View {
                 }
             }
         }
-        .border(.black)
         .padding(.horizontal, 20)
-        .onAppear {
-            Log.debug("MoreDetailSpendingView :\(spendingCategoryViewModel.dailyDetailSpendings), \(spendingCategoryViewModel.amount), \(clickDate)")
-        }
     }
     
     private func getSpendingDetail(by id: Int) -> IndividualSpending? {

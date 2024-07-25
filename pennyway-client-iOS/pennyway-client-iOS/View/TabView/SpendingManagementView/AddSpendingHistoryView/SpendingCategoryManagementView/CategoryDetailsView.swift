@@ -12,6 +12,7 @@ struct CategoryDetailsView: View {
     @State private var showingPopUp = false
     @State private var showToastPopup = false
     @State var isDeleted = false
+    @State private var refreshView = false
     @State private var isNavigateToEditCategoryView = false
 
     var body: some View {
@@ -48,6 +49,7 @@ struct CategoryDetailsView: View {
 
                     CategorySpendingListView(viewModel: viewModel, showToastPopup: $showToastPopup, isDeleted: $isDeleted)
                 }
+                .id(refreshView)
             }
 
             if showingPopUp {
@@ -65,12 +67,17 @@ struct CategoryDetailsView: View {
             }
         }
         .onAppear {
-            refreshView {}
+            refreshView {
+                Log.debug("onAppear")
+            }
+            refreshView = true
         }
         .onChange(of: isDeleted) { newValue in
             if newValue {
                 refreshView {
                     showToastPopup = true
+                    refreshView = true
+                    Log.debug("onChange")
                 }
                 isDeleted = false
             }
@@ -156,6 +163,19 @@ struct CategoryDetailsView: View {
         viewModel.getCategorySpendingHistoryApi { success in
             if success {
                 Log.debug("카테고리 지출내역 조회 성공")
+                // 기존 데이터의 마지막 인덱스를 확인하고, 추가 데이터를 불러오는 로직 추가
+                if let lastItem = viewModel.dailyDetailSpendings.last {
+                    guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == lastItem.id }) else {
+                        return
+                    }
+                    // 해당 인덱스가 마지막 인덱스라면 데이터 추가
+                    if index == viewModel.dailyDetailSpendings.count - 1 {
+                        Log.debug("지출 내역 index: \(index)")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
+                            viewModel.getCategorySpendingHistoryApi { _ in }
+                        }
+                    }
+                }
             } else {
                 Log.debug("카테고리 지출내역 조회 실패")
             }

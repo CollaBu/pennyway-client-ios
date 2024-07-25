@@ -94,5 +94,4 @@ struct CategorySpendingListView: View {
         }
         .frame(maxWidth: .infinity, alignment: .center)
     }
-
 }
