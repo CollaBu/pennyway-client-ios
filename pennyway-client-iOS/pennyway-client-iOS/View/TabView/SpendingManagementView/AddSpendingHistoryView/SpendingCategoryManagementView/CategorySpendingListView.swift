@@ -14,14 +14,10 @@ struct CategorySpendingListView: View {
             ForEach(SpendingListGroupUtil.groupedSpendings(from: viewModel.dailyDetailSpendings), id: \.key) { date, spendings in
                             
                 if DateFormatterUtil.getYear(from: date) != currentYear {
-                    Spacer().frame(height: 5 * DynamicSizeFactor.factor())
-                                
                     yearSeparatorView(for: DateFormatterUtil.getYear(from: date))
                         .padding(.horizontal, 20)
                                 
-                    Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-                } else {
-                    Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                 }
                             
                 Section(header: headerView(for: date)) {
@@ -57,11 +53,13 @@ struct CategorySpendingListView: View {
                         Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     }
                 }
+                
+                Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                
             }
             if isLoadingShown {
                 LoadingView()
             }
-//            Spacer().frame(height: 18 * DynamicSizeFactor.factor())
         }
     }
                 
