@@ -12,7 +12,6 @@ struct CategoryDetailsView: View {
     @State private var showingPopUp = false
     @State private var showToastPopup = false
     @State var isDeleted = false
-    @State private var refreshView = false
     @State private var isNavigateToEditCategoryView = false
 
     var body: some View {
@@ -20,36 +19,49 @@ struct CategoryDetailsView: View {
             ScrollView {
                 VStack {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-
+                        
                     Image("\(viewModel.selectedCategory!.icon.rawValue)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())
-
+                        
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-
+                        
                     Text(viewModel.selectedCategory!.name)
                         .font(.H3SemiboldFont())
                         .platformTextColor(color: Color("Gray07"))
-
+                        
                     Spacer().frame(height: 4 * DynamicSizeFactor.factor())
-
+                        
                     Text("\(viewModel.spedingHistoryTotalCount)개의 소비 내역")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
-
+                        
                     Spacer().frame(height: 28 * DynamicSizeFactor.factor())
-
+                        
                     Rectangle()
                         .platformTextColor(color: Color("Gray01"))
                         .frame(maxWidth: .infinity)
                         .frame(height: 1 * DynamicSizeFactor.factor())
-
+                        
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
-
+                        
                     CategorySpendingListView(viewModel: viewModel, showToastPopup: $showToastPopup, isDeleted: $isDeleted)
+                        
+                    Spacer()
                 }
-                .id(refreshView)
+                .frame(maxHeight: .infinity)
+            }
+            .onAppear {
+                refreshView {}
+            }
+            .onChange(of: isDeleted) { newValue in
+                if newValue {
+                    refreshView {
+                        showToastPopup = true
+                    }
+                    isDeleted = false
+                }
             }
 
             if showingPopUp {
@@ -66,28 +78,13 @@ struct CategoryDetailsView: View {
                 )
             }
         }
-        .onAppear {
-            refreshView {
-                Log.debug("onAppear")
-            }
-            refreshView = true
-        }
-        .onChange(of: isDeleted) { newValue in
-            if newValue {
-                refreshView {
-                    showToastPopup = true
-                    refreshView = true
-                    Log.debug("onChange")
-                }
-                isDeleted = false
-            }
-        }
         .overlay(
             Group {
                 if showToastPopup {
                     CustomToastView(message: "소비내역이 삭제되었어요")
                         .transition(.move(edge: .bottom))
                         .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                        .padding(.bottom, 34)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                                 showToastPopup = false
@@ -96,6 +93,7 @@ struct CategoryDetailsView: View {
                 }
             }, alignment: .bottom
         )
+        .edgesIgnoringSafeArea(.bottom)
         .overlay(
             VStack(alignment: .leading) {
                 if isClickMenu {

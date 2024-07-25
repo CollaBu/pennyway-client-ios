@@ -55,11 +55,6 @@ struct SpendingWeekCalendarView: View {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
-                    if let dateToScroll = selectedDateToScroll, let date = DateFormatterUtil.parseDate(from: dateToScroll) {
-                        DispatchQueue.main.async {
-                            scrollToDate(proxy: proxy)
-                        }
-                    }
                 } else {
                     Log.debug("소비내역 조회 api 연동 실패")
                 }
