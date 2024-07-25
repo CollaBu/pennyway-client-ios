@@ -8,6 +8,7 @@ struct SpendingWeekCalendarView: View {
     @State private var date: Date = Date()
     @State private var changeMonth = false
     @State private var proxy: ScrollViewProxy?
+    @State private var userSelectedDate: Date?
 
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @Binding var selectedDateToScroll: String?
@@ -166,6 +167,7 @@ struct SpendingWeekCalendarView: View {
                     .onTapGesture {
                         if !calendar.isDateInFuture(date, comparedTo: self.date) {
                             selectedDate = date
+                            userSelectedDate = date
                             selectedDateToScroll = dateFormatter(date: date)
                             spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: date)
                         }
@@ -192,10 +194,14 @@ struct SpendingWeekCalendarView: View {
     private func circleColor(for date: Date) -> Color {
         if calendar.isDateInToday(date) {
             return Color("Mint01")
-        } else if spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil {
-            return Color.clear
-        } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
-            return spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil ? Color("Gray02") : Color("Gray03")
+        } else if let userSelected = userSelectedDate,
+                  calendar.isDate(userSelected, equalTo: date, toGranularity: .day)
+        {
+            if spendingHistoryViewModel.getDailyTotalAmount(for: date) != nil {
+                return Color("Gray03")
+            } else {
+                return Color("Gray02")
+            }
         } else {
             return Color.clear
         }
@@ -266,7 +272,10 @@ private extension SpendingWeekCalendarView {
         let newDate = Calendar.current.date(byAdding: .month, value: value, to: currentMonth) ?? currentMonth
         currentMonth = newDate
         spendingHistoryViewModel.currentDate = currentMonth
-//        selectedDate = Date() // 초기화
+
+        selectedDate = Date() // 초기화
+        userSelectedDate = nil // 사용자가 선택한 날짜 초기화
+
         // 선택된 날짜를 새로운 달의 첫날로 설정
         if let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate)) {
             selectedDate = firstDayOfMonth
