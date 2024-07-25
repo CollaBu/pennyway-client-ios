@@ -4,8 +4,8 @@ import SwiftUI
 struct CategorySpendingListView: View {
     @ObservedObject var viewModel: SpendingCategoryViewModel
     @State private var clickDate: Date? = nil
-    
-    @State private var isLoadingShown: Bool = false
+    @State private var isLoadingViewShown: Bool = false
+    @State private var isLoading = false
 
     var currentYear = String(Date.year(from: Date()))
                 
@@ -29,22 +29,25 @@ struct CategorySpendingListView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                         .onAppear {
-                            guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
+                            guard var currentIndex = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
                                 return
                             }
+                            Log.debug(currentIndex)
                             
-                            // 해당 index가 마지막 index라면 데이터 추가
-                            if index == viewModel.dailyDetailSpendings.count - 1 {
-                                Log.debug("지출 내역 index: \(index)")
+                            if currentIndex == viewModel.dailyDetailSpendings.count - 1 && !isLoadingViewShown {
+                                Log.debug("지출 내역 index: \(currentIndex)")
                                 
                                 if viewModel.hasNext {
-                                    isLoadingShown = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {//
+                                        isLoadingViewShown = true
+                                    }
                                 }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // 임시 버퍼링
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                     viewModel.getCategorySpendingHistoryApi { success in
                                         if success {
-                                            isLoadingShown = false
-                                            Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")
+                                            isLoadingViewShown = false
+                                            Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")             
+                                            currentIndex = viewModel.dailyDetailSpendings.count - 1
                                         }
                                     }
                                 }
@@ -55,9 +58,8 @@ struct CategorySpendingListView: View {
                 }
                 
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-                
             }
-            if isLoadingShown {
+            if isLoadingViewShown {
                 LoadingView()
             }
         }
