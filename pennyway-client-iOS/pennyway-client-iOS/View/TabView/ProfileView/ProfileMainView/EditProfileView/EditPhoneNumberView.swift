@@ -52,9 +52,10 @@ struct EditPhoneNumberView: View {
                 CustomBottomButton(action: {
                     if viewModel.isFormValid {
                         viewModel.editUserPhoneNumberApi {
-                            checkFormValid()
-                            if !showingPopUp, !viewModel.showErrorExistingUser {
-                                self.presentationMode.wrappedValue.dismiss()
+                            checkFormValid { success in
+                                if success {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }
                             }
                         }
                     }
@@ -133,12 +134,14 @@ struct EditPhoneNumberView: View {
         viewModel.validateForm()
     }
 
-    private func checkFormValid() {
+    private func checkFormValid(completion: @escaping (Bool) -> Void) {
         if !viewModel.showErrorVerificationCode && !viewModel.showErrorExistingUser && viewModel.isFormValid {
             showingPopUp = false
+            completion(true)
         } else {
             if viewModel.showErrorVerificationCode {
                 showingPopUp = true
+                completion(false)
             }
         }
     }
