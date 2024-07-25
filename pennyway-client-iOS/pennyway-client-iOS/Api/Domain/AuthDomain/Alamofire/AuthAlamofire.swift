@@ -17,17 +17,6 @@ class AuthAlamofire {
         Log.info("AuthAlamofire - receiveVerificationCode() called userInput: \(dto.phone)")
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receiveVerificationCode(dto: dto, type: type), completion: completion)
     }
-
-//    
-//    func receiveUserNameVerificationCode(_ dto: VerificationCodeRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) { // 아이디 찾기 번호인증
-//        Log.info("AuthAlamofire - receiveUserNameVerificationCode() called userInput: \(dto.phone)")
-//        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receiveUserNameVerificationCode(dto: dto), completion: completion)
-//    }
-//    
-//    func receivePwVerificationCode(_ dto: VerificationCodeRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) { // 비밀번호 찾기 번호인증
-//        Log.info("AuthAlamofire - receivePwVerificationCode() called userInput: \(dto.phone)")
-//        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.receivePwVerificationCode(dto: dto), completion: completion)
-//    }
     
     func receivePwVerifyVerificationCode(_ dto: VerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) { // 비밀번호 찾기 번호인증 검증
         Log.info("AuthAlamofire - receivePwVerifyVerificationCode() called userInput: \(dto.phone), \(dto.code)")

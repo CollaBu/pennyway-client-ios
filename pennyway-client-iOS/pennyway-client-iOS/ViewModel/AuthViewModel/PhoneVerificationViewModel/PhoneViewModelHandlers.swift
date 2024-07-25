@@ -1,9 +1,3 @@
-//
-//  PhoneViewModelHandlers.swift
-//  pennyway-client-iOS
-//
-//  Created by 최희진 on 7/25/24.
-//
 
 import Foundation
 
@@ -21,6 +15,7 @@ extension PhoneVerificationViewModel {
                     if type == .general || type == .oauth {
                         RegistrationManager.shared.phoneNumber = phoneNumber
                     }
+                    firstPhoneNumber = phoneNumber
 
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
@@ -189,7 +184,7 @@ extension PhoneVerificationViewModel {
                     let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
 
                     Log.debug("전화번호 수정 완료 \(response)")
-                    //                        updateUserField(fieldName: "username", value: self.inputId)
+                    updateUserField(fieldName: "phone", value: self.phoneNumber)
                 } catch {
                     Log.fault("Error parsing response JSON: \(error)")
                 }

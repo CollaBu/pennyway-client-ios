@@ -8,26 +8,29 @@ struct EditProfileListView: View {
     @State var isNavigateToEditPhoneView = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Spacer().frame(height: 35 * DynamicSizeFactor.factor())
-                
-                CustomRectangleButton(action: {
-                    isNavigateToEditIdView = true
-                }, label: "아이디 변경")
-                
-                Spacer().frame(height: 15 * DynamicSizeFactor.factor())
-                
-                CustomRectangleButton(action: {
-                    isNavigateToEditPhoneView = true
-                }, label: "전화번호 변경")
+        ZStack {
+            ScrollView {
+                VStack {
+                    Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+                    
+                    CustomRectangleButton(action: {
+                        isNavigateToEditIdView = true
+                    }, label: "아이디 변경")
+                    
+                    Spacer().frame(height: 15 * DynamicSizeFactor.factor())
+                    
+                    CustomRectangleButton(action: {
+                        isNavigateToEditPhoneView = true
+                    }, label: "전화번호 변경")
+                }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color("Gray01"))
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
         .navigationBarColor(UIColor(named: "Gray01"), title: "내 정보 수정")
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("Gray01"))
+        .edgesIgnoringSafeArea(.bottom)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 HStack {

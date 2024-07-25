@@ -12,6 +12,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     // MARK: Internal
 
+    @Published var firstPhoneNumber = ""
     @Published var phoneNumber: String = ""
 
     @Published var code: String = ""

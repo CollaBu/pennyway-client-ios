@@ -105,7 +105,7 @@ struct EditPhoneNumberView: View {
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                 PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange)
-                VerificationButton(isEnabled: !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11, action: handleVerificationButtonTap)
+                VerificationButton(isEnabled: !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 && viewModel.phoneNumber != viewModel.firstPhoneNumber, action: handleVerificationButtonTap)
             }
             .padding(.horizontal, 20)
         }
