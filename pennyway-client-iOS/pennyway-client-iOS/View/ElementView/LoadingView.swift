@@ -31,7 +31,7 @@ struct LoadingView: View {
 
     private func startAnimation() {
         animate = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             animate = false
         }
     }

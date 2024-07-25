@@ -5,8 +5,9 @@ import Foundation
 enum SpendingRouter: URLRequestConvertible {
     case getSpendingHistory(dto: GetSpendingHistoryRequestDto)
     case addSpendingHistory(dto: AddSpendingHistoryRequestDto)
-    case deleteSpendingHistory(dto: DeleteSpendingHistoryRequestDto)
+    case deleteSpendingHistory(dto: DeleteSpendingHistoryRequestDto) // 지출내역 복수 삭제
     case getDetailSpendingHistory(spendingId: Int)
+    case deleteSingleSpendingHistory(spendingId: Int) // 지출내역 단일 삭제
     case editSpendingHistory(spendingId: Int, dto: AddSpendingHistoryRequestDto)
     
     var method: HTTPMethod {
@@ -15,7 +16,7 @@ enum SpendingRouter: URLRequestConvertible {
             return .get
         case .addSpendingHistory:
             return .post
-        case .deleteSpendingHistory:
+        case .deleteSpendingHistory, .deleteSingleSpendingHistory:
             return .delete
         case .editSpendingHistory:
             return .put
@@ -31,14 +32,14 @@ enum SpendingRouter: URLRequestConvertible {
         case .getSpendingHistory, .addSpendingHistory, .deleteSpendingHistory:
             return "v2/spendings"
 
-        case let .getDetailSpendingHistory(spendingId), let .editSpendingHistory(spendingId, _):
+        case let .getDetailSpendingHistory(spendingId), let .editSpendingHistory(spendingId, _), let .deleteSingleSpendingHistory(spendingId):
             return "v2/spendings/\(spendingId)"
         }
     }
     
     var bodyParameters: Parameters? {
         switch self {
-        case .getSpendingHistory, .getDetailSpendingHistory:
+        case .getSpendingHistory, .getDetailSpendingHistory, .deleteSingleSpendingHistory:
             return [:]
         case let .addSpendingHistory(dto):
             return try? dto.asDictionary()
@@ -53,7 +54,7 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case let .getSpendingHistory(dto):
             return try? dto.asDictionary()
-        case .addSpendingHistory, .deleteSpendingHistory, .getDetailSpendingHistory, .editSpendingHistory:
+        case .addSpendingHistory, .deleteSpendingHistory, .getDetailSpendingHistory, .editSpendingHistory, .deleteSingleSpendingHistory:
             return [:]
         }
     }
@@ -68,7 +69,7 @@ enum SpendingRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         case .addSpendingHistory, .editSpendingHistory, .deleteSpendingHistory:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
-        case .getDetailSpendingHistory:
+        case .getDetailSpendingHistory, .deleteSingleSpendingHistory:
             request = URLRequest.createURLRequest(url: url, method: method)
         }
         return request

@@ -15,17 +15,17 @@ struct UserProfileData: Codable {
 
 struct UserData: Codable {
     let id: Int
-    let username: String
-    let name: String
+    var username: String
+    var name: String
     let isGeneralSignUp: Bool
     let passwordUpdatedAt: String?
-    let profileImageUrl: String
-    let phone: String
+    var profileImageUrl: String
+    var phone: String
     let profileVisibility: String
     let locked: Bool
-    let notifySetting: NotifySetting
+    var notifySetting: NotifySetting
     let createdAt: String
-    let oauthAccount: OauthAccount
+    var oauthAccount: OauthAccount
 }
 
 // MARK: - NotifySetting

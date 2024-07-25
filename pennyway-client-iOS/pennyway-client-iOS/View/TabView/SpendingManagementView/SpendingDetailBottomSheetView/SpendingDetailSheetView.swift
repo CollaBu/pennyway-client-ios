@@ -8,6 +8,8 @@ struct SpendingDetailSheetView: View {
     @State private var showAddSpendingHistoryView = false
     @State private var forceUpdate: Bool = false
     @State private var isDeleted: Bool = false
+    @State private var showDetailSpendingView = false
+    @State private var selectedSpendingId: Int? = nil
 
     @Binding var clickDate: Date?
     
@@ -78,7 +80,14 @@ struct SpendingDetailSheetView: View {
                             ForEach(spendingHistoryViewModel.filteredSpendings(for: clickDate), id: \.id) { item in
                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
                                     
-                                CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                Button(action: {
+                                    selectedSpendingId = item.id
+                                    showDetailSpendingView = true
+                                }, label: {
+                                    CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                })
+                                .buttonStyle(PlainButtonStyle())
+                                
                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                             }
                         }
@@ -93,6 +102,10 @@ struct SpendingDetailSheetView: View {
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
                     AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $showAddSpendingHistoryView, entryPoint: .detailSheet)
+                }
+            }
+            .fullScreenCover(isPresented: $showDetailSpendingView) {
+                NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: .constant(false), showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
                 }
             }
         }
