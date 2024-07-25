@@ -14,7 +14,6 @@ struct SpendingManagementMainView: View {
     @State private var addSpendingClickDate: Date?
     @State private var addSpendingSelectedDate: Date?
     @State private var entryPoint: EntryPoint = .main
-
     @State private var showToastPopup = false
 
     var body: some View {
@@ -110,7 +109,7 @@ struct SpendingManagementMainView: View {
                 EmptyView()
             }
         }
-        .dragBottomSheet(isPresented: $showSpendingDetailView) {
+        .dragBottomSheet(isPresented: $showSpendingDetailView, minHeight: bottomSheetMinHeight, maxHeight: 524 * DynamicSizeFactor.factor()) {
             SpendingDetailSheetView(clickDate: $clickDate,
                                     viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
                 .zIndex(2)
@@ -126,6 +125,22 @@ struct SpendingManagementMainView: View {
             }
         }
         .id(ishidden)
+    }
+
+    private var bottomSheetMinHeight: CGFloat {
+        if let clickDate = clickDate {
+            let filteredSpendings = spendingHistoryViewModel.filteredSpendings(for: clickDate)
+            switch filteredSpendings.count {
+            case 0 ..< 2: // 지출내역 0~1
+                return 255 * DynamicSizeFactor.factor()
+            case 2 ..< 6: // 지출내역 2~5
+                return 412 * DynamicSizeFactor.factor()
+            default: // 지출내역 5이상일 경우
+                return 524 * DynamicSizeFactor.factor()
+            }
+        } else {
+            return 255 * DynamicSizeFactor.factor()
+        }
     }
 }
 
