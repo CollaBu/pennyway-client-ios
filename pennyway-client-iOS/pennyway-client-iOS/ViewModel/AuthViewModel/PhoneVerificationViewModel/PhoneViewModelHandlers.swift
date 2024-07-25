@@ -7,10 +7,9 @@
 
 import Foundation
 
-extension PhoneVerificationViewModel{
-    
+extension PhoneVerificationViewModel {
     // MARK: 인증번호 요청 handler
-    
+
     func handleVerificationCodeApiResult(result: Result<Data?, Error>, type: VerificationType, completion: @escaping () -> Void) {
         switch result {
         case let .success(data):
@@ -31,7 +30,7 @@ extension PhoneVerificationViewModel{
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if (type == .username || type == .password) && StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                if type == .username || type == .password, StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
                 } else {
                     showErrorVerificationCode = true
@@ -65,7 +64,7 @@ extension PhoneVerificationViewModel{
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
                     code = ""
                     isTimerHidden = true
@@ -105,7 +104,7 @@ extension PhoneVerificationViewModel{
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = true
                     code = ""
                     isTimerHidden = true
@@ -140,7 +139,7 @@ extension PhoneVerificationViewModel{
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
                 } else {
                     showErrorVerificationCode = true
@@ -168,7 +167,7 @@ extension PhoneVerificationViewModel{
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                     showErrorExistingUser = false
                 } else {
                     showErrorVerificationCode = true
@@ -179,5 +178,41 @@ extension PhoneVerificationViewModel{
         }
         completion()
     }
-    
+
+    // MARK: 전화번호 수정 handler
+
+    func handleEditUserPhoneNumberApi(result: Result<Data?, Error>, completion: @escaping () -> Void) {
+        switch result {
+        case let .success(data):
+            if let responseData = data {
+                do {
+                    let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
+
+                    Log.debug("전화번호 수정 완료 \(response)")
+                    //                        updateUserField(fieldName: "username", value: self.inputId)
+                } catch {
+                    Log.fault("Error parsing response JSON: \(error)")
+                }
+            }
+        case let .failure(error):
+            if let StatusSpecificError = error as? StatusSpecificError {
+                Log.info("Failed to verify: \(StatusSpecificError)")
+
+                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                    showErrorExistingUser = true
+                    showErrorVerificationCode = false
+                    code = ""
+                    isTimerHidden = true
+                    stopTimer()
+                    isDisabledButton = false
+                } else {
+                    showErrorVerificationCode = true
+                }
+            } else {
+                Log.error("Failed to verify: \(error)")
+            }
+            Log.debug("전화번호 수정 실패")
+        }
+        completion()
+    }
 }

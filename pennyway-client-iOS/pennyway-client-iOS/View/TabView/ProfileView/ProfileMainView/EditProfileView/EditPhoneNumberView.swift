@@ -4,7 +4,7 @@ import SwiftUI
 struct EditPhoneNumberView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = PhoneVerificationViewModel()
-    @StateObject var editPhoneNumberViewModel = EditPhoneNumberViewModel()
+    @State private var showingPopUp = false
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
@@ -13,49 +13,62 @@ struct EditPhoneNumberView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Spacer().frame(height: 35 * DynamicSizeFactor.factor())
+        ZStack {
+            VStack(alignment: .leading) {
+                Spacer().frame(height: 35 * DynamicSizeFactor.factor())
 
-            VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
-                phoneNumberSection
-                if viewModel.showErrorPhoneNumberFormat {
-                    ErrorText(message: "올바른 전화번호 형식이 아니에요", color: Color("Red03"))
+                VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
+                    phoneNumberSection
+                    if viewModel.showErrorPhoneNumberFormat {
+                        ErrorText(message: "올바른 전화번호 형식이 아니에요", color: Color("Red03"))
+                    }
+                    if viewModel.showErrorExistingUser {
+                        ErrorText(message: "이미 가입된 전화번호예요", color: Color("Red03"))
+                    }
                 }
-                if viewModel.showErrorExistingUser {
-                    ErrorText(message: "이미 가입된 전화번호예요", color: Color("Red03"))
-                }
-            }
 
-            Spacer().frame(height: 21 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 
-            VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-                Text("인증번호")
+                VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
+                    Text("인증번호")
+                        .padding(.horizontal, 20)
+                        .font(.B1RegularFont())
+                        .platformTextColor(color: Color("Gray04"))
+
+                    HStack(spacing: 11 * DynamicSizeFactor.factor()) {
+                        CodeInputField(
+                            code: $viewModel.code,
+                            onCodeChange: handleCodeChange,
+                            isTimerHidden: viewModel.isTimerHidden,
+                            timerString: timerString,
+                            isDisabled: !viewModel.isDisabledButton
+                        )
+                    }
                     .padding(.horizontal, 20)
-                    .font(.B1RegularFont())
-                    .platformTextColor(color: Color("Gray04"))
-
-                HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                    CodeInputField(
-                        code: $viewModel.code,
-                        onCodeChange: handleCodeChange,
-                        isTimerHidden: viewModel.isTimerHidden,
-                        timerString: timerString,
-                        isDisabled: !viewModel.isDisabledButton
-                    )
                 }
-                .padding(.horizontal, 20)
+
+                Spacer()
+
+                CustomBottomButton(action: {
+                    if viewModel.isFormValid {
+                        viewModel.editUserPhoneNumberApi {
+                            checkFormValid()
+                            if !showingPopUp, !viewModel.showErrorExistingUser {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                    }
+
+                }, label: "변경 완료", isFormValid: $viewModel.isFormValid)
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
 
-            Spacer()
-
-            CustomBottomButton(action: {
-                if viewModel.isFormValid {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-
-            }, label: "변경 완료", isFormValid: $viewModel.isFormValid)
-                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+            if showingPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "잘못된 인증번호예요")
+            }
         }
+
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
@@ -110,7 +123,7 @@ struct EditPhoneNumberView: View {
     }
 
     private func handleVerificationButtonTap() {
-        viewModel.requestVerificationCodeApi { viewModel.judgeTimerRunning() }
+        viewModel.requestEditVerificationCodeApi { viewModel.judgeTimerRunning() }
     }
 
     private func handleCodeChange(_ newValue: String) {
@@ -120,6 +133,16 @@ struct EditPhoneNumberView: View {
             viewModel.code = ""
         }
         viewModel.validateForm()
+    }
+
+    private func checkFormValid() {
+        if !viewModel.showErrorVerificationCode && !viewModel.showErrorExistingUser && viewModel.isFormValid {
+            showingPopUp = false
+        } else {
+            if viewModel.showErrorVerificationCode {
+                showingPopUp = true
+            }
+        }
     }
 }
 

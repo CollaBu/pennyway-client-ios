@@ -117,6 +117,7 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         }
     }
+
     // MARK: OAuth 인증번호 검증 API
 
     func requestOAuthVerifyVerificationCodeApi(completion: @escaping () -> Void) {
@@ -128,7 +129,6 @@ class PhoneVerificationViewModel: ObservableObject {
             }
         }
     }
-
 
     // MARK: 아이디 찾기 인증번호 검증 API
 
@@ -151,6 +151,32 @@ class PhoneVerificationViewModel: ObservableObject {
         if isFormValid {
             AuthAlamofire.shared.receivePwVerifyVerificationCode(verificationDto) { result in
                 self.receivePwVerifyVerificationCode(result: result, completion: completion)
+            }
+        }
+    }
+
+    // MARK: 전화번호 수정 인증번호 코드 요청 API
+
+    func requestEditVerificationCodeApi(completion: @escaping () -> Void) {
+        validatePhoneNumber()
+        requestVerificationCodeAction()
+        let verificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
+
+        if !showErrorPhoneNumberFormat {
+            AuthAlamofire.shared.receiveVerificationCode(verificationCodeDto, type: VerificationType.phone) { result in
+                self.handleVerificationCodeApiResult(result: result, type: VerificationType.phone, completion: completion)
+            }
+        }
+    }
+
+    // MARK: 전화번호 수정 API
+
+    func editUserPhoneNumberApi(completion: @escaping () -> Void) {
+        let editPhoneNumberDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
+
+        if isFormValid {
+            UserAccountAlamofire.shared.editUserPhoneNumber(dto: editPhoneNumberDto) { result in
+                self.handleEditUserPhoneNumberApi(result: result, completion: completion)
             }
         }
     }
