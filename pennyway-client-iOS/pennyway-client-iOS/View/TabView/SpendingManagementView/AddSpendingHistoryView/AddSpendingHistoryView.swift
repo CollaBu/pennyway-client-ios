@@ -86,7 +86,7 @@ struct AddSpendingHistoryView: View {
                     }.offset(x: -10)
                 }
             }
-            .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented, minHeight: 255 * DynamicSizeFactor.factor(), maxHeight: 524 * DynamicSizeFactor.factor()) {
+            .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented, minHeight: 524 * DynamicSizeFactor.factor(), maxHeight: 524 * DynamicSizeFactor.factor()) {
                 SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
             }
             .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {

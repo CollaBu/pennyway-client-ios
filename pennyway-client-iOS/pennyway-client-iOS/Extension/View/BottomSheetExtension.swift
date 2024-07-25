@@ -81,20 +81,17 @@ struct DragBottomSheet<SheetContent: View>: ViewModifier {
                                 }
                                 .onEnded { value in
                                     let translation = value.translation.height
-                                    let velocity = value.predictedEndLocation.y - value.location.y
+                                    let velocity = value.predictedEndLocation.y - value.location.y // 속도
 
-                                    // withAnimation(.spring()) {
-                                    if translation < currentHeight * 0.25 || velocity < -300 {
-                                        currentHeight = maxHeight
-                                    } else if translation > currentHeight * 0.25 || velocity > 300 {
-                                        if currentHeight == minHeight {
+                                    withAnimation(.spring()) {
+                                        if -translation > currentHeight * 0.2 || velocity < -150 {
+                                            currentHeight = maxHeight
+                                        } else if translation > currentHeight * 0.2 || velocity > 150 {
                                             isPresented = false
-                                        } else {
-                                            currentHeight = minHeight
                                         }
+
+                                        draggedOffset = 0
                                     }
-                                    draggedOffset = 0
-                                    // }
                                 }
                         )
                         .transition(.move(edge: .bottom))
