@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 // MARK: - BottomSheet
@@ -40,14 +39,18 @@ struct BottomSheet<SheetContent: View>: ViewModifier {
 struct DragBottomSheet<SheetContent: View>: ViewModifier {
     @Binding var isPresented: Bool
     let sheetContent: SheetContent
+    let minHeight: CGFloat
+    let maxHeight: CGFloat
 
-    @State private var offset: CGFloat = 0
-    @State private var lastDragValue: DragGesture.Value?
-    @State private var currentHeight: CGFloat = UIScreen.main.bounds.height
+    @State private var currentHeight: CGFloat
+    @State private var draggedOffset: CGFloat = 0
 
-    init(isPresented: Binding<Bool>, @ViewBuilder sheetContent: @escaping () -> SheetContent) {
+    init(isPresented: Binding<Bool>, minHeight: CGFloat, maxHeight: CGFloat, @ViewBuilder sheetContent: @escaping () -> SheetContent) {
         _isPresented = isPresented
         self.sheetContent = sheetContent()
+        self.minHeight = minHeight
+        self.maxHeight = maxHeight
+        _currentHeight = State(initialValue: minHeight)
     }
 
     func body(content: Content) -> some View {
@@ -65,28 +68,34 @@ struct DragBottomSheet<SheetContent: View>: ViewModifier {
                     Spacer()
                     sheetContent
                         .frame(maxWidth: .infinity)
+                        .frame(height: currentHeight + draggedOffset)
                         .background(
                             RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight])
                                 .fill(Color("White01"))
                         )
-                        .offset(y: max(0, offset))
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
                                     let translation = value.translation.height
-                                    self.offset = max(0, translation + (self.lastDragValue?.translation.height ?? 0))
-                                    self.lastDragValue = value
+                                    draggedOffset = -translation
                                 }
-                                .onEnded { _ in
-                                    if self.offset > 400 { // 수정 필요
-                                        self.offset = 0
-                                        self.lastDragValue = nil
-                                        self.isPresented = false
+                                .onEnded { value in
+                                    let translation = value.translation.height
+                                    let velocity = value.predictedEndLocation.y - value.location.y // 속도
+
+                                    withAnimation(.spring()) {
+                                        if -translation > currentHeight * 0.2 || velocity < -150 {
+                                            currentHeight = maxHeight
+                                        } else if translation > currentHeight * 0.2 || velocity > 150 {
+                                            isPresented = false
+                                        }
+
+                                        draggedOffset = 0
                                     }
                                 }
                         )
                         .transition(.move(edge: .bottom))
-                        .animation(.easeInOut, value: offset)
+                        .animation(.easeInOut, value: draggedOffset)
                 }
                 .edgesIgnoringSafeArea(.bottom)
             }
@@ -99,7 +108,7 @@ extension View {
         modifier(BottomSheet(isPresented: isPresented, maxHeight: maxHeight, sheetContent: content))
     }
 
-    func dragBottomSheet<SheetContent: View>(isPresented: Binding<Bool>, @ViewBuilder sheetContent: @escaping () -> SheetContent) -> some View {
-        modifier(DragBottomSheet(isPresented: isPresented, sheetContent: sheetContent))
+    func dragBottomSheet<SheetContent: View>(isPresented: Binding<Bool>, minHeight: CGFloat, maxHeight: CGFloat, @ViewBuilder sheetContent: @escaping () -> SheetContent) -> some View {
+        modifier(DragBottomSheet(isPresented: isPresented, minHeight: minHeight, maxHeight: maxHeight, sheetContent: sheetContent))
     }
-} 
+}
