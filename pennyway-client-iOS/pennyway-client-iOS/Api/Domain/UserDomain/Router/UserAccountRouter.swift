@@ -11,6 +11,7 @@ enum UserAccountRouter: URLRequestConvertible {
     case validatePw(dto: ValidatePwRequestDto)
     case resetMyPw(dto: ResetMyPwRequestDto)
     case editUserId(dto: CheckDuplicateRequestDto)
+    case editUserPhoneNumber(dto: VerificationRequestDto)
     
     var method: HTTPMethod {
         switch self {
@@ -20,7 +21,7 @@ enum UserAccountRouter: URLRequestConvertible {
             return .delete
         case .registDeviceToken:
             return .put
-        case .settingOnAlarm, .resetMyPw, .editUserId:
+        case .settingOnAlarm, .resetMyPw, .editUserId, .editUserPhoneNumber:
             return .patch
         case .validatePw:
             return .post
@@ -45,6 +46,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return "v2/users/me/password"
         case .editUserId:
             return "v2/users/me/username"
+        case .editUserPhoneNumber:
+            return "v2/users/me/phone"
         }
     }
     
@@ -62,6 +65,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return ["type": type]
         case let .editUserId(dto):
             return try? dto.asDictionary()
+        case let .editUserPhoneNumber(dto):
+            return try? dto.asDictionary()
         }
     }
 
@@ -72,7 +77,7 @@ enum UserAccountRouter: URLRequestConvertible {
         switch self {
         case .getUserProfile, .deleteUserAccount:
             request = URLRequest.createURLRequest(url: url, method: method)
-        case .registDeviceToken, .validatePw, .resetMyPw, .editUserId:
+        case .registDeviceToken, .validatePw, .resetMyPw, .editUserId, .editUserPhoneNumber:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
         case .settingOnAlarm, .settingOffAlarm:
             let queryParameters = parameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }

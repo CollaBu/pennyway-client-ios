@@ -20,9 +20,9 @@ class OAuthAlamofire {
         ApiRequstHandler.shared.requestWithTokenHandling(session: session, router: OAuthRouter.oauthLogin(dto: dto), completion: completion)
     }
 
-    func oauthReceiveVerificationCode(_ dto: OAuthVerificationCodeRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func oauthReceiveVerificationCode(_ dto: OAuthVerificationCodeRequestDto, type: VerificationType, completion: @escaping (Result<Data?, Error>) -> Void) {
         os_log("OAuthAlamofire - oauthReceiveVerificationCode() called : %@ ,, %@", log: .default, type: .info, dto.phone, dto.provider)
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: OAuthRouter.oauthReceiveVerificationCode(dto: dto), completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: OAuthRouter.oauthReceiveVerificationCode(dto: dto, type: type), completion: completion)
     }
     
     func oauthVerifyVerificationCode(_ dto: OAuthVerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
