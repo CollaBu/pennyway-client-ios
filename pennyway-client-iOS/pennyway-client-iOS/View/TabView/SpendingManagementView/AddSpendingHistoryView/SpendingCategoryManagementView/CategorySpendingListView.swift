@@ -9,8 +9,10 @@ struct CategorySpendingListView: View {
     @State private var needRefresh = false
     @Binding var showToastPopup: Bool
     @Binding var isDeleted: Bool
+    
+    @State var animate = false
 
-    var currentYear = String(Date.year(from: Date()))
+    let currentYear = String(Date.year(from: Date()))
 
     var body: some View {
         ZStack {
@@ -51,14 +53,18 @@ struct CategorySpendingListView: View {
                                         if viewModel.hasNext {
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                 isLoadingViewShown = true
+                                                animate = true
                                             }
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                             viewModel.getCategorySpendingHistoryApi { success in
                                                 if success {
-                                                    isLoadingViewShown = false
-                                                    Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")
+                                                    animate = false
                                                     currentIndex = viewModel.dailyDetailSpendings.count - 1
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                        isLoadingViewShown = false
+                                                        Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")
+                                                    }
                                                 }
                                             }
                                         }
@@ -72,7 +78,7 @@ struct CategorySpendingListView: View {
                 }
                 
                 if isLoadingViewShown {
-                    LoadingView()
+                    LoadingView(startAnimate: $animate)
                 }
                 
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())

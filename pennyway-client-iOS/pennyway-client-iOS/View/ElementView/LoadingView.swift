@@ -3,6 +3,7 @@ import SwiftUI
 
 struct LoadingView: View {
     @State private var animate = false
+    @Binding var startAnimate: Bool
     private let frameFactor = 5 * DynamicSizeFactor.factor()
     private let offsetFactor = 3 * DynamicSizeFactor.factor()
 
@@ -25,14 +26,12 @@ struct LoadingView: View {
                 .animation(animate ? Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true).delay(0.4) : .default, value: animate)
         }
         .onAppear {
-            startAnimation()
+            animate = true
         }
-    }
-
-    private func startAnimation() {
-        animate = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
-            animate = false
+        .onChange(of: startAnimate) { value in
+            if !value {
+                animate = false
+            }
         }
     }
 }
