@@ -62,4 +62,10 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.editUserId(dto: dto), completion: completion)
     }
+    
+    func editUserPhoneNumber(dto: VerificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - editUserPhoneNumber() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.editUserPhoneNumber(dto: dto), completion: completion)
+    }
 }

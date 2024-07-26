@@ -131,6 +131,7 @@
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A73E9AA2C34F5610017EED9 /* SpendingCategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */; };
 		4A73E9AD2C35137F0017EED9 /* CategorySpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */; };
+		4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7514D62C51713F00573671 /* PhoneViewModelHandlers.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
 		4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEE2B99A16B001C1188 /* MainView.swift */; };
 		4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A762AF02B99A16D001C1188 /* Assets.xcassets */; };
@@ -401,6 +402,7 @@
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryGridView.swift; sourceTree = "<group>"; };
 		4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySpendingListView.swift; sourceTree = "<group>"; };
+		4A7514D62C51713F00573671 /* PhoneViewModelHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModelHandlers.swift; sourceTree = "<group>"; };
 		4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pennyway-client-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pennyway_client_iOSApp.swift; sourceTree = "<group>"; };
 		4A762AEE2B99A16B001C1188 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -1187,6 +1189,15 @@
 			path = SpendingCategoryManagementView;
 			sourceTree = "<group>";
 		};
+		4A7514D52C51708800573671 /* PhoneVerificationViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D85927F42BE9116700653391 /* PhoneVerificationViewModel.swift */,
+				4A7514D62C51713F00573671 /* PhoneViewModelHandlers.swift */,
+			);
+			path = PhoneVerificationViewModel;
+			sourceTree = "<group>";
+		};
 		4A762AE02B99A16B001C1188 = {
 			isa = PBXGroup;
 			children = (
@@ -1579,11 +1590,11 @@
 		4ADBFAF22BE2C7D600C3ECE4 /* AuthViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */,
+				4A7514D52C51708800573671 /* PhoneVerificationViewModel */,
 				D85927F52BE9116700653391 /* LoginViewModel.swift */,
-				D85927F42BE9116700653391 /* PhoneVerificationViewModel.swift */,
 				D85927F32BE9116700653391 /* SignUpFormViewModel.swift */,
 				D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */,
+				4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */,
 				D85927F72BE9116700653391 /* TermsAndConditionsViewModel.swift */,
 				D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */,
 			);
@@ -1999,6 +2010,7 @@
 				4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
+				4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */,
 				4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */,
 				D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */,
 				4AC320562C11D5AC00DDB4B6 /* TotalTargetAmountHeaderView.swift in Sources */,
