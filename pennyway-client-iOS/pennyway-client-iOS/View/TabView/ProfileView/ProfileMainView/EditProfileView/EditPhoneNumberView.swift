@@ -4,7 +4,8 @@ import SwiftUI
 struct EditPhoneNumberView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = PhoneVerificationViewModel()
-    @State private var showingPopUp = false
+    @State private var showingCodeErrorPopUp = false//인증번호 오류
+    @State private var showingApiRequestPopUp = false//api 요청 오류
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
@@ -64,9 +65,13 @@ struct EditPhoneNumberView: View {
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
 
-            if showingPopUp {
+            if showingCodeErrorPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "잘못된 인증번호예요")
+                ErrorCodePopUpView(showingPopUp: $showingCodeErrorPopUp, label: "잘못된 인증번호예요")
+            }
+            if showingApiRequestPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showingCodeErrorPopUp, label: "잘못된 인증번호예요")
             }
         }
         .background(Color("White01"))
@@ -141,11 +146,11 @@ struct EditPhoneNumberView: View {
 
     private func checkFormValid(completion: @escaping (Bool) -> Void) {
         if !viewModel.showErrorVerificationCode && !viewModel.showErrorExistingUser && viewModel.isFormValid {
-            showingPopUp = false
+            showingCodeErrorPopUp = false
             completion(true)
         } else {
             if viewModel.showErrorVerificationCode {
-                showingPopUp = true
+                showingCodeErrorPopUp = true
                 completion(false)
             }
         }

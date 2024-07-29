@@ -30,6 +30,7 @@ extension PhoneVerificationViewModel {
 //                } else {
 //                    showErrorVerificationCode = true
 //                }
+                
             } else {
                 Log.error("Network request failed: \(error)")
             }
