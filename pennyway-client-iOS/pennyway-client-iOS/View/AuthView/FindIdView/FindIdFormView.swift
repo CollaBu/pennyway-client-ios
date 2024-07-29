@@ -68,7 +68,7 @@ struct FindIdFormView: View {
             Log.debug("else문 시작")
             if phoneVerificationViewModel.showErrorVerificationCode {
                 showingPopUp = true
-                isVerificationError = true//어디 사용??
+                isVerificationError = true // 어디 사용??
             }
         }
     }

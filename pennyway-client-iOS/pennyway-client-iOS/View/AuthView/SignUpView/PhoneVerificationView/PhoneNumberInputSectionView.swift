@@ -43,6 +43,8 @@ struct PhoneNumberInputSectionView: View {
             } else {
                 viewModel.showErrorExistingUser = true
             }
+        } else {
+            viewModel.phoneNumber = ""
         }
         viewModel.validateForm()
     }

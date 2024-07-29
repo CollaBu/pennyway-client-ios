@@ -114,10 +114,14 @@ struct EditPhoneNumberView: View {
         if Int(newValue) != nil {
             if newValue.count > 11 {
                 viewModel.phoneNumber = String(newValue.prefix(11))
-                if viewModel.phoneNumber != viewModel.firstPhoneNumber {
-                    viewModel.showErrorExistingUser = false
-                }
             }
+            if viewModel.phoneNumber != viewModel.firstPhoneNumber {
+                viewModel.showErrorExistingUser = false
+            } else {
+                viewModel.showErrorExistingUser = true
+            }
+        } else {
+            viewModel.phoneNumber = ""
         }
         viewModel.validateForm()
     }

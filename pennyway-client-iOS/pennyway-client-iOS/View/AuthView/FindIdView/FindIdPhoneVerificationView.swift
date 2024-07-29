@@ -33,6 +33,7 @@ struct FindIdPhoneVerificationView: View {
                             .platformTextColor(color: Color("Gray07"))
 
                             .onChange(of: viewModel.phoneNumber) { newValue in
+
                                 if Int(newValue) != nil {
                                     if newValue.count > 11 {
                                         viewModel.phoneNumber = String(newValue.prefix(11))
@@ -51,7 +52,7 @@ struct FindIdPhoneVerificationView: View {
                         }
                     }, label: {
                         Text("인증번호 받기")
-                            .font(.pretendard(.medium, size: 13)) // DynamicFontSize에 없음
+                            .font(.B1MediumFont())
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
                     .padding(.horizontal, 13)
