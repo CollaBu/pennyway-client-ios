@@ -38,8 +38,11 @@ struct PhoneNumberInputSectionView: View {
             if newValue.count > 11 {
                 viewModel.phoneNumber = String(newValue.prefix(11))
             }
-        } else {
-            viewModel.phoneNumber = ""
+            if viewModel.phoneNumber != viewModel.firstPhoneNumber {
+                viewModel.showErrorExistingUser = false
+            } else {
+                viewModel.showErrorExistingUser = true
+            }
         }
         viewModel.validateForm()
     }
