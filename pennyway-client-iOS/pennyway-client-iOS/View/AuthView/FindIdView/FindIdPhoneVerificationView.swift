@@ -48,7 +48,9 @@ struct FindIdPhoneVerificationView: View {
                     Button(action: {
                         if isFindUser {
                             Log.debug("아이디 찾기 api 요청")
-                            viewModel.requestUserNameVerificationCodeApi { viewModel.judgeTimerRunning() }
+                            viewModel.requestUserNameVerificationCodeApi {
+                                viewModel.judgeTimerRunning()
+                            }
                         }
                     }, label: {
                         Text("인증번호 받기")

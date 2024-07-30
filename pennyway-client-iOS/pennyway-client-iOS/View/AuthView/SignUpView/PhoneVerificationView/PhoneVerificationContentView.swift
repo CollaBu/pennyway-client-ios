@@ -3,7 +3,7 @@ import SwiftUI
 
 struct PhoneVerificationContentView: View {
     @ObservedObject var phoneVerificationViewModel: PhoneVerificationViewModel
-
+    @Binding var showingApiRequestPopUp: Bool
     // MARK: Internal
 
     var body: some View {

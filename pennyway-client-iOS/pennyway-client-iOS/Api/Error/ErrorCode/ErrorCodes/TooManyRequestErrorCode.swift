@@ -1,4 +1,4 @@
 
 enum TooManyRequestErrorCode: String {
-    case unexpectedError = "4290"
+    case tooManyRequestError = "4290"
 }

@@ -4,7 +4,8 @@ import SwiftUI
 struct PhoneNumberInputSectionView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
-
+    @Binding var showingApiRequestPopUp: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
             phoneNumberSection
@@ -51,13 +52,22 @@ struct PhoneNumberInputSectionView: View {
 
     private func handleVerificationButtonTap() {
         if isOAuthRegistration {
-            viewModel.requestOAuthVerificationCodeApi { viewModel.judgeTimerRunning() }
+            viewModel.requestOAuthVerificationCodeApi { 
+                handleErrorApi()
+            }
         } else {
-            viewModel.requestVerificationCodeApi { viewModel.judgeTimerRunning() }
+            viewModel.requestVerificationCodeApi { 
+                handleErrorApi()
+            }
+        }
+    }
+    
+    private func handleErrorApi(){
+        if viewModel.showErrorApiRequest {
+            showingApiRequestPopUp = true
+        } else {
+            viewModel.judgeTimerRunning()
         }
     }
 }
 
-#Preview {
-    PhoneNumberInputSectionView(viewModel: PhoneVerificationViewModel())
-}

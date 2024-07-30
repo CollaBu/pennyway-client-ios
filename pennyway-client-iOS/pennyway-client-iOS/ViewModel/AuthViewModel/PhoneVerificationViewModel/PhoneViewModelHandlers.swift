@@ -25,12 +25,19 @@ extension PhoneVerificationViewModel {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
+                if StatusSpecificError.domainError == .tooManyRequest {
+                    showErrorApiRequest = true
+                    isTimerHidden = true
+                    stopTimer()
+                    isDisabledButton = false
+                    print("??: \(showErrorApiRequest)")
+                }
 //                if type == .username || type == .password, StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
 //                    showErrorExistingUser = false
 //                } else {
 //                    showErrorVerificationCode = true
 //                }
-                
+
             } else {
                 Log.error("Network request failed: \(error)")
             }
@@ -56,17 +63,17 @@ extension PhoneVerificationViewModel {
                 }
             }
         case let .failure(error):
-            if let StatusSpecificError = error as? StatusSpecificError {
-                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-
-                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-                    handleExistUser()
-                } else {
-                    showErrorVerificationCode = true
-                }
-            } else {
-                Log.error("Network request failed: \(error)")
-            }
+//            if let StatusSpecificError = error as? StatusSpecificError {
+//                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+//
+//                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+//                    handleExistUser()
+//                } else {
+//                    showErrorVerificationCode = true
+//                }
+//            } else {
+            Log.error("Network request failed: \(error)")
+//            }
         }
         completion()
     }
