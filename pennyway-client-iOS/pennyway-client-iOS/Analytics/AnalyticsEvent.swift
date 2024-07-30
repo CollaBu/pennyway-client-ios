@@ -30,6 +30,11 @@ enum AnalyticsEvent {
     }
 }
 
+/**
+ *  화면 정보를 정의한다.
+ *
+ *  - Parameters: name (analytics 대시보드에 표시될 화면 이름), className (analytics 대시보드에 표시될 클래스명), parameters (추가적인 정보, 선택 사항)
+ */
 struct ScreenViewEvent {
     let name: String
     let className: String
@@ -39,6 +44,11 @@ struct ScreenViewEvent {
     }
 }
 
+/**
+ *  이벤트 정보를 정의한다.
+ *
+ *  - Parameters: name (analytics 대시보드에 표시될 이벤트 이름), parameters (추가적인 정보, 선택 사항)
+ */
 struct EventLog {
     let name: String
     let parameters: [String: Any]?
@@ -46,18 +56,14 @@ struct EventLog {
 
 extension AnalyticsEvent {
     /**
-     *  서비스 내 화면 정보를 정의한다.
-     *
-     *  - Parameters: screenName (화면 이름), screenClass (화면 클래스)
+     *  서비스 내 화면 정보를 상수로써 정의한다.
      */
     enum Screen {
         static let loginView = ScreenViewEvent(name: "로그인 화면", className: "LoginView")
     }
     
     /**
-     *  서비스 내 이벤트 정보를 정의한다.
-     *
-     *  - Parameters: name (이벤트 이름), parameters (이벤트 파라미터)
+     *  서비스 내 이벤트 정보를 상수로써 정의한다.
      */
     enum Trigger {
         static let login = EventLog(name: "user_login", parameters: nil)
