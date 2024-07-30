@@ -49,7 +49,7 @@ final class AnalyticsManager {
             - event: 추적할 이벤트
             - additionalParams: 이벤트에 추가할 파라미터
      */
-    func trackEvent(_ event: AnalyticsEvent, additionalParams: [String: Any]?) {
+    func trackEvent(_ event: AnalyticsEvent, additionalParams: [AnalyticsConstants.Parameter: Any]?) {
         queue.async {
             self.services.forEach{ service in
                 service.trackEventIfSubscribed(event, additionalParams: additionalParams)
