@@ -65,7 +65,7 @@ extension AppDelegate: MessagingDelegate {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
                         Log.debug(response)
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")

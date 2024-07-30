@@ -82,18 +82,6 @@ class KeychainHelper {
         }
     }
     
-    static func deleteFcmToken() {
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: "fcmToken",
-        ]
-        
-        let status = SecItemDelete(query as CFDictionary)
-        if status != noErr {
-            Log.error("Failed to delete fcmToken from Keychain")
-        }
-    }
-    
     // MARK: OAuthUserData Keychain
     
     static func saveOAuthUserData(oauthUserData: OAuthUserData) {
