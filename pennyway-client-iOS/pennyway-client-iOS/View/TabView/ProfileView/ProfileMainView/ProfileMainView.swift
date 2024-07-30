@@ -10,23 +10,23 @@ struct ProfileMainView: View {
                 ZStack(alignment: .leading) {
                     VStack {
                         ProfileUserInfoView()
-                        
+
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-                        
+
                         VStack {
                             Text("내 게시글")
                                 .font(.B1MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
                                 .offset(x: -140, y: 0)
-                                
+
                             Spacer().frame(height: 6 * DynamicSizeFactor.factor())
-                            
+
                             Image("icon_illust_error")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 80 * DynamicSizeFactor.factor(), height: 80 * DynamicSizeFactor.factor(), alignment: .leading)
                                 .padding(10)
-                               
+
                             Text("아직 작성된 글이 없어요")
                                 .font(.H4MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
