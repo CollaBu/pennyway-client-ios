@@ -30,7 +30,6 @@ extension PhoneVerificationViewModel {
                     isTimerHidden = true
                     stopTimer()
                     isDisabledButton = false
-                    print("??: \(showErrorApiRequest)")
                 }
 //                if type == .username || type == .password, StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
 //                    showErrorExistingUser = false
@@ -72,7 +71,7 @@ extension PhoneVerificationViewModel {
                     showErrorVerificationCode = true
                 }
             } else {
-            Log.error("Network request failed: \(error)")
+                Log.error("Network request failed: \(error)")
             }
         }
         completion()
