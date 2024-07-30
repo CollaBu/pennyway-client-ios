@@ -42,7 +42,7 @@ struct ResetPwFormView: View {
                             isPwDeleteButtonVisible = !newValue.isEmpty
                         }
 
-                        handleDeleteButtonTapped(isVisible: !formViewModel.password.isEmpty && isPwDeleteButtonVisible, action: {
+                        handleDeleteButtonUtil(isVisible: !formViewModel.password.isEmpty && isPwDeleteButtonVisible, action: {
                             formViewModel.password = ""
                             formViewModel.showErrorPassword = false
                             formViewModel.validatePwForm()
@@ -94,7 +94,7 @@ struct ResetPwFormView: View {
                             isConfirmPwDeleteButtonVisible = !newValue.isEmpty
                         }
 
-                        handleDeleteButtonTapped(isVisible: !formViewModel.confirmPw.isEmpty && isConfirmPwDeleteButtonVisible, action: {
+                        handleDeleteButtonUtil(isVisible: !formViewModel.confirmPw.isEmpty && isConfirmPwDeleteButtonVisible, action: {
                             formViewModel.confirmPw = ""
                             formViewModel.showErrorConfirmPw = false
                             formViewModel.validatePwForm()
@@ -110,23 +110,6 @@ struct ResetPwFormView: View {
                     ErrorText(message: "비밀번호가 일치하지 않아요", color: Color("Red03"))
                 }
             }
-        }
-    }
-
-    @ViewBuilder
-    private func handleDeleteButtonTapped(isVisible: Bool, action: @escaping () -> Void) -> some View {
-        if isVisible {
-            Button(action: {
-                       action()
-                   },
-                   label: {
-                       Image("icon_close_filled_primary")
-                           .resizable()
-                           .aspectRatio(contentMode: .fit)
-                           .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-
-                   })
-                   .offset(x: 120 * DynamicSizeFactor.factor(), y: 1 * DynamicSizeFactor.factor())
         }
     }
 }
