@@ -4,9 +4,6 @@
 //
 //  Created by 양재서 on 7/30/24.
 //
-
-import Foundation
-
 enum AuthenticationEvents: AnalyticsEvent {
     case login
     

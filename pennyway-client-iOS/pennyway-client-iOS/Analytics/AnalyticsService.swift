@@ -5,7 +5,6 @@
 //  Created by 양재서 on 7/30/24.
 //
 
-import Foundation
 import UIKit
 
 protocol AnalyticsService {
@@ -63,7 +62,7 @@ extension AnalyticsService {
      - Note: 이 메서드는 내부에서 `shouldSubscribeEvent(_:)` 메서드를 호출하여 이벤트가 구독된 이벤트인지 확인한다.
             구독하지 않은 이벤트인 경우 추적을 수행하지 않는다.
      */
-    func trackEventIfSubscribed(_ event: AnalyticsEvent, additionalParams: [AnalyticsConstants.Parameter: Any]?) {
+    func trackEventIfSubscribed(_ event: AnalyticsEvent, additionalParams: [AnalyticsConstants.Parameter: Any] = [:]) {
         if shouldSubscribeEvent(event: event) {
             track(event, additionalParams: additionalParams)
         }

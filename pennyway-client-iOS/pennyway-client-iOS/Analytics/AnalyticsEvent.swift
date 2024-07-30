@@ -5,8 +5,6 @@
 //  Created by 양재서 on 7/30/24.
 //
 
-import Foundation
-
 /**
 분석 이벤트 로그에 대한 프로토콜
  

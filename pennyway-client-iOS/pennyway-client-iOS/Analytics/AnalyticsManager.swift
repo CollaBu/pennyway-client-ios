@@ -5,7 +5,6 @@
 //  Created by 양재서 on 7/30/24.
 //
 
-import Foundation
 import UIKit
 
 final class AnalyticsManager {
