@@ -26,10 +26,32 @@ enum AuthenticationEvents: AnalyticsEvent {
         switch self {
         case .login:
             return [
-                .screenId: "login_screen_view_event",
-                .screenName: "로그인 화면",
-                .screenClass: "LoginView"
+                .screenId: AuthScreen.login.screenId,
+                .screenName: AuthScreen.login.screenName,
+                .screenClass: AuthScreen.login.screenClass
             ]
+        }
+    }
+}
+
+enum AuthScreen {
+    case login
+    
+    var screenId: String {
+        switch self {
+        case .login: return "login_screen_view_event"
+        }
+    }
+    
+    var screenName: String {
+        switch self {
+        case .login: return "로그인 화면"
+        }
+    }
+    
+    var screenClass: String {
+        switch self {
+        case .login: return "LoginView"
         }
     }
 }
