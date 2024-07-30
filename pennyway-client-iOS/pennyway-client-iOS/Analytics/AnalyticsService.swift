@@ -18,7 +18,7 @@ protocol AnalyticsService {
     /**
      앱 내에서 구독할 이벤트를 등록한다.
      */
-    func subscribe(event: AnalyticsEvent)
+    func subscribe(_ event: AnalyticsEvent, additionalParams: [String: Any]?)
     
     /**
      사용자 정보를 설정한다.
@@ -30,50 +30,38 @@ protocol AnalyticsService {
     func setUser(_ userId: String, _ properties: [String: Any]?)
     
     /**
-     구독할 화면 이벤트의 목록을 제공하는 변수.
-     
-     - Note: 이 변수는 구독할 화면 이벤트의 배열을 반환합니다. 구독할 화면 이벤트를 설정하려면 이 변수를 구현하는 클래스 또는 구조체에서 배열을 반환하도록 해야 합니다.
-     */
-    var subscribeScreens: [ScreenViewEvent] { get }
-    
-    /**
-     구독할 트리거 이벤트의 목록을 제공하는 변수.
+    구독할 이벤트의 목록을 제공하는 변수.
          
-     - Note: 이 변수는 구독할 트리거 이벤트의 배열을 반환합니다. 구독할 트리거 이벤트를 설정하려면 이 변수를 구현하는 클래스 또는 구조체에서 배열을 반환하도록 해야 합니다.
+    - Note: 이 변수는 구독할 이벤트의 배열을 반환합니다. 구독할 이벤트를 설정하려면 이 변수를 구현하는 클래스 또는 구조체에서 배열을 반환하도록 해야 합니다.
     */
-    var subscribeTriggerEvents: [TriggerEvent] { get }
+    var subscribeEvents: [AnalyticsEvent.Type] { get }
 }
 
 // MARK: Default Behavior
 extension AnalyticsService {
-    var subscribeScreenEvents: [ScreenViewEvent] {
-        return AnalyticsEvent.allScreenEvent
-    }
-    
-    var subscribeTriggerEvents: [TriggerEvent] {
-        return AnalyticsEvent.allTriggerEvent
+    var subscribeEvents: [AnalyticsEvent.Type] {
+        return []
     }
 }
 
 // MARK: Convenience Methods
 extension AnalyticsService {
     /**
-     화면 이벤트가 구독된 이벤트 목록에 포함되어 있는지 확인한다.
+     이벤트가 구독된 이벤트 목록에 포함되어 있는지 확인한다.
      
-     - Parameter event: 확인하려는 `ScreenViewEvent`
+     - Parameter event: 확인하려는 `AnalyticsEventDefinition`
      - Returns: 이벤트가 구독된 목록에 포함되어 있으면 `true`, 그렇지 않으면 `false`
      */
-    func shouldSubscribeScreenEvent(event: ScreenViewEvent) -> Bool {
-        return subscribeScreenEvents.contains{ $0.name == event.name }
+    func shouldSubscribeEvent(event: AnalyticsEvent) -> Bool {
+        return subscribeEvents.contains(where: { type(of: event) == $0 })
     }
     
     /**
-     트리거 이벤트가 구독된 이벤트 목록에 포함되어 있는지 확인한다.
-     
-     - Parameter event: 확인하려는 `TriggerEvent`
-     - Returns: 이벤트가 구독된 목록에 포함되어 있으면 `true`, 그렇지 않으면 `false`
+     이벤트를 추적한다. 구독된 이벤트인 경우에만 추적을 수행한다.
      */
-    func shouldSubscribeTriggerEvent(event: TriggerEvent) -> Bool {
-        return subscribeTriggerEvents.contains{ $0.name == event.name }
+    func trackEventIfSubscribed(_ event: AnalyticsEvent, additionalParams: [String: Any]?) {
+        if shouldSubscribeEvent(event: event) {
+            subscribe(event, additionalParams: additionalParams)
+        }
     }
 }
