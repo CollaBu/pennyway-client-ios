@@ -16,9 +16,9 @@ protocol AnalyticsService {
     func initialize(application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
     
     /**
-     앱 내에서 구독할 이벤트를 등록한다.
+     앱 내에서 이벤트를 추적한다.
      */
-    func subscribe(_ event: AnalyticsEvent, additionalParams: [String: Any]?)
+    func track(_ event: AnalyticsEvent, additionalParams: [String: Any]?)
     
     /**
      사용자 정보를 설정한다.
@@ -65,7 +65,7 @@ extension AnalyticsService {
      */
     func trackEventIfSubscribed(_ event: AnalyticsEvent, additionalParams: [String: Any]?) {
         if shouldSubscribeEvent(event: event) {
-            subscribe(event, additionalParams: additionalParams)
+            track(event, additionalParams: additionalParams)
         }
     }
 }
