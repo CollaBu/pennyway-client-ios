@@ -34,12 +34,12 @@ protocol AnalyticsService {
          
     - Note: 이 변수는 구독할 이벤트의 배열을 반환합니다. 구독할 이벤트를 설정하려면 이 변수를 구현하는 클래스 또는 구조체에서 배열을 반환하도록 해야 합니다.
     */
-    var subscribeEvents: [AnalyticsEvent.Type] { get }
+    var subscribedEvents: [AnalyticsEvent.Type] { get }
 }
 
 // MARK: Default Behavior
 extension AnalyticsService {
-    var subscribeEvents: [AnalyticsEvent.Type] {
+    var subscribedEvents: [AnalyticsEvent.Type] {
         return []
     }
 }
@@ -53,11 +53,15 @@ extension AnalyticsService {
      - Returns: 이벤트가 구독된 목록에 포함되어 있으면 `true`, 그렇지 않으면 `false`
      */
     func shouldSubscribeEvent(event: AnalyticsEvent) -> Bool {
-        return subscribeEvents.contains(where: { type(of: event) == $0 })
+        return subscribedEvents.contains(where: { type(of: event) == $0 })
     }
     
     /**
-     이벤트를 추적한다. 구독된 이벤트인 경우에만 추적을 수행한다.
+     이벤트를 추적하는 편의용 메서드.
+     구독된 이벤트인 경우에만 추적을 수행한다.
+     
+     - Note: 이 메서드는 내부에서 `shouldSubscribeEvent(_:)` 메서드를 호출하여 이벤트가 구독된 이벤트인지 확인한다.
+            구독하지 않은 이벤트인 경우 추적을 수행하지 않는다.
      */
     func trackEventIfSubscribed(_ event: AnalyticsEvent, additionalParams: [String: Any]?) {
         if shouldSubscribeEvent(event: event) {
