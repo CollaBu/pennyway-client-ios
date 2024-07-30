@@ -274,6 +274,8 @@
 		D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */; };
 		D8E637502C06303D00D43BB6 /* MySpendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */; };
 		D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */; };
+		D8F9D7362C593B71005416FC /* PreparedFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7352C593B71005416FC /* PreparedFeedView.swift */; };
+		D8F9D7382C593B80005416FC /* PreparedChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7372C593B80005416FC /* PreparedChatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -546,6 +548,8 @@
 		D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
 		D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListViewModel.swift; sourceTree = "<group>"; };
 		D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleDeleteButtonUtil.swift; sourceTree = "<group>"; };
+		D8F9D7352C593B71005416FC /* PreparedFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedFeedView.swift; path = "pennyway-client-iOS/Utils/View/PreparedFeedView.swift"; sourceTree = SOURCE_ROOT; };
+		D8F9D7372C593B80005416FC /* PreparedChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedChatView.swift; path = "pennyway-client-iOS/Utils/View/PreparedChatView.swift"; sourceTree = SOURCE_ROOT; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1518,6 +1522,7 @@
 		4AD70E1F2BE013380058A52A /* FeedView */ = {
 			isa = PBXGroup;
 			children = (
+				D8F9D7352C593B71005416FC /* PreparedFeedView.swift */,
 			);
 			path = FeedView;
 			sourceTree = "<group>";
@@ -1525,6 +1530,7 @@
 		4AD70E202BE013430058A52A /* ChatView */ = {
 			isa = PBXGroup;
 			children = (
+				D8F9D7372C593B80005416FC /* PreparedChatView.swift */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -1928,6 +1934,7 @@
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
 				4A5789752BDC1CBF00AFEB26 /* NotFoundErrorCode.swift in Sources */,
 				4A6C79D62C463DB1009463E4 /* EditIdView.swift in Sources */,
+				D8F9D7362C593B71005416FC /* PreparedFeedView.swift in Sources */,
 				4A3701D72C090CD600F0AEBA /* Value.swift in Sources */,
 				4AC320592C11D5D500DDB4B6 /* CustomToastView.swift in Sources */,
 				4A57898F2BDC298500AFEB26 /* NotFoundError.swift in Sources */,
@@ -2083,6 +2090,7 @@
 				4A4703AB2BCEE52300AEE04E /* VerificationResponseDto.swift in Sources */,
 				4A5789952BDC29E700AFEB26 /* ConflictError.swift in Sources */,
 				D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */,
+				D8F9D7382C593B80005416FC /* PreparedChatView.swift in Sources */,
 				4AC3204B2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
