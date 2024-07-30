@@ -5,7 +5,6 @@
 //  Created by 양재서 on 7/30/24.
 //
 
-import Firebase
 import FirebaseAnalytics
 
 class FirebaseAnalyticsService: AnalyticsService {
@@ -14,7 +13,7 @@ class FirebaseAnalyticsService: AnalyticsService {
     }
     
     func initialize(application _: UIApplication, launchOptions _: [UIApplication.LaunchOptionsKey: Any]?) {
-        FirebaseApp.configure()
+        Log.info("Firebase: Initialized")
     }
     
     func track(_ event: any AnalyticsEvent, additionalParams: [AnalyticsConstants.Parameter: Any]?) {
@@ -50,7 +49,7 @@ class FirebaseAnalyticsService: AnalyticsService {
         event.parameters?.forEach { key, value in
             switch key {
             case .screenId:
-                params[AnalyticsParameterScreenName] = value
+                params["firebase_screen_id"] = value
             case .screenName:
                 params[AnalyticsParameterScreenName] = value
             case .screenClass:

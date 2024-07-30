@@ -14,8 +14,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let firebaseAnalyticsService = FirebaseAnalyticsService()
 
         AnalyticsManager.shared.addService(firebaseAnalyticsService)
-
         AnalyticsManager.shared.initialize(application: application, launchOptions: nil)
+
+        FirebaseApp.configure()
 
         // Setting Up Notifications...
         // 원격 알림 등록

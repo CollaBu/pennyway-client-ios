@@ -1,4 +1,4 @@
-
+import FirebaseAnalytics
 import SwiftUI
 
 // MARK: - MainTabView
@@ -29,7 +29,6 @@ struct MainTabView: View {
                 .tag(2)
 
             ProfileMainView()
-
                 .tabItem {
                     selection == 3 ? Image("icon_tabbar_profile_on") : Image("icon_tabbar_profile_off")
                     Text("프로필")
