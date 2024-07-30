@@ -7,14 +7,6 @@ class UserAccountViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var oldPassword: String = ""
     @Published var showErrorPassword: Bool = false
-//
-//    func validatePwForm() {
-//        if !password.isEmpty && !showErrorPassword {
-//            isFormValid = true
-//        } else {
-//            isFormValid = false
-//        }
-//    }
 
     func getUserProfileApi(completion: @escaping (Bool) -> Void) {
         UserAccountAlamofire.shared.getUserProfile { result in
