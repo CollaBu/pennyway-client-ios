@@ -8,6 +8,8 @@ struct ProfileMenuBarListView: View {
     @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
 
+    @State private var navigateCompleteView = false
+
     var body: some View {
         ZStack {
             ScrollView {
@@ -53,13 +55,17 @@ struct ProfileMenuBarListView: View {
                 CustomPopUpView(showingPopUp: $showLogoutPopUp,
                                 titleLabel: "탈퇴하시겠어요?",
                                 subTitleLabel: "탈퇴 후에는 이용한 서비스\n내역이 모두 사라져요 😢",
-                                firstBtnAction: handleLogout,
+                                firstBtnAction: handleDeleteUserAccount,
                                 firstBtnLabel: "탈퇴하기",
                                 secondBtnAction: { self.showDeleteUserPopUp = false },
                                 secondBtnLabel: "더 써볼게요",
                                 secondBtnColor: Color("Gray05"),
                                 heightSize: 166
                 )
+            }
+
+            NavigationLink(destination: CompleteDeleteUserView(), isActive: $navigateCompleteView) {
+                EmptyView()
             }
         }
     }
@@ -81,7 +87,8 @@ struct ProfileMenuBarListView: View {
         userAccountViewModel.deleteUserAccountApi { success in
             DispatchQueue.main.async {
                 if success {
-                    authViewModel.logout()
+                    showDeleteUserPopUp = false
+                    navigateCompleteView = true
                 } else {
                     Log.error("Fail delete UserAccount")
                 }
