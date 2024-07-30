@@ -51,8 +51,7 @@ extension AppDelegate: MessagingDelegate {
     /// fcm 등록 토큰을 받았을 때
     func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let fcmToken = fcmToken {
-            KeychainHelper.saveFcmToken(fcmToken: fcmToken) // fcmToken 저장
-            Log.info("fcmToken saved: \(fcmToken)")
+            Log.info("fcmToken: \(fcmToken)")
             registDeviceTokenApi(fcmToken: fcmToken)
         }
     }
