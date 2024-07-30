@@ -1,9 +1,9 @@
-//
-//  AnalyticsConstants.swift
-//  pennyway-client-iOS
-//
-//  Created by 양재서 on 7/30/24.
-//
+///
+///  AnalyticsConstants.swift
+///  pennyway-client-iOS
+///
+///  Created by 양재서 on 7/30/24.
+///
 enum AnalyticsConstants {
     enum EventName {
         case screenView

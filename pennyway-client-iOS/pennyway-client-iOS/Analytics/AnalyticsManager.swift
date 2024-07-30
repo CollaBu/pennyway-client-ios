@@ -27,30 +27,26 @@ final class AnalyticsManager {
         services.forEach { $0.initialize(application: application, launchOptions: launchOptions) }
     }
     
-    /**
-        사용자 정보를 설정한다.
-     
-        - Parameters:
-            - userId: 사용자 식별자 정보 (고유값)
-            - properties: 사용자 추가 정보 (옵션)
-     */
-    func setUser(_ userId: String, _ properties: [String: Any]? = nil) {
-        self.services.forEach { service in
+    ///   사용자 정보를 설정한다.
+    ///
+    ///   - Parameters:
+    ///       - userId: 사용자 식별자 정보 (고유값)
+    ///       - properties: 사용자 추가 정보. key (옵션)
+    func setUser(_ userId: String, _ properties: [String: String]? = [:]) {
+        for service in services {
             service.setUser(userId, properties)
         }
     }
     
-    /**
-        구독된 이벤트를 추적한다.
-        이 메서드는 비동기로 실행되며, Thread-Safe하다.
-     
-        - Parameters:
-            - event: 추적할 이벤트
-            - additionalParams: 이벤트에 추가할 파라미터
-     */
+    ///   구독된 이벤트를 추적한다.
+    ///   이 메서드는 비동기로 실행되며, Thread-Safe하다.
+    ///
+    ///   - Parameters:
+    ///       - event: 추적할 이벤트
+    ///       - additionalParams: 이벤트에 추가할 파라미터
     func trackEvent(_ event: AnalyticsEvent, additionalParams: [AnalyticsConstants.Parameter: Any]?) {
         queue.async {
-            self.services.forEach{ service in
+            for service in self.services {
                 service.trackEventIfSubscribed(event, additionalParams: additionalParams)
             }
         }

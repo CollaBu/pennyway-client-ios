@@ -1,9 +1,11 @@
-//
-//  AuthenticationEvents.swift
-//  pennyway-client-iOS
-//
-//  Created by 양재서 on 7/30/24.
-//
+// MARK: - AuthenticationEvents
+
+///
+///  AuthenticationEvents.swift
+///  pennyway-client-iOS
+///
+///  Created by 양재서 on 7/30/24.
+///
 enum AuthenticationEvents: AnalyticsEvent {
     case login
     
@@ -30,6 +32,8 @@ enum AuthenticationEvents: AnalyticsEvent {
         }
     }
 }
+
+// MARK: - AuthScreen
 
 enum AuthScreen {
     case login

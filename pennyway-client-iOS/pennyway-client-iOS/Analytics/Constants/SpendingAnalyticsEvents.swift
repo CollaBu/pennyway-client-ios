@@ -1,11 +1,14 @@
-//
-//  SpendingEvents.swift
-//  pennyway-client-iOS
-//
-//  Created by 양재서 on 7/30/24.
-//
+// MARK: - SpendingEvents
+
+///
+///  SpendingEvents.swift
+///  pennyway-client-iOS
+///
+///  Created by 양재서 on 7/30/24.
+///
 enum SpendingEvents: AnalyticsEvent {
     // MARK: - Spending List Screen View Event
+
     case spendingListView
     case detailSpendingView
     case addSpendingInputFormView
@@ -54,6 +57,8 @@ enum SpendingEvents: AnalyticsEvent {
         }
     }
 }
+
+// MARK: - SpendingScreen
 
 enum SpendingScreen {
     case spendingListView
