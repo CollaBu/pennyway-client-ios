@@ -5,7 +5,7 @@ struct PhoneNumberInputSectionView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @Binding var showingApiRequestPopUp: Bool
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
             phoneNumberSection
@@ -61,8 +61,8 @@ struct PhoneNumberInputSectionView: View {
             }
         }
     }
-    
-    private func handleErrorApi(){
+
+    private func handleErrorApi() {
         if viewModel.showErrorApiRequest {
             showingApiRequestPopUp = true
         } else {
@@ -70,4 +70,3 @@ struct PhoneNumberInputSectionView: View {
         }
     }
 }
-

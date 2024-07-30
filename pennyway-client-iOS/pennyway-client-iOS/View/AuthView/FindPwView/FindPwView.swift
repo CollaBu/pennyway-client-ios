@@ -13,7 +13,7 @@ struct FindPwView: View {
             VStack {
                 ScrollView {
                     VStack {
-                        FindPwContentView(phoneVerificationViewModel: phoneVerificationViewModel)
+                        FindPwContentView(phoneVerificationViewModel: phoneVerificationViewModel, showingApiRequestPopUp: $showingApiRequestPopUp)
                     }
                 }
                 Spacer()

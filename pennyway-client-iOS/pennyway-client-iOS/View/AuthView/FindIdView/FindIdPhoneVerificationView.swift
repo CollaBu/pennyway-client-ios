@@ -4,6 +4,7 @@ import SwiftUI
 
 struct FindIdPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
+    @Binding var showingApiRequestPopUp: Bool
     @State private var isFindUser = true
 
     var body: some View {
@@ -49,7 +50,11 @@ struct FindIdPhoneVerificationView: View {
                         if isFindUser {
                             Log.debug("아이디 찾기 api 요청")
                             viewModel.requestUserNameVerificationCodeApi {
-                                viewModel.judgeTimerRunning()
+                                if viewModel.showErrorApiRequest {
+                                    showingApiRequestPopUp = true
+                                } else {
+                                    viewModel.judgeTimerRunning()
+                                }
                             }
                         }
                     }, label: {
@@ -80,8 +85,4 @@ struct FindIdPhoneVerificationView: View {
             }
         }
     }
-}
-
-#Preview {
-    FindIdPhoneVerificationView(viewModel: PhoneVerificationViewModel())
 }

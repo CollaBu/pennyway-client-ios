@@ -63,17 +63,17 @@ extension PhoneVerificationViewModel {
                 }
             }
         case let .failure(error):
-//            if let StatusSpecificError = error as? StatusSpecificError {
-//                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-//
-//                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-//                    handleExistUser()
-//                } else {
-//                    showErrorVerificationCode = true
-//                }
-//            } else {
+            if let StatusSpecificError = error as? StatusSpecificError {
+                Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+
+                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                    handleExistUser()
+                } else {
+                    showErrorVerificationCode = true
+                }
+            } else {
             Log.error("Network request failed: \(error)")
-//            }
+            }
         }
         completion()
     }

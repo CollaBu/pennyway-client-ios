@@ -14,7 +14,7 @@ struct FindIdFormView: View {
         ZStack {
             VStack {
                 ScrollView {
-                    FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel)
+                    FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel, showingApiRequestPopUp: $showingApiRequestPopUp)
                 }
 
                 Spacer()

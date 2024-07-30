@@ -4,6 +4,7 @@ import SwiftUI
 
 struct FindPwPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
+    @Binding var showingApiRequestPopUp: Bool
     @State private var isFindUser = true
 
     var body: some View {
@@ -44,7 +45,12 @@ struct FindPwPhoneVerificationView: View {
                     }
                     Button(action: {
                         if isFindUser {
-                            viewModel.requestPwVerificationCodeApi { viewModel.judgeTimerRunning() }
+                            viewModel.requestPwVerificationCodeApi { if viewModel.showErrorApiRequest {
+                                showingApiRequestPopUp = true
+                            } else {
+                                viewModel.judgeTimerRunning()
+                            }
+                            }
                         }
                     }, label: {
                         Text("인증번호 받기")
@@ -74,8 +80,4 @@ struct FindPwPhoneVerificationView: View {
             }
         }
     }
-}
-
-#Preview {
-    FindIdPhoneVerificationView(viewModel: PhoneVerificationViewModel())
 }
