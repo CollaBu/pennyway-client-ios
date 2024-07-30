@@ -11,7 +11,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     /// 앱이 켜졌을 때
     func application(_ application: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // 파이어베이스 설정
-        FirebaseApp.configure()
+        let firebaseAnalyticsService = FirebaseAnalyticsService()
+
+        AnalyticsManager.shared.addService(firebaseAnalyticsService)
+
+        AnalyticsManager.shared.initialize(application: application, launchOptions: nil)
 
         // Setting Up Notifications...
         // 원격 알림 등록
