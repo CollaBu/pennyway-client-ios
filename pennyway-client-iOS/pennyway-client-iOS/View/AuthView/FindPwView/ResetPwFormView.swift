@@ -112,23 +112,6 @@ struct ResetPwFormView: View {
             }
         }
     }
-
-//    @ViewBuilder
-//    private func handleDeleteButtonTapped(isVisible: Bool, action: @escaping () -> Void) -> some View {
-//        if isVisible {
-//            Button(action: {
-//                       action()
-//                   },
-//                   label: {
-//                       Image("icon_close_filled_primary")
-//                           .resizable()
-//                           .aspectRatio(contentMode: .fit)
-//                           .frame(width: 12 * DynamicSizeFactor.factor(), height: 12 * DynamicSizeFactor.factor())
-//
-//                   })
-//                   .offset(x: 120 * DynamicSizeFactor.factor(), y: 1 * DynamicSizeFactor.factor())
-//        }
-//    }
 }
 
 #Preview {
