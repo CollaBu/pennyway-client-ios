@@ -121,8 +121,13 @@ struct AddSpendingCategoryView: View {
                     .padding(.leading, 13 * DynamicSizeFactor.factor())
                     .font(.H4MediumFont())
                     .platformTextColor(color: Color("Gray07"))
-                    .onChange(of: categoryName) { _ in
-                        isFormValid = !categoryName.isEmpty
+                    .onChange(of: categoryName) { newValue in
+                        if entryPoint == .create {
+                            viewModel.categoryName = String(newValue.prefix(maxCategoryNameCount))
+                        } else {
+                            spendingCategoryViewModel.categoryName = String(newValue.prefix(maxCategoryNameCount))
+                        }
+                        isFormValid = !newValue.isEmpty
                     }
             }
         }
