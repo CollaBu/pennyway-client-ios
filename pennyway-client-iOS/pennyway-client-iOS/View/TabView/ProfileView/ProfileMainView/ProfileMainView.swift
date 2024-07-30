@@ -3,18 +3,42 @@ import SwiftUI
 
 struct ProfileMainView: View {
     @State private var isSelectedToolBar = false
+
     var body: some View {
         NavigationAvailable {
             ScrollView {
-                VStack {
-                    ProfileUserInfoView()
-
-                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                ZStack(alignment: .leading) {
+                    VStack {
+                        ProfileUserInfoView()
+                        
+                        Spacer().frame(height: 33 * DynamicSizeFactor.factor())
+                        
+                        VStack {
+                            Text("내 게시글")
+                                .font(.B1MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                                .offset(x: -140, y: 0)
+                                
+                            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+                            
+                            Image("icon_illust_error")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 80 * DynamicSizeFactor.factor(), height: 80 * DynamicSizeFactor.factor(), alignment: .leading)
+                                .padding(10)
+                               
+                            Text("아직 작성된 글이 없어요")
+                                .font(.H4MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                                .padding(1)
+                        }
+                        .padding(.horizontal, 20)
+                    }
                 }
-                .background(Color("Gray01"))
             }
+            .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: false)
-            .navigationBarColor(UIColor(named: "White01"), title: "프로필")
+            .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
