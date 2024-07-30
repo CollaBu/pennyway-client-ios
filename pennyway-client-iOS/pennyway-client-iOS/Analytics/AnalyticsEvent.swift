@@ -9,7 +9,7 @@ import Foundation
 
 enum AnalyticsEvent {
     case screenView(ScreenViewEvent)
-    case eventLog(EventLog)
+    case eventLog(TriggerEvent)
     
     var name: String {
         switch self {
@@ -31,9 +31,12 @@ enum AnalyticsEvent {
 }
 
 /**
- *  화면 정보를 정의한다.
- *
- *  - Parameters: name (analytics 대시보드에 표시될 화면 이름), className (analytics 대시보드에 표시될 클래스명), parameters (추가적인 정보, 선택 사항)
+ 화면 정보를 정의한다.
+ 
+ - Parameters: 
+    - name: analytics 대시보드에 표시될 화면 이름
+    - className: analytics 대시보드에 표시될 클래스명
+    - parameters: 추가적인 정보, 선택 사항
  */
 struct ScreenViewEvent {
     let name: String
@@ -45,18 +48,20 @@ struct ScreenViewEvent {
 }
 
 /**
- *  이벤트 정보를 정의한다.
- *
- *  - Parameters: name (analytics 대시보드에 표시될 이벤트 이름), parameters (추가적인 정보, 선택 사항)
+ 이벤트 정보를 정의한다.
+ 
+ - Parameters:
+   - name: analytics 대시보드에 표시될 이벤트 이름
+   - parameters: 추가적인 정보, 선택 사항
  */
-struct EventLog {
+struct TriggerEvent {
     let name: String
     let parameters: [String: Any]?
 }
 
 extension AnalyticsEvent {
     /**
-     *  서비스 내 화면 정보를 상수로써 정의한다.
+     서비스 내 화면 정보를 상수로써 정의한다.
      */
     enum Screen: String, CaseIterable {
         case loginView
@@ -70,35 +75,35 @@ extension AnalyticsEvent {
     }
     
     /**
-     *  서비스 내 이벤트 정보를 상수로써 정의한다.
+     서비스 내 이벤트 정보를 상수로써 정의한다.
      */
     enum Trigger: String, CaseIterable {
         case login
         case buttonTap
         
-        var event: EventLog {
+        var event: TriggerEvent {
             switch self {
             case .login:
-                return EventLog(name: "user_login", parameters: nil)
+                return TriggerEvent(name: "user_login", parameters: nil)
             case .buttonTap:
-                return EventLog(name: "button_tapped", parameters: nil)
+                return TriggerEvent(name: "button_tapped", parameters: nil)
             }
         }
     }
     
     /**
-     *  이 속성은 오직 편의용 메서드로 사용한다.
-     *  만약, analytics serivce에서 모든 페이지를 구독할 때, 이 메서드를 사용하면 정의된 모든 페이지 정보를 반환한다.
+     이 속성은 오직 편의용 메서드로 사용한다.
+     > 만약, analytics serivce에서 모든 페이지를 구독할 때, 이 메서드를 사용하면 정의된 모든 페이지 정보를 반환한다.
      */
     static var allScreenEvent: [ScreenViewEvent] = {
         return Screen.allCases.map { $0.event }
     }()
     
     /**
-     *  이 속성은 오직 편의용 메서드로 사용한다.
-     *  만약, analytics serivce에서 모든 이벤트를 구독할 때, 이 메서드를 사용하면 정의된 모든 이벤트 정보를 반환한다.
+     이 속성은 오직 편의용 메서드로 사용한다.
+     > 만약, analytics serivce에서 모든 이벤트를 구독할 때, 이 메서드를 사용하면 정의된 모든 이벤트 정보를 반환한다.
      */
-    static var allTriggerEvent: [EventLog] = {
+    static var allTriggerEvent: [TriggerEvent] = {
         return Trigger.allCases.map { $0.event }
     }()
 }
