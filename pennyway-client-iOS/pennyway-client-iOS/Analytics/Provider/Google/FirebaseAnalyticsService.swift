@@ -6,13 +6,14 @@
 //
 
 import FirebaseAnalytics
+import SwiftUI
 
 class FirebaseAnalyticsService: AnalyticsService {
     var subscribedEvents: [AnalyticsEvent.Type] {
         [AuthenticationEvents.self, SpendingEvents.self]
     }
     
-    func initialize(application _: UIApplication, launchOptions _: [UIApplication.LaunchOptionsKey: Any]?) {
+    func initialize(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) {
         Log.info("Firebase: Initialized")
     }
     

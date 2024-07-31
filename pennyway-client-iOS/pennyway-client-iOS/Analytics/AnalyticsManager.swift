@@ -23,8 +23,8 @@ final class AnalyticsManager {
     
     /// `addService` 메서드로 추가한 서비스들을 `AppDelegate`에서 초기화한다.
     /// 이 메서드는 반드시 AppDelegate의 `application(_:didFinishLaunchingWithOptions:)`에서 호출되어야 한다.
-    func initialize(application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        services.forEach { $0.initialize(application: application, launchOptions: launchOptions) }
+    func initialize(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        services.forEach { $0.initialize(application, didFinishLaunchingWithOptions: launchOptions) }
     }
     
     ///   사용자 정보를 설정한다.

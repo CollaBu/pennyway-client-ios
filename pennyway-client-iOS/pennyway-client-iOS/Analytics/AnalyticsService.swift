@@ -5,14 +5,14 @@
 //  Created by 양재서 on 7/30/24.
 //
 
-import UIKit
+import SwiftUI
 
 // MARK: - AnalyticsService
 
 protocol AnalyticsService {
     /// SDK를 초기화한다.
     /// > 이 메서드는 AppDelegate application:didFinishLaunchingWithOptions: 메서드 내에서 반드시 호출되어야 한다.
-    func initialize(application: UIApplication, launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
+    func initialize(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
 
     /// 앱 내에서 이벤트를 추적한다.
     func track(_ event: AnalyticsEvent, additionalParams: [AnalyticsConstants.Parameter: Any]?)
