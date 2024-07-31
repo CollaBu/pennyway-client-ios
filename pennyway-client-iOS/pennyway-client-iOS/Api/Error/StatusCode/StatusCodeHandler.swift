@@ -24,6 +24,8 @@ enum StatusCodeHandler {
             return preconditionFailedError(errorCode, message: defaultMessage)
         case 422:
             return unprocessableContentError(errorCode, message: defaultMessage)
+        case 429:
+            return tooManyRequestError(errorCode, message: defaultMessage)
         case 500:
             return internalServerError(errorCode, message: defaultMessage)
         default:

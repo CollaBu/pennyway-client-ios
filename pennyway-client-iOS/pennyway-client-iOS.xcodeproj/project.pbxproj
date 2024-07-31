@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -110,13 +110,14 @@
 		4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789982BDC2A1100AFEB26 /* UnprocessableContentError.swift */; };
 		4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */; };
 		4A5DA8C12C3C498D00685F77 /* FcmTokenDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */; };
+		4A60F64C2C595E4700805F2C /* CustomCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60F64B2C595E4700805F2C /* CustomCompleteView.swift */; };
+		4A60F64E2C595F6A00805F2C /* CompleteDeleteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60F64D2C595F6A00805F2C /* CompleteDeleteUserView.swift */; };
 		4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A641A142C0F98380041B053 /* TotalTargetAmountViewModel.swift */; };
 		4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */; };
 		4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */; };
 		4A69C1522BE695FF00A27B82 /* FindUserNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */; };
 		4A69C1562BE69DEA00A27B82 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A69C1552BE69DEA00A27B82 /* Log.swift */; };
 		4A6A9D112C331A9500394771 /* TargetAmountSetCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6A9D102C331A9500394771 /* TargetAmountSetCompleteView.swift */; };
-		4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */; };
 		4A6C79D22C46310B009463E4 /* EditProfileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D12C46310B009463E4 /* EditProfileListView.swift */; };
 		4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D32C463C0B009463E4 /* CustomRectangleButton.swift */; };
 		4A6C79D62C463DB1009463E4 /* EditIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D52C463DB1009463E4 /* EditIdView.swift */; };
@@ -218,6 +219,16 @@
 		4AE8F3B42C330A0B0014F0D4 /* TargetAmountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3B32C330A0B0014F0D4 /* TargetAmountSettingView.swift */; };
 		4AE8F3B62C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3B52C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift */; };
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
+		4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */; };
+		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
+		B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */; };
+		B599E4BE2C58AF34006051E9 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4BD2C58AF34006051E9 /* AnalyticsEvent.swift */; };
+		B599E4C02C58B951006051E9 /* AnalyticsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4BF2C58B951006051E9 /* AnalyticsTracker.swift */; };
+		B599E4C32C58D4F0006051E9 /* AnalyticsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4C22C58D4F0006051E9 /* AnalyticsConstants.swift */; };
+		B599E4C62C58E989006051E9 /* AuthenticationAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4C52C58E989006051E9 /* AuthenticationAnalyticsEvents.swift */; };
+		B599E4C82C58EB74006051E9 /* SpendingAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4C72C58EB74006051E9 /* SpendingAnalyticsEvents.swift */; };
+		B599E4CA2C58F1CC006051E9 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4C92C58F1CC006051E9 /* AnalyticsManager.swift */; };
+		B599E4CD2C59067C006051E9 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4CC2C59067C006051E9 /* FirebaseAnalyticsService.swift */; };
 		D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809412D2BF276460015CFF9 /* ResetPwFormView.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -274,8 +285,8 @@
 		D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */; };
 		D8E637502C06303D00D43BB6 /* MySpendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */; };
 		D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */; };
-		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
 		D8F9D7362C593B71005416FC /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7352C593B71005416FC /* PreparedView.swift */; };
+		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -383,13 +394,14 @@
 		4A5789982BDC2A1100AFEB26 /* UnprocessableContentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnprocessableContentError.swift; sourceTree = "<group>"; };
 		4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalServerError.swift; sourceTree = "<group>"; };
 		4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmTokenDto.swift; sourceTree = "<group>"; };
+		4A60F64B2C595E4700805F2C /* CustomCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCompleteView.swift; sourceTree = "<group>"; };
+		4A60F64D2C595F6A00805F2C /* CompleteDeleteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteDeleteUserView.swift; sourceTree = "<group>"; };
 		4A641A142C0F98380041B053 /* TotalTargetAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTargetAmountViewModel.swift; sourceTree = "<group>"; };
 		4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		4A69C14B2BE2DBAC00A27B82 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		4A69C1512BE695FF00A27B82 /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
 		4A69C1552BE69DEA00A27B82 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		4A6A9D102C331A9500394771 /* TargetAmountSetCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountSetCompleteView.swift; sourceTree = "<group>"; };
-		4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A6C79D12C46310B009463E4 /* EditProfileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileListView.swift; sourceTree = "<group>"; };
 		4A6C79D32C463C0B009463E4 /* CustomRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangleButton.swift; sourceTree = "<group>"; };
 		4A6C79D52C463DB1009463E4 /* EditIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIdView.swift; sourceTree = "<group>"; };
@@ -492,7 +504,18 @@
 		4AE8F3B32C330A0B0014F0D4 /* TargetAmountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountSettingView.swift; sourceTree = "<group>"; };
 		4AE8F3B52C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountSettingViewModel.swift; sourceTree = "<group>"; };
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
+		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
+		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
 		5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		B599E4B92C555A01006051E9 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		B599E4BD2C58AF34006051E9 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
+		B599E4BF2C58B951006051E9 /* AnalyticsTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTracker.swift; sourceTree = "<group>"; };
+		B599E4C22C58D4F0006051E9 /* AnalyticsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConstants.swift; sourceTree = "<group>"; };
+		B599E4C52C58E989006051E9 /* AuthenticationAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAnalyticsEvents.swift; sourceTree = "<group>"; };
+		B599E4C72C58EB74006051E9 /* SpendingAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingAnalyticsEvents.swift; sourceTree = "<group>"; };
+		B599E4C92C58F1CC006051E9 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		B599E4CC2C59067C006051E9 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		D809412D2BF276460015CFF9 /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		D8157E632BBEF2040083844B /* InputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormView.swift; sourceTree = "<group>"; };
@@ -548,8 +571,8 @@
 		D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
 		D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListViewModel.swift; sourceTree = "<group>"; };
 		D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleDeleteButtonUtil.swift; sourceTree = "<group>"; };
-		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D8F9D7352C593B71005416FC /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedView.swift; path = "pennyway-client-iOS/View/TabView/PreparedView.swift"; sourceTree = SOURCE_ROOT; };
+		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -780,6 +803,7 @@
 				4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */,
 				4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */,
 				4A6C79D32C463C0B009463E4 /* CustomRectangleButton.swift */,
+				4A60F64B2C595E4700805F2C /* CustomCompleteView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1104,6 +1128,7 @@
 				4A57897C2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift */,
 				4A57897E2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift */,
 				4A5789802BDC1FF300AFEB26 /* InternalServerErrorCode.swift */,
+				4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */,
 			);
 			path = ErrorCodes;
 			sourceTree = "<group>";
@@ -1121,6 +1146,7 @@
 				4A5789962BDC29FC00AFEB26 /* PreconditionFailedError.swift */,
 				4A5789982BDC2A1100AFEB26 /* UnprocessableContentError.swift */,
 				4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */,
+				4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */,
 			);
 			path = ErrorCodeHandler;
 			sourceTree = "<group>";
@@ -1226,6 +1252,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
 				4AE8F3A52C32AB5C0014F0D4 /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
@@ -1238,9 +1265,9 @@
 				4A762AFC2B99A1CB001C1188 /* ViewModel */,
 				4A762AFB2B99A1C4001C1188 /* View */,
 				4A762AFA2B99A1A5001C1188 /* Model */,
-				4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */,
 				4A762AF02B99A16D001C1188 /* Assets.xcassets */,
 				4A762AF22B99A16D001C1188 /* Preview Content */,
+				B599E4B92C555A01006051E9 /* Secrets.xcconfig */,
 			);
 			path = "pennyway-client-iOS";
 			sourceTree = "<group>";
@@ -1545,6 +1572,7 @@
 				4AD70E282BE015970058A52A /* ProfileSettingListView.swift */,
 				D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */,
 				D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */,
+				4A60F64D2C595F6A00805F2C /* CompleteDeleteUserView.swift */,
 			);
 			path = ProfileMainView;
 			sourceTree = "<group>";
@@ -1647,6 +1675,53 @@
 				4AC3203C2C11D5AC00DDB4B6 /* TotalTargetAmountView.swift */,
 			);
 			path = TotalTargetAmountView;
+			sourceTree = "<group>";
+		};
+		B599E4BA2C58AE72006051E9 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				B599E4CE2C5A0B32006051E9 /* Event */,
+				B599E4C42C58E68B006051E9 /* Constants */,
+				B599E4C12C58C72E006051E9 /* Provider */,
+				B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */,
+				B599E4BF2C58B951006051E9 /* AnalyticsTracker.swift */,
+				B599E4C92C58F1CC006051E9 /* AnalyticsManager.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		B599E4C12C58C72E006051E9 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				B599E4CB2C59064E006051E9 /* Google */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		B599E4C42C58E68B006051E9 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B599E4C22C58D4F0006051E9 /* AnalyticsConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		B599E4CB2C59064E006051E9 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				B599E4CC2C59067C006051E9 /* FirebaseAnalyticsService.swift */,
+			);
+			path = Google;
+			sourceTree = "<group>";
+		};
+		B599E4CE2C5A0B32006051E9 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				B599E4BD2C58AF34006051E9 /* AnalyticsEvent.swift */,
+				B599E4C52C58E989006051E9 /* AuthenticationAnalyticsEvents.swift */,
+				B599E4C72C58EB74006051E9 /* SpendingAnalyticsEvents.swift */,
+			);
+			path = Event;
 			sourceTree = "<group>";
 		};
 		C2F5B21500B89F9F684EBF8B /* Frameworks */ = {
@@ -1794,7 +1869,7 @@
 				};
 			};
 			buildConfigurationList = 4A762AE42B99A16B001C1188 /* Build configuration list for PBXProject "pennyway-client-iOS" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 15.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1818,7 +1893,6 @@
 			files = (
 				4AE8F3A62C32AB5C0014F0D4 /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
-				4A6ACA372BD3D09E00D0789F /* Secrets.xcconfig in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
@@ -1914,6 +1988,7 @@
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
+				B599E4C32C58D4F0006051E9 /* AnalyticsConstants.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
@@ -1928,6 +2003,7 @@
 				4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
 				4A3DE2162C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift in Sources */,
+				B599E4C82C58EB74006051E9 /* SpendingAnalyticsEvents.swift in Sources */,
 				4AC320652C120C0D00DDB4B6 /* TargetAmountModel.swift in Sources */,
 				D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */,
 				D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */,
@@ -1947,11 +2023,13 @@
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
+				4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
 				4A148B5E2C364A3C005C6D4E /* SpendingCategoryViewModel.swift in Sources */,
 				4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */,
 				4AE8F3AD2C32AED30014F0D4 /* AppDelegate.swift in Sources */,
 				4A5789972BDC29FD00AFEB26 /* PreconditionFailedError.swift in Sources */,
+				4A60F64C2C595E4700805F2C /* CustomCompleteView.swift in Sources */,
 				D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */,
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
@@ -1960,6 +2038,7 @@
 				4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */,
 				4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */,
 				4AE8F3A82C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */,
+				4A60F64E2C595F6A00805F2C /* CompleteDeleteUserView.swift in Sources */,
 				D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */,
 				D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */,
 				4AC320422C11D5AC00DDB4B6 /* AddSpendingCompleteView.swift in Sources */,
@@ -1976,6 +2055,7 @@
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */,
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
+				B599E4C02C58B951006051E9 /* AnalyticsTracker.swift in Sources */,
 				4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */,
 				D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
@@ -1983,12 +2063,14 @@
 				4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */,
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
 				4A6C79DB2C46D067009463E4 /* ProfileActiveNavigation.swift in Sources */,
+				B599E4C62C58E989006051E9 /* AuthenticationAnalyticsEvents.swift in Sources */,
 				D888329C2BBC612600F49B27 /* LoginView.swift in Sources */,
 				4A69C1562BE69DEA00A27B82 /* Log.swift in Sources */,
 				4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */,
 				D8157E642BBEF2040083844B /* InputFormView.swift in Sources */,
 				D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */,
 				4ADE802C2BF29055007FFB01 /* MainTabView.swift in Sources */,
+				B599E4CA2C58F1CC006051E9 /* AnalyticsManager.swift in Sources */,
 				D8E24D932BFCF885006E8046 /* ProfileMenuBarListView.swift in Sources */,
 				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
 				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
@@ -2037,6 +2119,7 @@
 				D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */,
 				4A6C79E62C46DEA7009463E4 /* ErrorText.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,
+				B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */,
 				4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
@@ -2076,6 +2159,7 @@
 				4AC3204D2C11D5AC00DDB4B6 /* SpendingCalendarCellView.swift in Sources */,
 				4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */,
 				4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */,
+				4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */,
 				4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */,
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
@@ -2083,6 +2167,7 @@
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4AC320472C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift in Sources */,
 				4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */,
+				B599E4CD2C59067C006051E9 /* FirebaseAnalyticsService.swift in Sources */,
 				4AC320452C11D5AC00DDB4B6 /* SelectSpendingDayView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */,
@@ -2092,6 +2177,7 @@
 				D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */,
 				4AC3204B2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
+				B599E4BE2C58AF34006051E9 /* AnalyticsEvent.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				4A73E9AD2C35137F0017EED9 /* CategorySpendingListView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
@@ -2163,7 +2249,7 @@
 /* Begin XCBuildConfiguration section */
 		4A762AF52B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */;
+			baseConfigurationReference = 01648F6A2404D638E6615EDB /* Pods-pennyway-client-iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2227,7 +2313,7 @@
 		};
 		4A762AF62B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A6ACA362BD3D09E00D0789F /* Secrets.xcconfig */;
+			baseConfigurationReference = 5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -2284,13 +2370,13 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01648F6A2404D638E6615EDB /* Pods-pennyway-client-iOS.debug.xcconfig */;
+			baseConfigurationReference = B599E4B92C555A01006051E9 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "pennyway-client-iOS/pennyway-client-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pennyway-client-iOS/Preview Content\"";
@@ -2313,7 +2399,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Pennyway;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Pennyway Release";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2322,7 +2408,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C86BC7DF91F1ADD72E96E7F /* Pods-pennyway-client-iOS.release.xcconfig */;
+			baseConfigurationReference = B599E4B92C555A01006051E9 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

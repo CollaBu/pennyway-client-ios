@@ -18,7 +18,7 @@ struct SpendingCheckBoxView: View {
         "반가워요 \(String(describing: getUserData()?.username ?? ""))님! \n이번 달에 \(formattedTotalSpent)원 썼어요"
     }
 
-    var totalSpending: Int {
+    var totalSpending: Int64 {
         viewModel.targetAmountData?.totalSpending ?? 0
     }
 
