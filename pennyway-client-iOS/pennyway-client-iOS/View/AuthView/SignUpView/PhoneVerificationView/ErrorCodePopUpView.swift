@@ -5,10 +5,11 @@ import SwiftUI
 
 struct ErrorCodePopUpView: View {
     @Binding var showingPopUp: Bool
-    let label: String
+    let titleLabel: String
+    let subLabel: String
 
     var body: some View {
-        PopupContent(imageSize: CGSize(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor()), frameHeight: 145 * DynamicSizeFactor.factor(), contentHeight: 70 * DynamicSizeFactor.factor(), label: label, showingPopUp: $showingPopUp)
+        PopupContent(imageSize: CGSize(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor()), frameHeight: 145 * DynamicSizeFactor.factor(), contentHeight: 70 * DynamicSizeFactor.factor(), titleLabel: titleLabel, subLabel: subLabel, showingPopUp: $showingPopUp)
     }
 }
 
@@ -19,7 +20,8 @@ extension ErrorCodePopUpView {
         var imageSize: CGSize
         var frameHeight: CGFloat
         var contentHeight: CGFloat
-        let label: String
+        let titleLabel: String
+        let subLabel: String
 
         @Binding var showingPopUp: Bool
 
@@ -60,10 +62,10 @@ extension ErrorCodePopUpView {
                     Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 
                     VStack(spacing: 2 * DynamicSizeFactor.factor()) {
-                        Text(label)
+                        Text(titleLabel)
                             .platformTextColor(color: Color("Gray07"))
                             .font(.H3SemiboldFont())
-                        Text("다시 한 번 확인해주세요")
+                        Text(subLabel)
                             .platformTextColor(color: Color("Gray04"))
                             .font(.B1MediumFont())
                     }

@@ -18,15 +18,17 @@ struct CustomPopUpView: View {
     let secondBtnLabel: String
     let secondBtnColor: Color
 
+    var heightSize: CGFloat? = nil
+
     var body: some View {
-        PopupContent(titleFontSize: 16, subtitleFontSize: 12,
-                     titleLabel: titleLabel,
+        PopupContent(titleLabel: titleLabel,
                      subTitleLabel: subTitleLabel,
                      firstBtnAction: firstBtnAction,
                      firstBtnLabel: firstBtnLabel,
                      secondBtnAction: secondBtnAction,
                      secondBtnLabel: secondBtnLabel,
                      secondBtnColor: secondBtnColor,
+                     heightSize: heightSize,
                      showingPopUp: $showingPopUp)
     }
 }
@@ -35,8 +37,6 @@ struct CustomPopUpView: View {
 
 extension CustomPopUpView {
     struct PopupContent: View {
-        var titleFontSize: CGFloat
-        var subtitleFontSize: CGFloat
         /// title 지정
         let titleLabel: String
         let subTitleLabel: String
@@ -49,6 +49,8 @@ extension CustomPopUpView {
         let secondBtnAction: () -> Void
         let secondBtnLabel: String
         let secondBtnColor: Color
+
+        let heightSize: CGFloat?
 
         @Binding var showingPopUp: Bool
 
@@ -103,10 +105,10 @@ extension CustomPopUpView {
                     .padding(.bottom, 11 * DynamicSizeFactor.factor())
                 }
                 .frame(maxWidth: 229 * DynamicSizeFactor.factor())
-                .background(Color.white)
+                .background(Color("White01"))
                 .cornerRadius(10)
             }
-            .frame(width: 229 * DynamicSizeFactor.factor(), height: 147 * DynamicSizeFactor.factor())
+            .frame(width: 229 * DynamicSizeFactor.factor(), height: (heightSize ?? 147) * DynamicSizeFactor.factor())
         }
     }
 }

@@ -4,6 +4,7 @@ import SwiftUI
 
 struct FindIdPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
+    @Binding var showManyRequestPopUp: Bool
     @State private var isFindUser = true
 
     var body: some View {
@@ -33,6 +34,7 @@ struct FindIdPhoneVerificationView: View {
                             .platformTextColor(color: Color("Gray07"))
 
                             .onChange(of: viewModel.phoneNumber) { newValue in
+
                                 if Int(newValue) != nil {
                                     if newValue.count > 11 {
                                         viewModel.phoneNumber = String(newValue.prefix(11))
@@ -47,11 +49,17 @@ struct FindIdPhoneVerificationView: View {
                     Button(action: {
                         if isFindUser {
                             Log.debug("아이디 찾기 api 요청")
-                            viewModel.requestUserNameVerificationCodeApi { viewModel.judgeTimerRunning() }
+                            viewModel.requestUserNameVerificationCodeApi {
+                                if viewModel.showErrorApiRequest {
+                                    showManyRequestPopUp = true
+                                } else {
+                                    viewModel.judgeTimerRunning()
+                                }
+                            }
                         }
                     }, label: {
                         Text("인증번호 받기")
-                            .font(.pretendard(.medium, size: 13)) // DynamicFontSize에 없음
+                            .font(.B1MediumFont())
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
                     .padding(.horizontal, 13)
@@ -77,8 +85,4 @@ struct FindIdPhoneVerificationView: View {
             }
         }
     }
-}
-
-#Preview {
-    FindIdPhoneVerificationView(viewModel: PhoneVerificationViewModel())
 }
