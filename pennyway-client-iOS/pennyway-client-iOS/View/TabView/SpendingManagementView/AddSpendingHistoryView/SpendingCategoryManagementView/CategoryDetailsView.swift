@@ -146,12 +146,17 @@ struct CategoryDetailsView: View {
                 CustomPopUpView(
                     showingPopUp: $showDeletePopUp,
                     titleLabel: "카테고리를 삭제할까요?",
-                    subTitleLabel: "몇개의 소비 내역이 모두 사라져요🥲",
+                    subTitleLabel: "\(viewModel.spedingHistoryTotalCount)개의 소비 내역이 모두 사라져요🥲",
                     firstBtnAction: { self.showDeletePopUp = false },
                     firstBtnLabel: "내역 옮기기",
                     secondBtnAction: { 
-                        self.showToastDeletePopUp = true
-                        self.showDeletePopUp = false
+                        viewModel.deleteCategoryApi { success in
+                            if success {
+                                self.showToastDeletePopUp = true
+                                self.showDeletePopUp = false
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        }
                     },
                     secondBtnLabel: "삭제하기",
                     secondBtnColor: Color("Red03")
