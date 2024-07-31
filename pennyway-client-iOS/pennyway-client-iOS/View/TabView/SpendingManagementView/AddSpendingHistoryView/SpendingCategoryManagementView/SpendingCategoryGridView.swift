@@ -10,6 +10,7 @@ struct SpendingCategoryGridView: View {
     
     @State var navigateToCategoryDetails = false
     @State var navigateToAddCategoryView = false
+    @State private var showToastDeletePopUp = false
 
     var body: some View {
         ZStack {
@@ -45,6 +46,21 @@ struct SpendingCategoryGridView: View {
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                 }
             }
+            .overlay(
+                Group {
+                    if showToastDeletePopUp {
+                        CustomToastView(message: "카테고리를 삭제했어요")
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                            .padding(.bottom, 34)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    showToastDeletePopUp = false
+                                }
+                            }
+                    }
+                }, alignment: .bottom
+            )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color("Gray01"))
             .navigationBarColor(UIColor(named: "Gray01"), title: "카테고리")
@@ -86,7 +102,7 @@ struct SpendingCategoryGridView: View {
             }
         }
 
-        NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel), isActive: $navigateToCategoryDetails) {}
+        NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel, showToastDeletePopUp: $showToastDeletePopUp), isActive: $navigateToCategoryDetails) {}
 
         NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
     }

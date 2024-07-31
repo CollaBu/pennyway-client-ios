@@ -10,10 +10,11 @@ struct CategoryDetailsView: View {
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]
     @State private var showDeletePopUp = false
-    @State private var showToastDeletePopUp = false
     @State private var showToastPopup = false
     @State var isDeleted = false
     @State private var isNavigateToEditCategoryView = false
+    
+    @Binding var showToastDeletePopUp: Bool
 
     var body: some View {
         ZStack {
@@ -55,15 +56,14 @@ struct CategoryDetailsView: View {
             }
             .overlay(
                 Group {
-                    if showToastPopup || showToastDeletePopUp {
-                        CustomToastView(message: showToastPopup ? "소비내역이 삭제되었어요" : "카테고리를 삭제했어요")
+                    if showToastPopup {
+                        CustomToastView(message: "소비내역이 삭제되었어요")
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
                             .padding(.bottom, 34)
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                                     showToastPopup = false
-                                    showToastDeletePopUp = false
                                 }
                             }
                     }
@@ -150,11 +150,11 @@ struct CategoryDetailsView: View {
                     firstBtnAction: { self.showDeletePopUp = false },
                     firstBtnLabel: "내역 옮기기",
                     secondBtnAction: { 
-                        viewModel.deleteCategoryApi { success in
-                            if success {
-                                self.showToastDeletePopUp = true
+                        viewModel.deleteCategoryApi{ success in
+                            if success{
                                 self.showDeletePopUp = false
                                 self.presentationMode.wrappedValue.dismiss()
+                                self.showToastDeletePopUp = true
                             }
                         }
                     },
@@ -164,6 +164,7 @@ struct CategoryDetailsView: View {
             }
             
             NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
+            
         }
     }
 
