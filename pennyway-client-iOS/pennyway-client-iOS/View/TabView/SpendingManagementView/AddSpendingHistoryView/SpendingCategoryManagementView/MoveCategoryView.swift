@@ -30,7 +30,7 @@ struct MoveCategoryView: View {
 
                     ForEach(Array(spendingCategoryViewModel.spendingCategories.enumerated()), id: \.element.id) { _, category in
                         HStack(spacing: 10) {
-                            Image(category.name == "추가하기" ? category.icon.rawValue : (category.id == spendingCategoryViewModel.selectedMoveCategoryId ? MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .onMint).rawValue : MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .on).rawValue))
+                            Image(getCategoryIcon(category: category, isSelected: category.id == spendingCategoryViewModel.selectedMoveCategoryId))
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
@@ -69,6 +69,7 @@ struct MoveCategoryView: View {
 
             CustomBottomButton(action: {
                 presentationMode.wrappedValue.dismiss()
+                spendingCategoryViewModel.selectedMoveCategoryId = 0
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
@@ -99,6 +100,14 @@ struct MoveCategoryView: View {
                 }.offset(x: -10)
             }
         }
+    }
+
+    private func getCategoryIcon(category: SpendingCategoryData, isSelected: Bool) -> String {
+        if category.name == "추가하기" {
+            return category.icon.rawValue
+        }
+        let iconName = MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: isSelected ? .onMint : .on)
+        return iconName.rawValue
     }
 }
 
