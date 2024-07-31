@@ -30,7 +30,7 @@ struct MoveCategoryView: View {
 
                     ForEach(Array(spendingCategoryViewModel.spendingCategories.enumerated()), id: \.element.id) { _, category in
                         HStack(spacing: 10) {
-                            Image(category.name == "추가하기" ? category.icon.rawValue : (category == spendingCategoryViewModel.selectedMoveCategory ? MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .onMint).rawValue : MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .on).rawValue))
+                            Image(category.name == "추가하기" ? category.icon.rawValue : (category.id == spendingCategoryViewModel.selectedMoveCategoryId ? MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .onMint).rawValue : MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .on).rawValue))
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
@@ -41,7 +41,7 @@ struct MoveCategoryView: View {
 
                             Spacer()
 
-                            if category == spendingCategoryViewModel.selectedMoveCategory {
+                            if category.id == spendingCategoryViewModel.selectedMoveCategoryId {
                                 Image("icon_checkone_on_small")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -57,7 +57,7 @@ struct MoveCategoryView: View {
                                 addSpendingHistoryViewModel.categoryName = "" // name 초기화
                                 navigateToAddCategoryView = true
                             } else {
-                                spendingCategoryViewModel.selectedMoveCategory = category
+                                spendingCategoryViewModel.selectedMoveCategoryId = category.id
                             }
                         }
                     }
@@ -84,7 +84,7 @@ struct MoveCategoryView: View {
                 HStack {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
-                        spendingCategoryViewModel.selectedMoveCategory = nil
+                        spendingCategoryViewModel.selectedMoveCategoryId = 0
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
