@@ -7,6 +7,7 @@ struct SpendingManagementMainView: View {
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToAddSpendingHistory = false
     @State private var navigateToMySpendingList = false
+    @State private var navigateToMainAlarmView = false
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
     @State private var ishidden = false
@@ -77,7 +78,9 @@ struct SpendingManagementMainView: View {
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
 
-                        Button(action: {}, label: {
+                        Button(action: {
+                            navigateToMainAlarmView = true
+                        }, label: {
                             Image("icon_navigationbar_bell")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -117,6 +120,11 @@ struct SpendingManagementMainView: View {
             NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
+
+            NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
+                EmptyView()
+            }
+            .hidden()
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView, minHeight: bottomSheetMinHeight, maxHeight: 524 * DynamicSizeFactor.factor()) {
             SpendingDetailSheetView(clickDate: $clickDate,
