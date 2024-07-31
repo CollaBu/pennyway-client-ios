@@ -23,8 +23,8 @@ struct ProfileMainView: View {
                         Image("icon_illust__empty")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 80 * DynamicSizeFactor.factor(), height: 80 * DynamicSizeFactor.factor(), alignment: .leading)
-                            .padding(10)
+                            .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
+                            .padding(.horizontal, 110)
 
                         Text("아직 작성된 글이 없어요")
                             .font(.H4MediumFont())

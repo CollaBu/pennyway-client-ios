@@ -9,9 +9,6 @@ struct ProfileUserInfoView: View {
     @State var selectedUIImage: UIImage?
     @State var image: Image?
 
-//    @Binding var image: Image?
-//    @Binding var showImagePicker: Bool
-
     private func loadUserData() {
         if let userData = getUserData() {
             name = userData.name // 사용자 이름
