@@ -4,7 +4,8 @@ import SwiftUI
 struct EditPhoneNumberView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = PhoneVerificationViewModel()
-    @State private var showingPopUp = false
+    @State private var showCodeErrorPopUp = false // 인증번호 오류
+    @State private var showManyRequestPopUp = false // api 요청 오류
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
@@ -63,33 +64,37 @@ struct EditPhoneNumberView: View {
                 }, label: "변경 완료", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
-
-            if showingPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "잘못된 인증번호예요")
+            .navigationBarBackButtonHidden(true)
+            .navigationBarColor(UIColor(named: "White01"), title: "휴대폰 번호 변경")
+            .background(Color("White01"))
+            .edgesIgnoringSafeArea(.bottom)
+            .setTabBarVisibility(isHidden: true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    HStack {
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }, label: {
+                            Image("icon_arrow_back")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 34, height: 34)
+                                .padding(5)
+                        })
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                    }.offset(x: -10)
+                }
             }
-        }
-        .background(Color("White01"))
-        .edgesIgnoringSafeArea(.bottom)
-        .setTabBarVisibility(isHidden: true)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarColor(UIColor(named: "White01"), title: "휴대폰 번호 변경")
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("icon_arrow_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 34, height: 34)
-                            .padding(5)
-                    })
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
-                }.offset(x: -10)
+
+            if showCodeErrorPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
+            }
+            if showManyRequestPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
             }
         }
     }
@@ -115,6 +120,11 @@ struct EditPhoneNumberView: View {
             if newValue.count > 11 {
                 viewModel.phoneNumber = String(newValue.prefix(11))
             }
+            if viewModel.phoneNumber != viewModel.firstPhoneNumber {
+                viewModel.showErrorExistingUser = false
+            } else {
+                viewModel.showErrorExistingUser = true
+            }
         } else {
             viewModel.phoneNumber = ""
         }
@@ -122,7 +132,13 @@ struct EditPhoneNumberView: View {
     }
 
     private func handleVerificationButtonTap() {
-        viewModel.requestEditVerificationCodeApi { viewModel.judgeTimerRunning() }
+        viewModel.requestEditVerificationCodeApi { 
+            if viewModel.showErrorApiRequest {
+                showManyRequestPopUp = true
+            } else {
+                viewModel.judgeTimerRunning()
+            }
+        }
     }
 
     private func handleCodeChange(_ newValue: String) {
@@ -135,12 +151,14 @@ struct EditPhoneNumberView: View {
     }
 
     private func checkFormValid(completion: @escaping (Bool) -> Void) {
-        if !viewModel.showErrorVerificationCode && !viewModel.showErrorExistingUser && viewModel.isFormValid {
-            showingPopUp = false
+        if !viewModel.showErrorVerificationCode && !viewModel.showErrorExistingUser &&
+            !viewModel.showErrorApiRequest && viewModel.isFormValid
+        {
+            showCodeErrorPopUp = false
             completion(true)
         } else {
             if viewModel.showErrorVerificationCode {
-                showingPopUp = true
+                showCodeErrorPopUp = true
                 completion(false)
             }
         }

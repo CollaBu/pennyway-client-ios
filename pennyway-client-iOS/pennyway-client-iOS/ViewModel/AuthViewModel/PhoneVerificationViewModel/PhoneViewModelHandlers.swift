@@ -16,7 +16,6 @@ extension PhoneVerificationViewModel {
                         RegistrationManager.shared.phoneNumber = phoneNumber
                     }
                     firstPhoneNumber = phoneNumber
-                    showErrorExistingUser = false
 
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
@@ -26,10 +25,11 @@ extension PhoneVerificationViewModel {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if type == .username || type == .password, StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-                    showErrorExistingUser = false
-                } else {
-                    showErrorVerificationCode = true
+                if StatusSpecificError.domainError == .tooManyRequest {
+                    showErrorApiRequest = true
+                    isTimerHidden = true
+                    stopTimer()
+                    isDisabledButton = false
                 }
             } else {
                 Log.error("Network request failed: \(error)")
@@ -47,7 +47,6 @@ extension PhoneVerificationViewModel {
                 do {
                     let response = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
                     showErrorVerificationCode = false
-                    showErrorExistingUser = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
@@ -61,11 +60,7 @@ extension PhoneVerificationViewModel {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-                    showErrorExistingUser = true
-                    code = ""
-                    isTimerHidden = true
-                    stopTimer()
-                    isDisabledButton = false
+                    handleExistUser()
                 } else {
                     showErrorVerificationCode = true
                 }
@@ -86,7 +81,6 @@ extension PhoneVerificationViewModel {
                     let response = try JSONDecoder().decode(OAuthVerificationResponseDto.self, from: responseData)
 
                     showErrorVerificationCode = false
-                    showErrorExistingUser = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
@@ -101,11 +95,7 @@ extension PhoneVerificationViewModel {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-                    showErrorExistingUser = true
-                    code = ""
-                    isTimerHidden = true
-                    stopTimer()
-                    isDisabledButton = false
+                    handleExistUser()
                 } else {
                     showErrorVerificationCode = true
                 }
@@ -135,11 +125,8 @@ extension PhoneVerificationViewModel {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-                    showErrorExistingUser = false
-                } else {
-                    showErrorVerificationCode = true
-                }
+                showErrorVerificationCode = true
+
             } else {
                 Log.error("Network request failed: \(error)")
             }
@@ -163,11 +150,8 @@ extension PhoneVerificationViewModel {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-                    showErrorExistingUser = false
-                } else {
-                    showErrorVerificationCode = true
-                }
+                showErrorVerificationCode = true
+
             } else {
                 Log.error("Network request failed: \(error)")
             }
@@ -183,7 +167,6 @@ extension PhoneVerificationViewModel {
             if let responseData = data {
                 do {
                     let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
-
                     Log.debug("전화번호 수정 완료 \(response)")
                     updateUserField(fieldName: "phone", value: phoneNumber)
                 } catch {
@@ -195,12 +178,7 @@ extension PhoneVerificationViewModel {
                 Log.info("Failed to verify: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .conflict, StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
-                    showErrorExistingUser = true
-                    showErrorVerificationCode = false
-                    code = ""
-                    isTimerHidden = true
-                    stopTimer()
-                    isDisabledButton = false
+                    handleExistUser()
                 } else {
                     showErrorVerificationCode = true
                 }
@@ -210,5 +188,14 @@ extension PhoneVerificationViewModel {
             Log.debug("전화번호 수정 실패")
         }
         completion()
+    }
+
+    private func handleExistUser() {
+        showErrorExistingUser = true
+        showErrorVerificationCode = false
+        code = ""
+        isTimerHidden = true
+        stopTimer()
+        isDisabledButton = false
     }
 }
