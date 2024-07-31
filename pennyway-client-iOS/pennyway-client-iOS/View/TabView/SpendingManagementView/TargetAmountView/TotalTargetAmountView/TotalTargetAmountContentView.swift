@@ -21,7 +21,7 @@ struct TotalTargetAmountContentView: View {
                 
                 Spacer()
                 
-                Text(viewModel.currentData.targetAmountDetail.amount != -1 ? "\(viewModel.currentData.diffAmount < 0 ? "" : "-")\(abs(viewModel.currentData.diffAmount))원" : "-원")
+                Text(viewModel.currentData.targetAmountDetail.amount != -1 ? "\(viewModel.currentData.diffAmount <= 0 ? "" : "-")\(abs(viewModel.currentData.diffAmount))원" : "-원")
                     .font(.B1SemiboldeFont())
                     .platformTextColor(color: determineDiffAmountColor(for: viewModel.currentData.diffAmount))
                     .padding(.trailing, 16)
