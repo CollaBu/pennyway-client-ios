@@ -42,6 +42,9 @@ class FirebaseAnalyticsService: AnalyticsService {
         Log.info("Firebase: Setting user \(userId) with properties \(String(describing: properties))")
     }
     
+    /// 애플리케이션 내에서 사용하는 `AnalyticsEvent`를 Firebase Analytics에서 사용하는 이벤트로 변환한다.`
+    ///
+    /// - todo: 이 메서드는 AnalyticsEvent의 종류가 많아질수록 수정이 필요하다.
     private func convertParameters(_ event: AnalyticsEvent, _ additionalParams: [AnalyticsConstants.Parameter: Any]?) -> [String: Any] {
         var params: [String: Any] = [:]
         
