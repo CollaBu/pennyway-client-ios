@@ -12,10 +12,11 @@ struct handleDeleteButtonUtil: View {
             }, label: {
                 Image("icon_close_filled_primary")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 16 * DynamicSizeFactor.factor(), height: 16 * DynamicSizeFactor.factor())
             })
-            .offset(x: 120 * DynamicSizeFactor.factor(), y: 1 * DynamicSizeFactor.factor())
+            .padding(.vertical, 15 * DynamicSizeFactor.factor())
+            .offset(x: 130 * DynamicSizeFactor.factor(), y: 1 * DynamicSizeFactor.factor())
         }
     }
 }
