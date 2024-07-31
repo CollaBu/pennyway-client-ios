@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 
 struct CustomInputView: View {
@@ -9,9 +7,13 @@ struct CustomInputView: View {
     var onCommit: (() -> Void)?
     var isSecureText: Bool
     var isCustom: Bool?
+    var showDeleteButton: Bool = false
+    var deleteAction: (() -> Void)?
 
     let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
     let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
+
+    @State private var isDeleteButtonVisible: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
@@ -42,22 +44,38 @@ struct CustomInputView: View {
                     if isSecureText {
                         SecureField("", text: $inputText, onCommit: {
                             onCommit?()
+                            isDeleteButtonVisible.toggle()
                         })
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .padding(.leading, 12 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
+                        .onChange(of: inputText) { newValue in
+                            isDeleteButtonVisible = !newValue.isEmpty
+                        }
 
                     } else {
                         TextField("", text: $inputText, onCommit: {
                             onCommit?()
+                            isDeleteButtonVisible.toggle()
                         })
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .padding(.leading, 12 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
+                        .onChange(of: inputText) { newValue in
+                            isDeleteButtonVisible = !newValue.isEmpty
+                        }
+                    }
+                    if showDeleteButton {
+                        handleDeleteButtonUtil(isVisible: !inputText.isEmpty && isDeleteButtonVisible, action: {
+                            inputText = ""
+                            isDeleteButtonVisible = false
+                            deleteAction?()
+                        })
+                        .offset(x: 120 * DynamicSizeFactor.factor(), y: 1 * DynamicSizeFactor.factor())
                     }
                 }
             }

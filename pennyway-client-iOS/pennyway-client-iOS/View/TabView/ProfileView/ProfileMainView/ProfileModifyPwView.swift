@@ -6,7 +6,10 @@ struct ProfileModifyPwView: View {
     @StateObject var viewModel = UserAccountViewModel()
     @State private var navigateView = false
     @State private var isFormValid = false
+    @State private var isPwDeleteButtonVisible: Bool = false
+
     @Binding var firstNaviLinkActive: Bool
+    private let maxLength = 16
 
     let entryPoint: PasswordChangeTypeNavigation
 
@@ -30,7 +33,19 @@ struct ProfileModifyPwView: View {
                         RegistrationManager.shared.oldPassword = viewModel.password
 
                         validatePwApi()
-                    }, isSecureText: true)
+                        isPwDeleteButtonVisible = false
+                    }, isSecureText: true, showDeleteButton: true,
+                    deleteAction: {
+                        viewModel.password = ""
+                        viewModel.showErrorPassword = false
+                        isPwDeleteButtonVisible = false
+                    })
+                    .onChange(of: viewModel.password) { newValue in
+                        if newValue.count > maxLength {
+                            viewModel.password = String(newValue.prefix(maxLength))
+                        }
+                        isPwDeleteButtonVisible = !newValue.isEmpty
+                    }
 
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
 

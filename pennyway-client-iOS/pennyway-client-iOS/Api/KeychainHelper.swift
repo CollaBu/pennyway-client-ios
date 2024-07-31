@@ -48,52 +48,6 @@ class KeychainHelper {
         }
     }
     
-    // MARK: fcmToken Keychain
-
-    static func saveFcmToken(fcmToken: String) {
-        let keychainQuery: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: "fcmToken",
-            kSecValueData: fcmToken.data(using: .utf8)!,
-        ]
-        
-        let status = SecItemAdd(keychainQuery as CFDictionary, nil)
-        if status == errSecDuplicateItem {
-            SecItemUpdate(keychainQuery as CFDictionary, [kSecValueData: fcmToken.data(using: .utf8)!] as CFDictionary)
-        } else if status != noErr {
-            Log.error("Failed to save fcmToken to Keychain")
-        }
-    }
-    
-    static func loadFcmToken() -> String? {
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: "fcmToken",
-            kSecReturnData: kCFBooleanTrue!,
-        ]
-        
-        var item: CFTypeRef?
-        let status = SecItemCopyMatching(query as CFDictionary, &item)
-        
-        if status == noErr, let data = item as? Data, let token = String(data: data, encoding: .utf8) {
-            return token
-        } else {
-            return nil
-        }
-    }
-    
-    static func deleteFcmToken() {
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrAccount: "fcmToken",
-        ]
-        
-        let status = SecItemDelete(query as CFDictionary)
-        if status != noErr {
-            Log.error("Failed to delete fcmToken from Keychain")
-        }
-    }
-    
     // MARK: OAuthUserData Keychain
     
     static func saveOAuthUserData(oauthUserData: OAuthUserData) {
