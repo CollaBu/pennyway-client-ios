@@ -6,11 +6,12 @@ import SwiftUI
 struct MoveCategoryView: View {
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel
+    @Environment(\.presentationMode) var presentationMode
 
     @State var navigateToAddCategoryView = false
 
     var body: some View {
-        ZStack {
+        VStack {
             ScrollView {
                 Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
@@ -27,9 +28,9 @@ struct MoveCategoryView: View {
 
                     Spacer().frame(height: 25 * DynamicSizeFactor.factor())
 
-                    ForEach(Array(spendingCategoryViewModel.spendingMoveCategories.enumerated()), id: \.element.id) { index, category in
+                    ForEach(Array(spendingCategoryViewModel.spendingCategories.enumerated()), id: \.element.id) { _, category in
                         HStack(spacing: 10) {
-                            Image(category.name == "추가하기" ? category.icon.rawValue : MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .on).rawValue)
+                            Image(category.name == "추가하기" ? category.icon.rawValue : (category == spendingCategoryViewModel.selectedMoveCategory ? MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .onMint).rawValue : MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: .on).rawValue))
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
@@ -37,6 +38,15 @@ struct MoveCategoryView: View {
                             Text(category.name)
                                 .font(.B1SemiboldeFont())
                                 .platformTextColor(color: category.name == "추가하기" ? Color("Gray04") : Color("Gray07"))
+
+                            Spacer()
+
+                            if category == spendingCategoryViewModel.selectedMoveCategory {
+                                Image("icon_checkone_on_small")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 6 * DynamicSizeFactor.factor())
@@ -47,8 +57,7 @@ struct MoveCategoryView: View {
                                 addSpendingHistoryViewModel.categoryName = "" // name 초기화
                                 navigateToAddCategoryView = true
                             } else {
-                                // 선택한 셀의 인덱스 출력
-                                print("Selected index: \(index)")
+                                spendingCategoryViewModel.selectedMoveCategory = category
                             }
                         }
                     }
@@ -56,24 +65,39 @@ struct MoveCategoryView: View {
                 }
                 .padding(.horizontal, 20)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("White01"))
-            .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 이동")
-            .navigationBarBackButtonHidden(true)
-            .edgesIgnoringSafeArea(.bottom)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
+            Spacer()
 
-                    }.offset(x: -10)
-                }
-            }
+            CustomBottomButton(action: {
+                presentationMode.wrappedValue.dismiss()
+            }, label: "확인", isFormValid: .constant(true))
+                .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
             NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
+        } 
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color("White01"))
+        .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 이동")
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.bottom)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                        spendingCategoryViewModel.selectedMoveCategory = nil
+                    }, label: {
+                        Image("icon_arrow_back")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 34, height: 34)
+                            .padding(5)
+                    })
+                    .padding(.leading, 5)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+
+                }.offset(x: -10)
+            }
         }
     }
 }

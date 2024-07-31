@@ -4,6 +4,7 @@ import SwiftUI
 class SpendingCategoryViewModel: ObservableObject {
     /// 카테고리 선택
     @Published var selectedCategory: SpendingCategoryData? = nil
+    @Published var selectedMoveCategory: SpendingCategoryData? = nil
     @Published var categoryName = ""
     @Published var selectedCategoryIcon: CategoryIconName? = nil
     @Published var selectedCategoryIconTitle: String = ""
@@ -18,7 +19,6 @@ class SpendingCategoryViewModel: ObservableObject {
     
     /// 총 카테고리 리스트
     @Published var spendingCategories: [SpendingCategoryData] = []
-    @Published var spendingMoveCategories: [SpendingCategoryData] = []
     
     /// 시스템 카테고리 리스트
     @Published var systemCategories: [SpendingCategoryData] = []
@@ -50,7 +50,6 @@ class SpendingCategoryViewModel: ObservableObject {
                         let otherCategory = SpendingCategoryIconList.plus.details
                         self.customCategories = response.data.spendingCategories.compactMap { self.convertToSpendingCategoryData(from: $0) }
                         self.spendingCategories = self.systemCategories + self.customCategories + [otherCategory]
-                        self.spendingMoveCategories = self.spendingCategories
                         completion(true)
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
