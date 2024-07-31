@@ -150,11 +150,13 @@ struct CategoryDetailsView: View {
                     firstBtnAction: { self.showDeletePopUp = false },
                     firstBtnLabel: "내역 옮기기",
                     secondBtnAction: { 
-                        viewModel.deleteCategoryApi{ success in
-                            if success{
-                                self.showDeletePopUp = false
-                                self.presentationMode.wrappedValue.dismiss()
-                                self.showToastDeletePopUp = true
+                        viewModel.deleteCategoryApi { success in
+                            if success {
+                                viewModel.getSpendingCustomCategoryListApi { _ in
+                                    self.showDeletePopUp = false
+                                    self.presentationMode.wrappedValue.dismiss()
+                                    self.showToastDeletePopUp = true
+                                }
                             }
                         }
                     },
@@ -164,7 +166,6 @@ struct CategoryDetailsView: View {
             }
             
             NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
-            
         }
     }
 

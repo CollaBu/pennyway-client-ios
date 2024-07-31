@@ -4,8 +4,8 @@ struct TargetAmount: Codable {
     var year: Int
     var month: Int
     var targetAmountDetail: AmountDetail
-    var totalSpending: Int
-    var diffAmount: Int
+    var totalSpending: Int64
+    var diffAmount: Int64
 }
 
 // MARK: - AmountDetail

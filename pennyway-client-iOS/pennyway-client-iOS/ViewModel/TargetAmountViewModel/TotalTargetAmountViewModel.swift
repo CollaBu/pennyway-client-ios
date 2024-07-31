@@ -20,6 +20,7 @@ class TotalTargetAmountViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(GetTotalTargetAmountResponseDto.self, from: responseData)
 
                         self.targetAmounts = response.data.targetAmounts
+
                         self.sortTargetAmounts = self.targetAmounts.sorted(by: { $0.month < $1.month })
                         if let firstTargetAmount = self.targetAmounts.first {
                             self.currentData = firstTargetAmount

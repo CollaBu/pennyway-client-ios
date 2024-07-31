@@ -74,7 +74,7 @@ struct RecentTargetAmountSuggestionView: View {
     
     private func getRecentTargetAmount() -> String {
         let year = Date.year(from: Date())
-        let data = "\(viewModel.recentTargetAmountData?.month ?? 0)월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(viewModel.recentTargetAmountData?.amount ?? 0))원"
+        let data = "\(viewModel.recentTargetAmountData?.month ?? 0)월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(Int64(viewModel.recentTargetAmountData?.amount ?? 0)))원"
         
         if viewModel.recentTargetAmountData?.year != year {
             return "\(year)년 \(data)"
