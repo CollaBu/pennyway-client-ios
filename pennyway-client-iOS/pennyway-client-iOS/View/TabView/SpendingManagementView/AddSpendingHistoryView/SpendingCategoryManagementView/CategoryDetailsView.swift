@@ -150,6 +150,8 @@ struct CategoryDetailsView: View {
             }
         }
         NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
+        
+        NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $isNavigateToMoveCategoryView) {}
     }
 
     private func refreshView(completion: @escaping () -> Void) {

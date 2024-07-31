@@ -53,24 +53,19 @@ struct SpendingCategoryGridView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     HStack {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Image("icon_arrow_back")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 34, height: 34)
-                                .padding(5)
-                        })
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+
                     }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
                         Button(action: {
                             navigateToAddCategoryView = true
+                            addSpendingHistoryViewModel.selectedCategoryIcon = CategoryIconName(baseName: CategoryBaseName.etc, state: .on) // icon 초기화
+                            addSpendingHistoryViewModel.categoryName = "" // name 초기화
                         }, label: {
                             Image("icon_navigation_add")
                                 .resizable()

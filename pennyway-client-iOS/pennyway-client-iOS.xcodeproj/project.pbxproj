@@ -189,6 +189,7 @@
 		4AC3205D2C11F33200DDB4B6 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3205C2C11F33200DDB4B6 /* GenerateCurrentMonthDummyDataRequestDto.swift */; };
 		4AC3205F2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3205E2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift */; };
 		4AC320652C120C0D00DDB4B6 /* TargetAmountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC320642C120C0D00DDB4B6 /* TargetAmountModel.swift */; };
+		4AC3C3EA2C5AB804002D965B /* MoveCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC3C3E92C5AB804002D965B /* MoveCategoryView.swift */; };
 		4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD072BBDCC190027ACD5 /* KakaoOAuthViewModel.swift */; };
 		4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD092BBDCE080027ACD5 /* GoogleOAuthViewModel.swift */; };
 		4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift */; };
@@ -475,6 +476,7 @@
 		4AC3205C2C11F33200DDB4B6 /* GenerateCurrentMonthDummyDataRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateCurrentMonthDummyDataRequestDto.swift; sourceTree = "<group>"; };
 		4AC3205E2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentMonthTargetAmountResponseDto.swift; sourceTree = "<group>"; };
 		4AC320642C120C0D00DDB4B6 /* TargetAmountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountModel.swift; sourceTree = "<group>"; };
+		4AC3C3E92C5AB804002D965B /* MoveCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoveCategoryView.swift; path = "pennyway-client-iOS/View/TabView/SpendingManagementView/AddSpendingHistoryView/SpendingCategoryManagementView/MoveCategoryView.swift"; sourceTree = SOURCE_ROOT; };
 		4AC4FD072BBDCC190027ACD5 /* KakaoOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC4FD092BBDCE080027ACD5 /* GoogleOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAtuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleOAtuthViewModel.swift; sourceTree = "<group>"; };
@@ -1217,6 +1219,7 @@
 				4A73E9A92C34F5610017EED9 /* SpendingCategoryGridView.swift */,
 				4A73E9AC2C35137F0017EED9 /* CategorySpendingListView.swift */,
 				4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */,
+				4AC3C3E92C5AB804002D965B /* MoveCategoryView.swift */,
 			);
 			path = SpendingCategoryManagementView;
 			sourceTree = "<group>";
@@ -2024,6 +2027,7 @@
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
 				4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */,
+				4AC3C3EA2C5AB804002D965B /* MoveCategoryView.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
 				4A148B5E2C364A3C005C6D4E /* SpendingCategoryViewModel.swift in Sources */,
 				4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */,
