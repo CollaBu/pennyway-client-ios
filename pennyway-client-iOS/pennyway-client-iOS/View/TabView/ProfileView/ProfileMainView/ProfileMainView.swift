@@ -3,15 +3,12 @@ import SwiftUI
 
 struct ProfileMainView: View {
     @State private var isSelectedToolBar = false
-    @State var showImagePicker = false
-    @State var selectedUIImage: UIImage?
-    @State var image: Image?
 
     var body: some View {
         NavigationAvailable {
             ScrollView {
                 VStack {
-                    ProfileUserInfoView(image: $image, showImagePicker: $showImagePicker)
+                    ProfileUserInfoView()
 
                     Spacer().frame(height: 33 * DynamicSizeFactor.factor())
 
@@ -23,7 +20,7 @@ struct ProfileMainView: View {
 
                         Spacer().frame(height: 6 * DynamicSizeFactor.factor())
 
-                        Image("icon_illust_error")
+                        Image("icon_illust__empty")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 80 * DynamicSizeFactor.factor(), height: 80 * DynamicSizeFactor.factor(), alignment: .leading)
@@ -37,12 +34,7 @@ struct ProfileMainView: View {
                     .padding(.horizontal, 20)
                 }
             }
-            .sheet(isPresented: $showImagePicker, onDismiss: {
-                loadImage()
-            }) {
-                ImagePicker(image: $selectedUIImage)
-                    .edgesIgnoringSafeArea(.bottom)
-            }
+
             .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: false)
             .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username)
@@ -67,13 +59,6 @@ struct ProfileMainView: View {
                 EmptyView()
             }.hidden()
         }
-    }
-
-    func loadImage() {
-        guard let selectedImage = selectedUIImage else {
-            return
-        }
-        image = Image(uiImage: selectedImage)
     }
 }
 

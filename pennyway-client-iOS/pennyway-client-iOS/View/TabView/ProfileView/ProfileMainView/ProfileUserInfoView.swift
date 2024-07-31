@@ -5,12 +5,12 @@ struct ProfileUserInfoView: View {
     @State private var name = ""
     @State private var username = ""
 
-//    @State var showImagePicker = false
-//    @State var selectedUIImage: UIImage?
-//    @State var image: Image?
+    @State var showImagePicker = false
+    @State var selectedUIImage: UIImage?
+    @State var image: Image?
 
-    @Binding var image: Image?
-    @Binding var showImagePicker: Bool
+//    @Binding var image: Image?
+//    @Binding var showImagePicker: Bool
 
     private func loadUserData() {
         if let userData = getUserData() {
@@ -27,17 +27,24 @@ struct ProfileUserInfoView: View {
                 showImagePicker.toggle()
             }, label: {
                 ZStack {
-                    Image("icon_illust_error")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
+                    if let image = image {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
+                            .clipShape(Circle())
+                    } else {
+                        Image("icon_close_filled_primary")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
 
-                    Image("icon_close_filled_primary")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                        .offset(x: 24 * DynamicSizeFactor.factor(), y: 24 * DynamicSizeFactor.factor())
-                        .padding(10)
+                        Image("icon_profile_camera")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor())
+                            .offset(x: 24 * DynamicSizeFactor.factor(), y: 24 * DynamicSizeFactor.factor())
+                    }
                 }
             })
             .buttonStyle(PlainButtonStyle())
@@ -111,10 +118,23 @@ struct ProfileUserInfoView: View {
 
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
         }
+        .sheet(isPresented: $showImagePicker, onDismiss: {
+            loadImage()
+        }) {
+            ImagePicker(image: $selectedUIImage)
+                .edgesIgnoringSafeArea(.bottom)
+        }
         .frame(maxWidth: .infinity, maxHeight: 304 * DynamicSizeFactor.factor())
         .background(Color("White01"))
         .onAppear {
             loadUserData()
         }
+    }
+
+    func loadImage() {
+        guard let selectedImage = selectedUIImage else {
+            return
+        }
+        image = Image(uiImage: selectedImage)
     }
 }
