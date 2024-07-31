@@ -4,9 +4,8 @@ import SwiftUI
 // MARK: - ProfileSettingListView
 
 struct ProfileSettingListView: View {
-    @EnvironmentObject var authViewModel: AppViewModel
-    @Binding var showingPopUp: Bool
-    @StateObject var userAccountViewModel = UserAccountViewModel()
+    @Binding var showLogoutPopUp: Bool
+    @Binding var showDeleteUserPopUp: Bool
     @State var firstNaviLinkActive = true
 
     @State private var activeNavigation: ProfileActiveNavigation?
@@ -56,8 +55,8 @@ struct ProfileSettingListView: View {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
                     ProfileSettingSectionView(title: "기타", itemsWithActions: [
-                        ProfileSettingListItem(title: "로그아웃", icon: "icon_logout", action: { self.showingPopUp = true }),
-                        ProfileSettingListItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: handleDeleteUserAccount)
+                        ProfileSettingListItem(title: "로그아웃", icon: "icon_logout", action: { self.showLogoutPopUp = true }),
+                        ProfileSettingListItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: { self.showDeleteUserPopUp = true })
                     ])
                 }
             }
@@ -91,18 +90,6 @@ struct ProfileSettingListView: View {
             EditProfileListView()
         case .modifyPw:
             ProfileModifyPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw)
-        }
-    }
-
-    func handleDeleteUserAccount() {
-        userAccountViewModel.deleteUserAccountApi { success in
-            DispatchQueue.main.async {
-                if success {
-                    authViewModel.logout()
-                } else {
-                    Log.error("Fail delete UserAccount")
-                }
-            }
         }
     }
 }
