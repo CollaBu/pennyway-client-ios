@@ -9,8 +9,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.message_id"
 
     /// 앱이 켜졌을 때
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // 파이어베이스 설정
+        let firebaseAnalyticsService = FirebaseAnalyticsService()
+
+        AnalyticsManager.shared.addService(firebaseAnalyticsService)
+
+        if let launchOptions = launchOptions {
+            AnalyticsManager.shared.initialize(application: application, didFinishLaunchingWithOptions: launchOptions)
+        }
+
         FirebaseApp.configure()
 
         // Setting Up Notifications...
