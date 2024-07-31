@@ -8,7 +8,6 @@ struct FindIdFormView: View {
     @State private var isNavigateToFindIDView: Bool = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var findUserNameViewModel = FindUserNameViewModel()
-    @State private var isVerificationError: Bool = false
 
     var body: some View {
         ZStack {
@@ -76,7 +75,6 @@ struct FindIdFormView: View {
             Log.debug("else문 시작")
             if phoneVerificationViewModel.showErrorVerificationCode {
                 showingCodeErrorPopUp = true
-                isVerificationError = true // 어디 사용??
             }
         }
     }
