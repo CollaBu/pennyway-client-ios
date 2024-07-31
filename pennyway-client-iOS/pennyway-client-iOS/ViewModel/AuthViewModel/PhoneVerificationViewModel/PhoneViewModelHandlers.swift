@@ -126,7 +126,7 @@ extension PhoneVerificationViewModel {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 showErrorVerificationCode = true
-                
+
             } else {
                 Log.error("Network request failed: \(error)")
             }
@@ -151,7 +151,7 @@ extension PhoneVerificationViewModel {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 showErrorVerificationCode = true
-                
+
             } else {
                 Log.error("Network request failed: \(error)")
             }

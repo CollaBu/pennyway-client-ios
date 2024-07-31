@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct PhoneVerificationView: View {
-    @State private var showingCodeErrorPopUp = false
-    @State private var showingApiRequestPopUp = false
+    @State private var showCodeErrorPopUp = false
+    @State private var showManyRequestPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @StateObject var oauthAccountLinkingViewModel = LinkOAuthToAccountViewModel()
@@ -21,7 +21,7 @@ struct PhoneVerificationView: View {
                 
                 Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                 
-                PhoneVerificationContentView(phoneVerificationViewModel: phoneVerificationViewModel, showingApiRequestPopUp: $showingApiRequestPopUp)
+                PhoneVerificationContentView(phoneVerificationViewModel: phoneVerificationViewModel, showManyRequestPopUp: $showManyRequestPopUp)
                 
                 Spacer()
                 
@@ -35,14 +35,14 @@ struct PhoneVerificationView: View {
                 }
             }
             
-            if showingCodeErrorPopUp {
+            if showCodeErrorPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
+                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
             }
             
-            if showingApiRequestPopUp {
+            if showManyRequestPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingApiRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
+                ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -81,7 +81,7 @@ struct PhoneVerificationView: View {
         if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser
             && phoneVerificationViewModel.isFormValid
         {
-            showingCodeErrorPopUp = false
+            showCodeErrorPopUp = false
             viewModel.continueButtonTapped()
             
             if OAuthRegistrationManager.shared.isOAuthRegistration {
@@ -96,7 +96,7 @@ struct PhoneVerificationView: View {
             }
         } else {
             if phoneVerificationViewModel.showErrorVerificationCode {
-                showingCodeErrorPopUp = true
+                showCodeErrorPopUp = true
             }
         }
     }

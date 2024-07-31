@@ -2,13 +2,13 @@ import SwiftUI
 
 struct FindPwContentView: View {
     @ObservedObject var phoneVerificationViewModel: PhoneVerificationViewModel
-    @Binding var showingApiRequestPopUp: Bool
+    @Binding var showManyRequestPopUp: Bool
 
     var body: some View {
         VStack {
             Spacer().frame(height: 36 * DynamicSizeFactor.factor())
 
-            FindPwPhoneVerificationView(viewModel: phoneVerificationViewModel, showingApiRequestPopUp: $showingApiRequestPopUp)
+            FindPwPhoneVerificationView(viewModel: phoneVerificationViewModel, showManyRequestPopUp: $showManyRequestPopUp)
 
             Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 
@@ -18,5 +18,5 @@ struct FindPwContentView: View {
 }
 
 #Preview {
-    FindPwContentView(phoneVerificationViewModel: PhoneVerificationViewModel(), showingApiRequestPopUp: .constant(false))
+    FindPwContentView(phoneVerificationViewModel: PhoneVerificationViewModel(), showManyRequestPopUp: .constant(false))
 }

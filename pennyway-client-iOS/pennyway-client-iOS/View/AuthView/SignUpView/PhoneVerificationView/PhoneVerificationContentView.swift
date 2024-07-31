@@ -3,7 +3,7 @@ import SwiftUI
 
 struct PhoneVerificationContentView: View {
     @ObservedObject var phoneVerificationViewModel: PhoneVerificationViewModel
-    @Binding var showingApiRequestPopUp: Bool
+    @Binding var showManyRequestPopUp: Bool
 
     // MARK: Internal
 
@@ -15,7 +15,7 @@ struct PhoneVerificationContentView: View {
 
             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
 
-            PhoneNumberInputSectionView(viewModel: phoneVerificationViewModel, showingApiRequestPopUp: $showingApiRequestPopUp)
+            PhoneNumberInputSectionView(viewModel: phoneVerificationViewModel, showManyRequestPopUp: $showManyRequestPopUp)
 
             Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 

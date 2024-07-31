@@ -4,7 +4,7 @@ import SwiftUI
 
 struct FindIdPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
-    @Binding var showingApiRequestPopUp: Bool
+    @Binding var showManyRequestPopUp: Bool
     @State private var isFindUser = true
 
     var body: some View {
@@ -51,7 +51,7 @@ struct FindIdPhoneVerificationView: View {
                             Log.debug("아이디 찾기 api 요청")
                             viewModel.requestUserNameVerificationCodeApi {
                                 if viewModel.showErrorApiRequest {
-                                    showingApiRequestPopUp = true
+                                    showManyRequestPopUp = true
                                 } else {
                                     viewModel.judgeTimerRunning()
                                 }

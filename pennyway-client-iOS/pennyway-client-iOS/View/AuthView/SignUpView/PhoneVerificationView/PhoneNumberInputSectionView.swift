@@ -4,7 +4,7 @@ import SwiftUI
 struct PhoneNumberInputSectionView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
-    @Binding var showingApiRequestPopUp: Bool
+    @Binding var showManyRequestPopUp: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
@@ -64,7 +64,7 @@ struct PhoneNumberInputSectionView: View {
 
     private func handleErrorApi() {
         if viewModel.showErrorApiRequest {
-            showingApiRequestPopUp = true
+            showManyRequestPopUp = true
         } else {
             viewModel.judgeTimerRunning()
         }

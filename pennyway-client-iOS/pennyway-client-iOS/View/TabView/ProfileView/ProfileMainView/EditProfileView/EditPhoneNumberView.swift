@@ -4,8 +4,8 @@ import SwiftUI
 struct EditPhoneNumberView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = PhoneVerificationViewModel()
-    @State private var showingCodeErrorPopUp = false // 인증번호 오류
-    @State private var showingApiRequestPopUp = false // api 요청 오류
+    @State private var showCodeErrorPopUp = false // 인증번호 오류
+    @State private var showManyRequestPopUp = false // api 요청 오류
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
@@ -88,13 +88,13 @@ struct EditPhoneNumberView: View {
                 }
             }
 
-            if showingCodeErrorPopUp {
+            if showCodeErrorPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
+                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
             }
-            if showingApiRequestPopUp {
+            if showManyRequestPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingApiRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
+                ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
             }
         }
     }
@@ -134,7 +134,7 @@ struct EditPhoneNumberView: View {
     private func handleVerificationButtonTap() {
         viewModel.requestEditVerificationCodeApi { 
             if viewModel.showErrorApiRequest {
-                showingApiRequestPopUp = true
+                showManyRequestPopUp = true
             } else {
                 viewModel.judgeTimerRunning()
             }
@@ -154,11 +154,11 @@ struct EditPhoneNumberView: View {
         if !viewModel.showErrorVerificationCode && !viewModel.showErrorExistingUser &&
             !viewModel.showErrorApiRequest && viewModel.isFormValid
         {
-            showingCodeErrorPopUp = false
+            showCodeErrorPopUp = false
             completion(true)
         } else {
             if viewModel.showErrorVerificationCode {
-                showingCodeErrorPopUp = true
+                showCodeErrorPopUp = true
                 completion(false)
             }
         }

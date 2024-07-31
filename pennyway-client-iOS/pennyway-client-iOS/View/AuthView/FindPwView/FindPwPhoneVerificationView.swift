@@ -4,7 +4,7 @@ import SwiftUI
 
 struct FindPwPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
-    @Binding var showingApiRequestPopUp: Bool
+    @Binding var showManyRequestPopUp: Bool
     @State private var isFindUser = true
 
     var body: some View {
@@ -46,7 +46,7 @@ struct FindPwPhoneVerificationView: View {
                     Button(action: {
                         if isFindUser {
                             viewModel.requestPwVerificationCodeApi { if viewModel.showErrorApiRequest {
-                                showingApiRequestPopUp = true
+                                showManyRequestPopUp = true
                             } else {
                                 viewModel.judgeTimerRunning()
                             }
