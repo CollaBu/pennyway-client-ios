@@ -3,7 +3,7 @@ import Foundation
 
 class NumberFormatterUtil {
     /// 정수를 100,000 형식으로 변환
-    static func formatIntToDecimalString(_ number: Int) -> String {
+    static func formatIntToDecimalString(_ number: Int64) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         return formatter.string(from: NSNumber(value: number)) ?? "\(number)"

@@ -99,7 +99,7 @@ struct TotalTargetAmountContentView: View {
     
     // Color 설정
     
-    func determineDiffAmountColor(for diffAmount: Int) -> Color {
+    func determineDiffAmountColor(for diffAmount: Int64) -> Color {
         if viewModel.currentData.targetAmountDetail.amount != -1 {
             return diffAmount > 0 ? Color("Red03") : Color("Gray07")
         } else {
@@ -107,15 +107,15 @@ struct TotalTargetAmountContentView: View {
         }
     }
     
-    func determineBackgroundColor(for diffAmount: Int) -> Color {
+    func determineBackgroundColor(for diffAmount: Int64) -> Color {
         return diffAmount > 0 ? Color("Red01") : Color("Ashblue01")
     }
     
-    func determineTextColor(for diffAmount: Int) -> Color {
+    func determineTextColor(for diffAmount: Int64) -> Color {
         return diffAmount > 0 ? Color("Red03") : Color("Mint03")
     }
     
-    func determineText(for diffAmount: Int) -> String {
+    func determineText(for diffAmount: Int64) -> String {
         let diffAmountValue = (NumberFormatterUtil.formatIntToDecimalString(abs(diffAmount)))
         
         if diffAmount != 0 {
