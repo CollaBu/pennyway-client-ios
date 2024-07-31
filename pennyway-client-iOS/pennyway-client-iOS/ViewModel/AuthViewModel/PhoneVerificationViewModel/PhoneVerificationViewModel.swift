@@ -19,6 +19,7 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var showErrorPhoneNumberFormat = false
     @Published var showErrorVerificationCode = false
     @Published var showErrorExistingUser = false
+    @Published var showErrorApiRequest = false
     @Published var isFormValid = false
 
     @Published var phone: String = ""

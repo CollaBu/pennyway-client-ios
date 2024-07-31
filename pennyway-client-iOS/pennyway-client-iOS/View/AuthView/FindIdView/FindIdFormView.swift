@@ -2,18 +2,18 @@ import os.log
 import SwiftUI
 
 struct FindIdFormView: View {
-    @State private var showingPopUp = false
+    @State private var showCodeErrorPopUp = false
+    @State private var showManyRequestPopUp = false
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var isNavigateToFindIDView: Bool = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var findUserNameViewModel = FindUserNameViewModel()
-    @State private var isVerificationError: Bool = false
 
     var body: some View {
         ZStack {
             VStack {
                 ScrollView {
-                    FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel)
+                    FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel, showManyRequestPopUp: $showManyRequestPopUp)
                 }
 
                 Spacer()
@@ -27,9 +27,14 @@ struct FindIdFormView: View {
                     EmptyView()
                 }.hidden()
             }
-            if showingPopUp == true {
+            if showCodeErrorPopUp == true {
                 Color.black.opacity(0.1).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showingPopUp, label: "사용자 정보를 찾을 수 없어요")
+                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "사용자 정보를 찾을 수 없어요", subLabel: "다시 한번 확인해주세요")
+            }
+
+            if showManyRequestPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -55,9 +60,11 @@ struct FindIdFormView: View {
     }
 
     private func checkFormValid() {
-        if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
+        if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser &&
+            phoneVerificationViewModel.isFormValid
+        {
             Log.debug("if문 시작")
-            showingPopUp = false
+            showCodeErrorPopUp = false
             isNavigateToFindIDView = true
             viewModel.continueButtonTapped()
 
@@ -67,8 +74,7 @@ struct FindIdFormView: View {
         } else {
             Log.debug("else문 시작")
             if phoneVerificationViewModel.showErrorVerificationCode {
-                showingPopUp = true
-                isVerificationError = true
+                showCodeErrorPopUp = true
             }
         }
     }
