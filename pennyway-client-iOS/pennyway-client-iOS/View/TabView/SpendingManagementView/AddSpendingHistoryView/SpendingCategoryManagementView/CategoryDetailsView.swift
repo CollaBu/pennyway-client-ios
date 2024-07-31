@@ -5,7 +5,6 @@ import SwiftUI
 
 struct CategoryDetailsView: View {
     @ObservedObject var viewModel: SpendingCategoryViewModel
-    @Environment(\.presentationMode) var presentationMode
     @State private var isClickMenu = false
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]
@@ -13,6 +12,7 @@ struct CategoryDetailsView: View {
     @State private var showToastPopup = false
     @State var isDeleted = false
     @State private var isNavigateToEditCategoryView = false
+    @State private var isNavigateToMoveCategoryView = false
 
     var body: some View {
         ZStack {
@@ -70,7 +70,10 @@ struct CategoryDetailsView: View {
                     showingPopUp: $showingPopUp,
                     titleLabel: "카테고리를 삭제할까요?",
                     subTitleLabel: "몇개의 소비 내역이 모두 사라져요🥲",
-                    firstBtnAction: { self.showingPopUp = false },
+                    firstBtnAction: {
+                        self.isNavigateToMoveCategoryView = true
+                        self.showingPopUp = false
+                    },
                     firstBtnLabel: "내역 옮기기",
                     secondBtnAction: { self.showingPopUp = false },
                     secondBtnLabel: "삭제하기",
@@ -120,18 +123,11 @@ struct CategoryDetailsView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("icon_arrow_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 34, height: 34)
-                            .padding(5)
-                    })
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+
                 }.offset(x: -10)
             }
             ToolbarItem(placement: .topBarTrailing) {
