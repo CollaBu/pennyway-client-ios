@@ -1659,10 +1659,10 @@
 		B599E4BA2C58AE72006051E9 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				B599E4CE2C5A0B32006051E9 /* Event */,
 				B599E4C42C58E68B006051E9 /* Constants */,
 				B599E4C12C58C72E006051E9 /* Provider */,
 				B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */,
-				B599E4BD2C58AF34006051E9 /* AnalyticsEvent.swift */,
 				B599E4BF2C58B951006051E9 /* AnalyticsTracker.swift */,
 				B599E4C92C58F1CC006051E9 /* AnalyticsManager.swift */,
 			);
@@ -1681,8 +1681,6 @@
 			isa = PBXGroup;
 			children = (
 				B599E4C22C58D4F0006051E9 /* AnalyticsConstants.swift */,
-				B599E4C52C58E989006051E9 /* AuthenticationAnalyticsEvents.swift */,
-				B599E4C72C58EB74006051E9 /* SpendingAnalyticsEvents.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1693,6 +1691,16 @@
 				B599E4CC2C59067C006051E9 /* FirebaseAnalyticsService.swift */,
 			);
 			path = Google;
+			sourceTree = "<group>";
+		};
+		B599E4CE2C5A0B32006051E9 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				B599E4BD2C58AF34006051E9 /* AnalyticsEvent.swift */,
+				B599E4C52C58E989006051E9 /* AuthenticationAnalyticsEvents.swift */,
+				B599E4C72C58EB74006051E9 /* SpendingAnalyticsEvents.swift */,
+			);
+			path = Event;
 			sourceTree = "<group>";
 		};
 		C2F5B21500B89F9F684EBF8B /* Frameworks */ = {
