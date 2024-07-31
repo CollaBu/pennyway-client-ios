@@ -5,9 +5,12 @@ struct ProfileUserInfoView: View {
     @State private var name = ""
     @State private var username = ""
 
-    @State var showImagePicker = false
-    @State var selectedUIImage: UIImage?
-    @State var image: Image?
+//    @State var showImagePicker = false
+//    @State var selectedUIImage: UIImage?
+//    @State var image: Image?
+
+    @Binding var image: Image?
+    @Binding var showImagePicker: Bool
 
     private func loadUserData() {
         if let userData = getUserData() {
@@ -108,22 +111,10 @@ struct ProfileUserInfoView: View {
 
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
         }
-        .sheet(isPresented: $showImagePicker, onDismiss: {
-            loadImage()
-        }) {
-            ImagePicker(image: $selectedUIImage)
-        }
         .frame(maxWidth: .infinity, maxHeight: 304 * DynamicSizeFactor.factor())
         .background(Color("White01"))
         .onAppear {
             loadUserData()
         }
-    }
-
-    func loadImage() {
-        guard let selectedImage = selectedUIImage else {
-            return
-        }
-        image = Image(uiImage: selectedImage)
     }
 }
