@@ -1,13 +1,13 @@
 
 import SwiftUI
 
-struct PreparedChatView: View {
+struct PreparedView: View {
     var body: some View {
         ZStack {
             VStack {
-                Image("icon_close_filled_primary")
+                Image("icon_illust_preparing")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 142 * DynamicSizeFactor.factor(), height: 75 * DynamicSizeFactor.factor())
                 
                 Spacer().frame(height: 24 * DynamicSizeFactor.factor())
@@ -27,5 +27,5 @@ struct PreparedChatView: View {
 }
 
 #Preview {
-    PreparedChatView()
+    PreparedView()
 }

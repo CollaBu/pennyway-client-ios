@@ -17,14 +17,14 @@ struct MainTabView: View {
                     }
                     .tag(0)
 
-                PreparedFeedView()
+                PreparedView()
                     .tabItem {
                         selection == 1 ? Image("icon_tapbar_feed_on") : Image("icon_tapbar_feed_off")
                         Text("피드")
                     }
                     .tag(1)
 
-                PreparedChatView()
+                PreparedView()
                     .tabItem {
                         selection == 2 ? Image("icon_tapbar_chatting_on") : Image("icon_tapbar_chatting_off")
                         Text("채팅")
