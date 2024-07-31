@@ -114,7 +114,7 @@ struct TotalTargetAmountContentView: View {
     func determineTextColor(for diffAmount: Int64) -> Color {
         return diffAmount > 0 ? Color("Red03") : Color("Mint03")
     }
-    
+
     func determineText(for diffAmount: Int64) -> String {
         let diffAmountValue = (NumberFormatterUtil.formatIntToDecimalString(abs(diffAmount)))
         
