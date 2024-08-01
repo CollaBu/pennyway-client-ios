@@ -13,6 +13,7 @@ struct CategoryDetailsView: View {
     @State private var showToastPopup = false
     @State var isDeleted = false
     @State private var isNavigateToEditCategoryView = false
+    @State private var isNavigateToMoveCategoryView = false
     
     @Binding var showToastDeletePopUp: Bool
 
@@ -96,18 +97,11 @@ struct CategoryDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Image("icon_arrow_back")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 34, height: 34)
-                                .padding(5)
-                        })
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+
                     }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -147,7 +141,10 @@ struct CategoryDetailsView: View {
                     showingPopUp: $showDeletePopUp,
                     titleLabel: "카테고리를 삭제할까요?",
                     subTitleLabel: "\(viewModel.spedingHistoryTotalCount)개의 소비 내역이 모두 사라져요🥲",
-                    firstBtnAction: { self.showDeletePopUp = false },
+                    firstBtnAction: {
+                        self.isNavigateToMoveCategoryView = true
+                        self.showDeletePopUp = false
+                    },
                     firstBtnLabel: "내역 옮기기",
                     secondBtnAction: { 
                         viewModel.deleteCategoryApi { success in
@@ -164,8 +161,9 @@ struct CategoryDetailsView: View {
                     secondBtnColor: Color("Red03")
                 )
             }
-            
             NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
+            
+            NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $isNavigateToMoveCategoryView) {}
         }
     }
 
