@@ -21,7 +21,7 @@ class TotalTargetAmountViewModel: ObservableObject {
 
                         self.targetAmounts = response.data.targetAmounts
 
-                        self.sortTargetAmounts = self.targetAmounts.sorted {//먼저 year 기준으로 나눈 후 month 오름차순
+                        self.sortTargetAmounts = self.targetAmounts.sorted { // 먼저 year 기준으로 나눈 후 month 오름차순
                             if $0.year == $1.year {
                                 return $0.month < $1.month
                             } else {

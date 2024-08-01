@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TotalTargetAmountContentView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
+    @Binding var isnavigateToPastSpendingView: Bool
     
     var body: some View {
         VStack {
@@ -45,11 +46,15 @@ struct TotalTargetAmountContentView: View {
                     
                     Spacer()
                     
-                    Image("icon_arrow_front_small")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                        .padding(.trailing, 10)
+                    Button(action: {
+                        isnavigateToPastSpendingView = true
+                    }, label: {
+                        Image("icon_arrow_front_small")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            .padding(.trailing, 10)
+                    })
                 }
                 .padding(.top, 18)
                 
