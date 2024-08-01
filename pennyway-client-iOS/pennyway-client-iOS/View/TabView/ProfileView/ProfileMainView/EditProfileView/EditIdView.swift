@@ -4,7 +4,7 @@ import SwiftUI
 
 struct EditIdView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var editIdViewModel = EditIdViewModel()
+    @StateObject var editIdViewModel = EditViewModel()
     
     var body: some View {
         VStack(alignment: .leading) {

@@ -2,7 +2,14 @@
 import SwiftUI
 
 struct EditUsernameView: View {
-    @StateObject var formViewModel = EditIdViewModel()
+    @StateObject var formViewModel = EditViewModel()
+    @State private var name = ""
+
+    private func loadUserData() {
+        if let userData = getUserData() {
+            name = userData.name // 사용자 이름
+        }
+    }
 
     private let maxLength = 8
 
@@ -24,7 +31,7 @@ struct EditUsernameView: View {
                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
 
                 HStack {
-                    Text("현재 이름 : 붕어빵")
+                    Text("현재 이름 : \(name)")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray05"))
 

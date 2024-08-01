@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-class EditIdViewModel: ObservableObject {
+class EditViewModel: ObservableObject {
     @Published var username = ""
     @Published var inputId = ""
     @Published var showErrorName = false
@@ -24,7 +24,6 @@ class EditIdViewModel: ObservableObject {
     }
 
     func validateForm() {
-
         if !isDuplicateId && !inputId.isEmpty {
             if !showErrorId {
                 isFormValid = true
@@ -80,6 +79,43 @@ class EditIdViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
 
                         Log.debug("아이디 수정 완료")
+                        updateUserField(fieldName: "username", value: self.inputId)
+
+                        completion(true)
+                    } catch {
+                        Log.fault("Error parsing response JSON: \(error)")
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("Failed to verify: \(StatusSpecificError)")
+
+                    if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                        self.isDuplicateId = true
+                        self.validateForm()
+                    }
+
+                } else {
+                    Log.error("Failed to verify: \(error)")
+                }
+                Log.debug("아이디 수정 실패")
+                completion(false)
+            }
+        }
+    }
+
+    /// 이름 수정
+    func editUsernameApi(completion: @escaping (Bool) -> Void) {
+        let editUsernameDto = CheckDuplicateRequestDto(username: inputId)
+
+        UserAccountAlamofire.shared.editUserId(dto: editUsernameDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
+
+                        Log.debug("이름 수정 완료")
                         updateUserField(fieldName: "username", value: self.inputId)
 
                         completion(true)
