@@ -4,14 +4,14 @@ import SwiftUI
 struct TotalTargetAmountGraphView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     var body: some View {
-        let maxHeight = 140 * DynamicSizeFactor.factor()
+        let maxHeight = 140 * DynamicSizeFactor.factor()//최대 높이
         let maxSpending = max(viewModel.maxTotalSpending, 100_000) // 최소값을 100000으로 설정
 
         HStack(spacing: 24 * DynamicSizeFactor.factor()) {
             ForEach(0 ..< 6) { index in
                 if index >= 6 - viewModel.sortTargetAmounts.count {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
-                    let adjustedHeight = (maxSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxSpending) * maxHeight : 0
+                    let adjustedHeight = (maxSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxSpending) * maxHeight : 0//그래프 높이 조정
 
                     VStack {
                         Text("\(content.totalSpending / 10000)")
