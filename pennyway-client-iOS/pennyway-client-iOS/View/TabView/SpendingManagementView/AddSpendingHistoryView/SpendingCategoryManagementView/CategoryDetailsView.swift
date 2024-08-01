@@ -96,10 +96,13 @@ struct CategoryDetailsView: View {
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+                    HStack {
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+
+                    }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     if viewModel.selectedCategory!.isCustom {
@@ -158,81 +161,10 @@ struct CategoryDetailsView: View {
                     secondBtnColor: Color("Red03")
                 )
             }
-            
             NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
+            
+            NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $isNavigateToMoveCategoryView) {}
         }
-        // <<<<<<< HEAD
-//        .overlay(
-//            Group {
-//                if showToastPopup {
-//                    CustomToastView(message: "소비내역이 삭제되었어요")
-//                        .transition(.move(edge: .bottom))
-//                        .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-//                        .padding(.bottom, 34)
-//                        .onAppear {
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//                                showToastPopup = false
-//                            }
-//                        }
-//                }
-//            }, alignment: .bottom
-//        )
-//        .edgesIgnoringSafeArea(.bottom)
-//        .overlay(
-//            VStack(alignment: .leading) {
-//                if isClickMenu {
-//                    CustomDropdownMenuView(
-//                        isClickMenu: $isClickMenu,
-//                        selectedMenu: $selectedMenu,
-//                        listArray: listArray,
-//                        onItemSelected: { item in
-//                            if item == "카테고리 삭제" {
-//                                showingPopUp = true
-//                            } else {
-//                                isNavigateToEditCategoryView = true
-//                                viewModel.categoryName = ""
-//                                viewModel.selectedCategoryIcon = viewModel.selectedCategory?.icon
-//                            }
-//                            Log.debug("Selected item: \(item)")
-//                        }
-//                    ).padding(.trailing, 20)
-//                }
-//            }, alignment: .topTrailing
-//        )
-//        .navigationBarColor(UIColor(named: "White01"), title: "")
-//        .navigationBarBackButtonHidden(true)
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                HStack {
-//                    NavigationBackButton()
-//                        .padding(.leading, 5)
-//                        .frame(width: 44, height: 44)
-//                        .contentShape(Rectangle())
-//
-//                }.offset(x: -10)
-//            }
-//            ToolbarItem(placement: .topBarTrailing) {
-//                if viewModel.selectedCategory!.isCustom {
-//                    HStack {
-//                        Button(action: {
-//                            isClickMenu.toggle()
-//                            selectedMenu = nil
-//                        }, label: {
-//                            Image("icon_navigationbar_kebabmenu")
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-//                                .padding(5)
-//                        })
-//                        .padding(.trailing, 5)
-//                        .frame(width: 44, height: 44)
-//                    }.offset(x: 10)
-//                }
-//            }
-//        }
-        NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
-        
-        NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $isNavigateToMoveCategoryView) {}
     }
 
     private func refreshView(completion: @escaping () -> Void) {

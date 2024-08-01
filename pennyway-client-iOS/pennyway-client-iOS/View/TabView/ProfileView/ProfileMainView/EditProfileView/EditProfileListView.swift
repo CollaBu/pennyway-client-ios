@@ -2,8 +2,6 @@
 import SwiftUI
 
 struct EditProfileListView: View {
-    @Environment(\.presentationMode) var presentationMode
-    
     @State var isNavigateToEditIdView = false
     @State var isNavigateToEditPhoneView = false
     
@@ -34,18 +32,11 @@ struct EditProfileListView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("icon_arrow_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 34, height: 34)
-                            .padding(5)
-                    })
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+
                 }.offset(x: -10)
             }
         }
