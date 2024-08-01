@@ -10,6 +10,7 @@ struct SpendingCategoryGridView: View {
     
     @State var navigateToCategoryDetails = false
     @State var navigateToAddCategoryView = false
+    @State private var showToastDeletePopUp = false
 
     var body: some View {
         ZStack {
@@ -45,6 +46,21 @@ struct SpendingCategoryGridView: View {
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                 }
             }
+            .overlay(
+                Group {
+                    if showToastDeletePopUp {
+                        CustomToastView(message: "카테고리를 삭제했어요")
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                            .padding(.bottom, 34)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    showToastDeletePopUp = false
+                                }
+                            }
+                    }
+                }, alignment: .bottom
+            )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color("Gray01"))
             .navigationBarColor(UIColor(named: "Gray01"), title: "카테고리")
@@ -53,24 +69,19 @@ struct SpendingCategoryGridView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     HStack {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Image("icon_arrow_back")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 34, height: 34)
-                                .padding(5)
-                        })
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+
                     }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
                         Button(action: {
                             navigateToAddCategoryView = true
+                            addSpendingHistoryViewModel.selectedCategoryIcon = CategoryIconName(baseName: CategoryBaseName.etc, state: .on) // icon 초기화
+                            addSpendingHistoryViewModel.categoryName = "" // name 초기화
                         }, label: {
                             Image("icon_navigation_add")
                                 .resizable()
@@ -86,7 +97,7 @@ struct SpendingCategoryGridView: View {
             }
         }
 
-        NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel), isActive: $navigateToCategoryDetails) {}
+        NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel, showToastDeletePopUp: $showToastDeletePopUp), isActive: $navigateToCategoryDetails) {}
 
         NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
     }

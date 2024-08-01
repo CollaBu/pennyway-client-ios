@@ -3,7 +3,9 @@
 import SwiftUI
 
 class EditIdViewModel: ObservableObject {
+    @Published var username = ""
     @Published var inputId = ""
+    @Published var showErrorName = false
     @Published var showErrorId = false
     @Published var isDuplicateId = false
     @Published var isFormValid = false
@@ -16,11 +18,20 @@ class EditIdViewModel: ObservableObject {
         }
     }
 
+    func validateName() {
+        let nameRegex = "^[가-힣a-zA-Z]{2,8}$"
+        showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: username)
+    }
+
     func validateForm() {
-        if !isDuplicateId && !showErrorId && !inputId.isEmpty {
-            isFormValid = true
-        } else {
-            isFormValid = false
+        if !isDuplicateId && !inputId.isEmpty {
+            if !showErrorId {
+                isFormValid = true
+            } else if !showErrorName {
+                isFormValid = true
+            } else {
+                isFormValid = false
+            }
         }
     }
 

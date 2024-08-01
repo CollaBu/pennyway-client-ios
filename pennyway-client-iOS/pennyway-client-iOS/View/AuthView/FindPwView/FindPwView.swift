@@ -17,17 +17,17 @@ struct FindPwView: View {
                     }
                 }
                 Spacer()
-                
+
                 CustomBottomButton(action: {
                     continueButtonAction()
                 }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                
+
                 NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel(), firstNaviLinkActive: .constant(true), entryPoint: .findPw), isActive: $isNavigateToFindPwView) {
                     EmptyView()
                 }.hidden()
             }
-            
+
             if showCodeErrorPopUp == true {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
@@ -47,30 +47,22 @@ struct FindPwView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
-                    Button(action: {
-                        NavigationUtil.popToRootView()
-                    }, label: {
-                        Image("icon_arrow_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 34, height: 34)
-                            .padding(5)
-                    })
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
-                    
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+
                 }.offset(x: -10)
             }
         }
     }
-    
+
     private func continueButtonAction() {
         phoneVerificationViewModel.requestPwVerifyVerificationCodeApi {
             checkFormValid()
         }
     }
-    
+
     private func checkFormValid() {
         if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
             Log.debug("비밀번호 찾기 checkFormValid if문 시작")
@@ -79,7 +71,7 @@ struct FindPwView: View {
             viewModel.continueButtonTapped()
 
             RegistrationManager.shared.code = phoneVerificationViewModel.code
-            
+
         } else {
             if phoneVerificationViewModel.showErrorVerificationCode {
                 showCodeErrorPopUp = true
