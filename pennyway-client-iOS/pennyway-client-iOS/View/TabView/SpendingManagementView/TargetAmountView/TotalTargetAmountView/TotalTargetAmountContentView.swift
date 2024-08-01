@@ -59,7 +59,7 @@ struct TotalTargetAmountContentView: View {
                 
                 Spacer().frame(height: 36 * DynamicSizeFactor.factor())
                 
-                ForEach(Array(viewModel.targetAmounts.enumerated()), id: \.offset) { _, content in
+                ForEach(Array(viewModel.targetAmounts.prefix(6).enumerated()), id: \.offset) { _, content in
                     VStack(alignment: .leading) {
                         Text("\(String(content.year))년 \(content.month)월")
                             .font(.B2MediumFont())

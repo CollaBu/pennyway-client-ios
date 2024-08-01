@@ -286,13 +286,13 @@
 		D8E637502C06303D00D43BB6 /* MySpendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */; };
 		D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */; };
 		D8F9D7362C593B71005416FC /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7352C593B71005416FC /* PreparedView.swift */; };
+		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
 		D8F9D73D2C59FDFD005416FC /* UnreadAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D73C2C59FDFD005416FC /* UnreadAlarmView.swift */; };
 		D8F9D73F2C59FE12005416FC /* ReadAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D73E2C59FE12005416FC /* ReadAlarmView.swift */; };
 		D8F9D7412C59FE22005416FC /* NoAlarmArrivedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7402C59FE22005416FC /* NoAlarmArrivedView.swift */; };
 		D8F9D7432C5A0596005416FC /* ProfileAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7422C5A0596005416FC /* ProfileAlarmView.swift */; };
 		D8F9D7452C5A09ED005416FC /* ArrivedAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */; };
 		D8F9D7472C5A1177005416FC /* AlarmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7462C5A1177005416FC /* AlarmList.swift */; };
-		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -578,13 +578,13 @@
 		D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListViewModel.swift; sourceTree = "<group>"; };
 		D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleDeleteButtonUtil.swift; sourceTree = "<group>"; };
 		D8F9D7352C593B71005416FC /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedView.swift; path = "pennyway-client-iOS/View/TabView/PreparedView.swift"; sourceTree = SOURCE_ROOT; };
+		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D8F9D73C2C59FDFD005416FC /* UnreadAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D73E2C59FE12005416FC /* ReadAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D7402C59FE22005416FC /* NoAlarmArrivedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAlarmArrivedView.swift; sourceTree = "<group>"; };
 		D8F9D7422C5A0596005416FC /* ProfileAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivedAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D7462C5A1177005416FC /* AlarmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmList.swift; sourceTree = "<group>"; };
-		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
