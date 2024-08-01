@@ -85,6 +85,7 @@ struct SpendingDetailSheetView: View {
                                     showDetailSpendingView = true
                                 }, label: {
                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                        .contentShape(Rectangle())
                                 })
                                 .buttonStyle(PlainButtonStyle())
                                 

@@ -56,6 +56,7 @@ struct EditSpendingDetailView: View {
 
                                 CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                     .padding(.leading, 13 * DynamicSizeFactor.factor())
+                                    .contentShape(Rectangle())
                             }
                             .frame(maxWidth: .infinity)
                             .padding(.leading, 14)
