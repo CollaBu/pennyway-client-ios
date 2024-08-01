@@ -3,7 +3,7 @@
 import SwiftUI
 
 class EditViewModel: ObservableObject {
-    @Published var username = ""
+    @Published var name = ""
     @Published var inputId = ""
     @Published var showErrorName = false
     @Published var showErrorId = false
@@ -20,19 +20,47 @@ class EditViewModel: ObservableObject {
 
     func validateName() {
         let nameRegex = "^[가-힣a-zA-Z]{2,8}$"
-        showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: username)
+        showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
+        validateNameForm()
     }
 
     func validateForm() {
-        if !isDuplicateId && !inputId.isEmpty {
-            if !showErrorId {
-                isFormValid = true
-            } else if !showErrorName {
-                isFormValid = true
-            } else {
-                isFormValid = false
-            }
+        if !inputId.isEmpty && !isDuplicateId && !showErrorId {
+            isFormValid = true
+        } else {
+            isFormValid = false
         }
+    }
+
+    func validateNameForm() {
+        if !name.isEmpty {
+            isFormValid = true
+        } else {
+            isFormValid = false
+        }
+//
+//    func validateNameForm() {
+//        if !name.isEmpty {
+//            
+//        }
+//        if !inputId.isEmpty || !name.isEmpty {
+//            if !showErrorId && !isDuplicateId {
+//                isFormValid = true
+//            } else if !showErrorName {
+//                isFormValid = true
+//            } else {
+//                isFormValid = false
+//            }
+//        }
+//        if !isDuplicateId && (!inputId.isEmpty || !name.isEmpty) {
+//            if !showErrorId {
+//                isFormValid = true
+//            } else if !showErrorName {
+//                isFormValid = true
+//            } else {
+//                isFormValid = false
+//            }
+//        }
     }
 
     /// 아이디 중복 확인
@@ -106,9 +134,9 @@ class EditViewModel: ObservableObject {
 
     /// 이름 수정
     func editUsernameApi(completion: @escaping (Bool) -> Void) {
-        let editUsernameDto = CheckDuplicateRequestDto(username: inputId)
+        let editUserNameDto = EditNameRequestDto(name: name)
 
-        UserAccountAlamofire.shared.editUserId(dto: editUsernameDto) { result in
+        UserAccountAlamofire.shared.editUserName(dto: editUserNameDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -116,7 +144,7 @@ class EditViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
 
                         Log.debug("이름 수정 완료")
-                        updateUserField(fieldName: "username", value: self.inputId)
+                        updateUserField(fieldName: "name", value: self.name)
 
                         completion(true)
                     } catch {
@@ -129,13 +157,13 @@ class EditViewModel: ObservableObject {
 
                     if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                         self.isDuplicateId = true
-                        self.validateForm()
+                        self.validateNameForm()
                     }
 
                 } else {
                     Log.error("Failed to verify: \(error)")
                 }
-                Log.debug("아이디 수정 실패")
+                Log.debug("이름 수정 실패")
                 completion(false)
             }
         }

@@ -805,7 +805,6 @@
 				4A0FFBF82BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift */,
 				D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */,
 				D847A78E2BEBB42200899AA3 /* RequestResetPwDto.swift */,
-				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1176,6 +1175,7 @@
 				4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */,
 				D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */,
 				D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */,
+				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
