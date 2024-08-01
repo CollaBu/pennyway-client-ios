@@ -3,12 +3,13 @@ import SwiftUI
 
 struct ProfileMainView: View {
     @State private var isSelectedToolBar = false
+    @State private var navigateToEditUsername = false
 
     var body: some View {
         NavigationAvailable {
             ScrollView {
                 VStack {
-                    ProfileUserInfoView()
+                    ProfileUserInfoView(navigateToEditUsername: $navigateToEditUsername)
 
                     Spacer().frame(height: 33 * DynamicSizeFactor.factor())
 
@@ -56,6 +57,10 @@ struct ProfileMainView: View {
                 }
             }
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
+                EmptyView()
+            }.hidden()
+
+            NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
                 EmptyView()
             }.hidden()
         }
