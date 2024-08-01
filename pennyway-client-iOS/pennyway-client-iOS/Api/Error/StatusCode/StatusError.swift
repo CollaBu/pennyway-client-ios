@@ -9,5 +9,6 @@ enum StatusError: Error {
     case conflict
     case preconditionFailed
     case unprocessableContent
+    case tooManyRequest
     case internalServerError
 }

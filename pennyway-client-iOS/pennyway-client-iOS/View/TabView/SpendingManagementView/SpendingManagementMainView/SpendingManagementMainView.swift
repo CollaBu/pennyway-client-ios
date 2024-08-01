@@ -41,6 +41,7 @@ struct SpendingManagementMainView: View {
 
                     CustomRectangleButton(action: {
                         navigateToMySpendingList = true
+                        Log.debug(navigateToMySpendingList)
                     }, label: "나의 소비 내역")
 
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())

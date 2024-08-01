@@ -10,7 +10,6 @@ class SpendingCategoryViewModel: ObservableObject {
     
     /// 카테고리 리스트 데이터
     @Published var amount: Int? = nil
-    ///    @Published var categoryName: String? = nil
     @Published var categoryIcon: String? = nil
     @Published var memo: String? = nil
     @Published var accountName: String? = nil
@@ -182,6 +181,28 @@ class SpendingCategoryViewModel: ObservableObject {
                 if let responseData = data {
                     if let jsonString = String(data: responseData, encoding: .utf8) {
                         Log.debug("카테고리 수정 완료 \(jsonString)")
+                    }
+                    completion(true)
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    /// 카테고리 삭제 api 호출
+    func deleteCategoryApi(completion: @escaping (Bool) -> Void) {
+        SpendingCategoryAlamofire.shared.deleteCategory(selectedCategory!.id) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("카테고리 삭제 완료 \(jsonString)")
                     }
                     completion(true)
                 }
