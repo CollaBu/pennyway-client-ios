@@ -5,12 +5,6 @@ struct EditUsernameView: View {
     @StateObject var formViewModel = EditViewModel()
     @State private var name = ""
 
-    private func loadUserData() {
-        if let userData = getUserData() {
-            name = userData.name // 사용자 이름
-        }
-    }
-
     private let maxLength = 8
 
     var body: some View {
@@ -31,7 +25,7 @@ struct EditUsernameView: View {
                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
 
                 HStack {
-                    Text("현재 이름 : \(name)")
+                    Text("현재 이름 : \(getUserData()!.name)")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray05"))
 
