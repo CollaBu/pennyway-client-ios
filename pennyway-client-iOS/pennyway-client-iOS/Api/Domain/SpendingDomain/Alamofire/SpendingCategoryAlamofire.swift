@@ -43,4 +43,10 @@ class SpendingCategoryAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingCategoryRouter.modifyCategory(categoryId: categoryId, dto: dto), completion: completion)
     }
+    
+    func deleteCategory(_ categoryId: Int, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("SpendingCategoryAlamofire - deleteCategory() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingCategoryRouter.deleteCategory(categoryId: categoryId), completion: completion)
+    }
 }
