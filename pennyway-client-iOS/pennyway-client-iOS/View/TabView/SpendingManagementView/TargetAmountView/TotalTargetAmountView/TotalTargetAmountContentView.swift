@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TotalTargetAmountContentView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
+    @Binding var isnavigateToPastSpendingView: Bool
     
     var body: some View {
         VStack {
@@ -45,11 +46,15 @@ struct TotalTargetAmountContentView: View {
                     
                     Spacer()
                     
-                    Image("icon_arrow_front_small")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                        .padding(.trailing, 10)
+                    Button(action: {
+                        isnavigateToPastSpendingView = true
+                    }, label: {
+                        Image("icon_arrow_front_small")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            .padding(.trailing, 10)
+                    })
                 }
                 .padding(.top, 18)
                 
@@ -59,7 +64,7 @@ struct TotalTargetAmountContentView: View {
                 
                 Spacer().frame(height: 36 * DynamicSizeFactor.factor())
                 
-                ForEach(Array(viewModel.targetAmounts.enumerated()), id: \.offset) { _, content in
+                ForEach(Array(viewModel.targetAmounts.prefix(6).enumerated()), id: \.offset) { _, content in
                     VStack(alignment: .leading) {
                         Text("\(String(content.year))년 \(content.month)월")
                             .font(.B2MediumFont())
