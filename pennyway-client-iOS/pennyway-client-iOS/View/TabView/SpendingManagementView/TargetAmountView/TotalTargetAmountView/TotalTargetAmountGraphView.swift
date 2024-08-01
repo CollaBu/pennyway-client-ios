@@ -4,16 +4,21 @@ import SwiftUI
 struct TotalTargetAmountGraphView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     var body: some View {
+        let maxHeight = 140 * DynamicSizeFactor.factor()
+        let maxSpending = max(viewModel.maxTotalSpending, 100_000) // 최소값을 100000으로 설정
+
         HStack(spacing: 24 * DynamicSizeFactor.factor()) {
             ForEach(0 ..< 6) { index in
                 if index >= 6 - viewModel.sortTargetAmounts.count {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
+                    let adjustedHeight = (maxSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxSpending) * maxHeight : 0
+
                     VStack {
                         Text("\(content.totalSpending / 10000)")
                             .font(.B3MediumFont())
                             .platformTextColor(color: determineColorGray04(for: content))
                         Rectangle()
-                            .frame(maxWidth: 16 * DynamicSizeFactor.factor(), maxHeight: CGFloat(content.totalSpending / 10000) * DynamicSizeFactor.factor())
+                            .frame(maxWidth: 16 * DynamicSizeFactor.factor(), maxHeight: adjustedHeight)
                             .platformTextColor(color: determineColorGray03(for: content))
                             .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
 
