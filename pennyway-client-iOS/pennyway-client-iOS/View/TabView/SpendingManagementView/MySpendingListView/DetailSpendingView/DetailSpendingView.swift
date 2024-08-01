@@ -108,56 +108,25 @@ struct DetailSpendingView: View {
             VStack(alignment: .center) {
                 Spacer().frame(height: 6 * DynamicSizeFactor.factor())
                 if isSelectedCategory {
-                    ZStack {
-                        Rectangle()
-                            .cornerRadius(4)
-                            .platformTextColor(color: Color("White01"))
-                            .padding(.vertical, 8)
-                            .shadow(color: .black.opacity(0.06), radius: 7, x: 0, y: 0)
-
-                        VStack(alignment: .leading, spacing: 0) {
-                            ForEach(listArray, id: \.self) { item in
-                                Button(action: {
-                                    self.selectedItem = item
-                                    if item == "수정하기" {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
-                                            navigateModifySpendingHistoryView = true
-                                        }
-                                    } else if item == "내역 삭제" {
-                                        showingPopUp = true
-                                        isSelectedCategory = false
-                                    }
-                                }, label: {
-                                    ZStack(alignment: .leading) {
-                                        Rectangle()
-                                            .platformTextColor(color: .clear)
-                                            .frame(width: 120, height: 22)
-                                            .cornerRadius(3)
-
-                                        Text(item)
-                                            .font(.B2MediumFont())
-                                            .multilineTextAlignment(.leading)
-                                            .platformTextColor(color: selectedItem == item ? Color("Gray05") : Color("Gray04"))
-                                            .padding(.leading, 3)
-                                    }
-                                    .padding(.horizontal, 7)
-                                    .padding(.vertical, 9)
-                                    .background(selectedItem == item ? Color("Gray02") : Color("White01"))
-
-                                })
-
-                                .buttonStyle(PlainButtonStyle())
+                    CustomDropdownMenuView(
+                        isClickMenu: $isSelectedCategory,
+                        selectedMenu: $selectedItem,
+                        listArray: listArray,
+                        onItemSelected: { item in
+                            if item == "수정하기" {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { // 버튼 액션 보이기 위해 임시로 0.2초 지연 후 뷰 넘어가도록 설정
+                                    navigateModifySpendingHistoryView = true
+                                }
+                            } else { // 내역 삭제일 경우
+                                showingPopUp = true
+                                isSelectedCategory = false
                             }
-                            .cornerRadius(3)
+                            Log.debug("Selected item: \(item)")
                         }
-                        .padding(.vertical, 12 * DynamicSizeFactor.factor())
-                        .zIndex(5)
-                    }
-                    .frame(width: 125 * DynamicSizeFactor.factor(), height: 47 * DynamicSizeFactor.factor())
-                    .zIndex(5)
-                    .offset(x: 175 * DynamicSizeFactor.factor(), y: 13 * DynamicSizeFactor.factor())
+                    ).padding(.trailing, 20)
                 }
-            }, alignment: .topLeading)
+            }, alignment: .topTrailing
+        )
 
         NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
     }
