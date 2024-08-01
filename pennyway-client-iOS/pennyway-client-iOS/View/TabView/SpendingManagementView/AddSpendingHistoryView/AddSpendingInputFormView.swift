@@ -6,6 +6,7 @@ import SwiftUI
 struct AddSpendingInputFormView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
     @Binding var clickDate: Date?
     var entryPoint: EntryPoint
@@ -32,6 +33,22 @@ struct AddSpendingInputFormView: View {
                                 name: spendingDetail.category.name,
                                 icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
                             )
+                            viewModel.consumerText = spendingDetail.accountName
+                            viewModel.memoText = spendingDetail.memo
+                            viewModel.validateForm()
+                        }
+                    } else {
+                        if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
+//                        if let spendingDetail = spendingCategoryViewModel.getSpendingDetail(by: spendingId) {
+                            viewModel.amountSpentText = String(spendingDetail.amount)
+                            spendingId = spendingDetail.id
+                            viewModel.selectedCategory = SpendingCategoryData(
+                                id: spendingDetail.category.id,
+                                isCustom: spendingDetail.category.isCustom,
+                                name: spendingDetail.category.name,
+                                icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
+                            )
+                            viewModel.clickDate = DateFormatterUtil.dateFromString(spendingDetail.spendAt)
                             viewModel.consumerText = spendingDetail.accountName
                             viewModel.memoText = spendingDetail.memo
                             viewModel.validateForm()
@@ -113,7 +130,7 @@ struct AddSpendingInputFormView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text(Date.getFormattedDate(from: clickDate ?? viewModel.selectedDate))
+                    Text(Date.getFormattedDate(from: (clickDate ?? viewModel.clickDate) ?? viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                    

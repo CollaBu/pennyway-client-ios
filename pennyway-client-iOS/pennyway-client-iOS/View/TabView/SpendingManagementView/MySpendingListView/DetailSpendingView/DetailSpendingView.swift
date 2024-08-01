@@ -8,6 +8,7 @@ struct DetailSpendingView: View {
     @State var listArray: [String] = ["수정하기", "내역 삭제"]
     @State var navigateModifySpendingHistoryView = false
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
+
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @Binding var clickDate: Date?
     @Binding var spendingId: Int?
@@ -128,7 +129,7 @@ struct DetailSpendingView: View {
             }, alignment: .topTrailing
         )
 
-        NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
+        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
     }
 
     private func loadDataForSelectedDate() {
@@ -163,8 +164,8 @@ struct DetailSpendingView: View {
             isSelectedCategory = false
         }
     }
-
-    private func getSpendingDetail(by id: Int) -> IndividualSpending? {
-        return spendingHistoryViewModel.getSpendingDetail(by: id) ?? spendingCategoryViewModel.getSpendingDetail(by: id)
-    }
+//
+//    private func getSpendingDetail(by id: Int) -> IndividualSpending? {
+//        return spendingHistoryViewModel.getSpendingDetail(by: id) ?? spendingCategoryViewModel.getSpendingDetail(by: id)
+//    }
 }
