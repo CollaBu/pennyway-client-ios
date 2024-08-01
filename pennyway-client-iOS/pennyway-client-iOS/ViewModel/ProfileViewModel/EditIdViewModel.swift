@@ -24,11 +24,7 @@ class EditIdViewModel: ObservableObject {
     }
 
     func validateForm() {
-//        if !isDuplicateId && !showErrorId && !inputId.isEmpty {
-//            isFormValid = true
-//        } else {
-//            isFormValid = false
-//        }
+
         if !isDuplicateId && !inputId.isEmpty {
             if !showErrorId {
                 isFormValid = true
