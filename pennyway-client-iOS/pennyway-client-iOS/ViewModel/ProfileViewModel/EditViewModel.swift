@@ -38,29 +38,6 @@ class EditViewModel: ObservableObject {
         } else {
             isFormValid = false
         }
-//
-//    func validateNameForm() {
-//        if !name.isEmpty {
-//            
-//        }
-//        if !inputId.isEmpty || !name.isEmpty {
-//            if !showErrorId && !isDuplicateId {
-//                isFormValid = true
-//            } else if !showErrorName {
-//                isFormValid = true
-//            } else {
-//                isFormValid = false
-//            }
-//        }
-//        if !isDuplicateId && (!inputId.isEmpty || !name.isEmpty) {
-//            if !showErrorId {
-//                isFormValid = true
-//            } else if !showErrorName {
-//                isFormValid = true
-//            } else {
-//                isFormValid = false
-//            }
-//        }
     }
 
     /// 아이디 중복 확인
