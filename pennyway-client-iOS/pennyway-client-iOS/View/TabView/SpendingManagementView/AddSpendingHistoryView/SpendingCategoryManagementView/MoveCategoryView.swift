@@ -73,7 +73,7 @@ struct MoveCategoryView: View {
                     spendingCategoryViewModel.selectedMoveCategoryId = 0 // 선택한 카테고리 id 초기화
                 }
 
-            }, label: "확인", isFormValid: .constant(true))
+            }, label: "확인", isFormValid: .constant(spendingCategoryViewModel.selectedMoveCategoryId != 0))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
             NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
