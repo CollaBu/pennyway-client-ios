@@ -57,7 +57,7 @@ struct MoveCategoryView: View {
                                 addSpendingHistoryViewModel.categoryName = "" // name 초기화
                                 navigateToAddCategoryView = true
                             } else {
-                                spendingCategoryViewModel.selectedMoveCategoryId = category.id
+                                spendingCategoryViewModel.selectedMoveCategoryId = category.id//선택한 카테고리 id
                             }
                         }
                     }
@@ -69,7 +69,7 @@ struct MoveCategoryView: View {
 
             CustomBottomButton(action: {
                 presentationMode.wrappedValue.dismiss()
-                spendingCategoryViewModel.selectedMoveCategoryId = 0
+                spendingCategoryViewModel.selectedMoveCategoryId = 0//선택한 카테고리 id 초기화
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
@@ -85,7 +85,7 @@ struct MoveCategoryView: View {
                 HStack {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
-                        spendingCategoryViewModel.selectedMoveCategoryId = 0
+                        spendingCategoryViewModel.selectedMoveCategoryId = 0//선택한 카테고리 id 초기화
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
@@ -106,7 +106,7 @@ struct MoveCategoryView: View {
         if category.name == "추가하기" {
             return category.icon.rawValue
         }
-        let iconName = MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: isSelected ? .onMint : .on)
+        let iconName = MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: isSelected ? .onMint : .on)//선택했다면 onMint 아니면 on으로 반환
         return iconName.rawValue
     }
 }
