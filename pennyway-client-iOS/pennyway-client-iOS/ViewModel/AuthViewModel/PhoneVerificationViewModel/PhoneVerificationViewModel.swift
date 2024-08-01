@@ -82,7 +82,7 @@ class PhoneVerificationViewModel: ObservableObject {
 
     // MARK: 아이디 찾기 인증번호 코드 요청 API
 
-    func requestUserNameVerificationCodeApi(completion: @escaping () -> Void) { // 아이디 찾기 번호 인증
+    func requestUserNameVerificationCodeApi(completion: @escaping () -> Void) {
         validatePhoneNumber()
         requestVerificationCodeAction()
         let usernameVerificationCodeDto = VerificationCodeRequestDto(phone: formattedPhoneNumber)
@@ -140,6 +140,24 @@ class PhoneVerificationViewModel: ObservableObject {
         if isFormValid {
             AuthAlamofire.shared.findUserName(verificationDto) { result in
                 self.handleFindUserNameApi(result: result, completion: completion)
+                switch result {
+                case let .success(data):
+                    if data != nil {
+                        self.handleFindUserNameApi(result: result, completion: completion)
+                    }
+                case let .failure(error):
+                    if let StatusSpecificError = error as? StatusSpecificError {
+                        Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                        if StatusSpecificError.domainError == .unauthorized && StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
+                            self.showErrorVerificationCode = true
+                        } else if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                            self.showErrorExistingUser = true
+                        }
+
+                    } else {
+                        Log.error("Network request failed: \(error)")
+                    }
+                }
             }
         }
     }
@@ -147,12 +165,31 @@ class PhoneVerificationViewModel: ObservableObject {
     // MARK: 비밀번호 찾기 번호 검증 API
 
     func requestPwVerifyVerificationCodeApi(completion: @escaping () -> Void) {
-        validatePhoneNumber()
         let verificationDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
 
         if isFormValid {
             AuthAlamofire.shared.receivePwVerifyVerificationCode(verificationDto) { result in
                 self.receivePwVerifyVerificationCode(result: result, completion: completion)
+
+                switch result {
+                case let .success(data):
+                    if data != nil {
+                        self.receivePwVerifyVerificationCode(result: result, completion: completion)
+                    }
+                case let .failure(error):
+                    if let StatusSpecificError = error as? StatusSpecificError {
+                        Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                        if StatusSpecificError.domainError == .unauthorized && StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
+                            self.showErrorVerificationCode = true
+                        } else if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                            self.showErrorExistingUser = true
+                        }
+
+                    } else {
+                        Log.error("Network request failed: \(error)")
+                    }
+                }
+                completion()
             }
         }
     }
