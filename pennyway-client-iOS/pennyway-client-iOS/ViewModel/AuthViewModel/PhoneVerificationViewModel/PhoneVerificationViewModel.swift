@@ -149,8 +149,11 @@ class PhoneVerificationViewModel: ObservableObject {
                     if let StatusSpecificError = error as? StatusSpecificError {
                         Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                         if StatusSpecificError.domainError == .unauthorized && StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
+                            self.showErrorVerificationCode = true
+                        } else if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
                             self.showErrorExistingUser = true
                         }
+
                     } else {
                         Log.error("Network request failed: \(error)")
                     }
@@ -170,14 +173,17 @@ class PhoneVerificationViewModel: ObservableObject {
                 switch result {
                 case let .success(data):
                     if data != nil {
-                        self.receivePwVerifyVerificationCode(result: result, completion: completion)
+                        self.handleFindUserNameApi(result: result, completion: completion)
                     }
                 case let .failure(error):
                     if let StatusSpecificError = error as? StatusSpecificError {
                         Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                         if StatusSpecificError.domainError == .unauthorized && StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
+                            self.showErrorVerificationCode = true
+                        } else if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
                             self.showErrorExistingUser = true
                         }
+
                     } else {
                         Log.error("Network request failed: \(error)")
                     }
