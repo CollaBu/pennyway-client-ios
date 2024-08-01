@@ -8,7 +8,6 @@ struct FindIdFormView: View {
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var isNavigateToFindIDView: Bool = false
     @StateObject var viewModel = SignUpNavigationViewModel()
-//    @StateObject var findUserNameViewModel = FindUserNameViewModel()
 
     var body: some View {
         ZStack {
