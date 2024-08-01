@@ -4,7 +4,6 @@ struct FindPwView: View {
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var showCodeErrorPopUp = false
     @State private var showManyRequestPopUp = false
-    @State private var showNotFoundUserPopUp = false
     @State private var isNavigateToFindPwView: Bool = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @State private var isVerificationError: Bool = false
@@ -22,27 +21,25 @@ struct FindPwView: View {
                 CustomBottomButton(action: {
                     continueButtonAction()
                 }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
-                
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
                 NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel(), firstNaviLinkActive: .constant(true), entryPoint: .findPw), isActive: $isNavigateToFindPwView) {
                     EmptyView()
                 }.hidden()
             }
+            
             if showCodeErrorPopUp == true {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "사용자 정보를 찾을 수 없어요", subLabel: "다시 한번 확인해주세요")
+                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
             }
             if showManyRequestPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
             }
-            if showNotFoundUserPopUp {
+            if phoneVerificationViewModel.showErrorExistingUser {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showNotFoundUserPopUp, titleLabel: "사용자 정보를 찾을 수 없어요", subLabel: "다시 한번 확인해주세요")
+                ErrorCodePopUpView(showingPopUp: $phoneVerificationViewModel.showErrorExistingUser, titleLabel: "사용자 정보를 찾을 수 없어요", subLabel: "다시 한번 확인해주세요")
             }
-            
-            
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationTitle(Text("비밀번호 찾기"))
@@ -71,7 +68,6 @@ struct FindPwView: View {
     private func continueButtonAction() {
         phoneVerificationViewModel.requestPwVerifyVerificationCodeApi {
             checkFormValid()
-            Log.debug("requestPwVerifyVerificationCodeApi 실행")
         }
     }
     
@@ -79,23 +75,13 @@ struct FindPwView: View {
         if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && phoneVerificationViewModel.isFormValid {
             Log.debug("비밀번호 찾기 checkFormValid if문 시작")
             showCodeErrorPopUp = false
-            showNotFoundUserPopUp = false
             isNavigateToFindPwView = true
             viewModel.continueButtonTapped()
 
             RegistrationManager.shared.code = phoneVerificationViewModel.code
             
         } else {
-            Log.debug("비밀번호 찾기 checkFormValid else문 시작")
-//            if phoneVerificationViewModel.showErrorVerificationCode {
-//                showCodeErrorPopUp = true
-//                isVerificationError = true
-//            }
-            if phoneVerificationViewModel.showErrorExistingUser {
-                showNotFoundUserPopUp = true
-                Log.debug("사용자 없음: \(showNotFoundUserPopUp)")
-
-            } else if phoneVerificationViewModel.showErrorVerificationCode {
+            if phoneVerificationViewModel.showErrorVerificationCode {
                 showCodeErrorPopUp = true
                 isVerificationError = true
                 Log.debug("인증번호 오류: \(showCodeErrorPopUp)")

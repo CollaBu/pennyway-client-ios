@@ -165,15 +165,16 @@ class PhoneVerificationViewModel: ObservableObject {
     // MARK: 비밀번호 찾기 번호 검증 API
 
     func requestPwVerifyVerificationCodeApi(completion: @escaping () -> Void) {
-        validatePhoneNumber()
         let verificationDto = VerificationRequestDto(phone: formattedPhoneNumber, code: code)
 
         if isFormValid {
             AuthAlamofire.shared.receivePwVerifyVerificationCode(verificationDto) { result in
+                self.receivePwVerifyVerificationCode(result: result, completion: completion)
+
                 switch result {
                 case let .success(data):
                     if data != nil {
-                        self.handleFindUserNameApi(result: result, completion: completion)
+                        self.receivePwVerifyVerificationCode(result: result, completion: completion)
                     }
                 case let .failure(error):
                     if let StatusSpecificError = error as? StatusSpecificError {
@@ -188,6 +189,7 @@ class PhoneVerificationViewModel: ObservableObject {
                         Log.error("Network request failed: \(error)")
                     }
                 }
+                completion()
             }
         }
     }
