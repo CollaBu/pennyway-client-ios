@@ -39,7 +39,7 @@ struct AddSpendingInputFormView: View {
                             viewModel.validateForm()
                         }
                     } else {
-                        //카테고리 리스트로 진입했을 경우
+                        // 카테고리 리스트로 진입했을 경우
                         if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
                             viewModel.amountSpentText = String(spendingDetail.amount)
                             spendingId = spendingDetail.id

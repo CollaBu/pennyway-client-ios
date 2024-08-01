@@ -4,6 +4,7 @@ import SwiftUI
 struct FindIdFormView: View {
     @State private var showCodeErrorPopUp = false
     @State private var showManyRequestPopUp = false
+    @State private var showNotFoundUserPopUp = false
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var isNavigateToFindIDView: Bool = false
     @StateObject var viewModel = SignUpNavigationViewModel()
@@ -35,6 +36,11 @@ struct FindIdFormView: View {
             if showManyRequestPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
+            }
+
+            if showNotFoundUserPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $showNotFoundUserPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -75,6 +81,9 @@ struct FindIdFormView: View {
             Log.debug("else문 시작")
             if phoneVerificationViewModel.showErrorVerificationCode {
                 showCodeErrorPopUp = true
+            } else if phoneVerificationViewModel.showErrorExistingUser {
+                showCodeErrorPopUp = true
+                Log.debug("인증번호 잘못입력함: \(showCodeErrorPopUp)")
             }
         }
     }
