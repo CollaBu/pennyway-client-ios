@@ -2,7 +2,8 @@
 import SwiftUI
 
 struct EditUsernameView: View {
-    @StateObject var formViewModel = EditIdViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    @StateObject var formViewModel = EditViewModel()
 
     private let maxLength = 8
 
@@ -11,12 +12,12 @@ struct EditUsernameView: View {
             VStack {
                 Spacer().frame(height: 35 * DynamicSizeFactor.factor())
 
-                CustomInputView(inputText: $formViewModel.username, titleText: "이름 입력", placeholder: "최대 8자로 입력해주세요", onCommit: {
+                CustomInputView(inputText: $formViewModel.name, titleText: "이름 입력", placeholder: "최대 8자로 입력해주세요", onCommit: {
                     formViewModel.validateName()
                 }, isSecureText: false, isCustom: false)
-                    .onChange(of: formViewModel.username) { newValue in
+                    .onChange(of: formViewModel.name) { newValue in
                         if newValue.count > maxLength {
-                            formViewModel.username = String(newValue.prefix(maxLength))
+                            formViewModel.name = String(newValue.prefix(maxLength))
                         }
                         formViewModel.validateName()
                     }
@@ -24,15 +25,15 @@ struct EditUsernameView: View {
                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
 
                 HStack {
-                    Text("현재 이름 : 붕어빵")
+                    Text("현재 이름 : \(getUserData()!.name)")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray05"))
 
                     Spacer()
 
                     HStack(spacing: 0) {
-                        Text("\(formViewModel.username.count)")
-                            .platformTextColor(color: formViewModel.username.isEmpty ? Color("Gray03") : Color("Gray05"))
+                        Text("\(formViewModel.name.count)")
+                            .platformTextColor(color: formViewModel.name.isEmpty ? Color("Gray03") : Color("Gray05"))
                         Text("/\(maxLength)")
                             .platformTextColor(color: Color("Gray03"))
                     }
@@ -42,7 +43,15 @@ struct EditUsernameView: View {
 
                 Spacer()
 
-                CustomBottomButton(action: {}, label: "완료", isFormValid: $formViewModel.isFormValid)
+                CustomBottomButton(action: {
+                    if formViewModel.isFormValid {
+                        formViewModel.editUsernameApi { success in
+                            if success {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                    }
+                }, label: "완료", isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
         }

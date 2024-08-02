@@ -14,7 +14,6 @@ struct ProfileUserInfoView: View {
     private func loadUserData() {
         if let userData = getUserData() {
             name = userData.name // 사용자 이름
-            username = userData.username // 사용자 아이디
         }
     }
 
