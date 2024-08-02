@@ -37,7 +37,7 @@ struct NoSpendingHistoryView: View {
                     .background(Color("Mint03"))
                     .cornerRadius(30)
 
-                    NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .detailSheet), isActive: $navigateToAddSpendingHistory) {
+                    NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .detailSheet), isActive: $navigateToAddSpendingHistory) {
                         EmptyView()
                     }.hidden()
                 }

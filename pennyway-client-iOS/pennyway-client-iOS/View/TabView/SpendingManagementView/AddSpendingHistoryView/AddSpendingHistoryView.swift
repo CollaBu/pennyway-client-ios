@@ -14,6 +14,8 @@ enum EntryPoint {
 
 struct AddSpendingHistoryView: View {
     @StateObject var viewModel = AddSpendingHistoryViewModel()
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
+
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State var spendingId: Int = 0
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
@@ -27,7 +29,7 @@ struct AddSpendingHistoryView: View {
         ZStack {
             VStack {
                 ScrollView {
-                    AddSpendingInputFormView(viewModel: viewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, entryPoint: entryPoint, spendingId: $spendingId)
+                    AddSpendingInputFormView(viewModel: viewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, clickDate: $clickDate, entryPoint: entryPoint, spendingId: $spendingId)
                 }
                 Spacer()
 
@@ -89,5 +91,5 @@ struct AddSpendingHistoryView: View {
 }
 
 #Preview {
-    AddSpendingHistoryView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
+    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
 }
