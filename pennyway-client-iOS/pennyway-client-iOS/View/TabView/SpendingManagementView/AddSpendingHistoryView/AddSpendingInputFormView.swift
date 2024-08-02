@@ -6,6 +6,7 @@ import SwiftUI
 struct AddSpendingInputFormView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
     @Binding var clickDate: Date?
     var entryPoint: EntryPoint
@@ -22,6 +23,7 @@ struct AddSpendingInputFormView: View {
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())
             AmountInputView(viewModel: viewModel, title: titleCustomTextList[0], placeholder: "소비 금액을 작성해 주세요", baseAttribute: baseAttribute, stringAttribute: stringAttribute)
                 .onAppear {
+                    // 지출내역리스트나 소비내역 바텀시트를 통해 진입한 경우
                     if entryPoint == .detailSpendingView, let clickDate = clickDate {
                         if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
                             viewModel.amountSpentText = String(spendingDetail.amount)
@@ -32,6 +34,22 @@ struct AddSpendingInputFormView: View {
                                 name: spendingDetail.category.name,
                                 icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
                             )
+                            viewModel.consumerText = spendingDetail.accountName
+                            viewModel.memoText = spendingDetail.memo
+                            viewModel.validateForm()
+                        }
+                    } else {
+                        // 카테고리 리스트로 진입했을 경우
+                        if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
+                            viewModel.amountSpentText = String(spendingDetail.amount)
+                            spendingId = spendingDetail.id
+                            viewModel.selectedCategory = SpendingCategoryData(
+                                id: spendingDetail.category.id,
+                                isCustom: spendingDetail.category.isCustom,
+                                name: spendingDetail.category.name,
+                                icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
+                            )
+                            viewModel.clickDate = DateFormatterUtil.dateFromString(spendingDetail.spendAt)
                             viewModel.consumerText = spendingDetail.accountName
                             viewModel.memoText = spendingDetail.memo
                             viewModel.validateForm()
@@ -113,7 +131,7 @@ struct AddSpendingInputFormView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text(Date.getFormattedDate(from: clickDate ?? viewModel.selectedDate))
+                    Text(Date.getFormattedDate(from: (clickDate ?? viewModel.clickDate) ?? viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                    

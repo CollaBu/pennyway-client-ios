@@ -21,20 +21,24 @@ struct FindPwView: View {
                 CustomBottomButton(action: {
                     continueButtonAction()
                 }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
-
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
                 NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel(), firstNaviLinkActive: .constant(true), entryPoint: .findPw), isActive: $isNavigateToFindPwView) {
                     EmptyView()
                 }.hidden()
             }
+
             if showCodeErrorPopUp == true {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "사용자 정보를 찾을 수 없어요", subLabel: "다시 한번 확인해주세요")
+                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요")
             }
             if showManyRequestPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
+            }
+            if phoneVerificationViewModel.showErrorExistingUser {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                ErrorCodePopUpView(showingPopUp: $phoneVerificationViewModel.showErrorExistingUser, titleLabel: "사용자 정보를 찾을 수 없어요", subLabel: "다시 한번 확인해주세요")
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -56,7 +60,6 @@ struct FindPwView: View {
     private func continueButtonAction() {
         phoneVerificationViewModel.requestPwVerifyVerificationCodeApi {
             checkFormValid()
-            Log.debug("requestPwVerifyVerificationCodeApi 실행")
         }
     }
 
@@ -70,10 +73,10 @@ struct FindPwView: View {
             RegistrationManager.shared.code = phoneVerificationViewModel.code
 
         } else {
-            Log.debug("비밀번호 찾기 checkFormValid else문 시작")
             if phoneVerificationViewModel.showErrorVerificationCode {
                 showCodeErrorPopUp = true
                 isVerificationError = true
+                Log.debug("인증번호 오류: \(showCodeErrorPopUp)")
             }
         }
     }

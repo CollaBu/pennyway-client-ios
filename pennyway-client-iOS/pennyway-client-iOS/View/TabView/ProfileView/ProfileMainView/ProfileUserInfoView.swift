@@ -9,10 +9,11 @@ struct ProfileUserInfoView: View {
     @State var selectedUIImage: UIImage?
     @State var image: Image?
 
+    @Binding var navigateToEditUsername: Bool
+
     private func loadUserData() {
         if let userData = getUserData() {
             name = userData.name // 사용자 이름
-            username = userData.username // 사용자 아이디
         }
     }
 
@@ -55,7 +56,9 @@ struct ProfileUserInfoView: View {
 
             Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 
-            Button(action: {}, label: {
+            Button(action: {
+                navigateToEditUsername = true
+            }, label: {
                 HStack(alignment: .center, spacing: 8 * DynamicSizeFactor.factor()) {
                     Text("이름 수정하기")
                         .font(.B2MediumFont())

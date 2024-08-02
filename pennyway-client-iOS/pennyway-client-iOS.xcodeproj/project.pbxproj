@@ -121,7 +121,7 @@
 		4A6C79D22C46310B009463E4 /* EditProfileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D12C46310B009463E4 /* EditProfileListView.swift */; };
 		4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D32C463C0B009463E4 /* CustomRectangleButton.swift */; };
 		4A6C79D62C463DB1009463E4 /* EditIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D52C463DB1009463E4 /* EditIdView.swift */; };
-		4A6C79D82C46CD9A009463E4 /* EditIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */; };
+		4A6C79D82C46CD9A009463E4 /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79D72C46CD9A009463E4 /* EditViewModel.swift */; };
 		4A6C79DB2C46D067009463E4 /* ProfileActiveNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79DA2C46D067009463E4 /* ProfileActiveNavigation.swift */; };
 		4A6C79DD2C46D28B009463E4 /* EditPhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79DC2C46D28B009463E4 /* EditPhoneNumberView.swift */; };
 		4A6C79E22C46DE77009463E4 /* PhoneNumberInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E12C46DE77009463E4 /* PhoneNumberInputField.swift */; };
@@ -200,6 +200,7 @@
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
 		4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */; };
+		4AD5733C2C5B973C00A4E192 /* PastSpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD5733B2C5B973C00A4E192 /* PastSpendingListView.swift */; };
 		4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */; };
 		4AD70E222BE013C10058A52A /* ProfileMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E212BE013C10058A52A /* ProfileMainView.swift */; };
 		4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */; };
@@ -244,6 +245,8 @@
 		D8180C082BE5168800F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8180C0A2BE531C500F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D81D5A832C16B68D008E5939 /* DateFormatterUtil .swift in Sources */ = {isa = PBXBuildFile; fileRef = D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */; };
+		D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */; };
+		D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */; };
 		D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A7882BEBABC700899AA3 /* FindPwContentView.swift */; };
 		D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */; };
 		D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */; };
@@ -287,13 +290,13 @@
 		D8E637502C06303D00D43BB6 /* MySpendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */; };
 		D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */; };
 		D8F9D7362C593B71005416FC /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7352C593B71005416FC /* PreparedView.swift */; };
+		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
 		D8F9D73D2C59FDFD005416FC /* UnreadAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D73C2C59FDFD005416FC /* UnreadAlarmView.swift */; };
 		D8F9D73F2C59FE12005416FC /* ReadAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D73E2C59FE12005416FC /* ReadAlarmView.swift */; };
 		D8F9D7412C59FE22005416FC /* NoAlarmArrivedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7402C59FE22005416FC /* NoAlarmArrivedView.swift */; };
 		D8F9D7432C5A0596005416FC /* ProfileAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7422C5A0596005416FC /* ProfileAlarmView.swift */; };
 		D8F9D7452C5A09ED005416FC /* ArrivedAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */; };
 		D8F9D7472C5A1177005416FC /* AlarmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7462C5A1177005416FC /* AlarmList.swift */; };
-		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -412,7 +415,7 @@
 		4A6C79D12C46310B009463E4 /* EditProfileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileListView.swift; sourceTree = "<group>"; };
 		4A6C79D32C463C0B009463E4 /* CustomRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRectangleButton.swift; sourceTree = "<group>"; };
 		4A6C79D52C463DB1009463E4 /* EditIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIdView.swift; sourceTree = "<group>"; };
-		4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditIdViewModel.swift; path = "pennyway-client-iOS/ViewModel/ProfileViewModel/EditIdViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		4A6C79D72C46CD9A009463E4 /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditViewModel.swift; path = "pennyway-client-iOS/ViewModel/ProfileViewModel/EditViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		4A6C79DA2C46D067009463E4 /* ProfileActiveNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActiveNavigation.swift; sourceTree = "<group>"; };
 		4A6C79DC2C46D28B009463E4 /* EditPhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNumberView.swift; sourceTree = "<group>"; };
 		4A6C79E12C46DE77009463E4 /* PhoneNumberInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberInputField.swift; sourceTree = "<group>"; };
@@ -492,6 +495,7 @@
 		4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTabBarVisibilityExtension.swift; sourceTree = "<group>"; };
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
 		4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryViewModel.swift; sourceTree = "<group>"; };
+		4AD5733B2C5B973C00A4E192 /* PastSpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSpendingListView.swift; sourceTree = "<group>"; };
 		4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		4AD70E212BE013C10058A52A /* ProfileMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainView.swift; sourceTree = "<group>"; };
 		4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
@@ -535,6 +539,8 @@
 		D8180C032BE5081F00F837FB /* FindIdContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdContentView.swift; sourceTree = "<group>"; };
 		D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatterUtil .swift"; sourceTree = "<group>"; };
+		D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUsernameView.swift; sourceTree = "<group>"; };
+		D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameRequestDto.swift; sourceTree = "<group>"; };
 		D847A7882BEBABC700899AA3 /* FindPwContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwContentView.swift; sourceTree = "<group>"; };
 		D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwViewModel.swift; sourceTree = "<group>"; };
@@ -580,13 +586,13 @@
 		D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListViewModel.swift; sourceTree = "<group>"; };
 		D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleDeleteButtonUtil.swift; sourceTree = "<group>"; };
 		D8F9D7352C593B71005416FC /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedView.swift; path = "pennyway-client-iOS/View/TabView/PreparedView.swift"; sourceTree = SOURCE_ROOT; };
+		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D8F9D73C2C59FDFD005416FC /* UnreadAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D73E2C59FE12005416FC /* ReadAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D7402C59FE22005416FC /* NoAlarmArrivedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAlarmArrivedView.swift; sourceTree = "<group>"; };
 		D8F9D7422C5A0596005416FC /* ProfileAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivedAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D7462C5A1177005416FC /* AlarmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmList.swift; sourceTree = "<group>"; };
-		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F0F9541D34A887D64D713E30 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1171,6 +1177,7 @@
 				4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */,
 				D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */,
 				D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */,
+				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1181,6 +1188,7 @@
 				4A6C79D12C46310B009463E4 /* EditProfileListView.swift */,
 				4A6C79D52C463DB1009463E4 /* EditIdView.swift */,
 				4A6C79DC2C46D28B009463E4 /* EditPhoneNumberView.swift */,
+				D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */,
 			);
 			path = EditProfileView;
 			sourceTree = "<group>";
@@ -1209,7 +1217,7 @@
 		4A6C79EB2C46EEAE009463E4 /* ProfileViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4A6C79D72C46CD9A009463E4 /* EditIdViewModel.swift */,
+				4A6C79D72C46CD9A009463E4 /* EditViewModel.swift */,
 				4A57762C2C48C2B900979D1A /* EditPhoneNumberViewModel.swift */,
 			);
 			path = ProfileViewModel;
@@ -1489,6 +1497,7 @@
 				4AE8F3B02C3309680014F0D4 /* TotalTargetAmountView */,
 				4AE8F3B32C330A0B0014F0D4 /* TargetAmountSettingView.swift */,
 				4A6A9D102C331A9500394771 /* TargetAmountSetCompleteView.swift */,
+				4AD5733B2C5B973C00A4E192 /* PastSpendingListView.swift */,
 			);
 			path = TargetAmountView;
 			sourceTree = "<group>";
@@ -2115,16 +2124,19 @@
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
+				D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */,
 				D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */,
 				4AC3205D2C11F33200DDB4B6 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */,
 				4A6A9D112C331A9500394771 /* TargetAmountSetCompleteView.swift in Sources */,
 				4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */,
+				4AD5733C2C5B973C00A4E192 /* PastSpendingListView.swift in Sources */,
 				D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */,
 				4A3701CF2C08F7F600F0AEBA /* AddSpendingHistoryRequestDto.swift in Sources */,
 				4AC320512C11D5AC00DDB4B6 /* SpendingCheckBoxView.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
 				4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift in Sources */,
+				D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */,
 				D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */,
 				4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */,
 				4A6C79E82C46DFBE009463E4 /* CodeInputField.swift in Sources */,
@@ -2218,7 +2230,7 @@
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
 				4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */,
-				4A6C79D82C46CD9A009463E4 /* EditIdViewModel.swift in Sources */,
+				4A6C79D82C46CD9A009463E4 /* EditViewModel.swift in Sources */,
 				4A762B012B99A239001C1188 /* SplashView.swift in Sources */,
 				4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */,
 				D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */,
