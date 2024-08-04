@@ -7,6 +7,7 @@ struct ResetPwView: View {
     @StateObject var accountViewModel = UserAccountViewModel()
     @Binding var firstNaviLinkActive: Bool
     let entryPoint: PasswordChangeTypeNavigation
+    @State private var shouldNavigateToRoot = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -48,6 +49,7 @@ struct ResetPwView: View {
                     Button(action: {
                         NavigationUtil.popToRootView()
                         firstNaviLinkActive = false
+                        shouldNavigateToRoot = true
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
@@ -60,6 +62,13 @@ struct ResetPwView: View {
                     .contentShape(Rectangle())
 
                 }.offset(x: -10)
+            }
+        }
+        .onChange(of: shouldNavigateToRoot) { newValue in
+            if newValue {
+                NavigationUtil.popToView(at: 3)
+                firstNaviLinkActive = false
+                Log.debug("?")
             }
         }
     }
