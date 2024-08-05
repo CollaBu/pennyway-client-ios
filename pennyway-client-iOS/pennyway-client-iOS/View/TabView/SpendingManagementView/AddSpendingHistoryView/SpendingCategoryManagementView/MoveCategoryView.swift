@@ -11,23 +11,26 @@ struct MoveCategoryView: View {
     @State var navigateToAddCategoryView = false
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+
+            Group {
+                Text("\(spendingCategoryViewModel.spedingHistoryTotalCount)개의 소비 내역")
+                    .font(.B1MediumFont())
+                    .platformTextColor(color: Color("Gray07"))
+
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
+
+                Text("변경할 카테고리를 선택해 주세요")
+                    .font(.H3SemiboldFont())
+                    .platformTextColor(color: Color("Gray07"))
+            }
+            .padding(.horizontal, 20)
+
+            Spacer().frame(height: 25 * DynamicSizeFactor.factor())
+
             ScrollView {
-                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("\(spendingCategoryViewModel.spedingHistoryTotalCount)개의 소비 내역")
-                        .font(.B1MediumFont())
-                        .platformTextColor(color: Color("Gray07"))
-
-                    Spacer().frame(height: 4 * DynamicSizeFactor.factor())
-
-                    Text("변경할 카테고리를 선택해 주세요")
-                        .font(.H3SemiboldFont())
-                        .platformTextColor(color: Color("Gray07"))
-
-                    Spacer().frame(height: 25 * DynamicSizeFactor.factor())
-
                     ForEach(Array(spendingCategoryViewModel.spendingCategories.enumerated()), id: \.element.id) { _, category in
                         HStack(spacing: 10) {
                             Image(getCategoryIcon(category: category, isSelected: category.id == spendingCategoryViewModel.selectedMoveCategoryId))
