@@ -123,16 +123,23 @@ struct SpendingCalenderView: View {
                     }
                 }
                 .onTapGesture {
+                    let currentDate = Calendar.current.startOfDay(for: Date())//날짜만 가져오기
                     if 0 <= index && index < daysInMonth {
                         let date = getDate(for: index)
-                        clickedCurrentMonthDates = date
-                        isClickDay(Date.day(from: date))
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            clickDate = date
-                            spendingHistoryViewModel.selectedDate = date
-
-                            self.showSpendingDetailView = true
+                        let dateOnly = Calendar.current.startOfDay(for: date)
+                        // 현재 날짜 이후인 경우 동작하지 않도록 함
+                        if dateOnly <= currentDate {
+                            clickedCurrentMonthDates = date
+                            isClickDay(Date.day(from: date))
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                clickDate = date
+                                spendingHistoryViewModel.selectedDate = date
+                                
+                                self.showSpendingDetailView = true
+                            }
+                        } else {
+                            print(dateOnly, currentDate)
                         }
                     }
                 }
