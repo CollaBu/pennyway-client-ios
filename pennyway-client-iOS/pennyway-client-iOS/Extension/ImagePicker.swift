@@ -3,8 +3,11 @@ import SwiftUI
 // MARK: - ImagePicker
 
 struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var image: UIImage?
     @Environment(\.presentationMode) var mode
+
+    @Binding var image: UIImage?
+    @Binding var isActive: Bool
+    var sourceType: UIImagePickerController.SourceType
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -13,6 +16,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> some UIViewController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
+        picker.sourceType = sourceType
         return picker
     }
 
@@ -34,6 +38,11 @@ extension ImagePicker {
                 return
             }
             parent.image = image
+            parent.mode.wrappedValue.dismiss()
+        }
+
+        func imagePickerControllerDidCancel(_: UIImagePickerController) {
+            parent.isActive = false
             parent.mode.wrappedValue.dismiss()
         }
     }

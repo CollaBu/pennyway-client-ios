@@ -4,39 +4,53 @@ import SwiftUI
 struct ProfileMainView: View {
     @State private var isSelectedToolBar = false
     @State private var navigateToEditUsername = false
+    @State var showPopUpView = false
+    @State var isHiddenTabBar = false
+    @State var selectedUIImage: UIImage?
+    @State var image: Image?
 
     var body: some View {
         NavigationAvailable {
-            ScrollView {
-                VStack {
-                    ProfileUserInfoView(navigateToEditUsername: $navigateToEditUsername)
-
-                    Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-
+            ZStack {
+                ScrollView {
                     VStack {
-                        Text("내 게시글")
-                            .font(.B1MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
-                            .offset(x: -140, y: 0)
+                        ProfileUserInfoView(showPopUpView: $showPopUpView, navigateToEditUsername: $navigateToEditUsername, image: $image)
 
-                        Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 33 * DynamicSizeFactor.factor())
 
-                        Image("icon_illust__empty")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
+                        VStack {
+                            Text("내 게시글")
+                                .font(.B1MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                                .offset(x: -140, y: 0)
 
-                        Text("아직 작성된 글이 없어요")
-                            .font(.H4MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
-                            .padding(1)
+                            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+
+                            Image("icon_illust__empty")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
+
+                            Text("아직 작성된 글이 없어요")
+                                .font(.H4MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                                .padding(1)
+                        }
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.horizontal, 20)
+
+                    Spacer()
+                }
+
+                if showPopUpView == true {
+                    Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    EditProfilePopUpView(isPresented: $showPopUpView, showPopUpView: $showPopUpView, isHiddenTabBar: $isHiddenTabBar, image: $image)
                 }
             }
+            .edgesIgnoringSafeArea(.bottom)
             .background(Color("Gray01"))
-            .setTabBarVisibility(isHidden: false)
-            .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username)
+            .setTabBarVisibility(isHidden: isHiddenTabBar)
+            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -62,6 +76,10 @@ struct ProfileMainView: View {
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
                 EmptyView()
             }.hidden()
+        }
+        .onAppear {
+            Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
+            Log.debug("showPopUpView:\(showPopUpView)")
         }
     }
 }

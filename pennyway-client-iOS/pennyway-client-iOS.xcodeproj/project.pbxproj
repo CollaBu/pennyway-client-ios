@@ -2436,6 +2436,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "pennyway-client-iOS/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "camera 접근 권한 주세요";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "album 권한 접근 주세요";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -2474,6 +2476,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "pennyway-client-iOS/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "camera 접근 권한 주세요";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "album 권한 접근 주세요";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
