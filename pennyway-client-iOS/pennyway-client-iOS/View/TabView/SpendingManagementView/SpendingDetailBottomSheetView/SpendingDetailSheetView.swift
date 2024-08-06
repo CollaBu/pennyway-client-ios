@@ -98,11 +98,17 @@ struct SpendingDetailSheetView: View {
             .fullScreenCover(isPresented: $showEditSpendingDetailView) {
                 NavigationAvailable {
                     EditSpendingDetailView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isDeleted: $isDeleted)
+                        .onDisappear {
+                            getDailyHistoryData()
+                        }
                 }
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
                     AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $showAddSpendingHistoryView, entryPoint: .detailSheet)
+                        .onDisappear {
+                            getDailyHistoryData()
+                        }
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
@@ -119,12 +125,6 @@ struct SpendingDetailSheetView: View {
         }
         .onChange(of: showEditSpendingDetailView) { _ in
             getDailyHistoryData()
-        }
-        .onChange(of: showAddSpendingHistoryView) { isPresented in
-            if !isPresented {
-                // AddSpendingHistoryView가 닫힐 때 새로고침
-                getDailyHistoryData()
-            }
         }
         .setTabBarVisibility(isHidden: true)
     }

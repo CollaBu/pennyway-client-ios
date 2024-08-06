@@ -156,8 +156,4 @@ struct DetailSpendingView: View {
             isSelectedCategory = false
         }
     }
-//
-//    private func getSpendingDetail(by id: Int) -> IndividualSpending? {
-//        return spendingHistoryViewModel.getSpendingDetail(by: id) ?? spendingCategoryViewModel.getSpendingDetail(by: id)
-//    }
 }
