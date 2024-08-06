@@ -70,26 +70,26 @@ struct SpendingCalendarCellView: View {
                 .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor())
 
             Spacer()
-                .frame(height: 1 * DynamicSizeFactor.factor())
+                .frame(height: 4 * DynamicSizeFactor.factor())
 
             if isCurrentMonthDay {
                 if let dailyTotalAmount = getSpendingAmount(for: day) {
-                    VStack(spacing: -3) {//텍스트 높이 조정
+                    VStack(spacing: -3) { // 텍스트 높이 조정
                         ForEach(truncatedText("\(dailyTotalAmount)").split(separator: "\n"), id: \.self) { line in
                             Text(line)
                                 .font(.B4MediumFont())
                                 .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
                         }
                     }
-                    .frame(width: 35 * DynamicSizeFactor.factor(), height: 10 * DynamicSizeFactor.factor())
+                    .frame(width: 36 * DynamicSizeFactor.factor(), height: 12 * DynamicSizeFactor.factor())
 
                 } else {
                     Spacer()
-                        .frame(height: 10 * DynamicSizeFactor.factor())
+                        .frame(height: 12 * DynamicSizeFactor.factor())
                 }
             }
         }
-        .frame(height: 32 * DynamicSizeFactor.factor())
+        .frame(height: 34 * DynamicSizeFactor.factor())
         .edgesIgnoringSafeArea(.all)
     }
 
@@ -103,13 +103,31 @@ struct SpendingCalendarCellView: View {
 
     private func truncatedText(_ text: String) -> String {
         let maxLength = 6
-        if text.count <= maxLength {
-            let number = NumberFormatterUtil.formatStringToDecimalString(text)
+        let number = NumberFormatterUtil.formatStringToDecimalString(text)
+        
+        if number.count <= maxLength {//1,000,000보다 작으면 바로 반환
             return "-\(number)\n "
         }
+        
+        var truncatedNumber = number.prefix(8)
+        let commaCount = truncatedNumber.filter { $0 == "," }.count
 
-        let number = NumberFormatterUtil.formatStringToDecimalString(text).prefix(7)
+        var prefixLength: Int
+        switch commaCount {//, 개수
+        case 1:
+            prefixLength = 7
+        case 2:
+            prefixLength = 8
+        default:
+            prefixLength = 7
+        }
 
-        return "-\(number)\n..."
+        truncatedNumber = number.prefix(prefixLength)
+
+        if truncatedNumber.hasSuffix(",") {//가장 마지막 ,는 제거
+            truncatedNumber = truncatedNumber.dropLast()
+        }
+
+        return "-\(truncatedNumber)\n..."
     }
 }
