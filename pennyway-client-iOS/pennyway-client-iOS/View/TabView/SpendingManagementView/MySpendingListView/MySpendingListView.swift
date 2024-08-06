@@ -191,9 +191,8 @@ struct MySpendingListView: View {
 //                Log.fault("지출내역 조회 API 연동 실패")
 //            }
 //        }
-        
-        let newDate = Calendar.current.date(byAdding: .month, value: value, to: currentMonth)//현재 달 확인
-        spendingHistoryViewModel.currentDate = currentMonth//뷰 모델에 값 넘겨주기
+
+        spendingHistoryViewModel.currentDate = currentMonth // 뷰 모델에 값 넘겨주기
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
