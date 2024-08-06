@@ -8,6 +8,10 @@ struct ProfileOAuthButtonView: View {
 
     @EnvironmentObject var authViewModel: AppViewModel
 
+    private var existKakaoOAuthAccount: Bool = getUserData()?.oauthAccount.kakao ?? false
+    private var existGoogleOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
+    private var existAppleOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
+
     var body: some View {
         VStack(alignment: .center) {
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
@@ -19,9 +23,9 @@ struct ProfileOAuthButtonView: View {
             Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
             OAuthButtonView(
-                isKakaoLoggedIn: kakaoOAuthViewModel.isLoggedIn,
-                isGoogleLoggedIn: googleOAuthViewModel.isLoggedIn,
-                isAppleLoggedIn: appleOAuthViewModel.isLoggedIn,
+                isKakaoLoggedIn: existKakaoOAuthAccount,
+                isGoogleLoggedIn: existGoogleOAuthAccount,
+                isAppleLoggedIn: existAppleOAuthAccount,
 
                 kakaoAction: { // Kakao 로그인 액션 처리
                     kakaoOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
