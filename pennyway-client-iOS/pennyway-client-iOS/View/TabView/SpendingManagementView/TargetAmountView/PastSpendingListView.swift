@@ -3,6 +3,8 @@ import SwiftUI
 
 struct PastSpendingListView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
+    @State private var navigateToMySpendingList = false
+    @State private var selectDate: Date = Date()
     
     var body: some View {
         ZStack {
@@ -37,6 +39,12 @@ struct PastSpendingListView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                        }.onTapGesture {
+                            let components = DateComponents(year: content.year, month: content.month)
+                            if let date = Calendar.current.date(from: components) {
+                                selectDate = date
+                            }
+                            navigateToMySpendingList = true
                         }
                     }
                 }
@@ -62,6 +70,10 @@ struct PastSpendingListView: View {
 
                 }.offset(x: -10)
             }
+        }
+        
+        NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: $selectDate, clickDate: .constant(nil)), isActive: $navigateToMySpendingList) {
+            EmptyView()
         }
     }
 }

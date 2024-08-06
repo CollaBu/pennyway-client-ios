@@ -105,7 +105,7 @@ struct SpendingManagementMainView: View {
                 }, alignment: .bottom
             )
             .background(
-                NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
+                NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
                     EmptyView()
                 }
                 .hidden()
@@ -113,7 +113,7 @@ struct SpendingManagementMainView: View {
 
             if #available(iOS 15.0, *) {
             } else {
-                NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
+                NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
                     EmptyView()
                 }
             }

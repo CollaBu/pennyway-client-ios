@@ -2,19 +2,11 @@ import SwiftUI
 
 // MARK: - MySpendingListView
 
-//// MARK: - SpendingListID
-//
-// struct SpendingListID: Identifiable {
-//    let id: Int
-//    let description: String
-//    // 필요한 다른 속성 추가
-// }
-
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @StateObject var spendingCategoryViewModel = SpendingCategoryViewModel()
     @State var selectedDateToScroll: String? = nil
-    @State private var currentMonth: Date = Date()
+    @Binding var currentMonth: Date
     @Binding var clickDate: Date?
     @State private var navigateToCategoryGridView = false
     @State private var showDetailSpendingView = false
@@ -160,6 +152,7 @@ struct MySpendingListView: View {
             ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
         }
         .onAppear {
+            spendingHistoryViewModel.currentDate = currentMonth
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
@@ -183,17 +176,28 @@ struct MySpendingListView: View {
     }
 
     private func changeMonth(by value: Int) {
-        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
-        currentMonth = spendingHistoryViewModel.currentDate
-        spendingHistoryViewModel.currentDate = newDate
-        currentMonth = newDate
+//        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
+//        currentMonth = spendingHistoryViewModel.currentDate
+//        spendingHistoryViewModel.currentDate = newDate
+//        currentMonth = newDate
+//
+//        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+//            if success {
+//                Log.debug("지출내역 조회 API 연동 성공")
+//                DispatchQueue.main.async {
+//                    self.currentMonth = newDate
+//                }
+//            } else {
+//                Log.fault("지출내역 조회 API 연동 실패")
+//            }
+//        }
+        
+        let newDate = Calendar.current.date(byAdding: .month, value: value, to: currentMonth)//현재 달 확인
+        spendingHistoryViewModel.currentDate = currentMonth//뷰 모델에 값 넘겨주기
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
                 Log.debug("지출내역 조회 API 연동 성공")
-                DispatchQueue.main.async {
-                    self.currentMonth = newDate
-                }
             } else {
                 Log.fault("지출내역 조회 API 연동 실패")
             }
