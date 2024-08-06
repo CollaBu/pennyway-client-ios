@@ -138,8 +138,6 @@ struct SpendingCalenderView: View {
                                 
                                 self.showSpendingDetailView = true
                             }
-                        } else {
-                            print(dateOnly, currentDate)
                         }
                     }
                 }
