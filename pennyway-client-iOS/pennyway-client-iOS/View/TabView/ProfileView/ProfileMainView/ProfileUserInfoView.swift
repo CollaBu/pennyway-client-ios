@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ProfileUserInfoView: View {
-    @State private var name = ""
-    @State private var username = ""
-    
     @Binding var showPopUpView: Bool
     @Binding var navigateToEditUsername: Bool
     @Binding var image: Image?
+
+    @State private var name = ""
+    @State private var username = ""
 
     private func loadUserData() {
         if let userData = getUserData() {

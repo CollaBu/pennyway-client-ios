@@ -1,20 +1,26 @@
-
 import SwiftUI
 
 struct ProfileMainView: View {
     @State private var isSelectedToolBar = false
     @State private var navigateToEditUsername = false
-    @State var showPopUpView = false
-    @State var isHiddenTabBar = false
-    @State var selectedUIImage: UIImage?
-    @State var image: Image?
+    @State private var showPopUpView = false
+    @State private var isHiddenTabBar = false
+    @State private var selectedUIImage: UIImage?
+    @State private var image: Image?
+
+    @State private var showImagePicker = false
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
     var body: some View {
         NavigationAvailable {
             ZStack {
                 ScrollView {
                     VStack {
-                        ProfileUserInfoView(showPopUpView: $showPopUpView, navigateToEditUsername: $navigateToEditUsername, image: $image)
+                        ProfileUserInfoView(
+                            showPopUpView: $showPopUpView,
+                            navigateToEditUsername: $navigateToEditUsername,
+                            image: $image
+                        )
 
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
 
@@ -41,15 +47,30 @@ struct ProfileMainView: View {
 
                     Spacer()
                 }
-
-                if showPopUpView == true {
+                if showPopUpView {
                     Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                    EditProfilePopUpView(isPresented: $showPopUpView, showPopUpView: $showPopUpView, isHiddenTabBar: $isHiddenTabBar, image: $image)
+                    EditProfilePopUpView(
+                        isPresented: $showPopUpView,
+                        showPopUpView: $showPopUpView,
+                        isHiddenTabBar: $isHiddenTabBar,
+                        image: $image,
+                        showImagePicker: $showImagePicker,
+                        selectedUIImage: $selectedUIImage,
+                        sourceType: $sourceType
+                    )
                 }
             }
             .edgesIgnoringSafeArea(.bottom)
+            .sheet(isPresented: $showImagePicker, onDismiss: {
+                loadImage()
+                showPopUpView = false
+            }) {
+                ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
+                    .edgesIgnoringSafeArea(.bottom)
+            }
+            .id(showPopUpView)
             .background(Color("Gray01"))
-            .setTabBarVisibility(isHidden: isHiddenTabBar)
+            .setTabBarVisibility(isHidden: showPopUpView)
             .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
@@ -81,6 +102,16 @@ struct ProfileMainView: View {
             Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
             Log.debug("showPopUpView:\(showPopUpView)")
         }
+        .onChange(of: showPopUpView) { newValue in
+            isHiddenTabBar = newValue
+        }
+    }
+
+    private func loadImage() {
+        guard let selectedImage = selectedUIImage else {
+            return
+        }
+        image = Image(uiImage: selectedImage)
     }
 }
 

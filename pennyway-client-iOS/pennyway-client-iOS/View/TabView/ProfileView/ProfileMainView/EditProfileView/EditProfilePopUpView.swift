@@ -7,10 +7,9 @@ struct EditProfilePopUpView: View {
     @Binding var showPopUpView: Bool
     @Binding var isHiddenTabBar: Bool
     @Binding var image: Image?
-
-    @State var showImagePicker = false
-    @State var selectedUIImage: UIImage?
-    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @Binding var showImagePicker: Bool
+    @Binding var selectedUIImage: UIImage?
+    @Binding var sourceType: UIImagePickerController.SourceType
 
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
 
@@ -62,24 +61,9 @@ struct EditProfilePopUpView: View {
             .padding(.horizontal, 20)
         }
         .padding(.bottom, 34)
-        .sheet(isPresented: $showImagePicker, onDismiss: {
-            showPopUpView = false
-            loadImage()
-
-        }) {
-            return ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
-                .edgesIgnoringSafeArea(.bottom)
-        }
         .onAppear {
             isHiddenTabBar = true
         }
-    }
-
-    func loadImage() {
-        guard let selectedImage = selectedUIImage else {
-            return
-        }
-        image = Image(uiImage: selectedImage)
     }
 
     private func handleOption(_ option: String) {
@@ -87,7 +71,6 @@ struct EditProfilePopUpView: View {
         case "앨범에서 사진 선택":
             checkPhotoLibraryPermission()
         case "사진 촬영":
-            showPopUpView = false
             checkCameraPermission()
         case "삭제":
             image = nil
@@ -103,32 +86,20 @@ struct EditProfilePopUpView: View {
     }
 
     private func handlePhotoLibraryStatus(_ status: PHAuthorizationStatus) {
-        Log.debug("status: \(status)")
         switch status {
-        case .authorized:
+        case .authorized, .limited:
             sourceType = .photoLibrary
             showImagePicker = true
-
-//            showPopUpView = false
-            Log.debug("?:\(showImagePicker)")
-        case .limited:
-            showImagePicker = true
-//            showPopUpView = false
         case .denied, .restricted:
-
             showAlertAuth(type: "앨범")
         case .notDetermined:
-            requestPhotoLibraryPermission()
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                DispatchQueue.main.async {
+                    self.handlePhotoLibraryStatus(status)
+                }
+            }
         @unknown default:
             break
-        }
-    }
-
-    private func requestPhotoLibraryPermission() {
-        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-            DispatchQueue.main.async {
-                self.handlePhotoLibraryStatus(status)
-            }
         }
     }
 
@@ -138,7 +109,6 @@ struct EditProfilePopUpView: View {
         case .authorized:
             sourceType = .camera
             showImagePicker = true
-            showPopUpView = false
         case .denied, .restricted:
             showAlertAuth(type: "카메라")
         case .notDetermined:
@@ -147,7 +117,6 @@ struct EditProfilePopUpView: View {
                     if granted {
                         self.sourceType = .camera
                         self.showImagePicker = true
-                        self.showPopUpView = false
                     }
                 }
             }
