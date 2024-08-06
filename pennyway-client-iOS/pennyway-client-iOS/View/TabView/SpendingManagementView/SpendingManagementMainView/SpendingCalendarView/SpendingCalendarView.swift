@@ -123,7 +123,7 @@ struct SpendingCalenderView: View {
                     }
                 }
                 .onTapGesture {
-                    let currentDate = Calendar.current.startOfDay(for: Date())//날짜만 가져오기
+                    let currentDate = Calendar.current.startOfDay(for: Date()) // 날짜만 가져오기
                     if 0 <= index && index < daysInMonth {
                         let date = getDate(for: index)
                         let dateOnly = Calendar.current.startOfDay(for: date)

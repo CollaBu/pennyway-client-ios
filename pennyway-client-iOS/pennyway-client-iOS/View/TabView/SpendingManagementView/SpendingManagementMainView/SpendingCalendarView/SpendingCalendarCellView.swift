@@ -74,10 +74,15 @@ struct SpendingCalendarCellView: View {
 
             if isCurrentMonthDay {
                 if let dailyTotalAmount = getSpendingAmount(for: day) {
-                    Text("-\(dailyTotalAmount)")
-                        .font(.B4MediumFont())
-                        .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
-                        .frame(width: 34 * DynamicSizeFactor.factor(), height: 10 * DynamicSizeFactor.factor())
+                    VStack(spacing: -3) {//텍스트 높이 조정
+                        ForEach(truncatedText("\(dailyTotalAmount)").split(separator: "\n"), id: \.self) { line in
+                            Text(line)
+                                .font(.B4MediumFont())
+                                .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
+                        }
+                    }
+                    .frame(width: 35 * DynamicSizeFactor.factor(), height: 10 * DynamicSizeFactor.factor())
+
                 } else {
                     Spacer()
                         .frame(height: 10 * DynamicSizeFactor.factor())
@@ -94,5 +99,17 @@ struct SpendingCalendarCellView: View {
 
     private func getSpendingAmount(for day: Int) -> Int? {
         return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
+    }
+
+    private func truncatedText(_ text: String) -> String {
+        let maxLength = 6
+        if text.count <= maxLength {
+            let number = NumberFormatterUtil.formatStringToDecimalString(text)
+            return "-\(number)\n "
+        }
+
+        let number = NumberFormatterUtil.formatStringToDecimalString(text).prefix(7)
+
+        return "-\(number)\n..."
     }
 }
