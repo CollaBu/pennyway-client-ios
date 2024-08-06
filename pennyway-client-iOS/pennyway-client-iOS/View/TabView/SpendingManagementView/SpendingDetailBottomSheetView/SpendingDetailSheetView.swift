@@ -107,6 +107,9 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
                 NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: .constant(false), showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
+                    .onDisappear {
+                        getDailyHistoryData()
+                    }
                 }
             }
         }
@@ -122,10 +125,6 @@ struct SpendingDetailSheetView: View {
                 // AddSpendingHistoryView가 닫힐 때 새로고침
                 getDailyHistoryData()
             }
-        }
-        .onChange(of: clickDate) { _ in
-            Log.debug("clickDate changed to: \(String(describing: clickDate))")
-            forceUpdate.toggle()
         }
         .setTabBarVisibility(isHidden: true)
     }

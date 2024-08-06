@@ -190,11 +190,13 @@ struct MySpendingListView: View {
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
+                Log.debug("??changeMonth1")
                 Log.debug("지출내역 조회 API 연동 성공")
                 DispatchQueue.main.async {
                     self.currentMonth = newDate
                 }
             } else {
+                Log.debug("??changeMonth2")
                 Log.fault("지출내역 조회 API 연동 실패")
             }
         }
