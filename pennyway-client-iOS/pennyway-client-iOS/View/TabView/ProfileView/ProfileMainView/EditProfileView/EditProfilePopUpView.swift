@@ -108,7 +108,6 @@ struct EditProfilePopUpView: View {
         switch status {
         case .authorized:
             sourceType = .camera
-            showImagePicker = true
         case .denied, .restricted:
             showAlertAuth(type: "카메라")
         case .notDetermined:
@@ -116,7 +115,6 @@ struct EditProfilePopUpView: View {
                 DispatchQueue.main.async {
                     if granted {
                         self.sourceType = .camera
-                        self.showImagePicker = true
                     }
                 }
             }
