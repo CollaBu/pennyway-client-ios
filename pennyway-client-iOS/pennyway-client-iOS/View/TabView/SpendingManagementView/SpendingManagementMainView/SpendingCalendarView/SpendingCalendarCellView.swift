@@ -73,7 +73,7 @@ struct SpendingCalendarCellView: View {
                 .frame(height: 4 * DynamicSizeFactor.factor())
 
             if isCurrentMonthDay {
-                if let dailyTotalAmount = getSpendingAmount(for: day) {
+                if let dailyTotalAmount = SpendingHistoryUtil.getSpendingAmount(for: day, from: spendingHistoryViewModel) {
                     VStack(spacing: -3) { // 텍스트 높이 조정
                         ForEach(truncatedText("\(dailyTotalAmount)").split(separator: "\n"), id: \.self) { line in
                             Text(line)
@@ -95,10 +95,6 @@ struct SpendingCalendarCellView: View {
 
     private func isSpendingDay(_ day: Int) -> Bool {
         return spendingHistoryViewModel.dailySpendings.contains { $0.day == day }
-    }
-
-    private func getSpendingAmount(for day: Int) -> Int? {
-        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
 
     private func truncatedText(_ text: String) -> String {
