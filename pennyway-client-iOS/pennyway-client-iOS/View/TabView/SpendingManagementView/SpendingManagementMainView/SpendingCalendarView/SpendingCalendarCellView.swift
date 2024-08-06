@@ -104,16 +104,16 @@ struct SpendingCalendarCellView: View {
     private func truncatedText(_ text: String) -> String {
         let maxLength = 6
         let number = NumberFormatterUtil.formatStringToDecimalString(text)
-        
-        if number.count <= maxLength {//1,000,000보다 작으면 바로 반환
+
+        if number.count <= maxLength { // 1,000,000보다 작으면 바로 반환
             return "-\(number)\n "
         }
-        
+
         var truncatedNumber = number.prefix(8)
         let commaCount = truncatedNumber.filter { $0 == "," }.count
 
         var prefixLength: Int
-        switch commaCount {//, 개수
+        switch commaCount { // , 개수
         case 1:
             prefixLength = 7
         case 2:
@@ -124,7 +124,7 @@ struct SpendingCalendarCellView: View {
 
         truncatedNumber = number.prefix(prefixLength)
 
-        if truncatedNumber.hasSuffix(",") {//가장 마지막 ,는 제거
+        if truncatedNumber.hasSuffix(",") { // 가장 마지막 ,는 제거
             truncatedNumber = truncatedNumber.dropLast()
         }
 
