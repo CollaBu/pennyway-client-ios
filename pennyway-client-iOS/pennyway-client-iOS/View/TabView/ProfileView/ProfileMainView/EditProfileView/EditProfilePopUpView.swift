@@ -10,7 +10,6 @@ struct EditProfilePopUpView: View {
 
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
-    @State private var showCamera = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
@@ -46,8 +45,6 @@ struct EditProfilePopUpView: View {
                 .cornerRadius(7)
                 .shadow(color: .black.opacity(0.06), radius: 7.29745, x: 0, y: 0)
 
-                Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-
                 Button(action: {
                     isPresented = false
                     showPopUpView = false
@@ -66,14 +63,15 @@ struct EditProfilePopUpView: View {
         }
         .padding(.bottom, 34)
         .sheet(isPresented: $showImagePicker, onDismiss: {
+            showPopUpView = false
             loadImage()
+
         }) {
-            ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
+            return ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                 .edgesIgnoringSafeArea(.bottom)
         }
         .onAppear {
             isHiddenTabBar = true
-            Log.debug("?????:\(isHiddenTabBar)")
         }
     }
 
@@ -88,57 +86,89 @@ struct EditProfilePopUpView: View {
         switch option {
         case "앨범에서 사진 선택":
             checkPhotoLibraryPermission()
-            Log.debug("앨범에서 사진 선택")
         case "사진 촬영":
             showPopUpView = false
             checkCameraPermission()
-            Log.debug("사진 촬영")
         case "삭제":
-            Log.debug("삭제")
+            image = nil
+            selectedUIImage = nil
         default:
-            Log.debug("알 수 없는 옵션")
+            break
         }
     }
 
     private func checkPhotoLibraryPermission() {
-        let status = PHPhotoLibrary.authorizationStatus()
-        if status == .authorized {
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        handlePhotoLibraryStatus(status)
+    }
+
+    private func handlePhotoLibraryStatus(_ status: PHAuthorizationStatus) {
+        Log.debug("status: \(status)")
+        switch status {
+        case .authorized:
             sourceType = .photoLibrary
             showImagePicker = true
-            showPopUpView = false
-        } else if status == .notDetermined {
-            PHPhotoLibrary.requestAuthorization { newStatus in
-                if newStatus == .authorized {
-                    DispatchQueue.main.async {
-                        sourceType = .photoLibrary
-                        showImagePicker = true
-                        showPopUpView = false
-                    }
-                }
+
+//            showPopUpView = false
+            Log.debug("?:\(showImagePicker)")
+        case .limited:
+            showImagePicker = true
+//            showPopUpView = false
+        case .denied, .restricted:
+
+            showAlertAuth(type: "앨범")
+        case .notDetermined:
+            requestPhotoLibraryPermission()
+        @unknown default:
+            break
+        }
+    }
+
+    private func requestPhotoLibraryPermission() {
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            DispatchQueue.main.async {
+                self.handlePhotoLibraryStatus(status)
             }
-        } else {
-            // Handle permission alert
         }
     }
 
     private func checkCameraPermission() {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
-        if status == .authorized {
+        switch status {
+        case .authorized:
             sourceType = .camera
             showImagePicker = true
             showPopUpView = false
-        } else if status == .notDetermined {
+        case .denied, .restricted:
+            showAlertAuth(type: "카메라")
+        case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    DispatchQueue.main.async {
-                        sourceType = .camera
-                        showImagePicker = true
-                        showPopUpView = false
+                DispatchQueue.main.async {
+                    if granted {
+                        self.sourceType = .camera
+                        self.showImagePicker = true
+                        self.showPopUpView = false
                     }
                 }
             }
-        } else {
-            // Handle permission alert
+        @unknown default:
+            break
         }
+    }
+
+    private func showAlertAuth(type: String) {
+        let appName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "이 앱"
+        let alertVC = UIAlertController(
+            title: "설정",
+            message: "\(appName)이(가) \(type) 접근 허용되어 있지 않습니다. 설정화면으로 가시겠습니까?",
+            preferredStyle: .alert
+        )
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+        }
+        alertVC.addAction(cancelAction)
+        alertVC.addAction(confirmAction)
+        UIApplication.shared.windows.first!.rootViewController!.present(alertVC, animated: true, completion: nil)
     }
 }
