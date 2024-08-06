@@ -21,7 +21,7 @@ enum AuthRouter: URLRequestConvertible {
             return .post
         case .checkDuplicateUserName, .findUserName, .logout, .refresh:
             return .get
-        case .requestResetPw:  
+        case .requestResetPw:
             return .patch
         }
     }
