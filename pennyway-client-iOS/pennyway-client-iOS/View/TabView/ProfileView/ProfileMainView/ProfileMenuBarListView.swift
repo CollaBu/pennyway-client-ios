@@ -7,65 +7,75 @@ struct ProfileMenuBarListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
+    @State var firstNaviLinkActive = false
+    @State private var activeNavigation: ProfileActiveNavigation?
 
     @State private var navigateCompleteView = false
 
     var body: some View {
-        ZStack {
-            ScrollView {
-                VStack {
-                    ProfileOAuthButtonView()
+        NavigationAvailable {
+            ZStack {
+                ScrollView {
+                    VStack {
+                        ProfileOAuthButtonView()
 
-                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 
-                    ProfileSettingListView(showLogoutPopUp: $showLogoutPopUp, showDeleteUserPopUp: $showDeleteUserPopUp)
+                        ProfileSettingListView(showLogoutPopUp: $showLogoutPopUp, showDeleteUserPopUp: $showDeleteUserPopUp, firstNaviLinkActive: $firstNaviLinkActive, activeNavigation: $activeNavigation)
+                    }
+                    .background(Color("Gray01"))
                 }
-                .background(Color("Gray01"))
-            }
-            .setTabBarVisibility(isHidden: false)
-            .navigationBarColor(UIColor(named: "White01"), title: "")
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
 
-                    }.offset(x: -10)
+                .setTabBarVisibility(isHidden: false)
+                .navigationBarColor(UIColor(named: "White01"), title: "")
+                .navigationBarBackButtonHidden(true)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        HStack {
+                            NavigationBackButton()
+                                .padding(.leading, 5)
+                                .frame(width: 44, height: 44)
+                                .contentShape(Rectangle())
+
+                        }.offset(x: -10)
+                    }
                 }
-            }
 
-            if showLogoutPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                CustomPopUpView(showingPopUp: $showLogoutPopUp,
-                                titleLabel: "로그아웃",
-                                subTitleLabel: "로그아웃하시겠어요?",
-                                firstBtnAction: { self.showLogoutPopUp = false },
-                                firstBtnLabel: "취소",
-                                secondBtnAction: handleLogout,
-                                secondBtnLabel: "로그아웃",
-                                secondBtnColor: Color("Red03")
-                )
-            }
+                if showLogoutPopUp {
+                    Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    CustomPopUpView(showingPopUp: $showLogoutPopUp,
+                                    titleLabel: "로그아웃",
+                                    subTitleLabel: "로그아웃하시겠어요?",
+                                    firstBtnAction: { self.showLogoutPopUp = false },
+                                    firstBtnLabel: "취소",
+                                    secondBtnAction: handleLogout,
+                                    secondBtnLabel: "로그아웃",
+                                    secondBtnColor: Color("Red03")
+                    )
+                }
 
-            if showDeleteUserPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                CustomPopUpView(showingPopUp: $showLogoutPopUp,
-                                titleLabel: "탈퇴하시겠어요?",
-                                subTitleLabel: "탈퇴 후에는 이용한 서비스\n내역이 모두 사라져요 😢",
-                                firstBtnAction: handleDeleteUserAccount,
-                                firstBtnLabel: "탈퇴하기",
-                                secondBtnAction: { self.showDeleteUserPopUp = false },
-                                secondBtnLabel: "더 써볼게요",
-                                secondBtnColor: Color("Gray05"),
-                                heightSize: 166
-                )
-            }
+                if showDeleteUserPopUp {
+                    Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    CustomPopUpView(showingPopUp: $showLogoutPopUp,
+                                    titleLabel: "탈퇴하시겠어요?",
+                                    subTitleLabel: "탈퇴 후에는 이용한 서비스\n내역이 모두 사라져요 😢",
+                                    firstBtnAction: handleDeleteUserAccount,
+                                    firstBtnLabel: "탈퇴하기",
+                                    secondBtnAction: { self.showDeleteUserPopUp = false },
+                                    secondBtnLabel: "더 써볼게요",
+                                    secondBtnColor: Color("Gray05"),
+                                    heightSize: 166
+                    )
+                }
 
-            NavigationLink(destination: CompleteDeleteUserView(), isActive: $navigateCompleteView) {
-                EmptyView()
+                NavigationLink(destination: CompleteDeleteUserView(), isActive: $navigateCompleteView) {
+                    EmptyView()
+                }
+                navigationLinks
+
+                //            NavigationLink(destination: ProfileModifyPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw), isActive: $firstNaviLinkActive) {
+                //                EmptyView()
+                //            }
             }
         }
     }
@@ -93,6 +103,34 @@ struct ProfileMenuBarListView: View {
                     Log.error("Fail delete UserAccount")
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private var navigationLinks: some View {
+        ForEach(ProfileActiveNavigation.allCases, id: \.self) { destination in
+            NavigationLink(
+                destination: destinationView(for: destination),
+                tag: destination,
+                selection: $activeNavigation
+            ) {
+                EmptyView()
+            }
+            .hidden()
+        }
+    }
+
+    @ViewBuilder
+    private func destinationView(for destination: ProfileActiveNavigation) -> some View {
+        switch destination {
+        case .inquiry:
+            InquiryView(viewModel: InquiryViewModel())
+        case .settingAlarm:
+            SettingAlarmView()
+        case .editProfile:
+            EditProfileListView()
+        case .modifyPw:
+            ProfileModifyPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw)
         }
     }
 }

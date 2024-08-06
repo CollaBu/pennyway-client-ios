@@ -6,9 +6,11 @@ import SwiftUI
 struct ProfileSettingListView: View {
     @Binding var showLogoutPopUp: Bool
     @Binding var showDeleteUserPopUp: Bool
-    @State var firstNaviLinkActive = true
+    ///    @State var firstNaviLinkActive = false
+    @Binding var firstNaviLinkActive: Bool
+    @Binding var activeNavigation: ProfileActiveNavigation?
 
-    @State private var activeNavigation: ProfileActiveNavigation?
+//    @State private var activeNavigation: ProfileActiveNavigation?
 
     var body: some View {
         ZStack {
@@ -65,6 +67,7 @@ struct ProfileSettingListView: View {
 
             navigationLinks
         }
+
         .setTabBarVisibility(isHidden: true)
         .navigationBarColor(UIColor(named: "White01"), title: "")
     }
@@ -74,7 +77,7 @@ struct ProfileSettingListView: View {
         ForEach(ProfileActiveNavigation.allCases, id: \.self) { destination in
             NavigationLink(destination: destinationView(for: destination), tag: destination, selection: $activeNavigation) {
                 EmptyView()
-            }
+            }.hidden()
         }
     }
 

@@ -1,45 +1,47 @@
 import SwiftUI
 
 struct ResetPwView: View {
+    @Environment(\.presentationMode) var presentationMode
+
     @StateObject var formViewModel = SignUpFormViewModel()
     @State private var navigateView = false
     @StateObject var resetPwViewModel = ResetPwViewModel()
     @StateObject var accountViewModel = UserAccountViewModel()
     @Binding var firstNaviLinkActive: Bool
     let entryPoint: PasswordChangeTypeNavigation
-    @State private var shouldNavigateToRoot = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView {
-                HStack(alignment: .top) {
-                    Text("새로운 비밀번호를\n설정해주세요")
-                        .font(.H1SemiboldFont())
-                        .multilineTextAlignment(.leading)
-                        .padding(.top, 15 * DynamicSizeFactor.factor())
+        ZStack {
+            VStack(spacing: 0) {
+                ScrollView {
+                    HStack(alignment: .top) {
+                        Text("새로운 비밀번호를\n설정해주세요")
+                            .font(.H1SemiboldFont())
+                            .multilineTextAlignment(.leading)
+                            .padding(.top, 15 * DynamicSizeFactor.factor())
                         
-                    Spacer()
+                        Spacer()
+                    }
+                    .padding(.leading, 20)
+                    
+                    Spacer().frame(height: 33 * DynamicSizeFactor.factor())
+                    
+                    ResetPwFormView(formViewModel: formViewModel, accountViewModel: accountViewModel)
                 }
-                .padding(.leading, 20)
+                Spacer()
+                
+                CustomBottomButton(action: {
+                    continueButtonAction()
+                    formViewModel.validatePwForm()
                     
-                Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-                    
-                ResetPwFormView(formViewModel: formViewModel, accountViewModel: accountViewModel)
+                }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                
+                NavigationLink(destination: CompleteChangePwView(firstNaviLinkActive: $firstNaviLinkActive), isActive: $navigateView) {
+                    EmptyView()
+                }.hidden()
             }
-            Spacer()
-                
-            CustomBottomButton(action: {
-                continueButtonAction()
-                formViewModel.validatePwForm()
-                    
-            }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
-                .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                
-            NavigationLink(destination: CompleteChangePwView(firstNaviLinkActive: $firstNaviLinkActive), isActive: $navigateView) {
-                EmptyView()
-            }.hidden()
         }
-        
         .edgesIgnoringSafeArea(.bottom)
         .frame(maxHeight: .infinity)
         .navigationBarBackButtonHidden(true)
@@ -49,7 +51,11 @@ struct ResetPwView: View {
                     Button(action: {
                         NavigationUtil.popToRootView()
                         firstNaviLinkActive = false
-                        shouldNavigateToRoot = true
+                        Log.debug("?:\(firstNaviLinkActive)")
+                        
+//                        if entryPoint == .modifyPw {
+//                            goToTotalTargetAmountView()
+//                        }
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
@@ -62,13 +68,6 @@ struct ResetPwView: View {
                     .contentShape(Rectangle())
 
                 }.offset(x: -10)
-            }
-        }
-        .onChange(of: shouldNavigateToRoot) { newValue in
-            if newValue {
-                NavigationUtil.popToView(at: 3)
-                firstNaviLinkActive = false
-                Log.debug("?")
             }
         }
     }
@@ -106,6 +105,10 @@ struct ResetPwView: View {
         } else {
             Log.fault("유효하지 않은 형식")
         }
+    }
+    
+    private func goToTotalTargetAmountView() {
+        NavigationUtil.popToView(at: 1)
     }
 }
 

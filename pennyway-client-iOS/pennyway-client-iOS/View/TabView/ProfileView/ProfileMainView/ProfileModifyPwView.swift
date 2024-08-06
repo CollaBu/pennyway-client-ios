@@ -7,14 +7,12 @@ struct ProfileModifyPwView: View {
     @State private var navigateView = false
     @State private var isFormValid = false
     @State private var isPwDeleteButtonVisible: Bool = false
-
     @Binding var firstNaviLinkActive: Bool
     private let maxLength = 16
 
     let entryPoint: PasswordChangeTypeNavigation
 
     var body: some View {
-        // NavigationAvailable {
         ZStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .top) {
@@ -57,7 +55,7 @@ struct ProfileModifyPwView: View {
 
                 CustomBottomButton(action: {
                     if isFormValid {
-                        navigateView = true
+                        self.navigateView = true
                     }
                 }, label: "완료", isFormValid: $isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
@@ -67,7 +65,6 @@ struct ProfileModifyPwView: View {
                 }.hidden()
             }
         }
-        // }
         .edgesIgnoringSafeArea(.bottom)
         .frame(maxHeight: .infinity)
         .navigationBarBackButtonHidden(true)

@@ -25,7 +25,8 @@ struct ProfileMainView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-                            .padding(.horizontal, 110)
+//                            .padding(20)
+//                            .padding(.horizontal, 110)
 
                         Text("아직 작성된 글이 없어요")
                             .font(.H4MediumFont())
@@ -35,7 +36,6 @@ struct ProfileMainView: View {
                     .padding(.horizontal, 20)
                 }
             }
-
             .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: false)
             .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username)
@@ -56,11 +56,12 @@ struct ProfileMainView: View {
                     }
                 }
             }
-            NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
+
+            NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
                 EmptyView()
             }.hidden()
 
-            NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
+            NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
                 EmptyView()
             }.hidden()
         }
