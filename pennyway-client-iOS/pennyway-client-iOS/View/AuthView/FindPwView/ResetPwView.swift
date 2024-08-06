@@ -51,11 +51,10 @@ struct ResetPwView: View {
                     Button(action: {
                         NavigationUtil.popToRootView()
                         firstNaviLinkActive = false
-                        Log.debug("?:\(firstNaviLinkActive)")
                         
-//                        if entryPoint == .modifyPw {
-//                            goToTotalTargetAmountView()
-//                        }
+                        if entryPoint == .modifyPw {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
                     }, label: {
                         Image("icon_arrow_back")
                             .resizable()
@@ -105,10 +104,6 @@ struct ResetPwView: View {
         } else {
             Log.fault("유효하지 않은 형식")
         }
-    }
-    
-    private func goToTotalTargetAmountView() {
-        NavigationUtil.popToView(at: 1)
     }
 }
 

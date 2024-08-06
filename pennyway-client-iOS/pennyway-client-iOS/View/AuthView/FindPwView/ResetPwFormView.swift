@@ -29,8 +29,6 @@ struct ResetPwFormView: View {
                 isPwDeleteButtonVisible = !newValue.isEmpty
             }
             
-            //            Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-            
             if formViewModel.showErrorPassword {
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
                 

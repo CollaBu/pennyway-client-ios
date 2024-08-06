@@ -25,8 +25,6 @@ struct ProfileMainView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-//                            .padding(20)
-//                            .padding(.horizontal, 110)
 
                         Text("아직 작성된 글이 없어요")
                             .font(.H4MediumFont())
