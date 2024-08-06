@@ -6,109 +6,63 @@ struct ResetPwFormView: View {
     @ObservedObject var accountViewModel: UserAccountViewModel
     @State private var isPwDeleteButtonVisible: Bool = false
     @State private var isConfirmPwDeleteButtonVisible: Bool = false
-
+    
     private let maxLength = 16
-
+    
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                Text("비밀번호")
-                    .padding(.horizontal, 20)
-                    .font(.pretendard(.regular, size: 12))
-                    .platformTextColor(color: Color("Gray04"))
-
-                Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-
-                HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(Color("Gray01"))
-                            .frame(height: 46 * DynamicSizeFactor.factor())
-
-                        SecureField("", text: $formViewModel.password, onCommit: {
-                            Log.debug("pw: \(formViewModel.password)")
-                            formViewModel.validatePassword()
-                            isPwDeleteButtonVisible = false
-                        })
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
-                        .padding(.leading, 13 * DynamicSizeFactor.factor())
-                        .padding(.vertical, 16 * DynamicSizeFactor.factor())
-                        .font(.pretendard(.medium, size: 14))
-                        .onChange(of: formViewModel.password) { newValue in
-                            if newValue.count > maxLength {
-                                formViewModel.password = String(newValue.prefix(maxLength))
-                            }
-                            isPwDeleteButtonVisible = !newValue.isEmpty
-                        }
-
-                        handleDeleteButtonUtil(isVisible: !formViewModel.password.isEmpty && isPwDeleteButtonVisible, action: {
-                            formViewModel.password = ""
-                            formViewModel.showErrorPassword = false
-                            formViewModel.validatePwForm()
-                            isPwDeleteButtonVisible = false
-                        })
-                    }
+        VStack(alignment: .leading) {
+            CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
+                Log.debug("pw: \(formViewModel.password)")
+                formViewModel.validatePassword()
+                isPwDeleteButtonVisible = false
+            }, isSecureText: true, showDeleteButton: true,
+            deleteAction: {
+                formViewModel.password = ""
+                formViewModel.showErrorPassword = false
+                formViewModel.validatePwForm()
+                isPwDeleteButtonVisible = false
+            })
+            .onChange(of: formViewModel.password) { newValue in
+                if newValue.count > maxLength {
+                    formViewModel.password = String(newValue.prefix(maxLength))
                 }
-                .padding(.horizontal, 20)
-
+                isPwDeleteButtonVisible = !newValue.isEmpty
+            }
+            
+            if formViewModel.showErrorPassword {
+                Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                
+                ErrorText(message: "숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요", color: Color("Red03"))
+                
+                Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+                
+            } else {
+                Spacer().frame(height: 21 * DynamicSizeFactor.factor())
+            }
+            
+            CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
+                Log.debug("confirmPw: \(formViewModel.confirmPw)")
+                RegistrationManager.shared.password = formViewModel.confirmPw
+                formViewModel.validateConfirmPw()
+                isConfirmPwDeleteButtonVisible = false
+            }, isSecureText: true, showDeleteButton: true,
+            deleteAction: {
+                formViewModel.confirmPw = ""
+                formViewModel.showErrorConfirmPw = false
+                formViewModel.validatePwForm()
+                isConfirmPwDeleteButtonVisible = false
+            })
+            .onChange(of: formViewModel.confirmPw) { newValue in
+                if newValue.count > maxLength {
+                    formViewModel.confirmPw = String(newValue.prefix(maxLength))
+                }
+                isConfirmPwDeleteButtonVisible = !newValue.isEmpty
+            }
+            
+            if formViewModel.showErrorConfirmPw {
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 
-                if formViewModel.showErrorPassword {
-                    ErrorText(message: "숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요", color: Color("Red03"))
-
-                    Spacer().frame(height: 24 * DynamicSizeFactor.factor())
-
-                } else {
-                    Spacer().frame(height: 21 * DynamicSizeFactor.factor())
-                }
-
-                Text("비밀번호 확인")
-                    .padding(.horizontal, 20)
-                    .font(.pretendard(.regular, size: 12))
-                    .platformTextColor(color: Color("Gray04"))
-
-                Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-
-                HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(Color("Gray01"))
-                            .frame(height: 46 * DynamicSizeFactor.factor())
-
-                        SecureField("", text: $formViewModel.confirmPw, onCommit: {
-                            Log.debug("confirmPw: \(formViewModel.confirmPw)")
-                            RegistrationManager.shared.password = formViewModel.confirmPw
-                            formViewModel.validateConfirmPw()
-                            isConfirmPwDeleteButtonVisible = false
-                        })
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
-                        .padding(.leading, 13 * DynamicSizeFactor.factor())
-                        .padding(.vertical, 16 * DynamicSizeFactor.factor())
-                        .font(.pretendard(.medium, size: 14))
-                        .onChange(of: formViewModel.confirmPw) { newValue in
-                            if newValue.count > maxLength {
-                                formViewModel.confirmPw = String(newValue.prefix(maxLength))
-                            }
-                            isConfirmPwDeleteButtonVisible = !newValue.isEmpty
-                        }
-
-                        handleDeleteButtonUtil(isVisible: !formViewModel.confirmPw.isEmpty && isConfirmPwDeleteButtonVisible, action: {
-                            formViewModel.confirmPw = ""
-                            formViewModel.showErrorConfirmPw = false
-                            formViewModel.validatePwForm()
-                            isConfirmPwDeleteButtonVisible = false
-                        })
-                    }
-                }
-                .padding(.horizontal, 20)
-
-                Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-
-                if formViewModel.showErrorConfirmPw {
-                    ErrorText(message: "비밀번호가 일치하지 않아요", color: Color("Red03"))
-                }
+                ErrorText(message: "비밀번호가 일치하지 않아요", color: Color("Red03"))
             }
         }
     }
