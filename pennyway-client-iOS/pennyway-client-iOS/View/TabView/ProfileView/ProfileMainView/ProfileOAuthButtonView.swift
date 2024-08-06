@@ -4,7 +4,7 @@ import SwiftUI
 struct ProfileOAuthButtonView: View {
     @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
-    @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
+    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
 
     @EnvironmentObject var authViewModel: AppViewModel
 
@@ -19,6 +19,10 @@ struct ProfileOAuthButtonView: View {
             Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
             OAuthButtonView(
+                isKakaoLoggedIn: kakaoOAuthViewModel.isLoggedIn,
+                isGoogleLoggedIn: googleOAuthViewModel.isLoggedIn,
+                isAppleLoggedIn: appleOAuthViewModel.isLoggedIn,
+
                 kakaoAction: { // Kakao 로그인 액션 처리
                     kakaoOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
                     kakaoOAuthViewModel.signIn()
@@ -30,8 +34,8 @@ struct ProfileOAuthButtonView: View {
                     OAuthRegistrationManager.shared.provider = Provider.google.rawValue
                 },
                 appleAction: { // Apple 로그인 액션 처리
-                    appleOAtuthViewModel.isLoggedIn = authViewModel.isLoggedIn
-                    appleOAtuthViewModel.signIn()
+                    appleOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
+                    appleOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.apple.rawValue
                 }
             )
