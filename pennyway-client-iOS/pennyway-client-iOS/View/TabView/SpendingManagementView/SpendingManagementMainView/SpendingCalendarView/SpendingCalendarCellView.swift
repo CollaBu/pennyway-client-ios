@@ -105,15 +105,18 @@ struct SpendingCalendarCellView: View {
         let maxLength = 6
         let number = NumberFormatterUtil.formatStringToDecimalString(text)
 
-        if number.count <= maxLength { // 1,000,000보다 작으면 바로 반환
+        if number.count <= maxLength { // 1. 숫자 문자열의 길이가 최대 길이 이하인 경우 그대로 반환
             return "-\(number)\n "
         }
 
+        // 2. 초기로 8자리만큼 문자열을 자름
         var truncatedNumber = number.prefix(8)
+        // 3. 잘라낸 문자열에서 쉼표의 개수를 셈
         let commaCount = truncatedNumber.filter { $0 == "," }.count
 
+        // 4. 쉼표의 개수에 따라 prefix 길이를 설정
         var prefixLength: Int
-        switch commaCount { // , 개수
+        switch commaCount {
         case 1:
             prefixLength = 7
         case 2:
@@ -122,9 +125,11 @@ struct SpendingCalendarCellView: View {
             prefixLength = 7
         }
 
+        // 5. 다시 숫자 문자열에서 prefix 길이만큼 자름
         truncatedNumber = number.prefix(prefixLength)
 
-        if truncatedNumber.hasSuffix(",") { // 가장 마지막 ,는 제거
+        // 6. 잘라낸 문자열이 쉼표로 끝나는 경우 쉼표를 제거
+        if truncatedNumber.hasSuffix(",") {
             truncatedNumber = truncatedNumber.dropLast()
         }
 
