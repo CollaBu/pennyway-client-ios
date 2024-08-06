@@ -24,9 +24,9 @@ struct PastSpendingListView: View {
                                 
                                 if content.targetAmountDetail.amount != -1 {
                                     DiffAmountDynamicWidthView(
-                                        text: determineText(for: content.diffAmount),
-                                        backgroundColor: determineBackgroundColor(for: content.diffAmount),
-                                        textColor: determineTextColor(for: content.diffAmount)
+                                        text: DiffAmountColorUtil.determineText(for: content.diffAmount),
+                                        backgroundColor: DiffAmountColorUtil.determineBackgroundColor(for: content.diffAmount),
+                                        textColor: DiffAmountColorUtil.determineTextColor(for: content.diffAmount)
                                     )
                                 }
                             }
@@ -62,25 +62,6 @@ struct PastSpendingListView: View {
 
                 }.offset(x: -10)
             }
-        }
-    }
-    
-    /// Color 설정
-    func determineBackgroundColor(for diffAmount: Int64) -> Color {
-        return diffAmount > 0 ? Color("Red01") : Color("Ashblue01")
-    }
-    
-    func determineTextColor(for diffAmount: Int64) -> Color {
-        return diffAmount > 0 ? Color("Red03") : Color("Mint03")
-    }
-
-    func determineText(for diffAmount: Int64) -> String {
-        let diffAmountValue = (NumberFormatterUtil.formatIntToDecimalString(abs(diffAmount)))
-        
-        if diffAmount != 0 {
-            return diffAmount < 0 ? "\(diffAmountValue)원 절약했어요" : "\(diffAmountValue)원 더 썼어요"
-        } else {
-            return "짝짝 소비 천재네요!"
         }
     }
 }
