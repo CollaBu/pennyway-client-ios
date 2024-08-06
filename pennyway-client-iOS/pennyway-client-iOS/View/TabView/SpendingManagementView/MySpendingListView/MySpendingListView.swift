@@ -66,7 +66,7 @@ struct MySpendingListView: View {
                         }
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
-                                changeMonth(by: -1)
+//                                changeMonth(by: -1)
 
                             }, label: {
                                 ZStack {
@@ -176,27 +176,17 @@ struct MySpendingListView: View {
     }
 
     private func changeMonth(by value: Int) {
-//        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
-//        currentMonth = spendingHistoryViewModel.currentDate
-//        spendingHistoryViewModel.currentDate = newDate
-//        currentMonth = newDate
-//
-//        spendingHistoryViewModel.checkSpendingHistoryApi { success in
-//            if success {
-//                Log.debug("지출내역 조회 API 연동 성공")
-//                DispatchQueue.main.async {
-//                    self.currentMonth = newDate
-//                }
-//            } else {
-//                Log.fault("지출내역 조회 API 연동 실패")
-//            }
-//        }
-
-        spendingHistoryViewModel.currentDate = currentMonth // 뷰 모델에 값 넘겨주기
+        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
+        currentMonth = spendingHistoryViewModel.currentDate
+        spendingHistoryViewModel.currentDate = newDate
+        currentMonth = newDate
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
                 Log.debug("지출내역 조회 API 연동 성공")
+                DispatchQueue.main.async {
+                    self.currentMonth = newDate
+                }
             } else {
                 Log.fault("지출내역 조회 API 연동 실패")
             }

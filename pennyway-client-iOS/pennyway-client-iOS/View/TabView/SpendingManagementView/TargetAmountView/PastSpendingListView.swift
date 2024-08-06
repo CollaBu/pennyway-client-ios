@@ -39,7 +39,9 @@ struct PastSpendingListView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                        }.onTapGesture {
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
                             let components = DateComponents(year: content.year, month: content.month)
                             if let date = Calendar.current.date(from: components) {
                                 selectDate = date
