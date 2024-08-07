@@ -7,6 +7,8 @@ class TargetAmountViewModel: ObservableObject {
     @Published var isHiddenSuggestionView = true // 추천 금액 뷰
     @Published var isPresentTargetAmount = true // 당월 목표 금액 존재 여부
     
+    @Published var generateTargetAmountId = -1
+    
     @Published var recentTargetAmountData: RecentTargetAmount? = nil // 당월 이전 사용자의 최신 목표 금액
 
     func getTargetAmountForDateApi(completion: @escaping (Bool) -> Void) {
@@ -74,7 +76,6 @@ class TargetAmountViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("당월 이전 사용자 최신 목표 금액 조회 완료 \(jsonString)")
                         }
-                        Log.debug("??")
                         
                         self.recentTargetAmountData = response.data.targetAmount
                         let isPresent = response.data.targetAmount.isPresent
@@ -108,6 +109,8 @@ class TargetAmountViewModel: ObservableObject {
             switch result {
             case let .success(data):
                 if let responseData = data {
+                    
+//                    CurrentMonthTargetAmountResponseDto
                     if let jsonString = String(data: responseData, encoding: .utf8) {
                         Log.debug("당월 목표 금액 더미값 생성 \(jsonString)")
                     }

@@ -33,8 +33,12 @@ struct TargetAmountSetCompleteView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    goToTotalTargetAmountView()
-                    authViewModel.login() // 메인화면으로 entryPoint 나누기
+                    if entryPoint == .signUp {
+                        authViewModel.login() // 메인화면으로 entryPoint 나누기
+                    } else {
+                        goToTotalTargetAmountView()
+                    }
+                    
                 }, label: "확인", isFormValid: .constant(true))
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }

@@ -11,6 +11,8 @@ struct SignUpView: View {
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
     
+    @State var initTargetAmount = TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)
+    
     private var buttonText: String {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
             return "연동하기"
@@ -97,6 +99,7 @@ struct SignUpView: View {
     @ViewBuilder
     private func destinationView() -> some View {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
+            TargetAmountSettingView(currentData: $initTargetAmount, entryPoint: .signUp)
         } else {
             TermsAndConditionsView(viewModel: viewModel)
         }
@@ -105,7 +108,6 @@ struct SignUpView: View {
     func handleLinkAccountToOAuth() {
         linkAccountToOAuthViewModel.linkAccountToOAuthApi { success in
             if success {
-                authViewModel.login()
                 profileInfoViewModel.getUserProfileApi { _ in }
             } else {
                 Log.error("기존 계정에 소셜 계정 연동 실패")

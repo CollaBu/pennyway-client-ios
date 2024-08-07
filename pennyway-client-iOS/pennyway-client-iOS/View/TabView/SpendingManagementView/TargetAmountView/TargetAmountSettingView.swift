@@ -4,6 +4,7 @@ import SwiftUI
 struct TargetAmountSettingView: View {
     @Binding var currentData: TargetAmount
     @StateObject var viewModel: TargetAmountSettingViewModel
+    @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToCompleteTarget = false
 
     var entryPoint: TargetAmountEntryPoint
@@ -56,6 +57,28 @@ struct TargetAmountSettingView: View {
                 
                 Spacer()
                 
+                if entryPoint == .signUp {
+                    
+                    HStack{
+                        Spacer()
+                        
+                        Button(action: {
+                            targetAmountViewModel.deleteCurrentMonthTargetAmountApi()
+                            // Delete 요청
+                            
+                        }, label: {
+                            Text("나중에 할게요")
+                                .font(.B2SemiboldFont())
+                                .platformTextColor(color: Color("Gray03"))
+                            
+                        })
+                        
+                        Spacer()
+                    }                  
+                }
+                
+                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+                
                 CustomBottomButton(action: {
                     if viewModel.isFormValid {
                         viewModel.editCurrentMonthTargetAmountApi { success in
@@ -84,6 +107,9 @@ struct TargetAmountSettingView: View {
                         .contentShape(Rectangle())
                 }.offset(x: -10)
             }
+        }
+        .onAppear {
+            targetAmountViewModel.generateCurrentMonthDummyDataApi() // 더미값 생성
         }
     }
 }

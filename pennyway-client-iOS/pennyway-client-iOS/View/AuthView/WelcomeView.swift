@@ -29,7 +29,7 @@ struct WelcomeView: View {
             Spacer()
 
             CustomBottomButton(action: {
-                authViewModel.login()
+                isnavigateToEditTargetView = true
                 profileInfoViewModel.getUserProfileApi { _ in }
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
