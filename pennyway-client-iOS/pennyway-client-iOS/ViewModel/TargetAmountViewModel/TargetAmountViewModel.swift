@@ -55,7 +55,7 @@ class TargetAmountViewModel: ObservableObject {
                         // 추천 금액 보여주기 x + 목표 금액 설정하기 UI
                         self.isHiddenSuggestionView = true
                         self.isPresentTargetAmount = false
-                        self.generateCurrentMonthDummyDataApi {}
+                        self.generateCurrentMonthDummyDataApi { _ in }
                     }
                 } else {
                     Log.error("Network request failed: \(error)")
@@ -85,7 +85,7 @@ class TargetAmountViewModel: ObservableObject {
                             self.isPresentTargetAmount = false
                             // 추천 금액 보여주기 + 목표 금액 설정하기 UI
                         } else {
-                            self.deleteCurrentMonthTargetAmountApi()
+                            self.deleteCurrentMonthTargetAmountApi { _ in }
                         }
                
                     } catch {
@@ -102,7 +102,7 @@ class TargetAmountViewModel: ObservableObject {
         }
     }
     
-    func generateCurrentMonthDummyDataApi(completion _: @escaping () -> Void) {
+    func generateCurrentMonthDummyDataApi(completion: @escaping (Bool) -> Void) {
         let generateCurrentMonthDummyDataRequestDto = GenerateCurrentMonthDummyDataRequestDto(year: Date.year(from: Date()), month: Date.month(from: Date()))
         
         TargetAmountAlamofire.shared.generateCurrentMonthDummyData(generateCurrentMonthDummyDataRequestDto) { result in
@@ -116,6 +116,7 @@ class TargetAmountViewModel: ObservableObject {
                             Log.debug("당월 목표 금액 더미값 생성 \(jsonString)")
                         }
                         self.generateTargetAmountId = response.data.targetAmount.id
+                        completion(true)
                
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
@@ -127,11 +128,12 @@ class TargetAmountViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
             }
         }
     }
     
-    func deleteCurrentMonthTargetAmountApi() {
+    func deleteCurrentMonthTargetAmountApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.deleteCurrentMonthTargetAmount(targetAmountId: (targetAmountData?.targetAmountDetail.id)!) { result in
             switch result {
             case let .success(data):
@@ -141,6 +143,7 @@ class TargetAmountViewModel: ObservableObject {
                     }
                     self.isHiddenSuggestionView = true
                     self.isPresentTargetAmount = false
+                    completion(true)
                 }
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {
@@ -148,6 +151,7 @@ class TargetAmountViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
             }
         }
     }

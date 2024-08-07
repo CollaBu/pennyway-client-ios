@@ -6,6 +6,8 @@ struct TargetAmountSettingView: View {
     @StateObject var viewModel: TargetAmountSettingViewModel
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToCompleteTarget = false
+    
+    @EnvironmentObject var authViewModel: AppViewModel
 
     var entryPoint: TargetAmountEntryPoint
     
@@ -62,15 +64,20 @@ struct TargetAmountSettingView: View {
                         Spacer()
                         
                         Button(action: {
-                            targetAmountViewModel.deleteCurrentMonthTargetAmountApi()
                             // Delete 요청
-                            
+                            targetAmountViewModel.deleteCurrentMonthTargetAmountApi { success in
+                                if success {
+                                    Log.debug("목표 금액 삭제 성공")
+                                    authViewModel.login()
+                                }
+                            }
                         }, label: {
                             Text("나중에 할게요")
                                 .font(.B2SemiboldFont())
                                 .platformTextColor(color: Color("Gray03"))
                             
                         })
+                        .buttonStyle(PlainButtonStyle())
                         
                         Spacer()
                     }                  
@@ -99,19 +106,28 @@ struct TargetAmountSettingView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    NavigationBackButton(action: {})
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-                }.offset(x: -10)
+                if entryPoint == .afterLogin {
+                    HStack {
+                        NavigationBackButton(action: {})
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    }.offset(x: -10)
+                } else {
+                    Spacer().frame(height: 44)
+                }
             }
         }
         .onAppear {
             if entryPoint == .signUp {
                 // 더미값 생성
-                targetAmountViewModel.generateCurrentMonthDummyDataApi {
-                    viewModel.currentData?.targetAmountDetail.id = targetAmountViewModel.generateTargetAmountId
+                targetAmountViewModel.generateCurrentMonthDummyDataApi { success in
+                    if success {
+                        Log.debug("더미데이터 목표 금액 생성 성공")
+                        viewModel.currentData?.targetAmountDetail.id = targetAmountViewModel.generateTargetAmountId
+                        
+                        targetAmountViewModel.targetAmountData = viewModel.currentData
+                    }
                 }
             }
         }
