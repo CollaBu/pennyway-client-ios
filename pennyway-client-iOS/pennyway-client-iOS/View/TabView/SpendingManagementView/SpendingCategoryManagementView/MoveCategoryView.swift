@@ -63,7 +63,6 @@ struct MoveCategoryView: View {
                                     navigateToAddCategoryView = true
                                 } else {
                                     spendingCategoryViewModel.selectedMoveCategory = category // 선택한 카테고리
-                                    Log.debug(spendingCategoryViewModel.selectedMoveCategory)
                                 }
                             }
                         }
@@ -129,6 +128,7 @@ struct MoveCategoryView: View {
     private func moveCategoryApi() {
         spendingCategoryViewModel.moveCategoryApi { success in
             if success {
+                presentationMode.wrappedValue.dismiss()
                 spendingCategoryViewModel.selectedCategory = spendingCategoryViewModel.selectedMoveCategory // 이동할 카테고리로 변경
                 spendingCategoryViewModel.selectedCategory?.icon = MapCategoryIconUtil.mapToCategoryIcon(spendingCategoryViewModel.selectedMoveCategory!.icon, outputState: .on) // icon 회색으로 변경
                 spendingCategoryViewModel.selectedMoveCategory = nil // 선택한 카테고리 초기화
@@ -138,7 +138,6 @@ struct MoveCategoryView: View {
                         Log.debug(spendingCategoryViewModel.dailyDetailSpendings)
                     }
                 }
-                presentationMode.wrappedValue.dismiss()
             }
         }
     }
