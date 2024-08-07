@@ -10,7 +10,7 @@ struct ProfileMainView: View {
 
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    
+
     @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
 
     var body: some View {
@@ -66,6 +66,8 @@ struct ProfileMainView: View {
             .sheet(isPresented: $showImagePicker, onDismiss: {
                 loadImage()
                 showPopUpView = false
+                presignedUrlViewModel.image = selectedUIImage
+                presignedUrlViewModel.storePresignedUrlApi { _ in }
             }) {
                 ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                     .edgesIgnoringSafeArea(.bottom)

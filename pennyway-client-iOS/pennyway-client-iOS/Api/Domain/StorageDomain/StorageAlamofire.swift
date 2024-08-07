@@ -20,7 +20,7 @@ class StorageAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: StorageRouter.generatePresignedUrl(dto: dto), completion: completion)
     }
 
-    func storePresignedUrl(_ payload: String, _ image: UIImage , _ dto: StorePresignedUrlRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func storePresignedUrl(_ payload: String, _ image: UIImage, _ dto: StorePresignedUrlRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("StorageAlamofire - storePresignedUrl() called")
 
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: StorageRouter.storePresignedUrl(payload: payload, image: image, dto: dto), completion: completion)
