@@ -7,6 +7,14 @@ struct TargetAmountSetCompleteView: View {
     
     var entryPoint: TargetAmountEntryPoint
     
+    private var buttonText: String {
+        if entryPoint == .signUp {
+            return "시작하기"
+        } else {
+            return "확인"
+        }
+    }
+    
     var body: some View {
         ZStack {
             VStack(alignment: .center) {
@@ -39,7 +47,7 @@ struct TargetAmountSetCompleteView: View {
                         goToTotalTargetAmountView()
                     }
                     
-                }, label: "확인", isFormValid: .constant(true))
+                }, label: buttonText, isFormValid: .constant(true))
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
         }

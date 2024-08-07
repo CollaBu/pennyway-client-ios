@@ -45,29 +45,27 @@ struct SignUpView: View {
             
             CustomBottomButton(action: {
                 if formViewModel.isFormValid {
-                    viewModel.continueButtonTapped()
-                    
                     if isOAuthRegistration {
                         OAuthRegistrationManager.shared.name = formViewModel.name
                         OAuthRegistrationManager.shared.username = formViewModel.id
                         OAuthRegistrationManager.shared.password = formViewModel.password
+                        viewModel.continueButtonTapped()
                     } else {
                         RegistrationManager.shared.name = formViewModel.name
                         RegistrationManager.shared.username = formViewModel.id
                         RegistrationManager.shared.password = formViewModel.password
                         if !isOAuthRegistration, OAuthRegistrationManager.shared.isOAuthUser {
                             handleLinkAccountToOAuth()
+                        } else {
+                            viewModel.continueButtonTapped()
                         }
                     }
-                    
-                } else {}
+                }
                 
             }, label: buttonText, isFormValid: $formViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
             
-            NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
-                EmptyView()
-            }
+            NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {}.hidden()
         }
         
         .edgesIgnoringSafeArea(.bottom)
@@ -98,9 +96,7 @@ struct SignUpView: View {
     
     @ViewBuilder
     private func destinationView() -> some View {
-        if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
-            TargetAmountSettingView(currentData: $initTargetAmount, entryPoint: .signUp)
-        } else {
+        if !(!isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser) {
             TermsAndConditionsView(viewModel: viewModel)
         }
     }
@@ -108,6 +104,7 @@ struct SignUpView: View {
     func handleLinkAccountToOAuth() {
         linkAccountToOAuthViewModel.linkAccountToOAuthApi { success in
             if success {
+                authViewModel.login()
                 profileInfoViewModel.getUserProfileApi { _ in }
             } else {
                 Log.error("기존 계정에 소셜 계정 연동 실패")
