@@ -4,7 +4,7 @@ import SwiftUI
 class SpendingCategoryViewModel: ObservableObject {
     /// 카테고리 선택
     @Published var selectedCategory: SpendingCategoryData? = nil
-    @Published var selectedMoveCategoryId: Int = 0
+    @Published var selectedMoveCategory: SpendingCategoryData? = nil
     @Published var categoryName = ""
     @Published var selectedCategoryIcon: CategoryIconName? = nil
     @Published var selectedCategoryIconTitle: String = ""

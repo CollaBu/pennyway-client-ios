@@ -81,7 +81,7 @@ struct AddSpendingCategoryView: View {
     private func selectedCategoryIcon() -> String {
         switch entryPoint {
         case .create:
-            return viewModel.selectedCategoryIcon?.rawValue ?? CategoryIconName(baseName: .etc, state: .on).rawValue
+            return viewModel.selectedCategoryIcon.rawValue
         case .modify:
             return spendingCategoryViewModel.selectedCategoryIcon!.rawValue
         }

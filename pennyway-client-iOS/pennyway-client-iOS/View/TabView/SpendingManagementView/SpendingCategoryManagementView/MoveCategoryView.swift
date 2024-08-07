@@ -33,7 +33,7 @@ struct MoveCategoryView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(Array(spendingCategoryViewModel.spendingCategories.enumerated()), id: \.element.id) { _, category in
                         HStack(spacing: 10) {
-                            Image(getCategoryIcon(category: category, isSelected: category.id == spendingCategoryViewModel.selectedMoveCategoryId))
+                            Image(getCategoryIcon(category: category, isSelected: category.id == spendingCategoryViewModel.selectedMoveCategory?.id))
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
@@ -44,7 +44,7 @@ struct MoveCategoryView: View {
 
                             Spacer()
 
-                            if category.id == spendingCategoryViewModel.selectedMoveCategoryId {
+                            if category.id == spendingCategoryViewModel.selectedMoveCategory?.id {
                                 Image("icon_checkone_on_small")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -53,14 +53,15 @@ struct MoveCategoryView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 6 * DynamicSizeFactor.factor())
-                        .contentShape(Rectangle()) // This makes the entire HStack touchable
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             if category.name == "추가하기" {
                                 addSpendingHistoryViewModel.selectedCategoryIcon = CategoryIconName(baseName: CategoryBaseName.etc, state: .on) // icon 초기화
                                 addSpendingHistoryViewModel.categoryName = "" // name 초기화
                                 navigateToAddCategoryView = true
                             } else {
-                                spendingCategoryViewModel.selectedMoveCategoryId = category.id // 선택한 카테고리 id
+                                spendingCategoryViewModel.selectedMoveCategory = category // 선택한 카테고리
+                                Log.debug(spendingCategoryViewModel.selectedMoveCategory)
                             }
                         }
                     }
@@ -71,12 +72,12 @@ struct MoveCategoryView: View {
             Spacer()
 
             CustomBottomButton(action: {
-                if spendingCategoryViewModel.selectedMoveCategoryId != 0 {
+                if spendingCategoryViewModel.selectedMoveCategory != nil {
                     presentationMode.wrappedValue.dismiss()
-                    spendingCategoryViewModel.selectedMoveCategoryId = 0 // 선택한 카테고리 id 초기화
+                    spendingCategoryViewModel.selectedMoveCategory = nil // 선택한 카테고리 id 초기화
                 }
 
-            }, label: "확인", isFormValid: .constant(spendingCategoryViewModel.selectedMoveCategoryId != 0))
+            }, label: "확인", isFormValid: .constant(spendingCategoryViewModel.selectedMoveCategory != nil))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
             NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
@@ -90,7 +91,7 @@ struct MoveCategoryView: View {
             ToolbarItem(placement: .topBarLeading) {
                 HStack {
                     NavigationBackButton(action: {
-                        spendingCategoryViewModel.selectedMoveCategoryId = 0
+                        spendingCategoryViewModel.selectedMoveCategory = nil
                     })
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
