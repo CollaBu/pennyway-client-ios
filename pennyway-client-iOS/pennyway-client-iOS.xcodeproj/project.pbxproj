@@ -150,6 +150,7 @@
 		4A9634B22C42EAF6000A218A /* SpendingListGroupUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */; };
 		4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */; };
 		4AA13C592C6389F200D8DEE7 /* MoveCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C582C6389F100D8DEE7 /* MoveCategoryView.swift */; };
+		4AA13C5B2C63930000D8DEE7 /* MoveCategoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C5A2C63930000D8DEE7 /* MoveCategoryRequestDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
 		4AB0B13C2C4F497400A475F5 /* MapCategoryIconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */; };
@@ -450,6 +451,7 @@
 		4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingListGroupUtil.swift; sourceTree = "<group>"; };
 		4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCurrentMonthTargetAmountRequestDto.swift; sourceTree = "<group>"; };
 		4AA13C582C6389F100D8DEE7 /* MoveCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveCategoryView.swift; sourceTree = "<group>"; };
+		4AA13C5A2C63930000D8DEE7 /* MoveCategoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCategoryRequestDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCategoryIconUtil.swift; sourceTree = "<group>"; };
@@ -1017,6 +1019,7 @@
 				4A3701C02C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift */,
 				4A3DE2152C3E448B00817589 /* GetCategorySpendingCountRequestDto.swift */,
 				4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */,
+				4AA13C5A2C63930000D8DEE7 /* MoveCategoryRequestDto.swift */,
 			);
 			path = SpendingCategory;
 			sourceTree = "<group>";
@@ -2283,6 +2286,7 @@
 				4A8BDEE52C629C3600D21424 /* SpendingHistoryUtil.swift in Sources */,
 				4AC3203F2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift in Sources */,
 				4A0BC6AD2BF5FA130036D900 /* NumberFormatterUtil.swift in Sources */,
+				4AA13C5B2C63930000D8DEE7 /* MoveCategoryRequestDto.swift in Sources */,
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
 				D8B0A92A2C4EB8E500716ECB /* ResetMyPwRequestDto.swift in Sources */,
 				4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */,

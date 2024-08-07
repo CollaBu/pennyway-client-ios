@@ -9,6 +9,7 @@ enum SpendingCategoryRouter: URLRequestConvertible {
     case getCategorySpendingHistory(categoryId: Int, dto: GetCategorySpendingHistoryRequestDto)
     case modifyCategory(categoryId: Int, dto: AddSpendingCustomCategoryRequestDto)
     case deleteCategory(categoryId: Int)
+    case moveCategory(fromId: Int, dto: MoveCategoryRequestDto)
     
     var method: HTTPMethod {
         switch self {
@@ -16,7 +17,7 @@ enum SpendingCategoryRouter: URLRequestConvertible {
             return .get
         case .addSpendingCustomCategory:
             return .post
-        case .modifyCategory:
+        case .modifyCategory, .moveCategory:
             return .patch
         case .deleteCategory:
             return .delete
@@ -39,12 +40,14 @@ enum SpendingCategoryRouter: URLRequestConvertible {
             return "v2/spending-categories/\(categoryId)"
         case let .deleteCategory(categoryId):
             return "v2/spending-categories/\(categoryId)"
+        case let .moveCategory(fromId, _):
+            return "v2/spending-categories/\(fromId)/migration"
         }
     }
     
     var bodyParameters: Parameters? {
         switch self {
-        case .getSpendingCustomCategoryList, .addSpendingCustomCategory, .getCategorySpendingCount, .getCategorySpendingHistory, .modifyCategory, .deleteCategory:
+        case .getSpendingCustomCategoryList, .addSpendingCustomCategory, .getCategorySpendingCount, .getCategorySpendingHistory, .modifyCategory, .deleteCategory, .moveCategory:
             return [:]
         }
     }
@@ -59,6 +62,8 @@ enum SpendingCategoryRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .modifyCategory(_, dto):
             return try? dto.asDictionary()
+        case let .moveCategory(_, dto):
+            return try? dto.asDictionary()
         case .getSpendingCustomCategoryList, .deleteCategory:
             return [:]
         }
@@ -69,7 +74,7 @@ enum SpendingCategoryRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .addSpendingCustomCategory, .getCategorySpendingCount, .getCategorySpendingHistory, .modifyCategory:
+        case .addSpendingCustomCategory, .getCategorySpendingCount, .getCategorySpendingHistory, .modifyCategory, .moveCategory:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         case .getSpendingCustomCategoryList, .deleteCategory:

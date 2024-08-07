@@ -155,6 +155,11 @@ struct AddSpendingCategoryView: View {
             case .modify:
                 spendingCategoryViewModel.selectedCategory!.name = categoryName
                 spendingCategoryViewModel.selectedCategory!.icon = spendingCategoryViewModel.selectedCategoryIcon ?? spendingCategoryViewModel.selectedCategory!.icon
+                
+                if let selectedCategory = SpendingCategoryIconList.fromIcon(spendingCategoryViewModel.selectedCategory!.icon) {
+                    spendingCategoryViewModel.selectedCategoryIconTitle = selectedCategory.rawValue
+                }
+                
                 spendingCategoryViewModel.modifyCategoryApi {
                     success in
                     if success {
