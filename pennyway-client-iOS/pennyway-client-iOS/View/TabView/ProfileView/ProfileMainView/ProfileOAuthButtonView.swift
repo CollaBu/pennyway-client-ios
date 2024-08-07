@@ -4,9 +4,13 @@ import SwiftUI
 struct ProfileOAuthButtonView: View {
     @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
-    @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
+    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
 
     @EnvironmentObject var authViewModel: AppViewModel
+
+    private var existKakaoOAuthAccount: Bool = getUserData()?.oauthAccount.kakao ?? false
+    private var existGoogleOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
+    private var existAppleOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
 
     var body: some View {
         VStack(alignment: .center) {
@@ -19,6 +23,10 @@ struct ProfileOAuthButtonView: View {
             Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
             OAuthButtonView(
+                isKakaoLoggedIn: existKakaoOAuthAccount,
+                isGoogleLoggedIn: existGoogleOAuthAccount,
+                isAppleLoggedIn: existAppleOAuthAccount,
+
                 kakaoAction: { // Kakao 로그인 액션 처리
                     kakaoOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
                     kakaoOAuthViewModel.signIn()
@@ -30,8 +38,8 @@ struct ProfileOAuthButtonView: View {
                     OAuthRegistrationManager.shared.provider = Provider.google.rawValue
                 },
                 appleAction: { // Apple 로그인 액션 처리
-                    appleOAtuthViewModel.isLoggedIn = authViewModel.isLoggedIn
-                    appleOAtuthViewModel.signIn()
+                    appleOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
+                    appleOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.apple.rawValue
                 }
             )
