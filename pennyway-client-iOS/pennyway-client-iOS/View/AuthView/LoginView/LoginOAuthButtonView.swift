@@ -4,7 +4,7 @@ import SwiftUI
 struct LoginOAuthButtonView: View {
     @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
-    @StateObject var appleOAtuthViewModel: AppleOAtuthViewModel = AppleOAtuthViewModel()
+    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
 
     @EnvironmentObject var authViewModel: AppViewModel
     @State private var isLoginSuccessful = false
@@ -13,6 +13,10 @@ struct LoginOAuthButtonView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 15 * DynamicSizeFactor.factor()) {
             OAuthButtonView(
+                isKakaoLoggedIn: true,
+                isGoogleLoggedIn: true,
+                isAppleLoggedIn: true,
+
                 kakaoAction: { // Kakao 로그인 액션 처리
                     kakaoOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.kakao.rawValue
@@ -22,7 +26,7 @@ struct LoginOAuthButtonView: View {
                     OAuthRegistrationManager.shared.provider = Provider.google.rawValue
                 },
                 appleAction: { // Apple 로그인 액션 처리
-                    appleOAtuthViewModel.signIn()
+                    appleOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.apple.rawValue
                 }
             )
@@ -40,10 +44,10 @@ struct LoginOAuthButtonView: View {
                     handleOAuthLogin()
                 }
             }
-            .onReceive(appleOAtuthViewModel.$isOAuthExistUser) { newValue in
+            .onReceive(appleOAuthViewModel.$isOAuthExistUser) { newValue in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     isActiveLink = !newValue
-                    isLoginSuccessful = appleOAtuthViewModel.isLoginSuccessful
+                    isLoginSuccessful = appleOAuthViewModel.isLoginSuccessful
                     handleOAuthLogin()
                 }
             }
@@ -61,6 +65,6 @@ struct LoginOAuthButtonView: View {
     }
 }
 
-#Preview {
-    OAuthButtonView(kakaoAction: {}, googleAction: {}, appleAction: {})
-}
+// #Preview {
+//    OAuthButtonView(kakaoAction: {}, googleAction: {}, appleAction: {})
+// }
