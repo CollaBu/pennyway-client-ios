@@ -11,6 +11,8 @@ struct EditProfilePopUpView: View {
     @Binding var selectedUIImage: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
 
+    @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
+
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
 
     var body: some View {
@@ -83,6 +85,7 @@ struct EditProfilePopUpView: View {
     private func checkPhotoLibraryPermission() {
         let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         handlePhotoLibraryStatus(status)
+        presignedUrlViewModel.generatePresignedUrlApi { _ in }
     }
 
     private func handlePhotoLibraryStatus(_ status: PHAuthorizationStatus) {

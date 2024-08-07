@@ -3,7 +3,7 @@ import Alamofire
 import Foundation
 
 enum StorageRouter: URLRequestConvertible {
-    case generatePresignedUrl(dto: GeneratePresigendUrlRequeatDto)
+    case generatePresignedUrl(dto: GeneratePresigendUrlRequestDto)
     
     var method: HTTPMethod {
         switch self {
@@ -19,7 +19,7 @@ enum StorageRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .generatePresignedUrl:
-            return "v1/storage/presigned_url"
+            return "v1/storage/presigned-url"
         }
     }
     

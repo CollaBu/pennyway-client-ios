@@ -32,7 +32,7 @@ struct ProfileMainView: View {
 
                             Spacer().frame(height: 6 * DynamicSizeFactor.factor())
 
-                            Image("icon_illust__empty")
+                            Image("icon_illust_empty")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())

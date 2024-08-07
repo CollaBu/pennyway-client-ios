@@ -14,7 +14,7 @@ class StorageAlamofire {
         session = Session(interceptor: interceptors, eventMonitors: monitors)
     }
 
-    func generatePresignedUrl(_ dto: GeneratePresigendUrlRequeatDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func generatePresignedUrl(_ dto: GeneratePresigendUrlRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("StorageAlamofire - generatePresignedUrl() called")
 
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: StorageRouter.generatePresignedUrl(dto: dto), completion: completion)

@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct GeneratePresigendUrlRequeatDto: Encodable {
+public struct GeneratePresigendUrlRequestDto: Encodable {
     let type: String
     let ext: String
 
