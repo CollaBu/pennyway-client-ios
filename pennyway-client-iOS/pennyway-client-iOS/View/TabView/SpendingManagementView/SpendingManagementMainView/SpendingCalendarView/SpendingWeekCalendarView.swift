@@ -151,7 +151,7 @@ struct SpendingWeekCalendarView: View {
 
                         Spacer().frame(height: 4) // 동적 ui 적용하니 너무 넓어짐
 
-                        if let amount = getSpendingAmount(for: date) {
+                        if let amount = SpendingHistoryUtil.getSpendingAmount(for: date, using: Calendar.current, from: spendingHistoryViewModel) {
                             Text("-\(amount)")
                                 .font(.B4MediumFont())
                                 .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
@@ -179,11 +179,6 @@ struct SpendingWeekCalendarView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
-    }
-
-    private func getSpendingAmount(for date: Date) -> Int? {
-        let day = calendar.component(.day, from: date)
-        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
 
     private func circleColor(for date: Date) -> Color {
@@ -228,10 +223,6 @@ struct SpendingWeekCalendarView: View {
             }
         }
         return dates
-    }
-
-    private func getSpendingAmount(for day: Int) -> Int? {
-        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
 
     private func setToToday() {

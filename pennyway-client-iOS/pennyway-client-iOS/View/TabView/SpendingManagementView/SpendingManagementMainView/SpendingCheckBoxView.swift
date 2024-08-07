@@ -8,14 +8,19 @@ struct SpendingCheckBoxView: View {
 
     var formattedTotalSpent: String {
         if let targetAmountData = viewModel.targetAmountData {
-            return NumberFormatterUtil.formatIntToDecimalString(targetAmountData.totalSpending)
+            let totalSpending = targetAmountData.totalSpending
+            if totalSpending > 100_000_000 {
+                return "100,000,000원 넘게"
+            } else {
+                return NumberFormatterUtil.formatIntToDecimalString(totalSpending) + "원"
+            }
         } else {
-            return "0"
+            return "0원"
         }
     }
 
     var spentInfoText: String {
-        "반가워요 \(String(describing: getUserData()?.username ?? ""))님! \n이번 달에 \(formattedTotalSpent)원 썼어요"
+        "반가워요 \(String(describing: getUserData()?.username ?? ""))님! \n이번 달에 \(formattedTotalSpent) 썼어요"
     }
 
     var totalSpending: Int64 {
@@ -33,7 +38,7 @@ struct SpendingCheckBoxView: View {
             HStack {
                 spentInfoText.toAttributesText(base: baseAttribute,
                                                StringAttribute(
-                                                   text: "\(formattedTotalSpent)원",
+                                                   text: "\(formattedTotalSpent)",
                                                    font: .H3SemiboldFont(),
                                                    color: determineColor()
                                                ))
