@@ -3,6 +3,9 @@ import SwiftUI
 
 struct TargetAmountSetCompleteView: View {
     @ObservedObject var viewModel: TargetAmountSettingViewModel
+    @EnvironmentObject var authViewModel: AppViewModel
+    
+    var entryPoint: TargetAmountEntryPoint
     
     var body: some View {
         ZStack {
@@ -31,6 +34,7 @@ struct TargetAmountSetCompleteView: View {
                 
                 CustomBottomButton(action: {
                     goToTotalTargetAmountView()
+                    authViewModel.login() // 메인화면으로 entryPoint 나누기
                 }, label: "확인", isFormValid: .constant(true))
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
@@ -45,5 +49,5 @@ struct TargetAmountSetCompleteView: View {
 }
 
 #Preview {
-    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel(currentData: TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)))
+    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel(currentData: TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)), entryPoint: .signUp)
 }

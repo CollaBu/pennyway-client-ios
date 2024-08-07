@@ -6,9 +6,12 @@ struct TargetAmountSettingView: View {
     @StateObject var viewModel: TargetAmountSettingViewModel
     @State private var navigateToCompleteTarget = false
 
-    init(currentData: Binding<TargetAmount>) {
+    var entryPoint: TargetAmountEntryPoint
+    
+    init(currentData: Binding<TargetAmount>, entryPoint: TargetAmountEntryPoint) {
         _currentData = currentData
         _viewModel = StateObject(wrappedValue: TargetAmountSettingViewModel(currentData: currentData.wrappedValue))
+        self.entryPoint = entryPoint
     }
     
     var body: some View {
@@ -67,7 +70,7 @@ struct TargetAmountSettingView: View {
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
-                NavigationLink(destination: TargetAmountSetCompleteView(viewModel: viewModel), isActive: $navigateToCompleteTarget) {}
+                NavigationLink(destination: TargetAmountSetCompleteView(viewModel: viewModel, entryPoint: entryPoint), isActive: $navigateToCompleteTarget) {}
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -86,5 +89,5 @@ struct TargetAmountSettingView: View {
 }
 
 #Preview {
-    TargetAmountSettingView(currentData: .constant(TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)))
+    TargetAmountSettingView(currentData: .constant(TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)), entryPoint: .signUp)
 }
