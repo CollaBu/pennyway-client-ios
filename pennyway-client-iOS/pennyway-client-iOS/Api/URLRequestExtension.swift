@@ -4,11 +4,16 @@ import Foundation
 import OSLog
 
 extension URLRequest {
-    static func createURLRequest(url: URL, method: HTTPMethod, bodyParameters: [String: Any]? = nil, queryParameters: [URLQueryItem]? = nil) -> URLRequest {
+    static func createURLRequest(url: URL, method: HTTPMethod, bodyParameters: [String: Any]? = nil, queryParameters: [URLQueryItem]? = nil, image: UIImage? = nil) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
-        if let bodyParameters = bodyParameters {
+        if let image = image {
+            if let imageData = image.jpegData(compressionQuality: 1.0) {
+                request.httpBody = imageData
+                request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+            }
+        } else if let bodyParameters = bodyParameters {
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")

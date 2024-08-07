@@ -4,7 +4,7 @@ import Foundation
 
 enum StorageRouter: URLRequestConvertible {
     case generatePresignedUrl(dto: GeneratePresigendUrlRequestDto)
-    case storePresignedUrl(payload: String, dto: StorePresignedUrlRequestDto)
+    case storePresignedUrl(payload: String, image: UIImage, dto: StorePresignedUrlRequestDto)
     
     var method: HTTPMethod {
         switch self {
@@ -23,7 +23,7 @@ enum StorageRouter: URLRequestConvertible {
         switch self {
         case .generatePresignedUrl:
             return "v1/storage/presigned-url"
-        case let .storePresignedUrl(payload, _):
+        case let .storePresignedUrl(payload,_, _):
             return "\(payload)"
         }
     }
@@ -39,7 +39,7 @@ enum StorageRouter: URLRequestConvertible {
         switch self {
         case let .generatePresignedUrl(dto):
             return try? dto.asDictionary()
-        case let .storePresignedUrl(_, dto):
+        case let .storePresignedUrl(_, _, dto):
             return try? dto.asDictionary()
         }
     }
@@ -49,9 +49,13 @@ enum StorageRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .generatePresignedUrl, .storePresignedUrl:
+        case .generatePresignedUrl:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
+            
+        case let .storePresignedUrl(_, image, _):
+            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas, image: image)
         }
         return request
     }

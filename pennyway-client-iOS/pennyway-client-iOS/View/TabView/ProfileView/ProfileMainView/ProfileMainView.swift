@@ -10,6 +10,8 @@ struct ProfileMainView: View {
 
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    
+    @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
 
     var body: some View {
         NavigationAvailable {
@@ -56,7 +58,7 @@ struct ProfileMainView: View {
                         image: $image,
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
-                        sourceType: $sourceType
+                        sourceType: $sourceType, presignedUrlViewModel: presignedUrlViewModel
                     )
                 }
             }
