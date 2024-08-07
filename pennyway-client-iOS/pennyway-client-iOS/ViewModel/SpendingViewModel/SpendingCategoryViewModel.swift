@@ -248,8 +248,8 @@ class SpendingCategoryViewModel: ObservableObject {
 
         if category.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
             if let category = SpendingCategoryIconList.fromIcon(category.icon) {
-                categoryIconTitle = category.rawValue
-                categoryId = -1
+                categoryIconTitle = "DEFAULT"
+                categoryId = abs(category.id)
             }
         } else { // 사용자 정의 카테고리
             categoryIconTitle = "CUSTOM"
