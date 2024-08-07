@@ -55,7 +55,7 @@ class TargetAmountViewModel: ObservableObject {
                         // 추천 금액 보여주기 x + 목표 금액 설정하기 UI
                         self.isHiddenSuggestionView = true
                         self.isPresentTargetAmount = false
-                        self.generateCurrentMonthDummyDataApi()
+                        self.generateCurrentMonthDummyDataApi {}
                     }
                 } else {
                     Log.error("Network request failed: \(error)")
@@ -102,17 +102,23 @@ class TargetAmountViewModel: ObservableObject {
         }
     }
     
-    func generateCurrentMonthDummyDataApi() {
+    func generateCurrentMonthDummyDataApi(completion _: @escaping () -> Void) {
         let generateCurrentMonthDummyDataRequestDto = GenerateCurrentMonthDummyDataRequestDto(year: Date.year(from: Date()), month: Date.month(from: Date()))
         
         TargetAmountAlamofire.shared.generateCurrentMonthDummyData(generateCurrentMonthDummyDataRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
-                    
-//                    CurrentMonthTargetAmountResponseDto
-                    if let jsonString = String(data: responseData, encoding: .utf8) {
-                        Log.debug("당월 목표 금액 더미값 생성 \(jsonString)")
+                    do {
+                        let response = try JSONDecoder().decode(CurrentMonthTargetAmountResponseDto.self, from: responseData)
+                       
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("당월 목표 금액 더미값 생성 \(jsonString)")
+                        }
+                        self.generateTargetAmountId = response.data.targetAmount.id
+               
+                    } catch {
+                        Log.fault("Error decoding JSON: \(error)")
                     }
                 }
             case let .failure(error):

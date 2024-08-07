@@ -58,8 +58,7 @@ struct TargetAmountSettingView: View {
                 Spacer()
                 
                 if entryPoint == .signUp {
-                    
-                    HStack{
+                    HStack {
                         Spacer()
                         
                         Button(action: {
@@ -109,7 +108,12 @@ struct TargetAmountSettingView: View {
             }
         }
         .onAppear {
-            targetAmountViewModel.generateCurrentMonthDummyDataApi() // 더미값 생성
+            if entryPoint == .signUp {
+                // 더미값 생성
+                targetAmountViewModel.generateCurrentMonthDummyDataApi {
+                    viewModel.currentData?.targetAmountDetail.id = targetAmountViewModel.generateTargetAmountId
+                }
+            }
         }
     }
 }

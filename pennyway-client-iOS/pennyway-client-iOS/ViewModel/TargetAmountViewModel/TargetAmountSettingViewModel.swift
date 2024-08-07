@@ -18,6 +18,8 @@ class TargetAmountSettingViewModel: ObservableObject {
 
     func editCurrentMonthTargetAmountApi(completion: @escaping (Bool) -> Void) {
         let editCurrentMonthTargetAmountRequestDto = EditCurrentMonthTargetAmountRequestDto(amount: Int(inputTargetAmount.replacingOccurrences(of: ",", with: "")) ?? 0)
+        
+        Log.debug("??: \(currentData?.targetAmountDetail.id)")
 
         TargetAmountAlamofire.shared.editCurrentMonthTargetAmount(targetAmountId: currentData?.targetAmountDetail.id ?? -1, dto: editCurrentMonthTargetAmountRequestDto) { result in
             switch result {
