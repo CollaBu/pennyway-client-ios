@@ -4,9 +4,11 @@ import SwiftUI
 // MARK: - ArrivedAlarmView
 
 struct ArrivedAlarmView: View {
+    @StateObject private var viewModel = ProfileNotificationViewModel()
+
     var body: some View {
         VStack(alignment: .leading) {
-            UnreadAlarmView(alarms: dummyAlarms)
+            UnreadAlarmView(alarms: viewModel.notificationData.filter { !$0.isRead })
 
             Spacer().frame(height: 4 * DynamicSizeFactor.factor())
 
@@ -17,7 +19,10 @@ struct ArrivedAlarmView: View {
 
             Spacer().frame(height: 25 * DynamicSizeFactor.factor())
 
-            ReadAlarmView(alarms: dummyAlarms)
+            ReadAlarmView(alarms: viewModel.notificationData.filter { $0.isRead })
+        }
+        .onAppear {
+            viewModel.getNotificationListApi()
         }
     }
 }
@@ -25,7 +30,7 @@ struct ArrivedAlarmView: View {
 // MARK: - AlarmRow
 
 struct AlarmRow: View {
-    let alarm: AlarmList
+    let alarm: NotificationContentData
 
     var body: some View {
         HStack(spacing: 15 * DynamicSizeFactor.factor()) {
@@ -36,11 +41,11 @@ struct AlarmRow: View {
                 .padding(1)
 
             VStack(alignment: .leading, spacing: 4 * DynamicSizeFactor.factor()) {
-                Text(alarm.message)
+                Text(alarm.content)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
 
-                Text(alarm.date)
+                Text(alarm.createdAt)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray04"))
             }

@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - GetNotificationResponseDto
+
 struct GetNotificationResponseDto: Codable {
     let code: String
     let data: NotificationsData
@@ -8,6 +10,8 @@ struct GetNotificationResponseDto: Codable {
         let notifications: NotificationsPage
     }
 }
+
+// MARK: - NotificationsPage
 
 struct NotificationsPage: Codable {
     let content: [NotificationContentData]

@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct ReadAlarmView: View {
-    let alarms: [AlarmList]
+    let alarms: [NotificationContentData]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -13,7 +13,7 @@ struct ReadAlarmView: View {
 
                 Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
-                ForEach(alarms.filter { !$0.isRead }) { alarm in
+                ForEach(alarms) { alarm in
                     AlarmRow(alarm: alarm)
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                 }
