@@ -108,7 +108,7 @@ struct TargetAmountSettingView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 if entryPoint == .afterLogin {
                     HStack {
-                        NavigationBackButton(action: {})
+                        NavigationBackButton()
                             .padding(.leading, 5)
                             .frame(width: 44, height: 44)
                             .contentShape(Rectangle())
