@@ -33,7 +33,7 @@ struct MoveCategoryView: View {
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
-                        ForEach(Array(spendingCategoryViewModel.spendingCategories.enumerated()), id: \.element.id) { _, category in
+                        ForEach(spendingCategoryViewModel.spendingCategories.filter { $0.id != spendingCategoryViewModel.selectedCategory?.id }, id: \.id) { category in
                             HStack(spacing: 10) {
                                 Image(getCategoryIcon(category: category, isSelected: category.id == spendingCategoryViewModel.selectedMoveCategory?.id))
                                     .resizable()
@@ -109,7 +109,16 @@ struct MoveCategoryView: View {
                                         spendingCategoryViewModel.moveCategoryApi { success in
                                             if success {
                                                 presentationMode.wrappedValue.dismiss()
+                                                
+                                                spendingCategoryViewModel.selectedCategory = spendingCategoryViewModel.selectedMoveCategory
                                                 spendingCategoryViewModel.selectedMoveCategory = nil // 선택한 카테고리 초기화
+                                                
+                                                spendingCategoryViewModel.getCategorySpendingCountApi { _ in } // 총 개수 조회
+                                                spendingCategoryViewModel.getCategorySpendingHistoryApi { success in // 지출 내역 조회
+                                                    if success {
+                                                        Log.debug(spendingCategoryViewModel.dailyDetailSpendings)
+                                                    }
+                                                }
                                             }
                                         }
                                     }
