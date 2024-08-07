@@ -18,7 +18,7 @@ struct RecentTargetAmountSuggestionView: View {
                 
                 Button(action: {
                     isHidden = true
-                    viewModel.deleteCurrentMonthTargetAmountApi()
+                    viewModel.deleteCurrentMonthTargetAmountApi { _ in }
                 }, label: {
                     Image("icon_close_white")
                         .resizable()

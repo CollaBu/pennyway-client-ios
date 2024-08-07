@@ -32,6 +32,7 @@ struct EditSpendingDetailView: View {
                                 .font(.B2MediumFont())
                                 .platformTextColor(color: Color("Gray05"))
                                 .padding(.vertical, 4)
+
                         })
                         .padding(.vertical, 4)
                         .padding(.trailing, 8)
@@ -56,7 +57,6 @@ struct EditSpendingDetailView: View {
 
                                 CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                     .padding(.leading, 13 * DynamicSizeFactor.factor())
-                                    .contentShape(Rectangle())
                             }
                             .frame(maxWidth: .infinity)
                             .padding(.leading, 14)

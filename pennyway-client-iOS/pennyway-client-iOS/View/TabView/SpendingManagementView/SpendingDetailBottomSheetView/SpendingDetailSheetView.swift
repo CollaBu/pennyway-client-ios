@@ -106,7 +106,7 @@ struct SpendingDetailSheetView: View {
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
-                NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: .constant(false), showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
+                NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
                 }
             }
         }
@@ -114,29 +114,21 @@ struct SpendingDetailSheetView: View {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
             getDailyHistoryData()
         }
-        .onChange(of: showEditSpendingDetailView) { _ in
-            getDailyHistoryData()
-        }
-        .onChange(of: showAddSpendingHistoryView) { isPresented in
-            if !isPresented {
-                // AddSpendingHistoryView가 닫힐 때 새로고침
+        .onChange(of: isDeleted) { newValue in
+            if newValue {
+                Log.debug("삭제됨")
                 getDailyHistoryData()
+                isDeleted = false
             }
         }
-        .onChange(of: clickDate) { _ in
-            Log.debug("clickDate changed to: \(String(describing: clickDate))")
-            forceUpdate.toggle()
+        .onChange(of: showAddSpendingHistoryView) { _ in
+            getDailyHistoryData()
         }
         .setTabBarVisibility(isHidden: true)
     }
     
-//    private func getSpendingAmount(for date: Date) -> Int? {
-//        let day = Calendar.current.component(.day, from: date)
-//        Log.debug(day)
-//        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
-//    }
-    
     private func getDailyHistoryData() {
+        Log.debug("getDailyHistoryData 호출됨")
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
                 Log.debug("뷰 새로고침 성공")
