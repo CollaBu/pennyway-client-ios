@@ -2,9 +2,9 @@
 import AuthenticationServices
 import SwiftUI
 
-// MARK: - AppleOAtuthViewModel
+// MARK: - AppleOAuthViewModel
 
-class AppleOAtuthViewModel: NSObject, ObservableObject {
+class AppleOAuthViewModel: NSObject, ObservableObject {
     @Published var givenName: String = ""
     @Published var isOAuthExistUser: Bool = true
     @Published var errorMessage: String = ""
@@ -47,7 +47,7 @@ class AppleOAtuthViewModel: NSObject, ObservableObject {
 
 // MARK: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate
 
-extension AppleOAtuthViewModel: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
+extension AppleOAuthViewModel: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
     /// Apple ID 연동 성공 시
     func authorizationController(controller _: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
