@@ -95,7 +95,7 @@ struct DetailSpendingView: View {
             loadDataForSelectedDate()
             isSelectedCategory = false
             self.selectedItem = nil
-            isDeleted = false
+//            isDeleted = false
         }
         .overlay(
             VStack(alignment: .center) {
@@ -145,10 +145,11 @@ struct DetailSpendingView: View {
         }
         spendingHistoryViewModel.deleteSingleSpendingHistory(spendingId: spendingId) { success in
             if success {
-                Log.debug("지출내역 단일 삭제 성공")
-                self.presentationMode.wrappedValue.dismiss()
-                showToastPopup = true
                 isDeleted = true
+                Log.debug("지출내역 단일 삭제 성공")
+                showToastPopup = true
+                self.presentationMode.wrappedValue.dismiss()
+
             } else {
                 Log.debug("지출내역 단일 삭제 실패")
                 isDeleted = false
