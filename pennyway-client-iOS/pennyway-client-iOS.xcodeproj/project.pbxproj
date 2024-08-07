@@ -149,6 +149,9 @@
 		4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */; };
 		4A9634B22C42EAF6000A218A /* SpendingListGroupUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */; };
 		4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */; };
+		4AA13C5E2C63E2A000D8DEE7 /* StorageAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C5D2C63E2A000D8DEE7 /* StorageAlamofire.swift */; };
+		4AA13C602C63E2B300D8DEE7 /* StorageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C5F2C63E2B300D8DEE7 /* StorageRouter.swift */; };
+		4AA13C622C63E4DF00D8DEE7 /* GeneratePresigendUrlRequeatDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C612C63E4DF00D8DEE7 /* GeneratePresigendUrlRequeatDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
 		4AB0B13C2C4F497400A475F5 /* MapCategoryIconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */; };
@@ -450,6 +453,9 @@
 		4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingListGroupUtil.swift; sourceTree = "<group>"; };
 		4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCurrentMonthTargetAmountRequestDto.swift; sourceTree = "<group>"; };
+		4AA13C5D2C63E2A000D8DEE7 /* StorageAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAlamofire.swift; sourceTree = "<group>"; };
+		4AA13C5F2C63E2B300D8DEE7 /* StorageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRouter.swift; sourceTree = "<group>"; };
+		4AA13C612C63E4DF00D8DEE7 /* GeneratePresigendUrlRequeatDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePresigendUrlRequeatDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCategoryIconUtil.swift; sourceTree = "<group>"; };
@@ -730,6 +736,7 @@
 		4A0FFBE42BCD9F2200EFEC56 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				4AA13C5C2C63E1EA00D8DEE7 /* StorageDomain */,
 				4A3701CC2C08F7F600F0AEBA /* SpendingDomain */,
 				4A3701B02C08F74E00F0AEBA /* TargetAmountDomain */,
 				D851E7192C0273A300316DB3 /* InquiryDomain */,
@@ -1423,6 +1430,24 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		4AA13C5C2C63E1EA00D8DEE7 /* StorageDomain */ = {
+			isa = PBXGroup;
+			children = (
+				4AA13C632C63E61900D8DEE7 /* Dto */,
+				4AA13C5D2C63E2A000D8DEE7 /* StorageAlamofire.swift */,
+				4AA13C5F2C63E2B300D8DEE7 /* StorageRouter.swift */,
+			);
+			path = StorageDomain;
+			sourceTree = "<group>";
+		};
+		4AA13C632C63E61900D8DEE7 /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				4AA13C612C63E4DF00D8DEE7 /* GeneratePresigendUrlRequeatDto.swift */,
+			);
+			path = Dto;
+			sourceTree = "<group>";
+		};
 		4AA52F3D2C05C38F00B21521 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2020,6 +2045,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */,
+				4AA13C602C63E2B300D8DEE7 /* StorageRouter.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
 				4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */,
@@ -2039,6 +2065,7 @@
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
 				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
+				4AA13C5E2C63E2A000D8DEE7 /* StorageAlamofire.swift in Sources */,
 				D85927FA2BE9116700653391 /* LoginViewModel.swift in Sources */,
 				4A6C79E42C46DE8B009463E4 /* VerificationButton.swift in Sources */,
 				4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */,
@@ -2213,6 +2240,7 @@
 				4A058EFF2BD03E01004B6F89 /* AuthResponseDto.swift in Sources */,
 				4AC320502C11D5AC00DDB4B6 /* RecentTargetAmountSuggestionView.swift in Sources */,
 				4A4703A72BCEDD9800AEE04E /* VerificationCodeRequestDto.swift in Sources */,
+				4AA13C622C63E4DF00D8DEE7 /* GeneratePresigendUrlRequeatDto.swift in Sources */,
 				4AC3204D2C11D5AC00DDB4B6 /* SpendingCalendarCellView.swift in Sources */,
 				4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */,
 				4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */,
