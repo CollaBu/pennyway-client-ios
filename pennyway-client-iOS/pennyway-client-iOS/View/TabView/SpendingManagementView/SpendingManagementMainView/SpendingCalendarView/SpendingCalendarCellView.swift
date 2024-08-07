@@ -70,21 +70,26 @@ struct SpendingCalendarCellView: View {
                 .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor())
 
             Spacer()
-                .frame(height: 1 * DynamicSizeFactor.factor())
+                .frame(height: 4 * DynamicSizeFactor.factor())
 
             if isCurrentMonthDay {
-                if let dailyTotalAmount = getSpendingAmount(for: day) {
-                    Text("-\(dailyTotalAmount)")
-                        .font(.B4MediumFont())
-                        .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
-                        .frame(width: 34 * DynamicSizeFactor.factor(), height: 10 * DynamicSizeFactor.factor())
+                if let dailyTotalAmount = SpendingHistoryUtil.getSpendingAmount(for: day, from: spendingHistoryViewModel) {
+                    VStack(spacing: -3) { // 텍스트 높이 조정
+                        ForEach(truncatedText("\(dailyTotalAmount)").split(separator: "\n"), id: \.self) { line in
+                            Text(line)
+                                .font(.B4MediumFont())
+                                .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
+                        }
+                    }
+                    .frame(width: 36 * DynamicSizeFactor.factor(), height: 12 * DynamicSizeFactor.factor())
+
                 } else {
                     Spacer()
-                        .frame(height: 10 * DynamicSizeFactor.factor())
+                        .frame(height: 12 * DynamicSizeFactor.factor())
                 }
             }
         }
-        .frame(height: 32 * DynamicSizeFactor.factor())
+        .frame(height: 34 * DynamicSizeFactor.factor())
         .edgesIgnoringSafeArea(.all)
     }
 
@@ -92,7 +97,38 @@ struct SpendingCalendarCellView: View {
         return spendingHistoryViewModel.dailySpendings.contains { $0.day == day }
     }
 
-    private func getSpendingAmount(for day: Int) -> Int? {
-        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
+    private func truncatedText(_ text: String) -> String {
+        let maxLength = 6
+        let number = NumberFormatterUtil.formatStringToDecimalString(text)
+
+        if number.count <= maxLength { // 1. 숫자 문자열의 길이가 최대 길이 이하인 경우 그대로 반환
+            return "-\(number)\n "
+        }
+
+        // 2. 초기로 8자리만큼 문자열을 자름
+        var truncatedNumber = number.prefix(8)
+        // 3. 잘라낸 문자열에서 쉼표의 개수를 셈
+        let commaCount = truncatedNumber.filter { $0 == "," }.count
+
+        // 4. 쉼표의 개수에 따라 prefix 길이를 설정
+        var prefixLength: Int
+        switch commaCount {
+        case 1:
+            prefixLength = 7
+        case 2:
+            prefixLength = 8
+        default:
+            prefixLength = 7
+        }
+
+        // 5. 다시 숫자 문자열에서 prefix 길이만큼 자름
+        truncatedNumber = number.prefix(prefixLength)
+
+        // 6. 잘라낸 문자열이 쉼표로 끝나는 경우 쉼표를 제거
+        if truncatedNumber.hasSuffix(",") {
+            truncatedNumber = truncatedNumber.dropLast()
+        }
+
+        return "-\(truncatedNumber)\n..."
     }
 }
