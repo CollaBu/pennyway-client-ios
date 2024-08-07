@@ -218,6 +218,46 @@ class SpendingCategoryViewModel: ObservableObject {
         }
     }
     
+    /// 카테고리 이동 api 호출
+    func moveCategoryApi(completion: @escaping (Bool) -> Void) {
+        let moveCategoryRequestDto = MoveCategoryRequestDto(fromType: getCategoryDetails(selectedCategory!).categoryIconTitle, toId: getCategoryDetails(selectedMoveCategory!).categoryId, toType: getCategoryDetails(selectedMoveCategory!).categoryIconTitle)
+        
+        SpendingCategoryAlamofire.shared.moveCategory(selectedCategory!.id, moveCategoryRequestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("카테고리 이동 완료 \(jsonString)")
+                    }
+                    completion(true)
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    func getCategoryDetails(_ category: SpendingCategoryData) -> (categoryIconTitle: String, categoryId: Int) {
+        var categoryIconTitle = ""
+        var categoryId = -1
+
+        if category.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
+            if let category = SpendingCategoryIconList.fromIcon(category.icon) {
+                categoryIconTitle = category.rawValue
+                categoryId = -1
+            }
+        } else { // 사용자 정의 카테고리
+            categoryIconTitle = "CUSTOM"
+            categoryId = category.id
+        }
+        return (categoryIconTitle, categoryId)
+    }
+    
     /// 특정 ID에 해당하는 지출내역 검색
     func getSpendingDetail(by id: Int) -> IndividualSpending? {
         return dailyDetailSpendings.first { $0.id == id }

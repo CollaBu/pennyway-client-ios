@@ -73,8 +73,12 @@ struct MoveCategoryView: View {
 
             CustomBottomButton(action: {
                 if spendingCategoryViewModel.selectedMoveCategory != nil {
-                    presentationMode.wrappedValue.dismiss()
-                    spendingCategoryViewModel.selectedMoveCategory = nil // 선택한 카테고리 id 초기화
+                    spendingCategoryViewModel.moveCategoryApi { success in
+                        if success {
+                            presentationMode.wrappedValue.dismiss()
+                            spendingCategoryViewModel.selectedMoveCategory = nil // 선택한 카테고리 id 초기화
+                        }
+                    }
                 }
 
             }, label: "확인", isFormValid: .constant(spendingCategoryViewModel.selectedMoveCategory != nil))
