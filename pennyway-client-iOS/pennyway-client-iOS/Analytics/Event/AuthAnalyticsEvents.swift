@@ -9,6 +9,7 @@
 enum AuthEvents: AnalyticsEvent {
     // 로그인 이벤트
     case loginView
+    case oauthSignInBtnTapped
     
     // 공용
     case phoneVerificationView
@@ -39,7 +40,7 @@ enum AuthEvents: AnalyticsEvent {
                 .generalSignSycnView, .oauthSignUpView, .findUsernameView,
                 .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
             return AnalyticsConstants.EventName.screenView
-        case .idCancelBtnTapped, .pwCancelBtnTapped:
+        case .oauthSignInBtnTapped, .idCancelBtnTapped, .pwCancelBtnTapped:
             return AnalyticsConstants.EventName.btnTapped
         }
     }
@@ -50,7 +51,7 @@ enum AuthEvents: AnalyticsEvent {
                 .generalSignSycnView, .oauthSignUpView, .findUsernameView,
                 .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
             return AnalyticsConstants.EventType.screenView
-        case .idCancelBtnTapped, .pwCancelBtnTapped:
+        case .oauthSignInBtnTapped, .idCancelBtnTapped, .pwCancelBtnTapped:
             return AnalyticsConstants.EventType.userAction
         }
     }
@@ -62,6 +63,10 @@ enum AuthEvents: AnalyticsEvent {
                 .screenId: AuthScreen.loginView.screenId,
                 .screenName: AuthScreen.loginView.screenName,
                 .screenClass: AuthScreen.loginView.screenClass
+            ]
+        case .oauthSignInBtnTapped:
+            return [
+                .eventName: AuthEvent.oauthSignInBtnTapped.eventName,
             ]
         case .phoneVerificationView:
             return [
@@ -211,11 +216,15 @@ enum AuthScreen {
 }
 
 enum AuthEvent {
+    case oauthSignInBtnTapped
+    
     case idCancelBtnTapped
     case pwCancelBtnTapped
     
     var eventName: String {
         switch self {
+        case .oauthSignInBtnTapped: return "oauth_sign_in_btn_tapped"
+            
         case .idCancelBtnTapped: return "id_cancel_btn_tapped"
         case .pwCancelBtnTapped: return "pw_cancel_btn_tapped"
         }
