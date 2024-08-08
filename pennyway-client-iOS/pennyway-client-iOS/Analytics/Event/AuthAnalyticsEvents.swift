@@ -21,8 +21,7 @@ enum AuthEvents: AnalyticsEvent {
     case existsOauthAccountView
     case generalSignSycnView
     
-    case idCancelBtnTapped
-    case pwCancelBtnTapped
+    case cancelBtnTapped
     
     /// 소셜 회원가입 이벤트
     case oauthSignUpView
@@ -32,7 +31,7 @@ enum AuthEvents: AnalyticsEvent {
         case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, 
                 .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
             return AnalyticsConstants.EventName.screenView
-        case .oauthSignInBtnTapped, .idCancelBtnTapped, .pwCancelBtnTapped:
+        case .oauthSignInBtnTapped, .cancelBtnTapped:
             return AnalyticsConstants.EventName.btnTapped
         }
     }
@@ -42,7 +41,7 @@ enum AuthEvents: AnalyticsEvent {
         case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, 
                 .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
             return AnalyticsConstants.EventType.screenView
-        case .oauthSignInBtnTapped, .idCancelBtnTapped, .pwCancelBtnTapped:
+        case .oauthSignInBtnTapped, .cancelBtnTapped:
             return AnalyticsConstants.EventType.userAction
         }
     }
@@ -95,13 +94,9 @@ enum AuthEvents: AnalyticsEvent {
                 .screenName: AuthScreen.generalSignSycnView.screenName,
                 .screenClass: AuthScreen.generalSignSycnView.screenClass
             ]
-        case .idCancelBtnTapped:
+        case .cancelBtnTapped:
             return [
-                .eventName: AuthCustomEvent.idCancelBtnTapped.eventName
-            ]
-        case .pwCancelBtnTapped:
-            return [
-                .eventName: AuthCustomEvent.pwCancelBtnTapped.eventName
+                .eventName: AuthCustomEvent.cancelBtnTapped.eventName
             ]
         case .oauthSignUpView:
             return [
@@ -177,15 +172,13 @@ enum AuthScreen {
 enum AuthCustomEvent {
     case oauthSignInBtnTapped
     
-    case idCancelBtnTapped
-    case pwCancelBtnTapped
+    case cancelBtnTapped
     
     var eventName: String {
         switch self {
         case .oauthSignInBtnTapped: return "oauth_sign_in_btn_tapped"
             
-        case .idCancelBtnTapped: return "id_cancel_btn_tapped"
-        case .pwCancelBtnTapped: return "pw_cancel_btn_tapped"
+        case .cancelBtnTapped: return "input_tab_cancel_btn_tapped"
         }
     }
 }
