@@ -51,7 +51,7 @@
 		4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */; };
 		4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */; };
 		4A28821B2C65184300AE50C7 /* ProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */; };
-		4A28821D2C6519D800AE50C7 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821C2C6519D800AE50C7 /* GetNotificationRequestDto.swift */; };
+		4A28821F2C652D3600AE50C7 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -292,7 +292,6 @@
 		D889F9F42C64823B0055D045 /* ReadNotificationsRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */; };
 		D889F9F62C6484950055D045 /* CheckUnReadNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */; };
 		D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */; };
-		D889F9FA2C651F340055D045 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
@@ -366,7 +365,7 @@
 		4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageRequestDto.swift; sourceTree = "<group>"; };
 		4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageResponseDto.swift; sourceTree = "<group>"; };
 		4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
-		4A28821C2C6519D800AE50C7 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
+		4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -608,7 +607,6 @@
 		D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNotificationsRequestDto.swift; sourceTree = "<group>"; };
 		D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUnReadNotificationResponseDto.swift; sourceTree = "<group>"; };
 		D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileImageViewModel.swift; sourceTree = "<group>"; };
-		D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
 		D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
@@ -1170,7 +1168,6 @@
 			children = (
 				D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */,
 				D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */,
-				4A2882062C64CCDF00AE50C7 /* GetNotificationRequestDto.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1242,14 +1239,13 @@
 		4A5DA8BE2C3C491F00685F77 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				4A28821C2C6519D800AE50C7 /* GetNotificationRequestDto.swift */,
+				4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */,
 				4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */,
 				D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */,
 				D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */,
 				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
 				D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */,
 				4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */,
-
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1291,7 +1287,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6C79D72C46CD9A009463E4 /* EditViewModel.swift */,
-				D889F9F12C63CD340055D045 /* ProfileNotificationViewModel.swift */,
 				4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */,
 				D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */,
 				4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */,
@@ -2134,7 +2129,6 @@
 				4AC320552C11D5AC00DDB4B6 /* TotalTargetAmountGraphView.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */,
-				D889F9FA2C651F340055D045 /* GetNotificationRequestDto.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
 				4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
@@ -2235,6 +2229,7 @@
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
 				4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift in Sources */,
+				4A28821F2C652D3600AE50C7 /* GetNotificationRequestDto.swift in Sources */,
 				D8BB4FE02C61BE7300FDD258 /* EditProfilePopUpView.swift in Sources */,
 				D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */,
 				D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */,
@@ -2259,7 +2254,6 @@
 				4AC320572C11D5AC00DDB4B6 /* TotalTargetAmountView.swift in Sources */,
 				D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */,
 				4A6C79DD2C46D28B009463E4 /* EditPhoneNumberView.swift in Sources */,
-				4A28821D2C6519D800AE50C7 /* GetNotificationRequestDto.swift in Sources */,
 				4AC320522C11D5AC00DDB4B6 /* SpendingManagementMainView.swift in Sources */,
 				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,

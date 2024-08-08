@@ -14,7 +14,7 @@ class ProfileImageViewModel: ObservableObject {
                     do {
                         let response = try JSONDecoder().decode(UploadProfileImageResponseDto.self, from: responseData)
                         Log.debug("사용자 프로필 사진 등록 성공: \(response)")
-                        updateUserField(fieldName: profileImageUrl, value: response.data.profileImageUrl)
+                        updateUserField(fieldName: "profileImageUrl", value: response.data.profileImageUrl)
 
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
