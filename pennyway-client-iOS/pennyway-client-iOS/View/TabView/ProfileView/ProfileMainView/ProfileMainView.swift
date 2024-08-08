@@ -11,6 +11,8 @@ struct ProfileMainView: View {
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
+    @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
+
     var body: some View {
         NavigationAvailable {
             ZStack {
@@ -32,7 +34,7 @@ struct ProfileMainView: View {
 
                             Spacer().frame(height: 6 * DynamicSizeFactor.factor())
 
-                            Image("icon_illust__empty")
+                            Image("icon_illust_empty")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
@@ -56,7 +58,7 @@ struct ProfileMainView: View {
                         image: $image,
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
-                        sourceType: $sourceType
+                        sourceType: $sourceType, presignedUrlViewModel: presignedUrlViewModel
                     )
                 }
             }
@@ -64,6 +66,8 @@ struct ProfileMainView: View {
             .sheet(isPresented: $showImagePicker, onDismiss: {
                 loadImage()
                 showPopUpView = false
+                presignedUrlViewModel.image = selectedUIImage
+                presignedUrlViewModel.generatePresignedUrlApi { _ in }
             }) {
                 ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                     .edgesIgnoringSafeArea(.bottom)

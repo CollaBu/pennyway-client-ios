@@ -80,11 +80,22 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.getNotificationList(dto: dto), completion: completion)
     }
-    
-    
+
     func uploadProfileImage(dto: UploadProfileImageRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("UserAccountAlamofire - uploadProfileImage() called")
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.uploadProfileImage(dto: dto), completion: completion)
+    }
+
+    func readNotifications(dto: ReadNotificationsRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - readNotifications() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.readNotifications(dto: dto), completion: completion)
+    }
+    
+    func checkUnReadNotifications(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - checkUnReadNotifications() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.checkUnReadNotifications, completion: completion)
     }
 }

@@ -5,7 +5,7 @@ public struct UploadProfileImageRequestDto: Encodable {
     let profileImageUrl: String
 
     public init(
-        profileImageUrl: String,
+        profileImageUrl: String
     ) {
         self.profileImageUrl = profileImageUrl
     }
