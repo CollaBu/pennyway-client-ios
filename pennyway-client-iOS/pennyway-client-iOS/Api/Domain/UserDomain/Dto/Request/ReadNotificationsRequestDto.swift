@@ -8,4 +8,3 @@ public struct ReadNotificationsRequestDto: Encodable {
         self.notificationIds = notificationIds
     }
 }
-

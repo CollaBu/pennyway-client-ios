@@ -17,7 +17,6 @@ enum UserAccountRouter: URLRequestConvertible {
     case readNotifications(dto: ReadNotificationsRequestDto)
     case checkUnReadNotifications
     
-    
     var method: HTTPMethod {
         switch self {
         case .getUserProfile, .getNotificationList, .checkUnReadNotifications:
