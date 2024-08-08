@@ -11,6 +11,7 @@ struct EditProfilePopUpView: View {
     @Binding var selectedUIImage: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
 
+    @StateObject var deleteProfileImageViewModel = DeleteProfileImageViewModel()
     @ObservedObject var presignedUrlViewModel: PresignedUrlViewModel
 
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
@@ -75,10 +76,29 @@ struct EditProfilePopUpView: View {
         case "사진 촬영":
             checkCameraPermission()
         case "삭제":
-            image = nil
-            selectedUIImage = nil
+            deleteProfileImage()
         default:
             break
+        }
+    }
+
+    private func deleteProfileImage() {
+        if let url = getUserData()?.profileImageUrl, !url.isEmpty {
+            deleteProfileImageViewModel.deleteProfileImageApi { success in
+                if success {
+                    Log.debug("deleteProfileImageApi 성공")
+                } else {
+                    Log.debug("삭제 api 호출 실패")
+                }
+                isPresented = false
+                showPopUpView = false
+                isHiddenTabBar = false
+            }
+        } else {
+            Log.debug("프로필 사진 비어 있음")
+            isPresented = false
+            showPopUpView = false
+            isHiddenTabBar = false
         }
     }
 

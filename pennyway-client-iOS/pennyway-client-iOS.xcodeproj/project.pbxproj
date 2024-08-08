@@ -291,6 +291,8 @@
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
 		D889F9F42C64823B0055D045 /* ReadNotificationsRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */; };
 		D889F9F62C6484950055D045 /* CheckUnReadNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */; };
+		D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */; };
+		D889F9FA2C651F340055D045 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
@@ -603,9 +605,10 @@
 		D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodeContentView.swift; sourceTree = "<group>"; };
 		D889F9EB2C63CA560055D045 /* GetNotificationResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationResponseDto.swift; sourceTree = "<group>"; };
 		D889F9EF2C63CC030055D045 /* NotificationContentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContentData.swift; sourceTree = "<group>"; };
-		D889F9F12C63CD340055D045 /* ProfileNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNotificationViewModel.swift; sourceTree = "<group>"; };
 		D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNotificationsRequestDto.swift; sourceTree = "<group>"; };
 		D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUnReadNotificationResponseDto.swift; sourceTree = "<group>"; };
+		D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileImageViewModel.swift; sourceTree = "<group>"; };
+		D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
 		D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
@@ -1167,6 +1170,7 @@
 			children = (
 				D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */,
 				D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */,
+				4A2882062C64CCDF00AE50C7 /* GetNotificationRequestDto.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1245,6 +1249,7 @@
 				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
 				D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */,
 				4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */,
+
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1288,6 +1293,7 @@
 				4A6C79D72C46CD9A009463E4 /* EditViewModel.swift */,
 				D889F9F12C63CD340055D045 /* ProfileNotificationViewModel.swift */,
 				4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */,
+				D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */,
 				4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */,
 			);
 			path = ProfileViewModel;
@@ -2128,6 +2134,7 @@
 				4AC320552C11D5AC00DDB4B6 /* TotalTargetAmountGraphView.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */,
+				D889F9FA2C651F340055D045 /* GetNotificationRequestDto.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
 				4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
@@ -2294,6 +2301,7 @@
 				4A0BC6AF2BF6459B0036D900 /* DateExtensions.swift in Sources */,
 				4A5789812BDC1FF300AFEB26 /* InternalServerErrorCode.swift in Sources */,
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
+				D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AC3204F2C11D5AC00DDB4B6 /* SpendingWeekCalendarView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,

@@ -13,6 +13,7 @@ enum UserAccountRouter: URLRequestConvertible {
     case editUserId(dto: CheckDuplicateRequestDto)
     case editUserPhoneNumber(dto: VerificationRequestDto)
     case editUserName(dto: EditNameRequestDto)
+    case deleteProfileImage
     case getNotificationList(dto: GetNotificationRequestDto)
     case uploadProfileImage(dto: UploadProfileImageRequestDto)
     case readNotifications(dto: ReadNotificationsRequestDto)
@@ -22,7 +23,7 @@ enum UserAccountRouter: URLRequestConvertible {
         switch self {
         case .getUserProfile, .getNotificationList, .checkUnReadNotifications:
             return .get
-        case .deleteUserAccount, .settingOffAlarm:
+        case .deleteUserAccount, .settingOffAlarm, .deleteProfileImage:
             return .delete
         case .registDeviceToken, .uploadProfileImage:
             return .put
@@ -55,6 +56,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return "v2/users/me/phone"
         case .editUserName:
             return "v2/users/me/name"
+        case .deleteProfileImage:
+            return "v2/users/me/profile-image"
         case .getNotificationList, .readNotifications:
             return "v2/notifications"
         case .uploadProfileImage:
@@ -66,7 +69,7 @@ enum UserAccountRouter: URLRequestConvertible {
     
     var parameters: Parameters? {
         switch self {
-        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications:
+        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage:
             return [:]
         case let .registDeviceToken(dto):
             return try? dto.asDictionary()
@@ -96,7 +99,7 @@ enum UserAccountRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications:
+        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage:
             request = URLRequest.createURLRequest(url: url, method: method)
         case .registDeviceToken, .validatePw, .resetMyPw, .editUserId, .editUserPhoneNumber, .editUserName, .readNotifications, .uploadProfileImage:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
