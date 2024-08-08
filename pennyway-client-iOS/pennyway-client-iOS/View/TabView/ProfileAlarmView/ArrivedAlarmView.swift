@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - ArrivedAlarmView
 
 struct ArrivedAlarmView: View {
-    @ObservedObject var viewModel: ProfileNotificationViewModel //    @StateObject private var viewModel = ProfileNotificationViewModel()
+    @ObservedObject var viewModel: ProfileNotificationViewModel 
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -12,14 +12,16 @@ struct ArrivedAlarmView: View {
 
             Spacer().frame(height: 4 * DynamicSizeFactor.factor())
 
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(maxWidth: 320 * DynamicSizeFactor.factor(), maxHeight: 9 * DynamicSizeFactor.factor())
-                .background(Color("Gray01"))
+            if !viewModel.notificationData.filter({ $0.isRead }).isEmpty {
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(maxWidth: 320 * DynamicSizeFactor.factor(), maxHeight: 9 * DynamicSizeFactor.factor())
+                    .background(Color("Gray01"))
 
-            Spacer().frame(height: 25 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 25 * DynamicSizeFactor.factor())
 
-            ReadAlarmView(alarms: viewModel.notificationData.filter { $0.isRead })
+                ReadAlarmView(viewModel: viewModel, alarms: viewModel.notificationData.filter { $0.isRead })
+            }
         }
         .onAppear {
             viewModel.getNotificationListApi()
