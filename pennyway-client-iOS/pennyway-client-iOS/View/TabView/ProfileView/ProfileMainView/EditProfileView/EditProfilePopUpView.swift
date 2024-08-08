@@ -86,11 +86,13 @@ struct EditProfilePopUpView: View {
             deleteProfileImageViewModel.deleteProfileImageApi { success in
                 if success {
                     Log.debug("deleteProfileImageApi 성공")
+                } else {
+                    Log.debug("삭제 api 호출 실패")
                 }
                 isPresented = false
                 showPopUpView = false
                 isHiddenTabBar = false
-                Log.debug("삭제 api 호출 실패")
+                
             }
         } else {
             Log.debug("프로필 사진 비어 있음")

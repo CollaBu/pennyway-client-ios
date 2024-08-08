@@ -2,6 +2,8 @@
 import SwiftUI
 
 class DeleteProfileImageViewModel: ObservableObject {
+    @Published var profileImageUrl: String
+    
     /// 프로필 사진 삭제 api
     func deleteProfileImageApi(completion: @escaping (Bool) -> Void) {
         UserAccountAlamofire.shared.deleteProfileImage { result in
@@ -12,8 +14,6 @@ class DeleteProfileImageViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
 
                         Log.debug("사진 삭제 완료")
-//                        updateUserField(fieldName: "name", value: self.name)
-
                         completion(true)
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
