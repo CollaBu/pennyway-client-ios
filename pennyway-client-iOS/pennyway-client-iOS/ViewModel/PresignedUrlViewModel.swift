@@ -2,8 +2,8 @@
 import SwiftUI
 
 class PresignedUrlViewModel: ObservableObject {
-    var presignedUrl = ""
-    var payload = ""
+    var presignedUrl = ""//발급받은 presigned url 저장
+    var payload = ""//presigned url의 payload 저장
     @Published var image: UIImage? = UIImage(named: "icon_illust_no_image_no_margin")!
 
     /// presigned url 발급
@@ -72,6 +72,7 @@ class PresignedUrlViewModel: ObservableObject {
         }
     }
 
+    //발급받은 presigned url 퀄리별로 자르기
     func createStorePresignedUrlRequestDto(from presignedUrl: String) -> StorePresignedUrlRequestDto {
         var algorithm = ""
         var date = ""
