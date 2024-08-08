@@ -80,7 +80,7 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.getNotificationList(dto: dto), completion: completion)
     }
-    
+
     func readNotifications(dto: ReadNotificationsRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("UserAccountAlamofire - readNotifications() called")
         
