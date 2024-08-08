@@ -13,6 +13,7 @@ enum AuthEvents: AnalyticsEvent {
     // 공용
     case phoneVerificationView
     case tosView
+    case welcomeView
     
     // 일반 회원가입 이벤트
     case generalSignUpView
@@ -34,7 +35,7 @@ enum AuthEvents: AnalyticsEvent {
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .loginView, .phoneVerificationView, .tosView, .generalSignUpView,
+        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
                 .generalSignSycnView, .oauthSignUpView, .findUsernameView,
                 .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
             return AnalyticsConstants.EventName.screenView
@@ -45,7 +46,7 @@ enum AuthEvents: AnalyticsEvent {
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .loginView, .phoneVerificationView, .tosView, .generalSignUpView,
+        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
                 .generalSignSycnView, .oauthSignUpView, .findUsernameView,
                 .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
             return AnalyticsConstants.EventType.screenView
@@ -73,6 +74,12 @@ enum AuthEvents: AnalyticsEvent {
                 .screenId: AuthScreen.tosView.screenId,
                 .screenName: AuthScreen.tosView.screenName,
                 .screenClass: AuthScreen.tosView.screenClass
+            ]
+        case .welcomeView:
+            return [
+                .screenId: AuthScreen.welcomeView.screenId,
+                .screenName: AuthScreen.welcomeView.screenName,
+                .screenClass: AuthScreen.welcomeView.screenClass
             ]
         case .generalSignUpView:
             return [
@@ -137,6 +144,7 @@ enum AuthScreen {
     // 공용
     case phoneVerificationView
     case tosView
+    case welcomeView
     
     // 일반 회원가입 이벤트
     case generalSignUpView
@@ -158,6 +166,7 @@ enum AuthScreen {
         case .loginView: return "login_screen_view_event"
         case .phoneVerificationView: return "phone_verification_screen_view_event"
         case .tosView: return "tos_screen_view_event"
+        case .welcomeView: return "welcome_screen_view_event"
         case .generalSignUpView: return "general_signup_screen_view_event"
         case .generalSignSycnView: return "general_signup_sync_screen_view_event"
         case .oauthSignUpView: return "oauth_signup_screen_view_event"
@@ -173,6 +182,7 @@ enum AuthScreen {
         case .loginView: return "로그인 화면"
         case .phoneVerificationView: return "휴대폰 인증 화면"
         case .tosView: return "이용약관 화면"
+        case .welcomeView: return "회원가입 성공 화면"
         case .generalSignUpView: return "일반 회원가입 화면"
         case .generalSignSycnView: return "일반 회원가입 소셜 계정 연동 화면"
         case .oauthSignUpView: return "소셜 회원가입 화면"
@@ -188,6 +198,7 @@ enum AuthScreen {
         case .loginView: return "LoginView"
         case .phoneVerificationView: return "PhoneVerificationView"
         case .tosView: return "TermsAndConditionsView"
+        case .welcomeView: return "WelcomeView"
         case .generalSignUpView: return "SignUpView"
         case .generalSignSycnView: return "OAuthAccountLinkingView"
         case .oauthSignUpView: return "SignUpView"
