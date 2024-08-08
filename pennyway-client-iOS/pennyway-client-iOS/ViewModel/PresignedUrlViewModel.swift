@@ -4,13 +4,13 @@ import SwiftUI
 class PresignedUrlViewModel: ObservableObject {
     var presignedUrl = ""
     var payload = ""
-    @Published var image: UIImage? = UIImage(named: "icon_illust_no_image")!
-    
+    @Published var image: UIImage? = UIImage(named: "icon_illust_no_image_no_margin")!
+
     /// presigned url 발급
     func generatePresignedUrlApi(completion: @escaping (Bool) -> Void) {
         let generatePresigendUrlRequestDto = GeneratePresigendUrlRequestDto(type: ImageType.profile.rawValue, ext: Ext.jpeg
             .rawValue)
-        
+
         StorageAlamofire.shared.generatePresignedUrl(generatePresigendUrlRequestDto) { result in
             switch result {
             case let .success(data):
@@ -35,7 +35,7 @@ class PresignedUrlViewModel: ObservableObject {
             }
         }
     }
-    
+
     /// presigned url 저장
     func storePresignedUrlApi(completion: @escaping (Bool) -> Void) {
         if let range = presignedUrl.range(of: "?") {
@@ -43,11 +43,10 @@ class PresignedUrlViewModel: ObservableObject {
         } else {
             payload = presignedUrl
         }
-        
+
         let storePresignedUrlRequestDto = createStorePresignedUrlRequestDto(from: presignedUrl)
-        
+
         Log.debug("payload: \(payload)")
-        Log.debug(storePresignedUrlRequestDto)
 
         if image != nil {
             StorageAlamofire.shared.storePresignedUrl(payload, image!, storePresignedUrlRequestDto) { result in
@@ -84,13 +83,13 @@ class PresignedUrlViewModel: ObservableObject {
         if let range = presignedUrl.range(of: "?") {
             let query = String(presignedUrl[range.upperBound...])
             let queryItems = query.split(separator: "&")
-            
+
             for item in queryItems {
                 let pair = item.split(separator: "=")
                 if pair.count == 2 {
                     let key = pair[0]
                     let value = pair[1]
-                    
+
                     switch key {
                     case "X-Amz-Algorithm":
                         algorithm = String(value)

@@ -30,7 +30,7 @@ struct ProfileUserInfoView: View {
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
                                 .clipShape(Circle())
                         } else {
-                            Image("icon_illust_no_image")
+                            Image("icon_illust_no_image_no_margin")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
@@ -39,7 +39,7 @@ struct ProfileUserInfoView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor())
-                                .offset(x: 24 * DynamicSizeFactor.factor(), y: 24 * DynamicSizeFactor.factor())
+                                .offset(x: 32 * DynamicSizeFactor.factor(), y: 21 * DynamicSizeFactor.factor())
                                 .zIndex(2)
                         }
                     }

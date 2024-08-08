@@ -36,7 +36,7 @@ struct RecentTargetAmountSuggestionView: View {
             Spacer()
             
             HStack {
-                Image("icon_illust_maintain goal")
+                Image("icon_illust_maintain_goal")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 85 * DynamicSizeFactor.factor(), height: 85 * DynamicSizeFactor.factor())

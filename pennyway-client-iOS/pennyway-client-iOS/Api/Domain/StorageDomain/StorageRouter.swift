@@ -20,7 +20,7 @@ enum StorageRouter: URLRequestConvertible {
         case .generatePresignedUrl:
             return URL(string: API.BASE_URL)!
         case let .storePresignedUrl(payload, _, _):
-            return URL(string: payload)!
+            return URL(string: payload) ?? URL(string: "")!
         }
     }
     

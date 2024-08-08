@@ -74,4 +74,10 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.editUserName(dto: dto), completion: completion)
     }
+    
+    func getNotificationList(dto: GetNotificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - getNotificationList() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.getNotificationList(dto: dto), completion: completion)
+    }
 }

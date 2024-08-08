@@ -10,7 +10,7 @@ struct AddSpendingCompleteView: View {
     
     var body: some View {
         VStack {
-            Image("icon_illust_add history")
+            Image("icon_illust_add_history")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 160 * DynamicSizeFactor.factor(), height: 160 * DynamicSizeFactor.factor())
