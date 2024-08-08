@@ -5,6 +5,8 @@ import SwiftUI
 struct SpendingManagementMainView: View {
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
+    @StateObject var notificationViewModel = ProfileNotificationViewModel()
+
     @State private var navigateToAddSpendingHistory = false
     @State private var navigateToMySpendingList = false
     @State private var navigateToMainAlarmView = false
@@ -50,6 +52,8 @@ struct SpendingManagementMainView: View {
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                 targetAmountViewModel.getTargetAmountForDateApi { _ in }
+                notificationViewModel.checkUnReadNotificationsApi { _ in }
+                Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
             }
             .setTabBarVisibility(isHidden: ishidden)
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
@@ -82,7 +86,7 @@ struct SpendingManagementMainView: View {
                         Button(action: {
                             navigateToMainAlarmView = true
                         }, label: {
-                            Image("icon_navigationbar_bell")
+                            Image(notificationViewModel.hasUnread ? "icon_navigationbar_bell_dot" : "icon_navigationbar_bell")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())

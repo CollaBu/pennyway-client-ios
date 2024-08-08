@@ -11,7 +11,8 @@ struct EditProfilePopUpView: View {
     @Binding var selectedUIImage: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
 
-    @StateObject private var deleteProfileImageViewModel = DeleteProfileImageViewModel()
+    @StateObject var deleteProfileImageViewModel = DeleteProfileImageViewModel()
+    @ObservedObject var presignedUrlViewModel: PresignedUrlViewModel
 
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
 
@@ -92,7 +93,6 @@ struct EditProfilePopUpView: View {
                 isPresented = false
                 showPopUpView = false
                 isHiddenTabBar = false
-                
             }
         } else {
             Log.debug("프로필 사진 비어 있음")

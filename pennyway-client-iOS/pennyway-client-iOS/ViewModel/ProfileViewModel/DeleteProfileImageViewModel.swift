@@ -2,8 +2,8 @@
 import SwiftUI
 
 class DeleteProfileImageViewModel: ObservableObject {
-    @Published var profileImageUrl: String
-    
+    @Published var profileImageUrl: String = ""
+
     /// 프로필 사진 삭제 api
     func deleteProfileImageApi(completion: @escaping (Bool) -> Void) {
         UserAccountAlamofire.shared.deleteProfileImage { result in
@@ -14,7 +14,7 @@ class DeleteProfileImageViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
                         self.profileImageUrl = "" // 삭제 성공 시 profileImageUrl 초기화
                         updateUserField(fieldName: "profileImageUrl", value: self.profileImageUrl)
-                        
+
                         Log.debug("사진 삭제 완료")
                         completion(true)
                     } catch {
