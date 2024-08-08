@@ -20,7 +20,7 @@ struct ProfileAlarmView: View {
                     if viewModel.notificationData.isEmpty {
                         NoAlarmArrivedView()
                     } else {
-                        ArrivedAlarmView()
+                        ArrivedAlarmView(viewModel: viewModel)
                     }
                 }
             }

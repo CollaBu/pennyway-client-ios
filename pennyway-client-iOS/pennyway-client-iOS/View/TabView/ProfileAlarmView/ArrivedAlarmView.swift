@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - ArrivedAlarmView
 
 struct ArrivedAlarmView: View {
-    @StateObject private var viewModel = ProfileNotificationViewModel()
+    @ObservedObject var viewModel: ProfileNotificationViewModel //    @StateObject private var viewModel = ProfileNotificationViewModel()
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,9 +21,9 @@ struct ArrivedAlarmView: View {
 
             ReadAlarmView(alarms: viewModel.notificationData.filter { $0.isRead })
         }
-//        .onAppear {
-//            viewModel.getNotificationListApi()
-//        }
+        .onAppear {
+            viewModel.getNotificationListApi()
+        }
     }
 }
 
@@ -33,7 +33,7 @@ struct AlarmRow: View {
     let alarm: NotificationContentData
 
     var body: some View {
-        HStack(spacing: 15 * DynamicSizeFactor.factor()) {
+        HStack(spacing: 0) {
             Image("icon_close_filled_primary")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -49,6 +49,7 @@ struct AlarmRow: View {
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray04"))
             }
+            .frame(maxWidth: .infinity)
 
             Spacer()
         }
