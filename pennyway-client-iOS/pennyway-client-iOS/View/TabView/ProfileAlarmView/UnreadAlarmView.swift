@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct UnreadAlarmView: View {
+//    @ObservedObject var viewModel: ProfileNotificationViewModel
+
     let alarms: [NotificationContentData]
 
     var body: some View {
@@ -14,9 +16,15 @@ struct UnreadAlarmView: View {
                 Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
                 ForEach(alarms) { alarm in
-                    AlarmRow(alarm: alarm)
-                    Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+                    Button(action: {
+                        Log.debug("click")
+                    }, label: {
+                        AlarmRow(alarm: alarm)
+                            .contentShape(Rectangle())
+                    })
+                    .buttonStyle(PlainButtonStyle())
                 }
+                Spacer().frame(height: 24 * DynamicSizeFactor.factor())
             }
         }
         .padding(.horizontal, 20)

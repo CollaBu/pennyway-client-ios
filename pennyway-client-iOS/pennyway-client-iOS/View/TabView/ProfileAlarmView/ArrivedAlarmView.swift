@@ -20,12 +20,12 @@ struct ArrivedAlarmView: View {
 
                 Spacer().frame(height: 25 * DynamicSizeFactor.factor())
 
-                ReadAlarmView(alarms: viewModel.notificationData.filter { $0.isRead })
+                ReadAlarmView(viewModel: viewModel, alarms: viewModel.notificationData.filter { $0.isRead })
             }
         }
-        .onAppear {
-            viewModel.getNotificationListApi()
-        }
+//        .onAppear {
+//            viewModel.getNotificationListApi()
+//        }
     }
 }
 
