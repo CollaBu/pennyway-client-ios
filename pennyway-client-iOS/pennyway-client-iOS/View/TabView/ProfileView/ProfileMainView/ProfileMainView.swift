@@ -131,4 +131,3 @@ struct ProfileMainView: View {
 #Preview {
     ProfileMainView()
 }
-
