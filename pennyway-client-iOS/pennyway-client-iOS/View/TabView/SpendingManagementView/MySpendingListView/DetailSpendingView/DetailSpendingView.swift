@@ -85,6 +85,7 @@ struct DetailSpendingView: View {
                             .padding(5)
                     })
                     .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(BasicButtonStyleUtil())
                     .padding(.trailing, 5)
                     .frame(width: 44, height: 44)
                 }
@@ -122,6 +123,7 @@ struct DetailSpendingView: View {
         )
 
         NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
+            .hidden()
     }
 
     private func loadDataForSelectedDate() {

@@ -48,6 +48,7 @@ struct AlarmListView: View {
                         .contentShape(Rectangle())
                     })
                     .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(BasicButtonStyleUtil())
                     .onAppear {
                         // 해당 index가 마지막 index라면 데이터 추가
                         guard let index = alarms.firstIndex(where: { $0.id == alarm.id }) else {

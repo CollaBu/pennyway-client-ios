@@ -107,6 +107,7 @@ struct InquiryView: View {
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                         })
                         .padding(.leading, 20 * DynamicSizeFactor.factor())
+                        .buttonStyle(BasicButtonStyleUtil())
                                 
                         Text("정보 제공에 동의할게요")
                             .font(.B1MediumFont())
@@ -128,6 +129,7 @@ struct InquiryView: View {
 
                         })
                         .padding(.trailing, 20 * DynamicSizeFactor.factor())
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                     .padding(.vertical, 1)
                 }

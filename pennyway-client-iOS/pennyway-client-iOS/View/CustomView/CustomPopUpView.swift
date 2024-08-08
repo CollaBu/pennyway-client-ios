@@ -85,6 +85,7 @@ extension CustomPopUpView {
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .buttonStyle(BasicButtonStyleUtil())
 
                         Button(action: secondBtnAction) {
                             ZStack {
@@ -100,6 +101,7 @@ extension CustomPopUpView {
                             .padding(.trailing, 13 * DynamicSizeFactor.factor())
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                     .padding(.horizontal, 14 * DynamicSizeFactor.factor())
                     .padding(.bottom, 11 * DynamicSizeFactor.factor())

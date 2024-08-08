@@ -43,6 +43,7 @@ struct CategorySpendingListView: View {
                                             .contentShape(Rectangle())
                                     })
                                     .buttonStyle(PlainButtonStyle())
+                                    .buttonStyle(BasicButtonStyleUtil())
 
                                     .onAppear {
                                         guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
@@ -69,6 +70,7 @@ struct CategorySpendingListView: View {
         }
 
         NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
+            .hidden()
     }
 
     private func headerView(for date: String) -> some View {

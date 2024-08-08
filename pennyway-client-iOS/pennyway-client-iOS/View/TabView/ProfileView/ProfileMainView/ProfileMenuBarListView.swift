@@ -67,6 +67,7 @@ struct ProfileMenuBarListView: View {
             NavigationLink(destination: CompleteDeleteUserView(), isActive: $navigateCompleteView) {
                 EmptyView()
             }
+            .hidden()
         }
     }
 

@@ -46,6 +46,7 @@ struct SpendingDetailSheetView: View {
                                 
                         })
                         .padding(10)
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                         
                     Button(action: {
@@ -57,6 +58,7 @@ struct SpendingDetailSheetView: View {
                             .frame(width: 34, height: 34)
                             
                     })
+                    .buttonStyle(BasicButtonStyleUtil())
                 }
                 .padding(.leading, 20)
                 .padding(.trailing, 17)
@@ -88,7 +90,8 @@ struct SpendingDetailSheetView: View {
                                         .contentShape(Rectangle())
                                 })
                                 .buttonStyle(PlainButtonStyle())
-                                
+                                .buttonStyle(BasicButtonStyleUtil())
+
                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                             }
                         }

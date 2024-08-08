@@ -45,7 +45,7 @@ struct TermsAndConditionsView: View {
                 
             NavigationLink(destination: WelcomeView(), tag: 4, selection: $viewModel.selectedText) {
                 EmptyView()
-            }
+            }.hidden()
         }
         
         .edgesIgnoringSafeArea(.bottom)

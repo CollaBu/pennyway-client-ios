@@ -48,6 +48,7 @@ struct TermsAndConditionsContentView: View {
                                     .offset(x: 34 * DynamicSizeFactor.factor())
                             }
                         })
+                        .buttonStyle(BasicButtonStyleUtil())
 
                         Spacer().frame(height: 29 * DynamicSizeFactor.factor())
 

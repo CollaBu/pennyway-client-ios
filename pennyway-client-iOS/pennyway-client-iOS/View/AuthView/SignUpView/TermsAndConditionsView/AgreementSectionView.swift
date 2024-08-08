@@ -21,6 +21,7 @@ struct AgreementSectionView: View {
 
                     })
                     .padding(.leading, 8 * DynamicSizeFactor.factor())
+                    .buttonStyle(BasicButtonStyleUtil())
 
                     Text(title)
                         .font(.B2MediumFont())

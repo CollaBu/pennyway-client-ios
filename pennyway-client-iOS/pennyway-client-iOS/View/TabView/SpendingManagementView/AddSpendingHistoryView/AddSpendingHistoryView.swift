@@ -59,9 +59,11 @@ struct AddSpendingHistoryView: View {
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
                 NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingCategory) {}
+                    .hidden()
 
                 NavigationLink(
                     destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel(), entryPoint: .create), isActive: $viewModel.navigateToAddCategory) {}
+                    .hidden()
             }
             .background(Color("White01"))
             .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")

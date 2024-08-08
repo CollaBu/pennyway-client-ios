@@ -47,6 +47,7 @@ struct ChangeMonthContentView: View {
                             .resizable()
                             .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                     })
+                    .buttonStyle(BasicButtonStyleUtil())
                 }
                 .padding(.horizontal, 20)
 
@@ -72,6 +73,7 @@ struct ChangeMonthContentView: View {
                                     .padding(.vertical, 14)
                             })
                             .buttonStyle(PlainButtonStyle())
+                            .buttonStyle(BasicButtonStyleUtil())
 
                             Spacer()
                         }

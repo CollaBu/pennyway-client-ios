@@ -62,6 +62,7 @@ struct FindIdPhoneVerificationView: View {
                             .font(.B1MediumFont())
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
+                    .buttonStyle(BasicButtonStyleUtil())
                     .padding(.horizontal, 13)
                     .frame(height: 46 * DynamicSizeFactor.factor())
                     .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05") : Color("Gray03"))

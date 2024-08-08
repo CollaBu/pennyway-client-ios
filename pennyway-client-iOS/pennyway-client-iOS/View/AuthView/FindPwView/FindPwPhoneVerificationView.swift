@@ -60,6 +60,7 @@ struct FindPwPhoneVerificationView: View {
                             .font(.B1MediumFont()) // 폰트 리스트에 없는 예외
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
+                    .buttonStyle(BasicButtonStyleUtil())
                     .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                     .frame(height: 46 * DynamicSizeFactor.factor())
                     .background(!viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 ? Color("Gray05") : Color("Gray03"))

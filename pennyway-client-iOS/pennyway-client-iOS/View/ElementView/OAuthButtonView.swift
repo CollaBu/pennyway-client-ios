@@ -17,6 +17,7 @@ struct OAuthButtonView: View {
                 Image(isKakaoLoggedIn ? "icon_signin_kakao" : "icon_signin_kakao_notlinked")
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
             })
+            .buttonStyle(BasicButtonStyleUtil())
 
             Button(action: {
                 googleAction()
@@ -24,6 +25,7 @@ struct OAuthButtonView: View {
                 Image(isGoogleLoggedIn ? "icon_signin_google" : "icon_signin_google_notlinked")
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
             })
+            .buttonStyle(BasicButtonStyleUtil())
 
             Button(action: {
                 appleAction()
@@ -31,6 +33,7 @@ struct OAuthButtonView: View {
                 Image(isAppleLoggedIn ? "icon_signin_apple" : "icon_signin_apple_notlinked")
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
             })
+            .buttonStyle(BasicButtonStyleUtil())
         }
     }
 }

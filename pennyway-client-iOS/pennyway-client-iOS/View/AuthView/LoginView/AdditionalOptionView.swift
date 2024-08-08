@@ -7,6 +7,7 @@ struct AdditionalOptionView: View {
             NavigationLink(destination: PhoneVerificationView()) {
                 Text("회원가입")
             }
+            .hidden()
             .font(.B3MediumFont())
             .platformTextColor(color: Color("Gray04"))
             .simultaneousGesture(TapGesture().onEnded {
@@ -25,6 +26,7 @@ struct AdditionalOptionView: View {
             NavigationLink(destination: FindIdFormView()) {
                 Text("아이디 찾기")
             }
+            .hidden()
             .font(.B3MediumFont())
             .platformTextColor(color: Color("Gray04"))
 
@@ -38,6 +40,7 @@ struct AdditionalOptionView: View {
             NavigationLink(destination: FindPwView()) {
                 Text("비밀번호 찾기")
             }
+            .hidden()
             .font(.B3MediumFont())
             .platformTextColor(color: Color("Gray04"))
         }
