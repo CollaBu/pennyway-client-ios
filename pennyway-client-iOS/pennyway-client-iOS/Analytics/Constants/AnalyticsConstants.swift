@@ -36,6 +36,8 @@ enum AnalyticsConstants {
         
         case eventName
         
+        case oauthType
+        
         var rawValue: String {
             switch self {
             case .screenId: return "screen_id"
@@ -43,6 +45,8 @@ enum AnalyticsConstants {
             case .screenClass: return "screen_class"
                 
             case .eventName: return "event_name"
+            
+            case .oauthType: return "oauth_type"
             }
         }
     }

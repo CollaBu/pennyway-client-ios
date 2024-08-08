@@ -10,7 +10,7 @@ import SwiftUI
 
 class FirebaseAnalyticsService: AnalyticsService {
     var subscribedEvents: [AnalyticsEvent.Type] {
-        [AuthenticationEvents.self, SpendingEvents.self]
+        [AuthEvents.self, SpendingEvents.self]
     }
     
     func initialize(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) {
