@@ -123,9 +123,6 @@ struct CategoryDetailsView: View {
                     }
                 }
             }
-            .onAppear {
-                refreshView {}
-            }
             .onChange(of: isDeleted) { newValue in
                 if newValue {
                     refreshView {
@@ -169,26 +166,26 @@ struct CategoryDetailsView: View {
 
     private func refreshView(completion: @escaping () -> Void) {
         viewModel.initPage()
-        viewModel.getCategorySpendingHistoryApi { success in
-            if success {
-                Log.debug("카테고리 지출내역 조회 성공")
-                // 기존 데이터의 마지막 인덱스를 확인하고, 추가 데이터를 불러오는 로직 추가
-                if let lastItem = viewModel.dailyDetailSpendings.last {
-                    guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == lastItem.id }) else {
-                        return
-                    }
-                    // 해당 인덱스가 마지막 인덱스라면 데이터 추가
-                    if index == viewModel.dailyDetailSpendings.count - 1 {
-                        Log.debug("지출 내역 index: \(index)")
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
-                            viewModel.getCategorySpendingHistoryApi { _ in }
-                        }
-                    }
-                }
-            } else {
-                Log.debug("카테고리 지출내역 조회 실패")
-            }
-            completion()
+        viewModel.getCategorySpendingHistoryApi { _ in
+//            if success {
+//                Log.debug("카테고리 지출내역 조회 성공")
+//                // 기존 데이터의 마지막 인덱스를 확인하고, 추가 데이터를 불러오는 로직 추가
+//                if let lastItem = viewModel.dailyDetailSpendings.last {
+//                    guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == lastItem.id }) else {
+//                        return
+//                    }
+//                    // 해당 인덱스가 마지막 인덱스라면 데이터 추가
+//                    if index == viewModel.dailyDetailSpendings.count - 1 {
+//                        Log.debug("지출 내역 index: \(index)")
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
+//                            viewModel.getCategorySpendingHistoryApi { _ in }
+//                        }
+//                    }
+//                }
+//            } else {
+//                Log.debug("카테고리 지출내역 조회 실패")
+//            }
+//            completion()
         }
     }
 }
