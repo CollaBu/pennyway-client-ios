@@ -51,7 +51,7 @@ struct PhoneVerificationView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
                     NavigationBackButton(action: {
-                        if OAuthRegistrationManager.shared.isOAuthRegistration { 
+                        if OAuthRegistrationManager.shared.isOAuthRegistration {
                             KeychainHelper.deleteOAuthUserData()
                         }
                     })
@@ -63,6 +63,7 @@ struct PhoneVerificationView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(AuthEvents.phoneVerificationView)
     }
     
     private func continueButtonAction() {

@@ -35,6 +35,7 @@ struct SignUpFormView: View {
             Spacer()
             passwordFields()
         }
+        .analyzeEvent(AuthEvents.generalSignUpView)
     }
     
     /// Name and ID fields
@@ -70,6 +71,7 @@ struct SignUpFormView: View {
                 ErrorText(message: "이미 사용 중인 아이디예요", color: Color("Red03"))
             }
         }
+        .analyzeEvent(AuthEvents.oauthSignUpView)
     }
     
     /// Password fields
@@ -102,6 +104,7 @@ struct SignUpFormView: View {
                 Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }
         }
+        .analyzeEvent(AuthEvents.generalSignSycnView)
     }
 }
 
