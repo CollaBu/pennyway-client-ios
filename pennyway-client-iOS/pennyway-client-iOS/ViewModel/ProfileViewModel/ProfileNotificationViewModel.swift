@@ -4,7 +4,8 @@ import Foundation
 
 class ProfileNotificationViewModel: ObservableObject {
     @Published var notificationData: [NotificationContentData] = [] // 알림 데이터 리스트
-    @Published var hasUnread: Bool = false // 미확인 알림 여부 조회
+    @Published var hasUnread: Bool = true // 미확인 알림 여부 조회
+    @Published var notificationIds: [Int] = [] // 읽음 처리할 알림 ID 리스트
 
     private var currentPageNumber: Int = 0
     private var hasNext: Bool = true // 다음 페이지가 있는지 여부
@@ -13,6 +14,7 @@ class ProfileNotificationViewModel: ObservableObject {
         notificationData = []
         currentPageNumber = 0
         hasNext = true
+        hasUnread = true
     }
 
     /// 알림 목록 무한스크롤 api 호출
@@ -77,7 +79,7 @@ class ProfileNotificationViewModel: ObservableObject {
     }
 
     /// 수신한 알람 중 미확인 알림 존재 여부 API
-    func checkUnReadNotifications(completion: @escaping (Bool) -> Void) {
+    func checkUnReadNotificationsApi(completion: @escaping (Bool) -> Void) {
         UserAccountAlamofire.shared.checkUnReadNotifications { result in
             switch result {
             case let .success(data):
@@ -86,8 +88,7 @@ class ProfileNotificationViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(CheckUnReadNotificationResponseDto.self, from: responseData)
 
                         Log.debug("Before hasUnread : \(self.hasUnread)")
-                        self.hasUnread = true
-//                        self.objectWillChange.send() // 뷰 강제 렌더링
+                        self.hasUnread = response.data.hasUnread
                         Log.debug("After hasUnread : \(self.hasUnread)")
 
                         if let jsonString = String(data: responseData, encoding: .utf8) {
@@ -98,6 +99,38 @@ class ProfileNotificationViewModel: ObservableObject {
                         Log.fault("Error decoding JSON: \(error)")
                         completion(false)
                     }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
+
+    /// 알림 읽음 처리 API
+    func readNotificationsApi(completion: @escaping (Bool) -> Void) {
+        guard !notificationIds.isEmpty else {
+            Log.debug("읽을 ID가 없음")
+            completion(false)
+            return
+        }
+
+        let readNotificationsRequestDto = ReadNotificationsRequestDto(notificationIds: notificationIds)
+        Log.debug("Sending readNotificationsApi with IDs: \(notificationIds)")
+
+        UserAccountAlamofire.shared.readNotifications(dto: readNotificationsRequestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("알람 읽음 처리 성공 \(jsonString)")
+                    }
+                    self.notificationIds = []
+                    completion(true)
                 }
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {

@@ -52,7 +52,7 @@ struct SpendingManagementMainView: View {
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                 targetAmountViewModel.getTargetAmountForDateApi { _ in }
-                notificationViewModel.checkUnReadNotifications { _ in }
+                notificationViewModel.checkUnReadNotificationsApi { _ in }
                 Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
             }
             .setTabBarVisibility(isHidden: ishidden)
