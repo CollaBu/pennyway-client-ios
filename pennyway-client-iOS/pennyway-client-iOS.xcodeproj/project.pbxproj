@@ -276,6 +276,10 @@
 		D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */; };
 		D888329C2BBC612600F49B27 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329B2BBC612600F49B27 /* LoginView.swift */; };
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
+		D889F9EA2C63C8CF0055D045 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9E92C63C8CF0055D045 /* GetNotificationRequestDto.swift */; };
+		D889F9EC2C63CA560055D045 /* GetNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9EB2C63CA560055D045 /* GetNotificationResponseDto.swift */; };
+		D889F9F02C63CC030055D045 /* NotificationContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9EF2C63CC030055D045 /* NotificationContentData.swift */; };
+		D889F9F22C63CD340055D045 /* ProfileNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F12C63CD340055D045 /* ProfileNotificationViewModel.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
@@ -295,8 +299,7 @@
 		D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */; };
 		D8F9D7362C593B71005416FC /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7352C593B71005416FC /* PreparedView.swift */; };
 		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
-		D8F9D73D2C59FDFD005416FC /* UnreadAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D73C2C59FDFD005416FC /* UnreadAlarmView.swift */; };
-		D8F9D73F2C59FE12005416FC /* ReadAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D73E2C59FE12005416FC /* ReadAlarmView.swift */; };
+		D8F9D73F2C59FE12005416FC /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D73E2C59FE12005416FC /* AlarmListView.swift */; };
 		D8F9D7412C59FE22005416FC /* NoAlarmArrivedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7402C59FE22005416FC /* NoAlarmArrivedView.swift */; };
 		D8F9D7432C5A0596005416FC /* ProfileAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7422C5A0596005416FC /* ProfileAlarmView.swift */; };
 		D8F9D7452C5A09ED005416FC /* ArrivedAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */; };
@@ -575,6 +578,10 @@
 		D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
 		D888329B2BBC612600F49B27 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodeContentView.swift; sourceTree = "<group>"; };
+		D889F9E92C63C8CF0055D045 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
+		D889F9EB2C63CA560055D045 /* GetNotificationResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationResponseDto.swift; sourceTree = "<group>"; };
+		D889F9EF2C63CC030055D045 /* NotificationContentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContentData.swift; sourceTree = "<group>"; };
+		D889F9F12C63CD340055D045 /* ProfileNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNotificationViewModel.swift; sourceTree = "<group>"; };
 		D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
@@ -596,8 +603,7 @@
 		D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleDeleteButtonUtil.swift; sourceTree = "<group>"; };
 		D8F9D7352C593B71005416FC /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedView.swift; path = "pennyway-client-iOS/View/TabView/PreparedView.swift"; sourceTree = SOURCE_ROOT; };
 		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		D8F9D73C2C59FDFD005416FC /* UnreadAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadAlarmView.swift; sourceTree = "<group>"; };
-		D8F9D73E2C59FE12005416FC /* ReadAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAlarmView.swift; sourceTree = "<group>"; };
+		D8F9D73E2C59FE12005416FC /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
 		D8F9D7402C59FE22005416FC /* NoAlarmArrivedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAlarmArrivedView.swift; sourceTree = "<group>"; };
 		D8F9D7422C5A0596005416FC /* ProfileAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlarmView.swift; sourceTree = "<group>"; };
 		D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivedAlarmView.swift; sourceTree = "<group>"; };
@@ -879,6 +885,8 @@
 			isa = PBXGroup;
 			children = (
 				4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */,
+				D889F9EB2C63CA560055D045 /* GetNotificationResponseDto.swift */,
+				D889F9EF2C63CC030055D045 /* NotificationContentData.swift */,
 			);
 			path = UserAccount;
 			sourceTree = "<group>";
@@ -1195,6 +1203,7 @@
 				D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */,
 				D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */,
 				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
+				D889F9E92C63C8CF0055D045 /* GetNotificationRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1237,6 +1246,7 @@
 			children = (
 				4A6C79D72C46CD9A009463E4 /* EditViewModel.swift */,
 				4A57762C2C48C2B900979D1A /* EditPhoneNumberViewModel.swift */,
+				D889F9F12C63CD340055D045 /* ProfileNotificationViewModel.swift */,
 			);
 			path = ProfileViewModel;
 			sourceTree = "<group>";
@@ -1871,8 +1881,7 @@
 		D8F9D73B2C59FDA3005416FC /* ProfileAlarmView */ = {
 			isa = PBXGroup;
 			children = (
-				D8F9D73C2C59FDFD005416FC /* UnreadAlarmView.swift */,
-				D8F9D73E2C59FE12005416FC /* ReadAlarmView.swift */,
+				D8F9D73E2C59FE12005416FC /* AlarmListView.swift */,
 				D8F9D7402C59FE22005416FC /* NoAlarmArrivedView.swift */,
 				D8F9D7422C5A0596005416FC /* ProfileAlarmView.swift */,
 				D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */,
@@ -2105,6 +2114,7 @@
 				D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */,
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */,
+				D889F9EA2C63C8CF0055D045 /* GetNotificationRequestDto.swift in Sources */,
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
 				B599E4C02C58B951006051E9 /* AnalyticsTracker.swift in Sources */,
 				4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */,
@@ -2116,10 +2126,9 @@
 				4A6C79DB2C46D067009463E4 /* ProfileActiveNavigation.swift in Sources */,
 				B599E4C62C58E989006051E9 /* AuthenticationAnalyticsEvents.swift in Sources */,
 				D888329C2BBC612600F49B27 /* LoginView.swift in Sources */,
-				D8F9D73F2C59FE12005416FC /* ReadAlarmView.swift in Sources */,
+				D8F9D73F2C59FE12005416FC /* AlarmListView.swift in Sources */,
 				4A69C1562BE69DEA00A27B82 /* Log.swift in Sources */,
 				4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */,
-				D8F9D73D2C59FDFD005416FC /* UnreadAlarmView.swift in Sources */,
 				D8157E642BBEF2040083844B /* InputFormView.swift in Sources */,
 				D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */,
 				4ADE802C2BF29055007FFB01 /* MainTabView.swift in Sources */,
@@ -2136,6 +2145,7 @@
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */,
+				D889F9EC2C63CA560055D045 /* GetNotificationResponseDto.swift in Sources */,
 				D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */,
 				4AC3205D2C11F33200DDB4B6 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */,
 				4A6A9D112C331A9500394771 /* TargetAmountSetCompleteView.swift in Sources */,
@@ -2156,6 +2166,7 @@
 				D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */,
 				D85927F82BE9116700653391 /* SignUpFormViewModel.swift in Sources */,
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDto.swift in Sources */,
+				D889F9F02C63CC030055D045 /* NotificationContentData.swift in Sources */,
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
 				4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
@@ -2221,6 +2232,7 @@
 				4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */,
 				4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */,
 				4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */,
+				D889F9F22C63CD340055D045 /* ProfileNotificationViewModel.swift in Sources */,
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
