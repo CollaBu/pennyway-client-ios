@@ -12,7 +12,9 @@ class DeleteProfileImageViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
-
+                        self.profileImageUrl = "" // 삭제 성공 시 profileImageUrl 초기화
+                        updateUserField(fieldName: "profileImageUrl", value: self.profileImageUrl)
+                        
                         Log.debug("사진 삭제 완료")
                         completion(true)
                     } catch {
