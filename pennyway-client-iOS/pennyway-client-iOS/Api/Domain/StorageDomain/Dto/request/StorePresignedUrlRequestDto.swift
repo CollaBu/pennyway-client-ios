@@ -25,14 +25,14 @@ public struct StorePresignedUrlRequestDto: Encodable {
         self.signature = signature
     }
 
-    func toHeaders() -> [String: String] {
+    func toQueryItems() -> [URLQueryItem] {
         return [
-            "X-Amz-Algorithm": algorithm,
-            "X-Amz-Credential": credential,
-            "X-Amz-Date": date,
-            "X-Amz-Expires": expires,
-            "X-Amz-Signature": signature,
-            "X-Amz-SignedHeaders": signedHeaders
+            URLQueryItem(name: "X-Amz-Algorithm", value: algorithm),
+            URLQueryItem(name: "X-Amz-Date", value: date),
+            URLQueryItem(name: "X-Amz-SignedHeaders", value: signedHeaders),
+            URLQueryItem(name: "X-Amz-Credential", value: credential),
+            URLQueryItem(name: "X-Amz-Expires", value: expires),
+            URLQueryItem(name: "X-Amz-Signature", value: signature)
         ]
     }
 }

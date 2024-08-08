@@ -25,7 +25,7 @@ extension URLRequest {
 
         if let queryParameters = queryParameters {
             var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-            components?.queryItems = queryParameters
+            components?.percentEncodedQueryItems = queryParameters
 
             if let urlWithQuery = components?.url {
                 request.url = urlWithQuery

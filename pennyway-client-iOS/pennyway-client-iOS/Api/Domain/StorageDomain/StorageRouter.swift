@@ -44,8 +44,8 @@ enum StorageRouter: URLRequestConvertible {
         switch self {
         case let .generatePresignedUrl(dto):
             return try? dto.asDictionary()
-        case let .storePresignedUrl(_, _, dto):
-            return try? dto.toHeaders().asDictionary()
+        case .storePresignedUrl:
+            return [:]
         }
     }
 
@@ -59,8 +59,7 @@ enum StorageRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
             
         case let .storePresignedUrl(_, image, dto):
-            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
-            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas, image: image)
+            request = URLRequest.createURLRequest(url: baseURL, method: method, queryParameters: dto.toQueryItems(), image: image)
         }
         return request
     }

@@ -46,7 +46,7 @@ class PresignedUrlViewModel: ObservableObject {
         
         let storePresignedUrlRequestDto = createStorePresignedUrlRequestDto(from: presignedUrl)
         
-        Log.debug(payload)
+        Log.debug("payload: \(payload)")
         Log.debug(storePresignedUrlRequestDto)
 
         if image != nil {
@@ -55,7 +55,7 @@ class PresignedUrlViewModel: ObservableObject {
                 case let .success(data):
                     if let responseData = data {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
-                            Log.debug("presigned_url 발급 성공 \(jsonString)")
+                            Log.debug("presigned_url 저장 성공 \(jsonString)")
                         }
                         completion(true)
                     }
@@ -68,38 +68,56 @@ class PresignedUrlViewModel: ObservableObject {
                     completion(false)
                 }
             }
+        } else {
+            Log.error("선택한 image가 없음")
         }
     }
-    
+
     func createStorePresignedUrlRequestDto(from presignedUrl: String) -> StorePresignedUrlRequestDto {
-        if let payloadURL = URL(string: presignedUrl),
-           let components = URLComponents(url: payloadURL, resolvingAgainstBaseURL: false),
-           let queryItems = components.queryItems
-        {
-            // 필요한 값을 추출, 값이 없을 경우 빈 문자열을 기본값으로 설정
-            let algorithm = queryItems[0].value ?? ""
-            let date = queryItems[1].value ?? ""
-            let signedHeaders = queryItems[2].value ?? ""
-            let credential = queryItems[3].value ?? ""
-            let expires = queryItems[4].value ?? ""
-            let signature = queryItems[5].value ?? ""
+        var algorithm = ""
+        var date = ""
+        var signedHeaders = ""
+        var credential = ""
+        var expires = ""
+        var signature = ""
+
+        if let range = presignedUrl.range(of: "?") {
+            let query = String(presignedUrl[range.upperBound...])
+            let queryItems = query.split(separator: "&")
             
-            return StorePresignedUrlRequestDto(
-                algorithm: algorithm,
-                date: date,
-                signedHeaders: signedHeaders,
-                credential: credential,
-                expires: expires,
-                signature: signature
-            )
+            for item in queryItems {
+                let pair = item.split(separator: "=")
+                if pair.count == 2 {
+                    let key = pair[0]
+                    let value = pair[1]
+                    
+                    switch key {
+                    case "X-Amz-Algorithm":
+                        algorithm = String(value)
+                    case "X-Amz-Date":
+                        date = String(value)
+                    case "X-Amz-SignedHeaders":
+                        signedHeaders = String(value)
+                    case "X-Amz-Credential":
+                        credential = String(value)
+                    case "X-Amz-Expires":
+                        expires = String(value)
+                    case "X-Amz-Signature":
+                        signature = String(value)
+                    default:
+                        break
+                    }
+                }
+            }
         }
+
         return StorePresignedUrlRequestDto(
-            algorithm: "",
-            date: "",
-            signedHeaders: "",
-            credential: "",
-            expires: "",
-            signature: ""
+            algorithm: algorithm,
+            date: date,
+            signedHeaders: signedHeaders,
+            credential: credential,
+            expires: expires,
+            signature: signature
         )
     }
 }
