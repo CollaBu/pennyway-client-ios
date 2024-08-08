@@ -84,5 +84,6 @@ struct FindIdPhoneVerificationView: View {
                     .platformTextColor(color: Color("Red03"))
             }
         }
+        .analyzeEvent(AuthCheckEvents.findUsernamePhoneVerificationView)
     }
 }

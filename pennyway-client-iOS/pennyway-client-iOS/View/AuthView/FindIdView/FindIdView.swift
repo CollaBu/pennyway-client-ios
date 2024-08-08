@@ -45,6 +45,7 @@ struct FindIdView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
+        .analyzeEvent(AuthCheckEvents.findUsernameView)
     }
     
     private func bottomButton() -> some View {
