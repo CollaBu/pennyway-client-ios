@@ -7,15 +7,17 @@
 enum AnalyticsConstants {
     enum EventName {
         case screenView
+        case btnTapped
         
         var rawValue: String {
             switch self {
             case .screenView: return "screen_view"
+            case .btnTapped: return "btn_tapped"
             }
         }
     }
     
-    enum EventType {        
+    enum EventType {
         case screenView
         case userAction
         
@@ -32,11 +34,15 @@ enum AnalyticsConstants {
         case screenName
         case screenClass
         
+        case eventName
+        
         var rawValue: String {
             switch self {
             case .screenId: return "screen_id"
             case .screenName: return "screen_name"
             case .screenClass: return "screen_class"
+                
+            case .eventName: return "event_name"
             }
         }
     }
