@@ -196,7 +196,7 @@ enum SpendingListViewCategoryIconList: String, CaseIterable, Identifiable {
         case .membershipOrFamilyEvent:
             return "icon_category_event_on"
         case .other:
-            return "icon_category_plus_off"
+            return "icon_category_etc_on"
         }
     }
 }

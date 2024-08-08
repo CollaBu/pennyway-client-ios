@@ -18,7 +18,7 @@ struct RecentTargetAmountSuggestionView: View {
                 
                 Button(action: {
                     isHidden = true
-                    viewModel.deleteCurrentMonthTargetAmountApi()
+                    viewModel.deleteCurrentMonthTargetAmountApi { _ in }
                 }, label: {
                     Image("icon_close_white")
                         .resizable()
@@ -36,7 +36,7 @@ struct RecentTargetAmountSuggestionView: View {
             Spacer()
             
             HStack {
-                Image("icon_illust_maintain goal")
+                Image("icon_illust_maintain_goal")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 85 * DynamicSizeFactor.factor(), height: 85 * DynamicSizeFactor.factor())
@@ -74,7 +74,7 @@ struct RecentTargetAmountSuggestionView: View {
     
     private func getRecentTargetAmount() -> String {
         let year = Date.year(from: Date())
-        let data = "\(viewModel.recentTargetAmountData?.month ?? 0)월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(viewModel.recentTargetAmountData?.amount ?? 0))원"
+        let data = "\(viewModel.recentTargetAmountData?.month ?? 0)월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(Int64(viewModel.recentTargetAmountData?.amount ?? 0)))원"
         
         if viewModel.recentTargetAmountData?.year != year {
             return "\(year)년 \(data)"

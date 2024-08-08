@@ -33,7 +33,7 @@ struct SpendingDetailSheetView: View {
                         
                     Spacer()
                         
-                    if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil || isDeleted {
+                    if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
                         // 지출내역이 없을 경우 편집버튼 없음
                     } else {
                         Button(action: {
@@ -62,13 +62,13 @@ struct SpendingDetailSheetView: View {
                 .padding(.trailing, 17)
                 .padding(.top, 12)
                     
-                if let clickDate = clickDate, getSpendingAmount(for: clickDate) == nil || isDeleted {
+                if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
                     NoSpendingHistorySheetView()
                 } else {
                     ScrollView {
                         VStack(alignment: .leading) {
                             Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-                            if let clickDate = clickDate, let dailyTotalAmount = getSpendingAmount(for: clickDate) {
+                            if let clickDate = clickDate, let dailyTotalAmount = SpendingHistoryUtil.getSpendingAmount(for: clickDate, using: Calendar.current, from: spendingHistoryViewModel) {
                                 Text("-\(dailyTotalAmount)원")
                                     .font(.H1SemiboldFont())
                                     .platformTextColor(color: Color("Gray07"))
@@ -85,6 +85,7 @@ struct SpendingDetailSheetView: View {
                                     showDetailSpendingView = true
                                 }, label: {
                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                        .contentShape(Rectangle())
                                 })
                                 .buttonStyle(PlainButtonStyle())
                                 
@@ -101,11 +102,11 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $showAddSpendingHistoryView, entryPoint: .detailSheet)
+                    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $showAddSpendingHistoryView, entryPoint: .detailSheet)
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
-                NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: .constant(false), showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
+                NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
                 }
             }
         }
@@ -113,29 +114,21 @@ struct SpendingDetailSheetView: View {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
             getDailyHistoryData()
         }
-        .onChange(of: showEditSpendingDetailView) { _ in
-            getDailyHistoryData()
-        }
-        .onChange(of: showAddSpendingHistoryView) { isPresented in
-            if !isPresented {
-                // AddSpendingHistoryView가 닫힐 때 새로고침
+        .onChange(of: isDeleted) { newValue in
+            if newValue {
+                Log.debug("삭제됨")
                 getDailyHistoryData()
+                isDeleted = false
             }
         }
-        .onChange(of: clickDate) { _ in
-            Log.debug("clickDate changed to: \(String(describing: clickDate))")
-            forceUpdate.toggle()
+        .onChange(of: showAddSpendingHistoryView) { _ in
+            getDailyHistoryData()
         }
         .setTabBarVisibility(isHidden: true)
     }
     
-    private func getSpendingAmount(for date: Date) -> Int? {
-        let day = Calendar.current.component(.day, from: date)
-        Log.debug(day)
-        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
-    }
-    
     private func getDailyHistoryData() {
+        Log.debug("getDailyHistoryData 호출됨")
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
                 Log.debug("뷰 새로고침 성공")

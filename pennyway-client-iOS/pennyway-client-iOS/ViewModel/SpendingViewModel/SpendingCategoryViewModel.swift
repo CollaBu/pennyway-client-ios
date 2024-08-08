@@ -4,13 +4,13 @@ import SwiftUI
 class SpendingCategoryViewModel: ObservableObject {
     /// 카테고리 선택
     @Published var selectedCategory: SpendingCategoryData? = nil
+    @Published var selectedMoveCategory: SpendingCategoryData? = nil
     @Published var categoryName = ""
     @Published var selectedCategoryIcon: CategoryIconName? = nil
     @Published var selectedCategoryIconTitle: String = ""
     
     /// 카테고리 리스트 데이터
     @Published var amount: Int? = nil
-    ///    @Published var categoryName: String? = nil
     @Published var categoryIcon: String? = nil
     @Published var memo: String? = nil
     @Published var accountName: String? = nil
@@ -194,6 +194,68 @@ class SpendingCategoryViewModel: ObservableObject {
                 completion(false)
             }
         }
+    }
+    
+    /// 카테고리 삭제 api 호출
+    func deleteCategoryApi(completion: @escaping (Bool) -> Void) {
+        SpendingCategoryAlamofire.shared.deleteCategory(selectedCategory!.id) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("카테고리 삭제 완료 \(jsonString)")
+                    }
+                    completion(true)
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    /// 카테고리 이동 api 호출
+    func moveCategoryApi(completion: @escaping (Bool) -> Void) {
+        let moveCategoryRequestDto = MoveCategoryRequestDto(fromType: getCategoryDetails(selectedCategory!).categoryIconTitle, toId: getCategoryDetails(selectedMoveCategory!).categoryId, toType: getCategoryDetails(selectedMoveCategory!).categoryIconTitle)
+        
+        SpendingCategoryAlamofire.shared.moveCategory(selectedCategory!.id, moveCategoryRequestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    if let jsonString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("카테고리 이동 완료 \(jsonString)")
+                    }
+                    completion(true)
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
+    
+    func getCategoryDetails(_ category: SpendingCategoryData) -> (categoryIconTitle: String, categoryId: Int) {
+        var categoryIconTitle = ""
+        var categoryId = -1
+
+        if category.isCustom == false { // isCustom false 인 경우 -> 정의된 카테고리
+            if let category = SpendingCategoryIconList.fromIcon(category.icon) {
+                categoryIconTitle = "DEFAULT"
+                categoryId = abs(category.id)
+            }
+        } else { // 사용자 정의 카테고리
+            categoryIconTitle = "CUSTOM"
+            categoryId = category.id
+        }
+        return (categoryIconTitle, categoryId)
     }
     
     /// 특정 ID에 해당하는 지출내역 검색

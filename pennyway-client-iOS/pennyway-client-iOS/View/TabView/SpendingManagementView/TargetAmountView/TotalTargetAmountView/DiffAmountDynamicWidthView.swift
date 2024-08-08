@@ -20,6 +20,7 @@ struct DiffAmountDynamicWidthView: View {
                 .platformTextColor(color: textColor)
                 .font(.B2SemiboldFont())
                 .padding(.horizontal, 10)
+                .lineLimit(1)
                 .background(GeometryReader { geometry in
                     Color.clear.preference(key: TextWidthPreferenceKey.self, value: geometry.size.width)
                 })

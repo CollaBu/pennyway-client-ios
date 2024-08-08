@@ -10,7 +10,7 @@ final class ApiStatusLogger: EventMonitor {
             return
         }
 
-        print("ApiStatusLogger - statusCode : \(statusCode)")
+        Log.info("ApiStatusLogger - statusCode : \(statusCode)")
         debugPrint(request)
     }
 }

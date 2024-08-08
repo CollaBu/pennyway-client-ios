@@ -2,19 +2,11 @@ import SwiftUI
 
 // MARK: - MySpendingListView
 
-//// MARK: - SpendingListID
-//
-// struct SpendingListID: Identifiable {
-//    let id: Int
-//    let description: String
-//    // 필요한 다른 속성 추가
-// }
-
 struct MySpendingListView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @StateObject var spendingCategoryViewModel = SpendingCategoryViewModel()
     @State var selectedDateToScroll: String? = nil
-    @State private var currentMonth: Date = Date()
+    @Binding var currentMonth: Date
     @Binding var clickDate: Date?
     @State private var navigateToCategoryGridView = false
     @State private var showDetailSpendingView = false
@@ -54,6 +46,7 @@ struct MySpendingListView: View {
                                                     showDetailSpendingView = true
                                                 }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                                        .contentShape(Rectangle())
 
                                                 })
                                                 .buttonStyle(PlainButtonStyle())
@@ -73,7 +66,7 @@ struct MySpendingListView: View {
                         }
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
-                                changeMonth(by: -1)
+//                                changeMonth(by: -1)
 
                             }, label: {
                                 ZStack {
@@ -159,6 +152,7 @@ struct MySpendingListView: View {
             ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
         }
         .onAppear {
+            spendingHistoryViewModel.currentDate = currentMonth
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")

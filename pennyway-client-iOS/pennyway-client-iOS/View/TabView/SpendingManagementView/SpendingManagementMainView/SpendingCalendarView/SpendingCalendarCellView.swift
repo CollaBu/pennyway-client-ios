@@ -70,29 +70,30 @@ struct SpendingCalendarCellView: View {
                 .frame(width: 22 * DynamicSizeFactor.factor(), height: 22 * DynamicSizeFactor.factor())
 
             Spacer()
-                .frame(height: 1 * DynamicSizeFactor.factor())
+                .frame(height: 4 * DynamicSizeFactor.factor())
 
             if isCurrentMonthDay {
-                if let dailyTotalAmount = getSpendingAmount(for: day) {
-                    Text("-\(dailyTotalAmount)")
-                        .font(.B4MediumFont())
-                        .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
-                        .frame(width: 34 * DynamicSizeFactor.factor(), height: 10 * DynamicSizeFactor.factor())
+                if let dailyTotalAmount = SpendingHistoryUtil.getSpendingAmount(for: day, from: spendingHistoryViewModel) {
+                    VStack(spacing: -3) { // 텍스트 높이 조정
+                        ForEach(SpendingHistoryUtil.truncatedText("\(dailyTotalAmount)").split(separator: "\n"), id: \.self) { line in
+                            Text(line)
+                                .font(.B4MediumFont())
+                                .platformTextColor(color: isToday ? Color("Mint03") : Color("Gray07"))
+                        }
+                    }
+                    .frame(width: 36 * DynamicSizeFactor.factor(), height: 12 * DynamicSizeFactor.factor())
+
                 } else {
                     Spacer()
-                        .frame(height: 10 * DynamicSizeFactor.factor())
+                        .frame(height: 12 * DynamicSizeFactor.factor())
                 }
             }
         }
-        .frame(height: 32 * DynamicSizeFactor.factor())
+        .frame(height: 34 * DynamicSizeFactor.factor())
         .edgesIgnoringSafeArea(.all)
     }
 
     private func isSpendingDay(_ day: Int) -> Bool {
         return spendingHistoryViewModel.dailySpendings.contains { $0.day == day }
-    }
-
-    private func getSpendingAmount(for day: Int) -> Int? {
-        return spendingHistoryViewModel.dailySpendings.first(where: { $0.day == day })?.dailyTotalAmount
     }
 }

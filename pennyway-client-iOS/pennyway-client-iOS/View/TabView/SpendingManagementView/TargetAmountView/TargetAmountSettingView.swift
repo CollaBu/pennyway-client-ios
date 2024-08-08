@@ -4,11 +4,17 @@ import SwiftUI
 struct TargetAmountSettingView: View {
     @Binding var currentData: TargetAmount
     @StateObject var viewModel: TargetAmountSettingViewModel
+    @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToCompleteTarget = false
+    
+    @EnvironmentObject var authViewModel: AppViewModel
 
-    init(currentData: Binding<TargetAmount>) {
+    var entryPoint: TargetAmountEntryPoint
+    
+    init(currentData: Binding<TargetAmount>, entryPoint: TargetAmountEntryPoint) {
         _currentData = currentData
         _viewModel = StateObject(wrappedValue: TargetAmountSettingViewModel(currentData: currentData.wrappedValue))
+        self.entryPoint = entryPoint
     }
     
     var body: some View {
@@ -53,6 +59,32 @@ struct TargetAmountSettingView: View {
                 
                 Spacer()
                 
+                if entryPoint == .signUp {
+                    HStack {
+                        Spacer()
+                        
+                        Button(action: {
+                            // Delete 요청
+                            targetAmountViewModel.deleteCurrentMonthTargetAmountApi { success in
+                                if success {
+                                    Log.debug("목표 금액 삭제 성공")
+                                    authViewModel.login()
+                                }
+                            }
+                        }, label: {
+                            Text("나중에 할게요")
+                                .font(.B2SemiboldFont())
+                                .platformTextColor(color: Color("Gray03"))
+                            
+                        })
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Spacer()
+                    }                  
+                }
+                
+                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+                
                 CustomBottomButton(action: {
                     if viewModel.isFormValid {
                         viewModel.editCurrentMonthTargetAmountApi { success in
@@ -67,24 +99,41 @@ struct TargetAmountSettingView: View {
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
-                NavigationLink(destination: TargetAmountSetCompleteView(viewModel: viewModel), isActive: $navigateToCompleteTarget) {}
+                NavigationLink(destination: TargetAmountSetCompleteView(viewModel: viewModel, entryPoint: entryPoint), isActive: $navigateToCompleteTarget) {}
             }
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    NavigationBackButton(action: {})
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-                }.offset(x: -10)
+                if entryPoint == .afterLogin {
+                    HStack {
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    }.offset(x: -10)
+                } else {
+                    Spacer().frame(height: 44)
+                }
+            }
+        }
+        .onAppear {
+            if entryPoint == .signUp {
+                // 더미값 생성
+                targetAmountViewModel.generateCurrentMonthDummyDataApi { success in
+                    if success {
+                        Log.debug("더미데이터 목표 금액 생성 성공")
+                        viewModel.currentData?.targetAmountDetail.id = targetAmountViewModel.generateTargetAmountId
+                        
+                        targetAmountViewModel.targetAmountData = viewModel.currentData
+                    }
+                }
             }
         }
     }
 }
 
 #Preview {
-    TargetAmountSettingView(currentData: .constant(TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)))
+    TargetAmountSettingView(currentData: .constant(TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)), entryPoint: .signUp)
 }

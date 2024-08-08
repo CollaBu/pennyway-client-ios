@@ -4,6 +4,8 @@ import SwiftUI
 
 struct FindPwPhoneVerificationView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
+    @Binding var showManyRequestPopUp: Bool
+
     @State private var isFindUser = true
 
     var body: some View {
@@ -44,11 +46,18 @@ struct FindPwPhoneVerificationView: View {
                     }
                     Button(action: {
                         if isFindUser {
-                            viewModel.requestPwVerificationCodeApi { viewModel.judgeTimerRunning() }
+                            viewModel.requestPwVerificationCodeApi {
+                                if viewModel.showErrorApiRequest {
+                                    showManyRequestPopUp = true
+
+                                } else {
+                                    viewModel.judgeTimerRunning()
+                                }
+                            }
                         }
                     }, label: {
                         Text("인증번호 받기")
-                            .font(.pretendard(.medium, size: 13)) // 폰트 리스트에 없는 예외
+                            .font(.B1MediumFont()) // 폰트 리스트에 없는 예외
                             .platformTextColor(color: !viewModel.isDisabledButton && viewModel.phoneNumber.count >= 11 ? Color("White01") : Color("Gray04"))
                     })
                     .padding(.horizontal, 13 * DynamicSizeFactor.factor())
@@ -74,8 +83,4 @@ struct FindPwPhoneVerificationView: View {
             }
         }
     }
-}
-
-#Preview {
-    FindIdPhoneVerificationView(viewModel: PhoneVerificationViewModel())
 }

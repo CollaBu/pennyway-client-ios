@@ -12,16 +12,21 @@ enum UserAccountRouter: URLRequestConvertible {
     case resetMyPw(dto: ResetMyPwRequestDto)
     case editUserId(dto: CheckDuplicateRequestDto)
     case editUserPhoneNumber(dto: VerificationRequestDto)
+    case editUserName(dto: EditNameRequestDto)
+    case deleteProfileImage
+    case getNotificationList(dto: GetNotificationRequestDto)
+    case readNotifications(dto: ReadNotificationsRequestDto)
+    case checkUnReadNotifications
     
     var method: HTTPMethod {
         switch self {
-        case .getUserProfile:
+        case .getUserProfile, .getNotificationList, .checkUnReadNotifications:
             return .get
-        case .deleteUserAccount, .settingOffAlarm:
+        case .deleteUserAccount, .settingOffAlarm, .deleteProfileImage:
             return .delete
         case .registDeviceToken:
             return .put
-        case .settingOnAlarm, .resetMyPw, .editUserId, .editUserPhoneNumber:
+        case .settingOnAlarm, .resetMyPw, .editUserId, .editUserPhoneNumber, .editUserName, .readNotifications:
             return .patch
         case .validatePw:
             return .post
@@ -48,12 +53,20 @@ enum UserAccountRouter: URLRequestConvertible {
             return "v2/users/me/username"
         case .editUserPhoneNumber:
             return "v2/users/me/phone"
+        case .editUserName:
+            return "v2/users/me/name"
+        case .deleteProfileImage:
+            return "v2/users/me/profile-image"
+        case .getNotificationList, .readNotifications:
+            return "v2/notifications"
+        case .checkUnReadNotifications:
+            return "v2/notifications/unread"
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .getUserProfile, .deleteUserAccount:
+        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage:
             return [:]
         case let .registDeviceToken(dto):
             return try? dto.asDictionary()
@@ -67,6 +80,12 @@ enum UserAccountRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .editUserPhoneNumber(dto):
             return try? dto.asDictionary()
+        case let .editUserName(dto):
+            return try? dto.asDictionary()
+        case let .getNotificationList(dto):
+            return try? dto.asDictionary()
+        case let .readNotifications(dto):
+            return try? dto.asDictionary()
         }
     }
 
@@ -75,11 +94,11 @@ enum UserAccountRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .getUserProfile, .deleteUserAccount:
+        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage:
             request = URLRequest.createURLRequest(url: url, method: method)
-        case .registDeviceToken, .validatePw, .resetMyPw, .editUserId, .editUserPhoneNumber:
+        case .registDeviceToken, .validatePw, .resetMyPw, .editUserId, .editUserPhoneNumber, .editUserName, .readNotifications:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
-        case .settingOnAlarm, .settingOffAlarm:
+        case .settingOnAlarm, .settingOffAlarm, .getNotificationList:
             let queryParameters = parameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }

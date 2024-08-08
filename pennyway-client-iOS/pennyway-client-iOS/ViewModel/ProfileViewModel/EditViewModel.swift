@@ -2,8 +2,10 @@
 
 import SwiftUI
 
-class EditIdViewModel: ObservableObject {
+class EditViewModel: ObservableObject {
+    @Published var name = ""
     @Published var inputId = ""
+    @Published var showErrorName = false
     @Published var showErrorId = false
     @Published var isDuplicateId = false
     @Published var isFormValid = false
@@ -16,8 +18,22 @@ class EditIdViewModel: ObservableObject {
         }
     }
 
+    func validateName() {
+        let nameRegex = "^[가-힣a-zA-Z]{2,8}$"
+        showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
+        validateNameForm()
+    }
+
     func validateForm() {
-        if !isDuplicateId && !showErrorId && !inputId.isEmpty {
+        if !inputId.isEmpty && !isDuplicateId && !showErrorId {
+            isFormValid = true
+        } else {
+            isFormValid = false
+        }
+    }
+
+    func validateNameForm() {
+        if !name.isEmpty {
             isFormValid = true
         } else {
             isFormValid = false
@@ -88,6 +104,43 @@ class EditIdViewModel: ObservableObject {
                     Log.error("Failed to verify: \(error)")
                 }
                 Log.debug("아이디 수정 실패")
+                completion(false)
+            }
+        }
+    }
+
+    /// 이름 수정
+    func editUsernameApi(completion: @escaping (Bool) -> Void) {
+        let editUserNameDto = EditNameRequestDto(name: name)
+
+        UserAccountAlamofire.shared.editUserName(dto: editUserNameDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
+
+                        Log.debug("이름 수정 완료")
+                        updateUserField(fieldName: "name", value: self.name)
+
+                        completion(true)
+                    } catch {
+                        Log.fault("Error parsing response JSON: \(error)")
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("Failed to verify: \(StatusSpecificError)")
+
+                    if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
+                        self.isDuplicateId = true
+                        self.validateNameForm()
+                    }
+
+                } else {
+                    Log.error("Failed to verify: \(error)")
+                }
+                Log.debug("이름 수정 실패")
                 completion(false)
             }
         }

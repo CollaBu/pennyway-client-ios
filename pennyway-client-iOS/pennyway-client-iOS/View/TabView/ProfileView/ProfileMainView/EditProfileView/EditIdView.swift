@@ -4,7 +4,7 @@ import SwiftUI
 
 struct EditIdView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var editIdViewModel = EditIdViewModel()
+    @StateObject var editIdViewModel = EditViewModel()
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -49,18 +49,11 @@ struct EditIdView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("icon_arrow_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 34, height: 34)
-                            .padding(5)
-                    })
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+
                 }.offset(x: -10)
             }
         }

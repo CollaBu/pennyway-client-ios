@@ -9,8 +9,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.message_id"
 
     /// 앱이 켜졌을 때
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // 파이어베이스 설정
+        let firebaseAnalyticsService = FirebaseAnalyticsService()
+
+        AnalyticsManager.shared.addService(firebaseAnalyticsService)
+
+        if let launchOptions = launchOptions {
+            AnalyticsManager.shared.initialize(application: application, didFinishLaunchingWithOptions: launchOptions)
+        }
+
         FirebaseApp.configure()
 
         // Setting Up Notifications...
@@ -51,24 +59,8 @@ extension AppDelegate: MessagingDelegate {
     /// fcm 등록 토큰을 받았을 때
     func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let fcmToken = fcmToken {
-            if let storedFcmToken = KeychainHelper.loadFcmToken() {
-                // 2. fcmToken이 KeychainHelper에 저장되어 있는 경우
-                if storedFcmToken != fcmToken {
-                    // 2.1 저장된 값과 비교해서 다르면 -> registDeviceTokenApi() 호출
-                    KeychainHelper.saveFcmToken(fcmToken: fcmToken)
-                    Log.info("fcmToken updated: \(fcmToken)")
-                    registDeviceTokenApi(fcmToken: fcmToken)
-                } else {
-                    // 2.2 저장된 값과 같으면 -> registDeviceTokenApi() 호출 x
-                    Log.info("fcmToken이 저장된 값과 같다")
-                    Log.info("fcmToken updated: \(fcmToken)")
-                }
-            } else {
-                // 1. fcmToken이 KeychainHelper에 저장되지 않은 경우 -> fcmToken 저장
-                KeychainHelper.saveFcmToken(fcmToken: fcmToken)
-                Log.info("fcmToken saved: \(fcmToken)")
-                registDeviceTokenApi(fcmToken: fcmToken)
-            }
+            Log.info("fcmToken: \(fcmToken)")
+            registDeviceTokenApi(fcmToken: fcmToken)
         }
     }
 
@@ -80,7 +72,7 @@ extension AppDelegate: MessagingDelegate {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
                         Log.debug(response)
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")

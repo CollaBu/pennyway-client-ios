@@ -1,30 +1,34 @@
 import SwiftUI
 
 struct OAuthButtonView: View {
+    var isKakaoLoggedIn: Bool
+    var isGoogleLoggedIn: Bool
+    var isAppleLoggedIn: Bool
+
     var kakaoAction: () -> Void
     var googleAction: () -> Void
     var appleAction: () -> Void
 
     var body: some View {
-        HStack {
+        HStack(spacing: 2 * DynamicSizeFactor.factor()) {
             Button(action: {
                 kakaoAction()
             }, label: {
-                Image("icon_signin_kakao")
+                Image(isKakaoLoggedIn ? "icon_signin_kakao" : "icon_signin_kakao_notlinked")
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
             })
 
             Button(action: {
                 googleAction()
             }, label: {
-                Image("icon_signin_google")
+                Image(isGoogleLoggedIn ? "icon_signin_google" : "icon_signin_google_notlinked")
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
             })
 
             Button(action: {
                 appleAction()
             }, label: {
-                Image("icon_signin_apple")
+                Image(isAppleLoggedIn ? "icon_signin_apple" : "icon_signin_apple_notlinked")
                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
             })
         }

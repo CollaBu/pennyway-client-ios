@@ -14,6 +14,8 @@ enum EntryPoint {
 
 struct AddSpendingHistoryView: View {
     @StateObject var viewModel = AddSpendingHistoryViewModel()
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
+
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @State var spendingId: Int = 0
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
@@ -27,7 +29,7 @@ struct AddSpendingHistoryView: View {
         ZStack {
             VStack {
                 ScrollView {
-                    AddSpendingInputFormView(viewModel: viewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, entryPoint: entryPoint, spendingId: $spendingId)
+                    AddSpendingInputFormView(viewModel: viewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, clickDate: $clickDate, entryPoint: entryPoint, spendingId: $spendingId)
                 }
                 Spacer()
 
@@ -70,23 +72,15 @@ struct AddSpendingHistoryView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Image("icon_arrow_back")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 34, height: 34)
-                                .padding(5)
-                        })
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
 
                     }.offset(x: -10)
                 }
             }
-            .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented) {
+            .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented, minHeight: 524 * DynamicSizeFactor.factor(), maxHeight: 524 * DynamicSizeFactor.factor()) {
                 SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
             }
             .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
@@ -97,5 +91,5 @@ struct AddSpendingHistoryView: View {
 }
 
 #Preview {
-    AddSpendingHistoryView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
+    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
 }

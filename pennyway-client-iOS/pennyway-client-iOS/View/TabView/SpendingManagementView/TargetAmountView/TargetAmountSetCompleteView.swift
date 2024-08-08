@@ -3,6 +3,17 @@ import SwiftUI
 
 struct TargetAmountSetCompleteView: View {
     @ObservedObject var viewModel: TargetAmountSettingViewModel
+    @EnvironmentObject var authViewModel: AppViewModel
+    
+    var entryPoint: TargetAmountEntryPoint
+    
+    private var buttonText: String {
+        if entryPoint == .signUp {
+            return "시작하기"
+        } else {
+            return "확인"
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -10,7 +21,7 @@ struct TargetAmountSetCompleteView: View {
                 Group {
                     Spacer().frame(height: 65 * DynamicSizeFactor.factor())
                     
-                    Image("icon_illust_goal setting")
+                    Image("icon_illust_goal_setting")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 160 * DynamicSizeFactor.factor(), height: 160 * DynamicSizeFactor.factor())
@@ -30,8 +41,13 @@ struct TargetAmountSetCompleteView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    goToTotalTargetAmountView()
-                }, label: "확인", isFormValid: .constant(true))
+                    if entryPoint == .signUp {
+                        authViewModel.login() // 메인화면으로 entryPoint 나누기
+                    } else {
+                        goToTotalTargetAmountView()
+                    }
+                    
+                }, label: buttonText, isFormValid: .constant(true))
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
         }
@@ -45,5 +61,5 @@ struct TargetAmountSetCompleteView: View {
 }
 
 #Preview {
-    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel(currentData: TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)))
+    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel(currentData: TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)), entryPoint: .signUp)
 }

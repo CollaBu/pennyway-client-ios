@@ -7,7 +7,8 @@ struct TotalTargetAmountView: View {
     @State private var isClickMenu = false
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["목표금액 수정", "초기화하기"]
-    @State private var navigateToEditTarget = false
+    @State private var isnavigateToEditTargetView = false
+    @State private var isnavigateToPastSpendingView = false
     @State private var showingDeletePopUp = false
     @State private var showToastPopup = false
     
@@ -17,7 +18,7 @@ struct TotalTargetAmountView: View {
                 VStack(spacing: 0) {
                     TotalTargetAmountHeaderView(viewModel: viewModel)
                     
-                    TotalTargetAmountContentView(viewModel: viewModel)
+                    TotalTargetAmountContentView(viewModel: viewModel, isnavigateToPastSpendingView: $isnavigateToPastSpendingView)
                     
                     Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                 }
@@ -31,7 +32,7 @@ struct TotalTargetAmountView: View {
                             listArray: listArray,
                             onItemSelected: { item in
                                 if item == "목표금액 수정" {
-                                    navigateToEditTarget = true
+                                    isnavigateToEditTargetView = true
                                 } else {
                                     showingDeletePopUp = true
                                 }
@@ -114,7 +115,9 @@ struct TotalTargetAmountView: View {
             }
         }
         
-        NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData), isActive: $navigateToEditTarget) {}
+        NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
+        
+        NavigationLink(destination: PastSpendingListView(viewModel: viewModel), isActive: $isnavigateToPastSpendingView) {}
     }
 
     private func deleteTargetAmountApi() {

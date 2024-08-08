@@ -42,19 +42,11 @@ struct AddSpendingCategoryView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("icon_arrow_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 34, height: 34)
-                            .padding(5)
-                    })
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
-                    
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+
                 }.offset(x: -10)
             }
         }
@@ -89,7 +81,7 @@ struct AddSpendingCategoryView: View {
     private func selectedCategoryIcon() -> String {
         switch entryPoint {
         case .create:
-            return viewModel.selectedCategoryIcon?.rawValue ?? CategoryIconName(baseName: .etc, state: .on).rawValue
+            return viewModel.selectedCategoryIcon.rawValue
         case .modify:
             return spendingCategoryViewModel.selectedCategoryIcon!.rawValue
         }
@@ -121,8 +113,13 @@ struct AddSpendingCategoryView: View {
                     .padding(.leading, 13 * DynamicSizeFactor.factor())
                     .font(.H4MediumFont())
                     .platformTextColor(color: Color("Gray07"))
-                    .onChange(of: categoryName) { _ in
-                        isFormValid = !categoryName.isEmpty
+                    .onChange(of: categoryName) { newValue in
+                        if entryPoint == .create {
+                            viewModel.categoryName = String(newValue.prefix(maxCategoryNameCount))
+                        } else {
+                            spendingCategoryViewModel.categoryName = String(newValue.prefix(maxCategoryNameCount))
+                        }
+                        isFormValid = !newValue.isEmpty
                     }
             }
         }
@@ -158,6 +155,11 @@ struct AddSpendingCategoryView: View {
             case .modify:
                 spendingCategoryViewModel.selectedCategory!.name = categoryName
                 spendingCategoryViewModel.selectedCategory!.icon = spendingCategoryViewModel.selectedCategoryIcon ?? spendingCategoryViewModel.selectedCategory!.icon
+                
+                if let selectedCategory = SpendingCategoryIconList.fromIcon(spendingCategoryViewModel.selectedCategory!.icon) {
+                    spendingCategoryViewModel.selectedCategoryIconTitle = selectedCategory.rawValue
+                }
+                
                 spendingCategoryViewModel.modifyCategoryApi {
                     success in
                     if success {

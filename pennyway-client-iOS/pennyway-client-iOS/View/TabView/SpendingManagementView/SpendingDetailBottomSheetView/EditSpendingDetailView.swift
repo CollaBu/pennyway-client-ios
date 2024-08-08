@@ -32,6 +32,7 @@ struct EditSpendingDetailView: View {
                                 .font(.B2MediumFont())
                                 .platformTextColor(color: Color("Gray05"))
                                 .padding(.vertical, 4)
+
                         })
                         .padding(.vertical, 4)
                         .padding(.trailing, 8)

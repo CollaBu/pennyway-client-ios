@@ -7,6 +7,7 @@ import SwiftUI
 class TotalTargetAmountViewModel: ObservableObject {
     @Published var targetAmounts: [TargetAmount] = [] // 내림차순 데이터
     @Published var sortTargetAmounts: [TargetAmount] = [] // 오름차순 정렬
+    @Published var maxTotalSpending = 0
     @Published var currentData: TargetAmount = TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0) // 당월 데이터
 
     func getTotalTargetAmountApi(completion: @escaping (Bool) -> Void) {
@@ -20,7 +21,19 @@ class TotalTargetAmountViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(GetTotalTargetAmountResponseDto.self, from: responseData)
 
                         self.targetAmounts = response.data.targetAmounts
-                        self.sortTargetAmounts = self.targetAmounts.sorted(by: { $0.month < $1.month })
+
+                        self.sortTargetAmounts = self.targetAmounts.sorted { // 먼저 year 기준으로 나눈 후 month 오름차순
+                            if $0.year == $1.year {
+                                return $0.month < $1.month
+                            } else {
+                                return $0.year < $1.year
+                            }
+                        }
+
+                        // 뒤에서 6개의 데이터 중 최대값을 maxTotalSpending에 설정
+                        let lastSixTargetAmounts = Array(self.sortTargetAmounts.suffix(6))
+                        self.maxTotalSpending = lastSixTargetAmounts.map { Int($0.totalSpending) }.max() ?? 0
+
                         if let firstTargetAmount = self.targetAmounts.first {
                             self.currentData = firstTargetAmount
                         }

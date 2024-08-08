@@ -5,8 +5,11 @@ import SwiftUI
 struct SpendingManagementMainView: View {
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
+    @StateObject var notificationViewModel = ProfileNotificationViewModel()
+
     @State private var navigateToAddSpendingHistory = false
     @State private var navigateToMySpendingList = false
+    @State private var navigateToMainAlarmView = false
     @State private var showSpendingDetailView = false
     @State private var showEditSpendingDetailView: Bool = false
     @State private var ishidden = false
@@ -14,7 +17,6 @@ struct SpendingManagementMainView: View {
     @State private var addSpendingClickDate: Date?
     @State private var addSpendingSelectedDate: Date?
     @State private var entryPoint: EntryPoint = .main
-
     @State private var showToastPopup = false
 
     var body: some View {
@@ -41,6 +43,7 @@ struct SpendingManagementMainView: View {
 
                     CustomRectangleButton(action: {
                         navigateToMySpendingList = true
+                        Log.debug(navigateToMySpendingList)
                     }, label: "나의 소비 내역")
 
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
@@ -49,6 +52,8 @@ struct SpendingManagementMainView: View {
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                 targetAmountViewModel.getTargetAmountForDateApi { _ in }
+                notificationViewModel.checkUnReadNotificationsApi { _ in }
+                Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
             }
             .setTabBarVisibility(isHidden: ishidden)
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
@@ -78,8 +83,10 @@ struct SpendingManagementMainView: View {
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
 
-                        Button(action: {}, label: {
-                            Image("icon_navigationbar_bell")
+                        Button(action: {
+                            navigateToMainAlarmView = true
+                        }, label: {
+                            Image(notificationViewModel.hasUnread ? "icon_navigationbar_bell_dot" : "icon_navigationbar_bell")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -101,16 +108,30 @@ struct SpendingManagementMainView: View {
                     }
                 }, alignment: .bottom
             )
+            .background(
+                NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
+                    EmptyView()
+                }
+                .hidden()
+            )
 
-            NavigationLink(destination: AddSpendingHistoryView(spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
+            if #available(iOS 15.0, *) {
+            } else {
+                NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
+                    EmptyView()
+                }
+            }
+
+            NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
 
-            NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
+            NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
                 EmptyView()
             }
+            .hidden()
         }
-        .dragBottomSheet(isPresented: $showSpendingDetailView) {
+        .dragBottomSheet(isPresented: $showSpendingDetailView, minHeight: bottomSheetMinHeight, maxHeight: 524 * DynamicSizeFactor.factor()) {
             SpendingDetailSheetView(clickDate: $clickDate,
                                     viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
                 .zIndex(2)
@@ -126,6 +147,22 @@ struct SpendingManagementMainView: View {
             }
         }
         .id(ishidden)
+    }
+
+    private var bottomSheetMinHeight: CGFloat {
+        if let clickDate = clickDate {
+            let filteredSpendings = spendingHistoryViewModel.filteredSpendings(for: clickDate)
+            switch filteredSpendings.count {
+            case 0 ..< 2: // 지출내역 0~1
+                return 255 * DynamicSizeFactor.factor()
+            case 2 ..< 6: // 지출내역 2~5
+                return 412 * DynamicSizeFactor.factor()
+            default: // 지출내역 5이상일 경우
+                return 524 * DynamicSizeFactor.factor()
+            }
+        } else {
+            return 255 * DynamicSizeFactor.factor()
+        }
     }
 }
 
