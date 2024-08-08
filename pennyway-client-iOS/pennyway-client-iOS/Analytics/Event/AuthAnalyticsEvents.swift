@@ -27,19 +27,10 @@ enum AuthEvents: AnalyticsEvent {
     /// 소셜 회원가입 이벤트
     case oauthSignUpView
     
-    // 아이디 찾기 이벤트
-    case findUsernameView
-    case findUsernamePhoneVerificationView
-    
-    // 비밀번호 찾기 이벤트
-    case findPasswordView
-    case findPasswordPhoneVerificationView
-    
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, .existsOauthAccountView,
-             .generalSignSycnView, .oauthSignUpView, .findUsernameView,
-             .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
+        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, 
+                .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
             return AnalyticsConstants.EventName.screenView
         case .oauthSignInBtnTapped, .idCancelBtnTapped, .pwCancelBtnTapped:
             return AnalyticsConstants.EventName.btnTapped
@@ -48,9 +39,8 @@ enum AuthEvents: AnalyticsEvent {
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, .existsOauthAccountView,
-             .generalSignSycnView, .oauthSignUpView, .findUsernameView,
-             .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
+        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, 
+                .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
             return AnalyticsConstants.EventType.screenView
         case .oauthSignInBtnTapped, .idCancelBtnTapped, .pwCancelBtnTapped:
             return AnalyticsConstants.EventType.userAction
@@ -67,7 +57,7 @@ enum AuthEvents: AnalyticsEvent {
             ]
         case .oauthSignInBtnTapped:
             return [
-                .eventName: AuthEvent.oauthSignInBtnTapped.eventName,
+                .eventName: AuthCustomEvent.oauthSignInBtnTapped.eventName,
             ]
         case .phoneVerificationView:
             return [
@@ -107,41 +97,17 @@ enum AuthEvents: AnalyticsEvent {
             ]
         case .idCancelBtnTapped:
             return [
-                .eventName: AuthEvent.idCancelBtnTapped.eventName
+                .eventName: AuthCustomEvent.idCancelBtnTapped.eventName
             ]
         case .pwCancelBtnTapped:
             return [
-                .eventName: AuthEvent.pwCancelBtnTapped.eventName
+                .eventName: AuthCustomEvent.pwCancelBtnTapped.eventName
             ]
         case .oauthSignUpView:
             return [
                 .screenId: AuthScreen.oauthSignUpView.screenId,
                 .screenName: AuthScreen.oauthSignUpView.screenName,
                 .screenClass: AuthScreen.oauthSignUpView.screenClass
-            ]
-        case .findUsernameView:
-            return [
-                .screenId: AuthScreen.findUsernameView.screenId,
-                .screenName: AuthScreen.findUsernameView.screenName,
-                .screenClass: AuthScreen.findUsernameView.screenClass
-            ]
-        case .findUsernamePhoneVerificationView:
-            return [
-                .screenId: AuthScreen.findUsernamePhoneVerificationView.screenId,
-                .screenName: AuthScreen.findUsernamePhoneVerificationView.screenName,
-                .screenClass: AuthScreen.findUsernamePhoneVerificationView.screenClass
-            ]
-        case .findPasswordView:
-            return [
-                .screenId: AuthScreen.findPasswordView.screenId,
-                .screenName: AuthScreen.findPasswordView.screenName,
-                .screenClass: AuthScreen.findPasswordView.screenClass
-            ]
-        case .findPasswordPhoneVerificationView:
-            return [
-                .screenId: AuthScreen.findPasswordPhoneVerification.screenId,
-                .screenName: AuthScreen.findPasswordPhoneVerification.screenName,
-                .screenClass: AuthScreen.findPasswordPhoneVerification.screenClass
             ]
         }
     }
@@ -166,14 +132,6 @@ enum AuthScreen {
     /// 소셜 회원가입 이벤트
     case oauthSignUpView
     
-    // 아이디 찾기 이벤트
-    case findUsernameView
-    case findUsernamePhoneVerificationView
-    
-    // 비밀번호 찾기 이벤트
-    case findPasswordView
-    case findPasswordPhoneVerification
-    
     var screenId: String {
         switch self {
         case .loginView: return "login_screen_view_event"
@@ -184,10 +142,6 @@ enum AuthScreen {
         case .existsOauthAccountView: return "exists_oauth_account_screen_view_event"
         case .generalSignSycnView: return "general_signup_sync_screen_view_event"
         case .oauthSignUpView: return "oauth_signup_screen_view_event"
-        case .findUsernameView: return "find_username_screen_view_event"
-        case .findUsernamePhoneVerificationView: return "find_username_phone_verification_screen_view_event"
-        case .findPasswordView: return "find_password_screen_view_event"
-        case .findPasswordPhoneVerification: return "find_password_phone_verification_screen_view_event"
         }
     }
     
@@ -201,10 +155,6 @@ enum AuthScreen {
         case .existsOauthAccountView: return "일반 회원가입 - 소셜 계정 존재 확인 화면"
         case .generalSignSycnView: return "일반 회원가입 - 소셜 계정 연동 화면"
         case .oauthSignUpView: return "소셜 회원가입 화면"
-        case .findUsernameView: return "아이디 찾기 화면"
-        case .findUsernamePhoneVerificationView: return "아이디 찾기 휴대폰 인증 화면"
-        case .findPasswordView: return "비밀번호 찾기 화면"
-        case .findPasswordPhoneVerification: return "비밀번호 찾기 휴대폰 인증 화면"
         }
     }
     
@@ -218,17 +168,13 @@ enum AuthScreen {
         case .existsOauthAccountView: return "OAuthAccountLinkingView"
         case .generalSignSycnView: return "OAuthAccountLinkingView"
         case .oauthSignUpView: return "SignUpView"
-        case .findUsernameView: return "FindIdView"
-        case .findUsernamePhoneVerificationView: return "FindIdPhoneVerificationView"
-        case .findPasswordView: return "FindPwView"
-        case .findPasswordPhoneVerification: return "FindPwPhoneVerification"
         }
     }
 }
 
 // MARK: - AuthEvent
 
-enum AuthEvent {
+enum AuthCustomEvent {
     case oauthSignInBtnTapped
     
     case idCancelBtnTapped
