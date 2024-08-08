@@ -155,8 +155,8 @@
 		4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */; };
 		4A9634B22C42EAF6000A218A /* SpendingListGroupUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */; };
 		4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */; };
-		4AA13C5E2C63E2A000D8DEE7 /* StorageAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C5D2C63E2A000D8DEE7 /* StorageAlamofire.swift */; };
-		4AA13C602C63E2B300D8DEE7 /* StorageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C5F2C63E2B300D8DEE7 /* StorageRouter.swift */; };
+		4AA13C5E2C63E2A000D8DEE7 /* ObjectStorageAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C5D2C63E2A000D8DEE7 /* ObjectStorageAlamofire.swift */; };
+		4AA13C602C63E2B300D8DEE7 /* ObjectStorageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C5F2C63E2B300D8DEE7 /* ObjectStorageRouter.swift */; };
 		4AA13C622C63E4DF00D8DEE7 /* GeneratePresigendUrlRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C612C63E4DF00D8DEE7 /* GeneratePresigendUrlRequestDto.swift */; };
 		4AA13C672C63ED5100D8DEE7 /* PresignedUrlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C662C63ED5100D8DEE7 /* PresignedUrlViewModel.swift */; };
 		4AA13C692C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C682C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift */; };
@@ -465,8 +465,8 @@
 		4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingListGroupUtil.swift; sourceTree = "<group>"; };
 		4A98BD7B2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCurrentMonthTargetAmountRequestDto.swift; sourceTree = "<group>"; };
-		4AA13C5D2C63E2A000D8DEE7 /* StorageAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAlamofire.swift; sourceTree = "<group>"; };
-		4AA13C5F2C63E2B300D8DEE7 /* StorageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRouter.swift; sourceTree = "<group>"; };
+		4AA13C5D2C63E2A000D8DEE7 /* ObjectStorageAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStorageAlamofire.swift; sourceTree = "<group>"; };
+		4AA13C5F2C63E2B300D8DEE7 /* ObjectStorageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStorageRouter.swift; sourceTree = "<group>"; };
 		4AA13C612C63E4DF00D8DEE7 /* GeneratePresigendUrlRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePresigendUrlRequestDto.swift; sourceTree = "<group>"; };
 		4AA13C662C63ED5100D8DEE7 /* PresignedUrlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlViewModel.swift; sourceTree = "<group>"; };
 		4AA13C682C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePresignedUrlRequestDto.swift; sourceTree = "<group>"; };
@@ -748,7 +748,7 @@
 		4A0FFBE42BCD9F2200EFEC56 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				4AA13C5C2C63E1EA00D8DEE7 /* StorageDomain */,
+				4AA13C5C2C63E1EA00D8DEE7 /* ObjectStorageDomain */,
 				4A3701CC2C08F7F600F0AEBA /* SpendingDomain */,
 				4A3701B02C08F74E00F0AEBA /* TargetAmountDomain */,
 				D851E7192C0273A300316DB3 /* InquiryDomain */,
@@ -1447,14 +1447,14 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		4AA13C5C2C63E1EA00D8DEE7 /* StorageDomain */ = {
+		4AA13C5C2C63E1EA00D8DEE7 /* ObjectStorageDomain */ = {
 			isa = PBXGroup;
 			children = (
 				4AA13C632C63E61900D8DEE7 /* Dto */,
-				4AA13C5D2C63E2A000D8DEE7 /* StorageAlamofire.swift */,
-				4AA13C5F2C63E2B300D8DEE7 /* StorageRouter.swift */,
+				4AA13C5D2C63E2A000D8DEE7 /* ObjectStorageAlamofire.swift */,
+				4AA13C5F2C63E2B300D8DEE7 /* ObjectStorageRouter.swift */,
 			);
-			path = StorageDomain;
+			path = ObjectStorageDomain;
 			sourceTree = "<group>";
 		};
 		4AA13C632C63E61900D8DEE7 /* Dto */ = {
@@ -2079,7 +2079,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */,
-				4AA13C602C63E2B300D8DEE7 /* StorageRouter.swift in Sources */,
+				4AA13C602C63E2B300D8DEE7 /* ObjectStorageRouter.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
 				4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */,
@@ -2100,7 +2100,7 @@
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
 				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
-				4AA13C5E2C63E2A000D8DEE7 /* StorageAlamofire.swift in Sources */,
+				4AA13C5E2C63E2A000D8DEE7 /* ObjectStorageAlamofire.swift in Sources */,
 				D85927FA2BE9116700653391 /* LoginViewModel.swift in Sources */,
 				4A6C79E42C46DE8B009463E4 /* VerificationButton.swift in Sources */,
 				4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */,

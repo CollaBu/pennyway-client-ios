@@ -2,7 +2,7 @@
 import Alamofire
 import Foundation
 
-enum StorageRouter: URLRequestConvertible {
+enum ObjectStorageRouter: URLRequestConvertible {
     case generatePresignedUrl(dto: GeneratePresigendUrlRequestDto)
     case storePresignedUrl(payload: String, image: UIImage, dto: StorePresignedUrlRequestDto)
     

@@ -11,7 +11,7 @@ class PresignedUrlViewModel: ObservableObject {
         let generatePresigendUrlRequestDto = GeneratePresigendUrlRequestDto(type: ImageType.profile.rawValue, ext: Ext.jpeg
             .rawValue)
 
-        StorageAlamofire.shared.generatePresignedUrl(generatePresigendUrlRequestDto) { result in
+        ObjectStorageAlamofire.shared.generatePresignedUrl(generatePresigendUrlRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -50,7 +50,7 @@ class PresignedUrlViewModel: ObservableObject {
         Log.debug("payload: \(payload)")
 
         if image != nil {
-            StorageAlamofire.shared.storePresignedUrl(payload, image!, storePresignedUrlRequestDto) { result in
+            ObjectStorageAlamofire.shared.storePresignedUrl(payload, image!, storePresignedUrlRequestDto) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {
