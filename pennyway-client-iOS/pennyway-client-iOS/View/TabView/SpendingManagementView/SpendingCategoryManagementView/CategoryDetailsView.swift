@@ -125,6 +125,7 @@ struct CategoryDetailsView: View {
             }
             .onChange(of: isDeleted) { newValue in
                 if newValue {
+                    viewModel.spedingHistoryTotalCount -= 1
                     refreshView {
                         showToastPopup = true
                     }
@@ -164,8 +165,8 @@ struct CategoryDetailsView: View {
         }
     }
 
-    private func refreshView(completion: @escaping () -> Void) {
-        viewModel.initPage()
+    private func refreshView(completion _: @escaping () -> Void) {
+//        viewModel.initPage()
         viewModel.getCategorySpendingHistoryApi { _ in
 //            if success {
 //                Log.debug("카테고리 지출내역 조회 성공")
