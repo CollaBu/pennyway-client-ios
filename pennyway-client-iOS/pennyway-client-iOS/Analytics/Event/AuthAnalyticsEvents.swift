@@ -18,12 +18,13 @@ enum AuthEvents: AnalyticsEvent {
     
     // 일반 회원가입 이벤트
     case generalSignUpView
+    case existsOauthAccountView
     case generalSignSycnView
     
     case idCancelBtnTapped
     case pwCancelBtnTapped
     
-    // 소셜 회원가입 이벤트
+    /// 소셜 회원가입 이벤트
     case oauthSignUpView
     
     // 아이디 찾기 이벤트
@@ -36,9 +37,9 @@ enum AuthEvents: AnalyticsEvent {
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
-                .generalSignSycnView, .oauthSignUpView, .findUsernameView,
-                .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
+        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, .existsOauthAccountView,
+             .generalSignSycnView, .oauthSignUpView, .findUsernameView,
+             .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
             return AnalyticsConstants.EventName.screenView
         case .oauthSignInBtnTapped, .idCancelBtnTapped, .pwCancelBtnTapped:
             return AnalyticsConstants.EventName.btnTapped
@@ -47,9 +48,9 @@ enum AuthEvents: AnalyticsEvent {
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
-                .generalSignSycnView, .oauthSignUpView, .findUsernameView,
-                .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
+        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, .existsOauthAccountView,
+             .generalSignSycnView, .oauthSignUpView, .findUsernameView,
+             .findUsernamePhoneVerificationView, .findPasswordView, .findPasswordPhoneVerificationView:
             return AnalyticsConstants.EventType.screenView
         case .oauthSignInBtnTapped, .idCancelBtnTapped, .pwCancelBtnTapped:
             return AnalyticsConstants.EventType.userAction
@@ -91,6 +92,12 @@ enum AuthEvents: AnalyticsEvent {
                 .screenId: AuthScreen.generalSignUpView.screenId,
                 .screenName: AuthScreen.generalSignUpView.screenName,
                 .screenClass: AuthScreen.generalSignUpView.screenClass
+            ]
+        case .existsOauthAccountView:
+            return [
+                .screenId: AuthScreen.existsOauthAccountView.screenId,
+                .screenName: AuthScreen.existsOauthAccountView.screenName,
+                .screenClass: AuthScreen.existsOauthAccountView.screenClass
             ]
         case .generalSignSycnView:
             return [
@@ -143,7 +150,7 @@ enum AuthEvents: AnalyticsEvent {
 // MARK: - AuthScreen
 
 enum AuthScreen {
-    // 로그인
+    /// 로그인
     case loginView
     
     // 공용
@@ -153,9 +160,10 @@ enum AuthScreen {
     
     // 일반 회원가입 이벤트
     case generalSignUpView
+    case existsOauthAccountView
     case generalSignSycnView
     
-    // 소셜 회원가입 이벤트
+    /// 소셜 회원가입 이벤트
     case oauthSignUpView
     
     // 아이디 찾기 이벤트
@@ -173,6 +181,7 @@ enum AuthScreen {
         case .tosView: return "tos_screen_view_event"
         case .welcomeView: return "welcome_screen_view_event"
         case .generalSignUpView: return "general_signup_screen_view_event"
+        case .existsOauthAccountView: return "exists_oauth_account_screen_view_event"
         case .generalSignSycnView: return "general_signup_sync_screen_view_event"
         case .oauthSignUpView: return "oauth_signup_screen_view_event"
         case .findUsernameView: return "find_username_screen_view_event"
@@ -189,7 +198,8 @@ enum AuthScreen {
         case .tosView: return "이용약관 화면"
         case .welcomeView: return "회원가입 성공 화면"
         case .generalSignUpView: return "일반 회원가입 화면"
-        case .generalSignSycnView: return "일반 회원가입 소셜 계정 연동 화면"
+        case .existsOauthAccountView: return "일반 회원가입 - 소셜 계정 존재 확인 화면"
+        case .generalSignSycnView: return "일반 회원가입 - 소셜 계정 연동 화면"
         case .oauthSignUpView: return "소셜 회원가입 화면"
         case .findUsernameView: return "아이디 찾기 화면"
         case .findUsernamePhoneVerificationView: return "아이디 찾기 휴대폰 인증 화면"
@@ -205,6 +215,7 @@ enum AuthScreen {
         case .tosView: return "TermsAndConditionsView"
         case .welcomeView: return "WelcomeView"
         case .generalSignUpView: return "SignUpView"
+        case .existsOauthAccountView: return "OAuthAccountLinkingView"
         case .generalSignSycnView: return "OAuthAccountLinkingView"
         case .oauthSignUpView: return "SignUpView"
         case .findUsernameView: return "FindIdView"
@@ -214,6 +225,8 @@ enum AuthScreen {
         }
     }
 }
+
+// MARK: - AuthEvent
 
 enum AuthEvent {
     case oauthSignInBtnTapped

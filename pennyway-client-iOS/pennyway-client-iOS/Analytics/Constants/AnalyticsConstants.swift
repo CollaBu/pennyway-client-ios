@@ -41,7 +41,9 @@ enum AnalyticsConstants {
         var rawValue: String {
             switch self {
             case .screenId: return "screen_id"
+
             case .screenName: return "screen_name"
+
             case .screenClass: return "screen_class"
                 
             case .eventName: return "event_name"
