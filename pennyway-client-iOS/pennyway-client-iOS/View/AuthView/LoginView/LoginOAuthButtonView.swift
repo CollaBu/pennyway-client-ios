@@ -18,14 +18,20 @@ struct LoginOAuthButtonView: View {
                 isAppleLoggedIn: true,
 
                 kakaoAction: { // Kakao 로그인 액션 처리
+                    AnalyticsManager.shared.trackEvent(AuthEvents.oauthSignInBtnTapped, additionalParams: [.oauthType: "kakao"])
+                    
                     kakaoOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.kakao.rawValue
                 },
                 googleAction: { // Google 로그인 액션 처리
+                    AnalyticsManager.shared.trackEvent(AuthEvents.oauthSignInBtnTapped, additionalParams: [.oauthType: "google"])
+                    
                     googleOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.google.rawValue
                 },
                 appleAction: { // Apple 로그인 액션 처리
+                    AnalyticsManager.shared.trackEvent(AuthEvents.oauthSignInBtnTapped, additionalParams: [.oauthType: "apple"])
+                    
                     appleOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.apple.rawValue
                 }
