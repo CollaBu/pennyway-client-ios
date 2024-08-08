@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct UnreadAlarmView: View {
-//    @ObservedObject var viewModel: ProfileNotificationViewModel
+    @ObservedObject var viewModel: ProfileNotificationViewModel
 
     let alarms: [NotificationContentData]
 
@@ -19,12 +19,28 @@ struct UnreadAlarmView: View {
                     Button(action: {
                         Log.debug("click")
                     }, label: {
-                        AlarmRow(alarm: alarm)
-                            .contentShape(Rectangle())
+                        VStack {
+                            AlarmRow(alarm: alarm)
+                            Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+                        }
+                        .contentShape(Rectangle())
                     })
                     .buttonStyle(PlainButtonStyle())
+                    .onAppear {
+                        // 해당 알림이 마지막 항목인 경우 추가 데이터를 로드
+
+                        guard let index = alarms.firstIndex(where: { $0.id == alarm.id }) else {
+                            return
+                        }
+                        // 해당 index가 마지막 index라면 데이터 추가
+                        if index == alarms.count - 1 {
+                            print("Fetching next page because last item appeared: \(alarm.id)")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
+                                viewModel.getNotificationListApi { _ in }
+                            }
+                        }
+                    }
                 }
-                Spacer().frame(height: 24 * DynamicSizeFactor.factor())
             }
         }
         .padding(.horizontal, 20)

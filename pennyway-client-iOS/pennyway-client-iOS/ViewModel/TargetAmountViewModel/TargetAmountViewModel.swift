@@ -7,6 +7,8 @@ class TargetAmountViewModel: ObservableObject {
     @Published var isHiddenSuggestionView = true // 추천 금액 뷰
     @Published var isPresentTargetAmount = true // 당월 목표 금액 존재 여부
     
+    @Published var generateTargetAmountId = -1
+    
     @Published var recentTargetAmountData: RecentTargetAmount? = nil // 당월 이전 사용자의 최신 목표 금액
 
     func getTargetAmountForDateApi(completion: @escaping (Bool) -> Void) {
@@ -53,7 +55,7 @@ class TargetAmountViewModel: ObservableObject {
                         // 추천 금액 보여주기 x + 목표 금액 설정하기 UI
                         self.isHiddenSuggestionView = true
                         self.isPresentTargetAmount = false
-                        self.generateCurrentMonthDummyDataApi()
+                        self.generateCurrentMonthDummyDataApi { _ in }
                     }
                 } else {
                     Log.error("Network request failed: \(error)")
@@ -74,7 +76,6 @@ class TargetAmountViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("당월 이전 사용자 최신 목표 금액 조회 완료 \(jsonString)")
                         }
-                        Log.debug("??")
                         
                         self.recentTargetAmountData = response.data.targetAmount
                         let isPresent = response.data.targetAmount.isPresent
@@ -84,7 +85,7 @@ class TargetAmountViewModel: ObservableObject {
                             self.isPresentTargetAmount = false
                             // 추천 금액 보여주기 + 목표 금액 설정하기 UI
                         } else {
-                            self.deleteCurrentMonthTargetAmountApi()
+                            self.deleteCurrentMonthTargetAmountApi { _ in }
                         }
                
                     } catch {
@@ -101,15 +102,24 @@ class TargetAmountViewModel: ObservableObject {
         }
     }
     
-    func generateCurrentMonthDummyDataApi() {
+    func generateCurrentMonthDummyDataApi(completion: @escaping (Bool) -> Void) {
         let generateCurrentMonthDummyDataRequestDto = GenerateCurrentMonthDummyDataRequestDto(year: Date.year(from: Date()), month: Date.month(from: Date()))
         
         TargetAmountAlamofire.shared.generateCurrentMonthDummyData(generateCurrentMonthDummyDataRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
-                    if let jsonString = String(data: responseData, encoding: .utf8) {
-                        Log.debug("당월 목표 금액 더미값 생성 \(jsonString)")
+                    do {
+                        let response = try JSONDecoder().decode(CurrentMonthTargetAmountResponseDto.self, from: responseData)
+                       
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("당월 목표 금액 더미값 생성 \(jsonString)")
+                        }
+                        self.generateTargetAmountId = response.data.targetAmount.id
+                        completion(true)
+               
+                    } catch {
+                        Log.fault("Error decoding JSON: \(error)")
                     }
                 }
             case let .failure(error):
@@ -118,11 +128,12 @@ class TargetAmountViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
             }
         }
     }
     
-    func deleteCurrentMonthTargetAmountApi() {
+    func deleteCurrentMonthTargetAmountApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.deleteCurrentMonthTargetAmount(targetAmountId: (targetAmountData?.targetAmountDetail.id)!) { result in
             switch result {
             case let .success(data):
@@ -132,6 +143,7 @@ class TargetAmountViewModel: ObservableObject {
                     }
                     self.isHiddenSuggestionView = true
                     self.isPresentTargetAmount = false
+                    completion(true)
                 }
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {
@@ -139,6 +151,7 @@ class TargetAmountViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(false)
             }
         }
     }

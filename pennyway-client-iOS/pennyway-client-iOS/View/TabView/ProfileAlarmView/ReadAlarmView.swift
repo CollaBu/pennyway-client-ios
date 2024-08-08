@@ -19,9 +19,13 @@ struct ReadAlarmView: View {
                     AlarmRow(alarm: alarm)
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                         .onAppear {
-                            // 해당 알림이 마지막 항목인 경우 추가 데이터를 로드
-                            if alarm.id == alarms.last?.id {
-                                Log.debug("alarm.id: \(alarm.id)")
+                            // 해당 index가 마지막 index라면 데이터 추가
+
+                            guard let index = alarms.firstIndex(where: { $0.id == alarm.id }) else {
+                                return
+                            }
+                            if index == alarms.count - 1 {
+                                print("Fetching next page because last item appeared: \(alarm.id)")
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
                                     viewModel.getNotificationListApi { _ in }
                                 }

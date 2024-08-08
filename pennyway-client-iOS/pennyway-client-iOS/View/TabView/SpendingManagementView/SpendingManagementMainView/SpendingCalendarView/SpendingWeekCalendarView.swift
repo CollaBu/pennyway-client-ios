@@ -149,12 +149,16 @@ struct SpendingWeekCalendarView: View {
                             .padding(.horizontal, 7)
                             .padding(.vertical, 3)
 
-                        Spacer().frame(height: 4) // 동적 ui 적용하니 너무 넓어짐
+                        Spacer().frame(height: 4 * DynamicSizeFactor.factor())
 
                         if let amount = SpendingHistoryUtil.getSpendingAmount(for: date, using: Calendar.current, from: spendingHistoryViewModel) {
-                            Text("-\(amount)")
-                                .font(.B4MediumFont())
-                                .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
+                            VStack(spacing: -3) { // 텍스트 높이 조정
+                                ForEach(SpendingHistoryUtil.truncatedText("-\(amount)").split(separator: "\n"), id: \.self) { line in
+                                    Text(line)
+                                        .font(.B4MediumFont())
+                                        .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
+                                }
+                            }
                         } else {
                             Text("")
                         }
@@ -167,7 +171,7 @@ struct SpendingWeekCalendarView: View {
                             spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: date)
                         }
                     }
-                    .frame(height: 65 * DynamicSizeFactor.factor())
+                    .frame(height: 70 * DynamicSizeFactor.factor())
                 }
                 .id(date)
             }

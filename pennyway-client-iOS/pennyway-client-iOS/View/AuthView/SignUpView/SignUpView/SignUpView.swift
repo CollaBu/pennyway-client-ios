@@ -11,6 +11,8 @@ struct SignUpView: View {
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
     
+    @State var initTargetAmount = TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)
+    
     private var buttonText: String {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
             return "연동하기"
@@ -43,29 +45,27 @@ struct SignUpView: View {
             
             CustomBottomButton(action: {
                 if formViewModel.isFormValid {
-                    viewModel.continueButtonTapped()
-                    
                     if isOAuthRegistration {
                         OAuthRegistrationManager.shared.name = formViewModel.name
                         OAuthRegistrationManager.shared.username = formViewModel.id
                         OAuthRegistrationManager.shared.password = formViewModel.password
+                        viewModel.continueButtonTapped()
                     } else {
                         RegistrationManager.shared.name = formViewModel.name
                         RegistrationManager.shared.username = formViewModel.id
                         RegistrationManager.shared.password = formViewModel.password
                         if !isOAuthRegistration, OAuthRegistrationManager.shared.isOAuthUser {
                             handleLinkAccountToOAuth()
+                        } else {
+                            viewModel.continueButtonTapped()
                         }
                     }
-                    
-                } else {}
+                }
                 
             }, label: buttonText, isFormValid: $formViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
             
-            NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {
-                EmptyView()
-            }
+            NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {}.hidden()
         }
         
         .edgesIgnoringSafeArea(.bottom)
@@ -96,8 +96,7 @@ struct SignUpView: View {
     
     @ViewBuilder
     private func destinationView() -> some View {
-        if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
-        } else {
+        if !(!isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser) {
             TermsAndConditionsView(viewModel: viewModel)
         }
     }

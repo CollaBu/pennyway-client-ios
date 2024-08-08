@@ -1,5 +1,6 @@
 
-import SwiftUI
+import Combine
+import Foundation
 
 class ProfileNotificationViewModel: ObservableObject {
     @Published var notificationData: [NotificationContentData] = [] // 알림 데이터 리스트
@@ -12,30 +13,35 @@ class ProfileNotificationViewModel: ObservableObject {
         currentPageNumber = 0
         hasNext = true
     }
-    
+
     /// 알림 목록 무한스크롤 api 호출
     func getNotificationListApi(completion: @escaping (Bool) -> Void = { _ in }) {
         guard hasNext else {
             return
         }
-        
-        let getNotificationRequestDto = GetNotificationRequestDto(size: "30", page: "\(currentPageNumber)")
-                
+        Log.debug("Fetching hasNext: \(hasNext)")
+        Log.debug("Fetching page: \(currentPageNumber)")
+
+        let getNotificationRequestDto = GetNotificationRequestDto(size: "5", page: "\(currentPageNumber)")
+
         UserAccountAlamofire.shared.getNotificationList(dto: getNotificationRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(GetNotificationResponseDto.self, from: responseData)
-                        
+
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("알림 목록 무한스크롤 조회\(jsonString)")
                         }
-                    
+
                         self.mergeNewNotifications(newNotifications: response.data.notifications.content)
                         self.currentPageNumber += 1
                         self.hasNext = response.data.notifications.hasNext
-        
+
+                        Log.debug("currentPageNumber: \(self.currentPageNumber)")
+                        Log.debug("hasNext: \(self.hasNext)")
+
                         completion(true)
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
@@ -52,28 +58,20 @@ class ProfileNotificationViewModel: ObservableObject {
             }
         }
     }
-    
-//    /// 무한 스크롤 지출 데이터 merge
-//    private func mergeNewSpendings(newSpendings: [NotificationContentData]) {
-//        var allNewNotificationList: [NotificationContentData] = []
-//
-//        for newSpending in newSpendings {
-//            for newDailySpending in newSpending.notificationData {
-//                allNewNotificationList.append(contentsOf: newDailySpending.individuals)
-//            }
-//        }
-//
-//        let existingIds = Set(notificationData.map { $0.id })
-//        let uniqueNewSpendings = allNewNotificationList.filter { !existingIds.contains($0.id) }
-//        
-//        notificationData.append(contentsOf: uniqueNewSpendings)
-//        notificationData.sort { $0.spendAt > $1.spendAt }
-//    }
-    
+
+    /// 무한 스크롤 merge
     private func mergeNewNotifications(newNotifications: [NotificationContentData]) {
+        var combinedNotifications = notificationData
+
+        for newNotification in newNotifications {
+            if !combinedNotifications.contains(where: { $0.id == newNotification.id }) {
+                combinedNotifications.append(newNotification)
+            }
+        }
+
         let existingIds = Set(notificationData.map { $0.id })
         let uniqueNewNotifications = newNotifications.filter { !existingIds.contains($0.id) }
-        notificationData.append(contentsOf: uniqueNewNotifications)
-        notificationData.sort { $0.createdAt > $1.createdAt }
+        combinedNotifications.sort { $0.createdAt > $1.createdAt }
+        notificationData = combinedNotifications
     }
 }
