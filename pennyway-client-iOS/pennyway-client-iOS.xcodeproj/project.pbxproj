@@ -40,6 +40,8 @@
 		4A148B622C3702E2005C6D4E /* CategoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
+		4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */; };
+		4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -343,6 +345,8 @@
 		4A148B612C3702E2005C6D4E /* CategoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsView.swift; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
+		4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageRequestDto.swift; sourceTree = "<group>"; };
+		4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageResponseDto.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -887,6 +891,7 @@
 				4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */,
 				D889F9EB2C63CA560055D045 /* GetNotificationResponseDto.swift */,
 				D889F9EF2C63CC030055D045 /* NotificationContentData.swift */,
+				4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */,
 			);
 			path = UserAccount;
 			sourceTree = "<group>";
@@ -1204,6 +1209,7 @@
 				D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */,
 				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
 				D889F9E92C63C8CF0055D045 /* GetNotificationRequestDto.swift */,
+				4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -2115,6 +2121,7 @@
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */,
 				D889F9EA2C63C8CF0055D045 /* GetNotificationRequestDto.swift in Sources */,
+				4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */,
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
 				B599E4C02C58B951006051E9 /* AnalyticsTracker.swift in Sources */,
 				4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */,
@@ -2141,6 +2148,7 @@
 				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
 				4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
+				4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
