@@ -77,6 +77,7 @@ class ProfileNotificationViewModel: ObservableObject {
         combinedNotifications.sort { $0.createdAt > $1.createdAt }
         notificationData = combinedNotifications
     }
+
     /// 수신한 알람 중 미확인 알림 존재 여부 API
     func checkUnReadNotificationsApi(completion: @escaping (Bool) -> Void) {
         UserAccountAlamofire.shared.checkUnReadNotifications { result in
