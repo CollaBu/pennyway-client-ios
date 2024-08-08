@@ -3,7 +3,6 @@
 import SwiftUI
 
 class ProfileImageViewModel: ObservableObject {
-    @Published var image: UIImage?
 
     func uploadProfileImageApi(_ payload: String) {
         let profileImageUrl = extractPathComponent(from: payload) ?? ""
@@ -17,9 +16,9 @@ class ProfileImageViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(UploadProfileImageResponseDto.self, from: responseData)
-                        Log.debug("사용자 프로필 사진 등록 성공: \(response)")
+                        Log.debug("사용자 프로필 사진 등록 성공: \(response)")          
+                        updateUserField(fieldName: profileImageUrl, value: response.data.profileImageUrl)
 
-                        self.loadImage(from: URL(string: response.data.profileImageUrl)!)
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                     }
@@ -55,17 +54,5 @@ class ProfileImageViewModel: ObservableObject {
         let trimmedPath = pathComponents.dropFirst(1).joined(separator: "/")
 
         return trimmedPath
-    }
-
-    func loadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data, let loadedImage = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.image = loadedImage
-                }
-            } else {
-                print("Failed to load image from URL: \(error?.localizedDescription ?? "Unknown error")")
-            }
-        }.resume()
     }
 }
