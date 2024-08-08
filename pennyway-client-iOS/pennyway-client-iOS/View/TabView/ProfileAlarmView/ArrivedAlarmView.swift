@@ -8,7 +8,7 @@ struct ArrivedAlarmView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            UnreadAlarmView(viewModel: viewModel, alarms: viewModel.notificationData.filter { !$0.isRead })
+            AlarmListView(viewModel: viewModel, alarms: viewModel.notificationData.filter { !$0.isRead })
 
             Spacer().frame(height: 4 * DynamicSizeFactor.factor())
 
@@ -20,7 +20,7 @@ struct ArrivedAlarmView: View {
 
                 Spacer().frame(height: 25 * DynamicSizeFactor.factor())
 
-                ReadAlarmView(viewModel: viewModel, alarms: viewModel.notificationData.filter { $0.isRead })
+                AlarmListView(viewModel: viewModel, alarms: viewModel.notificationData.filter { $0.isRead })
             }
         }
     }
