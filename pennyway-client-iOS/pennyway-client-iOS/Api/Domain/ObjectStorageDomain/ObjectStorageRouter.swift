@@ -59,7 +59,17 @@ enum ObjectStorageRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
             
         case let .storePresignedUrl(_, image, dto):
-            request = URLRequest.createURLRequest(url: baseURL, method: method, queryParameters: dto.toQueryItems(), image: image)
+            let queryDatas: [URLQueryItem] =
+                [
+                    URLQueryItem(name: "X-Amz-Algorithm", value: dto.algorithm),
+                    URLQueryItem(name: "X-Amz-Date", value: dto.date),
+                    URLQueryItem(name: "X-Amz-SignedHeaders", value: dto.signedHeaders),
+                    URLQueryItem(name: "X-Amz-Credential", value: dto.credential),
+                    URLQueryItem(name: "X-Amz-Expires", value: dto.expires),
+                    URLQueryItem(name: "X-Amz-Signature", value: dto.signature)
+                ]
+            
+            request = URLRequest.createURLRequest(url: baseURL, method: method, queryParameters: queryDatas, image: image)
         }
         return request
     }

@@ -24,15 +24,4 @@ public struct StorePresignedUrlRequestDto: Encodable {
         self.expires = expires
         self.signature = signature
     }
-
-    func toQueryItems() -> [URLQueryItem] {
-        return [
-            URLQueryItem(name: "X-Amz-Algorithm", value: algorithm),
-            URLQueryItem(name: "X-Amz-Date", value: date),
-            URLQueryItem(name: "X-Amz-SignedHeaders", value: signedHeaders),
-            URLQueryItem(name: "X-Amz-Credential", value: credential),
-            URLQueryItem(name: "X-Amz-Expires", value: expires),
-            URLQueryItem(name: "X-Amz-Signature", value: signature)
-        ]
-    }
 }
