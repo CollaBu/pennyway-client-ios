@@ -56,12 +56,10 @@ enum UserAccountRouter: URLRequestConvertible {
             return "v2/users/me/phone"
         case .editUserName:
             return "v2/users/me/name"
-        case .deleteProfileImage:
+        case .deleteProfileImage, .uploadProfileImage:
             return "v2/users/me/profile-image"
         case .getNotificationList, .readNotifications:
             return "v2/notifications"
-        case .uploadProfileImage:
-            return "v2/users/me/profile-image"
         case .checkUnReadNotifications:
             return "v2/notifications/unread"
         }
