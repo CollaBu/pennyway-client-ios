@@ -30,7 +30,7 @@ struct ProfileUserInfoView: View {
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
                                 .clipShape(Circle())
                         } else {
-                            Image("icon_illust_no image_no margin")
+                            Image("icon_illust_no image_no_margin")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)

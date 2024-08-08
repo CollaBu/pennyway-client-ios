@@ -8,8 +8,8 @@ class AddSpendingHistoryViewModel: ObservableObject {
     @Published var isCategoryListViewPresented: Bool = false
 
     /// 카테고리 생성
-    @Published var selectedCategoryIconTitle: String = ""
-    @Published var selectedCategoryIcon: CategoryIconName? = nil
+    @Published var selectedCategoryIconTitle: String = "OTHER"
+    @Published var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: .etc, state: .on)
     @Published var categoryName: String = ""
 
     @Published var navigateToAddCategory = false // 추가하기 버튼 누른 경우
@@ -150,7 +150,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
                                 id: response.data.spendingCategory.id,
                                 isCustom: true,
                                 name: self.categoryName,
-                                icon: self.selectedCategoryIcon ?? CategoryIconName(baseName: CategoryBaseName.etc, state: .on)
+                                icon: self.selectedCategoryIcon
                             )
                         completion(true)
                     } catch {
