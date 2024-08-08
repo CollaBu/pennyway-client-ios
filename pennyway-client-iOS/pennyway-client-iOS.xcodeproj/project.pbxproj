@@ -275,6 +275,7 @@
 		D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */; };
 		D888329C2BBC612600F49B27 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329B2BBC612600F49B27 /* LoginView.swift */; };
 		D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */; };
+		D889F9F42C64823B0055D045 /* ReadNotificationsRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
@@ -573,6 +574,7 @@
 		D88832992BBC610300F49B27 /* AutoCorrectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCorrectionExtensions.swift; sourceTree = "<group>"; };
 		D888329B2BBC612600F49B27 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D888329F2BBC615100F49B27 /* ErrorCodeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodeContentView.swift; sourceTree = "<group>"; };
+		D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNotificationsRequestDto.swift; sourceTree = "<group>"; };
 		D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
@@ -1192,6 +1194,7 @@
 				D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */,
 				D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */,
 				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
+				D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -2095,6 +2098,7 @@
 				4AC320532C11D5AC00DDB4B6 /* DiffAmountDynamicWidthView.swift in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
 				4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */,
+				D889F9F42C64823B0055D045 /* ReadNotificationsRequestDto.swift in Sources */,
 				4A69C1522BE695FF00A27B82 /* FindUserNameViewModel.swift in Sources */,
 				4A6C79D22C46310B009463E4 /* EditProfileListView.swift in Sources */,
 				4A0FFBF92BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift in Sources */,

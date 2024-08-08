@@ -14,6 +14,7 @@ enum UserAccountRouter: URLRequestConvertible {
     case editUserPhoneNumber(dto: VerificationRequestDto)
     case editUserName(dto: EditNameRequestDto)
     
+    
     var method: HTTPMethod {
         switch self {
         case .getUserProfile:
