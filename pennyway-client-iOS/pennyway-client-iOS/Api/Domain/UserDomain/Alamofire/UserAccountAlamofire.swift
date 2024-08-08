@@ -74,4 +74,9 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.editUserName(dto: dto), completion: completion)
     }
+    func deleteProfileImage(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - deleteProfileImage() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.deleteProfileImage, completion: completion)
+    }
 }

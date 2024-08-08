@@ -13,12 +13,13 @@ enum UserAccountRouter: URLRequestConvertible {
     case editUserId(dto: CheckDuplicateRequestDto)
     case editUserPhoneNumber(dto: VerificationRequestDto)
     case editUserName(dto: EditNameRequestDto)
+    case deleteProfileImage
     
     var method: HTTPMethod {
         switch self {
         case .getUserProfile:
             return .get
-        case .deleteUserAccount, .settingOffAlarm:
+        case .deleteUserAccount, .settingOffAlarm, .deleteProfileImage:
             return .delete
         case .registDeviceToken:
             return .put
@@ -51,12 +52,14 @@ enum UserAccountRouter: URLRequestConvertible {
             return "v2/users/me/phone"
         case .editUserName:
             return "v2/users/me/name"
+        case .deleteProfileImage:
+            return "v2/users/me/profile-image"
         }
     }
     
     var parameters: Parameters? {
         switch self {
-        case .getUserProfile, .deleteUserAccount:
+        case .getUserProfile, .deleteUserAccount, .deleteProfileImage:
             return [:]
         case let .registDeviceToken(dto):
             return try? dto.asDictionary()
@@ -80,7 +83,7 @@ enum UserAccountRouter: URLRequestConvertible {
         var request: URLRequest
         
         switch self {
-        case .getUserProfile, .deleteUserAccount:
+        case .getUserProfile, .deleteUserAccount, .deleteProfileImage:
             request = URLRequest.createURLRequest(url: url, method: method)
         case .registDeviceToken, .validatePw, .resetMyPw, .editUserId, .editUserPhoneNumber, .editUserName:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
