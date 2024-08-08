@@ -85,7 +85,6 @@ struct EditProfilePopUpView: View {
     private func checkPhotoLibraryPermission() {
         let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         handlePhotoLibraryStatus(status)
-        presignedUrlViewModel.generatePresignedUrlApi { _ in }
     }
 
     private func handlePhotoLibraryStatus(_ status: PHAuthorizationStatus) {

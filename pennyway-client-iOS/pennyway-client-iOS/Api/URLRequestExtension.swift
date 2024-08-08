@@ -9,7 +9,7 @@ extension URLRequest {
         request.httpMethod = method.rawValue
 
         if let image = image {
-            if let imageData = image.jpegData(compressionQuality: 1.0) {//압축정도 임시로 지정
+            if let imageData = image.jpegData(compressionQuality: 1.0) { // 압축정도 임시로 지정
                 request.httpBody = imageData
                 request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
             }

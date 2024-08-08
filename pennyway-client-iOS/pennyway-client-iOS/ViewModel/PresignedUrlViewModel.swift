@@ -2,8 +2,8 @@
 import SwiftUI
 
 class PresignedUrlViewModel: ObservableObject {
-    var presignedUrl = ""//발급받은 presigned url 저장
-    var payload = ""//presigned url의 payload 저장
+    var presignedUrl = "" // 발급받은 presigned url 저장
+    var payload = "" // presigned url의 payload 저장
     @Published var image: UIImage? = UIImage(named: "icon_illust_no_image_no_margin")!
 
     /// presigned url 발급
@@ -19,6 +19,7 @@ class PresignedUrlViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(GeneratePresignedUrlResponseDto.self, from: responseData)
                         self.presignedUrl = response.presignedUrl
                         Log.debug("presigned_url 발급 성공 \(self.presignedUrl)")
+                        self.storePresignedUrlApi { _ in }
                         completion(true)
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
@@ -72,7 +73,7 @@ class PresignedUrlViewModel: ObservableObject {
         }
     }
 
-    //발급받은 presigned url 퀄리별로 자르기
+    /// 발급받은 presigned url 퀄리별로 자르기
     func createStorePresignedUrlRequestDto(from presignedUrl: String) -> StorePresignedUrlRequestDto {
         var algorithm = ""
         var date = ""

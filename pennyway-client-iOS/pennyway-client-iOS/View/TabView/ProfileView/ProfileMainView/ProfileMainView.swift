@@ -67,7 +67,7 @@ struct ProfileMainView: View {
                 loadImage()
                 showPopUpView = false
                 presignedUrlViewModel.image = selectedUIImage
-                presignedUrlViewModel.storePresignedUrlApi { _ in }
+                presignedUrlViewModel.generatePresignedUrlApi { _ in }
             }) {
                 ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                     .edgesIgnoringSafeArea(.bottom)
