@@ -48,6 +48,7 @@
 		4A2882092C64CD1500AE50C7 /* ProfileNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */; };
 		4A28820C2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28820A2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift */; };
 		4A28820D2C64CD5F00AE50C7 /* NotificationContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28820B2C64CD5F00AE50C7 /* NotificationContentData.swift */; };
+		4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882202C654BB500AE50C7 /* ReloadView.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -361,6 +362,7 @@
 		4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNotificationViewModel.swift; sourceTree = "<group>"; };
 		4A28820A2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationResponseDto.swift; sourceTree = "<group>"; };
 		4A28820B2C64CD5F00AE50C7 /* NotificationContentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContentData.swift; sourceTree = "<group>"; };
+		4A2882202C654BB500AE50C7 /* ReloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadView.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -1137,6 +1139,7 @@
 				4A4A56792BADEFF90071D00E /* NavigationBackButton.swift */,
 				4A4A56732BACA4000071D00E /* NavigationCountView.swift */,
 				4AB0B13D2C50256300A475F5 /* LoadingView.swift */,
+				4A2882202C654BB500AE50C7 /* ReloadView.swift */,
 			);
 			path = ElementView;
 			sourceTree = "<group>";
@@ -2291,6 +2294,7 @@
 				4A5789812BDC1FF300AFEB26 /* InternalServerErrorCode.swift in Sources */,
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
 				D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */,
+				4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AC3204F2C11D5AC00DDB4B6 /* SpendingWeekCalendarView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
@@ -2546,7 +2550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2586,7 +2590,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

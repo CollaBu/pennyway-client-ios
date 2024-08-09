@@ -10,6 +10,7 @@ struct CategorySpendingListView: View {
     @Binding var isDeleted: Bool
 
     @State private var isLoadingViewShown: Bool = false
+    @State private var isReloadViewShown = false
 
     var currentYear = String(Date.year(from: Date()))
 
@@ -44,32 +45,7 @@ struct CategorySpendingListView: View {
                                         })
                                         .buttonStyle(PlainButtonStyle())
                                         .onAppear {
-                                            guard var currentIndex = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
-                                                return
-                                            }
-                                            Log.debug(currentIndex)
-
-                                            // 해당 index가 마지막 index라면 데이터 추가
-                                            if currentIndex == viewModel.dailyDetailSpendings.count - 1 && !isLoadingViewShown {
-                                                Log.debug("지출 내역 index: \(currentIndex)")
-
-                                                if viewModel.hasNext {
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { //로딩 뷰 나오게 하기 위한 지연시간
-                                                        isLoadingViewShown = true
-                                                    }
-                                                }
-
-                                                viewModel.getCategorySpendingHistoryApi { success in
-                                                    if success {
-                                                        isLoadingViewShown = false
-                                                        Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")
-                                                        currentIndex = viewModel.dailyDetailSpendings.count - 1
-                                                    }
-                                                }
-                                                
-                                            } else {
-                                                isLoadingViewShown = false
-                                            }
+                                            handleOnAppear(for: item)
                                         }
                                         Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                     }
@@ -81,6 +57,10 @@ struct CategorySpendingListView: View {
                 }
                 if isLoadingViewShown {
                     LoadingView(startAnimate: $isLoadingViewShown)
+                }
+
+                if isReloadViewShown {
+                    ReloadView(action: reloadAction)
                 }
 
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
@@ -113,5 +93,59 @@ struct CategorySpendingListView: View {
                 .frame(height: 1 * DynamicSizeFactor.factor())
         }
         .frame(maxWidth: .infinity, alignment: .center)
+    }
+
+    private func handleOnAppear(for item: IndividualSpending) {
+        guard let currentIndex = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
+            return
+        }
+        Log.debug(currentIndex)
+
+        if currentIndex == viewModel.dailyDetailSpendings.count - 1 && !isLoadingViewShown {
+            Log.debug("지출 내역 index: \(currentIndex)")
+
+            if viewModel.hasNext {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isLoadingViewShown = true
+                }
+            }
+
+            handleApiResponse()
+        } else {
+            isLoadingViewShown = false
+        }
+    }
+
+    private func handleApiResponse() {
+        if viewModel.hasNext {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isLoadingViewShown = true
+            }
+        }
+
+        var timeout = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            if !timeout {
+                Log.debug("API 응답이 10초 이상 걸림")
+                isLoadingViewShown = false
+                isReloadViewShown = true
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            viewModel.getCategorySpendingHistoryApi { success in
+                timeout = true // 응답이 왔으므로 타이머 취소
+                if success {
+                    isLoadingViewShown = false
+                    Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")
+                }
+            }
+        }
+    }
+
+    private func reloadAction() {
+        isLoadingViewShown = true
+        isReloadViewShown = false
+
+        handleApiResponse()
     }
 }
