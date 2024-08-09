@@ -34,9 +34,10 @@ struct EditSpendingDetailView: View {
                                 .padding(.vertical, 4)
 
                         })
+//                        .buttonStyle(BasicButtonStyleUtil())
+
                         .padding(.vertical, 4)
                         .padding(.trailing, 8)
-                        .buttonStyle(BasicButtonStyleUtil())
 
                         Spacer()
                     }
