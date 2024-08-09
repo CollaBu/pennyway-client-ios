@@ -12,7 +12,7 @@ class SpendingHistoryUtil {
     }
 
     static func truncatedText(_ text: String) -> String {
-        let maxLength = 6
+        let maxLength = 7
         let number = NumberFormatterUtil.formatStringToDecimalString(text)
 
         if number.count <= maxLength { // 1. 숫자 문자열의 길이가 최대 길이 이하인 경우 그대로 반환
