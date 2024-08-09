@@ -95,7 +95,7 @@ struct SpendingCheckBoxView: View {
                         }
                         .frame(alignment: .trailing)
                     }
-                    .hidden()
+//                    .hidden()
                 } else {
                     Spacer()
 
@@ -112,7 +112,7 @@ struct SpendingCheckBoxView: View {
                         }
                         .frame(width: 110 * DynamicSizeFactor.factor(), alignment: .trailing)
                     }
-                    .hidden()
+//                    .hidden()
                 }
             }
             .padding(.leading, 22)
