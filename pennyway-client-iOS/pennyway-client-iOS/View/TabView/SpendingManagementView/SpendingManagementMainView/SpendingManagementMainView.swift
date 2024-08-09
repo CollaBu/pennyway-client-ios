@@ -82,6 +82,7 @@ struct SpendingManagementMainView: View {
                         })
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
 
                         Button(action: {
                             navigateToMainAlarmView = true
@@ -94,6 +95,7 @@ struct SpendingManagementMainView: View {
                         })
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                     .offset(x: 10)
                 }
@@ -120,11 +122,13 @@ struct SpendingManagementMainView: View {
                 NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
                     EmptyView()
                 }
+                .hidden()
             }
 
             NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
+            .hidden()
 
             NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
                 EmptyView()

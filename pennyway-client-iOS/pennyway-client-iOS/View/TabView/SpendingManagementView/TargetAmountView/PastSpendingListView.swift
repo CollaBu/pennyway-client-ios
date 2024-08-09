@@ -77,5 +77,6 @@ struct PastSpendingListView: View {
         NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: $selectDate, clickDate: .constant(nil)), isActive: $navigateToMySpendingList) {
             EmptyView()
         }
+        .hidden()
     }
 }

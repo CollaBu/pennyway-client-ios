@@ -114,6 +114,7 @@ struct MoveCategoryView: View {
             }
             
             NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
+                .hidden()
         }
     }
 

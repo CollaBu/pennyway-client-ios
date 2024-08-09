@@ -36,6 +36,7 @@ struct EditSpendingDetailView: View {
                         })
                         .padding(.vertical, 4)
                         .padding(.trailing, 8)
+                        .buttonStyle(BasicButtonStyleUtil())
 
                         Spacer()
                     }
@@ -54,6 +55,7 @@ struct EditSpendingDetailView: View {
                                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                         .aspectRatio(contentMode: .fill)
                                 }
+                                .buttonStyle(BasicButtonStyleUtil())
 
                                 CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                     .padding(.leading, 13 * DynamicSizeFactor.factor())
@@ -94,6 +96,7 @@ struct EditSpendingDetailView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 36, height: 36)
                         })
+                        .buttonStyle(BasicButtonStyleUtil())
                         .padding(.leading, 11)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())

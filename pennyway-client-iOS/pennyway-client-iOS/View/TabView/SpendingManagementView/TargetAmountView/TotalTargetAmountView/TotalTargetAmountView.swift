@@ -11,15 +11,15 @@ struct TotalTargetAmountView: View {
     @State private var isnavigateToPastSpendingView = false
     @State private var showingDeletePopUp = false
     @State private var showToastPopup = false
-    
+
     var body: some View {
         ZStack {
             ScrollView {
                 VStack(spacing: 0) {
                     TotalTargetAmountHeaderView(viewModel: viewModel)
-                    
+
                     TotalTargetAmountContentView(viewModel: viewModel, isnavigateToPastSpendingView: $isnavigateToPastSpendingView)
-                    
+
                     Spacer().frame(height: 29 * DynamicSizeFactor.factor())
                 }
             }
@@ -73,7 +73,8 @@ struct TotalTargetAmountView: View {
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-                        
+                        .buttonStyle(BasicButtonStyleUtil())
+
                     }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -90,11 +91,12 @@ struct TotalTargetAmountView: View {
                         })
                         .padding(.trailing, 5)
                         .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                     .offset(x: 10)
                 }
             }
-            
+
             if showingDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
@@ -114,10 +116,12 @@ struct TotalTargetAmountView: View {
             viewModel.getTotalTargetAmountApi { _ in
             }
         }
-        
+
         NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
-        
+            .hidden()
+
         NavigationLink(destination: PastSpendingListView(viewModel: viewModel), isActive: $isnavigateToPastSpendingView) {}
+            .hidden()
     }
 
     private func deleteTargetAmountApi() {

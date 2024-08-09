@@ -78,7 +78,8 @@ struct TargetAmountSettingView: View {
                             
                         })
                         .buttonStyle(PlainButtonStyle())
-                        
+                        .buttonStyle(BasicButtonStyleUtil())
+
                         Spacer()
                     }                  
                 }
@@ -100,6 +101,7 @@ struct TargetAmountSettingView: View {
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
                 NavigationLink(destination: TargetAmountSetCompleteView(viewModel: viewModel, entryPoint: entryPoint), isActive: $navigateToCompleteTarget) {}
+                    .hidden()
             }
         }
         .edgesIgnoringSafeArea(.bottom)

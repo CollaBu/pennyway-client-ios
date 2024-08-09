@@ -292,6 +292,8 @@
 		D889F9F42C64823B0055D045 /* ReadNotificationsRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */; };
 		D889F9F62C6484950055D045 /* CheckUnReadNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */; };
 		D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */; };
+		D889F9FA2C651F340055D045 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */; };
+		D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
@@ -607,6 +609,8 @@
 		D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNotificationsRequestDto.swift; sourceTree = "<group>"; };
 		D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUnReadNotificationResponseDto.swift; sourceTree = "<group>"; };
 		D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileImageViewModel.swift; sourceTree = "<group>"; };
+		D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
+		D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonStyleUtil.swift; sourceTree = "<group>"; };
 		D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
@@ -1514,6 +1518,7 @@
 				D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */,
 				4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */,
 				4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */,
+				D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2116,6 +2121,7 @@
 				D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
+				D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				B599E4C32C58D4F0006051E9 /* AnalyticsConstants.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,

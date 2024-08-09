@@ -99,6 +99,7 @@ struct ProfileMainView: View {
                                 .padding(5)
                         })
                         .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                 }
             }

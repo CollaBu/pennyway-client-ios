@@ -98,8 +98,10 @@ struct SpendingCategoryGridView: View {
         }
 
         NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel, showToastDeletePopUp: $showToastDeletePopUp), isActive: $navigateToCategoryDetails) {}
+            .hidden()
 
         NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
+            .hidden()
     }
     
     private func categoryVGridView(for category: SpendingCategoryData) -> some View {
@@ -133,6 +135,7 @@ struct SpendingCategoryGridView: View {
             .cornerRadius(8)
         }
         .buttonStyle(PlainButtonStyle())
+        .buttonStyle(BasicButtonStyleUtil())
     }
 }
 

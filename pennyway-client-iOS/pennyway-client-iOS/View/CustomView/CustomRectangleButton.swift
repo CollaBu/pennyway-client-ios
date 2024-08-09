@@ -31,5 +31,6 @@ struct CustomRectangleButton: View {
         }
         .padding(.horizontal, 20)
         .buttonStyle(PlainButtonStyle())
+        .buttonStyle(BasicButtonStyleUtil())
     }
 }

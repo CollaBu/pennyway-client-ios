@@ -16,6 +16,7 @@ struct MainTabView: View {
                         Text("지출관리")
                     }
                     .tag(0)
+                    .buttonStyle(BasicButtonStyleUtil())
 
                 PreparedView()
                     .tabItem {
@@ -23,6 +24,7 @@ struct MainTabView: View {
                         Text("피드")
                     }
                     .tag(1)
+                    .buttonStyle(BasicButtonStyleUtil())
 
                 PreparedView()
                     .tabItem {
@@ -30,6 +32,7 @@ struct MainTabView: View {
                         Text("채팅")
                     }
                     .tag(2)
+                    .buttonStyle(BasicButtonStyleUtil())
 
                 ProfileMainView()
                     .tabItem {
@@ -37,6 +40,7 @@ struct MainTabView: View {
                         Text("프로필")
                     }
                     .tag(3)
+                    .buttonStyle(BasicButtonStyleUtil())
             }
             .accentColor(Color("Mint03"))
             .onAppear {

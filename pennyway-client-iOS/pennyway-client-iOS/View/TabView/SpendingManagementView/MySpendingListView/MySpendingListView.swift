@@ -50,6 +50,7 @@ struct MySpendingListView: View {
 
                                                 })
                                                 .buttonStyle(PlainButtonStyle())
+                                                .buttonStyle(BasicButtonStyleUtil())
 
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }
@@ -82,6 +83,7 @@ struct MySpendingListView: View {
                                         .padding(.vertical, 12)
                                 }
                             })
+                            .buttonStyle(BasicButtonStyleUtil())
                             .padding(.bottom, 48)
                             .onChange(of: selectedDateToScroll) { date in
                                 if let date = date {
@@ -117,6 +119,7 @@ struct MySpendingListView: View {
             )
 
             NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $showDetailSpendingView) {}
+                .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
         .edgesIgnoringSafeArea(.bottom)
@@ -142,9 +145,11 @@ struct MySpendingListView: View {
                         Text("카테고리")
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray05"))
+
                     })
-                    .padding(.trailing, 20)
-                    .frame(width: 38 * DynamicSizeFactor.factor(), height: 44)
+                    .buttonStyle(BasicButtonStyleUtil())
+//                    .padding(.trailing, 20)
+                    .frame(width: 48 * DynamicSizeFactor.factor(), height: 44)
                 }
             }
         }
@@ -164,6 +169,7 @@ struct MySpendingListView: View {
         }
 
         NavigationLink(destination: SpendingCategoryGridView(spendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
+            .hidden()
     }
 
     private func headerView(for date: String) -> some View {

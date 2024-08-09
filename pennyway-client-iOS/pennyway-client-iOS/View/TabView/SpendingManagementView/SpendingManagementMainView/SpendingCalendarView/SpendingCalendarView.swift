@@ -73,6 +73,7 @@ struct SpendingCalenderView: View {
             )
             .frame(width: 44, height: 44)
             .disabled(!canMoveToPreviousMonth())
+            .buttonStyle(BasicButtonStyleUtil())
       
             Text(date, formatter: Self.calendarHeaderDateFormatter)
                 .font(.B1SemiboldeFont())
@@ -89,6 +90,7 @@ struct SpendingCalenderView: View {
             )
             .frame(width: 44, height: 44)
             .disabled(!canMoveToNextMonth())
+            .buttonStyle(BasicButtonStyleUtil())
         }
     }
   

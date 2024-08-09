@@ -85,6 +85,7 @@ struct SpendingWeekCalendarView: View {
                     .padding(.vertical, 8)
                 })
                 .buttonStyle(PlainButtonStyle())
+                .buttonStyle(BasicButtonStyleUtil())
 
                 Spacer()
 
@@ -99,6 +100,7 @@ struct SpendingWeekCalendarView: View {
                                 .aspectRatio(contentMode: .fill)
                         }
                     )
+                    .buttonStyle(BasicButtonStyleUtil())
 
                     Button(
                         action: {
@@ -110,6 +112,7 @@ struct SpendingWeekCalendarView: View {
                                 .aspectRatio(contentMode: .fill)
                         }
                     )
+                    .buttonStyle(BasicButtonStyleUtil())
                 }
             }
         }

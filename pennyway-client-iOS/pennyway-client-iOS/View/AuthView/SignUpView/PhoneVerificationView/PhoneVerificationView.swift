@@ -32,7 +32,7 @@ struct PhoneVerificationView: View {
                 
                 NavigationLink(destination: destinationView(), tag: 2, selection: $viewModel.selectedText) {
                     EmptyView()
-                }
+                }.hidden()
             }
             
             if showCodeErrorPopUp {
