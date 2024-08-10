@@ -36,6 +36,11 @@ class BaseInterceptor: RequestInterceptor {
 
                             completion(.retry)
 
+                            AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
+                            AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
+                                AnalyticsConstants.Parameter.oauthType: "none",
+                                AnalyticsConstants.Parameter.isRefresh: true
+                            ])
                         } catch {
                             Log.fault("Error parsing response JSON: \(error)")
                             completion(.doNotRetry)
