@@ -22,7 +22,11 @@ class FirebaseAnalyticsService: AnalyticsService {
         
         if event.eventName == .screenView {
             Analytics.logEvent(AnalyticsEventScreenView, parameters: firebaseParams)
-        } else {
+        }
+        if event.eventName == .login {
+            Analytics.logEvent(AnalyticsEventLogin, parameters: firebaseParams)
+        }
+        else {
             Analytics.logEvent(event.eventName.rawValue, parameters: firebaseParams)
         }
         
