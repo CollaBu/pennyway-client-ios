@@ -38,7 +38,7 @@ enum AuthEvents: AnalyticsEvent {
             return AnalyticsConstants.EventName.btnTapped
         case .login:
             return AnalyticsConstants.EventName.login
-        case .signUp
+        case .signUp:
             return AnalyticsConstants.EventName.signUp
         }
     }
