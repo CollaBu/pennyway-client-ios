@@ -194,6 +194,7 @@ enum AuthCustomEvent {
     var eventName: String {
         switch self {
         case .login: return "login"
+
         case .signUp: return "sign_up"
 
         case .oauthSignInBtnTapped: return "oauth_sign_in_btn_tapped"

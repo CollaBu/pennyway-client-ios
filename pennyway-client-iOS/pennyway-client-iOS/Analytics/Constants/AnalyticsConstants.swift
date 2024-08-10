@@ -52,7 +52,7 @@ enum AnalyticsConstants {
             case .screenClass: return "screen_class"
             case .eventName: return "event_name"
             case .isRefresh: return "is_refresh"
-            case .oauthType: return "oauth_type"
+            case .oauthType: return "method"
             case .btnName: return "btn_name"
             }
         }
