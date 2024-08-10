@@ -46,6 +46,8 @@ class FirebaseAnalyticsService: AnalyticsService {
             return AnalyticsEventScreenView
         case .login:
             return AnalyticsEventLogin
+        case .signUp:
+            return AnalyticsEventSignUp
         default:
             return eventName.rawValue
         }

@@ -11,6 +11,7 @@ enum AuthEvents: AnalyticsEvent {
     case loginView
     
     case login
+    case signUp
     case oauthSignInBtnTapped
     
     // 공용
@@ -37,6 +38,8 @@ enum AuthEvents: AnalyticsEvent {
             return AnalyticsConstants.EventName.btnTapped
         case .login:
             return AnalyticsConstants.EventName.login
+        case .signUp
+            return AnalyticsConstants.EventName.signUp
         }
     }
     
@@ -45,7 +48,7 @@ enum AuthEvents: AnalyticsEvent {
         case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
              .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
             return AnalyticsConstants.EventType.screenView
-        case .oauthSignInBtnTapped, .cancelBtnTapped, .login:
+        case .oauthSignInBtnTapped, .cancelBtnTapped, .login, .signUp:
             return AnalyticsConstants.EventType.userAction
         }
     }
@@ -61,6 +64,10 @@ enum AuthEvents: AnalyticsEvent {
         case .login:
             return [
                 .eventName: AuthCustomEvent.login.eventName
+            ]
+        case .signUp:
+            return [
+                .eventName: AuthCustomEvent.signUp.eventName
             ]
         case .oauthSignInBtnTapped:
             return [
@@ -179,6 +186,7 @@ enum AuthScreen {
 
 enum AuthCustomEvent {
     case login
+    case signUp
     case oauthSignInBtnTapped
     
     case cancelBtnTapped
@@ -186,6 +194,7 @@ enum AuthCustomEvent {
     var eventName: String {
         switch self {
         case .login: return "login"
+        case .signUp: return "sign_up"
 
         case .oauthSignInBtnTapped: return "oauth_sign_in_btn_tapped"
             
