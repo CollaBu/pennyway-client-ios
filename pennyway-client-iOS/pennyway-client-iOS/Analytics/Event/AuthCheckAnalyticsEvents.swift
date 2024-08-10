@@ -5,6 +5,8 @@
 //  Created by 양재서 on 8/8/24.
 //
 
+// MARK: - AuthCheckEvents
+
 enum AuthCheckEvents: AnalyticsEvent {
     // 아이디 찾기 이벤트
     case findUsernameView
@@ -17,7 +19,7 @@ enum AuthCheckEvents: AnalyticsEvent {
     var eventName: AnalyticsConstants.EventName {
         switch self {
         case .findUsernameView, .findUsernamePhoneVerificationView,
-                .findPasswordView, .findPasswordPhoneVerificationView:
+             .findPasswordView, .findPasswordPhoneVerificationView:
             return AnalyticsConstants.EventName.screenView
         }
     }
@@ -25,12 +27,12 @@ enum AuthCheckEvents: AnalyticsEvent {
     var eventType: AnalyticsConstants.EventType {
         switch self {
         case .findUsernameView, .findUsernamePhoneVerificationView,
-                .findPasswordView, .findPasswordPhoneVerificationView:
+             .findPasswordView, .findPasswordPhoneVerificationView:
             return AnalyticsConstants.EventType.screenView
         }
     }
         
-    var parameters: [AnalyticsConstants.Parameter : Any]? {
+    var parameters: [AnalyticsConstants.Parameter: Any]? {
         switch self {
         case .findUsernameView:
             return [
@@ -59,6 +61,8 @@ enum AuthCheckEvents: AnalyticsEvent {
         }
     }
 }
+
+// MARK: - AuthCheckScreen
 
 enum AuthCheckScreen {
     // 아이디 찾기 이벤트

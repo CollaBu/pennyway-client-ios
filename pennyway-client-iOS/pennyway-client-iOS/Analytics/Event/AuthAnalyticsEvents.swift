@@ -7,8 +7,10 @@
 ///  Created by 양재서 on 7/30/24.
 ///
 enum AuthEvents: AnalyticsEvent {
-    // 로그인 이벤트
+    /// 로그인 이벤트
     case loginView
+    
+    case login
     case oauthSignInBtnTapped
     
     // 공용
@@ -28,20 +30,22 @@ enum AuthEvents: AnalyticsEvent {
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, 
-                .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
+        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
+             .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
             return AnalyticsConstants.EventName.screenView
         case .oauthSignInBtnTapped, .cancelBtnTapped:
             return AnalyticsConstants.EventName.btnTapped
+        case .login:
+            return AnalyticsConstants.EventName.login
         }
     }
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView, 
-                .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
+        case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
+             .existsOauthAccountView, .generalSignSycnView, .oauthSignUpView:
             return AnalyticsConstants.EventType.screenView
-        case .oauthSignInBtnTapped, .cancelBtnTapped:
+        case .oauthSignInBtnTapped, .cancelBtnTapped, .login:
             return AnalyticsConstants.EventType.userAction
         }
     }
@@ -53,6 +57,10 @@ enum AuthEvents: AnalyticsEvent {
                 .screenId: AuthScreen.loginView.screenId,
                 .screenName: AuthScreen.loginView.screenName,
                 .screenClass: AuthScreen.loginView.screenClass
+            ]
+        case .login:
+            return [
+                .eventName: AuthCustomEvent.login.eventName
             ]
         case .oauthSignInBtnTapped:
             return [
@@ -167,15 +175,18 @@ enum AuthScreen {
     }
 }
 
-// MARK: - AuthEvent
+// MARK: - AuthCustomEvent
 
 enum AuthCustomEvent {
+    case login
     case oauthSignInBtnTapped
     
     case cancelBtnTapped
     
     var eventName: String {
         switch self {
+        case .login: return "login"
+
         case .oauthSignInBtnTapped: return "oauth_sign_in_btn_tapped"
             
         case .cancelBtnTapped: return "input_tab_cancel_btn_tapped"

@@ -39,6 +39,7 @@ enum AnalyticsConstants {
         
         case eventName
         
+        case isRefresh
         case oauthType
         case btnName
         
@@ -47,9 +48,8 @@ enum AnalyticsConstants {
             case .screenId: return "screen_id"
             case .screenName: return "screen_name"
             case .screenClass: return "screen_class"
-                
             case .eventName: return "event_name"
-            
+            case .isRefresh: return "is_refresh"
             case .oauthType: return "oauth_type"
             case .btnName: return "btn_name"
             }
