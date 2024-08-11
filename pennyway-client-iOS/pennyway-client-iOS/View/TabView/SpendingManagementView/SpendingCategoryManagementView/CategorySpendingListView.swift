@@ -122,10 +122,13 @@ struct CategorySpendingListView: View {
 
     private func startApiRetryTimer() {
         var retryWorkItem: DispatchWorkItem?
+        var shouldProceedWithApiResponse = true
 
         // API 응답 10초 이상 걸린 경우
         retryWorkItem = DispatchWorkItem {
             Log.debug("API 응답이 10초 이상 걸림")
+            shouldProceedWithApiResponse = false//10초이상 걸린 경우 더이상 api 요청하지 않도록
+
             // 로딩 뷰 사라지고, 재로드 뷰 나타남
             animateLoadingView = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -134,9 +137,14 @@ struct CategorySpendingListView: View {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: retryWorkItem!)
 
         viewModel.getCategorySpendingHistoryApi { success in
+            guard shouldProceedWithApiResponse else {
+                Log.debug("API 응답이 너무 늦어 UI 업데이트 중단")
+                return
+            }
+
             if success {
                 // 로딩 뷰와 재로드 뷰 사라짐
                 Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")
@@ -145,8 +153,6 @@ struct CategorySpendingListView: View {
                     isLoadingViewShown = false
                     isReloadViewShown = false
                 }
-
-                retryWorkItem?.cancel() // 타이머 리셋
             } else {
                 // 로딩 뷰 사라지고, 재로드 뷰 나타남
                 Log.debug("API 호출 실패, 재로드 뷰 나타남")
@@ -155,8 +161,9 @@ struct CategorySpendingListView: View {
                     isLoadingViewShown = false
                     isReloadViewShown = true
                 }
-                retryWorkItem?.cancel() // 타이머 리셋
             }
+
+            retryWorkItem?.cancel() // 타이머 리셋
         }
     }
 

@@ -123,10 +123,10 @@ struct CategoryDetailsView: View {
                     }
                 }
             }
-            //지출 내역 삭제한 경우
+            // 지출 내역 삭제한 경우
             .onChange(of: isDeleted) { newValue in
                 if newValue {
-                    viewModel.spedingHistoryTotalCount -= 1//지출 내역 총 개수 감소
+                    viewModel.spedingHistoryTotalCount -= 1 // 지출 내역 총 개수 감소
                     showToastPopup = true
                     isDeleted = false
                 }
