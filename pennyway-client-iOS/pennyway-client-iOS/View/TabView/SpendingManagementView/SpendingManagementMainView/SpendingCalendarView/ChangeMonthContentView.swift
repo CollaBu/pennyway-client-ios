@@ -4,14 +4,17 @@ struct ChangeMonthContentView: View {
     @ObservedObject var viewModel: SpendingHistoryViewModel
     @Binding var isPresented: Bool
     @State private var selectedMonth: Date
-    @State private var months: [Date]
+//    @State private var months: [Date]
 
     private let calendars = Calendar.current
+    private var months: [Date]
 
     init(viewModel: SpendingHistoryViewModel, isPresented: Binding<Bool>) {
         self.viewModel = viewModel
         _isPresented = isPresented
-        _selectedMonth = State(initialValue: viewModel.selectedDate ?? viewModel.currentDate)
+        _selectedMonth = State(initialValue: viewModel.currentDate)
+
+        Log.debug("_selectedMonth: \(_selectedMonth)")
 
         months = {
             let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
@@ -58,15 +61,16 @@ struct ChangeMonthContentView: View {
                         HStack {
                             Button(action: {
                                 selectedMonth = month
-                                viewModel.currentDate = month
+//                                viewModel.currentDate = month
+                                viewModel.updateCurrentDate(to: month)
 
-                                viewModel.checkSpendingHistoryApi { success in
-                                    if success {
-                                        Log.debug("해당날짜 소비내역 가져오기 성공")
-                                    } else {
-                                        Log.debug("해당날짜 소비내역 가져오기 실패")
-                                    }
-                                }
+//                                viewModel.checkSpendingHistoryApi { success in
+//                                    if success {
+//                                        Log.debug("해당날짜 소비내역 가져오기 성공")
+//                                    } else {
+//                                        Log.debug("해당날짜 소비내역 가져오기 실패")
+//                                    }
+//                                }
                             }, label: {
                                 Text(monthTitle(from: month))
                                     .font(.H4MediumFont())
@@ -84,6 +88,9 @@ struct ChangeMonthContentView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            selectedMonth = viewModel.currentDate
+        }
     }
 
     func monthTitle(from date: Date) -> String {
