@@ -67,7 +67,7 @@ struct MySpendingListView: View {
                         }
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
-//                                changeMonth(by: -1)
+                                changeMonth(by: -1)
 
                             }, label: {
                                 ZStack {
@@ -186,6 +186,9 @@ struct MySpendingListView: View {
         currentMonth = spendingHistoryViewModel.currentDate
         spendingHistoryViewModel.currentDate = newDate
         currentMonth = newDate
+
+        spendingHistoryViewModel.selectedDate = nil
+        spendingHistoryViewModel.selectedDateId = 0
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
