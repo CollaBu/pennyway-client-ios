@@ -265,10 +265,6 @@ private extension SpendingWeekCalendarView {
         let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? Date()
         spendingHistoryViewModel.updateCurrentDate(to: newDate)
 
-//        let newDate = Calendar.current.date(byAdding: .month, value: value, to: currentMonth) ?? currentMonth
-//        currentMonth = newDate
-//        spendingHistoryViewModel.currentDate = currentMonth
-
         selectedDate = Date() // 초기화
         userSelectedDate = nil // 사용자가 선택한 날짜 초기화
 

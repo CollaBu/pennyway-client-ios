@@ -4,7 +4,6 @@ struct ChangeMonthContentView: View {
     @ObservedObject var viewModel: SpendingHistoryViewModel
     @Binding var isPresented: Bool
     @State private var selectedMonth: Date
-//    @State private var months: [Date]
 
     private let calendars = Calendar.current
     private var months: [Date]
@@ -61,16 +60,7 @@ struct ChangeMonthContentView: View {
                         HStack {
                             Button(action: {
                                 selectedMonth = month
-//                                viewModel.currentDate = month
                                 viewModel.updateCurrentDate(to: month)
-
-//                                viewModel.checkSpendingHistoryApi { success in
-//                                    if success {
-//                                        Log.debug("해당날짜 소비내역 가져오기 성공")
-//                                    } else {
-//                                        Log.debug("해당날짜 소비내역 가져오기 실패")
-//                                    }
-//                                }
                             }, label: {
                                 Text(monthTitle(from: month))
                                     .font(.H4MediumFont())
