@@ -25,6 +25,7 @@ class SpendingCategoryViewModel: ObservableObject {
     /// 사용자 정의 카테고리 리스트
     @Published var customCategories: [SpendingCategoryData] = []
     @Published var dailyDetailSpendings: [IndividualSpending] = [] // 지출내역 리스트 임시 데이터
+    @Published var selectSpending: IndividualSpending? = nil
     
     @Published var spedingHistoryTotalCount = 0 // 지출 내역 리스트 총 개수
     @Published var hasNext: Bool = true

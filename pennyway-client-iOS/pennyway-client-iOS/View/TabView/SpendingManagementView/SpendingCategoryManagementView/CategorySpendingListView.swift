@@ -38,7 +38,8 @@ struct CategorySpendingListView: View {
 
                                         Button(action: {
                                             spendingId = item.id
-                                            viewModel.dailyDetailSpendings = [item] // 셀 선택 후 뒤로가기시 리스트 데이터 사라지는 문제 해결
+                                            viewModel.selectSpending = item
+                                            // viewModel.dailyDetailSpendings = [item]  셀 선택 후 뒤로가기시 리스트 데이터 사라지는 문제 해결
                                             showDetailSpendingView = true
                                         }, label: {
                                             CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)

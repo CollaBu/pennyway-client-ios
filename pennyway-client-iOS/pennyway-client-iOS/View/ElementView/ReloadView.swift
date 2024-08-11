@@ -14,6 +14,7 @@ struct ReloadView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
             })
+            .buttonStyle(PlainButtonStyle())
 
             Text("다시 시도해 주세요")
                 .font(.B1MediumFont())
