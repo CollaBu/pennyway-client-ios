@@ -10,6 +10,7 @@ struct CategorySpendingListView: View {
     @Binding var isDeleted: Bool
 
     @State private var isLoadingViewShown: Bool = false
+    @State private var animateLoadingView: Bool = false
     @State private var isReloadViewShown = false
 
     var currentYear = String(Date.year(from: Date()))
@@ -37,7 +38,7 @@ struct CategorySpendingListView: View {
 
                                         Button(action: {
                                             spendingId = item.id
-//                                            viewModel.dailyDetailSpendings = [item] 셀 선택 후 뒤로가기시 리스트 데이터 사라지는 문제 해결
+                                            viewModel.dailyDetailSpendings = [item] // 셀 선택 후 뒤로가기시 리스트 데이터 사라지는 문제 해결
                                             showDetailSpendingView = true
                                         }, label: {
                                             CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
@@ -56,7 +57,7 @@ struct CategorySpendingListView: View {
                     }
                 }
                 if isLoadingViewShown {
-                    LoadingView(startAnimate: $isLoadingViewShown)
+                    LoadingView(startAnimate: $animateLoadingView)
                 }
 
                 if isReloadViewShown {
@@ -99,53 +100,73 @@ struct CategorySpendingListView: View {
         guard let currentIndex = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
             return
         }
-        Log.debug(currentIndex)
 
         if currentIndex == viewModel.dailyDetailSpendings.count - 1 && !isLoadingViewShown {
             Log.debug("지출 내역 index: \(currentIndex)")
 
             if viewModel.hasNext {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    animateLoadingView = true
                     isLoadingViewShown = true
+                    startApiRetryTimer()
                 }
             }
 
-            handleApiResponse()
         } else {
+            Log.debug("지출 내역 마지막 index")
             isLoadingViewShown = false
+            isReloadViewShown = false
         }
     }
 
-    private func handleApiResponse() {
-        if viewModel.hasNext {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                isLoadingViewShown = true
-            }
-        }
+    private func startApiRetryTimer() {
+        var retryWorkItem: DispatchWorkItem?
 
-        var timeout = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            if !timeout {
-                Log.debug("API 응답이 10초 이상 걸림")
+        // API 응답 10초 이상 걸린 경우
+        retryWorkItem = DispatchWorkItem {
+            Log.debug("API 응답이 10초 이상 걸림")
+            // 로딩 뷰 사라지고, 재로드 뷰 나타남
+            animateLoadingView = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 isLoadingViewShown = false
                 isReloadViewShown = true
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            viewModel.getCategorySpendingHistoryApi { success in
-                timeout = true // 응답이 왔으므로 타이머 취소
-                if success {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem!)
+
+        viewModel.getCategorySpendingHistoryApi { success in
+            if success {
+                // 로딩 뷰와 재로드 뷰 사라짐
+                Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")
+                animateLoadingView = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     isLoadingViewShown = false
-                    Log.debug("지출 내역 가져오기 성공 후 로딩 뷰 사라짐")
+                    isReloadViewShown = false
                 }
+
+                retryWorkItem?.cancel() // 타이머 리셋
+            } else {
+                // 로딩 뷰 사라지고, 재로드 뷰 나타남
+                Log.debug("API 호출 실패, 재로드 뷰 나타남")
+                animateLoadingView = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isLoadingViewShown = false
+                    isReloadViewShown = true
+                }
+                retryWorkItem?.cancel() // 타이머 리셋
             }
         }
     }
 
     private func reloadAction() {
-        isLoadingViewShown = true
-        isReloadViewShown = false
+        // 로딩 뷰 나오고, 재로드 뷰 사라짐
+        animateLoadingView = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            isLoadingViewShown = true
+            isReloadViewShown = false
+        }
 
-        handleApiResponse()
+        startApiRetryTimer()
     }
 }
