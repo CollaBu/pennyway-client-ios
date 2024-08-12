@@ -27,38 +27,36 @@ struct CategorySpendingListView: View {
                         }
 
                         Section(header: headerView(for: date)) {
-                            VStack(spacing: 0) {
-                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                                ForEach(spendings, id: \.id) { item in
-                                    let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+                            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                            ForEach(spendings, id: \.id) { item in
+                                let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
 
-                                    Button(action: {
-                                        spendingId = item.id
-                                        viewModel.dailyDetailSpendings = [item]
-                                        showDetailSpendingView = true
+                                Button(action: {
+                                    spendingId = item.id
+                                    viewModel.dailyDetailSpendings = [item]
+                                    showDetailSpendingView = true
 
-                                    }, label: {
-                                        CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                            .contentShape(Rectangle())
-                                    })
-                                    .buttonStyle(PlainButtonStyle())
-                                    .buttonStyle(BasicButtonStyleUtil())
+                                }, label: {
+                                    CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                        .contentShape(Rectangle())
+                                })
+                                .buttonStyle(PlainButtonStyle())
+                                .buttonStyle(BasicButtonStyleUtil())
 
-                                    Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                                Spacer().frame(height: 6 * DynamicSizeFactor.factor())
 
-                                        .onAppear {
-                                            guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
-                                                return
-                                            }
-                                            // 해당 index가 마지막 index라면 데이터 추가
-                                            if index == viewModel.dailyDetailSpendings.count - 1 {
-                                                Log.debug("지출 내역 index: \(index)")
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
-                                                    viewModel.getCategorySpendingHistoryApi { _ in }
-                                                }
+                                    .onAppear {
+                                        guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
+                                            return
+                                        }
+                                        // 해당 index가 마지막 index라면 데이터 추가
+                                        if index == viewModel.dailyDetailSpendings.count - 1 {
+                                            Log.debug("지출 내역 index: \(index)")
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
+                                                viewModel.getCategorySpendingHistoryApi { _ in }
                                             }
                                         }
-                                }
+                                    }
                             }
                         }
 
