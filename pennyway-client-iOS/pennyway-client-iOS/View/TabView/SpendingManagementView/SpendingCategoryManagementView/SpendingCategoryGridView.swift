@@ -10,7 +10,7 @@ struct SpendingCategoryGridView: View {
     
     @State var navigateToCategoryDetails = false
     @State var navigateToAddCategoryView = false
-    @State private var showToastDeletePopUp = false
+    @State private var showDeleteCategoryToastPopUp = false
 
     var body: some View {
         ZStack {
@@ -48,14 +48,14 @@ struct SpendingCategoryGridView: View {
             }
             .overlay(
                 Group {
-                    if showToastDeletePopUp {
+                    if showDeleteCategoryToastPopUp {
                         CustomToastView(message: "카테고리를 삭제했어요")
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
                             .padding(.bottom, 34)
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                    showToastDeletePopUp = false
+                                    showDeleteCategoryToastPopUp = false
                                 }
                             }
                     }
@@ -97,7 +97,7 @@ struct SpendingCategoryGridView: View {
             }
         }
 
-        NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel, showToastDeletePopUp: $showToastDeletePopUp), isActive: $navigateToCategoryDetails) {}
+        NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel, showDeleteCategoryToastPopUp: $showDeleteCategoryToastPopUp), isActive: $navigateToCategoryDetails) {}
             .hidden()
 
         NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}

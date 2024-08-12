@@ -5,8 +5,7 @@ struct CategorySpendingListView: View {
     @State private var clickDate: Date? = nil
     @State private var spendingId: Int? = nil
     @State private var showDetailSpendingView = false
-    @State private var needRefresh = false
-    @Binding var showToastPopup: Bool
+    @Binding var showDeleteToastPopup: Bool
     @Binding var isDeleted: Bool
 
     var currentYear = String(Date.year(from: Date()))
@@ -70,7 +69,7 @@ struct CategorySpendingListView: View {
             }
         }
 
-        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
+        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showDeleteToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
             .hidden()
     }
 
