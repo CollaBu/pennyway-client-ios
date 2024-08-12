@@ -67,10 +67,12 @@ struct FindIdView: View {
                     NavigationLink(destination: FindPwView(), isActive: $goToPwView) {
                         EmptyView()
                     }
+                    .hidden()
                     .navigationBarBackButtonHidden(true)
                 }
             })
-            
+            .buttonStyle(BasicButtonStyleUtil())
+
             Button(action: {
                 NavigationUtil.popToRootView()
             }, label: {
@@ -87,6 +89,7 @@ struct FindIdView: View {
                         .platformTextColor(color: Color("White01"))
                 }
             })
+            .buttonStyle(BasicButtonStyleUtil())
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 34)

@@ -34,6 +34,7 @@ struct EditProfilePopUpView: View {
                                 .contentShape(Rectangle())
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .buttonStyle(BasicButtonStyleUtil())
 
                         if option != options.last {
                             Rectangle()
@@ -60,6 +61,7 @@ struct EditProfilePopUpView: View {
                         .background(Color("Gray05"))
                         .cornerRadius(4)
                 }
+                .buttonStyle(BasicButtonStyleUtil())
             }
             .padding(.horizontal, 20)
         }

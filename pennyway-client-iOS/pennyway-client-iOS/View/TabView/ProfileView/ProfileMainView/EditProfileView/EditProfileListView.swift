@@ -42,7 +42,9 @@ struct EditProfileListView: View {
         }
         
         NavigationLink(destination: EditIdView(), isActive: $isNavigateToEditIdView) {}
+            .hidden()
         NavigationLink(destination: EditPhoneNumberView(), isActive: $isNavigateToEditPhoneView) {}
+            .hidden()
     }
 }
 

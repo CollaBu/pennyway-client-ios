@@ -70,6 +70,7 @@ struct CategorySpendingListView: View {
         }
 
         NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
+            .hidden()
     }
 
     private func headerView(for date: String) -> some View {
@@ -122,12 +123,10 @@ struct CategorySpendingListView: View {
 
     private func startApiRetryTimer() {
         var retryWorkItem: DispatchWorkItem?
-        var shouldProceedWithApiResponse = true
 
         // API 응답 10초 이상 걸린 경우
         retryWorkItem = DispatchWorkItem {
             Log.debug("API 응답이 10초 이상 걸림")
-            shouldProceedWithApiResponse = false//10초이상 걸린 경우 더이상 api 요청하지 않도록
 
             // 로딩 뷰 사라지고, 재로드 뷰 나타남
             animateLoadingView = false
@@ -137,13 +136,9 @@ struct CategorySpendingListView: View {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: retryWorkItem!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem!)
 
         viewModel.getCategorySpendingHistoryApi { success in
-            guard shouldProceedWithApiResponse else {
-                Log.debug("API 응답이 너무 늦어 UI 업데이트 중단")
-                return
-            }
 
             if success {
                 // 로딩 뷰와 재로드 뷰 사라짐

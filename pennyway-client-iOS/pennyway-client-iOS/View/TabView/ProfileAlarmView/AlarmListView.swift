@@ -38,16 +38,10 @@ struct AlarmListView: View {
                 Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
                 ForEach(alarms) { alarm in
-                    Button(action: {
-                        Log.debug("click")
-                    }, label: {
-                        VStack {
-                            AlarmRow(alarm: alarm)
-                            Spacer().frame(height: 24 * DynamicSizeFactor.factor())
-                        }
-                        .contentShape(Rectangle())
-                    })
-                    .buttonStyle(PlainButtonStyle())
+                    VStack {
+                        AlarmRow(alarm: alarm)
+                        Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+                    }
                     .onAppear {
                         // 해당 index가 마지막 index라면 데이터 추가
                         guard let index = alarms.firstIndex(where: { $0.id == alarm.id }) else {

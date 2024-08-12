@@ -121,12 +121,13 @@ class SpendingCategoryViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("카테고리에 등록된 지출내역 조회\(jsonString)")
                         }
-                    
+                        
                         self.mergeNewSpendings(newSpendings: response.data.spendings.content)
                         self.currentPageNumber += 1
                         self.hasNext = response.data.spendings.hasNext
-        
+                        
                         completion(true)
+                        
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }

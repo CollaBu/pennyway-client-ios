@@ -119,6 +119,8 @@ struct CategoryDetailsView: View {
                             })
                             .padding(.trailing, 5)
                             .frame(width: 44, height: 44)
+                            .buttonStyle(BasicButtonStyleUtil())
+
                         }.offset(x: 10)
                     }
                 }
@@ -159,8 +161,10 @@ struct CategoryDetailsView: View {
                 )
             }
             NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
+                .hidden()
             
             NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $isNavigateToMoveCategoryView) {}
+                .hidden()
         }
     }
 }

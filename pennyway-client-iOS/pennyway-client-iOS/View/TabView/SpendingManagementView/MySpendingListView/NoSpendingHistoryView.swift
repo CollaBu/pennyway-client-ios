@@ -42,6 +42,7 @@ struct NoSpendingHistoryView: View {
                     }.hidden()
                 }
             })
+            .buttonStyle(BasicButtonStyleUtil())
         }
     }
 }

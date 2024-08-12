@@ -16,5 +16,6 @@ struct VerificationButton: View {
         .background(isEnabled ? Color("Gray05") : Color("Gray03"))
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .disabled(!isEnabled)
+        .buttonStyle(BasicButtonStyleUtil())
     }
 }

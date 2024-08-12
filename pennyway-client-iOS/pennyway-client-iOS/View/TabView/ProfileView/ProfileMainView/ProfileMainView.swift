@@ -12,6 +12,7 @@ struct ProfileMainView: View {
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
     @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
+    @StateObject var profileImageViewModel = ProfileImageViewModel()
 
     var body: some View {
         NavigationAvailable {
@@ -67,7 +68,15 @@ struct ProfileMainView: View {
                 loadImage()
                 showPopUpView = false
                 presignedUrlViewModel.image = selectedUIImage
-                presignedUrlViewModel.generatePresignedUrlApi { _ in }
+                presignedUrlViewModel.generatePresignedUrlApi { success in
+                    if success {
+                        presignedUrlViewModel.storePresignedUrlApi { success in
+                            if success {
+                                profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
+                            }
+                        }
+                    }
+                }
             }) {
                 ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                     .edgesIgnoringSafeArea(.bottom)
@@ -90,6 +99,7 @@ struct ProfileMainView: View {
                                 .padding(5)
                         })
                         .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                 }
             }

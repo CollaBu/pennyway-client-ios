@@ -75,6 +75,7 @@ struct ProfileSettingListView: View {
             NavigationLink(destination: destinationView(for: destination), tag: destination, selection: $activeNavigation) {
                 EmptyView()
             }
+            .hidden()
         }
     }
 
@@ -135,6 +136,7 @@ struct ProfileSettingSectionView: View {
                     }
                 })
                 .padding(.horizontal, 17)
+                .buttonStyle(BasicButtonStyleUtil())
             }
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
         }

@@ -65,6 +65,7 @@ struct ResetPwView: View {
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
+                    .buttonStyle(BasicButtonStyleUtil())
 
                 }.offset(x: -10)
             }

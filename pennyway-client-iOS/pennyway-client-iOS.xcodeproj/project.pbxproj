@@ -49,6 +49,10 @@
 		4A28820C2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28820A2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift */; };
 		4A28820D2C64CD5F00AE50C7 /* NotificationContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28820B2C64CD5F00AE50C7 /* NotificationContentData.swift */; };
 		4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882202C654BB500AE50C7 /* ReloadView.swift */; };
+		4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */; };
+		4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */; };
+		4A28821B2C65184300AE50C7 /* ProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */; };
+		4A28821F2C652D3600AE50C7 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -290,7 +294,7 @@
 		D889F9F42C64823B0055D045 /* ReadNotificationsRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */; };
 		D889F9F62C6484950055D045 /* CheckUnReadNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */; };
 		D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */; };
-		D889F9FA2C651F340055D045 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */; };
+		D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
@@ -358,11 +362,14 @@
 		4A2881FD2C64CC5900AE50C7 /* MoveCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveCategoryView.swift; sourceTree = "<group>"; };
 		4A2881FE2C64CC5900AE50C7 /* SpendingCategoryGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendingCategoryGridView.swift; sourceTree = "<group>"; };
 		4A2882042C64CC9600AE50C7 /* AlarmListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
-		4A2882062C64CCDF00AE50C7 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
 		4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNotificationViewModel.swift; sourceTree = "<group>"; };
 		4A28820A2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationResponseDto.swift; sourceTree = "<group>"; };
 		4A28820B2C64CD5F00AE50C7 /* NotificationContentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContentData.swift; sourceTree = "<group>"; };
 		4A2882202C654BB500AE50C7 /* ReloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadView.swift; sourceTree = "<group>"; };
+		4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageRequestDto.swift; sourceTree = "<group>"; };
+		4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageResponseDto.swift; sourceTree = "<group>"; };
+		4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
+		4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -605,7 +612,7 @@
 		D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNotificationsRequestDto.swift; sourceTree = "<group>"; };
 		D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUnReadNotificationResponseDto.swift; sourceTree = "<group>"; };
 		D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileImageViewModel.swift; sourceTree = "<group>"; };
-		D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
+		D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonStyleUtil.swift; sourceTree = "<group>"; };
 		D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../YU-LikeLion-iOS/YU-LikeLion-iOS/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
@@ -924,6 +931,7 @@
 				4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */,
 				D889F9EB2C63CA560055D045 /* GetNotificationResponseDto.swift */,
 				D889F9EF2C63CC030055D045 /* NotificationContentData.swift */,
+				4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */,
 				D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */,
 			);
 			path = UserAccount;
@@ -1168,7 +1176,6 @@
 			children = (
 				D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */,
 				D89F31C12C0049A100A51CFA /* GoogleService-Info.plist */,
-				4A2882062C64CCDF00AE50C7 /* GetNotificationRequestDto.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1240,12 +1247,13 @@
 		4A5DA8BE2C3C491F00685F77 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */,
 				4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */,
 				D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */,
 				D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */,
 				D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */,
 				D889F9F32C64823B0055D045 /* ReadNotificationsRequestDto.swift */,
-				D889F9F92C651F340055D045 /* GetNotificationRequestDto.swift */,
+				4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1287,6 +1295,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6C79D72C46CD9A009463E4 /* EditViewModel.swift */,
+				4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */,
 				D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */,
 				4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */,
 			);
@@ -1513,6 +1522,7 @@
 				D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */,
 				4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */,
 				4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */,
+				D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2115,6 +2125,7 @@
 				D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
+				D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				B599E4C32C58D4F0006051E9 /* AnalyticsConstants.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
@@ -2128,7 +2139,6 @@
 				4AC320552C11D5AC00DDB4B6 /* TotalTargetAmountGraphView.swift in Sources */,
 				4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */,
 				4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */,
-				D889F9FA2C651F340055D045 /* GetNotificationRequestDto.swift in Sources */,
 				4A57896F2BDBF01500AFEB26 /* BadRequestErrorCode.swift in Sources */,
 				4A98BD7C2C10F9AA0044A352 /* EditCurrentMonthTargetAmountRequestDto.swift in Sources */,
 				4A57897B2BDC1E5A00AFEB26 /* ConflictErrorCode.swift in Sources */,
@@ -2186,6 +2196,7 @@
 				D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */,
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */,
+				4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */,
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
 				B599E4C02C58B951006051E9 /* AnalyticsTracker.swift in Sources */,
 				4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */,
@@ -2212,6 +2223,7 @@
 				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
 				4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
+				4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
@@ -2228,6 +2240,7 @@
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
 				4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift in Sources */,
+				4A28821F2C652D3600AE50C7 /* GetNotificationRequestDto.swift in Sources */,
 				D8BB4FE02C61BE7300FDD258 /* EditProfilePopUpView.swift in Sources */,
 				D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */,
 				D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */,
@@ -2318,6 +2331,7 @@
 				4AC320452C11D5AC00DDB4B6 /* SelectSpendingDayView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */,
+				4A28821B2C65184300AE50C7 /* ProfileImageViewModel.swift in Sources */,
 				D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */,
 				4A4703AB2BCEE52300AEE04E /* VerificationResponseDto.swift in Sources */,
 				4A5789952BDC29E700AFEB26 /* ConflictError.swift in Sources */,

@@ -15,5 +15,6 @@ struct NavigationBackButton: View {
                 .frame(width: 34, height: 34)
                 .padding(5)
         })
+        .buttonStyle(BasicButtonStyleUtil())
     }
 }

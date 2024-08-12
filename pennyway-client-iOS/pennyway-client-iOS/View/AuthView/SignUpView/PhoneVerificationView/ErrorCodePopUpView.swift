@@ -43,6 +43,7 @@ extension ErrorCodePopUpView {
                                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                                 }
                                 .frame(width: 44, height: 44)
+                                .buttonStyle(BasicButtonStyleUtil())
                             }
                             .alignmentGuide(.top, computeValue: { _ in
                                 geometry.frame(in: .global).midY
