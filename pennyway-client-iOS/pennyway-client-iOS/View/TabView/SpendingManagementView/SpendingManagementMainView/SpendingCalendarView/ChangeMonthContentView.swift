@@ -6,12 +6,14 @@ struct ChangeMonthContentView: View {
     @State private var selectedMonth: Date
 
     private let calendars = Calendar.current
-    private let months: [Date]
+    private var months: [Date]
 
     init(viewModel: SpendingHistoryViewModel, isPresented: Binding<Bool>) {
         self.viewModel = viewModel
         _isPresented = isPresented
         _selectedMonth = State(initialValue: viewModel.currentDate)
+
+        Log.debug("_selectedMonth: \(_selectedMonth)")
 
         months = {
             let startDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1)) ?? Date()
@@ -58,14 +60,7 @@ struct ChangeMonthContentView: View {
                         HStack {
                             Button(action: {
                                 selectedMonth = month
-                                viewModel.currentDate = month
-                                viewModel.checkSpendingHistoryApi { success in
-                                    if success {
-                                        Log.debug("해당날짜 소비내역 가져오기 성공")
-                                    } else {
-                                        Log.debug("해당날짜 소비내역 가져오기 실패")
-                                    }
-                                }
+                                viewModel.updateCurrentDate(to: month)
                             }, label: {
                                 Text(monthTitle(from: month))
                                     .font(.H4MediumFont())
@@ -83,6 +78,9 @@ struct ChangeMonthContentView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            selectedMonth = viewModel.currentDate
+        }
     }
 
     func monthTitle(from date: Date) -> String {

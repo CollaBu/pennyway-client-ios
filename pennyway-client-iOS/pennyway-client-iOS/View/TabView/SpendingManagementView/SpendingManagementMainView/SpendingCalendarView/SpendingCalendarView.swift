@@ -220,6 +220,9 @@ private extension SpendingCalenderView {
   
     /// 월 변경
     func changeMonth(by value: Int) {
+        spendingHistoryViewModel.selectedDate = nil
+        spendingHistoryViewModel.selectedDateId = 0
+        
         spendingHistoryViewModel.currentDate = adjustedMonth(by: value)
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {

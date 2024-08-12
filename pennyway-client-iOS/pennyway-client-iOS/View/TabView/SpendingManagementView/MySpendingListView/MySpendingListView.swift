@@ -11,7 +11,7 @@ struct MySpendingListView: View {
     @State private var navigateToCategoryGridView = false
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
-    @State private var refreshView = false
+//    @State private var refreshView = false
     @State private var showToastPopup = false
     @State private var isDeleted = false
 
@@ -67,7 +67,7 @@ struct MySpendingListView: View {
                         }
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
-//                                changeMonth(by: -1)
+                                changeMonth(by: -1)
 
                             }, label: {
                                 ZStack {
@@ -99,7 +99,7 @@ struct MySpendingListView: View {
                     }
                 }
             }
-            .id(refreshView)
+//            .id(refreshView)
             .overlay(
                 Group {
                     if showToastPopup {
@@ -161,7 +161,7 @@ struct MySpendingListView: View {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
-                    refreshView = true
+//                    refreshView = true
                 } else {
                     Log.debug("소비내역 조회 api 연동 실패")
                 }
@@ -186,6 +186,9 @@ struct MySpendingListView: View {
         currentMonth = spendingHistoryViewModel.currentDate
         spendingHistoryViewModel.currentDate = newDate
         currentMonth = newDate
+
+        spendingHistoryViewModel.selectedDate = nil
+        spendingHistoryViewModel.selectedDateId = 0
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
