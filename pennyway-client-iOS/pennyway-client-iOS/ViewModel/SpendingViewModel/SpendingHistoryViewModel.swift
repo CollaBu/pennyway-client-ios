@@ -65,7 +65,6 @@ class SpendingHistoryViewModel: ObservableObject {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: currentDate)
         let month = calendar.component(.month, from: selectedDate ?? currentDate)
-//        let month = calendar.component(.month, from: currentDate)
 
         let yearString = String(year)
         let monthString = String(month)

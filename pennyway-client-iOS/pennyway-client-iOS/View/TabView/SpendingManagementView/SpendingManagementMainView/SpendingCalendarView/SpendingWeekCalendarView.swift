@@ -274,16 +274,6 @@ private extension SpendingWeekCalendarView {
             selectedDateToScroll = dateFormatter(date: firstDayOfMonth)
             spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: firstDayOfMonth)
         }
-        spendingHistoryViewModel.checkSpendingHistoryApi { success in
-            if success {
-                Log.debug("지출내역 조회 API 연동 성공")
-                DispatchQueue.main.async {
-                    self.selectedDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate))!
-                }
-            } else {
-                Log.fault("지출내역 조회 API 연동 실패")
-            }
-        }
     }
 
     /// 요일 추출
