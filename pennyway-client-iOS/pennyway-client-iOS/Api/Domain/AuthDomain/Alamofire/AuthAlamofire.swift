@@ -11,7 +11,6 @@ class AuthAlamofire {
     var session: Session
     var interceptedSession: Session
 
-    
     private init() {
         session = Session(eventMonitors: monitors)
         interceptedSession = Session(interceptor: interceptors, eventMonitors: monitors)

@@ -104,4 +104,10 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.checkUnReadNotifications, completion: completion)
     }
+    
+    func deleteDeviceToken(_ dto: FcmTokenDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - deleteDeviceToken() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.deleteDeviceToken(dto: dto), completion: completion)
+    }
 }

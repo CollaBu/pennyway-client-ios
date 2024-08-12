@@ -228,7 +228,6 @@
 		4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */; };
 		4ADE802C2BF29055007FFB01 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE802B2BF29055007FFB01 /* MainTabView.swift */; };
 		4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */; };
-		4AE8F3A62C32AB5C0014F0D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AE8F3A52C32AB5C0014F0D4 /* GoogleService-Info.plist */; };
 		4AE8F3A82C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3A72C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift */; };
 		4AE8F3AA2C32ABA50014F0D4 /* GetTargetAmountForDateResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3A92C32ABA50014F0D4 /* GetTargetAmountForDateResponseDto.swift */; };
 		4AE8F3AD2C32AED30014F0D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3AC2C32AED30014F0D4 /* AppDelegate.swift */; };
@@ -248,6 +247,7 @@
 		B599E4CD2C59067C006051E9 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4CC2C59067C006051E9 /* FirebaseAnalyticsService.swift */; };
 		B599E4D82C68A76B006051E9 /* AuthAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4D72C68A76B006051E9 /* AuthAnalyticsEvents.swift */; };
 		B599E4DA2C68A8E6006051E9 /* TokenRefreshHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4D92C68A8E6006051E9 /* TokenRefreshHandler.swift */; };
+		D801BEB72C6A52EA00C012E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D801BEB62C6A52EA00C012E1 /* GoogleService-Info.plist */; };
 		D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809412D2BF276460015CFF9 /* ResetPwFormView.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -545,7 +545,6 @@
 		4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListItem.swift; sourceTree = "<group>"; };
 		4ADE802B2BF29055007FFB01 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
-		4AE8F3A52C32AB5C0014F0D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4AE8F3A72C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTargetAmountForPreviousMonthResponseDto.swift; sourceTree = "<group>"; };
 		4AE8F3A92C32ABA50014F0D4 /* GetTargetAmountForDateResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTargetAmountForDateResponseDto.swift; sourceTree = "<group>"; };
 		4AE8F3AC2C32AED30014F0D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -566,6 +565,8 @@
 		B599E4CC2C59067C006051E9 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		B599E4D72C68A76B006051E9 /* AuthAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B599E4D92C68A8E6006051E9 /* TokenRefreshHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshHandler.swift; sourceTree = "<group>"; };
+		D801BEB62C6A52EA00C012E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D801BEB92C6A540A00C012E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D809412D2BF276460015CFF9 /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		D8157E632BBEF2040083844B /* InputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormView.swift; sourceTree = "<group>"; };
@@ -1340,9 +1341,9 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D801BEB92C6A540A00C012E1 /* GoogleService-Info.plist */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
-				4AE8F3A52C32AB5C0014F0D4 /* GoogleService-Info.plist */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
 				4A8571332BC650FA0082CE47 /* Constants */,
 				4A1179822BA9522D00A9CF4C /* Resource */,
@@ -1792,6 +1793,7 @@
 			children = (
 				4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */,
 				4AE8F3AC2C32AED30014F0D4 /* AppDelegate.swift */,
+				D801BEB62C6A52EA00C012E1 /* GoogleService-Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -2025,12 +2027,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AE8F3A62C32AB5C0014F0D4 /* GoogleService-Info.plist in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
+				D801BEB72C6A52EA00C012E1 /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
