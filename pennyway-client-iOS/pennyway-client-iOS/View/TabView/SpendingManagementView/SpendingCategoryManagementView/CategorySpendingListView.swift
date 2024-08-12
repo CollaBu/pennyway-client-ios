@@ -43,7 +43,7 @@ struct CategorySpendingListView: View {
                                 .buttonStyle(PlainButtonStyle())
                                 .buttonStyle(BasicButtonStyleUtil())
 
-                                Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
 
                                     .onAppear {
                                         guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
@@ -59,8 +59,6 @@ struct CategorySpendingListView: View {
                                     }
                             }
                         }
-
-                        Spacer()
                     }
                 }
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
