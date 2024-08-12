@@ -42,7 +42,7 @@ struct MySpendingListView: View {
                                                     clickDate = DateFormatterUtil.parseDate(from: date)
                                                     spendingHistoryViewModel.selectedDate = clickDate
                                                     selectedSpendingId = item.id
-                                                    Log.debug("Id: \(selectedSpendingId)")
+                                                    Log.debug("Id: \(selectedSpendingId), clickDate: \(clickDate)")
                                                     showDetailSpendingView = true
                                                 }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
