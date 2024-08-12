@@ -10,7 +10,7 @@ import SwiftUI
 
 class FirebaseAnalyticsService: AnalyticsService {
     var subscribedEvents: [AnalyticsEvent.Type] {
-        [AuthenticationEvents.self, SpendingEvents.self]
+        [AuthEvents.self, SpendingEvents.self]
     }
     
     func initialize(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) {
@@ -18,13 +18,10 @@ class FirebaseAnalyticsService: AnalyticsService {
     }
     
     func track(_ event: any AnalyticsEvent, additionalParams: [AnalyticsConstants.Parameter: Any]?) {
+        let eventName = getFirebaseEventName(for: event.eventName)
         let firebaseParams = convertParameters(event, additionalParams)
         
-        if event.eventName == .screenView {
-            Analytics.logEvent(AnalyticsEventScreenView, parameters: firebaseParams)
-        } else {
-            Analytics.logEvent(event.eventName.rawValue, parameters: firebaseParams)
-        }
+        Analytics.logEvent(eventName, parameters: firebaseParams)
         
         Log.info("Firebase: Tracking event \(event.eventName.rawValue) with parameters \(String(describing: additionalParams))")
     }
@@ -43,28 +40,42 @@ class FirebaseAnalyticsService: AnalyticsService {
         Log.info("Firebase: Setting user \(userId) with properties \(String(describing: properties))")
     }
     
+    private func getFirebaseEventName(for eventName: AnalyticsConstants.EventName) -> String {
+        switch eventName {
+        case .screenView:
+            return AnalyticsEventScreenView
+        case .login:
+            return AnalyticsEventLogin
+        case .signUp:
+            return AnalyticsEventSignUp
+        default:
+            return eventName.rawValue
+        }
+    }
+    
     /// 애플리케이션 내에서 사용하는 `AnalyticsEvent`를 Firebase Analytics에서 사용하는 이벤트로 변환한다.`
-    ///
-    /// - todo: 이 메서드는 AnalyticsEvent의 종류가 많아질수록 수정이 필요하다.
     private func convertParameters(_ event: AnalyticsEvent, _ additionalParams: [AnalyticsConstants.Parameter: Any]?) -> [String: Any] {
         var params: [String: Any] = [:]
-        
-        // 이벤트 파라미터 변환
+            
         event.parameters?.forEach { key, value in
-            switch key {
-            case .screenId:
-                params["firebase_screen_id"] = value
-            case .screenName:
-                params[AnalyticsParameterScreenName] = value
-            case .screenClass:
-                params[AnalyticsParameterScreenClass] = value
-            default:
-                params[key.rawValue] = value // 그 외의 파라미터가 있다면 커스텀 파라미터로 취급
-            }
+            params[getFirebaseParameterKey(for: key)] = value
         }
-        
+            
         additionalParams?.forEach { params[$0.key.rawValue] = $0.value }
-        
+            
         return params
+    }
+    
+    private func getFirebaseParameterKey(for key: AnalyticsConstants.Parameter) -> String {
+        switch key {
+        case .screenId:
+            return "firebase_screen_id"
+        case .screenName:
+            return AnalyticsParameterScreenName
+        case .screenClass:
+            return AnalyticsParameterScreenClass
+        default:
+            return key.rawValue
+        }
     }
 }
