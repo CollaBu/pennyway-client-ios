@@ -1,12 +1,41 @@
+import Combine
 import SwiftUI
+
+// MARK: - ImageLoader
+
+class ImageLoader: ObservableObject {
+    @Published var image: UIImage? = nil
+    
+    private var cancellable: AnyCancellable?
+    
+    func loadImage(from url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        
+        cancellable = URLSession.shared.dataTaskPublisher(for: url)
+            .map { UIImage(data: $0.data) }
+            .replaceError(with: nil)
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.image, on: self)
+    }
+    
+    deinit {
+        cancellable?.cancel()
+    }
+}
+
+// MARK: - ProfileUserInfoView
 
 struct ProfileUserInfoView: View {
     @Binding var showPopUpView: Bool
     @Binding var navigateToEditUsername: Bool
-    @Binding var image: Image?
+    @Binding var selectedUIImage: UIImage?
 
     @State private var name = ""
-    @State private var username = ""
+    @Binding var imageUrl: String
+    
+    @ObservedObject var imageLoader: ImageLoader
 
     private func loadUserData() {
         if let userData = getUserData() {
@@ -23,12 +52,19 @@ struct ProfileUserInfoView: View {
                     showPopUpView = true
                 }, label: {
                     ZStack {
-                        if let image = image {
-                            image
+                        if let selectedImage = selectedUIImage {
+                            Image(uiImage: selectedImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
                                 .clipShape(Circle())
+                        } else if let loadedImage = imageLoader.image {
+                            Image(uiImage: loadedImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
+                                .clipShape(Circle())
+                            
                         } else {
                             Image("icon_illust_no_image_no_margin")
                                 .resizable()

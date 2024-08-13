@@ -6,13 +6,14 @@ struct ProfileMainView: View {
     @State private var showPopUpView = false
     @State private var isHiddenTabBar = false
     @State private var selectedUIImage: UIImage?
-    @State private var image: Image?
-
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
     @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
     @StateObject var profileImageViewModel = ProfileImageViewModel()
+
+    @State var imageUrl = ""
+    @StateObject private var imageLoader = ImageLoader()
 
     var body: some View {
         NavigationAvailable {
@@ -22,7 +23,9 @@ struct ProfileMainView: View {
                         ProfileUserInfoView(
                             showPopUpView: $showPopUpView,
                             navigateToEditUsername: $navigateToEditUsername,
-                            image: $image
+                            selectedUIImage: $selectedUIImage,
+                            imageUrl: $imageUrl,
+                            imageLoader: imageLoader
                         )
 
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
@@ -56,7 +59,6 @@ struct ProfileMainView: View {
                         isPresented: $showPopUpView,
                         showPopUpView: $showPopUpView,
                         isHiddenTabBar: $isHiddenTabBar,
-                        image: $image,
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType, presignedUrlViewModel: presignedUrlViewModel
@@ -65,7 +67,7 @@ struct ProfileMainView: View {
             }
             .edgesIgnoringSafeArea(.bottom)
             .sheet(isPresented: $showImagePicker, onDismiss: {
-                loadImage()
+                // 사진 클릭한 경우
                 showPopUpView = false
                 presignedUrlViewModel.image = selectedUIImage
                 presignedUrlViewModel.generatePresignedUrlApi { success in
@@ -115,17 +117,18 @@ struct ProfileMainView: View {
         .onAppear {
             Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
             Log.debug("showPopUpView:\(showPopUpView)")
+            loadUserDataImage() // 사용자 프로필 사진 불러오기
         }
         .onChange(of: showPopUpView) { newValue in
             isHiddenTabBar = newValue
         }
     }
 
-    private func loadImage() {
-        guard let selectedImage = selectedUIImage else {
-            return
+    private func loadUserDataImage() {
+        if let userData = getUserData() {
+            imageUrl = userData.profileImageUrl
+            imageLoader.loadImage(from: imageUrl)
         }
-        image = Image(uiImage: selectedImage)
     }
 }
 
