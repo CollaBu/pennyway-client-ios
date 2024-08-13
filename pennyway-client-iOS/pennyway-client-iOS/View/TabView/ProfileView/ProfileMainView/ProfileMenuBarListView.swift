@@ -72,13 +72,15 @@ struct ProfileMenuBarListView: View {
     }
 
     func handleLogout() {
-        userProfileViewModel.logout { success in
-            DispatchQueue.main.async {
-                if success {
-                    authViewModel.logout()
-                    showLogoutPopUp = false
-                } else {
-                    Log.error("Fail logout")
+        if let fcmToken = AppDelegate.currentFCMToken {
+            userProfileViewModel.deleteDeviceTokenApi(fcmToken: fcmToken) { success in
+                DispatchQueue.main.async {
+                    if success {
+                        self.showLogoutPopUp = false
+                        self.authViewModel.logout()
+                    } else {
+                        Log.error("디바이스 토큰 삭제 실패")
+                    }
                 }
             }
         }

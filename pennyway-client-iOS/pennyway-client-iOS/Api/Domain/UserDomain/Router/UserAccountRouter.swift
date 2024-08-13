@@ -18,12 +18,13 @@ enum UserAccountRouter: URLRequestConvertible {
     case uploadProfileImage(dto: UploadProfileImageRequestDto)
     case readNotifications(dto: ReadNotificationsRequestDto)
     case checkUnReadNotifications
+    case deleteDeviceToken(dto: FcmTokenDto)
     
     var method: HTTPMethod {
         switch self {
         case .getUserProfile, .getNotificationList, .checkUnReadNotifications:
             return .get
-        case .deleteUserAccount, .settingOffAlarm, .deleteProfileImage:
+        case .deleteUserAccount, .settingOffAlarm, .deleteProfileImage, .deleteDeviceToken:
             return .delete
         case .registDeviceToken, .uploadProfileImage:
             return .put
@@ -42,7 +43,7 @@ enum UserAccountRouter: URLRequestConvertible {
         switch self {
         case .getUserProfile, .deleteUserAccount:
             return "v2/users/me"
-        case .registDeviceToken:
+        case .registDeviceToken, .deleteDeviceToken:
             return "v2/users/me/device-tokens"
         case .settingOnAlarm, .settingOffAlarm:
             return "v2/users/me/notifications"
@@ -89,6 +90,8 @@ enum UserAccountRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .readNotifications(dto):
             return try? dto.asDictionary()
+        case let .deleteDeviceToken(dto):
+            return try? dto.asDictionary()
         }
     }
 
@@ -101,7 +104,7 @@ enum UserAccountRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method)
         case .registDeviceToken, .validatePw, .resetMyPw, .editUserId, .editUserPhoneNumber, .editUserName, .readNotifications, .uploadProfileImage:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
-        case .settingOnAlarm, .settingOffAlarm, .getNotificationList:
+        case .settingOnAlarm, .settingOffAlarm, .getNotificationList, .deleteDeviceToken:
             let queryParameters = parameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         }
