@@ -85,6 +85,7 @@ struct SpendingDetailSheetView: View {
                                 Button(action: {
                                     selectedSpendingId = item.id
                                     showDetailSpendingView = true
+                                    Log.debug("selectedSpendingId: \(selectedSpendingId)")
                                 }, label: {
                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                         .contentShape(Rectangle())

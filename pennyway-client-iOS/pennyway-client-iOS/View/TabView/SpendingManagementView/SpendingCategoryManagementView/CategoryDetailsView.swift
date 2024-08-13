@@ -10,12 +10,13 @@ struct CategoryDetailsView: View {
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]
     @State private var showDeletePopUp = false
-    @State private var showToastPopup = false
+    @State private var showDeleteToastPopup = false
+    @State private var showMoveToastPopup = false // 카테고리 이동
     @State var isDeleted = false
     @State private var isNavigateToEditCategoryView = false
     @State private var isNavigateToMoveCategoryView = false
     
-    @Binding var showToastDeletePopUp: Bool
+    @Binding var showDeleteCategoryToastPopUp: Bool // 카테고리 삭제시
 
     var body: some View {
         ZStack {
@@ -47,9 +48,9 @@ struct CategoryDetailsView: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: 1 * DynamicSizeFactor.factor())
                         
-                    Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                         
-                    CategorySpendingListView(viewModel: viewModel, showToastPopup: $showToastPopup, isDeleted: $isDeleted)
+                    CategorySpendingListView(viewModel: viewModel, showDeleteToastPopup: $showDeleteToastPopup, isDeleted: $isDeleted)
                         
                     Spacer()
                 }
@@ -57,19 +58,24 @@ struct CategoryDetailsView: View {
             }
             .overlay(
                 Group {
-                    if showToastPopup {
-                        CustomToastView(message: "소비내역이 삭제되었어요")
+                    if showDeleteToastPopup || showMoveToastPopup {
+                        CustomToastView(message: showDeleteToastPopup ? "소비 내역을 삭제했어요" : "소비 내역을 이동시켰어요")
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
                             .padding(.bottom, 34)
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                    showToastPopup = false
+                                    if showDeleteToastPopup {
+                                        showDeleteToastPopup = false
+                                    } else {
+                                        showMoveToastPopup = false
+                                    }
                                 }
                             }
                     }
                 }, alignment: .bottom
             )
+            
             .overlay(
                 VStack(alignment: .leading) {
                     if isClickMenu {
@@ -129,7 +135,7 @@ struct CategoryDetailsView: View {
             .onChange(of: isDeleted) { newValue in
                 if newValue {
                     viewModel.spedingHistoryTotalCount -= 1 // 지출 내역 총 개수 감소
-                    showToastPopup = true
+                    showDeleteToastPopup = true
                     isDeleted = false
                 }
             }
@@ -151,7 +157,7 @@ struct CategoryDetailsView: View {
                                 viewModel.getSpendingCustomCategoryListApi { _ in
                                     self.showDeletePopUp = false
                                     self.presentationMode.wrappedValue.dismiss()
-                                    self.showToastDeletePopUp = true
+                                    self.showDeleteCategoryToastPopUp = true
                                 }
                             }
                         }
@@ -163,7 +169,7 @@ struct CategoryDetailsView: View {
             NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
                 .hidden()
             
-            NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $isNavigateToMoveCategoryView) {}
+            NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel(), showMoveToastPopup: $showMoveToastPopup), isActive: $isNavigateToMoveCategoryView) {}
                 .hidden()
         }
     }

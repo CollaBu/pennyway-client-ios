@@ -5,8 +5,7 @@ struct CategorySpendingListView: View {
     @State private var clickDate: Date? = nil
     @State private var spendingId: Int? = nil
     @State private var showDetailSpendingView = false
-    @State private var needRefresh = false
-    @Binding var showToastPopup: Bool
+    @Binding var showDeleteToastPopup: Bool
     @Binding var isDeleted: Bool
 
     @State private var isLoadingViewShown: Bool = false
@@ -21,39 +20,38 @@ struct CategorySpendingListView: View {
                 ForEach(SpendingListGroupUtil.groupedByYear(from: viewModel.dailyDetailSpendings).sorted(by: { $0.key > $1.key }), id: \.key) { year, spendingsByYear in
                     VStack(spacing: 0) {
                         if year != currentYear {
-                            VStack(spacing: 0) {
-                                Spacer().frame(height: 5 * DynamicSizeFactor.factor())
-                                yearSeparatorView(for: year)
-                                    .padding(.horizontal, 20)
-                                Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-                            }
+                            yearSeparatorView(for: year)
+                                .padding(.horizontal, 20)
                         }
 
                         ForEach(spendingsByYear, id: \.key) { date, spendings in
-                            Section(header: headerView(for: date)) {
-                                VStack(spacing: 0) {
-                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                                    ForEach(spendings, id: \.id) { item in
-                                        let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
 
-                                        Button(action: {
-                                            spendingId = item.id
-                                            viewModel.selectSpending = item
-                                            showDetailSpendingView = true
-                                        }, label: {
-                                            CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                                .contentShape(Rectangle())
-                                        })
-                                        .buttonStyle(PlainButtonStyle())
-                                        .onAppear {
-                                            handleOnAppear(for: item)
-                                        }
-                                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                            Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+
+                            Section(header: headerView(for: date)) {
+                                Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                                ForEach(spendings, id: \.id) { item in
+                                    let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+
+                                    Button(action: {
+                                        spendingId = item.id
+                                        viewModel.selectSpending = item
+                                        showDetailSpendingView = true
+                                    }, label: {
+                                        CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                            .contentShape(Rectangle())
+                                    })
+                                    .buttonStyle(PlainButtonStyle())
+                                    .buttonStyle(BasicButtonStyleUtil())
+
+                                    .onAppear {
+                                        handleOnAppear(for: item)
                                     }
+
+                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                 }
                             }
                         }
-                        Spacer()
                     }
                 }
                 if isLoadingViewShown {
@@ -68,7 +66,7 @@ struct CategorySpendingListView: View {
             }
         }
 
-        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
+        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showDeleteToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
             .hidden()
     }
 

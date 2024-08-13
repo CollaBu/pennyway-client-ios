@@ -4,7 +4,7 @@ import Foundation
 import OSLog
 
 extension URLRequest {
-    static func createURLRequest(url: URL, method: HTTPMethod, bodyParameters: [String: Any]? = nil, queryParameters: [URLQueryItem]? = nil, image: UIImage? = nil) -> URLRequest {
+    static func createURLRequest(url: URL, method: HTTPMethod, bodyParameters: [String: Any]? = nil, queryParameters: [URLQueryItem]? = nil, image: UIImage? = nil, percentEncoded: Bool? = false) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
@@ -25,7 +25,12 @@ extension URLRequest {
 
         if let queryParameters = queryParameters {
             var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-            components?.percentEncodedQueryItems = queryParameters
+
+            if percentEncoded! {
+                components?.percentEncodedQueryItems = queryParameters
+            } else {
+                components?.queryItems = queryParameters
+            }
 
             if let urlWithQuery = components?.url {
                 request.url = urlWithQuery

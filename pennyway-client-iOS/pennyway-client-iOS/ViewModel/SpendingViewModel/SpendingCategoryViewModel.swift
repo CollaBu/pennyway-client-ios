@@ -229,9 +229,14 @@ class SpendingCategoryViewModel: ObservableObject {
             case let .success(data):
                 if let responseData = data {
                     if let jsonString = String(data: responseData, encoding: .utf8) {
-                        Log.debug("카테고리 이동 완료 \(jsonString)")
+                        self.deleteCategoryApi { success in
+                            if success {
+                                Log.debug("카테고리 이동 및 삭제 완료 \(jsonString)")
+                                self.customCategories.removeAll { $0.id == self.selectedCategory!.id }
+                                completion(true)
+                            }
+                        }
                     }
-                    completion(true)
                 }
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {

@@ -69,7 +69,7 @@ enum ObjectStorageRouter: URLRequestConvertible {
                     URLQueryItem(name: "X-Amz-Signature", value: dto.signature)
                 ]
             
-            request = URLRequest.createURLRequest(url: baseURL, method: method, queryParameters: queryDatas, image: image)
+            request = URLRequest.createURLRequest(url: baseURL, method: method, queryParameters: queryDatas, image: image, percentEncoded: true)
         }
         return request
     }

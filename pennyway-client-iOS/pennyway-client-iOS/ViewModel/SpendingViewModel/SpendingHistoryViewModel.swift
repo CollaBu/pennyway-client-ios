@@ -21,6 +21,22 @@ class SpendingHistoryViewModel: ObservableObject {
         return String(Date.month(from: currentDate))
     }
 
+    func updateCurrentDate(to date: Date) {
+        currentDate = date
+        selectedDate = nil
+        fetchSpendingHistory()
+    }
+
+    private func fetchSpendingHistory() {
+        checkSpendingHistoryApi { success in
+            if success {
+                Log.debug("소비내역 조회 api 연동 성공")
+            } else {
+                Log.debug("소비내역 조회 api 연동 실패")
+            }
+        }
+    }
+
     /// 선택한 날짜에 해당하는 소비내역을 필터링
     func filteredSpendings(for date: Date?) -> [IndividualSpending] {
         guard let date = date else {
@@ -48,7 +64,7 @@ class SpendingHistoryViewModel: ObservableObject {
     func checkSpendingHistoryApi(completion: @escaping (Bool) -> Void) {
         let calendar = Calendar.current
         let year = calendar.component(.year, from: currentDate)
-        let month = calendar.component(.month, from: currentDate)
+        let month = calendar.component(.month, from: selectedDate ?? currentDate)
 
         let yearString = String(year)
         let monthString = String(month)
