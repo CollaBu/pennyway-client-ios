@@ -15,12 +15,6 @@ class UserLogoutViewModel: ObservableObject {
                 KeychainHelper.deleteAccessToken()
                 TokenHandler.deleteAllRefreshTokens()
 
-                if let fcmToken = AppDelegate.currentFCMToken {
-                    self.deleteDeviceTokenApi(fcmToken: fcmToken)
-                } else {
-                    Log.debug("FCM token이 존재하지 않음")
-                }
-
                 completion(true)
 
             case let .failure(error):
@@ -35,7 +29,7 @@ class UserLogoutViewModel: ObservableObject {
         }
     }
 
-    func deleteDeviceTokenApi(fcmToken: String) {
+    func deleteDeviceTokenApi(fcmToken: String, completion _: @escaping (Bool) -> Void) {
         let fcmTokenDto = FcmTokenDto(token: fcmToken)
 
         UserAccountAlamofire.shared.deleteDeviceToken(fcmTokenDto) { result in
@@ -45,6 +39,7 @@ class UserLogoutViewModel: ObservableObject {
                     do {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
                         Log.debug(response)
+                        Log.debug("디바이스 토큰 삭제됨")
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                     }
