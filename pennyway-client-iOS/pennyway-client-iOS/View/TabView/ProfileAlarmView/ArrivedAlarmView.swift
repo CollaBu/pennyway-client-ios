@@ -65,7 +65,7 @@ struct AlarmRow: View {
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
 
-                Text(alarm.createdAt)
+                Text(DateFormatterUtil.formatRelativeDate(from: alarm.createdAt))
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray04"))
             }
