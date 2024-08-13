@@ -5,8 +5,7 @@ struct CategorySpendingListView: View {
     @State private var clickDate: Date? = nil
     @State private var spendingId: Int? = nil
     @State private var showDetailSpendingView = false
-    @State private var needRefresh = false
-    @Binding var showToastPopup: Bool
+    @Binding var showDeleteToastPopup: Bool
     @Binding var isDeleted: Bool
 
     var currentYear = String(Date.year(from: Date()))
@@ -28,22 +27,23 @@ struct CategorySpendingListView: View {
                         }
 
                         Section(header: headerView(for: date)) {
-                            VStack(spacing: 0) {
+                            Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                            ForEach(spendings, id: \.id) { item in
+                                let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
+
+                                Button(action: {
+                                    spendingId = item.id
+                                    viewModel.dailyDetailSpendings = [item]
+                                    showDetailSpendingView = true
+
+                                }, label: {
+                                    CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
+                                        .contentShape(Rectangle())
+                                })
+                                .buttonStyle(PlainButtonStyle())
+                                .buttonStyle(BasicButtonStyleUtil())
+
                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                                ForEach(spendings, id: \.id) { item in
-                                    let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-
-                                    Button(action: {
-                                        spendingId = item.id
-                                        viewModel.dailyDetailSpendings = [item]
-                                        showDetailSpendingView = true
-
-                                    }, label: {
-                                        CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
-                                            .contentShape(Rectangle())
-                                    })
-                                    .buttonStyle(PlainButtonStyle())
-                                    .buttonStyle(BasicButtonStyleUtil())
 
                                     .onAppear {
                                         guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == item.id }) else {
@@ -57,19 +57,15 @@ struct CategorySpendingListView: View {
                                             }
                                         }
                                     }
-                                    Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-                                }
                             }
                         }
-
-                        Spacer()
                     }
                 }
                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
             }
         }
 
-        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
+        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showDeleteToastPopup, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
             .hidden()
     }
 
