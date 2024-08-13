@@ -18,17 +18,10 @@ class UserLogoutViewModel: ObservableObject {
                 completion(true)
 
             case let .failure(error):
-
-                if let StatusSpecificError = error as? StatusSpecificError {
-                    Log.info("Failed to verify: \(StatusSpecificError)")
-
-                    if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
-                        completion(true)
-                    } else {
-                        Log.error("Failed to verify: \(error)")
-                    }
+                if let statusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
                 } else {
-                    Log.error("Failed to verify: \(error)")
+                    Log.error("Network request failed: \(error)")
                 }
 
                 completion(false)
@@ -36,7 +29,7 @@ class UserLogoutViewModel: ObservableObject {
         }
     }
 
-    func deleteDeviceTokenApi(fcmToken: String, completion _: @escaping (Bool) -> Void) {
+    func deleteDeviceTokenApi(fcmToken: String, completion: @escaping (Bool) -> Void) {
         let fcmTokenDto = FcmTokenDto(token: fcmToken)
 
         UserAccountAlamofire.shared.deleteDeviceToken(fcmTokenDto) { result in
@@ -47,15 +40,40 @@ class UserLogoutViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
                         Log.debug(response)
                         Log.debug("디바이스 토큰 삭제됨")
+                        self.logout { success in
+                            if success {
+                                Log.debug("로그아웃 성공")
+                                completion(true)
+                            } else {
+                                Log.error("로그아웃 실패.")
+                                completion(false)
+                            }
+                        }
+
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
+                        completion(false)
                     }
                 }
             case let .failure(error):
-                if let statusSpecificError = error as? StatusSpecificError {
-                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("Failed to verify: \(StatusSpecificError)")
+
+                    if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                        // 404에러시 로그아웃 로직 실행
+                        self.logout { success in
+                            if success {
+                                Log.debug("디바이스 토큰 삭제시 404에러 떠서 로그아웃 처리.")
+                            } else {
+                                Log.error("디바이스 토큰 삭제 못함.")
+                            }
+                        }
+                    } else {
+                        Log.error("Failed to verify: \(error)")
+                    }
                 } else {
-                    Log.error("Network request failed: \(error)")
+                    Log.error("Failed to verify: \(error)")
                 }
             }
         }

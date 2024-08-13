@@ -76,19 +76,8 @@ struct ProfileMenuBarListView: View {
             userProfileViewModel.deleteDeviceTokenApi(fcmToken: fcmToken) { success in
                 DispatchQueue.main.async {
                     if success {
-                        Log.debug("디바이스 토큰 삭제 성공")
-                        userProfileViewModel.logout { success in
-                            if success {
-//                                authViewModel.logout()
-                                showLogoutPopUp = false
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    authViewModel.logout()
-                                }
-                                Log.debug("로그아웃 성공")
-                            } else {
-                                Log.error("로그아웃 실패")
-                            }
-                        }
+                        self.showLogoutPopUp = false
+                        self.authViewModel.logout()
                     } else {
                         Log.error("디바이스 토큰 삭제 실패")
                     }
