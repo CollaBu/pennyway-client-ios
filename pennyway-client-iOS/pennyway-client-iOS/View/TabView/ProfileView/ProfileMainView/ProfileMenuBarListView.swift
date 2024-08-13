@@ -4,9 +4,14 @@ import SwiftUI
 struct ProfileMenuBarListView: View {
     @State private var showLogoutPopUp = false
     @State private var showDeleteUserPopUp = false
+    @State private var showUnLinkPopUp = false
+    @State private var provider = ""
     @EnvironmentObject var authViewModel: AppViewModel
     @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
+    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
+    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
+    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
 
     @State private var navigateCompleteView = false
 
@@ -14,7 +19,7 @@ struct ProfileMenuBarListView: View {
         ZStack {
             ScrollView {
                 VStack {
-                    ProfileOAuthButtonView()
+                    ProfileOAuthButtonView(kakaoOAuthViewModel: kakaoOAuthViewModel, googleOAuthViewModel: googleOAuthViewModel, appleOAuthViewModel: appleOAuthViewModel, showUnLinkPopUp: $showUnLinkPopUp, provider: $provider)
 
                     Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 
@@ -35,6 +40,19 @@ struct ProfileMenuBarListView: View {
 
                     }.offset(x: -10)
                 }
+            }
+
+            if showUnLinkPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showLogoutPopUp,
+                                titleLabel: "계정 연동을 해제할까요?",
+                                subTitleLabel: "해제하더라도 다시 연동할 수 있어요",
+                                firstBtnAction: { self.showUnLinkPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: handleUnLinkAccount,
+                                secondBtnLabel: "해제하기",
+                                secondBtnColor: Color("Gray05")
+                )
             }
 
             if showLogoutPopUp {
@@ -95,6 +113,20 @@ struct ProfileMenuBarListView: View {
                 }
             }
         }
+    }
+
+    func handleUnLinkAccount() {
+        switch provider {
+        case "kakao":
+            kakaoOAuthViewModel.signIn()
+        case "google":
+            googleOAuthViewModel.signIn()
+        case "apple":
+            appleOAuthViewModel.signIn()
+        default:
+            Log.debug("계정 연동 해제 실패")
+        }
+        showUnLinkPopUp = false
     }
 }
 

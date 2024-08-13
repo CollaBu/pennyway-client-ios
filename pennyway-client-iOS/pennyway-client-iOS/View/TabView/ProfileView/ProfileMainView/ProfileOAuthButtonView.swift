@@ -2,10 +2,12 @@
 import SwiftUI
 
 struct ProfileOAuthButtonView: View {
-    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
-    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
-    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
+    @ObservedObject var kakaoOAuthViewModel: KakaoOAuthViewModel
+    @ObservedObject var googleOAuthViewModel: GoogleOAuthViewModel
+    @ObservedObject var appleOAuthViewModel: AppleOAuthViewModel
 
+    @Binding var showUnLinkPopUp: Bool
+    @Binding var provider: String
     @EnvironmentObject var authViewModel: AppViewModel
 
     var body: some View {
@@ -25,18 +27,34 @@ struct ProfileOAuthButtonView: View {
 
                 kakaoAction: { // Kakao 로그인 액션 처리
                     kakaoOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
-                    kakaoOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.kakao.rawValue
+                    if kakaoOAuthViewModel.existOAuthAccount {
+                        showUnLinkPopUp = true
+                        provider = "kakao"
+                    } else {
+                        kakaoOAuthViewModel.signIn()
+                    }
                 },
                 googleAction: { // Google 로그인 액션 처리
                     googleOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
-                    googleOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.google.rawValue
+
+                    if googleOAuthViewModel.existOAuthAccount {
+                        showUnLinkPopUp = true
+                        provider = "google"
+                    } else {
+                        googleOAuthViewModel.signIn()
+                    }
                 },
                 appleAction: { // Apple 로그인 액션 처리
                     appleOAuthViewModel.isLoggedIn = authViewModel.isLoggedIn
-                    appleOAuthViewModel.signIn()
                     OAuthRegistrationManager.shared.provider = Provider.apple.rawValue
+                    if appleOAuthViewModel.existOAuthAccount {
+                        showUnLinkPopUp = true
+                        provider = "apple"
+                    } else {
+                        appleOAuthViewModel.signIn() // 계정 연동
+                    }
                 }
             )
 
