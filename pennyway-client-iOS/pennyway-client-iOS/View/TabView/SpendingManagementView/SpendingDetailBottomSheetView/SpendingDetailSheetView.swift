@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 // MARK: - SpendingDetailSheetView
@@ -114,6 +115,7 @@ struct SpendingDetailSheetView: View {
                 }
             }
         }
+        .id(forceUpdate)
         .onAppear {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
             getDailyHistoryData()
@@ -127,6 +129,16 @@ struct SpendingDetailSheetView: View {
         }
         .onChange(of: showAddSpendingHistoryView) { _ in
             getDailyHistoryData()
+        }
+        // 왜 안됨
+        .onChange(of: spendingHistoryViewModel.spendingSheetViewUpdated) { updated in
+            Log.debug("onChange실행중, updated: \(updated)")
+            if updated {
+                Log.debug("업데이트됨")
+                forceUpdate = true
+                Log.debug("forceUpdate:\(forceUpdate)")
+                spendingHistoryViewModel.spendingSheetViewUpdated = false
+            }
         }
         .setTabBarVisibility(isHidden: true)
     }

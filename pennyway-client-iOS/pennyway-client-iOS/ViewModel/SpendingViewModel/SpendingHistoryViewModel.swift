@@ -13,7 +13,8 @@ class SpendingHistoryViewModel: ObservableObject {
     @Published var selectedDateId = 0
     @Published var selectedDate: Date?
 
-    @Published var spendingHistoryUpdated: Bool = false
+    @Published var spendingDetailViewUpdated: Bool = false
+    @Published var spendingSheetViewUpdated: Bool = false
 
     private var year: String {
         return String(Date.year(from: currentDate))
