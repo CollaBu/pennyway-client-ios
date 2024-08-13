@@ -28,12 +28,14 @@ struct ProfileUserInfoView: View {
                 }, label: {
                     ZStack {
                         if let selectedImage = selectedUIImage {
+                            // selectedUIImage가 nil이 아닌 경우
                             Image(uiImage: selectedImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
                                 .clipShape(Circle())
                         } else if let loadedImage = viewModel.imageUrl {
+                            // userDefaults에 저장된 이미지가 nil이 아니고 빈 값이 아닌 경우
                             Image(uiImage: loadedImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -41,6 +43,7 @@ struct ProfileUserInfoView: View {
                                 .clipShape(Circle())
                             
                         } else {
+                            // selectedUIImage도 nil이고 userDefaults에 저장된 이미지도 nil이거나 빈 값인 경우
                             Image("icon_illust_no_image_no_margin")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
