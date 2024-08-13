@@ -21,6 +21,7 @@ class AppViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         Log.debug(response)
                         self?.checkLoginState = true
+                        self?.isLoggedIn = true
 
                         Log.debug(KeychainHelper.loadAccessToken())
 
