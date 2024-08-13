@@ -37,4 +37,35 @@ enum DateFormatterUtil {
         yearFormatter.dateFormat = "yyyy"
         return yearFormatter.string(from: date)
     }
+
+    static func formatRelativeDate(from dateString: String) -> String {
+        guard let date = dateFromString(dateString) else {
+            return dateString
+        }
+
+        // 현재 시간
+        let now = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .weekOfYear, .day, .hour, .minute], from: date, to: now)
+
+        if let year = components.year, year > 0 {
+            return "\(year)년 전"
+        } else if let month = components.month, month > 0 {
+            return "\(month)달 전"
+        } else if let week = components.weekOfYear, week > 0 {
+            return "\(week)주일 전"
+        } else if let day = components.day, day > 0 {
+            switch day {
+            case 1: return "어제"
+            case 2 ... 6: return "\(day)일 전"
+            default: return "1주일 전"
+            }
+        } else if let hour = components.hour, hour > 0 {
+            return "\(hour)시간 전"
+        } else if let minute = components.minute, minute > 0 {
+            return "\(minute)분 전"
+        } else {
+            return "오늘"
+        }
+    }
 }

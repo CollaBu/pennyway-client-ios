@@ -4,7 +4,8 @@ import SwiftUI
 struct PastSpendingListView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     @State private var navigateToMySpendingList = false
-    @State private var selectDate: Date = Date()
+    @State var currentMonth: Date = Date()
+    @State var clickDate: Date?
     
     var body: some View {
         ZStack {
@@ -44,7 +45,7 @@ struct PastSpendingListView: View {
                         .onTapGesture {
                             let components = DateComponents(year: content.year, month: content.month)
                             if let date = Calendar.current.date(from: components) {
-                                selectDate = date
+                                currentMonth = date
                             }
                             navigateToMySpendingList = true
                         }
@@ -74,7 +75,7 @@ struct PastSpendingListView: View {
             }
         }
         
-        NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: $selectDate, clickDate: .constant(nil)), isActive: $navigateToMySpendingList) {
+        NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: $currentMonth, clickDate: $clickDate), isActive: $navigateToMySpendingList) {
             EmptyView()
         }
         .hidden()
