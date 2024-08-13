@@ -49,5 +49,8 @@ struct ProfileOAuthButtonView: View {
 
         .frame(maxWidth: .infinity)
         .background(Color("White01"))
+        .onAppear{
+            
+        }
     }
 }
