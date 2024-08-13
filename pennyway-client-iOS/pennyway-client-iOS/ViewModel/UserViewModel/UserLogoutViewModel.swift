@@ -19,11 +19,18 @@ class UserLogoutViewModel: ObservableObject {
 
             case let .failure(error):
 
-                if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
-                    Log.info("Failed to verify: \(errorWithDomainErrorAndMessage)")
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("Failed to verify: \(StatusSpecificError)")
+
+                    if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                        completion(true)
+                    } else {
+                        Log.error("Failed to verify: \(error)")
+                    }
                 } else {
                     Log.error("Failed to verify: \(error)")
                 }
+
                 completion(false)
             }
         }
