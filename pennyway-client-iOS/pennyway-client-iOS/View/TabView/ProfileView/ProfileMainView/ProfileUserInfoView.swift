@@ -1,41 +1,16 @@
 import Combine
 import SwiftUI
 
-// MARK: - ImageLoader
-
-class ImageLoader: ObservableObject {
-    @Published var image: UIImage? = nil
-    
-    private var cancellable: AnyCancellable?
-    
-    func loadImage(from url: String) {
-        guard let url = URL(string: url) else {
-            return
-        }
-        
-        cancellable = URLSession.shared.dataTaskPublisher(for: url)
-            .map { UIImage(data: $0.data) }
-            .replaceError(with: nil)
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.image, on: self)
-    }
-    
-    deinit {
-        cancellable?.cancel()
-    }
-}
-
 // MARK: - ProfileUserInfoView
 
 struct ProfileUserInfoView: View {
     @Binding var showPopUpView: Bool
     @Binding var navigateToEditUsername: Bool
     @Binding var selectedUIImage: UIImage?
+    @Binding var imageUrl: String
 
     @State private var name = ""
-    @Binding var imageUrl: String
-    
-    @ObservedObject var imageLoader: ImageLoader
+    @ObservedObject var viewModel: ProfileImageViewModel
 
     private func loadUserData() {
         if let userData = getUserData() {
@@ -58,7 +33,7 @@ struct ProfileUserInfoView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
                                 .clipShape(Circle())
-                        } else if let loadedImage = imageLoader.image {
+                        } else if let loadedImage = viewModel.imageUrl {
                             Image(uiImage: loadedImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)

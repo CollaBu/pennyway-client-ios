@@ -3,6 +3,8 @@
 import SwiftUI
 
 class ProfileImageViewModel: ObservableObject {
+    @Published var imageUrl: UIImage? = nil
+
     func uploadProfileImageApi(_ payload: String) {
         let profileImageUrl = extractPathComponent(from: payload) ?? ""
         let uploadProfileImageRequestDto = UploadProfileImageRequestDto(profileImageUrl: profileImageUrl)
@@ -50,5 +52,26 @@ class ProfileImageViewModel: ObservableObject {
         let trimmedPath = pathComponents.dropFirst(1).joined(separator: "/")
 
         return trimmedPath
+    }
+
+    func loadImageUrl(from url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+
+        // URLSession을 사용하여 주어진 URL에서 데이터를 비동기적으로 다운로드
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let data = data, error == nil, let downloadedImage = UIImage(data: data) {
+                // 이미지 URL이 존재하고 이미지를 성공적으로 다운로드한 경우
+                DispatchQueue.main.async {
+                    self.imageUrl = downloadedImage
+                }
+            } else {
+                // 에러가 발생했거나 유효한 데이터를 받지 못한 경우
+                DispatchQueue.main.async {
+                    self.imageUrl = nil
+                }
+            }
+        }.resume()
     }
 }

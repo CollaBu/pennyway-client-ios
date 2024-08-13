@@ -5,7 +5,7 @@ struct ProfileMainView: View {
     @State private var navigateToEditUsername = false
     @State private var showPopUpView = false
     @State private var isHiddenTabBar = false
-    @State private var selectedUIImage: UIImage?
+    @State private var selectedUIImage: UIImage? // image를 selectedUIImage로 대체
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
@@ -13,7 +13,6 @@ struct ProfileMainView: View {
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
     @State var imageUrl = ""
-    @StateObject private var imageLoader = ImageLoader()
 
     var body: some View {
         NavigationAvailable {
@@ -25,7 +24,7 @@ struct ProfileMainView: View {
                             navigateToEditUsername: $navigateToEditUsername,
                             selectedUIImage: $selectedUIImage,
                             imageUrl: $imageUrl,
-                            imageLoader: imageLoader
+                            viewModel: profileImageViewModel
                         )
 
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
@@ -127,7 +126,7 @@ struct ProfileMainView: View {
     private func loadUserDataImage() {
         if let userData = getUserData() {
             imageUrl = userData.profileImageUrl
-            imageLoader.loadImage(from: imageUrl)
+            profileImageViewModel.loadImageUrl(from: imageUrl)
         }
     }
 }
