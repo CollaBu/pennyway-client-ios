@@ -33,7 +33,7 @@ struct DetailSpendingView: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
 
-                if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first { 
+                if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
                     // 지출 카테고리 리스트로 조회시
                     MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingDetail.id)
                 } else {
@@ -130,7 +130,7 @@ struct DetailSpendingView: View {
             }, alignment: .topTrailing
         )
 
-        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
+        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: $spendingId, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
             .hidden()
     }
 

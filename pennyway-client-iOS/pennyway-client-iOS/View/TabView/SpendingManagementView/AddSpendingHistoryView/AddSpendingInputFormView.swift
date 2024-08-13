@@ -10,7 +10,7 @@ struct AddSpendingInputFormView: View {
 
     @Binding var clickDate: Date?
     var entryPoint: EntryPoint
-    @Binding var spendingId: Int
+    @Binding var spendingId: Int?
 
     let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
     let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
@@ -24,19 +24,20 @@ struct AddSpendingInputFormView: View {
             AmountInputView(viewModel: viewModel, title: titleCustomTextList[0], placeholder: "소비 금액을 작성해 주세요", baseAttribute: baseAttribute, stringAttribute: stringAttribute)
                 .onAppear {
                     // 지출내역리스트나 소비내역 바텀시트를 통해 진입한 경우
-                    if entryPoint == .detailSpendingView, let clickDate = clickDate {
-                        if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
-                            viewModel.amountSpentText = String(spendingDetail.amount)
-                            spendingId = spendingDetail.id
-                            viewModel.selectedCategory = SpendingCategoryData(
-                                id: spendingDetail.category.id,
-                                isCustom: spendingDetail.category.isCustom,
-                                name: spendingDetail.category.name,
-                                icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
-                            )
-                            viewModel.consumerText = spendingDetail.accountName
-                            viewModel.memoText = spendingDetail.memo
-                            viewModel.validateForm()
+                    if let spendingId = spendingId {
+                        if entryPoint == .detailSpendingView || entryPoint == .detailSheet {
+                            if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
+                                viewModel.amountSpentText = String(spendingDetail.amount)
+                                viewModel.selectedCategory = SpendingCategoryData(
+                                    id: spendingDetail.category.id,
+                                    isCustom: spendingDetail.category.isCustom,
+                                    name: spendingDetail.category.name,
+                                    icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
+                                )
+                                viewModel.consumerText = spendingDetail.accountName
+                                viewModel.memoText = spendingDetail.memo
+                                viewModel.validateForm()
+                            }
                         }
                     } else {
                         // 카테고리 리스트로 진입했을 경우

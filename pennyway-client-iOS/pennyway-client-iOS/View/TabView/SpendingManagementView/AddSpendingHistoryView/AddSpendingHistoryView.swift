@@ -17,7 +17,7 @@ struct AddSpendingHistoryView: View {
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
-    @State var spendingId: Int = 0
+    @Binding var spendingId: Int?
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
@@ -33,33 +33,10 @@ struct AddSpendingHistoryView: View {
                 }
                 Spacer()
 
-//                CustomBottomButton(action: {
-//                    if viewModel.isFormValid, let date = clickDate {
-//                        viewModel.clickDate = date
-//                        if entryPoint == .detailSpendingView{ // 수정하기 api
-//                            viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
-//                                if success {
-//                                    self.presentationMode.wrappedValue.dismiss()
-//                                    Log.debug("지출 내역 수정 성공")
-//                                } else {
-//                                    Log.debug("지출 내역 수정 실패")
-//                                }
-//                            }
-//
-//                        }  else {
-//                            viewModel.addSpendingHistoryApi { success in
-//                                if success {
-//                                    navigateToAddSpendingCategory = true
-//                                    Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }, label: "확인", isFormValid: $viewModel.isFormValid)
                 CustomBottomButton(action: {
                     if viewModel.isFormValid, let date = clickDate {
                         viewModel.clickDate = date
-                        if entryPoint == .main || entryPoint == .detailSheet || entryPoint == .NoSpendingHistoryView { 
+                        if entryPoint == .main || entryPoint == .detailSheet || entryPoint == .NoSpendingHistoryView {
                             viewModel.addSpendingHistoryApi { success in
                                 if success {
                                     navigateToAddSpendingCategory = true
@@ -68,7 +45,7 @@ struct AddSpendingHistoryView: View {
                             }
 
                         } else {
-                            viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
+                            viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()
                                     Log.debug("지출 내역 수정 성공")
@@ -78,7 +55,7 @@ struct AddSpendingHistoryView: View {
                             }
                         }
                     } else if viewModel.isFormValid {
-                        viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
+                        viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
                             if success {
                                 self.presentationMode.wrappedValue.dismiss()
                                 self.spendingHistoryViewModel.spendingSheetViewUpdated = true
@@ -123,9 +100,12 @@ struct AddSpendingHistoryView: View {
                 SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
             }
         }
+        .onAppear {
+            Log.debug("AddSpendingHistoryView에서 spendingId: \(spendingId)")
+        }
     }
 }
 
-#Preview {
-    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
-}
+// #Preview {
+//    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), spendingId: 0, isPresented: .constant(true), entryPoint: .main)
+// }

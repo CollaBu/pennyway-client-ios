@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 // MARK: - SpendingDetailSheetView
@@ -107,11 +106,18 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $showAddSpendingHistoryView, entryPoint: .detailSheet)
+                    AddSpendingHistoryView(
+                        spendingCategoryViewModel: SpendingCategoryViewModel(),
+                        spendingHistoryViewModel: spendingHistoryViewModel,
+                        spendingId: $selectedSpendingId, clickDate: $clickDate,
+                        isPresented: $showAddSpendingHistoryView,
+                        entryPoint: .detailSheet // 기본값 0 제공
+                    )
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
-                NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
+                NavigationAvailable {
+                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
                 }
             }
         }
@@ -130,7 +136,6 @@ struct SpendingDetailSheetView: View {
         .onChange(of: showAddSpendingHistoryView) { _ in
             getDailyHistoryData()
         }
-        // 왜 안됨
         .onChange(of: spendingHistoryViewModel.spendingSheetViewUpdated) { updated in
             Log.debug("onChange실행중, updated: \(updated)")
             if updated {
