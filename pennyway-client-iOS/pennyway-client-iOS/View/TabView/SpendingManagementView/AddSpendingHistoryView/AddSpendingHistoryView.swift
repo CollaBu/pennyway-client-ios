@@ -33,10 +33,41 @@ struct AddSpendingHistoryView: View {
                 }
                 Spacer()
 
+//                CustomBottomButton(action: {
+//                    if viewModel.isFormValid, let date = clickDate {
+//                        viewModel.clickDate = date
+//                        if entryPoint == .detailSpendingView{ // 수정하기 api
+//                            viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
+//                                if success {
+//                                    self.presentationMode.wrappedValue.dismiss()
+//                                    Log.debug("지출 내역 수정 성공")
+//                                } else {
+//                                    Log.debug("지출 내역 수정 실패")
+//                                }
+//                            }
+//
+//                        }  else {
+//                            viewModel.addSpendingHistoryApi { success in
+//                                if success {
+//                                    navigateToAddSpendingCategory = true
+//                                    Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
+//                                }
+//                            }
+//                        }
+//                    }
+//                }, label: "확인", isFormValid: $viewModel.isFormValid)
                 CustomBottomButton(action: {
                     if viewModel.isFormValid, let date = clickDate {
                         viewModel.clickDate = date
-                        if entryPoint == .detailSpendingView { // 수정하기 api
+                        if entryPoint == .main || entryPoint == .detailSheet || entryPoint == .NoSpendingHistoryView { 
+                            viewModel.addSpendingHistoryApi { success in
+                                if success {
+                                    navigateToAddSpendingCategory = true
+                                    Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
+                                }
+                            }
+
+                        } else {
                             viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()
@@ -45,13 +76,16 @@ struct AddSpendingHistoryView: View {
                                     Log.debug("지출 내역 수정 실패")
                                 }
                             }
-
-                        } else {
-                            viewModel.addSpendingHistoryApi { success in
-                                if success {
-                                    navigateToAddSpendingCategory = true
-                                    Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
-                                }
+                        }
+                    } else if viewModel.isFormValid {
+                        viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
+                            if success {
+                                self.presentationMode.wrappedValue.dismiss()
+                                self.spendingHistoryViewModel.spendingHistoryUpdated = true
+                                Log.debug("spendingHistoryUpdated:\(spendingHistoryViewModel.spendingHistoryUpdated)")
+                                Log.debug("지출 내역 수정 성공")
+                            } else {
+                                Log.debug("지출 내역 수정 실패")
                             }
                         }
                     }

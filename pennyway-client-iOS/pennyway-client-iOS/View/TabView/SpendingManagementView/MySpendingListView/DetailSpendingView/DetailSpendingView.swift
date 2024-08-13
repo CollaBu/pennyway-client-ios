@@ -57,6 +57,7 @@ struct DetailSpendingView: View {
                                 secondBtnColor: Color("Red03"))
             }
         }
+        .id(forceUpdate)
         .navigationBarTitle("", displayMode: .inline)
         .setTabBarVisibility(isHidden: true)
         .edgesIgnoringSafeArea(.bottom)
@@ -96,7 +97,15 @@ struct DetailSpendingView: View {
             loadDataForSelectedDate()
             isSelectedCategory = false
             self.selectedItem = nil
-//            isDeleted = false
+        }
+        .onChange(of: spendingHistoryViewModel.spendingHistoryUpdated) { updated in
+            Log.debug("onChange실행중, updated: \(updated)")
+            if updated {
+                Log.debug("업데이트됨")
+                loadDataForSelectedDate()
+                forceUpdate = true
+//                spendingHistoryViewModel.spendingHistoryUpdated = false
+            }
         }
         .overlay(
             VStack(alignment: .center) {
@@ -127,12 +136,16 @@ struct DetailSpendingView: View {
     }
 
     private func loadDataForSelectedDate() {
-        guard let date = clickDate else {
-            return
-        }
+        Log.debug("api 실행됨")
+//        guard let date = clickDate else {
+//            return
+//        }
+        let date = clickDate ?? Date()
+
         spendingHistoryViewModel.selectedDate = date
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
+                Log.debug("api 실행됨1")
                 Log.debug("선택한 날짜의 지출 내역 조회 성공")
                 forceUpdate.toggle()
             } else {

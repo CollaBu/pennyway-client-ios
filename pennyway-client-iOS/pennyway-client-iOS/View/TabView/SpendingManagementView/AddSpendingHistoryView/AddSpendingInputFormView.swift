@@ -25,6 +25,7 @@ struct AddSpendingInputFormView: View {
                 .onAppear {
                     // 지출내역리스트나 소비내역 바텀시트를 통해 진입한 경우
                     if entryPoint == .detailSpendingView, let clickDate = clickDate {
+                        Log.debug("이외")
                         if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
                             viewModel.amountSpentText = String(spendingDetail.amount)
                             spendingId = spendingDetail.id
@@ -41,6 +42,13 @@ struct AddSpendingInputFormView: View {
                     } else {
                         // 카테고리 리스트로 진입했을 경우
                         if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
+                            Log.debug("지출 카테고리로 진입함")
+                            Log.debug("amountSpentText: \(viewModel.amountSpentText)")
+                            Log.debug("spendingId: \(spendingDetail.id)")
+                            Log.debug("clickDate: \(viewModel.clickDate)")
+                            Log.debug("consumerText: \(viewModel.consumerText)")
+                            Log.debug("memoText: \(viewModel.memoText)")
+
                             viewModel.amountSpentText = String(spendingDetail.amount)
                             spendingId = spendingDetail.id
                             viewModel.selectedCategory = SpendingCategoryData(
