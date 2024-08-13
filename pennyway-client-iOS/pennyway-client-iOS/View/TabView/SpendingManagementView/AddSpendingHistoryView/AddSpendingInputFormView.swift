@@ -40,7 +40,7 @@ struct AddSpendingInputFormView: View {
                         }
                     } else {
                         // 카테고리 리스트로 진입했을 경우
-                        if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
+                        if let spendingDetail = spendingCategoryViewModel.selectSpending {
                             viewModel.amountSpentText = String(spendingDetail.amount)
                             spendingId = spendingDetail.id
                             viewModel.selectedCategory = SpendingCategoryData(
@@ -52,6 +52,7 @@ struct AddSpendingInputFormView: View {
                             viewModel.clickDate = DateFormatterUtil.dateFromString(spendingDetail.spendAt)
                             viewModel.consumerText = spendingDetail.accountName
                             viewModel.memoText = spendingDetail.memo
+                            
                             viewModel.validateForm()
                         }
                     }

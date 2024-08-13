@@ -40,6 +40,7 @@ struct AddSpendingHistoryView: View {
                             viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()
+
                                     Log.debug("지출 내역 수정 성공")
                                 } else {
                                     Log.debug("지출 내역 수정 실패")

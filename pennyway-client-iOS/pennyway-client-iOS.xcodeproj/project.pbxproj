@@ -48,6 +48,7 @@
 		4A2882092C64CD1500AE50C7 /* ProfileNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */; };
 		4A28820C2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28820A2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift */; };
 		4A28820D2C64CD5F00AE50C7 /* NotificationContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28820B2C64CD5F00AE50C7 /* NotificationContentData.swift */; };
+		4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882202C654BB500AE50C7 /* ReloadView.swift */; };
 		4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */; };
 		4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */; };
 		4A28821B2C65184300AE50C7 /* ProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */; };
@@ -167,6 +168,7 @@
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
 		4AB0B13C2C4F497400A475F5 /* MapCategoryIconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */; };
+		4AB0B13E2C50256300A475F5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13D2C50256300A475F5 /* LoadingView.swift */; };
 		4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */; };
 		4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */; };
 		4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */; };
@@ -364,6 +366,7 @@
 		4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNotificationViewModel.swift; sourceTree = "<group>"; };
 		4A28820A2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationResponseDto.swift; sourceTree = "<group>"; };
 		4A28820B2C64CD5F00AE50C7 /* NotificationContentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContentData.swift; sourceTree = "<group>"; };
+		4A2882202C654BB500AE50C7 /* ReloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadView.swift; sourceTree = "<group>"; };
 		4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageRequestDto.swift; sourceTree = "<group>"; };
 		4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageResponseDto.swift; sourceTree = "<group>"; };
 		4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
@@ -485,6 +488,7 @@
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCategoryIconUtil.swift; sourceTree = "<group>"; };
+		4AB0B13D2C50256300A475F5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4AB5AB462BB4A32F00D2C9EA /* AuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAlamofire.swift; sourceTree = "<group>"; };
 		4AB5AB492BB4A37600D2C9EA /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		4AB5AB4D2BB4A60500D2C9EA /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
@@ -1144,6 +1148,8 @@
 				D8157E652BBEF2740083844B /* OAuthButtonView.swift */,
 				4A4A56792BADEFF90071D00E /* NavigationBackButton.swift */,
 				4A4A56732BACA4000071D00E /* NavigationCountView.swift */,
+				4AB0B13D2C50256300A475F5 /* LoadingView.swift */,
+				4A2882202C654BB500AE50C7 /* ReloadView.swift */,
 			);
 			path = ElementView;
 			sourceTree = "<group>";
@@ -2212,6 +2218,7 @@
 				D8E24D932BFCF885006E8046 /* ProfileMenuBarListView.swift in Sources */,
 				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
 				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
+				4AB0B13E2C50256300A475F5 /* LoadingView.swift in Sources */,
 				4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */,
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */,
@@ -2301,6 +2308,7 @@
 				4A5789812BDC1FF300AFEB26 /* InternalServerErrorCode.swift in Sources */,
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
 				D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */,
+				4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AC3204F2C11D5AC00DDB4B6 /* SpendingWeekCalendarView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
