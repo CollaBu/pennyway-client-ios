@@ -55,6 +55,7 @@ struct FindPwView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(AuthCheckEvents.findPasswordView)
     }
 
     private func continueButtonAction() {

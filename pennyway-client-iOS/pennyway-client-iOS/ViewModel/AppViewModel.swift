@@ -8,8 +8,6 @@ class AppViewModel: ObservableObject {
     @Published var isSplashShown: Bool = false
     @Published var checkLoginState = false
 
-    let profileInfoViewModel = UserAccountViewModel()
-
     init() {
         checkLoginStateApi()
     }
@@ -23,11 +21,9 @@ class AppViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         Log.debug(response)
                         self?.checkLoginState = true
+                        self?.isLoggedIn = true
 
                         Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
-                        self?.profileInfoViewModel.getUserProfileApi { _ in
-                            Log.debug(response)                        
-                        }
 
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")

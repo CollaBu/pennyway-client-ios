@@ -11,7 +11,7 @@ class AppleOAuthViewModel: NSObject, ObservableObject {
     @Published var isLoggedIn: Bool = false // 로그인 여부
     @Published var isLoginSuccessful = false
     
-    private var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
+    @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
     var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     let oauthAccountViewModel = OAuthAccountViewModel()
     

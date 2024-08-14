@@ -23,10 +23,16 @@ class LoginViewModel: ObservableObject {
                             self.showErrorCodeContent = false
                             self.username = ""
                             self.password = ""
-                            self.profileInfoViewModel.getUserProfileApi { _ in 
+                            self.profileInfoViewModel.getUserProfileApi { _ in
                                 Log.debug(response)
                                 completion(true)
                             }
+
+                            AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
+                            AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
+                                AnalyticsConstants.Parameter.oauthType: "none",
+                                AnalyticsConstants.Parameter.isRefresh: false
+                            ])
                         } catch {
                             Log.fault("Error parsing response JSON: \(error)")
                             completion(false)

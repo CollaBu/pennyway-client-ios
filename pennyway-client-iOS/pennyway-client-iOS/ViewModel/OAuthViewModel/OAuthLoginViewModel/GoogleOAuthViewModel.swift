@@ -9,7 +9,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false // 로그인 여부 
     @Published var isLoginSuccessful = false
     
-    private var existOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
+    @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
     private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     let oauthAccountViewModel = OAuthAccountViewModel()
     
