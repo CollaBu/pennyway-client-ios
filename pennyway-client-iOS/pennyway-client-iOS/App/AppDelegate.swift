@@ -23,20 +23,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         FirebaseApp.configure()
 
-        // Setting Up Notifications...
-        // 원격 알림 등록
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
+        // 알림 허용 여부
+        UNUserNotificationCenter.current().delegate = self
 
-            let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOption,
-                completionHandler: { _, _ in })
-        } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
+        let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOption,
+            completionHandler: { granted, error in
+                if granted { // 알림 허용
+                    Log.info("알림 허용")
+                } else { // 알림 거부
+                    Log.info("알림 거부")
+                }
+
+                if let error = error {
+                    Log.error("Error requesting notification authorization: \(error.localizedDescription)")
+                }
+            })
 
         application.registerForRemoteNotifications()
 
