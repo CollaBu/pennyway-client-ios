@@ -134,6 +134,7 @@ struct EditSpendingDetailView: View {
                 )
             }
         }
+        .analyzeEvent(SpendingEvents.spendingListEditView)
     }
 
     private func toggleAllSelections() { // 전체 선택시
