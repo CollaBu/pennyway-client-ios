@@ -125,8 +125,8 @@ enum SpendingScreen {
     var screenClass: String {
         switch self {
         case .spendingTabView: return "SpendingManagementMainView"
-        case .spendingListView: return ""
-        case .mySpendingListView: return ""
+        case .spendingListView: return "SpendingDetailSheetView"
+        case .mySpendingListView: return "MySpendingListView"
         case .spendingDetailView: return ""
         case .spendingAddView: return ""
         case .spendingAddCompleteView: return ""
