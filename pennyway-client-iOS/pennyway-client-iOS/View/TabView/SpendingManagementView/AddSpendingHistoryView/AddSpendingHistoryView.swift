@@ -89,6 +89,7 @@ struct AddSpendingHistoryView: View {
             .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
                 SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
             }
+            .analyzeEvent(SpendingEvents.spendingAddView)
         }
     }
 }

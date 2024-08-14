@@ -56,6 +56,13 @@ struct AddSpendingInputFormView: View {
                             viewModel.validateForm()
                         }
                     }
+                    
+                    /// FIXME: 수정하기, 추가하기 뷰를 구분하기 위해 임시로 조건문을 사용하여 해결함.
+                    if entryPoint == .detailSpendingView {
+                        AnalyticsManager.shared.trackEvent(SpendingEvents.spendingAddView, additionalParams: nil)
+                    } else {
+                        AnalyticsManager.shared.trackEvent(SpendingEvents.spendingUpdateView, additionalParams: nil)
+                    }
                 }
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
