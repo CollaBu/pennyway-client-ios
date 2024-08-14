@@ -5,6 +5,8 @@
 //  Created by 양재서 on 8/14/24.
 //
 
+// MARK: - TargetAmountEvents
+
 enum TargetAmountEvents: AnalyticsEvent {
     // 목표 금액
     case totalAmountView // 목표 금액 확인 뷰
@@ -14,7 +16,64 @@ enum TargetAmountEvents: AnalyticsEvent {
     
     case maintainRecentTargetAmount // 최근 목표 금액 유지
     case cancelRecentTotalAmount // 최근 목표 금액 유지 취소
+    
+    var eventName: AnalyticsConstants.EventName {
+        switch self {
+        case .totalAmountView, .totalAmountHistoryView, .totalAmountInitView, .totalAmountUpdateView:
+            return AnalyticsConstants.EventName.screenView
+        case .maintainRecentTargetAmount, .cancelRecentTotalAmount:
+            return AnalyticsConstants.EventName.btnTapped
+        }
+    }
+    
+    var eventType: AnalyticsConstants.EventType {
+        switch self {
+        case .totalAmountView, .totalAmountHistoryView, .totalAmountInitView, .totalAmountUpdateView:
+            return AnalyticsConstants.EventType.screenView
+        case .maintainRecentTargetAmount, .cancelRecentTotalAmount:
+            return AnalyticsConstants.EventType.userAction
+        }
+    }
+    
+    var parameters: [AnalyticsConstants.Parameter: Any]? {
+        switch self {
+        case .totalAmountView:
+            return [
+                .screenId: TargetAmountScreen.totalAmountView.screenId,
+                .screenName: TargetAmountScreen.totalAmountView.screenName,
+                .screenClass: TargetAmountScreen.totalAmountView.screenClass
+            ]
+        case .totalAmountHistoryView:
+            return [
+                .screenId: TargetAmountScreen.totalAmountHistoryView.screenId,
+                .screenName: TargetAmountScreen.totalAmountHistoryView.screenName,
+                .screenClass: TargetAmountScreen.totalAmountHistoryView.screenClass
+            ]
+        case .totalAmountInitView:
+            return [
+                .screenId: TargetAmountScreen.totalAmountInitView.screenId,
+                .screenName: TargetAmountScreen.totalAmountInitView.screenName,
+                .screenClass: TargetAmountScreen.totalAmountInitView.screenClass
+            ]
+        case .totalAmountUpdateView:
+            return [
+                .screenId: TargetAmountScreen.totalAmountUpdateView.screenId,
+                .screenName: TargetAmountScreen.totalAmountUpdateView.screenName,
+                .screenClass: TargetAmountScreen.totalAmountUpdateView.screenClass
+            ]
+        case .maintainRecentTargetAmount:
+            return [
+                .eventName: TargetAmountCustomEvent.maintainRecentTargetAmount.eventName
+            ]
+        case .cancelRecentTotalAmount:
+            return [
+                .eventName: TargetAmountCustomEvent.cancelRecentTotalAmount.eventName
+            ]
+        }
+    }
 }
+
+// MARK: - TargetAmountScreen
 
 enum TargetAmountScreen {
     case totalAmountView
@@ -49,6 +108,8 @@ enum TargetAmountScreen {
         }
     }
 }
+
+// MARK: - TargetAmountCustomEvent
 
 enum TargetAmountCustomEvent {
     case maintainRecentTargetAmount

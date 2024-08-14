@@ -5,6 +5,8 @@
 //  Created by 양재서 on 8/14/24.
 //
 
+// MARK: - SpendingCategoryEvents
+
 enum SpendingCategoryEvents: AnalyticsEvent {
     case categorySelectView // 카테고리 선택 뷰
     case categoryAddView // 카테고리 추가 뷰
@@ -17,7 +19,88 @@ enum SpendingCategoryEvents: AnalyticsEvent {
     
     case migrateSpendingList // 소비 내역 이전하기
     case deleteCategoryList // 소비 내역 삭제하기
+    
+    var eventName: AnalyticsConstants.EventName {
+        switch self {
+        case .categorySelectView, .categoryAddView, .iconSelectView, .categoryListView, .categoryDetailView, .categoryUpdateView, .categoryDeleteView, .categoryMigrateView:
+            return AnalyticsConstants.EventName.screenView
+        case .migrateSpendingList, .deleteCategoryList:
+            return AnalyticsConstants.EventName.btnTapped
+        }
+    }
+    
+    var eventType: AnalyticsConstants.EventType {
+        switch self {
+        case .categorySelectView, .categoryAddView, .iconSelectView, .categoryListView, .categoryDetailView, .categoryUpdateView, .categoryDeleteView, .categoryMigrateView:
+            return AnalyticsConstants.EventType.screenView
+        case .migrateSpendingList, .deleteCategoryList:
+            return AnalyticsConstants.EventType.userAction
+        }
+    }
+    
+    var parameters: [AnalyticsConstants.Parameter: Any]? {
+        switch self {
+        case .categorySelectView:
+            return [
+                .screenId: SpendingCategoryScreen.categorySelectView.screenId,
+                .screenName: SpendingCategoryScreen.categorySelectView.screenName,
+                .screenClass: SpendingCategoryScreen.categorySelectView.screenClass
+            ]
+        case .categoryAddView:
+            return [
+                .screenId: SpendingCategoryScreen.categoryAddView.screenId,
+                .screenName: SpendingCategoryScreen.categoryAddView.screenName,
+                .screenClass: SpendingCategoryScreen.categoryAddView.screenClass
+            ]
+        case .iconSelectView:
+            return [
+                .screenId: SpendingCategoryScreen.iconSelectView.screenId,
+                .screenName: SpendingCategoryScreen.iconSelectView.screenName,
+                .screenClass: SpendingCategoryScreen.iconSelectView.screenClass
+            ]
+        case .categoryListView:
+            return [
+                .screenId: SpendingCategoryScreen.categoryListView.screenId,
+                .screenName: SpendingCategoryScreen.categoryListView.screenName,
+                .screenClass: SpendingCategoryScreen.categoryListView.screenClass
+            ]
+        case .categoryDetailView:
+            return [
+                .screenId: SpendingCategoryScreen.categoryDetailView.screenId,
+                .screenName: SpendingCategoryScreen.categoryDetailView.screenName,
+                .screenClass: SpendingCategoryScreen.categoryDetailView.screenClass
+            ]
+        case .categoryUpdateView:
+            return [
+                .screenId: SpendingCategoryScreen.categoryUpdateView.screenId,
+                .screenName: SpendingCategoryScreen.categoryUpdateView.screenName,
+                .screenClass: SpendingCategoryScreen.categoryUpdateView.screenClass
+            ]
+        case .categoryDeleteView:
+            return [
+                .screenId: SpendingCategoryScreen.categoryDeleteView.screenId,
+                .screenName: SpendingCategoryScreen.categoryDeleteView.screenName,
+                .screenClass: SpendingCategoryScreen.categoryDeleteView.screenClass
+            ]
+        case .categoryMigrateView:
+            return [
+                .screenId: SpendingCategoryScreen.categoryMigrateView.screenId,
+                .screenName: SpendingCategoryScreen.categoryMigrateView.screenName,
+                .screenClass: SpendingCategoryScreen.categoryMigrateView.screenClass
+            ]
+        case .migrateSpendingList:
+            return [
+                .eventName: SpendingCategoryCustomEvent.migrateSpendingList.eventName
+            ]
+        case .deleteCategoryList:
+            return [
+                .eventName: SpendingCategoryCustomEvent.deleteCategoryList.eventName
+            ]
+        }
+    }
 }
+
+// MARK: - SpendingCategoryScreen
 
 enum SpendingCategoryScreen {
     case categorySelectView
@@ -68,6 +151,8 @@ enum SpendingCategoryScreen {
         }
     }
 }
+
+// MARK: - SpendingCategoryCustomEvent
 
 enum SpendingCategoryCustomEvent {
     case migrateSpendingList
