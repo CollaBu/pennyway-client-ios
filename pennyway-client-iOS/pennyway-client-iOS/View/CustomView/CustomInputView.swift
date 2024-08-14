@@ -17,16 +17,18 @@ struct CustomInputView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-            if isCustom ?? false {
-                titleText?.toAttributesText(base: baseAttribute, stringAttribute)
-                    .padding(.horizontal, 20)
-                    .font(.B1RegularFont())
-                    .platformTextColor(color: Color("Gray04"))
-            } else {
-                Text(titleText!)
-                    .padding(.horizontal, 20)
-                    .font(.B1RegularFont())
-                    .platformTextColor(color: Color("Gray04"))
+            if titleText != nil {
+                if isCustom ?? false {
+                    titleText?.toAttributesText(base: baseAttribute, stringAttribute)
+                        .padding(.horizontal, 20)
+                        .font(.B1RegularFont())
+                        .platformTextColor(color: Color("Gray04"))
+                } else {
+                    Text(titleText!)
+                        .padding(.horizontal, 20)
+                        .font(.B1RegularFont())
+                        .platformTextColor(color: Color("Gray04"))
+                }
             }
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
