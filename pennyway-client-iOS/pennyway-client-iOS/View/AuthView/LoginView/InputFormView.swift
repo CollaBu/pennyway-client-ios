@@ -28,17 +28,15 @@ struct InputFormView: View {
             }
 
             VStack(spacing: 9 * DynamicSizeFactor.factor()) {
-                CustomInputView(inputText: $loginViewModel.username, placeholder: "아이디 입력", onCommit: {
-                }, isSecureText: false, showDeleteButton: true,
-                deleteAction: {
-                    loginViewModel.username = ""
-                })
+                CustomInputView(inputText: $loginViewModel.username, placeholder: "아이디 입력", onCommit: {}, isSecureText: false, showDeleteButton: true,
+                                deleteAction: {
+                                    loginViewModel.username = ""
+                                })
 
-                CustomInputView(inputText: $loginViewModel.password, placeholder: "비밀번호 입력", onCommit: {
-                }, isSecureText: true, showDeleteButton: true,
-                deleteAction: {
-                    loginViewModel.password = ""
-                })
+                CustomInputView(inputText: $loginViewModel.password, placeholder: "비밀번호 입력", onCommit: {}, isSecureText: true, showDeleteButton: true,
+                                deleteAction: {
+                                    loginViewModel.password = ""
+                                })
 
                 Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }

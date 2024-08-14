@@ -6,6 +6,7 @@ struct EditPhoneNumberView: View {
     @StateObject var viewModel = PhoneVerificationViewModel()
     @State private var showCodeErrorPopUp = false // 인증번호 오류
     @State private var showManyRequestPopUp = false // api 요청 오류
+    @State private var isDeleteButtonVisible: Bool = false
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
@@ -101,7 +102,14 @@ struct EditPhoneNumberView: View {
                 .platformTextColor(color: Color("Gray04"))
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange)
+                PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange, onCommit: {
+                    isDeleteButtonVisible = false
+
+                }, showDeleteButton: true, deleteAction: {
+                    viewModel.phoneNumber = ""
+                    viewModel.showErrorExistingUser = false
+                    viewModel.showErrorPhoneNumberFormat = false
+                })
                 VerificationButton(isEnabled: !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 && viewModel.phoneNumber != viewModel.firstPhoneNumber, action: handleVerificationButtonTap)
             }
             .padding(.horizontal, 20)
