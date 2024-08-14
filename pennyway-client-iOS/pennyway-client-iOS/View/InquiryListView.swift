@@ -37,6 +37,7 @@ struct InquiryListView: View {
             })
             .transition(.opacity.animation(.easeIn))
             .buttonStyle(PlainButtonStyle())
+            .buttonStyle(BasicButtonStyleUtil())
             .overlay(
                 VStack(alignment: .center, spacing: 60 * DynamicSizeFactor.factor()) {
                     Spacer().frame(height: 6 * DynamicSizeFactor.factor())
@@ -72,7 +73,7 @@ struct InquiryListView: View {
                                         .background(selectedItem == item ? Color("Gray03") : Color("White01"))
 
                                     })
-
+                                    .buttonStyle(BasicButtonStyleUtil())
                                     .buttonStyle(PlainButtonStyle())
                                 }
                                 .cornerRadius(3)

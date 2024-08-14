@@ -21,6 +21,7 @@ struct ErrorCodeContentView: View {
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                         .padding(.leading, 9)
                 })
+                .buttonStyle(BasicButtonStyleUtil())
 
                 Text("아이디 또는 비밀번호가 잘못 입력되었어요")
                     .platformTextColor(color: Color("Red03"))

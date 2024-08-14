@@ -73,6 +73,7 @@ struct SpendingCalenderView: View {
             )
             .frame(width: 44, height: 44)
             .disabled(!canMoveToPreviousMonth())
+            .buttonStyle(BasicButtonStyleUtil())
       
             Text(date, formatter: Self.calendarHeaderDateFormatter)
                 .font(.B1SemiboldeFont())
@@ -89,6 +90,7 @@ struct SpendingCalenderView: View {
             )
             .frame(width: 44, height: 44)
             .disabled(!canMoveToNextMonth())
+            .buttonStyle(BasicButtonStyleUtil())
         }
     }
   
@@ -218,6 +220,9 @@ private extension SpendingCalenderView {
   
     /// 월 변경
     func changeMonth(by value: Int) {
+        spendingHistoryViewModel.selectedDate = nil
+        spendingHistoryViewModel.selectedDateId = 0
+        
         spendingHistoryViewModel.currentDate = adjustedMonth(by: value)
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {

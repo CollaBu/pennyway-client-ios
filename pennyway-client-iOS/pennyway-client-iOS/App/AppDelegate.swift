@@ -6,6 +6,8 @@ import SwiftUI
 // MARK: - AppDelegate
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    static var currentFCMToken: String?
+
     let gcmMessageIDKey = "gcm.message_id"
 
     /// 앱이 켜졌을 때
@@ -59,6 +61,7 @@ extension AppDelegate: MessagingDelegate {
     /// fcm 등록 토큰을 받았을 때
     func messaging(_: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let fcmToken = fcmToken {
+            AppDelegate.currentFCMToken = fcmToken // fcm 토큰 저장
             Log.info("fcmToken: \(fcmToken)")
             registDeviceTokenApi(fcmToken: fcmToken)
         }

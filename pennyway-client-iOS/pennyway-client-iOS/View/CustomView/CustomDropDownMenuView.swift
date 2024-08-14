@@ -38,6 +38,7 @@ struct CustomDropdownMenuView: View {
                         .padding(.vertical, 2)
                     })
                     .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(BasicButtonStyleUtil())
                 }
                 .cornerRadius(3)
             }

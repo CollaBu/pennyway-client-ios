@@ -102,12 +102,6 @@ enum AuthRouter: URLRequestConvertible {
             
         case .logout:
             request = URLRequest.createURLRequest(url: url, method: method)
-            if let cookies = HTTPCookieStorage.shared.cookies(for: url) {
-                let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)
-                request.allHTTPHeaderFields = cookieHeader
-            }
-            let accessToken = KeychainHelper.loadAccessToken() ?? ""
-            request.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
             
         case .refresh:
             

@@ -46,6 +46,7 @@ struct SpendingDetailSheetView: View {
                                 
                         })
                         .padding(10)
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                         
                     Button(action: {
@@ -57,6 +58,7 @@ struct SpendingDetailSheetView: View {
                             .frame(width: 34, height: 34)
                             
                     })
+                    .buttonStyle(BasicButtonStyleUtil())
                 }
                 .padding(.leading, 20)
                 .padding(.trailing, 17)
@@ -83,12 +85,14 @@ struct SpendingDetailSheetView: View {
                                 Button(action: {
                                     selectedSpendingId = item.id
                                     showDetailSpendingView = true
+                                    Log.debug("selectedSpendingId: \(selectedSpendingId)")
                                 }, label: {
                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                         .contentShape(Rectangle())
                                 })
                                 .buttonStyle(PlainButtonStyle())
-                                
+                                .buttonStyle(BasicButtonStyleUtil())
+
                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                             }
                         }

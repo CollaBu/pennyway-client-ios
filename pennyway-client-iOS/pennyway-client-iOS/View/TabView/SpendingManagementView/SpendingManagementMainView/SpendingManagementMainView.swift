@@ -5,6 +5,8 @@ import SwiftUI
 struct SpendingManagementMainView: View {
     @StateObject var spendingHistoryViewModel = SpendingHistoryViewModel()
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
+    @StateObject var notificationViewModel = ProfileNotificationViewModel()
+
     @State private var navigateToAddSpendingHistory = false
     @State private var navigateToMySpendingList = false
     @State private var navigateToMainAlarmView = false
@@ -50,6 +52,8 @@ struct SpendingManagementMainView: View {
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                 targetAmountViewModel.getTargetAmountForDateApi { _ in }
+                notificationViewModel.checkUnReadNotificationsApi { _ in }
+                Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
             }
             .setTabBarVisibility(isHidden: ishidden)
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
@@ -78,11 +82,12 @@ struct SpendingManagementMainView: View {
                         })
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
 
                         Button(action: {
                             navigateToMainAlarmView = true
                         }, label: {
-                            Image("icon_navigationbar_bell")
+                            Image(notificationViewModel.hasUnread ? "icon_navigationbar_bell_dot" : "icon_navigationbar_bell")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -90,6 +95,7 @@ struct SpendingManagementMainView: View {
                         })
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
                     }
                     .offset(x: 10)
                 }
@@ -116,11 +122,13 @@ struct SpendingManagementMainView: View {
                 NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
                     EmptyView()
                 }
+                .hidden()
             }
 
             NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
+            .hidden()
 
             NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
                 EmptyView()

@@ -24,6 +24,7 @@ struct RecentTargetAmountSuggestionView: View {
                         .resizable()
                         .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
                 })
+                .buttonStyle(BasicButtonStyleUtil())
             }
             .padding(.leading, 18 * DynamicSizeFactor.factor())
             .padding(.trailing, 13 * DynamicSizeFactor.factor())
@@ -36,7 +37,7 @@ struct RecentTargetAmountSuggestionView: View {
             Spacer()
             
             HStack {
-                Image("icon_illust_maintain goal")
+                Image("icon_illust_maintain_goal")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 85 * DynamicSizeFactor.factor(), height: 85 * DynamicSizeFactor.factor())
@@ -59,8 +60,10 @@ struct RecentTargetAmountSuggestionView: View {
                         .frame(width: 63 * DynamicSizeFactor.factor(), height: 30 * DynamicSizeFactor.factor())
                         .background(Color("White01"))
                         .cornerRadius(30)
-                }).frame(maxHeight: .infinity, alignment: .bottom)
-                    .padding(.bottom, 18 * DynamicSizeFactor.factor())
+                })
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, 18 * DynamicSizeFactor.factor())
+                .buttonStyle(BasicButtonStyleUtil())
             }
             .padding(.leading, 28 * DynamicSizeFactor.factor())
             .padding(.trailing, 19 * DynamicSizeFactor.factor())

@@ -85,6 +85,7 @@ struct SpendingWeekCalendarView: View {
                     .padding(.vertical, 8)
                 })
                 .buttonStyle(PlainButtonStyle())
+                .buttonStyle(BasicButtonStyleUtil())
 
                 Spacer()
 
@@ -99,6 +100,7 @@ struct SpendingWeekCalendarView: View {
                                 .aspectRatio(contentMode: .fill)
                         }
                     )
+                    .buttonStyle(BasicButtonStyleUtil())
 
                     Button(
                         action: {
@@ -110,6 +112,7 @@ struct SpendingWeekCalendarView: View {
                                 .aspectRatio(contentMode: .fill)
                         }
                     )
+                    .buttonStyle(BasicButtonStyleUtil())
                 }
             }
         }
@@ -149,12 +152,16 @@ struct SpendingWeekCalendarView: View {
                             .padding(.horizontal, 7)
                             .padding(.vertical, 3)
 
-                        Spacer().frame(height: 4) // 동적 ui 적용하니 너무 넓어짐
+                        Spacer().frame(height: 4 * DynamicSizeFactor.factor())
 
                         if let amount = SpendingHistoryUtil.getSpendingAmount(for: date, using: Calendar.current, from: spendingHistoryViewModel) {
-                            Text("-\(amount)")
-                                .font(.B4MediumFont())
-                                .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
+                            VStack(spacing: -3) { // 텍스트 높이 조정
+                                ForEach(SpendingHistoryUtil.truncatedText("-\(amount)").split(separator: "\n"), id: \.self) { line in
+                                    Text(line)
+                                        .font(.B4MediumFont())
+                                        .platformTextColor(color: calendar.isDateInToday(date) ? Color("Mint03") : Color("Gray06"))
+                                }
+                            }
                         } else {
                             Text("")
                         }
@@ -167,7 +174,7 @@ struct SpendingWeekCalendarView: View {
                             spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: date)
                         }
                     }
-                    .frame(height: 65 * DynamicSizeFactor.factor())
+                    .frame(height: 70 * DynamicSizeFactor.factor())
                 }
                 .id(date)
             }
@@ -255,9 +262,8 @@ private extension SpendingWeekCalendarView {
             return
         }
 
-        let newDate = Calendar.current.date(byAdding: .month, value: value, to: currentMonth) ?? currentMonth
-        currentMonth = newDate
-        spendingHistoryViewModel.currentDate = currentMonth
+        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? Date()
+        spendingHistoryViewModel.updateCurrentDate(to: newDate)
 
         selectedDate = Date() // 초기화
         userSelectedDate = nil // 사용자가 선택한 날짜 초기화
@@ -267,16 +273,6 @@ private extension SpendingWeekCalendarView {
             selectedDate = firstDayOfMonth
             selectedDateToScroll = dateFormatter(date: firstDayOfMonth)
             spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: firstDayOfMonth)
-        }
-        spendingHistoryViewModel.checkSpendingHistoryApi { success in
-            if success {
-                Log.debug("지출내역 조회 API 연동 성공")
-                DispatchQueue.main.async {
-                    self.selectedDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate))!
-                }
-            } else {
-                Log.fault("지출내역 조회 API 연동 실패")
-            }
         }
     }
 
@@ -312,20 +308,11 @@ private extension SpendingWeekCalendarView {
     /// 다음 월로 이동 가능한지 확인
     private func canMoveToNextMonth() -> Bool {
         let calendar = Calendar.current
-        let currentDate = Date()
-        let currentMonthComponents = calendar.dateComponents([.year, .month], from: currentDate)
-        guard let currentMonthDate = calendar.date(from: currentMonthComponents) else {
-            return false
-        }
+        let currentMonthComponents = calendar.dateComponents([.year, .month], from: Date())
+        let currentMonthDate = calendar.date(from: currentMonthComponents)!
 
-        let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: selectedDate)!
-        let nextMonthComponents = calendar.dateComponents([.year, .month], from: nextMonthDate)
-        guard let nextMonthStartDate = calendar.date(from: nextMonthComponents) else {
-            return false
-        }
-
-        // 다음 달이 현재 달보다 미래이면 이동 불가
-        return nextMonthStartDate <= currentMonthDate
+        // 다음 달이 현재 월 이후인지 확인
+        return spendingHistoryViewModel.currentDate <= currentMonthDate
     }
 
     /// 변경하려는 월 반환

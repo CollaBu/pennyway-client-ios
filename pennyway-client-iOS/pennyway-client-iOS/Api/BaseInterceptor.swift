@@ -26,32 +26,12 @@ class BaseInterceptor: RequestInterceptor {
         }
 
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
-            AuthAlamofire.shared.refresh { result in
+            TokenRefreshHandler.shared.refreshSync { result in
                 switch result {
-                case let .success(data):
-                    if let responseData = data {
-                        do {
-                            let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
-                            Log.debug(response)
-
-                            completion(.retry)
-
-                            AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
-                            AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
-                                AnalyticsConstants.Parameter.oauthType: "none",
-                                AnalyticsConstants.Parameter.isRefresh: true
-                            ])
-                        } catch {
-                            Log.fault("Error parsing response JSON: \(error)")
-                            completion(.doNotRetry)
-                        }
-                    }
-                case let .failure(error):
-                    if let statusSpecificError = error as? StatusSpecificError {
-                        Log.info("StatusSpecificError occurred: \(statusSpecificError)")
-                    } else {
-                        Log.error("Network request failed: \(error)")
-                    }
+                case .success:
+                    Log.debug("Token refreshed, retrying request : \(request)")
+                    completion(.retry)
+                case .failure:
                     completion(.doNotRetry)
                 }
             }

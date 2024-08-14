@@ -36,12 +36,14 @@ struct LoginView: View {
 
                     })
                     .padding(.bottom, 34)
+                    .buttonStyle(BasicButtonStyleUtil())
                 }
                 .edgesIgnoringSafeArea(.bottom)
 
                 NavigationLink(destination: InquiryView(viewModel: InquiryViewModel()), isActive: $goToInquiryView) {
                     EmptyView()
                 }
+                .hidden()
             }
         }
         .analyzeEvent(AuthEvents.loginView)

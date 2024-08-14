@@ -21,7 +21,7 @@ struct TargetAmountSetCompleteView: View {
                 Group {
                     Spacer().frame(height: 65 * DynamicSizeFactor.factor())
                     
-                    Image("icon_illust_goal setting")
+                    Image("icon_illust_goal_setting")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 160 * DynamicSizeFactor.factor(), height: 160 * DynamicSizeFactor.factor())

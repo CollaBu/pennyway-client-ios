@@ -60,6 +60,7 @@ struct LoginOAuthButtonView: View {
             NavigationLink(destination: PhoneVerificationView(), isActive: $isActiveLink) {
                 EmptyView()
             }
+            .hidden()
         }
         .padding(.top, 14 * DynamicSizeFactor.factor())
     }

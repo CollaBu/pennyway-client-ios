@@ -67,9 +67,9 @@ struct SignUpView: View {
             
             NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {}.hidden()
         }
-        
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
+        .navigationBarColor(UIColor(named: "White01"), title: "")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
@@ -88,6 +88,7 @@ struct SignUpView: View {
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
+                    .buttonStyle(BasicButtonStyleUtil())
                     
                 }.offset(x: -10)
             }

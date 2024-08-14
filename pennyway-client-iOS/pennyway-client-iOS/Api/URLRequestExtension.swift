@@ -4,11 +4,16 @@ import Foundation
 import OSLog
 
 extension URLRequest {
-    static func createURLRequest(url: URL, method: HTTPMethod, bodyParameters: [String: Any]? = nil, queryParameters: [URLQueryItem]? = nil) -> URLRequest {
+    static func createURLRequest(url: URL, method: HTTPMethod, bodyParameters: [String: Any]? = nil, queryParameters: [URLQueryItem]? = nil, image: UIImage? = nil, percentEncoded: Bool? = false) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
-        if let bodyParameters = bodyParameters {
+        if let image = image {
+            if let imageData = image.jpegData(compressionQuality: 1.0) { // 압축정도 임시로 지정
+                request.httpBody = imageData
+                request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+            }
+        } else if let bodyParameters = bodyParameters {
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -20,7 +25,12 @@ extension URLRequest {
 
         if let queryParameters = queryParameters {
             var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-            components?.queryItems = queryParameters
+
+            if percentEncoded! {
+                components?.percentEncodedQueryItems = queryParameters
+            } else {
+                components?.queryItems = queryParameters
+            }
 
             if let urlWithQuery = components?.url {
                 request.url = urlWithQuery

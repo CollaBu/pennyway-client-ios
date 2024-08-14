@@ -33,7 +33,7 @@ struct DetailSpendingView: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 26 * DynamicSizeFactor.factor())
 
-                if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first { 
+                if let spendingDetail = spendingCategoryViewModel.selectSpending {
                     // 지출 카테고리 리스트로 조회시
                     MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingDetail.id)
                 } else {
@@ -85,6 +85,7 @@ struct DetailSpendingView: View {
                             .padding(5)
                     })
                     .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(BasicButtonStyleUtil())
                     .padding(.trailing, 5)
                     .frame(width: 44, height: 44)
                 }
@@ -122,6 +123,7 @@ struct DetailSpendingView: View {
         )
 
         NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
+            .hidden()
     }
 
     private func loadDataForSelectedDate() {
@@ -148,6 +150,12 @@ struct DetailSpendingView: View {
                 isDeleted = true
                 Log.debug("지출내역 단일 삭제 성공")
                 showToastPopup = true
+
+                if let spendingDetail = spendingCategoryViewModel.selectSpending {
+                    spendingCategoryViewModel.dailyDetailSpendings.removeAll { $0.id == spendingDetail.id }
+                    Log.debug("spendingCategoryViewModel에서 지출 내역 삭제")
+                }
+
                 self.presentationMode.wrappedValue.dismiss()
 
             } else {

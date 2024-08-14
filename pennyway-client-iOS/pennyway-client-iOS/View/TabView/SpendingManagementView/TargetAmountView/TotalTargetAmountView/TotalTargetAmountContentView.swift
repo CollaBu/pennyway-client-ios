@@ -55,6 +55,7 @@ struct TotalTargetAmountContentView: View {
                             .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                             .padding(.trailing, 10)
                     })
+                    .buttonStyle(BasicButtonStyleUtil())
                 }
                 .padding(.top, 18)
                 

@@ -11,7 +11,7 @@ struct MySpendingListView: View {
     @State private var navigateToCategoryGridView = false
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
-    @State private var refreshView = false
+//    @State private var refreshView = false
     @State private var showToastPopup = false
     @State private var isDeleted = false
 
@@ -42,7 +42,7 @@ struct MySpendingListView: View {
                                                     clickDate = DateFormatterUtil.parseDate(from: date)
                                                     spendingHistoryViewModel.selectedDate = clickDate
                                                     selectedSpendingId = item.id
-                                                    Log.debug("Id: \(selectedSpendingId)")
+                                                    Log.debug("Id: \(selectedSpendingId), clickDate: \(clickDate)")
                                                     showDetailSpendingView = true
                                                 }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
@@ -50,6 +50,7 @@ struct MySpendingListView: View {
 
                                                 })
                                                 .buttonStyle(PlainButtonStyle())
+                                                .buttonStyle(BasicButtonStyleUtil())
 
                                                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                                             }
@@ -66,7 +67,7 @@ struct MySpendingListView: View {
                         }
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
-//                                changeMonth(by: -1)
+                                changeMonth(by: -1)
 
                             }, label: {
                                 ZStack {
@@ -82,6 +83,7 @@ struct MySpendingListView: View {
                                         .padding(.vertical, 12)
                                 }
                             })
+                            .buttonStyle(BasicButtonStyleUtil())
                             .padding(.bottom, 48)
                             .onChange(of: selectedDateToScroll) { date in
                                 if let date = date {
@@ -97,7 +99,7 @@ struct MySpendingListView: View {
                     }
                 }
             }
-            .id(refreshView)
+//            .id(refreshView)
             .overlay(
                 Group {
                     if showToastPopup {
@@ -117,6 +119,7 @@ struct MySpendingListView: View {
             )
 
             NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $showDetailSpendingView) {}
+                .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
         .edgesIgnoringSafeArea(.bottom)
@@ -142,9 +145,11 @@ struct MySpendingListView: View {
                         Text("카테고리")
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray05"))
+
                     })
-                    .padding(.trailing, 20)
-                    .frame(width: 38 * DynamicSizeFactor.factor(), height: 44)
+                    .buttonStyle(BasicButtonStyleUtil())
+//                    .padding(.trailing, 20)
+                    .frame(width: 48 * DynamicSizeFactor.factor(), height: 44)
                 }
             }
         }
@@ -156,7 +161,7 @@ struct MySpendingListView: View {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
-                    refreshView = true
+//                    refreshView = true
                 } else {
                     Log.debug("소비내역 조회 api 연동 실패")
                 }
@@ -164,6 +169,7 @@ struct MySpendingListView: View {
         }
 
         NavigationLink(destination: SpendingCategoryGridView(spendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
+            .hidden()
     }
 
     private func headerView(for date: String) -> some View {
@@ -180,6 +186,9 @@ struct MySpendingListView: View {
         currentMonth = spendingHistoryViewModel.currentDate
         spendingHistoryViewModel.currentDate = newDate
         currentMonth = newDate
+
+        spendingHistoryViewModel.selectedDate = nil
+        spendingHistoryViewModel.selectedDateId = 0
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {

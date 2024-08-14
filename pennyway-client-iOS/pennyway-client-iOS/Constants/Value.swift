@@ -22,3 +22,21 @@ enum VerificationType: String {
     case password = "PASSWORD"
     case phone = "PHONE"
 }
+
+// MARK: - ImageType
+
+enum ImageType: String {
+    case profile = "PROFILE"
+    case feed = "FEED"
+    case chatroomProfile = "CHATROOM_PROFILE"
+    case caht = "CHAT"
+    case chatProfile = "CHAT_PROFILE"
+}
+
+// MARK: - Ext
+
+enum Ext: String {
+    case jpg = "jpg"
+    case png = "png"
+    case jpeg = "jpeg"
+}

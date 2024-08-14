@@ -7,7 +7,7 @@ class UserAccountAlamofire {
     static let shared = UserAccountAlamofire()
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
-
+    
     let interceptors = Interceptor(interceptors: [BaseInterceptor()])
     var session: Session
     
@@ -20,7 +20,7 @@ class UserAccountAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.getUserProfile, completion: completion)
     }
-
+    
     func deleteUserAccount(completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("UserAccountAlamofire - deleteUserAccount() called")
         
@@ -73,5 +73,41 @@ class UserAccountAlamofire {
         Log.info("UserAccountAlamofire - editUserName() called")
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.editUserName(dto: dto), completion: completion)
+    }
+    
+    func deleteProfileImage(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - deleteProfileImage() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.deleteProfileImage, completion: completion)
+    }
+ 
+    func uploadProfileImage(dto: UploadProfileImageRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - uploadProfileImage() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.uploadProfileImage(dto: dto), completion: completion)
+    }
+    
+    func getNotificationList(dto: GetNotificationRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - getNotificationList() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.getNotificationList(dto: dto), completion: completion)
+    }
+
+    func readNotifications(dto: ReadNotificationsRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - readNotifications() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.readNotifications(dto: dto), completion: completion)
+    }
+    
+    func checkUnReadNotifications(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - checkUnReadNotifications() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.checkUnReadNotifications, completion: completion)
+    }
+    
+    func deleteDeviceToken(_ dto: FcmTokenDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - deleteDeviceToken() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.deleteDeviceToken(dto: dto), completion: completion)
     }
 }

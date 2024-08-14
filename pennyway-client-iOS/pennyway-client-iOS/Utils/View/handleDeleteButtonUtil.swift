@@ -17,6 +17,7 @@ struct handleDeleteButtonUtil: View {
             })
             .padding(.vertical, 15 * DynamicSizeFactor.factor())
             .offset(x: 130 * DynamicSizeFactor.factor(), y: 1 * DynamicSizeFactor.factor())
+            .buttonStyle(BasicButtonStyleUtil())
         }
     }
 }

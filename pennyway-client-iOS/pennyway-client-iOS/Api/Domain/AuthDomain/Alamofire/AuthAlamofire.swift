@@ -7,10 +7,13 @@ class AuthAlamofire {
     
     let monitors = [RequestLogger(), ApiStatusLogger()] as [EventMonitor]
 
+    let interceptors = Interceptor(interceptors: [BaseInterceptor()])
     var session: Session
-    
+    var logoutInterceptor: Session
+
     private init() {
         session = Session(eventMonitors: monitors)
+        logoutInterceptor = Session(interceptor: interceptors, eventMonitors: monitors)
     }
     
     func receiveVerificationCode(_ dto: VerificationCodeRequestDto, type: VerificationType, completion: @escaping (Result<Data?, Error>) -> Void) {
@@ -45,7 +48,7 @@ class AuthAlamofire {
     
     func logout(completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("AuthAlamofire - logout() called")
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: AuthRouter.logout, completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: logoutInterceptor, router: AuthRouter.logout, completion: completion)
     }
     
     func linkAccountToOAuth(_ dto: LinkAccountToOAuthRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {

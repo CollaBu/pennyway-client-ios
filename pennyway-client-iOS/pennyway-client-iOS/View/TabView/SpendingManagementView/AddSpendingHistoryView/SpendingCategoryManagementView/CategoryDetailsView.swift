@@ -9,13 +9,10 @@ struct CategoryDetailsView: View {
     @State private var isClickMenu = false
     @State private var selectedMenu: String? = nil // 선택한 메뉴
     @State private var listArray: [String] = ["수정하기", "카테고리 삭제"]
-    @State private var showDeletePopUp = false
+    @State private var showingPopUp = false
     @State private var showToastPopup = false
     @State var isDeleted = false
     @State private var isNavigateToEditCategoryView = false
-    @State private var isNavigateToMoveCategoryView = false
-    
-    @Binding var showToastDeletePopUp: Bool
 
     var body: some View {
         ZStack {
@@ -55,140 +52,129 @@ struct CategoryDetailsView: View {
                 }
                 .frame(maxHeight: .infinity)
             }
-            .overlay(
-                Group {
-                    if showToastPopup {
-                        CustomToastView(message: "소비내역이 삭제되었어요")
-                            .transition(.move(edge: .bottom))
-                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                            .padding(.bottom, 34)
-                            .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                    showToastPopup = false
-                                }
-                            }
-                    }
-                }, alignment: .bottom
-            )
-            .overlay(
-                VStack(alignment: .leading) {
-                    if isClickMenu {
-                        CustomDropdownMenuView(
-                            isClickMenu: $isClickMenu,
-                            selectedMenu: $selectedMenu,
-                            listArray: listArray,
-                            onItemSelected: { item in
-                                if item == "카테고리 삭제" {
-                                    showDeletePopUp = true
-                                } else {
-                                    isNavigateToEditCategoryView = true
-                                    viewModel.categoryName = ""
-                                    viewModel.selectedCategoryIcon = viewModel.selectedCategory?.icon
-                                }
-                                Log.debug("Selected item: \(item)")
-                            }
-                        ).padding(.trailing, 20)
-                    }
-                }, alignment: .topTrailing
-            )
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationBarColor(UIColor(named: "White01"), title: "")
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
-
-                    }.offset(x: -10)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    if viewModel.selectedCategory!.isCustom {
-                        HStack {
-                            Button(action: {
-                                isClickMenu.toggle()
-                                selectedMenu = nil
-                            }, label: {
-                                Image("icon_navigationbar_kebabmenu")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                    .padding(5)
-                            })
-                            .padding(.trailing, 5)
-                            .frame(width: 44, height: 44)
-                        }.offset(x: 10)
-                    }
-                }
-            }
-            .onAppear {
-                refreshView {}
-            }
             .onChange(of: isDeleted) { newValue in
                 if newValue {
-                    refreshView {
-                        showToastPopup = true
-                    }
+//                    refreshView {
+                    showToastPopup = true
+//                    }
                     isDeleted = false
                 }
             }
-            
-            if showDeletePopUp {
+
+            if showingPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(
-                    showingPopUp: $showDeletePopUp,
+                    showingPopUp: $showingPopUp,
                     titleLabel: "카테고리를 삭제할까요?",
-                    subTitleLabel: "\(viewModel.spedingHistoryTotalCount)개의 소비 내역이 모두 사라져요🥲",
-                    firstBtnAction: {
-                        self.isNavigateToMoveCategoryView = true
-                        self.showDeletePopUp = false
-                    },
+                    subTitleLabel: "몇개의 소비 내역이 모두 사라져요🥲",
+                    firstBtnAction: { self.showingPopUp = false },
                     firstBtnLabel: "내역 옮기기",
-                    secondBtnAction: { 
-                        viewModel.deleteCategoryApi { success in
-                            if success {
-                                viewModel.getSpendingCustomCategoryListApi { _ in
-                                    self.showDeletePopUp = false
-                                    self.presentationMode.wrappedValue.dismiss()
-                                    self.showToastDeletePopUp = true
-                                }
-                            }
-                        }
-                    },
+                    secondBtnAction: { self.showingPopUp = false },
                     secondBtnLabel: "삭제하기",
                     secondBtnColor: Color("Red03")
                 )
             }
-            NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
-            
-            NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $isNavigateToMoveCategoryView) {}
         }
-    }
-
-    private func refreshView(completion: @escaping () -> Void) {
-        viewModel.initPage()
-        viewModel.getCategorySpendingHistoryApi { success in
-            if success {
-                Log.debug("카테고리 지출내역 조회 성공")
-                // 기존 데이터의 마지막 인덱스를 확인하고, 추가 데이터를 불러오는 로직 추가
-                if let lastItem = viewModel.dailyDetailSpendings.last {
-                    guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == lastItem.id }) else {
-                        return
-                    }
-                    // 해당 인덱스가 마지막 인덱스라면 데이터 추가
-                    if index == viewModel.dailyDetailSpendings.count - 1 {
-                        Log.debug("지출 내역 index: \(index)")
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
-                            viewModel.getCategorySpendingHistoryApi { _ in }
+        .overlay(
+            Group {
+                if showToastPopup {
+                    CustomToastView(message: "소비내역이 삭제되었어요")
+                        .transition(.move(edge: .bottom))
+                        .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                        .padding(.bottom, 34)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                showToastPopup = false
+                            }
                         }
-                    }
                 }
-            } else {
-                Log.debug("카테고리 지출내역 조회 실패")
+            }, alignment: .bottom
+        )
+        .edgesIgnoringSafeArea(.bottom)
+        .overlay(
+            VStack(alignment: .leading) {
+                if isClickMenu {
+                    CustomDropdownMenuView(
+                        isClickMenu: $isClickMenu,
+                        selectedMenu: $selectedMenu,
+                        listArray: listArray,
+                        onItemSelected: { item in
+                            if item == "카테고리 삭제" {
+                                showingPopUp = true
+                            } else {
+                                isNavigateToEditCategoryView = true
+                                viewModel.categoryName = ""
+                                viewModel.selectedCategoryIcon = viewModel.selectedCategory?.icon
+                            }
+                            Log.debug("Selected item: \(item)")
+                        }
+                    ).padding(.trailing, 20)
+                }
+            }, alignment: .topTrailing
+        )
+        .navigationBarColor(UIColor(named: "White01"), title: "")
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image("icon_arrow_back")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 34, height: 34)
+                            .padding(5)
+                    })
+                    .padding(.leading, 5)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+                }.offset(x: -10)
             }
-            completion()
+            ToolbarItem(placement: .topBarTrailing) {
+                if viewModel.selectedCategory!.isCustom {
+                    HStack {
+                        Button(action: {
+                            isClickMenu.toggle()
+                            selectedMenu = nil
+                        }, label: {
+                            Image("icon_navigationbar_kebabmenu")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                .padding(5)
+                        })
+                        .padding(.trailing, 5)
+                        .frame(width: 44, height: 44)
+                    }.offset(x: 10)
+                }
+            }
         }
+        NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
     }
+//
+//    private func refreshView(completion _: @escaping () -> Void) {
+//        viewModel.initPage()
+//        viewModel.getCategorySpendingHistoryApi { success in
+//            if success {
+//                Log.debug("카테고리 지출내역 조회 성공")
+//                // 기존 데이터의 마지막 인덱스를 확인하고, 추가 데이터를 불러오는 로직 추가
+//                if let lastItem = viewModel.dailyDetailSpendings.last {
+//                    guard let index = viewModel.dailyDetailSpendings.firstIndex(where: { $0.id == lastItem.id }) else {
+//                        return
+//                    }
+//                    // 해당 인덱스가 마지막 인덱스라면 데이터 추가
+//                    if index == viewModel.dailyDetailSpendings.count - 1 {
+//                        Log.debug("지출 내역 index: \(index)")
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
+//                            viewModel.getCategorySpendingHistoryApi { _ in }
+//                        }
+//                    }
+//                }
+//            } else {
+//                Log.debug("카테고리 지출내역 조회 실패")
+//            }
+//            completion()
+//        }
+//    }
 }

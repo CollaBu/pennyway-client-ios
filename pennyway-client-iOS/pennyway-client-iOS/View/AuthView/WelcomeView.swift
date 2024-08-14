@@ -39,6 +39,7 @@ struct WelcomeView: View {
         .analyzeEvent(AuthEvents.welcomeView)
 
         NavigationLink(destination: TargetAmountSettingView(currentData: $initTargetAmount, entryPoint: .signUp), isActive: $isnavigateToEditTargetView) {}
+            .hidden()
     }
 }
 

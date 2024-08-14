@@ -4,20 +4,45 @@ import SwiftUI
 // MARK: - ArrivedAlarmView
 
 struct ArrivedAlarmView: View {
+    @ObservedObject var viewModel: ProfileNotificationViewModel 
+
     var body: some View {
         VStack(alignment: .leading) {
-            UnreadAlarmView(alarms: dummyAlarms)
+            if !viewModel.notificationData.filter({ !$0.isRead }).isEmpty {
+                AlarmListView(viewModel: viewModel, alarms: viewModel.notificationData.filter { !$0.isRead })
 
-            Spacer().frame(height: 4 * DynamicSizeFactor.factor())
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(maxWidth: 320 * DynamicSizeFactor.factor(), maxHeight: 9 * DynamicSizeFactor.factor())
+                    .background(Color("Gray01"))
 
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(maxWidth: 320 * DynamicSizeFactor.factor(), maxHeight: 9 * DynamicSizeFactor.factor())
-                .background(Color("Gray01"))
+                Spacer().frame(height: 29 * DynamicSizeFactor.factor())
+            }
 
-            Spacer().frame(height: 25 * DynamicSizeFactor.factor())
-
-            ReadAlarmView(alarms: dummyAlarms)
+            if !viewModel.notificationData.filter({ $0.isRead }).isEmpty {
+                AlarmListView(viewModel: viewModel, alarms: viewModel.notificationData.filter { $0.isRead })
+            }
+        }
+        .onAppear {
+            if viewModel.hasUnread == true {
+                viewModel.getNotificationListApi { success in
+                    if success {
+                        let unreadNotificationIds = viewModel.notificationData.filter { !$0.isRead }.map { $0.id }
+                        viewModel.notificationIds = unreadNotificationIds
+                        if !unreadNotificationIds.isEmpty {
+                            viewModel.readNotificationsApi { success in
+                                if success {
+                                    Log.debug("알림 읽음 처리 성공")
+                                } else {
+                                    Log.debug("알림 읽음 처리 실패")
+                                }
+                            }
+                        }
+                    } else {
+                        Log.debug("알림 목록 가져오기 실패")
+                    }
+                }
+            }
         }
     }
 }
@@ -25,10 +50,10 @@ struct ArrivedAlarmView: View {
 // MARK: - AlarmRow
 
 struct AlarmRow: View {
-    let alarm: AlarmList
+    let alarm: NotificationContentData
 
     var body: some View {
-        HStack(spacing: 15 * DynamicSizeFactor.factor()) {
+        HStack(spacing: 0) {
             Image("icon_close_filled_primary")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -36,14 +61,15 @@ struct AlarmRow: View {
                 .padding(1)
 
             VStack(alignment: .leading, spacing: 4 * DynamicSizeFactor.factor()) {
-                Text(alarm.message)
+                Text(alarm.content)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
 
-                Text(alarm.date)
+                Text(DateFormatterUtil.formatRelativeDate(from: alarm.createdAt))
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray04"))
             }
+            .frame(maxWidth: .infinity)
 
             Spacer()
         }
