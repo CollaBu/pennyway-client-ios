@@ -2,6 +2,8 @@
 import Alamofire
 import Foundation
 
+// MARK: - BaseInterceptor
+
 class BaseInterceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for _: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         Log.info("BaseInterceptor - adapt()")
@@ -32,6 +34,10 @@ class BaseInterceptor: RequestInterceptor {
                     Log.debug("Token refreshed, retrying request : \(request)")
                     completion(.retry)
                 case .failure:
+                    
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .logoutNotification, object: nil)
+                    }
                     completion(.doNotRetry)
                 }
             }

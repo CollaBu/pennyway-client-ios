@@ -1,4 +1,5 @@
 
+import Combine
 import SwiftUI
 
 // MARK: - AppViewModel
@@ -8,8 +9,17 @@ class AppViewModel: ObservableObject {
     @Published var isSplashShown: Bool = false
     @Published var checkLoginState = false
 
+    private var cancellables = Set<AnyCancellable>()
+
     init() {
         checkLoginStateApi()
+
+        // Combine을 사용하여 NotificationCenter 알림 구독
+        NotificationCenter.default.publisher(for: .logoutNotification)
+            .sink { [weak self] _ in
+                self?.logout()
+            }
+            .store(in: &cancellables)
     }
 
     func checkLoginStateApi() {
