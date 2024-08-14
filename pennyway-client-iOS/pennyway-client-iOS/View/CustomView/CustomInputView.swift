@@ -74,6 +74,8 @@ struct CustomInputView: View {
                             inputText = ""
                             isDeleteButtonVisible = false
                             deleteAction?()
+
+                            AnalyticsManager.shared.trackEvent(AuthEvents.cancelBtnTapped, additionalParams: [AnalyticsConstants.Parameter.btnName: titleText ?? "미설정"])
                         })
                         .offset(x: 120 * DynamicSizeFactor.factor(), y: 1 * DynamicSizeFactor.factor())
                     }

@@ -58,6 +58,7 @@ struct OAuthAccountLinkingView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(AuthEvents.existsOauthAccountView)
     }
 }
 

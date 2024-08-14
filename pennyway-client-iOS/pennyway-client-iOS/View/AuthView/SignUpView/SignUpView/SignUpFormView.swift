@@ -18,10 +18,13 @@ struct SignUpFormView: View {
                 VStack(alignment: .leading, spacing: 21 * DynamicSizeFactor.factor()) {
                     if !isOAuthRegistration && (!isExistUser && !isOAuthUser) {
                         allInputFields()
+                            .analyzeEvent(AuthEvents.generalSignUpView)
                     } else if isOAuthRegistration && !isExistUser {
                         nameAndIDFields()
+                            .analyzeEvent(AuthEvents.oauthSignUpView)
                     } else if !isOAuthRegistration && isOAuthUser {
                         passwordFields()
+                            .analyzeEvent(AuthEvents.generalSignSycnView)
                     }
                 }
             }

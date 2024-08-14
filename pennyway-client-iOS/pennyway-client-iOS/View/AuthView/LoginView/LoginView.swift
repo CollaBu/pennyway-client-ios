@@ -46,6 +46,7 @@ struct LoginView: View {
                 .hidden()
             }
         }
+        .analyzeEvent(AuthEvents.loginView)
     }
 }
 

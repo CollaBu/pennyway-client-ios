@@ -20,7 +20,7 @@ struct SignUpView: View {
             return "계속하기"
         }
     }
-    
+
     var body: some View {
         VStack {
             ScrollView {

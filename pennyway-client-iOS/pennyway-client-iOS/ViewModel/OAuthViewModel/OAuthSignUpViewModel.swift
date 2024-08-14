@@ -16,6 +16,11 @@ class OAuthSignUpViewModel: ObservableObject {
                         print(response)
                         self.isSignUpSuccess = true
                         KeychainHelper.deleteOAuthUserData()
+
+                        AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
+                        AnalyticsManager.shared.trackEvent(AuthEvents.signUp, additionalParams: [
+                            AnalyticsConstants.Parameter.oauthType: oauthSignUpDto.provider,
+                        ])
                     } catch {
                         print("Error parsing response JSON: \(error)")
                     }
