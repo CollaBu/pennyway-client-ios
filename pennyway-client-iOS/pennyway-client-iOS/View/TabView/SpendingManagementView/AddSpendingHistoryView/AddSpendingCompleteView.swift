@@ -80,6 +80,7 @@ struct AddSpendingCompleteView: View {
         
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
+        .analyzeEvent(SpendingEvents.spendingAddCompleteView)
     }
 }
 
