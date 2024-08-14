@@ -16,6 +16,12 @@ struct SpendingDetailSheetView: View {
     @StateObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     
+    init(clickDate: Binding<Date?>, viewModel: AddSpendingHistoryViewModel, spendingHistoryViewModel: SpendingHistoryViewModel) {
+        _clickDate = clickDate
+        _viewModel = StateObject(wrappedValue: viewModel)
+        _spendingHistoryViewModel = ObservedObject(wrappedValue: spendingHistoryViewModel)
+    }
+    
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
@@ -122,9 +128,24 @@ struct SpendingDetailSheetView: View {
             }
         }
         .id(forceUpdate)
+        .onChange(of: spendingHistoryViewModel.spendingSheetViewUpdated) { updated in
+            Log.debug("바텀시트에서 onChange실행중, updated: \(updated) ")
+            
+            if updated {
+                DispatchQueue.main.async {
+                    Log.debug("업데이트됨")
+
+                    self.forceUpdate.toggle()
+                    Log.debug("forceUpdate:\(forceUpdate)")
+
+                    self.spendingHistoryViewModel.spendingSheetViewUpdated = false
+                }
+            }
+        }
         .onAppear {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
             getDailyHistoryData()
+            forceUpdate.toggle()
         }
         .onChange(of: isDeleted) { newValue in
             if newValue {
@@ -135,15 +156,6 @@ struct SpendingDetailSheetView: View {
         }
         .onChange(of: showAddSpendingHistoryView) { _ in
             getDailyHistoryData()
-        }
-        .onChange(of: spendingHistoryViewModel.spendingSheetViewUpdated) { updated in
-            Log.debug("onChange실행중, updated: \(updated)")
-            if updated {
-                Log.debug("업데이트됨")
-                forceUpdate = true
-                Log.debug("forceUpdate:\(forceUpdate)")
-                spendingHistoryViewModel.spendingSheetViewUpdated = false
-            }
         }
         .setTabBarVisibility(isHidden: true)
     }

@@ -146,7 +146,6 @@ struct AddSpendingInputFormView: View {
     
     private func loadSpendingDetails() {
         if let spendingId = spendingId {
-            // if entryPoint == .detailSpendingView || entryPoint == .detailSheet {
             if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
                 getSpendingData(with: spendingDetail)
                     
@@ -160,21 +159,7 @@ struct AddSpendingInputFormView: View {
                     }
                 }
             }
-            // }
         }
-//        else {
-//            // 카테고리 리스트로 진입했을 경우
-//            if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
-//                getSpendingData(with: spendingDetail)
-//                Log.debug("?")
-//                
-//                // spendAt을 SelectSpendingDayView로 전달해주기 위해
-//                if let spendAtDate = spendAt {
-//                    viewModel.selectedDate = spendAtDate
-//                    Log.debug("값 넘어감")
-//                }
-//            }
-//        }
     }
 
     private func getSpendingData(with spendingDetail: IndividualSpending) {

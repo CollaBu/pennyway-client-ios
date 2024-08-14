@@ -37,6 +37,7 @@ struct AddSpendingHistoryView: View {
                     if viewModel.isFormValid, let date = clickDate {
                         viewModel.clickDate = date
                         if entryPoint == .main || entryPoint == .detailSheet || entryPoint == .NoSpendingHistoryView {
+                            Log.debug("추가하기")
                             viewModel.addSpendingHistoryApi { success in
                                 if success {
                                     navigateToAddSpendingCategory = true
@@ -45,9 +46,12 @@ struct AddSpendingHistoryView: View {
                             }
 
                         } else {
+                            // 바텀시트를 통해 수정한 경우
+                            Log.debug("수정하기1")
                             viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()
+                                    self.spendingHistoryViewModel.spendingSheetViewUpdated = true
                                     Log.debug("지출 내역 수정 성공")
                                 } else {
                                     Log.debug("지출 내역 수정 실패")
@@ -55,11 +59,12 @@ struct AddSpendingHistoryView: View {
                             }
                         }
                     } else if viewModel.isFormValid {
+                        Log.debug("수정하기2")
                         viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
                             if success {
                                 self.presentationMode.wrappedValue.dismiss()
-                                self.spendingHistoryViewModel.spendingSheetViewUpdated = true
                                 self.spendingHistoryViewModel.spendingDetailViewUpdated = true
+                                self.spendingHistoryViewModel.spendingSheetViewUpdated = true
                                 Log.debug("지출 내역 수정 성공")
                             } else {
                                 Log.debug("지출 내역 수정 실패")
