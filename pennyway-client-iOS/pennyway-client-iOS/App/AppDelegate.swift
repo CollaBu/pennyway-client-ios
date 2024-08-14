@@ -63,31 +63,6 @@ extension AppDelegate: MessagingDelegate {
         if let fcmToken = fcmToken {
             AppDelegate.currentFCMToken = fcmToken // fcm 토큰 저장
             Log.info("fcmToken: \(fcmToken)")
-            registDeviceTokenApi(fcmToken: fcmToken)
-        }
-    }
-
-    private func registDeviceTokenApi(fcmToken: String) {
-        let fcmTokenDto = FcmTokenDto(token: fcmToken)
-
-        UserAccountAlamofire.shared.registDeviceToken(fcmTokenDto) { result in
-            switch result {
-            case let .success(data):
-                if let responseData = data {
-                    do {
-                        let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
-                        Log.debug(response)
-                    } catch {
-                        Log.fault("Error parsing response JSON: \(error)")
-                    }
-                }
-            case let .failure(error):
-                if let statusSpecificError = error as? StatusSpecificError {
-                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
-                } else {
-                    Log.error("Network request failed: \(error)")
-                }
-            }
         }
     }
 }
