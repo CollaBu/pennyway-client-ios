@@ -35,10 +35,10 @@ struct DetailSpendingView: View {
 
                 if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
                     // 지출 카테고리 리스트로 조회시
-                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingDetail.id)
+                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, addSpendingViewModel: AddSpendingHistoryViewModel(), spendingId: spendingDetail.id)
                 } else {
                     if let spendingId = spendingId {
-                        MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingId)
+                        MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, addSpendingViewModel: AddSpendingHistoryViewModel(), spendingId: spendingId)
                     }
                 }
             }

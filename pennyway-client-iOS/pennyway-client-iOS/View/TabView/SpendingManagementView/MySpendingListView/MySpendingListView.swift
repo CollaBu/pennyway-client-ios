@@ -39,6 +39,7 @@ struct MySpendingListView: View {
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
                                                 Button(action: {
+                                                    Log.debug("버튼 누름")
                                                     clickDate = DateFormatterUtil.parseDate(from: date)
                                                     spendingHistoryViewModel.selectedDate = clickDate
                                                     selectedSpendingId = item.id

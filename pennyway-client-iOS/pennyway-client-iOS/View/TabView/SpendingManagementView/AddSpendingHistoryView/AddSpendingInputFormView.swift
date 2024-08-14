@@ -17,9 +17,16 @@ struct AddSpendingInputFormView: View {
     
     let titleCustomTextList: [String] = ["금액*", "카테고리*", "날짜*"]
     let maxCharacterCount: Int = 100
-    
+
     var spendAt: Date? {
-        DateFormatterUtil.dateFromString(spendingCategoryViewModel.dailyDetailSpendings.first?.spendAt ?? "")
+        if let spendAtString = spendingCategoryViewModel.dailyDetailSpendings.first?.spendAt {
+            if let date = DateFormatterUtil.dateFromString(spendAtString) {
+                // UTC 시간대를 로컬 시간대로 변환
+                let timezoneOffset = TimeZone.current.secondsFromGMT()
+                return date.addingTimeInterval(TimeInterval(timezoneOffset))
+            }
+        }
+        return nil
     }
 
     var body: some View {
@@ -104,7 +111,7 @@ struct AddSpendingInputFormView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text(Date.getFormattedDate(from: (clickDate ?? spendAt) ?? viewModel.selectedDate))
+                    Text(Date.getFormattedDate(from: viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                    
@@ -139,19 +146,35 @@ struct AddSpendingInputFormView: View {
     
     private func loadSpendingDetails() {
         if let spendingId = spendingId {
-            // 지출내역리스트나 소비내역 바텀시트를 통해 진입한 경우
-            if entryPoint == .detailSpendingView || entryPoint == .detailSheet {
-                if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
-                    getSpendingData(with: spendingDetail)
+            // if entryPoint == .detailSpendingView || entryPoint == .detailSheet {
+            if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
+                getSpendingData(with: spendingDetail)
+                    
+                if let spendAtDate = spendAt {
+                    viewModel.selectedDate = spendAtDate
+                    Log.debug("값 넘어감")
+                } else {
+                    if let clickDate = clickDate {
+                        viewModel.selectedDate = clickDate
+                        Log.debug("clickDate 값을 viewModel.selectedDate에 설정: \(clickDate)")
+                    }
                 }
             }
-        } else {
-            // 카테고리 리스트로 진입했을 경우
-            if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
-                getSpendingData(with: spendingDetail)
-                viewModel.clickDate = spendAt ?? Date()
-            }
+            // }
         }
+//        else {
+//            // 카테고리 리스트로 진입했을 경우
+//            if let spendingDetail = spendingCategoryViewModel.dailyDetailSpendings.first {
+//                getSpendingData(with: spendingDetail)
+//                Log.debug("?")
+//                
+//                // spendAt을 SelectSpendingDayView로 전달해주기 위해
+//                if let spendAtDate = spendAt {
+//                    viewModel.selectedDate = spendAtDate
+//                    Log.debug("값 넘어감")
+//                }
+//            }
+//        }
     }
 
     private func getSpendingData(with spendingDetail: IndividualSpending) {
