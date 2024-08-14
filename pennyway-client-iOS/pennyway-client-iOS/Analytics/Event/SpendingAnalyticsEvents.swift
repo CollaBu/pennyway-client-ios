@@ -127,11 +127,11 @@ enum SpendingScreen {
         case .spendingTabView: return "SpendingManagementMainView"
         case .spendingListView: return "SpendingDetailSheetView"
         case .mySpendingListView: return "MySpendingListView"
-        case .spendingDetailView: return ""
-        case .spendingAddView: return ""
-        case .spendingAddCompleteView: return ""
-        case .spendingUpdateView: return ""
-        case .spendingListEditView: return ""
+        case .spendingDetailView: return "DetailSpendingView"
+        case .spendingAddView: return "AddSpendingInputFormView"
+        case .spendingAddCompleteView: return "AddSpendingCompleteView"
+        case .spendingUpdateView: return "AddSpendingInputFormView"
+        case .spendingListEditView: return "SpendingDetailSheetView"
         }
     }
 }
