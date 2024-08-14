@@ -42,6 +42,7 @@ struct DetailSpendingView: View {
                     }
                 }
             }
+
             if showingPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingPopUp,
@@ -121,6 +122,7 @@ struct DetailSpendingView: View {
                 }
             }, alignment: .topTrailing
         )
+        .analyzeEvent(SpendingEvents.spendingDetailView)
 
         NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
             .hidden()
