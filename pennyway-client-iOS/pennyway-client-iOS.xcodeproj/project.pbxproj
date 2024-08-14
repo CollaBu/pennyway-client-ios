@@ -1858,7 +1858,6 @@
 				B599E4C52C58E989006051E9 /* AuthAnalyticsEvents.swift */,
 				B599E4C72C58EB74006051E9 /* SpendingAnalyticsEvents.swift */,
 				B599E4D12C64D1F3006051E9 /* AuthCheckAnalyticsEvents.swift */,
->>>>>>> dev
 			);
 			path = Event;
 			sourceTree = "<group>";
