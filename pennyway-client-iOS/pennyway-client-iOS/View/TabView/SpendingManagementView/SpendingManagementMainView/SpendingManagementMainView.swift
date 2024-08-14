@@ -151,6 +151,7 @@ struct SpendingManagementMainView: View {
             }
         }
         .id(ishidden)
+        .analyzeEvent(SpendingEvents.spendingTabView)
     }
 
     private var bottomSheetMinHeight: CGFloat {

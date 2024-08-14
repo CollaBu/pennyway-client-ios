@@ -128,6 +128,7 @@ struct SpendingDetailSheetView: View {
         .onChange(of: showAddSpendingHistoryView) { _ in
             getDailyHistoryData()
         }
+        .analyzeEvent(SpendingEvents.spendingListView, additionalParams: [AnalyticsConstants.Parameter.date: clickDate ?? ""])
         .setTabBarVisibility(isHidden: true)
     }
     
