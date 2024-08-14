@@ -80,7 +80,7 @@ struct CustomInputView: View {
 
                             AnalyticsManager.shared.trackEvent(AuthEvents.cancelBtnTapped, additionalParams: [AnalyticsConstants.Parameter.btnName: titleText ?? "미설정"])
                         })
-                        .offset(x: 130 * DynamicSizeFactor.factor() /* , y: 1 * DynamicSizeFactor.factor() */ )
+                        .offset(x: 130 * DynamicSizeFactor.factor())
                     }
                 }
             }
