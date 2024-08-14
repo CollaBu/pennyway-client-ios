@@ -6,7 +6,6 @@ struct EditProfilePopUpView: View {
     @Binding var isPresented: Bool
     @Binding var showPopUpView: Bool
     @Binding var isHiddenTabBar: Bool
-    @Binding var image: Image?
     @Binding var showImagePicker: Bool
     @Binding var selectedUIImage: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
