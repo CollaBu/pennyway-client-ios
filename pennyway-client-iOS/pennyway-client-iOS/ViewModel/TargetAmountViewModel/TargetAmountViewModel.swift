@@ -55,7 +55,12 @@ class TargetAmountViewModel: ObservableObject {
                         // 추천 금액 보여주기 x + 목표 금액 설정하기 UI
                         self.isHiddenSuggestionView = true
                         self.isPresentTargetAmount = false
-                        self.generateCurrentMonthDummyDataApi { _ in }
+                        self.generateCurrentMonthDummyDataApi { success in
+                            if success{
+                                // 당월 이전 사용자 최신 목표 금액 조회
+                                self.getTargetAmountForPreviousMonthApi()
+                            }
+                        }
                     }
                 } else {
                     Log.error("Network request failed: \(error)")
