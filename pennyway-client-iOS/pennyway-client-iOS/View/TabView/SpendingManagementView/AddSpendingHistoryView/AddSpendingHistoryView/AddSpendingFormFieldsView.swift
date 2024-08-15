@@ -4,9 +4,9 @@ import SwiftUI
 
 struct AmountInputView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-
     var title: String
     var placeholder: String
+    @State private var isDeleteButtonVisible: Bool = false
 
     let baseAttribute: BaseAttribute
     let stringAttribute: StringAttribute
@@ -16,32 +16,23 @@ struct AmountInputView: View {
             title.toAttributesText(base: baseAttribute, stringAttribute)
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray07"))
-            HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color("Gray01"))
-                        .frame(height: 46 * DynamicSizeFactor.factor())
+                .padding(.horizontal, 20)
 
-                    if viewModel.amountSpentText.isEmpty {
-                        Text(placeholder)
-                            .platformTextColor(color: Color("Gray03"))
-                            .padding(.leading, 13 * DynamicSizeFactor.factor())
-                            .font(.H4MediumFont())
-                    }
-
-                    TextField("", text: $viewModel.amountSpentText)
-                        .padding(.leading, 13 * DynamicSizeFactor.factor())
-                        .font(.H4MediumFont())
-                        .keyboardType(.numberPad)
-                        .platformTextColor(color: Color("Gray07"))
-                        .onChange(of: viewModel.amountSpentText) { _ in
-                            viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
-                            viewModel.validateForm()
-                        }
-                }
+            CustomInputView(inputText: $viewModel.amountSpentText, placeholder: placeholder, onCommit: {
+                isDeleteButtonVisible = false
+            }, isSecureText: false, isCustom: false, showDeleteButton: isDeleteButtonVisible, deleteAction: {
+                viewModel.amountSpentText = ""
+                isDeleteButtonVisible = false
+            })
+            .keyboardType(.numberPad)
+            .onChange(of: viewModel.amountSpentText) { _ in
+                viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
+                viewModel.validateForm()
+            }
+            .onTapGesture {
+                isDeleteButtonVisible = true
             }
         }
-        .padding(.horizontal, 20)
     }
 }
 

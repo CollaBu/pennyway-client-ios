@@ -7,8 +7,14 @@ class BaseInterceptor: RequestInterceptor {
         Log.info("BaseInterceptor - adapt()")
 
         var adaptedRequest = urlRequest
-        let accessToken = KeychainHelper.loadAccessToken()
-        adaptedRequest.setValue("Bearer " + (accessToken ?? ""), forHTTPHeaderField: "Authorization")
+
+        guard let accessToken = KeychainHelper.loadAccessToken(), !accessToken.isEmpty else {
+            Log.error("[BaseInterceptor]: Access token이 존재하지 않음")
+            completion(.failure(NSError(domain: "", code: 499, userInfo: [NSLocalizedDescriptionKey: "Missing Access Token"])))
+            return
+        }
+
+        adaptedRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
 
         if let url = adaptedRequest.url, let cookies = HTTPCookieStorage.shared.cookies(for: url) {
             let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)

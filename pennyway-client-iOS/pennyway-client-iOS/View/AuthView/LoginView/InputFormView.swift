@@ -28,44 +28,15 @@ struct InputFormView: View {
             }
 
             VStack(spacing: 9 * DynamicSizeFactor.factor()) {
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color("Gray01"))
-                        .frame(height: 46 * DynamicSizeFactor.factor())
+                CustomInputView(inputText: $loginViewModel.username, placeholder: "아이디 입력", onCommit: {}, isSecureText: false, showDeleteButton: true,
+                                deleteAction: {
+                                    loginViewModel.username = ""
+                                })
 
-                    if loginViewModel.username.isEmpty {
-                        Text("아이디 입력")
-                            .platformTextColor(color: Color("Gray03"))
-                            .padding(.leading, 13 * DynamicSizeFactor.factor())
-                            .font(.H4MediumFont())
-                    }
-                    TextField("", text: $loginViewModel.username)
-                        .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-                        .font(.H4MediumFont())
-                        .AutoCorrectionExtensions()
-                        .TextAutocapitalization()
-                        .ignoresSafeArea(.keyboard)
-                }
-                .padding(.horizontal, 20)
-
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color("Gray01"))
-                        .frame(height: 46 * DynamicSizeFactor.factor())
-
-                    if loginViewModel.password.isEmpty {
-                        Text("비밀번호 입력")
-                            .platformTextColor(color: Color("Gray03"))
-                            .padding(.leading, 13 * DynamicSizeFactor.factor())
-                            .font(.H4MediumFont())
-                    }
-                    SecureField("", text: $loginViewModel.password)
-                        .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-                        .font(.H4MediumFont())
-                        .textContentType(.password)
-                        .ignoresSafeArea(.keyboard)
-                }
-                .padding(.horizontal, 20)
+                CustomInputView(inputText: $loginViewModel.password, placeholder: "비밀번호 입력", onCommit: {}, isSecureText: true, showDeleteButton: true,
+                                deleteAction: {
+                                    loginViewModel.password = ""
+                                })
 
                 Spacer().frame(height: 4 * DynamicSizeFactor.factor())
             }

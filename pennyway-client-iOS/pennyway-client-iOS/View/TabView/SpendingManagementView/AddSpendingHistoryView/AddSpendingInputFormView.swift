@@ -7,10 +7,11 @@ struct AddSpendingInputFormView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
+    @State private var isDeleteButtonVisible: Bool = false
 
     @Binding var clickDate: Date?
     var entryPoint: EntryPoint
-    @Binding var spendingId: Int
+    @Binding var spendingId: Int?
 
     let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
     let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
@@ -18,44 +19,24 @@ struct AddSpendingInputFormView: View {
     let titleCustomTextList: [String] = ["금액*", "카테고리*", "날짜*"]
     let maxCharacterCount: Int = 100
 
+    var spendAt: Date? {
+        if let spendAtString = spendingCategoryViewModel.dailyDetailSpendings.first?.spendAt {
+            if let date = DateFormatterUtil.dateFromString(spendAtString) {
+                // UTC 시간대를 로컬 시간대로 변환
+                let timezoneOffset = TimeZone.current.secondsFromGMT()
+                return date.addingTimeInterval(TimeInterval(timezoneOffset))
+            }
+        }
+        return nil
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())
             AmountInputView(viewModel: viewModel, title: titleCustomTextList[0], placeholder: "소비 금액을 작성해 주세요", baseAttribute: baseAttribute, stringAttribute: stringAttribute)
                 .onAppear {
-                    // 지출내역리스트나 소비내역 바텀시트를 통해 진입한 경우
-                    if entryPoint == .detailSpendingView, let clickDate = clickDate {
-                        if let spendingDetail = spendingHistoryViewModel.filteredSpendings(for: clickDate).first {
-                            viewModel.amountSpentText = String(spendingDetail.amount)
-                            spendingId = spendingDetail.id
-                            viewModel.selectedCategory = SpendingCategoryData(
-                                id: spendingDetail.category.id,
-                                isCustom: spendingDetail.category.isCustom,
-                                name: spendingDetail.category.name,
-                                icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
-                            )
-                            viewModel.consumerText = spendingDetail.accountName
-                            viewModel.memoText = spendingDetail.memo
-                            viewModel.validateForm()
-                        }
-                    } else {
-                        // 카테고리 리스트로 진입했을 경우
-                        if let spendingDetail = spendingCategoryViewModel.selectSpending {
-                            viewModel.amountSpentText = String(spendingDetail.amount)
-                            spendingId = spendingDetail.id
-                            viewModel.selectedCategory = SpendingCategoryData(
-                                id: spendingDetail.category.id,
-                                isCustom: spendingDetail.category.isCustom,
-                                name: spendingDetail.category.name,
-                                icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
-                            )
-                            viewModel.clickDate = DateFormatterUtil.dateFromString(spendingDetail.spendAt)
-                            viewModel.consumerText = spendingDetail.accountName
-                            viewModel.memoText = spendingDetail.memo
-                            
-                            viewModel.validateForm()
-                        }
-                    }
+                    loadSpendingDetails()
+                    isDeleteButtonVisible = false
                 }
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
@@ -132,7 +113,7 @@ struct AddSpendingInputFormView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text(Date.getFormattedDate(from: (clickDate ?? viewModel.clickDate) ?? viewModel.selectedDate))
+                    Text(Date.getFormattedDate(from: viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                    
@@ -154,7 +135,21 @@ struct AddSpendingInputFormView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             
             // 소비처
-            CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true)
+            CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true, showDeleteButton: isDeleteButtonVisible, deleteAction: {
+                viewModel.consumerText = ""
+                isDeleteButtonVisible = false
+            })
+//            .onAppear {
+//                isDeleteButtonVisible = false
+//            }
+            .onTapGesture {
+                isDeleteButtonVisible = true
+            }
+//            .onChange(of: viewModel.consumerText) { newValue in
+//                if newValue.isEmpty {
+//                    isDeleteButtonVisible = false
+//                }
+//            }
 
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             
@@ -163,6 +158,37 @@ struct AddSpendingInputFormView: View {
 
             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
         }
+    }
+    
+    private func loadSpendingDetails() {
+        if let spendingId = spendingId {
+            if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
+                getSpendingData(with: spendingDetail)
+                    
+                if let spendAtDate = spendAt {
+                    viewModel.selectedDate = spendAtDate
+                    Log.debug("값 넘어감")
+                } else {
+                    if let clickDate = clickDate {
+                        viewModel.selectedDate = clickDate
+                        Log.debug("clickDate 값을 viewModel.selectedDate에 설정: \(clickDate)")
+                    }
+                }
+            }
+        }
+    }
+
+    private func getSpendingData(with spendingDetail: IndividualSpending) {
+        viewModel.amountSpentText = String(spendingDetail.amount)
+        viewModel.selectedCategory = SpendingCategoryData(
+            id: spendingDetail.category.id,
+            isCustom: spendingDetail.category.isCustom,
+            name: spendingDetail.category.name,
+            icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
+        )
+        viewModel.consumerText = spendingDetail.accountName
+        viewModel.memoText = spendingDetail.memo
+        viewModel.validateForm()
     }
 
     func convertToSpendingCategoryData(from spendingCategory: SpendingCategory) -> SpendingCategoryData? {
