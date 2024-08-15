@@ -32,11 +32,10 @@ struct CustomInputView: View {
             }
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color("Gray01"))
-                        .frame(height: 46 * DynamicSizeFactor.factor())
-
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color("Gray01"))
+                    .frame(height: 46 * DynamicSizeFactor.factor())
                     if inputText.isEmpty {
                         Text(placeholder ?? "")
                             .platformTextColor(color: Color("Gray03"))
@@ -72,6 +71,7 @@ struct CustomInputView: View {
                             isDeleteButtonVisible = !newValue.isEmpty
                         }
                     }
+
                     if showDeleteButton {
                         handleDeleteButtonUtil(isVisible: !inputText.isEmpty && isDeleteButtonVisible, action: {
                             inputText = ""
@@ -80,7 +80,7 @@ struct CustomInputView: View {
 
                             AnalyticsManager.shared.trackEvent(AuthEvents.cancelBtnTapped, additionalParams: [AnalyticsConstants.Parameter.btnName: titleText ?? "미설정"])
                         })
-                        .offset(x: 130 * DynamicSizeFactor.factor())
+                        .offset(x: 120 * DynamicSizeFactor.factor())
                     }
                 }
             }
