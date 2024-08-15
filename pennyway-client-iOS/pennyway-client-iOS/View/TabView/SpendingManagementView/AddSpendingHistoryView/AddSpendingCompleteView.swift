@@ -68,6 +68,7 @@ struct AddSpendingCompleteView: View {
             CustomBottomButton(action: {
                 if entryPoint == .main {
                     NavigationUtil.popToRootView()
+                    Log.debug("루트뷰로이동")
                 } else {
                     isPresented = false
                     Log.debug("isPresented: \(isPresented)")
