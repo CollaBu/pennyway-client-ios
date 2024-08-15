@@ -38,8 +38,8 @@ class BaseInterceptor: RequestInterceptor {
         case 400 ... 500:
             Log.error("Request failed with status code: \(response.statusCode). Not retrying.")
             completion(.doNotRetry)
-        default: // 400~500사이의 범위를 벗어나는 경우
-            handleRetry(for: request, response: response, completion: completion)
+        default:
+            Log.error("[BaseInterceptor] Network error occurred")
         }
     }
 
