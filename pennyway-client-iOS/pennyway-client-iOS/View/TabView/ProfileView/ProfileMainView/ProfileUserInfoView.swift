@@ -10,7 +10,10 @@ struct ProfileUserInfoView: View {
     @Binding var imageUrl: String
 
     @State private var name = ""
+    @State private var refreshView = false
+    
     @ObservedObject var viewModel: ProfileImageViewModel
+    @ObservedObject var deleteViewModel: DeleteProfileImageViewModel
 
     private func loadUserData() {
         if let userData = getUserData() {
@@ -135,6 +138,9 @@ struct ProfileUserInfoView: View {
             .background(Color("White01"))
             .onAppear {
                 loadUserData()
+                Log.debug("deleteViewModel.profileImageUrl: \(deleteViewModel.profileImageUrl)")
+                Log.debug("selectedUIImage: \(selectedUIImage)")
+                Log.debug("viewModel.imageUrl: \(viewModel.imageUrl)")
             }
         }
     }

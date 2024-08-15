@@ -20,7 +20,7 @@ struct AmountInputView: View {
 
             CustomInputView(inputText: $viewModel.amountSpentText, placeholder: placeholder, onCommit: {
                 isDeleteButtonVisible = false
-            }, isSecureText: false, isCustom: false, showDeleteButton: true, deleteAction: {
+            }, isSecureText: false, isCustom: false, showDeleteButton: isDeleteButtonVisible, deleteAction: {
                 viewModel.amountSpentText = ""
                 isDeleteButtonVisible = false
             })
@@ -28,6 +28,9 @@ struct AmountInputView: View {
             .onChange(of: viewModel.amountSpentText) { _ in
                 viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
                 viewModel.validateForm()
+            }
+            .onTapGesture {
+                isDeleteButtonVisible = true
             }
         }
     }

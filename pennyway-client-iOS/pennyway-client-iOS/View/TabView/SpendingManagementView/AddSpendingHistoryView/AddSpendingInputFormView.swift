@@ -36,6 +36,7 @@ struct AddSpendingInputFormView: View {
             AmountInputView(viewModel: viewModel, title: titleCustomTextList[0], placeholder: "소비 금액을 작성해 주세요", baseAttribute: baseAttribute, stringAttribute: stringAttribute)
                 .onAppear {
                     loadSpendingDetails()
+                    isDeleteButtonVisible = false
                 }
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
@@ -134,10 +135,21 @@ struct AddSpendingInputFormView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             
             // 소비처
-            CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true, showDeleteButton: true, deleteAction: {
+            CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true, showDeleteButton: isDeleteButtonVisible, deleteAction: {
                 viewModel.consumerText = ""
                 isDeleteButtonVisible = false
             })
+//            .onAppear {
+//                isDeleteButtonVisible = false
+//            }
+            .onTapGesture {
+                isDeleteButtonVisible = true
+            }
+//            .onChange(of: viewModel.consumerText) { newValue in
+//                if newValue.isEmpty {
+//                    isDeleteButtonVisible = false
+//                }
+//            }
 
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             

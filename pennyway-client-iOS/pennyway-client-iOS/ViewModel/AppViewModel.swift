@@ -31,7 +31,7 @@ class AppViewModel: ObservableObject {
         registDeviceTokenApi()
         isLoggedIn = true
     }
-    
+
     func checkLoginStateApi() {
         UserAuthAlamofire.shared.checkLoginState { [weak self] result in
             switch result {
@@ -42,10 +42,10 @@ class AppViewModel: ObservableObject {
                         Log.debug(response)
                         self?.checkLoginState = true
                         self?.isLoggedIn = true
-                        
+
                         self?.registDeviceTokenApi()
                         Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
-                        
+
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                         self?.checkLoginState = false
@@ -57,16 +57,16 @@ class AppViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
-                
+
                 self?.checkLoginState = false
             }
         }
     }
-    
+
     func registDeviceTokenApi() {
         if let fcmToken = AppDelegate.currentFCMToken {
             let fcmTokenDto = FcmTokenDto(token: fcmToken)
-                    
+
             UserAccountAlamofire.shared.registDeviceToken(fcmTokenDto) { result in
                 switch result {
                 case let .success(data):
