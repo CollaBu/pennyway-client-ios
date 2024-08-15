@@ -38,6 +38,11 @@ struct FindPwPhoneVerificationView: View {
                                     if newValue.count > 11 {
                                         viewModel.phoneNumber = String(newValue.prefix(11))
                                     }
+                                    if viewModel.phoneNumber != viewModel.requestedPhoneNumber && viewModel.showErrorExistingUser {
+                                        viewModel.showErrorExistingUser = false
+                                    } else {
+                                        viewModel.showErrorExistingUser = true
+                                    }
                                 } else {
                                     viewModel.phoneNumber = ""
                                 }

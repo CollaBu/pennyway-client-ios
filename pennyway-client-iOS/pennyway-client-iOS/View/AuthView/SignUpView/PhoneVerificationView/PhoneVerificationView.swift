@@ -3,6 +3,7 @@ import SwiftUI
 struct PhoneVerificationView: View {
     @State private var showCodeErrorPopUp = false
     @State private var showManyRequestPopUp = false
+    @State private var showDiffNumberPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @StateObject var oauthAccountLinkingViewModel = LinkOAuthToAccountViewModel()
@@ -43,6 +44,19 @@ struct PhoneVerificationView: View {
             if showManyRequestPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
+            }
+            
+            if showDiffNumberPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showDiffNumberPopUp,
+                                titleLabel: "인증 요청 번호와\n현재 입력된 번호가 달라요",
+                                subTitleLabel: "기존 번호()로 인증할까요?",
+                                firstBtnAction: { self.showDiffNumberPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: {},
+                                secondBtnLabel: "옮길래요",
+                                secondBtnColor: Color("Mint03"),
+                                heightSize: 166)
             }
         }
         .edgesIgnoringSafeArea(.bottom)

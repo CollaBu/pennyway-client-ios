@@ -12,8 +12,8 @@ class PhoneVerificationViewModel: ObservableObject {
 
     // MARK: Internal
 
-    @Published var firstPhoneNumber = ""
-    @Published var phoneNumber: String = ""
+    @Published var requestedPhoneNumber = "" // 요청을 보낸 폰 번호
+    @Published var phoneNumber: String = "" // 입력한 폰 번호
 
     @Published var code: String = ""
     @Published var showErrorPhoneNumberFormat = false
@@ -49,6 +49,8 @@ class PhoneVerificationViewModel: ObservableObject {
 
     func validateForm() {
         isFormValid = (!phoneNumber.isEmpty && !code.isEmpty && timerSeconds > 0)
+
+        isDisabledButton = (requestedPhoneNumber == phoneNumber)
     }
 
     // MARK: 인증번호 코드 요청 API
@@ -140,24 +142,6 @@ class PhoneVerificationViewModel: ObservableObject {
         if isFormValid {
             AuthAlamofire.shared.findUserName(verificationDto) { result in
                 self.handleFindUserNameApi(result: result, completion: completion)
-                switch result {
-                case let .success(data):
-                    if data != nil {
-                        self.handleFindUserNameApi(result: result, completion: completion)
-                    }
-                case let .failure(error):
-                    if let StatusSpecificError = error as? StatusSpecificError {
-                        Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-                        if StatusSpecificError.domainError == .unauthorized && StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
-                            self.showErrorVerificationCode = true
-                        } else if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
-                            self.showErrorExistingUser = true
-                        }
-
-                    } else {
-                        Log.error("Network request failed: \(error)")
-                    }
-                }
             }
         }
     }
@@ -170,26 +154,6 @@ class PhoneVerificationViewModel: ObservableObject {
         if isFormValid {
             AuthAlamofire.shared.receivePwVerifyVerificationCode(verificationDto) { result in
                 self.receivePwVerifyVerificationCode(result: result, completion: completion)
-
-                switch result {
-                case let .success(data):
-                    if data != nil {
-                        self.receivePwVerifyVerificationCode(result: result, completion: completion)
-                    }
-                case let .failure(error):
-                    if let StatusSpecificError = error as? StatusSpecificError {
-                        Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-                        if StatusSpecificError.domainError == .unauthorized && StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
-                            self.showErrorVerificationCode = true
-                        } else if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
-                            self.showErrorExistingUser = true
-                        }
-
-                    } else {
-                        Log.error("Network request failed: \(error)")
-                    }
-                }
-                completion()
             }
         }
     }

@@ -4,10 +4,11 @@ import SwiftUI
 struct VerificationButton: View {
     let isEnabled: Bool
     let action: () -> Void
+    let buttonTitle: String
 
     var body: some View {
         Button(action: action, label: {
-            Text("인증번호 받기")
+            Text(buttonTitle)
                 .font(.B1MediumFont())
                 .platformTextColor(color: isEnabled ? Color("White01") : Color("Gray04"))
         })
