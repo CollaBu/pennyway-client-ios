@@ -28,20 +28,22 @@ class BaseInterceptor: RequestInterceptor {
         }
 
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
-            TokenRefreshHandler.shared.refreshSync { result in
+            TokenRefreshHandler.shared.refreshSync { result, shouldRetry in
                 switch result {
                 case .success:
                     Log.debug("Token refreshed, retrying request : \(request)")
                     completion(.retry)
                 case .failure:
-                    
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .logoutNotification, object: nil)
+                    if shouldRetry {
+                        Log.debug("Retrying due to network error")
+                        completion(.retry)
+                    } else {
+                        completion(.doNotRetry)
                     }
-                    completion(.doNotRetry)
                 }
             }
         } else {
+            // 기타 오류에 대한 재시도 처리
             completion(.doNotRetry)
         }
     }
