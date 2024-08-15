@@ -6,7 +6,6 @@ struct SpendingDetailSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
-    @State private var forceUpdate: Bool = false
     @State private var isDeleted: Bool = false
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
@@ -128,21 +127,6 @@ struct SpendingDetailSheetView: View {
                 }
             }
         }
-        .id(forceUpdate)
-//        .onChange(of: spendingHistoryViewModel.spendingSheetViewUpdated) { updated in
-//            Log.debug("바텀시트에서 onChange실행중, updated: \(updated) ")
-//            
-//            if updated {
-//                DispatchQueue.main.async {
-//                    Log.debug("업데이트됨")
-//
-//                    self.forceUpdate.toggle()
-//                    Log.debug("forceUpdate:\(forceUpdate)")
-//
-//                    self.spendingHistoryViewModel.spendingSheetViewUpdated = false
-//                }
-//            }
-//        }
         .onChange(of: isEditSuccess) { newValue in
             if newValue {
                 Log.debug("지출 내역이 수정되었습니다.")
@@ -154,7 +138,6 @@ struct SpendingDetailSheetView: View {
         .onAppear {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
             getDailyHistoryData()
-            forceUpdate.toggle()
         }
         .onChange(of: isDeleted) { newValue in
             if newValue {

@@ -149,7 +149,6 @@ struct MySpendingListView: View {
 
                     })
                     .buttonStyle(BasicButtonStyleUtil())
-//                    .padding(.trailing, 20)
                     .frame(width: 48 * DynamicSizeFactor.factor(), height: 44)
                 }
             }
