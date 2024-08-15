@@ -59,7 +59,6 @@ class TargetAmountViewModel: ObservableObject {
                             if success {
                                 // 당월 목표 금액 재조회
                                 self.getTargetAmountForDateApi { _ in }
-                            }
                         }
                     }
                 } else {

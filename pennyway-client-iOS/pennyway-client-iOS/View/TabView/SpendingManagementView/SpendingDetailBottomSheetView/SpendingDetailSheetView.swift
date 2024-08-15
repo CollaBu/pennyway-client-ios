@@ -6,15 +6,21 @@ struct SpendingDetailSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showEditSpendingDetailView = false
     @State private var showAddSpendingHistoryView = false
-    @State private var forceUpdate: Bool = false
     @State private var isDeleted: Bool = false
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
+    @State private var isEditSuccess: Bool = false
 
     @Binding var clickDate: Date?
     
     @StateObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
+    
+    init(clickDate: Binding<Date?>, viewModel: AddSpendingHistoryViewModel, spendingHistoryViewModel: SpendingHistoryViewModel) {
+        _clickDate = clickDate
+        _viewModel = StateObject(wrappedValue: viewModel)
+        _spendingHistoryViewModel = ObservedObject(wrappedValue: spendingHistoryViewModel)
+    }
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -106,14 +112,29 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showAddSpendingHistoryView) {
                 NavigationAvailable {
-                    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: $showAddSpendingHistoryView, entryPoint: .detailSheet)
+                    AddSpendingHistoryView(
+                        spendingCategoryViewModel: SpendingCategoryViewModel(),
+                        spendingHistoryViewModel: spendingHistoryViewModel,
+                        spendingId: $selectedSpendingId, clickDate: $clickDate,
+                        isPresented: $showAddSpendingHistoryView,
+                        isEditSuccess: .constant(false), entryPoint: .detailSheet // 기본값 0 제공
+                    )
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
-                NavigationAvailable { DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
+                NavigationAvailable {
+                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), isEditSuccess: $isEditSuccess, spendingCategoryViewModel: SpendingCategoryViewModel())
                 }
             }
         }
+        .onChange(of: isEditSuccess) { newValue in
+            if newValue {
+                Log.debug("지출 내역이 수정되었습니다.")
+                getDailyHistoryData()
+                isEditSuccess = false // 상태를 초기화
+            }
+        }
+
         .onAppear {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
             getDailyHistoryData()

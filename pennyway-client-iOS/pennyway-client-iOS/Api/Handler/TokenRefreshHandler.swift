@@ -10,11 +10,11 @@ import Foundation
 class TokenRefreshHandler {
     static let shared = TokenRefreshHandler()
     private var isRefreshing = false
-    private var pendingRequests: [(Result<Data?, Error>) -> Void] = []
+    private var pendingRequests: [(Result<Data?, Error>, Bool) -> Void] = []
     
     private init() {}
     
-    func refreshSync(completion: @escaping (Result<Data?, Error>) -> Void) {
+    func refreshSync(completion: @escaping (Result<Data?, Error>, Bool) -> Void) {
         Log.debug("TokenRefreshManager - refreshSync() called - isRefreshing: \(isRefreshing)")
         
         if isRefreshing {
@@ -42,32 +42,43 @@ class TokenRefreshHandler {
                             AnalyticsConstants.Parameter.oauthType: "none",
                             AnalyticsConstants.Parameter.isRefresh: true
                         ])
+                        
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
-                        self.notifyPendingRequests(result: .failure(error))
-                        completion(.failure(error))
+                        self.notifyPendingRequests(result: .failure(error), shouldRetry: false)
+                        completion(.failure(error), false)
                     }
                 }
-                        
-                self.notifyPendingRequests(result: .success(data))
-                completion(.success(data))
+                self.notifyPendingRequests(result: .success(data), shouldRetry: false)
+                completion(.success(data), false)
+                
             case let .failure(error):
+                var shouldRetry = false
+                
                 if let statusSpecificError = error as? StatusSpecificError {
+                    if statusSpecificError.domainError == .unauthorized, statusSpecificError.code == UnauthorizedErrorCode.expiredOrRevokedToken.rawValue || statusSpecificError.domainError == .forbidden, statusSpecificError.code == ForbiddenErrorCode.accessForbidden.rawValue {
+                        // 401, 403 에러인 경우 로그아웃
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .logoutNotification, object: nil)
+                        }
+                    }
                     Log.info("StatusSpecificError occurred: \(statusSpecificError)")
                 } else {
-                    Log.error("Network request failed: \(error)")
+                    Log.error("Network request failedd: \(error)")
+                    // 네트워크 오류 발생 시 재시도 플래그 설정
+                    shouldRetry = true
                 }
                 
-                self.notifyPendingRequests(result: .failure(error))
-                completion(.failure(error))
+                self.notifyPendingRequests(result: .failure(error), shouldRetry: shouldRetry)
+                completion(.failure(error), shouldRetry)
             }
-                    
+            
             self.isRefreshing = false
         }
     }
     
-    private func notifyPendingRequests(result: Result<Data?, Error>) {
-        pendingRequests.forEach { $0(result) }
+    private func notifyPendingRequests(result: Result<Data?, Error>, shouldRetry: Bool) {
+        pendingRequests.forEach { $0(result, shouldRetry) }
         pendingRequests.removeAll()
     }
 }

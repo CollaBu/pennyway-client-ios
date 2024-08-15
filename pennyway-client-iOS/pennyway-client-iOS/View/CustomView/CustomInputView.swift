@@ -17,16 +17,18 @@ struct CustomInputView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-            if isCustom ?? false {
-                titleText?.toAttributesText(base: baseAttribute, stringAttribute)
-                    .padding(.horizontal, 20)
-                    .font(.B1RegularFont())
-                    .platformTextColor(color: Color("Gray04"))
-            } else {
-                Text(titleText!)
-                    .padding(.horizontal, 20)
-                    .font(.B1RegularFont())
-                    .platformTextColor(color: Color("Gray04"))
+            if titleText != nil {
+                if isCustom ?? false {
+                    titleText?.toAttributesText(base: baseAttribute, stringAttribute)
+                        .padding(.horizontal, 20)
+                        .font(.B1RegularFont())
+                        .platformTextColor(color: Color("Gray04"))
+                } else {
+                    Text(titleText!)
+                        .padding(.horizontal, 20)
+                        .font(.B1RegularFont())
+                        .platformTextColor(color: Color("Gray04"))
+                }
             }
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
@@ -63,6 +65,7 @@ struct CustomInputView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .padding(.leading, 12 * DynamicSizeFactor.factor())
+                        .padding(.trailing, 35 * DynamicSizeFactor.factor())
                         .padding(.vertical, 16 * DynamicSizeFactor.factor())
                         .font(.H4MediumFont())
                         .onChange(of: inputText) { newValue in
@@ -77,7 +80,7 @@ struct CustomInputView: View {
 
                             AnalyticsManager.shared.trackEvent(AuthEvents.cancelBtnTapped, additionalParams: [AnalyticsConstants.Parameter.btnName: titleText ?? "미설정"])
                         })
-                        .offset(x: 120 * DynamicSizeFactor.factor(), y: 1 * DynamicSizeFactor.factor())
+                        .offset(x: 130 * DynamicSizeFactor.factor())
                     }
                 }
             }

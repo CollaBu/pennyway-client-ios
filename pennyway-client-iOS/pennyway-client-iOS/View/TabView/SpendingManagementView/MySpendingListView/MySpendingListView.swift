@@ -39,6 +39,7 @@ struct MySpendingListView: View {
                                             ForEach(spendings, id: \.id) { item in
                                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
                                                 Button(action: {
+                                                    Log.debug("버튼 누름")
                                                     clickDate = DateFormatterUtil.parseDate(from: date)
                                                     spendingHistoryViewModel.selectedDate = clickDate
                                                     selectedSpendingId = item.id
@@ -118,7 +119,7 @@ struct MySpendingListView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $showDetailSpendingView) {}
+            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, isEditSuccess: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $showDetailSpendingView) {}
                 .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
@@ -148,7 +149,6 @@ struct MySpendingListView: View {
 
                     })
                     .buttonStyle(BasicButtonStyleUtil())
-//                    .padding(.trailing, 20)
                     .frame(width: 48 * DynamicSizeFactor.factor(), height: 44)
                 }
             }
