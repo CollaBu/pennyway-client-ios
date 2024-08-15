@@ -7,6 +7,7 @@ struct AddSpendingInputFormView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
+    @State private var isDeleteButtonVisible: Bool = false
 
     @Binding var clickDate: Date?
     var entryPoint: EntryPoint
@@ -133,7 +134,10 @@ struct AddSpendingInputFormView: View {
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             
             // 소비처
-            CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true)
+            CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true, showDeleteButton: true, deleteAction: {
+                viewModel.consumerText = ""
+                isDeleteButtonVisible = false
+            })
 
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             
