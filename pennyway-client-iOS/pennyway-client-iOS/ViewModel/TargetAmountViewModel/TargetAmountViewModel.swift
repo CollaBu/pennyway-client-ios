@@ -57,9 +57,8 @@ class TargetAmountViewModel: ObservableObject {
                         self.isPresentTargetAmount = false
                         self.generateCurrentMonthDummyDataApi { success in
                             if success {
-                                // 당월 이전 사용자 최신 목표 금액 조회
-                                self.getTargetAmountForPreviousMonthApi()
-                            }
+                                // 당월 목표 금액 재조회
+                                self.getTargetAmountForDateApi { _ in }
                         }
                     }
                 } else {
