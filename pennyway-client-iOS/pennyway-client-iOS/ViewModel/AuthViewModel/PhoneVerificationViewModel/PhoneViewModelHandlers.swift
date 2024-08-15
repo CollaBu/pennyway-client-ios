@@ -125,7 +125,11 @@ extension PhoneVerificationViewModel {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                showErrorVerificationCode = true
+                if StatusSpecificError.domainError == .unauthorized, StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
+                    showErrorVerificationCode = true
+                } else if StatusSpecificError.domainError == .notFound, StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                    showErrorExistingUser = true
+                }
 
             } else {
                 Log.error("Network request failed: \(error)")
@@ -150,7 +154,11 @@ extension PhoneVerificationViewModel {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                showErrorVerificationCode = true
+                if StatusSpecificError.domainError == .unauthorized, StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
+                    showErrorVerificationCode = true
+                } else if StatusSpecificError.domainError == .notFound, StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                    showErrorExistingUser = true
+                }
 
             } else {
                 Log.error("Network request failed: \(error)")

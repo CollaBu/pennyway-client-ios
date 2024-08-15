@@ -30,23 +30,7 @@ struct EditPhoneNumberView: View {
 
                 Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 
-                VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-                    Text("인증번호")
-                        .padding(.horizontal, 20)
-                        .font(.B1RegularFont())
-                        .platformTextColor(color: Color("Gray04"))
-
-                    HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                        CodeInputField(
-                            code: $viewModel.code,
-                            onCodeChange: handleCodeChange,
-                            isTimerHidden: viewModel.isTimerHidden,
-                            timerString: timerString,
-                            isDisabled: !viewModel.isDisabledButton
-                        )
-                    }
-                    .padding(.horizontal, 20)
-                }
+                CodeInputSectionView(viewModel: viewModel)
 
                 Spacer()
 
@@ -135,15 +119,6 @@ struct EditPhoneNumberView: View {
                 viewModel.judgeTimerRunning()
             }
         }
-    }
-
-    private func handleCodeChange(_ newValue: String) {
-        if Int(newValue) != nil {
-            viewModel.code = String(newValue)
-        } else {
-            viewModel.code = ""
-        }
-        viewModel.validateForm()
     }
 
     private func checkFormValid(completion: @escaping (Bool) -> Void) {

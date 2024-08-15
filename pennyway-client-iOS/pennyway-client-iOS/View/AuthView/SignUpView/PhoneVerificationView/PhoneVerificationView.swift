@@ -27,7 +27,13 @@ struct PhoneVerificationView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    continueButtonAction()
+                    if !phoneVerificationViewModel.requestedPhoneNumber.isEmpty, phoneVerificationViewModel.requestedPhoneNumber != phoneVerificationViewModel.phoneNumber {
+                        showDiffNumberPopUp = true
+                    } else {
+                        print(phoneVerificationViewModel.requestedPhoneNumber, phoneVerificationViewModel.phoneNumber)
+                        continueButtonAction()
+                    }
+                    
                 }, label: "계속하기", isFormValid: $phoneVerificationViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
@@ -50,12 +56,16 @@ struct PhoneVerificationView: View {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showDiffNumberPopUp,
                                 titleLabel: "인증 요청 번호와\n현재 입력된 번호가 달라요",
-                                subTitleLabel: "기존 번호()로 인증할까요?",
+                                subTitleLabel: "기존 번호(\(phoneVerificationViewModel.requestedPhoneNumber))로 인증할까요?",
                                 firstBtnAction: { self.showDiffNumberPopUp = false },
                                 firstBtnLabel: "취소",
-                                secondBtnAction: {},
-                                secondBtnLabel: "옮길래요",
-                                secondBtnColor: Color("Mint03"),
+                                secondBtnAction: {
+                                    self.showDiffNumberPopUp = false
+                                    phoneVerificationViewModel.phoneNumber = phoneVerificationViewModel.requestedPhoneNumber
+                                    continueButtonAction()
+                                },
+                                secondBtnLabel: "인증할게요",
+                                secondBtnColor: Color("Gray05"),
                                 heightSize: 166)
             }
         }

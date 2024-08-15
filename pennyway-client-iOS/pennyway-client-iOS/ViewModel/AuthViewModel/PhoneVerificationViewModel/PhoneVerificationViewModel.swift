@@ -49,7 +49,6 @@ class PhoneVerificationViewModel: ObservableObject {
 
     func validateForm() {
         isFormValid = (!phoneNumber.isEmpty && !code.isEmpty && timerSeconds > 0)
-
         isDisabledButton = (requestedPhoneNumber == phoneNumber)
     }
 

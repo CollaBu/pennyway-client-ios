@@ -22,7 +22,7 @@ struct CodeInputSectionView: View {
                     onCodeChange: handleCodeChange,
                     isTimerHidden: viewModel.isTimerHidden,
                     timerString: timerString,
-                    isDisabled: !viewModel.isDisabledButton
+                    isDisabled: viewModel.requestedPhoneNumber.isEmpty
                 )
             }
             .padding(.horizontal, 20)
