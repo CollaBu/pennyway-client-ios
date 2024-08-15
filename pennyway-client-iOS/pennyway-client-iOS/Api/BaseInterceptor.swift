@@ -71,15 +71,4 @@ class BaseInterceptor: RequestInterceptor {
             completion(.doNotRetry)
         }
     }
-
-    private func handleRetry(for request: Request, response: HTTPURLResponse, completion: @escaping (RetryResult) -> Void) {
-        Log.error("[BaseInterceptor] Network error with status code: \(response.statusCode)")
-        if request.retryCount < 1 {
-            Log.info("Retrying request once due to status code: \(response.statusCode)")
-            completion(.retry)
-        } else {
-            Log.info("Not retrying after error with status code: \(response.statusCode)")
-            completion(.doNotRetry)
-        }
-    }
 }
