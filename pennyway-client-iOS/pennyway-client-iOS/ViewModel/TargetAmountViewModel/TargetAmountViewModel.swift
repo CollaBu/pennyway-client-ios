@@ -56,9 +56,9 @@ class TargetAmountViewModel: ObservableObject {
                         self.isHiddenSuggestionView = true
                         self.isPresentTargetAmount = false
                         self.generateCurrentMonthDummyDataApi { success in
-                            if success{
+                            if success {
                                 // 당월 이전 사용자 최신 목표 금액 조회
-                                self.getTargetAmountForPreviousMonthApi()
+                                self.getTargetAmountForDateApi { _ in }
                             }
                         }
                     }
