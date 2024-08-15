@@ -7,12 +7,7 @@ struct EditPhoneNumberView: View {
     @State private var showCodeErrorPopUp = false // 인증번호 오류
     @State private var showManyRequestPopUp = false // api 요청 오류
     @State private var showDiffNumberPopUp = false
-
-    var timerString: String {
-        let minutes = viewModel.timerSeconds / 60
-        let seconds = viewModel.timerSeconds % 60
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
+    @State private var showErrorExistingUser = false
 
     var body: some View {
         ZStack {
@@ -88,6 +83,9 @@ struct EditPhoneNumberView: View {
                                 heightSize: 166)
             }
         }
+        .onChange(of: viewModel.showErrorExistingUser) { newValue in
+            showErrorExistingUser = newValue
+        }
     }
 
     @ViewBuilder
@@ -114,9 +112,9 @@ struct EditPhoneNumberView: View {
 
             if viewModel.showErrorExistingUser {
                 if viewModel.phoneNumber != viewModel.requestedPhoneNumber {
-                    viewModel.showErrorExistingUser = false
+                    showErrorExistingUser = false
                 } else {
-                    viewModel.showErrorExistingUser = true
+                    showErrorExistingUser = true
                 }
             }
         } else {
