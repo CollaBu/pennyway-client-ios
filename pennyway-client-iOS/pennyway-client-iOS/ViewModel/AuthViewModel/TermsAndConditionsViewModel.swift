@@ -14,6 +14,11 @@ class TermsAndConditionsViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("회원가입 \(jsonString)")
                         }
+
+                        AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
+                        AnalyticsManager.shared.trackEvent(AuthEvents.signUp, additionalParams: [
+                            AnalyticsConstants.Parameter.oauthType: "none",
+                        ])
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }

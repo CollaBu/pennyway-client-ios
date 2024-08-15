@@ -7,6 +7,8 @@ struct MoveCategoryView: View {
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel
     @Environment(\.presentationMode) var presentationMode
+    
+    @Binding var showMoveToastPopup: Bool
 
     @State var navigateToAddCategoryView = false
     @State var showingPopUp = false
@@ -133,6 +135,7 @@ struct MoveCategoryView: View {
                 spendingCategoryViewModel.selectedCategory = spendingCategoryViewModel.selectedMoveCategory // 이동할 카테고리로 변경
                 spendingCategoryViewModel.selectedCategory?.icon = MapCategoryIconUtil.mapToCategoryIcon(spendingCategoryViewModel.selectedMoveCategory!.icon, outputState: .on) // icon 회색으로 변경
                 spendingCategoryViewModel.selectedMoveCategory = nil // 선택한 카테고리 초기화
+                showMoveToastPopup = true
                 spendingCategoryViewModel.getCategorySpendingCountApi { _ in } // 총 개수 조회
                 spendingCategoryViewModel.getCategorySpendingHistoryApi { success in // 지출 내역 조회
                     if success {
@@ -145,5 +148,5 @@ struct MoveCategoryView: View {
 }
 
 #Preview {
-    MoveCategoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), addSpendingHistoryViewModel: AddSpendingHistoryViewModel())
+    MoveCategoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), addSpendingHistoryViewModel: AddSpendingHistoryViewModel(), showMoveToastPopup: .constant(false))
 }

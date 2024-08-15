@@ -11,6 +11,13 @@ class LinkAccountToOAuthViewModel: ObservableObject {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         Log.debug(response)
+
+                        AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
+                        AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
+                            AnalyticsConstants.Parameter.oauthType: "none",
+                            AnalyticsConstants.Parameter.isRefresh: false
+                        ])
+
                         completion(true)
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")

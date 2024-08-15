@@ -41,6 +41,7 @@ struct AddSpendingHistoryView: View {
                         viewModel.clickDate = date
                         if entryPoint == .main || entryPoint == .detailSheet || entryPoint == .NoSpendingHistoryView {
                             Log.debug("추가하기")
+
                             viewModel.addSpendingHistoryApi { success in
                                 if success {
                                     navigateToAddSpendingCategory = true
@@ -54,7 +55,6 @@ struct AddSpendingHistoryView: View {
                             viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()
-//                                    self.spendingHistoryViewModel.spendingSheetViewUpdated = true
                                     self.isEditSuccess = true
                                     Log.debug("지출 내역 수정 성공")
                                 } else {
@@ -68,7 +68,6 @@ struct AddSpendingHistoryView: View {
                             if success {
                                 self.presentationMode.wrappedValue.dismiss()
                                 self.spendingHistoryViewModel.spendingDetailViewUpdated = true
-//                                self.spendingHistoryViewModel.spendingSheetViewUpdated = true
                                 self.isEditSuccess = true
                                 Log.debug("지출 내역 수정 성공")
                             } else {

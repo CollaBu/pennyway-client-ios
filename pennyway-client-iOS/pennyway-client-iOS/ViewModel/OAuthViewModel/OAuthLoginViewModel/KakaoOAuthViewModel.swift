@@ -9,7 +9,7 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false // 로그인 여부
     @Published var isLoginSuccessful = false
 
-    private var existOAuthAccount: Bool = getUserData()?.oauthAccount.kakao ?? false
+    @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.kakao ?? false
     private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     let oauthAccountViewModel = OAuthAccountViewModel()
 
@@ -79,7 +79,7 @@ class KakaoOAuthViewModel: ObservableObject {
             oauthUserData.nonce = CryptoHelper.sha256(randomNonce)
 
             // 카카오 로그인 실행
-            UserApi.shared.loginWithKakaoAccount(prompts: [.Login], nonce: oauthUserData.nonce) { oauthToken, error in
+            UserApi.shared.loginWithKakaoAccount(prompts: [.SelectAccount], nonce: oauthUserData.nonce) { oauthToken, error in
                 if let error = error {
                     print(error)
                 } else {

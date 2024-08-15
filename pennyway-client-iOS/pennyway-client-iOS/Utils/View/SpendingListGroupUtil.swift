@@ -13,4 +13,10 @@ enum SpendingListGroupUtil {
             }
         return sortedGroup
     }
+
+    static func groupedByYear(from spendings: [IndividualSpending]) -> [String: [(key: String, values: [IndividualSpending])]] {
+        let groupedByDate = groupedSpendings(from: spendings)
+        let groupedByYear = Dictionary(grouping: groupedByDate, by: { DateFormatterUtil.getYear(from: $0.key) })
+        return groupedByYear
+    }
 }
