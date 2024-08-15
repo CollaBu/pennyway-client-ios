@@ -14,16 +14,19 @@ struct DetailSpendingView: View {
     @Binding var spendingId: Int?
     @Binding var isDeleted: Bool
     @Binding var showToastPopup: Bool
+    @Binding var isEditSuccess: Bool
+
     @State private var forceUpdate: Bool = false
     @State private var showingPopUp: Bool = false
 
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
-    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>, spendingCategoryViewModel: SpendingCategoryViewModel) {
+    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>, isEditSuccess: Binding<Bool>, spendingCategoryViewModel: SpendingCategoryViewModel) {
         _clickDate = clickDate
         _spendingId = spendingId
         _isDeleted = isDeleted
         _showToastPopup = showToastPopup
+        _isEditSuccess = isEditSuccess
         _spendingCategoryViewModel = ObservedObject(wrappedValue: spendingCategoryViewModel)
         _spendingHistoryViewModel = StateObject(wrappedValue: SpendingHistoryViewModel())
     }
@@ -101,7 +104,6 @@ struct DetailSpendingView: View {
         .onChange(of: spendingHistoryViewModel.spendingDetailViewUpdated) { updated in
             Log.debug("onChange실행중, updated: \(updated)")
             if updated {
-                Log.debug("업데이트됨")
                 loadDataForSelectedDate()
                 forceUpdate = true
             }
@@ -130,13 +132,11 @@ struct DetailSpendingView: View {
             }, alignment: .topTrailing
         )
 
-        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: $spendingId, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
+        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: $spendingId, clickDate: $clickDate, isPresented: .constant(false), isEditSuccess: $isEditSuccess, entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
             .hidden()
     }
 
     private func loadDataForSelectedDate() {
-        Log.debug("api 실행됨")
-
         let date = clickDate ?? Date()
 
         spendingHistoryViewModel.selectedDate = date

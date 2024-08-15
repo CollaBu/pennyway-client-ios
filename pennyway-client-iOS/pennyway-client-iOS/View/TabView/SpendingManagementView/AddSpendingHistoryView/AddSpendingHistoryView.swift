@@ -19,10 +19,13 @@ struct AddSpendingHistoryView: View {
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @Binding var spendingId: Int?
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
+
     @State private var navigateToAddSpendingCategory = false
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
     @Binding var isPresented: Bool
+    @Binding var isEditSuccess: Bool
+
     var entryPoint: EntryPoint
 
     var body: some View {
@@ -47,11 +50,12 @@ struct AddSpendingHistoryView: View {
 
                         } else {
                             // 바텀시트를 통해 수정한 경우
-                            Log.debug("수정하기1")
+                            Log.debug("바텀시트를 통해 수정하기")
                             viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
                                 if success {
                                     self.presentationMode.wrappedValue.dismiss()
-                                    self.spendingHistoryViewModel.spendingSheetViewUpdated = true
+//                                    self.spendingHistoryViewModel.spendingSheetViewUpdated = true
+                                    self.isEditSuccess = true
                                     Log.debug("지출 내역 수정 성공")
                                 } else {
                                     Log.debug("지출 내역 수정 실패")
@@ -59,12 +63,13 @@ struct AddSpendingHistoryView: View {
                             }
                         }
                     } else if viewModel.isFormValid {
-                        Log.debug("수정하기2")
+                        Log.debug("그외의 뷰에서 수정하기")
                         viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
                             if success {
                                 self.presentationMode.wrappedValue.dismiss()
                                 self.spendingHistoryViewModel.spendingDetailViewUpdated = true
-                                self.spendingHistoryViewModel.spendingSheetViewUpdated = true
+//                                self.spendingHistoryViewModel.spendingSheetViewUpdated = true
+                                self.isEditSuccess = true
                                 Log.debug("지출 내역 수정 성공")
                             } else {
                                 Log.debug("지출 내역 수정 실패")

@@ -10,6 +10,7 @@ struct SpendingDetailSheetView: View {
     @State private var isDeleted: Bool = false
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
+    @State private var isEditSuccess: Bool = false
 
     @Binding var clickDate: Date?
     
@@ -117,31 +118,39 @@ struct SpendingDetailSheetView: View {
                         spendingHistoryViewModel: spendingHistoryViewModel,
                         spendingId: $selectedSpendingId, clickDate: $clickDate,
                         isPresented: $showAddSpendingHistoryView,
-                        entryPoint: .detailSheet // 기본값 0 제공
+                        isEditSuccess: .constant(false), entryPoint: .detailSheet // 기본값 0 제공
                     )
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
                 NavigationAvailable {
-                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel())
+                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), isEditSuccess: $isEditSuccess, spendingCategoryViewModel: SpendingCategoryViewModel())
                 }
             }
         }
         .id(forceUpdate)
-        .onChange(of: spendingHistoryViewModel.spendingSheetViewUpdated) { updated in
-            Log.debug("바텀시트에서 onChange실행중, updated: \(updated) ")
-            
-            if updated {
-                DispatchQueue.main.async {
-                    Log.debug("업데이트됨")
-
-                    self.forceUpdate.toggle()
-                    Log.debug("forceUpdate:\(forceUpdate)")
-
-                    self.spendingHistoryViewModel.spendingSheetViewUpdated = false
-                }
+//        .onChange(of: spendingHistoryViewModel.spendingSheetViewUpdated) { updated in
+//            Log.debug("바텀시트에서 onChange실행중, updated: \(updated) ")
+//            
+//            if updated {
+//                DispatchQueue.main.async {
+//                    Log.debug("업데이트됨")
+//
+//                    self.forceUpdate.toggle()
+//                    Log.debug("forceUpdate:\(forceUpdate)")
+//
+//                    self.spendingHistoryViewModel.spendingSheetViewUpdated = false
+//                }
+//            }
+//        }
+        .onChange(of: isEditSuccess) { newValue in
+            if newValue {
+                Log.debug("지출 내역이 수정되었습니다.")
+                getDailyHistoryData()
+                isEditSuccess = false // 상태를 초기화
             }
         }
+
         .onAppear {
             Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
             getDailyHistoryData()

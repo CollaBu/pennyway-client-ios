@@ -119,7 +119,7 @@ struct MySpendingListView: View {
                 }, alignment: .bottom
             )
 
-            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $showDetailSpendingView) {}
+            NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: $showToastPopup, isEditSuccess: .constant(false), spendingCategoryViewModel: SpendingCategoryViewModel()), isActive: $showDetailSpendingView) {}
                 .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "소비 내역")
