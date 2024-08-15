@@ -32,10 +32,10 @@ struct CustomInputView: View {
             }
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color("Gray01"))
-                    .frame(height: 46 * DynamicSizeFactor.factor())
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color("Gray01"))
+                        .frame(height: 46 * DynamicSizeFactor.factor())
                     if inputText.isEmpty {
                         Text(placeholder ?? "")
                             .platformTextColor(color: Color("Gray03"))
