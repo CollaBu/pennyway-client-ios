@@ -13,7 +13,7 @@ struct VerificationButton: View {
                 .platformTextColor(color: isEnabled ? Color("White01") : Color("Gray04"))
         })
         .padding(.horizontal, 13)
-        .frame(height: 46 * DynamicSizeFactor.factor())
+        .frame(width: 95 * DynamicSizeFactor.factor(), height: 46 * DynamicSizeFactor.factor())
         .background(isEnabled ? Color("Gray05") : Color("Gray03"))
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .disabled(!isEnabled)

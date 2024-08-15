@@ -30,7 +30,6 @@ struct PhoneVerificationView: View {
                     if !phoneVerificationViewModel.requestedPhoneNumber.isEmpty, phoneVerificationViewModel.requestedPhoneNumber != phoneVerificationViewModel.phoneNumber {
                         showDiffNumberPopUp = true
                     } else {
-                        print(phoneVerificationViewModel.requestedPhoneNumber, phoneVerificationViewModel.phoneNumber)
                         continueButtonAction()
                     }
                     

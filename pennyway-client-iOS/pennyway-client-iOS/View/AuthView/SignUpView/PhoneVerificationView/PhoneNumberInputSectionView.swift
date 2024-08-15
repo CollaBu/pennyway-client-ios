@@ -5,6 +5,7 @@ struct PhoneNumberInputSectionView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @Binding var showManyRequestPopUp: Bool
+    @State private var showErrorExistingUser = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
@@ -12,9 +13,12 @@ struct PhoneNumberInputSectionView: View {
             if viewModel.showErrorPhoneNumberFormat {
                 ErrorText(message: "올바른 전화번호 형식이 아니에요", color: Color("Red03"))
             }
-            if viewModel.showErrorExistingUser {
+            if showErrorExistingUser {
                 ErrorText(message: "이미 가입된 전화번호예요", color: Color("Red03"))
             }
+        }
+        .onChange(of: viewModel.showErrorExistingUser) { newValue in
+            showErrorExistingUser = newValue
         }
     }
 
@@ -45,9 +49,9 @@ struct PhoneNumberInputSectionView: View {
             }
             if viewModel.showErrorExistingUser {
                 if viewModel.phoneNumber != viewModel.requestedPhoneNumber {
-                    viewModel.showErrorExistingUser = false
+                    showErrorExistingUser = false
                 } else {
-                    viewModel.showErrorExistingUser = true
+                    showErrorExistingUser = true
                 }
             }
         } else {

@@ -6,6 +6,7 @@ struct EditPhoneNumberView: View {
     @StateObject var viewModel = PhoneVerificationViewModel()
     @State private var showCodeErrorPopUp = false // 인증번호 오류
     @State private var showManyRequestPopUp = false // api 요청 오류
+    @State private var showDiffNumberPopUp = false
 
     var timerString: String {
         let minutes = viewModel.timerSeconds / 60
@@ -35,14 +36,10 @@ struct EditPhoneNumberView: View {
                 Spacer()
 
                 CustomBottomButton(action: {
-                    if viewModel.isFormValid {
-                        viewModel.editUserPhoneNumberApi {
-                            checkFormValid { success in
-                                if success {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                }
-                            }
-                        }
+                    if !viewModel.requestedPhoneNumber.isEmpty, viewModel.requestedPhoneNumber != viewModel.phoneNumber {
+                        showDiffNumberPopUp = true
+                    } else {
+                        continueButtonAction()
                     }
 
                 }, label: "변경 완료", isFormValid: $viewModel.isFormValid)
@@ -72,6 +69,23 @@ struct EditPhoneNumberView: View {
             if showManyRequestPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
+            }
+
+            if showDiffNumberPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showDiffNumberPopUp,
+                                titleLabel: "인증 요청 번호와\n현재 입력된 번호가 달라요",
+                                subTitleLabel: "기존 번호(\(viewModel.requestedPhoneNumber))로 인증할까요?",
+                                firstBtnAction: { self.showDiffNumberPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: {
+                                    self.showDiffNumberPopUp = false
+                                    viewModel.phoneNumber = viewModel.requestedPhoneNumber
+                                    continueButtonAction()
+                                },
+                                secondBtnLabel: "인증할게요",
+                                secondBtnColor: Color("Gray05"),
+                                heightSize: 166)
             }
         }
     }
@@ -137,6 +151,16 @@ struct EditPhoneNumberView: View {
 
     private func isVerificationButtonEnabled() -> Bool {
         return !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 && viewModel.phoneNumber != viewModel.requestedPhoneNumber
+    }
+
+    private func continueButtonAction() {
+        viewModel.editUserPhoneNumberApi {
+            checkFormValid { success in
+                if success {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            }
+        }
     }
 }
 

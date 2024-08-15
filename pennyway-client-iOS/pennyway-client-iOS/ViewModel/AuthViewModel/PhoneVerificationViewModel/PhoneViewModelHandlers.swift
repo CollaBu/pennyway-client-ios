@@ -29,7 +29,7 @@ extension PhoneVerificationViewModel {
                     showErrorApiRequest = true
                     isTimerHidden = true
                     stopTimer()
-//                    isDisabledButton = false
+                    isDisabledButton = false
                 }
             } else {
                 Log.error("Network request failed: \(error)")
@@ -204,6 +204,6 @@ extension PhoneVerificationViewModel {
         code = ""
         isTimerHidden = true
         stopTimer()
-//        isDisabledButton = false
+        isDisabledButton = false
     }
 }
