@@ -13,7 +13,7 @@ class TokenHandler {
                     Log.info("Cookie name: \(cookie.name), value: \(cookie.value)")
                     let nsCookie = HTTPCookie(properties: [
                         HTTPCookiePropertyKey.name: cookie.name,
-                        HTTPCookiePropertyKey.value: "aaa",
+                        HTTPCookiePropertyKey.value: cookie.value,
                         HTTPCookiePropertyKey.domain: cookie.domain,
                         HTTPCookiePropertyKey.path: cookie.path,
                         HTTPCookiePropertyKey.version: NSNumber(value: cookie.version),
@@ -25,7 +25,7 @@ class TokenHandler {
                     }
                 }
             }
-            KeychainHelper.saveAccessToken(accessToken: "aa")
+            KeychainHelper.saveAccessToken(accessToken: accessToken)
             Log.info("accessToken: \(accessToken)")
         }
     }
