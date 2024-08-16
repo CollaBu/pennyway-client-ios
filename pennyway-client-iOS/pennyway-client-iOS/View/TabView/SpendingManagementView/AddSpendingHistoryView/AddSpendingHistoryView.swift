@@ -89,10 +89,10 @@ struct AddSpendingHistoryView: View {
             if isAddSpendingMode() {
                 addSpendingHistory()
             } else {
-                editSpendingHistoryAtBottomSheet()
+                editSpendingHistory(spendingDetailViewUpdated: false)
             }
         } else {
-            editSpendingHistoryAtOtherView()
+            editSpendingHistory(spendingDetailViewUpdated: true)
         }
     }
     
@@ -111,27 +111,17 @@ struct AddSpendingHistoryView: View {
         }
     }
     
-    private func editSpendingHistoryAtBottomSheet() {
-        Log.debug("바텀시트를 통해 수정하기")
-        
-        viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
-            if success {
-                self.presentationMode.wrappedValue.dismiss()
-                self.isEditSuccess = true
-                Log.debug("지출 내역 수정 성공")
-            } else {
-                Log.debug("지출 내역 수정 실패")
-            }
+    private func editSpendingHistory(spendingDetailViewUpdated: Bool) {
+        guard let spendingId = spendingId else {
+            Log.debug("spendingId가 nil입니다.")
+            return
         }
-    }
-    
-    private func editSpendingHistoryAtOtherView() {
-        Log.debug("그외의 뷰에서 수정하기")
+        Log.debug("수정하기")
         
-        viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
+        viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
             if success {
                 self.presentationMode.wrappedValue.dismiss()
-                self.spendingHistoryViewModel.spendingDetailViewUpdated = true
+                self.spendingHistoryViewModel.spendingDetailViewUpdated = spendingDetailViewUpdated
                 self.isEditSuccess = true
                 Log.debug("지출 내역 수정 성공")
             } else {
