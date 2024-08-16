@@ -36,50 +36,14 @@ struct AddSpendingHistoryView: View {
                 }
                 Spacer()
 
-                CustomBottomButton(action: {
-                    if viewModel.isFormValid, let date = clickDate {
-                        viewModel.clickDate = date
-                        if entryPoint == .main || entryPoint == .detailSheet || entryPoint == .NoSpendingHistoryView {
-                            Log.debug("추가하기")
-
-                            viewModel.addSpendingHistoryApi { success in
-                                if success {
-                                    self.navigateToAddSpendingComplete = true
-                                    Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
-                                }
-                            }
-
-                        } else {
-                            // 바텀시트를 통해 수정한 경우
-                            Log.debug("바텀시트를 통해 수정하기")
-                            viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
-                                if success {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                    self.isEditSuccess = true
-                                    Log.debug("지출 내역 수정 성공")
-                                } else {
-                                    Log.debug("지출 내역 수정 실패")
-                                }
-                            }
-                        }
-                    } else if viewModel.isFormValid {
-                        Log.debug("그외의 뷰에서 수정하기")
-                        viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
-                            if success {
-                                self.presentationMode.wrappedValue.dismiss()
-                                self.spendingHistoryViewModel.spendingDetailViewUpdated = true
-                                self.isEditSuccess = true
-                                Log.debug("지출 내역 수정 성공")
-                            } else {
-                                Log.debug("지출 내역 수정 실패")
-                            }
-                        }
-                    }
-                }, label: "확인", isFormValid: $viewModel.isFormValid)
+                CustomBottomButton(action: {handleConfirmBtnTap()}, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
-
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete) {}
-                    .hidden()
+                
+                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete) {
+                    Log.debug("AddSpendingCompleteView로 이동")
+                    return EmptyView()
+                }
+                .hidden()
 
                 NavigationLink(
                     destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel(), entryPoint: .create), isActive: $viewModel.navigateToAddCategory) {}
@@ -111,6 +75,68 @@ struct AddSpendingHistoryView: View {
         }
         .onAppear {
             Log.debug("AddSpendingHistoryView에서 spendingId: \(spendingId)")
+        }
+    }
+    
+    private func handleConfirmBtnTap() {
+        guard viewModel.isFormValid else {
+            Log.debug("폼이 유효하지 않습니다.")
+            return
+        }
+        
+        if let date = clickDate {
+            viewModel.clickDate = date
+            if isAddSpendingMode() {
+                addSpendingHistory()
+            } else {
+                editSpendingHistoryAtBottomSheet()
+            }
+        } else {
+            editSpendingHistoryAtOtherView()
+        }
+    }
+    
+    private func isAddSpendingMode() -> Bool {
+        return entryPoint == .main || entryPoint == .detailSheet || entryPoint == .NoSpendingHistoryView
+    }
+    
+    private func addSpendingHistory() {
+        Log.debug("추가하기")
+
+        viewModel.addSpendingHistoryApi { success in
+            if success {
+                self.navigateToAddSpendingComplete = true
+                Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
+            }
+        }
+    }
+    
+    private func editSpendingHistoryAtBottomSheet() {
+        Log.debug("바텀시트를 통해 수정하기")
+        
+        viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
+            if success {
+                self.presentationMode.wrappedValue.dismiss()
+                self.isEditSuccess = true
+                Log.debug("지출 내역 수정 성공")
+            } else {
+                Log.debug("지출 내역 수정 실패")
+            }
+        }
+    }
+    
+    private func editSpendingHistoryAtOtherView() {
+        Log.debug("그외의 뷰에서 수정하기")
+        
+        viewModel.editSpendingHistoryApi(spendingId: spendingId!) { success in
+            if success {
+                self.presentationMode.wrappedValue.dismiss()
+                self.spendingHistoryViewModel.spendingDetailViewUpdated = true
+                self.isEditSuccess = true
+                Log.debug("지출 내역 수정 성공")
+            } else {
+                Log.debug("지출 내역 수정 실패")
+            }
         }
     }
 }
