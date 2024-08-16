@@ -15,6 +15,8 @@ enum TargetAmountEvents: AnalyticsEvent {
     case targetAmountUpdateView // 목표 금액 수정 뷰
     case targetAmountSetCompleteView // 목표 금액 설정 완료 뷰
     
+    case postponeTargetAmount // 목표 금액 나중에 설정하기
+    case setInitialTargetAmount // 초기 목표 금액 설정하기
     case maintainRecentTargetAmount // 최근 목표 금액 유지
     case cancelRecentTotalAmount // 최근 목표 금액 유지 취소
     
@@ -22,7 +24,7 @@ enum TargetAmountEvents: AnalyticsEvent {
         switch self {
         case .targetAmountView, .targetAmountHistoryView, .targetAmountInitView, .targetAmountUpdateView, .targetAmountSetCompleteView:
             return AnalyticsConstants.EventName.screenView
-        case .maintainRecentTargetAmount, .cancelRecentTotalAmount:
+        case .postponeTargetAmount, .setInitialTargetAmount, .maintainRecentTargetAmount, .cancelRecentTotalAmount:
             return AnalyticsConstants.EventName.btnTapped
         }
     }
@@ -31,7 +33,7 @@ enum TargetAmountEvents: AnalyticsEvent {
         switch self {
         case .targetAmountView, .targetAmountHistoryView, .targetAmountInitView, .targetAmountUpdateView, .targetAmountSetCompleteView:
             return AnalyticsConstants.EventType.screenView
-        case .maintainRecentTargetAmount, .cancelRecentTotalAmount:
+        case .postponeTargetAmount, .setInitialTargetAmount, .maintainRecentTargetAmount, .cancelRecentTotalAmount:
             return AnalyticsConstants.EventType.userAction
         }
     }
@@ -67,6 +69,14 @@ enum TargetAmountEvents: AnalyticsEvent {
                 .screenId: TargetAmountScreen.targetAmountSetCompleteView.screenId,
                 .screenName: TargetAmountScreen.targetAmountSetCompleteView.screenName,
                 .screenClass: TargetAmountScreen.targetAmountSetCompleteView.screenClass
+            ]
+        case .postponeTargetAmount:
+            return [
+                .eventName: TargetAmountCustomEvent.postponeTargetAmount.eventName
+            ]
+        case .setInitialTargetAmount:
+            return [
+                .eventName: TargetAmountCustomEvent.setInitialTargetAmount.eventName
             ]
         case .maintainRecentTargetAmount:
             return [
@@ -123,11 +133,15 @@ enum TargetAmountScreen {
 // MARK: - TargetAmountCustomEvent
 
 enum TargetAmountCustomEvent {
+    case postponeTargetAmount
+    case setInitialTargetAmount
     case maintainRecentTargetAmount
     case cancelRecentTargetAmount
     
     var eventName: String {
         switch self {
+        case .postponeTargetAmount: return "postpone_target_amount"
+        case .setInitialTargetAmount: return "set_initial_target_amount"
         case .maintainRecentTargetAmount: return "maintain_recent_target_amount"
         case .cancelRecentTargetAmount: return "cancel_recent_total_amount"
         }

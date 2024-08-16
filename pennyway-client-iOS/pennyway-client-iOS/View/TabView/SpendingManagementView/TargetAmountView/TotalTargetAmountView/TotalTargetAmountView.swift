@@ -116,6 +116,7 @@ struct TotalTargetAmountView: View {
             viewModel.getTotalTargetAmountApi { _ in
             }
         }
+        .analyzeEvent(TargetAmountEvents.targetAmountView)
 
         NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
             .hidden()

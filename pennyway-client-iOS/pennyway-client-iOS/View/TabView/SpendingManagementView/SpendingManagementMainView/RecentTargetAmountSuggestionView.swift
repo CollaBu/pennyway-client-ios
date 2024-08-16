@@ -19,6 +19,7 @@ struct RecentTargetAmountSuggestionView: View {
                 Button(action: {
                     isHidden = true
                     viewModel.deleteCurrentMonthTargetAmountApi { _ in }
+                    AnalyticsManager.shared.trackEvent(TargetAmountEvents.cancelRecentTotalAmount, additionalParams: nil)
                 }, label: {
                     Image("icon_close_white")
                         .resizable()
@@ -49,10 +50,11 @@ struct RecentTargetAmountSuggestionView: View {
                     showToastPopup = true
                     viewModel.editCurrentMonthTargetAmountApi()
                     
+                    AnalyticsManager.shared.trackEvent(TargetAmountEvents.maintainRecentTargetAmount, additionalParams: nil)
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         showToastPopup = false
                     }
-                    
                 }, label: {
                     Text("사용하기")
                         .font(.B1SemiboldeFont())

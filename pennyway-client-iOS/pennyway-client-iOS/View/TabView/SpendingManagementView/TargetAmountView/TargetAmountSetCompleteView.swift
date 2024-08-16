@@ -53,6 +53,7 @@ struct TargetAmountSetCompleteView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
+        .analyzeEvent(TargetAmountEvents.targetAmountSetCompleteView)
     }
 
     private func goToTotalTargetAmountView() {

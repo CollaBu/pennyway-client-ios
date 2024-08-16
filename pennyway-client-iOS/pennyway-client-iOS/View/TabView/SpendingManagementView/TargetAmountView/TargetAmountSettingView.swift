@@ -68,6 +68,7 @@ struct TargetAmountSettingView: View {
                             targetAmountViewModel.deleteCurrentMonthTargetAmountApi { success in
                                 if success {
                                     Log.debug("목표 금액 삭제 성공")
+                                    AnalyticsManager.shared.trackEvent(TargetAmountEvents.postponeTargetAmount, additionalParams: nil)
                                     authViewModel.login()
                                 }
                             }
@@ -81,7 +82,7 @@ struct TargetAmountSettingView: View {
                         .buttonStyle(BasicButtonStyleUtil())
 
                         Spacer()
-                    }                  
+                    }
                 }
                 
                 Spacer().frame(height: 16 * DynamicSizeFactor.factor())
@@ -91,6 +92,11 @@ struct TargetAmountSettingView: View {
                         viewModel.editCurrentMonthTargetAmountApi { success in
                             if success {
                                 Log.debug("목표 금액 수정 성공")
+                                
+                                if entryPoint == .signUp {
+                                    AnalyticsManager.shared.trackEvent(TargetAmountEvents.setInitialTargetAmount, additionalParams: nil)
+                                }
+                                
                                 navigateToCompleteTarget = true
                             } else {
                                 Log.debug("목표 금액 수정 실패")
@@ -131,6 +137,12 @@ struct TargetAmountSettingView: View {
                         targetAmountViewModel.targetAmountData = viewModel.currentData
                     }
                 }
+            }
+            
+            if entryPoint == .signUp {
+                AnalyticsManager.shared.trackEvent(TargetAmountEvents.targetAmountInitView, additionalParams: nil)
+            } else if entryPoint == .afterLogin {
+                AnalyticsManager.shared.trackEvent(TargetAmountEvents.targetAmountUpdateView, additionalParams: nil)
             }
         }
     }
