@@ -29,7 +29,8 @@ struct SelectSpendingDayView: View {
 
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
-            DatePicker("", selection: $selectedDate, in: dateRange, displayedComponents: [.date])
+            DatePicker("", selection: $viewModel.selectedDate, in: dateRange, displayedComponents: [.date])
+
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
                 .environment(\.locale, Locale(identifier: "ko_KR"))
@@ -43,12 +44,15 @@ struct SelectSpendingDayView: View {
                 let today = Date()
                 let timezone = TimeZone.autoupdatingCurrent
                 let secondsFromGMT = timezone.secondsFromGMT(for: today)
-                let localizedDate = selectedDate.addingTimeInterval(TimeInterval(secondsFromGMT))
+                let localizedDate = viewModel.selectedDate.addingTimeInterval(TimeInterval(secondsFromGMT))
                 clickDate = localizedDate
                 isPresented = false
-                Log.debug("clickDate: \(self.clickDate)")
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
+        }
+        .onAppear {
+            Log.debug("viewModel.selectedDate: \(viewModel.selectedDate)")
+            Log.debug("selectedDate:\(selectedDate)")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)

@@ -8,6 +8,7 @@ struct EditPhoneNumberView: View {
     @State private var showManyRequestPopUp = false // api 요청 오류
     @State private var showDiffNumberPopUp = false
     @State private var showErrorExistingUser = false
+    @State private var isDeleteButtonVisible: Bool = false
 
     var body: some View {
         ZStack {
@@ -97,8 +98,16 @@ struct EditPhoneNumberView: View {
                 .platformTextColor(color: Color("Gray04"))
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange)
-                VerificationButton(isEnabled: isVerificationButtonEnabled(), action: handleVerificationButtonTap, buttonTitle: viewModel.requestedPhoneNumber.isEmpty ? "인증번호 받기" : "재전송하기")
+                PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange, onCommit: {
+                    isDeleteButtonVisible = false
+
+                }, showDeleteButton: true, deleteAction: {
+                    viewModel.phoneNumber = ""
+                    viewModel.showErrorExistingUser = false
+                    viewModel.showErrorPhoneNumberFormat = false
+                })
+                VerificationButton(isEnabled: isVerificationButtonEnabled(), action: handleVerificationButtonTap, buttonTitle: viewModel.requestedPhoneNumber.isEmpty ? "인증번호 받기" : "재전송하기"
+                )
             }
             .padding(.horizontal, 20)
         }

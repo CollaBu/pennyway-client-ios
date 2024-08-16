@@ -44,7 +44,7 @@ class LoginViewModel: ObservableObject {
                     if let errorWithDomainErrorAndMessage = error as? StatusSpecificError {
                         Log.info("Failed to verify: \(errorWithDomainErrorAndMessage)")
                     } else {
-                        Log.error("Failed to verify: \(error)")
+                        Log.error("[LoginViewModel] Failed to verify: \(error)")
                     }
                     completion(false)
                 }

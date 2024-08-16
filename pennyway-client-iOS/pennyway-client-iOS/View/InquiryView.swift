@@ -6,7 +6,8 @@ struct InquiryView: View {
     @State private var isSelectedCategory: Bool = false
     @State private var isSelectedAgreeBtn: Bool = false
     @State private var showAgreement: Bool = false
-    
+    @State private var isDeleteButtonVisible: Bool = false
+
     @Environment(\.presentationMode) var presentationMode
 
     let placeholder: String = "문의 내용을 입력해주세요"
@@ -25,7 +26,6 @@ struct InquiryView: View {
                         Text("문의가 필요해요")
                             .platformTextColor(color: Color("Gray05"))
                             .font(.H4MediumFont())
-//                            .padding(.leading, 15 * DynamicSizeFactor.factor())
                             .multilineTextAlignment(.leading)
                     }
                 }
@@ -38,13 +38,20 @@ struct InquiryView: View {
                 CustomInputView(inputText: $viewModel.email, titleText: "이메일", placeholder: "이메일 입력", onCommit: {
                     viewModel.validateEmail()
                     viewModel.validateForm()
-                }, isSecureText: false)
-                            
-                if viewModel.showErrorEmail {
-                    Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-                    
-                    ErrorText(message: "유효하지 않는 이메일 형식이에요", color: Color("Red03"))
-                        .offset(x: -72.5 * DynamicSizeFactor.factor())
+                    isDeleteButtonVisible = false
+
+                }, isSecureText: false, showDeleteButton: true, deleteAction: {
+                    viewModel.email = ""
+                    viewModel.validateForm()
+                    isDeleteButtonVisible = false
+                })
+                      
+                ZStack(alignment: .leading) {
+                    if viewModel.showErrorEmail {
+                        Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                        
+                        ErrorText(message: "유효하지 않는 이메일 형식이에요", color: Color("Red03"))
+                    }
                 }
                                                     
                 Spacer().frame(height: 24 * DynamicSizeFactor.factor())

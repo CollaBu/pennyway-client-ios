@@ -48,11 +48,11 @@
 		4A2882092C64CD1500AE50C7 /* ProfileNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */; };
 		4A28820C2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28820A2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift */; };
 		4A28820D2C64CD5F00AE50C7 /* NotificationContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28820B2C64CD5F00AE50C7 /* NotificationContentData.swift */; };
-		4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882202C654BB500AE50C7 /* ReloadView.swift */; };
 		4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */; };
 		4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */; };
 		4A28821B2C65184300AE50C7 /* ProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */; };
 		4A28821F2C652D3600AE50C7 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */; };
+		4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882202C654BB500AE50C7 /* ReloadView.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -166,6 +166,7 @@
 		4AA13C692C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C682C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift */; };
 		4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C6A2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
+		4AA969752C6D2B8F00CA889C /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA969742C6D2B8F00CA889C /* NotificationName.swift */; };
 		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
 		4AB0B13C2C4F497400A475F5 /* MapCategoryIconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */; };
 		4AB0B13E2C50256300A475F5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13D2C50256300A475F5 /* LoadingView.swift */; };
@@ -367,11 +368,11 @@
 		4A2882082C64CD1500AE50C7 /* ProfileNotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNotificationViewModel.swift; sourceTree = "<group>"; };
 		4A28820A2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationResponseDto.swift; sourceTree = "<group>"; };
 		4A28820B2C64CD5F00AE50C7 /* NotificationContentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContentData.swift; sourceTree = "<group>"; };
-		4A2882202C654BB500AE50C7 /* ReloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadView.swift; sourceTree = "<group>"; };
 		4A2882162C65178400AE50C7 /* UploadProfileImageRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageRequestDto.swift; sourceTree = "<group>"; };
 		4A2882182C6517A700AE50C7 /* UploadProfileImageResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageResponseDto.swift; sourceTree = "<group>"; };
 		4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
 		4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
+		4A2882202C654BB500AE50C7 /* ReloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadView.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -487,6 +488,7 @@
 		4AA13C682C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePresignedUrlRequestDto.swift; sourceTree = "<group>"; };
 		4AA13C6A2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePresignedUrlResponseDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
+		4AA969742C6D2B8F00CA889C /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCategoryIconUtil.swift; sourceTree = "<group>"; };
 		4AB0B13D2C50256300A475F5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -1442,6 +1444,7 @@
 				4A0FFBFA2BCDA74000EFEC56 /* EncodableExtension.swift */,
 				D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */,
 				D8F9D7392C59576B005416FC /* ImagePicker.swift */,
+				4AA969742C6D2B8F00CA889C /* NotificationName.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2126,6 +2129,7 @@
 				4A3701D12C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift in Sources */,
 				4A2882002C64CC5900AE50C7 /* CategoryDetailsView.swift in Sources */,
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */,
+				4AA969752C6D2B8F00CA889C /* NotificationName.swift in Sources */,
 				D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
@@ -2317,7 +2321,6 @@
 				4AC3204F2C11D5AC00DDB4B6 /* SpendingWeekCalendarView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
 				4A058EFF2BD03E01004B6F89 /* AuthResponseDto.swift in Sources */,
-				B599E4D82C68A76B006051E9 /* AuthAnalyticsEvents.swift in Sources */,
 				4AC320502C11D5AC00DDB4B6 /* RecentTargetAmountSuggestionView.swift in Sources */,
 				4A4703A72BCEDD9800AEE04E /* VerificationCodeRequestDto.swift in Sources */,
 				4AA13C622C63E4DF00D8DEE7 /* GeneratePresigendUrlRequestDto.swift in Sources */,

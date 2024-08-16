@@ -58,7 +58,7 @@ class UserLogoutViewModel: ObservableObject {
             case let .failure(error):
 
                 if let StatusSpecificError = error as? StatusSpecificError {
-                    Log.info("Failed to verify: \(StatusSpecificError)")
+                    Log.info("[UserLogoutViewModel] Failed to verify: \(StatusSpecificError)")
 
                     if StatusSpecificError.domainError == .notFound && StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
                         // 404에러시 로그아웃 로직 실행

@@ -9,6 +9,8 @@ struct ProfileMainView: View {
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
+    @StateObject var deleteProfileImageViewModel = DeleteProfileImageViewModel()
+
     @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
@@ -24,7 +26,7 @@ struct ProfileMainView: View {
                             navigateToEditUsername: $navigateToEditUsername,
                             selectedUIImage: $selectedUIImage,
                             imageUrl: $imageUrl,
-                            viewModel: profileImageViewModel
+                            viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
                         )
 
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
@@ -60,7 +62,9 @@ struct ProfileMainView: View {
                         isHiddenTabBar: $isHiddenTabBar,
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
-                        sourceType: $sourceType, presignedUrlViewModel: presignedUrlViewModel
+                        sourceType: $sourceType,
+                        imageUrl: $imageUrl, 
+                        presignedUrlViewModel: presignedUrlViewModel
                     )
                 }
             }
