@@ -20,7 +20,7 @@ struct AddSpendingHistoryView: View {
     @Binding var spendingId: Int?
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
-    @State private var navigateToAddSpendingCategory = false
+    @State private var navigateToAddSpendingComplete = false
     @Environment(\.presentationMode) var presentationMode
     @Binding var clickDate: Date?
     @Binding var isPresented: Bool
@@ -44,7 +44,7 @@ struct AddSpendingHistoryView: View {
 
                             viewModel.addSpendingHistoryApi { success in
                                 if success {
-                                    navigateToAddSpendingCategory = true
+                                    self.navigateToAddSpendingComplete = true
                                     Log.debug("\(viewModel.clickDate)에 해당하는 지출내역 추가 성공")
                                 }
                             }
@@ -78,7 +78,7 @@ struct AddSpendingHistoryView: View {
                 }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingCategory) {}
+                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete) {}
                     .hidden()
 
                 NavigationLink(
