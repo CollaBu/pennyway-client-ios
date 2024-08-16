@@ -58,6 +58,7 @@ struct SpendingCategoryListView: View {
             }
         }
         .frame(maxWidth: .infinity)
+        .analyzeEvent(SpendingCategoryEvents.categoryListView)
     }
 }
 

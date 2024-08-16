@@ -118,6 +118,7 @@ struct MoveCategoryView: View {
             NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
                 .hidden()
         }
+        .analyzeEvent(SpendingCategoryEvents.categoryMigrateView)
     }
 
     private func getCategoryIcon(category: SpendingCategoryData, isSelected: Bool) -> String {

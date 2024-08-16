@@ -139,6 +139,7 @@ struct CategoryDetailsView: View {
                     isDeleted = false
                 }
             }
+            .analyzeEvent(SpendingCategoryEvents.categoryDetailView)
             
             if showDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
@@ -149,15 +150,17 @@ struct CategoryDetailsView: View {
                     firstBtnAction: {
                         self.isNavigateToMoveCategoryView = true
                         self.showDeletePopUp = false
+                        AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.deleteCategoryList, additionalParams: nil)
                     },
                     firstBtnLabel: "내역 옮기기",
-                    secondBtnAction: { 
+                    secondBtnAction: {
                         viewModel.deleteCategoryApi { success in
                             if success {
                                 viewModel.getSpendingCustomCategoryListApi { _ in
                                     self.showDeletePopUp = false
                                     self.presentationMode.wrappedValue.dismiss()
                                     self.showDeleteCategoryToastPopUp = true
+                                    AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.migrateSpendingList, additionalParams: nil)
                                 }
                             }
                         }
@@ -165,6 +168,7 @@ struct CategoryDetailsView: View {
                     secondBtnLabel: "삭제하기",
                     secondBtnColor: Color("Red03")
                 )
+                .analyzeEvent(SpendingCategoryEvents.categoryDeletePopUp)
             }
             NavigationLink(destination: AddSpendingCategoryView(viewModel: AddSpendingHistoryViewModel(), spendingCategoryViewModel: viewModel, entryPoint: .modify), isActive: $isNavigateToEditCategoryView) {}
                 .hidden()

@@ -14,7 +14,7 @@ enum SpendingCategoryEvents: AnalyticsEvent {
     case categoryListView // 카테고리 리스트 뷰
     case categoryDetailView // 카테고리 상세 뷰
     case categoryUpdateView // 카테고리 수정 뷰
-    case categoryDeleteView // 카테고리 삭제 뷰
+    case categoryDeletePopUp // 카테고리 삭제 팝업
     case categoryMigrateView // 카테고리 이전 뷰 (소비 내역 옮김)
     
     case migrateSpendingList // 소비 내역 이전하기
@@ -22,7 +22,7 @@ enum SpendingCategoryEvents: AnalyticsEvent {
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .categorySelectView, .categoryAddView, .iconSelectView, .categoryListView, .categoryDetailView, .categoryUpdateView, .categoryDeleteView, .categoryMigrateView:
+        case .categorySelectView, .categoryAddView, .iconSelectView, .categoryListView, .categoryDetailView, .categoryUpdateView, .categoryDeletePopUp, .categoryMigrateView:
             return AnalyticsConstants.EventName.screenView
         case .migrateSpendingList, .deleteCategoryList:
             return AnalyticsConstants.EventName.btnTapped
@@ -31,7 +31,7 @@ enum SpendingCategoryEvents: AnalyticsEvent {
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .categorySelectView, .categoryAddView, .iconSelectView, .categoryListView, .categoryDetailView, .categoryUpdateView, .categoryDeleteView, .categoryMigrateView:
+        case .categorySelectView, .categoryAddView, .iconSelectView, .categoryListView, .categoryDetailView, .categoryUpdateView, .categoryDeletePopUp, .categoryMigrateView:
             return AnalyticsConstants.EventType.screenView
         case .migrateSpendingList, .deleteCategoryList:
             return AnalyticsConstants.EventType.userAction
@@ -76,11 +76,11 @@ enum SpendingCategoryEvents: AnalyticsEvent {
                 .screenName: SpendingCategoryScreen.categoryUpdateView.screenName,
                 .screenClass: SpendingCategoryScreen.categoryUpdateView.screenClass
             ]
-        case .categoryDeleteView:
+        case .categoryDeletePopUp:
             return [
-                .screenId: SpendingCategoryScreen.categoryDeleteView.screenId,
-                .screenName: SpendingCategoryScreen.categoryDeleteView.screenName,
-                .screenClass: SpendingCategoryScreen.categoryDeleteView.screenClass
+                .screenId: SpendingCategoryScreen.categoryDeletePopUp.screenId,
+                .screenName: SpendingCategoryScreen.categoryDeletePopUp.screenName,
+                .screenClass: SpendingCategoryScreen.categoryDeletePopUp.screenClass
             ]
         case .categoryMigrateView:
             return [
@@ -109,7 +109,7 @@ enum SpendingCategoryScreen {
     case categoryListView
     case categoryDetailView
     case categoryUpdateView
-    case categoryDeleteView
+    case categoryDeletePopUp
     case categoryMigrateView
     
     var screenId: String {
@@ -120,7 +120,7 @@ enum SpendingCategoryScreen {
         case .categoryListView: return "category_list_view"
         case .categoryDetailView: return "category_detail_view"
         case .categoryUpdateView: return "category_update_view"
-        case .categoryDeleteView: return "category_delete_view"
+        case .categoryDeletePopUp: return "category_delete_view"
         case .categoryMigrateView: return "category_migrate_view"
         }
     }
@@ -133,7 +133,7 @@ enum SpendingCategoryScreen {
         case .categoryListView: return "카테고리 리스트 화면"
         case .categoryDetailView: return "카테고리 상세 화면"
         case .categoryUpdateView: return "카테고리 수정 화면"
-        case .categoryDeleteView: return "카테고리 삭제 화면"
+        case .categoryDeletePopUp: return "카테고리 삭제 화면"
         case .categoryMigrateView: return "카테고리 내 소비내역 옮기기 화면"
         }
     }
@@ -146,7 +146,7 @@ enum SpendingCategoryScreen {
         case .categoryListView: return "SpendingCategoryGridView"
         case .categoryDetailView: return "CategoryDetailView"
         case .categoryUpdateView: return "AddSpendingCategoryView"
-        case .categoryDeleteView: return "CategoryDetailsView"
+        case .categoryDeletePopUp: return "CategoryDetailsPopUp"
         case .categoryMigrateView: return "MoveCategoryView"
         }
     }
