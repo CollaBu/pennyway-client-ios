@@ -140,14 +140,14 @@ enum SpendingCategoryScreen {
     
     var screenClass: String {
         switch self {
-        case .categorySelectView: return ""
-        case .categoryAddView: return ""
-        case .iconSelectView: return ""
-        case .categoryListView: return ""
-        case .categoryDetailView: return ""
-        case .categoryUpdateView: return ""
-        case .categoryDeleteView: return ""
-        case .categoryMigrateView: return ""
+        case .categorySelectView: return "SpendingCategoryListView"
+        case .categoryAddView: return "AddSpendingCategoryView"
+        case .iconSelectView: return "SelectCategoryIconView"
+        case .categoryListView: return "SpendingCategoryGridView"
+        case .categoryDetailView: return "CategoryDetailView"
+        case .categoryUpdateView: return "AddSpendingCategoryView"
+        case .categoryDeleteView: return "CategoryDetailsView"
+        case .categoryMigrateView: return "MoveCategoryView"
         }
     }
 }
