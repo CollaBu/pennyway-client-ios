@@ -20,7 +20,7 @@ struct EditPhoneNumberView: View {
                     if viewModel.showErrorPhoneNumberFormat {
                         ErrorText(message: "올바른 전화번호 형식이 아니에요", color: Color("Red03"))
                     }
-                    if viewModel.showErrorExistingUser {
+                    if showErrorExistingUser {
                         ErrorText(message: "이미 가입된 전화번호예요", color: Color("Red03"))
                     }
                 }
@@ -32,7 +32,9 @@ struct EditPhoneNumberView: View {
                 Spacer()
 
                 CustomBottomButton(action: {
-                    if !viewModel.requestedPhoneNumber.isEmpty, viewModel.requestedPhoneNumber != viewModel.phoneNumber {
+                    if !viewModel.requestedPhoneNumber.isEmpty, viewModel.requestedPhoneNumber != viewModel.phoneNumber,
+                       !viewModel.showErrorExistingUser
+                    {
                         showDiffNumberPopUp = true
                     } else {
                         continueButtonAction()

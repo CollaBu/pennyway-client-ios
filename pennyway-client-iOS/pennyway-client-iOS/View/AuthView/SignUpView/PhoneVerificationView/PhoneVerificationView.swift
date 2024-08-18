@@ -27,7 +27,7 @@ struct PhoneVerificationView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    if !phoneVerificationViewModel.requestedPhoneNumber.isEmpty, phoneVerificationViewModel.requestedPhoneNumber != phoneVerificationViewModel.phoneNumber {
+                    if !phoneVerificationViewModel.requestedPhoneNumber.isEmpty, phoneVerificationViewModel.requestedPhoneNumber != phoneVerificationViewModel.phoneNumber, !phoneVerificationViewModel.showErrorExistingUser {
                         showDiffNumberPopUp = true
                     } else {
                         continueButtonAction()

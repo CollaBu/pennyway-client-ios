@@ -16,6 +16,8 @@ extension PhoneVerificationViewModel {
                         RegistrationManager.shared.phoneNumber = phoneNumber
                     }
                     requestedPhoneNumber = phoneNumber
+                    showErrorApiRequest = false
+                    showErrorExistingUser = false
 
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
@@ -47,6 +49,8 @@ extension PhoneVerificationViewModel {
                 do {
                     let response = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
                     showErrorVerificationCode = false
+                    showErrorExistingUser = false
+                    showErrorApiRequest = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
@@ -81,6 +85,9 @@ extension PhoneVerificationViewModel {
                     let response = try JSONDecoder().decode(OAuthVerificationResponseDto.self, from: responseData)
 
                     showErrorVerificationCode = false
+                    showErrorExistingUser = false
+                    showErrorApiRequest = false
+
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
@@ -177,6 +184,9 @@ extension PhoneVerificationViewModel {
                     let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
                     Log.debug("전화번호 수정 완료 \(response)")
                     updateUserField(fieldName: "phone", value: phoneNumber)
+                    showErrorVerificationCode = false
+                    showErrorExistingUser = false
+                    showErrorApiRequest = false
                 } catch {
                     Log.fault("Error parsing response JSON: \(error)")
                 }
