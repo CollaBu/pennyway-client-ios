@@ -91,8 +91,9 @@ struct PhoneVerificationView: View {
                 if OAuthRegistrationManager.shared.isExistUser {
                     oauthAccountLinkingViewModel.linkOAuthToAccountApi { success in
                         if success {
-                            authViewModel.login()
-                            profileInfoViewModel.getUserProfileApi { _ in }
+                            profileInfoViewModel.getUserProfileApi { success in
+                                authViewModel.login()
+                            }
                         }
                     }
                 }

@@ -69,8 +69,9 @@ struct TargetAmountSettingView: View {
                             targetAmountViewModel.deleteCurrentMonthTargetAmountApi { success in
                                 if success {
                                     Log.debug("목표 금액 삭제 성공")
-                                    authViewModel.login()
-                                    profileInfoViewModel.getUserProfileApi { _ in }
+                                    profileInfoViewModel.getUserProfileApi { success in
+                                        authViewModel.login()
+                                    }
                                 }
                             }
                         }, label: {
