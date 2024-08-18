@@ -7,14 +7,14 @@
 ///  Created by 양재서 on 7/30/24.
 ///
 enum SpendingEvents: AnalyticsEvent {
-    case spendingTabView // 지출 관리 메인 탭뷰
-    case spendingListView // 지출 관리 바텀시트 뷰 (날짜 파라미터 필요)
-    case mySpendingListView // 나의 소비 내역 뷰 (날짜 파라미터 필요)
-    case spendingDetailView // 지출 상세 뷰
-    case spendingAddView // 소비 내역 추가하기 뷰
-    case spendingAddCompleteView // 소비 내역 추가 완료 뷰
-    case spendingUpdateView // 소비 내역 수정 뷰
-    case spendingListEditView // 소비 내역 편집하기 뷰 (바텀시트)
+    case spendingTabView
+    case spendingListView
+    case mySpendingListView
+    case spendingDetailView
+    case spendingAddView
+    case spendingAddCompleteView
+    case spendingUpdateView
+    case spendingListEditView
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
@@ -87,14 +87,14 @@ enum SpendingEvents: AnalyticsEvent {
 // MARK: - SpendingScreen
 
 enum SpendingScreen {
-    case spendingTabView // 지출 관리 메인 탭뷰
-    case spendingListView // 지출 관리 바텀시트 뷰 (날짜 파라미터 필요)
-    case mySpendingListView // 나의 소비 내역 뷰 (날짜 파라미터 필요)
-    case spendingDetailView // 지출 상세 뷰
-    case spendingAddView // 소비 내역 추가하기 뷰
-    case spendingAddCompleteView // 소비 내역 추가 완료 뷰
-    case spendingUpdateView // 소비 내역 수정 뷰
-    case spendingListEditView // 소비 내역 편집하기 뷰 (바텀시트)
+    case spendingTabView
+    case spendingListView
+    case mySpendingListView
+    case spendingDetailView
+    case spendingAddView
+    case spendingAddCompleteView
+    case spendingUpdateView
+    case spendingListEditView
     
     var screenId: String {
         switch self {

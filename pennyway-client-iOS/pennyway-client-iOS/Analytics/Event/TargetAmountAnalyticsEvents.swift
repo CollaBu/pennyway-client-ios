@@ -8,17 +8,16 @@
 // MARK: - TargetAmountEvents
 
 enum TargetAmountEvents: AnalyticsEvent {
-    // 목표 금액
-    case targetAmountView // 목표 금액 확인 뷰
-    case targetAmountHistoryView // 지난 사용 금액 뷰
-    case targetAmountInitView // 초기 목표 금액 설정 뷰
-    case targetAmountUpdateView // 목표 금액 수정 뷰
-    case targetAmountSetCompleteView // 목표 금액 설정 완료 뷰
+    case targetAmountView
+    case targetAmountHistoryView
+    case targetAmountInitView
+    case targetAmountUpdateView
+    case targetAmountSetCompleteView
     
-    case postponeTargetAmount // 목표 금액 나중에 설정하기
-    case setInitialTargetAmount // 초기 목표 금액 설정하기
-    case maintainRecentTargetAmount // 최근 목표 금액 유지
-    case cancelRecentTotalAmount // 최근 목표 금액 유지 취소
+    case postponeTargetAmount
+    case setInitialTargetAmount
+    case maintainRecentTargetAmount
+    case cancelRecentTotalAmount
     
     var eventName: AnalyticsConstants.EventName {
         switch self {

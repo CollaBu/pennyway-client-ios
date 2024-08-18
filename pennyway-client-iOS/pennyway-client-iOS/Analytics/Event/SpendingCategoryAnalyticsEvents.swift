@@ -8,17 +8,17 @@
 // MARK: - SpendingCategoryEvents
 
 enum SpendingCategoryEvents: AnalyticsEvent {
-    case categorySelectView // 카테고리 선택 뷰
-    case categoryAddView // 카테고리 추가 뷰
-    case iconSelectView // 아이콘 선택 뷰
-    case categoryListView // 카테고리 리스트 뷰
-    case categoryDetailView // 카테고리 상세 뷰
-    case categoryUpdateView // 카테고리 수정 뷰
-    case categoryDeletePopUp // 카테고리 삭제 팝업
-    case categoryMigrateView // 카테고리 이전 뷰 (소비 내역 옮김)
+    case categorySelectView
+    case categoryAddView
+    case iconSelectView
+    case categoryListView
+    case categoryDetailView
+    case categoryUpdateView
+    case categoryDeletePopUp
+    case categoryMigrateView
     
-    case migrateSpendingList // 소비 내역 이전하기
-    case deleteCategoryList // 소비 내역 삭제하기
+    case migrateSpendingList
+    case deleteCategoryList
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
