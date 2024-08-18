@@ -36,17 +36,13 @@ struct AddSpendingHistoryView: View {
                 }
                 Spacer()
 
-                CustomBottomButton(action: {handleConfirmBtnTap()}, label: "확인", isFormValid: $viewModel.isFormValid)
+                CustomBottomButton(action: { handleConfirmBtnTap() }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete) {
-                    Log.debug("AddSpendingCompleteView로 이동")
-                    return EmptyView()
-                }
-                .hidden()
 
-                NavigationLink(
-                    destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: SpendingCategoryViewModel(), entryPoint: .create), isActive: $viewModel.navigateToAddCategory) {}
+                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete, label: { EmptyView() })
+                    .hidden()
+
+                NavigationLink(destination: AddSpendingCategoryView(viewModel: viewModel, entryPoint: .create), isActive: $viewModel.navigateToAddCategory, label: { EmptyView() })
                     .hidden()
             }
             .background(Color("White01"))
@@ -77,13 +73,13 @@ struct AddSpendingHistoryView: View {
             Log.debug("AddSpendingHistoryView에서 spendingId: \(spendingId)")
         }
     }
-    
+
     private func handleConfirmBtnTap() {
         guard viewModel.isFormValid else {
             Log.debug("폼이 유효하지 않습니다.")
             return
         }
-        
+
         if let date = clickDate {
             viewModel.clickDate = date
             if isAddSpendingMode() {
@@ -95,11 +91,11 @@ struct AddSpendingHistoryView: View {
             editSpendingHistory(spendingDetailViewUpdated: true)
         }
     }
-    
+
     private func isAddSpendingMode() -> Bool {
         return entryPoint == .main || entryPoint == .detailSheet || entryPoint == .NoSpendingHistoryView
     }
-    
+
     private func addSpendingHistory() {
         Log.debug("추가하기")
 
@@ -110,14 +106,14 @@ struct AddSpendingHistoryView: View {
             }
         }
     }
-    
+
     private func editSpendingHistory(spendingDetailViewUpdated: Bool) {
         guard let spendingId = spendingId else {
             Log.debug("spendingId가 nil입니다.")
             return
         }
         Log.debug("수정하기")
-        
+
         viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
             if success {
                 self.presentationMode.wrappedValue.dismiss()

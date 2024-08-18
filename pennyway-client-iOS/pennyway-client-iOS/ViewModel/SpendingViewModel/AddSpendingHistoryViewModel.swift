@@ -15,6 +15,8 @@ class AddSpendingHistoryViewModel: ObservableObject {
     @Published var navigateToAddCategory = false // 추가하기 버튼 누른 경우
     @Published var isSelectAddCategoryViewPresented: Bool = false
 
+    @Published var navigateToAddSpendingComplete = false
+
     /// 날짜 선택
     @Published var isSelectDayViewPresented: Bool = false
     @Published var selectedDate: Date = Date()
