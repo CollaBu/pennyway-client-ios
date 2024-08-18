@@ -89,7 +89,12 @@ struct PhoneVerificationView: View {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
                 OAuthRegistrationManager.shared.code = phoneVerificationViewModel.code
                 if OAuthRegistrationManager.shared.isExistUser {
-                    oauthAccountLinkingViewModel.linkOAuthToAccountApi()
+                    oauthAccountLinkingViewModel.linkOAuthToAccountApi { success in           
+                        if success {
+                            authViewModel.login()
+                            profileInfoViewModel.getUserProfileApi { _ in }
+                        }
+                    }
                 }
             } else {
                 RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
@@ -108,17 +113,18 @@ struct PhoneVerificationView: View {
             OAuthAccountLinkingView(signUpViewModel: viewModel)
 
         } else if OAuthRegistrationManager.shared.isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser { // 이미 계정이 있는 경우
-            handleExistUserLogin()
+//            handleExistUserLogin()
         } else {
             SignUpView(viewModel: viewModel)
         }
     }
     
-    func handleExistUserLogin() -> some View {
-        authViewModel.login()
-        profileInfoViewModel.getUserProfileApi { _ in }
-        return EmptyView()
-    }
+//    func handleExistUserLogin() -> some View {
+    ////        oauthAccountLinkingViewModel.linkOAuthToAccountApi()
+    ////        authViewModel.login()
+    ////        profileInfoViewModel.getUserProfileApi { _ in }
+//        return EmptyView()
+//    }
 }
 
 #Preview {
