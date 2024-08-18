@@ -115,7 +115,8 @@ struct SpendingDetailSheetView: View {
                     AddSpendingHistoryView(
                         spendingCategoryViewModel: SpendingCategoryViewModel(),
                         spendingHistoryViewModel: spendingHistoryViewModel,
-                        spendingId: $selectedSpendingId, clickDate: $clickDate,
+                        spendingId: $selectedSpendingId, 
+                        clickDate: $clickDate,
                         isPresented: $showAddSpendingHistoryView,
                         isEditSuccess: .constant(false), entryPoint: .detailSheet // 기본값 0 제공
                     )
