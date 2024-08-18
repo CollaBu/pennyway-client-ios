@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    let profileInfoViewModel = UserAccountViewModel()
     var name = OAuthRegistrationManager.shared.isOAuthRegistration ? OAuthRegistrationManager.shared.name : RegistrationManager.shared.name
     @State private var isnavigateToEditTargetView = false
     @State var initTargetAmount = TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)
