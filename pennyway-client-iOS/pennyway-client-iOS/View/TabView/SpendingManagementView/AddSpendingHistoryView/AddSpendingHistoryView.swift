@@ -42,7 +42,7 @@ struct AddSpendingHistoryView: View {
                 NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete, label: { EmptyView() })
                     .hidden()
 
-                NavigationLink(destination: AddSpendingCategoryView(viewModel: viewModel, entryPoint: .create), isActive: $viewModel.navigateToAddCategory, label: { EmptyView() })
+                NavigationLink(destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $viewModel.navigateToAddCategory, label: { EmptyView() })
                     .hidden()
             }
             .background(Color("White01"))

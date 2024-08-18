@@ -6,7 +6,7 @@ import SwiftUI
 struct AddSpendingCategoryView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
-    @StateObject var spendingCategoryViewModel: SpendingCategoryViewModel = SpendingCategoryViewModel()
+    @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     
     @State private var maxCategoryNameCount = 8
     @State private var isFormValid = false
