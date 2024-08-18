@@ -92,7 +92,9 @@ struct PhoneVerificationView: View {
                     oauthAccountLinkingViewModel.linkOAuthToAccountApi { success in
                         if success {
                             profileInfoViewModel.getUserProfileApi { success in
-                                authViewModel.login()
+                                if success {
+                                    authViewModel.login()
+                                }
                             }
                         }
                     }

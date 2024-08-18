@@ -106,7 +106,9 @@ struct SignUpView: View {
         linkAccountToOAuthViewModel.linkAccountToOAuthApi { success in
             if success {
                 profileInfoViewModel.getUserProfileApi { success in
-                    authViewModel.login()
+                    if success {
+                        authViewModel.login()
+                    }
                 }
             } else {
                 Log.error("기존 계정에 소셜 계정 연동 실패")

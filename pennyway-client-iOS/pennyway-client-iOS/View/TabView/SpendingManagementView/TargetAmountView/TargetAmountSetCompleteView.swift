@@ -45,7 +45,9 @@ struct TargetAmountSetCompleteView: View {
                 CustomBottomButton(action: {
                     if entryPoint == .signUp {
                         profileInfoViewModel.getUserProfileApi { success in
-                            authViewModel.login()// 메인화면으로 entryPoint 나누기
+                            if success {
+                                authViewModel.login() // 메인화면으로 entryPoint 나누기
+                            }
                         }
                     } else {
                         goToTotalTargetAmountView()

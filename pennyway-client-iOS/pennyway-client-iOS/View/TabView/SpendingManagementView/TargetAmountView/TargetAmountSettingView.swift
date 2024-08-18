@@ -70,7 +70,9 @@ struct TargetAmountSettingView: View {
                                 if success {
                                     Log.debug("목표 금액 삭제 성공")
                                     profileInfoViewModel.getUserProfileApi { success in
-                                        authViewModel.login()
+                                        if success {
+                                            authViewModel.login()
+                                        }
                                     }
                                 }
                             }
