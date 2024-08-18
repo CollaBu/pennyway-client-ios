@@ -20,11 +20,11 @@ class TargetAmountViewModel: ObservableObject {
                         let response = try JSONDecoder().decode(GetTargetAmountForDateResponseDto.self, from: responseData)
                         let validTargetAmount = response.data.targetAmount
                         self.targetAmountData = validTargetAmount
-                       
+                        
                         if validTargetAmount.targetAmountDetail.isRead == true {
                             // 추천 금액 보여주기 x
                             self.isHiddenSuggestionView = true
-
+                            
                         } else {
                             self.isHiddenSuggestionView = false
                             self.getTargetAmountForPreviousMonthApi()
@@ -36,7 +36,7 @@ class TargetAmountViewModel: ObservableObject {
                         } else {
                             self.isPresentTargetAmount = true
                         }
-    
+                        
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("당월 목표 금액 조회 \(jsonString)")
                         }
@@ -47,7 +47,7 @@ class TargetAmountViewModel: ObservableObject {
                     }
                 }
             case let .failure(error):
-    
+                
                 if let StatusSpecificError = error as? StatusSpecificError {
                     Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                     
@@ -59,12 +59,13 @@ class TargetAmountViewModel: ObservableObject {
                             if success {
                                 // 당월 목표 금액 재조회
                                 self.getTargetAmountForDateApi { _ in }
+                            }
                         }
+                    } else {
+                        Log.error("Network request failed: \(error)")
                     }
-                } else {
-                    Log.error("Network request failed: \(error)")
+                    completion(false)
                 }
-                completion(false)
             }
         }
     }
