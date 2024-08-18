@@ -7,8 +7,9 @@ struct TargetAmountSettingView: View {
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToCompleteTarget = false
     
+    let profileInfoViewModel = UserAccountViewModel()
+    
     @EnvironmentObject var authViewModel: AppViewModel
-
     var entryPoint: TargetAmountEntryPoint
     
     init(currentData: Binding<TargetAmount>, entryPoint: TargetAmountEntryPoint) {
@@ -69,6 +70,7 @@ struct TargetAmountSettingView: View {
                                 if success {
                                     Log.debug("목표 금액 삭제 성공")
                                     authViewModel.login()
+                                    profileInfoViewModel.getUserProfileApi { _ in }
                                 }
                             }
                         }, label: {

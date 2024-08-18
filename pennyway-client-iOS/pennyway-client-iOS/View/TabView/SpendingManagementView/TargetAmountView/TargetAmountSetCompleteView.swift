@@ -5,6 +5,8 @@ struct TargetAmountSetCompleteView: View {
     @ObservedObject var viewModel: TargetAmountSettingViewModel
     @EnvironmentObject var authViewModel: AppViewModel
     
+    let profileInfoViewModel = UserAccountViewModel()
+    
     var entryPoint: TargetAmountEntryPoint
     
     private var buttonText: String {
@@ -43,6 +45,7 @@ struct TargetAmountSetCompleteView: View {
                 CustomBottomButton(action: {
                     if entryPoint == .signUp {
                         authViewModel.login() // 메인화면으로 entryPoint 나누기
+                        profileInfoViewModel.getUserProfileApi { _ in }
                     } else {
                         goToTotalTargetAmountView()
                     }
