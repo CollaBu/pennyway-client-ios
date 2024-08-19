@@ -68,6 +68,10 @@ class SpendingCategoryViewModel: ObservableObject {
     
     /// 카테고리 지출내역 개수 조회 api 호출
     func getCategorySpendingCountApi(completion: @escaping (Bool) -> Void) {
+        guard selectedCategory != nil else {
+            return 
+        }
+        
         let getCategorySpendingCountRequestDto = GetCategorySpendingCountRequestDto(type: selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")
         
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
@@ -103,7 +107,7 @@ class SpendingCategoryViewModel: ObservableObject {
     
     /// 카테고리에 따른 지출내역 리스트 조회 api 호출
     func getCategorySpendingHistoryApi(completion: @escaping (Bool) -> Void) {
-        guard hasNext else {
+        guard hasNext, selectedCategory != nil else {
             return
         }
         
@@ -176,6 +180,10 @@ class SpendingCategoryViewModel: ObservableObject {
     
     /// 카테고리 수정 api 호출
     func modifyCategoryApi(completion: @escaping (Bool) -> Void) {
+        guard selectedCategory != nil else {
+            return
+        }
+        
         let modifyCategoryRequestDto = AddSpendingCustomCategoryRequestDto(name: categoryName, icon: selectedCategoryIconTitle)
         
         SpendingCategoryAlamofire.shared.modifyCategory(selectedCategory!.id, modifyCategoryRequestDto) { result in
@@ -200,6 +208,10 @@ class SpendingCategoryViewModel: ObservableObject {
     
     /// 카테고리 삭제 api 호출
     func deleteCategoryApi(completion: @escaping (Bool) -> Void) {
+        guard selectedCategory != nil else {
+            return
+        }
+        
         SpendingCategoryAlamofire.shared.deleteCategory(selectedCategory!.id) { result in
             switch result {
             case let .success(data):
@@ -222,6 +234,10 @@ class SpendingCategoryViewModel: ObservableObject {
     
     /// 카테고리 이동 api 호출
     func moveCategoryApi(completion: @escaping (Bool) -> Void) {
+        guard selectedCategory != nil else {
+            return
+        }
+        
         let moveCategoryRequestDto = MoveCategoryRequestDto(fromType: getCategoryDetails(selectedCategory!).categoryIconTitle, toId: getCategoryDetails(selectedMoveCategory!).categoryId, toType: getCategoryDetails(selectedMoveCategory!).categoryIconTitle)
         
         SpendingCategoryAlamofire.shared.moveCategory(selectedCategory!.id, moveCategoryRequestDto) { result in
@@ -233,8 +249,8 @@ class SpendingCategoryViewModel: ObservableObject {
                             if success {
                                 Log.debug("카테고리 이동 및 삭제 완료 \(jsonString)")
                                 self.customCategories.removeAll { $0.id == self.selectedCategory!.id }
-                                self.initPage()
-                                self.spendingCategories.removeAll { $0.id == self.selectedCategory!.id }
+                                self.initPage() // 카테고리 삭제했으니 무한 스크롤 데이터 초기화
+                                self.spendingCategories.removeAll { $0.id == self.selectedCategory!.id } // 총 카테고리 리스트에서 삭제한 카테고리 제거
                                 
                                 completion(true)
                             }
