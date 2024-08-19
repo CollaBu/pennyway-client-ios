@@ -35,7 +35,7 @@ struct PhoneNumberInputSectionView: View {
                 VerificationButton(
                     isEnabled: isVerificationButtonEnabled(),
                     action: handleVerificationButtonTap,
-                    buttonTitle: viewModel.requestedPhoneNumber.isEmpty ? "인증번호 받기" : "재전송하기"
+                    buttonTitle: viewModel.requestedPhoneNumber.isEmpty && !viewModel.showErrorPhoneNumberFormat ? "인증번호 받기" : "재전송하기"
                 )
             }
             .padding(.horizontal, 20)
@@ -73,7 +73,7 @@ struct PhoneNumberInputSectionView: View {
     }
 
     private func handleErrorApi() {
-        if viewModel.showErrorApiRequest {
+        if viewModel.showErrorManyRequest {
             showManyRequestPopUp = true
         } else {
             viewModel.judgeTimerRunning()

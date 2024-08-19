@@ -16,7 +16,7 @@ extension PhoneVerificationViewModel {
                         RegistrationManager.shared.phoneNumber = phoneNumber
                     }
                     requestedPhoneNumber = phoneNumber
-                    showErrorApiRequest = false
+                    showErrorManyRequest = false
                     showErrorExistingUser = false
 
                 } catch {
@@ -28,7 +28,7 @@ extension PhoneVerificationViewModel {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .tooManyRequest {
-                    showErrorApiRequest = true
+                    showErrorManyRequest = true
                     isTimerHidden = true
                     stopTimer()
                     isDisabledButton = false
@@ -50,7 +50,7 @@ extension PhoneVerificationViewModel {
                     let response = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
                     showErrorVerificationCode = false
                     showErrorExistingUser = false
-                    showErrorApiRequest = false
+                    showErrorManyRequest = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
@@ -86,7 +86,7 @@ extension PhoneVerificationViewModel {
 
                     showErrorVerificationCode = false
                     showErrorExistingUser = false
-                    showErrorApiRequest = false
+                    showErrorManyRequest = false
 
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
@@ -186,7 +186,7 @@ extension PhoneVerificationViewModel {
                     updateUserField(fieldName: "phone", value: phoneNumber)
                     showErrorVerificationCode = false
                     showErrorExistingUser = false
-                    showErrorApiRequest = false
+                    showErrorManyRequest = false
                 } catch {
                     Log.fault("Error parsing response JSON: \(error)")
                 }

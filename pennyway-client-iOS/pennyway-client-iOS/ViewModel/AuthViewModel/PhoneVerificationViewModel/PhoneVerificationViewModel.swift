@@ -19,7 +19,7 @@ class PhoneVerificationViewModel: ObservableObject {
     @Published var showErrorPhoneNumberFormat = false
     @Published var showErrorVerificationCode = false
     @Published var showErrorExistingUser = false
-    @Published var showErrorApiRequest = false
+    @Published var showErrorManyRequest = false
     @Published var isFormValid = false
 
     @Published var phone: String = ""
@@ -42,6 +42,10 @@ class PhoneVerificationViewModel: ObservableObject {
     func validatePhoneNumber() {
         if phoneNumber.prefix(3) != "010" && phoneNumber.prefix(3) != "011" && phoneNumber.count == 11 {
             showErrorPhoneNumberFormat = true
+            isTimerHidden = true
+            stopTimer()
+            isDisabledButton = false
+            requestedPhoneNumber = ""
         } else {
             showErrorPhoneNumberFormat = false
         }

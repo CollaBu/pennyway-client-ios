@@ -108,7 +108,7 @@ struct EditPhoneNumberView: View {
                     viewModel.showErrorExistingUser = false
                     viewModel.showErrorPhoneNumberFormat = false
                 })
-                VerificationButton(isEnabled: isVerificationButtonEnabled(), action: handleVerificationButtonTap, buttonTitle: viewModel.requestedPhoneNumber.isEmpty ? "인증번호 받기" : "재전송하기"
+                VerificationButton(isEnabled: isVerificationButtonEnabled(), action: handleVerificationButtonTap, buttonTitle: viewModel.requestedPhoneNumber.isEmpty && !viewModel.showErrorPhoneNumberFormat ? "인증번호 받기" : "재전송하기"
                 )
             }
             .padding(.horizontal, 20)
@@ -136,7 +136,7 @@ struct EditPhoneNumberView: View {
 
     private func handleVerificationButtonTap() {
         viewModel.requestEditVerificationCodeApi { 
-            if viewModel.showErrorApiRequest {
+            if viewModel.showErrorManyRequest {
                 showManyRequestPopUp = true
             } else {
                 viewModel.judgeTimerRunning()
@@ -146,7 +146,7 @@ struct EditPhoneNumberView: View {
 
     private func checkFormValid(completion: @escaping (Bool) -> Void) {
         if !viewModel.showErrorVerificationCode && !viewModel.showErrorExistingUser &&
-            !viewModel.showErrorApiRequest && viewModel.isFormValid
+            !viewModel.showErrorManyRequest && viewModel.isFormValid
         {
             showCodeErrorPopUp = false
             completion(true)
