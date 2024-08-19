@@ -140,8 +140,9 @@ struct MySpendingListView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 0) {
                     Button(action: {
-                        navigateToCategoryGridView = true
-                        spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in }
+                        spendingCategoryViewModel.getSpendingCustomCategoryListApi { success in
+                            navigateToCategoryGridView = true
+                        }
                     }, label: {
                         Text("카테고리")
                             .font(.B2MediumFont())

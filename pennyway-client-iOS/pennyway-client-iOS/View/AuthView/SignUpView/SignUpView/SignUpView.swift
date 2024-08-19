@@ -105,8 +105,11 @@ struct SignUpView: View {
     func handleLinkAccountToOAuth() {
         linkAccountToOAuthViewModel.linkAccountToOAuthApi { success in
             if success {
-                authViewModel.login()
-                profileInfoViewModel.getUserProfileApi { _ in }
+                profileInfoViewModel.getUserProfileApi { success in
+                    if success {
+                        authViewModel.login()
+                    }
+                }
             } else {
                 Log.error("기존 계정에 소셜 계정 연동 실패")
             }
