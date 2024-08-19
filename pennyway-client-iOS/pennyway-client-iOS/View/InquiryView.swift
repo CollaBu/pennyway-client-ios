@@ -176,7 +176,6 @@ struct InquiryView: View {
             viewModel.dismissAction = {
                 self.presentationMode.wrappedValue.dismiss()
             }
-            
             // 디바운스 타이머 트리거
             viewModel.debounceTimer.send(())
         }
