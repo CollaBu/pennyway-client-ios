@@ -233,6 +233,9 @@ class SpendingCategoryViewModel: ObservableObject {
                             if success {
                                 Log.debug("카테고리 이동 및 삭제 완료 \(jsonString)")
                                 self.customCategories.removeAll { $0.id == self.selectedCategory!.id }
+                                self.initPage()
+                                self.spendingCategories.removeAll { $0.id == self.selectedCategory!.id }
+                                
                                 completion(true)
                             }
                         }
