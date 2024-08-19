@@ -25,8 +25,11 @@ class GoogleOAuthViewModel: ObservableObject {
             self.givenName = givenName ?? ""
             
             let jwtParts = user.idToken?.tokenString.components(separatedBy: ".")
-            guard jwtParts?.count == 3, let payloadData = Data(base64Encoded: jwtParts?[1] ?? "", options: .ignoreUnknownCharacters) else {
-                print("Invalid JWT format")
+            let payloadBase64 = jwtParts?[1].replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/")
+            let payloadPadded = payloadBase64!.padding(toLength: ((payloadBase64!.count + 3) / 4) * 4, withPad: "=", startingAt: 0)
+
+            guard jwtParts?.count == 3, let payloadData = Data(base64Encoded: payloadPadded) else {
+                Log.fault("[GoogleOAuthViewModel] Invalid JWT format")
                 return
             }
             do {

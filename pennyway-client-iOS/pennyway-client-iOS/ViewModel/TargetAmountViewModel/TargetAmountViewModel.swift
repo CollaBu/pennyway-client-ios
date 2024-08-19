@@ -10,7 +10,7 @@ class TargetAmountViewModel: ObservableObject {
     @Published var generateTargetAmountId = -1
     
     @Published var recentTargetAmountData: RecentTargetAmount? = nil // 당월 이전 사용자의 최신 목표 금액
-
+    
     func getTargetAmountForDateApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.getTargetAmountForDate { result in
             switch result {
@@ -69,7 +69,7 @@ class TargetAmountViewModel: ObservableObject {
             }
         }
     }
-    
+        
     func getTargetAmountForPreviousMonthApi() {
         TargetAmountAlamofire.shared.getTargetAmountForPreviousMonth { result in
             switch result {
@@ -77,14 +77,14 @@ class TargetAmountViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(GetTargetAmountForPreviousMonthResponseDto.self, from: responseData)
-                       
+                            
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("당월 이전 사용자 최신 목표 금액 조회 완료 \(jsonString)")
                         }
-                        
+                            
                         self.recentTargetAmountData = response.data.targetAmount
                         let isPresent = response.data.targetAmount.isPresent
-                        
+                            
                         if isPresent == true {
                             self.isHiddenSuggestionView = false
                             self.isPresentTargetAmount = false
@@ -92,7 +92,7 @@ class TargetAmountViewModel: ObservableObject {
                         } else {
                             self.deleteCurrentMonthTargetAmountApi { _ in }
                         }
-               
+                            
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }
@@ -106,23 +106,23 @@ class TargetAmountViewModel: ObservableObject {
             }
         }
     }
-    
+        
     func generateCurrentMonthDummyDataApi(completion: @escaping (Bool) -> Void) {
         let generateCurrentMonthDummyDataRequestDto = GenerateCurrentMonthDummyDataRequestDto(year: Date.year(from: Date()), month: Date.month(from: Date()))
-        
+            
         TargetAmountAlamofire.shared.generateCurrentMonthDummyData(generateCurrentMonthDummyDataRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(CurrentMonthTargetAmountResponseDto.self, from: responseData)
-                       
+                            
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("당월 목표 금액 더미값 생성 \(jsonString)")
                         }
                         self.generateTargetAmountId = response.data.targetAmount.id
                         completion(true)
-               
+                            
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }
@@ -137,7 +137,7 @@ class TargetAmountViewModel: ObservableObject {
             }
         }
     }
-    
+        
     func deleteCurrentMonthTargetAmountApi(completion: @escaping (Bool) -> Void) {
         TargetAmountAlamofire.shared.deleteCurrentMonthTargetAmount(targetAmountId: (targetAmountData?.targetAmountDetail.id)!) { result in
             switch result {
@@ -160,10 +160,10 @@ class TargetAmountViewModel: ObservableObject {
             }
         }
     }
-    
+        
     func editCurrentMonthTargetAmountApi() {
         let editCurrentMonthTargetAmountRequestDto = EditCurrentMonthTargetAmountRequestDto(amount: recentTargetAmountData!.amount ?? 0)
-        
+            
         TargetAmountAlamofire.shared.editCurrentMonthTargetAmount(targetAmountId: targetAmountData?.targetAmountDetail.id ?? -1, dto: editCurrentMonthTargetAmountRequestDto) { result in
             switch result {
             case let .success(data):
