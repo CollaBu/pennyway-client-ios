@@ -34,8 +34,7 @@ struct PhoneNumberInputSectionView: View {
                 PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange)
                 VerificationButton(
                     isEnabled: isVerificationButtonEnabled(),
-                    action: handleVerificationButtonTap,
-                    buttonTitle: viewModel.requestedPhoneNumber.isEmpty && !viewModel.showErrorPhoneNumberFormat ? "인증번호 받기" : "재전송하기"
+                    action: handleVerificationButtonTap
                 )
             }
             .padding(.horizontal, 20)

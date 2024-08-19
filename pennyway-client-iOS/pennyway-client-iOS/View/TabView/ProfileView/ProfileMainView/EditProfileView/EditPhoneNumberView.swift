@@ -108,8 +108,7 @@ struct EditPhoneNumberView: View {
                     viewModel.showErrorExistingUser = false
                     viewModel.showErrorPhoneNumberFormat = false
                 })
-                VerificationButton(isEnabled: isVerificationButtonEnabled(), action: handleVerificationButtonTap, buttonTitle: viewModel.requestedPhoneNumber.isEmpty && !viewModel.showErrorPhoneNumberFormat ? "인증번호 받기" : "재전송하기"
-                )
+                VerificationButton(isEnabled: isVerificationButtonEnabled(), action: handleVerificationButtonTap)
             }
             .padding(.horizontal, 20)
         }
