@@ -1,3 +1,4 @@
+import Combine
 import SwiftUI
 
 class InquiryViewModel: ObservableObject {
@@ -7,6 +8,28 @@ class InquiryViewModel: ObservableObject {
     @Published var showErrorEmail = false
     @Published var isFormValid: Bool = false
     @Published var isSelectedAgreeBtn = false
+
+    var cancellables = Set<AnyCancellable>()
+    let debounceInterval = 0.3
+    var debounceTimer = PassthroughSubject<Void, Never>()
+
+    var dismissAction: (() -> Void)?
+
+    init() {
+        debounceTimer
+            .debounce(for: .seconds(debounceInterval), scheduler: RunLoop.main)
+            .sink { [weak self] in
+                self?.sendInquiryMailApi { success in
+                    if success {
+                        self?.dismissAction?()
+                        Log.debug("디바운싱 문의하기 마지막 이벤트 보냄")
+                    } else {
+                        Log.debug("문의하기 디바운싱 실패")
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
 
     let categoryMapping: [String: String] = [
         "이용 관련": "UTILIZATION",
