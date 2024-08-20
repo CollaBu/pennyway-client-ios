@@ -11,9 +11,11 @@ struct MySpendingListView: View {
     @State private var navigateToCategoryGridView = false
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
-//    @State private var refreshView = false
     @State private var showToastPopup = false
     @State private var isDeleted = false
+
+    @State var lastSelectedDate: Date? = nil
+    @State var lastSelectedMonth: Date? = nil
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -45,6 +47,10 @@ struct MySpendingListView: View {
                                                     selectedSpendingId = item.id
                                                     Log.debug("Id: \(selectedSpendingId), clickDate: \(clickDate)")
                                                     showDetailSpendingView = true
+
+                                                    // 상세 화면으로 이동하기 전에 상태 보존
+                                                    lastSelectedDate = spendingHistoryViewModel.selectedDate
+                                                    lastSelectedMonth = spendingHistoryViewModel.currentDate
                                                 }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                                         .contentShape(Rectangle())
@@ -100,7 +106,6 @@ struct MySpendingListView: View {
                     }
                 }
             }
-//            .id(refreshView)
             .overlay(
                 Group {
                     if showToastPopup {
@@ -140,8 +145,9 @@ struct MySpendingListView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 HStack(spacing: 0) {
                     Button(action: {
-                        navigateToCategoryGridView = true
-                        spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in }
+                        spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in
+                            navigateToCategoryGridView = true
+                        }
                     }, label: {
                         Text("카테고리")
                             .font(.B2MediumFont())
@@ -157,14 +163,31 @@ struct MySpendingListView: View {
             ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
         }
         .onAppear {
-            spendingHistoryViewModel.currentDate = currentMonth
+            if let lastMonth = lastSelectedMonth {
+                // 이전에 선택한 달이 있으면 해당 달로 이동
+                spendingHistoryViewModel.currentDate = lastMonth
+                currentMonth = lastMonth
+            } else {
+                // 그렇지 않으면 현재 달을 사용
+                spendingHistoryViewModel.currentDate = currentMonth
+            }
+
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
-//                    refreshView = true
                 } else {
                     Log.debug("소비내역 조회 api 연동 실패")
                 }
+            }
+
+            if let lastDate = lastSelectedDate {
+                // 이전에 선택한 날짜가 있으면 해당 날짜로 스크롤
+                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: lastDate)
+                Log.debug("이전에 선택한 날짜가 있음")
+            } else {
+                // 그렇지 않으면 현재 달의 첫 번째 날로 설정
+                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: spendingHistoryViewModel.currentDate)
+                Log.debug("else")
             }
         }
 

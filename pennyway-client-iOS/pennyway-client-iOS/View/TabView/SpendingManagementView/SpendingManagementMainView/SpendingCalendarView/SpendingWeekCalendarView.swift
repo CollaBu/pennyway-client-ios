@@ -47,7 +47,13 @@ struct SpendingWeekCalendarView: View {
             }
             .onAppear {
                 proxy = scrollProxy
-                setToToday()
+
+                // 만약 사용자가 선택한 날짜가 없다면, 오늘 날짜로 초기화
+                if userSelectedDate == nil {
+                    setToToday()
+                } else {
+                    scrollToDate(proxy: scrollProxy)
+                }
                 scrollToDate(proxy: scrollProxy)
             }
         }
@@ -170,8 +176,9 @@ struct SpendingWeekCalendarView: View {
                         if !calendar.isDateInFuture(date, comparedTo: self.date) {
                             selectedDate = date
                             userSelectedDate = date
-                            selectedDateToScroll = dateFormatter(date: date)
-                            spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: date)
+
+                            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: date)
+                            spendingHistoryViewModel.selectedDateToScroll = DateFormatterUtil.dateFormatter(date: date)
                         }
                     }
                     .frame(height: 70 * DynamicSizeFactor.factor())
@@ -182,18 +189,19 @@ struct SpendingWeekCalendarView: View {
         }
     }
 
-    private func dateFormatter(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
-    }
-
     private func circleColor(for date: Date) -> Color {
+        // 현재 날짜는 항상 Mint01 컬러를 적용
         if calendar.isDateInToday(date) {
             return Color("Mint01")
-        } else if let userSelected = userSelectedDate,
-                  calendar.isDate(userSelected, equalTo: date, toGranularity: .day)
-        {
+        }
+
+        // 사용자가 날짜를 선택하지 않았다면 기본 색상 반환
+        guard let userSelected = userSelectedDate else {
+            return Color.clear
+        }
+
+        // 사용자가 선택한 날짜에 대해 처리
+        if calendar.isDate(userSelected, equalTo: date, toGranularity: .day) {
             if spendingHistoryViewModel.getDailyTotalAmount(for: date) != nil {
                 return Color("Gray03")
             } else {
@@ -210,6 +218,9 @@ struct SpendingWeekCalendarView: View {
         } else if spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil {
             return Color("Gray03")
         } else if calendar.isDate(selectedDate, equalTo: date, toGranularity: .day) {
+            guard let userSelected = userSelectedDate else {
+                return Color("Gray06")
+            }
             return spendingHistoryViewModel.getDailyTotalAmount(for: date) == nil ? Color("Gray04") : Color("Gray05")
         } else {
             return Color("Gray06")
@@ -234,8 +245,8 @@ struct SpendingWeekCalendarView: View {
 
     private func setToToday() {
         selectedDate = Date()
-        selectedDateToScroll = dateFormatter(date: Date())
-        spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: Date())
+        selectedDateToScroll = DateFormatterUtil.dateFormatter(date: Date())
+        spendingHistoryViewModel.selectedDateToScroll = DateFormatterUtil.dateFormatter(date: Date())
     }
 
     private func scrollToDate(proxy: ScrollViewProxy?) {
@@ -265,14 +276,23 @@ private extension SpendingWeekCalendarView {
         let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? Date()
         spendingHistoryViewModel.updateCurrentDate(to: newDate)
 
-        selectedDate = Date() // 초기화
+        // selectedDate = Date() // 초기화
+
         userSelectedDate = nil // 사용자가 선택한 날짜 초기화
 
         // 선택된 날짜를 새로운 달의 첫날로 설정
+//        if let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate)) {
+//            selectedDate = firstDayOfMonth
+//            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
+//            spendingHistoryViewModel.selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
+//        }
         if let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate)) {
             selectedDate = firstDayOfMonth
-            selectedDateToScroll = dateFormatter(date: firstDayOfMonth)
-            spendingHistoryViewModel.selectedDateToScroll = dateFormatter(date: firstDayOfMonth)
+//            userSelectedDate = firstDayOfMonth
+            userSelectedDate = nil
+            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
+            spendingHistoryViewModel.selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
+            proxy?.scrollTo(firstDayOfMonth, anchor: .center)
         }
     }
 
