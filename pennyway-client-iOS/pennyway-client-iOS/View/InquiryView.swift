@@ -1,4 +1,5 @@
 
+import Combine
 import SwiftUI
 
 struct InquiryView: View {
@@ -11,7 +12,7 @@ struct InquiryView: View {
     @Environment(\.presentationMode) var presentationMode
 
     let placeholder: String = "문의 내용을 입력해주세요"
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             ScrollView {
@@ -172,11 +173,11 @@ struct InquiryView: View {
 
     private func continueButtonAction() {
         if viewModel.isFormValid {
-            viewModel.sendInquiryMailApi { success in
-                if success {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
+            viewModel.dismissAction = {
+                self.presentationMode.wrappedValue.dismiss()
             }
+            // 디바운스 타이머 트리거
+            viewModel.debounceTimer.send(())
         }
     }
     

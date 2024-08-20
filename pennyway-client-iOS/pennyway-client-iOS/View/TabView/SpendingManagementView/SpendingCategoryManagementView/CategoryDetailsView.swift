@@ -154,10 +154,12 @@ struct CategoryDetailsView: View {
                     secondBtnAction: { 
                         viewModel.deleteCategoryApi { success in
                             if success {
-                                viewModel.getSpendingCustomCategoryListApi { _ in
-                                    self.showDeletePopUp = false
-                                    self.presentationMode.wrappedValue.dismiss()
-                                    self.showDeleteCategoryToastPopUp = true
+                                viewModel.getSpendingCustomCategoryListApi { success in    
+                                    if success {
+                                        self.showDeletePopUp = false
+                                        self.presentationMode.wrappedValue.dismiss()
+                                        self.showDeleteCategoryToastPopUp = true
+                                    }
                                 }
                             }
                         }

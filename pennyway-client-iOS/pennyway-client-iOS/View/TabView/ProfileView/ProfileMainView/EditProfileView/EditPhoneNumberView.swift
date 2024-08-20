@@ -6,13 +6,9 @@ struct EditPhoneNumberView: View {
     @StateObject var viewModel = PhoneVerificationViewModel()
     @State private var showCodeErrorPopUp = false // 인증번호 오류
     @State private var showManyRequestPopUp = false // api 요청 오류
+    @State private var showDiffNumberPopUp = false
+    @State private var showErrorExistingUser = false
     @State private var isDeleteButtonVisible: Bool = false
-
-    var timerString: String {
-        let minutes = viewModel.timerSeconds / 60
-        let seconds = viewModel.timerSeconds % 60
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
 
     var body: some View {
         ZStack {
@@ -24,42 +20,24 @@ struct EditPhoneNumberView: View {
                     if viewModel.showErrorPhoneNumberFormat {
                         ErrorText(message: "올바른 전화번호 형식이 아니에요", color: Color("Red03"))
                     }
-                    if viewModel.showErrorExistingUser {
+                    if showErrorExistingUser {
                         ErrorText(message: "이미 가입된 전화번호예요", color: Color("Red03"))
                     }
                 }
 
                 Spacer().frame(height: 21 * DynamicSizeFactor.factor())
 
-                VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-                    Text("인증번호")
-                        .padding(.horizontal, 20)
-                        .font(.B1RegularFont())
-                        .platformTextColor(color: Color("Gray04"))
-
-                    HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                        CodeInputField(
-                            code: $viewModel.code,
-                            onCodeChange: handleCodeChange,
-                            isTimerHidden: viewModel.isTimerHidden,
-                            timerString: timerString,
-                            isDisabled: !viewModel.isDisabledButton
-                        )
-                    }
-                    .padding(.horizontal, 20)
-                }
+                CodeInputSectionView(viewModel: viewModel)
 
                 Spacer()
 
                 CustomBottomButton(action: {
-                    if viewModel.isFormValid {
-                        viewModel.editUserPhoneNumberApi {
-                            checkFormValid { success in
-                                if success {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                }
-                            }
-                        }
+                    if !viewModel.requestedPhoneNumber.isEmpty, viewModel.requestedPhoneNumber != viewModel.phoneNumber,
+                       !viewModel.showErrorExistingUser
+                    {
+                        showDiffNumberPopUp = true
+                    } else {
+                        continueButtonAction()
                     }
 
                 }, label: "변경 완료", isFormValid: $viewModel.isFormValid)
@@ -90,6 +68,26 @@ struct EditPhoneNumberView: View {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
             }
+
+            if showDiffNumberPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showDiffNumberPopUp,
+                                titleLabel: "인증 요청 번호와\n현재 입력된 번호가 달라요",
+                                subTitleLabel: "기존 번호(\(viewModel.requestedPhoneNumber))로 인증할까요?",
+                                firstBtnAction: { self.showDiffNumberPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: {
+                                    self.showDiffNumberPopUp = false
+                                    viewModel.phoneNumber = viewModel.requestedPhoneNumber
+                                    continueButtonAction()
+                                },
+                                secondBtnLabel: "인증할게요",
+                                secondBtnColor: Color("Gray05"),
+                                heightSize: 166)
+            }
+        }
+        .onChange(of: viewModel.showErrorExistingUser) { newValue in
+            showErrorExistingUser = newValue
         }
     }
 
@@ -110,7 +108,7 @@ struct EditPhoneNumberView: View {
                     viewModel.showErrorExistingUser = false
                     viewModel.showErrorPhoneNumberFormat = false
                 })
-                VerificationButton(isEnabled: !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 && viewModel.phoneNumber != viewModel.firstPhoneNumber, action: handleVerificationButtonTap)
+                VerificationButton(isEnabled: isVerificationButtonEnabled(), action: handleVerificationButtonTap)
             }
             .padding(.horizontal, 20)
         }
@@ -121,10 +119,13 @@ struct EditPhoneNumberView: View {
             if newValue.count > 11 {
                 viewModel.phoneNumber = String(newValue.prefix(11))
             }
-            if viewModel.phoneNumber != viewModel.firstPhoneNumber {
-                viewModel.showErrorExistingUser = false
-            } else {
-                viewModel.showErrorExistingUser = true
+
+            if viewModel.showErrorExistingUser {
+                if viewModel.phoneNumber != viewModel.requestedPhoneNumber {
+                    showErrorExistingUser = false
+                } else {
+                    showErrorExistingUser = true
+                }
             }
         } else {
             viewModel.phoneNumber = ""
@@ -134,7 +135,7 @@ struct EditPhoneNumberView: View {
 
     private func handleVerificationButtonTap() {
         viewModel.requestEditVerificationCodeApi { 
-            if viewModel.showErrorApiRequest {
+            if viewModel.showErrorManyRequest {
                 showManyRequestPopUp = true
             } else {
                 viewModel.judgeTimerRunning()
@@ -142,18 +143,9 @@ struct EditPhoneNumberView: View {
         }
     }
 
-    private func handleCodeChange(_ newValue: String) {
-        if Int(newValue) != nil {
-            viewModel.code = String(newValue)
-        } else {
-            viewModel.code = ""
-        }
-        viewModel.validateForm()
-    }
-
     private func checkFormValid(completion: @escaping (Bool) -> Void) {
         if !viewModel.showErrorVerificationCode && !viewModel.showErrorExistingUser &&
-            !viewModel.showErrorApiRequest && viewModel.isFormValid
+            !viewModel.showErrorManyRequest && viewModel.isFormValid
         {
             showCodeErrorPopUp = false
             completion(true)
@@ -161,6 +153,20 @@ struct EditPhoneNumberView: View {
             if viewModel.showErrorVerificationCode {
                 showCodeErrorPopUp = true
                 completion(false)
+            }
+        }
+    }
+
+    private func isVerificationButtonEnabled() -> Bool {
+        return !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 && viewModel.phoneNumber != viewModel.requestedPhoneNumber
+    }
+
+    private func continueButtonAction() {
+        viewModel.editUserPhoneNumberApi {
+            checkFormValid { success in
+                if success {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
             }
         }
     }
