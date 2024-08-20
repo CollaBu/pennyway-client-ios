@@ -12,6 +12,7 @@ struct ProfileMenuBarListView: View {
     @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
     @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
+    @StateObject var oauthViewModel: OAuthAccountViewModel = OAuthAccountViewModel()
 
     @State private var navigateCompleteView = false
 
@@ -80,6 +81,13 @@ struct ProfileMenuBarListView: View {
                                 secondBtnColor: Color("Gray05"),
                                 heightSize: 166
                 )
+            }
+
+            if oauthViewModel.isExistUser {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                
+                ErrorCodePopUpView(showingPopUp: $oauthViewModel.isExistUser, titleLabel: "계정이 이미 연동되어 있어요", subLabel: "이미 연동된 계정은 사용할 수 없어요")
+
             }
 
             NavigationLink(destination: CompleteDeleteUserView(), isActive: $navigateCompleteView) {
