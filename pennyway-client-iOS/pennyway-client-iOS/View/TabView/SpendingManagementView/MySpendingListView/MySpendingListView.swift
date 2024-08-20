@@ -69,13 +69,14 @@ struct MySpendingListView: View {
                                         .id(date) // ScrollViewReader를 위한 ID 추가
                                     }
                                 }
+
                                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                             }
                         }
+
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
-//                                changeMonth(by: -1)
-
+                                changeMonth(by: -1)
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -187,7 +188,10 @@ struct MySpendingListView: View {
                 Log.debug("이전에 선택한 날짜가 있음")
             } else {
                 // 그렇지 않으면 현재 달의 첫 번째 날로 설정
-                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: spendingHistoryViewModel.currentDate)
+                //                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: spendingHistoryViewModel.currentDate)
+                let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: spendingHistoryViewModel.currentDate))!
+                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
+                Log.debug("포커스는 첫날")
                 Log.debug("else")
             }
         }
@@ -212,5 +216,44 @@ struct MySpendingListView: View {
             return dateFormatter.string(from: previousMonthDate)
         }
         return dateFormatter.string(from: date)
+    }
+
+    /// 스크롤 바 하단 M월 내역보기 버튼 클릭시 이전달로 이동하는 함수
+    private func changeMonth(by value: Int) {
+        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
+        currentMonth = spendingHistoryViewModel.currentDate
+        spendingHistoryViewModel.currentDate = newDate
+        currentMonth = newDate
+//
+//        // 현재 날짜가 새로운 달에 속하는지 확인
+//        let calendar = Calendar.current
+//        let newMonthComponents = calendar.dateComponents([.year, .month], from: newDate)
+//        let today = Date()
+//        let todayComponents = calendar.dateComponents([.year, .month], from: today)
+//
+//        if newMonthComponents == todayComponents {
+//            // 새로운 달이 현재 달이면 오늘 날짜로 설정
+//            spendingHistoryViewModel.selectedDate = today
+//            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: today)
+//        } else {
+//            // 그렇지 않으면 새로운 달의 1일로 설정
+//            let firstDayOfMonth = calendar.date(from: newMonthComponents)!
+//            spendingHistoryViewModel.selectedDate = firstDayOfMonth
+//            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
+//        }
+
+        spendingHistoryViewModel.selectedDate = nil
+        spendingHistoryViewModel.selectedDateId = 0
+
+        spendingHistoryViewModel.checkSpendingHistoryApi { success in
+            if success {
+                Log.debug("지출내역 조회 API 연동 성공")
+                DispatchQueue.main.async {
+                    self.currentMonth = newDate
+                }
+            } else {
+                Log.fault("지출내역 조회 API 연동 실패")
+            }
+        }
     }
 }

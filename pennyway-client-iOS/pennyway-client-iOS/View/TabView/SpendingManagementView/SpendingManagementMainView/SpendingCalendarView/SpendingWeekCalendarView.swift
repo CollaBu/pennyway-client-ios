@@ -51,6 +51,7 @@ struct SpendingWeekCalendarView: View {
                 // 만약 사용자가 선택한 날짜가 없다면, 오늘 날짜로 초기화
                 if userSelectedDate == nil {
                     setToToday()
+                    Log.debug("설마여기?")
                 } else {
                     scrollToDate(proxy: scrollProxy)
                 }
@@ -276,7 +277,9 @@ private extension SpendingWeekCalendarView {
         let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? Date()
         spendingHistoryViewModel.updateCurrentDate(to: newDate)
 
-        userSelectedDate = nil // 사용자가 선택한 날짜 초기화
+        // userSelectedDate = nil // 사용자가 선택한 날짜 초기화
+        Log.debug("날짜:\(String(describing: spendingHistoryViewModel.currentDate))")
+        Log.debug("date: \(Date())")
 
         // 선택된 날짜를 새로운 달의 첫날로 설정
         if let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate)) {
@@ -284,6 +287,9 @@ private extension SpendingWeekCalendarView {
             selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
             spendingHistoryViewModel.selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
             proxy?.scrollTo(firstDayOfMonth, anchor: .center)
+            Log.debug("selectedDate:\(selectedDate)")
+            Log.debug("selectedDateToScroll:\(selectedDateToScroll)")
+            Log.debug("firstDayOfMonth:\(firstDayOfMonth)")
         }
     }
 
