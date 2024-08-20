@@ -50,16 +50,6 @@ struct SpendingWeekCalendarView: View {
 
                 handleInitialScroll(scrollProxy: scrollProxy)
             }
-            .onChange(of: userSelectedDate) { _ in
-                handleInitialScroll(scrollProxy: scrollProxy)
-                Log.debug("userSelectedDate값 변경 실행:\(userSelectedDate)")
-            }
-            .onChange(of: spendingHistoryViewModel.isClickSpendingDetailView) { _ in
-                proxy = scrollProxy
-
-                handleInitialScroll(scrollProxy: scrollProxy)
-                Log.debug("isClickSpendingDetailView값 변경 실행:\(spendingHistoryViewModel.isClickSpendingDetailView)")
-            }
         }
         .onAppear {
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
@@ -289,7 +279,7 @@ private extension SpendingWeekCalendarView {
         let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? Date()
         spendingHistoryViewModel.updateCurrentDate(to: newDate)
 
-        // userSelectedDate = nil // 사용자가 선택한 날짜 초기화
+        userSelectedDate = nil // 사용자가 선택한 날짜 초기화
 
         // 선택된 날짜를 새로운 달의 첫날로 설정
         if let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate)) {
@@ -297,7 +287,6 @@ private extension SpendingWeekCalendarView {
             selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
             spendingHistoryViewModel.selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
             proxy?.scrollTo(firstDayOfMonth, anchor: .center)
-            Log.debug("ㅈㅂㅈㅂㅈ:\(spendingHistoryViewModel.selectedDateToScroll)")
         }
     }
 

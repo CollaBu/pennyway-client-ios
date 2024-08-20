@@ -185,18 +185,15 @@ struct MySpendingListView: View {
 
             if let lastDate = lastSelectedDate {
                 // 이전에 선택한 날짜가 있으면 해당 날짜로 스크롤
-                selectedDateToScroll = nil
-            //                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: lastDate)
+                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: lastDate)
                 Log.debug("이전에 선택한 날짜가 있음")
             } else {
                 // 그렇지 않으면 현재 달의 첫 번째 날로 설정
-                //                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: spendingHistoryViewModel.currentDate)
                 if let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: spendingHistoryViewModel.currentDate)) {
                     selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
                 }
                 Log.debug("else")
             }
-
         }
 
         NavigationLink(destination: SpendingCategoryGridView(spendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
