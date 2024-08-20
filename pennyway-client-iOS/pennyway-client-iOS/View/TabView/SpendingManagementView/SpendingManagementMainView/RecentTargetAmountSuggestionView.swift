@@ -17,7 +17,7 @@ struct RecentTargetAmountSuggestionView: View {
                 Spacer()
                 
                 Button(action: {
-                    viewModel.deleteCurrentMonthTargetAmountApi { success in
+                    viewModel.deleteCurrentMonthTargetAmountApi { _ in
                         isHidden = true
                     }
                 }, label: {
