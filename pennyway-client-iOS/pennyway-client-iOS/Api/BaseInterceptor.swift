@@ -54,7 +54,12 @@ class BaseInterceptor: RequestInterceptor {
             switch result {
             case .success:
                 Log.debug("Token refreshed, retrying request: \(request)")
-                completion(.retry)
+
+                if request.retryCount < 1 {
+                    completion(.retry)
+                } else {
+                    completion(.doNotRetry)
+                }
             case .failure:
                 if shouldRetry && request.retryCount < 1 {
                     Log.info("Retrying request due to failed token refresh")
