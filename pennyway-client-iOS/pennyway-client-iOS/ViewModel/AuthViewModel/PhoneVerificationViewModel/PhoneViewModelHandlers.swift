@@ -15,7 +15,9 @@ extension PhoneVerificationViewModel {
                     if type == .general || type == .oauth {
                         RegistrationManager.shared.phoneNumber = phoneNumber
                     }
-                    firstPhoneNumber = phoneNumber
+                    requestedPhoneNumber = phoneNumber
+                    showErrorManyRequest = false
+                    showErrorExistingUser = false
 
                 } catch {
                     Log.fault("Error decoding JSON: \(error)")
@@ -26,7 +28,7 @@ extension PhoneVerificationViewModel {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
                 if StatusSpecificError.domainError == .tooManyRequest {
-                    showErrorApiRequest = true
+                    showErrorManyRequest = true
                     isTimerHidden = true
                     stopTimer()
                     isDisabledButton = false
@@ -47,6 +49,8 @@ extension PhoneVerificationViewModel {
                 do {
                     let response = try JSONDecoder().decode(VerificationResponseDto.self, from: responseData)
                     showErrorVerificationCode = false
+                    showErrorExistingUser = false
+                    showErrorManyRequest = false
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isOAuthUser = sms.oauth
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
@@ -81,6 +85,9 @@ extension PhoneVerificationViewModel {
                     let response = try JSONDecoder().decode(OAuthVerificationResponseDto.self, from: responseData)
 
                     showErrorVerificationCode = false
+                    showErrorExistingUser = false
+                    showErrorManyRequest = false
+
                     let sms = response.data.sms
                     OAuthRegistrationManager.shared.isExistUser = sms.existsUser
                     OAuthRegistrationManager.shared.username = sms.username ?? ""
@@ -125,7 +132,11 @@ extension PhoneVerificationViewModel {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                showErrorVerificationCode = true
+                if StatusSpecificError.domainError == .unauthorized, StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
+                    showErrorVerificationCode = true
+                } else if StatusSpecificError.domainError == .notFound, StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                    showErrorExistingUser = true
+                }
 
             } else {
                 Log.error("Network request failed: \(error)")
@@ -150,7 +161,11 @@ extension PhoneVerificationViewModel {
             if let StatusSpecificError = error as? StatusSpecificError {
                 Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
 
-                showErrorVerificationCode = true
+                if StatusSpecificError.domainError == .unauthorized, StatusSpecificError.code == UnauthorizedErrorCode.missingOrInvalidCredentials.rawValue {
+                    showErrorVerificationCode = true
+                } else if StatusSpecificError.domainError == .notFound, StatusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue {
+                    showErrorExistingUser = true
+                }
 
             } else {
                 Log.error("Network request failed: \(error)")
@@ -169,6 +184,9 @@ extension PhoneVerificationViewModel {
                     let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
                     Log.debug("전화번호 수정 완료 \(response)")
                     updateUserField(fieldName: "phone", value: phoneNumber)
+                    showErrorVerificationCode = false
+                    showErrorExistingUser = false
+                    showErrorManyRequest = false
                 } catch {
                     Log.fault("Error parsing response JSON: \(error)")
                 }

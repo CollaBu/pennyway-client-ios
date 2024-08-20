@@ -4,6 +4,7 @@ struct FindPwView: View {
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @State private var showCodeErrorPopUp = false
     @State private var showManyRequestPopUp = false
+    @State private var showDiffNumberPopUp = false
     @State private var isNavigateToFindPwView: Bool = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @State private var isVerificationError: Bool = false
@@ -19,7 +20,11 @@ struct FindPwView: View {
                 Spacer()
 
                 CustomBottomButton(action: {
-                    continueButtonAction()
+                    if !phoneVerificationViewModel.requestedPhoneNumber.isEmpty, phoneVerificationViewModel.requestedPhoneNumber != phoneVerificationViewModel.phoneNumber {
+                        showDiffNumberPopUp = true
+                    } else {
+                        continueButtonAction()
+                    }
                 }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
@@ -39,6 +44,23 @@ struct FindPwView: View {
             if phoneVerificationViewModel.showErrorExistingUser {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $phoneVerificationViewModel.showErrorExistingUser, titleLabel: "사용자 정보를 찾을 수 없어요", subLabel: "다시 한번 확인해주세요")
+            }
+
+            if showDiffNumberPopUp {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                CustomPopUpView(showingPopUp: $showDiffNumberPopUp,
+                                titleLabel: "인증 요청 번호와\n현재 입력된 번호가 달라요",
+                                subTitleLabel: "기존 번호(\(phoneVerificationViewModel.requestedPhoneNumber))로 인증할까요?",
+                                firstBtnAction: { self.showDiffNumberPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: {
+                                    self.showDiffNumberPopUp = false
+                                    phoneVerificationViewModel.phoneNumber = phoneVerificationViewModel.requestedPhoneNumber
+                                    continueButtonAction()
+                                },
+                                secondBtnLabel: "인증할게요",
+                                secondBtnColor: Color("Gray05"),
+                                heightSize: 166)
             }
         }
         .edgesIgnoringSafeArea(.bottom)
