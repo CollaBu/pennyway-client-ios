@@ -34,7 +34,6 @@ struct AgreementSectionView: View {
                 Rectangle()
                     .platformTextColor(color: .clear)
                     .frame(width: 280 * DynamicSizeFactor.factor(), height: 121 * DynamicSizeFactor.factor())
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .cornerRadius(4)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
