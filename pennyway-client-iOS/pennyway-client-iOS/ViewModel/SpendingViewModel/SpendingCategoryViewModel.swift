@@ -122,6 +122,7 @@ class SpendingCategoryViewModel: ObservableObject {
                             Log.debug("카테고리에 등록된 지출내역 조회\(jsonString)")
                         }
                         
+                        self.dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id }
                         self.mergeNewSpendings(newSpendings: response.data.spendings.content)
                         self.currentPageNumber += 1
                         self.hasNext = response.data.spendings.hasNext
