@@ -48,14 +48,17 @@ struct SpendingWeekCalendarView: View {
             .onAppear {
                 proxy = scrollProxy
 
-                // 만약 사용자가 선택한 날짜가 없다면, 오늘 날짜로 초기화
-                if userSelectedDate == nil {
-                    setToToday()
-                    Log.debug("설마여기?")
-                } else {
-                    scrollToDate(proxy: scrollProxy)
-                }
-                scrollToDate(proxy: scrollProxy)
+                handleInitialScroll(scrollProxy: scrollProxy)
+            }
+            .onChange(of: userSelectedDate) { _ in
+                handleInitialScroll(scrollProxy: scrollProxy)
+                Log.debug("userSelectedDate값 변경 실행:\(userSelectedDate)")
+            }
+            .onChange(of: spendingHistoryViewModel.isClickSpendingDetailView) { _ in
+                proxy = scrollProxy
+
+                handleInitialScroll(scrollProxy: scrollProxy)
+                Log.debug("isClickSpendingDetailView값 변경 실행:\(spendingHistoryViewModel.isClickSpendingDetailView)")
             }
         }
         .onAppear {
@@ -67,6 +70,15 @@ struct SpendingWeekCalendarView: View {
                 }
             }
         }
+    }
+
+    private func handleInitialScroll(scrollProxy: ScrollViewProxy) {
+        if userSelectedDate == nil || spendingHistoryViewModel.isClickSpendingDetailView == false {
+            setToToday()
+        } else {
+            scrollToDate(proxy: scrollProxy)
+        }
+        scrollToDate(proxy: scrollProxy)
     }
 
     // MARK: - 월 표시 뷰
@@ -278,8 +290,6 @@ private extension SpendingWeekCalendarView {
         spendingHistoryViewModel.updateCurrentDate(to: newDate)
 
         // userSelectedDate = nil // 사용자가 선택한 날짜 초기화
-        Log.debug("날짜:\(String(describing: spendingHistoryViewModel.currentDate))")
-        Log.debug("date: \(Date())")
 
         // 선택된 날짜를 새로운 달의 첫날로 설정
         if let firstDayOfMonth = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: newDate)) {
@@ -287,9 +297,7 @@ private extension SpendingWeekCalendarView {
             selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
             spendingHistoryViewModel.selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
             proxy?.scrollTo(firstDayOfMonth, anchor: .center)
-            Log.debug("selectedDate:\(selectedDate)")
-            Log.debug("selectedDateToScroll:\(selectedDateToScroll)")
-            Log.debug("firstDayOfMonth:\(firstDayOfMonth)")
+            Log.debug("ㅈㅂㅈㅂㅈ:\(spendingHistoryViewModel.selectedDateToScroll)")
         }
     }
 
