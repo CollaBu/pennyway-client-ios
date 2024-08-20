@@ -18,7 +18,9 @@ struct RecentTargetAmountSuggestionView: View {
                 
                 Button(action: {
                     viewModel.deleteCurrentMonthTargetAmountApi { success in
-                        isHidden = true
+                        if success {
+                            isHidden = true
+                        }
                     }
                 }, label: {
                     Image("icon_close_white")

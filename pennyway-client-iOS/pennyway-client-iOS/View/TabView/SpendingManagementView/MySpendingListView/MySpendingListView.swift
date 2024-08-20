@@ -141,7 +141,9 @@ struct MySpendingListView: View {
                 HStack(spacing: 0) {
                     Button(action: {
                         spendingCategoryViewModel.getSpendingCustomCategoryListApi { success in
-                            navigateToCategoryGridView = true
+                            if success {
+                                navigateToCategoryGridView = true
+                            }
                         }
                     }, label: {
                         Text("카테고리")

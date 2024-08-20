@@ -220,6 +220,6 @@ class PhoneVerificationViewModel: ObservableObject {
         isTimerRunning = false
         isTimerHidden = true
         timerSeconds = 300
-        code = "" //입력한 코드 초기화
+        code = "" // 입력한 코드 초기화
     }
 }
