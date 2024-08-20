@@ -74,7 +74,7 @@ struct MySpendingListView: View {
                         }
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
-                                changeMonth(by: -1)
+//                                changeMonth(by: -1)
 
                             }, label: {
                                 ZStack {
@@ -91,6 +91,7 @@ struct MySpendingListView: View {
                                 }
                             })
                             .buttonStyle(BasicButtonStyleUtil())
+                            .buttonStyle(PlainButtonStyle())
                             .padding(.bottom, 48)
                             .onChange(of: selectedDateToScroll) { date in
                                 if let date = date {
@@ -202,27 +203,6 @@ struct MySpendingListView: View {
             .padding(.leading, 20)
             .padding(.bottom, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private func changeMonth(by value: Int) {
-        let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
-        currentMonth = spendingHistoryViewModel.currentDate
-        spendingHistoryViewModel.currentDate = newDate
-        currentMonth = newDate
-
-        spendingHistoryViewModel.selectedDate = nil
-        spendingHistoryViewModel.selectedDateId = 0
-
-        spendingHistoryViewModel.checkSpendingHistoryApi { success in
-            if success {
-                Log.debug("지출내역 조회 API 연동 성공")
-                DispatchQueue.main.async {
-                    self.currentMonth = newDate
-                }
-            } else {
-                Log.fault("지출내역 조회 API 연동 실패")
-            }
-        }
     }
 
     func monthTitle(from date: Date) -> String {
