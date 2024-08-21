@@ -72,7 +72,7 @@ struct SpendingDetailSheetView: View {
                     
                 if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
                     NoSpendingHistorySheetView()
-                        .analyzeEvent(SpendingEvents.spendingListView, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
+                        .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
                 } else {
                     ScrollView {
                         VStack(alignment: .leading) {
@@ -104,7 +104,7 @@ struct SpendingDetailSheetView: View {
                             }
                         }
                     }
-                    .analyzeEvent(SpendingEvents.spendingListView, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
+                    .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
                 }
             }
             .fullScreenCover(isPresented: $showEditSpendingDetailView) {

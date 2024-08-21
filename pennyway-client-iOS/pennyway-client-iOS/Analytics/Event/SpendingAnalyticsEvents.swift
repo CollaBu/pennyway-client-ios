@@ -8,7 +8,8 @@
 ///
 enum SpendingEvents: AnalyticsEvent {
     case spendingTabView
-    case spendingListView
+    case spendingListBottonSheet
+    
     case mySpendingListView
     case spendingDetailView
     case spendingAddView
@@ -20,14 +21,14 @@ enum SpendingEvents: AnalyticsEvent {
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .spendingTabView, .spendingListView, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendingListEditView, .spendAtSelectView, .spendingDeletePopUp:
+        case .spendingTabView, .spendingListBottonSheet, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendingListEditView, .spendAtSelectView, .spendingDeletePopUp:
             return AnalyticsConstants.EventName.screenView
         }
     }
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .spendingTabView, .spendingListView, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendAtSelectView, .spendingListEditView, .spendingDeletePopUp:
+        case .spendingTabView, .spendingListBottonSheet, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendAtSelectView, .spendingListEditView, .spendingDeletePopUp:
             return AnalyticsConstants.EventType.screenView
         }
     }
@@ -40,11 +41,11 @@ enum SpendingEvents: AnalyticsEvent {
                 .screenName: SpendingScreen.spendingTabView.screenName,
                 .screenClass: SpendingScreen.spendingTabView.screenClass
             ]
-        case .spendingListView:
+        case .spendingListBottonSheet:
             return [
-                .screenId: SpendingScreen.spendingListView.screenId,
-                .screenName: SpendingScreen.spendingListView.screenName,
-                .screenClass: SpendingScreen.spendingListView.screenClass
+                .screenId: SpendingScreen.spendingListBottonSheet.screenId,
+                .screenName: SpendingScreen.spendingListBottonSheet.screenName,
+                .screenClass: SpendingScreen.spendingListBottonSheet.screenClass
             ]
         case .mySpendingListView:
             return [
@@ -102,7 +103,8 @@ enum SpendingEvents: AnalyticsEvent {
 
 enum SpendingScreen {
     case spendingTabView
-    case spendingListView
+    case spendingListBottonSheet
+    
     case mySpendingListView
     case spendingDetailView
     case spendingAddView
@@ -115,7 +117,7 @@ enum SpendingScreen {
     var screenId: String {
         switch self {
         case .spendingTabView: return "spending_tab_view"
-        case .spendingListView: return "spending_bottom_sheet_view"
+        case .spendingListBottonSheet: return "spending_bottom_sheet_view"
         case .mySpendingListView: return "my_spending_list_view"
         case .spendingDetailView: return "spending_detail_view"
         case .spendingAddView: return "spending_add_view"
@@ -130,7 +132,7 @@ enum SpendingScreen {
     var screenName: String {
         switch self {
         case .spendingTabView: return "지출 관리 메인 탭 화면"
-        case .spendingListView: return "지출 관리 바텀시트 화면"
+        case .spendingListBottonSheet: return "지출 관리 바텀시트 화면"
         case .mySpendingListView: return "나의 소비 내역 화면"
         case .spendingDetailView: return "지출 상세 화면"
         case .spendingAddView: return "소비 내역 추가하기 화면"
@@ -145,7 +147,7 @@ enum SpendingScreen {
     var screenClass: String {
         switch self {
         case .spendingTabView: return "SpendingManagementMainView"
-        case .spendingListView: return "SpendingDetailSheetView"
+        case .spendingListBottonSheet: return "SpendingDetailSheetView"
         case .mySpendingListView: return "MySpendingListView"
         case .spendingDetailView: return "DetailSpendingView"
         case .spendingAddView: return "AddSpendingInputFormView"
