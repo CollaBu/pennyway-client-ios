@@ -54,10 +54,10 @@ struct AlarmRow: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            Image("icon_close_filled_primary")
+            Image("icon_notifications")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor())
+                .frame(width: 33 * DynamicSizeFactor.factor(), height: 33 * DynamicSizeFactor.factor())
                 .padding(1)
 
             VStack(alignment: .leading, spacing: 4 * DynamicSizeFactor.factor()) {

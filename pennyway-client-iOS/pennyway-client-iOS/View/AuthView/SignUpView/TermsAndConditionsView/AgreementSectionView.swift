@@ -33,7 +33,8 @@ struct AgreementSectionView: View {
             ZStack {
                 Rectangle()
                     .platformTextColor(color: .clear)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(width: 280 * DynamicSizeFactor.factor(), height: 121 * DynamicSizeFactor.factor())
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .cornerRadius(4)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
@@ -41,14 +42,17 @@ struct AgreementSectionView: View {
                             .stroke(Color("Gray01"), lineWidth: 1)
                     )
 
-                Text(contentText)
-                    .font(.B1MediumFont())
-                    .minimumScaleFactor(0.001)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .platformTextColor(color: Color("Gray04"))
-                    .padding(12 * DynamicSizeFactor.factor())
+                ScrollView {
+                    Text(contentText)
+                        .font(.B1MediumFont())
+                        .minimumScaleFactor(0.001)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .platformTextColor(color: Color("Gray04"))
+                        .padding(12 * DynamicSizeFactor.factor())
+                }
             }
+            .frame(width: 280 * DynamicSizeFactor.factor(), height: 121 * DynamicSizeFactor.factor())
         }
     }
 }
