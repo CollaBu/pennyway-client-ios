@@ -70,6 +70,14 @@ struct ResetPwView: View {
                 }.offset(x: -10)
             }
         }
+        .onAppear {
+            if entryPoint == .findPw {
+                AnalyticsManager.shared.trackEvent(AuthCheckEvents.findPasswordView, additionalParams: nil)
+            }
+            if entryPoint == .modifyPw {
+                AnalyticsManager.shared.trackEvent(ProfileEvents.passwordEditView, additionalParams: nil)
+            }
+        }
     }
     
     private func continueButtonAction() {

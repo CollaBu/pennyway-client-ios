@@ -80,6 +80,7 @@ struct ProfileMenuBarListView: View {
                                 secondBtnColor: Color("Gray05"),
                                 heightSize: 166
                 )
+                .analyzeEvent(ProfileEvents.accountDeletePopUp)
             }
 
             NavigationLink(destination: CompleteDeleteUserView(), isActive: $navigateCompleteView) {
@@ -87,6 +88,7 @@ struct ProfileMenuBarListView: View {
             }
             .hidden()
         }
+        .analyzeEvent(ProfileEvents.profileHamburgerMenuTap)
     }
 
     func handleLogout() {

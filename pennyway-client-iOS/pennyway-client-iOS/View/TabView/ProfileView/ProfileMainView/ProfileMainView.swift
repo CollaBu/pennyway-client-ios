@@ -108,6 +108,7 @@ struct ProfileMainView: View {
                     }
                 }
             }
+            .analyzeEvent(ProfileEvents.profileTapView)
 
             NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
                 EmptyView()
