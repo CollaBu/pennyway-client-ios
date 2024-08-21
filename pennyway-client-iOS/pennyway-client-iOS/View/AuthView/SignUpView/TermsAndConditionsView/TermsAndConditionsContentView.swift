@@ -53,13 +53,11 @@ struct TermsAndConditionsContentView: View {
                         Spacer().frame(height: 29 * DynamicSizeFactor.factor())
 
                         VStack(alignment: .leading) {
-                            // 하단 text내용 수정필요
-                            AgreementSectionView(isSelected: $isSelectedUseBtn, title: "이용약관 (필수)", contentText: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit")
+                            AgreementSectionView(isSelected: $isSelectedUseBtn, title: "이용약관 (필수)", contentText: PrivatePolicyModel.agreementOnTermsAndConditions)
 
                             Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
-                            // 하단 text내용 수정필요
-                            AgreementSectionView(isSelected: $isSelectedInfoBtn, title: "개인정보 처리방침 (필수)", contentText: "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit")
+                            AgreementSectionView(isSelected: $isSelectedInfoBtn, title: "개인정보 처리방침 (필수)", contentText: PrivatePolicyModel.privacyPolicy)
                         }
 
                         Spacer().frame(height: 32 * DynamicSizeFactor.factor())
@@ -70,7 +68,6 @@ struct TermsAndConditionsContentView: View {
                 .onChange(of: isSelectedInfoBtn) { _ in isSelectedAllBtn = isSelectedUseBtn && isSelectedInfoBtn }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
