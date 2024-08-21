@@ -20,7 +20,7 @@ struct pennyway_client_iOSApp: App {
     var body: some Scene {
         WindowGroup {
             if appViewModel.isLoggedIn || appViewModel.checkLoginState {
-                MainLayout {
+                LayoutView {
                     MainTabView()
                         .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
                         .onOpenURL { url in
@@ -31,22 +31,25 @@ struct pennyway_client_iOSApp: App {
                 .environmentObject(networkStatus)
             } else {
                 if appViewModel.isSplashShown {
-                    LoginView()
-                        .onOpenURL { url in
-                            GIDSignIn.sharedInstance.handle(url)
-                        }
-                        .environmentObject(appViewModel)
-                        .environmentObject(networkStatus)
+                    LayoutView {
+                        LoginView()
+                            .onOpenURL { url in
+                                GIDSignIn.sharedInstance.handle(url)
+                            }
+                    }
+                    .environmentObject(appViewModel)
+                    .environmentObject(networkStatus)
 
                 } else {
-                    MainView()
-                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-
-                        .onOpenURL { url in
-                            GIDSignIn.sharedInstance.handle(url)
-                        }
-                        .environmentObject(appViewModel)
-                        .environmentObject(networkStatus)
+                    LayoutView {
+                        MainView()
+                            .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                            .onOpenURL { url in
+                                GIDSignIn.sharedInstance.handle(url)
+                            }
+                    }
+                    .environmentObject(appViewModel)
+                    .environmentObject(networkStatus)
                 }
             }
         }

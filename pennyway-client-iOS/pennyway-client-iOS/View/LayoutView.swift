@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MainLayout<Content: View>: View {
+struct LayoutView<Content: View>: View {
     @EnvironmentObject var networkStatus: NetworkStatusViewModel
     let content: Content
 
@@ -15,11 +15,11 @@ struct MainLayout<Content: View>: View {
             if networkStatus.showToast {
                 VStack {
                     Spacer()
-                    CustomToastView(message: "네트워크 연결이 끊어졌습니다.")
+                    CustomToastView(message: "인터넷 연결이 불안정해요", isNetworkError: true)
                 }
                 .transition(.move(edge: .bottom))
                 .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                .padding(.bottom, 44 * DynamicSizeFactor.factor())
+                .padding(.bottom, networkStatus.paddingValue * DynamicSizeFactor.factor())
             }
         }
     }

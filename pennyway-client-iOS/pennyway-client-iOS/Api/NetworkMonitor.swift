@@ -8,7 +8,7 @@ final class NetworkMonitor {
     private let monitor: NWPathMonitor
     public private(set) var isConnected: Bool = false {
         didSet {
-            NotificationCenter.default.post(name: .networkStatusChanged, object: nil)
+            NotificationCenter.default.post(name: .changeNetworkState, object: nil)
         }
     }
 

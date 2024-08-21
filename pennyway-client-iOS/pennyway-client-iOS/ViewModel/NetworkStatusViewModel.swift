@@ -1,32 +1,35 @@
-
 import Combine
 import SwiftUI
 
 class NetworkStatusViewModel: ObservableObject {
-    @Published var isConnected: Bool = NetworkMonitor.shared.isConnected
     @Published var showToast: Bool = false
+    @Published var paddingValue: CGFloat = 34
 
     private var lastConnectionStatus: Bool = true
+    private var cancellable: AnyCancellable?
 
     init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(networkStatusChanged), name: .networkStatusChanged, object: nil)
+        cancellable = NotificationCenter.default
+            .publisher(for: .changeNetworkState)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.changeNetworkState()
+            }
     }
 
-    @objc private func networkStatusChanged(_: Notification) {
-        DispatchQueue.main.async {
-            let currentStatus = NetworkMonitor.shared.isConnected
-//            self.isConnected = currentStatus
+    private func changeNetworkState() {
+        let currentStatus = NetworkMonitor.shared.isConnected
 
-            if !currentStatus {
-                self.showToast = true
+        if !currentStatus {
+            showToast = true
 
-                Log.debug("??: 네트워크 오류")
-
-                // 일정 시간 후에 토스트를 숨김
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.showToast = false
-                }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.showToast = false
             }
         }
+    }
+
+    deinit {
+        cancellable?.cancel()
     }
 }
