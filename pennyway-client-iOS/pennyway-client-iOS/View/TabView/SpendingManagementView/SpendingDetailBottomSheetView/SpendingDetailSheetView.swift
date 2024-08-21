@@ -104,7 +104,6 @@ struct SpendingDetailSheetView: View {
                             }
                         }
                     }
-                    .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
                 }
             }
             .fullScreenCover(isPresented: $showEditSpendingDetailView) {
@@ -153,6 +152,13 @@ struct SpendingDetailSheetView: View {
             getDailyHistoryData()
         }
         .setTabBarVisibility(isHidden: true)
+        .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
+        .onChange(of: FullScreenState(showEditSpendingDetailView: showEditSpendingDetailView, showAddSpendingHistoryView: showAddSpendingHistoryView, showDetailSpendingView: showDetailSpendingView), 
+                  perform: { state in
+                      if state.isReturn() {
+                          AnalyticsManager.shared.trackEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
+                      }
+                  })
     }
     
     private func getDailyHistoryData() {
@@ -164,5 +170,17 @@ struct SpendingDetailSheetView: View {
                 Log.debug("뷰 새로고침 실패")
             }
         }
+    }
+}
+
+// MARK: - FullScreenState
+
+struct FullScreenState: Equatable {
+    let showEditSpendingDetailView: Bool
+    let showAddSpendingHistoryView: Bool
+    let showDetailSpendingView: Bool
+    
+    func isReturn() -> Bool {
+        return !showEditSpendingDetailView && !showAddSpendingHistoryView && !showDetailSpendingView
     }
 }

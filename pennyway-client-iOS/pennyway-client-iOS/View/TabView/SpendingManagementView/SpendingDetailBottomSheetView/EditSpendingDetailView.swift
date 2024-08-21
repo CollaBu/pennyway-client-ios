@@ -119,6 +119,7 @@ struct EditSpendingDetailView: View {
                                 secondBtnLabel: "끝낼래요",
                                 secondBtnColor: Color("Mint03")
                 )
+                .analyzeEvent(SpendingEvents.spendingEditdonePopup)
             }
 
             if showingDeletePopUp {
@@ -132,9 +133,15 @@ struct EditSpendingDetailView: View {
                                 secondBtnLabel: "삭제하기",
                                 secondBtnColor: Color("Red03")
                 )
+                .analyzeEvent(SpendingEvents.spendingEditDeletePopUp)
             }
         }
         .analyzeEvent(SpendingEvents.spendingListEditView)
+        .onChange(of: PopUpState(showingClosePopUp: showingClosePopUp, showingDeletePopUp: showingDeletePopUp), perform: { state in
+            if state.isReturn() {
+                AnalyticsManager.shared.trackEvent(SpendingEvents.spendingListEditView, additionalParams: nil)
+            }
+        })
     }
 
     private func toggleAllSelections() { // 전체 선택시
@@ -178,6 +185,17 @@ struct EditSpendingDetailView: View {
             }
         }
         isItemSelected = !selectedIds.isEmpty
+    }
+}
+
+// MARK: - PopUpState
+
+struct PopUpState: Equatable {
+    let showingClosePopUp: Bool
+    let showingDeletePopUp: Bool
+
+    func isReturn() -> Bool {
+        return !showingClosePopUp && !showingDeletePopUp
     }
 }
 

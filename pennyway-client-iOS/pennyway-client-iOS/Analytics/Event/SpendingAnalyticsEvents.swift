@@ -9,7 +9,6 @@
 enum SpendingEvents: AnalyticsEvent {
     case spendingTabView
     case spendingListBottonSheet
-    
     case mySpendingListView
     case spendingDetailView
     case spendingAddView
@@ -17,18 +16,20 @@ enum SpendingEvents: AnalyticsEvent {
     case spendingUpdateView
     case spendAtSelectView
     case spendingListEditView
+    case spendingEditdonePopup
+    case spendingEditDeletePopUp
     case spendingDeletePopUp
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .spendingTabView, .spendingListBottonSheet, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendingListEditView, .spendAtSelectView, .spendingDeletePopUp:
+        case .spendingTabView, .spendingListBottonSheet, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendingListEditView, .spendAtSelectView, .spendingEditdonePopup, .spendingEditDeletePopUp, .spendingDeletePopUp:
             return AnalyticsConstants.EventName.screenView
         }
     }
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .spendingTabView, .spendingListBottonSheet, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendAtSelectView, .spendingListEditView, .spendingDeletePopUp:
+        case .spendingTabView, .spendingListBottonSheet, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendAtSelectView, .spendingListEditView, .spendingEditdonePopup, .spendingEditDeletePopUp, .spendingDeletePopUp:
             return AnalyticsConstants.EventType.screenView
         }
     }
@@ -89,6 +90,18 @@ enum SpendingEvents: AnalyticsEvent {
                 .screenName: SpendingScreen.spendingListEditView.screenName,
                 .screenClass: SpendingScreen.spendingListEditView.screenClass
             ]
+        case .spendingEditdonePopup:
+            return [
+                .screenId: SpendingScreen.spendingEditdonePopup.screenId,
+                .screenName: SpendingScreen.spendingEditdonePopup.screenName,
+                .screenClass: SpendingScreen.spendingEditdonePopup.screenClass
+            ]
+        case .spendingEditDeletePopUp:
+            return [
+                .screenId: SpendingScreen.spendingEditDeletePopUp.screenId,
+                .screenName: SpendingScreen.spendingEditDeletePopUp.screenName,
+                .screenClass: SpendingScreen.spendingEditDeletePopUp.screenClass
+            ]
         case .spendingDeletePopUp:
             return [
                 .screenId: SpendingScreen.spendingDeletePopUp.screenId,
@@ -104,7 +117,6 @@ enum SpendingEvents: AnalyticsEvent {
 enum SpendingScreen {
     case spendingTabView
     case spendingListBottonSheet
-    
     case mySpendingListView
     case spendingDetailView
     case spendingAddView
@@ -112,6 +124,8 @@ enum SpendingScreen {
     case spendingUpdateView
     case spendAtSelectView
     case spendingListEditView
+    case spendingEditdonePopup
+    case spendingEditDeletePopUp
     case spendingDeletePopUp
     
     var screenId: String {
@@ -125,6 +139,8 @@ enum SpendingScreen {
         case .spendingUpdateView: return "spending_update_view"
         case .spendAtSelectView: return "spend_at_select_view"
         case .spendingListEditView: return "spending_list_edit_view"
+        case .spendingEditdonePopup: return "spending_edit_done_popup"
+        case .spendingEditDeletePopUp: return "spending_edit_delete_popup"
         case .spendingDeletePopUp: return "spending_delete_popup"
         }
     }
@@ -140,6 +156,8 @@ enum SpendingScreen {
         case .spendingUpdateView: return "소비 내역 수정 화면"
         case .spendAtSelectView: return "소비 날짜 선택 화면"
         case .spendingListEditView: return "소비 내역 편집하기 화면"
+        case .spendingEditdonePopup: return "소비 내역 편집 끝내기 팝업"
+        case .spendingEditDeletePopUp: return "소비 내역 다중 삭제 팝업"
         case .spendingDeletePopUp: return "소비 내역 삭제 팝업"
         }
     }
@@ -155,6 +173,8 @@ enum SpendingScreen {
         case .spendingUpdateView: return "AddSpendingInputFormView"
         case .spendAtSelectView: return "SelectSpendingDayView"
         case .spendingListEditView: return "SpendingDetailSheetView"
+        case .spendingEditdonePopup: return "SpendingDetailSheetView"
+        case .spendingEditDeletePopUp: return "SpendingDetailSheetView"
         case .spendingDeletePopUp: return "DetailSpendingView"
         }
     }
