@@ -72,9 +72,11 @@ struct ResetPwView: View {
         }
         .onAppear {
             if entryPoint == .findPw {
+                Log.debug("이벤트 발생: 비밀번호 찾기 뷰 진입")
                 AnalyticsManager.shared.trackEvent(AuthCheckEvents.findPasswordView, additionalParams: nil)
             }
             if entryPoint == .modifyPw {
+                Log.debug("이벤트 발생: 비밀번호 변경 뷰 진입")
                 AnalyticsManager.shared.trackEvent(ProfileEvents.passwordEditView, additionalParams: nil)
             }
         }
