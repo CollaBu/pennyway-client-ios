@@ -5,6 +5,8 @@
 //  Created by 양재서 on 8/21/24.
 //
 
+// MARK: - QuestionEvents
+
 enum QuestionEvents: AnalyticsEvent {
     case questionView
     
@@ -33,6 +35,8 @@ enum QuestionEvents: AnalyticsEvent {
     }
 }
 
+// MARK: - QuestionScreen
+
 enum QuestionScreen {
     case questionView
     
@@ -53,7 +57,7 @@ enum QuestionScreen {
     var screenClass: String {
         switch self {
         case .questionView:
-            return "TermsAndConditionsView"
+            return "InquiryView"
         }
     }
 }

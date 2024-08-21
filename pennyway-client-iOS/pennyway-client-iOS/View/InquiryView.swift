@@ -169,6 +169,7 @@ struct InquiryView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(QuestionEvents.questionView)
     }
 
     private func continueButtonAction() {
