@@ -43,7 +43,6 @@ struct MainTabView: View {
             .accentColor(Color("Mint03"))
             .onAppear {
                 UITabBar.appearance().barTintColor = .white
-                networkStatus.paddingValue = 50
             }
         }
     }

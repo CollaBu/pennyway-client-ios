@@ -3,7 +3,6 @@ import SwiftUI
 
 class NetworkStatusViewModel: ObservableObject {
     @Published var showToast: Bool = false
-    @Published var paddingValue: CGFloat = 34
 
     private var lastConnectionStatus: Bool = true
     private var cancellable: AnyCancellable?

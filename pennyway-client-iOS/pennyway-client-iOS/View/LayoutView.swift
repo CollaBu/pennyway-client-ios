@@ -19,7 +19,7 @@ struct LayoutView<Content: View>: View {
                 }
                 .transition(.move(edge: .bottom))
                 .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                .padding(.bottom, networkStatus.paddingValue * DynamicSizeFactor.factor())
+                .padding(.bottom, 10 * DynamicSizeFactor.factor())
             }
         }
     }
