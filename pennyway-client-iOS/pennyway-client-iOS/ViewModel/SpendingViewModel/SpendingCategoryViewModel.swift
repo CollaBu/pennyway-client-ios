@@ -1,4 +1,4 @@
-
+import Combine
 import SwiftUI
 
 class SpendingCategoryViewModel: ObservableObject {
@@ -30,7 +30,7 @@ class SpendingCategoryViewModel: ObservableObject {
     @Published var spedingHistoryTotalCount = 0 // 지출 내역 리스트 총 개수
     @Published var hasNext: Bool = true
     private var currentPageNumber: Int = 0
-    
+  
     /// 카테고리 조회 api 호출
     func getSpendingCustomCategoryListApi(completion: @escaping (Bool) -> Void) {
         SpendingCategoryAlamofire.shared.getSpendingCustomCategoryList { result in
@@ -106,12 +106,12 @@ class SpendingCategoryViewModel: ObservableObject {
     }
     
     /// 카테고리에 따른 지출내역 리스트 조회 api 호출
-    func getCategorySpendingHistoryApi(completion: @escaping (Bool) -> Void) {
+    func getCategorySpendingHistoryApi(isReload: Bool? = false, completion: @escaping (Bool) -> Void) {
         guard hasNext, selectedCategory != nil else {
             return
         }
         
-        let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "5", page: "\(currentPageNumber)")
+        let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "30", page: "\(currentPageNumber)")
         
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
         
@@ -125,13 +125,16 @@ class SpendingCategoryViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("카테고리에 등록된 지출내역 조회\(jsonString)")
                         }
-                        
+                        self.dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id }
                         self.mergeNewSpendings(newSpendings: response.data.spendings.content)
-                        self.currentPageNumber += 1
                         self.hasNext = response.data.spendings.hasNext
                         
-                        completion(true)
+                        if !(isReload ?? false) {
+                            self.currentPageNumber += 1
+                        }
                         
+                        completion(true)
+
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }
