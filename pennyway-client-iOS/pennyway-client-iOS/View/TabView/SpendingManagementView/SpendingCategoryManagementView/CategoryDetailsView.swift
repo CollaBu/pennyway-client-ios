@@ -139,7 +139,6 @@ struct CategoryDetailsView: View {
                     isDeleted = false
                 }
             }
-            .analyzeEvent(SpendingCategoryEvents.categoryDetailView)
             
             if showDeletePopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
@@ -176,5 +175,11 @@ struct CategoryDetailsView: View {
             NavigationLink(destination: MoveCategoryView(spendingCategoryViewModel: viewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel(), showMoveToastPopup: $showMoveToastPopup), isActive: $isNavigateToMoveCategoryView) {}
                 .hidden()
         }
+        .analyzeEvent(SpendingCategoryEvents.categoryDetailView)
+        .onChange(of: showDeletePopUp, perform: { isShow in
+            if !isShow {
+                AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.categoryDetailView, additionalParams: nil)
+            }
+        })
     }
 }
