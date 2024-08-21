@@ -175,9 +175,15 @@ struct AddSpendingCategoryView: View {
                         spendingCategoryViewModel.initPage()
                         
                         // 카테고리 수정 후 카테고리 관련 데이터 다시 조회
-                        spendingCategoryViewModel.getCategorySpendingHistoryApi { _ in }
-                        spendingCategoryViewModel.getSpendingCustomCategoryListApi { _ in }
-                        presentationMode.wrappedValue.dismiss()
+                        spendingCategoryViewModel.getCategorySpendingHistoryApi { success in
+                            if success {
+                                spendingCategoryViewModel.getSpendingCustomCategoryListApi { success in
+                                    if success {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
+                            }
+                        }
                             
                     } else {
                         Log.debug("카테고리 수정 실패")

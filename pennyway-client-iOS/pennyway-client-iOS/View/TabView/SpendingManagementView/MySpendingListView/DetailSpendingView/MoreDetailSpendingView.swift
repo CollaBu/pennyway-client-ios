@@ -5,7 +5,8 @@ struct MoreDetailSpendingView: View {
     @Binding var clickDate: Date?
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
-    
+    @ObservedObject var addSpendingViewModel: AddSpendingHistoryViewModel
+
     var spendingId: Int
 
     var body: some View {
@@ -39,15 +40,13 @@ struct MoreDetailSpendingView: View {
                             .font(.B1MediumFont())
                         
                         Spacer()
-                        
-                        if let date = clickDate {
-                            Text(Date.getFormattedDate(from: date))
+            
+                        if let date = DateFormatterUtil.dateFromString(spendingDetail.spendAt) {
+                            Text(Date.getFormattedDate(from: date ?? Date()))
                                 .platformTextColor(color: Color("Gray07"))
                                 .font(.B1MediumFont())
                         } else {
-                            // 지출 카테고리에서 진입한 경우
-                            let date = DateFormatterUtil.dateFromString(spendingDetail.spendAt)
-                            Text(Date.getFormattedDate(from: date ?? Date()))
+                            Text(Date.getFormattedDate(from: addSpendingViewModel.selectedDate))
                                 .platformTextColor(color: Color("Gray07"))
                                 .font(.B1MediumFont())
                         }

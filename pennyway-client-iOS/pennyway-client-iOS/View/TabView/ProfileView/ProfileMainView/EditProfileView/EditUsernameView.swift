@@ -14,20 +14,24 @@ struct EditUsernameView: View {
 
                 CustomInputView(inputText: $formViewModel.name, titleText: "이름 입력", placeholder: "최대 8자로 입력해주세요", onCommit: {
                     formViewModel.validateName()
-                }, isSecureText: false, isCustom: false)
-                    .onChange(of: formViewModel.name) { newValue in
-                        if newValue.count > maxLength {
-                            formViewModel.name = String(newValue.prefix(maxLength))
-                        }
-                        formViewModel.validateName()
+                }, isSecureText: false, isCustom: false, showDeleteButton: true, deleteAction: {
+                    formViewModel.name = ""
+                })
+                .onChange(of: formViewModel.name) { newValue in
+                    if newValue.count > maxLength {
+                        formViewModel.name = String(newValue.prefix(maxLength))
                     }
+                    formViewModel.validateName()
+                }
 
                 Spacer().frame(height: 12 * DynamicSizeFactor.factor())
 
                 HStack {
-                    Text("현재 이름 : \(getUserData()!.name)")
-                        .font(.B1MediumFont())
-                        .platformTextColor(color: Color("Gray05"))
+                    if let userData = getUserData() {
+                        Text("현재 이름 : \(userData.name)")
+                            .font(.B1MediumFont())
+                            .platformTextColor(color: Color("Gray05"))
+                    }
 
                     Spacer()
 

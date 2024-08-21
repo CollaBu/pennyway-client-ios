@@ -14,16 +14,19 @@ struct DetailSpendingView: View {
     @Binding var spendingId: Int?
     @Binding var isDeleted: Bool
     @Binding var showToastPopup: Bool
+    @Binding var isEditSuccess: Bool
+
     @State private var forceUpdate: Bool = false
     @State private var showingPopUp: Bool = false
 
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
-    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>, spendingCategoryViewModel: SpendingCategoryViewModel) {
+    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>, isEditSuccess: Binding<Bool>, spendingCategoryViewModel: SpendingCategoryViewModel) {
         _clickDate = clickDate
         _spendingId = spendingId
         _isDeleted = isDeleted
         _showToastPopup = showToastPopup
+        _isEditSuccess = isEditSuccess
         _spendingCategoryViewModel = ObservedObject(wrappedValue: spendingCategoryViewModel)
         _spendingHistoryViewModel = StateObject(wrappedValue: SpendingHistoryViewModel())
     }
@@ -35,10 +38,10 @@ struct DetailSpendingView: View {
 
                 if let spendingDetail = spendingCategoryViewModel.selectSpending {
                     // 지출 카테고리 리스트로 조회시
-                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingDetail.id)
+                    MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, addSpendingViewModel: AddSpendingHistoryViewModel(), spendingId: spendingDetail.id)
                 } else {
                     if let spendingId = spendingId {
-                        MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, spendingId: spendingId)
+                        MoreDetailSpendingView(clickDate: $clickDate, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, addSpendingViewModel: AddSpendingHistoryViewModel(), spendingId: spendingId)
                     }
                 }
             }
@@ -58,6 +61,7 @@ struct DetailSpendingView: View {
                                 secondBtnColor: Color("Red03"))
             }
         }
+        .id(forceUpdate)
         .navigationBarTitle("", displayMode: .inline)
         .setTabBarVisibility(isHidden: true)
         .edgesIgnoringSafeArea(.bottom)
@@ -97,7 +101,13 @@ struct DetailSpendingView: View {
             loadDataForSelectedDate()
             isSelectedCategory = false
             self.selectedItem = nil
-//            isDeleted = false
+        }
+        .onChange(of: spendingHistoryViewModel.spendingDetailViewUpdated) { updated in
+            Log.debug("onChange실행중, updated: \(updated)")
+            if updated {
+                loadDataForSelectedDate()
+                forceUpdate = true
+            }
         }
         .overlay(
             VStack(alignment: .center) {
@@ -124,14 +134,13 @@ struct DetailSpendingView: View {
         )
         .analyzeEvent(SpendingEvents.spendingDetailView)
 
-        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, clickDate: $clickDate, isPresented: .constant(false), entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
+        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: $spendingId, clickDate: $clickDate, isPresented: .constant(false), isEditSuccess: $isEditSuccess, entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
             .hidden()
     }
 
     private func loadDataForSelectedDate() {
-        guard let date = clickDate else {
-            return
-        }
+        let date = clickDate ?? Date()
+
         spendingHistoryViewModel.selectedDate = date
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {

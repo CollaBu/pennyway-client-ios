@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddSpendingCompleteView: View {
-//    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode
 
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @Binding var clickDate: Date?
@@ -66,14 +66,16 @@ struct AddSpendingCompleteView: View {
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                 
             CustomBottomButton(action: {
+                Log.debug("버튼 누름")
                 if entryPoint == .main {
                     NavigationUtil.popToRootView()
+                    Log.debug("루트뷰로이동")
                 } else {
                     isPresented = false
                     Log.debug("isPresented: \(isPresented)")
                     Log.debug("entryPoint: \(entryPoint)")
                 }
-
+                
             }, label: "확인", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }

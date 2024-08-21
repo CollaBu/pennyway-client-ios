@@ -17,9 +17,12 @@ struct RecentTargetAmountSuggestionView: View {
                 Spacer()
                 
                 Button(action: {
-                    isHidden = true
-                    viewModel.deleteCurrentMonthTargetAmountApi { _ in }
-                    AnalyticsManager.shared.trackEvent(TargetAmountEvents.cancelRecentTotalAmount, additionalParams: nil)
+                    viewModel.deleteCurrentMonthTargetAmountApi { success in
+                        if success {
+                            isHidden = true
+                            AnalyticsManager.shared.trackEvent(TargetAmountEvents.cancelRecentTotalAmount, additionalParams: nil)
+                        }
+                    }
                 }, label: {
                     Image("icon_close_white")
                         .resizable()

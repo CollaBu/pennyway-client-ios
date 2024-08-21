@@ -6,10 +6,10 @@ struct EditProfilePopUpView: View {
     @Binding var isPresented: Bool
     @Binding var showPopUpView: Bool
     @Binding var isHiddenTabBar: Bool
-    @Binding var image: Image?
     @Binding var showImagePicker: Bool
     @Binding var selectedUIImage: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
+    @Binding var imageUrl: String
 
     @StateObject var deleteProfileImageViewModel = DeleteProfileImageViewModel()
     @ObservedObject var presignedUrlViewModel: PresignedUrlViewModel
@@ -89,6 +89,8 @@ struct EditProfilePopUpView: View {
             deleteProfileImageViewModel.deleteProfileImageApi { success in
                 if success {
                     Log.debug("deleteProfileImageApi 성공")
+                    selectedUIImage = nil
+                    imageUrl = ""
                 } else {
                     Log.debug("삭제 api 호출 실패")
                 }

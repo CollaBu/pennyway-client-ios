@@ -5,6 +5,7 @@ struct PhoneNumberInputSectionView: View {
     @ObservedObject var viewModel: PhoneVerificationViewModel
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @Binding var showManyRequestPopUp: Bool
+    @State private var showErrorExistingUser = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 11 * DynamicSizeFactor.factor()) {
@@ -12,9 +13,12 @@ struct PhoneNumberInputSectionView: View {
             if viewModel.showErrorPhoneNumberFormat {
                 ErrorText(message: "올바른 전화번호 형식이 아니에요", color: Color("Red03"))
             }
-            if viewModel.showErrorExistingUser {
+            if showErrorExistingUser {
                 ErrorText(message: "이미 가입된 전화번호예요", color: Color("Red03"))
             }
+        }
+        .onChange(of: viewModel.showErrorExistingUser) { newValue in
+            showErrorExistingUser = newValue
         }
     }
 
@@ -28,7 +32,10 @@ struct PhoneNumberInputSectionView: View {
 
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                 PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange)
-                VerificationButton(isEnabled: !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 && viewModel.phoneNumber != viewModel.firstPhoneNumber, action: handleVerificationButtonTap)
+                VerificationButton(
+                    isEnabled: isVerificationButtonEnabled(),
+                    action: handleVerificationButtonTap
+                )
             }
             .padding(.horizontal, 20)
         }
@@ -39,10 +46,12 @@ struct PhoneNumberInputSectionView: View {
             if newValue.count > 11 {
                 viewModel.phoneNumber = String(newValue.prefix(11))
             }
-            if viewModel.phoneNumber != viewModel.firstPhoneNumber {
-                viewModel.showErrorExistingUser = false
-            } else {
-                viewModel.showErrorExistingUser = true
+            if viewModel.showErrorExistingUser {
+                if viewModel.phoneNumber != viewModel.requestedPhoneNumber {
+                    showErrorExistingUser = false
+                } else {
+                    showErrorExistingUser = true
+                }
             }
         } else {
             viewModel.phoneNumber = ""
@@ -63,10 +72,14 @@ struct PhoneNumberInputSectionView: View {
     }
 
     private func handleErrorApi() {
-        if viewModel.showErrorApiRequest {
+        if viewModel.showErrorManyRequest {
             showManyRequestPopUp = true
         } else {
             viewModel.judgeTimerRunning()
         }
+    }
+
+    private func isVerificationButtonEnabled() -> Bool {
+        return !viewModel.isDisabledButton && viewModel.phoneNumber.count == 11 && viewModel.phoneNumber != viewModel.requestedPhoneNumber
     }
 }

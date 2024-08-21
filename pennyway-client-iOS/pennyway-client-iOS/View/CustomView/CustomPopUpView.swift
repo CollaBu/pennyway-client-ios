@@ -61,6 +61,8 @@ extension CustomPopUpView {
                     Text(titleLabel)
                         .platformTextColor(color: Color("Gray07"))
                         .font(.H3SemiboldFont())
+                        .multilineTextAlignment(.center) // 이 라인을 추가하여 텍스트를 가운데 정렬
+                        .frame(maxWidth: .infinity)
 
                     Spacer().frame(height: 7 * DynamicSizeFactor.factor())
 
