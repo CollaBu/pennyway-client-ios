@@ -7,6 +7,7 @@ struct CategorySpendingListView: View {
     @State private var showDetailSpendingView = false
     @Binding var showDeleteToastPopup: Bool
     @Binding var isDeleted: Bool
+    @Binding var isEditSuccess: Bool
 
     @State private var isLoadingViewShown: Bool = false
     @State private var animateLoadingView: Bool = false
@@ -66,7 +67,7 @@ struct CategorySpendingListView: View {
             }
         }
 
-        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showDeleteToastPopup, isEditSuccess: .constant(false), spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
+        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showDeleteToastPopup, isEditSuccess: $isEditSuccess, spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
             .hidden()
     }
 

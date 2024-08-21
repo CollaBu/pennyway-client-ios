@@ -139,18 +139,9 @@ struct AddSpendingInputFormView: View {
                 viewModel.consumerText = ""
                 isDeleteButtonVisible = false
             })
-//            .onAppear {
-//                isDeleteButtonVisible = false
-//            }
             .onTapGesture {
                 isDeleteButtonVisible = true
             }
-//            .onChange(of: viewModel.consumerText) { newValue in
-//                if newValue.isEmpty {
-//                    isDeleteButtonVisible = false
-//                }
-//            }
-
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             
             // 메모
