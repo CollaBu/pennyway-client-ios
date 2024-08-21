@@ -52,6 +52,7 @@ struct SelectSpendingDayView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
+        .analyzeEvent(SpendingEvents.spendAtSelectView)
     }
 
     private var dateRange: ClosedRange<Date> { // 2000년도부터 현재까지로 제한

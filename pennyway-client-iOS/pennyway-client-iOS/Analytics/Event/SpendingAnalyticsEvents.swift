@@ -14,18 +14,19 @@ enum SpendingEvents: AnalyticsEvent {
     case spendingAddView
     case spendingAddCompleteView
     case spendingUpdateView
+    case spendAtSelectView
     case spendingListEditView
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .spendingTabView, .spendingListView, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendingListEditView:
+        case .spendingTabView, .spendingListView, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendingListEditView, .spendAtSelectView:
             return AnalyticsConstants.EventName.screenView
         }
     }
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .spendingTabView, .spendingListView, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendingListEditView:
+        case .spendingTabView, .spendingListView, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendAtSelectView, .spendingListEditView:
             return AnalyticsConstants.EventType.screenView
         }
     }
@@ -74,6 +75,12 @@ enum SpendingEvents: AnalyticsEvent {
                 .screenName: SpendingScreen.spendingUpdateView.screenName,
                 .screenClass: SpendingScreen.spendingUpdateView.screenClass
             ]
+        case .spendAtSelectView:
+            return [
+                .screenId: SpendingScreen.spendAtSelectView.screenId,
+                .screenName: SpendingScreen.spendAtSelectView.screenName,
+                .screenClass: SpendingScreen.spendAtSelectView.screenClass
+                ]
         case .spendingListEditView:
             return [
                 .screenId: SpendingScreen.spendingListEditView.screenId,
@@ -94,6 +101,7 @@ enum SpendingScreen {
     case spendingAddView
     case spendingAddCompleteView
     case spendingUpdateView
+    case spendAtSelectView
     case spendingListEditView
     
     var screenId: String {
@@ -105,6 +113,7 @@ enum SpendingScreen {
         case .spendingAddView: return "spending_add_view"
         case .spendingAddCompleteView: return "spending_add_complete_view"
         case .spendingUpdateView: return "spending_update_view"
+        case .spendAtSelectView: return "spend_at_select_view"
         case .spendingListEditView: return "spending_list_edit_view"
         }
     }
@@ -118,6 +127,7 @@ enum SpendingScreen {
         case .spendingAddView: return "소비 내역 추가하기 화면"
         case .spendingAddCompleteView: return "소비 내역 추가 완료 화면"
         case .spendingUpdateView: return "소비 내역 수정 화면"
+        case .spendAtSelectView: return "소비 날짜 선택 화면"
         case .spendingListEditView: return "소비 내역 편집하기 화면"
         }
     }
@@ -131,6 +141,7 @@ enum SpendingScreen {
         case .spendingAddView: return "AddSpendingInputFormView"
         case .spendingAddCompleteView: return "AddSpendingCompleteView"
         case .spendingUpdateView: return "AddSpendingInputFormView"
+        case .spendAtSelectView: return "SelectSpendingDayView"
         case .spendingListEditView: return "SpendingDetailSheetView"
         }
     }
