@@ -21,10 +21,6 @@ class NetworkStatusViewModel: ObservableObject {
 
         if !currentStatus {
             showToast = true
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.showToast = false
-            }
         }
     }
 
