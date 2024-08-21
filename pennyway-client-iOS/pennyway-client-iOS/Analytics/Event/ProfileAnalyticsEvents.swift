@@ -12,6 +12,7 @@ enum ProfileEvents: AnalyticsEvent {
     case profileEditView
     case nameEditView
     case usernameEditView
+    case phoneEditView
     case currentPasswordCheckView
     case passwordEditView
     case passwordEditCompleteView
@@ -24,14 +25,14 @@ enum ProfileEvents: AnalyticsEvent {
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
+        case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .phoneEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
             return AnalyticsConstants.EventName.screenView
         }
     }
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
+        case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .phoneEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
             return AnalyticsConstants.EventType.screenView
         }
     }
@@ -62,6 +63,11 @@ enum ProfileEvents: AnalyticsEvent {
             .screenId: ProfileScreen.usernameEditView.screenId,
             .screenName: ProfileScreen.usernameEditView.screenName,
             .screenClass: ProfileScreen.usernameEditView.screenClass
+        ]
+        case .phoneEditView: [
+            .screenId: ProfileScreen.phoneEditView.screenId,
+            .screenName: ProfileScreen.phoneEditView.screenName,
+            .screenClass: ProfileScreen.phoneEditView.screenClass
         ]
         case .currentPasswordCheckView: [
             .screenId: ProfileScreen.currentPasswordCheckView.screenId,
@@ -109,6 +115,7 @@ enum ProfileScreen {
     case profileEditView
     case nameEditView
     case usernameEditView
+    case phoneEditView
     case currentPasswordCheckView
     case passwordEditView
     case passwordEditCompleteView
@@ -126,6 +133,7 @@ enum ProfileScreen {
             case .profileEditView: return "profile_edit_view"
             case .nameEditView: return "name_edit_view"
             case .usernameEditView: return "username_edit_view"
+            case .phoneEditView: return "phone_edit_view"
             case .currentPasswordCheckView: return "current_password_check_view"
             case .passwordEditView: return "password_edit_view"
             case .passwordEditCompleteView: return "password_edit_complete_view"
@@ -143,6 +151,7 @@ enum ProfileScreen {
             case .profileEditView: return "내 정보 수정 화면"
             case .nameEditView: return "이름 수정 화면"
             case .usernameEditView: return "아이디 수정 화면"
+            case .phoneEditView: return "전화번호 수정 화면"
             case .currentPasswordCheckView: return "현재 비밀번호 확인 화면"
             case .passwordEditView: return "비밀번호 수정 화면"
             case .passwordEditCompleteView: return "비밀번호 수정 완료 화면"
@@ -160,6 +169,7 @@ enum ProfileScreen {
             case .profileEditView: return "EditProfileListView"
             case .nameEditView: return "EditUsernameView"
             case .usernameEditView: return "EditIdView"
+            case .phoneEditView: return "EditPhoneNumberView"
             case .currentPasswordCheckView: return "ProfileModifyPwView"
             case .passwordEditView: return "ResetPwView"
             case .passwordEditCompleteView: return "CompleteChangePwView"
