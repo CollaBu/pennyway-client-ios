@@ -13,12 +13,15 @@ enum ProfileEvents: AnalyticsEvent {
     
     case profileEditView
     case nameEditView
+    
     case usernameEditView
     case phoneEditView
     case currentPasswordCheckView
     case passwordEditView
     case passwordEditCompleteView
     case profileImageEditPopUp
+    case oauthUnlinkPopUp
+    case signOutPopUp
     
     case notificationEditView
     
@@ -27,14 +30,14 @@ enum ProfileEvents: AnalyticsEvent {
     
     var eventName: AnalyticsConstants.EventName {
         switch self {
-        case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .phoneEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
+        case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .phoneEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .oauthUnlinkPopUp, .signOutPopUp, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
             return AnalyticsConstants.EventName.screenView
         }
     }
     
     var eventType: AnalyticsConstants.EventType {
         switch self {
-        case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .phoneEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
+        case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .phoneEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .oauthUnlinkPopUp, .signOutPopUp, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
             return AnalyticsConstants.EventType.screenView
         }
     }
@@ -91,6 +94,16 @@ enum ProfileEvents: AnalyticsEvent {
                 .screenName: ProfileScreen.profileImageEditPopUp.screenName,
                 .screenClass: ProfileScreen.profileImageEditPopUp.screenClass
             ]
+        case .oauthUnlinkPopUp: [
+                .screenId: ProfileScreen.oauthUnlinkPopUp.screenId,
+                .screenName: ProfileScreen.oauthUnlinkPopUp.screenName,
+                .screenClass: ProfileScreen.oauthUnlinkPopUp.screenClass
+            ]
+        case .signOutPopUp: [
+                .screenId: ProfileScreen.signOutPopUp.screenId,
+                .screenName: ProfileScreen.signOutPopUp.screenName,
+                .screenClass: ProfileScreen.signOutPopUp.screenClass
+            ]
         case .notificationEditView: [
                 .screenId: ProfileScreen.notificationEditView.screenId,
                 .screenName: ProfileScreen.notificationEditView.screenName,
@@ -118,12 +131,15 @@ enum ProfileScreen {
     
     case profileEditView
     case nameEditView
+    
     case usernameEditView
     case phoneEditView
     case currentPasswordCheckView
     case passwordEditView
     case passwordEditCompleteView
     case profileImageEditPopUp
+    case oauthUnlinkPopUp
+    case signOutPopUp
     
     case notificationEditView
     
@@ -142,6 +158,8 @@ enum ProfileScreen {
         case .passwordEditView: return "password_edit_view"
         case .passwordEditCompleteView: return "password_edit_complete_view"
         case .profileImageEditPopUp: return "profile_image_edit_popup"
+        case .oauthUnlinkPopUp: return "oauth_unlink_popup"
+        case .signOutPopUp: return "logout_popup"
         case .notificationEditView: return "notification_edit_view"
         case .accountDeletePopUp: return "account_delete_popup"
         case .accountDeleteSuccessPopUp: return "account_delete_success_popup"
@@ -160,6 +178,8 @@ enum ProfileScreen {
         case .passwordEditView: return "비밀번호 수정 화면"
         case .passwordEditCompleteView: return "비밀번호 수정 완료 화면"
         case .profileImageEditPopUp: return "프로필 이미지 수정 팝업"
+        case .oauthUnlinkPopUp: return "소셜 계정 연동 해제 팝업"
+        case .signOutPopUp: return "로그아웃 팝업"
         case .notificationEditView: return "알림 설정 화면"
         case .accountDeletePopUp: return "계정 삭제 팝업"
         case .accountDeleteSuccessPopUp: return "계정 삭제 성공 팝업"
@@ -178,6 +198,8 @@ enum ProfileScreen {
         case .passwordEditView: return "ResetPwView"
         case .passwordEditCompleteView: return "CompleteChangePwView"
         case .profileImageEditPopUp: return "EditProfilePopView"
+        case .oauthUnlinkPopUp: return "ProfileMenuBarListView"
+        case .signOutPopUp: return "ProfileMenuBarListView"
         case .notificationEditView: return "SettingAlarmView"
         case .accountDeletePopUp: return "ProfileMenuBarListView"
         case .accountDeleteSuccessPopUp: return "CompleteDeleteUserView"
