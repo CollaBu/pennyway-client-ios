@@ -77,7 +77,7 @@ struct FindPwView: View {
                 }.offset(x: -10)
             }
         }
-        .analyzeEvent(AuthCheckEvents.findPasswordView)
+        .analyzeEvent(AuthCheckEvents.findPasswordPhoneVerificationView)
     }
 
     private func continueButtonAction() {
