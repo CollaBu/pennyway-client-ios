@@ -80,7 +80,7 @@ enum SpendingEvents: AnalyticsEvent {
                 .screenId: SpendingScreen.spendAtSelectView.screenId,
                 .screenName: SpendingScreen.spendAtSelectView.screenName,
                 .screenClass: SpendingScreen.spendAtSelectView.screenClass
-                ]
+            ]
         case .spendingListEditView:
             return [
                 .screenId: SpendingScreen.spendingListEditView.screenId,

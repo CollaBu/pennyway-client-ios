@@ -163,14 +163,6 @@ struct AddSpendingInputFormView: View {
 
             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
         }
-        .onAppear {
-            // FIXME: 수정하기, 추가하기 뷰를 구분하기 위해 임시로 조건문을 사용하여 해결함.
-            if entryPoint == .detailSpendingView {
-                AnalyticsManager.shared.trackEvent(SpendingEvents.spendingUpdateView, additionalParams: nil)
-            } else {
-                AnalyticsManager.shared.trackEvent(SpendingEvents.spendingAddView, additionalParams: nil)
-            }
-        }
     }
 
     func convertToSpendingCategoryData(from spendingCategory: SpendingCategory) -> SpendingCategoryData? {

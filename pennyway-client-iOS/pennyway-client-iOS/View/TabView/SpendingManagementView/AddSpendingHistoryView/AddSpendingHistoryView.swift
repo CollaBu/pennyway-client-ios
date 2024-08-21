@@ -89,8 +89,33 @@ struct AddSpendingHistoryView: View {
             .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
                 SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
             }
+            .onChange(of: SheetState(isCategoryListViewPresented: viewModel.isCategoryListViewPresented, 
+                                     isSelectDayViewPresented: viewModel.isSelectDayViewPresented))
+            { state in
+                if !state.isCategoryListViewPresented && !state.isSelectDayViewPresented {
+                    analyzeEvent()
+                }
+            }
+            .onAppear { analyzeEvent() }
         }
     }
+
+    private func analyzeEvent() {
+        if entryPoint == .detailSpendingView {
+            Log.debug("이벤트 트리거: 지출 내역 수정하기 뷰 진입")
+            AnalyticsManager.shared.trackEvent(SpendingEvents.spendingUpdateView, additionalParams: nil)
+        } else {
+            Log.debug("이벤트 트리거: 지출 내역 추가하기 뷰 진입")
+            AnalyticsManager.shared.trackEvent(SpendingEvents.spendingAddView, additionalParams: nil)
+        }
+    }
+}
+
+// MARK: - SheetState
+
+struct SheetState: Equatable {
+    let isCategoryListViewPresented: Bool
+    let isSelectDayViewPresented: Bool
 }
 
 #Preview {
