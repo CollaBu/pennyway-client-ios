@@ -54,10 +54,11 @@ struct AddSpendingCategoryView: View {
             SelectCategoryIconView(isPresented: $viewModel.isSelectAddCategoryViewPresented, viewModel: viewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: entryPoint)
         }
         .onAppear {
-            if entryPoint == .create {
-                AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.categoryAddView, additionalParams: nil)
-            } else if entryPoint == .modify {
-                AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.categoryUpdateView, additionalParams: nil)
+            analyzeEvent()
+        }
+        .onChange(of: viewModel.isSelectAddCategoryViewPresented) { _ in
+            if !viewModel.isSelectAddCategoryViewPresented {
+                analyzeEvent()
             }
         }
     }
@@ -183,6 +184,14 @@ struct AddSpendingCategoryView: View {
                     }
                 }
             }
+        }
+    }
+    
+    private func analyzeEvent() {
+        if entryPoint == .create {
+            AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.categoryAddView, additionalParams: nil)
+        } else if entryPoint == .modify {
+            AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.categoryUpdateView, additionalParams: nil)
         }
     }
 }

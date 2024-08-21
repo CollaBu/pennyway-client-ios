@@ -102,10 +102,8 @@ struct AddSpendingHistoryView: View {
 
     private func analyzeEvent() {
         if entryPoint == .detailSpendingView {
-            Log.debug("이벤트 트리거: 지출 내역 수정하기 뷰 진입")
             AnalyticsManager.shared.trackEvent(SpendingEvents.spendingUpdateView, additionalParams: nil)
         } else {
-            Log.debug("이벤트 트리거: 지출 내역 추가하기 뷰 진입")
             AnalyticsManager.shared.trackEvent(SpendingEvents.spendingAddView, additionalParams: nil)
         }
     }
