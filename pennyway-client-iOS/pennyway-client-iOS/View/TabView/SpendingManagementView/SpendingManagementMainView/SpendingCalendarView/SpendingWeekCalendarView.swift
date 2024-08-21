@@ -193,17 +193,14 @@ struct SpendingWeekCalendarView: View {
     }
 
     private func circleColor(for date: Date) -> Color {
-        // 현재 날짜는 항상 Mint01 컬러를 적용
         if calendar.isDateInToday(date) {
             return Color("Mint01")
         }
 
-        // 사용자가 날짜를 선택하지 않았다면 기본 색상 반환
         guard let userSelected = userSelectedDate else {
             return Color.clear
         }
 
-        // 사용자가 선택한 날짜에 대해 처리
         if calendar.isDate(userSelected, equalTo: date, toGranularity: .day) {
             if spendingHistoryViewModel.getDailyTotalAmount(for: date) != nil {
                 return Color("Gray03")

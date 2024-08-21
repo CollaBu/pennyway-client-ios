@@ -224,26 +224,26 @@ struct MySpendingListView: View {
         currentMonth = spendingHistoryViewModel.currentDate
         spendingHistoryViewModel.currentDate = newDate
         currentMonth = newDate
-//
-//        // 현재 날짜가 새로운 달에 속하는지 확인
-//        let calendar = Calendar.current
-//        let newMonthComponents = calendar.dateComponents([.year, .month], from: newDate)
-//        let today = Date()
-//        let todayComponents = calendar.dateComponents([.year, .month], from: today)
-//
-//        if newMonthComponents == todayComponents {
-//            // 새로운 달이 현재 달이면 오늘 날짜로 설정
-//            spendingHistoryViewModel.selectedDate = today
-//            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: today)
-//        } else {
-//            // 그렇지 않으면 새로운 달의 1일로 설정
-//            let firstDayOfMonth = calendar.date(from: newMonthComponents)!
-//            spendingHistoryViewModel.selectedDate = firstDayOfMonth
-//            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
-//        }
 
-        spendingHistoryViewModel.selectedDate = nil
-        spendingHistoryViewModel.selectedDateId = 0
+        // 현재 날짜가 새로운 달에 속하는지 확인
+        let calendar = Calendar.current
+        let newMonthComponents = calendar.dateComponents([.year, .month], from: newDate)
+        let today = Date()
+        let todayComponents = calendar.dateComponents([.year, .month], from: today)
+
+        if newMonthComponents == todayComponents {
+            // 새로운 달이 현재 달이면 오늘 날짜로 설정
+            spendingHistoryViewModel.selectedDate = today
+            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: today)
+        } else {
+            // 그렇지 않으면 새로운 달의 1일로 설정
+            let firstDayOfMonth = calendar.date(from: newMonthComponents)!
+            spendingHistoryViewModel.selectedDate = firstDayOfMonth
+            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
+        }
+
+        // spendingHistoryViewModel.selectedDate = nil
+        // spendingHistoryViewModel.selectedDateId = 0
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
