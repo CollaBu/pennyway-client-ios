@@ -1,7 +1,7 @@
 
 import Foundation
 
-enum PrivatePolicyModel {
+enum PrivatePolicy {
     /// 개인정보 보호방침
     static let privacyPolicy = """
     [차례]
