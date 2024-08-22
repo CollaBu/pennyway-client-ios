@@ -13,7 +13,6 @@ struct CategoryDetailsView: View {
     @State private var showDeleteToastPopup = false
     @State private var showMoveToastPopup = false // 카테고리 이동
     @State var isDeleted = false
-    @State var isEditSuccess = false
     @State private var isNavigateToEditCategoryView = false
     @State private var isNavigateToMoveCategoryView = false
     
@@ -51,7 +50,7 @@ struct CategoryDetailsView: View {
                         
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
                         
-                    CategorySpendingListView(viewModel: viewModel, showDeleteToastPopup: $showDeleteToastPopup, isDeleted: $isDeleted, isEditSuccess: $isEditSuccess)
+                    CategorySpendingListView(viewModel: viewModel, showDeleteToastPopup: $showDeleteToastPopup, isDeleted: $isDeleted)
                         
                     Spacer()
                 }
