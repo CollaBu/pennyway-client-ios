@@ -80,7 +80,6 @@ struct AddSpendingInputFormView: View {
                                     .font(.B1MediumFont())
                                     .platformTextColor(color: Color("Gray04"))
                             }
-                            
                         } else {
                             Text("카테고리를 선택해 주세요")
                                 .font(.B1MediumFont())
@@ -139,17 +138,10 @@ struct AddSpendingInputFormView: View {
                 viewModel.consumerText = ""
                 isDeleteButtonVisible = false
             })
-//            .onAppear {
-//                isDeleteButtonVisible = false
-//            }
+
             .onTapGesture {
                 isDeleteButtonVisible = true
             }
-//            .onChange(of: viewModel.consumerText) { newValue in
-//                if newValue.isEmpty {
-//                    isDeleteButtonVisible = false
-//                }
-//            }
 
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             
@@ -180,12 +172,6 @@ struct AddSpendingInputFormView: View {
 
     private func getSpendingData(with spendingDetail: IndividualSpending) {
         viewModel.amountSpentText = String(spendingDetail.amount)
-        viewModel.selectedCategory = SpendingCategoryData(
-            id: spendingDetail.category.id,
-            isCustom: spendingDetail.category.isCustom,
-            name: spendingDetail.category.name,
-            icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
-        )
         viewModel.consumerText = spendingDetail.accountName
         viewModel.memoText = spendingDetail.memo
         viewModel.validateForm()

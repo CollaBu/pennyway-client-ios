@@ -40,6 +40,12 @@ struct AddSpendingHistoryView: View {
 
                 CustomBottomButton(action: { handleConfirmBtnTap() }, label: "확인", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
+                    .border(.red)
+                    .background(
+                        Color.white
+                            .opacity(keyboardHandler.keyboardHeight > 0 ? 0 : 1.0) // 키보드 높이에 따른 불투명도 조절
+                            .edgesIgnoringSafeArea(.all)
+                    )
 
                 NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete, label: { EmptyView() })
                     .hidden()

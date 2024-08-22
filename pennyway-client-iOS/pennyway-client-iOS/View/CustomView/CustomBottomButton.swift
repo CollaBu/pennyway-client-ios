@@ -5,7 +5,6 @@ struct CustomBottomButton: View {
     let action: () -> Void
     let label: String
     @Binding var isFormValid: Bool
-    var isBackgroundOpaque: Bool? = nil
 
     var body: some View {
         Button(action: action) {
@@ -21,10 +20,8 @@ struct CustomBottomButton: View {
             .background(isFormValid ? Color("Mint03") : Color("Gray03"))
             .clipShape(RoundedRectangle(cornerRadius: 4))
         }
-        .border(Color.black)
         .padding(.horizontal, 20)
         .buttonStyle(PlainButtonStyle())
         .buttonStyle(BasicButtonStyleUtil())
-        .opacity(isBackgroundOpaque ?? true ? 1.0 : 0.5)
     }
 }

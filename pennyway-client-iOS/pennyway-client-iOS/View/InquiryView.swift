@@ -9,7 +9,6 @@ struct InquiryView: View {
     @State private var isSelectedAgreeBtn: Bool = false
     @State private var showAgreement: Bool = false
     @State private var isDeleteButtonVisible: Bool = false
-    @State private var isBackgroundOpaque: Bool = false
 
     @Environment(\.presentationMode) var presentationMode
 
@@ -154,10 +153,14 @@ struct InquiryView: View {
                 }
                 CustomBottomButton(action: {
                     continueButtonAction()
-                }, label: "문의하기", isFormValid: $viewModel.isFormValid,
-                isBackgroundOpaque: isBackgroundOpaque)
+                }, label: "문의하기", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
                     .border(.red)
+                    .background(
+                        Color.clear
+                            .opacity(0) // 키보드 높이에 따른 불투명도 조절
+                            .edgesIgnoringSafeArea(.all)
+                    )
             }
             .padding(.bottom, keyboardHandler.keyboardHeight)
             .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
