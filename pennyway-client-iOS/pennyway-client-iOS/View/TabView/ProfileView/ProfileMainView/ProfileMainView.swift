@@ -18,11 +18,19 @@ struct ProfileMainView: View {
 
     @State var imageUrl = ""
 
+    let profileViewHeight = 267 * DynamicSizeFactor.factor()
+    @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
+    @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
+    @State private var updateCount = 0 // 업데이트 횟수를 추적하는 변수
+
     var body: some View {
         NavigationAvailable {
             ZStack {
                 ScrollView {
-                    VStack {
+                    GeometryReader { geometry in
+                        let offset = geometry.frame(in: .global).minY
+                        setOffset(offset: offset)
+                        
                         ProfileUserInfoView(
                             showPopUpView: $showPopUpView,
                             navigateToEditUsername: $navigateToEditUsername,
@@ -30,31 +38,33 @@ struct ProfileMainView: View {
                             imageUrl: $imageUrl,
                             viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
                         )
-                            
-                        Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-                            
-                        VStack {
-                            Text("내 게시글")
-                                .font(.B1MediumFont())
-                                .platformTextColor(color: Color("Gray07"))
-                                .offset(x: -140, y: 0)
-                                
-                            Spacer().frame(height: 6 * DynamicSizeFactor.factor())
-                                
-                            Image("icon_illust_empty")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-                                
-                            Text("아직 작성된 글이 없어요")
-                                .font(.H4MediumFont())
-                                .platformTextColor(color: Color("Gray07"))
-                                .padding(1)
-                        }
-                        .padding(.horizontal, 20)
+                        .background(Color("White01"))
+                        .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
                     }
+                    .frame(height: profileViewHeight)
+                    
+                    VStack {
+                        Spacer().frame(height: 33 * DynamicSizeFactor.factor())
                         
-                    Spacer()
+                        Text("내 게시글")
+                            .font(.B1MediumFont())
+                            .platformTextColor(color: Color("Gray07"))
+                            .offset(x: -140, y: 0)
+                        
+                        Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+                        
+                        Image("icon_illust_empty")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
+                        
+                        Text("아직 작성된 글이 없어요")
+                            .font(.H4MediumFont())
+                            .platformTextColor(color: Color("Gray07"))
+                            .padding(1)
+                    }
+                    .padding(.horizontal, 20)
+                    .background(Color("Gray01"))
                 }
                     
                 if showPopUpView {
@@ -70,8 +80,21 @@ struct ProfileMainView: View {
                         presignedUrlViewModel: presignedUrlViewModel
                     )
                 }
-            }
                 
+                if showPopUpView {
+                    Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    EditProfilePopUpView(
+                        isPresented: $showPopUpView,
+                        showPopUpView: $showPopUpView,
+                        isHiddenTabBar: $isHiddenTabBar,
+                        showImagePicker: $showImagePicker,
+                        selectedUIImage: $selectedUIImage,
+                        sourceType: $sourceType,
+                        imageUrl: $imageUrl,
+                        presignedUrlViewModel: presignedUrlViewModel
+                    )
+                }
+            }
             .edgesIgnoringSafeArea(.bottom)
             .sheet(isPresented: $showImagePicker, onDismiss: {
                 // 사진 클릭한 경우
@@ -91,10 +114,9 @@ struct ProfileMainView: View {
                     .edgesIgnoringSafeArea(.bottom)
             }
             .id(showPopUpView)
-            .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: showPopUpView)
             .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
-                
+            .background(Color("Gray01"))
             //            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
@@ -114,15 +136,16 @@ struct ProfileMainView: View {
                     }
                 }
             }
-                
+            
             NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
                 EmptyView()
             }.hidden()
-                
+            
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
                 EmptyView()
             }.hidden()
         }
+        
         .onAppear {
             Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
             Log.debug("showPopUpView:\(showPopUpView)")
@@ -138,12 +161,29 @@ struct ProfileMainView: View {
             }
         }
     }
-
+    
     private func loadUserDataImage() {
         if let userData = getUserData() {
             imageUrl = userData.profileImageUrl
             profileImageViewModel.loadImageUrl(from: imageUrl)
         }
+    }
+    
+    func setOffset(offset: CGFloat) -> some View {
+        DispatchQueue.main.async {
+            Log.debug("offset 값:\(offset)")
+            
+            if updateCount < 2 {
+                updateCount += 1
+            } else if initialOffset == 0 {
+                initialOffset = offset
+            }
+            
+            adjustedOffset = offset - initialOffset
+            
+            Log.debug("initialOffset 값:\(offset)")
+        }
+        return EmptyView()
     }
 }
 
