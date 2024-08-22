@@ -12,11 +12,24 @@ struct TotalTargetAmountView: View {
     @State private var showingDeletePopUp = false
     @State private var showToastPopup = false
 
+    let headerViewHeight = 173 * DynamicSizeFactor.factor()
+    @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
+    @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
+    @State private var updateCount = 0 // 업데이트 횟수를 추적하는 변수
+
     var body: some View {
         ZStack {
             ScrollView {
                 VStack(spacing: 0) {
-                    TotalTargetAmountHeaderView(viewModel: viewModel)
+                    GeometryReader { geometry in
+                        let offset = geometry.frame(in: .global).minY
+                        setOffset(offset: offset)
+
+                        TotalTargetAmountHeaderView(viewModel: viewModel)
+                            .background(Color("Mint03"))
+                            .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
+                    }
+                    .frame(height: headerViewHeight)
 
                     TotalTargetAmountContentView(viewModel: viewModel, isnavigateToPastSpendingView: $isnavigateToPastSpendingView)
 
@@ -145,6 +158,23 @@ struct TotalTargetAmountView: View {
                 Log.fault("목표 금액 초기화 실패")
             }
         }
+    }
+
+    func setOffset(offset: CGFloat) -> some View {
+        DispatchQueue.main.async {
+            Log.debug("offset 값:\(offset)")
+
+            if updateCount < 2 {
+                updateCount += 1
+            } else if initialOffset == 0 {
+                initialOffset = offset
+            }
+
+            adjustedOffset = offset - initialOffset
+
+            Log.debug("initialOffset 값:\(offset)")
+        }
+        return EmptyView()
     }
 }
 

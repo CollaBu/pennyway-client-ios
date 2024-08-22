@@ -17,7 +17,6 @@ struct ProfileMainView: View {
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
     @State var imageUrl = ""
-    @State private var offsetY: CGFloat = CGFloat.zero
 
     let profileViewHeight = 267 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
@@ -166,7 +165,6 @@ struct ProfileMainView: View {
     
     func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
-            self.offsetY = offset
             Log.debug("offset 값:\(offset)")
             
             if updateCount < 2 {
