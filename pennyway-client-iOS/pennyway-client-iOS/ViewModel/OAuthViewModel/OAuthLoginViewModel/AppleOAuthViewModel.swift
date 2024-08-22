@@ -14,6 +14,7 @@ class AppleOAuthViewModel: NSObject, ObservableObject {
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
     var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     let oauthAccountViewModel = OAuthAccountViewModel()
+    @Published var isExistUser: Bool = false
     
     func signIn() {
         if isLoggedIn && existOAuthAccount {
@@ -73,6 +74,7 @@ extension AppleOAuthViewModel: ASAuthorizationControllerPresentationContextProvi
                     if success {
                         self.existOAuthAccount = true
                     } else {
+                        self.isExistUser = self.oauthAccountViewModel.isExistUser
                         self.existOAuthAccount = false
                     }
                 }

@@ -5,12 +5,10 @@ import SwiftUI
 struct NavigationBarModifierExtension: ViewModifier {
     var backgroundColor: UIColor?
     var title: String?
-    var isPresented: Binding<Bool>?
 
-    init(backgroundColor: UIColor?, title: String?, isPresented: Binding<Bool>? = nil) {
+    init(backgroundColor: UIColor?, title: String?) {
         self.backgroundColor = backgroundColor
         self.title = title
-        self.isPresented = isPresented
 
         let coloredAppearance = UINavigationBarAppearance()
         coloredAppearance.configureWithTransparentBackground()
@@ -39,21 +37,13 @@ struct NavigationBarModifierExtension: ViewModifier {
                     Spacer()
                 }
             }
-
-            if let isPresented = isPresented, isPresented.wrappedValue {
-                Color.black.opacity(0.3)
-                    .edgesIgnoringSafeArea(.top)
-                    .onTapGesture {
-                        isPresented.wrappedValue = false
-                    }
-            }
         }
     }
 }
 
 extension View {
     /// 네비게이션 바 색상 및 타이틀 텍스트 설정
-    func navigationBarColor(_ backgroundColor: UIColor?, title: String?, isPresented: Binding<Bool>? = nil) -> some View {
-        modifier(NavigationBarModifierExtension(backgroundColor: backgroundColor, title: title, isPresented: isPresented))
+    func navigationBarColor(_ backgroundColor: UIColor?, title: String?) -> some View {
+        modifier(NavigationBarModifierExtension(backgroundColor: backgroundColor, title: title))
     }
 }

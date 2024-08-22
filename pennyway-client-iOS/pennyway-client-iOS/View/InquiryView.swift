@@ -155,14 +155,13 @@ struct InquiryView: View {
                     continueButtonAction()
                 }, label: "문의하기", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
-                    .border(.red)
                     .background(
                         Color.clear
-                            .opacity(0) // 키보드 높이에 따른 불투명도 조절
+                            .opacity(0)
                             .edgesIgnoringSafeArea(.all)
                     )
             }
-            .padding(.bottom, keyboardHandler.keyboardHeight)
+            .padding(.bottom, keyboardHandler.keyboardHeight + 20)
             .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarColor(UIColor(named: "White01"), title: "문의하기")

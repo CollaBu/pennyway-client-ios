@@ -91,9 +91,7 @@ struct ProfileMainView: View {
             .id(showPopUpView)
             .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: showPopUpView)
-            .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "", isPresented: $showPopUpView)
-                
-            //            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
+            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
