@@ -150,6 +150,13 @@ struct AddSpendingInputFormView: View {
 
             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
         }
+        .onAppear {
+            Log.debug("[AddSpendingInputFormView] selectedDate: \(viewModel.selectedDate)")
+            Log.debug("지출내역 추가 폼 뷰 clickDate:  \(clickDate)")
+            if let clickDate = clickDate {
+                viewModel.selectedDate = clickDate
+            }
+        }
     }
     
     private func loadSpendingDetails() {
@@ -160,12 +167,13 @@ struct AddSpendingInputFormView: View {
                 if let spendAtDate = spendAt {
                     viewModel.selectedDate = spendAtDate
                     Log.debug("값 넘어감")
-                } else {
-                    if let clickDate = clickDate {
-                        viewModel.selectedDate = clickDate
-                        Log.debug("clickDate 값을 viewModel.selectedDate에 설정: \(clickDate)")
-                    }
-                }
+                } 
+//                else {
+//                    if let clickDate = clickDate {
+//                        viewModel.selectedDate = clickDate
+//                        Log.debug("clickDate 값을 viewModel.selectedDate에 설정: \(clickDate)")
+//                    }
+//                }
             }
         }
     }

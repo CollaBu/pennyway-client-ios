@@ -115,7 +115,7 @@ struct SpendingDetailSheetView: View {
                     AddSpendingHistoryView(
                         spendingCategoryViewModel: SpendingCategoryViewModel(),
                         spendingHistoryViewModel: spendingHistoryViewModel,
-                        spendingId: $selectedSpendingId, 
+                        spendingId: $selectedSpendingId,
                         clickDate: $clickDate,
                         isPresented: $showAddSpendingHistoryView,
                         isEditSuccess: .constant(false), entryPoint: .detailSheet // 기본값 0 제공
@@ -137,7 +137,13 @@ struct SpendingDetailSheetView: View {
         }
 
         .onAppear {
-            Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
+            Log.debug("바텀시트 clickDate: \(String(describing: clickDate))")
+            Log.debug("selectedDate: \(String(describing: viewModel.selectedDate))")
+            
+            if let clickDate = clickDate {
+                viewModel.selectedDate = clickDate
+            }
+            
             getDailyHistoryData()
         }
         .onChange(of: isDeleted) { newValue in

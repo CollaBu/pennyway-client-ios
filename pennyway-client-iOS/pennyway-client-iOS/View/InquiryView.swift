@@ -151,18 +151,15 @@ struct InquiryView: View {
                     
                     Spacer().frame(height: 26 * DynamicSizeFactor.factor())
                 }
+                                
                 CustomBottomButton(action: {
                     continueButtonAction()
                 }, label: "문의하기", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
-                    .background(
-                        Color.clear
-                            .opacity(0)
-                            .edgesIgnoringSafeArea(.all)
-                    )
             }
-            .padding(.bottom, keyboardHandler.keyboardHeight + 20)
+            .padding(.bottom, keyboardHandler.keyboardHeight)
             .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
+
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarColor(UIColor(named: "White01"), title: "문의하기")
             .navigationBarBackButtonHidden(true)
