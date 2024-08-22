@@ -18,11 +18,19 @@ struct DailySpending: Codable {
 
 struct IndividualSpending: Codable {
     let id: Int
-    let amount: Int
-    let category: SpendingCategory
-    let spendAt: String
-    let accountName: String
-    let memo: String
+    var amount: Int
+    var category: SpendingCategory
+    var spendAt: String
+    var accountName: String
+    var memo: String
+
+    mutating func update(spending: IndividualSpending) {
+        amount = spending.amount
+        category = spending.category
+        spendAt = spending.spendAt
+        accountName = spending.accountName
+        memo = spending.memo
+    }
 }
 
 // MARK: - SpendingCategory

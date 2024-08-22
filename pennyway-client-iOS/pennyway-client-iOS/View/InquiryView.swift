@@ -193,15 +193,26 @@ struct InquiryView: View {
                         .inset(by: 0.5)
                         .stroke(Color("Gray01"), lineWidth: 1)
                 )
-            
-            Text("Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit")
-                .font(.B1MediumFont())
-                .minimumScaleFactor(0.001)
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .platformTextColor(color: Color("Gray04"))
-                .padding(.horizontal, 12 * DynamicSizeFactor.factor())
-                .padding(.vertical, 13 * DynamicSizeFactor.factor())
+            VStack {
+                Text("답변을 보내드리기 위해 필요해요.")
+                    .font(.B1MediumFont())
+                    .minimumScaleFactor(0.001)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .platformTextColor(color: Color("Gray04"))
+                    .padding(.horizontal, 12 * DynamicSizeFactor.factor())
+                    .padding(.vertical, 13 * DynamicSizeFactor.factor())
+                Spacer()
+                
+                Link("[자세히 보기]", destination: URL(string: "https://polar-cheek-a39.notion.site/419c51f95b8146d89a9ec06fbdfa4b0a")!)
+                    .font(.B1MediumFont())
+                    .minimumScaleFactor(0.001)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .platformTextColor(color: Color("Gray04"))
+                    .padding(.horizontal, 12 * DynamicSizeFactor.factor())
+                    .padding(.vertical, 13 * DynamicSizeFactor.factor())
+            }
         }
         .padding(.horizontal, 20)
     }

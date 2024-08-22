@@ -30,22 +30,22 @@ struct ProfileMainView: View {
                             imageUrl: $imageUrl,
                             viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
                         )
-
+                            
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-
+                            
                         VStack {
                             Text("내 게시글")
                                 .font(.B1MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
                                 .offset(x: -140, y: 0)
-
+                                
                             Spacer().frame(height: 6 * DynamicSizeFactor.factor())
-
+                                
                             Image("icon_illust_empty")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-
+                                
                             Text("아직 작성된 글이 없어요")
                                 .font(.H4MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
@@ -53,9 +53,10 @@ struct ProfileMainView: View {
                         }
                         .padding(.horizontal, 20)
                     }
-
+                        
                     Spacer()
                 }
+                    
                 if showPopUpView {
                     Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                     EditProfilePopUpView(
@@ -65,11 +66,12 @@ struct ProfileMainView: View {
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType,
-                        imageUrl: $imageUrl, 
+                        imageUrl: $imageUrl,
                         presignedUrlViewModel: presignedUrlViewModel
                     )
                 }
             }
+                
             .edgesIgnoringSafeArea(.bottom)
             .sheet(isPresented: $showImagePicker, onDismiss: {
                 // 사진 클릭한 경우
@@ -91,7 +93,9 @@ struct ProfileMainView: View {
             .id(showPopUpView)
             .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: showPopUpView)
-            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
+            .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
+                
+            //            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -110,11 +114,11 @@ struct ProfileMainView: View {
                     }
                 }
             }
-
+                
             NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
                 EmptyView()
             }.hidden()
-
+                
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
                 EmptyView()
             }.hidden()

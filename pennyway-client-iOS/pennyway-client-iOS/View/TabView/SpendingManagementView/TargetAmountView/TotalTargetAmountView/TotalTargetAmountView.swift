@@ -110,12 +110,19 @@ struct TotalTargetAmountView: View {
                                 secondBtnLabel: "초기화하기",
                                 secondBtnColor: Color("Mint03")
                 )
+                .analyzeEvent(TargetAmountEvents.targetAmountResetPopUp)
             }
         }
         .onAppear {
             viewModel.getTotalTargetAmountApi { _ in
             }
         }
+        .analyzeEvent(TargetAmountEvents.targetAmountView)
+        .onChange(of: showingDeletePopUp, perform: { _ in
+            if !showingDeletePopUp {
+                AnalyticsManager.shared.trackEvent(TargetAmountEvents.targetAmountView, additionalParams: nil)
+            }
+        })
 
         NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
             .hidden()
