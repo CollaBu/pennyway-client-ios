@@ -82,5 +82,6 @@ struct SelectCategoryIconView: View {
                 selectedCategoryIcon = MapCategoryIconUtil.mapToCategoryIcon(icon, outputState: .onMint) // on -> onMint
             }
         }
+        .analyzeEvent(SpendingCategoryEvents.iconSelectView)
     }
 }
