@@ -99,7 +99,6 @@ struct MoveCategoryView: View {
             }
             
             if showingPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingPopUp,
                                 titleLabel: "'\(spendingCategoryViewModel.selectedMoveCategory?.name ?? "")'으로 옮길까요?",
                                 subTitleLabel: "소비 내역 \(spendingCategoryViewModel.spedingHistoryTotalCount)개의 카테고리가 변경돼요",

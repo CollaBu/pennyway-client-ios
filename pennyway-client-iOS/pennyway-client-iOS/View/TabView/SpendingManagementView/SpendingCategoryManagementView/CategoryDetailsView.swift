@@ -140,7 +140,6 @@ struct CategoryDetailsView: View {
             }
             
             if showDeletePopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(
                     showingPopUp: $showDeletePopUp,
                     titleLabel: "카테고리를 삭제할까요?",
