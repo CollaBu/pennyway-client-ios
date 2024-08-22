@@ -7,7 +7,6 @@ struct CategorySpendingListView: View {
     @State private var showDetailSpendingView = false
     @Binding var showDeleteToastPopup: Bool
     @Binding var isDeleted: Bool
-
     @State private var isLoadingViewShown: Bool = false
     @State private var animateLoadingView: Bool = false
     @State private var isReloadViewShown = false
@@ -100,12 +99,12 @@ struct CategorySpendingListView: View {
             return
         }
 
-        if currentIndex == viewModel.dailyDetailSpendings.count - 1 && !isLoadingViewShown {
+        if currentIndex == viewModel.dailyDetailSpendings.count - 1 {
             Log.debug("지출 내역 index: \(currentIndex)")
 
             if viewModel.hasNext {
+                animateLoadingView = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    animateLoadingView = true
                     isLoadingViewShown = true
                     startApiRetryTimer()
                 }
@@ -118,7 +117,7 @@ struct CategorySpendingListView: View {
         }
     }
 
-    private func startApiRetryTimer() {
+    private func startApiRetryTimer(isReload: Bool? = false) {
         var retryWorkItem: DispatchWorkItem?
 
         // API 응답 10초 이상 걸린 경우
@@ -133,9 +132,9 @@ struct CategorySpendingListView: View {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: retryWorkItem!)
 
-        viewModel.getCategorySpendingHistoryApi { success in
+        viewModel.getCategorySpendingHistoryApi(isReload: isReload) { success in
 
             if success {
                 // 로딩 뷰와 재로드 뷰 사라짐
@@ -145,6 +144,7 @@ struct CategorySpendingListView: View {
                     isLoadingViewShown = false
                     isReloadViewShown = false
                 }
+
             } else {
                 // 로딩 뷰 사라지고, 재로드 뷰 나타남
                 Log.debug("API 호출 실패, 재로드 뷰 나타남")
@@ -160,6 +160,8 @@ struct CategorySpendingListView: View {
     }
 
     private func reloadAction() {
+        Log.debug("다시시도 버튼 클릭")
+
         // 로딩 뷰 나오고, 재로드 뷰 사라짐
         animateLoadingView = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -167,6 +169,6 @@ struct CategorySpendingListView: View {
             isReloadViewShown = false
         }
 
-        startApiRetryTimer()
+        startApiRetryTimer(isReload: true)
     }
 }

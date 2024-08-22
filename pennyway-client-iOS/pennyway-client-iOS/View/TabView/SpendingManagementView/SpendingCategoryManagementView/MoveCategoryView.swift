@@ -113,11 +113,18 @@ struct MoveCategoryView: View {
                                 }},
                                 secondBtnLabel: "옮길래요",
                                 secondBtnColor: Color("Mint03"))
+                    .analyzeEvent(SpendingCategoryEvents.categoryMigratePopUp)
             }
             
             NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
                 .hidden()
         }
+        .analyzeEvent(SpendingCategoryEvents.categoryMigrateView)
+        .onChange(of: showingPopUp, perform: { isShow in
+            if !isShow {
+                AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.categoryMigrateView, additionalParams: nil)
+            }
+        })
     }
 
     private func getCategoryIcon(category: SpendingCategoryData, isSelected: Bool) -> String {

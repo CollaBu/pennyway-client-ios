@@ -44,6 +44,7 @@ enum AnalyticsConstants {
         case isRefresh
         case oauthType
         case btnName
+        case date
         
         var rawValue: String {
             switch self {
@@ -54,6 +55,7 @@ enum AnalyticsConstants {
             case .isRefresh: return "is_refresh"
             case .oauthType: return "method"
             case .btnName: return "btn_name"
+            case .date: return "date"
             }
         }
     }
