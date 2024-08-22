@@ -17,54 +17,54 @@ struct ProfileMainView: View {
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
     @State var imageUrl = ""
+    @State private var offsetY: CGFloat = CGFloat.zero
 
-    @State private var scrollOffset: CGFloat = 0
-    @State private var lastScrollOffset: CGFloat = 0
+    let profileViewHeight = 260 * DynamicSizeFactor.factor()
 
     var body: some View {
         NavigationAvailable {
             ZStack {
-                BouncelessScrollView {
-                    ProfileUserInfoView(
-                        showPopUpView: $showPopUpView,
-                        navigateToEditUsername: $navigateToEditUsername,
-                        selectedUIImage: $selectedUIImage,
-                        imageUrl: $imageUrl,
-                        viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
-                    )
-
+                ScrollView {
+                    GeometryReader { geometry in
+                        let offset = geometry.frame(in: .global).minY
+                        setOffset(offset: offset)
+                        ProfileUserInfoView(
+                            showPopUpView: $showPopUpView,
+                            navigateToEditUsername: $navigateToEditUsername,
+                            selectedUIImage: $selectedUIImage,
+                            imageUrl: $imageUrl,
+                            viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
+                        )
+                        .background(Color("White01"))
+                        .offset(y: offset > 0 ? -offset : 0)
+                    }
+                    .frame(height: profileViewHeight)
+                    .border(.black)
+                    
                     VStack {
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-
+                        
                         Text("내 게시글")
                             .font(.B1MediumFont())
                             .platformTextColor(color: Color("Gray07"))
                             .offset(x: -140, y: 0)
-
+                        
                         Spacer().frame(height: 6 * DynamicSizeFactor.factor())
-
+                        
                         Image("icon_illust_empty")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-
+                        
                         Text("아직 작성된 글이 없어요")
                             .font(.H4MediumFont())
                             .platformTextColor(color: Color("Gray07"))
                             .padding(1)
-
-                        Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-
-                        Text("내 게시글")
-                            .font(.B1MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
-                            .offset(x: -140, y: 0)
                     }
-                    .frame(maxWidth: .infinity)
                     .padding(.horizontal, 20)
                     .background(Color("Gray01"))
                 }
-
+                
                 if showPopUpView {
                     Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                     EditProfilePopUpView(
@@ -79,7 +79,6 @@ struct ProfileMainView: View {
                     )
                 }
             }
-
             .edgesIgnoringSafeArea(.bottom)
             .sheet(isPresented: $showImagePicker, onDismiss: {
                 // 사진 클릭한 경우
@@ -99,10 +98,9 @@ struct ProfileMainView: View {
                     .edgesIgnoringSafeArea(.bottom)
             }
             .id(showPopUpView)
-            .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: showPopUpView)
             .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
-
+            .background(Color("Gray01"))
             //            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
@@ -122,15 +120,16 @@ struct ProfileMainView: View {
                     }
                 }
             }
-
+            
             NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
                 EmptyView()
             }.hidden()
-
+            
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
                 EmptyView()
             }.hidden()
         }
+        
         .onAppear {
             Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
             Log.debug("showPopUpView:\(showPopUpView)")
@@ -140,63 +139,23 @@ struct ProfileMainView: View {
             isHiddenTabBar = newValue
         }
     }
-
+    
     private func loadUserDataImage() {
         if let userData = getUserData() {
             imageUrl = userData.profileImageUrl
             profileImageViewModel.loadImageUrl(from: imageUrl)
         }
     }
+    
+    func setOffset(offset: CGFloat) -> some View {
+        DispatchQueue.main.async {
+            self.offsetY = offset
+            Log.debug("??:\(offset)")
+        }
+        return EmptyView()
+    }
 }
 
 #Preview {
     ProfileMainView()
-}
-
-// MARK: - ScrollOffsetKey
-
-struct ScrollOffsetKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
-import SwiftUI
-
-// MARK: - BouncelessScrollView
-
-struct BouncelessScrollView<Content: View>: UIViewRepresentable {
-    var content: Content
-
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
-
-    func makeUIView(context _: Context) -> UIScrollView {
-        let scrollView = UIScrollView()
-        let hostedView = UIHostingController(rootView: content)
-        hostedView.view.translatesAutoresizingMaskIntoConstraints = false
-
-        scrollView.addSubview(hostedView.view)
-
-        // Set up constraints for the content to fill the scroll view
-        NSLayoutConstraint.activate([
-            hostedView.view.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            hostedView.view.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            hostedView.view.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            hostedView.view.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            hostedView.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
-
-        // Disable the bounce effect only for this instance
-        scrollView.contentInsetAdjustmentBehavior = .automatic
-        scrollView.bounces = false
-
-        return scrollView
-    }
-
-    func updateUIView(_: UIScrollView, context _: Context) {
-        // Update the content of the scroll view if needed
-    }
 }

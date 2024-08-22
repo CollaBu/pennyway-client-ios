@@ -4,6 +4,8 @@ struct TotalTargetAmountContentView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     @Binding var isnavigateToPastSpendingView: Bool
     
+    @State private var scrollOffset: CGFloat = 0
+    
     var body: some View {
         VStack {
             HStack {
@@ -99,6 +101,7 @@ struct TotalTargetAmountContentView: View {
             .cornerRadius(8)
         }
         .padding(.horizontal, 20)
+        .background(Color("Gray01"))
         
         Spacer()
     }
