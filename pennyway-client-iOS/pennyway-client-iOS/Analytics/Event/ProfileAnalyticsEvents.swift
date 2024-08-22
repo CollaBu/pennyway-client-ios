@@ -166,7 +166,7 @@ enum ProfileScreen {
         case .passwordEditCompleteView: return "password_edit_complete_view"
         case .profileImageEditPopUp: return "profile_image_edit_popup"
         case .oauthUnlinkPopUp: return "oauth_unlink_popup"
-        case .signOutPopUp: return "logout_popup"
+        case .signOutPopUp: return "sign_out_popup"
         case .notificationListView: return "notification_list_view"
         case .notificationEditView: return "notification_edit_view"
         case .accountDeletePopUp: return "account_delete_popup"
