@@ -115,6 +115,8 @@ class SpendingCategoryViewModel: ObservableObject {
         
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
         
+        dailyDetailSpendings.removeAll { $0.category.name != self.selectedCategory!.name }//선택한 카테고리와 다르면 삭제
+        
         SpendingCategoryAlamofire.shared.getCategorySpendingHistory(categoryId, getCategorySpendingHistoryRequestDto) { result in
             switch result {
             case let .success(data):
@@ -125,7 +127,6 @@ class SpendingCategoryViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("카테고리에 등록된 지출내역 조회\(jsonString)")
                         }
-                        self.dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id }
                         self.mergeNewSpendings(newSpendings: response.data.spendings.content)
                         self.hasNext = response.data.spendings.hasNext
                         
@@ -168,7 +169,7 @@ class SpendingCategoryViewModel: ObservableObject {
 
         let existingIds = Set(dailyDetailSpendings.map { $0.id })
         let uniqueNewSpendings = allNewIndividualSpendings.filter { !existingIds.contains($0.id) }
-        
+
         dailyDetailSpendings.append(contentsOf: uniqueNewSpendings)
         dailyDetailSpendings.sort { $0.spendAt > $1.spendAt }
     }
@@ -290,5 +291,15 @@ class SpendingCategoryViewModel: ObservableObject {
     /// 특정 ID에 해당하는 지출내역 검색
     func getSpendingDetail(by id: Int) -> IndividualSpending? {
         return dailyDetailSpendings.first { $0.id == id }
+    }
+    
+    func updateSpending(dto: AddSpendingHistoryResponseDto) {
+        let id = selectSpending?.id
+        
+        if let firstIndex = dailyDetailSpendings.firstIndex(where: { $0.id == id }) {
+            dailyDetailSpendings[firstIndex].update(spending: dto.data.spending)
+        }
+        selectSpending?.update(spending: dto.data.spending)
+        Log.debug("spendingCategoryViewModel에서 지출 내역 삭제")
     }
 }

@@ -98,7 +98,6 @@ struct TotalTargetAmountView: View {
             }
 
             if showingDeletePopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
                                 titleLabel: "목표금액을 초기화할까요?",
                                 subTitleLabel: "이번 달 목표금액이 사라져요",
@@ -110,12 +109,19 @@ struct TotalTargetAmountView: View {
                                 secondBtnLabel: "초기화하기",
                                 secondBtnColor: Color("Mint03")
                 )
+                .analyzeEvent(TargetAmountEvents.targetAmountResetPopUp)
             }
         }
         .onAppear {
             viewModel.getTotalTargetAmountApi { _ in
             }
         }
+        .analyzeEvent(TargetAmountEvents.targetAmountView)
+        .onChange(of: showingDeletePopUp, perform: { _ in
+            if !showingDeletePopUp {
+                AnalyticsManager.shared.trackEvent(TargetAmountEvents.targetAmountView, additionalParams: nil)
+            }
+        })
 
         NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
             .hidden()

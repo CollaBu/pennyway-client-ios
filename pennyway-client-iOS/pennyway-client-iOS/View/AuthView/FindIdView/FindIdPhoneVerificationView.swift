@@ -14,7 +14,6 @@ struct FindIdPhoneVerificationView: View {
                 ErrorText(message: "올바른 전화번호 형식이 아니에요", color: Color("Red03"))
             }
         }
-        .analyzeEvent(AuthCheckEvents.findUsernamePhoneVerificationView)
     }
 
     @ViewBuilder

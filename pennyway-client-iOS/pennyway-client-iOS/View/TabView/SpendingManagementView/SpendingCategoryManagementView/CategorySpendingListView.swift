@@ -7,7 +7,6 @@ struct CategorySpendingListView: View {
     @State private var showDetailSpendingView = false
     @Binding var showDeleteToastPopup: Bool
     @Binding var isDeleted: Bool
-
     @State private var isLoadingViewShown: Bool = false
     @State private var animateLoadingView: Bool = false
     @State private var isReloadViewShown = false
@@ -133,7 +132,7 @@ struct CategorySpendingListView: View {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0, execute: retryWorkItem!)
 
         viewModel.getCategorySpendingHistoryApi(isReload: isReload) { success in
 

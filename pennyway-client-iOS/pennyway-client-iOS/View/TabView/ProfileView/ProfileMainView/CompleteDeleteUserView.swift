@@ -22,6 +22,7 @@ struct CompleteDeleteUserView: View {
 
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
+        .analyzeEvent(ProfileEvents.accountDeleteSuccessPopUp)
     }
 }
 

@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - ProfileMainView
+
 struct ProfileMainView: View {
     @State private var isSelectedToolBar = false
     @State private var navigateToEditUsername = false
@@ -28,22 +30,22 @@ struct ProfileMainView: View {
                             imageUrl: $imageUrl,
                             viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
                         )
-                            
+
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-                            
+
                         VStack {
                             Text("내 게시글")
                                 .font(.B1MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
                                 .offset(x: -140, y: 0)
-                                
+
                             Spacer().frame(height: 6 * DynamicSizeFactor.factor())
-                                
+
                             Image("icon_illust_empty")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-                                
+
                             Text("아직 작성된 글이 없어요")
                                 .font(.H4MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
@@ -51,10 +53,10 @@ struct ProfileMainView: View {
                         }
                         .padding(.horizontal, 20)
                     }
-                        
+
                     Spacer()
                 }
-                    
+
                 if showPopUpView {
                     Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                     EditProfilePopUpView(
@@ -69,7 +71,7 @@ struct ProfileMainView: View {
                     )
                 }
             }
-                
+
             .edgesIgnoringSafeArea(.bottom)
             .sheet(isPresented: $showImagePicker, onDismiss: {
                 // 사진 클릭한 경우
@@ -92,7 +94,7 @@ struct ProfileMainView: View {
             .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: showPopUpView)
             .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
-                
+
             //            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
@@ -112,11 +114,11 @@ struct ProfileMainView: View {
                     }
                 }
             }
-                
+
             NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
                 EmptyView()
             }.hidden()
-                
+
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
                 EmptyView()
             }.hidden()
@@ -129,6 +131,12 @@ struct ProfileMainView: View {
         .onChange(of: showPopUpView) { newValue in
             isHiddenTabBar = newValue
         }
+        .analyzeEvent(ProfileEvents.profileTapView)
+        .onChange(of: ProfileNavigationState(navigateToEditUsername: navigateToEditUsername, isSelectedToolBar: isSelectedToolBar, showPopUpView: showPopUpView)) { state in
+            if state.isReturn() {
+                AnalyticsManager.shared.trackEvent(ProfileEvents.profileTapView, additionalParams: nil)
+            }
+        }
     }
 
     private func loadUserDataImage() {
@@ -136,6 +144,18 @@ struct ProfileMainView: View {
             imageUrl = userData.profileImageUrl
             profileImageViewModel.loadImageUrl(from: imageUrl)
         }
+    }
+}
+
+// MARK: - ProfileNavigationState
+
+struct ProfileNavigationState: Equatable {
+    let navigateToEditUsername: Bool
+    let isSelectedToolBar: Bool
+    let showPopUpView: Bool
+
+    func isReturn() -> Bool {
+        return !navigateToEditUsername && !isSelectedToolBar && !showPopUpView
     }
 }
 
