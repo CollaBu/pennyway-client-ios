@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - ProfileMainView
+
 struct ProfileMainView: View {
     @State private var isSelectedToolBar = false
     @State private var navigateToEditUsername = false
@@ -129,6 +131,12 @@ struct ProfileMainView: View {
         .onChange(of: showPopUpView) { newValue in
             isHiddenTabBar = newValue
         }
+        .analyzeEvent(ProfileEvents.profileTapView)
+        .onChange(of: ProfileNavigationState(navigateToEditUsername: navigateToEditUsername, isSelectedToolBar: isSelectedToolBar, showPopUpView: showPopUpView)) { state in
+            if state.isReturn() {
+                AnalyticsManager.shared.trackEvent(ProfileEvents.profileTapView, additionalParams: nil)
+            }
+        }
     }
 
     private func loadUserDataImage() {
@@ -136,6 +144,18 @@ struct ProfileMainView: View {
             imageUrl = userData.profileImageUrl
             profileImageViewModel.loadImageUrl(from: imageUrl)
         }
+    }
+}
+
+// MARK: - ProfileNavigationState
+
+struct ProfileNavigationState: Equatable {
+    let navigateToEditUsername: Bool
+    let isSelectedToolBar: Bool
+    let showPopUpView: Bool
+
+    func isReturn() -> Bool {
+        return !navigateToEditUsername && !isSelectedToolBar && !showPopUpView
     }
 }
 

@@ -1,6 +1,8 @@
 
 import SwiftUI
 
+// MARK: - ProfileMenuBarListView
+
 struct ProfileMenuBarListView: View {
     @State private var showLogoutPopUp = false
     @State private var showDeleteUserPopUp = false
@@ -53,6 +55,7 @@ struct ProfileMenuBarListView: View {
                                 secondBtnLabel: "해제하기",
                                 secondBtnColor: Color("Gray05")
                 )
+                .analyzeEvent(ProfileEvents.oauthUnlinkPopUp)
             }
 
             if showLogoutPopUp {
@@ -65,6 +68,7 @@ struct ProfileMenuBarListView: View {
                                 secondBtnLabel: "로그아웃",
                                 secondBtnColor: Color("Red03")
                 )
+                .analyzeEvent(ProfileEvents.signOutPopUp)
             }
 
             if showDeleteUserPopUp {
@@ -78,6 +82,7 @@ struct ProfileMenuBarListView: View {
                                 secondBtnColor: Color("Gray05"),
                                 heightSize: 166
                 )
+                .analyzeEvent(ProfileEvents.accountDeletePopUp)
             }
 
             if oauthViewModel.isExistUser {
@@ -90,6 +95,12 @@ struct ProfileMenuBarListView: View {
                 EmptyView()
             }
             .hidden()
+        }
+        .analyzeEvent(ProfileEvents.profileHamburgerMenuTap)
+        .onChange(of: ProfileMenuPopUpState(showLogoutPopUp: showLogoutPopUp, showDeleteUserPopUp: showDeleteUserPopUp, showUnLinkPopUp: showUnLinkPopUp)) { state in
+            if state.isReturn() {
+                AnalyticsManager.shared.trackEvent(ProfileEvents.profileHamburgerMenuTap, additionalParams: nil)
+            }
         }
     }
 
@@ -133,6 +144,18 @@ struct ProfileMenuBarListView: View {
             Log.debug("계정 연동 해제 실패")
         }
         showUnLinkPopUp = false
+    }
+}
+
+// MARK: - ProfileMenuPopUpState
+
+struct ProfileMenuPopUpState: Equatable {
+    var showLogoutPopUp: Bool
+    var showDeleteUserPopUp: Bool
+    var showUnLinkPopUp: Bool
+
+    func isReturn() -> Bool {
+        return !showLogoutPopUp && !showDeleteUserPopUp && !showUnLinkPopUp
     }
 }
 

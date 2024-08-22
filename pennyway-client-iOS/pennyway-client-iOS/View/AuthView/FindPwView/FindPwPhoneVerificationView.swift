@@ -15,7 +15,6 @@ struct FindPwPhoneVerificationView: View {
                 ErrorText(message: "010, 011으로 시작하는 11자리 문자열을 입력해주세요", color: Color("Red03"))
             }
         }
-        .analyzeEvent(AuthCheckEvents.findPasswordPhoneVerificationView)
     }
 
     @ViewBuilder

@@ -16,6 +16,7 @@ struct FindIdContentView: View {
 
             CodeInputSectionView(viewModel: phoneVerificationViewModel)
         }
+        .analyzeEvent(AuthCheckEvents.findUsernamePhoneVerificationView)
     }
 }
 

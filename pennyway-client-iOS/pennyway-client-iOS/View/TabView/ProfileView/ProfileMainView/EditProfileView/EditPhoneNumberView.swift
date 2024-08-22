@@ -111,6 +111,7 @@ struct EditPhoneNumberView: View {
             }
             .padding(.horizontal, 20)
         }
+        .analyzeEvent(ProfileEvents.phoneEditView)
     }
 
     private func handlePhoneNumberChange(_ newValue: String) {

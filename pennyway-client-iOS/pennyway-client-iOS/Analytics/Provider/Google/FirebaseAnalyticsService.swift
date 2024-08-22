@@ -10,7 +10,7 @@ import SwiftUI
 
 class FirebaseAnalyticsService: AnalyticsService {
     var subscribedEvents: [AnalyticsEvent.Type] {
-        [AuthEvents.self, SpendingEvents.self, SpendingCategoryEvents.self, TargetAmountEvents.self]
+        [AuthEvents.self, AuthCheckEvents.self, SpendingEvents.self, SpendingCategoryEvents.self, TargetAmountEvents.self, ProfileEvents.self, QuestionEvents.self]
     }
     
     func initialize(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) {
@@ -23,7 +23,7 @@ class FirebaseAnalyticsService: AnalyticsService {
         
         Analytics.logEvent(eventName, parameters: firebaseParams)
         
-        Log.info("[FirebaseAnalyticsService]: Tracking event \(event.eventName.rawValue) with parameters \(String(describing: additionalParams))")
+        Log.info("[FirebaseAnalyticsService]: Tracking event \(event) with parameters \(String(describing: additionalParams))")
     }
     
     /// - Parameters:
