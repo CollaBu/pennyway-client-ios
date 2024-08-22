@@ -13,6 +13,7 @@ enum EntryPoint {
 // MARK: - AddSpendingHistoryView
 
 struct AddSpendingHistoryView: View {
+    @StateObject private var keyboardHandler = KeyboardHandlerManager()
     @StateObject var viewModel = AddSpendingHistoryViewModel()
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
@@ -34,6 +35,7 @@ struct AddSpendingHistoryView: View {
                 ScrollView {
                     AddSpendingInputFormView(viewModel: viewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, clickDate: $clickDate, entryPoint: entryPoint, spendingId: $spendingId)
                 }
+
                 Spacer()
 
                 CustomBottomButton(action: { handleConfirmBtnTap() }, label: "확인", isFormValid: $viewModel.isFormValid)
@@ -45,6 +47,8 @@ struct AddSpendingHistoryView: View {
                 NavigationLink(destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $viewModel.navigateToAddCategory, label: { EmptyView() })
                     .hidden()
             }
+            .padding(.bottom, keyboardHandler.keyboardHeight)
+            .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
             .background(Color("White01"))
             .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")
             .edgesIgnoringSafeArea(.bottom)
