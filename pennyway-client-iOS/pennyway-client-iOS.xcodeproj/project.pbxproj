@@ -224,6 +224,8 @@
 		4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */; };
 		4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */; };
 		4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E282BE015970058A52A /* ProfileSettingListView.swift */; };
+		4AD8248D2C77D83400AEF371 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AD824892C77D83400AEF371 /* Debug.xcconfig */; };
+		4AD8248E2C77D83400AEF371 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AD8248A2C77D83400AEF371 /* Release.xcconfig */; };
 		4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */; };
 		4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */; };
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
@@ -550,6 +552,8 @@
 		4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
 		4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOAuthButtonView.swift; sourceTree = "<group>"; };
 		4AD70E282BE015970058A52A /* ProfileSettingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListView.swift; sourceTree = "<group>"; };
+		4AD824892C77D83400AEF371 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4AD8248A2C77D83400AEF371 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
 		4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRouter.swift; sourceTree = "<group>"; };
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
@@ -1359,6 +1363,7 @@
 			isa = PBXGroup;
 			children = (
 				4AFF0C832C6A6B770040B192 /* GoogleService-Info.plist */,
+				4AD8248B2C77D83400AEF371 /* Xcconfig */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
@@ -1373,7 +1378,6 @@
 				4A762AFA2B99A1A5001C1188 /* Model */,
 				4A762AF02B99A16D001C1188 /* Assets.xcassets */,
 				4A762AF22B99A16D001C1188 /* Preview Content */,
-				B599E4B92C555A01006051E9 /* Secrets.xcconfig */,
 			);
 			path = "pennyway-client-iOS";
 			sourceTree = "<group>";
@@ -1727,6 +1731,16 @@
 			path = ProfileMainView;
 			sourceTree = "<group>";
 		};
+		4AD8248B2C77D83400AEF371 /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				B599E4B92C555A01006051E9 /* Secrets.xcconfig */,
+				4AD824892C77D83400AEF371 /* Debug.xcconfig */,
+				4AD8248A2C77D83400AEF371 /* Release.xcconfig */,
+			);
+			path = Xcconfig;
+			sourceTree = "<group>";
+		};
 		4ADBFAE72BE2C32800C3ECE4 /* UserDomain */ = {
 			isa = PBXGroup;
 			children = (
@@ -2060,6 +2074,7 @@
 			files = (
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
+				4AD8248D2C77D83400AEF371 /* Debug.xcconfig in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
@@ -2070,6 +2085,7 @@
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
+				4AD8248E2C77D83400AEF371 /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2575,7 +2591,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B599E4B92C555A01006051E9 /* Secrets.xcconfig */;
+			baseConfigurationReference = 4AD824892C77D83400AEF371 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2616,7 +2632,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B599E4B92C555A01006051E9 /* Secrets.xcconfig */;
+			baseConfigurationReference = 4AD8248A2C77D83400AEF371 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
