@@ -75,7 +75,6 @@ struct CategoryDetailsView: View {
                     }
                 }, alignment: .bottom
             )
-            
             .overlay(
                 VStack(alignment: .leading) {
                     if isClickMenu {

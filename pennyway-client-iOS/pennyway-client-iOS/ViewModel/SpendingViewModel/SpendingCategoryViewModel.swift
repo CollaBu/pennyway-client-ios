@@ -291,4 +291,14 @@ class SpendingCategoryViewModel: ObservableObject {
     func getSpendingDetail(by id: Int) -> IndividualSpending? {
         return dailyDetailSpendings.first { $0.id == id }
     }
+    
+    func updateSpending(dto: AddSpendingHistoryResponseDto) {
+        let id = selectSpending?.id
+        
+        if let firstIndex = dailyDetailSpendings.firstIndex(where: { $0.id == id }) {
+            dailyDetailSpendings[firstIndex].update(spending: dto.data.spending)
+        }
+        selectSpending?.update(spending: dto.data.spending)
+        Log.debug("spendingCategoryViewModel에서 지출 내역 삭제")
+    }
 }

@@ -7,7 +7,6 @@ struct CategorySpendingListView: View {
     @State private var showDetailSpendingView = false
     @Binding var showDeleteToastPopup: Bool
     @Binding var isDeleted: Bool
-
     @State private var isLoadingViewShown: Bool = false
     @State private var animateLoadingView: Bool = false
     @State private var isReloadViewShown = false

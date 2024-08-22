@@ -114,19 +114,19 @@ struct AddSpendingHistoryView: View {
         }
         Log.debug("수정하기")
 
-        viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
-            if success {
+        viewModel.editSpendingHistoryApi(spendingId: spendingId) { response in
+
+            switch response {
+            case let .success(data):
                 self.presentationMode.wrappedValue.dismiss()
                 self.spendingHistoryViewModel.spendingDetailViewUpdated = spendingDetailViewUpdated
                 self.isEditSuccess = true
-                Log.debug("지출 내역 수정 성공")
-            } else {
-                Log.debug("지출 내역 수정 실패")
+
+                spendingCategoryViewModel.updateSpending(dto: data!)
+
+            case let .failure(error):
+                Log.debug("error")
             }
         }
     }
 }
-
-// #Preview {
-//    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), spendingId: 0, isPresented: .constant(true), entryPoint: .main)
-// }
