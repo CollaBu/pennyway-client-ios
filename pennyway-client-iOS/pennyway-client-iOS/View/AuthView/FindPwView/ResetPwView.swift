@@ -72,12 +72,6 @@ struct ResetPwView: View {
                 }.offset(x: -10)
             }
         }
-        .onAppear {
-            Log.debug("비밀번호 변경 뷰 onappear: \(firstNaviLinkActive)")
-        }
-        .onDisappear {
-            Log.debug("비밀번호 변경 뷰 ondisappear: \(firstNaviLinkActive)")
-        }
     }
     
     private func continueButtonAction() {

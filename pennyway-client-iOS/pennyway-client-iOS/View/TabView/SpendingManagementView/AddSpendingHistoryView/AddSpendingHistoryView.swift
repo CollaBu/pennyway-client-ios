@@ -135,7 +135,3 @@ struct AddSpendingHistoryView: View {
         }
     }
 }
-
-// #Preview {
-//    AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()), spendingId: 0, isPresented: .constant(true), entryPoint: .main)
-// }

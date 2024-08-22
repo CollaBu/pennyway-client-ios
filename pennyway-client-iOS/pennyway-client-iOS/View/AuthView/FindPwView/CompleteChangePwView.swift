@@ -31,13 +31,6 @@ struct CompleteChangePwView: View {
                 EmptyView()
             }.hidden()
         }
-        .onAppear {
-            Log.debug("비밀번호 변경완료 뷰 onappear: \(firstNaviLinkActive)")
-        }
-        .onDisappear {
-            Log.debug("비밀번호 변경완료 뷰 ondisappear: \(firstNaviLinkActive)")
-        }
-
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
     }

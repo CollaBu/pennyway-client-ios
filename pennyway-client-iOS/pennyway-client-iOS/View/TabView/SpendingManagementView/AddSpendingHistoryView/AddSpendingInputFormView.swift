@@ -168,12 +168,6 @@ struct AddSpendingInputFormView: View {
                     viewModel.selectedDate = spendAtDate
                     Log.debug("값 넘어감")
                 } 
-//                else {
-//                    if let clickDate = clickDate {
-//                        viewModel.selectedDate = clickDate
-//                        Log.debug("clickDate 값을 viewModel.selectedDate에 설정: \(clickDate)")
-//                    }
-//                }
             }
         }
     }

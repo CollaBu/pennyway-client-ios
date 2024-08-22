@@ -70,7 +70,7 @@ struct SpendingDetailSheetView: View {
                 .padding(.trailing, 17)
                 .padding(.top, 12)
                     
-                if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
+                if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate ?? viewModel.selectedDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
                     NoSpendingHistorySheetView()
                 } else {
                     ScrollView {
@@ -135,14 +135,9 @@ struct SpendingDetailSheetView: View {
                 isEditSuccess = false // 상태를 초기화
             }
         }
-
         .onAppear {
             Log.debug("바텀시트 clickDate: \(String(describing: clickDate))")
             Log.debug("selectedDate: \(String(describing: viewModel.selectedDate))")
-            
-            if let clickDate = clickDate {
-                viewModel.selectedDate = clickDate
-            }
             
             getDailyHistoryData()
         }
