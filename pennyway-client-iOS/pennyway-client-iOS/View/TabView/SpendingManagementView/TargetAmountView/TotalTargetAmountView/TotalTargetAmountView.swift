@@ -12,7 +12,8 @@ struct TotalTargetAmountView: View {
     @State private var showingDeletePopUp = false
     @State private var showToastPopup = false
 
-    let headerViewHeight = 173 * DynamicSizeFactor.factor()
+    let screenHeight = UIScreen.main.bounds.height
+    let hearderViewHeight = 173 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
     @State private var updateCount = 0 // 업데이트 횟수를 추적하는 변수
@@ -20,21 +21,18 @@ struct TotalTargetAmountView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                VStack(spacing: 0) {
-                    GeometryReader { geometry in
-                        let offset = geometry.frame(in: .global).minY
-                        setOffset(offset: offset)
+                GeometryReader { geometry in
+                    let offset = geometry.frame(in: .global).minY
+                    setOffset(offset: offset)
 
-                        TotalTargetAmountHeaderView(viewModel: viewModel)
-                            .background(Color("Mint03"))
-                            .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
-                    }
-                    .frame(height: headerViewHeight)
+                    TotalTargetAmountHeaderView(viewModel: viewModel)
+                        .background(Color("Mint03"))
+                        .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
 
                     TotalTargetAmountContentView(viewModel: viewModel, isnavigateToPastSpendingView: $isnavigateToPastSpendingView)
-
-                    Spacer().frame(height: 29 * DynamicSizeFactor.factor())
+                        .offset(y: adjustedOffset > 0 ? (hearderViewHeight - adjustedOffset) : hearderViewHeight)
                 }
+                .frame(height: screenHeight)
             }
             .overlay(
                 VStack(alignment: .leading) {
