@@ -19,7 +19,10 @@ struct ProfileMainView: View {
     @State var imageUrl = ""
     @State private var offsetY: CGFloat = CGFloat.zero
 
-    let profileViewHeight = 260 * DynamicSizeFactor.factor()
+    let profileViewHeight = 267 * DynamicSizeFactor.factor()
+    @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
+    @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
+    @State private var updateCount = 0 // 업데이트 횟수를 추적하는 변수
 
     var body: some View {
         NavigationAvailable {
@@ -28,6 +31,7 @@ struct ProfileMainView: View {
                     GeometryReader { geometry in
                         let offset = geometry.frame(in: .global).minY
                         setOffset(offset: offset)
+                        
                         ProfileUserInfoView(
                             showPopUpView: $showPopUpView,
                             navigateToEditUsername: $navigateToEditUsername,
@@ -36,10 +40,9 @@ struct ProfileMainView: View {
                             viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
                         )
                         .background(Color("White01"))
-                        .offset(y: offset > 0 ? -offset : 0)
+                        .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
                     }
                     .frame(height: profileViewHeight)
-                    .border(.black)
                     
                     VStack {
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
@@ -164,7 +167,17 @@ struct ProfileMainView: View {
     func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
             self.offsetY = offset
-            Log.debug("??:\(offset)")
+            Log.debug("offset 값:\(offset)")
+            
+            if updateCount < 2 {
+                updateCount += 1
+            } else if initialOffset == 0 {
+                initialOffset = offset
+            }
+            
+            adjustedOffset = offset - initialOffset
+            
+            Log.debug("initialOffset 값:\(offset)")
         }
         return EmptyView()
     }

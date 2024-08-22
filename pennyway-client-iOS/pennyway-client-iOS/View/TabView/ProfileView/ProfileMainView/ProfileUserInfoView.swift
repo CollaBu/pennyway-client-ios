@@ -24,7 +24,7 @@ struct ProfileUserInfoView: View {
     var body: some View {
         ZStack {
             VStack {
-//                Spacer().frame(height: 27 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 22 * DynamicSizeFactor.factor())
                 
                 Button(action: {
                     showPopUpView = true
@@ -132,9 +132,9 @@ struct ProfileUserInfoView: View {
                     .padding(.horizontal, 34)
                 }
                 
-//                Spacer().frame(height: 28 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             }
-            .frame(maxWidth: .infinity, maxHeight: 304 * DynamicSizeFactor.factor())
+            .frame(maxWidth: .infinity, maxHeight: 267 * DynamicSizeFactor.factor())
             .background(Color("White01"))
             .onAppear {
                 loadUserData()
