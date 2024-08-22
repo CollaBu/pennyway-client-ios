@@ -24,7 +24,3 @@ struct CompleteDeleteUserView: View {
         .navigationBarBackButtonHidden(true)
     }
 }
-
-#Preview {
-    CompleteChangePwView(firstNaviLinkActive: .constant(true))
-}

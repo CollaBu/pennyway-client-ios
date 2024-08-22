@@ -9,6 +9,7 @@ struct InquiryView: View {
     @State private var isSelectedAgreeBtn: Bool = false
     @State private var showAgreement: Bool = false
     @State private var isDeleteButtonVisible: Bool = false
+    @State private var isBackgroundOpaque: Bool = false
 
     @Environment(\.presentationMode) var presentationMode
 
@@ -153,13 +154,15 @@ struct InquiryView: View {
                 }
                 CustomBottomButton(action: {
                     continueButtonAction()
-                }, label: "문의하기", isFormValid: $viewModel.isFormValid)
-                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 0 : 34 * DynamicSizeFactor.factor())
+                }, label: "문의하기", isFormValid: $viewModel.isFormValid,
+                isBackgroundOpaque: isBackgroundOpaque)
+                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
+                    .border(.red)
             }
             .padding(.bottom, keyboardHandler.keyboardHeight)
             .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
             .edgesIgnoringSafeArea(.bottom)
-            .navigationTitle(Text("문의하기"))
+            .navigationBarColor(UIColor(named: "White01"), title: "문의하기")
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

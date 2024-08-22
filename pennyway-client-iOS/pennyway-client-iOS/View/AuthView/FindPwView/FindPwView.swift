@@ -12,11 +12,8 @@ struct FindPwView: View {
     var body: some View {
         ZStack {
             VStack {
-                ScrollView {
-                    VStack {
-                        FindPwContentView(phoneVerificationViewModel: phoneVerificationViewModel, showManyRequestPopUp: $showManyRequestPopUp)
-                    }
-                }
+                FindPwContentView(phoneVerificationViewModel: phoneVerificationViewModel, showManyRequestPopUp: $showManyRequestPopUp)
+
                 Spacer()
 
                 CustomBottomButton(action: {
