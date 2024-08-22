@@ -136,8 +136,7 @@ struct SpendingManagementMainView: View {
             .hidden()
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView, minHeight: bottomSheetMinHeight, maxHeight: 524 * DynamicSizeFactor.factor()) {
-            SpendingDetailSheetView(clickDate: $clickDate,
-                                    viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
+            SpendingDetailSheetView(clickDate: $clickDate, viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
                 .zIndex(2)
         }
         .onChange(of: showSpendingDetailView) { isPresented in

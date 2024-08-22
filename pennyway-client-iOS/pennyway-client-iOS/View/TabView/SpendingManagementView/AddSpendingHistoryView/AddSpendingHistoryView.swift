@@ -39,7 +39,7 @@ struct AddSpendingHistoryView: View {
                 Spacer()
 
                 CustomBottomButton(action: { handleConfirmBtnTap() }, label: "확인", isFormValid: $viewModel.isFormValid)
-                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
 
                 NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete, label: { EmptyView() })
                     .hidden()

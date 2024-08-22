@@ -3,8 +3,8 @@ import Combine
 import SwiftUI
 
 struct InquiryView: View {
-    @StateObject var viewModel = InquiryViewModel()
     @StateObject private var keyboardHandler = KeyboardHandlerManager()
+    @StateObject var viewModel = InquiryViewModel()
     @State private var isSelectedCategory: Bool = false
     @State private var isSelectedAgreeBtn: Bool = false
     @State private var showAgreement: Bool = false
@@ -15,165 +15,162 @@ struct InquiryView: View {
     let placeholder: String = "문의 내용을 입력해주세요"
     
     var body: some View {
-        VStack(alignment: .leading) {
-            ScrollView {
-                Spacer().frame(height: 31 * DynamicSizeFactor.factor())
+        ZStack {
+            VStack(alignment: .leading) {
+                ScrollView {
+                    Spacer().frame(height: 31 * DynamicSizeFactor.factor())
                     
-                ZStack(alignment: .leading) {
-                    HStack {
-                        InquiryListView(viewModel: viewModel)
+                    ZStack(alignment: .leading) {
+                        HStack {
+                            InquiryListView(viewModel: viewModel)
                             
-                        Spacer()
+                            Spacer()
                             
-                        Text("문의가 필요해요")
-                            .platformTextColor(color: Color("Gray05"))
-                            .font(.H4MediumFont())
-                            .multilineTextAlignment(.leading)
-                    }
-                }
-                .padding(.leading, 20)
-                .padding(.trailing, 44)
-                .zIndex(10)
-                    
-                Spacer().frame(height: 18 * DynamicSizeFactor.factor())
-                    
-                CustomInputView(inputText: $viewModel.email, titleText: "이메일", placeholder: "이메일 입력", onCommit: {
-                    viewModel.validateEmail()
-                    viewModel.validateForm()
-                    isDeleteButtonVisible = false
-                        
-                }, isSecureText: false, showDeleteButton: true, deleteAction: {
-                    viewModel.email = ""
-                    viewModel.validateForm()
-                    isDeleteButtonVisible = false
-                })
-                    
-                ZStack(alignment: .leading) {
-                    if viewModel.showErrorEmail {
-                        Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-                            
-                        ErrorText(message: "유효하지 않는 이메일 형식이에요", color: Color("Red03"))
-                    }
-                }
-                    
-                Spacer().frame(height: 24 * DynamicSizeFactor.factor())
-                    
-                VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-                    Text("문의 내용")
-                        .padding(.horizontal, 20)
-                        .font(.B1RegularFont())
-                        .platformTextColor(color: Color("Gray04"))
-                        
-                    ScrollView(.vertical, showsIndicators: false) {
-                        HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                            ZStack(alignment: .topLeading) {
-                                RoundedRectangle(cornerRadius: 6)
-                                    .fill(Color("Gray01"))
-                                    .frame(height: 123 * DynamicSizeFactor.factor())
-                                    
-                                TextEditor(text: $viewModel.content)
-                                    .font(.B1MediumFont())
-                                    .padding(.horizontal, 10)
-                                    .padding(.top, 8)
-                                    .zIndex(0)
-                                    .colorMultiply(Color("Gray01"))
-                                    .cornerRadius(6)
-                                    .TextAutocapitalization()
-                                    .AutoCorrectionExtensions()
-                                    .onChange(of: viewModel.content) { _ in
-                                        if viewModel.content.count > 500 {
-                                            viewModel.content = String(viewModel.content.prefix(500))
-                                        }
-                                            
-                                        viewModel.validateForm()
-                                    }
-                                    .frame(height: 123)
-                                    
-                                if viewModel.content.isEmpty {
-                                    Text(placeholder)
-                                        .font(.B1MediumFont())
-                                        .padding(.leading, 14)
-                                        .padding(.top, 16)
-                                        .platformTextColor(color: Color("Gray03"))
-                                        .cornerRadius(6)
-                                }
-                            }
-                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                            Text("문의가 필요해요")
+                                .platformTextColor(color: Color("Gray05"))
+                                .font(.H4MediumFont())
+                                .multilineTextAlignment(.leading)
                         }
-                        .padding(.horizontal, 20)
                     }
+                    .padding(.leading, 20)
+                    .padding(.trailing, 44)
+                    .zIndex(10)
+                    
+                    Spacer().frame(height: 18 * DynamicSizeFactor.factor())
+                    
+                    CustomInputView(inputText: $viewModel.email, titleText: "이메일", placeholder: "이메일 입력", onCommit: {
+                        viewModel.validateEmail()
+                        viewModel.validateForm()
+                        isDeleteButtonVisible = false
+                        
+                    }, isSecureText: false, showDeleteButton: true, deleteAction: {
+                        viewModel.email = ""
+                        viewModel.validateForm()
+                        isDeleteButtonVisible = false
+                    })
+                    
+                    ZStack(alignment: .leading) {
+                        if viewModel.showErrorEmail {
+                            Spacer().frame(height: 9 * DynamicSizeFactor.factor())
+                            
+                            ErrorText(message: "유효하지 않는 이메일 형식이에요", color: Color("Red03"))
+                        }
+                    }
+                    
+                    Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+                    
+                    VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
+                        Text("문의 내용")
+                            .padding(.horizontal, 20)
+                            .font(.B1RegularFont())
+                            .platformTextColor(color: Color("Gray04"))
+                        
+                        ScrollView(.vertical, showsIndicators: false) {
+                            HStack(spacing: 11 * DynamicSizeFactor.factor()) {
+                                ZStack(alignment: .topLeading) {
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .fill(Color("Gray01"))
+                                        .frame(height: 123 * DynamicSizeFactor.factor())
+                                    
+                                    TextEditor(text: $viewModel.content)
+                                        .font(.B1MediumFont())
+                                        .padding(.horizontal, 10)
+                                        .padding(.top, 8)
+                                        .zIndex(0)
+                                        .colorMultiply(Color("Gray01"))
+                                        .cornerRadius(6)
+                                        .TextAutocapitalization()
+                                        .AutoCorrectionExtensions()
+                                        .onChange(of: viewModel.content) { _ in
+                                            if viewModel.content.count > 500 {
+                                                viewModel.content = String(viewModel.content.prefix(500))
+                                            }
                                             
-                    HStack(spacing: 0) {
-                        Button(action: {
-                            viewModel.isSelectedAgreeBtn.toggle()
-                            viewModel.validateForm()
-                        }, label: {
-                            let selected = viewModel.isSelectedAgreeBtn == true ? Image("icon_checkone_on_small") : Image("icon_checkone_off_small")
-                                
-                            selected
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                        })
-                        .padding(.leading, 20 * DynamicSizeFactor.factor())
-                        .buttonStyle(BasicButtonStyleUtil())
-                        .buttonStyle(PlainButtonStyle())
-                            
-                        Text("정보 제공에 동의할게요")
-                            .font(.B1MediumFont())
-                            .platformTextColor(color: Color("Gray05"))
-                            .padding(.leading, 7 * DynamicSizeFactor.factor())
-                            
-                        Spacer()
-                            
-                        Button(action: {
-                            withAnimation {
-                                showAgreement.toggle()
+                                            viewModel.validateForm()
+                                        }
+                                        .frame(height: 123)
+                                    
+                                    if viewModel.content.isEmpty {
+                                        Text(placeholder)
+                                            .font(.B1MediumFont())
+                                            .padding(.leading, 14)
+                                            .padding(.top, 16)
+                                            .platformTextColor(color: Color("Gray03"))
+                                            .cornerRadius(6)
+                                    }
+                                }
+                                .clipShape(RoundedRectangle(cornerRadius: 6))
                             }
-                        }, label: {
-                            Image("icon_arrow_down")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                .rotationEffect(.degrees(showAgreement ? 180 : 0))
+                            .padding(.horizontal, 20)
+                        }
+                        
+                        HStack(spacing: 0) {
+                            Button(action: {
+                                viewModel.isSelectedAgreeBtn.toggle()
+                                viewModel.validateForm()
+                            }, label: {
+                                let selected = viewModel.isSelectedAgreeBtn == true ? Image("icon_checkone_on_small") : Image("icon_checkone_off_small")
                                 
-                        })
-                        .padding(.trailing, 20 * DynamicSizeFactor.factor())
-                        .buttonStyle(BasicButtonStyleUtil())
-                        .buttonStyle(PlainButtonStyle())
+                                selected
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            })
+                            .padding(.leading, 20 * DynamicSizeFactor.factor())
+                            .buttonStyle(BasicButtonStyleUtil())
+                            
+                            Text("정보 제공에 동의할게요")
+                                .font(.B1MediumFont())
+                                .platformTextColor(color: Color("Gray05"))
+                                .padding(.leading, 7 * DynamicSizeFactor.factor())
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                withAnimation {
+                                    showAgreement.toggle()
+                                }
+                            }, label: {
+                                Image("icon_arrow_down")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                    .rotationEffect(.degrees(showAgreement ? 180 : 0))
+                                
+                            })
+                            .padding(.trailing, 20 * DynamicSizeFactor.factor())
+                            .buttonStyle(BasicButtonStyleUtil())
+                        }
+                        .padding(.vertical, 1)
                     }
-                    .padding(.vertical, 1)
-                }
                     
-                if showAgreement {
-                    agreementSection()
-                        .transition(.opacity.animation(.easeOut))
-                }
+                    if showAgreement {
+                        agreementSection()
+                            .transition(.opacity.animation(.easeOut))
+                    }
                     
-                Spacer().frame(height: 26 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 26 * DynamicSizeFactor.factor())
+                }
+                CustomBottomButton(action: {
+                    continueButtonAction()
+                }, label: "문의하기", isFormValid: $viewModel.isFormValid)
+                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 0 : 34 * DynamicSizeFactor.factor())
             }
-            Spacer()
-            
-            CustomBottomButton(action: {
-                continueButtonAction()
-            }, label: "문의하기", isFormValid: $viewModel.isFormValid)
-                .padding(.bottom, 34 * DynamicSizeFactor.factor())
-        }
-        .padding(.bottom, max(keyboardHandler.keyboardHeight, 0))
-        .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
-        
-        .edgesIgnoringSafeArea(.bottom)
-        .navigationBarColor(UIColor(named: "White01"), title: "문의하기")
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-
-                }.offset(x: -10)
+            .padding(.bottom, keyboardHandler.keyboardHeight)
+            .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
+            .edgesIgnoringSafeArea(.bottom)
+            .navigationTitle(Text("문의하기"))
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                        
+                    }.offset(x: -10)
+                }
             }
         }
     }
