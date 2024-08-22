@@ -109,7 +109,6 @@ struct TotalTargetAmountView: View {
             }
 
             if showingDeletePopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
                                 titleLabel: "목표금액을 초기화할까요?",
                                 subTitleLabel: "이번 달 목표금액이 사라져요",

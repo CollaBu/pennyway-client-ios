@@ -69,6 +69,7 @@ struct EditProfilePopUpView: View {
         .onAppear {
             isHiddenTabBar = true
         }
+        .analyzeEvent(ProfileEvents.profileImageEditPopUp)
     }
 
     private func handleOption(_ option: String) {

@@ -154,6 +154,12 @@ struct ProfileMainView: View {
         .onChange(of: showPopUpView) { newValue in
             isHiddenTabBar = newValue
         }
+        .analyzeEvent(ProfileEvents.profileTapView)
+        .onChange(of: ProfileNavigationState(navigateToEditUsername: navigateToEditUsername, isSelectedToolBar: isSelectedToolBar, showPopUpView: showPopUpView)) { state in
+            if state.isReturn() {
+                AnalyticsManager.shared.trackEvent(ProfileEvents.profileTapView, additionalParams: nil)
+            }
+        }
     }
     
     private func loadUserDataImage() {
@@ -178,6 +184,18 @@ struct ProfileMainView: View {
             Log.debug("initialOffset 값:\(offset)")
         }
         return EmptyView()
+    }
+}
+
+// MARK: - ProfileNavigationState
+
+struct ProfileNavigationState: Equatable {
+    let navigateToEditUsername: Bool
+    let isSelectedToolBar: Bool
+    let showPopUpView: Bool
+
+    func isReturn() -> Bool {
+        return !navigateToEditUsername && !isSelectedToolBar && !showPopUpView
     }
 }
 

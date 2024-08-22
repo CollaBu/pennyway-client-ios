@@ -47,7 +47,6 @@ struct DetailSpendingView: View {
             }
 
             if showingPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingPopUp,
                                 titleLabel: "내역을 삭제할까요?",
                                 subTitleLabel: "선택한 소비 내역이 사라져요",

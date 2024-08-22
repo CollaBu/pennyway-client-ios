@@ -107,7 +107,6 @@ struct EditSpendingDetailView: View {
             }
 
             if showingClosePopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingClosePopUp,
                                 titleLabel: "편집을 끝낼까요?",
                                 subTitleLabel: "변경된 내용은 자동 저장돼요",
@@ -123,7 +122,6 @@ struct EditSpendingDetailView: View {
             }
 
             if showingDeletePopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
                                 titleLabel: "\(selectedIds.count)개의 내역을 삭제할까요?",
                                 subTitleLabel: "선택한 소비 내역이 사라져요",
