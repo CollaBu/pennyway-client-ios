@@ -111,7 +111,7 @@ class SpendingCategoryViewModel: ObservableObject {
             return
         }
         
-        let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "5", page: "\(currentPageNumber)")
+        let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "30", page: "\(currentPageNumber)")
         
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
         
@@ -126,17 +126,15 @@ class SpendingCategoryViewModel: ObservableObject {
                             Log.debug("카테고리에 등록된 지출내역 조회\(jsonString)")
                         }
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-                            self.dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id }
-                            self.mergeNewSpendings(newSpendings: response.data.spendings.content)
-                            self.hasNext = response.data.spendings.hasNext
+                        self.dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id }
+                        self.mergeNewSpendings(newSpendings: response.data.spendings.content)
+                        self.hasNext = response.data.spendings.hasNext
                             
-                            if !(isReload ?? false) {
-                                self.currentPageNumber += 1
-                            }
-                            
-                            completion(true)
+                        if !(isReload ?? false) {
+                            self.currentPageNumber += 1
                         }
+                            
+                        completion(true)
                         
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
