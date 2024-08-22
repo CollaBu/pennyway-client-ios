@@ -119,11 +119,6 @@ struct AddSpendingHistoryView: View {
                 self.presentationMode.wrappedValue.dismiss()
                 self.spendingHistoryViewModel.spendingDetailViewUpdated = spendingDetailViewUpdated
 
-                if let spendingDetail = spendingCategoryViewModel.selectSpending {
-                    spendingCategoryViewModel.dailyDetailSpendings.removeAll { $0.id == spendingDetail.id }
-                    Log.debug("spendingCategoryViewModel에서 지출 내역 삭제")
-                }
-
                 self.isEditSuccess = true
                 Log.debug("지출 내역 수정 성공")
             } else {

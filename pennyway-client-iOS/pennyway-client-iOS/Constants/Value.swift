@@ -40,3 +40,11 @@ enum Ext: String {
     case png = "png"
     case jpeg = "jpeg"
 }
+
+/// 연결타입
+enum ConnectionType {
+    case wifi
+    case cellular
+    case ethernet
+    case unknown
+}

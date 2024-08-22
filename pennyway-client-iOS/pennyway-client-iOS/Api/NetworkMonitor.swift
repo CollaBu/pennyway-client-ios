@@ -14,14 +14,6 @@ final class NetworkMonitor {
 
     public private(set) var connectionType: ConnectionType = .unknown
     
-    /// 연결타입
-    enum ConnectionType {
-        case wifi
-        case cellular
-        case ethernet
-        case unknown
-    }
-    
     private init() {
         monitor = NWPathMonitor()
     }
