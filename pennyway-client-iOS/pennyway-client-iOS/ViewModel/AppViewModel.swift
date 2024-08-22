@@ -33,9 +33,6 @@ class AppViewModel: ObservableObject {
     }
 
     func checkLoginStateApi() {
-        Log.debug("api: \(API.BASE_URL)")
-        Log.debug("api 경로: \(Bundle.main.object(forInfoDictionaryKey: "BaseURL") as? String ?? "")")
-
         UserAuthAlamofire.shared.checkLoginState { [weak self] result in
             switch result {
             case let .success(data):
