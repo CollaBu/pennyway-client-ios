@@ -121,9 +121,9 @@
 		4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789982BDC2A1100AFEB26 /* UnprocessableContentError.swift */; };
 		4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */; };
 		4A5DA8C12C3C498D00685F77 /* FcmTokenDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */; };
-		4A5E6A492C78696C00389C98 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A452C78696C00389C98 /* Debug.xcconfig */; };
-		4A5E6A4A2C78696C00389C98 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A462C78696C00389C98 /* Release.xcconfig */; };
-		4A5E6A4B2C78696C00389C98 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A472C78696C00389C98 /* Secrets.xcconfig */; };
+		4A5E6A502C786CED00389C98 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A4C2C786CED00389C98 /* Debug.xcconfig */; };
+		4A5E6A512C786CED00389C98 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A4D2C786CED00389C98 /* Release.xcconfig */; };
+		4A5E6A522C786CED00389C98 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A4E2C786CED00389C98 /* Secrets.xcconfig */; };
 		4A60F64C2C595E4700805F2C /* CustomCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60F64B2C595E4700805F2C /* CustomCompleteView.swift */; };
 		4A60F64E2C595F6A00805F2C /* CompleteDeleteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60F64D2C595F6A00805F2C /* CompleteDeleteUserView.swift */; };
 		4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A641A142C0F98380041B053 /* TotalTargetAmountViewModel.swift */; };
@@ -449,9 +449,9 @@
 		4A5789982BDC2A1100AFEB26 /* UnprocessableContentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnprocessableContentError.swift; sourceTree = "<group>"; };
 		4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalServerError.swift; sourceTree = "<group>"; };
 		4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmTokenDto.swift; sourceTree = "<group>"; };
-		4A5E6A452C78696C00389C98 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4A5E6A462C78696C00389C98 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4A5E6A472C78696C00389C98 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		4A5E6A4C2C786CED00389C98 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4A5E6A4D2C786CED00389C98 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4A5E6A4E2C786CED00389C98 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A60F64B2C595E4700805F2C /* CustomCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCompleteView.swift; sourceTree = "<group>"; };
 		4A60F64D2C595F6A00805F2C /* CompleteDeleteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteDeleteUserView.swift; sourceTree = "<group>"; };
 		4A641A142C0F98380041B053 /* TotalTargetAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTargetAmountViewModel.swift; sourceTree = "<group>"; };
@@ -1278,12 +1278,12 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
-		4A5E6A482C78696C00389C98 /* Xcconfig */ = {
+		4A5E6A4F2C786CED00389C98 /* Xcconfig */ = {
 			isa = PBXGroup;
 			children = (
-				4A5E6A452C78696C00389C98 /* Debug.xcconfig */,
-				4A5E6A462C78696C00389C98 /* Release.xcconfig */,
-				4A5E6A472C78696C00389C98 /* Secrets.xcconfig */,
+				4A5E6A4C2C786CED00389C98 /* Debug.xcconfig */,
+				4A5E6A4D2C786CED00389C98 /* Release.xcconfig */,
+				4A5E6A4E2C786CED00389C98 /* Secrets.xcconfig */,
 			);
 			path = Xcconfig;
 			sourceTree = "<group>";
@@ -1373,6 +1373,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4A5E6A4F2C786CED00389C98 /* Xcconfig */,
 				4AFF0C832C6A6B770040B192 /* GoogleService-Info.plist */,
 				4A5E6A482C78696C00389C98 /* Xcconfig */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
@@ -2081,12 +2082,12 @@
 				4AFF0C842C6A6B770040B192 /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				4A5E6A492C78696C00389C98 /* Debug.xcconfig in Resources */,
+				4A5E6A502C786CED00389C98 /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				4A5E6A4B2C78696C00389C98 /* Secrets.xcconfig in Resources */,
+				4A5E6A522C786CED00389C98 /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				4A5E6A4A2C78696C00389C98 /* Release.xcconfig in Resources */,
+				4A5E6A512C786CED00389C98 /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
