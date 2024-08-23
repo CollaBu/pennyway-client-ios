@@ -16,6 +16,8 @@ class SpendingHistoryViewModel: ObservableObject {
     @Published var spendingDetailViewUpdated: Bool = false
     @Published var spendingSheetViewUpdated: Bool = false
 
+    @Published var isClickSpendingDetailView: Bool = false
+
     private var year: String {
         return String(Date.year(from: currentDate))
     }
