@@ -134,7 +134,7 @@ struct TotalTargetAmountView: View {
             }
         })
 
-        NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
+        NavigationLink(destination: TargetAmountSettingView(currentData: viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
             .hidden()
 
         NavigationLink(destination: PastSpendingListView(viewModel: viewModel), isActive: $isnavigateToPastSpendingView) {}

@@ -6,7 +6,6 @@ struct TargetAmountSetCompleteView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     
     let profileInfoViewModel = UserAccountViewModel()
-    
     var entryPoint: TargetAmountEntryPoint
     
     private var buttonText: String {
@@ -65,8 +64,4 @@ struct TargetAmountSetCompleteView: View {
     private func goToTotalTargetAmountView() {
         NavigationUtil.popToView(at: 1)
     }
-}
-
-#Preview {
-    TargetAmountSetCompleteView(viewModel: TargetAmountSettingViewModel(currentData: TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)), entryPoint: .signUp)
 }
