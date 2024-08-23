@@ -239,8 +239,8 @@ struct MySpendingListView: View {
             selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
         }
 
-        // spendingHistoryViewModel.selectedDate = nil
-        // spendingHistoryViewModel.selectedDateId = 0
+        spendingHistoryViewModel.selectedDate = nil
+        spendingHistoryViewModel.selectedDateId = 0
 
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
             if success {
