@@ -4,37 +4,10 @@ struct TotalTargetAmountContentView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     @Binding var isnavigateToPastSpendingView: Bool
     
+    @State private var scrollOffset: CGFloat = 0
+    
     var body: some View {
         VStack {
-            HStack {
-                HStack(spacing: 4) {
-                    Image("icon_remaining_amount")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                    
-                    Text("남은 금액")
-                        .font(.B1MediumFont())
-                        .platformTextColor(color: Color("Gray04"))
-                }
-                .padding(.leading, 14)
-                .padding(.bottom, 12)
-                
-                Spacer()
-                
-                Text(viewModel.currentData.targetAmountDetail.amount != -1 ? "\(viewModel.currentData.diffAmount <= 0 ? "" : "-")\(abs(viewModel.currentData.diffAmount))원" : "-원")
-                    .font(.B1SemiboldeFont())
-                    .platformTextColor(color: determineDiffAmountColor(for: viewModel.currentData.diffAmount))
-                    .padding(.trailing, 16)
-                    .padding(.bottom, 12)
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: 38 * DynamicSizeFactor.factor())
-            .background(
-                RoundedCornerUtil(radius: 8, corners: [.bottomLeft, .bottomRight])
-                    .fill(Color("White01"))
-            )
-            
             Spacer().frame(height: 13 * DynamicSizeFactor.factor())
             
             VStack {
@@ -99,17 +72,8 @@ struct TotalTargetAmountContentView: View {
             .cornerRadius(8)
         }
         .padding(.horizontal, 20)
+        .background(Color("Gray01"))
         
         Spacer()
-    }
-    
-    // Color 설정
-    
-    func determineDiffAmountColor(for diffAmount: Int64) -> Color {
-        if viewModel.currentData.targetAmountDetail.amount != -1 {
-            return diffAmount > 0 ? Color("Red03") : Color("Gray07")
-        } else {
-            return Color("Gray07")
-        }
     }
 }

@@ -1,6 +1,8 @@
 
 import SwiftUI
 
+// MARK: - ProfileMenuBarListView
+
 struct ProfileMenuBarListView: View {
     @State private var showLogoutPopUp = false
     @State private var showDeleteUserPopUp = false
@@ -44,8 +46,7 @@ struct ProfileMenuBarListView: View {
             }
 
             if showUnLinkPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                CustomPopUpView(showingPopUp: $showLogoutPopUp,
+                CustomPopUpView(showingPopUp: $showUnLinkPopUp,
                                 titleLabel: "계정 연동을 해제할까요?",
                                 subTitleLabel: "해제하더라도 다시 연동할 수 있어요",
                                 firstBtnAction: { self.showUnLinkPopUp = false },
@@ -54,10 +55,10 @@ struct ProfileMenuBarListView: View {
                                 secondBtnLabel: "해제하기",
                                 secondBtnColor: Color("Gray05")
                 )
+                .analyzeEvent(ProfileEvents.oauthUnlinkPopUp)
             }
 
             if showLogoutPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showLogoutPopUp,
                                 titleLabel: "로그아웃",
                                 subTitleLabel: "로그아웃하시겠어요?",
@@ -67,11 +68,11 @@ struct ProfileMenuBarListView: View {
                                 secondBtnLabel: "로그아웃",
                                 secondBtnColor: Color("Red03")
                 )
+                .analyzeEvent(ProfileEvents.signOutPopUp)
             }
 
             if showDeleteUserPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                CustomPopUpView(showingPopUp: $showLogoutPopUp,
+                CustomPopUpView(showingPopUp: $showDeleteUserPopUp,
                                 titleLabel: "탈퇴하시겠어요?",
                                 subTitleLabel: "탈퇴 후에는 이용한 서비스\n내역이 모두 사라져요 😢",
                                 firstBtnAction: handleDeleteUserAccount,
@@ -81,6 +82,7 @@ struct ProfileMenuBarListView: View {
                                 secondBtnColor: Color("Gray05"),
                                 heightSize: 166
                 )
+                .analyzeEvent(ProfileEvents.accountDeletePopUp)
             }
 
             if googleOAuthViewModel.isExistUser || kakaoOAuthViewModel.isExistUser || appleOAuthViewModel.isExistUser {
@@ -93,6 +95,12 @@ struct ProfileMenuBarListView: View {
                 EmptyView()
             }
             .hidden()
+        }
+        .analyzeEvent(ProfileEvents.profileHamburgerMenuTap)
+        .onChange(of: ProfileMenuPopUpState(showLogoutPopUp: showLogoutPopUp, showDeleteUserPopUp: showDeleteUserPopUp, showUnLinkPopUp: showUnLinkPopUp)) { state in
+            if state.isReturn() {
+                AnalyticsManager.shared.trackEvent(ProfileEvents.profileHamburgerMenuTap, additionalParams: nil)
+            }
         }
     }
 
@@ -136,6 +144,18 @@ struct ProfileMenuBarListView: View {
             Log.debug("계정 연동 해제 실패")
         }
         showUnLinkPopUp = false
+    }
+}
+
+// MARK: - ProfileMenuPopUpState
+
+struct ProfileMenuPopUpState: Equatable {
+    var showLogoutPopUp: Bool
+    var showDeleteUserPopUp: Bool
+    var showUnLinkPopUp: Bool
+
+    func isReturn() -> Bool {
+        return !showLogoutPopUp && !showDeleteUserPopUp && !showUnLinkPopUp
     }
 }
 

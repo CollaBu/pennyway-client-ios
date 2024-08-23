@@ -77,6 +77,14 @@ struct AddSpendingHistoryView: View {
             .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
                 SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
             }
+            .onChange(of: SheetState(isCategoryListViewPresented: viewModel.isCategoryListViewPresented, 
+                                     isSelectDayViewPresented: viewModel.isSelectDayViewPresented))
+            { state in
+                if !state.isCategoryListViewPresented && !state.isSelectDayViewPresented {
+                    analyzeEvent()
+                }
+            }
+            .onAppear { analyzeEvent() }
         }
         .onAppear {
             Log.debug("AddSpendingHistoryView에서 spendingId: \(spendingId)")
@@ -123,15 +131,36 @@ struct AddSpendingHistoryView: View {
         }
         Log.debug("수정하기")
 
-        viewModel.editSpendingHistoryApi(spendingId: spendingId) { success in
-            if success {
+        viewModel.editSpendingHistoryApi(spendingId: spendingId) { response in
+
+            switch response {
+            case let .success(data):
                 self.presentationMode.wrappedValue.dismiss()
                 self.spendingHistoryViewModel.spendingDetailViewUpdated = spendingDetailViewUpdated
                 self.isEditSuccess = true
-                Log.debug("지출 내역 수정 성공")
-            } else {
-                Log.debug("지출 내역 수정 실패")
+
+                spendingCategoryViewModel.updateSpending(dto: data!)
+
+            case let .failure(error):
+                Log.debug("error")
             }
         }
     }
+
+    private func analyzeEvent() {
+        if entryPoint == .detailSpendingView {
+            AnalyticsManager.shared.trackEvent(SpendingEvents.spendingUpdateView, additionalParams: nil)
+        } else {
+            AnalyticsManager.shared.trackEvent(SpendingEvents.spendingAddView, additionalParams: nil)
+        }
+    }
 }
+
+
+// MARK: - SheetState
+
+struct SheetState: Equatable {
+    let isCategoryListViewPresented: Bool
+    let isSelectDayViewPresented: Bool
+}
+

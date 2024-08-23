@@ -175,6 +175,7 @@ struct InquiryView: View {
                 }
             }
         }
+        .analyzeEvent(QuestionEvents.questionView)
     }
 
     private func continueButtonAction() {

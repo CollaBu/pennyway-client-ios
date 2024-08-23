@@ -94,9 +94,9 @@ enum AuthCheckScreen {
     var screenClass: String {
         switch self {
         case .findUsernameView: return "FindIdView"
-        case .findUsernamePhoneVerificationView: return "FindIdPhoneVerificationView"
-        case .findPasswordView: return "FindPwView"
-        case .findPasswordPhoneVerification: return "FindPwPhoneVerification"
+        case .findUsernamePhoneVerificationView: return "FindIdContentView"
+        case .findPasswordView: return "ResetPwView"
+        case .findPasswordPhoneVerification: return "FindPwView"
         }
     }
 }

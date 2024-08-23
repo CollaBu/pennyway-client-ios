@@ -76,7 +76,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
         }
     }
 
-    func editSpendingHistoryApi(spendingId: Int, completion: @escaping (Bool) -> Void) {
+    func editSpendingHistoryApi(spendingId: Int, completion: @escaping (Result<AddSpendingHistoryResponseDto?, Error>) -> Void) {
         let amount = Int(amountSpentText.replacingOccurrences(of: ",", with: "")) ?? 0
         let spendAt = Date.getBasicformattedDate(from: clickDate ?? selectedDate)
         var categoryId = -1
@@ -108,18 +108,19 @@ class AddSpendingHistoryViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("지출 내역 수정 완료 \(jsonString)")
                         }
-                        completion(true)
+                        completion(.success(response))
+
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
-                        completion(false)
                     }
                 }
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {
                     Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
                 } else {
-                    Log.error("Network request faile: \(error)")
+                    Log.error("Network request failed: \(error)")
                 }
+                completion(.failure(error))
             }
         }
     }
