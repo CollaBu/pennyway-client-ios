@@ -1375,6 +1375,7 @@
 			children = (
 				4A5E6A4F2C786CED00389C98 /* Xcconfig */,
 				4AFF0C832C6A6B770040B192 /* GoogleService-Info.plist */,
+				4A5E6A482C78696C00389C98 /* Xcconfig */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
