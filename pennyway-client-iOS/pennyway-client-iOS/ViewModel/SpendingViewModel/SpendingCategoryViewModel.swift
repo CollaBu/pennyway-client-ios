@@ -129,13 +129,13 @@ class SpendingCategoryViewModel: ObservableObject {
                         }
                         self.mergeNewSpendings(newSpendings: response.data.spendings.content)
                         self.hasNext = response.data.spendings.hasNext
-                        
+                            
                         if !(isReload ?? false) {
                             self.currentPageNumber += 1
                         }
-                        
+                            
                         completion(true)
-
+                        
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }
@@ -173,7 +173,7 @@ class SpendingCategoryViewModel: ObservableObject {
         for var spending in uniqueNewSpendings {
             let updatedCategory = SpendingCategory(
                 isCustom: spending.category.isCustom,
-                id: self.selectedCategory!.id,
+                id: selectedCategory!.id,
                 name: spending.category.name,
                 icon: spending.category.icon
             )
