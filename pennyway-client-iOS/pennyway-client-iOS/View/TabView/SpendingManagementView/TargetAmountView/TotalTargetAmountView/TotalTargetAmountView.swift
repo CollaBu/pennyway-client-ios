@@ -159,8 +159,6 @@ struct TotalTargetAmountView: View {
 
     func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
-            Log.debug("offset 값:\(offset)")
-
             if updateCount < 2 {
                 updateCount += 1
             } else if initialOffset == 0 {
@@ -168,8 +166,6 @@ struct TotalTargetAmountView: View {
             }
 
             adjustedOffset = offset - initialOffset
-
-            Log.debug("initialOffset 값:\(offset)")
         }
         return EmptyView()
     }
