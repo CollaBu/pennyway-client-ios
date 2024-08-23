@@ -10,11 +10,11 @@ import SwiftUI
 
 class FirebaseAnalyticsService: AnalyticsService {
     var subscribedEvents: [AnalyticsEvent.Type] {
-        [AuthEvents.self, SpendingEvents.self]
+        [AuthEvents.self, AuthCheckEvents.self, SpendingEvents.self, SpendingCategoryEvents.self, TargetAmountEvents.self, ProfileEvents.self, QuestionEvents.self]
     }
     
     func initialize(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) {
-        Log.info("Firebase: Initialized")
+        Log.info("[FirebaseAnalyticsService]: Initialized")
     }
     
     func track(_ event: any AnalyticsEvent, additionalParams: [AnalyticsConstants.Parameter: Any]?) {
@@ -23,7 +23,7 @@ class FirebaseAnalyticsService: AnalyticsService {
         
         Analytics.logEvent(eventName, parameters: firebaseParams)
         
-        Log.info("Firebase: Tracking event \(event.eventName.rawValue) with parameters \(String(describing: additionalParams))")
+        Log.info("[FirebaseAnalyticsService]: Tracking event \(event) with parameters \(String(describing: additionalParams))")
     }
     
     /// - Parameters:
@@ -37,7 +37,7 @@ class FirebaseAnalyticsService: AnalyticsService {
         Analytics.setUserID(userId)
         properties?.forEach { Analytics.setUserProperty($0.key, forName: $0.value) }
         
-        Log.info("Firebase: Setting user \(userId) with properties \(String(describing: properties))")
+        Log.info("[FirebaseAnalyticsService]: Setting user \(userId) with properties \(String(describing: properties))")
     }
     
     private func getFirebaseEventName(for eventName: AnalyticsConstants.EventName) -> String {

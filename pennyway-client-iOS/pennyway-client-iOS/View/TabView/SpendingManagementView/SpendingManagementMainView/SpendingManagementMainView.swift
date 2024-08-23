@@ -48,6 +48,7 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
+                .analyzeEvent(SpendingEvents.spendingTabView)
             }
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }

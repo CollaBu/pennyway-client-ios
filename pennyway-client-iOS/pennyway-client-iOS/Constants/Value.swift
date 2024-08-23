@@ -41,6 +41,8 @@ enum Ext: String {
     case jpeg = "jpeg"
 }
 
+// MARK: - ConnectionType
+
 /// 연결타입
 enum ConnectionType {
     case wifi

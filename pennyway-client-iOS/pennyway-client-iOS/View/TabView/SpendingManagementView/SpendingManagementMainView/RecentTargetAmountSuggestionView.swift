@@ -20,6 +20,7 @@ struct RecentTargetAmountSuggestionView: View {
                     viewModel.deleteCurrentMonthTargetAmountApi { success in
                         if success {
                             isHidden = true
+                            AnalyticsManager.shared.trackEvent(TargetAmountEvents.cancelRecentTotalAmount, additionalParams: nil)
                         }
                     }
                 }, label: {
@@ -52,10 +53,11 @@ struct RecentTargetAmountSuggestionView: View {
                     showToastPopup = true
                     viewModel.editCurrentMonthTargetAmountApi()
                     
+                    AnalyticsManager.shared.trackEvent(TargetAmountEvents.maintainRecentTargetAmount, additionalParams: nil)
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         showToastPopup = false
                     }
-                    
                 }, label: {
                     Text("사용하기")
                         .font(.B1SemiboldeFont())

@@ -1,4 +1,4 @@
-
+import Combine
 import SwiftUI
 
 class SpendingCategoryViewModel: ObservableObject {
@@ -30,7 +30,7 @@ class SpendingCategoryViewModel: ObservableObject {
     @Published var spedingHistoryTotalCount = 0 // 지출 내역 리스트 총 개수
     @Published var hasNext: Bool = true
     private var currentPageNumber: Int = 0
-    
+  
     /// 카테고리 조회 api 호출
     func getSpendingCustomCategoryListApi(completion: @escaping (Bool) -> Void) {
         SpendingCategoryAlamofire.shared.getSpendingCustomCategoryList { result in
@@ -106,14 +106,16 @@ class SpendingCategoryViewModel: ObservableObject {
     }
     
     /// 카테고리에 따른 지출내역 리스트 조회 api 호출
-    func getCategorySpendingHistoryApi(completion: @escaping (Bool) -> Void) {
+    func getCategorySpendingHistoryApi(isReload: Bool? = false, completion: @escaping (Bool) -> Void) {
         guard hasNext, selectedCategory != nil else {
             return
         }
         
-        let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "5", page: "\(currentPageNumber)")
+        let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "30", page: "\(currentPageNumber)")
         
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
+        
+        dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id } // 선택한 카테고리와 다르면 삭제
         
         SpendingCategoryAlamofire.shared.getCategorySpendingHistory(categoryId, getCategorySpendingHistoryRequestDto) { result in
             switch result {
@@ -125,11 +127,13 @@ class SpendingCategoryViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("카테고리에 등록된 지출내역 조회\(jsonString)")
                         }
-                        
                         self.mergeNewSpendings(newSpendings: response.data.spendings.content)
-                        self.currentPageNumber += 1
                         self.hasNext = response.data.spendings.hasNext
-                        
+                            
+                        if !(isReload ?? false) {
+                            self.currentPageNumber += 1
+                        }
+                            
                         completion(true)
                         
                     } catch {
@@ -165,8 +169,17 @@ class SpendingCategoryViewModel: ObservableObject {
 
         let existingIds = Set(dailyDetailSpendings.map { $0.id })
         let uniqueNewSpendings = allNewIndividualSpendings.filter { !existingIds.contains($0.id) }
-        
-        dailyDetailSpendings.append(contentsOf: uniqueNewSpendings)
+
+        for var spending in uniqueNewSpendings {
+            let updatedCategory = SpendingCategory(
+                isCustom: spending.category.isCustom,
+                id: selectedCategory!.id,
+                name: spending.category.name,
+                icon: spending.category.icon
+            )
+            spending.category = updatedCategory
+            dailyDetailSpendings.append(spending)
+        }
         dailyDetailSpendings.sort { $0.spendAt > $1.spendAt }
     }
     
@@ -287,5 +300,15 @@ class SpendingCategoryViewModel: ObservableObject {
     /// 특정 ID에 해당하는 지출내역 검색
     func getSpendingDetail(by id: Int) -> IndividualSpending? {
         return dailyDetailSpendings.first { $0.id == id }
+    }
+    
+    func updateSpending(dto: AddSpendingHistoryResponseDto) {
+        let id = selectSpending?.id
+        
+        if let firstIndex = dailyDetailSpendings.firstIndex(where: { $0.id == id }) {
+            dailyDetailSpendings[firstIndex].update(spending: dto.data.spending)
+        }
+        selectSpending?.update(spending: dto.data.spending)
+        Log.debug("spendingCategoryViewModel에서 지출 내역 삭제")
     }
 }

@@ -21,9 +21,9 @@ struct CompleteChangePwView: View {
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
-
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
+        .analyzeEvent(ProfileEvents.passwordEditCompleteView)
     }
 }
 

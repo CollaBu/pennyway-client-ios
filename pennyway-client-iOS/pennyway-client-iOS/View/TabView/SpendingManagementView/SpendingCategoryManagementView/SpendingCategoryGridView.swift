@@ -96,6 +96,7 @@ struct SpendingCategoryGridView: View {
                 }
             }
         }
+        .analyzeEvent(SpendingCategoryEvents.categoryListView)
 
         NavigationLink(destination: CategoryDetailsView(viewModel: spendingCategoryViewModel, showDeleteCategoryToastPopUp: $showDeleteCategoryToastPopUp), isActive: $navigateToCategoryDetails) {}
             .hidden()
