@@ -3,6 +3,7 @@ import SwiftUI
 struct PhoneVerificationView: View {
     @State private var showCodeErrorPopUp = false
     @State private var showManyRequestPopUp = false
+    @State private var showDiffNumberPopUp = false
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var phoneVerificationViewModel = PhoneVerificationViewModel()
     @StateObject var oauthAccountLinkingViewModel = LinkOAuthToAccountViewModel()
@@ -26,7 +27,12 @@ struct PhoneVerificationView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    continueButtonAction()
+                    if !phoneVerificationViewModel.requestedPhoneNumber.isEmpty, phoneVerificationViewModel.requestedPhoneNumber != phoneVerificationViewModel.phoneNumber, !phoneVerificationViewModel.showErrorExistingUser {
+                        showDiffNumberPopUp = true
+                    } else {
+                        continueButtonAction()
+                    }
+                    
                 }, label: "계속하기", isFormValid: $phoneVerificationViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
@@ -43,6 +49,22 @@ struct PhoneVerificationView: View {
             if showManyRequestPopUp {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요")
+            }
+            
+            if showDiffNumberPopUp {
+                CustomPopUpView(showingPopUp: $showDiffNumberPopUp,
+                                titleLabel: "인증 요청 번호와\n현재 입력된 번호가 달라요",
+                                subTitleLabel: "기존 번호(\(phoneVerificationViewModel.requestedPhoneNumber))로 인증할까요?",
+                                firstBtnAction: { self.showDiffNumberPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: {
+                                    self.showDiffNumberPopUp = false
+                                    phoneVerificationViewModel.phoneNumber = phoneVerificationViewModel.requestedPhoneNumber
+                                    continueButtonAction()
+                                },
+                                secondBtnLabel: "인증할게요",
+                                secondBtnColor: Color("Gray05"),
+                                heightSize: 166)
             }
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -89,7 +111,15 @@ struct PhoneVerificationView: View {
                 OAuthRegistrationManager.shared.phone = phoneVerificationViewModel.phoneNumber
                 OAuthRegistrationManager.shared.code = phoneVerificationViewModel.code
                 if OAuthRegistrationManager.shared.isExistUser {
-                    oauthAccountLinkingViewModel.linkOAuthToAccountApi()
+                    oauthAccountLinkingViewModel.linkOAuthToAccountApi { success in
+                        if success {
+                            profileInfoViewModel.getUserProfileApi { success in
+                                if success {
+                                    authViewModel.login()
+                                }
+                            }
+                        }
+                    }
                 }
             } else {
                 RegistrationManager.shared.phoneNumber = phoneVerificationViewModel.phoneNumber
@@ -108,16 +138,9 @@ struct PhoneVerificationView: View {
             OAuthAccountLinkingView(signUpViewModel: viewModel)
 
         } else if OAuthRegistrationManager.shared.isOAuthRegistration && OAuthRegistrationManager.shared.isExistUser { // 이미 계정이 있는 경우
-            handleExistUserLogin()
         } else {
             SignUpView(viewModel: viewModel)
         }
-    }
-    
-    func handleExistUserLogin() -> some View {
-        authViewModel.login()
-        profileInfoViewModel.getUserProfileApi { _ in }
-        return EmptyView()
     }
 }
 

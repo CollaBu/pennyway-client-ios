@@ -85,6 +85,7 @@ struct SettingAlarmView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(ProfileEvents.notificationEditView)
     }
 
     private func settingOnAlarm(type: String) { // 알람 활성화

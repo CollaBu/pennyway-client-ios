@@ -21,15 +21,26 @@ struct CustomPopUpView: View {
     var heightSize: CGFloat? = nil
 
     var body: some View {
-        PopupContent(titleLabel: titleLabel,
-                     subTitleLabel: subTitleLabel,
-                     firstBtnAction: firstBtnAction,
-                     firstBtnLabel: firstBtnLabel,
-                     secondBtnAction: secondBtnAction,
-                     secondBtnLabel: secondBtnLabel,
-                     secondBtnColor: secondBtnColor,
-                     heightSize: heightSize,
-                     showingPopUp: $showingPopUp)
+        ZStack {
+            // 팝업 바깥 영역을 터치하면 닫히도록 설정
+            Color.black.opacity(0.3)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    showingPopUp = false
+                }
+
+            PopupContent(
+                titleLabel: titleLabel,
+                subTitleLabel: subTitleLabel,
+                firstBtnAction: firstBtnAction,
+                firstBtnLabel: firstBtnLabel,
+                secondBtnAction: secondBtnAction,
+                secondBtnLabel: secondBtnLabel,
+                secondBtnColor: secondBtnColor,
+                heightSize: heightSize,
+                showingPopUp: $showingPopUp
+            )
+        }
     }
 }
 
@@ -61,6 +72,8 @@ extension CustomPopUpView {
                     Text(titleLabel)
                         .platformTextColor(color: Color("Gray07"))
                         .font(.H3SemiboldFont())
+                        .multilineTextAlignment(.center) // 이 라인을 추가하여 텍스트를 가운데 정렬
+                        .frame(maxWidth: .infinity)
 
                     Spacer().frame(height: 7 * DynamicSizeFactor.factor())
 
