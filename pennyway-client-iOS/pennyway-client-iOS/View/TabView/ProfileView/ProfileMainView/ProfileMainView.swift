@@ -66,21 +66,7 @@ struct ProfileMainView: View {
                     .padding(.horizontal, 20)
                     .background(Color("Gray01"))
                 }
-                    
-                if showPopUpView {
-                    Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                    EditProfilePopUpView(
-                        isPresented: $showPopUpView,
-                        showPopUpView: $showPopUpView,
-                        isHiddenTabBar: $isHiddenTabBar,
-                        showImagePicker: $showImagePicker,
-                        selectedUIImage: $selectedUIImage,
-                        sourceType: $sourceType,
-                        imageUrl: $imageUrl,
-                        presignedUrlViewModel: presignedUrlViewModel
-                    )
-                }
-                
+
                 if showPopUpView {
                     Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                     EditProfilePopUpView(

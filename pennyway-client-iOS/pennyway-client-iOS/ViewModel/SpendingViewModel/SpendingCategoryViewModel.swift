@@ -115,6 +115,8 @@ class SpendingCategoryViewModel: ObservableObject {
         
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
         
+        dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id } // 선택한 카테고리와 다르면 삭제
+        
         SpendingCategoryAlamofire.shared.getCategorySpendingHistory(categoryId, getCategorySpendingHistoryRequestDto) { result in
             switch result {
             case let .success(data):
@@ -125,8 +127,6 @@ class SpendingCategoryViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("카테고리에 등록된 지출내역 조회\(jsonString)")
                         }
-                        
-                        self.dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id }
                         self.mergeNewSpendings(newSpendings: response.data.spendings.content)
                         self.hasNext = response.data.spendings.hasNext
                             
@@ -169,8 +169,17 @@ class SpendingCategoryViewModel: ObservableObject {
 
         let existingIds = Set(dailyDetailSpendings.map { $0.id })
         let uniqueNewSpendings = allNewIndividualSpendings.filter { !existingIds.contains($0.id) }
-        
-        dailyDetailSpendings.append(contentsOf: uniqueNewSpendings)
+
+        for var spending in uniqueNewSpendings {
+            let updatedCategory = SpendingCategory(
+                isCustom: spending.category.isCustom,
+                id: selectedCategory!.id,
+                name: spending.category.name,
+                icon: spending.category.icon
+            )
+            spending.category = updatedCategory
+            dailyDetailSpendings.append(spending)
+        }
         dailyDetailSpendings.sort { $0.spendAt > $1.spendAt }
     }
     
