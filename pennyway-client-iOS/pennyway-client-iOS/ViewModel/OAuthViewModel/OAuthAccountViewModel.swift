@@ -2,6 +2,7 @@
 import Foundation
 
 class OAuthAccountViewModel: ObservableObject {
+    @Published var isExistUser: Bool = false
     /// 소셜 계정 연동/연동 해제 완료시 UserDefaults 업데이트
     let profileInfoViewModel = UserAccountViewModel()
 
@@ -21,9 +22,14 @@ class OAuthAccountViewModel: ObservableObject {
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {
                     Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+
                     if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.resourceAlreadyExists.rawValue {
                         Log.info("StatusSpecificError occurred 4091: \(StatusSpecificError)")
+                    } else if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.requestConflictWithResourceState.rawValue {
+                        self.isExistUser = true
+                        Log.info("StatusSpecificError occurred 4090: \(StatusSpecificError)")
                     }
+
                     completion(false)
                 } else {
                     Log.error("Network request failed: \(error)")

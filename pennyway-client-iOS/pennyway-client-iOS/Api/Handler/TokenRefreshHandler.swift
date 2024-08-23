@@ -62,7 +62,7 @@ class TokenRefreshHandler {
                             NotificationCenter.default.post(name: .logoutNotification, object: nil)
                         }
                     }
-                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+                   
                 } else {
                     Log.error("Network request failedd: \(error)")
                     // 네트워크 오류 발생 시 재시도 플래그 설정

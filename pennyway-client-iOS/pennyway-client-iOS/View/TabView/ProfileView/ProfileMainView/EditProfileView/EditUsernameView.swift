@@ -74,6 +74,7 @@ struct EditUsernameView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(ProfileEvents.nameEditView)
     }
 }
 

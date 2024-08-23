@@ -47,7 +47,7 @@ struct TermsAndConditionsView: View {
                 EmptyView()
             }.hidden()
         }
-        
+        .navigationBarColor(UIColor(named: "White01"), title: "")
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .toolbar {

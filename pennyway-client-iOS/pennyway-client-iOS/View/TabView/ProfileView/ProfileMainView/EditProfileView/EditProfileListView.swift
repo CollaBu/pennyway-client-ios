@@ -40,6 +40,7 @@ struct EditProfileListView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(ProfileEvents.profileEditView)
         
         NavigationLink(destination: EditIdView(), isActive: $isNavigateToEditIdView) {}
             .hidden()
