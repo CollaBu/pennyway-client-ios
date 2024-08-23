@@ -1,10 +1,9 @@
-import FirebaseAnalytics
 import SwiftUI
-
-// MARK: - MainTabView
 
 struct MainTabView: View {
     @State private var selection = 0
+    @EnvironmentObject var authViewModel: AppViewModel
+    @EnvironmentObject var networkStatus: NetworkStatusViewModel
 
     var body: some View {
         ZStack {
@@ -47,8 +46,4 @@ struct MainTabView: View {
             }
         }
     }
-}
-
-#Preview {
-    MainTabView()
 }

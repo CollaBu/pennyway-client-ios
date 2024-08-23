@@ -2,8 +2,8 @@
 import SwiftUI
 
 struct TargetAmountSettingView: View {
-    @Binding var currentData: TargetAmount
-    @StateObject var viewModel: TargetAmountSettingViewModel
+    var currentData: TargetAmount
+    @StateObject var viewModel = TargetAmountSettingViewModel()
     @StateObject var targetAmountViewModel = TargetAmountViewModel()
     @State private var navigateToCompleteTarget = false
     
@@ -11,13 +11,7 @@ struct TargetAmountSettingView: View {
     
     @EnvironmentObject var authViewModel: AppViewModel
     var entryPoint: TargetAmountEntryPoint
-    
-    init(currentData: Binding<TargetAmount>, entryPoint: TargetAmountEntryPoint) {
-        _currentData = currentData
-        _viewModel = StateObject(wrappedValue: TargetAmountSettingViewModel(currentData: currentData.wrappedValue))
-        self.entryPoint = entryPoint
-    }
-    
+
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
@@ -144,6 +138,7 @@ struct TargetAmountSettingView: View {
                     }
                 }
             }
+            viewModel.currentData = currentData
             
             if entryPoint == .signUp {
                 AnalyticsManager.shared.trackEvent(TargetAmountEvents.targetAmountInitView, additionalParams: nil)
@@ -152,8 +147,4 @@ struct TargetAmountSettingView: View {
             }
         }
     }
-}
-
-#Preview {
-    TargetAmountSettingView(currentData: .constant(TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)), entryPoint: .signUp)
 }

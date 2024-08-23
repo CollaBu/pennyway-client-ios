@@ -47,7 +47,7 @@ struct AddSpendingHistoryView: View {
             }
             .background(Color("White01"))
             .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")
-            .edgesIgnoringSafeArea(.bottom)
+//            .edgesIgnoringSafeArea(.bottom)
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -128,6 +128,7 @@ struct AddSpendingHistoryView: View {
             case let .success(data):
                 self.presentationMode.wrappedValue.dismiss()
                 self.spendingHistoryViewModel.spendingDetailViewUpdated = spendingDetailViewUpdated
+
                 self.isEditSuccess = true
 
                 spendingCategoryViewModel.updateSpending(dto: data!)

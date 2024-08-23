@@ -36,7 +36,7 @@ struct WelcomeView: View {
         .navigationBarBackButtonHidden(true)
         .analyzeEvent(AuthEvents.welcomeView)
 
-        NavigationLink(destination: TargetAmountSettingView(currentData: $initTargetAmount, entryPoint: .signUp), isActive: $isnavigateToEditTargetView) {}
+        NavigationLink(destination: TargetAmountSettingView(currentData: initTargetAmount, entryPoint: .signUp), isActive: $isnavigateToEditTargetView) {}
             .hidden()
     }
 }

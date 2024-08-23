@@ -12,6 +12,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     /// 앱이 켜졌을 때
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        NetworkMonitor.shared.startMonitoring()
+
         // 파이어베이스 설정
         let firebaseAnalyticsService = FirebaseAnalyticsService()
 

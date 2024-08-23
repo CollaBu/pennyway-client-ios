@@ -8,10 +8,6 @@ class TargetAmountSettingViewModel: ObservableObject {
     @Published var inputTargetAmount = ""
     @Published var isFormValid = false
 
-    init(currentData: TargetAmount) {
-        self.currentData = currentData
-    }
-
     func validateForm() {
         isFormValid = !inputTargetAmount.isEmpty
     }

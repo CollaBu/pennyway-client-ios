@@ -30,7 +30,6 @@ struct ProfileMainView: View {
                     GeometryReader { geometry in
                         let offset = geometry.frame(in: .global).minY
                         setOffset(offset: offset)
-                        
                         ProfileUserInfoView(
                             showPopUpView: $showPopUpView,
                             navigateToEditUsername: $navigateToEditUsername,
@@ -42,22 +41,22 @@ struct ProfileMainView: View {
                         .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
                     }
                     .frame(height: profileViewHeight)
-                    
+
                     VStack {
                         Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-                        
+
                         Text("내 게시글")
                             .font(.B1MediumFont())
                             .platformTextColor(color: Color("Gray07"))
                             .offset(x: -140, y: 0)
-                        
+
                         Spacer().frame(height: 6 * DynamicSizeFactor.factor())
-                        
+
                         Image("icon_illust_empty")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-                        
+
                         Text("아직 작성된 글이 없어요")
                             .font(.H4MediumFont())
                             .platformTextColor(color: Color("Gray07"))
@@ -122,16 +121,16 @@ struct ProfileMainView: View {
                     }
                 }
             }
-            
+
             NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
                 EmptyView()
             }.hidden()
-            
+
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
                 EmptyView()
             }.hidden()
         }
-        
+
         .onAppear {
             Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
             Log.debug("showPopUpView:\(showPopUpView)")
@@ -147,26 +146,26 @@ struct ProfileMainView: View {
             }
         }
     }
-    
+
     private func loadUserDataImage() {
         if let userData = getUserData() {
             imageUrl = userData.profileImageUrl
             profileImageViewModel.loadImageUrl(from: imageUrl)
         }
     }
-    
+
     func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
             Log.debug("offset 값:\(offset)")
-            
+
             if updateCount < 2 {
                 updateCount += 1
             } else if initialOffset == 0 {
                 initialOffset = offset
             }
-            
+
             adjustedOffset = offset - initialOffset
-            
+
             Log.debug("initialOffset 값:\(offset)")
         }
         return EmptyView()
