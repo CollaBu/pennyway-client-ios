@@ -9,6 +9,12 @@ enum DateFormatterUtil {
         return formatter.date(from: dateString)
     }
 
+    static func dateFormatter(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
+
     /// 받아온 날짜가 string이기 때문에 날짜 문자열을 Date객체로 변환
     static func dateFromString(_ dateString: String) -> Date? {
         let formatter = DateFormatter()
