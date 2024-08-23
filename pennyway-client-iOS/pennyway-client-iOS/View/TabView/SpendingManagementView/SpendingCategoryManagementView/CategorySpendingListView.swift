@@ -132,7 +132,7 @@ struct CategorySpendingListView: View {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: retryWorkItem!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem!)
 
         viewModel.getCategorySpendingHistoryApi(isReload: isReload) { success in
 
