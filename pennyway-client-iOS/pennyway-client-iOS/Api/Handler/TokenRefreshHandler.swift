@@ -56,13 +56,13 @@ class TokenRefreshHandler {
                 var shouldRetry = false
                 
                 if let statusSpecificError = error as? StatusSpecificError {
-                    if statusSpecificError.domainError == .unauthorized, statusSpecificError.code == UnauthorizedErrorCode.expiredOrRevokedToken.rawValue || statusSpecificError.domainError == .forbidden, statusSpecificError.code == ForbiddenErrorCode.accessForbidden.rawValue {
+                    if statusSpecificError.domainError == .unauthorized || statusSpecificError.domainError == .forbidden {
                         // 401, 403 에러인 경우 로그아웃
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: .logoutNotification, object: nil)
                         }
                     }
-                   
+                    
                 } else {
                     Log.error("Network request failedd: \(error)")
                     // 네트워크 오류 발생 시 재시도 플래그 설정
