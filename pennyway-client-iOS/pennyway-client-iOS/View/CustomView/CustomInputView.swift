@@ -85,6 +85,8 @@ struct CustomInputView: View {
 // MARK: - CustomTextFieldModifier
 
 // CustomTextFieldModifier: UIViewRepresentable을 사용하여 SwiftUI에서 UITextField 사용
+// 텍스트 입력, 입력 완료, 키보드 타입 등을 제어
+
 struct CustomTextFieldModifier: UIViewRepresentable {
     class Coordinator: NSObject, UITextFieldDelegate {
         var parent: CustomTextFieldModifier
@@ -93,12 +95,14 @@ struct CustomTextFieldModifier: UIViewRepresentable {
             self.parent = parent
         }
 
+        /// 텍스트 필드 편집 종료 시 호출되는 메서드(빈 화면 터치시 작동)
         func textFieldDidEndEditing(_: UITextField) {
             if !parent.text.isEmpty {
                 parent.onCommit?()
             }
         }
 
+        /// 텍스트 필드의 선택이 변경될 때 호출되는 메서드 (입력 시 호출)
         func textFieldDidChangeSelection(_ textField: UITextField) {
             parent.text = textField.text ?? ""
         }
@@ -112,9 +116,9 @@ struct CustomTextFieldModifier: UIViewRepresentable {
         }
     }
 
-    @Binding var text: String
-    var isSecureText: Bool
-    var onCommit: (() -> Void)?
+    @Binding var text: String // 텍스트 필드의 텍스트 바인딩
+    var isSecureText: Bool // 비밀번호 입력 필드인지 여부
+    var onCommit: (() -> Void)? // 입력 완료 시 실행할 함수 (옵션)
     var keyboardType: UIKeyboardType // 키보드 타입을 받아서 사용
 
     func makeCoordinator() -> Coordinator {
@@ -123,10 +127,10 @@ struct CustomTextFieldModifier: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UITextField {
         let textField = UITextField()
-        textField.isSecureTextEntry = isSecureText
+        textField.isSecureTextEntry = isSecureText // 비밀번호 입력 여부 설정
         textField.delegate = context.coordinator
-        textField.autocapitalizationType = .none
-        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none // 자동 대문자 비활성화
+        textField.autocorrectionType = .no // 자동 수정 비활성화
         textField.borderStyle = .none
         textField.keyboardType = keyboardType // 전달받은 키보드 타입 설정
         return textField
