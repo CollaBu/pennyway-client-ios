@@ -55,8 +55,6 @@ struct CustomInputView: View {
                         },
                         keyboardType: keyboardType // CustomInputView의 keyboardType 전달
                     )
-//                    .autocapitalization(.none)
-//                    .disableAutocorrection(true)
                     .padding(.leading, 12 * DynamicSizeFactor.factor())
                     .padding(.trailing, 35 * DynamicSizeFactor.factor())
                     .frame(height: 46 * DynamicSizeFactor.factor())
