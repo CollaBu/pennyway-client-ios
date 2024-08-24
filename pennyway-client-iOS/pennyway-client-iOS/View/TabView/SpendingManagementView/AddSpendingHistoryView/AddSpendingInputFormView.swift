@@ -37,6 +37,7 @@ struct AddSpendingInputFormView: View {
                 .onAppear {
                     loadSpendingDetails()
                     isDeleteButtonVisible = false
+                    viewModel.validateForm()
                 }
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
@@ -80,7 +81,6 @@ struct AddSpendingInputFormView: View {
                                     .font(.B1MediumFont())
                                     .platformTextColor(color: Color("Gray04"))
                             }
-                            
                         } else {
                             Text("카테고리를 선택해 주세요")
                                 .font(.B1MediumFont())
@@ -142,12 +142,20 @@ struct AddSpendingInputFormView: View {
             .onTapGesture {
                 isDeleteButtonVisible = true
             }
+
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             
             // 메모
             MemoInputView(memoText: $viewModel.memoText, title: "메모", placeholder: "더 하고 싶은 말이 있나요?", maxCharacterCount: maxCharacterCount)
 
             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
+        }
+        .onAppear {
+            Log.debug("[AddSpendingInputFormView] selectedDate: \(viewModel.selectedDate)")
+            Log.debug("지출내역 추가 폼 뷰 clickDate:  \(clickDate)")
+            if let clickDate = clickDate {
+                viewModel.selectedDate = clickDate
+            }
         }
     }
     
@@ -159,11 +167,6 @@ struct AddSpendingInputFormView: View {
                 if let spendAtDate = spendAt {
                     viewModel.selectedDate = spendAtDate
                     Log.debug("값 넘어감")
-                } else {
-                    if let clickDate = clickDate {
-                        viewModel.selectedDate = clickDate
-                        Log.debug("clickDate 값을 viewModel.selectedDate에 설정: \(clickDate)")
-                    }
                 }
             }
         }

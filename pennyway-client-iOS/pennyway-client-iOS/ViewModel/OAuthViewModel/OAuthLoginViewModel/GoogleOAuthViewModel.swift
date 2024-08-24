@@ -12,6 +12,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
     private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     let oauthAccountViewModel = OAuthAccountViewModel()
+    @Published var isExistUser: Bool = false
     
     func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
@@ -56,6 +57,7 @@ class GoogleOAuthViewModel: ObservableObject {
                 if success {
                     self.existOAuthAccount = true
                 } else {
+                    self.isExistUser = self.oauthAccountViewModel.isExistUser
                     self.existOAuthAccount = false
                 }
             }

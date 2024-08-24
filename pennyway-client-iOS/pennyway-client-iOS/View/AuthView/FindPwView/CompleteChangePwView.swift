@@ -2,7 +2,11 @@
 import SwiftUI
 
 struct CompleteChangePwView: View {
+    @EnvironmentObject var authViewModel: AppViewModel
+
     @Binding var firstNaviLinkActive: Bool
+    @State private var navigateView = false
+    let entryPoint: PasswordChangeTypeNavigation
 
     var body: some View {
         VStack {
@@ -12,21 +16,22 @@ struct CompleteChangePwView: View {
                     subTitle: "메인화면으로 돌아갈게요"
                 )
             }
-
             CustomBottomButton(action: {
                 firstNaviLinkActive = false
                 NavigationUtil.popToRootView()
 
-                Log.debug("firstNaviLinkActive: \(firstNaviLinkActive)")
+                if entryPoint == .modifyPw {
+                    navigateView = true
+                }
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
+            NavigationLink(destination: ProfileMainView(), isActive: $navigateView) {
+                EmptyView()
+            }.hidden()
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
         .analyzeEvent(ProfileEvents.passwordEditCompleteView)
     }
-}
-
-#Preview {
-    CompleteChangePwView(firstNaviLinkActive: .constant(true))
 }

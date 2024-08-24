@@ -34,7 +34,6 @@ struct EditSpendingDetailView: View {
                                 .padding(.vertical, 4)
 
                         })
-//                        .buttonStyle(BasicButtonStyleUtil())
 
                         .padding(.vertical, 4)
                         .padding(.trailing, 8)
@@ -79,10 +78,11 @@ struct EditSpendingDetailView: View {
                     }
 
                 }, label: "삭제하기", isFormValid: $isItemSelected)
-                    .padding(.bottom, 34)
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
             .padding(.leading, 3)
             .padding(.trailing, 5)
+            .edgesIgnoringSafeArea(.bottom)
             .setTabBarVisibility(isHidden: true)
             .navigationBarColor(UIColor(named: "White01"), title: "편집하기")
             .toolbar {

@@ -15,18 +15,20 @@ struct DetailSpendingView: View {
     @Binding var isDeleted: Bool
     @Binding var showToastPopup: Bool
     @Binding var isEditSuccess: Bool
+    @Binding var isAddSpendingData: Bool
 
     @State private var forceUpdate: Bool = false
     @State private var showingPopUp: Bool = false
 
     @State var newDetails = AddSpendingHistoryRequestDto(amount: 0, categoryId: 0, icon: "", spendAt: "", accountName: "", memo: "")
 
-    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>, isEditSuccess: Binding<Bool>, spendingCategoryViewModel: SpendingCategoryViewModel) {
+    init(clickDate: Binding<Date?>, spendingId: Binding<Int?>, isDeleted: Binding<Bool>, showToastPopup: Binding<Bool>, isEditSuccess: Binding<Bool>, isAddSpendingData: Binding<Bool>, spendingCategoryViewModel: SpendingCategoryViewModel) {
         _clickDate = clickDate
         _spendingId = spendingId
         _isDeleted = isDeleted
         _showToastPopup = showToastPopup
         _isEditSuccess = isEditSuccess
+        _isAddSpendingData = isAddSpendingData
         _spendingCategoryViewModel = ObservedObject(wrappedValue: spendingCategoryViewModel)
         _spendingHistoryViewModel = StateObject(wrappedValue: SpendingHistoryViewModel())
     }
@@ -69,10 +71,12 @@ struct DetailSpendingView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
+                    NavigationBackButton(action: {
+                        spendingId = nil
+                    })
+                    .padding(.leading, 5)
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
 
                 }.offset(x: -10)
             }
@@ -139,7 +143,7 @@ struct DetailSpendingView: View {
             }
         })
 
-        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: $spendingId, clickDate: $clickDate, isPresented: .constant(false), isEditSuccess: $isEditSuccess, entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
+        NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: $spendingId, clickDate: $clickDate, isPresented: .constant(false), isEditSuccess: $isEditSuccess, isAddSpendingData: $isAddSpendingData, entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
             .hidden()
     }
 

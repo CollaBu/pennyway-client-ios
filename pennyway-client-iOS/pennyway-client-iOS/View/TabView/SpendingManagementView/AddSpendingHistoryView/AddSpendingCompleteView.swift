@@ -6,6 +6,7 @@ struct AddSpendingCompleteView: View {
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @Binding var clickDate: Date?
     @Binding var isPresented: Bool
+    @Binding var isAddSpendingData: Bool
     var entryPoint: EntryPoint
     
     var body: some View {
@@ -68,7 +69,9 @@ struct AddSpendingCompleteView: View {
             CustomBottomButton(action: {
                 Log.debug("버튼 누름")
                 if entryPoint == .main {
+                    isAddSpendingData = true
                     NavigationUtil.popToRootView()
+                    
                     Log.debug("루트뷰로이동")
                 } else {
                     isPresented = false
@@ -87,5 +90,5 @@ struct AddSpendingCompleteView: View {
 }
 
 #Preview {
-    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), entryPoint: .main)
+    AddSpendingCompleteView(viewModel: AddSpendingHistoryViewModel(), clickDate: .constant(Date()), isPresented: .constant(true), isAddSpendingData: .constant(true), entryPoint: .main)
 }

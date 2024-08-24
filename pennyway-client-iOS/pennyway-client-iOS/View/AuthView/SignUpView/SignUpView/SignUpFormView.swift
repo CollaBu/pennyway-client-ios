@@ -7,28 +7,28 @@ struct SignUpFormView: View {
     @State private var isOAuthUser = OAuthRegistrationManager.shared.isOAuthUser
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Text("회원가입")
-                    .font(.H1SemiboldFont())
-                    .padding(.horizontal, 20)
+        // ScrollView {
+        VStack(alignment: .leading) {
+            Text("회원가입")
+                .font(.H1SemiboldFont())
+                .padding(.horizontal, 20)
                 
-                Spacer().frame(height: 32 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 32 * DynamicSizeFactor.factor())
                 
-                VStack(alignment: .leading, spacing: 21 * DynamicSizeFactor.factor()) {
-                    if !isOAuthRegistration && (!isExistUser && !isOAuthUser) {
-                        allInputFields()
-                            .analyzeEvent(AuthEvents.generalSignUpView)
-                    } else if isOAuthRegistration && !isExistUser {
-                        nameAndIDFields()
-                            .analyzeEvent(AuthEvents.oauthSignUpView)
-                    } else if !isOAuthRegistration && isOAuthUser {
-                        passwordFields()
-                            .analyzeEvent(AuthEvents.generalSignSycnView)
-                    }
+            VStack(alignment: .leading, spacing: 21 * DynamicSizeFactor.factor()) {
+                if !isOAuthRegistration && (!isExistUser && !isOAuthUser) {
+                    allInputFields()
+                        .analyzeEvent(AuthEvents.generalSignUpView)
+                } else if isOAuthRegistration && !isExistUser {
+                    nameAndIDFields()
+                        .analyzeEvent(AuthEvents.oauthSignUpView)
+                } else if !isOAuthRegistration && isOAuthUser {
+                    passwordFields()
+                        .analyzeEvent(AuthEvents.generalSignSycnView)
                 }
             }
         }
+        // }
     }
     
     /// All input fields

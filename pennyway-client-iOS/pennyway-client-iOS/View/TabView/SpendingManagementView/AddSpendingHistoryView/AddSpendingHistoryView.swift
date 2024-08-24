@@ -13,6 +13,7 @@ enum EntryPoint {
 // MARK: - AddSpendingHistoryView
 
 struct AddSpendingHistoryView: View {
+    @StateObject private var keyboardHandler = KeyboardHandlerManager()
     @StateObject var viewModel = AddSpendingHistoryViewModel()
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
@@ -25,6 +26,7 @@ struct AddSpendingHistoryView: View {
     @Binding var clickDate: Date?
     @Binding var isPresented: Bool
     @Binding var isEditSuccess: Bool
+    @Binding var isAddSpendingData: Bool
 
     var entryPoint: EntryPoint
 
@@ -34,48 +36,52 @@ struct AddSpendingHistoryView: View {
                 ScrollView {
                     AddSpendingInputFormView(viewModel: viewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, clickDate: $clickDate, entryPoint: entryPoint, spendingId: $spendingId)
                 }
+
                 Spacer()
 
                 CustomBottomButton(action: { handleConfirmBtnTap() }, label: "확인", isFormValid: $viewModel.isFormValid)
-                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
+            }
+            .padding(.bottom, keyboardHandler.keyboardHeight)
+            .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
 
-                NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete, label: { EmptyView() })
-                    .hidden()
+            NavigationLink(destination: AddSpendingCompleteView(viewModel: viewModel, clickDate: $clickDate, isPresented: $isPresented, isAddSpendingData: $isAddSpendingData, entryPoint: entryPoint), isActive: $navigateToAddSpendingComplete, label: { EmptyView() })
+                .hidden()
 
-                NavigationLink(destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $viewModel.navigateToAddCategory, label: { EmptyView() })
-                    .hidden()
-            }
-            .background(Color("White01"))
-            .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")
-//            .edgesIgnoringSafeArea(.bottom)
-            .setTabBarVisibility(isHidden: true)
-            .navigationBarBackButtonHidden(true)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
+            NavigationLink(destination: AddSpendingCategoryView(viewModel: viewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $viewModel.navigateToAddCategory, label: { EmptyView() })
+                .hidden()
+        }
+        .edgesIgnoringSafeArea(.bottom)
+        .background(Color("White01"))
+        .navigationBarColor(UIColor(named: "White01"), title: "소비 내역 추가하기")
+        .setTabBarVisibility(isHidden: true)
+        .navigationBarBackButtonHidden(true)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack {
+                    NavigationBackButton()
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
 
-                    }.offset(x: -10)
-                }
+                }.offset(x: -10)
             }
-            .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented, minHeight: 524 * DynamicSizeFactor.factor(), maxHeight: 524 * DynamicSizeFactor.factor()) {
-                SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
+        }
+        .onChange(of: SheetState(isCategoryListViewPresented: viewModel.isCategoryListViewPresented,
+                                 isSelectDayViewPresented: viewModel.isSelectDayViewPresented))
+        { state in
+            if !state.isCategoryListViewPresented && !state.isSelectDayViewPresented {
+                analyzeEvent()
             }
-            .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
-                SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
-            }
-            .onChange(of: SheetState(isCategoryListViewPresented: viewModel.isCategoryListViewPresented, 
-                                     isSelectDayViewPresented: viewModel.isSelectDayViewPresented))
-            { state in
-                if !state.isCategoryListViewPresented && !state.isSelectDayViewPresented {
-                    analyzeEvent()
-                }
-            }
-            .onAppear { analyzeEvent() }
+        }
+        .onAppear { analyzeEvent() }
+
+        .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented, minHeight: 524 * DynamicSizeFactor.factor(), maxHeight: 524 * DynamicSizeFactor.factor()) {
+            SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
+        }
+        .bottomSheet(isPresented: $viewModel.isSelectDayViewPresented, maxHeight: 300 * DynamicSizeFactor.factor()) {
+            SelectSpendingDayView(viewModel: viewModel, isPresented: $viewModel.isSelectDayViewPresented, clickDate: $clickDate)
         }
         .onAppear {
             Log.debug("AddSpendingHistoryView에서 spendingId: \(spendingId)")

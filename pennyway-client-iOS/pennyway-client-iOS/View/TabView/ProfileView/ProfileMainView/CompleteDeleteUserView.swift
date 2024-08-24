@@ -25,7 +25,3 @@ struct CompleteDeleteUserView: View {
         .analyzeEvent(ProfileEvents.accountDeleteSuccessPopUp)
     }
 }
-
-#Preview {
-    CompleteChangePwView(firstNaviLinkActive: .constant(true))
-}

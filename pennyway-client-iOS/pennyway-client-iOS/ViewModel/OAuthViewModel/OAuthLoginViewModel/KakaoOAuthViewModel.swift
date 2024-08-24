@@ -12,6 +12,7 @@ class KakaoOAuthViewModel: ObservableObject {
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.kakao ?? false
     private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     let oauthAccountViewModel = OAuthAccountViewModel()
+    @Published var isExistUser: Bool = false
 
     func checkUserInfo() {
         if AuthApi.hasToken() {
@@ -44,6 +45,7 @@ class KakaoOAuthViewModel: ObservableObject {
                 if success {
                     self.existOAuthAccount = true
                 } else {
+                    self.isExistUser = self.oauthAccountViewModel.isExistUser
                     self.existOAuthAccount = false
                 }
             }

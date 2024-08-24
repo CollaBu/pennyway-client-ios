@@ -126,7 +126,7 @@ struct SpendingManagementMainView: View {
                 .hidden()
             }
 
-            NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, spendingId: .constant(0), clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, isEditSuccess: .constant(false), entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
+            NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, spendingId: .constant(0), clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, isEditSuccess: .constant(false), isAddSpendingData: .constant(false), entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
                 EmptyView()
             }
             .hidden()
@@ -137,8 +137,7 @@ struct SpendingManagementMainView: View {
             .hidden()
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView, minHeight: bottomSheetMinHeight, maxHeight: 524 * DynamicSizeFactor.factor()) {
-            SpendingDetailSheetView(clickDate: $clickDate,
-                                    viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
+            SpendingDetailSheetView(clickDate: $clickDate, viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
                 .zIndex(2)
         }
         .onChange(of: showSpendingDetailView) { isPresented in

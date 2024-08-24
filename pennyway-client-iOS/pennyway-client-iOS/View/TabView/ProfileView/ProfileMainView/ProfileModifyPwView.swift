@@ -55,15 +55,16 @@ struct ProfileModifyPwView: View {
 
                 CustomBottomButton(action: {
                     if isFormValid {
-                        self.navigateView = true
+                        navigateView = true
+                        Log.debug("navigateView:\(navigateView)")
                     }
                 }, label: "완료", isFormValid: $isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
-
-                NavigationLink(destination: ResetPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw), isActive: $navigateView) {
-                    EmptyView()
-                }.hidden()
             }
+
+            NavigationLink(destination: ResetPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw), isActive: $navigateView) {
+                EmptyView()
+            }.hidden()
         }
         .edgesIgnoringSafeArea(.bottom)
         .frame(maxHeight: .infinity)

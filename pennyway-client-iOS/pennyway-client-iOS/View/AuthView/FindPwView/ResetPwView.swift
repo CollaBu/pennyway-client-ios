@@ -31,13 +31,15 @@ struct ResetPwView: View {
                 Spacer()
                 
                 CustomBottomButton(action: {
-                    continueButtonAction()
-                    formViewModel.validatePwForm()
+                    if entryPoint == .findPw || entryPoint == .modifyPw {
+                        continueButtonAction()
+                        formViewModel.validatePwForm()
+                    }
                     
                 }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
-                NavigationLink(destination: CompleteChangePwView(firstNaviLinkActive: $firstNaviLinkActive), isActive: $navigateView) {
+                NavigationLink(destination: CompleteChangePwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: entryPoint), isActive: $navigateView) {
                     EmptyView()
                 }.hidden()
             }
@@ -118,6 +120,7 @@ struct ResetPwView: View {
     }
 }
 
-#Preview {
-    ResetPwView(firstNaviLinkActive: .constant(true), entryPoint: .modifyPw)
-}
+//
+// #Preview {
+//    ResetPwView
+// }

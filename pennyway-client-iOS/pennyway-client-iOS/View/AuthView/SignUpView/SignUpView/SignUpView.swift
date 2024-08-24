@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @StateObject var keyboardHandler = KeyboardHandlerManager()
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var linkAccountToOAuthViewModel = LinkAccountToOAuthViewModel()
@@ -22,75 +23,80 @@ struct SignUpView: View {
     }
 
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack(spacing: 47 * DynamicSizeFactor.factor()) {
-                    VStack {
-                        Spacer().frame(height: 15 * DynamicSizeFactor.factor())
-                        
-                        NavigationCountView(selectedText: $viewModel.selectedText)
-                            .onAppear {
-                                viewModel.selectedText = 2
-                            }
-                        
-                        Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-                        
-                        SignUpFormView(formViewModel: formViewModel)
-                        
-                        Spacer().frame(height: 65 * DynamicSizeFactor.factor())
-                    }
-                }
-            }
-            Spacer()
-            
-            CustomBottomButton(action: {
-                if formViewModel.isFormValid {
-                    if isOAuthRegistration {
-                        OAuthRegistrationManager.shared.name = formViewModel.name
-                        OAuthRegistrationManager.shared.username = formViewModel.id
-                        OAuthRegistrationManager.shared.password = formViewModel.password
-                        viewModel.continueButtonTapped()
-                    } else {
-                        RegistrationManager.shared.name = formViewModel.name
-                        RegistrationManager.shared.username = formViewModel.id
-                        RegistrationManager.shared.password = formViewModel.password
-                        if !isOAuthRegistration, OAuthRegistrationManager.shared.isOAuthUser {
-                            handleLinkAccountToOAuth()
-                        } else {
-                            viewModel.continueButtonTapped()
+        ZStack {
+            VStack {
+                ScrollView {
+                    VStack(spacing: 47 * DynamicSizeFactor.factor()) {
+                        VStack {
+                            Spacer().frame(height: 15 * DynamicSizeFactor.factor())
+                            
+                            NavigationCountView(selectedText: $viewModel.selectedText)
+                                .onAppear {
+                                    viewModel.selectedText = 2
+                                }
+                            
+                            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+                            
+                            SignUpFormView(formViewModel: formViewModel)
+                            
+                            Spacer().frame(height: 65 * DynamicSizeFactor.factor())
                         }
                     }
                 }
                 
-            }, label: buttonText, isFormValid: $formViewModel.isFormValid)
-                .padding(.bottom, 34 * DynamicSizeFactor.factor())
-            
-            NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {}.hidden()
-        }
-        .edgesIgnoringSafeArea(.bottom)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarColor(UIColor(named: "White01"), title: "")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    Button(action: {
-                        if isOAuthRegistration { // 소셜 회원가입 중 취소
-                            KeychainHelper.deleteOAuthUserData()
+                Spacer()
+                
+                CustomBottomButton(action: {
+                    if formViewModel.isFormValid {
+                        if isOAuthRegistration {
+                            OAuthRegistrationManager.shared.name = formViewModel.name
+                            OAuthRegistrationManager.shared.username = formViewModel.id
+                            OAuthRegistrationManager.shared.password = formViewModel.password
+                            viewModel.continueButtonTapped()
+                        } else {
+                            RegistrationManager.shared.name = formViewModel.name
+                            RegistrationManager.shared.username = formViewModel.id
+                            RegistrationManager.shared.password = formViewModel.password
+                            if !isOAuthRegistration, OAuthRegistrationManager.shared.isOAuthUser {
+                                handleLinkAccountToOAuth()
+                            } else {
+                                viewModel.continueButtonTapped()
+                            }
                         }
-                        NavigationUtil.popToRootView()
-                    }, label: {
-                        Image("icon_arrow_back")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 34, height: 34)
-                            .padding(5)
-                    })
-                    .padding(.leading, 5)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
-                    .buttonStyle(BasicButtonStyleUtil())
+                    }
                     
-                }.offset(x: -10)
+                }, label: buttonText, isFormValid: $formViewModel.isFormValid)
+                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 0 : 34 * DynamicSizeFactor.factor())
+                
+                NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {}.hidden()
+            }
+            .padding(.bottom, keyboardHandler.keyboardHeight)
+            .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
+            .edgesIgnoringSafeArea(.bottom)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarColor(UIColor(named: "White01"), title: "")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        Button(action: {
+                            if isOAuthRegistration { // 소셜 회원가입 중 취소
+                                KeychainHelper.deleteOAuthUserData()
+                            }
+                            NavigationUtil.popToRootView()
+                        }, label: {
+                            Image("icon_arrow_back")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 34, height: 34)
+                                .padding(5)
+                        })
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                        .buttonStyle(BasicButtonStyleUtil())
+                        
+                    }.offset(x: -10)
+                }
             }
         }
     }

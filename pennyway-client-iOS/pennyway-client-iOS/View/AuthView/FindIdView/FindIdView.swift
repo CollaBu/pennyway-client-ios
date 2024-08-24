@@ -93,7 +93,7 @@ struct FindIdView: View {
             .buttonStyle(BasicButtonStyleUtil())
         }
         .padding(.horizontal, 20)
-        .padding(.bottom, 34)
+        .padding(.bottom, 34 * DynamicSizeFactor.factor())
     }
 }
 

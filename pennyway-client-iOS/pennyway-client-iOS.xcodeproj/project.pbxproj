@@ -292,7 +292,11 @@
 		D85927FA2BE9116700653391 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F52BE9116700653391 /* LoginViewModel.swift */; };
 		D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */; };
 		D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F72BE9116700653391 /* TermsAndConditionsViewModel.swift */; };
-		D86773022C74F43F00C68728 /* PrivatePolicyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773012C74F43F00C68728 /* PrivatePolicyModel.swift */; };
+		D85ABDE62C78DA1500FD152A /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D85ABDE22C78DA1500FD152A /* Debug.xcconfig */; };
+		D85ABDE72C78DA1500FD152A /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D85ABDE32C78DA1500FD152A /* Release.xcconfig */; };
+		D85ABDE82C78DA1500FD152A /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D85ABDE42C78DA1500FD152A /* Secrets.xcconfig */; };
+		D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773032C76C90700C68728 /* PrivatePolicy.swift */; };
+		D86773062C76CA0100C68728 /* KeyboardHandlerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773052C76CA0100C68728 /* KeyboardHandlerManager.swift */; };
 		D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D874F52A2C32888E00936886 /* DetailSpendingView.swift */; };
 		D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */; };
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
@@ -621,7 +625,11 @@
 		D85927F52BE9116700653391 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNavigationViewModel.swift; sourceTree = "<group>"; };
 		D85927F72BE9116700653391 /* TermsAndConditionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModel.swift; sourceTree = "<group>"; };
-		D86773012C74F43F00C68728 /* PrivatePolicyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatePolicyModel.swift; sourceTree = "<group>"; };
+		D85ABDE22C78DA1500FD152A /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D85ABDE32C78DA1500FD152A /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		D85ABDE42C78DA1500FD152A /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		D86773032C76C90700C68728 /* PrivatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatePolicy.swift; sourceTree = "<group>"; };
+		D86773052C76CA0100C68728 /* KeyboardHandlerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerManager.swift; sourceTree = "<group>"; };
 		D874F52A2C32888E00936886 /* DetailSpendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpendingView.swift; sourceTree = "<group>"; };
 		D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlarmResponseDto.swift; sourceTree = "<group>"; };
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
@@ -721,6 +729,7 @@
 			children = (
 				4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */,
 				4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */,
+				D86773052C76CA0100C68728 /* KeyboardHandlerManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1380,7 +1389,7 @@
 			isa = PBXGroup;
 			children = (
 				4AFF0C832C6A6B770040B192 /* GoogleService-Info.plist */,
-				4A5E6A6D2C78CFAE00389C98 /* Xcconfig */,
+				D85ABDE52C78DA1500FD152A /* Xcconfig */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
@@ -1410,7 +1419,6 @@
 		4A762AFA2B99A1A5001C1188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D86773002C74F41400C68728 /* PrivatePolicy */,
 				4A6C79D92C46D03E009463E4 /* Navigation */,
 				4ADE80232BF23D10007FFB01 /* ListItem */,
 				4A058F062BD051D9004B6F89 /* Network */,
@@ -1505,6 +1513,7 @@
 			children = (
 				4A8571322BC650FA0082CE47 /* BaseUrl.swift */,
 				4A3701D62C090CD500F0AEBA /* Value.swift */,
+				D86773032C76C90700C68728 /* PrivatePolicy.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1957,12 +1966,15 @@
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
-		D86773002C74F41400C68728 /* PrivatePolicy */ = {
+		D85ABDE52C78DA1500FD152A /* Xcconfig */ = {
 			isa = PBXGroup;
 			children = (
-				D86773012C74F43F00C68728 /* PrivatePolicyModel.swift */,
+				D85ABDE22C78DA1500FD152A /* Debug.xcconfig */,
+				D85ABDE32C78DA1500FD152A /* Release.xcconfig */,
+				D85ABDE42C78DA1500FD152A /* Secrets.xcconfig */,
 			);
-			path = PrivatePolicy;
+			name = Xcconfig;
+			path = ../../../../Downloads/Xcconfig;
 			sourceTree = "<group>";
 		};
 		D874F5292C32881400936886 /* DetailSpendingView */ = {
@@ -2090,12 +2102,12 @@
 				4AFF0C842C6A6B770040B192 /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				4A5E6A6E2C78CFAF00389C98 /* Debug.xcconfig in Resources */,
+				D85ABDE62C78DA1500FD152A /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				4A5E6A702C78CFAF00389C98 /* Secrets.xcconfig in Resources */,
+				D85ABDE82C78DA1500FD152A /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				4A5E6A6F2C78CFAF00389C98 /* Release.xcconfig in Resources */,
+				D85ABDE72C78DA1500FD152A /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2218,6 +2230,7 @@
 				4AC3205F2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift in Sources */,
 				4A3701D42C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift in Sources */,
 				4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */,
+				D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */,
 				4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */,
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
@@ -2336,7 +2349,6 @@
 				4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
-				D86773022C74F43F00C68728 /* PrivatePolicyModel.swift in Sources */,
 				4A28820D2C64CD5F00AE50C7 /* NotificationContentData.swift in Sources */,
 				4AC320402C11D5AC00DDB4B6 /* SelectCategoryIconView.swift in Sources */,
 				D8F9D7472C5A1177005416FC /* AlarmList.swift in Sources */,
@@ -2345,6 +2357,7 @@
 				4A3701D52C08F7F600F0AEBA /* SpendingRouter.swift in Sources */,
 				4A3701CE2C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift in Sources */,
 				4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */,
+				D86773062C76CA0100C68728 /* KeyboardHandlerManager.swift in Sources */,
 				4A4703A92BCEE25000AEE04E /* SmsResponseDto.swift in Sources */,
 				4ACE1FED2BBB149D00BB4F0A /* (null) in Sources */,
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
@@ -2605,7 +2618,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A5E6A6A2C78CFAE00389C98 /* Debug.xcconfig */;
+			baseConfigurationReference = D85ABDE22C78DA1500FD152A /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2647,7 +2660,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A5E6A6B2C78CFAE00389C98 /* Release.xcconfig */;
+			baseConfigurationReference = D85ABDE32C78DA1500FD152A /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

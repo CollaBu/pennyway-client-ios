@@ -13,9 +13,7 @@ struct FindIdFormView: View {
     var body: some View {
         ZStack {
             VStack {
-                ScrollView {
-                    FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel, showManyRequestPopUp: $showManyRequestPopUp)
-                }
+                FindIdContentView(phoneVerificationViewModel: phoneVerificationViewModel, showManyRequestPopUp: $showManyRequestPopUp)
 
                 Spacer()
 

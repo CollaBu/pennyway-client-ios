@@ -10,6 +10,7 @@ struct SpendingDetailSheetView: View {
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
     @State private var isEditSuccess: Bool = false
+    @State private var isAddSpendingData: Bool = false
 
     @Binding var clickDate: Date?
     
@@ -70,7 +71,7 @@ struct SpendingDetailSheetView: View {
                 .padding(.trailing, 17)
                 .padding(.top, 12)
                     
-                if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
+                if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate ?? viewModel.selectedDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
                     NoSpendingHistorySheetView()
                         .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
                 } else {
@@ -116,16 +117,27 @@ struct SpendingDetailSheetView: View {
                     AddSpendingHistoryView(
                         spendingCategoryViewModel: SpendingCategoryViewModel(),
                         spendingHistoryViewModel: spendingHistoryViewModel,
-                        spendingId: $selectedSpendingId, 
+                        spendingId: $selectedSpendingId,
                         clickDate: $clickDate,
                         isPresented: $showAddSpendingHistoryView,
-                        isEditSuccess: .constant(false), entryPoint: .detailSheet // 기본값 0 제공
+                        isEditSuccess: .constant(false),
+                        isAddSpendingData: $isAddSpendingData,
+                        entryPoint: .detailSheet // 기본값 0 제공
                     )
+                    .edgesIgnoringSafeArea(.bottom)
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
                 NavigationAvailable {
-                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), isEditSuccess: $isEditSuccess, spendingCategoryViewModel: SpendingCategoryViewModel())
+                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), isEditSuccess: $isEditSuccess, isAddSpendingData: $isAddSpendingData, spendingCategoryViewModel: SpendingCategoryViewModel())
+                }
+            }
+            // 지출추가 완료시 onChange트리거 동작안함
+            .onChange(of: isAddSpendingData) { newValue in
+                Log.debug("onChange실행중")
+                if newValue {
+                    Log.debug("clickDate가 변경됨: \(String(describing: viewModel.selectedDate))")
+                    getDailyHistoryData() // 데이터 새로 고침
                 }
             }
         }
@@ -136,9 +148,10 @@ struct SpendingDetailSheetView: View {
                 isEditSuccess = false // 상태를 초기화
             }
         }
-
         .onAppear {
-            Log.debug("SpendingDetailSheetView appeared. Selected date: \(String(describing: clickDate))")
+            Log.debug("바텀시트 clickDate: \(String(describing: clickDate))")
+            Log.debug("selectedDate: \(String(describing: viewModel.selectedDate))")
+            
             getDailyHistoryData()
         }
         .onChange(of: isDeleted) { newValue in

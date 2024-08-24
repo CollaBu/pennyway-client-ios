@@ -99,10 +99,10 @@ struct ProfileMainView: View {
                     .edgesIgnoringSafeArea(.bottom)
             }
             .id(showPopUpView)
-            .setTabBarVisibility(isHidden: showPopUpView)
-            .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
             .background(Color("Gray01"))
-            //            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
+            .setTabBarVisibility(isHidden: showPopUpView)
+            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
+            .navigationBarBackButtonHidden()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
