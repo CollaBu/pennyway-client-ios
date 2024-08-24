@@ -31,13 +31,33 @@ struct ProfileMenuBarListView: View {
             .setTabBarVisibility(isHidden: false)
             .navigationBarColor(UIColor(named: "White01"), title: "")
             .navigationBarBackButtonHidden(true)
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    HStack {
+//                        NavigationBackButton()
+//                            .padding(.leading, 5)
+//                            .frame(width: 44, height: 44)
+//                            .contentShape(Rectangle())
+//
+//                    }.offset(x: -10)
+//                }
+//            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
+                        Button(action: {
+                            NavigationUtil.popToRootView()
+                        }, label: {
+                            Image("icon_arrow_back")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 34, height: 34)
+                                .padding(5)
+                        })
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                        .buttonStyle(BasicButtonStyleUtil())
 
                     }.offset(x: -10)
                 }

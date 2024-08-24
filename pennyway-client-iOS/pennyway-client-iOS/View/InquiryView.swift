@@ -154,7 +154,7 @@ struct InquiryView: View {
                 CustomBottomButton(action: {
                     continueButtonAction()
                 }, label: "문의하기", isFormValid: $viewModel.isFormValid)
-                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarColor(UIColor(named: "White01"), title: "문의하기")
