@@ -3,11 +3,12 @@ import SwiftUI
 
 struct CustomToastView: View {
     var message: String
+    var isNetworkError: Bool? = false
 
     var body: some View {
         VStack {
             HStack(spacing: 6 * DynamicSizeFactor.factor()) {
-                Image("icon_checkone_on_small")
+                Image((isNetworkError ?? false) ? "icon_caution" : "icon_checkone_on_small")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())

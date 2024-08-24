@@ -34,6 +34,7 @@ class BaseInterceptor: RequestInterceptor {
         }
 
         guard let response = request.task?.response as? HTTPURLResponse else {
+            NotificationCenter.default.post(name: .changeNetworkState, object: nil)
             handleNetworkError(for: request, completion: completion) // netWork Error인 경우
             return
         }

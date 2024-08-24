@@ -9,6 +9,7 @@ import SwiftUI
 @main
 struct pennyway_client_iOSApp: App {
     @StateObject private var appViewModel = AppViewModel()
+    @StateObject private var networkStatus = NetworkStatusViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     init() {
@@ -19,29 +20,36 @@ struct pennyway_client_iOSApp: App {
     var body: some Scene {
         WindowGroup {
             if appViewModel.isLoggedIn || appViewModel.checkLoginState {
-                MainTabView()
-                    .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-                    .onOpenURL { url in
-                        GIDSignIn.sharedInstance.handle(url)
-                    }
-                    .environmentObject(appViewModel)
-
+                LayoutView {
+                    MainTabView()
+                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                        .onOpenURL { url in
+                            GIDSignIn.sharedInstance.handle(url)
+                        }
+                }
+                .environmentObject(appViewModel)
+                .environmentObject(networkStatus)
             } else {
                 if appViewModel.isSplashShown {
-                    LoginView()
-                        .onOpenURL { url in
-                            GIDSignIn.sharedInstance.handle(url)
-                        }
-                        .environmentObject(appViewModel)
+                    LayoutView {
+                        LoginView()
+                            .onOpenURL { url in
+                                GIDSignIn.sharedInstance.handle(url)
+                            }
+                    }
+                    .environmentObject(appViewModel)
+                    .environmentObject(networkStatus)
 
                 } else {
-                    MainView()
-                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-
-                        .onOpenURL { url in
-                            GIDSignIn.sharedInstance.handle(url)
-                        }
-                        .environmentObject(appViewModel)
+                    LayoutView {
+                        MainView()
+                            .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                            .onOpenURL { url in
+                                GIDSignIn.sharedInstance.handle(url)
+                            }
+                    }
+                    .environmentObject(appViewModel)
+                    .environmentObject(networkStatus)
                 }
             }
         }

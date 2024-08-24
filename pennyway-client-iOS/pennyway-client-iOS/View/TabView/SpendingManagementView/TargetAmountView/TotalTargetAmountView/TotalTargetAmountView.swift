@@ -59,7 +59,7 @@ struct TotalTargetAmountView: View {
                         CustomToastView(message: "목표금액이 초기화되었어요")
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                            .padding(.bottom, 34)
+                            .padding(.bottom, 34 * DynamicSizeFactor.factor())
                     }
                 }, alignment: .bottom
             )
@@ -134,7 +134,7 @@ struct TotalTargetAmountView: View {
             }
         })
 
-        NavigationLink(destination: TargetAmountSettingView(currentData: $viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
+        NavigationLink(destination: TargetAmountSettingView(currentData: viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
             .hidden()
 
         NavigationLink(destination: PastSpendingListView(viewModel: viewModel), isActive: $isnavigateToPastSpendingView) {}

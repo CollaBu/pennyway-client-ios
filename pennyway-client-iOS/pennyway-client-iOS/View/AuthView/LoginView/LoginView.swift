@@ -35,7 +35,7 @@ struct LoginView: View {
                         }
 
                     })
-                    .padding(.bottom, 34)
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
                     .buttonStyle(BasicButtonStyleUtil())
                 }
                 .edgesIgnoringSafeArea(.bottom)
