@@ -101,7 +101,6 @@ struct EditPhoneNumberView: View {
             HStack(spacing: 11 * DynamicSizeFactor.factor()) {
                 PhoneNumberInputField(phoneNumber: $viewModel.phoneNumber, onPhoneNumberChange: handlePhoneNumberChange, onCommit: {
                     isDeleteButtonVisible = false
-
                 }, showDeleteButton: true, deleteAction: {
                     viewModel.phoneNumber = ""
                     viewModel.showErrorExistingUser = false

@@ -26,9 +26,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>$(BASE_URL)</string>
-			</array>
+			<array/>
 		</dict>
 	</array>
 	<key>GIDClientID</key>

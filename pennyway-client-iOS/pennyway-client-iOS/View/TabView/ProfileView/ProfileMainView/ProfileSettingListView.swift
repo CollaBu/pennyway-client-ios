@@ -134,6 +134,8 @@ struct ProfileSettingSectionView: View {
                             .platformTextColor(color: Color("Gray07"))
                             .padding(.vertical, 7)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                 })
                 .padding(.horizontal, 17)
                 .buttonStyle(BasicButtonStyleUtil())
