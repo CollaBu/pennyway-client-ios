@@ -74,6 +74,7 @@ struct PastSpendingListView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(TargetAmountEvents.targetAmountHistoryView)
         
         NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: $currentMonth, clickDate: $clickDate), isActive: $navigateToMySpendingList) {
             EmptyView()

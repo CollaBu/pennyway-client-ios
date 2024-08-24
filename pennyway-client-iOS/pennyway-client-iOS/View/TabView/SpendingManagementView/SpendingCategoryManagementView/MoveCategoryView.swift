@@ -99,7 +99,6 @@ struct MoveCategoryView: View {
             }
             
             if showingPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingPopUp,
                                 titleLabel: "'\(spendingCategoryViewModel.selectedMoveCategory?.name ?? "")'으로 옮길까요?",
                                 subTitleLabel: "소비 내역 \(spendingCategoryViewModel.spedingHistoryTotalCount)개의 카테고리가 변경돼요",
@@ -113,11 +112,18 @@ struct MoveCategoryView: View {
                                 }},
                                 secondBtnLabel: "옮길래요",
                                 secondBtnColor: Color("Mint03"))
+                    .analyzeEvent(SpendingCategoryEvents.categoryMigratePopUp)
             }
             
             NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
                 .hidden()
         }
+        .analyzeEvent(SpendingCategoryEvents.categoryMigrateView)
+        .onChange(of: showingPopUp, perform: { isShow in
+            if !isShow {
+                AnalyticsManager.shared.trackEvent(SpendingCategoryEvents.categoryMigrateView, additionalParams: nil)
+            }
+        })
     }
 
     private func getCategoryIcon(category: SpendingCategoryData, isSelected: Bool) -> String {

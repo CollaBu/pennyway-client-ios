@@ -33,7 +33,8 @@ struct WelcomeView: View {
                 }, label: "확인", isFormValid: .constant(true))
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
-            NavigationLink(destination: TargetAmountSettingView(currentData: $initTargetAmount, entryPoint: .signUp), isActive: $isnavigateToEditTargetView) {}
+
+            NavigationLink(destination: TargetAmountSettingView(currentData: initTargetAmount, entryPoint: .signUp), isActive: $isnavigateToEditTargetView) {}
                 .hidden()
         }
         .edgesIgnoringSafeArea(.bottom)

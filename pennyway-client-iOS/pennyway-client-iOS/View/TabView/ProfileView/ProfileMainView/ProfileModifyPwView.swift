@@ -80,6 +80,7 @@ struct ProfileModifyPwView: View {
                 }.offset(x: -10)
             }
         }
+        .analyzeEvent(ProfileEvents.currentPasswordCheckView)
     }
 
     func validatePwApi() {

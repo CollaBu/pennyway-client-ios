@@ -139,7 +139,6 @@ struct AddSpendingInputFormView: View {
                 viewModel.consumerText = ""
                 isDeleteButtonVisible = false
             })
-
             .onTapGesture {
                 isDeleteButtonVisible = true
             }

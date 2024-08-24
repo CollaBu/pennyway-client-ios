@@ -48,6 +48,7 @@ struct SpendingManagementMainView: View {
 
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
+                .analyzeEvent(SpendingEvents.spendingTabView)
             }
             .onAppear {
                 spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
@@ -106,7 +107,7 @@ struct SpendingManagementMainView: View {
                         CustomToastView(message: "\(Date.month(from: Date()))월의 새로운 목표금액을 설정했어요")
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                            .padding(.bottom, 10)
+                            .padding(.bottom, 10 * DynamicSizeFactor.factor())
                     }
                 }, alignment: .bottom
             )

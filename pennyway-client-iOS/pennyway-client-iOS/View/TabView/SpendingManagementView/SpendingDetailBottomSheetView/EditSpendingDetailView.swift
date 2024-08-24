@@ -107,7 +107,6 @@ struct EditSpendingDetailView: View {
             }
 
             if showingClosePopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingClosePopUp,
                                 titleLabel: "편집을 끝낼까요?",
                                 subTitleLabel: "변경된 내용은 자동 저장돼요",
@@ -119,10 +118,10 @@ struct EditSpendingDetailView: View {
                                 secondBtnLabel: "끝낼래요",
                                 secondBtnColor: Color("Mint03")
                 )
+                .analyzeEvent(SpendingEvents.spendingEditdonePopup)
             }
 
             if showingDeletePopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingDeletePopUp,
                                 titleLabel: "\(selectedIds.count)개의 내역을 삭제할까요?",
                                 subTitleLabel: "선택한 소비 내역이 사라져요",
@@ -132,8 +131,15 @@ struct EditSpendingDetailView: View {
                                 secondBtnLabel: "삭제하기",
                                 secondBtnColor: Color("Red03")
                 )
+                .analyzeEvent(SpendingEvents.spendingEditDeletePopUp)
             }
         }
+        .analyzeEvent(SpendingEvents.spendingListEditView)
+        .onChange(of: PopUpState(showingClosePopUp: showingClosePopUp, showingDeletePopUp: showingDeletePopUp), perform: { state in
+            if state.isReturn() {
+                AnalyticsManager.shared.trackEvent(SpendingEvents.spendingListEditView, additionalParams: nil)
+            }
+        })
     }
 
     private func toggleAllSelections() { // 전체 선택시
@@ -177,6 +183,17 @@ struct EditSpendingDetailView: View {
             }
         }
         isItemSelected = !selectedIds.isEmpty
+    }
+}
+
+// MARK: - PopUpState
+
+struct PopUpState: Equatable {
+    let showingClosePopUp: Bool
+    let showingDeletePopUp: Bool
+
+    func isReturn() -> Bool {
+        return !showingClosePopUp && !showingDeletePopUp
     }
 }
 

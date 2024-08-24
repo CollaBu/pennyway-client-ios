@@ -73,6 +73,7 @@ struct SpendingDetailSheetView: View {
                     
                 if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate ?? viewModel.selectedDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
                     NoSpendingHistorySheetView()
+                        .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
                 } else {
                     ScrollView {
                         VStack(alignment: .leading) {
@@ -131,7 +132,7 @@ struct SpendingDetailSheetView: View {
                     DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), isEditSuccess: $isEditSuccess, isAddSpendingData: $isAddSpendingData, spendingCategoryViewModel: SpendingCategoryViewModel())
                 }
             }
-            //지출추가 완료시 onChange트리거 동작안함
+            // 지출추가 완료시 onChange트리거 동작안함
             .onChange(of: isAddSpendingData) { newValue in
                 Log.debug("onChange실행중")
                 if newValue {
@@ -164,6 +165,13 @@ struct SpendingDetailSheetView: View {
             getDailyHistoryData()
         }
         .setTabBarVisibility(isHidden: true)
+        .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
+        .onChange(of: FullScreenState(showEditSpendingDetailView: showEditSpendingDetailView, showAddSpendingHistoryView: showAddSpendingHistoryView, showDetailSpendingView: showDetailSpendingView), 
+                  perform: { state in
+                      if state.isReturn() {
+                          AnalyticsManager.shared.trackEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
+                      }
+                  })
     }
     
     private func getDailyHistoryData() {
@@ -175,5 +183,17 @@ struct SpendingDetailSheetView: View {
                 Log.debug("뷰 새로고침 실패")
             }
         }
+    }
+}
+
+// MARK: - FullScreenState
+
+struct FullScreenState: Equatable {
+    let showEditSpendingDetailView: Bool
+    let showAddSpendingHistoryView: Bool
+    let showDetailSpendingView: Bool
+    
+    func isReturn() -> Bool {
+        return !showEditSpendingDetailView && !showAddSpendingHistoryView && !showDetailSpendingView
     }
 }

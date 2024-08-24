@@ -11,9 +11,11 @@ struct MySpendingListView: View {
     @State private var navigateToCategoryGridView = false
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
-//    @State private var refreshView = false
     @State private var showToastPopup = false
     @State private var isDeleted = false
+
+    @State var lastSelectedDate: Date? = nil
+    @State var lastSelectedMonth: Date? = nil
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -45,6 +47,11 @@ struct MySpendingListView: View {
                                                     selectedSpendingId = item.id
                                                     Log.debug("Id: \(selectedSpendingId), clickDate: \(clickDate)")
                                                     showDetailSpendingView = true
+                                                    spendingHistoryViewModel.isClickSpendingDetailView = true
+
+                                                    // 상세 화면으로 이동하기 전에 상태 보존
+                                                    lastSelectedDate = spendingHistoryViewModel.selectedDate
+                                                    lastSelectedMonth = spendingHistoryViewModel.currentDate
                                                 }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                                         .contentShape(Rectangle())
@@ -63,13 +70,15 @@ struct MySpendingListView: View {
                                         .id(date) // ScrollViewReader를 위한 ID 추가
                                     }
                                 }
+
                                 Spacer().frame(height: 18 * DynamicSizeFactor.factor())
                             }
                         }
+                        .analyzeEvent(SpendingEvents.mySpendingListView, additionalParams: [AnalyticsConstants.Parameter.date: currentMonth])
+
                         if !SpendingListGroupUtil.groupedSpendings(from: spendingHistoryViewModel.dailyDetailSpendings).isEmpty {
                             Button(action: {
                                 changeMonth(by: -1)
-
                             }, label: {
                                 ZStack {
                                     Rectangle()
@@ -85,6 +94,7 @@ struct MySpendingListView: View {
                                 }
                             })
                             .buttonStyle(BasicButtonStyleUtil())
+                            .buttonStyle(PlainButtonStyle())
                             .padding(.bottom, 48)
                             .onChange(of: selectedDateToScroll) { date in
                                 if let date = date {
@@ -100,14 +110,13 @@ struct MySpendingListView: View {
                     }
                 }
             }
-//            .id(refreshView)
             .overlay(
                 Group {
                     if showToastPopup {
                         CustomToastView(message: "소비 내역을 삭제했어요")
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                            .padding(.bottom, 34)
+                            .padding(.bottom, 34 * DynamicSizeFactor.factor())
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     withAnimation {
@@ -160,15 +169,28 @@ struct MySpendingListView: View {
             ChangeMonthContentView(viewModel: spendingHistoryViewModel, isPresented: $spendingHistoryViewModel.isChangeMonth)
         }
         .onAppear {
-            spendingHistoryViewModel.currentDate = currentMonth
+            if let lastMonth = lastSelectedMonth {
+                // 이전에 선택한 달이 있으면 해당 달로 이동
+                spendingHistoryViewModel.currentDate = lastMonth
+                currentMonth = lastMonth
+            } else {
+                // 그렇지 않으면 현재 달을 사용
+                spendingHistoryViewModel.currentDate = currentMonth
+            }
+
             spendingHistoryViewModel.checkSpendingHistoryApi { success in
                 if success {
                     Log.debug("소비내역 조회 api 연동 성공")
-//                    refreshView = true
                 } else {
                     Log.debug("소비내역 조회 api 연동 실패")
                 }
             }
+
+            if let lastDate = lastSelectedDate {
+                // 이전에 선택한 날짜가 있으면 해당 날짜로 스크롤
+                selectedDateToScroll = DateFormatterUtil.dateFormatter(date: lastDate)
+                Log.debug("이전에 선택한 날짜가 있음")
+            } 
         }
 
         NavigationLink(destination: SpendingCategoryGridView(spendingCategoryViewModel: spendingCategoryViewModel, addSpendingHistoryViewModel: AddSpendingHistoryViewModel()), isActive: $navigateToCategoryGridView) {}
@@ -184,11 +206,38 @@ struct MySpendingListView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
+    func monthTitle(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월 내역보기"
+        if let previousMonthDate = Calendar.current.date(byAdding: .month, value: -1, to: date) {
+            return dateFormatter.string(from: previousMonthDate)
+        }
+        return dateFormatter.string(from: date)
+    }
+
+    /// 스크롤 바 하단 M월 내역보기 버튼 클릭시 이전달로 이동하는 함수
     private func changeMonth(by value: Int) {
         let newDate = Calendar.current.date(byAdding: .month, value: value, to: spendingHistoryViewModel.currentDate) ?? currentMonth
         currentMonth = spendingHistoryViewModel.currentDate
         spendingHistoryViewModel.currentDate = newDate
         currentMonth = newDate
+
+        // 현재 날짜가 새로운 달에 속하는지 확인
+        let calendar = Calendar.current
+        let newMonthComponents = calendar.dateComponents([.year, .month], from: newDate)
+        let today = Date()
+        let todayComponents = calendar.dateComponents([.year, .month], from: today)
+
+        if newMonthComponents == todayComponents {
+            // 새로운 달이 현재 달이면 오늘 날짜로 설정
+            spendingHistoryViewModel.selectedDate = today
+            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: today)
+        } else {
+            // 그렇지 않으면 새로운 달의 1일로 설정
+            let firstDayOfMonth = calendar.date(from: newMonthComponents)!
+            spendingHistoryViewModel.selectedDate = firstDayOfMonth
+            selectedDateToScroll = DateFormatterUtil.dateFormatter(date: firstDayOfMonth)
+        }
 
         spendingHistoryViewModel.selectedDate = nil
         spendingHistoryViewModel.selectedDateId = 0
@@ -203,14 +252,5 @@ struct MySpendingListView: View {
                 Log.fault("지출내역 조회 API 연동 실패")
             }
         }
-    }
-
-    func monthTitle(from date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M월 내역보기"
-        if let previousMonthDate = Calendar.current.date(byAdding: .month, value: -1, to: date) {
-            return dateFormatter.string(from: previousMonthDate)
-        }
-        return dateFormatter.string(from: date)
     }
 }

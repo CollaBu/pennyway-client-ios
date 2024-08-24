@@ -47,8 +47,8 @@ struct DetailSpendingView: View {
                     }
                 }
             }
+
             if showingPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showingPopUp,
                                 titleLabel: "내역을 삭제할까요?",
                                 subTitleLabel: "선택한 소비 내역이 사라져요",
@@ -60,6 +60,7 @@ struct DetailSpendingView: View {
                                 }},
                                 secondBtnLabel: "삭제하기",
                                 secondBtnColor: Color("Red03"))
+                    .analyzeEvent(SpendingEvents.spendingDeletePopUp)
             }
         }
         .id(forceUpdate)
@@ -133,6 +134,12 @@ struct DetailSpendingView: View {
                 }
             }, alignment: .topTrailing
         )
+        .analyzeEvent(SpendingEvents.spendingDetailView)
+        .onChange(of: showingPopUp, perform: { isShow in
+            if !isShow {
+                AnalyticsManager.shared.trackEvent(SpendingEvents.spendingDetailView, additionalParams: nil)
+            }
+        })
 
         NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: spendingCategoryViewModel, spendingHistoryViewModel: spendingHistoryViewModel, spendingId: $spendingId, clickDate: $clickDate, isPresented: .constant(false), isEditSuccess: $isEditSuccess, isAddSpendingData: $isAddSpendingData, entryPoint: .detailSpendingView), isActive: $navigateModifySpendingHistoryView) {}
             .hidden()

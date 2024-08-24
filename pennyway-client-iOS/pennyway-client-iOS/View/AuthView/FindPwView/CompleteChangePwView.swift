@@ -26,12 +26,12 @@ struct CompleteChangePwView: View {
                 }
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
-
             NavigationLink(destination: ProfileMenuBarListView(), isActive: $navigateView) {
                 EmptyView()
             }.hidden()
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
+        .analyzeEvent(ProfileEvents.passwordEditCompleteView)
     }
 }

@@ -46,7 +46,6 @@ struct FindIdFormView: View {
             }
 
             if showDiffNumberPopUp {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                 CustomPopUpView(showingPopUp: $showDiffNumberPopUp,
                                 titleLabel: "인증 요청 번호와\n현재 입력된 번호가 달라요",
                                 subTitleLabel: "기존 번호(\(phoneVerificationViewModel.requestedPhoneNumber))로 인증할까요?",

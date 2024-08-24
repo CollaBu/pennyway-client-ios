@@ -44,6 +44,7 @@ struct ProfileAlarmView: View {
         .onAppear {
             viewModel.getNotificationListApi()
         }
+        .analyzeEvent(ProfileEvents.notificationListView)
     }
 }
 
