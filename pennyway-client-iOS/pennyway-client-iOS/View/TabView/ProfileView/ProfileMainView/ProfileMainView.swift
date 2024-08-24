@@ -102,6 +102,7 @@ struct ProfileMainView: View {
             .background(Color("Gray01"))
             .setTabBarVisibility(isHidden: showPopUpView)
             .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
+            .navigationBarBackButtonHidden()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

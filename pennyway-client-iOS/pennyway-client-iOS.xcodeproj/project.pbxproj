@@ -2602,8 +2602,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47DE7CB1D6DCDF1FAA88A105 /* Pods-pennyway-client-iOS.debug.xcconfig */;
-
+			baseConfigurationReference = D85ABDE22C78DA1500FD152A /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2644,8 +2643,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */;
-
+			baseConfigurationReference = D85ABDE32C78DA1500FD152A /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

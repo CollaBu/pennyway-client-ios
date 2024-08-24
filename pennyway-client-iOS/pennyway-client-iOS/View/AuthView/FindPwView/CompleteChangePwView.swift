@@ -22,11 +22,11 @@ struct CompleteChangePwView: View {
 
                 if entryPoint == .modifyPw {
                     navigateView = true
-                    Log.debug("popToRootView 호출됨")
                 }
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
-            NavigationLink(destination: ProfileMenuBarListView(), isActive: $navigateView) {
+
+            NavigationLink(destination: ProfileMainView(), isActive: $navigateView) {
                 EmptyView()
             }.hidden()
         }
