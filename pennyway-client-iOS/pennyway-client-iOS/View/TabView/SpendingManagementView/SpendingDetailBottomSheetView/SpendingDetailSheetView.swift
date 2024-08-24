@@ -10,6 +10,7 @@ struct SpendingDetailSheetView: View {
     @State private var showDetailSpendingView = false
     @State private var selectedSpendingId: Int? = nil
     @State private var isEditSuccess: Bool = false
+    @State private var isAddSpendingData: Bool = false
 
     @Binding var clickDate: Date?
     
@@ -118,13 +119,24 @@ struct SpendingDetailSheetView: View {
                         spendingId: $selectedSpendingId,
                         clickDate: $clickDate,
                         isPresented: $showAddSpendingHistoryView,
-                        isEditSuccess: .constant(false), entryPoint: .detailSheet // 기본값 0 제공
+                        isEditSuccess: .constant(false),
+                        isAddSpendingData: $isAddSpendingData,
+                        entryPoint: .detailSheet // 기본값 0 제공
                     )
+                    .edgesIgnoringSafeArea(.bottom)
                 }
             }
             .fullScreenCover(isPresented: $showDetailSpendingView) {
                 NavigationAvailable {
-                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), isEditSuccess: $isEditSuccess, spendingCategoryViewModel: SpendingCategoryViewModel())
+                    DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), isEditSuccess: $isEditSuccess, isAddSpendingData: $isAddSpendingData, spendingCategoryViewModel: SpendingCategoryViewModel())
+                }
+            }
+            //지출추가 완료시 onChange트리거 동작안함
+            .onChange(of: isAddSpendingData) { newValue in
+                Log.debug("onChange실행중")
+                if newValue {
+                    Log.debug("clickDate가 변경됨: \(String(describing: viewModel.selectedDate))")
+                    getDailyHistoryData() // 데이터 새로 고침
                 }
             }
         }

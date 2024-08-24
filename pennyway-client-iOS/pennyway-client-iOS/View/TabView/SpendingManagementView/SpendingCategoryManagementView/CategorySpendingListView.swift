@@ -66,7 +66,7 @@ struct CategorySpendingListView: View {
             }
         }
 
-        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showDeleteToastPopup, isEditSuccess: .constant(false), spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
+        NavigationLink(destination: DetailSpendingView(clickDate: $clickDate, spendingId: $spendingId, isDeleted: $isDeleted, showToastPopup: $showDeleteToastPopup, isEditSuccess: .constant(false), isAddSpendingData: .constant(false), spendingCategoryViewModel: viewModel), isActive: $showDetailSpendingView) {}
             .hidden()
     }
 
