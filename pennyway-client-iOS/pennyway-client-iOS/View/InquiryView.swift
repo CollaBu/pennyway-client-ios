@@ -3,7 +3,6 @@ import Combine
 import SwiftUI
 
 struct InquiryView: View {
-    @StateObject private var keyboardHandler = KeyboardHandlerManager()
     @StateObject var viewModel = InquiryViewModel()
     @State private var isSelectedCategory: Bool = false
     @State private var isSelectedAgreeBtn: Bool = false
@@ -157,9 +156,6 @@ struct InquiryView: View {
                 }, label: "문의하기", isFormValid: $viewModel.isFormValid)
                     .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
             }
-            .padding(.bottom, keyboardHandler.keyboardHeight)
-            .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
-
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarColor(UIColor(named: "White01"), title: "문의하기")
             .navigationBarBackButtonHidden(true)
