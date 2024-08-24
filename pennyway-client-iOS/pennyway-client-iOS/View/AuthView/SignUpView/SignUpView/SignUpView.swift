@@ -66,13 +66,12 @@ struct SignUpView: View {
                     }
                     
                 }, label: buttonText, isFormValid: $formViewModel.isFormValid)
-                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? nil : 34 * DynamicSizeFactor.factor())
+                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 0 : 34 * DynamicSizeFactor.factor())
                 
                 NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {}.hidden()
             }
             .padding(.bottom, keyboardHandler.keyboardHeight)
             .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
-            
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarBackButtonHidden(true)
             .navigationBarColor(UIColor(named: "White01"), title: "")

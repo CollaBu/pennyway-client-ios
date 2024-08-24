@@ -37,6 +37,7 @@ struct AddSpendingInputFormView: View {
                 .onAppear {
                     loadSpendingDetails()
                     isDeleteButtonVisible = false
+                    viewModel.validateForm()
                 }
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
@@ -167,13 +168,19 @@ struct AddSpendingInputFormView: View {
                 if let spendAtDate = spendAt {
                     viewModel.selectedDate = spendAtDate
                     Log.debug("값 넘어감")
-                } 
+                }
             }
         }
     }
 
     private func getSpendingData(with spendingDetail: IndividualSpending) {
         viewModel.amountSpentText = String(spendingDetail.amount)
+        viewModel.selectedCategory = SpendingCategoryData(
+            id: spendingDetail.category.id,
+            isCustom: spendingDetail.category.isCustom,
+            name: spendingDetail.category.name,
+            icon: convertToSpendingCategoryData(from: spendingDetail.category)?.icon ?? CategoryIconName(baseName: .etc, state: .on)
+        )
         viewModel.consumerText = spendingDetail.accountName
         viewModel.memoText = spendingDetail.memo
         viewModel.validateForm()
