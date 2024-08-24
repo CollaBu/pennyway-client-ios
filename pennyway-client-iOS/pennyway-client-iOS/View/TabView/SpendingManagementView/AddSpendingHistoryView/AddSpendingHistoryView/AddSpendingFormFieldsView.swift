@@ -23,15 +23,14 @@ struct AmountInputView: View {
             }, isSecureText: false, isCustom: false, showDeleteButton: isDeleteButtonVisible, deleteAction: {
                 viewModel.amountSpentText = ""
                 isDeleteButtonVisible = false
-            })
-            .keyboardType(.numberPad)
-            .onChange(of: viewModel.amountSpentText) { _ in
-                viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
-                viewModel.validateForm()
-            }
-            .onTapGesture {
-                isDeleteButtonVisible = true
-            }
+            }, keyboardType: .numberPad)
+                .onChange(of: viewModel.amountSpentText) { _ in
+                    viewModel.amountSpentText = NumberFormatterUtil.formatStringToDecimalString(viewModel.amountSpentText)
+                    viewModel.validateForm()
+                }
+                .onTapGesture {
+                    isDeleteButtonVisible = true
+                }
         }
     }
 }
