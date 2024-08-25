@@ -52,6 +52,7 @@ struct MySpendingListView: View {
                                                     // 상세 화면으로 이동하기 전에 상태 보존
                                                     lastSelectedDate = spendingHistoryViewModel.selectedDate
                                                     lastSelectedMonth = spendingHistoryViewModel.currentDate
+
                                                 }, label: {
                                                     CustomSpendingRow(categoryIcon: iconName, category: item.category.name, amount: item.amount, memo: item.memo)
                                                         .contentShape(Rectangle())

@@ -5,7 +5,7 @@ struct NoSpendingHistoryView: View {
     @State var navigateToAddSpendingHistory = false
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
-    @Binding var clickDate: Date?
+    @Binding var clickDate: Date? // 현재 선택된 날을 넘겨주기 위한 변수
 
     var body: some View {
         VStack(spacing: 0) {
@@ -53,8 +53,4 @@ struct NoSpendingHistoryView: View {
             .buttonStyle(BasicButtonStyleUtil())
         }
     }
-}
-
-#Preview {
-    NoSpendingHistoryView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()))
 }
