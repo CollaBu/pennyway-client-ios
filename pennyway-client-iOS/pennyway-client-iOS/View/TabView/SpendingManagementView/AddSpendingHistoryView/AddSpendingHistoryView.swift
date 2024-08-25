@@ -94,15 +94,19 @@ struct AddSpendingHistoryView: View {
             return
         }
 
-        if let date = clickDate {
-            viewModel.clickDate = date
-            if isAddSpendingMode() {
-                addSpendingHistory()
-            } else {
-                editSpendingHistory(spendingDetailViewUpdated: false)
+        // 진입점을 먼저 찾은 후에 clickDate가 존재한다면 그 날짜에 해당하는 지출추가하기뷰를 보여줌
+        if isAddSpendingMode() {
+            if let date = clickDate {
+                viewModel.clickDate = date
             }
+            addSpendingHistory()
         } else {
-            editSpendingHistory(spendingDetailViewUpdated: true)
+            if let date = clickDate {
+                viewModel.clickDate = date
+                editSpendingHistory(spendingDetailViewUpdated: false)
+            } else {
+                editSpendingHistory(spendingDetailViewUpdated: true)
+            }
         }
     }
 
