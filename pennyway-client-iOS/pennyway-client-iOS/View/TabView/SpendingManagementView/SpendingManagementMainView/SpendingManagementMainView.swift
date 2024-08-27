@@ -24,42 +24,36 @@ struct SpendingManagementMainView: View {
             ScrollView {
                 VStack {
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
+                    
                     if !targetAmountViewModel.isHiddenSuggestionView {
                         RecentTargetAmountSuggestionView(viewModel: targetAmountViewModel, showToastPopup: $showToastPopup, isHidden: $targetAmountViewModel.isHiddenSuggestionView)
-
+                        
                         Spacer().frame(height: 13 * DynamicSizeFactor.factor())
                     }
-
+                    
                     SpendingCheckBoxView(viewModel: targetAmountViewModel)
                         .padding(.horizontal, 20)
-
+                    
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-
+                    
                     SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView, date: $spendingHistoryViewModel.currentDate, clickDate: $clickDate)
                         .padding(.horizontal, 20)
-
+                    
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-
+                    
                     CustomRectangleButton(action: {
                         navigateToMySpendingList = true
                         Log.debug(navigateToMySpendingList)
                     }, label: "나의 소비 내역")
-
+                    
                     Spacer().frame(height: 23 * DynamicSizeFactor.factor())
                 }
                 .analyzeEvent(SpendingEvents.spendingTabView)
             }
-            .onAppear {
-                spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
-                targetAmountViewModel.getTargetAmountForDateApi { _ in }
-                notificationViewModel.checkUnReadNotificationsApi { _ in }
-                Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
-            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .setTabBarVisibility(isHidden: ishidden)
             .navigationBarColor(UIColor(named: "Gray01"), title: "")
             .background(Color("Gray01"))
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Image("icon_logo_text")
@@ -67,7 +61,7 @@ struct SpendingManagementMainView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 99 * DynamicSizeFactor.factor(), height: 18 * DynamicSizeFactor.factor())
                 }
-
+            
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 0) {
                         Button(action: {
@@ -84,7 +78,7 @@ struct SpendingManagementMainView: View {
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
                         .frame(width: 44, height: 44)
                         .buttonStyle(BasicButtonStyleUtil())
-
+            
                         Button(action: {
                             navigateToMainAlarmView = true
                         }, label: {
@@ -115,9 +109,20 @@ struct SpendingManagementMainView: View {
                 NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
                     EmptyView()
                 }
+                    .hidden()
+            )
+            .background(
+                NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, spendingId: .constant(0), clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, isEditSuccess: .constant(false), isAddSpendingData: .constant(false), entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
+                    EmptyView()
+                }
                 .hidden()
             )
-
+            
+            NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
+                EmptyView()
+            }
+            .hidden()
+            
             if #available(iOS 15.0, *) {
             } else {
                 NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
@@ -125,20 +130,17 @@ struct SpendingManagementMainView: View {
                 }
                 .hidden()
             }
-
-            NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, spendingId: .constant(0), clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, isEditSuccess: .constant(false), isAddSpendingData: .constant(false), entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
-                EmptyView()
-            }
-            .hidden()
-
-            NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
-                EmptyView()
-            }
-            .hidden()
+            
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView, minHeight: bottomSheetMinHeight, maxHeight: 524 * DynamicSizeFactor.factor()) {
             SpendingDetailSheetView(clickDate: $clickDate, viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
                 .zIndex(2)
+        }
+        .onAppear {
+            spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
+            targetAmountViewModel.getTargetAmountForDateApi { _ in }
+            notificationViewModel.checkUnReadNotificationsApi { _ in }
+            Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
         }
         .onChange(of: showSpendingDetailView) { isPresented in
             ishidden = isPresented
