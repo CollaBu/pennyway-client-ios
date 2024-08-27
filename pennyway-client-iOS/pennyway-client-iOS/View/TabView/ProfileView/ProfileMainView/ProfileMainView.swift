@@ -24,145 +24,135 @@ struct ProfileMainView: View {
     @State private var updateCount = 0 // 업데이트 횟수를 추적하는 변수
 
     var body: some View {
-        NavigationView {
+        NavigationAvailable {
             ZStack {
-                ScrollView {
-                    GeometryReader { geometry in
-                        let offset = geometry.frame(in: .global).minY
-                        setOffset(offset: offset)
-                        ProfileUserInfoView(
-                            showPopUpView: $showPopUpView,
-                            navigateToEditUsername: $navigateToEditUsername,
-                            selectedUIImage: $selectedUIImage,
-                            imageUrl: $imageUrl,
-                            viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
-                        )
-                        .background(Color("White01"))
-                        .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
-                    }
-                    .frame(height: profileViewHeight)
+                content
 
-                    VStack {
-                        Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-
-                        Text("내 게시글")
-                            .font(.B1MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
-                            .offset(x: -140, y: 0)
-
-                        Spacer().frame(height: 6 * DynamicSizeFactor.factor())
-
-                        Image("icon_illust_empty")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-
-                        Text("아직 작성된 글이 없어요")
-                            .font(.H4MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
-                            .padding(1)
-                    }
-                    .padding(.horizontal, 20)
-                    .background(Color("Gray01"))
+                if showPopUpView {
+                    Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                    EditProfilePopUpView(
+                        isPresented: $showPopUpView,
+                        showPopUpView: $showPopUpView,
+                        isHiddenTabBar: $isHiddenTabBar,
+                        showImagePicker: $showImagePicker,
+                        selectedUIImage: $selectedUIImage,
+                        sourceType: $sourceType,
+                        imageUrl: $imageUrl,
+                        presignedUrlViewModel: presignedUrlViewModel
+                    )
                 }
             }
-//            if showPopUpView {
-//                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-//                EditProfilePopUpView(
-//                    isPresented: $showPopUpView,
-//                    showPopUpView: $showPopUpView,
-//                    isHiddenTabBar: $isHiddenTabBar,
-//                    showImagePicker: $showImagePicker,
-//                    selectedUIImage: $selectedUIImage,
-//                    sourceType: $sourceType,
-//                    imageUrl: $imageUrl,
-//                    presignedUrlViewModel: presignedUrlViewModel
-//                )
-//            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                HStack {
-                    Button(action: {
-                        isSelectedToolBar = true
-                    }, label: {
-                        Image("icon_hamburger_button")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                            .padding(5)
-                    })
-                    .frame(width: 44, height: 44)
-                    .buttonStyle(BasicButtonStyleUtil())
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("Gray01"))
+            .setTabBarVisibility(isHidden: showPopUpView)
+            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
+            .navigationBarBackButtonHidden()
+            .edgesIgnoringSafeArea(.bottom)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Button(action: {
+                            isSelectedToolBar = true
+                        }, label: {
+                            Image("icon_hamburger_button")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                .padding(5)
+                        })
+                        .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
+                    }
                 }
             }
-        }
+            .sheet(isPresented: $showImagePicker, onDismiss: {
+                // 사진 클릭한 경우
+                showPopUpView = false
+                presignedUrlViewModel.image = selectedUIImage
+                presignedUrlViewModel.generatePresignedUrlApi { success in
+                    if success {
+                        presignedUrlViewModel.storePresignedUrlApi { success in
+                            if success {
+                                profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
+                            }
+                        }
+                    }
+                }
+            }) {
+                ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
+                    .edgesIgnoringSafeArea(.bottom)
+            }
 
-//        .edgesIgnoringSafeArea(.bottom)
-//        .sheet(isPresented: $showImagePicker, onDismiss: {
-//            // 사진 클릭한 경우
-//            showPopUpView = false
-//            presignedUrlViewModel.image = selectedUIImage
-//            presignedUrlViewModel.generatePresignedUrlApi { success in
-//                if success {
-//                    presignedUrlViewModel.storePresignedUrlApi { success in
-//                        if success {
-//                            profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
-//                        }
-//                    }
-//                }
-//            }
-//        }) {
-//            ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
-//                .edgesIgnoringSafeArea(.bottom)
-//        }
-//        .id(showPopUpView)
-//        .background(Color("Gray01"))
-//        .setTabBarVisibility(isHidden: showPopUpView)
-//        .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
-//        .navigationBarBackButtonHidden()
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                HStack {
-//                    Button(action: {
-//                        isSelectedToolBar = true
-//                    }, label: {
-//                        Image("icon_hamburger_button")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fill)
-//                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-//                            .padding(5)
-//                    })
-//                    .frame(width: 44, height: 44)
-//                    .buttonStyle(BasicButtonStyleUtil())
-//                }
-//            }
-//        }
-//
-//        NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
-//            EmptyView()
-//        }.hidden()
-//
-//        NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
-//            EmptyView()
-//        }.hidden()
-//            //        }
-//
-//            .onAppear {
-//                Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
-//                Log.debug("showPopUpView:\(showPopUpView)")
-//                loadUserDataImage() // 사용자 프로필 사진 불러오기
-//            }
-//            .onChange(of: showPopUpView) { newValue in
-//                isHiddenTabBar = newValue
-//            }
-//            .analyzeEvent(ProfileEvents.profileTapView)
-//            .onChange(of: ProfileNavigationState(navigateToEditUsername: navigateToEditUsername, isSelectedToolBar: isSelectedToolBar, showPopUpView: showPopUpView)) { state in
-//                if state.isReturn() {
-//                    AnalyticsManager.shared.trackEvent(ProfileEvents.profileTapView, additionalParams: nil)
-//                }
-//            }
+            .background(
+                NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
+                    EmptyView()
+                }.hidden()
+            )
+            .background(
+                NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
+                    EmptyView()
+                }.hidden()
+            )
+        }
+        .id(showPopUpView)
+        .onAppear {
+            Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
+            Log.debug("showPopUpView:\(showPopUpView)")
+            loadUserDataImage() // 사용자 프로필 사진 불러오기
+        }
+        .onChange(of: showPopUpView) { newValue in
+            isHiddenTabBar = newValue
+        }
+        .onChange(of: ProfileNavigationState(navigateToEditUsername: navigateToEditUsername, isSelectedToolBar: isSelectedToolBar, showPopUpView: showPopUpView)) { state in
+            if state.isReturn() {
+                AnalyticsManager.shared.trackEvent(ProfileEvents.profileTapView, additionalParams: nil)
+            }
+        }
+        .analyzeEvent(ProfileEvents.profileTapView)
+    }
+
+    // MARK: - Subviews
+
+    private var content: some View {
+        ScrollView {
+            GeometryReader { geometry in
+                let offset = geometry.frame(in: .global).minY
+                setOffset(offset: offset)
+                ProfileUserInfoView(
+                    showPopUpView: $showPopUpView,
+                    navigateToEditUsername: $navigateToEditUsername,
+                    selectedUIImage: $selectedUIImage,
+                    imageUrl: $imageUrl,
+                    viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
+                )
+                .background(Color("White01"))
+                .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
+            }
+            .frame(height: profileViewHeight)
+
+            VStack {
+                Spacer().frame(height: 33 * DynamicSizeFactor.factor())
+
+                Text("내 게시글")
+                    .font(.B1MediumFont())
+                    .platformTextColor(color: Color("Gray07"))
+                    .offset(x: -140, y: 0)
+
+                Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+
+                Image("icon_illust_empty")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
+
+                Text("아직 작성된 글이 없어요")
+                    .font(.H4MediumFont())
+                    .platformTextColor(color: Color("Gray07"))
+                    .padding(1)
+            }
+            .padding(.horizontal, 20)
+            .background(Color("Gray01"))
+        }
     }
 
     private func loadUserDataImage() {

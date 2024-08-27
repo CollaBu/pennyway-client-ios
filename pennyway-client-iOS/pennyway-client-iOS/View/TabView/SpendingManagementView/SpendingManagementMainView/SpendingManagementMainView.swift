@@ -21,107 +21,81 @@ struct SpendingManagementMainView: View {
 
     var body: some View {
         NavigationAvailable {
-            ScrollView {
-                VStack {
-                    Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-                    
-                    if !targetAmountViewModel.isHiddenSuggestionView {
-                        RecentTargetAmountSuggestionView(viewModel: targetAmountViewModel, showToastPopup: $showToastPopup, isHidden: $targetAmountViewModel.isHiddenSuggestionView)
-                        
-                        Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+            content
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .setTabBarVisibility(isHidden: ishidden)
+                .navigationBarColor(UIColor(named: "Gray01"), title: "")
+                .background(Color("Gray01"))
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Image("icon_logo_text")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 99 * DynamicSizeFactor.factor(), height: 18 * DynamicSizeFactor.factor())
                     }
-                    
-                    SpendingCheckBoxView(viewModel: targetAmountViewModel)
-                        .padding(.horizontal, 20)
-                    
-                    Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-                    
-                    SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView, date: $spendingHistoryViewModel.currentDate, clickDate: $clickDate)
-                        .padding(.horizontal, 20)
-                    
-                    Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-                    
-                    CustomRectangleButton(action: {
-                        navigateToMySpendingList = true
-                        Log.debug(navigateToMySpendingList)
-                    }, label: "나의 소비 내역")
-                    
-                    Spacer().frame(height: 23 * DynamicSizeFactor.factor())
-                }
-                .analyzeEvent(SpendingEvents.spendingTabView)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .setTabBarVisibility(isHidden: ishidden)
-            .navigationBarColor(UIColor(named: "Gray01"), title: "")
-            .background(Color("Gray01"))
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Image("icon_logo_text")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 99 * DynamicSizeFactor.factor(), height: 18 * DynamicSizeFactor.factor())
-                }
             
-                ToolbarItem(placement: .topBarTrailing) {
-                    HStack(spacing: 0) {
-                        Button(action: {
-                            clickDate = Date() // +아이콘을 통해 들어간 경우 현재날짜 고정
-                            entryPoint = .main
-                            navigateToAddSpendingHistory = true
-                        }, label: {
-                            Image("icon_navigation_add_black")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
-                                .padding(5 * DynamicSizeFactor.factor())
-                        })
-                        .padding(.trailing, 5 * DynamicSizeFactor.factor())
-                        .frame(width: 44, height: 44)
-                        .buttonStyle(BasicButtonStyleUtil())
+                    ToolbarItem(placement: .topBarTrailing) {
+                        HStack(spacing: 0) {
+                            Button(action: {
+                                clickDate = Date() // +아이콘을 통해 들어간 경우 현재날짜 고정
+                                entryPoint = .main
+                                navigateToAddSpendingHistory = true
+                            }, label: {
+                                Image("icon_navigation_add_black")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
+                                    .padding(5 * DynamicSizeFactor.factor())
+                            })
+                            .padding(.trailing, 5 * DynamicSizeFactor.factor())
+                            .frame(width: 44, height: 44)
+                            .buttonStyle(BasicButtonStyleUtil())
             
-                        Button(action: {
-                            navigateToMainAlarmView = true
-                        }, label: {
-                            Image(notificationViewModel.hasUnread ? "icon_navigationbar_bell_dot" : "icon_navigationbar_bell")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                .padding(5 * DynamicSizeFactor.factor())
-                        })
-                        .padding(.trailing, 5 * DynamicSizeFactor.factor())
-                        .frame(width: 44, height: 44)
-                        .buttonStyle(BasicButtonStyleUtil())
+                            Button(action: {
+                                navigateToMainAlarmView = true
+                            }, label: {
+                                Image(notificationViewModel.hasUnread ? "icon_navigationbar_bell_dot" : "icon_navigationbar_bell")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                    .padding(5 * DynamicSizeFactor.factor())
+                            })
+                            .padding(.trailing, 5 * DynamicSizeFactor.factor())
+                            .frame(width: 44, height: 44)
+                            .buttonStyle(BasicButtonStyleUtil())
+                        }
+                        .offset(x: 10)
                     }
-                    .offset(x: 10)
                 }
-            }
-            .overlay(
-                Group {
-                    if showToastPopup {
-                        CustomToastView(message: "\(Date.month(from: Date()))월의 새로운 목표금액을 설정했어요")
-                            .transition(.move(edge: .bottom))
-                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                            .padding(.bottom, 10 * DynamicSizeFactor.factor())
+                .overlay(
+                    Group {
+                        if showToastPopup {
+                            CustomToastView(message: "\(Date.month(from: Date()))월의 새로운 목표금액을 설정했어요")
+                                .transition(.move(edge: .bottom))
+                                .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                                .padding(.bottom, 10 * DynamicSizeFactor.factor())
+                        }
+                    }, alignment: .bottom
+                )
+                .background(
+                    NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
+                        EmptyView()
                     }
-                }, alignment: .bottom
-            )
-            .background(
-                NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
-                    EmptyView()
-                }
                     .hidden()
-            )
-            .background(
-                NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, spendingId: .constant(0), clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, isEditSuccess: .constant(false), isAddSpendingData: .constant(false), entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
-                    EmptyView()
-                }
-                .hidden()
-            )
+                )
+                .background(
+                    NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, spendingId: .constant(0), clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, isEditSuccess: .constant(false), isAddSpendingData: .constant(false), entryPoint: .main), isActive: $navigateToAddSpendingHistory) {
+                        EmptyView()
+                    }
+                    .hidden()
+                )
             
-            NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
-                EmptyView()
-            }
-            .hidden()
+                .background(
+                    NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
+                        EmptyView()
+                    }
+                    .hidden()
+                )
             
             if #available(iOS 15.0, *) {
             } else {
@@ -130,7 +104,6 @@ struct SpendingManagementMainView: View {
                 }
                 .hidden()
             }
-            
         }
         .dragBottomSheet(isPresented: $showSpendingDetailView, minHeight: bottomSheetMinHeight, maxHeight: 524 * DynamicSizeFactor.factor()) {
             SpendingDetailSheetView(clickDate: $clickDate, viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
@@ -153,6 +126,40 @@ struct SpendingManagementMainView: View {
             }
         }
         .id(ishidden)
+    }
+    
+    // MARK: - Subviews
+
+    private var content: some View {
+        ScrollView {
+            VStack {
+                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+                
+                if !targetAmountViewModel.isHiddenSuggestionView {
+                    RecentTargetAmountSuggestionView(viewModel: targetAmountViewModel, showToastPopup: $showToastPopup, isHidden: $targetAmountViewModel.isHiddenSuggestionView)
+                    
+                    Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+                }
+                
+                SpendingCheckBoxView(viewModel: targetAmountViewModel)
+                    .padding(.horizontal, 20)
+                
+                Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+                
+                SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView, date: $spendingHistoryViewModel.currentDate, clickDate: $clickDate)
+                    .padding(.horizontal, 20)
+                
+                Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+                
+                CustomRectangleButton(action: {
+                    navigateToMySpendingList = true
+                    Log.debug(navigateToMySpendingList)
+                }, label: "나의 소비 내역")
+                
+                Spacer().frame(height: 23 * DynamicSizeFactor.factor())
+            }
+            .analyzeEvent(SpendingEvents.spendingTabView)
+        }
     }
 
     private var bottomSheetMinHeight: CGFloat {
