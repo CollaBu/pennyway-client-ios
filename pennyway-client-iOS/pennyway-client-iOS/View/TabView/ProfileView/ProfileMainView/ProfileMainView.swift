@@ -93,8 +93,8 @@ struct ProfileMainView: View {
                     .edgesIgnoringSafeArea(.bottom)
                 }
             }
+            .id(showPopUpView)
         }
-        .id(showPopUpView)
         .onAppear {
             Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
             Log.debug("showPopUpView:\(showPopUpView)")
