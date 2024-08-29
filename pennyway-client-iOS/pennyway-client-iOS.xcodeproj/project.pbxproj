@@ -139,6 +139,7 @@
 		4A6C79E42C46DE8B009463E4 /* VerificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E32C46DE8B009463E4 /* VerificationButton.swift */; };
 		4A6C79E62C46DEA7009463E4 /* ErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E52C46DEA7009463E4 /* ErrorText.swift */; };
 		4A6C79E82C46DFBE009463E4 /* CodeInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E72C46DFBE009463E4 /* CodeInputField.swift */; };
+		4A6CC1E02C80E3F600D638B2 /* ScreenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6CC1DF2C80E3F600D638B2 /* ScreenUtil.swift */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7514D62C51713F00573671 /* PhoneViewModelHandlers.swift */; };
@@ -471,6 +472,7 @@
 		4A6C79E32C46DE8B009463E4 /* VerificationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationButton.swift; sourceTree = "<group>"; };
 		4A6C79E52C46DEA7009463E4 /* ErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorText.swift; sourceTree = "<group>"; };
 		4A6C79E72C46DFBE009463E4 /* CodeInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputField.swift; sourceTree = "<group>"; };
+		4A6CC1DF2C80E3F600D638B2 /* ScreenUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtil.swift; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -1557,6 +1559,7 @@
 				4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */,
 				4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */,
 				D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */,
+				4A6CC1DF2C80E3F600D638B2 /* ScreenUtil.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2386,6 +2389,7 @@
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4AC320472C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift in Sources */,
+				4A6CC1E02C80E3F600D638B2 /* ScreenUtil.swift in Sources */,
 				B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */,
 				4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */,
 				B599E4CD2C59067C006051E9 /* FirebaseAnalyticsService.swift in Sources */,

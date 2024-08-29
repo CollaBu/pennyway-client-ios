@@ -12,7 +12,6 @@ struct TotalTargetAmountView: View {
     @State private var showingDeletePopUp = false
     @State private var showToastPopup = false
 
-    @State var screenHeight = UIScreen.main.bounds.height
     let hearderViewHeight = 173 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
@@ -32,7 +31,7 @@ struct TotalTargetAmountView: View {
                     TotalTargetAmountContentView(viewModel: viewModel, isnavigateToPastSpendingView: $isnavigateToPastSpendingView)
                         .offset(y: adjustedOffset > 0 ? (hearderViewHeight - adjustedOffset) : hearderViewHeight)
                 }
-                .frame(height: screenHeight + hearderViewHeight)
+                .frame(height: ScreenUtil.calculateAvailableHeight() + calculateAdditionalHeight())
             }
             .overlay(
                 VStack(alignment: .leading) {
@@ -157,7 +156,7 @@ struct TotalTargetAmountView: View {
         }
     }
 
-    func setOffset(offset: CGFloat) -> some View {
+    private func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
             if updateCount < 2 {
                 updateCount += 1
@@ -168,6 +167,16 @@ struct TotalTargetAmountView: View {
             adjustedOffset = offset - initialOffset
         }
         return EmptyView()
+    }
+
+    /// viewModel.targetAmounts의 개수에 따라 추가 높이를 계산하는 함수
+    private func calculateAdditionalHeight() -> CGFloat {
+        let count = viewModel.targetAmounts.count
+        if count >= 3 {
+            return CGFloat(min(count - 2, 4)) * 60 * DynamicSizeFactor.factor()
+        } else {
+            return 0
+        }
     }
 }
 

@@ -18,7 +18,6 @@ struct ProfileMainView: View {
 
     @State var imageUrl = ""
 
-    let screenHeight = UIScreen.main.bounds.height
     let profileViewHeight = 267 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
@@ -153,7 +152,7 @@ struct ProfileMainView: View {
                 .background(Color("Gray01"))
                 .offset(y: adjustedOffset > 0 ? (profileViewHeight - adjustedOffset) : profileViewHeight)
             }
-            .frame(height: screenHeight)
+            .frame(height: ScreenUtil.calculateAvailableHeight())
         }
     }
 
@@ -193,4 +192,3 @@ struct ProfileNavigationState: Equatable {
 #Preview {
     ProfileMainView()
 }
-
