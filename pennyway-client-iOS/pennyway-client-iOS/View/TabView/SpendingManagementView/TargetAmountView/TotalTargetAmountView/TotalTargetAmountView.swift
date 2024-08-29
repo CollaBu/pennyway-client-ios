@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - TotalTargetAmountView
 
 struct TotalTargetAmountView: View {
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = TotalTargetAmountViewModel()
     @State private var isClickMenu = false
     @State private var selectedMenu: String? = nil // 선택한 메뉴
@@ -72,7 +73,7 @@ struct TotalTargetAmountView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Button(action: {
-                            NavigationUtil.popToRootView()
+                            self.presentationMode.wrappedValue.dismiss()
                         }, label: {
                             Image("icon_arrow_back_white")
                                 .resizable()
