@@ -6,8 +6,6 @@ import SwiftUI
 struct ProfileSettingListView: View {
     @Binding var showLogoutPopUp: Bool
     @Binding var showDeleteUserPopUp: Bool
-    @State var firstNaviLinkActive = true
-
     @State private var activeNavigation: ProfileActiveNavigation?
 
     var body: some View {
@@ -22,7 +20,8 @@ struct ProfileSettingListView: View {
                         }),
                         ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
                         ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {
-                            activeNavigation = .modifyPw
+//                            activeNavigation = .modifyPw
+                            NavigationUtil.popToRootView()
                         })
                     ])
 
@@ -65,8 +64,6 @@ struct ProfileSettingListView: View {
 
             navigationLinks
         }
-        .setTabBarVisibility(isHidden: true)
-        .navigationBarColor(UIColor(named: "White01"), title: "")
     }
 
     @ViewBuilder
@@ -90,7 +87,7 @@ struct ProfileSettingListView: View {
         case .editProfile:
             EditProfileListView()
         case .modifyPw:
-            ProfileModifyPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw)
+            ProfileModifyPwView(entryPoint: .modifyPw)
         }
     }
 }

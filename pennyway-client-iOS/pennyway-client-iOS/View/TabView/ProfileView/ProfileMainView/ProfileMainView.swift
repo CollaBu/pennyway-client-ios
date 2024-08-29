@@ -27,6 +27,56 @@ struct ProfileMainView: View {
         NavigationAvailable {
             ZStack {
                 content
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .setTabBarVisibility(isHidden: showPopUpView)
+                    .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
+                    .background(Color("Gray01"))
+//                .edgesIgnoringSafeArea(.bottom) 루트 뷰 이동 가능
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            HStack {
+                                Button(action: {
+                                    isSelectedToolBar = true
+                                }, label: {
+                                    Image("icon_hamburger_button")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                        .padding(5)
+                                })
+                                .frame(width: 44, height: 44)
+                                .buttonStyle(BasicButtonStyleUtil())
+                            }
+                        }
+                    }
+                    .sheet(isPresented: $showImagePicker, onDismiss: {
+                        // 사진 클릭한 경우
+                        showPopUpView = false
+                        presignedUrlViewModel.image = selectedUIImage
+                        presignedUrlViewModel.generatePresignedUrlApi { success in
+                            if success {
+                                presignedUrlViewModel.storePresignedUrlApi { success in
+                                    if success {
+                                        profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
+                                    }
+                                }
+                            }
+                        }
+                    }) {
+                        ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
+                            .edgesIgnoringSafeArea(.bottom)
+                    }
+
+                    .background(
+                        NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
+                            EmptyView()
+                        }.hidden()
+                    )
+                    .background(
+                        NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
+                            EmptyView()
+                        }.hidden()
+                    )
 
                 if showPopUpView {
                     Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
@@ -40,59 +90,9 @@ struct ProfileMainView: View {
                         imageUrl: $imageUrl,
                         presignedUrlViewModel: presignedUrlViewModel
                     )
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("Gray01"))
-            .setTabBarVisibility(isHidden: showPopUpView)
-            .navigationBarTitle(getUserData()?.username ?? "", displayMode: .inline)
-            .navigationBarBackButtonHidden()
-            .edgesIgnoringSafeArea(.bottom)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        Button(action: {
-                            isSelectedToolBar = true
-                        }, label: {
-                            Image("icon_hamburger_button")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                                .padding(5)
-                        })
-                        .frame(width: 44, height: 44)
-                        .buttonStyle(BasicButtonStyleUtil())
-                    }
-                }
-            }
-            .sheet(isPresented: $showImagePicker, onDismiss: {
-                // 사진 클릭한 경우
-                showPopUpView = false
-                presignedUrlViewModel.image = selectedUIImage
-                presignedUrlViewModel.generatePresignedUrlApi { success in
-                    if success {
-                        presignedUrlViewModel.storePresignedUrlApi { success in
-                            if success {
-                                profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
-                            }
-                        }
-                    }
-                }
-            }) {
-                ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                     .edgesIgnoringSafeArea(.bottom)
+                }
             }
-
-            .background(
-                NavigationLink(destination: EditUsernameView(), isActive: $navigateToEditUsername) {
-                    EmptyView()
-                }.hidden()
-            )
-            .background(
-                NavigationLink(destination: ProfileMenuBarListView(), isActive: $isSelectedToolBar) {
-                    EmptyView()
-                }.hidden()
-            )
         }
         .id(showPopUpView)
         .onAppear {

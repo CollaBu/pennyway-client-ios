@@ -25,7 +25,7 @@ struct FindPwView: View {
                 }, label: "확인", isFormValid: $phoneVerificationViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-                NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel(), firstNaviLinkActive: .constant(true), entryPoint: .findPw), isActive: $isNavigateToFindPwView) {
+                NavigationLink(destination: ResetPwView(formViewModel: SignUpFormViewModel(), entryPoint: .findPw), isActive: $isNavigateToFindPwView) {
                     EmptyView()
                 }.hidden()
             }
