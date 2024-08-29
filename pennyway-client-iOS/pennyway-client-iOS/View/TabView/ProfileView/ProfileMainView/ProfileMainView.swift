@@ -18,6 +18,7 @@ struct ProfileMainView: View {
 
     @State var imageUrl = ""
 
+    let screenHeight = UIScreen.main.bounds.height
     let profileViewHeight = 267 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
@@ -31,6 +32,7 @@ struct ProfileMainView: View {
                     .setTabBarVisibility(isHidden: showPopUpView)
                     .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
                     .background(Color("Gray01"))
+                    .navigationBarBackButtonHidden(true)
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             HStack {
@@ -126,31 +128,32 @@ struct ProfileMainView: View {
                 )
                 .background(Color("White01"))
                 .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
+
+                VStack(alignment: .center) {
+                    Spacer().frame(height: 33 * DynamicSizeFactor.factor())
+
+                    Text("내 게시글")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: Color("Gray07"))
+                        .offset(x: -140, y: 0)
+
+                    Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+
+                    Image("icon_illust_empty")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
+
+                    Text("아직 작성된 글이 없어요")
+                        .font(.H4MediumFont())
+                        .platformTextColor(color: Color("Gray07"))
+                        .padding(1)
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color("Gray01"))
+                .offset(y: adjustedOffset > 0 ? (profileViewHeight - adjustedOffset) : profileViewHeight)
             }
-            .frame(height: profileViewHeight)
-
-            VStack {
-                Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-
-                Text("내 게시글")
-                    .font(.B1MediumFont())
-                    .platformTextColor(color: Color("Gray07"))
-                    .offset(x: -140, y: 0)
-
-                Spacer().frame(height: 6 * DynamicSizeFactor.factor())
-
-                Image("icon_illust_empty")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 100 * DynamicSizeFactor.factor(), height: 100 * DynamicSizeFactor.factor())
-
-                Text("아직 작성된 글이 없어요")
-                    .font(.H4MediumFont())
-                    .platformTextColor(color: Color("Gray07"))
-                    .padding(1)
-            }
-            .padding(.horizontal, 20)
-            .background(Color("Gray01"))
+            .frame(height: screenHeight)
         }
     }
 
@@ -190,3 +193,4 @@ struct ProfileNavigationState: Equatable {
 #Preview {
     ProfileMainView()
 }
+

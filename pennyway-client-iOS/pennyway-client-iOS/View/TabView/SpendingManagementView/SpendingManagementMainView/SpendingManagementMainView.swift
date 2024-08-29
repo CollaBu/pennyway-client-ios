@@ -26,6 +26,12 @@ struct SpendingManagementMainView: View {
                 .setTabBarVisibility(isHidden: ishidden)
                 .navigationBarColor(UIColor(named: "Gray01"), title: "")
                 .background(Color("Gray01"))
+                .onAppear {
+                    spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
+                    targetAmountViewModel.getTargetAmountForDateApi { _ in }
+                    notificationViewModel.checkUnReadNotificationsApi { _ in }
+                    Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
+                }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Image("icon_logo_text")
@@ -108,12 +114,6 @@ struct SpendingManagementMainView: View {
         .dragBottomSheet(isPresented: $showSpendingDetailView, minHeight: bottomSheetMinHeight, maxHeight: 524 * DynamicSizeFactor.factor()) {
             SpendingDetailSheetView(clickDate: $clickDate, viewModel: AddSpendingHistoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel)
                 .zIndex(2)
-        }
-        .onAppear {
-            spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
-            targetAmountViewModel.getTargetAmountForDateApi { _ in }
-            notificationViewModel.checkUnReadNotificationsApi { _ in }
-            Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
         }
         .onChange(of: showSpendingDetailView) { isPresented in
             ishidden = isPresented

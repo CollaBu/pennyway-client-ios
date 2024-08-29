@@ -5,6 +5,8 @@ struct CompleteChangePwView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     let entryPoint: PasswordChangeTypeNavigation
 
+    @State var navigateToRootView = false
+
     var body: some View {
         VStack {
             ScrollView {
@@ -17,11 +19,14 @@ struct CompleteChangePwView: View {
                 if entryPoint == .findPw {
                     NavigationUtil.popToRootView()
                 } else {
-                    NavigationUtil.popToView(at: 1)
+                    navigateToRootView = true
                 }
 
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
+            NavigationLink(destination: ProfileMainView(), isActive: $navigateToRootView) {}
+                .hidden()
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)
