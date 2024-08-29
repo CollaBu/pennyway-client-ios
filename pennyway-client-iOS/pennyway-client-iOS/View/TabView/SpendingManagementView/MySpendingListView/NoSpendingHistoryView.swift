@@ -5,7 +5,7 @@ struct NoSpendingHistoryView: View {
     @State var navigateToAddSpendingHistory = false
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
 
-    @Binding var clickDate: Date?
+    @Binding var clickDate: Date? // 현재 선택된 날을 넘겨주기 위한 변수
 
     var body: some View {
         VStack(spacing: 0) {
@@ -36,7 +36,16 @@ struct NoSpendingHistoryView: View {
                     .background(Color("Mint03"))
                     .cornerRadius(30)
 
-                    NavigationLink(destination: AddSpendingHistoryView(spendingCategoryViewModel: SpendingCategoryViewModel(), spendingHistoryViewModel: spendingHistoryViewModel, spendingId: .constant(0), clickDate: $clickDate, isPresented: $navigateToAddSpendingHistory, isEditSuccess: .constant(false), isAddSpendingData: .constant(false), entryPoint: .detailSheet), isActive: $navigateToAddSpendingHistory) {
+                    NavigationLink(destination: AddSpendingHistoryView(
+                        spendingCategoryViewModel: SpendingCategoryViewModel(),
+                        spendingHistoryViewModel: spendingHistoryViewModel,
+                        spendingId: .constant(0), 
+                        clickDate: $clickDate,
+                        isPresented: $navigateToAddSpendingHistory,
+                        isEditSuccess: .constant(false),
+                        isAddSpendingData: .constant(false),
+                        entryPoint: .NoSpendingHistoryView), isActive: $navigateToAddSpendingHistory)
+                    {
                         EmptyView()
                     }.hidden()
                 }
@@ -44,8 +53,4 @@ struct NoSpendingHistoryView: View {
             .buttonStyle(BasicButtonStyleUtil())
         }
     }
-}
-
-#Preview {
-    NoSpendingHistoryView(spendingHistoryViewModel: SpendingHistoryViewModel(), clickDate: .constant(Date()))
 }

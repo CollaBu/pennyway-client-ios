@@ -74,9 +74,13 @@ struct AddSpendingCompleteView: View {
                     
                     Log.debug("루트뷰로이동")
                 } else {
-                    isPresented = false
-                    Log.debug("isPresented: \(isPresented)")
-                    Log.debug("entryPoint: \(entryPoint)")
+                    if entryPoint == .NoSpendingHistoryView {
+                        NavigationUtil.popToView(at: 1)
+                    } else {
+                        isPresented = false
+                        Log.debug("isPresented: \(isPresented)")
+                        Log.debug("entryPoint: \(entryPoint)")
+                    }
                 }
                 
             }, label: "확인", isFormValid: .constant(true))
