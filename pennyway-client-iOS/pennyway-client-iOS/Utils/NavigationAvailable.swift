@@ -6,6 +6,6 @@ func NavigationAvailable<Content: View>(@ViewBuilder content: () -> Content) -> 
         return AnyView(NavigationStack { content() })
     } else {
         return AnyView(NavigationView { content() }
-            .navigationViewStyle(.stack))//navigation index 파악위해 stack 사용
+            .navigationViewStyle(.stack)) // navigation index 파악위해 stack 사용
     }
 }

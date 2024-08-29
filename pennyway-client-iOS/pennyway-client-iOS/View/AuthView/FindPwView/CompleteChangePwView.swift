@@ -14,7 +14,11 @@ struct CompleteChangePwView: View {
                 )
             }
             CustomBottomButton(action: {
-                NavigationUtil.popToRootView()
+                if entryPoint == .findPw {
+                    NavigationUtil.popToRootView()
+                } else {
+                    NavigationUtil.popToView(at: 1)
+                }
 
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())

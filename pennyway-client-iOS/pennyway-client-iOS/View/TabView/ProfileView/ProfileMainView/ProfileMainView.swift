@@ -31,9 +31,8 @@ struct ProfileMainView: View {
                     .setTabBarVisibility(isHidden: showPopUpView)
                     .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
                     .background(Color("Gray01"))
-//                .edgesIgnoringSafeArea(.bottom) 루트 뷰 이동 가능
                     .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
+                        ToolbarItem(placement: .topBarTrailing) {
                             HStack {
                                 Button(action: {
                                     isSelectedToolBar = true
