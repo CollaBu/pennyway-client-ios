@@ -173,8 +173,8 @@ struct TotalTargetAmountView: View {
     /// viewModel.targetAmounts의 개수에 따라 추가 높이를 계산하는 함수
     private func calculateAdditionalHeight() -> CGFloat {
         let count = viewModel.targetAmounts.count
-        if count >= 3 {
-            return CGFloat(min(count - 2, 4)) * 60 * DynamicSizeFactor.factor()
+        if count >= 2 {
+            return CGFloat(min(count - 1, 5)) * 60 * DynamicSizeFactor.factor()
         } else {
             return 0
         }

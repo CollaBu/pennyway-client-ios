@@ -53,8 +53,6 @@ enum NavigationUtil {
 
         let viewControllersCount = navigationController.viewControllers.count
 
-        Log.debug(viewControllersCount)
-
         guard index < viewControllersCount else {
             Log.error("Index out of bounds")
             return
