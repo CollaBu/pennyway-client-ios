@@ -15,7 +15,7 @@ struct LoginView: View {
                         Spacer().frame(height: 3 * DynamicSizeFactor.factor())
 
                         AdditionalOptionView()
-                        Spacer()
+//                        Spacer()
                     }
                 }
                 VStack {
