@@ -7,7 +7,6 @@ struct ResetPwView: View {
     @State private var navigateView = false
     @StateObject var resetPwViewModel = ResetPwViewModel()
     @StateObject var accountViewModel = UserAccountViewModel()
-    @Binding var firstNaviLinkActive: Bool
     let entryPoint: PasswordChangeTypeNavigation
     
     var body: some View {
@@ -39,7 +38,7 @@ struct ResetPwView: View {
                 }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 
-                NavigationLink(destination: CompleteChangePwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: entryPoint), isActive: $navigateView) {
+                NavigationLink(destination: CompleteChangePwView(entryPoint: entryPoint), isActive: $navigateView) {
                     EmptyView()
                 }.hidden()
             }
@@ -51,11 +50,10 @@ struct ResetPwView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
                     Button(action: {
-                        NavigationUtil.popToRootView()
-                        firstNaviLinkActive = false
-                        
                         if entryPoint == .modifyPw {
                             self.presentationMode.wrappedValue.dismiss()
+                        } else {
+                            NavigationUtil.popToRootView()
                         }
                     }, label: {
                         Image("icon_arrow_back")

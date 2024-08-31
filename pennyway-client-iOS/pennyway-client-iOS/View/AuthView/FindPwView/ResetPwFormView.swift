@@ -12,7 +12,6 @@ struct ResetPwFormView: View {
     var body: some View {
         VStack(alignment: .leading) {
             CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
-                Log.debug("pw: \(formViewModel.password)")
                 formViewModel.validatePassword()
                 isPwDeleteButtonVisible = false
             }, isSecureText: true, showDeleteButton: true,
@@ -41,7 +40,6 @@ struct ResetPwFormView: View {
             }
             
             CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
-                Log.debug("confirmPw: \(formViewModel.confirmPw)")
                 RegistrationManager.shared.password = formViewModel.confirmPw
                 formViewModel.validateConfirmPw()
                 isConfirmPwDeleteButtonVisible = false

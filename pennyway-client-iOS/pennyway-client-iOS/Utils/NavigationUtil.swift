@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - NavigationUtil
+
 enum NavigationUtil {
     static func popToRootView() {
         let keyWindow = UIApplication.shared.connectedScenes
@@ -9,8 +11,13 @@ enum NavigationUtil {
             .first?.windows
             .filter { $0.isKeyWindow }.first
 
-        findNavigationController(viewController: keyWindow?.rootViewController)?
+        // 루트 뷰 컨트롤러의 이름 출력
+        if let rootViewController = keyWindow?.rootViewController {
+            Log.debug("Root ViewController name: \(String(describing: type(of: rootViewController)))")
+        }
 
+        // 루트 뷰 컨트롤러에서 NavigationController를 찾아 루트로 이동
+        findNavigationController(viewController: keyWindow?.rootViewController)?
             .popToRootViewController(animated: true)
     }
 
@@ -20,13 +27,13 @@ enum NavigationUtil {
         }
 
         if let navigationController = viewController as? UINavigationController {
-            Log.debug(navigationController)
             return navigationController
         }
 
         for childViewController in viewController.children {
-            Log.debug(childViewController)
-            return findNavigationController(viewController: childViewController)
+            if let navigationController = findNavigationController(viewController: childViewController) {
+                return navigationController
+            }
         }
 
         return nil
