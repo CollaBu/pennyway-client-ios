@@ -7,7 +7,6 @@ struct ProfileModifyPwView: View {
     @State private var navigateView = false
     @State private var isFormValid = false
     @State private var isPwDeleteButtonVisible: Bool = false
-    @Binding var firstNaviLinkActive: Bool
     private let maxLength = 16
 
     let entryPoint: PasswordChangeTypeNavigation
@@ -62,7 +61,7 @@ struct ProfileModifyPwView: View {
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
 
-            NavigationLink(destination: ResetPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw), isActive: $navigateView) {
+            NavigationLink(destination: ResetPwView(entryPoint: .modifyPw), isActive: $navigateView) {
                 EmptyView()
             }.hidden()
         }
@@ -99,5 +98,5 @@ struct ProfileModifyPwView: View {
 }
 
 #Preview {
-    ProfileModifyPwView(firstNaviLinkActive: .constant(true), entryPoint: .modifyPw)
+    ProfileModifyPwView(entryPoint: .modifyPw)
 }

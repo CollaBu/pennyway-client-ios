@@ -9,6 +9,6 @@ enum API {
         guard let baseURL = Bundle.main.object(forInfoDictionaryKey: "BaseURL") as? String else {
             fatalError("BaseURL not found in Info.plist")
         }
-        return baseURL.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")
+        return baseURL.replacingOccurrences(of: " ", with: "")
     }()
 }

@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - TotalTargetAmountView
 
 struct TotalTargetAmountView: View {
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = TotalTargetAmountViewModel()
     @State private var isClickMenu = false
     @State private var selectedMenu: String? = nil // 선택한 메뉴
@@ -12,7 +13,6 @@ struct TotalTargetAmountView: View {
     @State private var showingDeletePopUp = false
     @State private var showToastPopup = false
 
-    let screenHeight = UIScreen.main.bounds.height
     let hearderViewHeight = 173 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
@@ -32,7 +32,7 @@ struct TotalTargetAmountView: View {
                     TotalTargetAmountContentView(viewModel: viewModel, isnavigateToPastSpendingView: $isnavigateToPastSpendingView)
                         .offset(y: adjustedOffset > 0 ? (hearderViewHeight - adjustedOffset) : hearderViewHeight)
                 }
-                .frame(height: screenHeight)
+                .frame(height: ScreenUtil.calculateAvailableHeight() + calculateAdditionalHeight())
             }
             .overlay(
                 VStack(alignment: .leading) {
@@ -73,7 +73,7 @@ struct TotalTargetAmountView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Button(action: {
-                            NavigationUtil.popToRootView()
+                            self.presentationMode.wrappedValue.dismiss()
                         }, label: {
                             Image("icon_arrow_back_white")
                                 .resizable()
@@ -157,7 +157,7 @@ struct TotalTargetAmountView: View {
         }
     }
 
-    func setOffset(offset: CGFloat) -> some View {
+    private func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
             if updateCount < 2 {
                 updateCount += 1
@@ -168,6 +168,16 @@ struct TotalTargetAmountView: View {
             adjustedOffset = offset - initialOffset
         }
         return EmptyView()
+    }
+
+    /// viewModel.targetAmounts의 개수에 따라 추가 높이를 계산하는 함수
+    private func calculateAdditionalHeight() -> CGFloat {
+        let count = viewModel.targetAmounts.count
+        if count >= 2 {
+            return CGFloat(min(count - 1, 5)) * 60 * DynamicSizeFactor.factor()
+        } else {
+            return 0
+        }
     }
 }
 

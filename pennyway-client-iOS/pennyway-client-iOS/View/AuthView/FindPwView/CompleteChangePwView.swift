@@ -3,10 +3,9 @@ import SwiftUI
 
 struct CompleteChangePwView: View {
     @EnvironmentObject var authViewModel: AppViewModel
-
-    @Binding var firstNaviLinkActive: Bool
-    @State private var navigateView = false
     let entryPoint: PasswordChangeTypeNavigation
+
+    @State var navigateToRootView = false
 
     var body: some View {
         VStack {
@@ -17,18 +16,17 @@ struct CompleteChangePwView: View {
                 )
             }
             CustomBottomButton(action: {
-                firstNaviLinkActive = false
-                NavigationUtil.popToRootView()
-
-                if entryPoint == .modifyPw {
-                    navigateView = true
+                if entryPoint == .findPw {
+                    NavigationUtil.popToRootView()
+                } else {
+                    navigateToRootView = true
                 }
+
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-            NavigationLink(destination: ProfileMainView(), isActive: $navigateView) {
-                EmptyView()
-            }.hidden()
+            NavigationLink(destination: ProfileMainView(), isActive: $navigateToRootView) {}
+                .hidden()
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarBackButtonHidden(true)

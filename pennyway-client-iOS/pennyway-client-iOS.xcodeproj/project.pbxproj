@@ -121,9 +121,6 @@
 		4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5789982BDC2A1100AFEB26 /* UnprocessableContentError.swift */; };
 		4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */; };
 		4A5DA8C12C3C498D00685F77 /* FcmTokenDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */; };
-		4A5E6A6E2C78CFAF00389C98 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A6A2C78CFAE00389C98 /* Debug.xcconfig */; };
-		4A5E6A6F2C78CFAF00389C98 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A6B2C78CFAE00389C98 /* Release.xcconfig */; };
-		4A5E6A702C78CFAF00389C98 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A5E6A6C2C78CFAE00389C98 /* Secrets.xcconfig */; };
 		4A60F64C2C595E4700805F2C /* CustomCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60F64B2C595E4700805F2C /* CustomCompleteView.swift */; };
 		4A60F64E2C595F6A00805F2C /* CompleteDeleteUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60F64D2C595F6A00805F2C /* CompleteDeleteUserView.swift */; };
 		4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A641A142C0F98380041B053 /* TotalTargetAmountViewModel.swift */; };
@@ -142,6 +139,7 @@
 		4A6C79E42C46DE8B009463E4 /* VerificationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E32C46DE8B009463E4 /* VerificationButton.swift */; };
 		4A6C79E62C46DEA7009463E4 /* ErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E52C46DEA7009463E4 /* ErrorText.swift */; };
 		4A6C79E82C46DFBE009463E4 /* CodeInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C79E72C46DFBE009463E4 /* CodeInputField.swift */; };
+		4A6CC1E02C80E3F600D638B2 /* ScreenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6CC1DF2C80E3F600D638B2 /* ScreenUtil.swift */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
 		4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7514D62C51713F00573671 /* PhoneViewModelHandlers.swift */; };
@@ -222,6 +220,9 @@
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
 		4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */; };
 		4AD5733C2C5B973C00A4E192 /* PastSpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD5733B2C5B973C00A4E192 /* PastSpendingListView.swift */; };
+		4AD69F872C7A13B000A62AAB /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AD69F832C7A13B000A62AAB /* Debug.xcconfig */; };
+		4AD69F882C7A13B000A62AAB /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AD69F842C7A13B000A62AAB /* Release.xcconfig */; };
+		4AD69F892C7A13B000A62AAB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AD69F852C7A13B000A62AAB /* Secrets.xcconfig */; };
 		4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */; };
 		4AD70E222BE013C10058A52A /* ProfileMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E212BE013C10058A52A /* ProfileMainView.swift */; };
 		4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */; };
@@ -292,9 +293,6 @@
 		D85927FA2BE9116700653391 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F52BE9116700653391 /* LoginViewModel.swift */; };
 		D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */; };
 		D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F72BE9116700653391 /* TermsAndConditionsViewModel.swift */; };
-		D85ABDE62C78DA1500FD152A /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D85ABDE22C78DA1500FD152A /* Debug.xcconfig */; };
-		D85ABDE72C78DA1500FD152A /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D85ABDE32C78DA1500FD152A /* Release.xcconfig */; };
-		D85ABDE82C78DA1500FD152A /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D85ABDE42C78DA1500FD152A /* Secrets.xcconfig */; };
 		D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773032C76C90700C68728 /* PrivatePolicy.swift */; };
 		D86773062C76CA0100C68728 /* KeyboardHandlerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773052C76CA0100C68728 /* KeyboardHandlerManager.swift */; };
 		D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D874F52A2C32888E00936886 /* DetailSpendingView.swift */; };
@@ -456,9 +454,6 @@
 		4A5789982BDC2A1100AFEB26 /* UnprocessableContentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnprocessableContentError.swift; sourceTree = "<group>"; };
 		4A57899A2BDC2A2500AFEB26 /* InternalServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalServerError.swift; sourceTree = "<group>"; };
 		4A5DA8C02C3C498D00685F77 /* FcmTokenDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FcmTokenDto.swift; sourceTree = "<group>"; };
-		4A5E6A6A2C78CFAE00389C98 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4A5E6A6B2C78CFAE00389C98 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4A5E6A6C2C78CFAE00389C98 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A60F64B2C595E4700805F2C /* CustomCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCompleteView.swift; sourceTree = "<group>"; };
 		4A60F64D2C595F6A00805F2C /* CompleteDeleteUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteDeleteUserView.swift; sourceTree = "<group>"; };
 		4A641A142C0F98380041B053 /* TotalTargetAmountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTargetAmountViewModel.swift; sourceTree = "<group>"; };
@@ -477,6 +472,7 @@
 		4A6C79E32C46DE8B009463E4 /* VerificationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationButton.swift; sourceTree = "<group>"; };
 		4A6C79E52C46DEA7009463E4 /* ErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorText.swift; sourceTree = "<group>"; };
 		4A6C79E72C46DFBE009463E4 /* CodeInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputField.swift; sourceTree = "<group>"; };
+		4A6CC1DF2C80E3F600D638B2 /* ScreenUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtil.swift; sourceTree = "<group>"; };
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -558,6 +554,9 @@
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
 		4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryViewModel.swift; sourceTree = "<group>"; };
 		4AD5733B2C5B973C00A4E192 /* PastSpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSpendingListView.swift; sourceTree = "<group>"; };
+		4AD69F832C7A13B000A62AAB /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4AD69F842C7A13B000A62AAB /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4AD69F852C7A13B000A62AAB /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		4AD70E212BE013C10058A52A /* ProfileMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainView.swift; sourceTree = "<group>"; };
 		4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
@@ -625,9 +624,6 @@
 		D85927F52BE9116700653391 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNavigationViewModel.swift; sourceTree = "<group>"; };
 		D85927F72BE9116700653391 /* TermsAndConditionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModel.swift; sourceTree = "<group>"; };
-		D85ABDE22C78DA1500FD152A /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		D85ABDE32C78DA1500FD152A /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		D85ABDE42C78DA1500FD152A /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		D86773032C76C90700C68728 /* PrivatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatePolicy.swift; sourceTree = "<group>"; };
 		D86773052C76CA0100C68728 /* KeyboardHandlerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerManager.swift; sourceTree = "<group>"; };
 		D874F52A2C32888E00936886 /* DetailSpendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpendingView.swift; sourceTree = "<group>"; };
@@ -1293,16 +1289,6 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
-		4A5E6A6D2C78CFAE00389C98 /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				4A5E6A6A2C78CFAE00389C98 /* Debug.xcconfig */,
-				4A5E6A6B2C78CFAE00389C98 /* Release.xcconfig */,
-				4A5E6A6C2C78CFAE00389C98 /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
-			sourceTree = "<group>";
-		};
 		4A6C79D02C4630A9009463E4 /* EditProfileView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1389,7 +1375,7 @@
 			isa = PBXGroup;
 			children = (
 				4AFF0C832C6A6B770040B192 /* GoogleService-Info.plist */,
-				D85ABDE52C78DA1500FD152A /* Xcconfig */,
+				4AD69F862C7A13B000A62AAB /* Xcconfig */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
@@ -1573,6 +1559,7 @@
 				4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */,
 				4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */,
 				D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */,
+				4A6CC1DF2C80E3F600D638B2 /* ScreenUtil.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1693,6 +1680,16 @@
 				4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4AD69F862C7A13B000A62AAB /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				4AD69F832C7A13B000A62AAB /* Debug.xcconfig */,
+				4AD69F842C7A13B000A62AAB /* Release.xcconfig */,
+				4AD69F852C7A13B000A62AAB /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
 			sourceTree = "<group>";
 		};
 		4AD70E192BE010430058A52A /* AuthView */ = {
@@ -1966,17 +1963,6 @@
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
-		D85ABDE52C78DA1500FD152A /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				D85ABDE22C78DA1500FD152A /* Debug.xcconfig */,
-				D85ABDE32C78DA1500FD152A /* Release.xcconfig */,
-				D85ABDE42C78DA1500FD152A /* Secrets.xcconfig */,
-			);
-			name = Xcconfig;
-			path = ../../../../Downloads/Xcconfig;
-			sourceTree = "<group>";
-		};
 		D874F5292C32881400936886 /* DetailSpendingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2102,12 +2088,12 @@
 				4AFF0C842C6A6B770040B192 /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				D85ABDE62C78DA1500FD152A /* Debug.xcconfig in Resources */,
+				4AD69F872C7A13B000A62AAB /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				D85ABDE82C78DA1500FD152A /* Secrets.xcconfig in Resources */,
+				4AD69F892C7A13B000A62AAB /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				D85ABDE72C78DA1500FD152A /* Release.xcconfig in Resources */,
+				4AD69F882C7A13B000A62AAB /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2403,6 +2389,7 @@
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4AC320472C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift in Sources */,
+				4A6CC1E02C80E3F600D638B2 /* ScreenUtil.swift in Sources */,
 				B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */,
 				4A69C14A2BE2CF6700A27B82 /* UserDefaultsHelper.swift in Sources */,
 				B599E4CD2C59067C006051E9 /* FirebaseAnalyticsService.swift in Sources */,
@@ -2618,7 +2605,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D85ABDE22C78DA1500FD152A /* Debug.xcconfig */;
+			baseConfigurationReference = 4AD69F832C7A13B000A62AAB /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2660,7 +2647,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D85ABDE32C78DA1500FD152A /* Release.xcconfig */;
+			baseConfigurationReference = 4AD69F842C7A13B000A62AAB /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

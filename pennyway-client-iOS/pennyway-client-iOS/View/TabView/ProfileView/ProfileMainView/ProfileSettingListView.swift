@@ -6,8 +6,6 @@ import SwiftUI
 struct ProfileSettingListView: View {
     @Binding var showLogoutPopUp: Bool
     @Binding var showDeleteUserPopUp: Bool
-    @State var firstNaviLinkActive = true
-
     @State private var activeNavigation: ProfileActiveNavigation?
 
     var body: some View {
@@ -65,8 +63,6 @@ struct ProfileSettingListView: View {
 
             navigationLinks
         }
-        .setTabBarVisibility(isHidden: true)
-        .navigationBarColor(UIColor(named: "White01"), title: "")
     }
 
     @ViewBuilder
@@ -90,7 +86,7 @@ struct ProfileSettingListView: View {
         case .editProfile:
             EditProfileListView()
         case .modifyPw:
-            ProfileModifyPwView(firstNaviLinkActive: $firstNaviLinkActive, entryPoint: .modifyPw)
+            ProfileModifyPwView(entryPoint: .modifyPw)
         }
     }
 }
