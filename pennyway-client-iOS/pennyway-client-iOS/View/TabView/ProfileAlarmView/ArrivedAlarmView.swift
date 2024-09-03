@@ -69,7 +69,8 @@ struct AlarmRow: View {
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray04"))
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 14 * DynamicSizeFactor.factor())
 
             Spacer()
         }
