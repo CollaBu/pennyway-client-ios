@@ -220,9 +220,6 @@
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
 		4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */; };
 		4AD5733C2C5B973C00A4E192 /* PastSpendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD5733B2C5B973C00A4E192 /* PastSpendingListView.swift */; };
-		4AD69F872C7A13B000A62AAB /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AD69F832C7A13B000A62AAB /* Debug.xcconfig */; };
-		4AD69F882C7A13B000A62AAB /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AD69F842C7A13B000A62AAB /* Release.xcconfig */; };
-		4AD69F892C7A13B000A62AAB /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AD69F852C7A13B000A62AAB /* Secrets.xcconfig */; };
 		4AD70E1B2BE0109D0058A52A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */; };
 		4AD70E222BE013C10058A52A /* ProfileMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E212BE013C10058A52A /* ProfileMainView.swift */; };
 		4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */; };
@@ -266,6 +263,9 @@
 		D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809412D2BF276460015CFF9 /* ResetPwFormView.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D81526942C86C45F00C16A2A /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D81526902C86C45F00C16A2A /* Debug.xcconfig */; };
+		D81526952C86C45F00C16A2A /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D81526912C86C45F00C16A2A /* Release.xcconfig */; };
+		D81526962C86C45F00C16A2A /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D81526922C86C45F00C16A2A /* Secrets.xcconfig */; };
 		D8157E642BBEF2040083844B /* InputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E632BBEF2040083844B /* InputFormView.swift */; };
 		D8157E662BBEF2740083844B /* OAuthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E652BBEF2740083844B /* OAuthButtonView.swift */; };
 		D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E672BBEF4400083844B /* AdditionalOptionView.swift */; };
@@ -554,9 +554,6 @@
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
 		4AD0D8492BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingHistoryViewModel.swift; sourceTree = "<group>"; };
 		4AD5733B2C5B973C00A4E192 /* PastSpendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSpendingListView.swift; sourceTree = "<group>"; };
-		4AD69F832C7A13B000A62AAB /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4AD69F842C7A13B000A62AAB /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4AD69F852C7A13B000A62AAB /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4AD70E1A2BE0109D0058A52A /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		4AD70E212BE013C10058A52A /* ProfileMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainView.swift; sourceTree = "<group>"; };
 		4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserInfoView.swift; sourceTree = "<group>"; };
@@ -599,6 +596,9 @@
 		B599E4DD2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryAnalyticsEvents.swift; sourceTree = "<group>"; };
 		D809412D2BF276460015CFF9 /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
+		D81526902C86C45F00C16A2A /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D81526912C86C45F00C16A2A /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		D81526922C86C45F00C16A2A /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		D8157E632BBEF2040083844B /* InputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormView.swift; sourceTree = "<group>"; };
 		D8157E652BBEF2740083844B /* OAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthButtonView.swift; sourceTree = "<group>"; };
 		D8157E672BBEF4400083844B /* AdditionalOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOptionView.swift; sourceTree = "<group>"; };
@@ -1375,7 +1375,7 @@
 			isa = PBXGroup;
 			children = (
 				4AFF0C832C6A6B770040B192 /* GoogleService-Info.plist */,
-				4AD69F862C7A13B000A62AAB /* Xcconfig */,
+				D81526932C86C45F00C16A2A /* Xcconfig */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
 				4A1179B32BA958ED00A9CF4C /* Info.plist */,
@@ -1682,16 +1682,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4AD69F862C7A13B000A62AAB /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				4AD69F832C7A13B000A62AAB /* Debug.xcconfig */,
-				4AD69F842C7A13B000A62AAB /* Release.xcconfig */,
-				4AD69F852C7A13B000A62AAB /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
-			sourceTree = "<group>";
-		};
 		4AD70E192BE010430058A52A /* AuthView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1910,6 +1900,16 @@
 			path = Event;
 			sourceTree = "<group>";
 		};
+		D81526932C86C45F00C16A2A /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				D81526902C86C45F00C16A2A /* Debug.xcconfig */,
+				D81526912C86C45F00C16A2A /* Release.xcconfig */,
+				D81526922C86C45F00C16A2A /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
+			sourceTree = "<group>";
+		};
 		D8180BFE2BE507D200F837FB /* FindIdView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2088,12 +2088,12 @@
 				4AFF0C842C6A6B770040B192 /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				4AD69F872C7A13B000A62AAB /* Debug.xcconfig in Resources */,
+				D81526942C86C45F00C16A2A /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				4AD69F892C7A13B000A62AAB /* Secrets.xcconfig in Resources */,
+				D81526962C86C45F00C16A2A /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				4AD69F882C7A13B000A62AAB /* Release.xcconfig in Resources */,
+				D81526952C86C45F00C16A2A /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2605,7 +2605,6 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AD69F832C7A13B000A62AAB /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2647,7 +2646,6 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AD69F842C7A13B000A62AAB /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
