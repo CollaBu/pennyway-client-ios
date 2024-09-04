@@ -31,7 +31,7 @@ struct NoSpendingHistorySheetView: View {
 
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
                         
-                    Text("절약왕이 될 상이에요!\n친구들에게 자랑해 볼까요?")
+                    Text("\(getUserData()!.name)님은 절약왕이 될 상이에요!\n친구들에게 자랑해 볼까요?")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray05"))
                         .lineSpacing(5)
