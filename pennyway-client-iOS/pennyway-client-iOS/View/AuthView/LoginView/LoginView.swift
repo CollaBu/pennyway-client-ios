@@ -13,7 +13,7 @@ struct LoginView: View {
 
                     AdditionalOptionView()
                 }
-                .padding(.bottom, 60 * DynamicSizeFactor.factor())
+                .padding(.bottom, 70 * DynamicSizeFactor.factor())
 
                 VStack {
                     Spacer()
