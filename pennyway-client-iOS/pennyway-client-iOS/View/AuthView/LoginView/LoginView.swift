@@ -7,16 +7,14 @@ struct LoginView: View {
         NavigationAvailable {
             ZStack {
                 VStack {
-                    ScrollView {
-                        InputFormView(loginViewModel: loginViewModel) // Id, Pw 입력 폼
+                    InputFormView(loginViewModel: loginViewModel) // Id, Pw 입력 폼
 
-                        LoginOAuthButtonView()
+                    LoginOAuthButtonView()
 
-                        Spacer().frame(height: 3 * DynamicSizeFactor.factor())
-
-                        AdditionalOptionView()
-                    }
+                    AdditionalOptionView()
                 }
+                .padding(.bottom, 70 * DynamicSizeFactor.factor())
+
                 VStack {
                     Spacer()
                     Button(action: {
