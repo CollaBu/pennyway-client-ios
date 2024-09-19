@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - UserProfileViewModelInput
 
@@ -29,13 +30,17 @@ protocol UserProfileViewModel: UserProfileViewModelInput, UserProfileViewModelOu
 class DefaultUserProfileViewModel: UserProfileViewModel {
     var userData: Observable<UserProfileItemModel>
 
-    private let fetchUserProfileUseCase: FetchUserProfileUseCase//유저 정보 조회
-    //presingned url
-    //profileIamge
-    //deleteProfileImage 
+    private let fetchUserProfileUseCase: FetchUserProfileUseCase
+    private let generatePresignedUrlUseCase: GeneratePresignedUrlUseCase
+    private let storePresignedUrlUseCase: StorePresignedUrlUseCase
 
-    init(fetchUserProfileUseCase: FetchUserProfileUseCase) {
+    init(fetchUserProfileUseCase: FetchUserProfileUseCase,
+         generatePresignedUrlUseCase: GeneratePresignedUrlUseCase,
+         storePresignedUrlUseCase: StorePresignedUrlUseCase)
+    {
         self.fetchUserProfileUseCase = fetchUserProfileUseCase
+        self.generatePresignedUrlUseCase = generatePresignedUrlUseCase
+        self.storePresignedUrlUseCase = storePresignedUrlUseCase
         userData = Observable(UserProfileItemModel(
             username: "",
             name: "기본"
@@ -54,6 +59,31 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
     private func updateName(_ newName: String) {
         Log.debug("Updated name to \(newName)")
         Log.debug("Updated \(userData.value)")
+    }
+
+    /// 프로필 이미지를 업로드하는 메서드
+    func uploadProfileImage(image: UIImage) {
+        let presignedUrlModel = PresignedUrlTypeModel(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue)
+
+        // Presigned URL 생성
+        generatePresignedUrlUseCase.execute(model: presignedUrlModel) { [weak self] result in
+            switch result {
+            case let .success(presignedUrl):
+                Log.debug("Presigned URL 생성 성공: \(presignedUrl.presignedUrl)")
+
+                // Presigned URL을 사용하여 이미지 업로드
+                self?.storePresignedUrlUseCase.execute(payload: presignedUrl.presignedUrl, image: image) { result in
+                    switch result {
+                    case .success:
+                        Log.debug("이미지 업로드 성공")
+                    case let .failure(error):
+                        Log.error("이미지 업로드 실패: \(error)")
+                    }
+                }
+            case let .failure(error):
+                Log.error("Presigned URL 생성 실패: \(error)")
+            }
+        }
     }
 }
 

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class DefaultPresignedUrlRepository: PresignedUrlProtocol {
-    
     func generatePresignedUrl(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void) {
         // Model을 DTO로 변환
         let requestDto = model.toDto()
@@ -17,7 +16,7 @@ class DefaultPresignedUrlRepository: PresignedUrlProtocol {
         // DTO로 API 호출 (예시)
         ObjectStorageAlamofire.shared.generatePresignedUrl(requestDto) { result in
             switch result {
-            case .success(let data):
+            case let .success(data):
                 if let responseData = data {
                     do {
                         // Data를 GeneratePresignedUrlResponseDto로 디코딩
@@ -27,25 +26,25 @@ class DefaultPresignedUrlRepository: PresignedUrlProtocol {
                         let presignedUrlModel = PresignedUrlModel(presignedUrl: responseDto.presignedUrl)
                         completion(.success(presignedUrlModel))
                     } catch {
-                        completion(.failure(error)) // 디코딩 실패 시 에러 처리
+                        completion(.failure(error))
                     }
                 }
                 
-            case .failure(let error):
+            case let .failure(error):
                 completion(.failure(error))
             }
         }
     }
 
-
     func storePresignedUrl(payload: String, image: UIImage, presignedUrl: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        // presignedUrl에서 필요한 데이터를 추출하여 StorePresignedUrlRequestDto로 변환
         let storePresignedUrlRequestDto = createStorePresignedUrlRequestDto(from: presignedUrl)
         
         ObjectStorageAlamofire.shared.storePresignedUrl(payload, image, storePresignedUrlRequestDto) { result in
             switch result {
             case .success:
                 completion(.success(()))
-            case .failure(let error):
+            case let .failure(error):
                 completion(.failure(error))
             }
         }
@@ -59,10 +58,13 @@ class DefaultPresignedUrlRepository: PresignedUrlProtocol {
         var expires = ""
         var signature = ""
         
+        // presignedUrl에서 '?' 이후의 쿼리 문자열을 추출
         if let range = presignedUrl.range(of: "?") {
             let query = String(presignedUrl[range.upperBound...])
+            // '&'로 구분된 각 쿼리 파라미터를 추출
             let queryItems = query.split(separator: "&")
             
+            // 각 쿼리 파라미터를 키-값 쌍으로 분리
             for item in queryItems {
                 let pair = item.split(separator: "=")
                 if pair.count == 2 {

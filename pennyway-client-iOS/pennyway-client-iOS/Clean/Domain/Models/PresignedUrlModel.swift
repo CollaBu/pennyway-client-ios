@@ -7,9 +7,13 @@
 
 import Foundation
 
+// MARK: - PresignedUrlModel
+
 struct PresignedUrlModel {
     let presignedUrl: String
 }
+
+// MARK: - PresignedUrlTypeModel
 
 struct PresignedUrlTypeModel {
     let type: String
@@ -19,8 +23,8 @@ struct PresignedUrlTypeModel {
 extension PresignedUrlTypeModel {
     func toDto() -> GeneratePresigendUrlRequestDto {
         return GeneratePresigendUrlRequestDto(
-            type: self.type,
-            ext: self.ext
+            type: type,
+            ext: ext
         )
     }
 }

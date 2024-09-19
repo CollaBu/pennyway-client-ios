@@ -17,32 +17,48 @@ final class ProfileSceneDIContainer {
 //    init(dependencies: Dependencies) {
 //        self.dependencies = dependencies
 //    }
-    
+
     // MARK: - Factory
 
     func makeProfileFactory() -> DefaultProfileFactory { // DefaultProfileFactory를 생성하여 반환
         let viewModelWrapper = makeUserProfileViewModelWrapper()
         return DefaultProfileFactory(userProfileViewModelWrapper: viewModelWrapper)
     }
-    
+
     // MARK: - Use Cases
 
     private func makeProfileUseCase() -> FetchUserProfileUseCase {
         DefaultFetchUserProfileUseCase(repository: makeProfileRepository())
     }
-    
+
+    private func makeGeneratePresignedUrlUseCase() -> GeneratePresignedUrlUseCase {
+        DefaultGeneratePresignedUrlUseCase(repository: makePresignedUrlRepository())
+    }
+
+    private func makeStorePresignedUrlUseCase() -> StorePresignedUrlUseCase {
+        DefaultStorePresignedUrlUseCase(repository: makePresignedUrlRepository())
+    }
+
     // MARK: - Repository
 
     private func makeProfileRepository() -> FetchUserProfileProtocol {
         DefaultUserProfileRepository()
     }
-    
+
+    private func makePresignedUrlRepository() -> PresignedUrlProtocol {
+        DefaultPresignedUrlRepository()
+    }
+
     // MARK: - View Model
 
     private func makeProfileViewModel() -> any UserProfileViewModel {
-        DefaultUserProfileViewModel(fetchUserProfileUseCase: makeProfileUseCase())
+        DefaultUserProfileViewModel(
+            fetchUserProfileUseCase: makeProfileUseCase(),
+            generatePresignedUrlUseCase: makeGeneratePresignedUrlUseCase(),
+            storePresignedUrlUseCase: makeStorePresignedUrlUseCase()
+        )
     }
-    
+
     // MARK: - View Model Wrapper
 
     private func makeUserProfileViewModelWrapper() -> UserProfileViewModelWrapper {
