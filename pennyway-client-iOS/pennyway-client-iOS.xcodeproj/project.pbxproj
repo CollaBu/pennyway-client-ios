@@ -187,7 +187,7 @@
 		4AABDBB42C9C860800E9436D /* PresignedUrlUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */; };
 		4AABDBB62C9C86F000E9436D /* PresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB52C9C86F000E9436D /* PresignedUrlRepository.swift */; };
 		4AABDBB82C9C87C300E9436D /* PresignedUrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB72C9C87C300E9436D /* PresignedUrlProtocol.swift */; };
-		4AABDBBA2C9C896A00E9436D /* StorePresignedUrlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB92C9C896A00E9436D /* StorePresignedUrlModel.swift */; };
+		4AABDBBC2C9C8C2900E9436D /* PresignedUrlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBBB2C9C8C2900E9436D /* PresignedUrlModel.swift */; };
 		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
 		4AB0B13C2C4F497400A475F5 /* MapCategoryIconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */; };
 		4AB0B13E2C50256300A475F5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13D2C50256300A475F5 /* LoadingView.swift */; };
@@ -542,7 +542,7 @@
 		4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlUseCase.swift; sourceTree = "<group>"; };
 		4AABDBB52C9C86F000E9436D /* PresignedUrlRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlRepository.swift; sourceTree = "<group>"; };
 		4AABDBB72C9C87C300E9436D /* PresignedUrlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlProtocol.swift; sourceTree = "<group>"; };
-		4AABDBB92C9C896A00E9436D /* StorePresignedUrlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePresignedUrlModel.swift; sourceTree = "<group>"; };
+		4AABDBBB2C9C8C2900E9436D /* PresignedUrlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlModel.swift; sourceTree = "<group>"; };
 		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCategoryIconUtil.swift; sourceTree = "<group>"; };
 		4AB0B13D2C50256300A475F5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -1012,7 +1012,7 @@
 			children = (
 				4A12FEEC2C9C487800DE10BC /* UserModel.swift */,
 				4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */,
-				4AABDBB92C9C896A00E9436D /* StorePresignedUrlModel.swift */,
+				4AABDBBB2C9C8C2900E9436D /* PresignedUrlModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2521,6 +2521,7 @@
 				4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */,
 				4AD5733C2C5B973C00A4E192 /* PastSpendingListView.swift in Sources */,
 				D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */,
+				4AABDBBC2C9C8C2900E9436D /* PresignedUrlModel.swift in Sources */,
 				4A3701CF2C08F7F600F0AEBA /* AddSpendingHistoryRequestDto.swift in Sources */,
 				4AA13C692C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift in Sources */,
 				4AC320512C11D5AC00DDB4B6 /* SpendingCheckBoxView.swift in Sources */,
@@ -2557,7 +2558,6 @@
 				4AC320522C11D5AC00DDB4B6 /* SpendingManagementMainView.swift in Sources */,
 				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,
-				4AABDBBA2C9C896A00E9436D /* StorePresignedUrlModel.swift in Sources */,
 				D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */,
 				4A6C79E62C46DEA7009463E4 /* ErrorText.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,

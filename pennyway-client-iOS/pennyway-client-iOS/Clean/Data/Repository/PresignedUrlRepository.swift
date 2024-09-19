@@ -10,20 +10,27 @@ import UIKit
 
 class DefaultPresignedUrlRepository: PresignedUrlProtocol {
     
-    func generatePresignedUrl(requestDto: GeneratePresigendUrlRequestDto, completion: @escaping (Result<GeneratePresignedUrlResponseDto, Error>) -> Void) {
+    func generatePresignedUrl(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void) {
+        // Model을 DTO로 변환
+        let requestDto = model.toDto()
+        
+        // DTO로 API 호출 (예시)
         ObjectStorageAlamofire.shared.generatePresignedUrl(requestDto) { result in
             switch result {
             case .success(let data):
-                guard let responseData = data else {
-                    completion(.failure(NSError(domain: "Data is nil", code: -1, userInfo: nil)))
-                    return
+                if let responseData = data {
+                    do {
+                        // Data를 GeneratePresignedUrlResponseDto로 디코딩
+                        let responseDto = try JSONDecoder().decode(GeneratePresignedUrlResponseDto.self, from: responseData)
+                        
+                        // 응답 DTO를 Model로 변환
+                        let presignedUrlModel = PresignedUrlModel(presignedUrl: responseDto.presignedUrl)
+                        completion(.success(presignedUrlModel))
+                    } catch {
+                        completion(.failure(error)) // 디코딩 실패 시 에러 처리
+                    }
                 }
-                do {
-                    let decodedResponse = try JSONDecoder().decode(GeneratePresignedUrlResponseDto.self, from: responseData)
-                    completion(.success(decodedResponse))
-                } catch {
-                    completion(.failure(error))
-                }
+                
             case .failure(let error):
                 completion(.failure(error))
             }

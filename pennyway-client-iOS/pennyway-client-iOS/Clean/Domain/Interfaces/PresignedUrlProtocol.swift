@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 
 protocol PresignedUrlProtocol {
-    func generatePresignedUrl(requestDto: GeneratePresigendUrlRequestDto, completion: @escaping (Result<GeneratePresignedUrlResponseDto, Error>) -> Void)
+    func generatePresignedUrl(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void)
     func storePresignedUrl(payload: String, image: UIImage, presignedUrl: String, completion: @escaping (Result<Void, Error>) -> Void)
 }

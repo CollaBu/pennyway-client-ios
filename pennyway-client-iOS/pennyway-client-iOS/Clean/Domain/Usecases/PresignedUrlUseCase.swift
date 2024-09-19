@@ -11,7 +11,7 @@ import UIKit
 // MARK: - PresignedUrlUseCase
 
 protocol GeneratePresignedUrlUseCase {
-    func execute(completion: @escaping (Result<GeneratePresignedUrlResponseDto, Error>) -> Void)
+    func execute(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void)
 }
 
 class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
@@ -21,9 +21,16 @@ class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
         self.repository = repository
     }
 
-    func execute(completion: @escaping (Result<GeneratePresignedUrlResponseDto, Error>) -> Void) {
-        let requestDto = GeneratePresigendUrlRequestDto(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue)
-        repository.generatePresignedUrl(requestDto: requestDto, completion: completion)
+    func execute(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void) {
+        repository.generatePresignedUrl(model: model) { result in
+            switch result {
+            case .success(let presignedUrlModel):
+                completion(.success(presignedUrlModel))
+
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }
 
