@@ -184,6 +184,10 @@
 		4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C6A2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AA969752C6D2B8F00CA889C /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA969742C6D2B8F00CA889C /* NotificationName.swift */; };
+		4AABDBB42C9C860800E9436D /* PresignedUrlUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */; };
+		4AABDBB62C9C86F000E9436D /* PresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB52C9C86F000E9436D /* PresignedUrlRepository.swift */; };
+		4AABDBB82C9C87C300E9436D /* PresignedUrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB72C9C87C300E9436D /* PresignedUrlProtocol.swift */; };
+		4AABDBBA2C9C896A00E9436D /* StorePresignedUrlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB92C9C896A00E9436D /* StorePresignedUrlModel.swift */; };
 		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
 		4AB0B13C2C4F497400A475F5 /* MapCategoryIconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */; };
 		4AB0B13E2C50256300A475F5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13D2C50256300A475F5 /* LoadingView.swift */; };
@@ -535,6 +539,10 @@
 		4AA13C6A2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePresignedUrlResponseDto.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AA969742C6D2B8F00CA889C /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlUseCase.swift; sourceTree = "<group>"; };
+		4AABDBB52C9C86F000E9436D /* PresignedUrlRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlRepository.swift; sourceTree = "<group>"; };
+		4AABDBB72C9C87C300E9436D /* PresignedUrlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlProtocol.swift; sourceTree = "<group>"; };
+		4AABDBB92C9C896A00E9436D /* StorePresignedUrlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePresignedUrlModel.swift; sourceTree = "<group>"; };
 		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCategoryIconUtil.swift; sourceTree = "<group>"; };
 		4AB0B13D2C50256300A475F5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -1004,6 +1012,7 @@
 			children = (
 				4A12FEEC2C9C487800DE10BC /* UserModel.swift */,
 				4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */,
+				4AABDBB92C9C896A00E9436D /* StorePresignedUrlModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1012,6 +1021,7 @@
 			isa = PBXGroup;
 			children = (
 				4A12FEF02C9C48B900DE10BC /* FetchUserProfileProtocol.swift */,
+				4AABDBB72C9C87C300E9436D /* PresignedUrlProtocol.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1020,6 +1030,7 @@
 			isa = PBXGroup;
 			children = (
 				4A12FEF22C9C48D500DE10BC /* FetchUserProfileUseCase.swift */,
+				4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
@@ -1028,6 +1039,7 @@
 			isa = PBXGroup;
 			children = (
 				4A12FEF82C9C49D500DE10BC /* DefaultUserProfileRepository.swift */,
+				4AABDBB52C9C86F000E9436D /* PresignedUrlRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2412,6 +2424,7 @@
 				B599E4C82C58EB74006051E9 /* SpendingAnalyticsEvents.swift in Sources */,
 				4AC320652C120C0D00DDB4B6 /* TargetAmountModel.swift in Sources */,
 				D851E7202C0273FA00316DB3 /* BackofficeRouter.swift in Sources */,
+				4AABDBB82C9C87C300E9436D /* PresignedUrlProtocol.swift in Sources */,
 				B599E4DA2C68A8E6006051E9 /* TokenRefreshHandler.swift in Sources */,
 				D85927FC2BE9116700653391 /* TermsAndConditionsViewModel.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
@@ -2463,6 +2476,7 @@
 				4A0FFBF92BCDA1F600EFEC56 /* LinkAccountToOAuthRequestDto.swift in Sources */,
 				4A1179A02BA9533D00A9CF4C /* FontExtensions.swift in Sources */,
 				D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */,
+				4AABDBB42C9C860800E9436D /* PresignedUrlUseCase.swift in Sources */,
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A12FF132C9C4BCF00DE10BC /* AppFlowCoordinator.swift in Sources */,
 				4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */,
@@ -2543,6 +2557,7 @@
 				4AC320522C11D5AC00DDB4B6 /* SpendingManagementMainView.swift in Sources */,
 				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,
+				4AABDBBA2C9C896A00E9436D /* StorePresignedUrlModel.swift in Sources */,
 				D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */,
 				4A6C79E62C46DEA7009463E4 /* ErrorText.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,
@@ -2566,6 +2581,7 @@
 				4AE8F3B62C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */,
+				4AABDBB62C9C86F000E9436D /* PresignedUrlRepository.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
