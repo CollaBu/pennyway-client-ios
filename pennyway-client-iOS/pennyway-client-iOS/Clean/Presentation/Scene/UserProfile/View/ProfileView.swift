@@ -1,8 +1,8 @@
 import SwiftUI
 
-// MARK: - ProfileMainView
+// MARK: - ProfileView
 
-struct ProfileMainView: View {
+struct ProfileView: View {
     @State private var isSelectedToolBar = false
     @State private var navigateToEditUsername = false
     @State private var showPopUpView = false
@@ -12,7 +12,6 @@ struct ProfileMainView: View {
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
     @StateObject var deleteProfileImageViewModel = DeleteProfileImageViewModel()
-
     @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
@@ -22,6 +21,8 @@ struct ProfileMainView: View {
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
     @State private var updateCount = 0 // 업데이트 횟수를 추적하는 변수
+
+    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
 
     var body: some View {
         NavigationAvailable {
@@ -88,6 +89,7 @@ struct ProfileMainView: View {
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType,
                         imageUrl: $imageUrl,
+                        deleteProfileImageViewModel: deleteProfileImageViewModel,
                         presignedUrlViewModel: presignedUrlViewModel
                     )
                     .edgesIgnoringSafeArea(.bottom)
@@ -189,6 +191,20 @@ struct ProfileNavigationState: Equatable {
     }
 }
 
-#Preview {
-    ProfileMainView()
+// MARK: - UserProfileViewModelWrapper
+
+/// `DefaultUserProfileViewModel`의 `userData` 변화를 관찰하여 UI가 자동으로 업데이트되도록 하는 클래스
+final class UserProfileViewModelWrapper: ObservableObject {
+    @Published var userData: UserProfileItemModel
+    var viewModel: any UserProfileViewModel
+
+    init(viewModel: any UserProfileViewModel) {
+        self.viewModel = viewModel
+        userData = viewModel.userData.value
+
+        // Observable을 통해 userData 변화를 감지하고 업데이트
+        viewModel.userData.observe(on: self) { [weak self] newUserData in
+            self?.userData = newUserData
+        }
+    }
 }
