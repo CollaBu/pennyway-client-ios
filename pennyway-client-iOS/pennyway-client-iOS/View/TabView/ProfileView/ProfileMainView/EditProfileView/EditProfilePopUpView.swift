@@ -11,7 +11,7 @@ struct EditProfilePopUpView: View {
     @Binding var sourceType: UIImagePickerController.SourceType
     @Binding var imageUrl: String
 
-    @StateObject var deleteProfileImageViewModel = DeleteProfileImageViewModel()
+    @ObservedObject var deleteProfileImageViewModel: DeleteProfileImageViewModel
     @ObservedObject var presignedUrlViewModel: PresignedUrlViewModel
 
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]

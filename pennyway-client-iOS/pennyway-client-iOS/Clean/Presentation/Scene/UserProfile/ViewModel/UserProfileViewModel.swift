@@ -29,7 +29,10 @@ protocol UserProfileViewModel: UserProfileViewModelInput, UserProfileViewModelOu
 class DefaultUserProfileViewModel: UserProfileViewModel {
     var userData: Observable<UserProfileItemModel>
 
-    private let fetchUserProfileUseCase: FetchUserProfileUseCase
+    private let fetchUserProfileUseCase: FetchUserProfileUseCase//유저 정보 조회
+    //presingned url
+    //profileIamge
+    //deleteProfileImage 
 
     init(fetchUserProfileUseCase: FetchUserProfileUseCase) {
         self.fetchUserProfileUseCase = fetchUserProfileUseCase

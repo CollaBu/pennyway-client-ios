@@ -12,7 +12,6 @@ struct ProfileView: View {
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
     @StateObject var deleteProfileImageViewModel = DeleteProfileImageViewModel()
-
     @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
@@ -90,6 +89,7 @@ struct ProfileView: View {
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType,
                         imageUrl: $imageUrl,
+                        deleteProfileImageViewModel: deleteProfileImageViewModel,
                         presignedUrlViewModel: presignedUrlViewModel
                     )
                     .edgesIgnoringSafeArea(.bottom)
