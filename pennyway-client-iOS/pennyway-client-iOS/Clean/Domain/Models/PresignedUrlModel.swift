@@ -19,12 +19,3 @@ struct PresignedUrlTypeModel {
     let type: String
     let ext: String
 }
-
-extension PresignedUrlTypeModel {
-    func toDto() -> GeneratePresigendUrlRequestDto {
-        return GeneratePresigendUrlRequestDto(
-            type: type,
-            ext: ext
-        )
-    }
-}
