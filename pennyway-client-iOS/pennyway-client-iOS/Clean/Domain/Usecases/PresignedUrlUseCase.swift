@@ -30,15 +30,16 @@ class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
     ///   - model: Presigned URL을 생성하기 위한 요청 모델
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
     func execute(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void) {
-        repository.generatePresignedUrl(model: model) { result in
-            switch result {
-            case let .success(presignedUrlModel):
-                completion(.success(presignedUrlModel))
-
-            case let .failure(error):
-                completion(.failure(error))
-            }
-        }
+        repository.generatePresignedUrl(model: model, completion: completion)
+//        { result in
+//            switch result {
+//            case let .success(presignedUrlModel):
+//                completion(.success(presignedUrlModel))
+//
+//            case let .failure(error):
+//                completion(.failure(error))
+//            }
+//        }
     }
 }
 

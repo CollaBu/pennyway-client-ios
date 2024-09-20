@@ -9,7 +9,7 @@ class PresignedUrlViewModel: ObservableObject {
     /// presigned url 발급
     func generatePresignedUrlApi(completion: @escaping (Bool) -> Void) {
         let generatePresigendUrlRequestDto = GeneratePresigendUrlRequestDto.from(model: PresignedUrlTypeModel(type: ImageType.profile.rawValue, ext: Ext.jpeg
-            .rawValue))
+                .rawValue))
 
         ObjectStorageAlamofire.shared.generatePresignedUrl(generatePresigendUrlRequestDto) { result in
             switch result {

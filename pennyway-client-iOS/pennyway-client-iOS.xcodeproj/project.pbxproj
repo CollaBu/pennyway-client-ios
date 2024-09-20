@@ -185,7 +185,7 @@
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AA969752C6D2B8F00CA889C /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA969742C6D2B8F00CA889C /* NotificationName.swift */; };
 		4AABDBB42C9C860800E9436D /* PresignedUrlUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */; };
-		4AABDBB62C9C86F000E9436D /* PresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB52C9C86F000E9436D /* PresignedUrlRepository.swift */; };
+		4AABDBB62C9C86F000E9436D /* DefaultPresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB52C9C86F000E9436D /* DefaultPresignedUrlRepository.swift */; };
 		4AABDBB82C9C87C300E9436D /* PresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB72C9C87C300E9436D /* PresignedUrlRepository.swift */; };
 		4AABDBBC2C9C8C2900E9436D /* PresignedUrlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBBB2C9C8C2900E9436D /* PresignedUrlModel.swift */; };
 		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
@@ -540,7 +540,7 @@
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AA969742C6D2B8F00CA889C /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlUseCase.swift; sourceTree = "<group>"; };
-		4AABDBB52C9C86F000E9436D /* PresignedUrlRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlRepository.swift; sourceTree = "<group>"; };
+		4AABDBB52C9C86F000E9436D /* DefaultPresignedUrlRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPresignedUrlRepository.swift; sourceTree = "<group>"; };
 		4AABDBB72C9C87C300E9436D /* PresignedUrlRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlRepository.swift; sourceTree = "<group>"; };
 		4AABDBBB2C9C8C2900E9436D /* PresignedUrlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlModel.swift; sourceTree = "<group>"; };
 		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
@@ -1039,7 +1039,7 @@
 			isa = PBXGroup;
 			children = (
 				4A12FEF82C9C49D500DE10BC /* DefaultUserProfileRepository.swift */,
-				4AABDBB52C9C86F000E9436D /* PresignedUrlRepository.swift */,
+				4AABDBB52C9C86F000E9436D /* DefaultPresignedUrlRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2581,7 +2581,7 @@
 				4AE8F3B62C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */,
-				4AABDBB62C9C86F000E9436D /* PresignedUrlRepository.swift in Sources */,
+				4AABDBB62C9C86F000E9436D /* DefaultPresignedUrlRepository.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
