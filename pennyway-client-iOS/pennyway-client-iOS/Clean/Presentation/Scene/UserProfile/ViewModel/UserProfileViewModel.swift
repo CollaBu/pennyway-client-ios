@@ -13,6 +13,7 @@ import UIKit
 protocol UserProfileViewModelInput {
     func viewDidLoad()
     func updateData(_ newName: String)
+    func uploadPresignedUrl(_ image: UIImage)
 }
 
 // MARK: - UserProfileViewModelOutput
@@ -62,7 +63,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
     }
 
     /// 프로필 이미지를 업로드하는 메서드
-    func uploadProfileImage(image: UIImage) {
+    private func uploadPresignedUrl(image: UIImage) {
         let presignedUrlModel = PresignedUrlTypeModel(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue)
 
         // Presigned URL 생성
@@ -96,5 +97,9 @@ extension DefaultUserProfileViewModel {
 
     func updateData(_ newName: String) {
         updateName(newName)
+    }
+
+    func uploadPresignedUrl(_ image: UIImage) {
+        uploadPresignedUrl(image: image)
     }
 }
