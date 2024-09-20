@@ -28,4 +28,8 @@ class DefaultUserProfileRepository: FetchUserProfileProtocol {
         // toModel()을 호출하여 UserModel로 변환 후 반환
         return profileResponseDTO.toModel()
     }
+
+    func deleteUserProfile() -> String {
+        return "" // 빈 문자열로 줘서 초기화
+    }
 }

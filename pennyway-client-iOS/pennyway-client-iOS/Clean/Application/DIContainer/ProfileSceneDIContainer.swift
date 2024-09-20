@@ -17,32 +17,32 @@ final class ProfileSceneDIContainer {
 //    init(dependencies: Dependencies) {
 //        self.dependencies = dependencies
 //    }
-    
+
     // MARK: - Factory
 
     func makeProfileFactory() -> DefaultProfileFactory { // DefaultProfileFactory를 생성하여 반환
         let viewModelWrapper = makeUserProfileViewModelWrapper()
         return DefaultProfileFactory(userProfileViewModelWrapper: viewModelWrapper)
     }
-    
+
     // MARK: - Use Cases
 
     private func makeProfileUseCase() -> FetchUserProfileUseCase {
         DefaultFetchUserProfileUseCase(repository: makeProfileRepository())
     }
-    
+
     // MARK: - Repository
 
     private func makeProfileRepository() -> FetchUserProfileProtocol {
         DefaultUserProfileRepository()
     }
-    
+
     // MARK: - View Model
 
     private func makeProfileViewModel() -> any UserProfileViewModel {
         DefaultUserProfileViewModel(fetchUserProfileUseCase: makeProfileUseCase())
     }
-    
+
     // MARK: - View Model Wrapper
 
     private func makeUserProfileViewModelWrapper() -> UserProfileViewModelWrapper {

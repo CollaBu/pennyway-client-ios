@@ -54,7 +54,7 @@ class ProfileImageViewModel: ObservableObject {
         return trimmedPath
     }
 
-    //userDefaults의 저장된 이미지 가저옴
+    /// userDefaults의 저장된 이미지 가저옴
     func loadImageUrl(from url: String) {
         guard let url = URL(string: url) else {
             return

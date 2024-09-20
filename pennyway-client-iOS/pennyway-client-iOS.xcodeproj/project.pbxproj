@@ -295,6 +295,9 @@
 		D81D5A832C16B68D008E5939 /* DateFormatterUtil .swift in Sources */ = {isa = PBXBuildFile; fileRef = D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */; };
 		D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */; };
 		D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */; };
+		D8359D4E2C9C7B2B00377E8A /* DeleteUserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8359D4D2C9C7B2B00377E8A /* DeleteUserProfileUseCase.swift */; };
+		D8359D502C9C83E700377E8A /* UpdateUserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8359D4F2C9C83E700377E8A /* UpdateUserProfileUseCase.swift */; };
+		D8359D522C9C84F800377E8A /* ProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8359D512C9C84F800377E8A /* ProfileImageRepository.swift */; };
 		D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A7882BEBABC700899AA3 /* FindPwContentView.swift */; };
 		D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */; };
 		D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */; };
@@ -642,6 +645,9 @@
 		D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatterUtil .swift"; sourceTree = "<group>"; };
 		D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUsernameView.swift; sourceTree = "<group>"; };
 		D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameRequestDto.swift; sourceTree = "<group>"; };
+		D8359D4D2C9C7B2B00377E8A /* DeleteUserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserProfileUseCase.swift; sourceTree = "<group>"; };
+		D8359D4F2C9C83E700377E8A /* UpdateUserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserProfileUseCase.swift; sourceTree = "<group>"; };
+		D8359D512C9C84F800377E8A /* ProfileImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageRepository.swift; sourceTree = "<group>"; };
 		D847A7882BEBABC700899AA3 /* FindPwContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwContentView.swift; sourceTree = "<group>"; };
 		D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwViewModel.swift; sourceTree = "<group>"; };
@@ -1020,6 +1026,8 @@
 			isa = PBXGroup;
 			children = (
 				4A12FEF22C9C48D500DE10BC /* FetchUserProfileUseCase.swift */,
+				D8359D4D2C9C7B2B00377E8A /* DeleteUserProfileUseCase.swift */,
+				D8359D4F2C9C83E700377E8A /* UpdateUserProfileUseCase.swift */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
@@ -1028,6 +1036,7 @@
 			isa = PBXGroup;
 			children = (
 				4A12FEF82C9C49D500DE10BC /* DefaultUserProfileRepository.swift */,
+				D8359D512C9C84F800377E8A /* ProfileImageRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2385,8 +2394,10 @@
 				4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */,
 				4A3701D12C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift in Sources */,
 				4A2882002C64CC5900AE50C7 /* CategoryDetailsView.swift in Sources */,
+				D8359D522C9C84F800377E8A /* ProfileImageRepository.swift in Sources */,
 				4A5789712BDC1ADC00AFEB26 /* UnauthorizedErrorCode.swift in Sources */,
 				4AA969752C6D2B8F00CA889C /* NotificationName.swift in Sources */,
+				D8359D4E2C9C7B2B00377E8A /* DeleteUserProfileUseCase.swift in Sources */,
 				D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
@@ -2698,6 +2709,7 @@
 				4A1179802BA86AF400A9CF4C /* CustomInputView.swift in Sources */,
 				4A5DA8C12C3C498D00685F77 /* FcmTokenDto.swift in Sources */,
 				4A5789732BDC1C0B00AFEB26 /* ForbiddenErrorCode.swift in Sources */,
+				D8359D502C9C83E700377E8A /* UpdateUserProfileUseCase.swift in Sources */,
 				4A4703AE2BCEE5AF00AEE04E /* OAuthVerificationResponseDto.swift in Sources */,
 				4A3701D22C08F7F600F0AEBA /* AddSpendingHistoryResponseDto.swift in Sources */,
 			);

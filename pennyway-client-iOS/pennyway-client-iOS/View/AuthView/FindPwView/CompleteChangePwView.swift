@@ -25,7 +25,7 @@ struct CompleteChangePwView: View {
             }, label: "메인으로 돌아가기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-            //TODO: 오류 수정 필요!!!!!!!!!
+            // TODO: 오류 수정 필요!!!!!!!!!
 //            NavigationLink(destination: ProfileMainView(), isActive: $navigateToRootView) {}
 //                .hidden()
         }
