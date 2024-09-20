@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DefaultPresignedUrlRepository: PresignedUrlProtocol {
+class DefaultPresignedUrlRepository: PresignedUrlRepository {
     func generatePresignedUrl(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void) {
         // Model을 DTO로 변환
         let requestDto = GeneratePresigendUrlRequestDto.from(model: model)

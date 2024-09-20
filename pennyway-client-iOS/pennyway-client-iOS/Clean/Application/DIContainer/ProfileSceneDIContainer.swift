@@ -41,11 +41,11 @@ final class ProfileSceneDIContainer {
 
     // MARK: - Repository
 
-    private func makeProfileRepository() -> FetchUserProfileProtocol {
+    private func makeProfileRepository() -> FetchUserProfileRepository {
         DefaultUserProfileRepository()
     }
 
-    private func makePresignedUrlRepository() -> PresignedUrlProtocol {
+    private func makePresignedUrlRepository() -> PresignedUrlRepository {
         DefaultPresignedUrlRepository()
     }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DefaultUserProfileRepository: FetchUserProfileProtocol {
+class DefaultUserProfileRepository: FetchUserProfileRepository {
     func fetchUserProfile() -> UserModel {
         // ProfileResponseDTO 초기 데이터를 설정
         let profileResponseDTO = ProfileResponseDTO(

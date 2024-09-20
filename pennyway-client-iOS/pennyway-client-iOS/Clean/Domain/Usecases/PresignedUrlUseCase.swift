@@ -19,9 +19,9 @@ protocol GeneratePresignedUrlUseCase {
 
 /// Presigned URL을 생성하는 Use Case 기본 구현
 class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
-    private let repository: PresignedUrlProtocol
+    private let repository: PresignedUrlRepository
 
-    init(repository: PresignedUrlProtocol) {
+    init(repository: PresignedUrlRepository) {
         self.repository = repository
     }
 
@@ -53,9 +53,9 @@ protocol StorePresignedUrlUseCase {
 
 /// presigned URL을 사용하여 이미지를 업로드하는 Use Case 기본 구현
 class DefaultStorePresignedUrlUseCase: StorePresignedUrlUseCase {
-    private let repository: PresignedUrlProtocol
+    private let repository: PresignedUrlRepository
 
-    init(repository: PresignedUrlProtocol) {
+    init(repository: PresignedUrlRepository) {
         self.repository = repository
     }
 

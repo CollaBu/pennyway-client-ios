@@ -19,9 +19,9 @@ protocol FetchUserProfileUseCase {
 // MARK: - DefaultFetchUserProfileUseCase
 
 class DefaultFetchUserProfileUseCase: FetchUserProfileUseCase {
-    private let repository: FetchUserProfileProtocol
+    private let repository: FetchUserProfileRepository
 
-    init(repository: FetchUserProfileProtocol) {
+    init(repository: FetchUserProfileRepository) {
         self.repository = repository
     }
 

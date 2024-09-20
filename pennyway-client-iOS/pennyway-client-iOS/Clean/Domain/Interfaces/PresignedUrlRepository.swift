@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol PresignedUrlProtocol {
+protocol PresignedUrlRepository {
     func generatePresignedUrl(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void)
     func storePresignedUrl(payload: String, image: UIImage, presignedUrl: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
