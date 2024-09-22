@@ -167,7 +167,7 @@ class UserAccountViewModel: ObservableObject {
         }
     }
 
-    private func initializeToggleStates(from notifySetting: NotifySetting) {
+    private func initializeToggleStates(from notifySetting: NotifySettingDto) {
         toggleStates[0] = notifySetting.accountBookNotify
         toggleStates[1] = notifySetting.chatNotify
         toggleStates[2] = notifySetting.feedNotify

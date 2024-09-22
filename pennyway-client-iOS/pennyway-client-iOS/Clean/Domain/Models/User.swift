@@ -7,9 +7,9 @@
 
 import Foundation
 
-// MARK: - UserModel
+// MARK: - User
 
-struct UserModel: Equatable {
+struct User: Equatable {
     let id: Int64
     let username: String
     let name: String
@@ -19,22 +19,22 @@ struct UserModel: Equatable {
     let phone: String
     let profileVisibility: String
     let locked: Bool
-    let notifySetting: NotifySettingModel
+    let notifySetting: NotifySetting
     let createdAt: String
-    let oauthAccount: OAuthAccountModel
+    let oauthAccount: OAuthAccount
 }
 
-// MARK: - NotifySettingModel
+// MARK: - NotifySetting
 
-struct NotifySettingModel: Equatable {
+struct NotifySetting: Equatable {
     let accountBookNotify: Bool
     let feedNotify: Bool
     let chatNotify: Bool
 }
 
-// MARK: - OAuthAccountModel
+// MARK: - OAuthAccount
 
-struct OAuthAccountModel: Equatable {
+struct OAuthAccount: Equatable {
     let kakao: Bool
     let google: Bool
     let apple: Bool

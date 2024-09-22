@@ -8,7 +8,7 @@
 import Foundation
 
 class DefaultUserProfileRepository: FetchUserProfileRepository {
-    func fetchUserProfile() -> UserModel {
+    func fetchUserProfile() -> User {
         // ProfileResponseDTO 초기 데이터를 설정
         let profileResponseDTO = ProfileResponseDTO(
             id: 1,

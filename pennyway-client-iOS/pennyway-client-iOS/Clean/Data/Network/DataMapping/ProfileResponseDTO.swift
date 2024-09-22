@@ -41,19 +41,19 @@ struct OAuthAccountDTO: Decodable {
 }
 
 extension ProfileResponseDTO {
-    func toModel() -> UserModel {
+    func toModel() -> User {
         return .init(id: id, username: username, name: name, isGeneralSignUp: isGeneralSignUp, passwordUpdatedAt: passwordUpdatedAt, profileImageUrl: profileImageUrl, phone: phone, profileVisibility: profileVisibility, locked: locked, notifySetting: NotifySettingDTO.toModel(notifySetting)(), createdAt: createdAt, oauthAccount: OAuthAccountDTO.toModel(oauthAccount)())
     }
 }
 
 extension NotifySettingDTO {
-    func toModel() -> NotifySettingModel {
+    func toModel() -> NotifySetting {
         return .init(accountBookNotify: accountBookNotify, feedNotify: feedNotify, chatNotify: chatNotify)
     }
 }
 
 extension OAuthAccountDTO {
-    func toModel() -> OAuthAccountModel {
+    func toModel() -> OAuthAccount {
         return .init(kakao: kakao, google: google, apple: apple)
     }
 }

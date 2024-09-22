@@ -35,12 +35,12 @@
 		4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */; };
 		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
 		4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */; };
-		4A12FEED2C9C487800DE10BC /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEEC2C9C487800DE10BC /* UserModel.swift */; };
+		4A12FEED2C9C487800DE10BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEEC2C9C487800DE10BC /* User.swift */; };
 		4A12FEEF2C9C489C00DE10BC /* UserProfileItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */; };
 		4A12FEF12C9C48B900DE10BC /* FetchUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEF02C9C48B900DE10BC /* FetchUserProfileRepository.swift */; };
 		4A12FEF32C9C48D500DE10BC /* FetchUserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEF22C9C48D500DE10BC /* FetchUserProfileUseCase.swift */; };
 		4A12FEF92C9C49D500DE10BC /* DefaultUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEF82C9C49D500DE10BC /* DefaultUserProfileRepository.swift */; };
-		4A12FEFC2C9C49FA00DE10BC /* ProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEFB2C9C49FA00DE10BC /* ProfileResponseDTO.swift */; };
+		4A12FEFC2C9C49FA00DE10BC /* ProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEFB2C9C49FA00DE10BC /* ProfileResponseDto.swift */; };
 		4A12FF052C9C4AC300DE10BC /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FF042C9C4AC300DE10BC /* UserProfileViewModel.swift */; };
 		4A12FF072C9C4B2C00DE10BC /* ProfileMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FF062C9C4B2C00DE10BC /* ProfileMainView.swift */; };
 		4A12FF092C9C4B4E00DE10BC /* ProfileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FF082C9C4B4E00DE10BC /* ProfileFactory.swift */; };
@@ -388,12 +388,12 @@
 		4A1179B32BA958ED00A9CF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
 		4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconListItem.swift; sourceTree = "<group>"; };
-		4A12FEEC2C9C487800DE10BC /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4A12FEEC2C9C487800DE10BC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileItemModel.swift; sourceTree = "<group>"; };
 		4A12FEF02C9C48B900DE10BC /* FetchUserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserProfileRepository.swift; sourceTree = "<group>"; };
 		4A12FEF22C9C48D500DE10BC /* FetchUserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserProfileUseCase.swift; sourceTree = "<group>"; };
 		4A12FEF82C9C49D500DE10BC /* DefaultUserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepository.swift; sourceTree = "<group>"; };
-		4A12FEFB2C9C49FA00DE10BC /* ProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseDTO.swift; sourceTree = "<group>"; };
+		4A12FEFB2C9C49FA00DE10BC /* ProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseDto.swift; sourceTree = "<group>"; };
 		4A12FF042C9C4AC300DE10BC /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		4A12FF062C9C4B2C00DE10BC /* ProfileMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainView.swift; sourceTree = "<group>"; };
 		4A12FF082C9C4B4E00DE10BC /* ProfileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFactory.swift; sourceTree = "<group>"; };
@@ -1010,8 +1010,7 @@
 		4A12FEE92C9C481900DE10BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4A12FEEC2C9C487800DE10BC /* UserModel.swift */,
-				4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */,
+				4A12FEEC2C9C487800DE10BC /* User.swift */,
 				4AABDBBB2C9C8C2900E9436D /* PresignedUrlModel.swift */,
 			);
 			path = Models;
@@ -1055,7 +1054,7 @@
 		4A12FEFA2C9C49F100DE10BC /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
-				4A12FEFB2C9C49FA00DE10BC /* ProfileResponseDTO.swift */,
+				4A12FEFB2C9C49FA00DE10BC /* ProfileResponseDto.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -1116,6 +1115,7 @@
 			isa = PBXGroup;
 			children = (
 				4A12FF042C9C4AC300DE10BC /* UserProfileViewModel.swift */,
+				4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2402,7 +2402,7 @@
 				D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */,
 				4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift in Sources */,
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
-				4A12FEED2C9C487800DE10BC /* UserModel.swift in Sources */,
+				4A12FEED2C9C487800DE10BC /* User.swift in Sources */,
 				D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				B599E4C32C58D4F0006051E9 /* AnalyticsConstants.swift in Sources */,
@@ -2493,7 +2493,7 @@
 				4A6C79DB2C46D067009463E4 /* ProfileActiveNavigation.swift in Sources */,
 				B599E4C62C58E989006051E9 /* AuthAnalyticsEvents.swift in Sources */,
 				D888329C2BBC612600F49B27 /* LoginView.swift in Sources */,
-				4A12FEFC2C9C49FA00DE10BC /* ProfileResponseDTO.swift in Sources */,
+				4A12FEFC2C9C49FA00DE10BC /* ProfileResponseDto.swift in Sources */,
 				4A69C1562BE69DEA00A27B82 /* Log.swift in Sources */,
 				4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */,
 				D8157E642BBEF2040083844B /* InputFormView.swift in Sources */,

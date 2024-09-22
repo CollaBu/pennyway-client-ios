@@ -15,7 +15,7 @@ struct UserProfileItemModel: Equatable {
 }
 
 extension UserProfileItemModel {
-    init(userData: UserModel) {
+    init(userData: User) {
         username = userData.username
         name = userData.name
     }

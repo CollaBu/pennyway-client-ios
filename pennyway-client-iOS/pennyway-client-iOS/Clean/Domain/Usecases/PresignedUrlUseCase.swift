@@ -31,15 +31,6 @@ class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
     func execute(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void) {
         repository.generatePresignedUrl(model: model, completion: completion)
-//        { result in
-//            switch result {
-//            case let .success(presignedUrlModel):
-//                completion(.success(presignedUrlModel))
-//
-//            case let .failure(error):
-//                completion(.failure(error))
-//            }
-//        }
     }
 }
 
