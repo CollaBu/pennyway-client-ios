@@ -7,15 +7,15 @@
 
 import Foundation
 
-// MARK: - PresignedUrlModel
+// MARK: - PresignedUrl
 
-struct PresignedUrlModel {
+struct PresignedUrl {
     let presignedUrl: String
 }
 
-// MARK: - PresignedUrlTypeModel
+// MARK: - PresignedUrlType
 
-struct PresignedUrlTypeModel {
+struct PresignedUrlType {
     let type: String
     let ext: String
 }

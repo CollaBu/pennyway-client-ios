@@ -12,7 +12,7 @@ import UIKit
 
 /// 프로필 이미지 등을 업로드할 때 presigned URL을 생성하는 Use Case 프로토콜
 protocol GeneratePresignedUrlUseCase {
-    func execute(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void)
+    func execute(type: String, ext: String, completion: @escaping (Result<PresignedUrl, Error>) -> Void)
 }
 
 // MARK: - DefaultGeneratePresignedUrlUseCase
@@ -29,8 +29,10 @@ class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
     /// - Parameters:
     ///   - model: Presigned URL을 생성하기 위한 요청 모델
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
-    func execute(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void) {
-        repository.generatePresignedUrl(model: model, completion: completion)
+    func execute(type: String, ext: String, completion: @escaping (Result<PresignedUrl, Error>) -> Void) {
+        let presignedUrlModel = PresignedUrlType(type: type, ext: ext)
+
+        repository.generatePresignedUrl(model: presignedUrlModel, completion: completion)
     }
 }
 
@@ -38,7 +40,7 @@ class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
 
 /// presigned URL을 사용하여 이미지를 업로드하는 Use Case 프로토콜
 protocol StorePresignedUrlUseCase {
-    func execute(payload: String, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void)
+    func execute(presignedUrl: String, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 // MARK: - DefaultStorePresignedUrlUseCase
@@ -53,11 +55,11 @@ class DefaultStorePresignedUrlUseCase: StorePresignedUrlUseCase {
 
     /// Presigned URL을 사용해 이미지를 업로드하는 메서드
     /// - Parameters:
-    ///   - payload: 서버로부터 받은 presigned URL
+    ///   - presignedUrl: 서버로부터 받은 presigned URL
     ///   - image: 업로드할 UIImage
     ///   - completion: 성공 시 Void, 실패 시 Error 반환
-    func execute(payload: String, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
-        let presignedUrl = extractPresignedUrl(from: payload)
+    func execute(presignedUrl: String, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
+        let payload = extractPresignedUrl(from: presignedUrl)
 
         repository.storePresignedUrl(payload: payload, image: image, presignedUrl: presignedUrl, completion: completion)
     }

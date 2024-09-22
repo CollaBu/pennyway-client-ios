@@ -13,7 +13,7 @@ public struct GeneratePresigendUrlRequestDto: Encodable {
         self.ext = ext
     }
 
-    static func from(model: PresignedUrlTypeModel) -> GeneratePresigendUrlRequestDto {
+    static func from(model: PresignedUrlType) -> GeneratePresigendUrlRequestDto {
         return GeneratePresigendUrlRequestDto.init(type: model.type, ext: model.ext)
     }
 }

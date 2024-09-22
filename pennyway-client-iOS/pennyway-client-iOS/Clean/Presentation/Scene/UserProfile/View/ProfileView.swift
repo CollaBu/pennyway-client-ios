@@ -53,16 +53,21 @@ struct ProfileView: View {
                     .sheet(isPresented: $showImagePicker, onDismiss: {
                         // 사진 클릭한 경우
                         showPopUpView = false
-                        presignedUrlViewModel.image = selectedUIImage
-                        presignedUrlViewModel.generatePresignedUrlApi { success in
-                            if success {
-                                presignedUrlViewModel.storePresignedUrlApi { success in
-                                    if success {
-                                        profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
-                                    }
-                                }
-                            }
+
+                        if let selectedUIImage {
+                            viewModelWrapper.viewModel.uploadPresignedUrl(selectedUIImage)
+//                            presignedUrlViewModel.image = selectedUIImage
+//                            presignedUrlViewModel.generatePresignedUrlApi { success in
+//                                if success {
+//                                    presignedUrlViewModel.storePresignedUrlApi { success in
+//                                        if success {
+//                                            profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
+//                                        }
+//                                    }
+//                                }
+//                            }
                         }
+
                     }) {
                         ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                             .edgesIgnoringSafeArea(.bottom)

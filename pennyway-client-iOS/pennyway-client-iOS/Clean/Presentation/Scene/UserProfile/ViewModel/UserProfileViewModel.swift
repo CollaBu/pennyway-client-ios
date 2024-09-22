@@ -12,7 +12,6 @@ import UIKit
 
 protocol UserProfileViewModelInput {
     func viewDidLoad()
-    func updateData(_ newName: String)
     func uploadPresignedUrl(_ image: UIImage)
 }
 
@@ -56,24 +55,16 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
         Log.debug(userData.value)
     }
 
-    /// 이름을 업데이트하는 메서드
-    private func updateName(_ newName: String) {
-        Log.debug("Updated name to \(newName)")
-        Log.debug("Updated \(userData.value)")
-    }
-
     /// 프로필 이미지를 업로드하는 메서드
     private func uploadPresignedUrl(image: UIImage) {
-        let presignedUrlModel = PresignedUrlTypeModel(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue)
-
         // Presigned URL 생성
-        generatePresignedUrlUseCase.execute(model: presignedUrlModel) { [weak self] result in
+        generatePresignedUrlUseCase.execute(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue) { [weak self] result in
             switch result {
             case let .success(presignedUrl):
                 Log.debug("Presigned URL 생성 성공: \(presignedUrl.presignedUrl)")
 
                 // Presigned URL을 사용하여 이미지 업로드
-                self?.storePresignedUrlUseCase.execute(payload: presignedUrl.presignedUrl, image: image) { result in
+                self?.storePresignedUrlUseCase.execute(presignedUrl: presignedUrl.presignedUrl, image: image) { result in
                     switch result {
                     case .success:
                         Log.debug("이미지 업로드 성공")
@@ -93,10 +84,6 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 extension DefaultUserProfileViewModel {
     func viewDidLoad() {
         updateUserData()
-    }
-
-    func updateData(_ newName: String) {
-        updateName(newName)
     }
 
     func uploadPresignedUrl(_ image: UIImage) {

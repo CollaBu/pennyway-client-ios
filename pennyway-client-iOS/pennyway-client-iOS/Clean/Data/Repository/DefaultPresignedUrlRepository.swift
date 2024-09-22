@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 class DefaultPresignedUrlRepository: PresignedUrlRepository {
-    func generatePresignedUrl(model: PresignedUrlTypeModel, completion: @escaping (Result<PresignedUrlModel, Error>) -> Void) {
+    func generatePresignedUrl(model: PresignedUrlType, completion: @escaping (Result<PresignedUrl, Error>) -> Void) {
         // Model을 DTO로 변환
         let requestDto = GeneratePresigendUrlRequestDto.from(model: model)
 
-        // DTO로 API 호출 (예시)
+        // DTO로 API 호출
         ObjectStorageAlamofire.shared.generatePresignedUrl(requestDto) { result in
             switch result {
             case let .success(data):
@@ -23,7 +23,7 @@ class DefaultPresignedUrlRepository: PresignedUrlRepository {
                         let responseDto = try JSONDecoder().decode(GeneratePresignedUrlResponseDto.self, from: responseData)
 
                         // 응답 DTO를 Model로 변환
-                        let presignedUrlModel = PresignedUrlModel(presignedUrl: responseDto.presignedUrl)
+                        let presignedUrlModel = PresignedUrl(presignedUrl: responseDto.presignedUrl)
                         completion(.success(presignedUrlModel))
                     } catch {
                         completion(.failure(error))
@@ -38,6 +38,7 @@ class DefaultPresignedUrlRepository: PresignedUrlRepository {
 
     func storePresignedUrl(payload: String, image: UIImage, presignedUrl: String, completion: @escaping (Result<Void, Error>) -> Void) {
         // presignedUrl에서 필요한 데이터를 추출하여 StorePresignedUrlRequestDto로 변환
+
         let storePresignedUrlRequestDto = StorePresignedUrlRequestMapper.toDto(presignedUrl: presignedUrl)
 
         ObjectStorageAlamofire.shared.storePresignedUrl(payload, image, storePresignedUrlRequestDto) { result in
