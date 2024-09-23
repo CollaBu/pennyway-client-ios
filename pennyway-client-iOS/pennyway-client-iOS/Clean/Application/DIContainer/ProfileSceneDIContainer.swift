@@ -31,12 +31,8 @@ final class ProfileSceneDIContainer {
         DefaultFetchUserProfileUseCase(repository: makeProfileRepository())
     }
 
-    private func makeGeneratePresignedUrlUseCase() -> GeneratePresignedUrlUseCase {
-        DefaultGeneratePresignedUrlUseCase(repository: makePresignedUrlRepository())
-    }
-
-    private func makeStorePresignedUrlUseCase() -> StorePresignedUrlUseCase {
-        DefaultStorePresignedUrlUseCase(repository: makePresignedUrlRepository())
+    private func makePresignedUrlUseCase() -> PresignedUrlUseCase {
+        DefaultPresignedUrlUseCase(repository: makePresignedUrlRepository())
     }
 
     // MARK: - Repository
@@ -54,8 +50,7 @@ final class ProfileSceneDIContainer {
     private func makeProfileViewModel() -> any UserProfileViewModel {
         DefaultUserProfileViewModel(
             fetchUserProfileUseCase: makeProfileUseCase(),
-            generatePresignedUrlUseCase: makeGeneratePresignedUrlUseCase(),
-            storePresignedUrlUseCase: makeStorePresignedUrlUseCase()
+            presignedUrlUseCase: makePresignedUrlUseCase()
         )
     }
 

@@ -36,7 +36,7 @@ class DefaultPresignedUrlRepository: PresignedUrlRepository {
         }
     }
 
-    func storePresignedUrl(payload: String, image: UIImage, presignedUrl: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func uploadPresignedUrl(payload: String, image: UIImage, presignedUrl: String, completion: @escaping (Result<Void, Error>) -> Void) {
         // presignedUrl에서 필요한 데이터를 추출하여 StorePresignedUrlRequestDto로 변환
 
         let storePresignedUrlRequestDto = StorePresignedUrlRequestMapper.toDto(presignedUrl: presignedUrl)

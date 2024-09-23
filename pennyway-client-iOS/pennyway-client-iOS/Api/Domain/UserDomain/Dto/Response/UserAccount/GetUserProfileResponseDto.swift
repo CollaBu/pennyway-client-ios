@@ -14,7 +14,7 @@ struct UserProfileData: Codable {
 // MARK: - UserDataDto
 
 struct UserDataDto: Codable {
-    let id: Int
+    let id: Int64
     var username: String
     var name: String
     let isGeneralSignUp: Bool

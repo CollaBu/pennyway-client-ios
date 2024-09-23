@@ -13,7 +13,7 @@ import Foundation
 protocol FetchUserProfileUseCase {
     /// 사용자 프로필 데이터를 가져오는 함수.
     /// - Returns: `UserModel` 타입의 사용자 프로필 데이터를 반환.
-    func execute() -> User
+    func execute(completion: @escaping (Result<User, Error>) -> Void)
 }
 
 // MARK: - DefaultFetchUserProfileUseCase
@@ -25,7 +25,7 @@ class DefaultFetchUserProfileUseCase: FetchUserProfileUseCase {
         self.repository = repository
     }
 
-    func execute() -> User {
-        return repository.fetchUserProfile()
+    func execute(completion: @escaping (Result<User, Error>) -> Void) {
+        return repository.fetchUserProfile(completion: completion)
     }
 }

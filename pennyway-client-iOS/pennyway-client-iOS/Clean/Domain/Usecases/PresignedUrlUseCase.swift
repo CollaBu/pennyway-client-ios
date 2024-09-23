@@ -8,17 +8,16 @@
 import Foundation
 import UIKit
 
-// MARK: - GeneratePresignedUrlUseCase
+// MARK: - PresignedUrlUseCase
 
-/// 프로필 이미지 등을 업로드할 때 presigned URL을 생성하는 Use Case 프로토콜
-protocol GeneratePresignedUrlUseCase {
-    func execute(type: String, ext: String, completion: @escaping (Result<PresignedUrl, Error>) -> Void)
+protocol PresignedUrlUseCase {
+    func generate(type: String, ext: String, image: UIImage)
 }
 
-// MARK: - DefaultGeneratePresignedUrlUseCase
+// MARK: - DefaultPresignedUrlUseCase
 
 /// Presigned URL을 생성하는 Use Case 기본 구현
-class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
+class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
     private let repository: PresignedUrlRepository
 
     init(repository: PresignedUrlRepository) {
@@ -29,28 +28,28 @@ class DefaultGeneratePresignedUrlUseCase: GeneratePresignedUrlUseCase {
     /// - Parameters:
     ///   - model: Presigned URL을 생성하기 위한 요청 모델
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
-    func execute(type: String, ext: String, completion: @escaping (Result<PresignedUrl, Error>) -> Void) {
+    ///   - image: 업로드할 UIImage
+    func generate(type: String, ext: String, image: UIImage) {
         let presignedUrlModel = PresignedUrlType(type: type, ext: ext)
 
-        repository.generatePresignedUrl(model: presignedUrlModel, completion: completion)
-    }
-}
+        repository.generatePresignedUrl(model: presignedUrlModel) { result in
+            switch result {
+            case let .success(presignedUrl):
+                Log.debug("Presigned URL 생성 성공: \(presignedUrl.presignedUrl)")
 
-// MARK: - StorePresignedUrlUseCase
-
-/// presigned URL을 사용하여 이미지를 업로드하는 Use Case 프로토콜
-protocol StorePresignedUrlUseCase {
-    func execute(presignedUrl: String, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void)
-}
-
-// MARK: - DefaultStorePresignedUrlUseCase
-
-/// presigned URL을 사용하여 이미지를 업로드하는 Use Case 기본 구현
-class DefaultStorePresignedUrlUseCase: StorePresignedUrlUseCase {
-    private let repository: PresignedUrlRepository
-
-    init(repository: PresignedUrlRepository) {
-        self.repository = repository
+                // Presigned URL을 사용하여 이미지 업로드
+                self.upload(presignedUrl: presignedUrl.presignedUrl, image: image) { result in
+                    switch result {
+                    case .success:
+                        Log.debug("이미지 업로드 성공")
+                    case let .failure(error):
+                        Log.error("이미지 업로드 실패: \(error)")
+                    }
+                }
+            case let .failure(error):
+                Log.error("Presigned URL 생성 실패: \(error)")
+            }
+        }
     }
 
     /// Presigned URL을 사용해 이미지를 업로드하는 메서드
@@ -58,10 +57,10 @@ class DefaultStorePresignedUrlUseCase: StorePresignedUrlUseCase {
     ///   - presignedUrl: 서버로부터 받은 presigned URL
     ///   - image: 업로드할 UIImage
     ///   - completion: 성공 시 Void, 실패 시 Error 반환
-    func execute(presignedUrl: String, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
+    private func upload(presignedUrl: String, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
         let payload = extractPresignedUrl(from: presignedUrl)
 
-        repository.storePresignedUrl(payload: payload, image: image, presignedUrl: presignedUrl, completion: completion)
+        repository.uploadPresignedUrl(payload: payload, image: image, presignedUrl: presignedUrl, completion: completion)
     }
 
     private func extractPresignedUrl(from presignedUrl: String) -> String {

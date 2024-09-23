@@ -10,5 +10,5 @@ import UIKit
 
 protocol PresignedUrlRepository {
     func generatePresignedUrl(model: PresignedUrlType, completion: @escaping (Result<PresignedUrl, Error>) -> Void)
-    func storePresignedUrl(payload: String, image: UIImage, presignedUrl: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func uploadPresignedUrl(payload: String, image: UIImage, presignedUrl: String, completion: @escaping (Result<Void, Error>) -> Void)
 }

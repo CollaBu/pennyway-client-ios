@@ -32,7 +32,6 @@ final class DefaultProfileFactory: ProfileFactory {
     }
 
     public func makeProfileView() -> some View { // some: "특정 타입만 반환"
-        userProfileViewModelWrapper.viewModel.viewDidLoad() // TODO: 질문
         return ProfileView(viewModelWrapper: userProfileViewModelWrapper)
     }
 }

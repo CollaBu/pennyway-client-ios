@@ -8,18 +8,16 @@ struct ProfileUserInfoView: View {
     @Binding var navigateToEditUsername: Bool
     @Binding var selectedUIImage: UIImage?
     @Binding var imageUrl: String
-
-    @State private var name = ""
-    @State private var refreshView = false
     
     @ObservedObject var viewModel: ProfileImageViewModel
     @ObservedObject var deleteViewModel: DeleteProfileImageViewModel
-
-    private func loadUserData() {
-        if let userData = getUserData() {
-            name = userData.name // 사용자 이름
-        }
-    }
+    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
+    
+//    private func loadUserData() {
+//        if let userData = getUserData() {
+//            name = userData.name // 사용자 이름
+//        }
+//    }
     
     var body: some View {
         ZStack {
@@ -65,7 +63,7 @@ struct ProfileUserInfoView: View {
                 
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 
-                Text("\(name)")
+                Text("\(viewModelWrapper.userData.name)")
                     .font(.H3SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
                     .padding(1)
@@ -137,7 +135,7 @@ struct ProfileUserInfoView: View {
             .frame(maxWidth: .infinity, maxHeight: 267 * DynamicSizeFactor.factor())
             .background(Color("White01"))
             .onAppear {
-                loadUserData()
+                viewModelWrapper.viewModel.getUser()
                 Log.debug("deleteViewModel.profileImageUrl: \(deleteViewModel.profileImageUrl)")
                 Log.debug("selectedUIImage: \(selectedUIImage)")
                 Log.debug("viewModel.imageUrl: \(viewModel.imageUrl)")

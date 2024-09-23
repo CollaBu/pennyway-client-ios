@@ -56,6 +56,7 @@ struct ProfileView: View {
 
                         if let selectedUIImage {
                             viewModelWrapper.viewModel.uploadPresignedUrl(selectedUIImage)
+                            viewModelWrapper.viewModel.getUser()
 //                            presignedUrlViewModel.image = selectedUIImage
 //                            presignedUrlViewModel.generatePresignedUrlApi { success in
 //                                if success {
@@ -105,7 +106,8 @@ struct ProfileView: View {
         .onAppear {
             Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
             Log.debug("showPopUpView:\(showPopUpView)")
-            loadUserDataImage() // 사용자 프로필 사진 불러오기
+            viewModelWrapper.viewModel.getUser()
+            loadUserData() // 사용자 정보(사진, 이름) 불러오기
         }
         .onChange(of: showPopUpView) { newValue in
             isHiddenTabBar = newValue
@@ -130,7 +132,9 @@ struct ProfileView: View {
                     navigateToEditUsername: $navigateToEditUsername,
                     selectedUIImage: $selectedUIImage,
                     imageUrl: $imageUrl,
-                    viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
+                    viewModel: profileImageViewModel, 
+                    deleteViewModel: deleteProfileImageViewModel,
+                    viewModelWrapper: viewModelWrapper
                 )
                 .background(Color("White01"))
                 .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
@@ -163,11 +167,16 @@ struct ProfileView: View {
         }
     }
 
-    private func loadUserDataImage() {
-        if let userData = getUserData() {
-            imageUrl = userData.profileImageUrl
-            profileImageViewModel.loadImageUrl(from: imageUrl)
-        }
+    private func loadUserData() {
+        imageUrl = viewModelWrapper.userData.imageUrl
+        profileImageViewModel.loadImageUrl(from: imageUrl)
+
+        Log.debug("이미지 확인: \(imageUrl)")
+
+//        if let userData = getUserData() {
+//            imageUrl = userData.profileImageUrl
+
+//        }
     }
 
     func setOffset(offset: CGFloat) -> some View {

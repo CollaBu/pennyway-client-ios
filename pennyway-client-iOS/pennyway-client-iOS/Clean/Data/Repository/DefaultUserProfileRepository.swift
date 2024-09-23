@@ -8,24 +8,25 @@
 import Foundation
 
 class DefaultUserProfileRepository: FetchUserProfileRepository {
-    func fetchUserProfile() -> User {
-        // ProfileResponseDTO 초기 데이터를 설정
-        let profileResponseDTO = ProfileResponseDTO(
-            id: 1,
-            username: "user1",
-            name: "홍길동",
-            isGeneralSignUp: false,
-            passwordUpdatedAt: "2023-09-04 12:00:00",
-            profileImageUrl: "https://example.com/profile.jpg",
-            phone: "010-1234-5678",
-            profileVisibility: "PUBLIC",
-            locked: false,
-            notifySetting: NotifySettingDTO(accountBookNotify: true, feedNotify: true, chatNotify: true),
-            createdAt: "2023-09-04 12:00:00",
-            oauthAccount: OAuthAccountDTO(kakao: true, google: false, apple: false)
-        )
+    func fetchUserProfile(completion: @escaping (Result<User, Error>) -> Void) {
+        if let userData = getUserData() {
+            let profileResponseDTO = ProfileResponseDTO(
+                id: userData.id,
+                username: userData.username,
+                name: userData.name,
+                isGeneralSignUp: userData.isGeneralSignUp,
+                passwordUpdatedAt: userData.passwordUpdatedAt ?? "",
+                profileImageUrl: userData.profileImageUrl,
+                phone: userData.phone,
+                profileVisibility: userData.profileVisibility,
+                locked: userData.locked,
+                notifySetting: NotifySettingDTO(accountBookNotify: userData.notifySetting.accountBookNotify, feedNotify: userData.notifySetting.feedNotify, chatNotify: userData.notifySetting.chatNotify),
+                createdAt: userData.createdAt,
+                oauthAccount: OAuthAccountDTO(kakao: userData.oauthAccount.kakao, google: userData.oauthAccount.google, apple: userData.oauthAccount.apple))
 
-        // toModel()을 호출하여 UserModel로 변환 후 반환
-        return profileResponseDTO.toModel()
+            completion(.success(profileResponseDTO.toModel()))
+        } else {
+            completion(.failure(StatusError.notFound))
+        }
     }
 }
