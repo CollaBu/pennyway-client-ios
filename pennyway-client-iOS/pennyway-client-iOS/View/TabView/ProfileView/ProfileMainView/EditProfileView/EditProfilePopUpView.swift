@@ -13,6 +13,7 @@ struct EditProfilePopUpView: View {
 
     @ObservedObject var deleteProfileImageViewModel: DeleteProfileImageViewModel
     @ObservedObject var presignedUrlViewModel: PresignedUrlViewModel
+    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
 
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
 
@@ -86,8 +87,22 @@ struct EditProfilePopUpView: View {
     }
 
     private func deleteProfileImage() {
-        if let url = getUserData()?.profileImageUrl, !url.isEmpty {
-            deleteProfileImageViewModel.deleteProfileImageApi { success in
+//        if let url = getUserData()?.profileImageUrl, !url.isEmpty {
+//            deleteProfileImageViewModel.deleteProfileImageApi { success in
+//                if success {
+//                    Log.debug("deleteProfileImageApi 성공")
+//                    selectedUIImage = nil
+//                    imageUrl = ""
+//                } else {
+//                    Log.debug("삭제 api 호출 실패")
+//                }
+//                isPresented = false
+//                showPopUpView = false
+//                isHiddenTabBar = false
+//            }
+
+        if let url = viewModelWrapper.userData.profileImageUrl, !url.isEmpty {
+            viewModelWrapper.viewModel.deleteProfileImage { success in
                 if success {
                     Log.debug("deleteProfileImageApi 성공")
                     selectedUIImage = nil
@@ -99,6 +114,7 @@ struct EditProfilePopUpView: View {
                 showPopUpView = false
                 isHiddenTabBar = false
             }
+
         } else {
             Log.debug("프로필 사진 비어 있음")
             isPresented = false

@@ -22,7 +22,7 @@ struct ProfileView: View {
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
     @State private var updateCount = 0 // 업데이트 횟수를 추적하는 변수
 
-    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
+    @StateObject var viewModelWrapper: UserProfileViewModelWrapper
 
     var body: some View {
         NavigationAvailable {
@@ -90,7 +90,8 @@ struct ProfileView: View {
                         sourceType: $sourceType,
                         imageUrl: $imageUrl,
                         deleteProfileImageViewModel: deleteProfileImageViewModel,
-                        presignedUrlViewModel: presignedUrlViewModel
+                        presignedUrlViewModel: presignedUrlViewModel,
+                        viewModelWrapper: viewModelWrapper
                     )
                     .edgesIgnoringSafeArea(.bottom)
                 }

@@ -12,7 +12,7 @@ import Foundation
 struct UserProfileItemModel: Equatable {
     var username: String
     var name: String
-    var profileImageUrl: String
+    var profileImageUrl: String?
 }
 
 extension UserProfileItemModel {

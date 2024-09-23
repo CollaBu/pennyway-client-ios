@@ -14,6 +14,7 @@ protocol UserProfileViewModelInput {
     func viewDidLoad()
     func updateData(_ newName: String)
     func updateProfileImage(from url: String)
+    func deleteProfileImage(completion: @escaping (Bool) -> Void) // 삭제 메서드 추가
 }
 
 // MARK: - UserProfileViewModelOutput
@@ -79,7 +80,8 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
                     self?.updateUserProfileUseCase.update(from: url) { result in
                         switch result {
                         case let .success(response):
-                            Log.debug("프로필 이미지가 성공적으로 업데이트되었습니다: \(response)")
+                            Log.debug("프로필 이미지가 업데이트 성공: \(response)")
+                            self?.userData.value.profileImageUrl = url
                         case let .failure(error):
                             Log.debug("프로필 이미지 업데이트 실패: \(error)")
                         }
@@ -103,6 +105,21 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
             case let .failure(error):
                 Log.debug("Failed to load image: \(error)")
                 completion(.failure(error))
+            }
+        }
+    }
+
+    /// 프로필 사진 삭제하는 함수
+    func deleteProfileImage(completion: @escaping (Bool) -> Void) {
+        deleteUserProfileUseCase.delete { result in
+            switch result {
+            case let .success(updatedProfile):
+                self.userData.value.profileImageUrl
+                completion(true)
+                Log.debug("프로필 이미지가 성공적으로 삭제되었습니다.")
+            case let .failure(error):
+                completion(false)
+                Log.debug("프로필 이미지 삭제 실패: \(error)")
             }
         }
     }

@@ -19,7 +19,7 @@ class DefaultDeleteUserProfileUseCase: DeleteUserProfileUseCase {
         self.repository = repository
     }
 
-    func delete(completion _: @escaping (Result<ProfileImageItemModel, Error>) -> Void) {
+    func delete(completion: @escaping (Result<ProfileImageItemModel, Error>) -> Void) {
         repository.deleteUserProfile { result in
             switch result {
             case let .success(result):
