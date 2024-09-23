@@ -19,13 +19,12 @@ class DefaultDeleteUserProfileUseCase: DeleteUserProfileUseCase {
         self.repository = repository
     }
 
-    func delete(completion: @escaping (Result<ProfileImageItemModel, Error>) -> Void) {
+    func delete(completion _: @escaping (Result<ProfileImageItemModel, Error>) -> Void) {
         repository.deleteUserProfile { result in
             switch result {
-            case let .success(result):
-                ProfileImageItemModel(profileImageUrl: "")
+            case let .success(result): break
             case let .failure(error):
-                Log.debug("프로필 삭제 실패")
+                Log.debug("[DefaultDeleteUserProfileUseCase]-프로필 삭제 실패")
             }
         }
     }

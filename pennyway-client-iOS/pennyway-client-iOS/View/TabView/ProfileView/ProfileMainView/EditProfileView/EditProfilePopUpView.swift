@@ -101,7 +101,7 @@ struct EditProfilePopUpView: View {
 //                isHiddenTabBar = false
 //            }
 
-        if let url = viewModelWrapper.userData.profileImageUrl, !url.isEmpty {
+        if let url = viewModelWrapper.viewModel.imageItemModel.value.profileImageUrl, url != nil {
             viewModelWrapper.viewModel.deleteProfileImage { success in
                 if success {
                     Log.debug("deleteProfileImageApi 성공")

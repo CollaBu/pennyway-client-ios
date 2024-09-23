@@ -12,13 +12,11 @@ import Foundation
 struct UserProfileItemModel: Equatable {
     var username: String
     var name: String
-    var profileImageUrl: String?
 }
 
 extension UserProfileItemModel {
     init(userData: UserModel) {
         username = userData.username
         name = userData.name
-        profileImageUrl = userData.profileImageUrl
     }
 }

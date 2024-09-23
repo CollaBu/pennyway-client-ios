@@ -96,6 +96,7 @@ final class DefaultProfileImageRepository: ProfileImageRepository {
             if let data = data, error == nil, let downloadedImage = UIImage(data: data) {
                 // 이미지 URL이 존재하고 이미지를 성공적으로 다운로드한 경우
                 DispatchQueue.main.async {
+                    // UIImage -> Model 타입 변환
                     completion(.success(downloadedImage))
                 }
             } else {

@@ -1,9 +1,3 @@
-//
-//  UserProfileViewModel.swift
-//  pennyway-client-iOS
-//
-//  Created by 최희진 on 9/19/24.
-//
 
 import Foundation
 import UIKit
@@ -15,12 +9,14 @@ protocol UserProfileViewModelInput {
     func updateData(_ newName: String)
     func updateProfileImage(from url: String)
     func deleteProfileImage(completion: @escaping (Bool) -> Void) // 삭제 메서드 추가
+    func loadProfileImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void)
 }
 
 // MARK: - UserProfileViewModelOutput
 
 protocol UserProfileViewModelOutput {
     var userData: Observable<UserProfileItemModel> { get }
+    var imageItemModel: Observable<ProfileImageItemModel> { get }
 }
 
 // MARK: - UserProfileViewModel
@@ -30,8 +26,9 @@ protocol UserProfileViewModel: UserProfileViewModelInput, UserProfileViewModelOu
 // MARK: - DefaultUserProfileViewModel
 
 class DefaultUserProfileViewModel: UserProfileViewModel {
+    // TODO: 이름 수정하기!
     var userData: Observable<UserProfileItemModel>
-    @Published var profileImageUrl: UIImage?
+    var imageItemModel: Observable<ProfileImageItemModel>
 
     private let fetchUserProfileUseCase: FetchUserProfileUseCase // 유저 정보 조회
     private let deleteUserProfileUseCase: DeleteUserProfileUseCase // 사용자 프로필 삭제
@@ -47,8 +44,11 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 
         userData = Observable(UserProfileItemModel(
             username: "",
-            name: "기본",
-            profileImageUrl: ""
+            name: "기본"
+        ))
+
+        imageItemModel = Observable(ProfileImageItemModel(
+            profileImageUrl: UIImage(named: "icon_illust_no_image_no_margin")
         ))
     }
 
@@ -66,45 +66,42 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
         Log.debug("Updated \(userData.value)")
     }
 
-    /// 업데이트 된 사진을 서버에 전달하는 함수
-    func updateProfileImage(from url: String) {
-        // URL을 통해 이미지를 불러옵니다.
-        loadProfileImage(from: url) { [weak self] result in
-            switch result {
-            case let .success(image):
-                // 이미지를 성공적으로 불러온 경우
-                DispatchQueue.main.async {
-                    self?.profileImageUrl = image // 프로필 이미지 업데이트
-
-                    // 서버에 URL 전송
-                    self?.updateUserProfileUseCase.update(from: url) { result in
-                        switch result {
-                        case let .success(response):
-                            Log.debug("프로필 이미지가 업데이트 성공: \(response)")
-                            self?.userData.value.profileImageUrl = url
-                        case let .failure(error):
-                            Log.debug("프로필 이미지 업데이트 실패: \(error)")
-                        }
-                    }
-                }
-            case let .failure(error):
-                Log.debug("이미지 로드 실패: \(error)")
-            }
-        }
-    }
-
     /// 업데이트된 사진을 불러오는 함수
     func loadProfileImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         updateUserProfileUseCase.loadProfileImage(from: url) { [weak self] result in
             switch result {
             case let .success(image):
                 DispatchQueue.main.async {
-                    self?.profileImageUrl = image
-                    completion(.success(image))
+                    self?.imageItemModel.value.update(image: image)
+                    completion(.success(image)) // 이미지 로드 성공 시 completion 호출
                 }
             case let .failure(error):
                 Log.debug("Failed to load image: \(error)")
-                completion(.failure(error))
+                completion(.failure(error)) // 이미지 로드 실패 시 completion 호출
+            }
+        }
+    }
+
+    /// 업데이트 된 사진을 서버에 전달하는 함수
+    func updateProfileImage(from url: String) {
+        loadProfileImage(from: url) { [weak self] result in
+            switch result {
+            case let .success(image):
+                DispatchQueue.main.async {
+                    self?.imageItemModel.value.profileImageUrl = image // 프로필 이미지 업데이트
+
+                    // 서버에 URL 전송
+                    self?.updateUserProfileUseCase.update(from: url) { result in
+                        switch result {
+                        case let .success(response):
+                            Log.debug("[UserProfileViewModel]-프로필 이미지가 업데이트 성공: \(response)")
+                        case let .failure(error):
+                            Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 실패: \(error)")
+                        }
+                    }
+                }
+            case let .failure(error):
+                Log.debug("[UserProfileViewModel]-이미지 로드 실패: \(error)")
             }
         }
     }
@@ -114,12 +111,12 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
         deleteUserProfileUseCase.delete { result in
             switch result {
             case let .success(updatedProfile):
-                self.userData.value.profileImageUrl
+                self.imageItemModel.value.profileImageUrl
                 completion(true)
-                Log.debug("프로필 이미지가 성공적으로 삭제되었습니다.")
+                Log.debug("[UserProfileViewModel]-프로필 이미지가 성공적으로 삭제되었습니다.")
             case let .failure(error):
                 completion(false)
-                Log.debug("프로필 이미지 삭제 실패: \(error)")
+                Log.debug("[UserProfileViewModel]-프로필 이미지 삭제 실패: \(error)")
             }
         }
     }
