@@ -1,9 +1,3 @@
-//
-//  FetchUserProfileUseCase.swift
-//  clean-architecture-seminar
-//
-//  Created by 최희진 on 9/4/24.
-//
 
 import Foundation
 
@@ -19,9 +13,9 @@ protocol FetchUserProfileUseCase {
 // MARK: - DefaultFetchUserProfileUseCase
 
 class DefaultFetchUserProfileUseCase: FetchUserProfileUseCase {
-    private let repository: FetchUserProfileProtocol
+    private let repository: UserProfileRepository
 
-    init(repository: FetchUserProfileProtocol) {
+    init(repository: UserProfileRepository) {
         self.repository = repository
     }
 

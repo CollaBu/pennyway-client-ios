@@ -31,23 +31,37 @@ final class ProfileSceneDIContainer {
         DefaultFetchUserProfileUseCase(repository: makeProfileRepository())
     }
 
+    private func makeDeleteProfileUseCase() -> DeleteUserProfileUseCase {
+        DefaultDeleteUserProfileUseCase(repository: makeProfileRepository())
+    }
+
+    private func makeUpdateProfileUseCase() -> UpdateUserProfileUseCase {
+        DefaultUpdateUserProfileUseCase(repository: makeProfileRepository())
+    }
+
     // MARK: - Repository
 
-    private func makeProfileRepository() -> FetchUserProfileProtocol {
+    private func makeProfileRepository() -> UserProfileRepository {
         DefaultUserProfileRepository()
+    }
+
+    private func makeProfileRepository() -> ProfileImageRepository {
+        DefaultProfileImageRepository()
     }
 
     // MARK: - View Model
 
     private func makeProfileViewModel() -> any UserProfileViewModel {
-        DefaultUserProfileViewModel(fetchUserProfileUseCase: makeProfileUseCase())
+        DefaultUserProfileViewModel(
+            fetchUserProfileUseCase: makeProfileUseCase(),
+            deleteUserProfileUseCase: makeDeleteProfileUseCase(), 
+            updateUserProfileUseCase: makeUpdateProfileUseCase())
     }
 
     // MARK: - View Model Wrapper
 
     private func makeUserProfileViewModelWrapper() -> UserProfileViewModelWrapper {
         UserProfileViewModelWrapper(
-            viewModel: makeProfileViewModel()
-        )
+            viewModel: makeProfileViewModel())
     }
 }

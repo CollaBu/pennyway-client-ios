@@ -1,9 +1,3 @@
-//
-//  DeleteUserProfileUseCase.swift
-//  pennyway-client-iOS
-//
-//  Created by 아우신얀 on 9/20/24.
-//
 
 import Foundation
 
@@ -13,24 +7,26 @@ import Foundation
 protocol DeleteUserProfileUseCase {
     /// 사용자 프로필을 삭제하는 함수
     /// - Returns: `UserProfileItemModel` 타입의 업데이트된 사용자 프로필 데이터를 반환.
-    func delete() -> UserProfileItemModel
+    func delete(completion: @escaping (Result<ProfileImageItemModel, Error>) -> Void)
 }
 
 // MARK: - DefaultDeleteUserProfileUseCase
 
 class DefaultDeleteUserProfileUseCase: DeleteUserProfileUseCase {
-    private let repository: FetchUserProfileProtocol
+    private let repository: ProfileImageRepository
 
-    init(repository: FetchUserProfileProtocol) {
+    init(repository: ProfileImageRepository) {
         self.repository = repository
     }
 
-    func delete() -> UserProfileItemModel {
-        let deletedUserProfileUrl = repository.deleteUserProfile()
-
-        // 삭제된 profileUrl을 UserProfileItemModel을 생성해서 전달
-        var updateUserProfileUrl = UserProfileItemModel(userData: repository.fetchUserProfile())
-        updateUserProfileUrl.profileImageUrl = deletedUserProfileUrl
-        return updateUserProfileUrl
+    func delete(completion _: @escaping (Result<ProfileImageItemModel, Error>) -> Void) {
+        repository.deleteUserProfile { result in
+            switch result {
+            case let .success(result):
+                ProfileImageItemModel(profileImageUrl: "")
+            case let .failure(error):
+                Log.debug("프로필 삭제 실패")
+            }
+        }
     }
 }

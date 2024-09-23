@@ -196,6 +196,8 @@ struct ProfileNavigationState: Equatable {
 /// `DefaultUserProfileViewModel`의 `userData` 변화를 관찰하여 UI가 자동으로 업데이트되도록 하는 클래스
 final class UserProfileViewModelWrapper: ObservableObject {
     @Published var userData: UserProfileItemModel
+
+    @Published var profileImageData: Data?
     var viewModel: any UserProfileViewModel
 
     init(viewModel: any UserProfileViewModel) {

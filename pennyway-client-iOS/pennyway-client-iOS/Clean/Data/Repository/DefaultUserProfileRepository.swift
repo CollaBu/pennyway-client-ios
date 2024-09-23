@@ -1,13 +1,7 @@
-//
-//  DefaultUserProfileRepository.swift
-//  pennyway-client-iOS
-//
-//  Created by 최희진 on 9/19/24.
-//
 
 import Foundation
 
-class DefaultUserProfileRepository: FetchUserProfileProtocol {
+class DefaultUserProfileRepository: UserProfileRepository {
     func fetchUserProfile() -> UserModel {
         // ProfileResponseDTO 초기 데이터를 설정
         let profileResponseDTO = ProfileResponseDTO(
@@ -24,12 +18,9 @@ class DefaultUserProfileRepository: FetchUserProfileProtocol {
             createdAt: "2023-09-04 12:00:00",
             oauthAccount: OAuthAccountDTO(kakao: true, google: false, apple: false)
         )
+        // 생성자 매개변수 너무 많다? -> 빌더 패턴 써라
 
         // toModel()을 호출하여 UserModel로 변환 후 반환
         return profileResponseDTO.toModel()
-    }
-
-    func deleteUserProfile() -> String {
-        return "" // 빈 문자열로 줘서 초기화
     }
 }
