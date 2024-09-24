@@ -11,7 +11,6 @@ struct EditProfilePopUpView: View {
     @Binding var sourceType: UIImagePickerController.SourceType
     @Binding var imageUrl: String
 
-    @ObservedObject var deleteProfileImageViewModel: DeleteProfileImageViewModel // TODO: 코드 삭제
     @ObservedObject var presignedUrlViewModel: PresignedUrlViewModel
     @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
 
@@ -90,7 +89,7 @@ struct EditProfilePopUpView: View {
         if let url = getUserData()?.profileImageUrl, !url.isEmpty {
             viewModelWrapper.viewModel.deleteProfileImage { success in
                 if success {
-                    viewModelWrapper.viewModel.imageItemModel.value.delete()
+                    viewModelWrapper.viewModel.userData.value.imageDelete()
                     selectedUIImage = nil
                     imageUrl = ""
                     Log.debug("deleteProfileImageApi 성공")

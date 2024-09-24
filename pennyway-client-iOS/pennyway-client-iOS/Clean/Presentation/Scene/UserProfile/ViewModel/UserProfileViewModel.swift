@@ -16,7 +16,6 @@ protocol UserProfileViewModelInput {
 
 protocol UserProfileViewModelOutput {
     var userData: Observable<UserProfileItemModel> { get }
-    var imageItemModel: Observable<ProfileImageItemModel> { get }
 }
 
 // MARK: - UserProfileViewModel
@@ -28,7 +27,6 @@ protocol UserProfileViewModel: UserProfileViewModelInput, UserProfileViewModelOu
 class DefaultUserProfileViewModel: UserProfileViewModel {
     // TODO: 이름 수정하기!
     var userData: Observable<UserProfileItemModel>
-    var imageItemModel: Observable<ProfileImageItemModel>
 
     private let fetchUserProfileUseCase: FetchUserProfileUseCase // 유저 정보 조회
     private let deleteUserProfileUseCase: DeleteUserProfileUseCase // 사용자 프로필 삭제
@@ -46,10 +44,6 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
             username: "",
             name: "기본", 
             profileImageUrl: ""
-        ))
-
-        imageItemModel = Observable(ProfileImageItemModel(
-            profileImage: UIImage(named: "icon_illust_no_image_no_margin")
         ))
     }
 
@@ -73,7 +67,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
             switch result {
             case let .success(image):
                 DispatchQueue.main.async {
-                    self?.imageItemModel.value.update(image: image)
+                    self?.userData.value.imageUpdate(image: image)
                     completion(.success(image)) // 이미지 로드 성공 시 completion 호출
                 }
             case let .failure(error):
@@ -89,7 +83,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
             switch result {
             case let .success(image):
                 DispatchQueue.main.async {
-                    self?.imageItemModel.value.profileImage = image // 프로필 이미지 업데이트
+                    self?.userData.value.profileImage = image // 프로필 이미지 업데이트
 
                     // 서버에 URL 전송
                     self?.updateUserProfileUseCase.update(from: url) { result in
@@ -112,7 +106,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
         deleteUserProfileUseCase.delete { result in
             switch result {
             case true:
-                self.imageItemModel.value.delete()
+                self.userData.value.imageDelete()
                 completion(true)
                 Log.debug("[UserProfileViewModel]-프로필 이미지가 성공적으로 삭제")
             case false:

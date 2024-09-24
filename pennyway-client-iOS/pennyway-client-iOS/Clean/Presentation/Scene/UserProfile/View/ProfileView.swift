@@ -89,7 +89,6 @@ struct ProfileView: View {
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType,
                         imageUrl: $imageUrl,
-                        deleteProfileImageViewModel: deleteProfileImageViewModel,
                         presignedUrlViewModel: presignedUrlViewModel,
                         viewModelWrapper: viewModelWrapper
                     )
@@ -127,7 +126,6 @@ struct ProfileView: View {
                     selectedUIImage: $selectedUIImage,
                     imageUrl: $imageUrl,
                     viewModel: profileImageViewModel, 
-                    deleteViewModel: deleteProfileImageViewModel,
                     viewModelWrapper: viewModelWrapper
                 )
                 .background(Color("White01"))
@@ -169,11 +167,11 @@ struct ProfileView: View {
                 switch result {
                 case let .success(loadedImage):
                     // 이미지를 성공적으로 로드한 경우
-                    viewModelWrapper.viewModel.imageItemModel.value.update(image: loadedImage)
+                    viewModelWrapper.viewModel.userData.value.imageUpdate(image: loadedImage)
                     Log.debug("[ProfileView]-image: \(imageUrl)")
                 case let .failure(error):
                     // 이미지를 로드하는 데 실패한 경우
-                    Log.debug("[ProfileView]이미지 로드에 실패: \(error)")
+                    Log.debug("[ProfileView]-이미지 로드에 실패: \(error)")
                 }
             }
         }
