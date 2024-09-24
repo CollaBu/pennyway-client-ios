@@ -15,8 +15,6 @@ struct ProfileView: View {
     @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
-    @State var imageUrl = ""
-
     let profileViewHeight = 267 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
@@ -94,7 +92,6 @@ struct ProfileView: View {
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType,
-                        imageUrl: $imageUrl,
                         deleteProfileImageViewModel: deleteProfileImageViewModel,
                         presignedUrlViewModel: presignedUrlViewModel
                     )
