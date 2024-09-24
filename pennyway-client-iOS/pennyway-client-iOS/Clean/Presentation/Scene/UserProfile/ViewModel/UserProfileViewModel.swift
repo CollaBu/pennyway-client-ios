@@ -41,7 +41,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
         userData = Observable(UserProfileItemModel(
             imageUrl: "",
             username: "",
-            name: "기본"
+            name: ""
         ))
     }
 
@@ -65,27 +65,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 
     /// 프로필 이미지를 업로드하는 메서드
     private func uploadPresignedUrl(image: UIImage) {
-        // Presigned URL 생성
         presignedUrlUseCase.generate(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue, image: image)
-
-//        { result in
-//            switch result {
-//            case let .success(presignedUrl):
-//                Log.debug("Presigned URL 생성 성공: \(presignedUrl.presignedUrl)")
-//
-//                // Presigned URL을 사용하여 이미지 업로드
-//                self.storePresignedUrlUseCase.execute(presignedUrl: presignedUrl.presignedUrl, image: image) { result in
-//                    switch result {
-//                    case .success:
-//                        Log.debug("이미지 업로드 성공")
-//                    case let .failure(error):
-//                        Log.error("이미지 업로드 실패: \(error)")
-//                    }
-//                }
-//            case let .failure(error):
-//                Log.error("Presigned URL 생성 실패: \(error)")
-//            }
-//        }
     }
 }
 

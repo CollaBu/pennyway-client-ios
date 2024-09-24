@@ -16,6 +16,8 @@ struct ProfileView: View {
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
     @State var imageUrl = ""
+    @State private var username: String = ""
+    @State var name: String = ""
 
     let profileViewHeight = 267 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
@@ -30,7 +32,7 @@ struct ProfileView: View {
                 content
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .setTabBarVisibility(isHidden: showPopUpView)
-                    .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
+                    .navigationBarColor(UIColor(named: "White01"), title: username)
                     .background(Color("Gray01"))
                     .navigationBarBackButtonHidden(true)
                     .toolbar {
@@ -132,7 +134,8 @@ struct ProfileView: View {
                     navigateToEditUsername: $navigateToEditUsername,
                     selectedUIImage: $selectedUIImage,
                     imageUrl: $imageUrl,
-                    viewModel: profileImageViewModel, 
+                    name: $name,
+                    viewModel: profileImageViewModel,
                     deleteViewModel: deleteProfileImageViewModel,
                     viewModelWrapper: viewModelWrapper
                 )
@@ -169,19 +172,16 @@ struct ProfileView: View {
 
     private func loadUserData() {
         imageUrl = viewModelWrapper.userData.imageUrl
+        username = viewModelWrapper.userData.username
+        name = viewModelWrapper.userData.name
         profileImageViewModel.loadImageUrl(from: imageUrl)
 
         Log.debug("이미지 확인: \(imageUrl)")
-
-//        if let userData = getUserData() {
-//            imageUrl = userData.profileImageUrl
-
-//        }
     }
 
     func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
-            if updateCount < 2 {
+            if updateCount < 4 {
                 updateCount += 1
             } else if initialOffset == 0 {
                 initialOffset = offset

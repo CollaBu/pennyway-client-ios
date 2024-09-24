@@ -8,16 +8,11 @@ struct ProfileUserInfoView: View {
     @Binding var navigateToEditUsername: Bool
     @Binding var selectedUIImage: UIImage?
     @Binding var imageUrl: String
+    @Binding var name: String
     
     @ObservedObject var viewModel: ProfileImageViewModel
     @ObservedObject var deleteViewModel: DeleteProfileImageViewModel
     @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
-    
-//    private func loadUserData() {
-//        if let userData = getUserData() {
-//            name = userData.name // 사용자 이름
-//        }
-//    }
     
     var body: some View {
         ZStack {
@@ -63,7 +58,7 @@ struct ProfileUserInfoView: View {
                 
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 
-                Text("\(viewModelWrapper.userData.name)")
+                Text("\(name)")
                     .font(.H3SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
                     .padding(1)
