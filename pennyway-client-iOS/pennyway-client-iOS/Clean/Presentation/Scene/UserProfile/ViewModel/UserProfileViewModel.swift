@@ -44,11 +44,12 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 
         userData = Observable(UserProfileItemModel(
             username: "",
-            name: "기본"
+            name: "기본", 
+            profileImageUrl: ""
         ))
 
         imageItemModel = Observable(ProfileImageItemModel(
-            profileImageUrl: UIImage(named: "icon_illust_no_image_no_margin")
+            profileImage: UIImage(named: "icon_illust_no_image_no_margin")
         ))
     }
 
@@ -88,7 +89,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
             switch result {
             case let .success(image):
                 DispatchQueue.main.async {
-                    self?.imageItemModel.value.profileImageUrl = image // 프로필 이미지 업데이트
+                    self?.imageItemModel.value.profileImage = image // 프로필 이미지 업데이트
 
                     // 서버에 URL 전송
                     self?.updateUserProfileUseCase.update(from: url) { result in
@@ -110,13 +111,13 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
     func deleteProfileImage(completion: @escaping (Bool) -> Void) {
         deleteUserProfileUseCase.delete { result in
             switch result {
-            case let .success(updatedProfile):
-                self.imageItemModel.value.profileImageUrl
+            case true:
+                self.imageItemModel.value.delete()
                 completion(true)
-                Log.debug("[UserProfileViewModel]-프로필 이미지가 성공적으로 삭제되었습니다.")
-            case let .failure(error):
+                Log.debug("[UserProfileViewModel]-프로필 이미지가 성공적으로 삭제")
+            case false:
                 completion(false)
-                Log.debug("[UserProfileViewModel]-프로필 이미지 삭제 실패: \(error)")
+                Log.debug("[UserProfileViewModel]-프로필 이미지 삭제 실패")
             }
         }
     }

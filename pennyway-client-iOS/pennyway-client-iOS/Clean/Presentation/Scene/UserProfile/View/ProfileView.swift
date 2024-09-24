@@ -126,7 +126,9 @@ struct ProfileView: View {
                     navigateToEditUsername: $navigateToEditUsername,
                     selectedUIImage: $selectedUIImage,
                     imageUrl: $imageUrl,
-                    viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
+                    viewModel: profileImageViewModel, 
+                    deleteViewModel: deleteProfileImageViewModel,
+                    viewModelWrapper: viewModelWrapper
                 )
                 .background(Color("White01"))
                 .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
@@ -158,7 +160,7 @@ struct ProfileView: View {
             .frame(height: ScreenUtil.calculateAvailableHeight())
         }
     }
-    
+
     private func loadUserDataImage() {
         if let userData = getUserData() {
             imageUrl = userData.profileImageUrl
@@ -171,7 +173,7 @@ struct ProfileView: View {
                     Log.debug("[ProfileView]-image: \(imageUrl)")
                 case let .failure(error):
                     // 이미지를 로드하는 데 실패한 경우
-                    Log.debug("[ProfileView]이미지 로드를 실패했습니다: \(error)")
+                    Log.debug("[ProfileView]이미지 로드에 실패: \(error)")
                 }
             }
         }

@@ -11,7 +11,7 @@ struct EditProfilePopUpView: View {
     @Binding var sourceType: UIImagePickerController.SourceType
     @Binding var imageUrl: String
 
-    @ObservedObject var deleteProfileImageViewModel: DeleteProfileImageViewModel
+    @ObservedObject var deleteProfileImageViewModel: DeleteProfileImageViewModel // TODO: 코드 삭제
     @ObservedObject var presignedUrlViewModel: PresignedUrlViewModel
     @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
 
@@ -87,26 +87,13 @@ struct EditProfilePopUpView: View {
     }
 
     private func deleteProfileImage() {
-//        if let url = getUserData()?.profileImageUrl, !url.isEmpty {
-//            deleteProfileImageViewModel.deleteProfileImageApi { success in
-//                if success {
-//                    Log.debug("deleteProfileImageApi 성공")
-//                    selectedUIImage = nil
-//                    imageUrl = ""
-//                } else {
-//                    Log.debug("삭제 api 호출 실패")
-//                }
-//                isPresented = false
-//                showPopUpView = false
-//                isHiddenTabBar = false
-//            }
-
-        if let url = viewModelWrapper.viewModel.imageItemModel.value.profileImageUrl, url != nil {
+        if let url = getUserData()?.profileImageUrl, !url.isEmpty {
             viewModelWrapper.viewModel.deleteProfileImage { success in
                 if success {
-                    Log.debug("deleteProfileImageApi 성공")
+                    viewModelWrapper.viewModel.imageItemModel.value.delete()
                     selectedUIImage = nil
                     imageUrl = ""
+                    Log.debug("deleteProfileImageApi 성공")
                 } else {
                     Log.debug("삭제 api 호출 실패")
                 }
@@ -114,12 +101,30 @@ struct EditProfilePopUpView: View {
                 showPopUpView = false
                 isHiddenTabBar = false
             }
-
         } else {
             Log.debug("프로필 사진 비어 있음")
-            isPresented = false
-            showPopUpView = false
-            isHiddenTabBar = false
+            // gg
+
+//            if viewModelWrapper.viewModel.imageItemModel.value.profileImage != nil {
+//                viewModelWrapper.viewModel.deleteProfileImage { success in
+//                    if success {
+//                        selectedUIImage = nil
+//                        imageUrl = ""
+//                        Log.debug("deleteProfileImageApi 성공")
+//                    } else {
+//                        Log.debug("삭제 api 호출 실패")
+//                    }
+//                    isPresented = false
+//                    showPopUpView = false
+//                    isHiddenTabBar = false
+//                }
+//
+//            } else {
+//                Log.debug("프로필 사진 비어 있음")
+//                isPresented = false
+//                showPopUpView = false
+//                isHiddenTabBar = false
+//            }
         }
     }
 

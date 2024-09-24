@@ -5,19 +5,20 @@ import UIKit
 // MARK: - ProfileImageItemModel
 
 struct ProfileImageItemModel: Equatable {
-    var profileImageUrl: UIImage?
+    var profileImage: UIImage?
 
     mutating func delete() {
-        profileImageUrl = nil
+        profileImage = nil
     }
 
     mutating func update(image: UIImage) {
-        profileImageUrl = image
+        profileImage = image
     }
 }
 
-extension ProfileImageItemModel {
-    init(profileImageUrl _: UIImage) {
-        profileImageUrl = nil
-    }
-}
+//
+// extension ProfileImageItemModel {
+//    init(profileImageUrl _: UIImage) {
+//        profileImageUrl = nil
+//    }
+// }

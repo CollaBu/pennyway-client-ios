@@ -15,7 +15,7 @@ final class DefaultProfileImageRepository: ProfileImageRepository {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
 
                         updateUserField(fieldName: "profileImageUrl", value: "")
-                        Log.debug("사진 삭제 완료")
+                        Log.debug("[DefaultProfileImageRepository]:사진 삭제 완료")
 
                         completion(.success(()))
                     } catch {

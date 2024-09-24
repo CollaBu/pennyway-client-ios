@@ -13,7 +13,9 @@ struct ProfileUserInfoView: View {
     @State private var refreshView = false
     
     @ObservedObject var viewModel: ProfileImageViewModel
-    @ObservedObject var deleteViewModel: DeleteProfileImageViewModel
+    @ObservedObject var deleteViewModel: DeleteProfileImageViewModel // TODO: 코드 삭제
+    
+    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
 
     private func loadUserData() {
         if let userData = getUserData() {
@@ -138,9 +140,19 @@ struct ProfileUserInfoView: View {
             .background(Color("White01"))
             .onAppear {
                 loadUserData()
-                Log.debug("deleteViewModel.profileImageUrl: \(deleteViewModel.profileImageUrl)")
+                
+                Log.debug("[ProfileUserInfoView]: \(viewModelWrapper.viewModel.imageItemModel.value.profileImage)")
                 Log.debug("selectedUIImage: \(selectedUIImage)")
-                Log.debug("viewModel.imageUrl: \(viewModel.imageUrl)")
+            }
+            .onChange(of: viewModelWrapper.viewModel.imageItemModel.value.profileImage) { result in
+                Log.debug("[ProfileUserInfoView] - onChange실행중")
+                if result == nil {
+                    selectedUIImage = nil
+                } else {
+                    if let updatedImage = viewModelWrapper.viewModel.imageItemModel.value.profileImage {
+                        selectedUIImage = updatedImage
+                    }
+                }
             }
         }
     }
