@@ -55,8 +55,6 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
                 self.userData.value.username = userProfile.username
                 self.userData.value.name = userProfile.name
 
-                Log.debug(self.userData.value)
-
             case let .failure(error):
                 Log.error("프로필 정보 조회 실패: \(error)")
             }

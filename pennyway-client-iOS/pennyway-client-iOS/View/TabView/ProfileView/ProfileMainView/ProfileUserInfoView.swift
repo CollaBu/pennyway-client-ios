@@ -7,8 +7,6 @@ struct ProfileUserInfoView: View {
     @Binding var showPopUpView: Bool
     @Binding var navigateToEditUsername: Bool
     @Binding var selectedUIImage: UIImage?
-    @Binding var imageUrl: String
-    @Binding var name: String
     
     @ObservedObject var viewModel: ProfileImageViewModel
     @ObservedObject var deleteViewModel: DeleteProfileImageViewModel
@@ -58,7 +56,7 @@ struct ProfileUserInfoView: View {
                 
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 
-                Text("\(name)")
+                Text("\(viewModelWrapper.userData.name)")
                     .font(.H3SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
                     .padding(1)
@@ -130,7 +128,7 @@ struct ProfileUserInfoView: View {
             .frame(maxWidth: .infinity, maxHeight: 267 * DynamicSizeFactor.factor())
             .background(Color("White01"))
             .onAppear {
-                viewModelWrapper.viewModel.getUser()
+//                viewModelWrapper.viewModel.getUser()
                 Log.debug("deleteViewModel.profileImageUrl: \(deleteViewModel.profileImageUrl)")
                 Log.debug("selectedUIImage: \(selectedUIImage)")
                 Log.debug("viewModel.imageUrl: \(viewModel.imageUrl)")
