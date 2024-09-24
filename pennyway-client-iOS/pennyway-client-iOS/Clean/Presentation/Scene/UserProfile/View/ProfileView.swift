@@ -58,7 +58,7 @@ struct ProfileView: View {
                             if success {
                                 presignedUrlViewModel.storePresignedUrlApi { success in
                                     if success {
-                                        profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
+                                        viewModelWrapper.viewModel.updateProfileImage(from: presignedUrlViewModel.payload)
                                     }
                                 }
                             }

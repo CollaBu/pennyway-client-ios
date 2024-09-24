@@ -79,24 +79,24 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 
     /// 업데이트 된 사진을 서버에 전달하는 함수
     func updateProfileImage(from url: String) {
-        loadProfileImage(from: url) { [weak self] result in
+        updateUserProfileUseCase.update(from: url) { result in
             switch result {
-            case let .success(image):
-                DispatchQueue.main.async {
-                    self?.userData.value.profileImage = image // 프로필 이미지 업데이트
-
-                    // 서버에 URL 전송
-                    self?.updateUserProfileUseCase.update(from: url) { result in
-                        switch result {
-                        case let .success(response):
-                            Log.debug("[UserProfileViewModel]-프로필 이미지가 업데이트 성공: \(response)")
-                        case let .failure(error):
-                            Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 실패: \(error)")
+            case let .success(response):
+                Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 성공: \(response)")
+                self.loadProfileImage(from: url) { loadResult in
+                    switch loadResult {
+                    case let .success(image):
+                        DispatchQueue.main.async {
+                            self.userData.value.imageUpdate(image: image) // 이미지 업데이트
+                            Log.debug("[UserProfileViewModel]-이미지 업데이트 성공")
                         }
+                    case let .failure(error):
+                        Log.debug("[UserProfileViewModel]-이미지 로드 실패: \(error)")
                     }
                 }
+
             case let .failure(error):
-                Log.debug("[UserProfileViewModel]-이미지 로드 실패: \(error)")
+                Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 실패: \(error)")
             }
         }
     }

@@ -45,7 +45,7 @@ final class DefaultProfileImageRepository: ProfileImageRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(UploadProfileImageResponseDto.self, from: responseData)
-                        Log.debug("사용자 프로필 사진 등록 성공: \(response)")
+                        Log.debug("[DefaultProfileImageRepository]:사용자 프로필 사진 등록 성공: \(response)")
                         updateUserField(fieldName: "profileImageUrl", value: response.data.profileImageUrl)
 
                     } catch {
@@ -85,7 +85,6 @@ final class DefaultProfileImageRepository: ProfileImageRepository {
     }
 
     /// userDefaults의 저장된 이미지 가저옴
-    /// Warning: error발생시 강제언래핑해서 에러를 처리하고 있음! - 위험요소
     func loadProfileImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         guard let url = URL(string: url) else {
             return
@@ -99,7 +98,9 @@ final class DefaultProfileImageRepository: ProfileImageRepository {
                     // UIImage -> Model 타입 변환
                     completion(.success(downloadedImage))
                 }
-            } else {
+            }
+
+            if error != nil {
                 // 에러가 발생했거나 유효한 데이터를 받지 못한 경우
                 DispatchQueue.main.async {
                     completion(.failure(error!))
