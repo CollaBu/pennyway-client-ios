@@ -158,6 +158,9 @@
 		4A6CC1E02C80E3F600D638B2 /* ScreenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6CC1DF2C80E3F600D638B2 /* ScreenUtil.swift */; };
 		4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */; };
 		4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6E62D72BA6082100111246 /* SignUpView.swift */; };
+		4A7354602CA45BBA002A856F /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A73545F2CA45BBA002A856F /* LoginUseCase.swift */; };
+		4A7354622CA45BDD002A856F /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7354612CA45BDD002A856F /* LoginRepository.swift */; };
+		4A7354642CA45C0B002A856F /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7354632CA45C0B002A856F /* DefaultLoginRepository.swift */; };
 		4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7514D62C51713F00573671 /* PhoneViewModelHandlers.swift */; };
 		4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */; };
 		4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762AEE2B99A16B001C1188 /* MainView.swift */; };
@@ -516,6 +519,9 @@
 		4A6E62D32BA18F9B00111246 /* pennyway-client-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pennyway-client-iOS.entitlements"; sourceTree = "<group>"; };
 		4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerificationContentView.swift; sourceTree = "<group>"; };
 		4A6E62D72BA6082100111246 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		4A73545F2CA45BBA002A856F /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		4A7354612CA45BDD002A856F /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		4A7354632CA45C0B002A856F /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
 		4A7514D62C51713F00573671 /* PhoneViewModelHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewModelHandlers.swift; sourceTree = "<group>"; };
 		4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pennyway-client-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A762AEC2B99A16B001C1188 /* pennyway_client_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pennyway_client_iOSApp.swift; sourceTree = "<group>"; };
@@ -1030,6 +1036,7 @@
 				4A12FEF02C9C48B900DE10BC /* FetchUserProfileRepository.swift */,
 				4AABDBB72C9C87C300E9436D /* PresignedUrlRepository.swift */,
 				4ADACB012CA3B984003AAA3A /* ProfileImageRepository.swift */,
+				4A7354612CA45BDD002A856F /* LoginRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1040,6 +1047,7 @@
 				4A12FEF22C9C48D500DE10BC /* FetchUserProfileUseCase.swift */,
 				4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */,
 				4ADACB032CA3C4E0003AAA3A /* DeleteImageUseCase.swift */,
+				4A73545F2CA45BBA002A856F /* LoginUseCase.swift */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
@@ -1050,6 +1058,7 @@
 				4A12FEF82C9C49D500DE10BC /* DefaultUserProfileRepository.swift */,
 				4AABDBB52C9C86F000E9436D /* DefaultPresignedUrlRepository.swift */,
 				4ADACAFF2CA3B973003AAA3A /* DefaultProfileImageRepository.swift */,
+				4A7354632CA45C0B002A856F /* DefaultLoginRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2500,6 +2509,7 @@
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
 				4A3701BD2C08F7B600F0AEBA /* TargetAmountViewModel.swift in Sources */,
 				4A12FF152C9C4BDE00DE10BC /* RootComponent.swift in Sources */,
+				4A7354602CA45BBA002A856F /* LoginUseCase.swift in Sources */,
 				4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */,
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
 				4A6C79DB2C46D067009463E4 /* ProfileActiveNavigation.swift in Sources */,
@@ -2594,6 +2604,7 @@
 				4AE8F3B62C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				4A8571442BC7C5EB0082CE47 /* OAuthSignUpViewModel.swift in Sources */,
+				4A7354642CA45C0B002A856F /* DefaultLoginRepository.swift in Sources */,
 				4AABDBB62C9C86F000E9436D /* DefaultPresignedUrlRepository.swift in Sources */,
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
@@ -2708,6 +2719,7 @@
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
 				D8180C002BE507E100F837FB /* FindIdView.swift in Sources */,
 				D8180C082BE5168800F837FB /* (null) in Sources */,
+				4A7354622CA45BDD002A856F /* LoginRepository.swift in Sources */,
 				B599E4DE2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift in Sources */,
 				D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */,
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
