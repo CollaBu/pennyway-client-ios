@@ -128,7 +128,7 @@ struct ProfileUserInfoView: View {
             .frame(maxWidth: .infinity, maxHeight: 267 * DynamicSizeFactor.factor())
             .background(Color("White01"))
             .onAppear {
-//                viewModelWrapper.viewModel.getUser()
+                viewModelWrapper.viewModel.getUser()
                 Log.debug("deleteViewModel.profileImageUrl: \(deleteViewModel.profileImageUrl)")
                 Log.debug("selectedUIImage: \(selectedUIImage)")
                 Log.debug("viewModel.imageUrl: \(viewModel.imageUrl)")
