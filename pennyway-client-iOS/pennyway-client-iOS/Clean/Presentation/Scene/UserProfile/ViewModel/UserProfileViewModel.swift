@@ -14,6 +14,7 @@ protocol UserProfileViewModelInput {
     func getUser()
     func uploadPresignedUrl(_ image: UIImage)
     func loadProfileImage(completion: @escaping (Result<UIImage, Error>) -> Void)
+    func deleteProfileImage(completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - UserProfileViewModelOutput
@@ -33,12 +34,16 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 
     private let fetchUserProfileUseCase: FetchUserProfileUseCase
     private let presignedUrlUseCase: PresignedUrlUseCase
+    private let deleteImageUseCase: DeleteImageUseCase
 
     init(fetchUserProfileUseCase: FetchUserProfileUseCase,
-         presignedUrlUseCase: PresignedUrlUseCase)
+         presignedUrlUseCase: PresignedUrlUseCase,
+         deleteImageUseCase: DeleteImageUseCase)
     {
         self.fetchUserProfileUseCase = fetchUserProfileUseCase
         self.presignedUrlUseCase = presignedUrlUseCase
+        self.deleteImageUseCase = deleteImageUseCase
+
         userData = Observable(UserProfileItemModel(
             username: "",
             name: "",
@@ -56,7 +61,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
                 self.userData.value.username = userProfile.username
                 self.userData.value.name = userProfile.name
 
-                Log.debug("[DefaultUserProfileViewModel]-유저정보 조회 \(self.userData)")
+                Log.debug("[DefaultUserProfileViewModel]-유저정보 조회 \(self.userData.value)")
 
             case let .failure(error):
                 Log.error("프로필 정보 조회 실패: \(error)")
@@ -91,6 +96,20 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
             case let .failure(error):
                 Log.debug("Failed to load image: \(error)")
                 completion(.failure(error)) // 이미지 로드 실패 시 completion 호출
+            }
+        }
+    }
+
+    func deleteProfileImage(completion: @escaping (Bool) -> Void) {
+        deleteImageUseCase.delete { result in
+            switch result {
+            case true:
+                self.userData.value.imageDelete()
+                completion(true)
+                Log.debug("[UserProfileViewModel]-프로필 이미지가 성공적으로 삭제")
+            case false:
+                completion(false)
+                Log.debug("[UserProfileViewModel]-프로필 이미지 삭제 실패")
             }
         }
     }

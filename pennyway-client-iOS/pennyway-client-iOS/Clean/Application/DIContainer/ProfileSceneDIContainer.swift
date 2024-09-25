@@ -37,6 +37,10 @@ final class ProfileSceneDIContainer {
         )
     }
 
+    private func makeDeleteImageUseCase() -> DeleteImageUseCase {
+        DefaultDeleteImageUseCase(repository: makeProfileImageRepository())
+    }
+
     // MARK: - Repository
 
     private func makeProfileRepository() -> FetchUserProfileRepository {
@@ -56,7 +60,8 @@ final class ProfileSceneDIContainer {
     private func makeProfileViewModel() -> any UserProfileViewModel {
         DefaultUserProfileViewModel(
             fetchUserProfileUseCase: makeProfileUseCase(),
-            presignedUrlUseCase: makePresignedUrlUseCase()
+            presignedUrlUseCase: makePresignedUrlUseCase(),
+            deleteImageUseCase: makeDeleteImageUseCase()
         )
     }
 

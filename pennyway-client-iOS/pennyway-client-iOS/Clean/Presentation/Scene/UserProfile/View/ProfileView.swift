@@ -55,16 +55,6 @@ struct ProfileView: View {
                         if let selectedUIImage {
                             viewModelWrapper.viewModel.uploadPresignedUrl(selectedUIImage)
                             viewModelWrapper.viewModel.getUser()
-//                            presignedUrlViewModel.image = selectedUIImage
-//                            presignedUrlViewModel.generatePresignedUrlApi { success in
-//                                if success {
-//                                    presignedUrlViewModel.storePresignedUrlApi { success in
-//                                        if success {
-//                                            profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
-//                                        }
-//                                    }
-//                                }
-//                            }
                         }
 
                     }) {
@@ -92,8 +82,8 @@ struct ProfileView: View {
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType,
-                        deleteProfileImageViewModel: deleteProfileImageViewModel,
-                        presignedUrlViewModel: presignedUrlViewModel
+                        presignedUrlViewModel: presignedUrlViewModel,
+                        viewModelWrapper: viewModelWrapper
                     )
                     .edgesIgnoringSafeArea(.bottom)
                 }
@@ -164,8 +154,6 @@ struct ProfileView: View {
     }
 
     private func loadUserData() {
-//        profileImageViewModel.loadImageUrl(from: viewModelWrapper.userData.imageUrl)
-
         viewModelWrapper.viewModel.loadProfileImage { result in
             switch result {
             case let .success(loadedImage):

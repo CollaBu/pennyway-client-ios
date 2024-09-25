@@ -251,6 +251,7 @@
 		4AD824792C7626C400AEF371 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD824782C7626C400AEF371 /* LayoutView.swift */; };
 		4ADACB002CA3B973003AAA3A /* DefaultProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACAFF2CA3B973003AAA3A /* DefaultProfileImageRepository.swift */; };
 		4ADACB022CA3B984003AAA3A /* ProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACB012CA3B984003AAA3A /* ProfileImageRepository.swift */; };
+		4ADACB042CA3C4E0003AAA3A /* DeleteImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACB032CA3C4E0003AAA3A /* DeleteImageUseCase.swift */; };
 		4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */; };
 		4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */; };
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
@@ -608,6 +609,7 @@
 		4AD824782C7626C400AEF371 /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
 		4ADACAFF2CA3B973003AAA3A /* DefaultProfileImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileImageRepository.swift; sourceTree = "<group>"; };
 		4ADACB012CA3B984003AAA3A /* ProfileImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageRepository.swift; sourceTree = "<group>"; };
+		4ADACB032CA3C4E0003AAA3A /* DeleteImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageUseCase.swift; sourceTree = "<group>"; };
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
 		4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRouter.swift; sourceTree = "<group>"; };
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
@@ -1037,6 +1039,7 @@
 			children = (
 				4A12FEF22C9C48D500DE10BC /* FetchUserProfileUseCase.swift */,
 				4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */,
+				4ADACB032CA3C4E0003AAA3A /* DeleteImageUseCase.swift */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
@@ -2610,6 +2613,7 @@
 				4A0BC6AF2BF6459B0036D900 /* DateExtensions.swift in Sources */,
 				4A5789812BDC1FF300AFEB26 /* InternalServerErrorCode.swift in Sources */,
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
+				4ADACB042CA3C4E0003AAA3A /* DeleteImageUseCase.swift in Sources */,
 				D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */,
 				4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
