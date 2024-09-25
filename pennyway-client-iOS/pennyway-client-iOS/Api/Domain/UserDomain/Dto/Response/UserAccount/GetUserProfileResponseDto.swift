@@ -8,13 +8,13 @@ struct GetUserProfileResponseDto: Codable {
 // MARK: - UserProfileData
 
 struct UserProfileData: Codable {
-    let user: UserData
+    let user: UserDataDto
 }
 
-// MARK: - UserData
+// MARK: - UserDataDto
 
-struct UserData: Codable {
-    let id: Int
+struct UserDataDto: Codable {
+    let id: Int64
     var username: String
     var name: String
     let isGeneralSignUp: Bool
@@ -23,22 +23,22 @@ struct UserData: Codable {
     var phone: String
     let profileVisibility: String
     let locked: Bool
-    var notifySetting: NotifySetting
+    var notifySetting: NotifySettingDto
     let createdAt: String
-    var oauthAccount: OauthAccount
+    var oauthAccount: OauthAccountDto
 }
 
-// MARK: - NotifySetting
+// MARK: - NotifySettingDto
 
-struct NotifySetting: Codable {
+struct NotifySettingDto: Codable {
     let accountBookNotify: Bool
     let feedNotify: Bool
     let chatNotify: Bool
 }
 
-// MARK: - OauthAccount
+// MARK: - OauthAccountDto
 
-struct OauthAccount: Codable {
+struct OauthAccountDto: Codable {
     let kakao: Bool
     let google: Bool
     let apple: Bool

@@ -17,32 +17,54 @@ final class ProfileSceneDIContainer {
 //    init(dependencies: Dependencies) {
 //        self.dependencies = dependencies
 //    }
-    
+
     // MARK: - Factory
 
     func makeProfileFactory() -> DefaultProfileFactory { // DefaultProfileFactory를 생성하여 반환
         let viewModelWrapper = makeUserProfileViewModelWrapper()
         return DefaultProfileFactory(userProfileViewModelWrapper: viewModelWrapper)
     }
-    
+
     // MARK: - Use Cases
 
     private func makeProfileUseCase() -> FetchUserProfileUseCase {
         DefaultFetchUserProfileUseCase(repository: makeProfileRepository())
     }
-    
+
+    private func makePresignedUrlUseCase() -> PresignedUrlUseCase {
+        DefaultPresignedUrlUseCase(urlRepository: makePresignedUrlRepository(),
+                                   imageRepository: makeProfileImageRepository()
+        )
+    }
+
+    private func makeDeleteImageUseCase() -> DeleteImageUseCase {
+        DefaultDeleteImageUseCase(repository: makeProfileImageRepository())
+    }
+
     // MARK: - Repository
 
-    private func makeProfileRepository() -> FetchUserProfileProtocol {
+    private func makeProfileRepository() -> FetchUserProfileRepository {
         DefaultUserProfileRepository()
     }
-    
+
+    private func makePresignedUrlRepository() -> PresignedUrlRepository {
+        DefaultPresignedUrlRepository()
+    }
+
+    private func makeProfileImageRepository() -> ProfileImageRepository {
+        DefaultProfileImageRepository()
+    }
+
     // MARK: - View Model
 
     private func makeProfileViewModel() -> any UserProfileViewModel {
-        DefaultUserProfileViewModel(fetchUserProfileUseCase: makeProfileUseCase())
+        DefaultUserProfileViewModel(
+            fetchUserProfileUseCase: makeProfileUseCase(),
+            presignedUrlUseCase: makePresignedUrlUseCase(),
+            deleteImageUseCase: makeDeleteImageUseCase()
+        )
     }
-    
+
     // MARK: - View Model Wrapper
 
     private func makeUserProfileViewModelWrapper() -> UserProfileViewModelWrapper {

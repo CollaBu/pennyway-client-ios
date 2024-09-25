@@ -33,14 +33,16 @@ struct MainTabView: View {
                 .tag(2)
                 .buttonStyle(BasicButtonStyleUtil())
 
-            AppComponent()
-                .makeRootView()
-                .tabItem {
-                    selection == 3 ? Image("icon_tabbar_profile_on") : Image("icon_tabbar_profile_off")
-                    Text("프로필")
-                }
-                .tag(3)
-                .buttonStyle(BasicButtonStyleUtil())
+            LazyView {
+                AppComponent()
+                    .makeRootView()
+            }
+            .tabItem {
+                selection == 3 ? Image("icon_tabbar_profile_on") : Image("icon_tabbar_profile_off")
+                Text("프로필")
+            }
+            .tag(3)
+            .buttonStyle(BasicButtonStyleUtil())
         }
         .accentColor(Color("Mint03"))
         .onAppear {

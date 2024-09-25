@@ -15,8 +15,6 @@ struct ProfileView: View {
     @StateObject var presignedUrlViewModel = PresignedUrlViewModel()
     @StateObject var profileImageViewModel = ProfileImageViewModel()
 
-    @State var imageUrl = ""
-
     let profileViewHeight = 267 * DynamicSizeFactor.factor()
     @State private var initialOffset: CGFloat = 0 // 초기 오프셋 값 저장
     @State private var adjustedOffset: CGFloat = 0 // (현재 오프셋 값 - 초기 오프셋 값) 계산
@@ -30,7 +28,7 @@ struct ProfileView: View {
                 content
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .setTabBarVisibility(isHidden: showPopUpView)
-                    .navigationBarColor(UIColor(named: "White01"), title: getUserData()?.username ?? "")
+                    .navigationBarColor(UIColor(named: "White01"), title: viewModelWrapper.userData.username)
                     .background(Color("Gray01"))
                     .navigationBarBackButtonHidden(true)
                     .toolbar {
@@ -53,16 +51,12 @@ struct ProfileView: View {
                     .sheet(isPresented: $showImagePicker, onDismiss: {
                         // 사진 클릭한 경우
                         showPopUpView = false
-                        presignedUrlViewModel.image = selectedUIImage
-                        presignedUrlViewModel.generatePresignedUrlApi { success in
-                            if success {
-                                presignedUrlViewModel.storePresignedUrlApi { success in
-                                    if success {
-                                        profileImageViewModel.uploadProfileImageApi(presignedUrlViewModel.payload)
-                                    }
-                                }
-                            }
+
+                        if let selectedUIImage {
+                            viewModelWrapper.viewModel.uploadPresignedUrl(selectedUIImage)
+                            viewModelWrapper.viewModel.getUser()
                         }
+
                     }) {
                         ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                             .edgesIgnoringSafeArea(.bottom)
@@ -88,9 +82,8 @@ struct ProfileView: View {
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType,
-                        imageUrl: $imageUrl,
-                        deleteProfileImageViewModel: deleteProfileImageViewModel,
-                        presignedUrlViewModel: presignedUrlViewModel
+                        presignedUrlViewModel: presignedUrlViewModel,
+                        viewModelWrapper: viewModelWrapper
                     )
                     .edgesIgnoringSafeArea(.bottom)
                 }
@@ -100,7 +93,8 @@ struct ProfileView: View {
         .onAppear {
             Log.debug("isHiddenTabBar:\(isHiddenTabBar)")
             Log.debug("showPopUpView:\(showPopUpView)")
-            loadUserDataImage() // 사용자 프로필 사진 불러오기
+            viewModelWrapper.viewModel.getUser()
+            loadUserData() // 사용자 정보(사진, 이름) 불러오기
         }
         .onChange(of: showPopUpView) { newValue in
             isHiddenTabBar = newValue
@@ -124,8 +118,9 @@ struct ProfileView: View {
                     showPopUpView: $showPopUpView,
                     navigateToEditUsername: $navigateToEditUsername,
                     selectedUIImage: $selectedUIImage,
-                    imageUrl: $imageUrl,
-                    viewModel: profileImageViewModel, deleteViewModel: deleteProfileImageViewModel
+                    viewModel: profileImageViewModel,
+                    deleteViewModel: deleteProfileImageViewModel,
+                    viewModelWrapper: viewModelWrapper
                 )
                 .background(Color("White01"))
                 .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
@@ -158,16 +153,23 @@ struct ProfileView: View {
         }
     }
 
-    private func loadUserDataImage() {
-        if let userData = getUserData() {
-            imageUrl = userData.profileImageUrl
-            profileImageViewModel.loadImageUrl(from: imageUrl)
+    private func loadUserData() {
+        viewModelWrapper.viewModel.loadProfileImage { result in
+            switch result {
+            case let .success(loadedImage):
+                // 이미지를 성공적으로 로드한 경우
+                viewModelWrapper.viewModel.userData.value.imageUpdate(image: loadedImage)
+                Log.debug("[ProfileView]-image: \(viewModelWrapper.userData.imageUrl)")
+            case let .failure(error):
+                // 이미지를 로드하는 데 실패한 경우
+                Log.debug("[ProfileView]-이미지 로드에 실패: \(error)")
+            }
         }
     }
 
     func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
-            if updateCount < 2 {
+            if updateCount < 4 {
                 updateCount += 1
             } else if initialOffset == 0 {
                 initialOffset = offset

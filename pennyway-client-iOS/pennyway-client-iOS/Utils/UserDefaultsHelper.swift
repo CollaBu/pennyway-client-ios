@@ -2,7 +2,7 @@
 import Foundation
 import os.log
 
-func saveUserData(userData: UserData) {
+func saveUserData(userData: UserDataDto) {
     do {
         let userDataJSON = try JSONEncoder().encode(userData)
 
@@ -15,10 +15,10 @@ func saveUserData(userData: UserData) {
     }
 }
 
-func getUserData() -> UserData? {
+func getUserData() -> UserDataDto? {
     if let userDataJSON = UserDefaults.standard.data(forKey: "userData") {
         do {
-            let userData = try JSONDecoder().decode(UserData.self, from: userDataJSON)
+            let userData = try JSONDecoder().decode(UserDataDto.self, from: userDataJSON)
             return userData
         } catch {
             Log.fault("Error encoding UserData: \(error.localizedDescription)")
@@ -39,9 +39,9 @@ func updateUserField<T>(fieldName: String, value: T) {
         case "phone":
             userData.phone = value as! String
         case "notifySetting":
-            userData.notifySetting = value as! NotifySetting
+            userData.notifySetting = value as! NotifySettingDto
         case "oauthAccount":
-            userData.oauthAccount = value as! OauthAccount
+            userData.oauthAccount = value as! OauthAccountDto
         default:
             Log.default("Invalid field name: \(fieldName)")
             return

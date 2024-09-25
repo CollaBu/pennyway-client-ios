@@ -7,19 +7,10 @@ struct ProfileUserInfoView: View {
     @Binding var showPopUpView: Bool
     @Binding var navigateToEditUsername: Bool
     @Binding var selectedUIImage: UIImage?
-    @Binding var imageUrl: String
-
-    @State private var name = ""
-    @State private var refreshView = false
     
     @ObservedObject var viewModel: ProfileImageViewModel
     @ObservedObject var deleteViewModel: DeleteProfileImageViewModel
-
-    private func loadUserData() {
-        if let userData = getUserData() {
-            name = userData.name // 사용자 이름
-        }
-    }
+    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
     
     var body: some View {
         ZStack {
@@ -37,7 +28,7 @@ struct ProfileUserInfoView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
                                 .clipShape(Circle())
-                        } else if let loadedImage = viewModel.imageUrl {
+                        } else if let loadedImage = viewModelWrapper.userData.image {
                             // userDefaults에 저장된 이미지가 nil이 아니고 빈 값이 아닌 경우
                             Image(uiImage: loadedImage)
                                 .resizable()
@@ -65,7 +56,7 @@ struct ProfileUserInfoView: View {
                 
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                 
-                Text("\(name)")
+                Text("\(viewModelWrapper.userData.name)")
                     .font(.H3SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
                     .padding(1)
@@ -137,7 +128,7 @@ struct ProfileUserInfoView: View {
             .frame(maxWidth: .infinity, maxHeight: 267 * DynamicSizeFactor.factor())
             .background(Color("White01"))
             .onAppear {
-                loadUserData()
+                viewModelWrapper.viewModel.getUser()
                 Log.debug("deleteViewModel.profileImageUrl: \(deleteViewModel.profileImageUrl)")
                 Log.debug("selectedUIImage: \(selectedUIImage)")
                 Log.debug("viewModel.imageUrl: \(viewModel.imageUrl)")

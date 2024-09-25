@@ -3,7 +3,7 @@ import SwiftUI
 struct SettingAlarmView: View {
     @StateObject var viewModel = UserAccountViewModel()
     @State var hasAppeared = false
-    @State private var notifySetting = NotifySetting(accountBookNotify: false, feedNotify: false, chatNotify: false)
+    @State private var notifySetting = NotifySettingDto(accountBookNotify: false, feedNotify: false, chatNotify: false)
 
     private func loadUserData() {
         if let userData = getUserData() {

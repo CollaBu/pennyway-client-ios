@@ -1,11 +1,47 @@
+//
+//  DefaultProfileImageRepository.swift
+//  pennyway-client-iOS
+//
+//  Created by 최희진 on 9/25/24.
+//
 
-
+import Foundation
 import SwiftUI
 
-class ProfileImageViewModel: ObservableObject {
-    @Published var imageUrl: UIImage? = nil
+// MARK: - DefaultProfileImageRepository
 
-    func uploadProfileImageApi(_ payload: String) {
+final class DefaultProfileImageRepository: ProfileImageRepository {
+    /// 사진 삭제 api 호출
+    func deleteUserProfile(completion: @escaping (Result<Void, Error>) -> Void) {
+        UserAccountAlamofire.shared.deleteProfileImage { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
+
+                        updateUserField(fieldName: "profileImageUrl", value: "")
+                        Log.debug("[DefaultProfileImageRepository]:사진 삭제 완료")
+
+                        completion(.success(()))
+                    } catch {
+                        Log.fault("Error parsing response JSON: \(error)")
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("Failed to verify: \(StatusSpecificError)")
+                } else {
+                    Log.error("Failed to verify: \(error)")
+                }
+                Log.debug("이름 수정 실패")
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /// 사진 등록 api 호출
+    func uploadProfileImage(payload: String, completion: @escaping (Result<String, Error>) -> Void) {
         let profileImageUrl = extractPathComponent(from: payload) ?? ""
         let uploadProfileImageRequestDto = UploadProfileImageRequestDto(profileImageUrl: profileImageUrl)
 
@@ -15,9 +51,10 @@ class ProfileImageViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(UploadProfileImageResponseDto.self, from: responseData)
-                        Log.debug("사용자 프로필 사진 등록 성공: \(response)")
+                        Log.debug("[DefaultProfileImageRepository]:사용자 프로필 사진 등록 성공: \(response)")
                         updateUserField(fieldName: "profileImageUrl", value: response.data.profileImageUrl)
 
+                        completion(.success(response.data.profileImageUrl))
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                     }
@@ -28,6 +65,7 @@ class ProfileImageViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
+                completion(.failure(error))
             }
         }
     }
@@ -55,7 +93,7 @@ class ProfileImageViewModel: ObservableObject {
     }
 
     /// userDefaults의 저장된 이미지 가저옴
-    func loadImageUrl(from url: String) {
+    func loadProfileImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         guard let url = URL(string: url) else {
             return
         }
@@ -65,12 +103,15 @@ class ProfileImageViewModel: ObservableObject {
             if let data = data, error == nil, let downloadedImage = UIImage(data: data) {
                 // 이미지 URL이 존재하고 이미지를 성공적으로 다운로드한 경우
                 DispatchQueue.main.async {
-                    self.imageUrl = downloadedImage
+                    // UIImage -> Model 타입 변환
+                    completion(.success(downloadedImage))
                 }
-            } else {
+            }
+
+            if error != nil {
                 // 에러가 발생했거나 유효한 데이터를 받지 못한 경우
                 DispatchQueue.main.async {
-                    self.imageUrl = nil
+                    completion(.failure(error!))
                 }
             }
         }.resume()
