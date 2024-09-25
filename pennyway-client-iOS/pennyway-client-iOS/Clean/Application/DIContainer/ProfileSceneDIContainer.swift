@@ -32,7 +32,9 @@ final class ProfileSceneDIContainer {
     }
 
     private func makePresignedUrlUseCase() -> PresignedUrlUseCase {
-        DefaultPresignedUrlUseCase(repository: makePresignedUrlRepository())
+        DefaultPresignedUrlUseCase(urlRepository: makePresignedUrlRepository(),
+                                   imageRepository: makeProfileImageRepository()
+        )
     }
 
     // MARK: - Repository
@@ -43,6 +45,10 @@ final class ProfileSceneDIContainer {
 
     private func makePresignedUrlRepository() -> PresignedUrlRepository {
         DefaultPresignedUrlRepository()
+    }
+
+    private func makeProfileImageRepository() -> ProfileImageRepository {
+        DefaultProfileImageRepository()
     }
 
     // MARK: - View Model

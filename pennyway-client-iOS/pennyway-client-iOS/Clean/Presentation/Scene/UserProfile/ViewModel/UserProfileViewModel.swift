@@ -13,6 +13,7 @@ import UIKit
 protocol UserProfileViewModelInput {
     func getUser()
     func uploadPresignedUrl(_ image: UIImage)
+    func loadProfileImage(completion: @escaping (Result<UIImage, Error>) -> Void)
 }
 
 // MARK: - UserProfileViewModelOutput
@@ -39,9 +40,9 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
         self.fetchUserProfileUseCase = fetchUserProfileUseCase
         self.presignedUrlUseCase = presignedUrlUseCase
         userData = Observable(UserProfileItemModel(
-            imageUrl: "",
             username: "",
-            name: ""
+            name: "",
+            imageUrl: ""
         ))
     }
 
@@ -55,6 +56,8 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
                 self.userData.value.username = userProfile.username
                 self.userData.value.name = userProfile.name
 
+                Log.debug("[DefaultUserProfileViewModel]-유저정보 조회 \(self.userData)")
+
             case let .failure(error):
                 Log.error("프로필 정보 조회 실패: \(error)")
             }
@@ -63,7 +66,33 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 
     /// 프로필 이미지를 업로드하는 메서드
     private func uploadPresignedUrl(image: UIImage) {
-        presignedUrlUseCase.generate(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue, image: image)
+        presignedUrlUseCase.generate(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue, image: image) { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.userData.value.imageUpdate(image: image) // 이미지 업데이트
+                    Log.debug("[UserProfileViewModel]-이미지 업데이트 성공")
+                }
+            case let .failure(error):
+                Log.debug("[UserProfileViewModel]-이미지 로드 실패: \(error)")
+            }
+        }
+    }
+
+    /// 업데이트된 사진을 불러오는 함수
+    func loadProfileImage(completion: @escaping (Result<UIImage, Error>) -> Void) {
+        presignedUrlUseCase.loadImage(from: userData.value.imageUrl) { [weak self] result in
+            switch result {
+            case let .success(image):
+                DispatchQueue.main.async {
+                    self?.userData.value.imageUpdate(image: image)
+                    completion(.success(image)) // 이미지 로드 성공 시 completion 호출
+                }
+            case let .failure(error):
+                Log.debug("Failed to load image: \(error)")
+                completion(.failure(error)) // 이미지 로드 실패 시 completion 호출
+            }
+        }
     }
 }
 

@@ -164,7 +164,19 @@ struct ProfileView: View {
     }
 
     private func loadUserData() {
-        profileImageViewModel.loadImageUrl(from: viewModelWrapper.userData.imageUrl)
+//        profileImageViewModel.loadImageUrl(from: viewModelWrapper.userData.imageUrl)
+
+        viewModelWrapper.viewModel.loadProfileImage { result in
+            switch result {
+            case let .success(loadedImage):
+                // 이미지를 성공적으로 로드한 경우
+                viewModelWrapper.viewModel.userData.value.imageUpdate(image: loadedImage)
+                Log.debug("[ProfileView]-image: \(viewModelWrapper.userData.imageUrl)")
+            case let .failure(error):
+                // 이미지를 로드하는 데 실패한 경우
+                Log.debug("[ProfileView]-이미지 로드에 실패: \(error)")
+            }
+        }
     }
 
     func setOffset(offset: CGFloat) -> some View {

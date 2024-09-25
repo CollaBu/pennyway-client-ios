@@ -249,6 +249,8 @@
 		4AD824752C76263B00AEF371 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD824742C76263B00AEF371 /* NetworkMonitor.swift */; };
 		4AD824772C76266600AEF371 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD824762C76266600AEF371 /* NetworkStatusViewModel.swift */; };
 		4AD824792C7626C400AEF371 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD824782C7626C400AEF371 /* LayoutView.swift */; };
+		4ADACB002CA3B973003AAA3A /* DefaultProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACAFF2CA3B973003AAA3A /* DefaultProfileImageRepository.swift */; };
+		4ADACB022CA3B984003AAA3A /* ProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACB012CA3B984003AAA3A /* ProfileImageRepository.swift */; };
 		4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */; };
 		4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */; };
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
@@ -604,6 +606,8 @@
 		4AD824742C76263B00AEF371 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		4AD824762C76266600AEF371 /* NetworkStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusViewModel.swift; sourceTree = "<group>"; };
 		4AD824782C7626C400AEF371 /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
+		4ADACAFF2CA3B973003AAA3A /* DefaultProfileImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileImageRepository.swift; sourceTree = "<group>"; };
+		4ADACB012CA3B984003AAA3A /* ProfileImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageRepository.swift; sourceTree = "<group>"; };
 		4ADBFAEC2BE2C36500C3ECE4 /* UserAccountAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountAlamofire.swift; sourceTree = "<group>"; };
 		4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRouter.swift; sourceTree = "<group>"; };
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
@@ -1023,6 +1027,7 @@
 			children = (
 				4A12FEF02C9C48B900DE10BC /* FetchUserProfileRepository.swift */,
 				4AABDBB72C9C87C300E9436D /* PresignedUrlRepository.swift */,
+				4ADACB012CA3B984003AAA3A /* ProfileImageRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1041,6 +1046,7 @@
 			children = (
 				4A12FEF82C9C49D500DE10BC /* DefaultUserProfileRepository.swift */,
 				4AABDBB52C9C86F000E9436D /* DefaultPresignedUrlRepository.swift */,
+				4ADACAFF2CA3B973003AAA3A /* DefaultProfileImageRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2560,6 +2566,7 @@
 				4A6C79DD2C46D28B009463E4 /* EditPhoneNumberView.swift in Sources */,
 				4AC320522C11D5AC00DDB4B6 /* SpendingManagementMainView.swift in Sources */,
 				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
+				4ADACB002CA3B973003AAA3A /* DefaultProfileImageRepository.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,
 				D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */,
 				4A6C79E62C46DEA7009463E4 /* ErrorText.swift in Sources */,
@@ -2659,6 +2666,7 @@
 				D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */,
 				4AC320462C11D5AC00DDB4B6 /* MySpendingListView.swift in Sources */,
 				D8F9D7412C59FE22005416FC /* NoAlarmArrivedView.swift in Sources */,
+				4ADACB022CA3B984003AAA3A /* ProfileImageRepository.swift in Sources */,
 				4A12FEF32C9C48D500DE10BC /* FetchUserProfileUseCase.swift in Sources */,
 				D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */,
 				D81D5A832C16B68D008E5939 /* DateFormatterUtil .swift in Sources */,
