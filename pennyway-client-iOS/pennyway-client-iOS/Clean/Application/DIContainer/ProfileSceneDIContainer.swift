@@ -41,6 +41,10 @@ final class ProfileSceneDIContainer {
         DefaultDeleteImageUseCase(repository: makeProfileImageRepository())
     }
 
+    private func makeLogoutUseCase() -> LogoutUseCase {
+        DefaultLogoutUseCase(repository: makeLogoutRepository())
+    }
+
     // MARK: - Repository
 
     private func makeProfileRepository() -> FetchUserProfileRepository {
@@ -55,6 +59,10 @@ final class ProfileSceneDIContainer {
         DefaultProfileImageRepository()
     }
 
+    private func makeLogoutRepository() -> LogoutRepository {
+        DefaultLogoutRepository()
+    }
+
     // MARK: - View Model
 
     private func makeProfileViewModel() -> any UserProfileViewModel {
@@ -65,11 +73,18 @@ final class ProfileSceneDIContainer {
         )
     }
 
+    private func makeLogoutViewModel() -> any LogoutViewModel {
+        DefaultLogoutViewModel(
+            logoutUseCase: makeLogoutUseCase()
+        )
+    }
+
     // MARK: - View Model Wrapper
 
     private func makeUserProfileViewModelWrapper() -> UserProfileViewModelWrapper {
         UserProfileViewModelWrapper(
-            viewModel: makeProfileViewModel()
+            viewModel: makeProfileViewModel(),
+            logoutViewModel: makeLogoutViewModel()
         )
     }
 }
