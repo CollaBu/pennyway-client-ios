@@ -19,14 +19,9 @@ class LoginUseCase {
         repository.login(username: username, password: password) { result in
             switch result {
             case let .success(response):
-                self.profileInfoViewModel.getUserProfileApi { _ in
-                    AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
-                    AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
-                        AnalyticsConstants.Parameter.oauthType: "none",
-                        AnalyticsConstants.Parameter.isRefresh: false
-                    ])
-                    completion(true)
-                }
+
+                completion(true)
+
             case let .failure(error):
                 print("Login failed: \(error)")
                 completion(false)
@@ -38,17 +33,9 @@ class LoginUseCase {
         repository.oauthLogin(dto: dto) { result in
             switch result {
             case let .success(response):
-                let isOAuthExistUser = response.data.user.id
-                if isOAuthExistUser != -1 {
-                    self.profileInfoViewModel.getUserProfileApi { _ in
-                        KeychainHelper.deleteOAuthUserData()
-                        AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
-                        AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
-                            AnalyticsConstants.Parameter.oauthType: dto.provider,
-                            AnalyticsConstants.Parameter.isRefresh: false
-                        ])
-                        completion(true, nil)
-                    }
+                let userId = response.data.user.id
+                if userId != -1 {
+                    completion(true, nil) // Pass userId back to the view
                 } else {
                     completion(false, nil)
                 }

@@ -8,7 +8,7 @@ class UserAccountViewModel: ObservableObject {
     @Published var oldPassword: String = ""
     @Published var showErrorPassword: Bool = false
 
-    func getUserProfileApi(completion: @escaping (Bool) -> Void) {
+    func getUserProfileApi(completion: @escaping (Bool, UserId?) -> Void) {
         UserAccountAlamofire.shared.getUserProfile { result in
             switch result {
             case let .success(data):
@@ -21,10 +21,10 @@ class UserAccountViewModel: ObservableObject {
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("사용자 계정 조회 완료 \(jsonString)")
                         }
-                        completion(true)
+                        completion(true, UserId(id: response.data.user.id))
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
-                        completion(false)
+                        completion(false, nil)
                     }
                 }
             case let .failure(error):
@@ -33,7 +33,7 @@ class UserAccountViewModel: ObservableObject {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
-                completion(false)
+                completion(false, nil)
             }
         }
     }
@@ -114,7 +114,7 @@ class UserAccountViewModel: ObservableObject {
     }
 
     func refreshToggleStates() {
-        getUserProfileApi { success in
+        getUserProfileApi { success, _ in
             if success {
                 Log.debug("알람 설정 갱신 완료")
             } else {

@@ -4,6 +4,8 @@ struct InputFormView: View {
     @ObservedObject var loginViewModel: LoginViewModel
     @EnvironmentObject var authViewModel: AppViewModel
 
+    let profileInfoViewModel = UserAccountViewModel()
+
     @State private var isLoginSuccessful = true
 
     var body: some View {
@@ -51,12 +53,22 @@ struct InputFormView: View {
     }
 
     func handleLogin() {
-        loginViewModel.loginApi { success in
+        loginViewModel.login { success in
             DispatchQueue.main.async {
                 if success {
                     authViewModel.login()
+
+                    profileInfoViewModel.getUserProfileApi { success, userId in
+                        if success, let userId = userId {
+                            AnalyticsManager.shared.setUser("userId = \(userId)")
+                            AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
+                                AnalyticsConstants.Parameter.oauthType: OAuthRegistrationManager.shared.provider,
+                                AnalyticsConstants.Parameter.isRefresh: false
+                            ])
+                        }
+                    }
                 } else {
-                    Log.error("fail login")
+                    Log.error("Login failed")
                     loginViewModel.isLoginSuccessful = true
                     loginViewModel.username = ""
                     loginViewModel.password = ""

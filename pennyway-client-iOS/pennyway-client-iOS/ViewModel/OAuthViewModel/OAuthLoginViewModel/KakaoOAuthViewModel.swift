@@ -50,7 +50,7 @@ class KakaoOAuthViewModel: ObservableObject {
                 }
             }
         } else { // 로그인하지 않은 경우
-            oauthLoginViewModel.oauthLoginApi { success, error in
+            oauthLoginViewModel.oauthLogin { success, error in
                 if success {
                     self.isOAuthExistUser = true
                     self.isLoginSuccessful = true
