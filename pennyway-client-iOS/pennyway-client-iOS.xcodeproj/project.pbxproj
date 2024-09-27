@@ -1119,6 +1119,7 @@
 			isa = PBXGroup;
 			children = (
 				4AD70E212BE013C10058A52A /* ProfileView.swift */,
+				D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1972,7 +1973,6 @@
 				4AD70E242BE0153F0058A52A /* ProfileUserInfoView.swift */,
 				4AD70E262BE015500058A52A /* ProfileOAuthButtonView.swift */,
 				4AD70E282BE015970058A52A /* ProfileSettingListView.swift */,
-				D8E24D922BFCF885006E8046 /* ProfileMenuBarListView.swift */,
 				D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */,
 				4A60F64D2C595F6A00805F2C /* CompleteDeleteUserView.swift */,
 			);
