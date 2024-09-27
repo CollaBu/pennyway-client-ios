@@ -9,7 +9,6 @@ import Foundation
 
 class LoginUseCase {
     private let repository: LoginRepository
-    private let profileInfoViewModel = UserAccountViewModel()
 
     init(repository: LoginRepository) {
         self.repository = repository
@@ -18,8 +17,7 @@ class LoginUseCase {
     func login(username: String, password: String, completion: @escaping (Bool) -> Void) {
         repository.login(username: username, password: password) { result in
             switch result {
-            case let .success(response):
-
+            case .success:
                 completion(true)
 
             case let .failure(error):
