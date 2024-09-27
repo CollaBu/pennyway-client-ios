@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol DeleteUserRepository {
+protocol DeleteUserAccountRepository {
     /// 사용자 계정을 삭제하는 함수
-    func deleteUserAccountApi(completion: @escaping (Bool) -> Void)
+    func deleteUserAccount(completion: @escaping (Bool) -> Void)
 }
-
-

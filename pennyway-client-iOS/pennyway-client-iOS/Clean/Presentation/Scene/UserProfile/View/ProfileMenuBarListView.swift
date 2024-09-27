@@ -18,6 +18,8 @@ struct ProfileMenuBarListView: View {
 
     @State private var navigateCompleteView = false
 
+    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
+
     var body: some View {
         ZStack {
             ScrollView {
@@ -77,7 +79,9 @@ struct ProfileMenuBarListView: View {
                                 subTitleLabel: "탈퇴 후에는 이용한 서비스\n내역이 모두 사라져요 😢",
                                 firstBtnAction: handleDeleteUserAccount,
                                 firstBtnLabel: "탈퇴하기",
-                                secondBtnAction: { self.showDeleteUserPopUp = false },
+                                secondBtnAction: { self.showDeleteUserPopUp = false
+                                    Log.debug("?:\(showDeleteUserPopUp)")
+                                },
                                 secondBtnLabel: "더 써볼게요",
                                 secondBtnColor: Color("Gray05"),
                                 heightSize: 166
@@ -106,21 +110,14 @@ struct ProfileMenuBarListView: View {
 
     func handleLogout() {
         if let fcmToken = AppDelegate.currentFCMToken {
-            userProfileViewModel.deleteDeviceTokenApi(fcmToken: fcmToken) { success in
-                DispatchQueue.main.async {
-                    if success {
-                        self.showLogoutPopUp = false
-                        self.authViewModel.logout()
-                    } else {
-                        Log.error("디바이스 토큰 삭제 실패")
-                    }
-                }
-            }
+            viewModelWrapper.logoutViewModel.deleteDeviceToken(fcmToken: fcmToken)
+            showLogoutPopUp = false
+            authViewModel.logout()
         }
     }
 
     func handleDeleteUserAccount() {
-        userAccountViewModel.deleteUserAccountApi { success in
+        viewModelWrapper.deleteUserViewModel.deleteUserAccount { success in
             DispatchQueue.main.async {
                 if success {
                     showDeleteUserPopUp = false
@@ -157,8 +154,4 @@ struct ProfileMenuPopUpState: Equatable {
     func isReturn() -> Bool {
         return !showLogoutPopUp && !showDeleteUserPopUp && !showUnLinkPopUp
     }
-}
-
-#Preview {
-    ProfileMenuBarListView()
 }
