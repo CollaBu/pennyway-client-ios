@@ -2,17 +2,16 @@
 import SwiftUI
 
 class OAuthLoginViewModel: ObservableObject {
-    var dto: OAuthLoginRequestDto
-
+    var model: OAuthLogin
     private let loginUseCase: LoginUseCase
 
-    init(dto: OAuthLoginRequestDto, loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
-        self.dto = dto
+    init(model: OAuthLogin, loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
+        self.model = model
         self.loginUseCase = loginUseCase
     }
 
     func oauthLogin(completion: @escaping (Bool, String?) -> Void) {
-        loginUseCase.oauthLogin(dto: dto) { success, errorMessage in
+        loginUseCase.oauthLogin(data: model) { success, errorMessage in
             DispatchQueue.main.async {
                 if success {
                     Log.debug("[OAuthLoginViewModel]-OAuth 로그인 성공")

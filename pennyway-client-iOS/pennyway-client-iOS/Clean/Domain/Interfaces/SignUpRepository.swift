@@ -8,6 +8,6 @@
 import Foundation
 
 protocol SignUpRepository {
-    func signUp(_ signupDto: SignUpRequestDto, completion: @escaping (Result<AuthResponseDto, Error>) -> Void)
-    func oauthSignUp(_ oauthSignUpDto: OAuthSignUpRequestDto, completion: @escaping (Result<AuthResponseDto, Error>) -> Void)
+    func signUp(model: SignUp, completion: @escaping (Result<AuthResponseDto, Error>) -> Void)
+    func oauthSignUp(model: OAuthSignUp, completion: @escaping (Result<AuthResponseDto, Error>) -> Void)
 }

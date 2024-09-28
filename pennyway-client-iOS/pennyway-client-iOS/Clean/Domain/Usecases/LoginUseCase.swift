@@ -28,14 +28,14 @@ class DefaultLoginUseCase: LoginUseCase {
             switch result {
             case .success:
                 completion(true)
-            case let .failure(error):
+            case .failure:
                 completion(false)
             }
         }
     }
 
     func oauthLogin(data: OAuthLogin, completion: @escaping (Bool, String?) -> Void) {
-        repository.oauthLogin(data: data) { result in
+        repository.oauthLogin(model: data) { result in
             switch result {
             case let .success(response):
                 let userId = response.data.user.id

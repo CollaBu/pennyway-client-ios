@@ -8,8 +8,10 @@
 import Foundation
 
 class DefaultSignUpRepository: SignUpRepository {
-    func signUp(_ signupDto: SignUpRequestDto, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
-        AuthAlamofire.shared.signup(signupDto) { result in
+    func signUp(model: SignUp, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+        let requestDto = SignUpRequestDto.from(model: model)
+
+        AuthAlamofire.shared.signup(requestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
@@ -27,10 +29,10 @@ class DefaultSignUpRepository: SignUpRepository {
         }
     }
 
-    func oauthSignUp(_ oauthSignUpDto: OAuthSignUpRequestDto, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
-        Log.debug("[DefaultSignUpRepository] - \(oauthSignUpDto)")
+    func oauthSignUp(model: OAuthSignUp, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+        let requestDto = OAuthSignUpRequestDto.from(model: model)
 
-        OAuthAlamofire.shared.oauthSignUp(oauthSignUpDto) { result in
+        OAuthAlamofire.shared.oauthSignUp(requestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

@@ -47,8 +47,8 @@ class GoogleOAuthViewModel: ObservableObject {
     }
     
     func oauthLoginApi() {
-        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
-        let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
+        let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
+        let oauthLoginViewModel = OAuthLoginViewModel(model: model)
         
         KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)
 

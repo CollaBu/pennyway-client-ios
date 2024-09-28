@@ -10,8 +10,8 @@ import Foundation
 // MARK: - SignUpUseCase
 
 protocol SignUpUseCase {
-    func signUp(_ signupDto: SignUpRequestDto, completion: @escaping (Bool, UserId?) -> Void)
-    func oauthSignUp(_ oauthSignUpDto: OAuthSignUpRequestDto, completion: @escaping (Bool, UserId?) -> Void)
+    func signUp(model: SignUp, completion: @escaping (Bool, UserId?) -> Void)
+    func oauthSignUp(model: OAuthSignUp, completion: @escaping (Bool, UserId?) -> Void)
 }
 
 // MARK: - DefaultSignUpUseCase
@@ -23,8 +23,8 @@ class DefaultSignUpUseCase: SignUpUseCase {
         self.repository = repository
     }
 
-    func signUp(_ signupDto: SignUpRequestDto, completion: @escaping (Bool, UserId?) -> Void) {
-        repository.signUp(signupDto) { result in
+    func signUp(model: SignUp, completion: @escaping (Bool, UserId?) -> Void) {
+        repository.signUp(model: model) { result in
             switch result {
             case let .success(response):
                 completion(true, UserId(id: Int64(response.data.user.id)))
@@ -35,8 +35,8 @@ class DefaultSignUpUseCase: SignUpUseCase {
         }
     }
 
-    func oauthSignUp(_ oauthSignUpDto: OAuthSignUpRequestDto, completion: @escaping (Bool, UserId?) -> Void) {
-        repository.oauthSignUp(oauthSignUpDto) { result in
+    func oauthSignUp(model: OAuthSignUp, completion: @escaping (Bool, UserId?) -> Void) {
+        repository.oauthSignUp(model: model) { result in
             switch result {
             case let .success(response):
                 KeychainHelper.deleteOAuthUserData()
