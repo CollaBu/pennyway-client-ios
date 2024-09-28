@@ -9,5 +9,5 @@ import Foundation
 
 protocol LoginRepository {
     func login(username: String, password: String, completion: @escaping (Result<AuthResponseDto, Error>) -> Void)
-    func oauthLogin(dto: OAuthLoginRequestDto, completion: @escaping (Result<AuthResponseDto, Error>) -> Void)
+    func oauthLogin(data: OAuthLogin, completion: @escaping (Result<AuthResponseDto, Error>) -> Void)
 }

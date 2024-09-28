@@ -7,7 +7,16 @@
 
 import Foundation
 
-class SignUpUseCase {
+// MARK: - SignUpUseCase
+
+protocol SignUpUseCase {
+    func signUp(_ signupDto: SignUpRequestDto, completion: @escaping (Bool, UserId?) -> Void)
+    func oauthSignUp(_ oauthSignUpDto: OAuthSignUpRequestDto, completion: @escaping (Bool, UserId?) -> Void)
+}
+
+// MARK: - DefaultSignUpUseCase
+
+class DefaultSignUpUseCase: SignUpUseCase {
     private let repository: SignUpRepository
 
     init(repository: SignUpRepository) {
@@ -18,10 +27,6 @@ class SignUpUseCase {
         repository.signUp(signupDto) { result in
             switch result {
             case let .success(response):
-                AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
-                AnalyticsManager.shared.trackEvent(AuthEvents.signUp, additionalParams: [
-                    AnalyticsConstants.Parameter.oauthType: "none",
-                ])
                 completion(true, UserId(id: Int64(response.data.user.id)))
             case let .failure(error):
                 Log.error("Sign up failed: \(error)")
@@ -35,10 +40,6 @@ class SignUpUseCase {
             switch result {
             case let .success(response):
                 KeychainHelper.deleteOAuthUserData()
-                AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
-                AnalyticsManager.shared.trackEvent(AuthEvents.signUp, additionalParams: [
-                    AnalyticsConstants.Parameter.oauthType: oauthSignUpDto.provider,
-                ])
                 completion(true, UserId(id: Int64(response.data.user.id)))
             case let .failure(error):
                 Log.error("OAuth sign up failed: \(error)")

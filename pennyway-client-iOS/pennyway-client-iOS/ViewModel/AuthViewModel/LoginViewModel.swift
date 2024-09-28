@@ -10,7 +10,7 @@ class LoginViewModel: ObservableObject {
     private let profileInfoViewModel = UserAccountViewModel()
     private let loginUseCase: LoginUseCase
 
-    init(loginUseCase: LoginUseCase = LoginUseCase(repository: DefaultLoginRepository())) {
+    init(loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
         self.loginUseCase = loginUseCase
     }
 

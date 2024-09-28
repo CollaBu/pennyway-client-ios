@@ -28,6 +28,8 @@ class DefaultSignUpRepository: SignUpRepository {
     }
 
     func oauthSignUp(_ oauthSignUpDto: OAuthSignUpRequestDto, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+        Log.debug("[DefaultSignUpRepository] - \(oauthSignUpDto)")
+
         OAuthAlamofire.shared.oauthSignUp(oauthSignUpDto) { result in
             switch result {
             case let .success(data):

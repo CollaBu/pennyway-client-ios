@@ -7,7 +7,16 @@
 
 import Foundation
 
-class LoginUseCase {
+// MARK: - LoginUseCase
+
+protocol LoginUseCase {
+    func login(username: String, password: String, completion: @escaping (Bool) -> Void)
+    func oauthLogin(data: OAuthLogin, completion: @escaping (Bool, String?) -> Void)
+}
+
+// MARK: - DefaultLoginUseCase
+
+class DefaultLoginUseCase: LoginUseCase {
     private let repository: LoginRepository
 
     init(repository: LoginRepository) {
@@ -19,26 +28,23 @@ class LoginUseCase {
             switch result {
             case .success:
                 completion(true)
-
             case let .failure(error):
-                print("Login failed: \(error)")
                 completion(false)
             }
         }
     }
 
-    func oauthLogin(dto: OAuthLoginRequestDto, completion: @escaping (Bool, String?) -> Void) {
-        repository.oauthLogin(dto: dto) { result in
+    func oauthLogin(data: OAuthLogin, completion: @escaping (Bool, String?) -> Void) {
+        repository.oauthLogin(data: data) { result in
             switch result {
             case let .success(response):
                 let userId = response.data.user.id
                 if userId != -1 {
-                    completion(true, nil) // Pass userId back to the view
+                    completion(true, nil) 
                 } else {
                     completion(false, nil)
                 }
             case let .failure(error):
-                print("OAuth login failed: \(error)")
                 completion(false, error.localizedDescription)
             }
         }

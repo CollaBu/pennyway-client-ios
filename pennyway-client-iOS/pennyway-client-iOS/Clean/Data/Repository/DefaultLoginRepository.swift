@@ -27,8 +27,11 @@ class DefaultLoginRepository: LoginRepository {
         }
     }
 
-    func oauthLogin(dto: OAuthLoginRequestDto, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
-        OAuthAlamofire.shared.oauthLogin(dto) { result in
+    func oauthLogin(data: OAuthLogin, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+        
+        let requestDto = OAuthLoginRequestDto.from(model: data)
+        
+        OAuthAlamofire.shared.oauthLogin(requestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

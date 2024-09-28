@@ -31,8 +31,6 @@ struct TermsAndConditionsView: View {
             
             CustomBottomButton(action: {
                 if isAllAgreed {
-                    viewModel.continueButtonTapped()
-                        
                     if isOAuthRegistration {
                         signUpViewModel.oauthSignUp { success, userId in
                             if success, let userId = userId {
@@ -40,6 +38,7 @@ struct TermsAndConditionsView: View {
                                 AnalyticsManager.shared.trackEvent(AuthEvents.signUp, additionalParams: [
                                     AnalyticsConstants.Parameter.oauthType: OAuthRegistrationManager.shared.provider,
                                 ])
+                                viewModel.continueButtonTapped()
                             }
                         }
                     } else {
@@ -49,6 +48,7 @@ struct TermsAndConditionsView: View {
                                 AnalyticsManager.shared.trackEvent(AuthEvents.signUp, additionalParams: [
                                     AnalyticsConstants.Parameter.oauthType: "none",
                                 ])
+                                viewModel.continueButtonTapped()
                             }
                         }
                     }

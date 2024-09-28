@@ -6,7 +6,7 @@ class OAuthLoginViewModel: ObservableObject {
 
     private let loginUseCase: LoginUseCase
 
-    init(dto: OAuthLoginRequestDto, loginUseCase: LoginUseCase = LoginUseCase(repository: DefaultLoginRepository())) {
+    init(dto: OAuthLoginRequestDto, loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
         self.dto = dto
         self.loginUseCase = loginUseCase
     }

@@ -3,7 +3,7 @@ import Foundation
 class SignUpViewModel: ObservableObject {
     private let signUpUseCase: SignUpUseCase
     
-    init(signUpUseCase: SignUpUseCase = SignUpUseCase(repository: DefaultSignUpRepository())) {
+    init(signUpUseCase: SignUpUseCase = DefaultSignUpUseCase(repository: DefaultSignUpRepository())) {
         self.signUpUseCase = signUpUseCase
     }
     
