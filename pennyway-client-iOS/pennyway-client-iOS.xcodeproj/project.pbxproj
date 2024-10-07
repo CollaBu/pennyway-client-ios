@@ -175,6 +175,7 @@
 		4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */; };
 		4A863A032CB4409600BA2F2F /* ChatReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A863A022CB4409600BA2F2F /* ChatReceiveCell.swift */; };
 		4A863A052CB4435B00BA2F2F /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A863A042CB4435B00BA2F2F /* Chat.swift */; };
+		4A863A072CB44D2800BA2F2F /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A863A062CB44D2800BA2F2F /* ChatMessage.swift */; };
 		4A8BDEE32C6246B900D21424 /* DiffAmountColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */; };
 		4A8BDEE52C629C3600D21424 /* SpendingHistoryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */; };
 		4A8E26B12CA2ECD30030EEB2 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E26B02CA2ECD30030EEB2 /* LazyView.swift */; };
@@ -542,6 +543,7 @@
 		4A8571412BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkOAuthToAccountViewModel.swift; sourceTree = "<group>"; };
 		4A863A022CB4409600BA2F2F /* ChatReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatReceiveCell.swift; sourceTree = "<group>"; };
 		4A863A042CB4435B00BA2F2F /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		4A863A062CB44D2800BA2F2F /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffAmountColorUtil.swift; sourceTree = "<group>"; };
 		4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingHistoryUtil.swift; sourceTree = "<group>"; };
 		4A8E26B02CA2ECD30030EEB2 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
@@ -1775,6 +1777,7 @@
 			isa = PBXGroup;
 			children = (
 				4A863A022CB4409600BA2F2F /* ChatReceiveCell.swift */,
+				4A863A062CB44D2800BA2F2F /* ChatMessage.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -2596,6 +2599,7 @@
 				4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */,
 				4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */,
 				D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */,
+				4A863A072CB44D2800BA2F2F /* ChatMessage.swift in Sources */,
 				4AC320562C11D5AC00DDB4B6 /* TotalTargetAmountHeaderView.swift in Sources */,
 				4AD5D0B72CA7108F0044CD75 /* SignUpUseCase.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,

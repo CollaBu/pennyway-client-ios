@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - ChatRoom
+
 struct ChatRoom: Equatable, Identifiable {
     let id: Int64
     let title: String
@@ -17,6 +19,8 @@ struct ChatRoom: Equatable, Identifiable {
     let notify_enabled: Bool
 }
 
+// MARK: - Chat
+
 struct Chat: Equatable, Identifiable {
     let id: Int64
     let content: String
@@ -24,6 +28,8 @@ struct Chat: Equatable, Identifiable {
     let sender_id: Int64
     let chat_room_id: Int64
 }
+
+// MARK: - ChatMember
 
 struct ChatMember: Equatable, Identifiable {
     let id: Int64
