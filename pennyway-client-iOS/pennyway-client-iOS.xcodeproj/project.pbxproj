@@ -177,6 +177,7 @@
 		4A863A052CB4435B00BA2F2F /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A863A042CB4435B00BA2F2F /* Chat.swift */; };
 		4A863A072CB44D2800BA2F2F /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A863A062CB44D2800BA2F2F /* ChatMessage.swift */; };
 		4A863A092CB44D9D00BA2F2F /* ChatSendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A863A082CB44D9D00BA2F2F /* ChatSendCell.swift */; };
+		4A863A0B2CB44FAF00BA2F2F /* ChatBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A863A0A2CB44FAF00BA2F2F /* ChatBottomBar.swift */; };
 		4A8BDEE32C6246B900D21424 /* DiffAmountColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */; };
 		4A8BDEE52C629C3600D21424 /* SpendingHistoryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */; };
 		4A8E26B12CA2ECD30030EEB2 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E26B02CA2ECD30030EEB2 /* LazyView.swift */; };
@@ -546,6 +547,7 @@
 		4A863A042CB4435B00BA2F2F /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		4A863A062CB44D2800BA2F2F /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		4A863A082CB44D9D00BA2F2F /* ChatSendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSendCell.swift; sourceTree = "<group>"; };
+		4A863A0A2CB44FAF00BA2F2F /* ChatBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBottomBar.swift; sourceTree = "<group>"; };
 		4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffAmountColorUtil.swift; sourceTree = "<group>"; };
 		4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingHistoryUtil.swift; sourceTree = "<group>"; };
 		4A8E26B02CA2ECD30030EEB2 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
@@ -1781,6 +1783,7 @@
 				4A863A022CB4409600BA2F2F /* ChatReceiveCell.swift */,
 				4A863A062CB44D2800BA2F2F /* ChatMessage.swift */,
 				4A863A082CB44D9D00BA2F2F /* ChatSendCell.swift */,
+				4A863A0A2CB44FAF00BA2F2F /* ChatBottomBar.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -2481,6 +2484,7 @@
 				D85927FC2BE9116700653391 /* SignUpViewModel.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
 				4A5789752BDC1CBF00AFEB26 /* NotFoundErrorCode.swift in Sources */,
+				4A863A0B2CB44FAF00BA2F2F /* ChatBottomBar.swift in Sources */,
 				4A6C79D62C463DB1009463E4 /* EditIdView.swift in Sources */,
 				D8F9D7362C593B71005416FC /* PreparedView.swift in Sources */,
 				4A3701D72C090CD600F0AEBA /* Value.swift in Sources */,
