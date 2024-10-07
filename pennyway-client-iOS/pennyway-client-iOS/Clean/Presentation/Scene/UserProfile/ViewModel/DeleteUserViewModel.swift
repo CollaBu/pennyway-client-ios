@@ -24,7 +24,6 @@ protocol DeleteUserViewModel: DeleteUserViewModelInput, DeleteUserViewModelOutpu
 // MARK: - DefaultDeleteUserViewModel
 
 class DefaultDeleteUserViewModel: DeleteUserViewModel {
-
     private let deleteUseCase: DeleteUserAccountUseCase
 
     init(deleteUseCase: DeleteUserAccountUseCase) {
