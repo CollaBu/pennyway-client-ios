@@ -35,9 +35,9 @@ class KakaoOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginApi() {
-        let oauthLoginDto = OAuthLoginRequestDto(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
+        let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
 
-        let oauthLoginViewModel = OAuthLoginViewModel(dto: oauthLoginDto)
+        let oauthLoginViewModel = OAuthLoginViewModel(model: model)
         KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)
 
         if isLoggedIn { // 로그인 한 경우
@@ -50,7 +50,7 @@ class KakaoOAuthViewModel: ObservableObject {
                 }
             }
         } else { // 로그인하지 않은 경우
-            oauthLoginViewModel.oauthLoginApi { success, error in
+            oauthLoginViewModel.oauthLogin { success, error in
                 if success {
                     self.isOAuthExistUser = true
                     self.isLoginSuccessful = true

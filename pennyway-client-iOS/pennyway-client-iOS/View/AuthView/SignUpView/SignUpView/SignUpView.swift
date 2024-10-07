@@ -111,7 +111,7 @@ struct SignUpView: View {
     func handleLinkAccountToOAuth() {
         linkAccountToOAuthViewModel.linkAccountToOAuthApi { success in
             if success {
-                profileInfoViewModel.getUserProfileApi { success in
+                profileInfoViewModel.getUserProfileApi { success, _ in
                     if success {
                         authViewModel.login()
                     }
