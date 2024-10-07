@@ -10,10 +10,21 @@ import SwiftUI
 struct ChatMessage: View {
     let content: String
     let createdAt: Date
+    let isSender: Bool
     let maxWidth: CGFloat = 151 * DynamicSizeFactor.factor()
 
     var body: some View {
         HStack(spacing: 9) {
+            if isSender {
+                // 타임스탬프 왼쪽 (isSender가 true일 때)
+                VStack {
+                    Spacer()
+                    Text(createdAt, style: .time)
+                        .font(.B4MediumFont())
+                        .platformTextColor(color: Color("Gray05"))
+                }
+            }
+
             GeometryReader { geometry in
                 ZStack(alignment: .topLeading) {
                     Rectangle()
@@ -34,13 +45,16 @@ struct ChatMessage: View {
             .frame(maxWidth: maxWidth)
             .fixedSize(horizontal: false, vertical: true)
 
-            VStack {
-                Spacer()
-                // 타임스탬프
-                Text(createdAt, style: .time)
-                    .font(.B4MediumFont())
-                    .platformTextColor(color: Color("Gray05"))
+            if !isSender {
+                // 타임스탬프 오른쪽 (isSender가 false일 때)
+                VStack {
+                    Spacer()
+                    Text(createdAt, style: .time)
+                        .font(.B4MediumFont())
+                        .platformTextColor(color: Color("Gray05"))
+                }
             }
         }
+        .frame(maxWidth: .infinity, alignment: isSender ? .trailing : .leading)
     }
 }

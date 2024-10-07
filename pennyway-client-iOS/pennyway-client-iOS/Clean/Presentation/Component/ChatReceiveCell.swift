@@ -37,7 +37,7 @@ struct ChatReceiveCell: View {
                 
                 Spacer()
                 
-                ChatMessage(content: chat.content, createdAt: chat.created_at)
+                ChatMessage(content: chat.content, createdAt: chat.created_at, isSender: false)
             }
             
             Spacer()
