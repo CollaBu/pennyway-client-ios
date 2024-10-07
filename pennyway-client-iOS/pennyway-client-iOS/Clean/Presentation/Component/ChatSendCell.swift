@@ -7,13 +7,18 @@
 
 import SwiftUI
 
+// MARK: - ChatSendCell
+
 struct ChatSendCell: View {
     let chat: Chat
     let sender: ChatMember
 
     var body: some View {
-        ChatMessage(content: chat.content, createdAt: chat.created_at, isSender: true)
-            .padding(.horizontal, 20)
+        VStack {
+            ChatMessage(content: chat.content, createdAt: chat.created_at, isSender: true)
+                .padding(.horizontal, 20)
+                .background(HeightPreferenceView())
+        }
     }
 }
 

@@ -12,34 +12,34 @@ import SwiftUI
 struct ChatReceiveCell: View {
     let chat: Chat
     let sender: ChatMember
-    
+
     var body: some View {
         HStack(alignment: .top, spacing: 11) {
             // 프로필 이미지
-            
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(width: 27 * DynamicSizeFactor.factor(), height: 27 * DynamicSizeFactor.factor())
-                .background(
-                    Image("icon_ current_spending")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 27 * DynamicSizeFactor.factor(), height: 27 * DynamicSizeFactor.factor())
-                        .clipped()
-                )
-                .cornerRadius(3)
-            
+
+            ZStack {
+                Rectangle()
+                    .platformTextColor(color: Color("White01"))
+                    .frame(width: 27 * DynamicSizeFactor.factor(), height: 27 * DynamicSizeFactor.factor())
+                    .cornerRadius(3)
+                Image("icon_ current_spending")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 27 * DynamicSizeFactor.factor(), height: 27 * DynamicSizeFactor.factor())
+                    .clipped()
+            }
+
             VStack(alignment: .leading, spacing: 5) {
                 // 사용자 이름
                 Text(sender.username)
                     .font(.B3MediumFont())
                     .platformTextColor(color: Color("Gray06"))
-                
+
                 Spacer()
-                
+
                 ChatMessage(content: chat.content, createdAt: chat.created_at, isSender: false)
             }
-            
+
             Spacer()
         }
         .padding(.horizontal, 20)

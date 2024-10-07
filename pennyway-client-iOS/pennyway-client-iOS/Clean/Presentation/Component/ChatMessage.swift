@@ -25,22 +25,22 @@ struct ChatMessage: View {
                 }
             }
 
-            GeometryReader { geometry in
-                ZStack(alignment: .topLeading) {
-                    Rectangle()
-                        .fill(Color("White01"))
-                        .cornerRadius(6)
-                        .border(Color.black, width: 1)
+            ZStack(alignment: .topLeading) {
+                Rectangle()
+                    .fill(Color("White01"))
+                    .cornerRadius(6)
+                    .border(Color.black, width: 1)
 
-                    Text(content)
-                        .font(.B1MediumFont())
-                        .platformTextColor(color: Color("Gray07"))
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .frame(width: min(geometry.size.width, maxWidth),
-                       height: geometry.size.height)
+                Text(content)
+                    .font(.B1MediumFont())
+                    .platformTextColor(color: Color("Gray07"))
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .background(
+                        GeometryReader { geo in
+                            Color.clear.preference(key: HeightPreferenceKey.self, value: geo.size.height)
+                        }
+                    )
             }
             .frame(maxWidth: maxWidth)
             .fixedSize(horizontal: false, vertical: true)
