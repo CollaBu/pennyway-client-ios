@@ -1,9 +1,3 @@
-//
-//  DefaultDeleteUserRepository.swift
-//  pennyway-client-iOS
-//
-//  Created by 아우신얀 on 9/27/24.
-//
 
 import Foundation
 
