@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ChatBottomBar: View {
-    @State private var message: String = "dd"
+    @State private var message: String = ""
     @State private var showFeature: Bool = false
 
     var body: some View {
         VStack {
+            Spacer().frame(height: 11 * DynamicSizeFactor.factor())
+
             HStack {
                 Button(action: {
                     showFeature.toggle()
@@ -23,13 +25,17 @@ struct ChatBottomBar: View {
                         .padding(.leading, 6 * DynamicSizeFactor.factor())
                 }).buttonStyle(PlainButtonStyle())
 
-                if message.isEmpty {
-                    Text("오늘은 어떤 소비를 했나요?")
-                        .platformTextColor(color: Color("Gray03"))
+                ZStack(alignment: .leading) {
+                    if message.isEmpty {
+                        Text("오늘은 어떤 소비를 했나요?")
+                            .platformTextColor(color: Color("Gray03"))
+                            .font(.B2MediumFont())
+                    }
+                    TextField("", text: $message)
+                        .platformTextColor(color: Color("Gray07"))
                         .font(.B2MediumFont())
-                }
 
-                TextField("", text: $message)
+                }.frame(maxWidth: .infinity)
 
                 if !message.isEmpty {
                     Button(action: {

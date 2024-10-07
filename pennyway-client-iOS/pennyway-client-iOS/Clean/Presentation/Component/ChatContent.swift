@@ -14,14 +14,14 @@ struct ChatContent: View {
 
     var body: some View {
         ScrollView {
+            Spacer().frame(height: 25 * DynamicSizeFactor.factor())
+
             LazyVStack(spacing: 14 * DynamicSizeFactor.factor()) {
                 ForEach(chats) { chat in
                     if let sender = members.first(where: { $0.user_id == chat.sender_id }) {
                         if chat.sender_id == currentUserID {
-                            // Current user is the sender, show ChatSendCell
                             ChatSendCell(chat: chat, sender: sender)
                         } else {
-                            // Other user is the sender, show ChatReceiveCell
                             ChatReceiveCell(chat: chat, sender: sender)
                         }
                     }

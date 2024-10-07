@@ -17,7 +17,7 @@ struct ChatSendCell: View {
         VStack {
             ChatMessage(content: chat.content, createdAt: chat.created_at, isSender: true)
                 .padding(.horizontal, 20)
-                .background(HeightPreferenceView())
+                .background(TextHeightPreferenceView())
         }
     }
 }

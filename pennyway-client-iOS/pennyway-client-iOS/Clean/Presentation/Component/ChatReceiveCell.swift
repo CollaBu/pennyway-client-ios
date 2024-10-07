@@ -35,8 +35,6 @@ struct ChatReceiveCell: View {
                     .font(.B3MediumFont())
                     .platformTextColor(color: Color("Gray06"))
 
-                Spacer()
-
                 ChatMessage(content: chat.content, createdAt: chat.created_at, isSender: false)
             }
 

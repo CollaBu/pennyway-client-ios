@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - HeightPreferenceKey
+// MARK: - TextHeightPreferenceKey
 
-struct HeightPreferenceKey: PreferenceKey {
+struct TextHeightPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
 
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
@@ -17,13 +17,13 @@ struct HeightPreferenceKey: PreferenceKey {
     }
 }
 
-// MARK: - HeightPreferenceView
+// MARK: - TextHeightPreferenceView
 
-struct HeightPreferenceView: View {
+struct TextHeightPreferenceView: View {
     var body: some View {
         Rectangle()
             .fill(Color.clear)
             .frame(height: 1)
-            .preference(key: HeightPreferenceKey.self, value: 1)
+            .preference(key: TextHeightPreferenceKey.self, value: 1)
     }
 }

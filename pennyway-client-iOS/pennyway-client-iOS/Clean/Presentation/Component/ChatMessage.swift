@@ -12,6 +12,7 @@ struct ChatMessage: View {
     let createdAt: Date
     let isSender: Bool
     let maxWidth: CGFloat = 151 * DynamicSizeFactor.factor()
+    @State private var textWidth: CGFloat = .zero
 
     var body: some View {
         HStack(spacing: 9) {
@@ -27,9 +28,8 @@ struct ChatMessage: View {
 
             ZStack(alignment: .topLeading) {
                 Rectangle()
-                    .fill(Color("White01"))
+                    .fill(isSender ? Color("Yellow01") : Color("White01"))
                     .cornerRadius(6)
-                    .border(Color.black, width: 1)
 
                 Text(content)
                     .font(.B1MediumFont())
@@ -38,11 +38,15 @@ struct ChatMessage: View {
                     .padding(.vertical, 12)
                     .background(
                         GeometryReader { geo in
-                            Color.clear.preference(key: HeightPreferenceKey.self, value: geo.size.height)
+                            Color.clear.preference(key: TextHeightPreferenceKey.self, value: geo.size.height)
+                            Color.clear.preference(key: TextWidthPreferenceKey.self, value: geo.size.width)
                         }
                     )
             }
-            .frame(maxWidth: maxWidth)
+            .onPreferenceChange(TextWidthPreferenceKey.self) { width in
+                self.textWidth = width
+            }
+            .frame(minWidth: textWidth, maxWidth: maxWidth)
             .fixedSize(horizontal: false, vertical: true)
 
             if !isSender {

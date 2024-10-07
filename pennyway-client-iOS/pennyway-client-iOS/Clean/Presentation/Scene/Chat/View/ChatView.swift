@@ -10,8 +10,6 @@ import SwiftUI
 // MARK: - ChatView
 
 struct ChatView: View {
-    //    @StateObject private var viewModel = ChatViewModel()
-
     var body: some View {
         VStack(spacing: 0) {
             ChatContent(chats: mockChats, members: mockMembers, currentUserID: 102)
@@ -19,6 +17,9 @@ struct ChatView: View {
         }
         .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
         .background(Color("Ashblue02"))
+        .setTabBarVisibility(isHidden: true)
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.bottom)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 HStack {
@@ -29,7 +30,21 @@ struct ChatView: View {
 
                 }.offset(x: -10)
             }
-            ToolbarItem(placement: .topBarTrailing) {}
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack {
+                    Button(action: {}, label: {
+                        Image("icon_navigationbar_kebabmenu")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            .padding(5)
+                    })
+                    .padding(.trailing, 5)
+                    .frame(width: 44, height: 44)
+                    .buttonStyle(BasicButtonStyleUtil())
+
+                }.offset(x: 10)
+            }
         }
     }
 }
