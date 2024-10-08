@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - ChatView
 
 struct ChatView: View {
-    @StateObject private var keyboardHandler = KeyboardHandler()
+    @StateObject private var keyboardHandler = KeyboardHandlerManager()
 
     var body: some View {
         VStack(spacing: 0) {

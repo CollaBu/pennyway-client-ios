@@ -24,7 +24,7 @@ struct ChatBottomBar: View {
             }
             .frame(height: textEditorHeight + 16 * DynamicSizeFactor.factor())
             .background(Color("Gray02"))
-            .cornerRadius(28)
+            .cornerRadius(15)
             .padding(.horizontal, 16)
 
             featureContent
