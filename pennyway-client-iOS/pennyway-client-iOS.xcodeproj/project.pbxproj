@@ -324,6 +324,8 @@
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
 		D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */; };
 		D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */; };
+		D87CF3472CB44A7B00A1870F /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CF3462CB44A7B00A1870F /* ChatViewModel.swift */; };
+		D87CF3492CB569ED00A1870F /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CF3482CB569ED00A1870F /* ChatItemViewModel.swift */; };
 		D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E182BCEBEE700922894 /* DynamicFontSize.swift */; };
 		D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */; };
 		D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */; };
@@ -335,6 +337,10 @@
 		D889F9F62C6484950055D045 /* CheckUnReadNotificationResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */; };
 		D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */; };
 		D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */; };
+		D89901E42CB4348D00A082D4 /* MainChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89901E32CB4348D00A082D4 /* MainChatView.swift */; };
+		D89901E62CB434C000A082D4 /* ChatRoomContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89901E52CB434C000A082D4 /* ChatRoomContent.swift */; };
+		D89901E82CB4376C00A082D4 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89901E72CB4376C00A082D4 /* ChatRoom.swift */; };
+		D89901EA2CB43A3100A082D4 /* MainChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89901E92CB43A3100A082D4 /* MainChatUseCase.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
 		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
@@ -679,6 +685,8 @@
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
+		D87CF3462CB44A7B00A1870F /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		D87CF3482CB569ED00A1870F /* ChatItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
 		D8880E182BCEBEE700922894 /* DynamicFontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFontSize.swift; sourceTree = "<group>"; };
 		D8880E1F2BCEED9B00922894 /* NavigationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtil.swift; sourceTree = "<group>"; };
 		D8880E232BD17FD000922894 /* TapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -692,6 +700,10 @@
 		D889F9F52C6484950055D045 /* CheckUnReadNotificationResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUnReadNotificationResponseDto.swift; sourceTree = "<group>"; };
 		D889F9F72C64BCC00055D045 /* DeleteProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProfileImageViewModel.swift; sourceTree = "<group>"; };
 		D889F9FB2C652CB50055D045 /* BasicButtonStyleUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonStyleUtil.swift; sourceTree = "<group>"; };
+		D89901E32CB4348D00A082D4 /* MainChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChatView.swift; sourceTree = "<group>"; };
+		D89901E52CB434C000A082D4 /* ChatRoomContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomContent.swift; sourceTree = "<group>"; };
+		D89901E72CB4376C00A082D4 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		D89901E92CB43A3100A082D4 /* MainChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChatUseCase.swift; sourceTree = "<group>"; };
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
@@ -1020,6 +1032,7 @@
 			children = (
 				4A12FEEC2C9C487800DE10BC /* User.swift */,
 				4AABDBBB2C9C8C2900E9436D /* PresignedUrl.swift */,
+				D89901E72CB4376C00A082D4 /* ChatRoom.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1040,6 +1053,7 @@
 				4A12FEF22C9C48D500DE10BC /* FetchUserProfileUseCase.swift */,
 				4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */,
 				4ADACB032CA3C4E0003AAA3A /* DeleteImageUseCase.swift */,
+				D89901E92CB43A3100A082D4 /* MainChatUseCase.swift */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
@@ -1118,6 +1132,7 @@
 		4A12FF022C9C4A8300DE10BC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D89901E02CB4345900A082D4 /* Chat */,
 				4AD70E212BE013C10058A52A /* ProfileView.swift */,
 			);
 			path = View;
@@ -1128,6 +1143,8 @@
 			children = (
 				4A12FF042C9C4AC300DE10BC /* UserProfileViewModel.swift */,
 				4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */,
+				D87CF3482CB569ED00A1870F /* ChatItemViewModel.swift */,
+				D87CF3462CB44A7B00A1870F /* ChatViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2229,6 +2246,15 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
+		D89901E02CB4345900A082D4 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D89901E32CB4348D00A082D4 /* MainChatView.swift */,
+				D89901E52CB434C000A082D4 /* ChatRoomContent.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		D8B0A9222C4E5CDA00716ECB /* AddSpendingHistoryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2450,6 +2476,7 @@
 				4AC3204E2C11D5AC00DDB4B6 /* SpendingCalendarView.swift in Sources */,
 				4AC3205F2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift in Sources */,
 				4A3701D42C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift in Sources */,
+				D89901E82CB4376C00A082D4 /* ChatRoom.swift in Sources */,
 				4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */,
 				D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */,
 				4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */,
@@ -2525,6 +2552,7 @@
 				4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
+				D87CF3472CB44A7B00A1870F /* ChatViewModel.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */,
 				D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */,
@@ -2563,6 +2591,7 @@
 				D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */,
 				4AC320562C11D5AC00DDB4B6 /* TotalTargetAmountHeaderView.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
+				D87CF3492CB569ED00A1870F /* ChatItemViewModel.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
 				4AC320572C11D5AC00DDB4B6 /* TotalTargetAmountView.swift in Sources */,
 				D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */,
@@ -2632,6 +2661,7 @@
 				4A2882022C64CC5900AE50C7 /* MoveCategoryView.swift in Sources */,
 				4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */,
 				B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */,
+				D89901E62CB434C000A082D4 /* ChatRoomContent.swift in Sources */,
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
@@ -2670,6 +2700,7 @@
 				D8157E682BBEF4400083844B /* AdditionalOptionView.swift in Sources */,
 				4AC320462C11D5AC00DDB4B6 /* MySpendingListView.swift in Sources */,
 				D8F9D7412C59FE22005416FC /* NoAlarmArrivedView.swift in Sources */,
+				D89901E42CB4348D00A082D4 /* MainChatView.swift in Sources */,
 				4ADACB022CA3B984003AAA3A /* ProfileImageRepository.swift in Sources */,
 				4A12FEF32C9C48D500DE10BC /* FetchUserProfileUseCase.swift in Sources */,
 				D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */,
@@ -2707,6 +2738,7 @@
 				4AE8F3AA2C32ABA50014F0D4 /* GetTargetAmountForDateResponseDto.swift in Sources */,
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
 				D8180C002BE507E100F837FB /* FindIdView.swift in Sources */,
+				D89901EA2CB43A3100A082D4 /* MainChatUseCase.swift in Sources */,
 				D8180C082BE5168800F837FB /* (null) in Sources */,
 				B599E4DE2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift in Sources */,
 				D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */,
