@@ -16,14 +16,3 @@ struct TextHeightPreferenceKey: PreferenceKey {
         value = max(value, nextValue())
     }
 }
-
-// MARK: - TextHeightPreference
-
-struct TextHeightPreference: View {
-    var body: some View {
-        Rectangle()
-            .fill(Color.clear)
-            .frame(height: 1)
-            .preference(key: TextHeightPreferenceKey.self, value: 1)
-    }
-}

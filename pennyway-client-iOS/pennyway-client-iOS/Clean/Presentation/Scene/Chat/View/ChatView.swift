@@ -109,6 +109,7 @@ let mockChats: [Chat] = [
         sender_id: 101,
         chat_room_id: 1
     ),
+
     Chat(
         id: 4,
         content: "Just working on some SwiftUI stuff.",
