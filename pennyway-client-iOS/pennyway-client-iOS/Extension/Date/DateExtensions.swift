@@ -52,6 +52,14 @@ extension Date {
         return formatter
     }()
 
+    /// 2000년 1월 1일 목요일  형식
+    static func chatDateFormatter() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy년 M월 d일 EEEE"
+        return formatter
+    }
+
     var formattedCalendarDayDate: String {
         return Date.calendarDayDateFormatter.string(from: self)
     }

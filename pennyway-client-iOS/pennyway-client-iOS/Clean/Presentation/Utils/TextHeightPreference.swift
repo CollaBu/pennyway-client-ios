@@ -1,5 +1,5 @@
 //
-//  HeightPreferenceView.swift
+//  HeightPreference.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 10/8/24.
@@ -17,9 +17,9 @@ struct TextHeightPreferenceKey: PreferenceKey {
     }
 }
 
-// MARK: - TextHeightPreferenceView
+// MARK: - TextHeightPreference
 
-struct TextHeightPreferenceView: View {
+struct TextHeightPreference: View {
     var body: some View {
         Rectangle()
             .fill(Color.clear)

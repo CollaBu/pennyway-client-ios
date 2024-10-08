@@ -10,10 +10,18 @@ import SwiftUI
 // MARK: - ChatView
 
 struct ChatView: View {
+    @StateObject private var keyboardHandler = KeyboardHandler()
+
     var body: some View {
-        VStack(spacing: 0) {
-            ChatContent(chats: mockChats, members: mockMembers, currentUserID: 102)
-            ChatBottomBar()
+        GeometryReader { _ in
+            VStack(spacing: 0) {
+                ChatContent(chats: mockChats, members: mockMembers, currentUserID: 102)
+                    .offset(y: -keyboardHandler.keyboardHeight)
+
+                ChatBottomBar()
+                    .background(Color("Ashblue02"))
+                    .offset(y: -keyboardHandler.keyboardHeight)
+            }
         }
         .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
         .background(Color("Ashblue02"))
@@ -27,7 +35,6 @@ struct ChatView: View {
                         .padding(.leading, 5)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
-
                 }.offset(x: -10)
             }
             ToolbarItem(placement: .topBarTrailing) {
@@ -42,7 +49,6 @@ struct ChatView: View {
                     .padding(.trailing, 5)
                     .frame(width: 44, height: 44)
                     .buttonStyle(BasicButtonStyleUtil())
-
                 }.offset(x: 10)
             }
         }
@@ -101,6 +107,27 @@ let mockChats: [Chat] = [
         id: 3,
         content: "Just working on some SwiftUI stuff.",
         created_at: Date(),
+        sender_id: 101,
+        chat_room_id: 1
+    ),
+    Chat(
+        id: 4,
+        content: "Just working on some SwiftUI stuff.",
+        created_at: Date(),
+        sender_id: 101,
+        chat_room_id: 1
+    ),
+    Chat(
+        id: 5,
+        content: "Just working on some SwiftUI stuff.",
+        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 21))!,
+        sender_id: 102,
+        chat_room_id: 1
+    ),
+    Chat(
+        id: 6,
+        content: "Just working on some SwiftUI stuff.",
+        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 21))!,
         sender_id: 101,
         chat_room_id: 1
     )

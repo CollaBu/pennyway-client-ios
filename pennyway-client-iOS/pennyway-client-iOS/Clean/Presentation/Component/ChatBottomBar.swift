@@ -59,7 +59,7 @@ struct ChatBottomBar: View {
             if showFeature {
                 Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
-                VStack {
+                VStack(spacing: 7 * DynamicSizeFactor.factor()) {
                     Image(systemName: "plus.circle")
                         .resizable()
                         .frame(width: 37 * DynamicSizeFactor.factor(), height: 37 * DynamicSizeFactor.factor())
@@ -68,9 +68,13 @@ struct ChatBottomBar: View {
                         .platformTextColor(color: Color("Gray07"))
                         .font(.B2MediumFont())
                 }
-            }
 
-        }.background(Color("White01"))
+                Spacer().frame(height: 20 * DynamicSizeFactor.factor())
+            } else {
+                Spacer().frame(height: 19 * DynamicSizeFactor.factor())
+            }
+        }
+        .background(Color("White01"))
     }
 }
 
