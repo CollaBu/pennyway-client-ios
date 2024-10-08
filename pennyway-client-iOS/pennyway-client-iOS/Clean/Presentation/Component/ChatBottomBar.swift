@@ -18,7 +18,7 @@ struct ChatBottomBar: View {
             Spacer().frame(height: 11 * DynamicSizeFactor.factor())
 
             HStack {
-                addButton
+                featureButton
                 messageInput
                 sendButton
             }
@@ -32,7 +32,7 @@ struct ChatBottomBar: View {
         .background(Color("White01"))
     }
 
-    private var addButton: some View {
+    private var featureButton: some View {
         VStack {
             Spacer()
             Button(action: {
@@ -40,7 +40,7 @@ struct ChatBottomBar: View {
                     showFeature.toggle()
                 }
             }) {
-                Image(systemName: "plus.circle")
+                Image(showFeature ? "icon_close_filled_gray" : "icon_add_filled_gray")
                     .resizable()
                     .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
                     .padding(.leading, 5 * DynamicSizeFactor.factor())
@@ -85,7 +85,7 @@ struct ChatBottomBar: View {
                     Log.debug("Message sent: \(message)")
                     message = ""
                 }) {
-                    Image(systemName: "arrow.up.circle.fill")
+                    Image("icon_send_filled_primary")
                         .resizable()
                         .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
                         .padding(.trailing, 5 * DynamicSizeFactor.factor())
