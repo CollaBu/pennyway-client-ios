@@ -18,12 +18,7 @@ struct ChatMessage: View {
         HStack(spacing: 9 * DynamicSizeFactor.factor()) {
             if isSender {
                 // 타임스탬프 왼쪽 (isSender가 true일 때)
-                VStack {
-                    Spacer()
-                    Text(createdAt, style: .time)
-                        .font(.B4MediumFont())
-                        .platformTextColor(color: Color("Gray05"))
-                }
+                Timestamp
             }
 
             ZStack(alignment: .topLeading) {
@@ -51,14 +46,18 @@ struct ChatMessage: View {
 
             if !isSender {
                 // 타임스탬프 오른쪽 (isSender가 false일 때)
-                VStack {
-                    Spacer()
-                    Text(createdAt, style: .time)
-                        .font(.B4MediumFont())
-                        .platformTextColor(color: Color("Gray05"))
-                }
+                Timestamp
             }
         }
         .frame(maxWidth: .infinity, alignment: isSender ? .trailing : .leading)
+    }
+
+    private var Timestamp: some View {
+        VStack {
+            Spacer()
+            Text(Date.koreanMeridianTimeFormatter(from: createdAt))
+                .font(.B4MediumFont())
+                .platformTextColor(color: Color("Gray05"))
+        }
     }
 }

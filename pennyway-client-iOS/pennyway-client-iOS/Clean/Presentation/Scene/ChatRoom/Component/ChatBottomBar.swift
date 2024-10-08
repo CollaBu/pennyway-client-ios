@@ -18,21 +18,21 @@ struct ChatBottomBar: View {
             Spacer().frame(height: 11 * DynamicSizeFactor.factor())
 
             HStack {
-                featureButton
-                messageInput
-                sendButton
+                FeatureButton
+                MessageInput
+                SendButton
             }
             .frame(height: textEditorHeight + 16 * DynamicSizeFactor.factor())
             .background(Color("Gray02"))
             .cornerRadius(15)
             .padding(.horizontal, 16)
 
-            featureContent
+            FeatureContent
         }
         .background(Color("White01"))
     }
 
-    private var featureButton: some View {
+    private var FeatureButton: some View {
         VStack {
             Spacer()
             Button(action: {
@@ -50,7 +50,7 @@ struct ChatBottomBar: View {
         }
     }
 
-    private var messageInput: some View {
+    private var MessageInput: some View {
         ZStack(alignment: .leading) {
             Rectangle()
                 .fill(Color("Gray02"))
@@ -77,7 +77,7 @@ struct ChatBottomBar: View {
         .frame(maxWidth: .infinity)
     }
 
-    private var sendButton: some View {
+    private var SendButton: some View {
         VStack {
             Spacer()
             if !message.isEmpty {
@@ -98,13 +98,13 @@ struct ChatBottomBar: View {
         }
     }
 
-    private var featureContent: some View {
+    private var FeatureContent: some View {
         Group {
             if showFeature {
                 Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
                 VStack(spacing: 7 * DynamicSizeFactor.factor()) {
-                    Image(systemName: "plus.circle")
+                    Image("icon_chat_image")
                         .resizable()
                         .frame(width: 37 * DynamicSizeFactor.factor(), height: 37 * DynamicSizeFactor.factor())
 
