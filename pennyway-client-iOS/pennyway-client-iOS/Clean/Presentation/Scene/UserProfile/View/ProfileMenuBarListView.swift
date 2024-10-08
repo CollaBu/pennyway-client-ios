@@ -18,6 +18,8 @@ struct ProfileMenuBarListView: View {
 
     @State private var navigateCompleteView = false
 
+    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
+
     var body: some View {
         ZStack {
             ScrollView {
@@ -105,17 +107,22 @@ struct ProfileMenuBarListView: View {
     }
 
     func handleLogout() {
+//        if let fcmToken = AppDelegate.currentFCMToken {
+//            userProfileViewModel.deleteDeviceTokenApi(fcmToken: fcmToken) { success in
+//                DispatchQueue.main.async {
+//                    if success {
+//                        self.showLogoutPopUp = false
+//                        self.authViewModel.logout()
+//                    } else {
+//                        Log.error("디바이스 토큰 삭제 실패")
+//                    }
+//                }
+//            }
+//        }
         if let fcmToken = AppDelegate.currentFCMToken {
-            userProfileViewModel.deleteDeviceTokenApi(fcmToken: fcmToken) { success in
-                DispatchQueue.main.async {
-                    if success {
-                        self.showLogoutPopUp = false
-                        self.authViewModel.logout()
-                    } else {
-                        Log.error("디바이스 토큰 삭제 실패")
-                    }
-                }
-            }
+            viewModelWrapper.logoutViewModel.deleteDeviceToken(fcmToken: fcmToken)
+            showLogoutPopUp = false
+            authViewModel.logout()
         }
     }
 
@@ -157,8 +164,4 @@ struct ProfileMenuPopUpState: Equatable {
     func isReturn() -> Bool {
         return !showLogoutPopUp && !showDeleteUserPopUp && !showUnLinkPopUp
     }
-}
-
-#Preview {
-    ProfileMenuBarListView()
 }
