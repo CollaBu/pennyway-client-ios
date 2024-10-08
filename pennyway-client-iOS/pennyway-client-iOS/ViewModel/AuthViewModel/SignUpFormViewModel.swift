@@ -12,11 +12,11 @@ class SignUpFormViewModel: ObservableObject {
     @Published var showErrorConfirmPw = false
     @Published var isFormValid: Bool = false
     @Published var isDuplicateUserName: Bool = false
-    
+
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
     @State private var isOAuthUser = OAuthRegistrationManager.shared.isOAuthUser
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
-    
+
     func validateForm() {
         if isOAuthRegistration {
             if !isExistUser && !name.isEmpty && !id.isEmpty && !showErrorName && !showErrorID && !isDuplicateUserName {
@@ -38,7 +38,7 @@ class SignUpFormViewModel: ObservableObject {
             }
         }
     }
-    
+
     func validatePwForm() {
         if !password.isEmpty && password == confirmPw && !confirmPw.isEmpty && !showErrorPassword && !showErrorConfirmPw {
             isFormValid = true
@@ -46,28 +46,28 @@ class SignUpFormViewModel: ObservableObject {
             isFormValid = false
         }
     }
-    
+
     func validateName() {
         let nameRegex = "^[가-힣a-zA-Z]{2,8}$"
         showErrorName = !NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
     }
-    
+
     func validateID() {
         let idRegex = "^[a-z0-9._-]{5,20}$"
         showErrorID = !NSPredicate(format: "SELF MATCHES %@", idRegex).evaluate(with: id)
     }
-    
+
     func validatePassword() {
         let passwordRegex = "^(?=.*[a-z])(?=.*[0-9])([A-Za-z0-9!@#$%^&*()_+={}?:~<>;,-./`]{8,16})$"
         showErrorPassword = !NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
         validatePwForm()
     }
-    
+
     func validateConfirmPw() {
         showErrorConfirmPw = password != confirmPw
         validatePwForm()
     }
-    
+
     func checkDuplicateUserNameApi(completion: @escaping (Bool) -> Void) {
         let checkDuplicateRequestDto = CheckDuplicateRequestDto(username: id)
         AuthAlamofire.shared.checkDuplicateUserName(checkDuplicateRequestDto) { result in
@@ -76,7 +76,7 @@ class SignUpFormViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(CheckDuplicateResponseDto.self, from: responseData)
-                            
+
                         if response.data.isDuplicate {
                             self.isDuplicateUserName = true
                             completion(true)

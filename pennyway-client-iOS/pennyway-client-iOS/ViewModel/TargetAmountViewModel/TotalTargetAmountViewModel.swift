@@ -8,7 +8,7 @@ class TotalTargetAmountViewModel: ObservableObject {
     @Published var targetAmounts: [TargetAmount] = [] // 내림차순 데이터
     @Published var sortTargetAmounts: [TargetAmount] = [] // 오름차순 정렬
     @Published var maxTotalSpending = 0
-    @Published var currentData: TargetAmount = TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0) // 당월 데이터
+    @Published var currentData: TargetAmount = .init(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0) // 당월 데이터
 
     func getTotalTargetAmountApi(completion: @escaping (Bool) -> Void) {
         let getTotalTargetAmountRequestDto = GetTotalTargetAmountRequestDto(date: Date.getBasicformattedDate(from: Date()))

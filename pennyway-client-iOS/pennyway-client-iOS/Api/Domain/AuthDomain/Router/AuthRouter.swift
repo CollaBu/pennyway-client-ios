@@ -14,7 +14,7 @@ enum AuthRouter: URLRequestConvertible {
     case logout, refresh
     case requestResetPw(dto: RequestResetPwDto)
     case receivePwVerifyVerificationCode(dto: VerificationRequestDto)
-    
+
     var method: HTTPMethod {
         switch self {
         case .signup, .receiveVerificationCode, .verifyVerificationCode, .login, .linkAccountToOAuth, .receivePwVerifyVerificationCode:
@@ -25,11 +25,11 @@ enum AuthRouter: URLRequestConvertible {
             return .patch
         }
     }
-    
+
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
     }
-    
+
     var path: String {
         switch self {
         case .signup:
@@ -56,7 +56,7 @@ enum AuthRouter: URLRequestConvertible {
             return "v1/auth/refresh"
         }
     }
-    
+
     var parameters: Parameters? {
         switch self {
         case let .signup(dto):
@@ -79,38 +79,38 @@ enum AuthRouter: URLRequestConvertible {
             return [:]
         }
     }
-    
+
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request: URLRequest
-        
+
         switch self {
         case .signup, .verifyVerificationCode, .login, .linkAccountToOAuth, .receivePwVerifyVerificationCode, .requestResetPw:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)
-            
+
         case let .receiveVerificationCode(_, type):
             let queryParameters = [URLQueryItem(name: "type", value: type.rawValue)]
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters, queryParameters: queryParameters)
-            
+
         case let .checkDuplicateUserName(dto):
             let queryParameters = [URLQueryItem(name: "username", value: dto.username)]
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
-            
+
         case let .findUserName(dto):
             let queryParameters = [URLQueryItem(name: "phone", value: dto.phone), URLQueryItem(name: "code", value: dto.code)]
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
-            
+
         case .logout:
             request = URLRequest.createURLRequest(url: url, method: method)
-            
+
         case .refresh:
-            
+
             request = URLRequest.createURLRequest(url: url, method: method)
-            
+
             if let cookies = HTTPCookieStorage.shared.cookies(for: url) {
                 let cookieHeader = HTTPCookie.requestHeaderFields(with: cookies)
                 request.allHTTPHeaderFields = cookieHeader
-                
+
                 Log.debug(KeychainHelper.loadAccessToken())
                 Log.debug(cookieHeader)
             }

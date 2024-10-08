@@ -12,9 +12,9 @@ struct ProfileMenuBarListView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     @StateObject var userProfileViewModel = UserLogoutViewModel()
     @StateObject var userAccountViewModel = UserAccountViewModel()
-    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
-    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
-    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
+    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = .init()
+    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = .init()
+    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = .init()
 
     @State private var navigateCompleteView = false
 
@@ -53,9 +53,8 @@ struct ProfileMenuBarListView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: handleUnLinkAccount,
                                 secondBtnLabel: "해제하기",
-                                secondBtnColor: Color("Gray05")
-                )
-                .analyzeEvent(ProfileEvents.oauthUnlinkPopUp)
+                                secondBtnColor: Color("Gray05"))
+                    .analyzeEvent(ProfileEvents.oauthUnlinkPopUp)
             }
 
             if showLogoutPopUp {
@@ -66,9 +65,8 @@ struct ProfileMenuBarListView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: handleLogout,
                                 secondBtnLabel: "로그아웃",
-                                secondBtnColor: Color("Red03")
-                )
-                .analyzeEvent(ProfileEvents.signOutPopUp)
+                                secondBtnColor: Color("Red03"))
+                    .analyzeEvent(ProfileEvents.signOutPopUp)
             }
 
             if showDeleteUserPopUp {
@@ -80,9 +78,8 @@ struct ProfileMenuBarListView: View {
                                 secondBtnAction: { self.showDeleteUserPopUp = false },
                                 secondBtnLabel: "더 써볼게요",
                                 secondBtnColor: Color("Gray05"),
-                                heightSize: 166
-                )
-                .analyzeEvent(ProfileEvents.accountDeletePopUp)
+                                heightSize: 166)
+                    .analyzeEvent(ProfileEvents.accountDeletePopUp)
             }
 
             if googleOAuthViewModel.isExistUser || kakaoOAuthViewModel.isExistUser || appleOAuthViewModel.isExistUser {

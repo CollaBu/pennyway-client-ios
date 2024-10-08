@@ -26,7 +26,7 @@ class OAuthLoginViewModel: ObservableObject {
                             AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
                             AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
                                 AnalyticsConstants.Parameter.oauthType: self.dto.provider,
-                                AnalyticsConstants.Parameter.isRefresh: false
+                                AnalyticsConstants.Parameter.isRefresh: false,
                             ])
                         } else {
                             completion(false, nil)

@@ -19,94 +19,94 @@ enum SpendingEvents: AnalyticsEvent {
     case spendingEditdonePopup
     case spendingEditDeletePopUp
     case spendingDeletePopUp
-    
+
     var eventName: AnalyticsConstants.EventName {
         switch self {
         case .spendingTabView, .spendingListBottonSheet, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendingListEditView, .spendAtSelectView, .spendingEditdonePopup, .spendingEditDeletePopUp, .spendingDeletePopUp:
             return AnalyticsConstants.EventName.screenView
         }
     }
-    
+
     var eventType: AnalyticsConstants.EventType {
         switch self {
         case .spendingTabView, .spendingListBottonSheet, .mySpendingListView, .spendingDetailView, .spendingAddView, .spendingAddCompleteView, .spendingUpdateView, .spendAtSelectView, .spendingListEditView, .spendingEditdonePopup, .spendingEditDeletePopUp, .spendingDeletePopUp:
             return AnalyticsConstants.EventType.screenView
         }
     }
-    
+
     var parameters: [AnalyticsConstants.Parameter: Any]? {
         switch self {
         case .spendingTabView:
             return [
                 .screenId: SpendingScreen.spendingTabView.screenId,
                 .screenName: SpendingScreen.spendingTabView.screenName,
-                .screenClass: SpendingScreen.spendingTabView.screenClass
+                .screenClass: SpendingScreen.spendingTabView.screenClass,
             ]
         case .spendingListBottonSheet:
             return [
                 .screenId: SpendingScreen.spendingListBottonSheet.screenId,
                 .screenName: SpendingScreen.spendingListBottonSheet.screenName,
-                .screenClass: SpendingScreen.spendingListBottonSheet.screenClass
+                .screenClass: SpendingScreen.spendingListBottonSheet.screenClass,
             ]
         case .mySpendingListView:
             return [
                 .screenId: SpendingScreen.mySpendingListView.screenId,
                 .screenName: SpendingScreen.mySpendingListView.screenName,
-                .screenClass: SpendingScreen.mySpendingListView.screenClass
+                .screenClass: SpendingScreen.mySpendingListView.screenClass,
             ]
         case .spendingDetailView:
             return [
                 .screenId: SpendingScreen.spendingDetailView.screenId,
                 .screenName: SpendingScreen.spendingDetailView.screenName,
-                .screenClass: SpendingScreen.spendingDetailView.screenClass
+                .screenClass: SpendingScreen.spendingDetailView.screenClass,
             ]
         case .spendingAddView:
             return [
                 .screenId: SpendingScreen.spendingAddView.screenId,
                 .screenName: SpendingScreen.spendingAddView.screenName,
-                .screenClass: SpendingScreen.spendingAddView.screenClass
+                .screenClass: SpendingScreen.spendingAddView.screenClass,
             ]
         case .spendingAddCompleteView:
             return [
                 .screenId: SpendingScreen.spendingAddCompleteView.screenId,
                 .screenName: SpendingScreen.spendingAddCompleteView.screenName,
-                .screenClass: SpendingScreen.spendingAddCompleteView.screenClass
+                .screenClass: SpendingScreen.spendingAddCompleteView.screenClass,
             ]
         case .spendingUpdateView:
             return [
                 .screenId: SpendingScreen.spendingUpdateView.screenId,
                 .screenName: SpendingScreen.spendingUpdateView.screenName,
-                .screenClass: SpendingScreen.spendingUpdateView.screenClass
+                .screenClass: SpendingScreen.spendingUpdateView.screenClass,
             ]
         case .spendAtSelectView:
             return [
                 .screenId: SpendingScreen.spendAtSelectView.screenId,
                 .screenName: SpendingScreen.spendAtSelectView.screenName,
-                .screenClass: SpendingScreen.spendAtSelectView.screenClass
+                .screenClass: SpendingScreen.spendAtSelectView.screenClass,
             ]
         case .spendingListEditView:
             return [
                 .screenId: SpendingScreen.spendingListEditView.screenId,
                 .screenName: SpendingScreen.spendingListEditView.screenName,
-                .screenClass: SpendingScreen.spendingListEditView.screenClass
+                .screenClass: SpendingScreen.spendingListEditView.screenClass,
             ]
         case .spendingEditdonePopup:
             return [
                 .screenId: SpendingScreen.spendingEditdonePopup.screenId,
                 .screenName: SpendingScreen.spendingEditdonePopup.screenName,
-                .screenClass: SpendingScreen.spendingEditdonePopup.screenClass
+                .screenClass: SpendingScreen.spendingEditdonePopup.screenClass,
             ]
         case .spendingEditDeletePopUp:
             return [
                 .screenId: SpendingScreen.spendingEditDeletePopUp.screenId,
                 .screenName: SpendingScreen.spendingEditDeletePopUp.screenName,
-                .screenClass: SpendingScreen.spendingEditDeletePopUp.screenClass
+                .screenClass: SpendingScreen.spendingEditDeletePopUp.screenClass,
             ]
         case .spendingDeletePopUp:
             return [
                 .screenId: SpendingScreen.spendingDeletePopUp.screenId,
                 .screenName: SpendingScreen.spendingDeletePopUp.screenName,
-                .screenClass: SpendingScreen.spendingDeletePopUp.screenClass
+                .screenClass: SpendingScreen.spendingDeletePopUp.screenClass,
             ]
         }
     }
@@ -127,7 +127,7 @@ enum SpendingScreen {
     case spendingEditdonePopup
     case spendingEditDeletePopUp
     case spendingDeletePopUp
-    
+
     var screenId: String {
         switch self {
         case .spendingTabView: return "spending_tab_view"
@@ -144,7 +144,7 @@ enum SpendingScreen {
         case .spendingDeletePopUp: return "spending_delete_popup"
         }
     }
-    
+
     var screenName: String {
         switch self {
         case .spendingTabView: return "지출 관리 메인 탭 화면"
@@ -161,7 +161,7 @@ enum SpendingScreen {
         case .spendingDeletePopUp: return "소비 내역 삭제 팝업"
         }
     }
-    
+
     var screenClass: String {
         switch self {
         case .spendingTabView: return "SpendingManagementMainView"

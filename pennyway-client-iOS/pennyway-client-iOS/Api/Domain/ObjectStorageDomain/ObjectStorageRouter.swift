@@ -5,7 +5,7 @@ import Foundation
 enum ObjectStorageRouter: URLRequestConvertible {
     case generatePresignedUrl(dto: GeneratePresigendUrlRequestDto)
     case storePresignedUrl(payload: String, image: UIImage, dto: StorePresignedUrlRequestDto)
-    
+
     var method: HTTPMethod {
         switch self {
         case .generatePresignedUrl:
@@ -14,7 +14,7 @@ enum ObjectStorageRouter: URLRequestConvertible {
             return .put
         }
     }
-    
+
     var baseURL: URL {
         switch self {
         case .generatePresignedUrl:
@@ -23,7 +23,7 @@ enum ObjectStorageRouter: URLRequestConvertible {
             return URL(string: payload) ?? URL(string: "")!
         }
     }
-    
+
     var path: String {
         switch self {
         case .generatePresignedUrl:
@@ -32,14 +32,14 @@ enum ObjectStorageRouter: URLRequestConvertible {
             return ""
         }
     }
-    
+
     var bodyParameters: Parameters? {
         switch self {
         case .generatePresignedUrl, .storePresignedUrl:
             return [:]
         }
     }
-    
+
     var queryParameters: Parameters? {
         switch self {
         case let .generatePresignedUrl(dto):
@@ -52,12 +52,12 @@ enum ObjectStorageRouter: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request: URLRequest
-        
+
         switch self {
         case .generatePresignedUrl:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
-            
+
         case let .storePresignedUrl(_, image, dto):
             let queryDatas: [URLQueryItem] =
                 [
@@ -66,9 +66,9 @@ enum ObjectStorageRouter: URLRequestConvertible {
                     URLQueryItem(name: "X-Amz-SignedHeaders", value: dto.signedHeaders),
                     URLQueryItem(name: "X-Amz-Credential", value: dto.credential),
                     URLQueryItem(name: "X-Amz-Expires", value: dto.expires),
-                    URLQueryItem(name: "X-Amz-Signature", value: dto.signature)
+                    URLQueryItem(name: "X-Amz-Signature", value: dto.signature),
                 ]
-            
+
             request = URLRequest.createURLRequest(url: baseURL, method: method, queryParameters: queryDatas, image: image, percentEncoded: true)
         }
         return request

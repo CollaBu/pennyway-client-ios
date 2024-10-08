@@ -35,7 +35,7 @@ class InquiryViewModel: ObservableObject {
         "이용 관련": "UTILIZATION",
         "오류 신고": "BUG_REPORT",
         "서비스 제안": "SUGGESTION",
-        "기타": "ETC"
+        "기타": "ETC",
     ]
 
     func getCategoryCode(for category: String) -> String {

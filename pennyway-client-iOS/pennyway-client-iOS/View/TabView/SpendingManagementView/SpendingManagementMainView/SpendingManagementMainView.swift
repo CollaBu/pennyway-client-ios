@@ -39,7 +39,7 @@ struct SpendingManagementMainView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 99 * DynamicSizeFactor.factor(), height: 18 * DynamicSizeFactor.factor())
                     }
-            
+
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack(spacing: 0) {
                             Button(action: {
@@ -56,7 +56,7 @@ struct SpendingManagementMainView: View {
                             .padding(.trailing, 5 * DynamicSizeFactor.factor())
                             .frame(width: 44, height: 44)
                             .buttonStyle(BasicButtonStyleUtil())
-            
+
                             Button(action: {
                                 navigateToMainAlarmView = true
                             }, label: {
@@ -95,14 +95,14 @@ struct SpendingManagementMainView: View {
                     }
                     .hidden()
                 )
-            
+
                 .background(
                     NavigationLink(destination: ProfileAlarmView(), isActive: $navigateToMainAlarmView) {
                         EmptyView()
                     }
                     .hidden()
                 )
-            
+
             if #available(iOS 15.0, *) {
             } else {
                 NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: .constant(Date()), clickDate: $clickDate), isActive: $navigateToMySpendingList) {
@@ -127,35 +127,35 @@ struct SpendingManagementMainView: View {
         }
         .id(ishidden)
     }
-    
+
     // MARK: - Subviews
 
     private var content: some View {
         ScrollView {
             VStack {
                 Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-                
+
                 if !targetAmountViewModel.isHiddenSuggestionView {
                     RecentTargetAmountSuggestionView(viewModel: targetAmountViewModel, showToastPopup: $showToastPopup, isHidden: $targetAmountViewModel.isHiddenSuggestionView)
-                    
+
                     Spacer().frame(height: 13 * DynamicSizeFactor.factor())
                 }
-                
+
                 SpendingCheckBoxView(viewModel: targetAmountViewModel)
                     .padding(.horizontal, 20)
-                
+
                 Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-                
+
                 SpendingCalenderView(spendingHistoryViewModel: spendingHistoryViewModel, showSpendingDetailView: $showSpendingDetailView, date: $spendingHistoryViewModel.currentDate, clickDate: $clickDate)
                     .padding(.horizontal, 20)
-                
+
                 Spacer().frame(height: 13 * DynamicSizeFactor.factor())
-                
+
                 CustomRectangleButton(action: {
                     navigateToMySpendingList = true
                     Log.debug(navigateToMySpendingList)
                 }, label: "나의 소비 내역")
-                
+
                 Spacer().frame(height: 23 * DynamicSizeFactor.factor())
             }
             .analyzeEvent(SpendingEvents.spendingTabView)

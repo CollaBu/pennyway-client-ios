@@ -2,9 +2,9 @@
 import SwiftUI
 
 struct LoginOAuthButtonView: View {
-    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
-    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
-    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
+    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = .init()
+    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = .init()
+    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = .init()
 
     @EnvironmentObject var authViewModel: AppViewModel
     @State private var isLoginSuccessful = false

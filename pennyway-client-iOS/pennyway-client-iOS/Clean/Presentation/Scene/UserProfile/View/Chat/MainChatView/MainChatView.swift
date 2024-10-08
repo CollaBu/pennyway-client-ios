@@ -30,10 +30,12 @@ struct MainChatView: View {
                 }
 
                 Spacer().frame(height: 28 * DynamicSizeFactor.factor())
+//                                    DefaultChatContent()
 
                 if selectedTab == 0 {
                     DefaultChatContent()
-                } else if selectedTab == 1 {
+                    Spacer()
+                } else if selectedTab == 1 { 
                     searchChatContainer
 
                     ChatRoomContent(isMyChat: true)

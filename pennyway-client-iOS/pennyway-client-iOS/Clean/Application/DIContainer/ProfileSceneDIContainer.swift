@@ -11,7 +11,7 @@ final class ProfileSceneDIContainer {
 //    struct Dependencies {
 //        let apiDataTransferService: DataTransferService
 //    }
-//    
+//
 //    private let dependencies: Dependencies
 //
 //    init(dependencies: Dependencies) {
@@ -33,8 +33,7 @@ final class ProfileSceneDIContainer {
 
     private func makePresignedUrlUseCase() -> PresignedUrlUseCase {
         DefaultPresignedUrlUseCase(urlRepository: makePresignedUrlRepository(),
-                                   imageRepository: makeProfileImageRepository()
-        )
+                                   imageRepository: makeProfileImageRepository())
     }
 
     private func makeDeleteImageUseCase() -> DeleteImageUseCase {

@@ -4,9 +4,9 @@ import SwiftUI
 struct PastSpendingListView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     @State private var navigateToMySpendingList = false
-    @State var currentMonth: Date = Date()
+    @State var currentMonth: Date = .init()
     @State var clickDate: Date?
-    
+
     var body: some View {
         ZStack {
             if viewModel.targetAmounts.isEmpty {
@@ -33,52 +33,52 @@ struct PastSpendingListView: View {
             }
         }
         .analyzeEvent(TargetAmountEvents.targetAmountHistoryView)
-        
+
         NavigationLink(destination: MySpendingListView(spendingHistoryViewModel: SpendingHistoryViewModel(), currentMonth: $currentMonth, clickDate: $clickDate), isActive: $navigateToMySpendingList) {
             EmptyView()
         }
         .hidden()
     }
-    
+
     @ViewBuilder
     private func emptyStateView() -> some View {
         VStack {
             Spacer()
-            
+
             VStack {
                 Image("icon_illust_nohistory")
                     .frame(width: 50 * DynamicSizeFactor.factor(), height: 66 * DynamicSizeFactor.factor())
                     .padding()
-                
+
                 Text("아직 기록이 없어요")
                     .platformTextColor(color: Color("Gray04"))
                     .font(.H4MediumFont())
             }
-            
+
             Spacer()
         }
         .edgesIgnoringSafeArea(.top)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    
+
     @ViewBuilder
     private func contentListView() -> some View {
         ScrollView {
             Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-            
+
             ForEach(Array(viewModel.targetAmounts.enumerated()), id: \.offset) { _, content in
                 VStack(alignment: .leading) {
                     Text("\(String(content.year))년 \(content.month)월")
                         .font(.B2MediumFont())
                         .platformTextColor(color: Color("Gray05"))
-                    
+
                     Spacer().frame(height: 8)
                     HStack {
                         HStack(spacing: 6 * DynamicSizeFactor.factor()) {
                             Text("\(content.totalSpending)원")
                                 .font(.ButtonH4SemiboldFont())
                                 .platformTextColor(color: Color("Gray07"))
-                            
+
                             if content.targetAmountDetail.amount != -1 {
                                 DiffAmountDynamicWidthView(
                                     text: DiffAmountColorUtil.determineText(for: content.diffAmount),
@@ -87,9 +87,9 @@ struct PastSpendingListView: View {
                                 )
                             }
                         }
-                        
+
                         Spacer()
-                        
+
                         Image("icon_arrow_front_small_gray03")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -107,7 +107,7 @@ struct PastSpendingListView: View {
             }
             .frame(height: 60 * DynamicSizeFactor.factor())
             .padding(.horizontal, 20)
-            
+
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
         }
     }
