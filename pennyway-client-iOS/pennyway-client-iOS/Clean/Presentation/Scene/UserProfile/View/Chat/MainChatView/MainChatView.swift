@@ -6,6 +6,7 @@ import SwiftUI
 struct MainChatView: View {
     @State private var selectedTab: Int = 0
     @State private var chatRoomName: String = "" // 수정 예정
+    private let maxLength = 16
 
     var body: some View {
         NavigationAvailable {
@@ -17,79 +18,25 @@ struct MainChatView: View {
                         selectedTab = 1
                     }, label: {
                         MyChatContainer
-//                        VStack {
-//                            if selectedTab == 1 {
-//                                ZStack {
-//                                    Circle()
-//                                        .platformTextColor(color: Color("Mint03"))
-//                                        .frame(width: 7 * DynamicSizeFactor.factor(), height: 7 * DynamicSizeFactor.factor())
-//                                        .offset(x: 32 * DynamicSizeFactor.factor(), y: -16 * DynamicSizeFactor.factor())
-//
-//                                    VStack {
-//                                        Text("내 채팅")
-//                                            .font(.ButtonH4SemiboldFont())
-//                                            .platformTextColor(color: Color("Mint03"))
-//
-//                                        Capsule()
-//                                            .platformTextColor(color: Color("Mint03"))
-//                                            .frame(width: 106 * DynamicSizeFactor.factor(), height: 3)
-//                                            .padding(.top, 4)
-//                                    }
-//                                }
-//                            } else {
-//                                Text("내 채팅")
-//                                    .font(.ButtonH4SemiboldFont())
-//                                    .platformTextColor(color: Color("Gray07"))
-//
-//                                Capsule()
-//                                    .fill(Color.clear)
-//                                    .frame(width: 106 * DynamicSizeFactor.factor(), height: 3)
-//                                    .padding(.top, 4)
-//                            }
-//                        }
+
                     })
 
                     Button(action: {
                         selectedTab = 2
                     }, label: {
                         RecommendChatContainer
-//                        VStack {
-//                            if selectedTab == 2 {
-//                                ZStack {
-//                                    Circle()
-//                                        .platformTextColor(color: Color("Mint03"))
-//                                        .frame(width: 7 * DynamicSizeFactor.factor(), height: 7 * DynamicSizeFactor.factor())
-//                                        .offset(x: 37 * DynamicSizeFactor.factor(), y: -16 * DynamicSizeFactor.factor())
-//
-//                                    VStack {
-//                                        Text("추천 채팅")
-//                                            .font(.ButtonH4SemiboldFont())
-//                                            .platformTextColor(color: Color("Mint03"))
-//
-//                                        Capsule()
-//                                            .platformTextColor(color: Color("Mint03"))
-//                                            .frame(width: 106 * DynamicSizeFactor.factor(), height: 3)
-//                                            .padding(.top, 4)
-//                                    }
-//                                }
-//
-//                            } else {
-//                                Text("추천 채팅")
-//                                    .font(.ButtonH4SemiboldFont())
-//                                    .platformTextColor(color: Color("Gray07"))
-//
-//                                Capsule()
-//                                    .fill(Color.clear)
-//                                    .frame(width: 106 * DynamicSizeFactor.factor(), height: 3)
-//                                    .padding(.top, 4)
-//                            }
-//                        }
+
                     })
                 }
 
                 Spacer().frame(height: 28 * DynamicSizeFactor.factor())
 
                 CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", isSecureText: false, showSearchBtn: true)
+                    .onChange(of: chatRoomName) { newValue in
+                        if newValue.count > maxLength {
+                            chatRoomName = String(newValue.prefix(maxLength))
+                        }
+                    }
 
                 Spacer().frame(height: 23 * DynamicSizeFactor.factor())
 

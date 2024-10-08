@@ -2234,6 +2234,23 @@
 			path = FindPwView;
 			sourceTree = "<group>";
 		};
+		D87CF34A2CB5942B00A1870F /* MainChatView */ = {
+			isa = PBXGroup;
+			children = (
+				D87CF34B2CB5944700A1870F /* Components */,
+				D89901E32CB4348D00A082D4 /* MainChatView.swift */,
+			);
+			path = MainChatView;
+			sourceTree = "<group>";
+		};
+		D87CF34B2CB5944700A1870F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D89901E52CB434C000A082D4 /* ChatRoomContent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		D88832962BBC60C400F49B27 /* LoginView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2249,8 +2266,7 @@
 		D89901E02CB4345900A082D4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				D89901E32CB4348D00A082D4 /* MainChatView.swift */,
-				D89901E52CB434C000A082D4 /* ChatRoomContent.swift */,
+				D87CF34A2CB5942B00A1870F /* MainChatView */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
