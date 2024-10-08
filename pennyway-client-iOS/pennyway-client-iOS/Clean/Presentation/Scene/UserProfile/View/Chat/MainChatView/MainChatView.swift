@@ -6,7 +6,7 @@ import SwiftUI
 struct MainChatView: View {
     @State private var selectedTab: Int = 0
     @State private var chatRoomName: String = "" // 수정 예정
-    private let maxLength = 16
+    private let maxLength = 19
 
     var body: some View {
         NavigationAvailable {
@@ -34,7 +34,7 @@ struct MainChatView: View {
                 CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", isSecureText: false, showSearchBtn: true)
                     .onChange(of: chatRoomName) { newValue in
                         if newValue.count > maxLength {
-                            chatRoomName = String(newValue.prefix(maxLength))
+                            chatRoomName = String(chatRoomName.suffix(19))
                         }
                     }
 
