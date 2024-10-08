@@ -200,10 +200,12 @@ final class UserProfileViewModelWrapper: ObservableObject {
     @Published var userData: UserProfileItemModel
     var viewModel: any UserProfileViewModel
     var logoutViewModel: any LogoutViewModel
+    var deleteUserViewModel: any DeleteUserViewModel
 
-    init(viewModel: any UserProfileViewModel, logoutViewModel: any LogoutViewModel) {
+    init(viewModel: any UserProfileViewModel, logoutViewModel: any LogoutViewModel, deleteUserViewModel: any DeleteUserViewModel) {
         self.viewModel = viewModel
         self.logoutViewModel = logoutViewModel
+        self.deleteUserViewModel = deleteUserViewModel
         userData = viewModel.userData.value
 
         // Observable을 통해 userData 변화를 감지하고 업데이트

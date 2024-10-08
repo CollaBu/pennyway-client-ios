@@ -79,7 +79,9 @@ struct ProfileMenuBarListView: View {
                                 subTitleLabel: "탈퇴 후에는 이용한 서비스\n내역이 모두 사라져요 😢",
                                 firstBtnAction: handleDeleteUserAccount,
                                 firstBtnLabel: "탈퇴하기",
-                                secondBtnAction: { self.showDeleteUserPopUp = false },
+                                secondBtnAction: { self.showDeleteUserPopUp = false
+                                    Log.debug("?:\(showDeleteUserPopUp)")
+                                },
                                 secondBtnLabel: "더 써볼게요",
                                 secondBtnColor: Color("Gray05"),
                                 heightSize: 166
@@ -127,7 +129,7 @@ struct ProfileMenuBarListView: View {
     }
 
     func handleDeleteUserAccount() {
-        userAccountViewModel.deleteUserAccountApi { success in
+        viewModelWrapper.deleteUserViewModel.deleteUserAccount { success in
             DispatchQueue.main.async {
                 if success {
                     showDeleteUserPopUp = false
