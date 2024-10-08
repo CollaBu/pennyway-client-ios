@@ -31,20 +31,15 @@ struct MainChatView: View {
 
                 Spacer().frame(height: 28 * DynamicSizeFactor.factor())
 
-                CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", isSecureText: false, showSearchBtn: true)
-                    .onChange(of: chatRoomName) { newValue in
-                        if newValue.count > maxLength {
-                            chatRoomName = String(chatRoomName.suffix(19))
-                        }
-                    }
-
-                Spacer().frame(height: 23 * DynamicSizeFactor.factor())
-
                 if selectedTab == 0 {
-                    Spacer()
+                    DefaultChatContent()
                 } else if selectedTab == 1 {
+                    searchChatContainer
+
                     ChatRoomContent(isMyChat: true)
                 } else if selectedTab == 2 {
+                    searchChatContainer
+
                     ChatRoomContent(isMyChat: false)
                 }
             }
@@ -63,6 +58,19 @@ struct MainChatView: View {
                     }
                 }
             }
+        }
+    }
+
+    private var searchChatContainer: some View {
+        VStack {
+            CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", isSecureText: false, showSearchBtn: true)
+                .onChange(of: chatRoomName) { newValue in
+                    if newValue.count > maxLength {
+                        chatRoomName = String(chatRoomName.suffix(19))
+                    }
+                }
+
+            Spacer().frame(height: 23 * DynamicSizeFactor.factor())
         }
     }
 
