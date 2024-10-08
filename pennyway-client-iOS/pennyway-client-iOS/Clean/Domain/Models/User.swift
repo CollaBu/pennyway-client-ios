@@ -39,3 +39,9 @@ struct OAuthAccount: Equatable {
     let google: Bool
     let apple: Bool
 }
+
+// MARK: - UserId
+
+struct UserId: Equatable {
+    let id: Int64
+}

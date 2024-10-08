@@ -6,6 +6,8 @@ struct LoginOAuthButtonView: View {
     @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
     @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
 
+    let profileInfoViewModel = UserAccountViewModel()
+
     @EnvironmentObject var authViewModel: AppViewModel
     @State private var isLoginSuccessful = false
     @State private var isActiveLink = false
@@ -68,6 +70,16 @@ struct LoginOAuthButtonView: View {
     func handleOAuthLogin() {
         if isLoginSuccessful {
             authViewModel.login()
+
+            profileInfoViewModel.getUserProfileApi { success, userId in
+                if success, let userId = userId {
+                    AnalyticsManager.shared.setUser("userId = \(userId)")
+                    AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
+                        AnalyticsConstants.Parameter.oauthType: OAuthRegistrationManager.shared.provider,
+                        AnalyticsConstants.Parameter.isRefresh: false
+                    ])
+                }
+            }
         }
     }
 }

@@ -64,7 +64,7 @@ struct TargetAmountSettingView: View {
                                 if success {
                                     Log.debug("목표 금액 삭제 성공")
 
-                                    profileInfoViewModel.getUserProfileApi { success in
+                                    profileInfoViewModel.getUserProfileApi { success, _ in
                                         if success {
                                             AnalyticsManager.shared.trackEvent(TargetAmountEvents.postponeTargetAmount, additionalParams: nil)
                                             authViewModel.login()
