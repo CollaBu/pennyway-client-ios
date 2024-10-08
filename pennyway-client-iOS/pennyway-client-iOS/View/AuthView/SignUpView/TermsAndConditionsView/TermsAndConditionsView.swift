@@ -1,10 +1,9 @@
 import SwiftUI
 
 struct TermsAndConditionsView: View {
-    @StateObject var termsAndConditionsViewModel = TermsAndConditionsViewModel()
+    @StateObject var signUpViewModel = SignUpViewModel()
     @State private var isAllAgreed = false
     @ObservedObject var viewModel: SignUpNavigationViewModel
-    @StateObject var oauthSignUpViewModel = OAuthSignUpViewModel()
     
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
 
@@ -32,12 +31,26 @@ struct TermsAndConditionsView: View {
             
             CustomBottomButton(action: {
                 if isAllAgreed {
-                    viewModel.continueButtonTapped()
-                        
                     if isOAuthRegistration {
-                        oauthSignUpViewModel.oauthSignUpApi()
+                        signUpViewModel.oauthSignUp { success, userId in
+                            if success, let userId = userId {
+                                AnalyticsManager.shared.setUser("userId = \(userId.id)")
+                                AnalyticsManager.shared.trackEvent(AuthEvents.signUp, additionalParams: [
+                                    AnalyticsConstants.Parameter.oauthType: OAuthRegistrationManager.shared.provider,
+                                ])
+                                viewModel.continueButtonTapped()
+                            }
+                        }
                     } else {
-                        termsAndConditionsViewModel.requestRegistApi()
+                        signUpViewModel.signUp { success, userId in
+                            if success, let userId = userId {
+                                AnalyticsManager.shared.setUser("userId = \(userId.id)")
+                                AnalyticsManager.shared.trackEvent(AuthEvents.signUp, additionalParams: [
+                                    AnalyticsConstants.Parameter.oauthType: "none",
+                                ])
+                                viewModel.continueButtonTapped()
+                            }
+                        }
                     }
                 }
             }, label: "계속하기", isFormValid: $isAllAgreed)

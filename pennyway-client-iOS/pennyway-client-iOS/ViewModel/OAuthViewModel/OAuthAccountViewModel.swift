@@ -16,7 +16,7 @@ class OAuthAccountViewModel: ObservableObject {
                 if data != nil {
                     Log.debug("소셜 계정 연동 완료")
                     KeychainHelper.deleteOAuthUserData()
-                    self.profileInfoViewModel.getUserProfileApi { _ in 
+                    self.profileInfoViewModel.getUserProfileApi { _, _ in 
                         completion(true)
                     }
                 }
@@ -28,7 +28,6 @@ class OAuthAccountViewModel: ObservableObject {
                         Log.info("StatusSpecificError occurred 4091: \(StatusSpecificError)")
                     } else if StatusSpecificError.domainError == .conflict && StatusSpecificError.code == ConflictErrorCode.requestConflictWithResourceState.rawValue {
                         self.isExistUser = true
-                        Log.debug("??: \(self.isExistUser)")
                         Log.info("StatusSpecificError occurred 4090: \(StatusSpecificError)")
                     }
 
@@ -47,7 +46,7 @@ class OAuthAccountViewModel: ObservableObject {
             case let .success(data):
                 if data != nil {
                     Log.debug("소셜 계정 연동 해제 완료")
-                    self.profileInfoViewModel.getUserProfileApi { _ in
+                    self.profileInfoViewModel.getUserProfileApi { _, _ in
                         completion(true)
                     }
                 }
