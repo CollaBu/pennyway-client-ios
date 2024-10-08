@@ -10,7 +10,7 @@ import SwiftUI
 struct ChatContent: View {
     let chats: [Chat]
     let members: [ChatMember]
-    let currentUserID: Int64 
+    let currentUserId: Int64
 
     var body: some View {
         ScrollView {
@@ -23,7 +23,7 @@ struct ChatContent: View {
 
                         ForEach(groupedChatsByDate[date] ?? []) { chat in
                             if let sender = members.first(where: { $0.user_id == chat.sender_id }) {
-                                if chat.sender_id == currentUserID {
+                                if chat.sender_id == currentUserId {
                                     ChatSendCell(chat: chat, sender: sender)
                                 } else {
                                     ChatReceiveCell(chat: chat, sender: sender)
@@ -38,7 +38,7 @@ struct ChatContent: View {
     }
 
     private var groupedChatsByDate: [String: [Chat]] {
-        let formatter = Date.chatDateFormatter() 
+        let formatter = Date.chatDateFormatter()
         return Dictionary(grouping: chats) { chat in
             formatter.string(from: chat.created_at)
         }

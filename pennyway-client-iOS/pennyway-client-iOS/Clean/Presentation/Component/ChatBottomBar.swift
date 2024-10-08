@@ -10,52 +10,96 @@ import SwiftUI
 struct ChatBottomBar: View {
     @State private var message: String = ""
     @State private var showFeature: Bool = false
+    @State private var textEditorHeight: CGFloat = 14 * DynamicSizeFactor.factor()
+    @State private var lineCount: Int = 1
 
     var body: some View {
         VStack {
             Spacer().frame(height: 11 * DynamicSizeFactor.factor())
 
             HStack {
-                Button(action: {
-                    showFeature.toggle()
-                }, label: {
-                    Image(systemName: "plus.circle")
-                        .resizable()
-                        .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
-                        .padding(.leading, 6 * DynamicSizeFactor.factor())
-                }).buttonStyle(PlainButtonStyle())
-
-                ZStack(alignment: .leading) {
-                    if message.isEmpty {
-                        Text("오늘은 어떤 소비를 했나요?")
-                            .platformTextColor(color: Color("Gray03"))
-                            .font(.B2MediumFont())
-                    }
-                    TextField("", text: $message)
-                        .platformTextColor(color: Color("Gray07"))
-                        .font(.B2MediumFont())
-
-                }.frame(maxWidth: .infinity)
-
-                if !message.isEmpty {
-                    Button(action: {
-                        Log.debug("Message sent: \(message)")
-                        message = ""
-                    }) {
-                        Image(systemName: "arrow.up.circle.fill")
-                            .resizable()
-                            .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
-                            .padding(.trailing, 6 * DynamicSizeFactor.factor())
-                    }
-                    .transition(.opacity)
-                    .animation(.easeInOut, value: message.isEmpty)
-                }
+                addButton
+                messageInput
+                sendButton
             }
-            .frame(height: 29 * DynamicSizeFactor.factor())
+            .frame(height: textEditorHeight + 16 * DynamicSizeFactor.factor())
             .background(Color("Gray02"))
             .cornerRadius(28)
             .padding(.horizontal, 16)
 
+            featureContent
+        }
+        .background(Color("White01"))
+    }
+
+    private var addButton: some View {
+        VStack {
+            Spacer()
+            Button(action: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    showFeature.toggle()
+                }
+            }) {
+                Image(systemName: "plus.circle")
+                    .resizable()
+                    .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
+                    .padding(.leading, 5 * DynamicSizeFactor.factor())
+                    .padding(.bottom, 5 * DynamicSizeFactor.factor())
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+    }
+
+    private var messageInput: some View {
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .fill(Color("Gray02"))
+                .frame(height: textEditorHeight)
+
+            TextEditor(text: $message)
+                .frame(height: textEditorHeight)
+                .colorMultiply(Color("Gray02"))
+                .platformTextColor(color: Color("Gray07"))
+                .font(.B2MediumFont())
+                .lineLimit(5)
+                .onChange(of: message) { newValue in
+                    updateTextEditorHeight(text: newValue)
+                }
+
+            if message.isEmpty {
+                Text("오늘은 어떤 소비를 했나요?")
+                    .platformTextColor(color: Color("Gray03"))
+                    .font(.B2MediumFont())
+                    .padding(.vertical, 8)
+            }
+        }
+
+        .frame(maxWidth: .infinity)
+    }
+
+    private var sendButton: some View {
+        VStack {
+            Spacer()
+            if !message.isEmpty {
+                Button(action: {
+                    Log.debug("Message sent: \(message)")
+                    message = ""
+                }) {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .resizable()
+                        .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
+                        .padding(.trailing, 5 * DynamicSizeFactor.factor())
+                        .padding(.bottom, 5 * DynamicSizeFactor.factor())
+                }
+                .transition(.opacity)
+                .animation(.easeInOut, value: message.isEmpty)
+                .buttonStyle(PlainButtonStyle())
+            }
+        }
+    }
+
+    private var featureContent: some View {
+        Group {
             if showFeature {
                 Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
@@ -68,13 +112,24 @@ struct ChatBottomBar: View {
                         .platformTextColor(color: Color("Gray07"))
                         .font(.B2MediumFont())
                 }
-
                 Spacer().frame(height: 20 * DynamicSizeFactor.factor())
             } else {
                 Spacer().frame(height: 19 * DynamicSizeFactor.factor())
             }
         }
-        .background(Color("White01"))
+    }
+
+    /// 엔터키 누른 걸 감지해서 라인 수에 따른 높이 조절 메서드
+    private func updateTextEditorHeight(text: String) {
+        let newLineCount = text.components(separatedBy: .newlines).count
+        if newLineCount != lineCount {
+            let heightDifference = (newLineCount - lineCount) * Int(14 * DynamicSizeFactor.factor())
+
+            if textEditorHeight <= 14 * DynamicSizeFactor.factor() * 5 {
+                textEditorHeight += CGFloat(heightDifference)
+                lineCount = newLineCount
+            }
+        }
     }
 }
 

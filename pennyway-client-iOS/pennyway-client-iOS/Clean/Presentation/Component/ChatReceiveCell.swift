@@ -14,7 +14,7 @@ struct ChatReceiveCell: View {
     let sender: ChatMember
 
     var body: some View {
-        HStack(alignment: .top, spacing: 11) {
+        HStack(alignment: .top, spacing: 11 * DynamicSizeFactor.factor()) {
             // 프로필 이미지
 
             ZStack {
@@ -29,7 +29,7 @@ struct ChatReceiveCell: View {
                     .clipped()
             }
 
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 5 * DynamicSizeFactor.factor()) {
                 // 사용자 이름
                 Text(sender.username)
                     .font(.B3MediumFont())

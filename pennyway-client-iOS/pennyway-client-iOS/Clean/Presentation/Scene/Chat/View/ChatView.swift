@@ -13,16 +13,15 @@ struct ChatView: View {
     @StateObject private var keyboardHandler = KeyboardHandler()
 
     var body: some View {
-        GeometryReader { _ in
-            VStack(spacing: 0) {
-                ChatContent(chats: mockChats, members: mockMembers, currentUserID: 102)
-                    .offset(y: -keyboardHandler.keyboardHeight)
+        VStack(spacing: 0) {
+            ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102)
+                .offset(y: -keyboardHandler.keyboardHeight)
 
-                ChatBottomBar()
-                    .background(Color("Ashblue02"))
-                    .offset(y: -keyboardHandler.keyboardHeight)
-            }
+            ChatBottomBar()
+                .background(Color("Ashblue02"))
+                .offset(y: -keyboardHandler.keyboardHeight)
         }
+
         .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
         .background(Color("Ashblue02"))
         .setTabBarVisibility(isHidden: true)
