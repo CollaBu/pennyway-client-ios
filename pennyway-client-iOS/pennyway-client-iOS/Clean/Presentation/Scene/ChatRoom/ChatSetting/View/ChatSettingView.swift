@@ -12,7 +12,7 @@ struct ChatSettingView: View {
     @State private var password: String = ""
 
     var body: some View {
-        ZStack{
+        ScrollView {
             VStack {
                 // 상단 여백 및 아이콘 이미지
                 Spacer().frame(height: 17 * DynamicSizeFactor.factor())
