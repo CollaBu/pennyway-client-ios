@@ -40,7 +40,7 @@ class DefaultLoginUseCase: LoginUseCase {
             case let .success(response):
                 let userId = response.data.user.id
                 if userId != -1 {
-                    completion(true, nil) 
+                    completion(true, nil)
                 } else {
                     completion(false, nil)
                 }

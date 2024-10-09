@@ -63,7 +63,7 @@ struct InputFormView: View {
                             AnalyticsManager.shared.setUser("userId = \(userId)")
                             AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
                                 AnalyticsConstants.Parameter.oauthType: OAuthRegistrationManager.shared.provider,
-                                AnalyticsConstants.Parameter.isRefresh: false
+                                AnalyticsConstants.Parameter.isRefresh: false,
                             ])
                         }
                     }

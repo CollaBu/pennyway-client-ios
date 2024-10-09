@@ -17,7 +17,7 @@ class TokenHandler {
                         HTTPCookiePropertyKey.domain: cookie.domain,
                         HTTPCookiePropertyKey.path: cookie.path,
                         HTTPCookiePropertyKey.version: NSNumber(value: cookie.version),
-                        HTTPCookiePropertyKey.expires: cookie.expiresDate ?? Date.distantFuture
+                        HTTPCookiePropertyKey.expires: cookie.expiresDate ?? Date.distantFuture,
                     ])
 
                     if let nsCookie = nsCookie {

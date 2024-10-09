@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - ArrivedAlarmView
 
 struct ArrivedAlarmView: View {
-    @ObservedObject var viewModel: ProfileNotificationViewModel 
+    @ObservedObject var viewModel: ProfileNotificationViewModel
 
     var body: some View {
         VStack(alignment: .leading) {

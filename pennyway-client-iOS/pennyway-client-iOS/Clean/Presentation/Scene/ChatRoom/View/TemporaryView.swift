@@ -11,6 +11,7 @@ import SwiftUI
 
 struct TemporaryView: View {
     @State private var navigate = false
+    @State private var isNavigate = false
 
     var body: some View {
         NavigationAvailable {
@@ -19,8 +20,15 @@ struct TemporaryView: View {
             }, label: {
                 Text("Button")
             })
+
+            Button(action: {
+                isNavigate = true
+            }, label: {
+                Text("Btn")
+            })
             .setTabBarVisibility(isHidden: false)
-            NavigationLink(destination: ChatView(), isActive: $navigate) {}
+            NavigationLink(destination: ChatSettingView(), isActive: $navigate) {}
+            NavigationLink(destination: ChatRoomDetailView(), isActive: $isNavigate) {}
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  HeightPreference.swift
+//  TextHeightPreference.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 10/8/24.

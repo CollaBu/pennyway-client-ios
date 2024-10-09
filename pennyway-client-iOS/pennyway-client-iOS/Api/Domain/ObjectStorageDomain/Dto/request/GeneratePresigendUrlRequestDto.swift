@@ -14,6 +14,6 @@ public struct GeneratePresigendUrlRequestDto: Encodable {
     }
 
     static func from(model: PresignedUrlType) -> GeneratePresigendUrlRequestDto {
-        return GeneratePresigendUrlRequestDto.init(type: model.type, ext: model.ext)
+        return GeneratePresigendUrlRequestDto(type: model.type, ext: model.ext)
     }
 }

@@ -14,8 +14,8 @@ struct CustomInputView: View {
     var deleteAction: (() -> Void)? // 삭제 버튼 클릭 시 실행할 함수 (옵션)
     var keyboardType: UIKeyboardType = .default // 키보드 타입 (기본값: .default)
 
-    let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
-    let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
+    let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray07"))
+    let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
 
     @State private var isDeleteButtonVisible: Bool = false // 삭제 버튼의 가시성 관리
 

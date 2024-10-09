@@ -283,6 +283,8 @@
 		4AE8F3AF2C3307940014F0D4 /* CustomDropDownMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */; };
 		4AE8F3B42C330A0B0014F0D4 /* TargetAmountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3B32C330A0B0014F0D4 /* TargetAmountSettingView.swift */; };
 		4AE8F3B62C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3B52C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift */; };
+		4AE9B32E2CB67E3E0044D3E1 /* ChatSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */; };
+		4AE9B3332CB689E50044D3E1 /* CustomRoundedBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B3322CB689E50044D3E1 /* CustomRoundedBtn.swift */; };
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
 		4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */; };
 		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
@@ -670,6 +672,8 @@
 		4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropDownMenuView.swift; sourceTree = "<group>"; };
 		4AE8F3B32C330A0B0014F0D4 /* TargetAmountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountSettingView.swift; sourceTree = "<group>"; };
 		4AE8F3B52C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountSettingViewModel.swift; sourceTree = "<group>"; };
+		4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingView.swift; sourceTree = "<group>"; };
+		4AE9B3322CB689E50044D3E1 /* CustomRoundedBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedBtn.swift; sourceTree = "<group>"; };
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
@@ -1165,6 +1169,8 @@
 			isa = PBXGroup;
 			children = (
 				D87AA7F62CB6C3630012BFA3 /* ChatRoomDetail */,
+				4AE9B3312CB689D00044D3E1 /* Component */,
+				4AE9B32B2CB67E270044D3E1 /* ChatSetting */,
 				4A863A102CB4594C00BA2F2F /* ChatRoom */,
 				4A12FF012C9C4A7900DE10BC /* UserProfile */,
 				4A12FF002C9C4A7200DE10BC /* Root */,
@@ -2197,6 +2203,30 @@
 			path = TotalTargetAmountView;
 			sourceTree = "<group>";
 		};
+		4AE9B32B2CB67E270044D3E1 /* ChatSetting */ = {
+			isa = PBXGroup;
+			children = (
+				4AE9B32C2CB67E330044D3E1 /* View */,
+			);
+			path = ChatSetting;
+			sourceTree = "<group>";
+		};
+		4AE9B32C2CB67E330044D3E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4AE9B3312CB689D00044D3E1 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				4AE9B3322CB689E50044D3E1 /* CustomRoundedBtn.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		B599E4BA2C58AE72006051E9 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -2551,6 +2581,7 @@
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
 				4AD5D0BB2CA710D90044CD75 /* DefaultSignUpRepository.swift in Sources */,
 				4A12FEED2C9C487800DE10BC /* User.swift in Sources */,
+				4AE9B3332CB689E50044D3E1 /* CustomRoundedBtn.swift in Sources */,
 				D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				B599E4C32C58D4F0006051E9 /* AnalyticsConstants.swift in Sources */,
@@ -2752,6 +2783,7 @@
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
+				4AE9B32E2CB67E3E0044D3E1 /* ChatSettingView.swift in Sources */,
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
 				D898E8132CA5A5E1003739F1 /* LogoutRepository.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,

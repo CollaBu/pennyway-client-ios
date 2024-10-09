@@ -12,7 +12,7 @@ import UIKit
 
 protocol PresignedUrlUseCase {
     func generate(type: String, ext: String, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
-    func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void) 
+    func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void)
 }
 
 // MARK: - DefaultPresignedUrlUseCase
