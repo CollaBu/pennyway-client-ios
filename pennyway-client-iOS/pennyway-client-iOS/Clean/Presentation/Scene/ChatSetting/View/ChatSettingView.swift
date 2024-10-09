@@ -27,7 +27,9 @@ struct ChatSettingView: View {
                 Spacer().frame(height: 17 * DynamicSizeFactor.factor())
                 
                 // 채팅방 커버 수정 버튼
-                CoverModificationButton
+                CustomRoundedButton(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01")) {
+                    // 버튼 액션
+                }
                 
                 Spacer().frame(height: 35 * DynamicSizeFactor.factor())
                 
@@ -56,21 +58,6 @@ struct ChatSettingView: View {
         }
     }
 
-    /// 채팅방 커버 수정 버튼
-    private var CoverModificationButton: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 14 * DynamicSizeFactor.factor())
-                .fill(Color("Mint01"))
-                .frame(width: 90 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
-            Button(action: {}, label: {
-                Text("채팅방 커버 변경")
-                    .font(.B2MediumFont())
-                    .platformTextColor(color: Color("Mint03"))
-            })
-            .buttonStyle(PlainButtonStyle())
-        }
-    }
-
     /// 채팅방 이름 입력 섹션
     private var ChatRoomNameSection: some View {
         VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
@@ -92,7 +79,7 @@ struct ChatSettingView: View {
                             .platformTextColor(color: Color("Gray07"))
                             .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         Spacer()
-                        Image("icon_navigationbar_write_gray05")
+                        Image("icon_navigationbar_write_primary")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
