@@ -336,7 +336,7 @@
 		D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */; };
 		D85927FC2BE9116700653391 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F72BE9116700653391 /* SignUpViewModel.swift */; };
 		D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773032C76C90700C68728 /* PrivatePolicy.swift */; };
-		D86773062C76CA0100C68728 /* KeyboardHandlerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773052C76CA0100C68728 /* KeyboardHandlerManager.swift */; };
+		D86773062C76CA0100C68728 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773052C76CA0100C68728 /* KeyboardManager.swift */; };
 		D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D874F52A2C32888E00936886 /* DetailSpendingView.swift */; };
 		D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */; };
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
@@ -709,7 +709,7 @@
 		D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpNavigationViewModel.swift; sourceTree = "<group>"; };
 		D85927F72BE9116700653391 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		D86773032C76C90700C68728 /* PrivatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatePolicy.swift; sourceTree = "<group>"; };
-		D86773052C76CA0100C68728 /* KeyboardHandlerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerManager.swift; sourceTree = "<group>"; };
+		D86773052C76CA0100C68728 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		D874F52A2C32888E00936886 /* DetailSpendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpendingView.swift; sourceTree = "<group>"; };
 		D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlarmResponseDto.swift; sourceTree = "<group>"; };
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
@@ -809,7 +809,7 @@
 			children = (
 				4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */,
 				4AB5AB562BB5E88C00D2C9EA /* RegistrationManager.swift */,
-				D86773052C76CA0100C68728 /* KeyboardHandlerManager.swift */,
+				D86773052C76CA0100C68728 /* KeyboardManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2685,7 +2685,7 @@
 				4A3701D52C08F7F600F0AEBA /* SpendingRouter.swift in Sources */,
 				4A3701CE2C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift in Sources */,
 				4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */,
-				D86773062C76CA0100C68728 /* KeyboardHandlerManager.swift in Sources */,
+				D86773062C76CA0100C68728 /* KeyboardManager.swift in Sources */,
 				4A4703A92BCEE25000AEE04E /* SmsResponseDto.swift in Sources */,
 				4A12FF1C2C9C4D9000DE10BC /* View+wrapAnyView.swift in Sources */,
 				4A863A0F2CB4594200BA2F2F /* ChatView.swift in Sources */,

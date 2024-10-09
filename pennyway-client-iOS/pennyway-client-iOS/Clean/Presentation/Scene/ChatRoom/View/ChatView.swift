@@ -10,16 +10,16 @@ import SwiftUI
 // MARK: - ChatView
 
 struct ChatView: View {
-    @StateObject private var keyboardHandler = KeyboardHandlerManager()
+    @StateObject private var keyboardManager = KeyboardManager()
 
     var body: some View {
         VStack(spacing: 0) {
             ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102)
-                .offset(y: -keyboardHandler.keyboardHeight)
+                .offset(y: -keyboardManager.keyboardHeight)
 
             ChatBottomBar()
                 .background(Color("Ashblue02"))
-                .offset(y: -keyboardHandler.keyboardHeight)
+                .offset(y: -keyboardManager.keyboardHeight)
         }
 
         .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")

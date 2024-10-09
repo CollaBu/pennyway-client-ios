@@ -19,7 +19,7 @@ struct ChatDateHeader: View {
 
             Text(date)
                 .font(.B3MediumFont())
-                .foregroundColor(Color("Gray05"))
+                .platformTextColor(color: Color("Gray05"))
                 .padding(.vertical, 6)
                 .padding(.horizontal, 10)
         }

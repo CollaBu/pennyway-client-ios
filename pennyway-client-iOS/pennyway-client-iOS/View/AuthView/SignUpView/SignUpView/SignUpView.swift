@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @StateObject var keyboardHandler = KeyboardHandlerManager()
+    @StateObject var keyboardHandler = KeyboardManager()
     @StateObject var formViewModel = SignUpFormViewModel()
     @StateObject var viewModel = SignUpNavigationViewModel()
     @StateObject var linkAccountToOAuthViewModel = LinkAccountToOAuthViewModel()
