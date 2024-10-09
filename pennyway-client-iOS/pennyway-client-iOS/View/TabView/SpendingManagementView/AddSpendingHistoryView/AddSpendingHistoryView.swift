@@ -13,7 +13,7 @@ enum EntryPoint {
 // MARK: - AddSpendingHistoryView
 
 struct AddSpendingHistoryView: View {
-    @StateObject private var keyboardHandler = KeyboardHandlerManager()
+    @StateObject private var keyboardHandler = KeyboardManager()
     @StateObject var viewModel = AddSpendingHistoryViewModel()
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
 
