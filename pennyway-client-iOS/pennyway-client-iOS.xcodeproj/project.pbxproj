@@ -1108,6 +1108,7 @@
 		4A12FEFF2C9C4A4600DE10BC /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				D829ECFF2CB66A87001476D3 /* MainChat */,
 				4A12FF012C9C4A7900DE10BC /* UserProfile */,
 				4A12FF002C9C4A7200DE10BC /* Root */,
 			);
@@ -1134,7 +1135,6 @@
 		4A12FF022C9C4A8300DE10BC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D89901E02CB4345900A082D4 /* Chat */,
 				4AD70E212BE013C10058A52A /* ProfileView.swift */,
 			);
 			path = View;
@@ -1145,8 +1145,6 @@
 			children = (
 				4A12FF042C9C4AC300DE10BC /* UserProfileViewModel.swift */,
 				4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */,
-				D87CF3482CB569ED00A1870F /* ChatItemViewModel.swift */,
-				D87CF3462CB44A7B00A1870F /* ChatViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2170,6 +2168,32 @@
 				D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */,
 			);
 			path = FindIdView;
+			sourceTree = "<group>";
+		};
+		D829ECFF2CB66A87001476D3 /* MainChat */ = {
+			isa = PBXGroup;
+			children = (
+				D829ED012CB66A9D001476D3 /* View */,
+				D829ED002CB66A92001476D3 /* ViewModel */,
+			);
+			path = MainChat;
+			sourceTree = "<group>";
+		};
+		D829ED002CB66A92001476D3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D87CF3482CB569ED00A1870F /* ChatItemViewModel.swift */,
+				D87CF3462CB44A7B00A1870F /* ChatViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D829ED012CB66A9D001476D3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D89901E02CB4345900A082D4 /* Chat */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D851E7192C0273A300316DB3 /* InquiryDomain */ = {
