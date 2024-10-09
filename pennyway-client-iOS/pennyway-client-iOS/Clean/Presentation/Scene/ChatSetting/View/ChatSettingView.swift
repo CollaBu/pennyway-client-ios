@@ -27,7 +27,7 @@ struct ChatSettingView: View {
                 Spacer().frame(height: 17 * DynamicSizeFactor.factor())
                 
                 // 채팅방 커버 수정 버튼
-                CustomRoundedButton(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01")) {
+                CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01")) {
                     // 버튼 액션
                 }
                 

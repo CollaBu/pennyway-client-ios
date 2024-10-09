@@ -1,5 +1,5 @@
 //
-//  CustomRoundedButton.swift
+//  CustomRoundedBtn.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 10/9/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomRoundedButton: View {
+struct CustomRoundedBtn: View {
     var title: String               // 버튼에 표시될 텍스트
     var fontColor: Color            // 텍스트 색상 (폰트 색상)
     var backgroundColor: Color      // 버튼의 배경 색상
