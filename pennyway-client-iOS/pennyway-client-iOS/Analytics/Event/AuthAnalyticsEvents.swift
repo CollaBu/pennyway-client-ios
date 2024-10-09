@@ -9,26 +9,26 @@
 enum AuthEvents: AnalyticsEvent {
     /// 로그인 이벤트
     case loginView
-
+    
     case login
     case signUp
     case oauthSignInBtnTapped
-
+    
     // 공용
     case phoneVerificationView
     case tosView
     case welcomeView
-
+    
     // 일반 회원가입 이벤트
     case generalSignUpView
     case existsOauthAccountView
     case generalSignSycnView
-
+    
     case cancelBtnTapped
-
+    
     /// 소셜 회원가입 이벤트
     case oauthSignUpView
-
+    
     var eventName: AnalyticsConstants.EventName {
         switch self {
         case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
@@ -42,7 +42,7 @@ enum AuthEvents: AnalyticsEvent {
             return AnalyticsConstants.EventName.signUp
         }
     }
-
+    
     var eventType: AnalyticsConstants.EventType {
         switch self {
         case .loginView, .phoneVerificationView, .tosView, .welcomeView, .generalSignUpView,
@@ -52,22 +52,22 @@ enum AuthEvents: AnalyticsEvent {
             return AnalyticsConstants.EventType.userAction
         }
     }
-
+    
     var parameters: [AnalyticsConstants.Parameter: Any]? {
         switch self {
         case .loginView:
             return [
                 .screenId: AuthScreen.loginView.screenId,
                 .screenName: AuthScreen.loginView.screenName,
-                .screenClass: AuthScreen.loginView.screenClass,
+                .screenClass: AuthScreen.loginView.screenClass
             ]
         case .login:
             return [
-                .eventName: AuthCustomEvent.login.eventName,
+                .eventName: AuthCustomEvent.login.eventName
             ]
         case .signUp:
             return [
-                .eventName: AuthCustomEvent.signUp.eventName,
+                .eventName: AuthCustomEvent.signUp.eventName
             ]
         case .oauthSignInBtnTapped:
             return [
@@ -77,47 +77,47 @@ enum AuthEvents: AnalyticsEvent {
             return [
                 .screenId: AuthScreen.phoneVerificationView.screenId,
                 .screenName: AuthScreen.phoneVerificationView.screenName,
-                .screenClass: AuthScreen.phoneVerificationView.screenClass,
+                .screenClass: AuthScreen.phoneVerificationView.screenClass
             ]
         case .tosView:
             return [
                 .screenId: AuthScreen.tosView.screenId,
                 .screenName: AuthScreen.tosView.screenName,
-                .screenClass: AuthScreen.tosView.screenClass,
+                .screenClass: AuthScreen.tosView.screenClass
             ]
         case .welcomeView:
             return [
                 .screenId: AuthScreen.welcomeView.screenId,
                 .screenName: AuthScreen.welcomeView.screenName,
-                .screenClass: AuthScreen.welcomeView.screenClass,
+                .screenClass: AuthScreen.welcomeView.screenClass
             ]
         case .generalSignUpView:
             return [
                 .screenId: AuthScreen.generalSignUpView.screenId,
                 .screenName: AuthScreen.generalSignUpView.screenName,
-                .screenClass: AuthScreen.generalSignUpView.screenClass,
+                .screenClass: AuthScreen.generalSignUpView.screenClass
             ]
         case .existsOauthAccountView:
             return [
                 .screenId: AuthScreen.existsOauthAccountView.screenId,
                 .screenName: AuthScreen.existsOauthAccountView.screenName,
-                .screenClass: AuthScreen.existsOauthAccountView.screenClass,
+                .screenClass: AuthScreen.existsOauthAccountView.screenClass
             ]
         case .generalSignSycnView:
             return [
                 .screenId: AuthScreen.generalSignSycnView.screenId,
                 .screenName: AuthScreen.generalSignSycnView.screenName,
-                .screenClass: AuthScreen.generalSignSycnView.screenClass,
+                .screenClass: AuthScreen.generalSignSycnView.screenClass
             ]
         case .cancelBtnTapped:
             return [
-                .eventName: AuthCustomEvent.cancelBtnTapped.eventName,
+                .eventName: AuthCustomEvent.cancelBtnTapped.eventName
             ]
         case .oauthSignUpView:
             return [
                 .screenId: AuthScreen.oauthSignUpView.screenId,
                 .screenName: AuthScreen.oauthSignUpView.screenName,
-                .screenClass: AuthScreen.oauthSignUpView.screenClass,
+                .screenClass: AuthScreen.oauthSignUpView.screenClass
             ]
         }
     }
@@ -128,20 +128,20 @@ enum AuthEvents: AnalyticsEvent {
 enum AuthScreen {
     /// 로그인
     case loginView
-
+    
     // 공용
     case phoneVerificationView
     case tosView
     case welcomeView
-
+    
     // 일반 회원가입 이벤트
     case generalSignUpView
     case existsOauthAccountView
     case generalSignSycnView
-
+    
     /// 소셜 회원가입 이벤트
     case oauthSignUpView
-
+    
     var screenId: String {
         switch self {
         case .loginView: return "login_screen_view_event"
@@ -154,7 +154,7 @@ enum AuthScreen {
         case .oauthSignUpView: return "oauth_signup_screen_view_event"
         }
     }
-
+    
     var screenName: String {
         switch self {
         case .loginView: return "로그인 화면"
@@ -167,7 +167,7 @@ enum AuthScreen {
         case .oauthSignUpView: return "소셜 회원가입 화면"
         }
     }
-
+    
     var screenClass: String {
         switch self {
         case .loginView: return "LoginView"
@@ -188,9 +188,9 @@ enum AuthCustomEvent {
     case login
     case signUp
     case oauthSignInBtnTapped
-
+    
     case cancelBtnTapped
-
+    
     var eventName: String {
         switch self {
         case .login: return "login"
@@ -198,7 +198,7 @@ enum AuthCustomEvent {
         case .signUp: return "sign_up"
 
         case .oauthSignInBtnTapped: return "oauth_sign_in_btn_tapped"
-
+            
         case .cancelBtnTapped: return "input_tab_cancel_btn_tapped"
         }
     }

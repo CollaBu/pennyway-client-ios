@@ -1,5 +1,5 @@
 //
-//  AnalyticsTracker.swift
+//  AnalyticsScreenTracker.swift
 //  pennyway-client-iOS
 //
 //  Created by 양재서 on 7/30/24.

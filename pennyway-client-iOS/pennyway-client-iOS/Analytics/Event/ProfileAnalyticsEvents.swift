@@ -10,10 +10,10 @@
 enum ProfileEvents: AnalyticsEvent {
     case profileTapView
     case profileHamburgerMenuTap
-
+    
     case profileEditView
     case nameEditView
-
+    
     case usernameEditView
     case phoneEditView
     case currentPasswordCheckView
@@ -22,108 +22,108 @@ enum ProfileEvents: AnalyticsEvent {
     case profileImageEditPopUp
     case oauthUnlinkPopUp
     case signOutPopUp
-
+    
     case notificationListView
     case notificationEditView
-
+    
     case accountDeletePopUp
     case accountDeleteSuccessPopUp
-
+    
     var eventName: AnalyticsConstants.EventName {
         switch self {
         case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .phoneEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .oauthUnlinkPopUp, .signOutPopUp, .notificationListView, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
             return AnalyticsConstants.EventName.screenView
         }
     }
-
+    
     var eventType: AnalyticsConstants.EventType {
         switch self {
         case .profileTapView, .profileHamburgerMenuTap, .profileEditView, .nameEditView, .usernameEditView, .phoneEditView, .currentPasswordCheckView, .passwordEditView, .passwordEditCompleteView, .profileImageEditPopUp, .oauthUnlinkPopUp, .signOutPopUp, .notificationListView, .notificationEditView, .accountDeletePopUp, .accountDeleteSuccessPopUp:
             return AnalyticsConstants.EventType.screenView
         }
     }
-
+    
     var parameters: [AnalyticsConstants.Parameter: Any]? {
         switch self {
         case .profileTapView: [
                 .screenId: ProfileScreen.profileTapView.screenId,
                 .screenName: ProfileScreen.profileTapView.screenName,
-                .screenClass: ProfileScreen.profileTapView.screenClass,
+                .screenClass: ProfileScreen.profileTapView.screenClass
             ]
         case .profileHamburgerMenuTap: [
                 .screenId: ProfileScreen.profileHamburgerMenuTap.screenId,
                 .screenName: ProfileScreen.profileHamburgerMenuTap.screenName,
-                .screenClass: ProfileScreen.profileHamburgerMenuTap.screenClass,
+                .screenClass: ProfileScreen.profileHamburgerMenuTap.screenClass
             ]
         case .profileEditView: [
                 .screenId: ProfileScreen.profileEditView.screenId,
                 .screenName: ProfileScreen.profileEditView.screenName,
-                .screenClass: ProfileScreen.profileEditView.screenClass,
+                .screenClass: ProfileScreen.profileEditView.screenClass
             ]
         case .nameEditView: [
                 .screenId: ProfileScreen.nameEditView.screenId,
                 .screenName: ProfileScreen.nameEditView.screenName,
-                .screenClass: ProfileScreen.nameEditView.screenClass,
+                .screenClass: ProfileScreen.nameEditView.screenClass
             ]
         case .usernameEditView: [
                 .screenId: ProfileScreen.usernameEditView.screenId,
                 .screenName: ProfileScreen.usernameEditView.screenName,
-                .screenClass: ProfileScreen.usernameEditView.screenClass,
+                .screenClass: ProfileScreen.usernameEditView.screenClass
             ]
         case .phoneEditView: [
                 .screenId: ProfileScreen.phoneEditView.screenId,
                 .screenName: ProfileScreen.phoneEditView.screenName,
-                .screenClass: ProfileScreen.phoneEditView.screenClass,
+                .screenClass: ProfileScreen.phoneEditView.screenClass
             ]
         case .currentPasswordCheckView: [
                 .screenId: ProfileScreen.currentPasswordCheckView.screenId,
                 .screenName: ProfileScreen.currentPasswordCheckView.screenName,
-                .screenClass: ProfileScreen.currentPasswordCheckView.screenClass,
+                .screenClass: ProfileScreen.currentPasswordCheckView.screenClass
             ]
         case .passwordEditView: [
                 .screenId: ProfileScreen.passwordEditView.screenId,
                 .screenName: ProfileScreen.passwordEditView.screenName,
-                .screenClass: ProfileScreen.passwordEditView.screenClass,
+                .screenClass: ProfileScreen.passwordEditView.screenClass
             ]
         case .passwordEditCompleteView: [
                 .screenId: ProfileScreen.passwordEditCompleteView.screenId,
                 .screenName: ProfileScreen.passwordEditCompleteView.screenName,
-                .screenClass: ProfileScreen.passwordEditCompleteView.screenClass,
+                .screenClass: ProfileScreen.passwordEditCompleteView.screenClass
             ]
         case .profileImageEditPopUp: [
                 .screenId: ProfileScreen.profileImageEditPopUp.screenId,
                 .screenName: ProfileScreen.profileImageEditPopUp.screenName,
-                .screenClass: ProfileScreen.profileImageEditPopUp.screenClass,
+                .screenClass: ProfileScreen.profileImageEditPopUp.screenClass
             ]
         case .oauthUnlinkPopUp: [
                 .screenId: ProfileScreen.oauthUnlinkPopUp.screenId,
                 .screenName: ProfileScreen.oauthUnlinkPopUp.screenName,
-                .screenClass: ProfileScreen.oauthUnlinkPopUp.screenClass,
+                .screenClass: ProfileScreen.oauthUnlinkPopUp.screenClass
             ]
         case .signOutPopUp: [
                 .screenId: ProfileScreen.signOutPopUp.screenId,
                 .screenName: ProfileScreen.signOutPopUp.screenName,
-                .screenClass: ProfileScreen.signOutPopUp.screenClass,
+                .screenClass: ProfileScreen.signOutPopUp.screenClass
             ]
         case .notificationListView: [
                 .screenId: ProfileScreen.notificationListView.screenId,
                 .screenName: ProfileScreen.notificationListView.screenName,
-                .screenClass: ProfileScreen.notificationListView.screenClass,
+                .screenClass: ProfileScreen.notificationListView.screenClass
             ]
         case .notificationEditView: [
                 .screenId: ProfileScreen.notificationEditView.screenId,
                 .screenName: ProfileScreen.notificationEditView.screenName,
-                .screenClass: ProfileScreen.notificationEditView.screenClass,
+                .screenClass: ProfileScreen.notificationEditView.screenClass
             ]
         case .accountDeletePopUp: [
                 .screenId: ProfileScreen.accountDeletePopUp.screenId,
                 .screenName: ProfileScreen.accountDeletePopUp.screenName,
-                .screenClass: ProfileScreen.accountDeletePopUp.screenClass,
+                .screenClass: ProfileScreen.accountDeletePopUp.screenClass
             ]
         case .accountDeleteSuccessPopUp: [
                 .screenId: ProfileScreen.accountDeleteSuccessPopUp.screenId,
                 .screenName: ProfileScreen.accountDeleteSuccessPopUp.screenName,
-                .screenClass: ProfileScreen.accountDeleteSuccessPopUp.screenClass,
+                .screenClass: ProfileScreen.accountDeleteSuccessPopUp.screenClass
             ]
         }
     }
@@ -134,10 +134,10 @@ enum ProfileEvents: AnalyticsEvent {
 enum ProfileScreen {
     case profileTapView
     case profileHamburgerMenuTap
-
+    
     case profileEditView
     case nameEditView
-
+    
     case usernameEditView
     case phoneEditView
     case currentPasswordCheckView
@@ -146,13 +146,13 @@ enum ProfileScreen {
     case profileImageEditPopUp
     case oauthUnlinkPopUp
     case signOutPopUp
-
+    
     case notificationListView
     case notificationEditView
-
+    
     case accountDeletePopUp
     case accountDeleteSuccessPopUp
-
+    
     var screenId: String {
         switch self {
         case .profileTapView: return "profile_tap_view"
@@ -173,7 +173,7 @@ enum ProfileScreen {
         case .accountDeleteSuccessPopUp: return "account_delete_success_popup"
         }
     }
-
+ 
     var screenName: String {
         switch self {
         case .profileTapView: return "프로필 탭 바 화면"
@@ -194,7 +194,7 @@ enum ProfileScreen {
         case .accountDeleteSuccessPopUp: return "계정 삭제 성공 팝업"
         }
     }
-
+    
     var screenClass: String {
         switch self {
         case .profileTapView: return "ProfileMainView"

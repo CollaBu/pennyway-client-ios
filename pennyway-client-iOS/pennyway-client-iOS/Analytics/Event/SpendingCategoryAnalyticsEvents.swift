@@ -17,10 +17,10 @@ enum SpendingCategoryEvents: AnalyticsEvent {
     case categoryDeletePopUp
     case categoryMigrateView
     case categoryMigratePopUp
-
+    
     case migrateSpendingList
     case deleteCategoryList
-
+    
     var eventName: AnalyticsConstants.EventName {
         switch self {
         case .categorySelectView, .categoryAddView, .iconSelectView, .categoryListView, .categoryDetailView, .categoryUpdateView, .categoryDeletePopUp, .categoryMigrateView, .categoryMigratePopUp:
@@ -29,7 +29,7 @@ enum SpendingCategoryEvents: AnalyticsEvent {
             return AnalyticsConstants.EventName.btnTapped
         }
     }
-
+    
     var eventType: AnalyticsConstants.EventType {
         switch self {
         case .categorySelectView, .categoryAddView, .iconSelectView, .categoryListView, .categoryDetailView, .categoryUpdateView, .categoryDeletePopUp, .categoryMigrateView, .categoryMigratePopUp:
@@ -38,70 +38,70 @@ enum SpendingCategoryEvents: AnalyticsEvent {
             return AnalyticsConstants.EventType.userAction
         }
     }
-
+    
     var parameters: [AnalyticsConstants.Parameter: Any]? {
         switch self {
         case .categorySelectView:
             return [
                 .screenId: SpendingCategoryScreen.categorySelectView.screenId,
                 .screenName: SpendingCategoryScreen.categorySelectView.screenName,
-                .screenClass: SpendingCategoryScreen.categorySelectView.screenClass,
+                .screenClass: SpendingCategoryScreen.categorySelectView.screenClass
             ]
         case .categoryAddView:
             return [
                 .screenId: SpendingCategoryScreen.categoryAddView.screenId,
                 .screenName: SpendingCategoryScreen.categoryAddView.screenName,
-                .screenClass: SpendingCategoryScreen.categoryAddView.screenClass,
+                .screenClass: SpendingCategoryScreen.categoryAddView.screenClass
             ]
         case .iconSelectView:
             return [
                 .screenId: SpendingCategoryScreen.iconSelectView.screenId,
                 .screenName: SpendingCategoryScreen.iconSelectView.screenName,
-                .screenClass: SpendingCategoryScreen.iconSelectView.screenClass,
+                .screenClass: SpendingCategoryScreen.iconSelectView.screenClass
             ]
         case .categoryListView:
             return [
                 .screenId: SpendingCategoryScreen.categoryListView.screenId,
                 .screenName: SpendingCategoryScreen.categoryListView.screenName,
-                .screenClass: SpendingCategoryScreen.categoryListView.screenClass,
+                .screenClass: SpendingCategoryScreen.categoryListView.screenClass
             ]
         case .categoryDetailView:
             return [
                 .screenId: SpendingCategoryScreen.categoryDetailView.screenId,
                 .screenName: SpendingCategoryScreen.categoryDetailView.screenName,
-                .screenClass: SpendingCategoryScreen.categoryDetailView.screenClass,
+                .screenClass: SpendingCategoryScreen.categoryDetailView.screenClass
             ]
         case .categoryUpdateView:
             return [
                 .screenId: SpendingCategoryScreen.categoryUpdateView.screenId,
                 .screenName: SpendingCategoryScreen.categoryUpdateView.screenName,
-                .screenClass: SpendingCategoryScreen.categoryUpdateView.screenClass,
+                .screenClass: SpendingCategoryScreen.categoryUpdateView.screenClass
             ]
         case .categoryDeletePopUp:
             return [
                 .screenId: SpendingCategoryScreen.categoryDeletePopUp.screenId,
                 .screenName: SpendingCategoryScreen.categoryDeletePopUp.screenName,
-                .screenClass: SpendingCategoryScreen.categoryDeletePopUp.screenClass,
+                .screenClass: SpendingCategoryScreen.categoryDeletePopUp.screenClass
             ]
         case .categoryMigrateView:
             return [
                 .screenId: SpendingCategoryScreen.categoryMigrateView.screenId,
                 .screenName: SpendingCategoryScreen.categoryMigrateView.screenName,
-                .screenClass: SpendingCategoryScreen.categoryMigrateView.screenClass,
+                .screenClass: SpendingCategoryScreen.categoryMigrateView.screenClass
             ]
         case .categoryMigratePopUp:
             return [
                 .screenId: SpendingCategoryScreen.categoryMigratePopUp.screenId,
                 .screenName: SpendingCategoryScreen.categoryMigratePopUp.screenName,
-                .screenClass: SpendingCategoryScreen.categoryMigratePopUp.screenClass,
+                .screenClass: SpendingCategoryScreen.categoryMigratePopUp.screenClass
             ]
         case .migrateSpendingList:
             return [
-                .eventName: SpendingCategoryCustomEvent.migrateSpendingList.eventName,
+                .eventName: SpendingCategoryCustomEvent.migrateSpendingList.eventName
             ]
         case .deleteCategoryList:
             return [
-                .eventName: SpendingCategoryCustomEvent.deleteCategoryList.eventName,
+                .eventName: SpendingCategoryCustomEvent.deleteCategoryList.eventName
             ]
         }
     }
@@ -119,7 +119,7 @@ enum SpendingCategoryScreen {
     case categoryDeletePopUp
     case categoryMigrateView
     case categoryMigratePopUp
-
+    
     var screenId: String {
         switch self {
         case .categorySelectView: return "category_select_view"
@@ -133,7 +133,7 @@ enum SpendingCategoryScreen {
         case .categoryMigratePopUp: return "category_migrate_pop_up"
         }
     }
-
+    
     var screenName: String {
         switch self {
         case .categorySelectView: return "카테고리 선택 화면"
@@ -147,7 +147,7 @@ enum SpendingCategoryScreen {
         case .categoryMigratePopUp: return "카테고리 내 소비내역 옮기기 팝업"
         }
     }
-
+    
     var screenClass: String {
         switch self {
         case .categorySelectView: return "SpendingCategoryListView"
@@ -168,7 +168,7 @@ enum SpendingCategoryScreen {
 enum SpendingCategoryCustomEvent {
     case migrateSpendingList
     case deleteCategoryList
-
+    
     var eventName: String {
         switch self {
         case .migrateSpendingList: return "migrate_spending_list"

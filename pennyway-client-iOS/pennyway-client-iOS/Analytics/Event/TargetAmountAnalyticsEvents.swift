@@ -13,14 +13,14 @@ enum TargetAmountEvents: AnalyticsEvent {
     case targetAmountInitView
     case targetAmountUpdateView
     case targetAmountSetCompleteView
-
+    
     case postponeTargetAmount
     case setInitialTargetAmount
     case maintainRecentTargetAmount
     case cancelRecentTotalAmount
-
+    
     case targetAmountResetPopUp
-
+    
     var eventName: AnalyticsConstants.EventName {
         switch self {
         case .targetAmountView, .targetAmountHistoryView, .targetAmountInitView, .targetAmountUpdateView, .targetAmountSetCompleteView, .targetAmountResetPopUp:
@@ -29,7 +29,7 @@ enum TargetAmountEvents: AnalyticsEvent {
             return AnalyticsConstants.EventName.btnTapped
         }
     }
-
+    
     var eventType: AnalyticsConstants.EventType {
         switch self {
         case .targetAmountView, .targetAmountHistoryView, .targetAmountInitView, .targetAmountUpdateView, .targetAmountSetCompleteView, .targetAmountResetPopUp:
@@ -38,60 +38,60 @@ enum TargetAmountEvents: AnalyticsEvent {
             return AnalyticsConstants.EventType.userAction
         }
     }
-
+    
     var parameters: [AnalyticsConstants.Parameter: Any]? {
         switch self {
         case .targetAmountView:
             return [
                 .screenId: TargetAmountScreen.targetAmountView.screenId,
                 .screenName: TargetAmountScreen.targetAmountView.screenName,
-                .screenClass: TargetAmountScreen.targetAmountView.screenClass,
+                .screenClass: TargetAmountScreen.targetAmountView.screenClass
             ]
         case .targetAmountHistoryView:
             return [
                 .screenId: TargetAmountScreen.targetAmountHistoryView.screenId,
                 .screenName: TargetAmountScreen.targetAmountHistoryView.screenName,
-                .screenClass: TargetAmountScreen.targetAmountHistoryView.screenClass,
+                .screenClass: TargetAmountScreen.targetAmountHistoryView.screenClass
             ]
         case .targetAmountInitView:
             return [
                 .screenId: TargetAmountScreen.targetAmountInitView.screenId,
                 .screenName: TargetAmountScreen.targetAmountInitView.screenName,
-                .screenClass: TargetAmountScreen.targetAmountInitView.screenClass,
+                .screenClass: TargetAmountScreen.targetAmountInitView.screenClass
             ]
         case .targetAmountUpdateView:
             return [
                 .screenId: TargetAmountScreen.targetAmountUpdateView.screenId,
                 .screenName: TargetAmountScreen.targetAmountUpdateView.screenName,
-                .screenClass: TargetAmountScreen.targetAmountUpdateView.screenClass,
+                .screenClass: TargetAmountScreen.targetAmountUpdateView.screenClass
             ]
         case .targetAmountSetCompleteView:
             return [
                 .screenId: TargetAmountScreen.targetAmountSetCompleteView.screenId,
                 .screenName: TargetAmountScreen.targetAmountSetCompleteView.screenName,
-                .screenClass: TargetAmountScreen.targetAmountSetCompleteView.screenClass,
+                .screenClass: TargetAmountScreen.targetAmountSetCompleteView.screenClass
             ]
         case .targetAmountResetPopUp:
             return [
                 .screenId: TargetAmountScreen.targetAmountResetPopUp.screenId,
                 .screenName: TargetAmountScreen.targetAmountResetPopUp.screenName,
-                .screenClass: TargetAmountScreen.targetAmountResetPopUp.screenClass,
+                .screenClass: TargetAmountScreen.targetAmountResetPopUp.screenClass
             ]
         case .postponeTargetAmount:
             return [
-                .eventName: TargetAmountCustomEvent.postponeTargetAmount.eventName,
+                .eventName: TargetAmountCustomEvent.postponeTargetAmount.eventName
             ]
         case .setInitialTargetAmount:
             return [
-                .eventName: TargetAmountCustomEvent.setInitialTargetAmount.eventName,
+                .eventName: TargetAmountCustomEvent.setInitialTargetAmount.eventName
             ]
         case .maintainRecentTargetAmount:
             return [
-                .eventName: TargetAmountCustomEvent.maintainRecentTargetAmount.eventName,
+                .eventName: TargetAmountCustomEvent.maintainRecentTargetAmount.eventName
             ]
         case .cancelRecentTotalAmount:
             return [
-                .eventName: TargetAmountCustomEvent.cancelRecentTargetAmount.eventName,
+                .eventName: TargetAmountCustomEvent.cancelRecentTargetAmount.eventName
             ]
         }
     }
@@ -106,7 +106,7 @@ enum TargetAmountScreen {
     case targetAmountUpdateView
     case targetAmountSetCompleteView
     case targetAmountResetPopUp
-
+    
     var screenId: String {
         switch self {
         case .targetAmountView: return "total_amount_view"
@@ -117,7 +117,7 @@ enum TargetAmountScreen {
         case .targetAmountResetPopUp: return "total_amount_reset_popup"
         }
     }
-
+    
     var screenName: String {
         switch self {
         case .targetAmountView: return "목표 금액 확인 화면"
@@ -128,7 +128,7 @@ enum TargetAmountScreen {
         case .targetAmountResetPopUp: return "목표 금액 초기화 팝업"
         }
     }
-
+    
     var screenClass: String {
         switch self {
         case .targetAmountView: return "TotalTargetAmountView"
@@ -148,7 +148,7 @@ enum TargetAmountCustomEvent {
     case setInitialTargetAmount
     case maintainRecentTargetAmount
     case cancelRecentTargetAmount
-
+    
     var eventName: String {
         switch self {
         case .postponeTargetAmount: return "postpone_target_amount"
