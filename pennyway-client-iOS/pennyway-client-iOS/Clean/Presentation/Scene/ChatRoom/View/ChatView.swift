@@ -11,44 +11,56 @@ import SwiftUI
 
 struct ChatView: View {
     @StateObject private var keyboardManager = KeyboardManager()
+    @State private var isSideMenuPresented = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102)
-                .offset(y: -keyboardManager.keyboardHeight)
+        ZStack {
+            VStack(spacing: 0) {
+                ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102)
+                    .offset(y: -keyboardManager.keyboardHeight)
 
-            ChatBottomBar()
-                .background(Color("Ashblue02"))
-                .offset(y: -keyboardManager.keyboardHeight)
-        }
-
-        .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
-        .background(Color("Ashblue02"))
-        .setTabBarVisibility(isHidden: true)
-        .navigationBarBackButtonHidden(true)
-        .edgesIgnoringSafeArea(.bottom)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                HStack {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-                }.offset(x: -10)
+                ChatBottomBar()
+                    .background(Color("Ashblue02"))
+                    .offset(y: -keyboardManager.keyboardHeight)
             }
-            ToolbarItem(placement: .topBarTrailing) {
-                HStack {
-                    Button(action: {}, label: {
-                        Image("icon_navigationbar_kebabmenu")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                            .padding(5)
-                    })
-                    .padding(.trailing, 5)
-                    .frame(width: 44, height: 44)
-                    .buttonStyle(BasicButtonStyleUtil())
-                }.offset(x: 10)
+//            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
+            .navigationTitle("????")
+            .background(Color("Ashblue02"))
+            .setTabBarVisibility(isHidden: true)
+            .navigationBarBackButtonHidden(true)
+            .edgesIgnoringSafeArea(.bottom)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    }.offset(x: -10)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack {
+                        Button(action: {
+                            withAnimation {
+                                isSideMenuPresented.toggle()
+                            }
+                        }, label: {
+                            Image("icon_navigationbar_kebabmenu")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                                .padding(5)
+                        })
+                        .padding(.trailing, 5)
+                        .frame(width: 44, height: 44)
+                        .buttonStyle(BasicButtonStyleUtil())
+                    }.offset(x: 10)
+                }
+            }
+
+            if isSideMenuPresented {
+                ChatSideMenuView(isPresented: $isSideMenuPresented)
+                    .transition(.move(edge: .trailing))
             }
         }
     }
