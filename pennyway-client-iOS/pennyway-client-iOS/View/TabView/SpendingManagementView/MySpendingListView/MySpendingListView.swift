@@ -84,12 +84,12 @@ struct MySpendingListView: View {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 103 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-                                        .foregroundColor(Color("Gray01"))
+                                        .platformTextColor(color: Color("Gray01"))
                                         .cornerRadius(26)
 
                                     Text(monthTitle(from: spendingHistoryViewModel.currentDate))
                                         .font(.B1SemiboldeFont())
-                                        .foregroundColor(Color("Gray04"))
+                                        .platformTextColor(color: Color("Gray04"))
                                         .padding(.horizontal, 20)
                                         .padding(.vertical, 12)
                                 }
