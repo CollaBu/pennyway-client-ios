@@ -23,7 +23,7 @@ struct ChatView: View {
                     .background(Color("Ashblue02"))
                     .offset(y: -keyboardManager.keyboardHeight)
             }
-            .navigationTitle("????")
+            .navigationBarColor(UIColor(named: "White01"), title: "\(mockChatRoom.title)")
             .background(Color("Ashblue02"))
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)

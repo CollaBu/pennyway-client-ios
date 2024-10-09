@@ -17,16 +17,19 @@ struct SideMenuCell: View {
         HStack(spacing: 7 * DynamicSizeFactor.factor()) {
             Image(imageName)
                 .resizable()
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 17 * DynamicSizeFactor.factor(), height: 17 * DynamicSizeFactor.factor())
             Text(title)
                 .font(.B2SemiboldFont())
                 .platformTextColor(color: Color("Gray07"))
             Spacer()
-            
-            if isAlarmCell{
+
+            if isAlarmCell {
                 Toggle(isOn: $isAlarmOn) {}
                     .toggleStyle(CustomToggleStyle(hasAppeared: $isAlarmOn))
             }
         }
+        .frame(maxWidth: .infinity)
+        .frame(height: 27 * DynamicSizeFactor.factor())
     }
 }

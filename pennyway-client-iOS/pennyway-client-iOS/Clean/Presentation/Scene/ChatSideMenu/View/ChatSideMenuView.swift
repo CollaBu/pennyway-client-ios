@@ -44,13 +44,18 @@ struct ChatSideMenuView: View {
             SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone", isAlarmCell: false, isAlarmOn: .constant(false))
             SideMenuCell(title: "알람 설정", imageName: "icon_notificationsetting", isAlarmCell: true, isAlarmOn: $isAlarmOn)
 
+            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+
             Divider()
                 .overlay(Color("Gray02"))
                 .frame(height: 0.33)
                 .padding(.horizontal, 25 * DynamicSizeFactor.factor())
 
-            ChatUserCell(name: "직장인은 바다여왕", status: "내")
-            ChatUserCell(name: "볼링하는 바니걸", status: "참여")
+            Spacer().frame(height: 14 * DynamicSizeFactor.factor())
+
+            ForEach(mockMembers) { user in
+                ChatUserCell(member: user, currentUserId: 102)
+            }
 
             Spacer()
         }
