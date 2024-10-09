@@ -2,7 +2,7 @@
 import Combine
 import SwiftUI
 
-final class KeyboardHandlerManager: ObservableObject {
+final class KeyboardManager: ObservableObject {
     @Published private(set) var keyboardHeight: CGFloat = 0
     
     private var cancellable: AnyCancellable?

@@ -12,7 +12,7 @@ struct ArrivedAlarmView: View {
                 AlarmListView(viewModel: viewModel, alarms: viewModel.notificationData.filter { !$0.isRead })
 
                 Rectangle()
-                    .foregroundColor(.clear)
+                    .platformTextColor(color: .clear)
                     .frame(maxWidth: 320 * DynamicSizeFactor.factor(), maxHeight: 9 * DynamicSizeFactor.factor())
                     .background(Color("Gray01"))
 

@@ -82,7 +82,6 @@ struct ProfileView: View {
                         showImagePicker: $showImagePicker,
                         selectedUIImage: $selectedUIImage,
                         sourceType: $sourceType,
-                        presignedUrlViewModel: presignedUrlViewModel,
                         viewModelWrapper: viewModelWrapper
                     )
                     .edgesIgnoringSafeArea(.bottom)

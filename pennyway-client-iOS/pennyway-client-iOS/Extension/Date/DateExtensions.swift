@@ -52,6 +52,22 @@ extension Date {
         return formatter
     }()
 
+    /// 2000년 1월 1일 목요일  형식
+    static func chatDateFormatter() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy년 M월 d일 EEEE"
+        return formatter
+    }
+
+    /// 오후 1:20 형식
+    static func koreanMeridianTimeFormatter(from time: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "a h:mm" // "a"는 오전/오후, "h:mm"은 시:분 형식
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: time)
+    }
+
     var formattedCalendarDayDate: String {
         return Date.calendarDayDateFormatter.string(from: self)
     }

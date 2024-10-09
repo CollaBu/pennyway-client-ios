@@ -10,7 +10,6 @@ struct EditProfilePopUpView: View {
     @Binding var selectedUIImage: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
 
-    @ObservedObject var presignedUrlViewModel: PresignedUrlViewModel
     @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
 
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
@@ -37,7 +36,7 @@ struct EditProfilePopUpView: View {
 
                         if option != options.last {
                             Rectangle()
-                                .foregroundColor(.clear)
+                                .platformTextColor(color: .clear)
                                 .frame(maxWidth: .infinity, maxHeight: 1)
                                 .background(Color("Gray01"))
                         }
