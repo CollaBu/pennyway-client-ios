@@ -73,6 +73,7 @@ struct ChatRoomCell: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 if isMyChat {
+                    // TODO: 몇개의 알람이 왔는지를 임의로 notify_setting으로 설정했지만, 웹소켓 연결 후 Chat데이터로 판단해야 하므로 수정해야함
                     if chatRoom.notify_setting {
                         ZStack {
                             Text("24")

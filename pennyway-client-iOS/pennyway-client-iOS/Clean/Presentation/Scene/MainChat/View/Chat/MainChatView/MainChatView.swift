@@ -30,7 +30,6 @@ struct MainChatView: View {
                 }
 
                 Spacer().frame(height: 28 * DynamicSizeFactor.factor())
-//                                    DefaultChatContent()
 
                 if selectedTab == 0 {
                     DefaultChatContent()
@@ -113,10 +112,6 @@ struct MainChatView: View {
         VStack {
             if selectedTab == 2 {
                 ZStack {
-                    Circle()
-                        .platformTextColor(color: Color("Mint03"))
-                        .frame(width: 7 * DynamicSizeFactor.factor(), height: 7 * DynamicSizeFactor.factor())
-                        .offset(x: 37 * DynamicSizeFactor.factor(), y: -16 * DynamicSizeFactor.factor())
 
                     VStack {
                         Text("추천 채팅")
