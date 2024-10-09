@@ -23,7 +23,6 @@ struct ChatView: View {
                     .background(Color("Ashblue02"))
                     .offset(y: -keyboardManager.keyboardHeight)
             }
-//            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
             .navigationTitle("????")
             .background(Color("Ashblue02"))
             .setTabBarVisibility(isHidden: true)
@@ -57,11 +56,14 @@ struct ChatView: View {
                     }.offset(x: 10)
                 }
             }
-
-            if isSideMenuPresented {
-                ChatSideMenuView(isPresented: $isSideMenuPresented)
-                    .transition(.move(edge: .trailing))
-            }
+            .overlay(
+                Group {
+                    if isSideMenuPresented {
+                        ChatSideMenuView(isPresented: $isSideMenuPresented)
+                            .transition(.move(edge: .trailing))
+                    }
+                }
+            )
         }
     }
 }
