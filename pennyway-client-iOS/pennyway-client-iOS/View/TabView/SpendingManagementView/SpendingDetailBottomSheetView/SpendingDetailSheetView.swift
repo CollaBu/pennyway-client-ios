@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 // MARK: - SpendingDetailSheetView
@@ -166,7 +167,7 @@ struct SpendingDetailSheetView: View {
         }
         .setTabBarVisibility(isHidden: true)
         .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
-        .onChange(of: FullScreenState(showEditSpendingDetailView: showEditSpendingDetailView, showAddSpendingHistoryView: showAddSpendingHistoryView, showDetailSpendingView: showDetailSpendingView), 
+        .onChange(of: FullScreenState(showEditSpendingDetailView: showEditSpendingDetailView, showAddSpendingHistoryView: showAddSpendingHistoryView, showDetailSpendingView: showDetailSpendingView),
                   perform: { state in
                       if state.isReturn() {
                           AnalyticsManager.shared.trackEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])

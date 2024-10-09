@@ -9,7 +9,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
 
     /// 카테고리 생성
     @Published var selectedCategoryIconTitle: String = "OTHER"
-    @Published var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: .etc, state: .on)
+    @Published var selectedCategoryIcon: CategoryIconName = .init(baseName: .etc, state: .on)
     @Published var categoryName: String = ""
 
     @Published var navigateToAddCategory = false // 추가하기 버튼 누른 경우
@@ -17,7 +17,7 @@ class AddSpendingHistoryViewModel: ObservableObject {
 
     /// 날짜 선택
     @Published var isSelectDayViewPresented: Bool = false
-    @Published var selectedDate: Date = Date()
+    @Published var selectedDate: Date = .init()
     @Published var clickDate: Date?
 
     /// 가격, 소비처, 메모 text

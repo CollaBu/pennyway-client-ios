@@ -6,7 +6,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var givenName: String = ""
     @Published var isOAuthExistUser: Bool = false
     @Published var errorMessage: String = ""
-    @Published var isLoggedIn: Bool = false // 로그인 여부 
+    @Published var isLoggedIn: Bool = false // 로그인 여부
     @Published var isLoginSuccessful = false
     
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false

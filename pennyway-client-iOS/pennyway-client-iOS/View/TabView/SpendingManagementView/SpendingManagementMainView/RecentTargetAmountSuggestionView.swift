@@ -4,7 +4,7 @@ struct RecentTargetAmountSuggestionView: View {
     @ObservedObject var viewModel: TargetAmountViewModel
     @Binding var showToastPopup: Bool
     @Binding var isHidden: Bool
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Spacer().frame(height: 18 * DynamicSizeFactor.factor())
@@ -13,9 +13,9 @@ struct RecentTargetAmountSuggestionView: View {
                 Text("최근 목표금액을 그대로 사용할까요?")
                     .font(.ButtonH4SemiboldFont())
                     .platformTextColor(color: Color("White01"))
-                
+
                 Spacer()
-                
+
                 Button(action: {
                     viewModel.deleteCurrentMonthTargetAmountApi { success in
                         if success {
@@ -32,29 +32,29 @@ struct RecentTargetAmountSuggestionView: View {
             }
             .padding(.leading, 18 * DynamicSizeFactor.factor())
             .padding(.trailing, 13 * DynamicSizeFactor.factor())
-    
+
             Text(getRecentTargetAmount())
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Mint02"))
                 .padding(.leading, 18 * DynamicSizeFactor.factor())
-            
+
             Spacer()
-            
+
             HStack {
                 Image("icon_illust_maintain_goal")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 85 * DynamicSizeFactor.factor(), height: 85 * DynamicSizeFactor.factor())
-                
+
                 Spacer()
-                
+
                 Button(action: {
                     isHidden = true
                     showToastPopup = true
                     viewModel.editCurrentMonthTargetAmountApi()
-                    
+
                     AnalyticsManager.shared.trackEvent(TargetAmountEvents.maintainRecentTargetAmount, additionalParams: nil)
-                    
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         showToastPopup = false
                     }
@@ -79,15 +79,15 @@ struct RecentTargetAmountSuggestionView: View {
         .shadow(color: Color(red: 0, green: 0.83, blue: 0.88).opacity(0.15), radius: 5, x: 0, y: 1) // TODO: 색상 변경 필요
         .padding(.horizontal, 20)
     }
-    
+
     private func getRecentTargetAmount() -> String {
         let year = Date.year(from: Date())
         let data = "\(viewModel.recentTargetAmountData?.month ?? 0)월 목표금액: \(NumberFormatterUtil.formatIntToDecimalString(Int64(viewModel.recentTargetAmountData?.amount ?? 0)))원"
-        
+
         if viewModel.recentTargetAmountData?.year != year {
             return "\(year)년 \(data)"
         }
-        
+
         return data
     }
 }

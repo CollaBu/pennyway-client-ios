@@ -15,7 +15,7 @@ class LinkAccountToOAuthViewModel: ObservableObject {
                         AnalyticsManager.shared.setUser("userId = \(response.data.user.id)")
                         AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
                             AnalyticsConstants.Parameter.oauthType: "none",
-                            AnalyticsConstants.Parameter.isRefresh: false
+                            AnalyticsConstants.Parameter.isRefresh: false,
                         ])
 
                         completion(true)

@@ -118,9 +118,8 @@ struct TotalTargetAmountView: View {
                                     deleteTargetAmountApi()
                                 },
                                 secondBtnLabel: "초기화하기",
-                                secondBtnColor: Color("Mint03")
-                )
-                .analyzeEvent(TargetAmountEvents.targetAmountResetPopUp)
+                                secondBtnColor: Color("Mint03"))
+                    .analyzeEvent(TargetAmountEvents.targetAmountResetPopUp)
             }
         }
         .onAppear {

@@ -16,7 +16,7 @@ class OAuthAccountViewModel: ObservableObject {
                 if data != nil {
                     Log.debug("소셜 계정 연동 완료")
                     KeychainHelper.deleteOAuthUserData()
-                    self.profileInfoViewModel.getUserProfileApi { _, _ in 
+                    self.profileInfoViewModel.getUserProfileApi { _, _ in
                         completion(true)
                     }
                 }

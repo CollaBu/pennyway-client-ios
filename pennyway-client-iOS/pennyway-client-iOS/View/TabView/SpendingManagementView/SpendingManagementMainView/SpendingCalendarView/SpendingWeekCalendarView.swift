@@ -5,7 +5,7 @@ import SwiftUI
 struct SpendingWeekCalendarView: View {
     @State private var selectedDate = Date()
     @State private var currentMonth = Date()
-    @State private var date: Date = Date()
+    @State private var date: Date = .init()
     @State private var changeMonth = false
     @State private var proxy: ScrollViewProxy?
     @State private var userSelectedDate: Date?

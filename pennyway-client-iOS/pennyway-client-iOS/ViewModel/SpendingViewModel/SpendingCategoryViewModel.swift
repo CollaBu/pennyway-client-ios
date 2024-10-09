@@ -8,29 +8,29 @@ class SpendingCategoryViewModel: ObservableObject {
     @Published var categoryName = ""
     @Published var selectedCategoryIcon: CategoryIconName? = nil
     @Published var selectedCategoryIconTitle: String = ""
-    
+
     /// 카테고리 리스트 데이터
     @Published var amount: Int? = nil
     @Published var categoryIcon: String? = nil
     @Published var memo: String? = nil
     @Published var accountName: String? = nil
     @Published var spendAt: Date? = nil
-    
+
     /// 총 카테고리 리스트
     @Published var spendingCategories: [SpendingCategoryData] = []
-    
+
     /// 시스템 카테고리 리스트
     @Published var systemCategories: [SpendingCategoryData] = []
-    
+
     /// 사용자 정의 카테고리 리스트
     @Published var customCategories: [SpendingCategoryData] = []
     @Published var dailyDetailSpendings: [IndividualSpending] = [] // 지출내역 리스트 임시 데이터
     @Published var selectSpending: IndividualSpending? = nil
-    
+
     @Published var spedingHistoryTotalCount = 0 // 지출 내역 리스트 총 개수
     @Published var hasNext: Bool = true
     private var currentPageNumber: Int = 0
-  
+
     /// 카테고리 조회 api 호출
     func getSpendingCustomCategoryListApi(completion: @escaping (Bool) -> Void) {
         SpendingCategoryAlamofire.shared.getSpendingCustomCategoryList { result in
@@ -39,14 +39,14 @@ class SpendingCategoryViewModel: ObservableObject {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(getSpendingCustomCategoryListResponseDto.self, from: responseData)
-                        
+
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("사용자 정의 카테고리 조회 완료 \(jsonString)")
                         }
                         self.systemCategories = SpendingCategoryIconList.allCases
                             .filter { $0 != .other && $0 != .plus }
                             .map { $0.detailsWhite } // 배경색 흰색인 데이터 가져오기
-                        
+
                         let otherCategory = SpendingCategoryIconList.plus.details
                         self.customCategories = response.data.spendingCategories.compactMap { self.convertToSpendingCategoryData(from: $0) }
                         self.spendingCategories = self.systemCategories + self.customCategories + [otherCategory]
@@ -65,30 +65,30 @@ class SpendingCategoryViewModel: ObservableObject {
             }
         }
     }
-    
+
     /// 카테고리 지출내역 개수 조회 api 호출
     func getCategorySpendingCountApi(completion: @escaping (Bool) -> Void) {
         guard selectedCategory != nil else {
-            return 
+            return
         }
-        
+
         let getCategorySpendingCountRequestDto = GetCategorySpendingCountRequestDto(type: selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")
-        
+
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
-        
+
         SpendingCategoryAlamofire.shared.getCategorySpendingCount(categoryId, getCategorySpendingCountRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(getCategorySpendingCountResponseDto.self, from: responseData)
-                        
+
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("카테고리에 등록된 지출내역 총 개수 조회 \(jsonString)")
                         }
-                        
+
                         self.spedingHistoryTotalCount = response.data.totalCount
-        
+
                         completion(true)
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
@@ -104,38 +104,38 @@ class SpendingCategoryViewModel: ObservableObject {
             }
         }
     }
-    
+
     /// 카테고리에 따른 지출내역 리스트 조회 api 호출
     func getCategorySpendingHistoryApi(isReload: Bool? = false, completion: @escaping (Bool) -> Void) {
         guard hasNext, selectedCategory != nil else {
             return
         }
-        
+
         let getCategorySpendingHistoryRequestDto = GetCategorySpendingHistoryRequestDto(type: "\(selectedCategory?.isCustom ?? false ? "CUSTOM" : "DEFAULT")", size: "30", page: "\(currentPageNumber)")
-        
+
         let categoryId = selectedCategory!.id < 0 ? abs(selectedCategory!.id) : selectedCategory!.id
-        
+
         dailyDetailSpendings.removeAll { $0.category.id != self.selectedCategory!.id } // 선택한 카테고리와 다르면 삭제
-        
+
         SpendingCategoryAlamofire.shared.getCategorySpendingHistory(categoryId, getCategorySpendingHistoryRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(getCategorySpendingHistoryResponseDto.self, from: responseData)
-                        
+
                         if let jsonString = String(data: responseData, encoding: .utf8) {
                             Log.debug("카테고리에 등록된 지출내역 조회\(jsonString)")
                         }
                         self.mergeNewSpendings(newSpendings: response.data.spendings.content)
                         self.hasNext = response.data.spendings.hasNext
-                            
+
                         if !(isReload ?? false) {
                             self.currentPageNumber += 1
                         }
-                            
+
                         completion(true)
-                        
+
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                     }
@@ -150,13 +150,13 @@ class SpendingCategoryViewModel: ObservableObject {
             }
         }
     }
-    
+
     func initPage() {
         dailyDetailSpendings = []
         currentPageNumber = 0
         hasNext = true
     }
-    
+
     /// 무한 스크롤 지출 데이터 merge
     private func mergeNewSpendings(newSpendings: [Spending]) {
         var allNewIndividualSpendings: [IndividualSpending] = []
@@ -182,7 +182,7 @@ class SpendingCategoryViewModel: ObservableObject {
         }
         dailyDetailSpendings.sort { $0.spendAt > $1.spendAt }
     }
-    
+
     /// white 배경색 아이콘 return
     func convertToSpendingCategoryData(from spendingCategory: SpendingCategory) -> SpendingCategoryData? {
         guard let iconList = SpendingCategoryIconList(rawValue: spendingCategory.icon) else {
@@ -190,15 +190,15 @@ class SpendingCategoryViewModel: ObservableObject {
         }
         return SpendingCategoryData(id: spendingCategory.id, isCustom: spendingCategory.isCustom, name: spendingCategory.name, icon: iconList.detailsWhite.icon)
     }
-    
+
     /// 카테고리 수정 api 호출
     func modifyCategoryApi(completion: @escaping (Bool) -> Void) {
         guard selectedCategory != nil else {
             return
         }
-        
+
         let modifyCategoryRequestDto = AddSpendingCustomCategoryRequestDto(name: categoryName, icon: selectedCategoryIconTitle)
-        
+
         SpendingCategoryAlamofire.shared.modifyCategory(selectedCategory!.id, modifyCategoryRequestDto) { result in
             switch result {
             case let .success(data):
@@ -218,13 +218,13 @@ class SpendingCategoryViewModel: ObservableObject {
             }
         }
     }
-    
+
     /// 카테고리 삭제 api 호출
     func deleteCategoryApi(completion: @escaping (Bool) -> Void) {
         guard selectedCategory != nil else {
             return
         }
-        
+
         SpendingCategoryAlamofire.shared.deleteCategory(selectedCategory!.id) { result in
             switch result {
             case let .success(data):
@@ -244,15 +244,15 @@ class SpendingCategoryViewModel: ObservableObject {
             }
         }
     }
-    
+
     /// 카테고리 이동 api 호출
     func moveCategoryApi(completion: @escaping (Bool) -> Void) {
         guard selectedCategory != nil else {
             return
         }
-        
+
         let moveCategoryRequestDto = MoveCategoryRequestDto(fromType: getCategoryDetails(selectedCategory!).categoryIconTitle, toId: getCategoryDetails(selectedMoveCategory!).categoryId, toType: getCategoryDetails(selectedMoveCategory!).categoryIconTitle)
-        
+
         SpendingCategoryAlamofire.shared.moveCategory(selectedCategory!.id, moveCategoryRequestDto) { result in
             switch result {
             case let .success(data):
@@ -264,7 +264,7 @@ class SpendingCategoryViewModel: ObservableObject {
                                 self.customCategories.removeAll { $0.id == self.selectedCategory!.id }
                                 self.initPage() // 카테고리 삭제했으니 무한 스크롤 데이터 초기화
                                 self.spendingCategories.removeAll { $0.id == self.selectedCategory!.id } // 총 카테고리 리스트에서 삭제한 카테고리 제거
-                                
+
                                 completion(true)
                             }
                         }
@@ -280,7 +280,7 @@ class SpendingCategoryViewModel: ObservableObject {
             }
         }
     }
-    
+
     func getCategoryDetails(_ category: SpendingCategoryData) -> (categoryIconTitle: String, categoryId: Int) {
         var categoryIconTitle = ""
         var categoryId = -1
@@ -296,15 +296,15 @@ class SpendingCategoryViewModel: ObservableObject {
         }
         return (categoryIconTitle, categoryId)
     }
-    
+
     /// 특정 ID에 해당하는 지출내역 검색
     func getSpendingDetail(by id: Int) -> IndividualSpending? {
         return dailyDetailSpendings.first { $0.id == id }
     }
-    
+
     func updateSpending(dto: AddSpendingHistoryResponseDto) {
         let id = selectSpending?.id
-        
+
         if let firstIndex = dailyDetailSpendings.firstIndex(where: { $0.id == id }) {
             dailyDetailSpendings[firstIndex].update(spending: dto.data.spending)
         }
