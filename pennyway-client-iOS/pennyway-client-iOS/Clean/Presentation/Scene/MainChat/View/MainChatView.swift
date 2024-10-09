@@ -42,6 +42,7 @@ struct MainChatView: View {
                 NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
             }
+            .setTabBarVisibility(isHidden: false)
             .navigationBarColor(UIColor(named: "White01"), title: "채팅방")
             .navigationBarBackButtonHidden(true)
             .toolbar {
