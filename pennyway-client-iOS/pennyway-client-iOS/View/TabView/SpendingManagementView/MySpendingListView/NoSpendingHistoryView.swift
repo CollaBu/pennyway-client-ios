@@ -39,13 +39,13 @@ struct NoSpendingHistoryView: View {
                     NavigationLink(destination: AddSpendingHistoryView(
                         spendingCategoryViewModel: SpendingCategoryViewModel(),
                         spendingHistoryViewModel: spendingHistoryViewModel,
-                        spendingId: .constant(0),
+                        spendingId: .constant(0), 
                         clickDate: $clickDate,
                         isPresented: $navigateToAddSpendingHistory,
                         isEditSuccess: .constant(false),
                         isAddSpendingData: .constant(false),
-                        entryPoint: .NoSpendingHistoryView
-                    ), isActive: $navigateToAddSpendingHistory) {
+                        entryPoint: .NoSpendingHistoryView), isActive: $navigateToAddSpendingHistory)
+                    {
                         EmptyView()
                     }.hidden()
                 }

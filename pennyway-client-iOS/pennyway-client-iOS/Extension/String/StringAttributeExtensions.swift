@@ -9,26 +9,26 @@ extension String {
     ) -> Text {
         var text = Text("")
         let parsingStr = components(separatedBy: attribute.text)
-
+        
         for (index, str) in parsingStr.enumerated() {
             let appendText = _makeAttributeText(text: str, attribute: base)
             text = text + appendText
-
+          
             if index == (parsingStr.count - 1) {
                 continue
             }
-
+          
             let attributeText = _makeAttributeText(
                 text: attribute.text,
                 attribute: attribute
             )
-
+          
             text = text + attributeText
         }
-
+      
         return text
     }
-
+  
     /// font와 color 지정한 Text 반환
     private func _makeAttributeText(
         text: String, attribute: StringAttributeProtocol

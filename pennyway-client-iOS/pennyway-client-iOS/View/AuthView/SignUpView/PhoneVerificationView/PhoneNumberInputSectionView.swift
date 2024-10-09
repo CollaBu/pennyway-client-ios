@@ -61,11 +61,11 @@ struct PhoneNumberInputSectionView: View {
 
     private func handleVerificationButtonTap() {
         if isOAuthRegistration {
-            viewModel.requestOAuthVerificationCodeApi {
+            viewModel.requestOAuthVerificationCodeApi { 
                 handleErrorApi()
             }
         } else {
-            viewModel.requestVerificationCodeApi {
+            viewModel.requestVerificationCodeApi { 
                 handleErrorApi()
             }
         }

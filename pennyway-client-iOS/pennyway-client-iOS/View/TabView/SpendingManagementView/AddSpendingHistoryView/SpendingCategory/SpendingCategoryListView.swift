@@ -38,7 +38,7 @@ struct SpendingCategoryListView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 6 * DynamicSizeFactor.factor())
-                        .contentShape(Rectangle())
+                        .contentShape(Rectangle()) 
                         .onTapGesture {
                             if category.name == "추가하기" {
                                 viewModel.selectedCategoryIcon = CategoryIconName(baseName: CategoryBaseName.etc, state: .on) // icon 초기화

@@ -7,7 +7,7 @@ struct SpendingCategoryGridView: View {
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel // 카테고리 생성 연동 처리
     @Environment(\.presentationMode) var presentationMode
-
+    
     @State var navigateToCategoryDetails = false
     @State var navigateToAddCategoryView = false
     @State private var showDeleteCategoryToastPopUp = false
@@ -16,7 +16,7 @@ struct SpendingCategoryGridView: View {
         ZStack {
             ScrollView {
                 Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
+                
                 VStack(alignment: .leading, spacing: 0) {
                     // 시스템 카테고리
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
@@ -25,16 +25,16 @@ struct SpendingCategoryGridView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-
+                    
                     Spacer().frame(height: 20 * DynamicSizeFactor.factor())
-
+                    
                     Text("내가 추가한")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.horizontal, 20)
-
+                    
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-
+                    
                     // 사용자 정의 카테고리
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 8 * DynamicSizeFactor.factor()) {
                         ForEach(spendingCategoryViewModel.customCategories) { category in
@@ -42,7 +42,7 @@ struct SpendingCategoryGridView: View {
                         }
                     }
                     .padding(.horizontal, 20)
-
+                                        
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
                 }
             }
@@ -104,7 +104,7 @@ struct SpendingCategoryGridView: View {
         NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
             .hidden()
     }
-
+    
     private func categoryVGridView(for category: SpendingCategoryData) -> some View {
         Button(action: {
             spendingCategoryViewModel.selectedCategory = category
@@ -124,11 +124,11 @@ struct SpendingCategoryGridView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 52 * DynamicSizeFactor.factor(), height: 52 * DynamicSizeFactor.factor())
-
+                
                 Text(category.name)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
-
+                
                 Spacer()
             }
             .frame(width: 88 * DynamicSizeFactor.factor(), height: 92 * DynamicSizeFactor.factor())

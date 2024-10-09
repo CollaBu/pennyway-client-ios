@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  UserModel.swift
 //  clean-architecture-seminar
 //
 //  Created by 최희진 on 9/4/24.
@@ -38,4 +38,10 @@ struct OAuthAccount: Equatable {
     let kakao: Bool
     let google: Bool
     let apple: Bool
+}
+
+// MARK: - UserId
+
+struct UserId: Equatable {
+    let id: Int64
 }

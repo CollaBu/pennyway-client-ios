@@ -8,15 +8,15 @@ class NumberFormatterUtil {
         formatter.numberStyle = .decimal
         return formatter.string(from: NSNumber(value: number)) ?? "\(number)"
     }
-
+    
     /// 문자열을 100,000 형식으로 변환
     static func formatStringToDecimalString(_ number: String) -> String {
         let digits = number.filter { $0.isNumber }
-
+           
         if digits.isEmpty {
             return ""
         }
-
+                
         if let number = Int(digits), number <= MaxValue.maxValue { // 정수 최댓값 넘지 않은 경우
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .decimal

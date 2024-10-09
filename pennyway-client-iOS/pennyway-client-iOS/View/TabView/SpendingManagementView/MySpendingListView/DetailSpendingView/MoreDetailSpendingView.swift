@@ -15,32 +15,32 @@ struct MoreDetailSpendingView: View {
                 if let spendingDetail = getSpendingDetail(by: spendingId) {
                     HStack(spacing: 10 * DynamicSizeFactor.factor()) {
                         let iconName = SpendingListViewCategoryIconList(rawValue: spendingDetail.category.icon)?.iconName ?? ""
-
+                        
                         Image(iconName)
                             .frame(width: 32 * DynamicSizeFactor.factor(), height: 32 * DynamicSizeFactor.factor())
                             .scaledToFill()
-
+                        
                         Text(spendingDetail.category.name)
                             .platformTextColor(color: Color("Gray07"))
                             .font(.B1SemiboldeFont())
                     }
-
+                    
                     Spacer().frame(height: 5 * DynamicSizeFactor.factor())
-
+                    
                     Text("\(spendingDetail.amount)원")
                         .padding(.vertical, 4)
                         .platformTextColor(color: Color("Gray07"))
                         .font(.H1BoldFont())
 
                     Spacer()
-
+                    
                     HStack {
                         Text("날짜")
                             .platformTextColor(color: Color("Gray04"))
                             .font(.B1MediumFont())
-
+                        
                         Spacer()
-
+            
                         if let date = DateFormatterUtil.dateFromString(spendingDetail.spendAt) {
                             Text(Date.getFormattedDate(from: date ?? Date()))
                                 .platformTextColor(color: Color("Gray07"))
@@ -52,12 +52,12 @@ struct MoreDetailSpendingView: View {
                         }
                     }
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
+                    
                     HStack {
                         Text("소비처")
                             .platformTextColor(color: Color("Gray04"))
                             .font(.B1MediumFont())
-
+                        
                         Spacer()
 
                         Text(spendingDetail.accountName)
@@ -65,12 +65,12 @@ struct MoreDetailSpendingView: View {
                             .font(.B1MediumFont())
                     }
                     Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
+                    
                     HStack {
                         Text("메모")
                             .platformTextColor(color: Color("Gray04"))
                             .font(.B1MediumFont())
-
+                        
                         Spacer()
                     }
                     Spacer().frame(height: 10 * DynamicSizeFactor.factor())
@@ -92,7 +92,7 @@ struct MoreDetailSpendingView: View {
         }
         .padding(.horizontal, 20)
     }
-
+    
     private func getSpendingDetail(by id: Int) -> IndividualSpending? {
         return spendingHistoryViewModel.getSpendingDetail(by: id) ?? spendingCategoryViewModel.getSpendingDetail(by: id)
     }

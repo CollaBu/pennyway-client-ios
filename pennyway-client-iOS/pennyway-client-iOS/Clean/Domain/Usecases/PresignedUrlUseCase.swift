@@ -12,7 +12,7 @@ import UIKit
 
 protocol PresignedUrlUseCase {
     func generate(type: String, ext: String, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
-    func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void)
+    func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void) 
 }
 
 // MARK: - DefaultPresignedUrlUseCase
@@ -58,7 +58,6 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
                                     switch loadResult {
                                     case let .success(image):
                                         DispatchQueue.main.async {
-//                                            self.userData.value.imageUpdate(image: image) // 이미지 업데이트
                                             Log.debug("[UserProfileViewModel]-이미지 업데이트 성공")
                                         }
                                     case let .failure(error):

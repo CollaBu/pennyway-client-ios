@@ -1,5 +1,5 @@
 //
-//  PresignedUrl.swift
+//  GeneratePresignedUrlModel.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 9/20/24.

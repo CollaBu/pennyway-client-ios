@@ -84,7 +84,7 @@ struct FindIdFormView: View {
     }
 
     private func checkFormValid() {
-        if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser &&
+        if !phoneVerificationViewModel.showErrorVerificationCode && !phoneVerificationViewModel.showErrorExistingUser && 
             phoneVerificationViewModel.isFormValid
         {
             Log.debug("if문 시작")

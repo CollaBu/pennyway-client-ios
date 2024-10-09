@@ -42,6 +42,7 @@ struct CategorySpendingListView: View {
                                     })
                                     .buttonStyle(PlainButtonStyle())
                                     .buttonStyle(BasicButtonStyleUtil())
+
                                     .onAppear {
                                         handleOnAppear(for: item)
                                     }

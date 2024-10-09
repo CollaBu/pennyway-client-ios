@@ -13,9 +13,9 @@ struct AddSpendingInputFormView: View {
     var entryPoint: EntryPoint
     @Binding var spendingId: Int?
 
-    let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray07"))
-    let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
-
+    let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
+    let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
+    
     let titleCustomTextList: [String] = ["금액*", "카테고리*", "날짜*"]
     let maxCharacterCount: Int = 100
 
@@ -39,17 +39,17 @@ struct AddSpendingInputFormView: View {
                     isDeleteButtonVisible = false
                     viewModel.validateForm()
                 }
-
+            
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-
+            
             // 카테고리
             HStack {
                 titleCustomTextList[1].toAttributesText(base: baseAttribute, stringAttribute)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
-
+                
                 Spacer()
-
+                
                 HStack(spacing: 0) {
                     if let category = viewModel.selectedCategory {
                         HStack {
@@ -57,7 +57,7 @@ struct AddSpendingInputFormView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
-
+                            
                             Text(category.name)
                                 .font(.B1MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
@@ -71,7 +71,7 @@ struct AddSpendingInputFormView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
-
+                                    
                                     Text(spendingDetail.category.name)
                                         .font(.B1MediumFont())
                                         .platformTextColor(color: Color("Gray07"))
@@ -87,13 +87,13 @@ struct AddSpendingInputFormView: View {
                                 .platformTextColor(color: Color("Gray04"))
                         }
                     }
-
+                        
                     Image("icon_arrow_front_small")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                 }
-
+                
                 .frame(alignment: .trailing)
                 .padding(.leading, 12)
                 .padding(.vertical, 14)
@@ -103,20 +103,20 @@ struct AddSpendingInputFormView: View {
                 }
             }
             .padding(.horizontal, 20)
-
+            
             // 날짜
             HStack {
                 titleCustomTextList[2].toAttributesText(base: baseAttribute, stringAttribute)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
-
+                
                 Spacer()
-
+                
                 HStack(spacing: 0) {
                     Text(Date.getFormattedDate(from: viewModel.selectedDate))
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
-
+                   
                     Image("icon_arrow_front_small")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -131,9 +131,9 @@ struct AddSpendingInputFormView: View {
                 viewModel.isSelectDayViewPresented = true
                 Log.debug(viewModel.selectedDate)
             }
-
+            
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-
+            
             // 소비처
             CustomInputView(inputText: $viewModel.consumerText, titleText: "소비처", placeholder: "카페인 수혈, 주식투자 등등", isSecureText: false, isCustom: true, showDeleteButton: isDeleteButtonVisible, deleteAction: {
                 viewModel.consumerText = ""
@@ -144,7 +144,7 @@ struct AddSpendingInputFormView: View {
             }
 
             Spacer().frame(height: 28 * DynamicSizeFactor.factor())
-
+            
             // 메모
             MemoInputView(memoText: $viewModel.memoText, title: "메모", placeholder: "더 하고 싶은 말이 있나요?", maxCharacterCount: maxCharacterCount)
 
@@ -158,12 +158,12 @@ struct AddSpendingInputFormView: View {
             }
         }
     }
-
+    
     private func loadSpendingDetails() {
         if let spendingId = spendingId {
             if let spendingDetail = spendingHistoryViewModel.getSpendingDetail(by: spendingId) {
                 getSpendingData(with: spendingDetail)
-
+                    
                 if let spendAtDate = spendAt {
                     viewModel.selectedDate = spendAtDate
                     Log.debug("값 넘어감")

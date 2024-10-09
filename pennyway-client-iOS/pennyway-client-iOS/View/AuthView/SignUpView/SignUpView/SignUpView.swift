@@ -8,12 +8,12 @@ struct SignUpView: View {
 
     @EnvironmentObject var authViewModel: AppViewModel
     let profileInfoViewModel = UserAccountViewModel()
-
+    
     @State private var isOAuthRegistration = OAuthRegistrationManager.shared.isOAuthRegistration
     @State private var isExistUser = OAuthRegistrationManager.shared.isExistUser
-
+    
     @State var initTargetAmount = TargetAmount(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0)
-
+    
     private var buttonText: String {
         if !isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser {
             return "연동하기"
@@ -29,23 +29,23 @@ struct SignUpView: View {
                     VStack(spacing: 47 * DynamicSizeFactor.factor()) {
                         VStack {
                             Spacer().frame(height: 15 * DynamicSizeFactor.factor())
-
+                            
                             NavigationCountView(selectedText: $viewModel.selectedText)
                                 .onAppear {
                                     viewModel.selectedText = 2
                                 }
-
+                            
                             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-
+                            
                             SignUpFormView(formViewModel: formViewModel)
-
+                            
                             Spacer().frame(height: 65 * DynamicSizeFactor.factor())
                         }
                     }
                 }
-
+                
                 Spacer()
-
+                
                 CustomBottomButton(action: {
                     if formViewModel.isFormValid {
                         if isOAuthRegistration {
@@ -64,10 +64,10 @@ struct SignUpView: View {
                             }
                         }
                     }
-
+                    
                 }, label: buttonText, isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 0 : 34 * DynamicSizeFactor.factor())
-
+                
                 NavigationLink(destination: destinationView(), tag: 3, selection: $viewModel.selectedText) {}.hidden()
             }
             .padding(.bottom, keyboardHandler.keyboardHeight)
@@ -94,24 +94,24 @@ struct SignUpView: View {
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
                         .buttonStyle(BasicButtonStyleUtil())
-
+                        
                     }.offset(x: -10)
                 }
             }
         }
     }
-
+    
     @ViewBuilder
     private func destinationView() -> some View {
         if !(!isOAuthRegistration && OAuthRegistrationManager.shared.isOAuthUser) {
             TermsAndConditionsView(viewModel: viewModel)
         }
     }
-
+    
     func handleLinkAccountToOAuth() {
         linkAccountToOAuthViewModel.linkAccountToOAuthApi { success in
             if success {
-                profileInfoViewModel.getUserProfileApi { success in
+                profileInfoViewModel.getUserProfileApi { success, _ in
                     if success {
                         authViewModel.login()
                     }

@@ -7,14 +7,14 @@ struct SelectCategoryIconView: View {
     @Binding var isPresented: Bool
     @ObservedObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
-    @State var selectedCategoryIcon: CategoryIconName = .init(baseName: .etc, state: .on)
+    @State var selectedCategoryIcon: CategoryIconName = CategoryIconName(baseName: .etc, state: .on)
     let entryPoint: CustomCategoryEntryPoint
 
     let columns = [
         GridItem(.flexible(), spacing: 32),
         GridItem(.flexible(), spacing: 32),
         GridItem(.flexible(), spacing: 32),
-        GridItem(.flexible(), spacing: 32),
+        GridItem(.flexible(), spacing: 32)
     ]
 
     let icons: [CategoryIconListItem] = [
@@ -29,7 +29,7 @@ struct SelectCategoryIconView: View {
         CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.travel, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.travel, state: .onMint)),
         CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.drink, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.drink, state: .onMint)),
         CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.event, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.event, state: .onMint)),
-        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.etc, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.etc, state: .onMint)),
+        CategoryIconListItem(offIcon: CategoryIconName(baseName: CategoryBaseName.etc, state: .off), onIcon: CategoryIconName(baseName: CategoryBaseName.etc, state: .onMint))
     ]
 
     var body: some View {

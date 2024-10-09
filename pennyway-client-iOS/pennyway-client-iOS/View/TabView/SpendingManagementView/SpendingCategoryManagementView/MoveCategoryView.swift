@@ -7,7 +7,7 @@ struct MoveCategoryView: View {
     @ObservedObject var spendingCategoryViewModel: SpendingCategoryViewModel
     @ObservedObject var addSpendingHistoryViewModel: AddSpendingHistoryViewModel
     @Environment(\.presentationMode) var presentationMode
-
+    
     @Binding var showMoveToastPopup: Bool
 
     @State var navigateToAddCategoryView = false
@@ -17,22 +17,22 @@ struct MoveCategoryView: View {
         ZStack {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
+                
                 Group {
                     Text("\(spendingCategoryViewModel.spedingHistoryTotalCount)개의 소비 내역")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray07"))
-
+                    
                     Spacer().frame(height: 4 * DynamicSizeFactor.factor())
-
+                    
                     Text("변경할 카테고리를 선택해 주세요")
                         .font(.H3SemiboldFont())
                         .platformTextColor(color: Color("Gray07"))
                 }
                 .padding(.horizontal, 20)
-
+                
                 Spacer().frame(height: 25 * DynamicSizeFactor.factor())
-
+                
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(spendingCategoryViewModel.spendingCategories.filter { $0.id != spendingCategoryViewModel.selectedCategory?.id }, id: \.id) { category in
@@ -41,13 +41,13 @@ struct MoveCategoryView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 40 * DynamicSizeFactor.factor(), height: 40 * DynamicSizeFactor.factor())
-
+                                
                                 Text(category.name)
                                     .font(.B1SemiboldeFont())
                                     .platformTextColor(color: category.name == "추가하기" ? Color("Gray04") : Color("Gray07"))
-
+                                
                                 Spacer()
-
+                                
                                 if category.id == spendingCategoryViewModel.selectedMoveCategory?.id {
                                     Image("icon_checkone_on_small")
                                         .resizable()
@@ -73,7 +73,7 @@ struct MoveCategoryView: View {
                     .padding(.horizontal, 20)
                 }
                 Spacer()
-
+                
                 CustomBottomButton(action: {
                     showingPopUp = true
                 }, label: "확인", isFormValid: .constant(spendingCategoryViewModel.selectedMoveCategory != nil))
@@ -97,7 +97,7 @@ struct MoveCategoryView: View {
                     }.offset(x: -10)
                 }
             }
-
+            
             if showingPopUp {
                 CustomPopUpView(showingPopUp: $showingPopUp,
                                 titleLabel: "'\(spendingCategoryViewModel.selectedMoveCategory?.name ?? "")'으로 옮길까요?",
@@ -114,7 +114,7 @@ struct MoveCategoryView: View {
                                 secondBtnColor: Color("Mint03"))
                     .analyzeEvent(SpendingCategoryEvents.categoryMigratePopUp)
             }
-
+            
             NavigationLink(destination: AddSpendingCategoryView(viewModel: addSpendingHistoryViewModel, spendingCategoryViewModel: spendingCategoryViewModel, entryPoint: .create), isActive: $navigateToAddCategoryView) {}
                 .hidden()
         }
@@ -133,7 +133,7 @@ struct MoveCategoryView: View {
         let iconName = MapCategoryIconUtil.mapToCategoryIcon(category.icon, outputState: isSelected ? .onMint : .on) // 선택했다면 onMint 아니면 on으로 반환
         return iconName.rawValue
     }
-
+    
     private func moveCategoryApi() {
         spendingCategoryViewModel.moveCategoryApi { success in
             if success {

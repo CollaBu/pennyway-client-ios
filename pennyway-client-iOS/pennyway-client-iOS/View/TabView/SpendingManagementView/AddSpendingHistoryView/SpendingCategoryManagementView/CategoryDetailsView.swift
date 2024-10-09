@@ -19,35 +19,35 @@ struct CategoryDetailsView: View {
             ScrollView {
                 VStack {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
-
+                        
                     Image("\(viewModel.selectedCategory!.icon.rawValue)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 60 * DynamicSizeFactor.factor(), height: 60 * DynamicSizeFactor.factor())
-
+                        
                     Spacer().frame(height: 12 * DynamicSizeFactor.factor())
-
+                        
                     Text(viewModel.selectedCategory!.name)
                         .font(.H3SemiboldFont())
                         .platformTextColor(color: Color("Gray07"))
-
+                        
                     Spacer().frame(height: 4 * DynamicSizeFactor.factor())
-
+                        
                     Text("\(viewModel.spedingHistoryTotalCount)개의 소비 내역")
                         .font(.B1MediumFont())
                         .platformTextColor(color: Color("Gray04"))
-
+                        
                     Spacer().frame(height: 28 * DynamicSizeFactor.factor())
-
+                        
                     Rectangle()
                         .platformTextColor(color: Color("Gray01"))
                         .frame(maxWidth: .infinity)
                         .frame(height: 1 * DynamicSizeFactor.factor())
-
+                        
                     Spacer().frame(height: 24 * DynamicSizeFactor.factor())
-
+                        
                     CategorySpendingListView(viewModel: viewModel, showToastPopup: $showToastPopup, isDeleted: $isDeleted)
-
+                        
                     Spacer()
                 }
                 .frame(maxHeight: .infinity)

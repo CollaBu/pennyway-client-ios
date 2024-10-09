@@ -5,6 +5,7 @@ import SwiftUI
 enum NavigationUtil {
     static func popToRootView() {
         let keyWindow = UIApplication.shared.connectedScenes
+
             .filter { $0.activationState == .foregroundActive }
             .compactMap { $0 as? UIWindowScene }
             .first?.windows

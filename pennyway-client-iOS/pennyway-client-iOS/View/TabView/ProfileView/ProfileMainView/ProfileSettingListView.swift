@@ -21,7 +21,7 @@ struct ProfileSettingListView: View {
                         ProfileSettingListItem(title: "스크랩", icon: "icon_scrap", action: {}),
                         ProfileSettingListItem(title: "비밀번호 변경", icon: "icon_change password", action: {
                             activeNavigation = .modifyPw
-                        }),
+                        })
                     ])
 
                     Divider()
@@ -31,7 +31,7 @@ struct ProfileSettingListView: View {
                     Spacer().frame(height: 14 * DynamicSizeFactor.factor())
 
                     ProfileSettingSectionView(title: "앱 설정", itemsWithActions: [
-                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: { activeNavigation = .settingAlarm }),
+                        ProfileSettingListItem(title: "알림 설정", icon: "icon_notificationsetting", action: { activeNavigation = .settingAlarm })
                     ])
 
                     Divider()
@@ -43,7 +43,7 @@ struct ProfileSettingListView: View {
                     ProfileSettingSectionView(title: "이용안내", itemsWithActions: [
                         ProfileSettingListItem(title: "문의하기", icon: "icon_checkwithsomeone", action: {
                             activeNavigation = .inquiry
-                        }),
+                        })
                     ])
 
                     Divider()
@@ -54,7 +54,7 @@ struct ProfileSettingListView: View {
 
                     ProfileSettingSectionView(title: "기타", itemsWithActions: [
                         ProfileSettingListItem(title: "로그아웃", icon: "icon_logout", action: { self.showLogoutPopUp = true }),
-                        ProfileSettingListItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: { self.showDeleteUserPopUp = true }),
+                        ProfileSettingListItem(title: "회원탈퇴", icon: "icon_cancelmembership", action: { self.showDeleteUserPopUp = true })
                     ])
                 }
             }

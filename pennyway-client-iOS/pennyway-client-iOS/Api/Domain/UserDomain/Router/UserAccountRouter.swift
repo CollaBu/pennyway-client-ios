@@ -19,7 +19,7 @@ enum UserAccountRouter: URLRequestConvertible {
     case readNotifications(dto: ReadNotificationsRequestDto)
     case checkUnReadNotifications
     case deleteDeviceToken(dto: FcmTokenDto)
-
+    
     var method: HTTPMethod {
         switch self {
         case .getUserProfile, .getNotificationList, .checkUnReadNotifications:
@@ -34,11 +34,11 @@ enum UserAccountRouter: URLRequestConvertible {
             return .post
         }
     }
-
+    
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
     }
-
+    
     var path: String {
         switch self {
         case .getUserProfile, .deleteUserAccount:
@@ -65,7 +65,7 @@ enum UserAccountRouter: URLRequestConvertible {
             return "v2/notifications/unread"
         }
     }
-
+    
     var parameters: Parameters? {
         switch self {
         case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage:
@@ -98,7 +98,7 @@ enum UserAccountRouter: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request: URLRequest
-
+        
         switch self {
         case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage:
             request = URLRequest.createURLRequest(url: url, method: method)

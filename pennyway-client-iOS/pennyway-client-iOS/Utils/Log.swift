@@ -21,7 +21,7 @@ enum Log {
 
         fileprivate var category: String {
             switch self {
-            case .default:
+            case .`default`:
                 return "☑️ DEFAULT"
             case .debug:
                 return "⌨️ DEBUG"
@@ -37,12 +37,12 @@ enum Log {
         }
     }
 
-    private static func log(_ message: Any, level: Level) {
-        let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: level.category)
+    static private func log(_ message: Any, level: Level) {
+        let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: level.category)   
         let logMessage = "\(message)"
 
         switch level {
-        case .default:
+        case .`default`:
             logger.notice("\(logMessage, privacy: .private)")
         case .debug:
             logger.debug("\(logMessage, privacy: .public)")
