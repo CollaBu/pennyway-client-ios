@@ -10,19 +10,23 @@ import SwiftUI
 struct SideMenuCell: View {
     let title: String
     let imageName: String
+    let isAlarmCell: Bool
+    @Binding var isAlarmOn: Bool
 
     var body: some View {
-        HStack {
+        HStack(spacing: 7 * DynamicSizeFactor.factor()) {
             Image(imageName)
                 .resizable()
-                .frame(width: 17, height: 17)
+                .frame(width: 17 * DynamicSizeFactor.factor(), height: 17 * DynamicSizeFactor.factor())
             Text(title)
-                .font(.system(size: 16))
+                .font(.B2SemiboldFont())
+                .platformTextColor(color: Color("Gray07"))
             Spacer()
-            Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
+            
+            if isAlarmCell{
+                Toggle(isOn: $isAlarmOn) {}
+                    .toggleStyle(CustomToggleStyle(hasAppeared: $isAlarmOn))
+            }
         }
-        .padding()
-        .background(Color.white)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChatSideMenuView: View {
     @Binding var isPresented: Bool
+    @State private var isAlarmOn: Bool = false
 
     var body: some View {
         HStack(spacing: 0) {
@@ -40,8 +41,8 @@ struct ChatSideMenuView: View {
 
             Spacer().frame(height: 17 * DynamicSizeFactor.factor())
 
-            SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone")
-            SideMenuCell(title: "알람 설정", imageName: "icon_notificationsetting")
+            SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone", isAlarmCell: false, isAlarmOn: .constant(false))
+            SideMenuCell(title: "알람 설정", imageName: "icon_notificationsetting", isAlarmCell: true, isAlarmOn: $isAlarmOn)
 
             Divider()
                 .overlay(Color("Gray02"))
