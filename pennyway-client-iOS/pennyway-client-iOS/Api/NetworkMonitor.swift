@@ -3,7 +3,7 @@ import Network
 
 final class NetworkMonitor {
     static let shared = NetworkMonitor()
-    
+
     private let queue = DispatchQueue.global()
     private let monitor: NWPathMonitor
     public private(set) var isConnected: Bool = false {
@@ -13,11 +13,11 @@ final class NetworkMonitor {
     }
 
     public private(set) var connectionType: ConnectionType = .unknown
-    
+
     private init() {
         monitor = NWPathMonitor()
     }
-    
+
     public func startMonitoring() {
         monitor.start(queue: queue)
         monitor.pathUpdateHandler = { [weak self] path in
@@ -25,11 +25,11 @@ final class NetworkMonitor {
             self?.getConenctionType(path)
         }
     }
-    
+
     public func stopMonitoring() {
         monitor.cancel()
     }
-    
+
     private func getConenctionType(_ path: NWPath) {
         if path.usesInterfaceType(.wifi) {
             connectionType = .wifi

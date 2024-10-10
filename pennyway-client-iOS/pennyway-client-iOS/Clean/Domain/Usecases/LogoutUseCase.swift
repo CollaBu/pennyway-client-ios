@@ -24,7 +24,7 @@ protocol LogoutUseCase {
 
 // MARK: - DefaultLogoutUseCase
 
-class DefaultLogoutUseCase: LogoutUseCase {    
+class DefaultLogoutUseCase: LogoutUseCase {
     private let repository: LogoutRepository
 
     init(repository: LogoutRepository) {

@@ -31,6 +31,6 @@ public struct OAuthSignUpRequestDto: Encodable {
     }
 
     static func from(model: OAuthSignUp) -> OAuthSignUpRequestDto {
-        return OAuthSignUpRequestDto.init(oauthId: model.oauthId, idToken: model.idToken, nonce: model.nonce, name: model.name, username: model.username, phone: model.phone, code: model.code, provider: model.provider)
+        return OAuthSignUpRequestDto(oauthId: model.oauthId, idToken: model.idToken, nonce: model.nonce, name: model.name, username: model.username, phone: model.phone, code: model.code, provider: model.provider)
     }
 }

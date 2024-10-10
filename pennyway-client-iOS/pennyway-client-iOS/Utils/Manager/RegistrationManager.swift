@@ -15,7 +15,7 @@ struct RegistrationManager {
 
     private init() {}
 
-    func performRegistration() {  
+    func performRegistration() {
         print("Registered User: Name - \(name), UserName - \(username), Phone Number - \(phoneNumber)")
     }
 }

@@ -133,7 +133,7 @@ struct EditPhoneNumberView: View {
     }
 
     private func handleVerificationButtonTap() {
-        viewModel.requestEditVerificationCodeApi { 
+        viewModel.requestEditVerificationCodeApi {
             if viewModel.showErrorManyRequest {
                 showManyRequestPopUp = true
             } else {

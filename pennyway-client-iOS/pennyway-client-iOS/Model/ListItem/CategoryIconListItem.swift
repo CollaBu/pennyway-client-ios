@@ -12,8 +12,8 @@ struct CategoryIconListItem: Identifiable {
 // MARK: - IconState
 
 enum IconState: String {
-    case off = "off"
-    case on = "on"
+    case off
+    case on
     case onWhite = "on_white"
     case onMint = "on_mint"
 }
@@ -41,19 +41,19 @@ struct SpendingCategoryData: Identifiable {
 // MARK: - CategoryBaseName
 
 enum CategoryBaseName: String {
-    case food = "food"
-    case traffic = "traffic"
-    case beauty = "beauty"
-    case market = "market"
-    case education = "education"
-    case life = "life"
-    case health = "health"
-    case hobby = "hobby"
-    case travel = "travel"
-    case drink = "drink"
-    case event = "event"
-    case etc = "etc"
-    case plus = "plus"
+    case food
+    case traffic
+    case beauty
+    case market
+    case education
+    case life
+    case health
+    case hobby
+    case travel
+    case drink
+    case event
+    case etc
+    case plus
 }
 
 // MARK: - SpendingCategoryIconList
