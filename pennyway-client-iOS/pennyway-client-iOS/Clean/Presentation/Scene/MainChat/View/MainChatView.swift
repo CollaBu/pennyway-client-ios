@@ -49,7 +49,6 @@ struct MainChatView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack {
-
                         Button(action: {
                             isNavigateToMakeChatRoom = true
                         }, label: {
