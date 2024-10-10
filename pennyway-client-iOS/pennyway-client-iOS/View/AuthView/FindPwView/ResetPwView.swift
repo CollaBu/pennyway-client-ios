@@ -8,7 +8,7 @@ struct ResetPwView: View {
     @StateObject var resetPwViewModel = ResetPwViewModel()
     @StateObject var accountViewModel = UserAccountViewModel()
     let entryPoint: PasswordChangeTypeNavigation
-    
+
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -18,26 +18,26 @@ struct ResetPwView: View {
                             .font(.H1SemiboldFont())
                             .multilineTextAlignment(.leading)
                             .padding(.top, 15 * DynamicSizeFactor.factor())
-                        
+
                         Spacer()
                     }
                     .padding(.leading, 20)
-                    
+
                     Spacer().frame(height: 33 * DynamicSizeFactor.factor())
-                    
+
                     ResetPwFormView(formViewModel: formViewModel, accountViewModel: accountViewModel)
                 }
                 Spacer()
-                
+
                 CustomBottomButton(action: {
                     if entryPoint == .findPw || entryPoint == .modifyPw {
                         continueButtonAction()
                         formViewModel.validatePwForm()
                     }
-                    
+
                 }, label: "변경하기", isFormValid: $formViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                
+
                 NavigationLink(destination: CompleteChangePwView(entryPoint: entryPoint), isActive: $navigateView) {
                     EmptyView()
                 }.hidden()
@@ -81,7 +81,7 @@ struct ResetPwView: View {
             }
         }
     }
-    
+
     private func continueButtonAction() {
         if formViewModel.isFormValid {
             formViewModel.validatePwForm()
@@ -109,9 +109,9 @@ struct ResetPwView: View {
                     }
                 }
             }
-            
+
             RegistrationManager.shared.password = formViewModel.password
-            
+
         } else {
             Log.fault("유효하지 않은 형식")
         }

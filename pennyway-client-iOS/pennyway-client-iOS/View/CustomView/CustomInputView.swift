@@ -10,12 +10,13 @@ struct CustomInputView: View {
     var onCommit: (() -> Void)? // 입력 완료 시 실행할 함수 (옵션)
     var isSecureText: Bool // 텍스트 필드가 비밀번호 필드인지 여부
     var isCustom: Bool? // 커스텀 텍스트 여부 (옵션)
+    var showSearchBtn: Bool = false
     var showDeleteButton: Bool = false // 삭제 버튼 표시 여부 (기본값: false)
     var deleteAction: (() -> Void)? // 삭제 버튼 클릭 시 실행할 함수 (옵션)
     var keyboardType: UIKeyboardType = .default // 키보드 타입 (기본값: .default)
 
-    let baseAttribute: BaseAttribute = BaseAttribute(font: .B1MediumFont(), color: Color("Gray07"))
-    let stringAttribute: StringAttribute = StringAttribute(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
+    let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray07"))
+    let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
 
     @State private var isDeleteButtonVisible: Bool = false // 삭제 버튼의 가시성 관리
 
@@ -72,6 +73,14 @@ struct CustomInputView: View {
                             AnalyticsManager.shared.trackEvent(AuthEvents.cancelBtnTapped, additionalParams: [AnalyticsConstants.Parameter.btnName: titleText ?? "미설정"])
                         })
                         .offset(x: 120 * DynamicSizeFactor.factor())
+                    }
+
+                    if showSearchBtn {
+                        Image("icon_search")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                            .offset(x: 241 * DynamicSizeFactor.factor())
                     }
                 }
             }

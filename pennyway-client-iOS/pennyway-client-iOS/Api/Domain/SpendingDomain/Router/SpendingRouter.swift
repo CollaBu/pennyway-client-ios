@@ -9,7 +9,7 @@ enum SpendingRouter: URLRequestConvertible {
     case getDetailSpendingHistory(spendingId: Int)
     case deleteSingleSpendingHistory(spendingId: Int) // 지출내역 단일 삭제
     case editSpendingHistory(spendingId: Int, dto: AddSpendingHistoryRequestDto)
-    
+
     var method: HTTPMethod {
         switch self {
         case .getSpendingHistory, .getDetailSpendingHistory:
@@ -22,11 +22,11 @@ enum SpendingRouter: URLRequestConvertible {
             return .put
         }
     }
-    
+
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
     }
-    
+
     var path: String {
         switch self {
         case .getSpendingHistory, .addSpendingHistory, .deleteSpendingHistory:
@@ -36,7 +36,7 @@ enum SpendingRouter: URLRequestConvertible {
             return "v2/spendings/\(spendingId)"
         }
     }
-    
+
     var bodyParameters: Parameters? {
         switch self {
         case .getSpendingHistory, .getDetailSpendingHistory, .deleteSingleSpendingHistory:
@@ -49,7 +49,7 @@ enum SpendingRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         }
     }
-    
+
     var queryParameters: Parameters? {
         switch self {
         case let .getSpendingHistory(dto):
@@ -62,7 +62,7 @@ enum SpendingRouter: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request: URLRequest
-        
+
         switch self {
         case .getSpendingHistory:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }

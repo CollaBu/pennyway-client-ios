@@ -9,9 +9,9 @@ enum AnalyticsConstants {
         case screenView
         case login
         case signUp
-        
+
         case btnTapped
-        
+
         var rawValue: String {
             switch self {
             case .screenView: return "screen_view"
@@ -21,11 +21,11 @@ enum AnalyticsConstants {
             }
         }
     }
-    
+
     enum EventType {
         case screenView
         case userAction
-        
+
         var rawValue: String {
             switch self {
             case .screenView: return "screen_view"
@@ -33,19 +33,19 @@ enum AnalyticsConstants {
             }
         }
     }
-    
+
     enum Parameter {
         case screenId
         case screenName
         case screenClass
-        
+
         case eventName
-        
+
         case isRefresh
         case oauthType
         case btnName
         case date
-        
+
         var rawValue: String {
             switch self {
             case .screenId: return "screen_id"

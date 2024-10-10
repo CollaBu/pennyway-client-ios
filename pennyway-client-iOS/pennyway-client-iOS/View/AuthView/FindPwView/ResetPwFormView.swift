@@ -6,9 +6,9 @@ struct ResetPwFormView: View {
     @ObservedObject var accountViewModel: UserAccountViewModel
     @State private var isPwDeleteButtonVisible: Bool = false
     @State private var isConfirmPwDeleteButtonVisible: Bool = false
-    
+
     private let maxLength = 16
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             CustomInputView(inputText: $formViewModel.password, titleText: "비밀번호", onCommit: {
@@ -27,18 +27,18 @@ struct ResetPwFormView: View {
                 }
                 isPwDeleteButtonVisible = !newValue.isEmpty
             }
-            
+
             if formViewModel.showErrorPassword {
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-                
+
                 ErrorText(message: "숫자와 영문 소문자를 하나 이상 사용하여\n8~16자의 비밀번호를 만들어주세요", color: Color("Red03"))
-                
+
                 Spacer().frame(height: 24 * DynamicSizeFactor.factor())
-                
+
             } else {
                 Spacer().frame(height: 21 * DynamicSizeFactor.factor())
             }
-            
+
             CustomInputView(inputText: $formViewModel.confirmPw, titleText: "비밀번호 확인", onCommit: {
                 RegistrationManager.shared.password = formViewModel.confirmPw
                 formViewModel.validateConfirmPw()
@@ -56,7 +56,7 @@ struct ResetPwFormView: View {
                 }
                 isConfirmPwDeleteButtonVisible = !newValue.isEmpty
             }
-            
+
             if formViewModel.showErrorConfirmPw {
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
 

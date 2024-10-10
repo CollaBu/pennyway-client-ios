@@ -95,7 +95,6 @@ private struct SideMenuContent: View {
             }
             
             SideMenuCell(title: "알람 설정", imageName: "icon_notificationsetting", isAlarmCell: true, isAlarmOn: $isAlarmOn)
-            
         }
     }
     

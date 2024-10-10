@@ -7,16 +7,16 @@ struct ProfileUserInfoView: View {
     @Binding var showPopUpView: Bool
     @Binding var navigateToEditUsername: Bool
     @Binding var selectedUIImage: UIImage?
-    
+
     @ObservedObject var viewModel: ProfileImageViewModel
     @ObservedObject var deleteViewModel: DeleteProfileImageViewModel
     @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
-    
+
     var body: some View {
         ZStack {
             VStack {
                 Spacer().frame(height: 22 * DynamicSizeFactor.factor())
-                
+
                 Button(action: {
                     showPopUpView = true
                 }, label: {
@@ -35,14 +35,14 @@ struct ProfileUserInfoView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
                                 .clipShape(Circle())
-                            
+
                         } else {
                             // selectedUIImage도 nil이고 userDefaults에 저장된 이미지도 nil이거나 빈 값인 경우
                             Image("icon_illust_no_image_no_margin")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 81 * DynamicSizeFactor.factor(), height: 81 * DynamicSizeFactor.factor(), alignment: .leading)
-                            
+
                             Image("icon_profile_camera")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -53,16 +53,16 @@ struct ProfileUserInfoView: View {
                     }
                 })
                 .buttonStyle(PlainButtonStyle())
-                
+
                 Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-                
+
                 Text("\(viewModelWrapper.userData.name)")
                     .font(.H3SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
                     .padding(1)
-                
+
                 Spacer().frame(height: 9 * DynamicSizeFactor.factor())
-                
+
                 Button(action: {
                     navigateToEditUsername = true
                 }, label: {
@@ -77,52 +77,52 @@ struct ProfileUserInfoView: View {
                     .cornerRadius(5)
                 })
                 .buttonStyle(PlainButtonStyle())
-                
+
                 Spacer().frame(height: 34 * DynamicSizeFactor.factor())
-                
+
                 HStack {
                     VStack {
                         Text("0")
                             .font(.H3SemiboldFont())
                             .platformTextColor(color: Color("Gray07"))
-                        
+
                         Text("게시물")
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray04"))
                     }
                     .padding(.horizontal, 34)
-                    
+
                     Image("icon_line_gray")
                         .frame(width: 1.2, height: 36 * DynamicSizeFactor.factor())
                         .background(Color("Gray03"))
-                    
+
                     VStack {
                         Text("0")
                             .font(.H3SemiboldFont())
                             .platformTextColor(color: Color("Gray07"))
-                        
+
                         Text("팔로워")
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray04"))
                     }
                     .padding(.horizontal, 34)
-                    
+
                     Image("icon_line_gray")
                         .frame(width: 1.2, height: 36 * DynamicSizeFactor.factor())
                         .background(Color("Gray03"))
-                    
+
                     VStack {
                         Text("0")
                             .font(.H3SemiboldFont())
                             .platformTextColor(color: Color("Gray07"))
-                        
+
                         Text("팔로잉")
                             .font(.B2MediumFont())
                             .platformTextColor(color: Color("Gray04"))
                     }
                     .padding(.horizontal, 34)
                 }
-                
+
                 Spacer().frame(height: 28 * DynamicSizeFactor.factor())
             }
             .frame(maxWidth: .infinity, maxHeight: 267 * DynamicSizeFactor.factor())

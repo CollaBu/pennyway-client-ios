@@ -76,7 +76,6 @@ struct AddSpendingHistoryView: View {
             }
         }
         .onAppear { analyzeEvent() }
-
         .dragBottomSheet(isPresented: $viewModel.isCategoryListViewPresented, minHeight: 524 * DynamicSizeFactor.factor(), maxHeight: 524 * DynamicSizeFactor.factor()) {
             SpendingCategoryListView(viewModel: viewModel, isPresented: $viewModel.isCategoryListViewPresented)
         }

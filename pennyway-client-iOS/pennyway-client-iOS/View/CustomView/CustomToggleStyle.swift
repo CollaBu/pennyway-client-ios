@@ -9,7 +9,7 @@ struct CustomToggleStyle: ToggleStyle {
 
     func makeBody(configuration: Self.Configuration) -> some View {
         HStack {
-            configuration.label 
+            configuration.label
             Spacer()
             RoundedRectangle(cornerRadius: 16, style: .circular)
                 .fill(configuration.isOn ? onColor : offColor)

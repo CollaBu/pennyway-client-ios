@@ -27,12 +27,9 @@ struct ChatUserCell: View {
             if member.user_id == currentUserId {
                 CustomRoundedBtn(
                     title: "나",
-                    fontSize: .B4MediumFont(),
                     fontColor: Color("Gray05"),
                     backgroundColor: Color("Gray01"),
-                    horizontalPadding: 4,
-                    verticalPadding: 2,
-                    cornerRadius: 6,
+                    style: .small,
                     action: {}
                 )
             }
@@ -40,12 +37,9 @@ struct ChatUserCell: View {
             if member.role == "Admin" {
                 CustomRoundedBtn(
                     title: "방장",
-                    fontSize: .B4MediumFont(),
                     fontColor: Color("Mint03"),
                     backgroundColor: Color("Mint01"),
-                    horizontalPadding: 4,
-                    verticalPadding: 2,
-                    cornerRadius: 6,
+                    style: .small,
                     action: {}
                 )
             }
