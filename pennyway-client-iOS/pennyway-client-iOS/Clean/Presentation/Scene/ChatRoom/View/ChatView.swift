@@ -23,7 +23,7 @@ struct ChatView: View {
                     .background(Color("Ashblue02"))
                     .offset(y: -keyboardManager.keyboardHeight)
             }
-            .navigationBarColor(UIColor(named: "White01"), title: "\(mockChatRoom.title)")
+            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
             .background(Color("Ashblue02"))
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
@@ -60,7 +60,6 @@ struct ChatView: View {
                 Group {
                     if isSideMenuPresented {
                         ChatSideMenuView(isPresented: $isSideMenuPresented)
-                            .transition(.move(edge: .trailing))
                     }
                 }
             )
