@@ -330,6 +330,9 @@
 		D8457BBA2CB6A462002540B2 /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BB92CB6A462002540B2 /* ChatItemViewModel.swift */; };
 		D8457BBC2CB6A471002540B2 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BBB2CB6A471002540B2 /* ChatViewModel.swift */; };
 		D8457BBE2CB6A4B8002540B2 /* ChatRoomContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BBD2CB6A4B8002540B2 /* ChatRoomContent.swift */; };
+
+		D8457BC32CB6A7DE002540B2 /* MakeChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BC22CB6A7DE002540B2 /* MakeChatRoomView.swift */; };
+		D8457BC52CB6A803002540B2 /* InputContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BC42CB6A803002540B2 /* InputContent.swift */; };
 		D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A7882BEBABC700899AA3 /* FindPwContentView.swift */; };
 		D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */; };
 		D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */; };
@@ -724,6 +727,8 @@
 		D8457BB92CB6A462002540B2 /* ChatItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
 		D8457BBB2CB6A471002540B2 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		D8457BBD2CB6A4B8002540B2 /* ChatRoomContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomContent.swift; sourceTree = "<group>"; };
+		D8457BC22CB6A7DE002540B2 /* MakeChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeChatRoomView.swift; sourceTree = "<group>"; };
+		D8457BC42CB6A803002540B2 /* InputContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContent.swift; sourceTree = "<group>"; };
 		D847A7882BEBABC700899AA3 /* FindPwContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwContentView.swift; sourceTree = "<group>"; };
 		D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwViewModel.swift; sourceTree = "<group>"; };
@@ -1184,6 +1189,7 @@
 				D87AA7F62CB6C3630012BFA3 /* ChatRoomDetail */,
 				4AE9B3312CB689D00044D3E1 /* Component */,
 				4AE9B32B2CB67E270044D3E1 /* ChatSetting */,
+				D8457BBF2CB6A7B9002540B2 /* MakeChatRoom */,
 				D8457BAA2CB6A18A002540B2 /* MainChat */,
 				4A863A102CB4594C00BA2F2F /* ChatRoom */,
 				4A12FF012C9C4A7900DE10BC /* UserProfile */,
@@ -2343,6 +2349,32 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+
+		D8457BBF2CB6A7B9002540B2 /* MakeChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				D8457BC12CB6A7CC002540B2 /* Component */,
+				D8457BC02CB6A7C6002540B2 /* View */,
+			);
+			path = MakeChatRoom;
+			sourceTree = "<group>";
+		};
+		D8457BC02CB6A7C6002540B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D8457BC22CB6A7DE002540B2 /* MakeChatRoomView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8457BC12CB6A7CC002540B2 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				D8457BC42CB6A803002540B2 /* InputContent.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		D851E7192C0273A300316DB3 /* InquiryDomain */ = {
 			isa = PBXGroup;
 			children = (
@@ -2706,6 +2738,7 @@
 				4AB0B13C2C4F497400A475F5 /* MapCategoryIconUtil.swift in Sources */,
 				4AC3204A2C11D5AC00DDB4B6 /* NoSpendingHistorySheetView.swift in Sources */,
 				D8F9D7452C5A09ED005416FC /* ArrivedAlarmView.swift in Sources */,
+				D8457BC52CB6A803002540B2 /* InputContent.swift in Sources */,
 				4AC320532C11D5AC00DDB4B6 /* DiffAmountDynamicWidthView.swift in Sources */,
 				D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */,
 				4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */,
@@ -2719,6 +2752,7 @@
 				4AABDBB42C9C860800E9436D /* PresignedUrlUseCase.swift in Sources */,
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				4A12FF132C9C4BCF00DE10BC /* AppFlowCoordinator.swift in Sources */,
+				D8457BC32CB6A7DE002540B2 /* MakeChatRoomView.swift in Sources */,
 				4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */,
 				4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */,
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
