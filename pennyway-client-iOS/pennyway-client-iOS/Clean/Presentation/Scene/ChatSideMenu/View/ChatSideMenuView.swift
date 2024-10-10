@@ -30,7 +30,9 @@ struct ChatSideMenuView: View {
                                 subTitleLabel: "채팅방을 나가시겠어요?",
                                 firstBtnAction: { self.showExitPopUp = false },
                                 firstBtnLabel: "취소",
-                                secondBtnAction: {},
+                                secondBtnAction: {
+                                    self.showExitPopUp = false
+                                },
                                 secondBtnLabel: "나가기",
                                 secondBtnColor: Color("Red03")
                 )
@@ -88,8 +90,12 @@ private struct SideMenuContent: View {
     
     private var SideMenuCells: some View {
         VStack {
-            SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone", isAlarmCell: false, isAlarmOn: .constant(false))
+            if mockMembers[1].role == "Admin" {
+                SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone", isAlarmCell: false, isAlarmOn: .constant(false))
+            }
+            
             SideMenuCell(title: "알람 설정", imageName: "icon_notificationsetting", isAlarmCell: true, isAlarmOn: $isAlarmOn)
+            
         }
     }
     
@@ -113,7 +119,9 @@ private struct SideMenuContent: View {
     }
 
     private var ExitButton: some View {
-        Button(action: {}, label: {
+        Button(action: {
+            showExitPopUp = true
+        }, label: {
             Image("icon_chat_close")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
