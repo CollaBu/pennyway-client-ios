@@ -12,14 +12,30 @@ import SwiftUI
 struct ChatSideMenuView: View {
     @Binding var isPresented: Bool
     @State private var isAlarmOn: Bool = false
+    @State private var showExitPopUp: Bool = false
 
     var body: some View {
-        HStack(spacing: 0) {
-            Spacer()
-
-            SideMenuContent(isAlarmOn: $isAlarmOn)
-                .padding(.leading, 105 * DynamicSizeFactor.factor())
-                .transition(.move(edge: .trailing))
+        ZStack {
+            HStack(spacing: 0) {
+                Spacer()
+                
+                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp)
+                    .padding(.leading, 105 * DynamicSizeFactor.factor())
+                    .transition(.move(edge: .trailing))
+            }
+            
+            if showExitPopUp {
+                CustomPopUpView(showingPopUp: $showExitPopUp,
+                                titleLabel: "\(mockChatRoom.title)",
+                                subTitleLabel: "채팅방을 나가시겠어요?",
+                                firstBtnAction: { self.showExitPopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: {},
+                                secondBtnLabel: "나가기",
+                                secondBtnColor: Color("Red03")
+                )
+                .analyzeEvent(ProfileEvents.oauthUnlinkPopUp)
+            }
         }
         .edgesIgnoringSafeArea(.bottom)
         .background(
@@ -38,6 +54,7 @@ struct ChatSideMenuView: View {
 
 private struct SideMenuContent: View {
     @Binding var isAlarmOn: Bool
+    @Binding var showExitPopUp: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
