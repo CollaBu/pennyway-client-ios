@@ -84,7 +84,7 @@ let mockMembers: [ChatMember] = [
         role: "Member",
         user_id: 102,
         chat_room_id: 1
-    )
+    ),
 ]
 
 let mockChats: [Chat] = [
@@ -130,5 +130,5 @@ let mockChats: [Chat] = [
         created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 21))!,
         sender_id: 101,
         chat_room_id: 1
-    )
+    ),
 ]

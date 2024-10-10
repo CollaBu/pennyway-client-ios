@@ -41,7 +41,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 if let error = error {
                     Log.error("Error requesting notification authorization: \(error.localizedDescription)")
                 }
-            })
+            }
+        )
 
         application.registerForRemoteNotifications()
 

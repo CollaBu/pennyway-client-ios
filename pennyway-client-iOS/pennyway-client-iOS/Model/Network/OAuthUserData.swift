@@ -9,7 +9,7 @@ struct OAuthUserData: Codable {
 // MARK: - Provider
 
 enum Provider: String {
-    case kakao = "kakao"
-    case google = "google"
-    case apple = "apple"
+    case kakao
+    case google
+    case apple
 }

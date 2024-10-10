@@ -17,30 +17,30 @@ struct ChatSettingView: View {
             VStack {
                 // 상단 여백 및 아이콘 이미지
                 Spacer().frame(height: 17 * DynamicSizeFactor.factor())
-                
+
                 Image("icon_illust_maintain_goal")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
                     .cornerRadius(12 * DynamicSizeFactor.factor())
-                
+
                 Spacer().frame(height: 17 * DynamicSizeFactor.factor())
-                
+
                 // 채팅방 커버 수정 버튼
                 CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01")) {
                     // 버튼 액션
                 }
-                
+
                 Spacer().frame(height: 35 * DynamicSizeFactor.factor())
-                
+
                 // 채팅방 이름 입력
                 ChatRoomNameSection
-                
+
                 Spacer().frame(height: 35 * DynamicSizeFactor.factor())
-                
+
                 // 공개 범위 설정
                 PublicScopeSection
-                
+
                 Spacer()
             }
         }
@@ -64,12 +64,12 @@ struct ChatSettingView: View {
             Text("채팅방 이름")
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray04"))
-            
+
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 4)
                     .fill(Color("Gray01"))
                     .frame(height: 46 * DynamicSizeFactor.factor())
-                
+
                 Button(action: {
                     isNavigateToEditView = true
                 }) {
@@ -98,24 +98,24 @@ struct ChatSettingView: View {
             Text("공개 범위")
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray04"))
-            
+
             HStack {
                 Text("채팅방 공개 설정")
                     .font(.ButtonH4SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
-                
+
                 Spacer()
-                
+
                 Toggle(isOn: $isPublic) {}
                     .toggleStyle(CustomToggleStyle(hasAppeared: $isPublic))
             }
-            
+
             if !isPublic {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
                         .frame(height: 46 * DynamicSizeFactor.factor())
-                    
+
                     TextField("", text: $password)
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))

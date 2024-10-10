@@ -36,9 +36,9 @@ enum ImageType: String {
 // MARK: - Ext
 
 enum Ext: String {
-    case jpg = "jpg"
-    case png = "png"
-    case jpeg = "jpeg"
+    case jpg
+    case png
+    case jpeg
 }
 
 // MARK: - ConnectionType

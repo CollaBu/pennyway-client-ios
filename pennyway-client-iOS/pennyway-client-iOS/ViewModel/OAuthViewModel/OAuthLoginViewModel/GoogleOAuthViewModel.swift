@@ -8,12 +8,12 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var isLoggedIn: Bool = false // 로그인 여부
     @Published var isLoginSuccessful = false
-    
+
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
     private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
     let oauthAccountViewModel = OAuthAccountViewModel()
     @Published var isExistUser: Bool = false
-    
+
     func checkUserInfo() {
         if GIDSignIn.sharedInstance.currentUser != nil {
             let user = GIDSignIn.sharedInstance.currentUser
@@ -24,7 +24,7 @@ class GoogleOAuthViewModel: ObservableObject {
             oauthUserData.oauthId = user.userID ?? ""
             oauthUserData.idToken = user.idToken?.tokenString ?? ""
             self.givenName = givenName ?? ""
-            
+
             let jwtParts = user.idToken?.tokenString.components(separatedBy: ".")
             let payloadBase64 = jwtParts?[1].replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/")
             let payloadPadded = payloadBase64!.padding(toLength: ((payloadBase64!.count + 3) / 4) * 4, withPad: "=", startingAt: 0)
@@ -39,17 +39,17 @@ class GoogleOAuthViewModel: ObservableObject {
             } catch {
                 print("Error decoding JSON: \(error)")
             }
-            
+
             oauthLoginApi()
         } else {
             givenName = "Not Logged In"
         }
     }
-    
+
     func oauthLoginApi() {
         let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
         let oauthLoginViewModel = OAuthLoginViewModel(model: model)
-        
+
         KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)
 
         if isLoggedIn { // 로그인 한 경우
@@ -77,7 +77,7 @@ class GoogleOAuthViewModel: ObservableObject {
             }
         }
     }
-    
+
     func signIn() {
         if isLoggedIn && existOAuthAccount {
             oauthAccountViewModel.unlinkOAuthAccountApi { success in
@@ -87,24 +87,24 @@ class GoogleOAuthViewModel: ObservableObject {
                     self.existOAuthAccount = true
                 }
             }
-            
+
         } else {
             guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
                 return
             }
-            
+
             GIDSignIn.sharedInstance.signIn(
                 withPresenting: presentingViewController)
             { _, error in
                 if let error = error {
                     self.errorMessage = "error: \(error.localizedDescription)"
                 }
-                
+
                 self.checkUserInfo()
             }
         }
     }
-    
+
     func signOut() {
         GIDSignIn.sharedInstance.signOut()
     }

@@ -350,6 +350,9 @@
 		D86F973C2CB808B900449190 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D86F97392CB808B900449190 /* Debug.xcconfig */; };
 		D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D874F52A2C32888E00936886 /* DetailSpendingView.swift */; };
 		D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */; };
+		D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87AA7F72CB6C3730012BFA3 /* ChatRoomDetailView.swift */; };
+		D87AA7FA2CB6C38E0012BFA3 /* SecretRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87AA7F92CB6C38E0012BFA3 /* SecretRoomView.swift */; };
+		D87AA7FC2CB6C39E0012BFA3 /* MakeUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87AA7FB2CB6C39E0012BFA3 /* MakeUsernameView.swift */; };
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
 		D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */; };
 		D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */; };
@@ -741,6 +744,9 @@
 		D86F97392CB808B900449190 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
 		D874F52A2C32888E00936886 /* DetailSpendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpendingView.swift; sourceTree = "<group>"; };
 		D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlarmResponseDto.swift; sourceTree = "<group>"; };
+		D87AA7F72CB6C3730012BFA3 /* ChatRoomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDetailView.swift; sourceTree = "<group>"; };
+		D87AA7F92CB6C38E0012BFA3 /* SecretRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretRoomView.swift; sourceTree = "<group>"; };
+		D87AA7FB2CB6C39E0012BFA3 /* MakeUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUsernameView.swift; sourceTree = "<group>"; };
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
@@ -1175,6 +1181,7 @@
 		4A12FEFF2C9C4A4600DE10BC /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				D87AA7F62CB6C3630012BFA3 /* ChatRoomDetail */,
 				4AE9B3312CB689D00044D3E1 /* Component */,
 				4AE9B32B2CB67E270044D3E1 /* ChatSetting */,
 				D8457BAA2CB6A18A002540B2 /* MainChat */,
@@ -2398,6 +2405,24 @@
 			path = DetailSpendingView;
 			sourceTree = "<group>";
 		};
+		D87AA7F52CB6C3630012BFA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D87AA7F72CB6C3730012BFA3 /* ChatRoomDetailView.swift */,
+				D87AA7F92CB6C38E0012BFA3 /* SecretRoomView.swift */,
+				D87AA7FB2CB6C39E0012BFA3 /* MakeUsernameView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D87AA7F62CB6C3630012BFA3 /* ChatRoomDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D87AA7F52CB6C3630012BFA3 /* View */,
+			);
+			path = ChatRoomDetail;
+			sourceTree = "<group>";
+		};
 		D87CB0CE2BC5A43B00BD882A /* FindPwView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2878,6 +2903,7 @@
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				B599E4BE2C58AF34006051E9 /* AnalyticsEvent.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
+				D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
 				4A12FEEF2C9C489C00DE10BC /* UserProfileItemModel.swift in Sources */,
 				4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */,
@@ -2905,6 +2931,7 @@
 				D8180C0A2BE531C500F837FB /* (null) in Sources */,
 				4A12FEF12C9C48B900DE10BC /* FetchUserProfileRepository.swift in Sources */,
 				4A9634B22C42EAF6000A218A /* SpendingListGroupUtil.swift in Sources */,
+				D87AA7FA2CB6C38E0012BFA3 /* SecretRoomView.swift in Sources */,
 				4AB5AB552BB4AAF200D2C9EA /* BaseInterceptor.swift in Sources */,
 				D888329A2BBC610300F49B27 /* AutoCorrectionExtensions.swift in Sources */,
 				D8E24D952BFD12BB006E8046 /* SettingAlarmView.swift in Sources */,
@@ -2933,6 +2960,7 @@
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
 				D8180C002BE507E100F837FB /* FindIdView.swift in Sources */,
 				D8180C082BE5168800F837FB /* (null) in Sources */,
+				D87AA7FC2CB6C39E0012BFA3 /* MakeUsernameView.swift in Sources */,
 				4A7354622CA45BDD002A856F /* LoginRepository.swift in Sources */,
 				B599E4DE2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift in Sources */,
 				D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */,

@@ -2,9 +2,9 @@
 import SwiftUI
 
 struct LoginOAuthButtonView: View {
-    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = KakaoOAuthViewModel()
-    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = GoogleOAuthViewModel()
-    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = AppleOAuthViewModel()
+    @StateObject var kakaoOAuthViewModel: KakaoOAuthViewModel = .init()
+    @StateObject var googleOAuthViewModel: GoogleOAuthViewModel = .init()
+    @StateObject var appleOAuthViewModel: AppleOAuthViewModel = .init()
 
     let profileInfoViewModel = UserAccountViewModel()
 
@@ -76,7 +76,7 @@ struct LoginOAuthButtonView: View {
                     AnalyticsManager.shared.setUser("userId = \(userId)")
                     AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
                         AnalyticsConstants.Parameter.oauthType: OAuthRegistrationManager.shared.provider,
-                        AnalyticsConstants.Parameter.isRefresh: false
+                        AnalyticsConstants.Parameter.isRefresh: false,
                     ])
                 }
             }

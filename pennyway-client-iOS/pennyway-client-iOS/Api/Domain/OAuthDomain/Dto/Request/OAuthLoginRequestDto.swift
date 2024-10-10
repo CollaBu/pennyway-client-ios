@@ -19,6 +19,6 @@ public struct OAuthLoginRequestDto: Encodable {
     }
 
     static func from(model: OAuthLogin) -> OAuthLoginRequestDto {
-        return OAuthLoginRequestDto.init(oauthId: model.oauthId, idToken: model.idToken, nonce: model.nonce, provider: model.provider)
+        return OAuthLoginRequestDto(oauthId: model.oauthId, idToken: model.idToken, nonce: model.nonce, provider: model.provider)
     }
 }

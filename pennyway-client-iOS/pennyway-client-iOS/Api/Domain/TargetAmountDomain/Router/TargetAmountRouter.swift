@@ -8,7 +8,7 @@ enum TargetAmountRouter: URLRequestConvertible {
     case getTargetAmountForDate, getTargetAmountForPreviousMonth
     case editCurrentMonthTargetAmount(targetAmountId: Int, dto: EditCurrentMonthTargetAmountRequestDto)
     case deleteCurrentMonthTargetAmount(targetAmountId: Int)
- 
+
     var method: HTTPMethod {
         switch self {
         case .getTargetAmountForDate, .getTotalTargetAmount, .getTargetAmountForPreviousMonth:
@@ -21,11 +21,11 @@ enum TargetAmountRouter: URLRequestConvertible {
             return .patch
         }
     }
-    
+
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
     }
-    
+
     var path: String {
         switch self {
         case .getTotalTargetAmount, .generateCurrentMonthDummyData:
@@ -38,14 +38,14 @@ enum TargetAmountRouter: URLRequestConvertible {
             return "v2/target-amounts/recent"
         }
     }
-    
+
     var bodyParameters: Parameters? {
         switch self {
         case .getTargetAmountForDate, .getTotalTargetAmount, .generateCurrentMonthDummyData, .deleteCurrentMonthTargetAmount, .editCurrentMonthTargetAmount, .getTargetAmountForPreviousMonth:
             return [:]
         }
     }
-    
+
     var queryParameters: Parameters? {
         switch self {
         case let .getTotalTargetAmount(dto):
@@ -62,7 +62,7 @@ enum TargetAmountRouter: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request: URLRequest
-        
+
         switch self {
         case .getTotalTargetAmount, .generateCurrentMonthDummyData, .editCurrentMonthTargetAmount:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }

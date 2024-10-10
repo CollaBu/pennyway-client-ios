@@ -116,9 +116,8 @@ struct EditSpendingDetailView: View {
                                     self.presentationMode.wrappedValue.dismiss()
                                 },
                                 secondBtnLabel: "끝낼래요",
-                                secondBtnColor: Color("Mint03")
-                )
-                .analyzeEvent(SpendingEvents.spendingEditdonePopup)
+                                secondBtnColor: Color("Mint03"))
+                    .analyzeEvent(SpendingEvents.spendingEditdonePopup)
             }
 
             if showingDeletePopUp {
@@ -129,9 +128,8 @@ struct EditSpendingDetailView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: { self.deleteSelectedItems() },
                                 secondBtnLabel: "삭제하기",
-                                secondBtnColor: Color("Red03")
-                )
-                .analyzeEvent(SpendingEvents.spendingEditDeletePopUp)
+                                secondBtnColor: Color("Red03"))
+                    .analyzeEvent(SpendingEvents.spendingEditDeletePopUp)
             }
         }
         .analyzeEvent(SpendingEvents.spendingListEditView)
@@ -177,7 +175,7 @@ struct EditSpendingDetailView: View {
                 // 내역을 전체 삭제한 경우에만 현재 창을 닫기
                 if totalSelectedCount == totalSpendingsCount {
                     presentationMode.wrappedValue.dismiss()
-                } 
+                }
             } else {
                 Log.debug("지출내역 삭제 실패")
             }

@@ -22,6 +22,6 @@ public struct SignUpRequestDto: Encodable {
     }
 
     static func from(model: SignUp) -> SignUpRequestDto {
-        return SignUpRequestDto.init(name: model.name, username: model.username, password: model.password, phone: model.phone, code: model.code)
+        return SignUpRequestDto(name: model.name, username: model.username, password: model.password, phone: model.phone, code: model.code)
     }
 }
