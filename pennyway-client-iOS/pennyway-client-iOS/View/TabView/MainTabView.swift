@@ -25,7 +25,8 @@ struct MainTabView: View {
                 .tag(1)
                 .buttonStyle(BasicButtonStyleUtil())
 
-            TemporaryView()
+//            TemporaryView()
+            MainChatView()
                 .tabItem {
                     selection == 2 ? Image("icon_tapbar_chatting_on") : Image("icon_tapbar_chatting_off")
                     Text("채팅")
