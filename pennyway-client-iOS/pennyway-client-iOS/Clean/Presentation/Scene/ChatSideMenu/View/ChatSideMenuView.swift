@@ -104,7 +104,7 @@ private struct SideMenuContent: View {
             
             Divider()
                 .overlay(Color("Gray02"))
-                .frame(height: 0.33)
+                .frame(height: 0.33 * DynamicSizeFactor.factor())
                 .padding(.horizontal, 25 * DynamicSizeFactor.factor())
             
             Spacer().frame(height: 14 * DynamicSizeFactor.factor())
