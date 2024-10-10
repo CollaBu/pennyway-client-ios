@@ -6,7 +6,7 @@ enum UserAuthRouter: URLRequestConvertible {
     case linkOAuthAccount(dto: OAuthUserData)
     case unlinkOAuthAccount, checkLoginState
     
-    var method: HTTPMethod {
+    var method: HTTPMethod { 
         switch self {
         case .linkOAuthAccount:
             return .put
