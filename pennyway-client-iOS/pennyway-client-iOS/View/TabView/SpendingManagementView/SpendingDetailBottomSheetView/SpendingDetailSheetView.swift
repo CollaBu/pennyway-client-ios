@@ -14,16 +14,16 @@ struct SpendingDetailSheetView: View {
     @State private var isAddSpendingData: Bool = false
 
     @Binding var clickDate: Date?
-    
+
     @StateObject var viewModel: AddSpendingHistoryViewModel
     @ObservedObject var spendingHistoryViewModel: SpendingHistoryViewModel
-    
+
     init(clickDate: Binding<Date?>, viewModel: AddSpendingHistoryViewModel, spendingHistoryViewModel: SpendingHistoryViewModel) {
         _clickDate = clickDate
         _viewModel = StateObject(wrappedValue: viewModel)
         _spendingHistoryViewModel = ObservedObject(wrappedValue: spendingHistoryViewModel)
     }
-    
+
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
@@ -31,16 +31,16 @@ struct SpendingDetailSheetView: View {
                     .frame(width: 40, height: 4)
                     .platformTextColor(color: Color("Gray03"))
                     .padding(.top, 12)
-                    
+
                 HStack {
                     if let date = clickDate {
                         Text(Date.getFormattedDate(from: date))
                             .font(.B1SemiboldeFont())
                             .platformTextColor(color: Color("Gray07"))
                     }
-                        
+
                     Spacer()
-                        
+
                     if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
                         // 지출내역이 없을 경우 편집버튼 없음
                     } else {
@@ -51,12 +51,12 @@ struct SpendingDetailSheetView: View {
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 24, height: 24)
-                                
+
                         })
                         .padding(10)
                         .buttonStyle(BasicButtonStyleUtil())
                     }
-                        
+
                     Button(action: {
                         showAddSpendingHistoryView = true
                     }, label: {
@@ -64,14 +64,14 @@ struct SpendingDetailSheetView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(width: 34, height: 34)
-                            
+
                     })
                     .buttonStyle(BasicButtonStyleUtil())
                 }
                 .padding(.leading, 20)
                 .padding(.trailing, 17)
                 .padding(.top, 12)
-                    
+
                 if let clickDate = clickDate, SpendingHistoryUtil.getSpendingAmount(for: clickDate ?? viewModel.selectedDate, using: Calendar.current, from: spendingHistoryViewModel) == nil || isDeleted {
                     NoSpendingHistorySheetView()
                         .analyzeEvent(SpendingEvents.spendingListBottonSheet, additionalParams: [AnalyticsConstants.Parameter.date: clickDate])
@@ -85,12 +85,12 @@ struct SpendingDetailSheetView: View {
                                     .platformTextColor(color: Color("Gray07"))
                                     .padding(.leading, 20)
                             }
-                                
+
                             Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-                                
+
                             ForEach(spendingHistoryViewModel.filteredSpendings(for: clickDate), id: \.id) { item in
                                 let iconName = SpendingListViewCategoryIconList(rawValue: item.category.icon)?.iconName ?? ""
-                                    
+
                                 Button(action: {
                                     selectedSpendingId = item.id
                                     showDetailSpendingView = true
@@ -152,7 +152,7 @@ struct SpendingDetailSheetView: View {
         .onAppear {
             Log.debug("바텀시트 clickDate: \(String(describing: clickDate))")
             Log.debug("selectedDate: \(String(describing: viewModel.selectedDate))")
-            
+
             getDailyHistoryData()
         }
         .onChange(of: isDeleted) { newValue in
@@ -174,7 +174,7 @@ struct SpendingDetailSheetView: View {
                       }
                   })
     }
-    
+
     private func getDailyHistoryData() {
         Log.debug("getDailyHistoryData 호출됨")
         spendingHistoryViewModel.checkSpendingHistoryApi { success in
@@ -193,7 +193,7 @@ struct FullScreenState: Equatable {
     let showEditSpendingDetailView: Bool
     let showAddSpendingHistoryView: Bool
     let showDetailSpendingView: Bool
-    
+
     func isReturn() -> Bool {
         return !showEditSpendingDetailView && !showAddSpendingHistoryView && !showDetailSpendingView
     }

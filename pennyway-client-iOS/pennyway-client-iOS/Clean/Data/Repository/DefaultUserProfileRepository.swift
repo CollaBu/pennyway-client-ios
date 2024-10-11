@@ -22,7 +22,8 @@ class DefaultUserProfileRepository: FetchUserProfileRepository {
                 locked: userData.locked,
                 notifySetting: NotifySettingDTO(accountBookNotify: userData.notifySetting.accountBookNotify, feedNotify: userData.notifySetting.feedNotify, chatNotify: userData.notifySetting.chatNotify),
                 createdAt: userData.createdAt,
-                oauthAccount: OAuthAccountDTO(kakao: userData.oauthAccount.kakao, google: userData.oauthAccount.google, apple: userData.oauthAccount.apple))
+                oauthAccount: OAuthAccountDTO(kakao: userData.oauthAccount.kakao, google: userData.oauthAccount.google, apple: userData.oauthAccount.apple)
+            )
 
             completion(.success(profileResponseDTO.toModel()))
         } else {

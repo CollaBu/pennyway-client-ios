@@ -8,19 +8,3 @@
 import SwiftUI
 
 // MARK: - ChatView
-
-struct TemporaryView: View {
-    @State private var navigate = false
-
-    var body: some View {
-        NavigationAvailable {
-            Button(action: {
-                navigate = true
-            }, label: {
-                Text("Button")
-            })
-            .setTabBarVisibility(isHidden: false)
-            NavigationLink(destination: ChatView(), isActive: $navigate) {}
-        }
-    }
-}

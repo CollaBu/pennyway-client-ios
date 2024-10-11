@@ -30,7 +30,6 @@ struct SelectSpendingDayView: View {
             Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
             DatePicker("", selection: $viewModel.selectedDate, in: dateRange, displayedComponents: [.date])
-
                 .datePickerStyle(WheelDatePickerStyle())
                 .labelsHidden()
                 .environment(\.locale, Locale(identifier: "ko_KR"))

@@ -38,7 +38,6 @@ struct MainChatView: View {
                     searchChatContainer
                     ChatRoomContent(isMyChat: false)
                 }
-
                 NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
             }
