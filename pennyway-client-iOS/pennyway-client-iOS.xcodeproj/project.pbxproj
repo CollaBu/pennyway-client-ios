@@ -197,6 +197,11 @@
 		4AA13C672C63ED5100D8DEE7 /* PresignedUrlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C662C63ED5100D8DEE7 /* PresignedUrlViewModel.swift */; };
 		4AA13C692C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C682C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift */; };
 		4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA13C6A2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift */; };
+		4AA369492CB83EC100528E01 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AA369452CB83EC100528E01 /* Debug.xcconfig */; };
+		4AA3694A2CB83EC100528E01 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AA369462CB83EC100528E01 /* Release.xcconfig */; };
+		4AA3694B2CB83EC100528E01 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AA369472CB83EC100528E01 /* Secrets.xcconfig */; };
+		4AA3694D2CB83EC800528E01 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AA3694C2CB83EC800528E01 /* GoogleService-Info.plist */; };
+		4AA3694F2CB841E900528E01 /* ChatUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA3694E2CB841E900528E01 /* ChatUserInfoView.swift */; };
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AA969752C6D2B8F00CA889C /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA969742C6D2B8F00CA889C /* NotificationName.swift */; };
 		4AABDBB42C9C860800E9436D /* PresignedUrlUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */; };
@@ -317,10 +322,8 @@
 		D8180C082BE5168800F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8180C0A2BE531C500F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D81D5A832C16B68D008E5939 /* DateFormatterUtil .swift in Sources */ = {isa = PBXBuildFile; fileRef = D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */; };
-		D82BFEF42CB7E57500DCB9EC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D82BFEF32CB7E57500DCB9EC /* GoogleService-Info.plist */; };
 		D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */; };
 		D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */; };
-		D83255312CB813FE0097BCB7 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D83255302CB813FE0097BCB7 /* Secrets.xcconfig */; };
 		D84348E62CA68D1F00AC4777 /* DeleteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84348E52CA68D1E00AC4777 /* DeleteUserRepository.swift */; };
 		D84348E82CA68D5600AC4777 /* DeleteUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84348E72CA68D5600AC4777 /* DeleteUserUseCase.swift */; };
 		D84348EA2CA68D6500AC4777 /* DefaultDeleteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84348E92CA68D6500AC4777 /* DefaultDeleteUserRepository.swift */; };
@@ -346,8 +349,6 @@
 		D85927FC2BE9116700653391 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F72BE9116700653391 /* SignUpViewModel.swift */; };
 		D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773032C76C90700C68728 /* PrivatePolicy.swift */; };
 		D86773062C76CA0100C68728 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773052C76CA0100C68728 /* KeyboardManager.swift */; };
-		D86F973B2CB808B900449190 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D86F97382CB808B900449190 /* Release.xcconfig */; };
-		D86F973C2CB808B900449190 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D86F97392CB808B900449190 /* Debug.xcconfig */; };
 		D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D874F52A2C32888E00936886 /* DetailSpendingView.swift */; };
 		D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */; };
 		D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87AA7F72CB6C3730012BFA3 /* ChatRoomDetailView.swift */; };
@@ -592,6 +593,11 @@
 		4AA13C662C63ED5100D8DEE7 /* PresignedUrlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlViewModel.swift; sourceTree = "<group>"; };
 		4AA13C682C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePresignedUrlRequestDto.swift; sourceTree = "<group>"; };
 		4AA13C6A2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePresignedUrlResponseDto.swift; sourceTree = "<group>"; };
+		4AA369452CB83EC100528E01 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4AA369462CB83EC100528E01 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4AA369472CB83EC100528E01 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		4AA3694C2CB83EC800528E01 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4AA3694E2CB841E900528E01 /* ChatUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserInfoView.swift; sourceTree = "<group>"; };
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AA969742C6D2B8F00CA889C /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		4AABDBB32C9C860800E9436D /* PresignedUrlUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrlUseCase.swift; sourceTree = "<group>"; };
@@ -711,10 +717,8 @@
 		D82BFEED2CB7E56600DCB9EC /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Release.xcconfig"; sourceTree = "<absolute>"; };
 		D82BFEEE2CB7E56600DCB9EC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Debug.xcconfig"; sourceTree = "<absolute>"; };
 		D82BFEEF2CB7E56600DCB9EC /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Secrets.xcconfig"; sourceTree = "<absolute>"; };
-		D82BFEF32CB7E57500DCB9EC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUsernameView.swift; sourceTree = "<group>"; };
 		D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameRequestDto.swift; sourceTree = "<group>"; };
-		D83255302CB813FE0097BCB7 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		D84348E52CA68D1E00AC4777 /* DeleteUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeleteUserRepository.swift; path = "pennyway-client-iOS/Clean/Domain/Interfaces/DeleteUserRepository.swift"; sourceTree = SOURCE_ROOT; };
 		D84348E72CA68D5600AC4777 /* DeleteUserUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteUserUseCase.swift; sourceTree = "<group>"; };
 		D84348E92CA68D6500AC4777 /* DefaultDeleteUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDeleteUserRepository.swift; sourceTree = "<group>"; };
@@ -740,8 +744,6 @@
 		D85927F72BE9116700653391 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		D86773032C76C90700C68728 /* PrivatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatePolicy.swift; sourceTree = "<group>"; };
 		D86773052C76CA0100C68728 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
-		D86F97382CB808B900449190 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../../../../Downloads/Release.xcconfig; sourceTree = "<group>"; };
-		D86F97392CB808B900449190 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
 		D874F52A2C32888E00936886 /* DetailSpendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpendingView.swift; sourceTree = "<group>"; };
 		D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlarmResponseDto.swift; sourceTree = "<group>"; };
 		D87AA7F72CB6C3730012BFA3 /* ChatRoomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDetailView.swift; sourceTree = "<group>"; };
@@ -1707,8 +1709,8 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D86F97342CB8083500449190 /* Xcconfig */,
-				D82BFEF32CB7E57500DCB9EC /* GoogleService-Info.plist */,
+				4AA3694C2CB83EC800528E01 /* GoogleService-Info.plist */,
+				4AA369482CB83EC100528E01 /* Xcconfig */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
@@ -1922,6 +1924,16 @@
 				4AA13C6A2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift */,
 			);
 			path = response;
+			sourceTree = "<group>";
+		};
+		4AA369482CB83EC100528E01 /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				4AA369452CB83EC100528E01 /* Debug.xcconfig */,
+				4AA369462CB83EC100528E01 /* Release.xcconfig */,
+				4AA369472CB83EC100528E01 /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
 			sourceTree = "<group>";
 		};
 		4AA52F3D2C05C38F00B21521 /* View */ = {
@@ -2232,6 +2244,7 @@
 			isa = PBXGroup;
 			children = (
 				4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */,
+				4AA3694E2CB841E900528E01 /* ChatUserInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2385,17 +2398,6 @@
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
-		D86F97342CB8083500449190 /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				D86F97392CB808B900449190 /* Debug.xcconfig */,
-				D86F97382CB808B900449190 /* Release.xcconfig */,
-				D83255302CB813FE0097BCB7 /* Secrets.xcconfig */,
-			);
-			name = Xcconfig;
-			path = "../../../../Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig";
-			sourceTree = "<group>";
-		};
 		D874F5292C32881400936886 /* DetailSpendingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2531,20 +2533,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D86F973B2CB808B900449190 /* Release.xcconfig in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
-				D82BFEF42CB7E57500DCB9EC /* GoogleService-Info.plist in Resources */,
+				4AA3694D2CB83EC800528E01 /* GoogleService-Info.plist in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
-				D86F973C2CB808B900449190 /* Debug.xcconfig in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
+				4AA369492CB83EC100528E01 /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
-				D83255312CB813FE0097BCB7 /* Secrets.xcconfig in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
+				4AA3694B2CB83EC100528E01 /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
+				4AA3694A2CB83EC100528E01 /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2790,6 +2792,7 @@
 				4A863A052CB4435B00BA2F2F /* Chat.swift in Sources */,
 				4A0FFBF72BCDA18C00EFEC56 /* LoginRequestDto.swift in Sources */,
 				4AB5AB522BB4A93500D2C9EA /* RequestLogger.swift in Sources */,
+				4AA3694F2CB841E900528E01 /* ChatUserInfoView.swift in Sources */,
 				4A4703962BCEB2E800AEE04E /* StatusCodeHandler.swift in Sources */,
 				4A6E62D82BA6082100111246 /* SignUpView.swift in Sources */,
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
@@ -3116,7 +3119,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D86F97392CB808B900449190 /* Debug.xcconfig */;
+			baseConfigurationReference = 4AA369452CB83EC100528E01 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3158,7 +3161,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D86F97382CB808B900449190 /* Release.xcconfig */;
+			baseConfigurationReference = 4AA369462CB83EC100528E01 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

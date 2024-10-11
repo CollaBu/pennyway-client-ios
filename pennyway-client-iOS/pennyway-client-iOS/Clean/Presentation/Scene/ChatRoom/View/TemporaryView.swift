@@ -28,7 +28,7 @@ struct TemporaryView: View {
             })
             .setTabBarVisibility(isHidden: false)
             NavigationLink(destination: ChatSettingView(), isActive: $navigate) {}
-            NavigationLink(destination: ChatRoomDetailView(), isActive: $isNavigate) {}
+            NavigationLink(destination: ChatView(), isActive: $isNavigate) {}
         }
     }
 }
