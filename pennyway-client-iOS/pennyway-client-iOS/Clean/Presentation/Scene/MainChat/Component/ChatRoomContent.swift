@@ -13,7 +13,7 @@ struct ChatRoomContent: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 21 * DynamicSizeFactor.factor()) {
+            VStack(spacing: 12) {
                 ForEach(dummyChatRooms) { chatRoom in
                     ChatRoomCell(chatRoom: chatRoom, isMyChat: isMyChat)
                 }

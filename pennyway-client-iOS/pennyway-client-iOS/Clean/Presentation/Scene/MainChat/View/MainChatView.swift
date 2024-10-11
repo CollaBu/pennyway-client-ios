@@ -6,7 +6,9 @@ import SwiftUI
 struct MainChatView: View {
     @State private var selectedTab: Int = 0
     @State private var chatRoomName: String = "" // 수정 예정
+    @State private var isNavigateToMakeChatRoom = false
     private let maxLength = 19
+
     var body: some View {
         NavigationAvailable {
             VStack {
@@ -36,13 +38,19 @@ struct MainChatView: View {
                     searchChatContainer
                     ChatRoomContent(isMyChat: false)
                 }
+
+                NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
+                    .hidden()
             }
+            .setTabBarVisibility(isHidden: false)
             .navigationBarColor(UIColor(named: "White01"), title: "채팅방")
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack {
-                        Button(action: {}, label: {
+                        Button(action: {
+                            isNavigateToMakeChatRoom = true
+                        }, label: {
                             Image("icon_navigationbar_mint")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
