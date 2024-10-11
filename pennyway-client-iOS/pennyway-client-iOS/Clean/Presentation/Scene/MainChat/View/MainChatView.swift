@@ -7,43 +7,70 @@ struct MainChatView: View {
     @State private var selectedTab: Int = 0
     @State private var chatRoomName: String = "" // 수정 예정
     @State private var isNavigateToMakeChatRoom = false
+    @State private var isPopUp = false // 채팅방 나가기 팝업 표시 여부
+    @State private var selectedChatRoom: ChatRoom? = nil // 어떤 채팅방이 선택됐는지의 여부
+    @State private var dummyChatRooms = [
+        ChatRoom(id: 1, title: "배달음식 그만 먹는 방", description: "배달음식 NO 집밥 YES", background_image_url: "icon_close_filled_primary", password: "", privacy_setting: false, notify_enabled: true),
+        ChatRoom(id: 2, title: "월급 다 쓴 사람이 모인 방", description: "함께 저축해요", background_image_url: "icon_close_filled_primary", password: "1234", privacy_setting: true, notify_enabled: true)
+    ]
+
     private let maxLength = 19
 
     var body: some View {
         NavigationAvailable {
-            VStack {
-                Spacer().frame(height: 38 * DynamicSizeFactor.factor())
-                HStack(spacing: 30) {
-                    Button(action: {
-                        selectedTab = 1
-                    }, label: {
-                        MyChatContainer
-                    })
-                    Button(action: {
-                        selectedTab = 2
-                    }, label: {
-                        RecommendChatContainer
-                    })
+            ZStack {
+                VStack {
+                    Spacer().frame(height: 38 * DynamicSizeFactor.factor())
+                    HStack(spacing: 30) {
+                        Button(action: {
+                            selectedTab = 1
+                        }, label: {
+                            MyChatContainer
+                        })
+                        Button(action: {
+                            selectedTab = 2
+                        }, label: {
+                            RecommendChatContainer
+                        })
+                    }
+
+                    Spacer().frame(height: 28 * DynamicSizeFactor.factor())
+
+                    if selectedTab == 0 {
+                        DefaultChatContent()
+                        Spacer()
+                    } else if selectedTab == 1 {
+                        searchChatContainer
+                        ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $dummyChatRooms, isMyChat: true)
+                    } else if selectedTab == 2 {
+                        searchChatContainer
+                        ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $dummyChatRooms, isMyChat: false)
+                    }
+
+                    NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
+                        .hidden()
                 }
 
-                Spacer().frame(height: 28 * DynamicSizeFactor.factor())
-
-                if selectedTab == 0 {
-                    DefaultChatContent()
-                    Spacer()
-                } else if selectedTab == 1 {
-                    searchChatContainer
-                    ChatRoomContent(isMyChat: true)
-                } else if selectedTab == 2 {
-                    searchChatContainer
-                    ChatRoomContent(isMyChat: false)
+                if isPopUp, let chatRoom = selectedChatRoom {
+                    CustomPopUpView(
+                        showingPopUp: $isPopUp,
+                        titleLabel: "채팅방 나가기",
+                        subTitleLabel: "선택한 채팅방에서 나갈까요?",
+                        firstBtnAction: { self.isPopUp = false },
+                        firstBtnLabel: "취소",
+                        secondBtnAction: {
+                            withAnimation {
+                                deleteChatRoom(chatRoom)
+                                self.isPopUp = false // 팝업 닫기
+                            }
+                        },
+                        secondBtnLabel: "나가기",
+                        secondBtnColor: Color("Red03"))
                 }
-
-                NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
-                    .hidden()
             }
             .setTabBarVisibility(isHidden: false)
-            .navigationBarColor(UIColor(named: "White01"), title: "채팅방")
+            .navigationTitle(Text("채팅방"))
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -61,6 +88,11 @@ struct MainChatView: View {
                 }
             }
         }
+    }
+
+    /// 채팅방 삭제 함수
+    private func deleteChatRoom(_ chatRoom: ChatRoom) {
+        dummyChatRooms.removeAll { $0.id == chatRoom.id }
     }
 
     private var searchChatContainer: some View {

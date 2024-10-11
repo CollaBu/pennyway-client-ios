@@ -38,7 +38,7 @@ struct MakeChatRoomView: View {
 
                 Spacer()
             }
-            CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
+            CustomBottomButton(action: {}, label: "채팅방 생성", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -112,7 +112,7 @@ struct MakeChatRoomView: View {
                 .padding(.horizontal, 20)
 
             HStack {
-                Text("채팅방 공개 설정")
+                Text("채팅방 비밀번호 설정")
                     .font(.ButtonH4SemiboldFont())
                     .platformTextColor(color: Color("Gray06"))
 
