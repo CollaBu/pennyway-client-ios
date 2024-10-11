@@ -62,9 +62,9 @@ struct ChatRoomDetailView: View {
 
     private var tagSection: some View {
         HStack(spacing: 9 * DynamicSizeFactor.factor()) {
-            CustomRoundedBtn(title: "비공개방", fontColor: Color("Mint03"), backgroundColor: Color("Mint01")) {}
+            CustomRoundedBtn(title: "비공개방", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {}
 
-            CustomRoundedBtn(title: "127명이 대화하고 있어요", fontColor: Color("Yellow02"), backgroundColor: Color("Yellow01")) {}
+            CustomRoundedBtn(title: "127명이 대화하고 있어요", fontColor: Color("Yellow02"), backgroundColor: Color("Yellow01"), style: .large) {}
         }
         .padding(.horizontal, 20)
     }
