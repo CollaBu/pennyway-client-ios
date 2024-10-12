@@ -27,7 +27,7 @@ struct TemporaryView: View {
                 Text("Btn")
             })
             .setTabBarVisibility(isHidden: false)
-            NavigationLink(destination: ChatSettingView(), isActive: $navigate) {}
+            NavigationLink(destination: ChatUserInfoView(), isActive: $navigate) {}
             NavigationLink(destination: ChatView(), isActive: $isNavigate) {}
         }
     }
