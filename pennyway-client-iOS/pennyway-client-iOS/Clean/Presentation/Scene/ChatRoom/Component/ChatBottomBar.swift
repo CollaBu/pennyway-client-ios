@@ -13,6 +13,8 @@ struct ChatBottomBar: View {
     @State private var textEditorHeight: CGFloat = 14 * DynamicSizeFactor.factor()
     @State private var lineCount: Int = 1
 
+    private let maxHeight: CGFloat = 14 * DynamicSizeFactor.factor() * 2
+
     var body: some View {
         VStack {
             Spacer().frame(height: 11 * DynamicSizeFactor.factor())
@@ -22,9 +24,10 @@ struct ChatBottomBar: View {
                 MessageInput
                 SendButton
             }
-            .frame(height: textEditorHeight + 16 * DynamicSizeFactor.factor())
+            .frame(height: textEditorHeight + 16
+                * DynamicSizeFactor.factor())
             .background(Color("Gray02"))
-            .cornerRadius(15)
+            .cornerRadius(15 * DynamicSizeFactor.factor())
             .padding(.horizontal, 16)
 
             FeatureContent
@@ -52,16 +55,16 @@ struct ChatBottomBar: View {
 
     private var MessageInput: some View {
         ZStack(alignment: .leading) {
-            Rectangle()
-                .fill(Color("Gray02"))
-                .frame(height: textEditorHeight)
-
             TextEditor(text: $message)
-                .frame(height: textEditorHeight)
                 .colorMultiply(Color("Gray02"))
                 .platformTextColor(color: Color("Gray07"))
                 .font(.B2MediumFont())
-                .lineLimit(5)
+                .padding(.vertical, 3)
+                .TextAutocapitalization()
+                .AutoCorrectionExtensions()
+                .onAppear {
+                    UITextView.appearance().backgroundColor = .clear
+                }
                 .onChange(of: message) { newValue in
                     updateTextEditorHeight(text: newValue)
                 }
@@ -125,7 +128,7 @@ struct ChatBottomBar: View {
         if newLineCount != lineCount {
             let heightDifference = (newLineCount - lineCount) * Int(14 * DynamicSizeFactor.factor())
 
-            if textEditorHeight <= 14 * DynamicSizeFactor.factor() * 5 {
+            if textEditorHeight <= maxHeight {
                 textEditorHeight += CGFloat(heightDifference)
                 lineCount = newLineCount
             }
