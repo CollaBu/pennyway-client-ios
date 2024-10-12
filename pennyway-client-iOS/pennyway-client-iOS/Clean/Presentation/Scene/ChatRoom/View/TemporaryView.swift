@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - ChatView
+// MARK: - TemporaryView
 
 struct TemporaryView: View {
     @State private var navigate = false
