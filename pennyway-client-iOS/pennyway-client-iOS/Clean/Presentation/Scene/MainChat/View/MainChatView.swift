@@ -78,13 +78,6 @@ struct MainChatView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                withAnimation {
-                                    isCheckMarkVisible = false
-                                }
-                            }
-                        }
                 }
             }
             .setTabBarVisibility(isHidden: false)
@@ -116,6 +109,7 @@ struct MainChatView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             withAnimation {
+                isCheckMarkVisible = false
                 deleteChatRoom(chatRoom)
             }
         }
