@@ -12,27 +12,45 @@ struct ChatContent: View {
     let members: [ChatMember]
     let currentUserId: Int64
 
+    @State private var scrollToBottom: Bool = false
+    @ObservedObject var keyboardManager: KeyboardManager
+
     var body: some View {
-        ScrollView {
-            Spacer().frame(height: 25 * DynamicSizeFactor.factor())
+        ScrollViewReader { proxy in
+            ScrollView {
+                Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
-            LazyVStack(spacing: 14 * DynamicSizeFactor.factor()) {
-                ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
-                    Section(header: ChatDateHeader(date: date)) {
-                        Spacer().frame(height: 7 * DynamicSizeFactor.factor())
+                LazyVStack(spacing: 14 * DynamicSizeFactor.factor()) {
+                    ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
 
-                        ForEach(groupedChatsByDate[date] ?? []) { chat in
-                            if let sender = members.first(where: { $0.user_id == chat.sender_id }) {
-                                if chat.sender_id == currentUserId {
-                                    ChatSendCell(chat: chat, sender: sender)
-                                } else {
-                                    ChatReceiveCell(chat: chat, sender: sender)
+                        Section(header: ChatDateHeader(date: date)) {
+                            Spacer().frame(height: 5 * DynamicSizeFactor.factor())
+
+                            ForEach(groupedChatsByDate[date] ?? []) { chat in
+                                if let sender = members.first(where: { $0.user_id == chat.sender_id }) {
+                                    if chat.sender_id == currentUserId {
+                                        ChatSendCell(chat: chat, sender: sender)
+                                    } else {
+                                        ChatReceiveCell(chat: chat, sender: sender)
+                                    }
                                 }
                             }
                         }
-                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
+                        .border(Color.black)
                     }
+
+                    // ScrollView 하단에 있는 마지막 아이템을 위한 태그
+                    Spacer().frame(height: 0)
+                        .id("bottom")
                 }
+            }
+            .onChange(of: keyboardManager.keyboardHeight) { _ in
+                // 키보드 높이가 변경될 때마다 스크롤을 하단으로 이동
+                proxy.scrollTo("bottom", anchor: .bottom)
+            }
+            .onAppear {
+                // 처음 열릴 때 가장 아래로 스크롤
+                proxy.scrollTo("bottom", anchor: .bottom)
             }
         }
     }

@@ -16,8 +16,10 @@ struct ChatView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102)
-                    .offset(y: -keyboardManager.keyboardHeight)
+                GeometryReader { geometry in
+                    ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102, keyboardManager: keyboardManager)
+                        .frame(height: geometry.size.height - keyboardManager.keyboardHeight) // ChatContent의 높이를 키보드 높이만큼 조정
+                }
 
                 ChatBottomBar()
                     .background(Color("Ashblue02"))
