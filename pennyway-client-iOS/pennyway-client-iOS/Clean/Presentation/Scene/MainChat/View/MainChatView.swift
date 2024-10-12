@@ -65,7 +65,6 @@ struct MainChatView: View {
                         secondBtnAction: {
                             withAnimation {
                                 self.isPopUp = false // 팝업 닫기
-//                                deleteChatRoom(chatRoom)
                                 showCheckMarkAnimation(chatRoom)
                             }
                         },
@@ -136,6 +135,7 @@ struct MainChatView: View {
         VStack {
             if selectedTab == 1 {
                 ZStack {
+                    // TODO: 읽지 않은 채팅이 존재하는 경우에만 Circle이 표시되도록 추후 수정 필요
                     Circle()
                         .platformTextColor(color: Color("Mint03"))
                         .frame(width: 7 * DynamicSizeFactor.factor(), height: 7 * DynamicSizeFactor.factor())
