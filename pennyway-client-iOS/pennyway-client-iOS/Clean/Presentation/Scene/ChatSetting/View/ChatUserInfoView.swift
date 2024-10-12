@@ -103,10 +103,10 @@ struct ChatUserInfoView: View {
                 .offset(y: -35 * DynamicSizeFactor.factor())
 
                 HStack(spacing: 14 * DynamicSizeFactor.factor()) {
-                    ActionButton(title: "방장 넘기기", icon: "person.fill", textColor: .mint03, backgroundColor: .mint01, action: {
+                    ActionBtn(title: "방장 넘기기", icon: "icon_chatprofile_delegation_primary", textColor: .mint03, backgroundColor: .mint01, action: {
                         showTransferPopUp = true
                     })
-                    ActionButton(title: "내보내기", icon: "hand.raised.fill", textColor: .red03, backgroundColor: .red01, action: {
+                    ActionBtn(title: "내보내기", icon: "icon_chatprofile_export", textColor: .red03, backgroundColor: .red01, action: {
                         showKickOutPopUp = true
                     })
                 }
@@ -119,9 +119,9 @@ struct ChatUserInfoView: View {
         }
     }
 
-    // MARK: - ActionButton (Private)
+    // MARK: - ActionBtn (Private)
 
-    private struct ActionButton: View {
+    private struct ActionBtn: View {
         let title: String
         let icon: String
         let textColor: Color
@@ -131,7 +131,7 @@ struct ChatUserInfoView: View {
         var body: some View {
             Button(action: action) {
                 HStack(spacing: 7) {
-                    Image(systemName: icon)
+                    Image(icon)
                     Text(title)
                 }
                 .frame(width: 130 * DynamicSizeFactor.factor())
