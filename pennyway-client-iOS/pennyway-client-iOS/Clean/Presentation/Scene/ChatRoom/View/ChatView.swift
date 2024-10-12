@@ -14,7 +14,7 @@ struct ChatView: View {
     @State private var isSideMenuPresented = false
 
     var body: some View {
-        ZStack {
+        NavigationAvailable {
             VStack(spacing: 0) {
                 GeometryReader { geometry in
                     ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102, keyboardManager: keyboardManager)
@@ -22,8 +22,8 @@ struct ChatView: View {
                 }
 
                 ChatBottomBar()
-                    .background(Color("Ashblue02"))
                     .offset(y: -keyboardManager.keyboardHeight)
+                    .animation(keyboardManager.keyboardHeight > 0 ? .easeOut(duration: 0.5) : nil, value: keyboardManager.keyboardHeight)
             }
             .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
             .background(Color("Ashblue02"))
