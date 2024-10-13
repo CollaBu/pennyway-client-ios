@@ -103,6 +103,7 @@ struct ChatBottomBar: View {
                         .platformTextColor(color: Color("Gray03"))
                         .font(.B2MediumFont())
                         .padding(.leading, 4)
+                        .allowsHitTesting(false)
                 }
             }
             .padding(.vertical, 8)
