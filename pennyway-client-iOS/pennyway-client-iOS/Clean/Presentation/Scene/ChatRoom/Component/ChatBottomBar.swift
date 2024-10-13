@@ -13,7 +13,8 @@ struct ChatBottomBar: View {
     @State private var textEditorHeight: CGFloat = 14 * DynamicSizeFactor.factor()
     @State private var lineCount: Int = 1
 
-    private let maxHeight: CGFloat = 14 * DynamicSizeFactor.factor() * 2
+    private let minHeight: CGFloat = 14 * DynamicSizeFactor.factor()
+    private let maxHeight: CGFloat = 14 * DynamicSizeFactor.factor() * 3
 
     var body: some View {
         VStack {
@@ -55,6 +56,7 @@ struct ChatBottomBar: View {
 
     private var MessageInput: some View {
         ZStack(alignment: .leading) {
+            
             TextEditor(text: $message)
                 .colorMultiply(Color("Gray02"))
                 .platformTextColor(color: Color("Gray07"))
@@ -68,15 +70,15 @@ struct ChatBottomBar: View {
                 .onChange(of: message) { newValue in
                     updateTextEditorHeight(text: newValue)
                 }
-
+            
             if message.isEmpty {
                 Text("오늘은 어떤 소비를 했나요?")
                     .platformTextColor(color: Color("Gray03"))
                     .font(.B2MediumFont())
                     .padding(.vertical, 8)
+                    .padding(.leading, 5)
             }
         }
-
         .frame(maxWidth: .infinity)
     }
 
@@ -122,17 +124,26 @@ struct ChatBottomBar: View {
         }
     }
 
-    /// 엔터키 누른 걸 감지해서 라인 수에 따른 높이 조절 메서드
+    ///    /// 엔터키 누른 걸 감지해서 라인 수에 따른 높이 조절 메서드
+    ///    private func updateTextEditorHeight(text: String) {
+    ///        let newLineCount = text.components(separatedBy: .newlines).count
+    ///        if newLineCount != lineCount {
+    ///            let heightDifference = (newLineCount - lineCount) * Int(14 * DynamicSizeFactor.factor())
+    ///
+    ///            if textEditorHeight <= maxHeight {
+    ///                textEditorHeight += CGFloat(heightDifference)
+    ///                lineCount = newLineCount
+    ///            }
+    ///        }
+    ///    }
     private func updateTextEditorHeight(text: String) {
         let newLineCount = text.components(separatedBy: .newlines).count
-        if newLineCount != lineCount {
-            let heightDifference = (newLineCount - lineCount) * Int(14 * DynamicSizeFactor.factor())
+        let newHeight = min(max(CGFloat(newLineCount) * 14 * DynamicSizeFactor.factor(), minHeight), maxHeight)
 
-            if textEditorHeight <= maxHeight {
-                textEditorHeight += CGFloat(heightDifference)
-                lineCount = newLineCount
-            }
+        withAnimation(.easeInOut(duration: 0.1)) {
+            self.textEditorHeight = newHeight
         }
+        lineCount = newLineCount
     }
 }
 
