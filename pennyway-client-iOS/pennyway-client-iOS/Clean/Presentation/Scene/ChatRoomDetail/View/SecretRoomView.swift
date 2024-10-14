@@ -10,7 +10,7 @@ struct SecretRoomView: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 36 * DynamicSizeFactor.factor())
 
-                Text("비밀번호를\n입력해주세요")
+                Text("비밀번호를\n입력해 주세요")
                     .font(.H1SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
 

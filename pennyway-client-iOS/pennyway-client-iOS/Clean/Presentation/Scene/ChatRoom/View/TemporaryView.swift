@@ -8,3 +8,21 @@
 import SwiftUI
 
 // MARK: - ChatView
+
+struct TemporaryView: View {
+    @State private var navigate = false
+    var body: some View {
+        NavigationAvailable {
+            VStack {
+                Button(action: {
+                    navigate = true
+                }, label: {
+                    Text("버튼")
+                })
+
+                NavigationLink(destination: ChatRoomDetailView(), isActive: $navigate) {}
+                    .hidden()
+            }
+        }
+    }
+}
