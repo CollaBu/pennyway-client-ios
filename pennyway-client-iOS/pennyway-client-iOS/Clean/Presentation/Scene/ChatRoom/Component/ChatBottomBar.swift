@@ -13,30 +13,33 @@ struct ChatBottomBar: View {
     @State private var currentTextEditorHeight: CGFloat = 14 * DynamicSizeFactor.factor()
     @State private var maxTextWidth: CGFloat = 0
 
-    private let minHeight: CGFloat = 15 * DynamicSizeFactor.factor()
-    private let maxHeight: CGFloat = 14 * DynamicSizeFactor.factor() * 3
-    private let maxLineCount: Int = 3
+    // TextEditor의 최소, 최대 높이 정의
+    private let minHeight: CGFloat = 15 * DynamicSizeFactor.factor() // 최소 높이
+    private let maxHeight: CGFloat = 14 * DynamicSizeFactor.factor() * 3 // 최대 높이 (3줄)
+    private let maxLineCount: Int = 3 // 최대 줄 수
 
+    /// 현재 메시지에서 줄바꿈(\n)으로 구분된 줄의 수 계산
     private var newLineCount: Int {
         message.components(separatedBy: "\n").count
     }
 
+    /// 텍스트 자동 줄바꿈으로 인한 줄 수 계산
     private var autoLineCount: Int {
         var counter: Int = 0
 
         guard maxTextWidth > 0 else {
-            Log.error("maxTextWidth is zero or invalid")
+            Log.error("maxTextWidth가 0이거나 유효하지 않음")
             return 0
         }
 
+        // 각 줄의 텍스트 너비 계산하여 줄 수 증가
         for line in message.components(separatedBy: "\n") {
             let currentTextWidth = calculateTextWidth(for: line, fontSize: minHeight)
 
             if currentTextWidth > 0 {
                 counter += Int(currentTextWidth / maxTextWidth)
-                Log.debug("width : \(Int(currentTextWidth / maxTextWidth)), \(currentTextWidth), \(maxTextWidth)")
             } else {
-                Log.error("currentTextWidth is invalid or zero for line: \(line)")
+                Log.error("라인의 텍스트 너비가 유효하지 않거나 0: \(line)")
             }
         }
 
@@ -53,13 +56,13 @@ struct ChatBottomBar: View {
                 SendButton
             }
             .frame(height: currentTextEditorHeight + 16)
-            .background(Color("Gray02"))
+            .background(Color(.gray02))
             .cornerRadius(15 * DynamicSizeFactor.factor())
             .padding(.horizontal, 16)
 
             FeatureContent
         }
-        .background(Color("White01"))
+        .background(Color(.white01))
     }
 
     private var FeatureButton: some View {
@@ -84,23 +87,23 @@ struct ChatBottomBar: View {
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
                 TextEditor(text: $message)
-                    .colorMultiply(Color("Gray02"))
+                    .colorMultiply(Color(.gray02))
                     .font(.B2MediumFont())
-                    .platformTextColor(color: Color("Gray07"))
+                    .platformTextColor(color: Color(.gray07))
                     .frame(height: currentTextEditorHeight)
                     .TextAutocapitalization()
                     .AutoCorrectionExtensions()
                     .onAppear {
-                        setMaxTextWidth(proxy: proxy)
+                        setMaxTextWidth(proxy: proxy) // 최대 텍스트 너비 설정
                     }
                     .onChange(of: message) { _ in
-                        updateTextEditorCurrentHeight()
+                        updateTextEditorCurrentHeight() // 메시지 변경 시 TextEditor 높이 업데이트
                     }
                     .padding(.trailing, 19)
 
                 if message.isEmpty {
                     Text("오늘은 어떤 소비를 했나요?")
-                        .platformTextColor(color: Color("Gray03"))
+                        .platformTextColor(color: Color(.gray03))
                         .font(.B2MediumFont())
                         .padding(.leading, 4)
                         .allowsHitTesting(false)
@@ -143,7 +146,7 @@ struct ChatBottomBar: View {
                         .frame(width: 37 * DynamicSizeFactor.factor(), height: 37 * DynamicSizeFactor.factor())
 
                     Text("사진")
-                        .platformTextColor(color: Color("Gray07"))
+                        .platformTextColor(color: Color(.gray07))
                         .font(.B2MediumFont())
                 }
                 Spacer().frame(height: 20 * DynamicSizeFactor.factor())
@@ -153,9 +156,10 @@ struct ChatBottomBar: View {
         }
     }
 
+    /// 텍스트의 너비 계산
     private func calculateTextWidth(for text: String, fontSize: CGFloat) -> CGFloat {
         guard !text.isEmpty else {
-            Log.error("Text is empty, returning 0 width.")
+            Log.error("텍스트가 비어있어서 너비는 0")
             return 0
         }
 
@@ -176,12 +180,14 @@ struct ChatBottomBar: View {
         return textRect.width
     }
 
+    /// GeometryReader를 사용하여 최대 텍스트 너비 설정
     private func setMaxTextWidth(proxy: GeometryProxy) {
         DispatchQueue.main.async {
             self.maxTextWidth = proxy.size.width + 30
         }
     }
 
+    /// TextEditor의 현재 높이 업데이트
     private func updateTextEditorCurrentHeight() {
         let totalLineCount = newLineCount + autoLineCount
 
