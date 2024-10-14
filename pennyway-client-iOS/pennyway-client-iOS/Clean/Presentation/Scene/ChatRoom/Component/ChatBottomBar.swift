@@ -107,7 +107,6 @@ struct ChatBottomBar: View {
                 }
             }
             .padding(.vertical, 8)
-            .border(.ashblue01)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

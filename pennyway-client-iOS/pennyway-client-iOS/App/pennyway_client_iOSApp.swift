@@ -19,43 +19,39 @@ struct pennyway_client_iOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            LayoutView {
-            ChatView()
-                .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-//            }
-//            if appViewModel.isLoggedIn || appViewModel.checkLoginState {
-//                LayoutView {
-//                    MainTabView()
-//                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-//                        .onOpenURL { url in
-//                            GIDSignIn.sharedInstance.handle(url)
-//                        }
-//                }
-//                .environmentObject(appViewModel)
-//                .environmentObject(networkStatus)
-//            } else {
-//                if appViewModel.isSplashShown {
-//                    LayoutView {
-//                        LoginView()
-//                            .onOpenURL { url in
-//                                GIDSignIn.sharedInstance.handle(url)
-//                            }
-//                    }
-//                    .environmentObject(appViewModel)
-//                    .environmentObject(networkStatus)
-//
-//                } else {
-//                    LayoutView {
-//                        MainView()
-//                            .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
-//                            .onOpenURL { url in
-//                                GIDSignIn.sharedInstance.handle(url)
-//                            }
-//                    }
-//                    .environmentObject(appViewModel)
-//                    .environmentObject(networkStatus)
-//                }
-//            }
+            if appViewModel.isLoggedIn || appViewModel.checkLoginState {
+                LayoutView {
+                    MainTabView()
+                        .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                        .onOpenURL { url in
+                            GIDSignIn.sharedInstance.handle(url)
+                        }
+                }
+                .environmentObject(appViewModel)
+                .environmentObject(networkStatus)
+            } else {
+                if appViewModel.isSplashShown {
+                    LayoutView {
+                        LoginView()
+                            .onOpenURL { url in
+                                GIDSignIn.sharedInstance.handle(url)
+                            }
+                    }
+                    .environmentObject(appViewModel)
+                    .environmentObject(networkStatus)
+
+                } else {
+                    LayoutView {
+                        MainView()
+                            .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+                            .onOpenURL { url in
+                                GIDSignIn.sharedInstance.handle(url)
+                            }
+                    }
+                    .environmentObject(appViewModel)
+                    .environmentObject(networkStatus)
+                }
+            }
         }
     }
 }

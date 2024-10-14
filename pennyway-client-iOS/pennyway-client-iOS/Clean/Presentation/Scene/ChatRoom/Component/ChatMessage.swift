@@ -15,7 +15,7 @@ struct ChatMessage: View {
     @State private var textWidth: CGFloat = .zero
 
     var body: some View {
-        HStack(spacing: 9 * DynamicSizeFactor.factor()) {
+        HStack(spacing: 9) {
             if isSender {
                 // 타임스탬프 왼쪽 (isSender가 true일 때)
                 Timestamp

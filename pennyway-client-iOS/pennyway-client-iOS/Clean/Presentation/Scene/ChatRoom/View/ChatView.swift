@@ -14,7 +14,7 @@ struct ChatView: View {
     @State private var isSideMenuPresented = false
 
     var body: some View {
-        NavigationAvailable {
+        ZStack {
             VStack(spacing: 0) {
                 GeometryReader { geometry in
                     ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102, keyboardManager: keyboardManager)
