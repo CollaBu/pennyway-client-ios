@@ -3,7 +3,6 @@ import SwiftUI
 
 struct MakeChatRoomView: View {
     @State var roomTitle = "" // 채팅방 제목을 관리하는 함수
-
     @State var content = "" // 채팅방 설명을 관리하는 변수
     @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
     @State var password = "" // 비밀번호 입력을 관리하는 변수
