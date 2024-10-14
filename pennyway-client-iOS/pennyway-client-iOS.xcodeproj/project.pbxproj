@@ -1191,6 +1191,7 @@
 		4A12FEFF2C9C4A4600DE10BC /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				D8457BBF2CB6A7B9002540B2 /* MakeChatRoom */,
 				4AE9B33C2CB6E52E0044D3E1 /* ChatSideMenu */,
 				D87AA7F62CB6C3630012BFA3 /* ChatRoomDetail */,
 				4AE9B3312CB689D00044D3E1 /* Component */,

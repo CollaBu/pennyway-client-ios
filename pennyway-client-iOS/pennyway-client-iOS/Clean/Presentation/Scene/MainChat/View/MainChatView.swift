@@ -16,7 +16,7 @@ struct MainChatView: View {
     ]
     
     private let maxLength = 19
-    
+
     var body: some View {
         NavigationAvailable {
             ZStack {
@@ -78,6 +78,8 @@ struct MainChatView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
                 }
+                NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
+                    .hidden()
             }
             .setTabBarVisibility(isHidden: false)
             .navigationTitle(Text("채팅방"))
