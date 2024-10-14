@@ -56,14 +56,6 @@ struct ChatView: View {
                     }.offset(x: 10)
                 }
             }
-//            .overlay(
-//                Group {
-//                    if isSideMenuPresented {
-//                        ChatSideMenuView(isPresented: $isSideMenuPresented)
-//                            .transition(.move(edge: .trailing))
-//                    }
-//                }
-//            )
             if isSideMenuPresented {
                 Color.black.opacity(0.3)
                     .edgesIgnoringSafeArea(.all)

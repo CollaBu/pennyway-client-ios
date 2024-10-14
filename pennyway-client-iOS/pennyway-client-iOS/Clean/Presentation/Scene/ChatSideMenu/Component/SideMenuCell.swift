@@ -27,7 +27,6 @@ struct SideMenuCell: View {
             if isAlarmCell {
                 Toggle(isOn: $isAlarmOn) {}
                     .toggleStyle(CustomToggleStyle(hasAppeared: $isAlarmOn))
-                    .animation(.easeInOut(duration: 0.5))
             }
         }
         .frame(maxWidth: .infinity)
