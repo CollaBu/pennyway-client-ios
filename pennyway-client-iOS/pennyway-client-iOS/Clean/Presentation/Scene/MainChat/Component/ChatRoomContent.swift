@@ -44,7 +44,7 @@ struct ChatRoomCell: View {
                         onDelete()
                     }, label: {
                         VStack {
-                            Image("icon_chat_delete_line")
+                            Image("icon_chat_delete_line_white")
                                 .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
                             
                             Text("나가기")
