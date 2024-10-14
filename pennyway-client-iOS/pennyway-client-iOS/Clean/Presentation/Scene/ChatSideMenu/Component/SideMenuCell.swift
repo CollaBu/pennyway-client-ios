@@ -14,11 +14,11 @@ struct SideMenuCell: View {
     @Binding var isAlarmOn: Bool
 
     var body: some View {
-        HStack(spacing: 7 * DynamicSizeFactor.factor()) {
+        HStack(spacing: 7) {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 17 * DynamicSizeFactor.factor(), height: 17 * DynamicSizeFactor.factor())
+                .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
             Text(title)
                 .font(.B2SemiboldFont())
                 .platformTextColor(color: Color("Gray07"))
@@ -27,6 +27,7 @@ struct SideMenuCell: View {
             if isAlarmCell {
                 Toggle(isOn: $isAlarmOn) {}
                     .toggleStyle(CustomToggleStyle(hasAppeared: $isAlarmOn))
+                    .animation(.easeInOut(duration: 0.5))
             }
         }
         .frame(maxWidth: .infinity)

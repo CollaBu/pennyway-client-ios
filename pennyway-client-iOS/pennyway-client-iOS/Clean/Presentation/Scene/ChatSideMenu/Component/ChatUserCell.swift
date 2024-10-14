@@ -12,7 +12,7 @@ struct ChatUserCell: View {
     let currentUserId: Int64
 
     var body: some View {
-        HStack(spacing: 3 * DynamicSizeFactor.factor()) {
+        HStack(spacing: 4) {
             Image("icon_illust_error")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -22,7 +22,7 @@ struct ChatUserCell: View {
             Text(member.username)
                 .font(.B3MediumFont())
                 .platformTextColor(color: Color("Gray07"))
-                .padding(.leading, 6 * DynamicSizeFactor.factor())
+                .padding(.leading, 6)
 
             if member.user_id == currentUserId {
                 CustomRoundedBtn(

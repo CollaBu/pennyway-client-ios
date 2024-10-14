@@ -21,7 +21,6 @@ struct ChatSideMenuView: View {
                 
                 SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp)
                     .padding(.leading, 105 * DynamicSizeFactor.factor())
-                    .transition(.move(edge: .trailing))
             }
             
             if showExitPopUp {
@@ -41,7 +40,7 @@ struct ChatSideMenuView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .background(
-            Color.black.opacity(0.3)
+            Color.black.opacity(0.001) // clear과 똑같이 사용
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     withAnimation {

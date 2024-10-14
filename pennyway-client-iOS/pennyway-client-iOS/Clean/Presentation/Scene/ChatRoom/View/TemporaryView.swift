@@ -20,7 +20,7 @@ struct TemporaryView: View {
                     Text("버튼")
                 })
 
-                NavigationLink(destination: ChatRoomDetailView(), isActive: $navigate) {}
+                NavigationLink(destination: ChatView(), isActive: $navigate) {}
                     .hidden()
             }
         }
