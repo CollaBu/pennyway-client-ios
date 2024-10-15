@@ -56,13 +56,19 @@ struct ChatView: View {
                     }.offset(x: 10)
                 }
             }
+            // 배경이 있는 경우
             if isSideMenuPresented {
                 Color.black.opacity(0.3)
                     .edgesIgnoringSafeArea(.all)
                     .transition(.opacity)
-
-                ChatSideMenuView(isPresented: $isSideMenuPresented)
+                    .onTapGesture {
+                        withAnimation {
+                            isSideMenuPresented = false
+                        }
+                    }
+                ChatSideMenuView()
                     .transition(.move(edge: .trailing))
+                    .animation(.easeInOut(duration: 0.3))
             }
         }
     }

@@ -10,7 +10,6 @@ import SwiftUI
 // MARK: - ChatSideMenuView
 
 struct ChatSideMenuView: View {
-    @Binding var isPresented: Bool
     @State private var isAlarmOn: Bool = false
     @State private var showExitPopUp: Bool = false
 
@@ -39,15 +38,7 @@ struct ChatSideMenuView: View {
             }
         }
         .edgesIgnoringSafeArea(.bottom)
-        .background(
-            Color.black.opacity(0.001) // clear과 똑같이 사용
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    withAnimation {
-                        isPresented = false
-                    }
-                }
-        )
+        .navigationBarHidden(true)
     }
 }
 
@@ -77,7 +68,7 @@ private struct SideMenuContent: View {
             
             ExitButton
             
-            Spacer().frame(height: 31 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 27 * DynamicSizeFactor.factor())
         }
         .padding(.horizontal, 25 * DynamicSizeFactor.factor())
         .frame(maxHeight: .infinity)
