@@ -41,7 +41,7 @@ enum ChatRouter: URLRequestConvertible {
 
     var queryParameters: Parameters? {
         switch self {
-        case let .getChatServer:
+        case .getChatServer:
             return [:]
         }
     }
