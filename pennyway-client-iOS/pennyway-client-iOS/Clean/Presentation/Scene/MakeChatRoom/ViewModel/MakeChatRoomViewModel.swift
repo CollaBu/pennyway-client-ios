@@ -6,12 +6,14 @@ import Foundation
 protocol MakeChatRoomViewModelInput {
     ///    func makeChatRoom(uuid: String, timestamp: String, ext: String)
     func pendChatRoom(roomData: MakeChatRoomItemModel)
+    func validateForm()
 }
 
 // MARK: - MakeChatRoomViewModelOutput
 
 protocol MakeChatRoomViewModelOutput {
     var roomData: Observable<MakeChatRoomItemModel> { get set }
+    var isFormValid: Bool { get set }
 }
 
 // MARK: - MakeChatRoomViewModel
@@ -21,6 +23,7 @@ protocol MakeChatRoomViewModel: MakeChatRoomViewModelInput, MakeChatRoomViewMode
 // MARK: - DefaultMakeChatRoomViewModel
 
 class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
+    @Published var isFormValid: Bool = false // 버튼 활성화 여부
     var roomData: Observable<MakeChatRoomItemModel>
 
     private let makeChatRoomUseCase: MakeChatRoomUseCase
@@ -34,6 +37,12 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
             password: 0
 
         ))
+    }
+
+    /// 제목의 유효성 검사 메서드
+    func validateForm() {
+        let title = roomData.value.title
+        isFormValid = !title.isEmpty && title.count <= 30
     }
 
     func pendChatRoom(roomData: MakeChatRoomItemModel) {

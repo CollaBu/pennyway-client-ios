@@ -6,7 +6,7 @@ import SwiftUI
 struct RoomTitleInput: View {
     @Binding var roomTitle: String
     var title: String
-    var placeholder: String
+//    var placeholder: String
 
     let baseAttribute: BaseAttribute
     let stringAttribute: StringAttribute

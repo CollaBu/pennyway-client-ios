@@ -26,7 +26,11 @@ struct MakeChatRoomView: View {
                     VStack(alignment: .leading) {
                         Spacer().frame(height: 27 * DynamicSizeFactor.factor())
 
-                        RoomTitleInput(roomTitle: $roomTitle, title: titleCustomTextList[0], placeholder: "소비 금액을 작성해 주세요", baseAttribute: baseAttribute, stringAttribute: stringAttribute)
+                        RoomTitleInput(roomTitle: $roomTitle, title: titleCustomTextList[0], baseAttribute: baseAttribute, stringAttribute: stringAttribute)
+                            .onChange(of: roomTitle) { newValue in
+                                viewModelWrapper.makeChatViewModel.roomData.value.title = newValue
+                                viewModelWrapper.makeChatViewModel.validateForm()
+                            }
 
                         Spacer().frame(height: 23 * DynamicSizeFactor.factor())
 
@@ -46,7 +50,7 @@ struct MakeChatRoomView: View {
 
                     Spacer()
                 }
-                CustomBottomButton(action: {}, label: "채팅방 생성", isFormValid: .constant(true))
+                CustomBottomButton(action: {}, label: "채팅방 생성", isFormValid: $viewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
 
@@ -102,8 +106,8 @@ struct MakeChatRoomView: View {
                         .TextAutocapitalization()
                         .AutoCorrectionExtensions()
                         .onChange(of: content) { _ in
-                            if content.count > 500 {
-                                content = String(content.prefix(500))
+                            if content.count > 100 {
+                                content = String(content.prefix(100))
                             }
                         }
                         .frame(height: 123)
