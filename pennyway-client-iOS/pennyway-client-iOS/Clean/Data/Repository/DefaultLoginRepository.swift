@@ -46,4 +46,22 @@ class DefaultLoginRepository: LoginRepository {
             }
         }
     }
+
+    func checkLoginState(completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+        UserAuthAlamofire.shared.checkLoginState { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        completion(.success(response))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

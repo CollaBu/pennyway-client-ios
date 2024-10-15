@@ -12,6 +12,7 @@ import Foundation
 protocol LoginUseCase {
     func login(username: String, password: String, completion: @escaping (Bool) -> Void)
     func oauthLogin(data: OAuthLogin, completion: @escaping (Bool, String?) -> Void)
+    func checkLoginState(completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - DefaultLoginUseCase
@@ -62,6 +63,24 @@ class DefaultLoginUseCase: LoginUseCase {
                 }
             case let .failure(error):
                 completion(false, error.localizedDescription)
+            }
+        }
+    }
+
+    func checkLoginState(completion: @escaping (Bool) -> Void) {
+        repository.checkLoginState { result in
+            switch result {
+            case .success:
+                self.getChatServer { chatResult in
+                    switch chatResult {
+                    case .success:
+                        completion(true)
+                    case .failure:
+                        completion(false)
+                    }
+                }
+            case .failure:
+                completion(false)
             }
         }
     }
