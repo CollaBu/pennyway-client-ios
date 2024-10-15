@@ -6,13 +6,12 @@ import SwiftUI
 struct RoomTitleInput: View {
     @Binding var roomTitle: String
     var title: String
-//    var placeholder: String
 
     let baseAttribute: BaseAttribute
     let stringAttribute: StringAttribute
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
             title.toAttributesText(base: baseAttribute, stringAttribute)
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray07"))

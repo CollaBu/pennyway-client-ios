@@ -74,6 +74,11 @@ struct MakeChatRoomView: View {
 
                     viewModelWrapper.makeChatViewModel.pendChatRoom(roomData: chatRoomData)
 
+                    if let chatRoomId = viewModelWrapper.makeChatViewModel.chatRoomId {
+                        // chatRoomId를 다음 화면으로 전달하여 화면 전환
+                        // 예: NavigationLink를 사용하여 이동하거나 모달로 표시
+                    }
+
                     Log.debug("[MakeChatRoomView]: 버튼 누름")
                 }, label: "채팅방 생성", isFormValid: $viewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())

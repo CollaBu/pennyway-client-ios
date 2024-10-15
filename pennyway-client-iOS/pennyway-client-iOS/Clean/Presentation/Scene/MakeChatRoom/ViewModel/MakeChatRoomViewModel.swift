@@ -14,6 +14,7 @@ protocol MakeChatRoomViewModelInput {
 protocol MakeChatRoomViewModelOutput {
     var roomData: Observable<MakeChatRoomItemModel> { get set }
     var isFormValid: Bool { get set }
+    var chatRoomId: Int64? { get set }
 }
 
 // MARK: - MakeChatRoomViewModel
@@ -24,6 +25,7 @@ protocol MakeChatRoomViewModel: MakeChatRoomViewModelInput, MakeChatRoomViewMode
 
 class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
     @Published var isFormValid: Bool = false // 버튼 활성화 여부
+    @Published var chatRoomId: Int64?
     var roomData: Observable<MakeChatRoomItemModel>
 
     private let makeChatRoomUseCase: MakeChatRoomUseCase
@@ -50,7 +52,8 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
             DispatchQueue.main.async {
                 switch result {
                 case let .success(chatRoomId):
-                    Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 대기 성공")
+                    Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 대기 성공, chatRoomId: \(chatRoomId)")
+                    self.chatRoomId = chatRoomId
                 case let .failure(error):
                     Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 대기 실패")
                 }
