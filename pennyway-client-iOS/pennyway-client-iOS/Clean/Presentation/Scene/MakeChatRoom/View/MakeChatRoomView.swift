@@ -50,11 +50,39 @@ struct MakeChatRoomView: View {
 
                     Spacer()
                 }
-                CustomBottomButton(action: {}, label: "채팅방 생성", isFormValid: $viewModelWrapper.makeChatViewModel.isFormValid)
+                .navigationBarColor(UIColor(named: "White01"), title: "채팅방 만들기")
+                .setTabBarVisibility(isHidden: true)
+                .navigationBarBackButtonHidden(true)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("White01"))
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        HStack {
+                            NavigationBackButton()
+                                .padding(.leading, 5)
+                                .frame(width: 44, height: 44)
+                                .contentShape(Rectangle())
+
+                        }.offset(x: -10)
+                    }
+                }
+
+                Spacer()
+
+                CustomBottomButton(action: {
+                    let chatRoomData = MakeChatRoomItemModel(title: roomTitle, description: content, password: Int32(password) ?? 0)
+
+                    viewModelWrapper.makeChatViewModel.pendChatRoom(roomData: chatRoomData)
+
+                    Log.debug("[MakeChatRoomView]: 버튼 누름")
+                }, label: "채팅방 생성", isFormValid: $viewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
+            .edgesIgnoringSafeArea(.bottom)
 
             if showPopUpView {
+                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+
                 ChatPhotoActionsPopUp(isPresented: $showPopUpView,
                                       showPopUpView: $showPopUpView,
                                       isHiddenTabBar: .constant(true),
@@ -62,23 +90,7 @@ struct MakeChatRoomView: View {
                                       selectedUIImage: $selectedUIImage,
                                       sourceType: $sourceType,
                                       viewModelWrapper: viewModelWrapper)
-            }
-        }
-        .edgesIgnoringSafeArea(.bottom)
-        .setTabBarVisibility(isHidden: true)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarColor(UIColor(named: "White01"), title: "채팅방 만들기")
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("White01"))
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                HStack {
-                    NavigationBackButton()
-                        .padding(.leading, 5)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-
-                }.offset(x: -10)
+                    .edgesIgnoringSafeArea(.bottom)
             }
         }
     }
@@ -150,6 +162,16 @@ struct MakeChatRoomView: View {
                 Spacer().frame(height: 1)
 
                 CustomInputView(inputText: $password, placeholder: "6자리의 숫자 비밀번호가 필요해요", isSecureText: false)
+                    .onChange(of: password) { newValue in
+                        // 비밀번호를 Int32로 변환
+                        if let intPassword = Int32(newValue), newValue.count == 6 {
+                            // 유효한 비밀번호인 경우에만 업데이트
+                            viewModelWrapper.makeChatViewModel.roomData.value.password = intPassword
+                        } else {
+                            // 비밀번호가 유효하지 않으면, 필요한 경우 기본값으로 초기화
+                            viewModelWrapper.makeChatViewModel.roomData.value.password = 0 // 초기값 또는 처리 로직 추가
+                        }
+                    }
             }
         }
     }
@@ -162,7 +184,9 @@ struct MakeChatRoomView: View {
 
             Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-            Button(action: {}, label: {
+            Button(action: {
+                showPopUpView.toggle()
+            }, label: {
                 ZStack {
                     Rectangle()
                         .cornerRadius(6)
