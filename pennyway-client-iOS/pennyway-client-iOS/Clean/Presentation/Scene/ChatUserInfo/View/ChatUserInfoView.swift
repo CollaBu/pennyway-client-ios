@@ -50,27 +50,29 @@ struct ChatUserInfoView: View {
         }
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
-        .edgesIgnoringSafeArea(.bottom)
+        .edgesIgnoringSafeArea(.all)
         .background(
-            Color.red.opacity(0.1) // 변경 필요
+            Image("test")
+                .resizable() // 이미지 크기 조정 가능하게 설정
+                .scaledToFill() // 이미지가 뷰를 꽉 채우도록 비율을 맞춤
         )
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                HStack {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("icon_close")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                            .padding(5)
-                    })
-                    .frame(width: 44, height: 44)
-                    .buttonStyle(BasicButtonStyleUtil())
-                }
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .topBarLeading) {
+//                HStack {
+//                    Button(action: {
+//                        self.presentationMode.wrappedValue.dismiss()
+//                    }, label: {
+//                        Image("icon_close")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+//                            .padding(5)
+//                    })
+//                    .frame(width: 44, height: 44)
+//                    .buttonStyle(BasicButtonStyleUtil())
+//                }
+//            }
+//        }
     }
 
     private var UserInfoContent: some View {

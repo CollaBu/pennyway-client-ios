@@ -1288,7 +1288,7 @@
 		4A1684372CBA63FE0069ADE9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */,
+				4AA3694E2CB841E900528E01 /* ChatUserInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2267,7 +2267,7 @@
 		4AE9B32C2CB67E330044D3E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4AA3694E2CB841E900528E01 /* ChatUserInfoView.swift */,
+				4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
