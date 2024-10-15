@@ -19,25 +19,24 @@ protocol LoginUseCase {
 
 class DefaultLoginUseCase: LoginUseCase {
     private let repository: LoginRepository
-    private let chatRepository: ChatServerRepository
 
-    init(repository: LoginRepository, chatRepository: ChatServerRepository) {
+    init(repository: LoginRepository) {
         self.repository = repository
-        self.chatRepository = chatRepository
     }
 
     func login(username: String, password: String, completion: @escaping (Bool) -> Void) {
         repository.login(username: username, password: password) { [weak self] result in
             switch result {
             case .success:
-                self?.getChatServer { chatResult in
-                    switch chatResult {
-                    case .success:
-                        completion(true)
-                    case .failure:
-                        completion(false)
-                    }
-                }
+//                self?.getChatServer { chatResult in
+//                    switch chatResult {
+//                    case .success:
+//                        completion(true)
+//                    case .failure:
+//                        completion(false)
+//                    }
+//                }
+                completion(true)
             case .failure:
                 completion(false)
             }
@@ -50,14 +49,15 @@ class DefaultLoginUseCase: LoginUseCase {
             case let .success(response):
                 let userId = response.data.user.id
                 if userId != -1 {
-                    self?.getChatServer { chatResult in
-                        switch chatResult {
-                        case .success:
-                            completion(true, nil)
-                        case let .failure(error):
-                            completion(false, error.localizedDescription)
-                        }
-                    }
+//                    self?.getChatServer { chatResult in
+//                        switch chatResult {
+//                        case .success:
+//                            completion(true, nil)
+//                        case let .failure(error):
+//                            completion(false, error.localizedDescription)
+//                        }
+//                    }
+                    completion(true, nil)
                 } else {
                     completion(false, nil)
                 }
@@ -71,27 +71,9 @@ class DefaultLoginUseCase: LoginUseCase {
         repository.checkLoginState { result in
             switch result {
             case .success:
-                self.getChatServer { chatResult in
-                    switch chatResult {
-                    case .success:
-                        completion(true)
-                    case .failure:
-                        completion(false)
-                    }
-                }
+                completion(true)
             case .failure:
                 completion(false)
-            }
-        }
-    }
-
-    private func getChatServer(completion: @escaping (Result<Void, Error>) -> Void) {
-        chatRepository.getChatServer { result in
-            switch result {
-            case .success:
-                completion(.success(()))
-            case let .failure(error):
-                completion(.failure(error))
             }
         }
     }

@@ -129,6 +129,9 @@ PODS:
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
   - PromisesObjC (2.4.0)
+  - SocketRocket (0.7.1)
+  - StompClientLib (1.4.1):
+    - SocketRocket
   - SwiftFormat/CLI (0.54.3)
 
 DEPENDENCIES:
@@ -139,6 +142,7 @@ DEPENDENCIES:
   - KakaoSDKAuth
   - KakaoSDKCommon
   - KakaoSDKUser
+  - StompClientLib
   - SwiftFormat/CLI
 
 SPEC REPOS:
@@ -162,6 +166,8 @@ SPEC REPOS:
     - KakaoSDKUser
     - nanopb
     - PromisesObjC
+    - SocketRocket
+    - StompClientLib
     - SwiftFormat
 
 SPEC CHECKSUMS:
@@ -184,8 +190,10 @@ SPEC CHECKSUMS:
   KakaoSDKUser: b37905ae618cfc3f0310dbbb5236320d7335bcd2
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
+  StompClientLib: ac40390e9660c574675f1c933bec81c8e2811a4f
   SwiftFormat: 0e575b1d412d27cd5906c59fab64a806ba8f2b8e
 
-PODFILE CHECKSUM: 071947aeb98716c211ec598b6111fd73f2bcfb2e
+PODFILE CHECKSUM: dbacbf475f2b80cf716f02da7827d156cb3061de
 
 COCOAPODS: 1.15.2

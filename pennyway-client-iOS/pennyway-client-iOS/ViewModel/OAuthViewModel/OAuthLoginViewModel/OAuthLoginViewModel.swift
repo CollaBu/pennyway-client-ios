@@ -5,7 +5,7 @@ class OAuthLoginViewModel: ObservableObject {
     var model: OAuthLogin
     private let loginUseCase: LoginUseCase
 
-    init(model: OAuthLogin, loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository(), chatRepository: DefaultChatServerRepository())) {
+    init(model: OAuthLogin, loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
         self.model = model
         self.loginUseCase = loginUseCase
     }

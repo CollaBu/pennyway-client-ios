@@ -12,7 +12,9 @@ class AppViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let loginUseCase: LoginUseCase
 
-    init(loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository(), chatRepository: DefaultChatServerRepository())) {
+    private let chatStompViewModel = ChatStompViewModel()
+
+    init(loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
         self.loginUseCase = loginUseCase
         checkLoginStateUseCase()
 
@@ -34,37 +36,6 @@ class AppViewModel: ObservableObject {
         isLoggedIn = true
     }
 
-//    func checkLoginStateApi() {
-//        UserAuthAlamofire.shared.checkLoginState { [weak self] result in
-//            switch result {
-//            case let .success(data):
-//                if let responseData = data {
-//                    do {
-//                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
-//                        Log.debug(response)
-//                        self?.checkLoginState = true
-//                        self?.isLoggedIn = true
-//
-//                        self?.registDeviceTokenApi()
-//                        Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
-//
-//                    } catch {
-//                        Log.fault("Error parsing response JSON: \(error)")
-//                        self?.checkLoginState = false
-//                    }
-//                }
-//            case let .failure(error):
-//                if let statusSpecificError = error as? StatusSpecificError {
-//                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
-//                } else {
-//                    Log.error("Network request failed: \(error)")
-//                }
-//
-//                self?.checkLoginState = false
-//            }
-//        }
-//    }
-
     func checkLoginStateUseCase() {
         loginUseCase.checkLoginState { [weak self] isLoggedIn in
             self?.checkLoginState = isLoggedIn
@@ -72,6 +43,7 @@ class AppViewModel: ObservableObject {
             if isLoggedIn {
                 self?.registDeviceTokenApi()
                 Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
+                self?.chatStompViewModel.connect()
             }
         }
     }

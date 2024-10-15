@@ -16,6 +16,7 @@ class DefaultLoginRepository: LoginRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        Log.debug("[DefaultLoginRepository] 로그인 성공: \(response)")
                         completion(.success(response))
                     } catch {
                         completion(.failure(error))
@@ -36,6 +37,7 @@ class DefaultLoginRepository: LoginRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        Log.debug("[DefaultLoginRepository] 소셜 로그인 성공: \(response)")
                         completion(.success(response))
                     } catch {
                         completion(.failure(error))
@@ -54,6 +56,7 @@ class DefaultLoginRepository: LoginRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        Log.debug("[DefaultLoginRepository] 자동 로그인 성공: \(response)")
                         completion(.success(response))
                     } catch {
                         completion(.failure(error))
