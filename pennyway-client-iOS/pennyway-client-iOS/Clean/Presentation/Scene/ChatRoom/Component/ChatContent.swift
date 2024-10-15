@@ -18,8 +18,6 @@ struct ChatContent: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-//                Spacer().frame(height: 22 * DynamicSizeFactor.factor())
-
                 LazyVStack(spacing: 14 * DynamicSizeFactor.factor()) {
                     ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())

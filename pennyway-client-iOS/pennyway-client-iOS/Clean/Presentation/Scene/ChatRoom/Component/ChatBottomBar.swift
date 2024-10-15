@@ -159,7 +159,7 @@ struct ChatBottomBar: View {
     /// 텍스트의 너비 계산
     private func calculateTextWidth(for text: String, fontSize: CGFloat) -> CGFloat {
         guard !text.isEmpty else {
-            Log.error("텍스트가 비어있어서 너비는 0")
+            Log.debug("텍스트가 비어있어서 너비는 0")
             return 0
         }
 
