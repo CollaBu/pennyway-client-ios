@@ -55,17 +55,6 @@ struct MakeChatRoomView: View {
                 .navigationBarBackButtonHidden(true)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("White01"))
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        HStack {
-                            NavigationBackButton()
-                                .padding(.leading, 5)
-                                .frame(width: 44, height: 44)
-                                .contentShape(Rectangle())
-
-                        }.offset(x: -10)
-                    }
-                }
 
                 Spacer()
 
@@ -84,6 +73,17 @@ struct MakeChatRoomView: View {
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
             .edgesIgnoringSafeArea(.bottom)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    HStack {
+                        NavigationBackButton()
+                            .padding(.leading, 5)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+
+                    }.offset(x: -10)
+                }
+            }
 
             if showPopUpView {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)

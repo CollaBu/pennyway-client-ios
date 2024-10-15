@@ -12,9 +12,9 @@ class DefaultMakeChatRoomRepository: MakeChatRoomRepository {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(PendChatRoomResponseDto.ChatRoomData.self, from: responseData)
+                        let response = try JSONDecoder().decode(PendChatRoomResponseDto.self, from: responseData)
                         Log.debug("[DefaultMakeChatRoomRepository]: 채팅방 생성 대기 api 성공: \(response)")
-                        completion(.success(response.chatRoomId))
+                        completion(.success(response.data.chatRoomId))
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                         completion(.failure(error))
