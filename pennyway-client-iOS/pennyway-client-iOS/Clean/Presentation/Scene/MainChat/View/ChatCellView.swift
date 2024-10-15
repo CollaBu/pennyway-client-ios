@@ -1,9 +1,9 @@
 
 import SwiftUI
 
-// MARK: - MainChatView
+// MARK: - ChatCellView
 
-struct MainChatView: View {
+struct ChatCellView: View {
     @State private var selectedTab: Int = 1
     @State private var chatRoomName: String = "" // 수정 예정
     @State private var isNavigateToMakeChatRoom = false
@@ -15,6 +15,8 @@ struct MainChatView: View {
         ChatRoom(id: 2, title: "월급 다 쓴 사람이 모인 방", description: "함께 저축해요", background_image_url: "icon_notifications", password: "1234", privacy_setting: true, notify_enabled: true)
     ]
     
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
+
     private let maxLength = 19
 
     var body: some View {
@@ -51,7 +53,7 @@ struct MainChatView: View {
                         ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $dummyChatRooms, isMyChat: false)
                     }
                     
-                    NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
+                    NavigationLink(destination: MakeChatRoomView(viewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                         .hidden()
                 }
                 
@@ -78,7 +80,7 @@ struct MainChatView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
                 }
-                NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
+                NavigationLink(destination: MakeChatRoomView(viewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
             }
             .setTabBarVisibility(isHidden: false)
@@ -198,8 +200,4 @@ final class MainChatViewModelWrapper: ObservableObject {
     init(chatData: ChatItemViewModel) {
         self.chatData = chatData
     }
-}
-
-#Preview {
-    MainChatView()
 }

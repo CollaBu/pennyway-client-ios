@@ -25,18 +25,21 @@ struct MainTabView: View {
                 .tag(1)
                 .buttonStyle(BasicButtonStyleUtil())
 
-//            TemporaryView()
-            MainChatView()
-                .tabItem {
-                    selection == 2 ? Image("icon_tapbar_chatting_on") : Image("icon_tapbar_chatting_off")
-                    Text("채팅")
-                }
-                .tag(2)
-                .buttonStyle(BasicButtonStyleUtil())
+//            MainChatView()
+            LazyView {
+                AppComponent()
+                    .makeChatRootView()
+            }
+            .tabItem {
+                selection == 2 ? Image("icon_tapbar_chatting_on") : Image("icon_tapbar_chatting_off")
+                Text("채팅")
+            }
+            .tag(2)
+            .buttonStyle(BasicButtonStyleUtil())
 
             LazyView {
                 AppComponent()
-                    .makeRootView()
+                    .makeProfileRootView()
             }
             .tabItem {
                 selection == 3 ? Image("icon_tabbar_profile_on") : Image("icon_tabbar_profile_off")

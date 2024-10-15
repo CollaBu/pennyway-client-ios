@@ -23,4 +23,11 @@ final class AppDIContainer {
 //        )
         return ProfileSceneDIContainer()
     }
+
+    func makeChatSceneDIContainer() -> ChatSceneDIContainer {
+//        let dependencies = ProfileSceneDIContainer.Dependencies(
+//            apiDataTransferService: apiDataTransferService
+//        )
+        return ChatSceneDIContainer()
+    }
 }

@@ -1,8 +1,9 @@
+
 import AVFoundation
 import Photos
 import SwiftUI
 
-struct EditProfilePopUpView: View {
+struct ChatPhotoActionsPopUp: View {
     @Binding var isPresented: Bool
     @Binding var showPopUpView: Bool
     @Binding var isHiddenTabBar: Bool
@@ -10,7 +11,7 @@ struct EditProfilePopUpView: View {
     @Binding var selectedUIImage: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
 
-    @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
 
@@ -84,22 +85,22 @@ struct EditProfilePopUpView: View {
     }
 
     private func deleteProfileImage() {
-        if let url = getUserData()?.profileImageUrl, !url.isEmpty {
-            viewModelWrapper.viewModel.deleteProfileImage { success in
-                if success {
-                    viewModelWrapper.viewModel.userData.value.imageDelete()
-                    selectedUIImage = nil
-                    Log.debug("deleteProfileImageApi 성공")
-                } else {
-                    Log.debug("삭제 api 호출 실패")
-                }
-                isPresented = false
-                showPopUpView = false
-                isHiddenTabBar = false
-            }
-        } else {
-            Log.debug("프로필 사진 비어 있음")
-        }
+//        if let url = getUserData()?.profileImageUrl, !url.isEmpty {
+//            viewModelWrapper.viewModel.deleteProfileImage { success in
+//                if success {
+//                    viewModelWrapper.viewModel.userData.value.imageDelete()
+//                    selectedUIImage = nil
+//                    Log.debug("deleteProfileImageApi 성공")
+//                } else {
+//                    Log.debug("삭제 api 호출 실패")
+//                }
+//                isPresented = false
+//                showPopUpView = false
+//                isHiddenTabBar = false
+//            }
+//        } else {
+//            Log.debug("프로필 사진 비어 있음")
+//        }
     }
 
     private func checkPhotoLibraryPermission() {

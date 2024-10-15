@@ -1,44 +1,64 @@
 
 import SwiftUI
 
+// MARK: - MakeChatRoomView
+
 struct MakeChatRoomView: View {
     @State var roomTitle = "" // 채팅방 제목을 관리하는 함수
     @State var content = "" // 채팅방 설명을 관리하는 변수
     @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
     @State var password = "" // 비밀번호 입력을 관리하는 변수
+    @State private var showPopUpView = false // 사진 선택 팝업 표시여부를 관리하는 변수
+    @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
+    @State private var showImagePicker = false
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     let titleCustomTextList: [String] = ["제목*"]
     let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray04"))
     let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
 
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    Spacer().frame(height: 27 * DynamicSizeFactor.factor())
+        ZStack {
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        Spacer().frame(height: 27 * DynamicSizeFactor.factor())
 
-                    RoomTitleInput(roomTitle: $roomTitle, title: titleCustomTextList[0], placeholder: "소비 금액을 작성해 주세요", baseAttribute: baseAttribute, stringAttribute: stringAttribute)
+                        RoomTitleInput(roomTitle: $roomTitle, title: titleCustomTextList[0], placeholder: "소비 금액을 작성해 주세요", baseAttribute: baseAttribute, stringAttribute: stringAttribute)
 
-                    Spacer().frame(height: 23 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 23 * DynamicSizeFactor.factor())
 
-                    RoomDescriptionInput
+                        RoomDescriptionInput
 
-                    Spacer().frame(height: 23 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 23 * DynamicSizeFactor.factor())
 
-                    privacySetting
+                        privacySetting
 
-                    Spacer().frame(height: 22 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 22 * DynamicSizeFactor.factor())
 
-                    settingChatRoomImage
+                        settingChatRoomImage
+
+                        Spacer()
+                    }
+                    .frame(maxHeight: .infinity)
 
                     Spacer()
                 }
-                .frame(maxHeight: .infinity)
-
-                Spacer()
+                CustomBottomButton(action: {}, label: "채팅방 생성", isFormValid: .constant(true))
+                    .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
-            CustomBottomButton(action: {}, label: "채팅방 생성", isFormValid: .constant(true))
-                .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
+            if showPopUpView {
+                ChatPhotoActionsPopUp(isPresented: $showPopUpView,
+                                      showPopUpView: $showPopUpView,
+                                      isHiddenTabBar: .constant(true),
+                                      showImagePicker: $showImagePicker,
+                                      selectedUIImage: $selectedUIImage,
+                                      sourceType: $sourceType,
+                                      viewModelWrapper: viewModelWrapper)
+            }
         }
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
@@ -157,6 +177,12 @@ struct MakeChatRoomView: View {
     }
 }
 
-#Preview {
-    MakeChatRoomView()
+// MARK: - ChatViewModelWrapper
+
+final class ChatViewModelWrapper: ObservableObject {
+    @Published var makeChatViewModel: MakeChatRoomViewModel
+
+    init(makeChatViewModel: any MakeChatRoomViewModel) {
+        self.makeChatViewModel = makeChatViewModel
+    }
 }

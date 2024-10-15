@@ -10,4 +10,3 @@ public struct MakeChatRoomRequestDto: Encodable {
         self.backgroundImageUrl = backgroundImageUrl
     }
 }
-
