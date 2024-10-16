@@ -10,7 +10,7 @@ class SignUpViewModel: ObservableObject {
     func signUp(completion: @escaping (Bool, UserId?) -> Void) {
         let model = SignUp(name: RegistrationManager.shared.name, username: RegistrationManager.shared.username, password: RegistrationManager.shared.password, phone: RegistrationManager.shared.formattedPhoneNumber ?? "", code: RegistrationManager.shared.code)
 
-        signUpUseCase.signUp(model: model) { success, userId in
+        signUpUseCase.signup(model: model) { success, userId in
             if success {
                 Log.debug("[SignUpViewModel]-일반 회원가입 성공")
                 completion(true, userId)
