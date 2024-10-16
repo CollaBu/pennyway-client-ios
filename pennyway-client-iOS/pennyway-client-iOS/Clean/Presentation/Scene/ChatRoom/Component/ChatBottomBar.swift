@@ -10,26 +10,59 @@ import SwiftUI
 struct ChatBottomBar: View {
     @State private var message: String = ""
     @State private var showFeature: Bool = false
-    @State private var textEditorHeight: CGFloat = 14 * DynamicSizeFactor.factor()
-    @State private var lineCount: Int = 1
+    @State private var currentTextEditorHeight: CGFloat = 14 * DynamicSizeFactor.factor()
+    @State private var maxTextWidth: CGFloat = 0
+
+    // TextEditor의 최소, 최대 높이 정의
+    private let minHeight: CGFloat = 15 * DynamicSizeFactor.factor() // 최소 높이
+    private let maxHeight: CGFloat = 14 * DynamicSizeFactor.factor() * 3 // 최대 높이 (3줄)
+    private let maxLineCount: Int = 3 // 최대 줄 수
+
+    /// 현재 메시지에서 줄바꿈(\n)으로 구분된 줄의 수 계산
+    private var newLineCount: Int {
+        message.components(separatedBy: "\n").count
+    }
+
+    /// 텍스트 자동 줄바꿈으로 인한 줄 수 계산
+    private var autoLineCount: Int {
+        var counter: Int = 0
+
+        guard maxTextWidth > 0 else {
+            Log.error("maxTextWidth가 0이거나 유효하지 않음")
+            return 0
+        }
+
+        // 각 줄의 텍스트 너비 계산하여 줄 수 증가
+        for line in message.components(separatedBy: "\n") {
+            let currentTextWidth = calculateTextWidth(for: line, fontSize: minHeight)
+
+            if currentTextWidth > 0 {
+                counter += Int(currentTextWidth / maxTextWidth)
+            } else {
+                Log.error("라인의 텍스트 너비가 유효하지 않거나 0: \(line)")
+            }
+        }
+
+        return counter
+    }
 
     var body: some View {
         VStack {
             Spacer().frame(height: 11 * DynamicSizeFactor.factor())
 
-            HStack {
+            HStack(spacing: 4) {
                 FeatureButton
                 MessageInput
                 SendButton
             }
-            .frame(height: textEditorHeight + 16 * DynamicSizeFactor.factor())
-            .background(Color("Gray02"))
-            .cornerRadius(15)
+            .frame(height: currentTextEditorHeight + 16)
+            .background(Color(.gray02))
+            .cornerRadius(15 * DynamicSizeFactor.factor())
             .padding(.horizontal, 16)
 
             FeatureContent
         }
-        .background(Color("White01"))
+        .background(Color(.white01))
     }
 
     private var FeatureButton: some View {
@@ -43,38 +76,42 @@ struct ChatBottomBar: View {
                 Image(showFeature ? "icon_close_filled_gray" : "icon_add_filled_gray")
                     .resizable()
                     .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
-                    .padding(.leading, 5 * DynamicSizeFactor.factor())
-                    .padding(.bottom, 5 * DynamicSizeFactor.factor())
+                    .padding(.leading, 5)
+                    .padding(.bottom, 8)
             }
             .buttonStyle(PlainButtonStyle())
         }
     }
 
     private var MessageInput: some View {
-        ZStack(alignment: .leading) {
-            Rectangle()
-                .fill(Color("Gray02"))
-                .frame(height: textEditorHeight)
-
-            TextEditor(text: $message)
-                .frame(height: textEditorHeight)
-                .colorMultiply(Color("Gray02"))
-                .platformTextColor(color: Color("Gray07"))
-                .font(.B2MediumFont())
-                .lineLimit(5)
-                .onChange(of: message) { newValue in
-                    updateTextEditorHeight(text: newValue)
-                }
-
-            if message.isEmpty {
-                Text("오늘은 어떤 소비를 했나요?")
-                    .platformTextColor(color: Color("Gray03"))
+        GeometryReader { proxy in
+            ZStack(alignment: .leading) {
+                TextEditor(text: $message)
+                    .colorMultiply(Color(.gray02))
                     .font(.B2MediumFont())
-                    .padding(.vertical, 8)
-            }
-        }
+                    .platformTextColor(color: Color(.gray07))
+                    .frame(height: currentTextEditorHeight)
+                    .TextAutocapitalization()
+                    .AutoCorrectionExtensions()
+                    .onAppear {
+                        setMaxTextWidth(proxy: proxy) // 최대 텍스트 너비 설정
+                    }
+                    .onChange(of: message) { _ in
+                        updateTextEditorCurrentHeight() // 메시지 변경 시 TextEditor 높이 업데이트
+                    }
+                    .padding(.trailing, 19)
 
-        .frame(maxWidth: .infinity)
+                if message.isEmpty {
+                    Text("오늘은 어떤 소비를 했나요?")
+                        .platformTextColor(color: Color(.gray03))
+                        .font(.B2MediumFont())
+                        .padding(.leading, 4)
+                        .allowsHitTesting(false)
+                }
+            }
+            .padding(.vertical, 8)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private var SendButton: some View {
@@ -88,8 +125,8 @@ struct ChatBottomBar: View {
                     Image("icon_send_filled_primary")
                         .resizable()
                         .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
-                        .padding(.trailing, 5 * DynamicSizeFactor.factor())
-                        .padding(.bottom, 5 * DynamicSizeFactor.factor())
+                        .padding(.trailing, 5)
+                        .padding(.bottom, 8)
                 }
                 .transition(.opacity)
                 .animation(.easeInOut, value: message.isEmpty)
@@ -109,7 +146,7 @@ struct ChatBottomBar: View {
                         .frame(width: 37 * DynamicSizeFactor.factor(), height: 37 * DynamicSizeFactor.factor())
 
                     Text("사진")
-                        .platformTextColor(color: Color("Gray07"))
+                        .platformTextColor(color: Color(.gray07))
                         .font(.B2MediumFont())
                 }
                 Spacer().frame(height: 20 * DynamicSizeFactor.factor())
@@ -119,17 +156,43 @@ struct ChatBottomBar: View {
         }
     }
 
-    /// 엔터키 누른 걸 감지해서 라인 수에 따른 높이 조절 메서드
-    private func updateTextEditorHeight(text: String) {
-        let newLineCount = text.components(separatedBy: .newlines).count
-        if newLineCount != lineCount {
-            let heightDifference = (newLineCount - lineCount) * Int(14 * DynamicSizeFactor.factor())
-
-            if textEditorHeight <= 14 * DynamicSizeFactor.factor() * 5 {
-                textEditorHeight += CGFloat(heightDifference)
-                lineCount = newLineCount
-            }
+    /// 텍스트의 너비 계산
+    private func calculateTextWidth(for text: String, fontSize: CGFloat) -> CGFloat {
+        guard !text.isEmpty else {
+            Log.debug("텍스트가 비어있어서 너비는 0")
+            return 0
         }
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: fontSize)
+        ]
+
+        let attributedString = NSAttributedString(string: text, attributes: attributes)
+
+        let textBoundingSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+
+        let textRect = attributedString.boundingRect(
+            with: textBoundingSize,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            context: nil
+        )
+
+        return textRect.width
+    }
+
+    /// GeometryReader를 사용하여 최대 텍스트 너비 설정
+    private func setMaxTextWidth(proxy: GeometryProxy) {
+        DispatchQueue.main.async {
+            self.maxTextWidth = proxy.size.width + 30
+        }
+    }
+
+    /// TextEditor의 현재 높이 업데이트
+    private func updateTextEditorCurrentHeight() {
+        let totalLineCount = newLineCount + autoLineCount
+
+        let currentHeight = (CGFloat(totalLineCount) * minHeight)
+        currentTextEditorHeight = min(max(currentHeight, minHeight), maxHeight)
     }
 }
 
