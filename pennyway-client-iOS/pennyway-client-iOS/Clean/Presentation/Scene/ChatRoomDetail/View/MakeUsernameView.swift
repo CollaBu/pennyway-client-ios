@@ -33,7 +33,7 @@ struct MakeUsernameView: View {
             CustomBottomButton(action: {}, label: "채팅 참여하기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
-        .navigationBarColor(UIColor(named: "White01"), title: "배달음식 그만 먹는 방")
+        .navigationBarColor(UIColor(named: "White01"), title: "프로필 설정")
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)

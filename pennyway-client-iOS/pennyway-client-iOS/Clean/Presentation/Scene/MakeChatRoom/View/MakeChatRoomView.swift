@@ -3,7 +3,6 @@ import SwiftUI
 
 struct MakeChatRoomView: View {
     @State var roomTitle = "" // 채팅방 제목을 관리하는 함수
-
     @State var content = "" // 채팅방 설명을 관리하는 변수
     @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
     @State var password = "" // 비밀번호 입력을 관리하는 변수
@@ -38,7 +37,7 @@ struct MakeChatRoomView: View {
 
                 Spacer()
             }
-            CustomBottomButton(action: {}, label: "확인", isFormValid: .constant(true))
+            CustomBottomButton(action: {}, label: "채팅방 생성", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -67,42 +66,40 @@ struct MakeChatRoomView: View {
                 .platformTextColor(color: Color("Gray04"))
                 .padding(.horizontal, 20)
 
-            ScrollView(.vertical, showsIndicators: false) {
-                HStack(spacing: 11 * DynamicSizeFactor.factor()) {
-                    ZStack(alignment: .topLeading) {
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(Color("Gray01"))
-                            .frame(height: 106 * DynamicSizeFactor.factor())
+            HStack(spacing: 11 * DynamicSizeFactor.factor()) {
+                ZStack(alignment: .topLeading) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color("Gray01"))
+                        .frame(height: 106 * DynamicSizeFactor.factor())
 
-                        TextEditor(text: $content)
-                            .font(.B1MediumFont())
-                            .padding(.horizontal, 10)
-                            .padding(.top, 8)
-                            .zIndex(0)
-                            .colorMultiply(Color("Gray01"))
-                            .cornerRadius(6)
-                            .TextAutocapitalization()
-                            .AutoCorrectionExtensions()
-                            .onChange(of: content) { _ in
-                                if content.count > 500 {
-                                    content = String(content.prefix(500))
-                                }
+                    TextEditor(text: $content)
+                        .font(.B1MediumFont())
+                        .padding(.horizontal, 10)
+                        .padding(.top, 8)
+                        .zIndex(0)
+                        .colorMultiply(Color("Gray01"))
+                        .cornerRadius(6)
+                        .TextAutocapitalization()
+                        .AutoCorrectionExtensions()
+                        .onChange(of: content) { _ in
+                            if content.count > 500 {
+                                content = String(content.prefix(500))
                             }
-                            .frame(height: 123)
-
-                        if content.isEmpty {
-                            Text("채팅방 소개를 해주세요")
-                                .font(.H4MediumFont())
-                                .padding(.leading, 14)
-                                .padding(.top, 16)
-                                .platformTextColor(color: Color("Gray03"))
-                                .cornerRadius(6)
                         }
+                        .frame(height: 123)
+
+                    if content.isEmpty {
+                        Text("채팅방 소개를 해주세요")
+                            .font(.H4MediumFont())
+                            .padding(.leading, 14)
+                            .padding(.top, 16)
+                            .platformTextColor(color: Color("Gray03"))
+                            .cornerRadius(6)
                     }
-                    .clipShape(RoundedRectangle(cornerRadius: 6))
                 }
-                .padding(.horizontal, 20)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
             }
+            .padding(.horizontal, 20)
         }
     }
 
@@ -114,7 +111,7 @@ struct MakeChatRoomView: View {
                 .padding(.horizontal, 20)
 
             HStack {
-                Text("채팅방 공개 설정")
+                Text("채팅방 비밀번호 설정")
                     .font(.ButtonH4SemiboldFont())
                     .platformTextColor(color: Color("Gray06"))
 
