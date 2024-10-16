@@ -23,4 +23,8 @@ public struct LinkOAuthToAccountRequestDto: Encodable {
         self.code = code
         self.provider = provider
     }
+
+    static func from(model: LinkOAuthToAccount) -> LinkOAuthToAccountRequestDto {
+        return LinkOAuthToAccountRequestDto(oauthId: model.oauthId, idToken: model.idToken, nonce: model.nonce, phone: model.phone, code: model.code, provider: model.provider)
+    }
 }

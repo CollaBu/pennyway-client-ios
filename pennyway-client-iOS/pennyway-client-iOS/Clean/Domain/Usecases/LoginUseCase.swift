@@ -12,6 +12,8 @@ import Foundation
 protocol LoginUseCase {
     func login(username: String, password: String, completion: @escaping (Bool) -> Void)
     func oauthLogin(data: OAuthLogin, completion: @escaping (Bool, String?) -> Void)
+    func linkOAuthToAccount(data: LinkOAuthToAccount, completion: @escaping (Bool, String?) -> Void)
+    func linkAccountToOAuth(data: LinkAccountToOAuth, completion: @escaping (Bool, String?) -> Void)
     func checkLoginState(completion: @escaping (Bool) -> Void)
 }
 
@@ -41,7 +43,7 @@ class DefaultLoginUseCase: LoginUseCase {
         repository.oauthLogin(model: data) { [weak self] result in
             switch result {
             case let .success(response):
-                let userId = response.data.user.id
+                let userId = response.user.id
                 if userId != -1 {
                     self?.chatStompService.connect()
                     completion(true, nil)
@@ -62,6 +64,30 @@ class DefaultLoginUseCase: LoginUseCase {
                 completion(true)
             case .failure:
                 completion(false)
+            }
+        }
+    }
+
+    func linkOAuthToAccount(data: LinkOAuthToAccount, completion: @escaping (Bool, String?) -> Void) {
+        repository.linkOAuthToAccount(model: data) { [weak self] result in
+            switch result {
+            case let .success(responseData):
+                self?.chatStompService.connect()
+                completion(true, String(responseData.user.id))
+            case .failure:
+                completion(false, nil)
+            }
+        }
+    }
+
+    func linkAccountToOAuth(data: LinkAccountToOAuth, completion: @escaping (Bool, String?) -> Void) {
+        repository.linkAccountToOAuth(model: data) { [weak self] result in
+            switch result {
+            case let .success(responseData):
+                self?.chatStompService.connect()
+                completion(true, String(responseData.user.id))
+            case let .failure(error):
+                completion(false, nil)
             }
         }
     }

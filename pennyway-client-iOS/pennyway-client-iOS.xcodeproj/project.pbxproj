@@ -1097,6 +1097,7 @@
 		4A12FEE72C9C480400DE10BC /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				4ADA09592CBED95A001F9384 /* DefaultChatStompService.swift */,
 				4A12FEEB2C9C486300DE10BC /* Usecases */,
 				4A12FEEA2C9C484B00DE10BC /* Interfaces */,
 				4A12FEE92C9C481900DE10BC /* Models */,
@@ -1149,7 +1150,6 @@
 				D898E8102CA5A55A003739F1 /* LogoutUseCase.swift */,
 				4A73545F2CA45BBA002A856F /* LoginUseCase.swift */,
 				4AD5D0B62CA7108F0044CD75 /* SignUpUseCase.swift */,
-				4ADA09592CBED95A001F9384 /* DefaultChatStompService.swift */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
