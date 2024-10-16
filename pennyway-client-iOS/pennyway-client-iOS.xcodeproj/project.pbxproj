@@ -276,8 +276,7 @@
 		4ADA094F2CBE679C001F9384 /* ChatStompRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA094E2CBE679C001F9384 /* ChatStompRepository.swift */; };
 		4ADA09522CBE681B001F9384 /* DefaultChatStompRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA09512CBE681B001F9384 /* DefaultChatStompRepository.swift */; };
 		4ADA09562CBED3F9001F9384 /* GetChatServerResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA09552CBED3F9001F9384 /* GetChatServerResponseDto.swift */; };
-		4ADA09582CBED90C001F9384 /* ChatStompViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA09572CBED90C001F9384 /* ChatStompViewModel.swift */; };
-		4ADA095A2CBED95A001F9384 /* ChatStompUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA09592CBED95A001F9384 /* ChatStompUseCase.swift */; };
+		4ADA095A2CBED95A001F9384 /* DefaultChatStompService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA09592CBED95A001F9384 /* DefaultChatStompService.swift */; };
 		4ADACB002CA3B973003AAA3A /* DefaultProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACAFF2CA3B973003AAA3A /* DefaultProfileImageRepository.swift */; };
 		4ADACB022CA3B984003AAA3A /* ProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACB012CA3B984003AAA3A /* ProfileImageRepository.swift */; };
 		4ADACB042CA3C4E0003AAA3A /* DeleteImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADACB032CA3C4E0003AAA3A /* DeleteImageUseCase.swift */; };
@@ -682,8 +681,7 @@
 		4ADA094E2CBE679C001F9384 /* ChatStompRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStompRepository.swift; sourceTree = "<group>"; };
 		4ADA09512CBE681B001F9384 /* DefaultChatStompRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatStompRepository.swift; sourceTree = "<group>"; };
 		4ADA09552CBED3F9001F9384 /* GetChatServerResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatServerResponseDto.swift; sourceTree = "<group>"; };
-		4ADA09572CBED90C001F9384 /* ChatStompViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStompViewModel.swift; sourceTree = "<group>"; };
-		4ADA09592CBED95A001F9384 /* ChatStompUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStompUseCase.swift; sourceTree = "<group>"; };
+		4ADA09592CBED95A001F9384 /* DefaultChatStompService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatStompService.swift; sourceTree = "<group>"; };
 		4ADACAFF2CA3B973003AAA3A /* DefaultProfileImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileImageRepository.swift; sourceTree = "<group>"; };
 		4ADACB012CA3B984003AAA3A /* ProfileImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageRepository.swift; sourceTree = "<group>"; };
 		4ADACB032CA3C4E0003AAA3A /* DeleteImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageUseCase.swift; sourceTree = "<group>"; };
@@ -1151,7 +1149,7 @@
 				D898E8102CA5A55A003739F1 /* LogoutUseCase.swift */,
 				4A73545F2CA45BBA002A856F /* LoginUseCase.swift */,
 				4AD5D0B62CA7108F0044CD75 /* SignUpUseCase.swift */,
-				4ADA09592CBED95A001F9384 /* ChatStompUseCase.swift */,
+				4ADA09592CBED95A001F9384 /* DefaultChatStompService.swift */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
@@ -1218,7 +1216,6 @@
 				4A863A102CB4594C00BA2F2F /* ChatRoom */,
 				4A12FF012C9C4A7900DE10BC /* UserProfile */,
 				4A12FF002C9C4A7200DE10BC /* Root */,
-				4ADA09572CBED90C001F9384 /* ChatStompViewModel.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -2758,7 +2755,7 @@
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
-				4ADA095A2CBED95A001F9384 /* ChatStompUseCase.swift in Sources */,
+				4ADA095A2CBED95A001F9384 /* DefaultChatStompService.swift in Sources */,
 				4A8571342BC650FA0082CE47 /* BaseUrl.swift in Sources */,
 				4AA13C5E2C63E2A000D8DEE7 /* ObjectStorageAlamofire.swift in Sources */,
 				D85927FA2BE9116700653391 /* LoginViewModel.swift in Sources */,
@@ -2877,7 +2874,6 @@
 				4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
-				4ADA09582CBED90C001F9384 /* ChatStompViewModel.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */,
 				D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */,

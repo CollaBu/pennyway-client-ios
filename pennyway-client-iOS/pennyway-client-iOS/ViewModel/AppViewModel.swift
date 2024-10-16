@@ -12,8 +12,6 @@ class AppViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let loginUseCase: LoginUseCase
 
-    private let chatStompViewModel = ChatStompViewModel()
-
     init(loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
         self.loginUseCase = loginUseCase
         checkLoginStateUseCase()
@@ -43,7 +41,6 @@ class AppViewModel: ObservableObject {
             if isLoggedIn {
                 self?.registDeviceTokenApi()
                 Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
-                self?.chatStompViewModel.connect()
             }
         }
     }

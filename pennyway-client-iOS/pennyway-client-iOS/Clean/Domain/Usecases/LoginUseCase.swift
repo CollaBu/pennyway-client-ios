@@ -19,6 +19,7 @@ protocol LoginUseCase {
 
 class DefaultLoginUseCase: LoginUseCase {
     private let repository: LoginRepository
+    private let chatStompService = DefaultChatStompService.shared
 
     init(repository: LoginRepository) {
         self.repository = repository
@@ -28,14 +29,7 @@ class DefaultLoginUseCase: LoginUseCase {
         repository.login(username: username, password: password) { [weak self] result in
             switch result {
             case .success:
-//                self?.getChatServer { chatResult in
-//                    switch chatResult {
-//                    case .success:
-//                        completion(true)
-//                    case .failure:
-//                        completion(false)
-//                    }
-//                }
+                self?.chatStompService.connect()
                 completion(true)
             case .failure:
                 completion(false)
@@ -49,14 +43,7 @@ class DefaultLoginUseCase: LoginUseCase {
             case let .success(response):
                 let userId = response.data.user.id
                 if userId != -1 {
-//                    self?.getChatServer { chatResult in
-//                        switch chatResult {
-//                        case .success:
-//                            completion(true, nil)
-//                        case let .failure(error):
-//                            completion(false, error.localizedDescription)
-//                        }
-//                    }
+                    self?.chatStompService.connect()
                     completion(true, nil)
                 } else {
                     completion(false, nil)
@@ -68,9 +55,10 @@ class DefaultLoginUseCase: LoginUseCase {
     }
 
     func checkLoginState(completion: @escaping (Bool) -> Void) {
-        repository.checkLoginState { result in
+        repository.checkLoginState { [weak self] result in
             switch result {
             case .success:
+                self?.chatStompService.connect()
                 completion(true)
             case .failure:
                 completion(false)

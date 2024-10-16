@@ -8,5 +8,8 @@
 import Foundation
 
 protocol ChatStompRepository {
-    func getChatServer(completion: @escaping (Result<String, Error>) -> Void)
+    func connect(completion: @escaping (Result<Void, Error>) -> Void)
+    func disconnect()
+    func sendMessage(message: String, destination: String)
+    func subscribeToDestination(_ destination: String)
 }
