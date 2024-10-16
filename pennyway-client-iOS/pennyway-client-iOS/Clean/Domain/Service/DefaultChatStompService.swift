@@ -9,18 +9,9 @@ import Combine
 import StompClientLib
 import SwiftUI
 
-// MARK: - ChatStompService
-
-protocol ChatStompService {
-    func connect()
-    func disconnect()
-    func sendMessage(message: String, destination: String)
-    func subscribeToDestination(_ destination: String)
-}
-
 // MARK: - DefaultChatStompService
 
-class DefaultChatStompService: ChatStompService {
+class DefaultChatStompService {
     static let shared = DefaultChatStompService()
     
     private let repository: ChatStompRepository
@@ -33,8 +24,7 @@ class DefaultChatStompService: ChatStompService {
         repository.connect { result in
             switch result {
             case .success:
-                self.subscribeToChat()
-                self.subscribeToErrors()
+                Log.debug("[DefaultChatStompService] sucess connect")
             case let .failure(error):
                 Log.error("Failed to connect: \(error)")
             }

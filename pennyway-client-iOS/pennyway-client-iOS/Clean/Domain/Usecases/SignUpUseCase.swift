@@ -10,7 +10,7 @@ import Foundation
 // MARK: - SignUpUseCase
 
 protocol SignUpUseCase {
-    func signUp(model: SignUp, completion: @escaping (Bool, UserId?) -> Void)
+    func signup(model: SignUp, completion: @escaping (Bool, UserId?) -> Void)
     func oauthSignUp(model: OAuthSignUp, completion: @escaping (Bool, UserId?) -> Void)
 }
 
@@ -24,8 +24,8 @@ class DefaultSignUpUseCase: SignUpUseCase {
         self.repository = repository
     }
 
-    func signUp(model: SignUp, completion: @escaping (Bool, UserId?) -> Void) {
-        repository.signUp(model: model) { [weak self] result in
+    func signup(model: SignUp, completion: @escaping (Bool, UserId?) -> Void) {
+        repository.signup(model: model) { [weak self] result in
             switch result {
             case let .success(response):
                 self?.chatStompService.connect()

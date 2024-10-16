@@ -1097,7 +1097,7 @@
 		4A12FEE72C9C480400DE10BC /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				4ADA09592CBED95A001F9384 /* DefaultChatStompService.swift */,
+				4A8D84A72CC032E800777FFE /* Service */,
 				4A12FEEB2C9C486300DE10BC /* Usecases */,
 				4A12FEEA2C9C484B00DE10BC /* Interfaces */,
 				4A12FEE92C9C481900DE10BC /* Models */,
@@ -1914,6 +1914,14 @@
 				4A863A152CB464A600BA2F2F /* TemporaryView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4A8D84A72CC032E800777FFE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4ADA09592CBED95A001F9384 /* DefaultChatStompService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		4AA13C5C2C63E1EA00D8DEE7 /* ObjectStorageDomain */ = {

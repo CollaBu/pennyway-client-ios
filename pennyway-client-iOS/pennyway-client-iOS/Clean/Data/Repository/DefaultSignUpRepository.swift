@@ -8,7 +8,7 @@
 import Foundation
 
 class DefaultSignUpRepository: SignUpRepository {
-    func signUp(model: SignUp, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
+    func signup(model: SignUp, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
         let requestDto = SignUpRequestDto.from(model: model)
 
         AuthAlamofire.shared.signup(requestDto) { result in
