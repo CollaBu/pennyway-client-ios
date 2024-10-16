@@ -8,7 +8,7 @@
 import Foundation
 
 class DefaultLoginRepository: LoginRepository {
-    func login(username: String, password: String, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+    func login(username: String, password: String, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
         let loginDto = LoginRequestDto(username: username, password: password)
         AuthAlamofire.shared.login(loginDto) { result in
             switch result {
@@ -17,7 +17,7 @@ class DefaultLoginRepository: LoginRepository {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         Log.debug("[DefaultLoginRepository] 로그인 성공: \(response)")
-                        completion(.success(response))
+                        completion(.success(response.data))
                     } catch {
                         completion(.failure(error))
                     }
@@ -28,7 +28,7 @@ class DefaultLoginRepository: LoginRepository {
         }
     }
 
-    func oauthLogin(model: OAuthLogin, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+    func oauthLogin(model: OAuthLogin, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
         let requestDto = OAuthLoginRequestDto.from(model: model)
 
         OAuthAlamofire.shared.oauthLogin(requestDto) { result in
@@ -38,7 +38,7 @@ class DefaultLoginRepository: LoginRepository {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         Log.debug("[DefaultLoginRepository] 소셜 로그인 성공: \(response)")
-                        completion(.success(response))
+                        completion(.success(response.data))
                     } catch {
                         completion(.failure(error))
                     }
@@ -49,7 +49,7 @@ class DefaultLoginRepository: LoginRepository {
         }
     }
 
-    func checkLoginState(completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+    func checkLoginState(completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
         UserAuthAlamofire.shared.checkLoginState { result in
             switch result {
             case let .success(data):
@@ -57,7 +57,7 @@ class DefaultLoginRepository: LoginRepository {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
                         Log.debug("[DefaultLoginRepository] 자동 로그인 성공: \(response)")
-                        completion(.success(response))
+                        completion(.success(response.data))
                     } catch {
                         completion(.failure(error))
                     }

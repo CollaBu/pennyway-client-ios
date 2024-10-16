@@ -8,7 +8,7 @@
 import Foundation
 
 class DefaultSignUpRepository: SignUpRepository {
-    func signUp(model: SignUp, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+    func signUp(model: SignUp, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
         let requestDto = SignUpRequestDto.from(model: model)
 
         AuthAlamofire.shared.signup(requestDto) { result in
@@ -17,7 +17,8 @@ class DefaultSignUpRepository: SignUpRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
-                        completion(.success(response))
+                        Log.debug("[DefaultSignUpRepository] 회원가입 성공: \(response)")
+                        completion(.success(response.data))
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                         completion(.failure(error))
@@ -29,7 +30,7 @@ class DefaultSignUpRepository: SignUpRepository {
         }
     }
 
-    func oauthSignUp(model: OAuthSignUp, completion: @escaping (Result<AuthResponseDto, Error>) -> Void) {
+    func oauthSignUp(model: OAuthSignUp, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
         let requestDto = OAuthSignUpRequestDto.from(model: model)
 
         OAuthAlamofire.shared.oauthSignUp(requestDto) { result in
@@ -38,7 +39,8 @@ class DefaultSignUpRepository: SignUpRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
-                        completion(.success(response))
+                        Log.debug("[DefaultSignUpRepository] 소셜 회원가입 성공: \(response)")
+                        completion(.success(response.data))
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
                         completion(.failure(error))

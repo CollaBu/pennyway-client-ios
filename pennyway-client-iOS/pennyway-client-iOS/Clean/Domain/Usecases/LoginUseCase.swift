@@ -41,7 +41,7 @@ class DefaultLoginUseCase: LoginUseCase {
         repository.oauthLogin(model: data) { [weak self] result in
             switch result {
             case let .success(response):
-                let userId = response.data.user.id
+                let userId = response.user.id
                 if userId != -1 {
                     self?.chatStompService.connect()
                     completion(true, nil)
