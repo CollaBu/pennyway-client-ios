@@ -11,7 +11,7 @@ import UIKit
 // MARK: - PresignedUrlUseCase
 
 protocol PresignedUrlUseCase {
-    func generate(type: String, ext: String, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
+    func generate(entryPoint: ImageEntryPoint, type: String, ext: String, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
     func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void)
 }
 
@@ -21,6 +21,7 @@ protocol PresignedUrlUseCase {
 class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
     private let urlRepository: PresignedUrlRepository
     private let imageRepository: ProfileImageRepository
+//    private let chatRepository: MakeChatRoomRepository
 
     init(urlRepository: PresignedUrlRepository, imageRepository: ProfileImageRepository) {
         self.urlRepository = urlRepository
@@ -29,10 +30,13 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
 
     /// Presigned URL을 생성하는 메서드의 구현
     /// - Parameters:
+    ///   - entryPoint: 이미지 업로드 Entry Point (예: profile, chatroom)
+    ///   - type: 파일의 타입
+    ///   - ext: 파일의 확장자 (예: "jpg")
     ///   - model: Presigned URL을 생성하기 위한 요청 모델
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
     ///   - image: 업로드할 UIImage
-    func generate(type: String, ext: String, image: UIImage, completion _: @escaping (Result<String, Error>) -> Void) {
+    func generate(entryPoint: ImageEntryPoint, type: String, ext: String, image: UIImage, completion _: @escaping (Result<String, Error>) -> Void) {
         let presignedUrlModel = PresignedUrlType(type: type, ext: ext)
 
         urlRepository.generatePresignedUrl(model: presignedUrlModel) { result in
@@ -42,38 +46,43 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
 
                 let payload = self.extractPresignedUrl(from: presignedUrl.presignedUrl)
 
-                // Presigned URL을 사용하여 이미지 업로드
-                self.upload(payload: payload, presignedUrl: presignedUrl.presignedUrl, image: image) { result in
-                    switch result {
-                    case .success:
-                        Log.debug("[Presigned URL]-이미지 업로드 성공")
+                if entryPoint == .profile {
+                    // Presigned URL을 사용하여 이미지 업로드
+                    self.upload(payload: payload, presignedUrl: presignedUrl.presignedUrl, image: image) { result in
+                        switch result {
+                        case .success:
+                            Log.debug("[Presigned URL]-이미지 업로드 성공")
 
-                        self.update(from: payload) { result in
+                            self.update(from: payload) { result in
 
-                            switch result {
-                            case let .success(response):
-                                Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 성공: \(response)")
+                                switch result {
+                                case let .success(response):
+                                    Log.debug("[PresignedUrlUseCase]-프로필 이미지 업데이트 성공: \(response)")
 
-                                self.loadImage(from: payload) { loadResult in
-                                    switch loadResult {
-                                    case let .success(image):
-                                        DispatchQueue.main.async {
-                                            Log.debug("[UserProfileViewModel]-이미지 업데이트 성공")
+                                    self.loadImage(from: payload) { loadResult in
+                                        switch loadResult {
+                                        case let .success(image):
+                                            DispatchQueue.main.async {
+                                                Log.debug("[PresignedUrlUseCase]-이미지 업데이트 성공")
+                                            }
+                                        case let .failure(error):
+                                            Log.debug("[PresignedUrlUseCase]-이미지 로드 실패: \(error)")
                                         }
-                                    case let .failure(error):
-                                        Log.debug("[UserProfileViewModel]-이미지 로드 실패: \(error)")
                                     }
+
+                                case let .failure(error):
+                                    Log.debug("[PresignedUrlUseCase]-프로필 이미지 업데이트 실패: \(error)")
                                 }
-
-                            case let .failure(error):
-                                Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 실패: \(error)")
                             }
-                        }
 
-                    case let .failure(error):
-                        Log.error("이미지 업로드 실패: \(error)")
+                        case let .failure(error):
+                            Log.error("이미지 업로드 실패: \(error)")
+                        }
                     }
+                } else if entryPoint == .chatRoom {
+//                    self.uploadChatRoomImage(payload: payload, presignedUrl: presignedUrl.presignedUrl, image: image, completion: completion)
                 }
+
             case let .failure(error):
                 Log.error("Presigned URL 생성 실패: \(error)")
             }
@@ -104,4 +113,30 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
     func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         imageRepository.loadProfileImage(from: url, completion: completion)
     }
+
+//    /// 채팅방 이미지를 업로드하고 채팅방 생성 확정 요청하는 메서드
+//    private func uploadChatRoomImage(payload: String, presignedUrl: String, chatRoomId: Int64, image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
+//        upload(payload: payload, presignedUrl: presignedUrl, image: image) { result in
+//            switch result {
+//            case .success:
+//                Log.debug("[PresignedUrlUseCase]-채팅방 이미지 업로드 성공")
+//
+//                // 채팅방 생성 확정 API 호출
+//                chatRepository.makeChatRoom(presignedUrl: presignedUrl, chatRoomId: chatRoomId) { result in
+//                    switch result {
+//                    case let .success(response):
+//                        Log.debug("[PresignedUrlUseCase]-채팅방 생성 확정 성공: \(response)")
+//                        completion(.success(response))
+//                    case let .failure(error):
+//                        Log.error("채팅방 생성 확정 실패: \(error)")
+//                        completion(.failure(error))
+//                    }
+//                }
+//
+//            case let .failure(error):
+//                Log.error("채팅방 이미지 업로드 실패: \(error)")
+//                completion(.failure(error))
+//            }
+//        }
+//    }
 }

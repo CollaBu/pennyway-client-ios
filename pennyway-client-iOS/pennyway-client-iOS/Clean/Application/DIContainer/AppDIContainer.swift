@@ -17,6 +17,7 @@ final class AppDIContainer {
 
     // MARK: - DIContainers of scenes
 
+    // TODO: 수정필요
     func makeProfileSceneDIContainer() -> ProfileSceneDIContainer {
 //        let dependencies = ProfileSceneDIContainer.Dependencies(
 //            apiDataTransferService: apiDataTransferService
@@ -25,9 +26,6 @@ final class AppDIContainer {
     }
 
     func makeChatSceneDIContainer() -> ChatSceneDIContainer {
-//        let dependencies = ProfileSceneDIContainer.Dependencies(
-//            apiDataTransferService: apiDataTransferService
-//        )
-        return ChatSceneDIContainer()
+        return ChatSceneDIContainer(profileSceneDIContainer: makeProfileSceneDIContainer())
     }
 }

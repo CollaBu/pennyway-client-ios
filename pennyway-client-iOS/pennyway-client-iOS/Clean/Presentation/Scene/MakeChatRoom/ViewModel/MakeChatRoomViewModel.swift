@@ -1,12 +1,13 @@
 
 import Foundation
+import UIKit
 
 // MARK: - MakeChatRoomViewModelInput
 
 protocol MakeChatRoomViewModelInput {
-    ///    func makeChatRoom(uuid: String, timestamp: String, ext: String)
-    func pendChatRoom(roomData: MakeChatRoomItemModel)
+    func pendChatRoom(roomData: MakeChatRoomItemModel, image: UIImage?)
     func validateForm()
+    func createChatRoomWithImage(image: UIImage)
 }
 
 // MARK: - MakeChatRoomViewModelOutput
@@ -29,9 +30,11 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
     var roomData: Observable<MakeChatRoomItemModel>
 
     private let makeChatRoomUseCase: MakeChatRoomUseCase
+    private let presignedUrlUseCase: PresignedUrlUseCase
 
-    init(makeChatRoomUseCase: MakeChatRoomUseCase) {
+    init(makeChatRoomUseCase: MakeChatRoomUseCase, presignedUrlUseCase: PresignedUrlUseCase) {
         self.makeChatRoomUseCase = makeChatRoomUseCase
+        self.presignedUrlUseCase = presignedUrlUseCase
 
         roomData = Observable(MakeChatRoomItemModel(
             title: "",
@@ -47,15 +50,40 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
         isFormValid = !title.isEmpty && title.count <= 30
     }
 
-    func pendChatRoom(roomData: MakeChatRoomItemModel) {
+    func pendChatRoom(roomData: MakeChatRoomItemModel, image: UIImage?) {
         makeChatRoomUseCase.pend(roomData: roomData) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(chatRoomId):
                     Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 대기 성공, chatRoomId: \(chatRoomId)")
-                    self.chatRoomId = chatRoomId
+                    self.chatRoomId = chatRoomId // 반환된 채팅방 ID 저장
+
+                    // presigned URL 발급 및 이미지 업로드
+                    if let image = image {
+                        self.createChatRoomWithImage(image: image)
+                    }
+
                 case let .failure(error):
                     Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 대기 실패")
+                }
+            }
+        }
+    }
+
+    /// Presigned URL 생성 후 채팅방 생성 확정 요청
+    func createChatRoomWithImage(image: UIImage) {
+        guard let chatRoomId = chatRoomId else {
+            Log.fault("[MakeChatRoomViewModel]: 채팅방 ID가 없습니다.")
+            return
+        }
+
+        // UseCase를 통해 이미지 업로드 후 채팅방 생성 확정 요청
+        makeChatRoomUseCase.createChatRoomWithImage(roomData: roomData.value, image: image) { success in
+            DispatchQueue.main.async {
+                if success {
+                    Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 성공")
+                } else {
+                    Log.fault("[MakeChatRoomViewModel]: 채팅방 생성 확정 실패")
                 }
             }
         }

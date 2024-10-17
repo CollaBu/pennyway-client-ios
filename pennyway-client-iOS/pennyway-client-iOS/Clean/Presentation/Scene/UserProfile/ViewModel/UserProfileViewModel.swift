@@ -71,12 +71,13 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 
     /// 프로필 이미지를 업로드하는 메서드
     private func uploadPresignedUrl(image: UIImage) {
-        presignedUrlUseCase.generate(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue, image: image) { result in
+        presignedUrlUseCase.generate(entryPoint: .profile, type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue, image: image) { result in
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self.userData.value.imageUpdate(image: image) // 이미지 업데이트
-                    Log.debug("[UserProfileViewModel]-이미지 업데이트 성공")
+                    // 프로필 이미지인 경우 userData 업데이트
+                    self.userData.value.imageUpdate(image: image)
+                    Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 성공")
                 }
             case let .failure(error):
                 Log.debug("[UserProfileViewModel]-이미지 로드 실패: \(error)")

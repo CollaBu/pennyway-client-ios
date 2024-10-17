@@ -13,7 +13,7 @@ struct MakeChatRoomView: View {
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
 
-    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
+    @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
 
     let titleCustomTextList: [String] = ["제목*"]
     let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray04"))
@@ -28,8 +28,8 @@ struct MakeChatRoomView: View {
 
                         RoomTitleInput(roomTitle: $roomTitle, title: titleCustomTextList[0], baseAttribute: baseAttribute, stringAttribute: stringAttribute)
                             .onChange(of: roomTitle) { newValue in
-                                viewModelWrapper.makeChatViewModel.roomData.value.title = newValue
-                                viewModelWrapper.makeChatViewModel.validateForm()
+                                chatViewModelWrapper.makeChatViewModel.roomData.value.title = newValue
+                                chatViewModelWrapper.makeChatViewModel.validateForm()
                             }
 
                         Spacer().frame(height: 23 * DynamicSizeFactor.factor())
@@ -61,15 +61,12 @@ struct MakeChatRoomView: View {
                 CustomBottomButton(action: {
                     let chatRoomData = MakeChatRoomItemModel(title: roomTitle, description: content, password: Int32(password) ?? 0)
 
-                    viewModelWrapper.makeChatViewModel.pendChatRoom(roomData: chatRoomData)
-
-                    if let chatRoomId = viewModelWrapper.makeChatViewModel.chatRoomId {
-                        // chatRoomId를 다음 화면으로 전달하여 화면 전환
-                        // 예: NavigationLink를 사용하여 이동하거나 모달로 표시
+                    if chatViewModelWrapper.makeChatViewModel.isFormValid {
+                        chatViewModelWrapper.makeChatViewModel.pendChatRoom(roomData: chatRoomData, image: selectedUIImage)
                     }
 
                     Log.debug("[MakeChatRoomView]: 버튼 누름")
-                }, label: "채팅방 생성", isFormValid: $viewModelWrapper.makeChatViewModel.isFormValid)
+                }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
             .edgesIgnoringSafeArea(.bottom)
@@ -84,6 +81,18 @@ struct MakeChatRoomView: View {
                     }.offset(x: -10)
                 }
             }
+            .sheet(isPresented: $showImagePicker, onDismiss: {
+                // 사진 클릭한 경우
+                showPopUpView = false
+
+                if let selectedUIImage {
+                    self.selectedUIImage = selectedUIImage
+                }
+
+            }) {
+                ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
+                    .edgesIgnoringSafeArea(.bottom)
+            }
 
             if showPopUpView {
                 Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
@@ -94,7 +103,7 @@ struct MakeChatRoomView: View {
                                       showImagePicker: $showImagePicker,
                                       selectedUIImage: $selectedUIImage,
                                       sourceType: $sourceType,
-                                      viewModelWrapper: viewModelWrapper)
+                                      viewModelWrapper: chatViewModelWrapper)
                     .edgesIgnoringSafeArea(.bottom)
             }
         }
@@ -171,10 +180,10 @@ struct MakeChatRoomView: View {
                         // 비밀번호를 Int32로 변환
                         if let intPassword = Int32(newValue), newValue.count == 6 {
                             // 유효한 비밀번호인 경우에만 업데이트
-                            viewModelWrapper.makeChatViewModel.roomData.value.password = intPassword
+                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = intPassword
                         } else {
                             // 비밀번호가 유효하지 않으면, 필요한 경우 기본값으로 초기화
-                            viewModelWrapper.makeChatViewModel.roomData.value.password = 0 // 초기값 또는 처리 로직 추가
+                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = 0 // 초기값 또는 처리 로직 추가
                         }
                     }
             }
@@ -189,20 +198,39 @@ struct MakeChatRoomView: View {
 
             Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-            Button(action: {
-                showPopUpView.toggle()
-            }, label: {
-                ZStack {
-                    Rectangle()
-                        .cornerRadius(6)
-                        .frame(width: 57 * DynamicSizeFactor.factor(), height: 57 * DynamicSizeFactor.factor())
-                        .platformTextColor(color: Color("Gray02"))
+            if let image = selectedUIImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .background(Color.black.opacity(0.3))
+                    .frame(width: 57 * DynamicSizeFactor.factor(), height: 57 * DynamicSizeFactor.factor())
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                    .overlay(
+                        Button(action: {
+                            showPopUpView.toggle()
+                        }) {
+                            Image("icon_picture")
+                                .frame(width: 15 * DynamicSizeFactor.factor(), height: 15 * DynamicSizeFactor.factor())
 
-                    Image("icon_navigation_add")
-                        .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-                }
-            })
-            .buttonStyle(PlainButtonStyle())
+                        },
+                        alignment: .center
+                    )
+            } else {
+                Button(action: {
+                    showPopUpView.toggle()
+                }, label: {
+                    ZStack {
+                        Rectangle()
+                            .cornerRadius(6)
+                            .frame(width: 57 * DynamicSizeFactor.factor(), height: 57 * DynamicSizeFactor.factor())
+                            .platformTextColor(color: Color("Gray02"))
+
+                        Image("icon_navigation_add")
+                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
+                    }
+                })
+                .buttonStyle(PlainButtonStyle())
+            }
 
             Spacer()
         }
@@ -215,7 +243,7 @@ struct MakeChatRoomView: View {
 final class ChatViewModelWrapper: ObservableObject {
     @Published var makeChatViewModel: MakeChatRoomViewModel
 
-    init(makeChatViewModel: any MakeChatRoomViewModel) {
+    init(makeChatViewModel: MakeChatRoomViewModel) {
         self.makeChatViewModel = makeChatViewModel
     }
 }

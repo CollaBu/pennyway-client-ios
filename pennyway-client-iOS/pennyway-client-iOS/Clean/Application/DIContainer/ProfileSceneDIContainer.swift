@@ -8,6 +8,12 @@
 import SwiftUI
 
 final class ProfileSceneDIContainer {
+//    private let chatSceneDIContainer: ChatSceneDIContainer
+//
+//    init(chatSceneDIContainer: ChatSceneDIContainer) {
+//        self.chatSceneDIContainer = chatSceneDIContainer
+//    }
+
 //    struct Dependencies {
 //        let apiDataTransferService: DataTransferService
 //    }
@@ -31,9 +37,9 @@ final class ProfileSceneDIContainer {
         DefaultFetchUserProfileUseCase(repository: makeProfileRepository())
     }
 
-    private func makePresignedUrlUseCase() -> PresignedUrlUseCase {
-        DefaultPresignedUrlUseCase(urlRepository: makePresignedUrlRepository(),
-                                   imageRepository: makeProfileImageRepository())
+    func makePresignedUrlUseCase() -> PresignedUrlUseCase {
+        return DefaultPresignedUrlUseCase(urlRepository: makePresignedUrlRepository(),
+                                          imageRepository: makeProfileImageRepository())
     }
 
     private func makeDeleteImageUseCase() -> DeleteImageUseCase {
@@ -54,7 +60,7 @@ final class ProfileSceneDIContainer {
         DefaultUserProfileRepository()
     }
 
-    private func makePresignedUrlRepository() -> PresignedUrlRepository {
+    func makePresignedUrlRepository() -> PresignedUrlRepository {
         DefaultPresignedUrlRepository()
     }
 
@@ -72,7 +78,7 @@ final class ProfileSceneDIContainer {
 
     // MARK: - View Model
 
-    private func makeProfileViewModel() -> any UserProfileViewModel {
+    func makeProfileViewModel() -> any UserProfileViewModel {
         DefaultUserProfileViewModel(
             fetchUserProfileUseCase: makeProfileUseCase(),
             presignedUrlUseCase: makePresignedUrlUseCase(),
@@ -92,7 +98,7 @@ final class ProfileSceneDIContainer {
 
     // MARK: - View Model Wrapper
 
-    private func makeUserProfileViewModelWrapper() -> UserProfileViewModelWrapper {
+    func makeUserProfileViewModelWrapper() -> UserProfileViewModelWrapper {
         UserProfileViewModelWrapper(
             viewModel: makeProfileViewModel(),
             logoutViewModel: makeLogoutViewModel(),

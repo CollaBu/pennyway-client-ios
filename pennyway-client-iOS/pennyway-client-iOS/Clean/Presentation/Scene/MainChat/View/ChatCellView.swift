@@ -52,9 +52,6 @@ struct ChatCellView: View {
                         searchChatContainer
                         ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $dummyChatRooms, isMyChat: false)
                     }
-                    
-                    NavigationLink(destination: MakeChatRoomView(viewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
-                        .hidden()
                 }
                 
                 if isPopUp, let chatRoom = selectedChatRoom {
@@ -80,7 +77,7 @@ struct ChatCellView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
                 }
-                NavigationLink(destination: MakeChatRoomView(viewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
+                NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
             }
             .setTabBarVisibility(isHidden: false)

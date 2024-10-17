@@ -25,7 +25,6 @@ struct MainTabView: View {
                 .tag(1)
                 .buttonStyle(BasicButtonStyleUtil())
 
-//            MainChatView()
             LazyView {
                 AppComponent()
                     .makeChatRootView()
