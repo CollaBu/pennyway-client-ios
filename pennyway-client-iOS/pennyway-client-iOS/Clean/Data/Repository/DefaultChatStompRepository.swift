@@ -50,7 +50,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         }
         
         let accessToken = KeychainHelper.loadAccessToken() ?? ""
-        let headers = ["Authorization": "Bearer \(accessToken)", "device-id": "\(DeviceInfoHandler.getDeviceId())", "device-name": "\(DeviceInfoHandler.getDeviceModelName())"]
+        let headers = ["Authorization": "Bearer \(accessToken)", "device-id": "\(DeviceInfoManager.getDeviceId())", "device-name": "\(DeviceInfoManager.getDeviceModelName())"]
         
         let request = NSURLRequest(url: URL(string: url)!)
         

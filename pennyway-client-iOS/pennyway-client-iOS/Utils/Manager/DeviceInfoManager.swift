@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-class DeviceInfoHandler {
+class DeviceInfoManager {
+    
     /// 기기 모델 이름 가져오기
     static func getDeviceModelName() -> String {
         // [1]. 시뮬레이터 체크 수행
         var modelName = ProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] ?? ""
         if !modelName.isEmpty {
-            Log.info("[DeviceInfoHandler >> getDeviceModelName() :: 디바이스 시뮬레이터]")
-            Log.info("[deviceModelName :: \(modelName)]")
+            Log.debug("[DeviceInfoHandler >> getDeviceModelName() :: 디바이스 시뮬레이터]")
+            Log.debug("[deviceModelName :: \(modelName)]")
             
             return modelName
         }
@@ -30,8 +31,8 @@ class DeviceInfoHandler {
             }
         }
         
-        Log.info("[DeviceInfoHandler >> getDeviceModelName() :: 실제 디바이스 기기]")
-        Log.info("[deviceModelName :: \(modelName)]")
+        Log.debug("[DeviceInfoHandler >> getDeviceModelName() :: 실제 디바이스 기기]")
+        Log.debug("[deviceModelName :: \(modelName)]")
         
         return modelName
     }
@@ -42,8 +43,8 @@ class DeviceInfoHandler {
             return "Unknown Device ID"
         }
         
-        Log.info("[DeviceInfoHandler >> getDeviceID() :: 기기 ID 확인]")
-        Log.info("[deviceId :: \(deviceId)]")
+        Log.debug("[DeviceInfoHandler >> getDeviceID() :: 기기 ID 확인]")
+        Log.debug("[deviceId :: \(deviceId)]")
         
         return deviceId
     }
