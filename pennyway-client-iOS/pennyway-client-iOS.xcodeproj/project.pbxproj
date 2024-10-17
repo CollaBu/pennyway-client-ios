@@ -369,6 +369,7 @@
 		D898E8182CA5A8C9003739F1 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E8172CA5A8C9003739F1 /* LogoutViewModel.swift */; };
 		D89FB7822BD97A2F0019DE3C /* FindUserNameResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */; };
 		D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */; };
+		D8A67ACA2CC1423800749B85 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A67AC92CC1423800749B85 /* LoginUseCase.swift */; };
 		D8B0A9242C4E5D6400716ECB /* AddSpendingFormFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */; };
 		D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */; };
 		D8B0A92A2C4EB8E500716ECB /* ResetMyPwRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */; };
@@ -383,7 +384,6 @@
 		D8DCCF802CBD8D5700550A8B /* DeleteImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF782CBD8D5700550A8B /* DeleteImageUseCase.swift */; };
 		D8DCCF812CBD8D5700550A8B /* DeleteUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF792CBD8D5700550A8B /* DeleteUserUseCase.swift */; };
 		D8DCCF822CBD8D5700550A8B /* FetchUserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF7A2CBD8D5700550A8B /* FetchUserProfileUseCase.swift */; };
-		D8DCCF832CBD8D5700550A8B /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF7B2CBD8D5700550A8B /* LoginUseCase.swift */; };
 		D8DCCF842CBD8D5700550A8B /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF7C2CBD8D5700550A8B /* LogoutUseCase.swift */; };
 		D8DCCF852CBD8D5700550A8B /* PresignedUrlUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF7D2CBD8D5700550A8B /* PresignedUrlUseCase.swift */; };
 		D8DCCF862CBD8D5700550A8B /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF7E2CBD8D5700550A8B /* SignUpUseCase.swift */; };
@@ -787,6 +787,7 @@
 		D89FB7812BD97A2F0019DE3C /* FindUserNameResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameResponseDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Response/FindUserNameResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7832BD97B660019DE3C /* FindUserNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindUserNameRequestDto.swift; path = "pennyway-client-iOS/API/Domain/AuthDomain/Dto/Request/FindUserNameRequestDto.swift"; sourceTree = SOURCE_ROOT; };
 		D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserNameViewModel.swift; sourceTree = "<group>"; };
+		D8A67AC92CC1423800749B85 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendingFormFieldsView.swift; sourceTree = "<group>"; };
 		D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePwRequestDto.swift; sourceTree = "<group>"; };
 		D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetMyPwRequestDto.swift; sourceTree = "<group>"; };
@@ -801,7 +802,6 @@
 		D8DCCF782CBD8D5700550A8B /* DeleteImageUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteImageUseCase.swift; sourceTree = "<group>"; };
 		D8DCCF792CBD8D5700550A8B /* DeleteUserUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteUserUseCase.swift; sourceTree = "<group>"; };
 		D8DCCF7A2CBD8D5700550A8B /* FetchUserProfileUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchUserProfileUseCase.swift; sourceTree = "<group>"; };
-		D8DCCF7B2CBD8D5700550A8B /* LoginUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		D8DCCF7C2CBD8D5700550A8B /* LogoutUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		D8DCCF7D2CBD8D5700550A8B /* PresignedUrlUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresignedUrlUseCase.swift; sourceTree = "<group>"; };
 		D8DCCF7E2CBD8D5700550A8B /* SignUpUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
@@ -2551,10 +2551,10 @@
 				D8DCCF782CBD8D5700550A8B /* DeleteImageUseCase.swift */,
 				D8DCCF792CBD8D5700550A8B /* DeleteUserUseCase.swift */,
 				D8DCCF7A2CBD8D5700550A8B /* FetchUserProfileUseCase.swift */,
-				D8DCCF7B2CBD8D5700550A8B /* LoginUseCase.swift */,
 				D8DCCF7C2CBD8D5700550A8B /* LogoutUseCase.swift */,
 				D8DCCF7D2CBD8D5700550A8B /* PresignedUrlUseCase.swift */,
 				D8DCCF7E2CBD8D5700550A8B /* SignUpUseCase.swift */,
+				D8A67AC92CC1423800749B85 /* LoginUseCase.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2914,7 +2914,6 @@
 				4A8523ED2CB5A8AE00AE90AF /* ChatRoom.swift in Sources */,
 				D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */,
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
-				D8DCCF832CBD8D5700550A8B /* LoginUseCase.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				D8B0A92C2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift in Sources */,
@@ -2988,6 +2987,7 @@
 				D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */,
 				4AC3205D2C11F33200DDB4B6 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */,
 				4A6A9D112C331A9500394771 /* TargetAmountSetCompleteView.swift in Sources */,
+				D8A67ACA2CC1423800749B85 /* LoginUseCase.swift in Sources */,
 				4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */,
 				D84348EA2CA68D6500AC4777 /* DefaultDeleteUserRepository.swift in Sources */,
 				4AD5733C2C5B973C00A4E192 /* PastSpendingListView.swift in Sources */,

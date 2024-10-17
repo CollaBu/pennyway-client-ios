@@ -1,9 +1,3 @@
-//
-//  LoginUseCase.swift
-//  pennyway-client-iOS
-//
-//  Created by 최희진 on 9/25/24.
-//
 
 import Foundation
 
@@ -50,3 +44,4 @@ class DefaultLoginUseCase: LoginUseCase {
         }
     }
 }
+

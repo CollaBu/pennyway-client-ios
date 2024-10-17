@@ -21,7 +21,6 @@ protocol PresignedUrlUseCase {
 class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
     private let urlRepository: PresignedUrlRepository
     private let imageRepository: ProfileImageRepository
-//    private let chatRepository: MakeChatRoomRepository
 
     init(urlRepository: PresignedUrlRepository, imageRepository: ProfileImageRepository) {
         self.urlRepository = urlRepository
@@ -37,7 +36,7 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
     ///   - image: 업로드할 UIImage
     func generate(entryPoint: ImageEntryPoint, type: String, ext: String, image: UIImage, completion _: @escaping (Result<String, Error>) -> Void) {
-        let presignedUrlModel = PresignedUrlType(type: type, ext: ext)
+        let presignedUrlModel = PresignedUrlType(type: type, ext: ext, chatRoomId: nil)
 
         urlRepository.generatePresignedUrl(model: presignedUrlModel) { result in
             switch result {
@@ -80,7 +79,6 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
                         }
                     }
                 } else if entryPoint == .chatRoom {
-//                    self.uploadChatRoomImage(payload: payload, presignedUrl: presignedUrl.presignedUrl, image: image, completion: completion)
                 }
 
             case let .failure(error):
@@ -114,29 +112,4 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
         imageRepository.loadProfileImage(from: url, completion: completion)
     }
 
-//    /// 채팅방 이미지를 업로드하고 채팅방 생성 확정 요청하는 메서드
-//    private func uploadChatRoomImage(payload: String, presignedUrl: String, chatRoomId: Int64, image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
-//        upload(payload: payload, presignedUrl: presignedUrl, image: image) { result in
-//            switch result {
-//            case .success:
-//                Log.debug("[PresignedUrlUseCase]-채팅방 이미지 업로드 성공")
-//
-//                // 채팅방 생성 확정 API 호출
-//                chatRepository.makeChatRoom(presignedUrl: presignedUrl, chatRoomId: chatRoomId) { result in
-//                    switch result {
-//                    case let .success(response):
-//                        Log.debug("[PresignedUrlUseCase]-채팅방 생성 확정 성공: \(response)")
-//                        completion(.success(response))
-//                    case let .failure(error):
-//                        Log.error("채팅방 생성 확정 실패: \(error)")
-//                        completion(.failure(error))
-//                    }
-//                }
-//
-//            case let .failure(error):
-//                Log.error("채팅방 이미지 업로드 실패: \(error)")
-//                completion(.failure(error))
-//            }
-//        }
-//    }
 }

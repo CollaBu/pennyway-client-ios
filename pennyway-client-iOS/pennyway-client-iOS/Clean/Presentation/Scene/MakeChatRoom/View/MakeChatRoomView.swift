@@ -62,10 +62,10 @@ struct MakeChatRoomView: View {
                     let chatRoomData = MakeChatRoomItemModel(title: roomTitle, description: content, password: Int32(password) ?? 0)
 
                     if chatViewModelWrapper.makeChatViewModel.isFormValid {
-                        chatViewModelWrapper.makeChatViewModel.pendChatRoom(roomData: chatRoomData, image: selectedUIImage)
+                        chatViewModelWrapper.makeChatViewModel.createChatRoomWithImage(image: selectedUIImage!)
+
                     }
 
-                    Log.debug("[MakeChatRoomView]: 버튼 누름")
                 }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
