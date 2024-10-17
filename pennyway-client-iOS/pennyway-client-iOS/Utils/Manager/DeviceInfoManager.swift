@@ -8,7 +8,6 @@
 import SwiftUI
 
 class DeviceInfoManager {
-    
     /// 기기 모델 이름 가져오기
     static func getDeviceModelName() -> String {
         // [1]. 시뮬레이터 체크 수행

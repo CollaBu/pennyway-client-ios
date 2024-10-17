@@ -50,7 +50,9 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         }
         
         let accessToken = KeychainHelper.loadAccessToken() ?? ""
-        let headers = ["Authorization": "Bearer \(accessToken)", "device-id": "\(DeviceInfoManager.getDeviceId())", "device-name": "\(DeviceInfoManager.getDeviceModelName())"]
+        let deviceName = DeviceInfoManager.getDeviceModelName()
+        let deviceId = DeviceInfoManager.getDeviceId()
+        let headers = ["Authorization": "Bearer \(accessToken)", "device-id": "\(deviceId)", "device-name": "\(deviceName)"]
         
         let request = NSURLRequest(url: URL(string: url)!)
         
@@ -83,7 +85,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
 
 extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidConnect(client _: StompClientLib!) {
-        Log.debug("Socket x")
+        Log.debug("Socket connected")
     }
     
     func stompClientDidDisconnect(client _: StompClientLib!) {
