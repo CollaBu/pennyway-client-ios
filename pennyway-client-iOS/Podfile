@@ -13,6 +13,8 @@ target 'pennyway-client-iOS' do
   pod 'GoogleSignIn'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+  pod 'StompClientLib'
 # Pods for pennyway-client-iOS
+
 
 end

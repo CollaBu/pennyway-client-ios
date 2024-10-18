@@ -10,9 +10,11 @@ class AppViewModel: ObservableObject {
     @Published var checkLoginState = false
 
     private var cancellables = Set<AnyCancellable>()
+    private let loginUseCase: LoginUseCase
 
-    init() {
-        checkLoginStateApi()
+    init(loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
+        self.loginUseCase = loginUseCase
+        checkLoginStateUseCase()
 
         // Combine을 사용하여 NotificationCenter 알림 구독
         NotificationCenter.default.publisher(for: .logoutNotification)
@@ -32,33 +34,13 @@ class AppViewModel: ObservableObject {
         isLoggedIn = true
     }
 
-    func checkLoginStateApi() {
-        UserAuthAlamofire.shared.checkLoginState { [weak self] result in
-            switch result {
-            case let .success(data):
-                if let responseData = data {
-                    do {
-                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
-                        Log.debug(response)
-                        self?.checkLoginState = true
-                        self?.isLoggedIn = true
-
-                        self?.registDeviceTokenApi()
-                        Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
-
-                    } catch {
-                        Log.fault("Error parsing response JSON: \(error)")
-                        self?.checkLoginState = false
-                    }
-                }
-            case let .failure(error):
-                if let statusSpecificError = error as? StatusSpecificError {
-                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
-                } else {
-                    Log.error("Network request failed: \(error)")
-                }
-
-                self?.checkLoginState = false
+    func checkLoginStateUseCase() {
+        loginUseCase.checkLoginState { [weak self] isLoggedIn in
+            self?.checkLoginState = isLoggedIn
+            self?.isLoggedIn = isLoggedIn
+            if isLoggedIn {
+                self?.registDeviceTokenApi()
+                Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
             }
         }
     }

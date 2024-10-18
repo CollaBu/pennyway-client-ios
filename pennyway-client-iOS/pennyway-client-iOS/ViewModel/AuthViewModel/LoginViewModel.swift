@@ -7,7 +7,6 @@ class LoginViewModel: ObservableObject {
     @Published var isLoginSuccessful: Bool = false
     @Published var showErrorCodeContent: Bool = false
 
-    private let profileInfoViewModel = UserAccountViewModel()
     private let loginUseCase: LoginUseCase
 
     init(loginUseCase: LoginUseCase = DefaultLoginUseCase(repository: DefaultLoginRepository())) {
