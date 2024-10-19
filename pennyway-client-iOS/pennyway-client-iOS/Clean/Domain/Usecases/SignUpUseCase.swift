@@ -27,7 +27,7 @@ class DefaultSignUpUseCase: SignUpUseCase {
         repository.signUp(model: model) { result in
             switch result {
             case let .success(response):
-                completion(true, UserId(id: Int64(response.data.user.id)))
+                completion(true, UserId(id: Int64(response.user.id)))
             case let .failure(error):
                 Log.error("Sign up failed: \(error)")
                 completion(false, nil)
@@ -40,7 +40,7 @@ class DefaultSignUpUseCase: SignUpUseCase {
             switch result {
             case let .success(response):
                 KeychainHelper.deleteOAuthUserData()
-                completion(true, UserId(id: Int64(response.data.user.id)))
+                completion(true, UserId(id: Int64(response.user.id)))
             case let .failure(error):
                 Log.error("OAuth sign up failed: \(error)")
                 completion(false, nil)
