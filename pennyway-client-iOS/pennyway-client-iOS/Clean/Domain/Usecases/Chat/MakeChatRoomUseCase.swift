@@ -19,6 +19,7 @@ class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
         self.repository = repository
         self.urlRepository = urlRepository
     }
+
     /// Presigned URL을 생성하는 메서드의 구현
     /// - Parameters:
     ///   - type: 파일의 타입
@@ -55,7 +56,7 @@ class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
     }
 
     /// Presigned URL을 생성하고 이미지를 업로드한 후 채팅방 생성을 확정하는 함수
-    func uploadImage(roomData: MakeChatRoomItemModel, image: UIImage, completion: @escaping
+    func uploadImage(roomData _: MakeChatRoomItemModel, image: UIImage, completion: @escaping
         (Result<String, Error>) -> Void)
     {
         // 1. Presigned URL 생성 및 이미지 업로드
@@ -64,7 +65,6 @@ class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
             Log.debug("createChatRoomWithImage내부에서 generatePresignedUrl까지 실행됨")
             switch generateResult {
             case let .success(presignedUrl):
-                // 이미지 업로드
                 Log.debug("presignedUrl:\(presignedUrl)")
 
                 // 2. 이미지 업로드
@@ -72,7 +72,7 @@ class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
                     switch uploadResult {
                     case .success:
                         // 이미지 업로드 성공 시 presignedUrl 반환
-                        completion(.success())
+                        completion(.success(presignedUrl))
                     case let .failure(uploadError):
                         // 이미지 업로드 실패 시 오류 반환
                         Log.error("[MakeChatRoomUseCase]: 이미지 업로드 실패, 오류: \(uploadError)")
@@ -90,7 +90,7 @@ class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
     private func upload(payload: String, presignedUrl: String, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
         urlRepository.uploadPresignedUrl(payload: payload, image: image, presignedUrl: presignedUrl, completion: completion)
     }
-    
+
     /// 채팅방 이미지를 업로드하고 채팅방 생성 확정 요청하는 메서드
     private func uploadImage(payload: String, presignedUrl: String, image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         upload(payload: payload, presignedUrl: presignedUrl, image: image) { result in
@@ -104,5 +104,4 @@ class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
             }
         }
     }
-
 }

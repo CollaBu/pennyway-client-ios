@@ -315,6 +315,7 @@
 		D8180C082BE5168800F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8180C0A2BE531C500F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D81D5A832C16B68D008E5939 /* DateFormatterUtil .swift in Sources */ = {isa = PBXBuildFile; fileRef = D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */; };
+		D820675C2CC5500700102356 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D820675B2CC5500700102356 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */; };
 		D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */; };
 		D84348E62CA68D1F00AC4777 /* DeleteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84348E52CA68D1E00AC4777 /* DeleteUserRepository.swift */; };
@@ -727,6 +728,7 @@
 		D8180C032BE5081F00F837FB /* FindIdContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdContentView.swift; sourceTree = "<group>"; };
 		D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatterUtil .swift"; sourceTree = "<group>"; };
+		D820675B2CC5500700102356 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		D82BFEED2CB7E56600DCB9EC /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Release.xcconfig"; sourceTree = "<absolute>"; };
 		D82BFEEE2CB7E56600DCB9EC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Debug.xcconfig"; sourceTree = "<absolute>"; };
 		D82BFEEF2CB7E56600DCB9EC /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Secrets.xcconfig"; sourceTree = "<absolute>"; };
@@ -840,6 +842,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D820675C2CC5500700102356 /* OSLog.framework in Frameworks */,
 				7C0E38D4CE51A896B5A498EE /* Pods_pennyway_client_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -850,6 +853,7 @@
 		124402E06539F5D0782DE704 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D820675B2CC5500700102356 /* OSLog.framework */,
 				A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */,
 			);
 			name = Frameworks;

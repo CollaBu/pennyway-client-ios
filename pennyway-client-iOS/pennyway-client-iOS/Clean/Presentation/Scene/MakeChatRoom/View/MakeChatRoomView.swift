@@ -4,6 +4,7 @@ import SwiftUI
 // MARK: - MakeChatRoomView
 
 struct MakeChatRoomView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State var roomTitle = "" // 채팅방 제목을 관리하는 함수
     @State var content = "" // 채팅방 설명을 관리하는 변수
     @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
@@ -67,6 +68,14 @@ struct MakeChatRoomView: View {
 
                 }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                    .onChange(of: chatViewModelWrapper.makeChatViewModel.isDismissView) { isDismissed in
+                        Log.debug("onChange실행중")
+
+                        if isDismissed {
+                            self.presentationMode.wrappedValue.dismiss()
+                            Log.debug("isDismissed")
+                        }
+                    }
             }
             .edgesIgnoringSafeArea(.bottom)
             .toolbar {
@@ -135,6 +144,9 @@ struct MakeChatRoomView: View {
                             if content.count > 100 {
                                 content = String(content.prefix(100))
                             }
+                        }
+                        .onChange(of: content) { newValue in
+                            chatViewModelWrapper.makeChatViewModel.roomData.value.description = newValue
                         }
                         .frame(height: 123)
 

@@ -15,6 +15,7 @@ protocol MakeChatRoomViewModelInput {
 protocol MakeChatRoomViewModelOutput {
     var roomData: Observable<MakeChatRoomItemModel> { get set }
     var isFormValid: Bool { get set }
+    var isDismissView: Bool { get set }
 }
 
 // MARK: - MakeChatRoomViewModel
@@ -25,6 +26,7 @@ protocol MakeChatRoomViewModel: MakeChatRoomViewModelInput, MakeChatRoomViewMode
 
 class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
     @Published var isFormValid: Bool = false // 버튼 활성화 여부
+    @Published var isDismissView: Bool = false // 뷰를 닫는 상태 여부
     var roomData: Observable<MakeChatRoomItemModel>
 
     private let makeChatRoomUseCase: MakeChatRoomUseCase
@@ -68,11 +70,19 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
 
     /// 채팅방 생성 확정 요청
     func makeChatRoom() {
-        makeChatRoomUseCase.makeChatRoom(roomData: roomData.value) { success in
-            if success {
-                Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 성공")
-            } else {
-                Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 실패")
+        makeChatRoomUseCase.makeChatRoom(roomData: roomData.value) { [weak self] success in
+            guard let self = self else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                if success {
+                    Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 성공")
+                    self.isDismissView = true // 값이 변경되는지 확인
+                    Log.debug("isDismissView = \(self.isDismissView)")
+                } else {
+                    Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 실패")
+                }
             }
         }
     }

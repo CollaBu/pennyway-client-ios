@@ -3,9 +3,9 @@ import Foundation
 
 public struct MakeChatRoomRequestDto: Encodable {
     let title: String
-    let description: String?
-    let password: String?
-    let backgroundImageUrl: String?
+    let description: String
+    let password: String
+    let backgroundImageUrl: String
 
     public init(
         title: String,

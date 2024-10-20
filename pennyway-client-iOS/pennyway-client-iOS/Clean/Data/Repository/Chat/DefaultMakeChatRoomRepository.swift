@@ -4,11 +4,16 @@ import Foundation
 
 class DefaultMakeChatRoomRepository: MakeChatRoomRepository {
     func makeChatRoom(roomData: MakeChatRoomItemModel, completion: @escaping (Result<MakeChatRoomResponseDto, Error>) -> Void) {
-        Log.debug("DefaultMakeChatRoomRepository: title: \(roomData.title), description: \(roomData.description), password: \(roomData.password), backgroundImageUrl: \(String(describing: roomData.backgroundImageUrl))")
         let parserData = parseChatroomUrl(from: roomData.backgroundImageUrl ?? "")
 
-        Log.debug("parserData:\(parserData)")
-        let makeChatRoomRequestDto = MakeChatRoomRequestDto(title: roomData.title, description: roomData.description, password: roomData.password, backgroundImageUrl: parserData)
+        Log.debug("DefaultMakeChatRoomRepository: title: \(roomData.title), description: \(roomData.description), password: \(roomData.password), backgroundImageUrl: \(parserData)")
+
+        let makeChatRoomRequestDto = MakeChatRoomRequestDto(
+            title: roomData.title,
+            description: roomData.description ?? "",
+            password: roomData.password ?? "",
+            backgroundImageUrl: parserData ?? ""
+        )
 
         ChatAlamofire.shared.makeChatRoom(makeChatRoomRequestDto) { result in
             switch result {
@@ -33,34 +38,6 @@ class DefaultMakeChatRoomRepository: MakeChatRoomRepository {
             }
         }
     }
-
-    // 채팅방 생성 대기 api
-//    func pendChatRoom(roomData: MakeChatRoomItemModel, completion: @escaping (Result<String, Error>) -> Void) {
-//        let pendChatRoomRequestDto = PendChatRoomRequestDto(title: roomData.title, description: roomData.description, password: roomData.password)
-//
-//        ChatAlamofire.shared.pendChatRoom(pendChatRoomRequestDto) { result in
-//            switch result {
-//            case let .success(data):
-//                if let responseData = data {
-//                    do {
-//                        let response = try JSONDecoder().decode(PendChatRoomResponseDto.self, from: responseData)
-//                        Log.debug("[DefaultMakeChatRoomRepository]: 채팅방 생성 대기 api 성공: \(response)")
-//                        completion(.success(response.data.chatRoomId))
-//                    } catch {
-//                        Log.fault("Error parsing response JSON: \(error)")
-//                        completion(.failure(error))
-//                    }
-//                }
-//            case let .failure(error):
-//                if let StatusSpecificError = error as? StatusSpecificError {
-//                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-//                } else {
-//                    Log.error("Network request failed: \(error)")
-//                }
-//                completion(.failure(error))
-//            }
-//        }
-//    }
 
     /// delete이후 문자열만 추출하는 함수
     private func parseChatroomUrl(from presignedUrl: String) -> String {
