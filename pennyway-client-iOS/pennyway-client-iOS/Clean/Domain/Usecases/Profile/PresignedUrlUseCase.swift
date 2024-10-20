@@ -29,13 +29,12 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
 
     /// Presigned URL을 생성하는 메서드의 구현
     /// - Parameters:
-    ///   - entryPoint: 이미지 업로드 Entry Point (예: profile, chatroom)
     ///   - type: 파일의 타입
     ///   - ext: 파일의 확장자 (예: "jpg")
     ///   - model: Presigned URL을 생성하기 위한 요청 모델
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
     ///   - image: 업로드할 UIImage
-    func generate(entryPoint: ImageEntryPoint, type: String, ext: String, image: UIImage, completion _: @escaping (Result<String, Error>) -> Void) {
+    func generate(type: String, ext: String, image: UIImage, completion _: @escaping (Result<String, Error>) -> Void) {
         let presignedUrlModel = PresignedUrlType(type: type, ext: ext)
 
         urlRepository.generatePresignedUrl(model: presignedUrlModel) { result in
@@ -45,7 +44,7 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
 
                 let payload = self.extractPresignedUrl(from: presignedUrl.presignedUrl)
 
-                if entryPoint == .profile {
+                
                     // Presigned URL을 사용하여 이미지 업로드
                     self.upload(payload: payload, presignedUrl: presignedUrl.presignedUrl, image: image) { result in
                         switch result {
@@ -78,7 +77,7 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
                             Log.error("이미지 업로드 실패: \(error)")
                         }
                     }
-                } else if entryPoint == .chatRoom {}
+                
 
             case let .failure(error):
                 Log.error("Presigned URL 생성 실패: \(error)")

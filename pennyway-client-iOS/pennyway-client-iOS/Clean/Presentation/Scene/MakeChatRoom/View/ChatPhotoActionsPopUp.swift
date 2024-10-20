@@ -85,22 +85,7 @@ struct ChatPhotoActionsPopUp: View {
     }
 
     private func deleteProfileImage() {
-//        if let url = getUserData()?.profileImageUrl, !url.isEmpty {
-//            viewModelWrapper.viewModel.deleteProfileImage { success in
-//                if success {
-//                    viewModelWrapper.viewModel.userData.value.imageDelete()
-//                    selectedUIImage = nil
-//                    Log.debug("deleteProfileImageApi 성공")
-//                } else {
-//                    Log.debug("삭제 api 호출 실패")
-//                }
-//                isPresented = false
-//                showPopUpView = false
-//                isHiddenTabBar = false
-//            }
-//        } else {
-//            Log.debug("프로필 사진 비어 있음")
-//        }
+        //TODO: 선택한 사진이 사라지도록 구현해야 함 
     }
 
     private func checkPhotoLibraryPermission() {

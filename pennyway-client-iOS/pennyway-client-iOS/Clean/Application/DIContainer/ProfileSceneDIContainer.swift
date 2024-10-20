@@ -8,21 +8,6 @@
 import SwiftUI
 
 final class ProfileSceneDIContainer {
-//    private let chatSceneDIContainer: ChatSceneDIContainer
-//
-//    init(chatSceneDIContainer: ChatSceneDIContainer) {
-//        self.chatSceneDIContainer = chatSceneDIContainer
-//    }
-
-//    struct Dependencies {
-//        let apiDataTransferService: DataTransferService
-//    }
-//
-//    private let dependencies: Dependencies
-//
-//    init(dependencies: Dependencies) {
-//        self.dependencies = dependencies
-//    }
 
     // MARK: - Factory
 
