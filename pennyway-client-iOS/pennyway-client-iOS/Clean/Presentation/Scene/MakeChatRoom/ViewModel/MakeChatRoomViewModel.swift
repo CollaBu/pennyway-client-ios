@@ -6,7 +6,8 @@ import UIKit
 
 protocol MakeChatRoomViewModelInput {
     func validateForm()
-    func createChatRoomWithImage(image: UIImage)
+    func uploadImage(image: UIImage)
+    func makeChatRoom()
 }
 
 // MARK: - MakeChatRoomViewModelOutput
@@ -14,7 +15,6 @@ protocol MakeChatRoomViewModelInput {
 protocol MakeChatRoomViewModelOutput {
     var roomData: Observable<MakeChatRoomItemModel> { get set }
     var isFormValid: Bool { get set }
-    var chatRoomId: Int64? { get set }
 }
 
 // MARK: - MakeChatRoomViewModel
@@ -25,7 +25,6 @@ protocol MakeChatRoomViewModel: MakeChatRoomViewModelInput, MakeChatRoomViewMode
 
 class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
     @Published var isFormValid: Bool = false // 버튼 활성화 여부
-    @Published var chatRoomId: Int64?
     var roomData: Observable<MakeChatRoomItemModel>
 
     private let makeChatRoomUseCase: MakeChatRoomUseCase
@@ -38,7 +37,8 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
         roomData = Observable(MakeChatRoomItemModel(
             title: "",
             description: "",
-            password: 0
+            password: "",
+            backgroundImageUrl: ""
 
         ))
     }
@@ -49,16 +49,30 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
         isFormValid = !title.isEmpty && title.count <= 30
     }
 
-    /// Presigned URL 생성 후 채팅방 생성 확정 요청
-    func createChatRoomWithImage(image: UIImage) {
+    /// Presigned URL 생성
+    func uploadImage(image: UIImage) {
         // UseCase를 통해 이미지 업로드 후 채팅방 생성 확정 요청
-        makeChatRoomUseCase.createChatRoomWithImage(roomData: roomData.value, image: image) { success in
+        makeChatRoomUseCase.uploadImage(roomData: roomData.value, image: image) { [weak self] result in
             DispatchQueue.main.async {
-                if success {
-                    Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 성공")
-                } else {
-                    Log.fault("[MakeChatRoomViewModel]: 채팅방 생성 확정 실패")
+                switch result {
+                case let .success(url):
+                    self?.roomData.value.backgroundImageUrl = url
+                    Log.debug("[MakeChatRoomViewModel]: 채팅방 이미지 업로드 성공, URL: \(url)")
+
+                case let .failure(error):
+                    Log.fault("[MakeChatRoomViewModel]: 채팅방 이미지 업로드 실패, 오류: \(error)")
                 }
+            }
+        }
+    }
+
+    /// 채팅방 생성 확정 요청
+    func makeChatRoom() {
+        makeChatRoomUseCase.makeChatRoom(roomData: roomData.value) { success in
+            if success {
+                Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 성공")
+            } else {
+                Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 실패")
             }
         }
     }

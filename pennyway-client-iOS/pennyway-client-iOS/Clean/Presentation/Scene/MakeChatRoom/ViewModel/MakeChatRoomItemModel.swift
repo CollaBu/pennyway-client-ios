@@ -7,7 +7,7 @@ import UIKit
 struct MakeChatRoomItemModel: Equatable {
     var title: String
     var description: String
-    var password: Int32
+    var password: String
     var backgroundImageUrl: String?
     var image: UIImage?
 
@@ -17,5 +17,9 @@ struct MakeChatRoomItemModel: Equatable {
 
     mutating func imageUpdate(image: UIImage) {
         self.image = image
+    }
+
+    mutating func backgroundImageUrlUpdate(backgroundImageUrl: String) {
+        self.backgroundImageUrl = backgroundImageUrl
     }
 }

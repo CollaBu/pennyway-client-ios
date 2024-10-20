@@ -59,11 +59,10 @@ struct MakeChatRoomView: View {
                 Spacer()
 
                 CustomBottomButton(action: {
-                    let chatRoomData = MakeChatRoomItemModel(title: roomTitle, description: content, password: Int32(password) ?? 0)
+                    let chatRoomData = MakeChatRoomItemModel(title: roomTitle, description: content, password: password)
 
                     if chatViewModelWrapper.makeChatViewModel.isFormValid {
-                        chatViewModelWrapper.makeChatViewModel.createChatRoomWithImage(image: selectedUIImage!)
-
+                        chatViewModelWrapper.makeChatViewModel.makeChatRoom()
                     }
 
                 }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
@@ -87,6 +86,7 @@ struct MakeChatRoomView: View {
 
                 if let selectedUIImage {
                     self.selectedUIImage = selectedUIImage
+                    chatViewModelWrapper.makeChatViewModel.uploadImage(image: selectedUIImage)
                 }
 
             }) {
@@ -177,13 +177,11 @@ struct MakeChatRoomView: View {
 
                 CustomInputView(inputText: $password, placeholder: "6자리의 숫자 비밀번호가 필요해요", isSecureText: false)
                     .onChange(of: password) { newValue in
-                        // 비밀번호를 Int32로 변환
-                        if let intPassword = Int32(newValue), newValue.count == 6 {
-                            // 유효한 비밀번호인 경우에만 업데이트
-                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = intPassword
+                        // 비밀번호가 6자리인 경우에만 유효하게 처리
+                        if newValue.count == 6 {
+                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = newValue
                         } else {
-                            // 비밀번호가 유효하지 않으면, 필요한 경우 기본값으로 초기화
-                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = 0 // 초기값 또는 처리 로직 추가
+                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = "" // 유효하지 않은 경우 초기화
                         }
                     }
             }

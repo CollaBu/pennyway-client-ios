@@ -18,5 +18,5 @@ struct PresignedUrl {
 struct PresignedUrlType {
     let type: String
     let ext: String
-    let chatRoomId: Int64?
+//    let chatRoomId: Int64?
 }

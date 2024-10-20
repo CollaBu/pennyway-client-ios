@@ -36,7 +36,7 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
     ///   - image: 업로드할 UIImage
     func generate(entryPoint: ImageEntryPoint, type: String, ext: String, image: UIImage, completion _: @escaping (Result<String, Error>) -> Void) {
-        let presignedUrlModel = PresignedUrlType(type: type, ext: ext, chatRoomId: nil)
+        let presignedUrlModel = PresignedUrlType(type: type, ext: ext)
 
         urlRepository.generatePresignedUrl(model: presignedUrlModel) { result in
             switch result {
@@ -78,8 +78,7 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
                             Log.error("이미지 업로드 실패: \(error)")
                         }
                     }
-                } else if entryPoint == .chatRoom {
-                }
+                } else if entryPoint == .chatRoom {}
 
             case let .failure(error):
                 Log.error("Presigned URL 생성 실패: \(error)")
@@ -111,5 +110,4 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
     func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
         imageRepository.loadProfileImage(from: url, completion: completion)
     }
-
 }

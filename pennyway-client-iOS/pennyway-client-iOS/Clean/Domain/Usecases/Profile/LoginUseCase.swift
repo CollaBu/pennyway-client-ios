@@ -44,4 +44,3 @@ class DefaultLoginUseCase: LoginUseCase {
         }
     }
 }
-
