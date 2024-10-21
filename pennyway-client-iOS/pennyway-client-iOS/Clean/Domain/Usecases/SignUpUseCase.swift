@@ -10,7 +10,7 @@ import Foundation
 // MARK: - SignUpUseCase
 
 protocol SignUpUseCase {
-    func signUp(model: SignUp, completion: @escaping (Bool, UserId?) -> Void)
+    func signup(model: SignUp, completion: @escaping (Bool, UserId?) -> Void)
     func oauthSignUp(model: OAuthSignUp, completion: @escaping (Bool, UserId?) -> Void)
 }
 
@@ -18,15 +18,17 @@ protocol SignUpUseCase {
 
 class DefaultSignUpUseCase: SignUpUseCase {
     private let repository: SignUpRepository
+    private let chatStompService = DefaultChatStompService.shared
 
     init(repository: SignUpRepository) {
         self.repository = repository
     }
 
-    func signUp(model: SignUp, completion: @escaping (Bool, UserId?) -> Void) {
-        repository.signUp(model: model) { result in
+    func signup(model: SignUp, completion: @escaping (Bool, UserId?) -> Void) {
+        repository.signup(model: model) { [weak self] result in
             switch result {
             case let .success(response):
+                self?.chatStompService.connect()
                 completion(true, UserId(id: Int64(response.user.id)))
             case let .failure(error):
                 Log.error("Sign up failed: \(error)")
@@ -36,9 +38,10 @@ class DefaultSignUpUseCase: SignUpUseCase {
     }
 
     func oauthSignUp(model: OAuthSignUp, completion: @escaping (Bool, UserId?) -> Void) {
-        repository.oauthSignUp(model: model) { result in
+        repository.oauthSignUp(model: model) { [weak self] result in
             switch result {
             case let .success(response):
+                self?.chatStompService.connect()
                 KeychainHelper.deleteOAuthUserData()
                 completion(true, UserId(id: Int64(response.user.id)))
             case let .failure(error):

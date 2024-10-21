@@ -8,7 +8,7 @@
 import Foundation
 
 class DefaultSignUpRepository: SignUpRepository {
-    func signUp(model: SignUp, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
+    func signup(model: SignUp, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
         let requestDto = SignUpRequestDto.from(model: model)
 
         AuthAlamofire.shared.signup(requestDto) { result in
@@ -17,6 +17,7 @@ class DefaultSignUpRepository: SignUpRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        Log.debug("[DefaultSignUpRepository] 회원가입 성공: \(response)")
                         completion(.success(response.data))
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
@@ -38,6 +39,7 @@ class DefaultSignUpRepository: SignUpRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        Log.debug("[DefaultSignUpRepository] 소셜 회원가입 성공: \(response)")
                         completion(.success(response.data))
                     } catch {
                         Log.fault("Error decoding JSON: \(error)")
