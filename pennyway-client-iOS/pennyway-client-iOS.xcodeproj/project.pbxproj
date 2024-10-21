@@ -396,8 +396,6 @@
 		D8DCCF9C2CBD923100550A8B /* MakeChatRoomRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF9B2CBD923100550A8B /* MakeChatRoomRequestDto.swift */; };
 		D8DCCFA02CBD94B400550A8B /* DefaultMakeChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF9F2CBD94B400550A8B /* DefaultMakeChatRoomRepository.swift */; };
 		D8DCCFA32CBE794300550A8B /* MakeChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCFA22CBE794200550A8B /* MakeChatRoomViewModel.swift */; };
-		D8DCCFA52CBE821700550A8B /* PendChatRoomRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCFA42CBE821700550A8B /* PendChatRoomRequestDto.swift */; };
-		D8DCCFA72CBE880F00550A8B /* PendChatRoomResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCFA62CBE880F00550A8B /* PendChatRoomResponseDto.swift */; };
 		D8DCCFA92CBE8BF900550A8B /* MakeChatRoomItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCFA82CBE8BF900550A8B /* MakeChatRoomItemModel.swift */; };
 		D8DCCFAB2CBE9C2800550A8B /* ChatPhotoActionsPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCFAA2CBE9C2800550A8B /* ChatPhotoActionsPopUp.swift */; };
 		D8DCCFAD2CBE9F1900550A8B /* ChatFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCFAC2CBE9F1900550A8B /* ChatFactory.swift */; };
@@ -815,8 +813,6 @@
 		D8DCCF9B2CBD923100550A8B /* MakeChatRoomRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeChatRoomRequestDto.swift; sourceTree = "<group>"; };
 		D8DCCF9F2CBD94B400550A8B /* DefaultMakeChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMakeChatRoomRepository.swift; sourceTree = "<group>"; };
 		D8DCCFA22CBE794200550A8B /* MakeChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeChatRoomViewModel.swift; sourceTree = "<group>"; };
-		D8DCCFA42CBE821700550A8B /* PendChatRoomRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendChatRoomRequestDto.swift; sourceTree = "<group>"; };
-		D8DCCFA62CBE880F00550A8B /* PendChatRoomResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendChatRoomResponseDto.swift; sourceTree = "<group>"; };
 		D8DCCFA82CBE8BF900550A8B /* MakeChatRoomItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeChatRoomItemModel.swift; sourceTree = "<group>"; };
 		D8DCCFAA2CBE9C2800550A8B /* ChatPhotoActionsPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPhotoActionsPopUp.swift; sourceTree = "<group>"; };
 		D8DCCFAC2CBE9F1900550A8B /* ChatFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFactory.swift; sourceTree = "<group>"; };
@@ -2632,7 +2628,6 @@
 			isa = PBXGroup;
 			children = (
 				D8DCCF942CBD903400550A8B /* MakeChatRoomResponseDto.swift */,
-				D8DCCFA62CBE880F00550A8B /* PendChatRoomResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2641,7 +2636,6 @@
 			isa = PBXGroup;
 			children = (
 				D8DCCF9B2CBD923100550A8B /* MakeChatRoomRequestDto.swift */,
-				D8DCCFA42CBE821700550A8B /* PendChatRoomRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -2907,7 +2901,6 @@
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
 				4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */,
-				D8DCCFA72CBE880F00550A8B /* PendChatRoomResponseDto.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
 				4A148B5E2C364A3C005C6D4E /* SpendingCategoryViewModel.swift in Sources */,
 				4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */,
@@ -2974,7 +2967,6 @@
 				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
 				4A12FEF92C9C49D500DE10BC /* DefaultUserProfileRepository.swift in Sources */,
 				4AB0B13E2C50256300A475F5 /* LoadingView.swift in Sources */,
-				D8DCCFA52CBE821700550A8B /* PendChatRoomRequestDto.swift in Sources */,
 				4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */,
 				4AB5AB572BB5E88C00D2C9EA /* RegistrationManager.swift in Sources */,
 				4A863A0D2CB4585300BA2F2F /* ChatContent.swift in Sources */,

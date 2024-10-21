@@ -3,7 +3,7 @@
 import Foundation
 
 class DefaultMakeChatRoomRepository: MakeChatRoomRepository {
-    func makeChatRoom(roomData: MakeChatRoomItemModel, completion: @escaping (Result<MakeChatRoomResponseDto, Error>) -> Void) {
+    func makeChatRoom(roomData: MakeChatRoomItemModel, completion: @escaping (Result<ChatRoomData, Error>) -> Void) {
         let parserData = parseChatroomUrl(from: roomData.backgroundImageUrl ?? "")
 
         Log.debug("DefaultMakeChatRoomRepository: title: \(roomData.title), description: \(roomData.description), password: \(roomData.password), backgroundImageUrl: \(parserData)")
@@ -22,7 +22,7 @@ class DefaultMakeChatRoomRepository: MakeChatRoomRepository {
                     do {
                         let response = try JSONDecoder().decode(MakeChatRoomResponseDto.self, from: responseData)
                         Log.debug("[DefaultMakeChatRoomRepository]: 채팅방 생성 확정 api 성공: \(response)")
-                        completion(.success(response))
+                        completion(.success(response.data))
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                         completion(.failure(error))

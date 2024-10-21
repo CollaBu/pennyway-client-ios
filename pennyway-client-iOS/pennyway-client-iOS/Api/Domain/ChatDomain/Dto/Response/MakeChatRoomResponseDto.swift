@@ -6,10 +6,12 @@ import Foundation
 struct MakeChatRoomResponseDto: Codable {
     let code: String
     let data: ChatRoomData
+}
 
-    struct ChatRoomData: Codable {
-        let chatRoom: ChatRoomDetail
-    }
+// MARK: - ChatRoomData
+
+struct ChatRoomData: Codable {
+    let chatRoom: ChatRoomDetail
 }
 
 // MARK: - ChatRoomDetail

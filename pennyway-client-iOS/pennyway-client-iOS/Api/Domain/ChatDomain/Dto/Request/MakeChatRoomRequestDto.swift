@@ -1,6 +1,8 @@
 
 import Foundation
 
+// MARK: - MakeChatRoomRequestDto
+
 public struct MakeChatRoomRequestDto: Encodable {
     let title: String
     let description: String?

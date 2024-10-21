@@ -36,6 +36,5 @@ struct RoomTitleInput: View {
             }
             .padding(.horizontal, 20)
         }
-        .border(.red03)
     }
 }

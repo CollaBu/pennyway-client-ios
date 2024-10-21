@@ -67,8 +67,6 @@ struct MakeChatRoomView: View {
                 }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
-//            .frame(maxWidth: .infinity)
-//            .frame(width: 320 * DynamicSizeFactor.factor(), maxHeight: .infinity)
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
             .background(Color("White01"))
@@ -103,6 +101,7 @@ struct MakeChatRoomView: View {
                 if isDismissed {
                     self.presentationMode.wrappedValue.dismiss()
                     Log.debug("isDismissed")
+                    isDismissed = false
                 }
             }
 
