@@ -7,8 +7,8 @@ import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     static var currentFCMToken: String?
-
     let gcmMessageIDKey = "gcm.message_id"
+    var viewManager = ViewStateManager()//view 상태 감지
 
     /// 앱이 켜졌을 때
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {

@@ -94,6 +94,7 @@
 		4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */; };
 		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
 		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
+		4A3ECF7B2CC6C869005D4803 /* ViewStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ECF7A2CC6C869005D4803 /* ViewStateManager.swift */; };
 		4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */; };
 		4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */; };
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */; };
@@ -499,6 +500,7 @@
 		4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingResponseDto.swift; sourceTree = "<group>"; };
+		4A3ECF7A2CC6C869005D4803 /* ViewStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStateManager.swift; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -1266,6 +1268,7 @@
 				4A12FF0B2C9C4B8600DE10BC /* DIContainer */,
 				4A12FF122C9C4BCF00DE10BC /* AppFlowCoordinator.swift */,
 				4A12FF142C9C4BDE00DE10BC /* RootComponent.swift */,
+				4A3ECF7A2CC6C869005D4803 /* ViewStateManager.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -2855,6 +2858,7 @@
 				4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */,
 				D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
+				4A3ECF7B2CC6C869005D4803 /* ViewStateManager.swift in Sources */,
 				4A3701BD2C08F7B600F0AEBA /* TargetAmountViewModel.swift in Sources */,
 				4A12FF152C9C4BDE00DE10BC /* RootComponent.swift in Sources */,
 				4A7354602CA45BBA002A856F /* LoginUseCase.swift in Sources */,
