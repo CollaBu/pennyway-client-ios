@@ -101,7 +101,6 @@ struct MakeChatRoomView: View {
                 if isDismissed {
                     self.presentationMode.wrappedValue.dismiss()
                     Log.debug("isDismissed")
-                    isDismissed = false
                 }
             }
 
