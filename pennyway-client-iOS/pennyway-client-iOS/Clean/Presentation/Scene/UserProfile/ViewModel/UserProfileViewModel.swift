@@ -71,7 +71,7 @@ class DefaultUserProfileViewModel: UserProfileViewModel {
 
     /// 프로필 이미지를 업로드하는 메서드
     private func uploadPresignedUrl(image: UIImage) {
-        presignedUrlUseCase.generate(entryPoint: .profile, type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue, image: image) { result in
+        presignedUrlUseCase.generate(type: ImageType.profile.rawValue, ext: Ext.jpeg.rawValue, image: image) { result in
             switch result {
             case .success:
                 DispatchQueue.main.async {

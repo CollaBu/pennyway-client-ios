@@ -11,7 +11,7 @@ import UIKit
 // MARK: - PresignedUrlUseCase
 
 protocol PresignedUrlUseCase {
-    func generate(entryPoint: ImageEntryPoint, type: String, ext: String, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
+    func generate(type: String, ext: String, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
     func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void)
 }
 
@@ -44,40 +44,38 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
 
                 let payload = self.extractPresignedUrl(from: presignedUrl.presignedUrl)
 
-                
-                    // Presigned URL을 사용하여 이미지 업로드
-                    self.upload(payload: payload, presignedUrl: presignedUrl.presignedUrl, image: image) { result in
-                        switch result {
-                        case .success:
-                            Log.debug("[Presigned URL]-이미지 업로드 성공")
+                // Presigned URL을 사용하여 이미지 업로드
+                self.upload(payload: payload, presignedUrl: presignedUrl.presignedUrl, image: image) { result in
+                    switch result {
+                    case .success:
+                        Log.debug("[Presigned URL]-이미지 업로드 성공")
 
-                            self.update(from: payload) { result in
+                        self.update(from: payload) { result in
 
-                                switch result {
-                                case let .success(response):
-                                    Log.debug("[PresignedUrlUseCase]-프로필 이미지 업데이트 성공: \(response)")
+                            switch result {
+                            case let .success(response):
+                                Log.debug("[PresignedUrlUseCase]-프로필 이미지 업데이트 성공: \(response)")
 
-                                    self.loadImage(from: payload) { loadResult in
-                                        switch loadResult {
-                                        case let .success(image):
-                                            DispatchQueue.main.async {
-                                                Log.debug("[PresignedUrlUseCase]-이미지 업데이트 성공")
-                                            }
-                                        case let .failure(error):
-                                            Log.debug("[PresignedUrlUseCase]-이미지 로드 실패: \(error)")
+                                self.loadImage(from: payload) { loadResult in
+                                    switch loadResult {
+                                    case let .success(image):
+                                        DispatchQueue.main.async {
+                                            Log.debug("[PresignedUrlUseCase]-이미지 업데이트 성공")
                                         }
+                                    case let .failure(error):
+                                        Log.debug("[PresignedUrlUseCase]-이미지 로드 실패: \(error)")
                                     }
-
-                                case let .failure(error):
-                                    Log.debug("[PresignedUrlUseCase]-프로필 이미지 업데이트 실패: \(error)")
                                 }
-                            }
 
-                        case let .failure(error):
-                            Log.error("이미지 업로드 실패: \(error)")
+                            case let .failure(error):
+                                Log.debug("[PresignedUrlUseCase]-프로필 이미지 업데이트 실패: \(error)")
+                            }
                         }
+
+                    case let .failure(error):
+                        Log.error("이미지 업로드 실패: \(error)")
                     }
-                
+                }
 
             case let .failure(error):
                 Log.error("Presigned URL 생성 실패: \(error)")

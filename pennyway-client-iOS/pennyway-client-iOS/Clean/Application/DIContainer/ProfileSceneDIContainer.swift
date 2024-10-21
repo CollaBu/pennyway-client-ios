@@ -8,7 +8,6 @@
 import SwiftUI
 
 final class ProfileSceneDIContainer {
-
     // MARK: - Factory
 
     func makeProfileFactory() -> DefaultProfileFactory { // DefaultProfileFactory를 생성하여 반환

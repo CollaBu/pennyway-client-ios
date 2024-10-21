@@ -5,7 +5,4 @@ import Foundation
 protocol MakeChatRoomRepository {
     /// 채팅방 생성하는 함수
     func makeChatRoom(roomData: MakeChatRoomItemModel, completion: @escaping (Result<MakeChatRoomResponseDto, Error>) -> Void)
-
-//    /// 채팅방 생성 대기하는 함수
-//    func pendChatRoom(roomData: MakeChatRoomItemModel, completion: @escaping (Result<Int64, Error>) -> Void)
 }

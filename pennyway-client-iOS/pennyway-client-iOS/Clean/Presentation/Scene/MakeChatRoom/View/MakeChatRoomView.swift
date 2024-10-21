@@ -68,14 +68,6 @@ struct MakeChatRoomView: View {
 
                 }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                    .onChange(of: chatViewModelWrapper.makeChatViewModel.isDismissView) { isDismissed in
-                        Log.debug("onChange실행중")
-
-                        if isDismissed {
-                            self.presentationMode.wrappedValue.dismiss()
-                            Log.debug("isDismissed")
-                        }
-                    }
             }
             .edgesIgnoringSafeArea(.bottom)
             .toolbar {
@@ -101,6 +93,14 @@ struct MakeChatRoomView: View {
             }) {
                 ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                     .edgesIgnoringSafeArea(.bottom)
+            }
+            .onChange(of: chatViewModelWrapper.makeChatViewModel.isDismissView) { isDismissed in
+                Log.debug("onChange실행중")
+
+                if isDismissed {
+                    self.presentationMode.wrappedValue.dismiss()
+                    Log.debug("isDismissed")
+                }
             }
 
             if showPopUpView {

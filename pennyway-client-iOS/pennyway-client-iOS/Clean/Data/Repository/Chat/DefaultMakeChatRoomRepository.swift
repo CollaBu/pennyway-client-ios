@@ -10,9 +10,9 @@ class DefaultMakeChatRoomRepository: MakeChatRoomRepository {
 
         let makeChatRoomRequestDto = MakeChatRoomRequestDto(
             title: roomData.title,
-            description: roomData.description ?? "",
-            password: roomData.password ?? "",
-            backgroundImageUrl: parserData ?? ""
+            description: roomData.description.isEmpty ? nil : roomData.description,
+            password: roomData.password.isEmpty ? nil : roomData.password,
+            backgroundImageUrl: parserData.isEmpty ? nil : parserData
         )
 
         ChatAlamofire.shared.makeChatRoom(makeChatRoomRequestDto) { result in
