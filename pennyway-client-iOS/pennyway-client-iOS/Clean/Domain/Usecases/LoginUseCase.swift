@@ -12,21 +12,24 @@ import Foundation
 protocol LoginUseCase {
     func login(username: String, password: String, completion: @escaping (Bool) -> Void)
     func oauthLogin(data: OAuthLogin, completion: @escaping (Bool, String?) -> Void)
+    func checkLoginState(completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - DefaultLoginUseCase
 
 class DefaultLoginUseCase: LoginUseCase {
     private let repository: LoginRepository
+    private let chatStompService = DefaultChatStompService.shared
 
     init(repository: LoginRepository) {
         self.repository = repository
     }
 
     func login(username: String, password: String, completion: @escaping (Bool) -> Void) {
-        repository.login(username: username, password: password) { result in
+        repository.login(username: username, password: password) { [weak self] result in
             switch result {
             case .success:
+                self?.chatStompService.connect()
                 completion(true)
             case .failure:
                 completion(false)
@@ -35,17 +38,30 @@ class DefaultLoginUseCase: LoginUseCase {
     }
 
     func oauthLogin(data: OAuthLogin, completion: @escaping (Bool, String?) -> Void) {
-        repository.oauthLogin(model: data) { result in
+        repository.oauthLogin(model: data) { [weak self] result in
             switch result {
             case let .success(response):
-                let userId = response.data.user.id
+                let userId = response.user.id
                 if userId != -1 {
+                    self?.chatStompService.connect()
                     completion(true, nil)
                 } else {
                     completion(false, nil)
                 }
             case let .failure(error):
                 completion(false, error.localizedDescription)
+            }
+        }
+    }
+
+    func checkLoginState(completion: @escaping (Bool) -> Void) {
+        repository.checkLoginState { [weak self] result in
+            switch result {
+            case .success:
+                self?.chatStompService.connect()
+                completion(true)
+            case .failure:
+                completion(false)
             }
         }
     }

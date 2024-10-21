@@ -50,33 +50,33 @@ struct ChatUserInfoView: View {
         }
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.bottom)
         .background(
-            Image("test")
+            Image("image_chat_background")
                 .resizable() // 이미지 크기 조정 가능하게 설정
                 .scaledToFill() // 이미지가 뷰를 꽉 채우도록 비율을 맞춤
         )
-//        .toolbar {
-//            ToolbarItem(placement: .topBarLeading) {
-//                HStack {
-//                    Button(action: {
-//                        self.presentationMode.wrappedValue.dismiss()
-//                    }, label: {
-//                        Image("icon_close")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
-//                            .padding(5)
-//                    })
-//                    .frame(width: 44, height: 44)
-//                    .buttonStyle(BasicButtonStyleUtil())
-//                }
-//            }
-//        }
     }
 
     private var UserInfoContent: some View {
         VStack {
+            Spacer().frame(height: 50 * DynamicSizeFactor.factor())
+
+            HStack {
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image("icon_close")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 34, height: 34)
+                        .padding(5)
+                })
+                .buttonStyle(BasicButtonStyleUtil())
+
+                Spacer()
+            }.padding(.horizontal, 10)
+
             Spacer()
 
             VStack(spacing: 0) {
@@ -142,6 +142,7 @@ struct ChatUserInfoView: View {
                 .platformTextColor(color: textColor)
                 .cornerRadius(6)
             }
+            .buttonStyle(BasicButtonStyleUtil())
         }
     }
 }
