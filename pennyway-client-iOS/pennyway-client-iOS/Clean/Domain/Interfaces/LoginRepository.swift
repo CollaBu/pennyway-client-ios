@@ -11,4 +11,6 @@ protocol LoginRepository {
     func login(username: String, password: String, completion: @escaping (Result<AuthResponseData, Error>) -> Void)
     func oauthLogin(model: OAuthLogin, completion: @escaping (Result<AuthResponseData, Error>) -> Void)
     func checkLoginState(completion: @escaping (Result<AuthResponseData, Error>) -> Void)
+    func linkOAuthToAccount(model: LinkOAuthToAccount, completion: @escaping (Result<AuthResponseData, Error>) -> Void)
+    func linkAccountToOAuth(model: LinkAccountToOAuth, completion: @escaping (Result<AuthResponseData, Error>) -> Void)
 }

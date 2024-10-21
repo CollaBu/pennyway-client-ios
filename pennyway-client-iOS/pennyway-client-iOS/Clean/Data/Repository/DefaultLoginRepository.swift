@@ -67,4 +67,45 @@ class DefaultLoginRepository: LoginRepository {
             }
         }
     }
+
+    func linkOAuthToAccount(model: LinkOAuthToAccount, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
+        let requestDto = LinkOAuthToAccountRequestDto.from(model: model)
+
+        OAuthAlamofire.shared.linkOAuthToAccount(requestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        Log.debug("[DefaultLoginRepository] 소셜 -> 일반 계정 연동 성공: \(response)")
+                        completion(.success(response.data))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func linkAccountToOAuth(model: LinkAccountToOAuth, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
+        let requestDto = LinkAccountToOAuthRequestDto.from(model: model)
+        AuthAlamofire.shared.linkAccountToOAuth(requestDto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(AuthResponseDto.self, from: responseData)
+                        Log.debug("[DefaultLoginRepository] 일반 -> 소셜 계정 연동 성공: \(response)")
+                        completion(.success(response.data))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
