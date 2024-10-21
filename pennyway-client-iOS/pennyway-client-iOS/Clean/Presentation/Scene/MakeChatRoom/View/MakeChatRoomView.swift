@@ -1,4 +1,4 @@
-
+import Combine
 import SwiftUI
 
 // MARK: - MakeChatRoomView
@@ -29,6 +29,9 @@ struct MakeChatRoomView: View {
 
                         RoomTitleInput(roomTitle: $roomTitle, title: titleCustomTextList[0], baseAttribute: baseAttribute, stringAttribute: stringAttribute)
                             .onChange(of: roomTitle) { newValue in
+                                if roomTitle.count > 30 {
+                                    roomTitle = String(roomTitle.prefix(30))
+                                }
                                 chatViewModelWrapper.makeChatViewModel.roomData.value.title = newValue
                                 chatViewModelWrapper.makeChatViewModel.validateForm()
                             }
@@ -47,15 +50,10 @@ struct MakeChatRoomView: View {
 
                         Spacer()
                     }
-                    .frame(maxHeight: .infinity)
 
                     Spacer()
                 }
                 .navigationBarColor(UIColor(named: "White01"), title: "채팅방 만들기")
-                .setTabBarVisibility(isHidden: true)
-                .navigationBarBackButtonHidden(true)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color("White01"))
 
                 Spacer()
 
@@ -69,6 +67,11 @@ struct MakeChatRoomView: View {
                 }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
+//            .frame(maxWidth: .infinity)
+//            .frame(width: 320 * DynamicSizeFactor.factor(), maxHeight: .infinity)
+            .setTabBarVisibility(isHidden: true)
+            .navigationBarBackButtonHidden(true)
+            .background(Color("White01"))
             .edgesIgnoringSafeArea(.bottom)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -132,7 +135,7 @@ struct MakeChatRoomView: View {
                         .frame(height: 106 * DynamicSizeFactor.factor())
 
                     TextEditor(text: $content)
-                        .font(.B1MediumFont())
+                        .font(.H4MediumFont())
                         .padding(.horizontal, 10)
                         .padding(.top, 8)
                         .zIndex(0)
@@ -190,8 +193,12 @@ struct MakeChatRoomView: View {
                 CustomInputView(inputText: $password, placeholder: "6자리의 숫자 비밀번호가 필요해요", isSecureText: false)
                     .onChange(of: password) { newValue in
                         // 비밀번호가 6자리인 경우에만 유효하게 처리
-                        if newValue.count == 6 {
-                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = newValue
+                        if newValue.count > 6 {
+                            password = String(password.prefix(6))
+                        }
+
+                        if password.count == 6 {
+                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = password
                         } else {
                             chatViewModelWrapper.makeChatViewModel.roomData.value.password = "" // 유효하지 않은 경우 초기화
                         }
@@ -251,7 +258,7 @@ struct MakeChatRoomView: View {
 // MARK: - ChatViewModelWrapper
 
 final class ChatViewModelWrapper: ObservableObject {
-    @Published var makeChatViewModel: MakeChatRoomViewModel
+    var makeChatViewModel: any MakeChatRoomViewModel
 
     init(makeChatViewModel: MakeChatRoomViewModel) {
         self.makeChatViewModel = makeChatViewModel
