@@ -10,8 +10,10 @@ import SwiftUI
 struct pennyway_client_iOSApp: App {
     @StateObject private var appViewModel = AppViewModel()
     @StateObject private var networkStatus = NetworkStatusViewModel()
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) private var scenePhase
+
+    @StateObject private var viewStateManager = ViewStateManager() // view 상태 감지
 
     init() {
         let kakaoAppKey = Bundle.main.infoDictionary?["KakaoAppKey"] as! String
@@ -36,10 +38,11 @@ struct pennyway_client_iOSApp: App {
                 GIDSignIn.sharedInstance.handle(url)
             }
             .onChange(of: scenePhase) { newPhase in
-                delegate.viewManager.setScenePhase(newPhase)
+                viewStateManager.setScenePhase(newPhase)
             }
             .environmentObject(appViewModel)
             .environmentObject(networkStatus)
+            .environmentObject(viewStateManager)
         }
     }
 }

@@ -19,6 +19,8 @@ struct SpendingManagementMainView: View {
     @State private var entryPoint: EntryPoint = .main
     @State private var showToastPopup = false
 
+    @EnvironmentObject var viewStateManager: ViewStateManager
+
     var body: some View {
         NavigationAvailable {
             content
@@ -30,6 +32,7 @@ struct SpendingManagementMainView: View {
                     spendingHistoryViewModel.checkSpendingHistoryApi { _ in }
                     targetAmountViewModel.getTargetAmountForDateApi { _ in }
                     notificationViewModel.checkUnReadNotificationsApi { _ in }
+                    viewStateManager.setCurrentView(self)
                     Log.debug("hasUnread : \(notificationViewModel.hasUnread)")
                 }
                 .toolbar {

@@ -12,6 +12,7 @@ import SwiftUI
 struct ChatView: View {
     @StateObject private var keyboardManager = KeyboardManager()
     @State private var isSideMenuPresented = false
+    @EnvironmentObject var viewStateManager: ViewStateManager
 
     var body: some View {
         ZStack {
@@ -65,6 +66,9 @@ struct ChatView: View {
                     }
                 }
             )
+            .onAppear {
+                viewStateManager.setCurrentView(self)
+            }
         }
     }
 }

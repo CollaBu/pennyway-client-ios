@@ -3,6 +3,8 @@ import SwiftUI
 struct LoginView: View {
     @StateObject var loginViewModel = LoginViewModel()
     @State private var goToInquiryView: Bool = false
+    @EnvironmentObject var viewStateManager: ViewStateManager
+
     var body: some View {
         NavigationAvailable {
             ZStack {
@@ -41,6 +43,9 @@ struct LoginView: View {
                     EmptyView()
                 }
                 .hidden()
+            }
+            .onAppear {
+                viewStateManager.setCurrentView(self)
             }
         }
         .analyzeEvent(AuthEvents.loginView)
