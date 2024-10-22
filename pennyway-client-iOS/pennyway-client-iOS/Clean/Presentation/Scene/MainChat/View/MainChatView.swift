@@ -14,6 +14,7 @@ struct MainChatView: View {
         ChatRoom(id: 1, title: "배달음식 그만 먹는 방", description: "배달음식 NO 집밥 YES", background_image_url: "icon_notifications", password: "", privacy_setting: false, notify_enabled: true),
         ChatRoom(id: 2, title: "월급 다 쓴 사람이 모인 방", description: "함께 저축해요", background_image_url: "icon_notifications", password: "1234", privacy_setting: true, notify_enabled: true)
     ]
+    @EnvironmentObject var viewStateManager: ViewStateManager
     
     private let maxLength = 19
 
@@ -99,6 +100,12 @@ struct MainChatView: View {
                         .buttonStyle(BasicButtonStyleUtil())
                     }
                 }
+            }
+            .onAppear {
+                viewStateManager.setCurrentView(self, selectedTab: selectedTab)
+            }
+            .onChange(of: selectedTab) { newSelected in
+                viewStateManager.setCurrentView(self, selectedTab: newSelected)
             }
         }
     }
