@@ -27,12 +27,11 @@ struct TemporaryView: View {
                 Text("Btn")
             })
             .setTabBarVisibility(isHidden: false)
-//            NavigationLink(destination: ChatUserInfoView(), isActive: $navigate) {}
             NavigationLink(destination: ChatView(), isActive: $isNavigate) {}
 
                 .fullScreenCover(isPresented: $showChatUserInfo) {
                     ChatUserInfoView()
-                        .ignoresSafeArea() // 안전 영역을 무시하고 전체 화면으로 표시
+                        .ignoresSafeArea()
                 }
         }
     }

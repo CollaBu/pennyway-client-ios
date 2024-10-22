@@ -53,8 +53,8 @@ struct ChatUserInfoView: View {
         .edgesIgnoringSafeArea(.bottom)
         .background(
             Image("image_chat_background")
-                .resizable() // 이미지 크기 조정 가능하게 설정
-                .scaledToFill() // 이미지가 뷰를 꽉 채우도록 비율을 맞춤
+                .resizable()
+                .scaledToFill()
         )
     }
 
