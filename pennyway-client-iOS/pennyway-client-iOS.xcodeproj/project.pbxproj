@@ -268,10 +268,6 @@
 		4AD824752C76263B00AEF371 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD824742C76263B00AEF371 /* NetworkMonitor.swift */; };
 		4AD824772C76266600AEF371 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD824762C76266600AEF371 /* NetworkStatusViewModel.swift */; };
 		4AD824792C7626C400AEF371 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD824782C7626C400AEF371 /* LayoutView.swift */; };
-		4ADA09412CBE5B34001F9384 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA093D2CBE5B34001F9384 /* Debug.xcconfig */; };
-		4ADA09422CBE5B34001F9384 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA093E2CBE5B34001F9384 /* Release.xcconfig */; };
-		4ADA09432CBE5B34001F9384 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA093F2CBE5B34001F9384 /* Secrets.xcconfig */; };
-		4ADA09452CBE5B3B001F9384 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA09442CBE5B3B001F9384 /* GoogleService-Info.plist */; };
 		4ADA094A2CBE5FFB001F9384 /* ChatAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA09492CBE5FFB001F9384 /* ChatAlamofire.swift */; };
 		4ADA094D2CBE635F001F9384 /* ChatRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA094C2CBE635F001F9384 /* ChatRouter.swift */; };
 		4ADA094F2CBE679C001F9384 /* ChatStompRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA094E2CBE679C001F9384 /* ChatStompRepository.swift */; };
@@ -318,6 +314,10 @@
 		B599E4DC2C6C6CEB006051E9 /* TargetAmountAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4DB2C6C6CEB006051E9 /* TargetAmountAnalyticsEvents.swift */; };
 		B599E4DE2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4DD2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift */; };
 		D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809412D2BF276460015CFF9 /* ResetPwFormView.swift */; };
+		D80C684A2CC7F78100928921 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D80C68472CC7F78100928921 /* Secrets.xcconfig */; };
+		D80C684B2CC7F78100928921 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D80C68482CC7F78100928921 /* Release.xcconfig */; };
+		D80C684C2CC7F78100928921 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D80C68492CC7F78100928921 /* Debug.xcconfig */; };
+		D80C684E2CC7F78D00928921 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D80C684D2CC7F78D00928921 /* GoogleService-Info.plist */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D8157E642BBEF2040083844B /* InputFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8157E632BBEF2040083844B /* InputFormView.swift */; };
@@ -674,10 +674,6 @@
 		4AD824742C76263B00AEF371 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		4AD824762C76266600AEF371 /* NetworkStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusViewModel.swift; sourceTree = "<group>"; };
 		4AD824782C7626C400AEF371 /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
-		4ADA093D2CBE5B34001F9384 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4ADA093E2CBE5B34001F9384 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4ADA093F2CBE5B34001F9384 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		4ADA09442CBE5B3B001F9384 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4ADA09492CBE5FFB001F9384 /* ChatAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAlamofire.swift; sourceTree = "<group>"; };
 		4ADA094C2CBE635F001F9384 /* ChatRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRouter.swift; sourceTree = "<group>"; };
 		4ADA094E2CBE679C001F9384 /* ChatStompRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStompRepository.swift; sourceTree = "<group>"; };
@@ -724,6 +720,10 @@
 		B599E4DB2C6C6CEB006051E9 /* TargetAmountAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B599E4DD2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingCategoryAnalyticsEvents.swift; sourceTree = "<group>"; };
 		D809412D2BF276460015CFF9 /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
+		D80C68472CC7F78100928921 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
+		D80C68482CC7F78100928921 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../../../../Downloads/Release.xcconfig; sourceTree = "<group>"; };
+		D80C68492CC7F78100928921 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
+		D80C684D2CC7F78D00928921 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		D8157E632BBEF2040083844B /* InputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormView.swift; sourceTree = "<group>"; };
 		D8157E652BBEF2740083844B /* OAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthButtonView.swift; sourceTree = "<group>"; };
@@ -1738,8 +1738,8 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4ADA09442CBE5B3B001F9384 /* GoogleService-Info.plist */,
-				4ADA09402CBE5B34001F9384 /* Xcconfig */,
+				D80C684D2CC7F78D00928921 /* GoogleService-Info.plist */,
+				D80C68462CC7F76900928921 /* Xcconfig */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
@@ -2158,16 +2158,6 @@
 			path = ProfileMainView;
 			sourceTree = "<group>";
 		};
-		4ADA09402CBE5B34001F9384 /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				4ADA093D2CBE5B34001F9384 /* Debug.xcconfig */,
-				4ADA093E2CBE5B34001F9384 /* Release.xcconfig */,
-				4ADA093F2CBE5B34001F9384 /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
-			sourceTree = "<group>";
-		};
 		4ADA09462CBE5D60001F9384 /* ChatDomain */ = {
 			isa = PBXGroup;
 			children = (
@@ -2403,6 +2393,16 @@
 				B599E4DD2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift */,
 			);
 			path = Event;
+			sourceTree = "<group>";
+		};
+		D80C68462CC7F76900928921 /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				D80C68492CC7F78100928921 /* Debug.xcconfig */,
+				D80C68482CC7F78100928921 /* Release.xcconfig */,
+				D80C68472CC7F78100928921 /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
 			sourceTree = "<group>";
 		};
 		D8180BFE2BE507D200F837FB /* FindIdView */ = {
@@ -2656,18 +2656,18 @@
 			files = (
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
-				4ADA09452CBE5B3B001F9384 /* GoogleService-Info.plist in Resources */,
+				D80C684E2CC7F78D00928921 /* GoogleService-Info.plist in Resources */,
+				D80C684A2CC7F78100928921 /* Secrets.xcconfig in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
+				D80C684C2CC7F78100928921 /* Debug.xcconfig in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				4ADA09412CBE5B34001F9384 /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				4ADA09432CBE5B34001F9384 /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				4ADA09422CBE5B34001F9384 /* Release.xcconfig in Resources */,
+				D80C684B2CC7F78100928921 /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3251,7 +3251,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ADA093D2CBE5B34001F9384 /* Debug.xcconfig */;
+			baseConfigurationReference = D80C68492CC7F78100928921 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3293,7 +3293,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ADA093E2CBE5B34001F9384 /* Release.xcconfig */;
+			baseConfigurationReference = D80C68482CC7F78100928921 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
