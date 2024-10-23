@@ -62,9 +62,21 @@ struct ChatView: View {
                 Group {
                     if isSideMenuPresented {
                         ChatSideMenuView(isPresented: $isSideMenuPresented)
+                            .transition(.move(edge: .trailing))
                     }
                 }
             )
+//            .background(
+//                if isSideMenuPresented {
+//                    Color.black.opacity(0.3)
+//                        .edgesIgnoringSafeArea(.all)
+            ////                        .onTapGesture {
+            ////                            withAnimation {
+            ////                                isPresented = false
+            ////                            }
+            ////                        }
+//                }
+//            )
         }
     }
 }
@@ -87,16 +99,16 @@ let mockMembers: [ChatMember] = [
     ChatMember(
         id: 1,
         profile_image: "https://example.com/user1.jpg",
-        username: "UserOne",
-        role: "Admin",
+        username: "바다오리",
+        role: "Member",
         user_id: 101,
         chat_room_id: 1
     ),
     ChatMember(
         id: 2,
         profile_image: "https://example.com/user2.jpg",
-        username: "UserTwo",
-        role: "Member",
+        username: "고래고래고래",
+        role: "Admin",
         user_id: 102,
         chat_room_id: 1
     ),
@@ -119,7 +131,7 @@ let mockChats: [Chat] = [
     ),
     Chat(
         id: 3,
-        content: "Just working on some SwiftUI stuff.",
+        content: "안녕하세요안녕하세요",
         created_at: Date(),
         sender_id: 101,
         chat_room_id: 1
@@ -135,12 +147,26 @@ let mockChats: [Chat] = [
     Chat(
         id: 5,
         content: "Just working on some SwiftUI stuff.",
-        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 21))!,
+        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 10, day: 21))!,
         sender_id: 102,
         chat_room_id: 1
     ),
     Chat(
         id: 6,
+        content: "Just working on some SwiftUI stuff.",
+        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 10, day: 21))!,
+        sender_id: 102,
+        chat_room_id: 1
+    ),
+    Chat(
+        id: 7,
+        content: "Just working on some SwiftUI stuff.",
+        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 21))!,
+        sender_id: 102,
+        chat_room_id: 1
+    ),
+    Chat(
+        id: 8,
         content: "Just working on some SwiftUI stuff.",
         created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 21))!,
         sender_id: 101,
