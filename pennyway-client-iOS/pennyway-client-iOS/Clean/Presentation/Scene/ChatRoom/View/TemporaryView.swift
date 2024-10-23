@@ -10,13 +10,13 @@ import SwiftUI
 // MARK: - TemporaryView
 
 struct TemporaryView: View {
-    @State private var navigate = false
+    @State private var showChatUserInfo = false
     @State private var isNavigate = false
 
     var body: some View {
         NavigationAvailable {
             Button(action: {
-                navigate = true
+                showChatUserInfo = true
             }, label: {
                 Text("Button")
             })
@@ -27,8 +27,12 @@ struct TemporaryView: View {
                 Text("Btn")
             })
             .setTabBarVisibility(isHidden: false)
-            NavigationLink(destination: ChatSettingView(), isActive: $navigate) {}
             NavigationLink(destination: ChatView(), isActive: $isNavigate) {}
+
+                .fullScreenCover(isPresented: $showChatUserInfo) {
+                    ChatUserInfoView()
+                        .ignoresSafeArea()
+                }
         }
     }
 }

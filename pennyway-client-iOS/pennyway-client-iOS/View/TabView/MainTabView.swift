@@ -36,6 +36,7 @@ struct MainTabView: View {
             .tag(2)
             .buttonStyle(BasicButtonStyleUtil())
 
+
             LazyView {
                 AppComponent()
                     .makeProfileRootView()
