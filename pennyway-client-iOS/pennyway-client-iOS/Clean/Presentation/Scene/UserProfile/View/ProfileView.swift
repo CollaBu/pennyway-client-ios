@@ -75,7 +75,7 @@ struct ProfileView: View {
 
                 if showPopUpView {
                     Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-                    EditProfilePopUpView(
+                    PhotoActionsPopUp(
                         isPresented: $showPopUpView,
                         showPopUpView: $showPopUpView,
                         isHiddenTabBar: $isHiddenTabBar,
