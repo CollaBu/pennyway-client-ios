@@ -103,11 +103,13 @@ struct ChatCellView: View {
     }
 
     private func showCheckMarkAnimation(_ chatRoom: ChatRoom) {
-        isCheckMarkVisible = true
+        withAnimation {
+            isCheckMarkVisible = true
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            deleteChatRoom(chatRoom)
-            isCheckMarkVisible = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                deleteChatRoom(chatRoom)
+                isCheckMarkVisible = false
+            }
         }
     }
 
