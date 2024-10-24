@@ -252,13 +252,3 @@ struct MakeChatRoomView: View {
         .padding(.horizontal, 20)
     }
 }
-
-// MARK: - ChatViewModelWrapper
-
-final class ChatViewModelWrapper: ObservableObject {
-    var makeChatViewModel: any MakeChatRoomViewModel
-
-    init(makeChatViewModel: MakeChatRoomViewModel) {
-        self.makeChatViewModel = makeChatViewModel
-    }
-}

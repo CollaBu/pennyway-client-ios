@@ -22,6 +22,7 @@ struct ChatRoomDetail: Codable {
     let description: String
     let backgroundImageUrl: String
     let isPrivate: Bool
+    let isAdmin: Bool
     let participantCount: Int32
     let createdAt: String
 }
