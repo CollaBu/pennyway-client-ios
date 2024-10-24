@@ -14,7 +14,7 @@ struct ChatCellView: View {
         ChatRoom(id: 1, title: "배달음식 그만 먹는 방", description: "배달음식 NO 집밥 YES", background_image_url: "icon_notifications", password: "", privacy_setting: false, notify_enabled: true),
         ChatRoom(id: 2, title: "월급 다 쓴 사람이 모인 방", description: "함께 저축해요", background_image_url: "icon_notifications", password: "1234", privacy_setting: true, notify_enabled: true)
     ]
-    
+
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     private let maxLength = 19
@@ -24,6 +24,7 @@ struct ChatCellView: View {
             ZStack {
                 VStack {
                     Spacer().frame(height: 38 * DynamicSizeFactor.factor())
+
                     HStack(spacing: 30) {
                         Button(action: {
                             selectedTab = 1
@@ -36,7 +37,7 @@ struct ChatCellView: View {
                             RecommendChatContainer
                         })
                     }
-                    
+
                     Spacer().frame(height: 28 * DynamicSizeFactor.factor())
 
                     // 내 채팅에서 채팅방의 존재 유무에 따라 다른 뷰를 보여주도록 함
@@ -53,7 +54,7 @@ struct ChatCellView: View {
                         ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $dummyChatRooms, isMyChat: false)
                     }
                 }
-                
+
                 if isPopUp, let chatRoom = selectedChatRoom {
                     CustomPopUpView(
                         showingPopUp: $isPopUp,
@@ -62,20 +63,19 @@ struct ChatCellView: View {
                         firstBtnAction: { self.isPopUp = false },
                         firstBtnLabel: "취소",
                         secondBtnAction: {
-                            withAnimation {
-                                self.isPopUp = false // 팝업 닫기
-                                showCheckMarkAnimation(chatRoom)
-                            }
+                            self.isPopUp = false // 팝업 닫기
+                            showCheckMarkAnimation(chatRoom)
                         },
                         secondBtnLabel: "나가기",
                         secondBtnColor: Color("Red03"))
                 }
-                
+
                 if isCheckMarkVisible {
                     Image("icon_illust_completion")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
+                        .zIndex(1)
                 }
                 NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
@@ -101,25 +101,23 @@ struct ChatCellView: View {
             }
         }
     }
-    
+
     private func showCheckMarkAnimation(_ chatRoom: ChatRoom) {
-        withAnimation {
-            isCheckMarkVisible = true
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            withAnimation {
-                isCheckMarkVisible = false
-                deleteChatRoom(chatRoom)
-            }
+        isCheckMarkVisible = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            deleteChatRoom(chatRoom)
+            isCheckMarkVisible = false
         }
     }
-    
+
     /// 채팅방 삭제 함수
     private func deleteChatRoom(_ chatRoom: ChatRoom) {
-        dummyChatRooms.removeAll { $0.id == chatRoom.id }
+        withAnimation {
+            dummyChatRooms.removeAll { $0.id == chatRoom.id }
+        }
     }
-    
+
     private var searchChatContainer: some View {
         VStack {
             CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", isSecureText: false, showSearchBtn: true)
@@ -131,7 +129,7 @@ struct ChatCellView: View {
             Spacer().frame(height: 23 * DynamicSizeFactor.factor())
         }
     }
-    
+
     private var MyChatContainer: some View {
         VStack {
             if selectedTab == 1 {
@@ -161,8 +159,9 @@ struct ChatCellView: View {
                     .padding(.top, 4)
             }
         }
+        .contentShape(Rectangle())
     }
-    
+
     private var RecommendChatContainer: some View {
         VStack {
             if selectedTab == 2 {
@@ -187,6 +186,7 @@ struct ChatCellView: View {
                     .padding(.top, 4)
             }
         }
+        .contentShape(Rectangle()) 
     }
 }
 
