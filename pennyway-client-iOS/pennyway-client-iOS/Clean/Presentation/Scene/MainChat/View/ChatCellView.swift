@@ -65,11 +65,11 @@ struct ChatCellView: View {
                         secondBtnAction: {
                             self.isPopUp = false // 팝업 닫기
                             showCheckMarkAnimation(chatRoom)
+
                         },
                         secondBtnLabel: "나가기",
                         secondBtnColor: Color("Red03"))
                 }
-
                 if isCheckMarkVisible {
                     Image("icon_illust_completion")
                         .resizable()
@@ -189,6 +189,7 @@ struct ChatCellView: View {
             }
         }
         .contentShape(Rectangle()) 
+
     }
 }
 
