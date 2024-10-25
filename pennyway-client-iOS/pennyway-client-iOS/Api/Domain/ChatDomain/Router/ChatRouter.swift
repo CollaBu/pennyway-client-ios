@@ -12,10 +12,11 @@ import Foundation
 enum ChatRouter: URLRequestConvertible {
     case getChatServer
     case makeChatRoom(dto: MakeChatRoomRequestDto)
+    case searchChatRoom(dto: SearchChatRoomRequestDto)
 
     var method: HTTPMethod {
         switch self {
-        case .getChatServer:
+        case .getChatServer, .searchChatRoom:
             return .get
         case .makeChatRoom:
             return .post
@@ -33,7 +34,7 @@ enum ChatRouter: URLRequestConvertible {
 
     var path: String {
         switch self {
-        case .makeChatRoom:
+        case .makeChatRoom, .searchChatRoom:
             return "v2/chat-rooms"
         case .getChatServer:
             return "v2/socket/chat"
@@ -44,7 +45,7 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case let .makeChatRoom(dto):
             return try? dto.asDictionary()
-        case .getChatServer:
+        case .getChatServer, .searchChatRoom:
             return [:]
         }
     }
@@ -53,6 +54,8 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case .getChatServer, .makeChatRoom:
             return [:]
+        case .searchChatRoom(dto):
+            return try? dto.asDictionary()
         }
     }
 
@@ -63,6 +66,8 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case .makeChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
+        case .searchChatRoom:
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
         case .getChatServer:
             request = URLRequest.createURLRequest(url: url, method: method)
         }
