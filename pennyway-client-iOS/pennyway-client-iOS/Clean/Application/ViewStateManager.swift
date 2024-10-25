@@ -31,20 +31,20 @@ class ViewStateManager: ObservableObject {
     func setCurrentView(_ view: some View, selectedTab: Int? = nil) {
         currentView = AnyView(view)
 
-        if view is MainChatView {
-            if selectedTab == 1 {//내 채팅인 경우
+        if view is ChatCellView {
+            if selectedTab == 1 { // 내 채팅인 경우
                 currentViewType = .activeChatRoomCell
-                Log.info("[ViewStateManager] View state: activeChatRoomList")
-            } else {//추천 채팅인 경우
+                Log.info("[ViewStateManager] View state: activeChatRoomCell")
+            } else { // 추천 채팅인 경우
                 currentViewType = .activeNonChat
-                Log.info("[ViewStateManager] View state: activeApp")
+                Log.info("[ViewStateManager] View state: activeNonChat")
             }
         } else if view is ChatView {
             currentViewType = .activeChatRoom
             Log.info("[ViewStateManager] View state: activeChatRoom")
         } else {
             currentViewType = .activeNonChat
-            Log.info("[ViewStateManager] View state: activeApp")
+            Log.info("[ViewStateManager] View state: activeNonChat")
         }
     }
 
@@ -54,7 +54,7 @@ class ViewStateManager: ObservableObject {
         switch phase {
         case .active:
             currentViewType = .activeNonChat
-            Log.info("[ViewStateManager - setScenePhase] View state: activeApp")
+            Log.info("[ViewStateManager - setScenePhase] View state: activeNonChat")
         case .inactive:
             currentViewType = .inactive
             Log.info("[ViewStateManager - setScenePhase] View state: inactive")

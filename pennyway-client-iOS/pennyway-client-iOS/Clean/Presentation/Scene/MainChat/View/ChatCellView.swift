@@ -1,9 +1,9 @@
 
 import SwiftUI
 
-// MARK: - MainChatView
+// MARK: - ChatCellView
 
-struct MainChatView: View {
+struct ChatCellView: View {
     @State private var selectedTab: Int = 1
     @State private var chatRoomName: String = "" // 수정 예정
     @State private var isNavigateToMakeChatRoom = false
@@ -15,7 +15,7 @@ struct MainChatView: View {
         ChatRoom(id: 2, title: "월급 다 쓴 사람이 모인 방", description: "함께 저축해요", background_image_url: "icon_notifications", password: "1234", privacy_setting: true, notify_enabled: true)
     ]
     @EnvironmentObject var viewStateManager: ViewStateManager
-    
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
     private let maxLength = 19
 
     var body: some View {
@@ -23,6 +23,7 @@ struct MainChatView: View {
             ZStack {
                 VStack {
                     Spacer().frame(height: 38 * DynamicSizeFactor.factor())
+
                     HStack(spacing: 30) {
                         Button(action: {
                             selectedTab = 1
@@ -35,7 +36,7 @@ struct MainChatView: View {
                             RecommendChatContainer
                         })
                     }
-                    
+
                     Spacer().frame(height: 28 * DynamicSizeFactor.factor())
 
                     // 내 채팅에서 채팅방의 존재 유무에 따라 다른 뷰를 보여주도록 함
@@ -51,11 +52,8 @@ struct MainChatView: View {
                         searchChatContainer
                         ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $dummyChatRooms, isMyChat: false)
                     }
-                    
-                    NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
-                        .hidden()
                 }
-                
+
                 if isPopUp, let chatRoom = selectedChatRoom {
                     CustomPopUpView(
                         showingPopUp: $isPopUp,
@@ -64,22 +62,21 @@ struct MainChatView: View {
                         firstBtnAction: { self.isPopUp = false },
                         firstBtnLabel: "취소",
                         secondBtnAction: {
-                            withAnimation {
-                                self.isPopUp = false // 팝업 닫기
-                                showCheckMarkAnimation(chatRoom)
-                            }
+                            self.isPopUp = false // 팝업 닫기
+                            showCheckMarkAnimation(chatRoom)
+
                         },
                         secondBtnLabel: "나가기",
                         secondBtnColor: Color("Red03"))
                 }
-                
                 if isCheckMarkVisible {
                     Image("icon_illust_completion")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
+                        .zIndex(1)
                 }
-                NavigationLink(destination: MakeChatRoomView(), isActive: $isNavigateToMakeChatRoom) {}
+                NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
             }
             .setTabBarVisibility(isHidden: false)
@@ -109,25 +106,25 @@ struct MainChatView: View {
             }
         }
     }
-    
+
     private func showCheckMarkAnimation(_ chatRoom: ChatRoom) {
         withAnimation {
             isCheckMarkVisible = true
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            withAnimation {
-                isCheckMarkVisible = false
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 deleteChatRoom(chatRoom)
+                isCheckMarkVisible = false
             }
         }
     }
-    
+
     /// 채팅방 삭제 함수
     private func deleteChatRoom(_ chatRoom: ChatRoom) {
-        dummyChatRooms.removeAll { $0.id == chatRoom.id }
+        withAnimation {
+            dummyChatRooms.removeAll { $0.id == chatRoom.id }
+        }
     }
-    
+
     private var searchChatContainer: some View {
         VStack {
             CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", isSecureText: false, showSearchBtn: true)
@@ -139,7 +136,7 @@ struct MainChatView: View {
             Spacer().frame(height: 23 * DynamicSizeFactor.factor())
         }
     }
-    
+
     private var MyChatContainer: some View {
         VStack {
             if selectedTab == 1 {
@@ -169,8 +166,9 @@ struct MainChatView: View {
                     .padding(.top, 4)
             }
         }
+        .contentShape(Rectangle())
     }
-    
+
     private var RecommendChatContainer: some View {
         VStack {
             if selectedTab == 2 {
@@ -195,6 +193,7 @@ struct MainChatView: View {
                     .padding(.top, 4)
             }
         }
+        .contentShape(Rectangle()) 
     }
 }
 
@@ -205,8 +204,4 @@ final class MainChatViewModelWrapper: ObservableObject {
     init(chatData: ChatItemViewModel) {
         self.chatData = chatData
     }
-}
-
-#Preview {
-    MainChatView()
 }

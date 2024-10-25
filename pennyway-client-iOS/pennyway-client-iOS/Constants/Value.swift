@@ -29,7 +29,7 @@ enum ImageType: String {
     case profile = "PROFILE"
     case feed = "FEED"
     case chatroomProfile = "CHATROOM_PROFILE"
-    case caht = "CHAT"
+    case chat = "CHAT"
     case chatProfile = "CHAT_PROFILE"
 }
 

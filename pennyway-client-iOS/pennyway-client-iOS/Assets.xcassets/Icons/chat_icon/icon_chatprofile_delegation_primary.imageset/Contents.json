@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "icon_chatprofile_delegation_primary.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

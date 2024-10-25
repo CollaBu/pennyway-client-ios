@@ -20,4 +20,9 @@ final class AppFlowCoordinator {
         let profileSceneDIContainer = appDIContainer.makeProfileSceneDIContainer() // ProfileSceneDIContainer
         return profileSceneDIContainer.makeProfileFactory()
     }
+
+    func chatFlowStart() -> any ChatFactory {
+        let chatSceneDIContainer = appDIContainer.makeChatSceneDIContainer() // ChatSceneDIContainer
+        return chatSceneDIContainer.makeChatFactory()
+    }
 }

@@ -25,6 +25,7 @@ struct ChatMessage: View {
                 Rectangle()
                     .fill(isSender ? Color("Yellow01") : Color("White01"))
                     .cornerRadius(6)
+                    .frame(width: textWidth)
 
                 Text(content)
                     .font(.B1MediumFont())

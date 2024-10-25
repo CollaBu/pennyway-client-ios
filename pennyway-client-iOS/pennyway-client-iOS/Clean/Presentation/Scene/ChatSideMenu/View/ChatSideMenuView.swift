@@ -36,7 +36,6 @@ struct ChatSideMenuView: View {
                                 secondBtnLabel: "나가기",
                                 secondBtnColor: Color("Red03")
                 )
-                .analyzeEvent(ProfileEvents.oauthUnlinkPopUp)
             }
         }
         .edgesIgnoringSafeArea(.bottom)

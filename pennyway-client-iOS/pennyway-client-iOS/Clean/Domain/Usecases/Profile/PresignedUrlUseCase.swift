@@ -29,6 +29,8 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
 
     /// Presigned URL을 생성하는 메서드의 구현
     /// - Parameters:
+    ///   - type: 파일의 타입
+    ///   - ext: 파일의 확장자 (예: "jpg")
     ///   - model: Presigned URL을 생성하기 위한 요청 모델
     ///   - completion: 성공 시 PresignedUrlModel 반환, 실패 시 Error 반환
     ///   - image: 업로드할 UIImage
@@ -52,21 +54,21 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
 
                             switch result {
                             case let .success(response):
-                                Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 성공: \(response)")
+                                Log.debug("[PresignedUrlUseCase]-프로필 이미지 업데이트 성공: \(response)")
 
                                 self.loadImage(from: payload) { loadResult in
                                     switch loadResult {
                                     case let .success(image):
                                         DispatchQueue.main.async {
-                                            Log.debug("[UserProfileViewModel]-이미지 업데이트 성공")
+                                            Log.debug("[PresignedUrlUseCase]-이미지 업데이트 성공")
                                         }
                                     case let .failure(error):
-                                        Log.debug("[UserProfileViewModel]-이미지 로드 실패: \(error)")
+                                        Log.debug("[PresignedUrlUseCase]-이미지 로드 실패: \(error)")
                                     }
                                 }
 
                             case let .failure(error):
-                                Log.debug("[UserProfileViewModel]-프로필 이미지 업데이트 실패: \(error)")
+                                Log.debug("[PresignedUrlUseCase]-프로필 이미지 업데이트 실패: \(error)")
                             }
                         }
 
@@ -74,6 +76,7 @@ class DefaultPresignedUrlUseCase: PresignedUrlUseCase {
                         Log.error("이미지 업로드 실패: \(error)")
                     }
                 }
+
             case let .failure(error):
                 Log.error("Presigned URL 생성 실패: \(error)")
             }

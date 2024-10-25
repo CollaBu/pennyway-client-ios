@@ -12,7 +12,6 @@ struct pennyway_client_iOSApp: App {
     @StateObject private var networkStatus = NetworkStatusViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) private var scenePhase
-
     @StateObject private var viewStateManager = ViewStateManager() // view 상태 감지
 
     init() {
