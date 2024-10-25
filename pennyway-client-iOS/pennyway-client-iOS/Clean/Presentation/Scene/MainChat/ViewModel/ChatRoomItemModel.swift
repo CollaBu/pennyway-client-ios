@@ -7,15 +7,10 @@
 
 import Foundation
 
-// MARK: - ChatRoom
-
-struct ChatRoom: Equatable {
-    let chatRoom: ChatRoomItemModel
-}
-
 // MARK: - ChatRoomItemModel
 
-struct ChatRoomItemModel: Equatable {
+struct ChatRoomItemModel: Equatable, Identifiable {
+    var id: Int64
     var title: String
     var description: String
     var backgroundImageUrl: String

@@ -16,7 +16,7 @@ protocol GetChatRoomViewModelInput {
 // MARK: - GetChatRoomViewModelOutput
 
 protocol GetChatRoomViewModelOutput {
-    var roomData: Observable<ChatRoomItemModel> { get set }
+    var roomData: Observable<[ChatRoomItemModel]> { get set }
 }
 
 // MARK: - GetChatRoomViewModel
@@ -26,9 +26,15 @@ protocol GetChatRoomViewModel: GetChatRoomViewModelInput, GetChatRoomViewModelOu
 // MARK: - DefaultGetChatRoomViewModel
 
 class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
-    var roomData: Observable<ChatRoomItemModel>
+    @Published var roomData: Observable<[ChatRoomItemModel]>
 
     private let getChatRoomUseCase: GetChatRoomUseCase
+
+    init(getChatRoomUseCase: GetChatRoomUseCase) {
+        self.getChatRoomUseCase = getChatRoomUseCase
+
+        roomData = Observable([ChatRoomItemModel(id: 0, title: "", description: "", backgroundImageUrl: "", isPrivate: false, isAdmin: false, participantCount: 0)])
+    }
 
     /// 내 채팅방 조회 요청
     func getChatRoom() {

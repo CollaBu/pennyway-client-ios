@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 // MARK: - ChatCellView
@@ -9,11 +8,7 @@ struct ChatCellView: View {
     @State private var isNavigateToMakeChatRoom = false
     @State private var isCheckMarkVisible = false // 체크 표시를 보여줄지 여부
     @State private var isPopUp = false // 채팅방 나가기 팝업 표시 여부
-    @State private var selectedChatRoom: ChatRoom? = nil // 어떤 채팅방이 선택됐는지의 여부
-    @State private var dummyChatRooms = [
-        ChatRoom(id: 1, title: "배달음식 그만 먹는 방", description: "배달음식 NO 집밥 YES", background_image_url: "icon_notifications", password: "", privacy_setting: false, notify_enabled: true),
-        ChatRoom(id: 2, title: "월급 다 쓴 사람이 모인 방", description: "함께 저축해요", background_image_url: "icon_notifications", password: "1234", privacy_setting: true, notify_enabled: true)
-    ]
+    @State private var selectedChatRoom: ChatRoomItemModel? = nil // 어떤 채팅방이 선택됐는지의 여부
 
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
@@ -41,16 +36,16 @@ struct ChatCellView: View {
 
                     // 내 채팅에서 채팅방의 존재 유무에 따라 다른 뷰를 보여주도록 함
                     if selectedTab == 1 {
-                        if dummyChatRooms.isEmpty {
+                        if viewModelWrapper.chatData.isEmpty {
                             DefaultChatContent()
                             Spacer()
                         } else {
                             searchChatContainer
-                            ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $dummyChatRooms, isMyChat: true)
+                            ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $viewModelWrapper.chatData, isMyChat: true)
                         }
                     } else {
                         searchChatContainer
-                        ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $dummyChatRooms, isMyChat: false)
+                        ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $viewModelWrapper.chatData, isMyChat: false)
                     }
                 }
 
@@ -106,7 +101,7 @@ struct ChatCellView: View {
         }
     }
 
-    private func showCheckMarkAnimation(_ chatRoom: ChatRoom) {
+    private func showCheckMarkAnimation(_ chatRoom: ChatRoomItemModel) {
         withAnimation {
             isCheckMarkVisible = true
         }
@@ -120,8 +115,8 @@ struct ChatCellView: View {
     }
 
     /// 채팅방 삭제 함수
-    private func deleteChatRoom(_ chatRoom: ChatRoom) {
-        dummyChatRooms.removeAll { $0.id == chatRoom.id }
+    private func deleteChatRoom(_ chatRoom: ChatRoomItemModel) {
+        viewModelWrapper.getChatRoomViewModel.roomData.value.removeAll { $0.id == chatRoom.id }
     }
 
     private var searchChatContainer: some View {
@@ -197,11 +192,20 @@ struct ChatCellView: View {
 // MARK: - ChatViewModelWrapper
 
 final class ChatViewModelWrapper: ObservableObject {
+    @Published var chatData: [ChatRoomItemModel] = []
+
     var makeChatViewModel: any MakeChatRoomViewModel
     var getChatRoomViewModel: any GetChatRoomViewModel
 
     init(makeChatViewModel: any MakeChatRoomViewModel, getChatRoomViewModel: any GetChatRoomViewModel) {
         self.makeChatViewModel = makeChatViewModel
         self.getChatRoomViewModel = getChatRoomViewModel
+
+        chatData = getChatRoomViewModel.roomData.value
+
+        // Observable을 통해 userData 변화를 감지하고 업데이트
+        getChatRoomViewModel.roomData.observe(on: self) { [weak self] newData in
+            self?.chatData = newData
+        }
     }
 }

@@ -379,9 +379,6 @@
 		D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */; };
 		D8B0A92A2C4EB8E500716ECB /* ResetMyPwRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */; };
 		D8B0A92C2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A92B2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift */; };
-		D8BAB3E32CCA790300D1910E /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8BAB3E02CCA790300D1910E /* Debug.xcconfig */; };
-		D8BAB3E42CCA790300D1910E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8BAB3E12CCA790300D1910E /* Secrets.xcconfig */; };
-		D8BAB3E52CCA790300D1910E /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8BAB3E22CCA790300D1910E /* Release.xcconfig */; };
 		D8BAB3E92CCA92CF00D1910E /* GetChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BAB3E82CCA92CF00D1910E /* GetChatRoomUseCase.swift */; };
 		D8BAB3EB2CCA931500D1910E /* GetChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BAB3EA2CCA931500D1910E /* GetChatRoomRepository.swift */; };
 		D8BAB3ED2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BAB3EC2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift */; };
@@ -766,6 +763,9 @@
 		D851E71A2C0273BD00316DB3 /* BackofficeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeRequestDto.swift; sourceTree = "<group>"; };
 		D851E71F2C0273FA00316DB3 /* BackofficeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeRouter.swift; sourceTree = "<group>"; };
 		D851E7222C02743C00316DB3 /* BackofficeAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackofficeAlamofire.swift; sourceTree = "<group>"; };
+		D857D1942CCB4C6B00E3FCC4 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
+		D857D1952CCB4C6B00E3FCC4 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../../../../Downloads/Release.xcconfig; sourceTree = "<group>"; };
+		D857D1962CCB4C6B00E3FCC4 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		D85927ED2BE6842A00653391 /* CustomPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
 		D85927F12BE69C6A00653391 /* UserLogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogoutViewModel.swift; sourceTree = "<group>"; };
 		D85927F32BE9116700653391 /* SignUpFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormViewModel.swift; sourceTree = "<group>"; };
@@ -805,9 +805,6 @@
 		D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePwRequestDto.swift; sourceTree = "<group>"; };
 		D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetMyPwRequestDto.swift; sourceTree = "<group>"; };
 		D8B0A92B2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeTypeNavigation.swift; sourceTree = "<group>"; };
-		D8BAB3E02CCA790300D1910E /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
-		D8BAB3E12CCA790300D1910E /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
-		D8BAB3E22CCA790300D1910E /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../../../../Downloads/Release.xcconfig; sourceTree = "<group>"; };
 		D8BAB3E82CCA92CF00D1910E /* GetChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRoomUseCase.swift; sourceTree = "<group>"; };
 		D8BAB3EA2CCA931500D1910E /* GetChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRoomRepository.swift; sourceTree = "<group>"; };
 		D8BAB3EC2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetChatRoomRepository.swift; sourceTree = "<group>"; };
@@ -1778,7 +1775,7 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D8BAB3DF2CCA78F400D1910E /* Xcconfig */,
+				D857D1932CCB4C5800E3FCC4 /* Xcconfig */,
 				D80C68662CC8037F00928921 /* GoogleService-Info.plist */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
@@ -2537,6 +2534,16 @@
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
+		D857D1932CCB4C5800E3FCC4 /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				D857D1942CCB4C6B00E3FCC4 /* Debug.xcconfig */,
+				D857D1952CCB4C6B00E3FCC4 /* Release.xcconfig */,
+				D857D1962CCB4C6B00E3FCC4 /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
+			sourceTree = "<group>";
+		};
 		D874F5292C32881400936886 /* DetailSpendingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2598,16 +2605,6 @@
 				D8B0A9232C4E5D6400716ECB /* AddSpendingFormFieldsView.swift */,
 			);
 			path = AddSpendingHistoryView;
-			sourceTree = "<group>";
-		};
-		D8BAB3DF2CCA78F400D1910E /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				D8BAB3E02CCA790300D1910E /* Debug.xcconfig */,
-				D8BAB3E22CCA790300D1910E /* Release.xcconfig */,
-				D8BAB3E12CCA790300D1910E /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
 			sourceTree = "<group>";
 		};
 		D8DCCF702CBD8B4B00550A8B /* Component */ = {
@@ -2796,7 +2793,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8BAB3E42CCA790300D1910E /* Secrets.xcconfig in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
 				D80C68672CC8037F00928921 /* GoogleService-Info.plist in Resources */,
@@ -2805,12 +2801,10 @@
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				D8BAB3E32CCA790300D1910E /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
-				D8BAB3E52CCA790300D1910E /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3409,7 +3403,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8BAB3E02CCA790300D1910E /* Debug.xcconfig */;
+			baseConfigurationReference = D857D1942CCB4C6B00E3FCC4 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3451,7 +3445,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8BAB3E22CCA790300D1910E /* Release.xcconfig */;
+			baseConfigurationReference = D857D1952CCB4C6B00E3FCC4 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
