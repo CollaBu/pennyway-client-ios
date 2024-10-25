@@ -16,5 +16,6 @@ struct ChatRoom: Equatable, Identifiable {
     let background_image_url: String
     let isPrivate: Bool
     let isAdmin: Bool
-    let participateCount: Int32
+    let participantCount: Int32
+    let createdAt: String
 }

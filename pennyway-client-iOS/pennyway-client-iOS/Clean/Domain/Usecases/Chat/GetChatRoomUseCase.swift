@@ -10,7 +10,7 @@ import Foundation
 // MARK: - GetChatRoomUseCase
 
 protocol GetChatRoomUseCase {
-    func getChatRoom(completion: @escaping (Bool) -> Void)
+    func getChatRoom(completion: @escaping (Bool, [ChatRoomItemModel]?) -> Void)
 }
 
 // MARK: - DefaultGetChatRoomUseCase
@@ -22,15 +22,29 @@ class DefaultGetChatRoomUseCase: GetChatRoomUseCase {
         self.repository = repository
     }
 
-    func getChatRoom(completion: @escaping (Bool) -> Void) {
+    func getChatRoom(completion: @escaping (Bool, [ChatRoomItemModel]?) -> Void) {
         repository.getChatRoom { result in
             switch result {
-            case let .success(response):
-                Log.debug("[GetChatRoomUseCase]-채팅방 조회 성공: \(response)")
-                completion(true)
+            case let .success(chatRooms): // chatRoom은 ChatRoom 타입
+                // ChatRoom 데이터를 ChatRoomItemModel로 변환
+
+                let chatRoomItemModels = chatRooms.map { chatRoom in
+                    return ChatRoomItemModel(
+                        id: chatRoom.id,
+                        title: chatRoom.title,
+                        description: chatRoom.description,
+                        backgroundImageUrl: chatRoom.background_image_url,
+                        isPrivate: chatRoom.isPrivate,
+                        isAdmin: chatRoom.isAdmin,
+                        participantCount: chatRoom.participantCount
+                    )
+                }
+                Log.debug("[GetChatRoomUseCase] 내 채팅 조회 성공")
+                completion(true, chatRoomItemModels) // 성공 시 데이터와 함께 true 전달
+
             case let .failure(error):
-                Log.debug("[GetChatRoomUseCase]-채팅방 조회 실패: \(error)")
-                completion(false)
+                Log.debug("[GetChatRoomUseCase] 내 채팅 조회 실패: \(error)")
+                completion(false, nil) // 실패 시 false와 nil 전달
             }
         }
     }

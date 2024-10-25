@@ -8,20 +8,31 @@
 import Foundation
 
 class DefaultGetChatRoomRepository: GetChatRoomRepository {
-    func getChatRoom(completion: @escaping (Result<ChatRoomData, any Error>) -> Void) {
+    func getChatRoom(completion: @escaping (Result<[ChatRoom], any Error>) -> Void) {
         ChatAlamofire.shared.getChatRoom { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
+                        // 응답을 DTO로 디코딩
                         let response = try JSONDecoder().decode(MakeChatRoomResponseDto.self, from: responseData)
-                        let chatRoomDetail = response.data.chatRoom
-                                                
-                        // 받아온 응답 DTO를 Model로 변환
-                        let ChatRoom = ChatRoom(id: chatRoomDetail.id, title: chatRoomDetail.title, description: chatRoomDetail.description, background_image_url: chatRoomDetail.backgroundImageUrl, isPrivate: chatRoomDetail.isPrivate, isAdmin: chatRoomDetail.isAdmin, participateCount: chatRoomDetail.participantCount)
-                        
+
+                        // 응답 DTO를 Model로 매핑
+                        let chatRooms = response.data.chatRooms.map { chatRoomDetail in
+                            return ChatRoom(
+                                id: chatRoomDetail.id,
+                                title: chatRoomDetail.title,
+                                description: chatRoomDetail.description,
+                                background_image_url: chatRoomDetail.backgroundImageUrl,
+                                isPrivate: chatRoomDetail.isPrivate,
+                                isAdmin: chatRoomDetail.isAdmin,
+                                participantCount: chatRoomDetail.participantCount,
+                                createdAt: chatRoomDetail.createdAt ?? ""
+                            )
+                        }
+
                         Log.debug("[DefaultGetChatRoomRepository]: 내 채팅 조회 api 성공: \(response)")
-                        completion(.success(ChatRoom))
+                        completion(.success(chatRooms))
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                         completion(.failure(error))

@@ -38,10 +38,25 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
 
     /// 내 채팅방 조회 요청
     func getChatRoom() {
-        getChatRoomUseCase.getChatRoom { [weak self] success in
+        getChatRoomUseCase.getChatRoom { [weak self] success, chatRooms in
             DispatchQueue.main.async {
                 if success {
-                    Log.debug("[ChatViewModel]: 내 채팅방 조회 성공")
+                    if let chatRooms = chatRooms {
+                        // 성공적으로 데이터를 받았을 때 처리
+                        self?.roomData.value = chatRooms.map { chatRoomDetail in
+                            return ChatRoomItemModel(
+                                id: chatRoomDetail.id,
+                                title: chatRoomDetail.title,
+                                description: chatRoomDetail.description,
+                                backgroundImageUrl: chatRoomDetail.backgroundImageUrl,
+                                isPrivate: chatRoomDetail.isPrivate,
+                                isAdmin: chatRoomDetail.isAdmin,
+                                participantCount: chatRoomDetail.participantCount
+                            )
+                        }
+                        Log.debug("[ChatViewModel]: 내 채팅방 조회 성공")
+                        // 필요한 데이터로 업데이트
+                    }
                 } else {
                     Log.debug("[ChatViewModel]: 내 채팅방 조회 실패")
                 }
