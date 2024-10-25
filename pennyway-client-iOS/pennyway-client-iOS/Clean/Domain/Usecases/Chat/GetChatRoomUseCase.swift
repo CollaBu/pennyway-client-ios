@@ -49,23 +49,4 @@ class DefaultGetChatRoomUseCase: GetChatRoomUseCase {
             }
         }
     }
-
-    /// URL을 사용해 이미지를 비동기적으로 로드하는 함수
-    private func loadImage(from url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
-        guard let url = URL(string: url) else {
-            completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
-            return
-        }
-
-        // URLSession을 사용해 이미지 다운로드
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data, let image = UIImage(data: data) {
-                completion(.success(image))
-            } else if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unknown error"])))
-            }
-        }.resume()
-    }
 }
