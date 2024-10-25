@@ -14,7 +14,6 @@ class DefaultGetChatRoomRepository: GetChatRoomRepository {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        // 응답을 DTO로 디코딩
                         let response = try JSONDecoder().decode(MakeChatRoomResponseDto.self, from: responseData)
 
                         // 응답 DTO를 Model로 매핑

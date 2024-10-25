@@ -94,13 +94,6 @@ let mockChatRoom = ChatRoom(
     isAdmin: true,
     participantCount: 0,
     createdAt: "2024-10-25T06:09:41.472Z"
-//    id: 1,
-//    title: "SwiftUI Chat Room",
-//    description: "A place to talk about SwiftUI",
-//    background_image_url: "https://example.com/background.jpg",
-//    password: nil,
-//    privacy_setting: true,
-//    notify_enabled: true
 )
 
 let mockMembers: [ChatMember] = [

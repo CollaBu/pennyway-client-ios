@@ -19,6 +19,7 @@ struct ChatRoomContent: View {
                     .transition(.move(edge: .trailing).combined(with: .opacity))
                 }
             }
+            .padding(.horizontal, 20)
         }
     }
 }
@@ -26,6 +27,8 @@ struct ChatRoomContent: View {
 // MARK: - ChatRoomCell
 
 struct ChatRoomCell: View {
+    @State private var loadedImage: UIImage? = nil
+
     let chatRoom: ChatRoomItemModel
     let isMyChat: Bool
     let onDelete: () -> Void
@@ -60,10 +63,17 @@ struct ChatRoomCell: View {
             }
             // 채팅방 셀
             HStack(spacing: 13) {
-                Image(chatRoom.backgroundImageUrl)
-                    .resizable()
-                    .frame(width: 43 * DynamicSizeFactor.factor(), height: 43 * DynamicSizeFactor.factor())
-                    .cornerRadius(8)
+                if let image = loadedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 43 * DynamicSizeFactor.factor(), height: 43 * DynamicSizeFactor.factor())
+                        .cornerRadius(8)
+                } else {
+                    Image("icon_illust_chat_no picture")
+                        .resizable()
+                        .frame(width: 43 * DynamicSizeFactor.factor(), height: 43 * DynamicSizeFactor.factor())
+                        .cornerRadius(8)
+                }
                     
                 ZStack {
                     VStack(alignment: .leading) {
@@ -125,7 +135,6 @@ struct ChatRoomCell: View {
                 }
             }
             .padding(.vertical, 8)
-            .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
             .offset(x: offset)
@@ -155,5 +164,25 @@ struct ChatRoomCell: View {
                     }
             )
         }
+        .onAppear {
+            loadImage(from: chatRoom.backgroundImageUrl)
+        }
+    }
+    
+    func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let data = data, error == nil, let downloadedImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.loadedImage = downloadedImage
+                }
+            } else {
+                print("Failed to load image for chat room: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }.resume()
     }
 }

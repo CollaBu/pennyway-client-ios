@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - GetChatRoomViewModelInput
 
@@ -42,7 +43,6 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
             DispatchQueue.main.async {
                 if success {
                     if let chatRooms = chatRooms {
-                        // 성공적으로 데이터를 받았을 때 처리
                         self?.roomData.value = chatRooms.map { chatRoomDetail in
                             return ChatRoomItemModel(
                                 id: chatRoomDetail.id,
@@ -55,7 +55,6 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
                             )
                         }
                         Log.debug("[ChatViewModel]: 내 채팅방 조회 성공")
-                        // 필요한 데이터로 업데이트
                     }
                 } else {
                     Log.debug("[ChatViewModel]: 내 채팅방 조회 실패")
