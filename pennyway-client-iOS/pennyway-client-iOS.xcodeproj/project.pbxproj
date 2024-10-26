@@ -91,6 +91,25 @@
 		4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */; };
 		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
 		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
+		4A3ECF7B2CC6C869005D4803 /* ViewStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3ECF7A2CC6C869005D4803 /* ViewStateManager.swift */; };
+		4A45A16C2CCBF5CE00D47F10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A45A16B2CCBF5CD00D47F10 /* GoogleService-Info.plist */; };
+		4A45A1712CCBF5D600D47F10 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A45A16D2CCBF5D500D47F10 /* Debug.xcconfig */; };
+		4A45A1722CCBF5D600D47F10 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A45A16E2CCBF5D500D47F10 /* Release.xcconfig */; };
+		4A45A1732CCBF5D600D47F10 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A45A16F2CCBF5D500D47F10 /* Secrets.xcconfig */; };
+		4A45A17C2CCBF66D00D47F10 /* DefaultDeleteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1742CCBF66D00D47F10 /* DefaultDeleteUserRepository.swift */; };
+		4A45A17D2CCBF66D00D47F10 /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1752CCBF66D00D47F10 /* DefaultLoginRepository.swift */; };
+		4A45A17E2CCBF66D00D47F10 /* DefaultLogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1762CCBF66D00D47F10 /* DefaultLogoutRepository.swift */; };
+		4A45A17F2CCBF66D00D47F10 /* DefaultPresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1772CCBF66D00D47F10 /* DefaultPresignedUrlRepository.swift */; };
+		4A45A1802CCBF66D00D47F10 /* DefaultProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1782CCBF66D00D47F10 /* DefaultProfileImageRepository.swift */; };
+		4A45A1812CCBF66D00D47F10 /* DefaultSignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1792CCBF66D00D47F10 /* DefaultSignUpRepository.swift */; };
+		4A45A1822CCBF66D00D47F10 /* DefaultUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A17A2CCBF66D00D47F10 /* DefaultUserProfileRepository.swift */; };
+		4A45A18A2CCBF67F00D47F10 /* FetchUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1832CCBF67F00D47F10 /* FetchUserProfileRepository.swift */; };
+		4A45A18B2CCBF67F00D47F10 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1842CCBF67F00D47F10 /* LoginRepository.swift */; };
+		4A45A18C2CCBF67F00D47F10 /* LogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1852CCBF67F00D47F10 /* LogoutRepository.swift */; };
+		4A45A18D2CCBF67F00D47F10 /* PresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1862CCBF67F00D47F10 /* PresignedUrlRepository.swift */; };
+		4A45A18E2CCBF67F00D47F10 /* ProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1872CCBF67F00D47F10 /* ProfileImageRepository.swift */; };
+		4A45A18F2CCBF67F00D47F10 /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1882CCBF67F00D47F10 /* SignUpRepository.swift */; };
+		4A45A1912CCBF7C800D47F10 /* DeleteUserAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1902CCBF7C800D47F10 /* DeleteUserAccountRepository.swift */; };
 		4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */; };
 		4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */; };
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */; };
@@ -299,24 +318,6 @@
 		D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D809412D2BF276460015CFF9 /* ResetPwFormView.swift */; };
 		D80C68612CC8022A00928921 /* ChatAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C68602CC8022A00928921 /* ChatAlamofire.swift */; };
 		D80C68632CC8023400928921 /* ChatRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C68622CC8023400928921 /* ChatRouter.swift */; };
-		D80C68672CC8037F00928921 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D80C68662CC8037F00928921 /* GoogleService-Info.plist */; };
-		D80C68702CC803CC00928921 /* DefaultDeleteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C68682CC803CB00928921 /* DefaultDeleteUserRepository.swift */; };
-		D80C68712CC803CC00928921 /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C68692CC803CB00928921 /* DefaultLoginRepository.swift */; };
-		D80C68722CC803CC00928921 /* DefaultLogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C686A2CC803CB00928921 /* DefaultLogoutRepository.swift */; };
-		D80C68732CC803CC00928921 /* DefaultPresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C686B2CC803CB00928921 /* DefaultPresignedUrlRepository.swift */; };
-		D80C68742CC803CC00928921 /* DefaultProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C686C2CC803CB00928921 /* DefaultProfileImageRepository.swift */; };
-		D80C68752CC803CC00928921 /* DefaultSignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C686D2CC803CB00928921 /* DefaultSignUpRepository.swift */; };
-		D80C68762CC803CC00928921 /* DefaultUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C686E2CC803CB00928921 /* DefaultUserProfileRepository.swift */; };
-		D80C687F2CC803EE00928921 /* DeleteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C68772CC803EE00928921 /* DeleteUserRepository.swift */; };
-		D80C68802CC803EE00928921 /* FetchUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C68782CC803EE00928921 /* FetchUserProfileRepository.swift */; };
-		D80C68812CC803EE00928921 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C68792CC803EE00928921 /* LoginRepository.swift */; };
-		D80C68822CC803EE00928921 /* LogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C687A2CC803EE00928921 /* LogoutRepository.swift */; };
-		D80C68832CC803EE00928921 /* PresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C687B2CC803EE00928921 /* PresignedUrlRepository.swift */; };
-		D80C68842CC803EE00928921 /* ProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C687C2CC803EE00928921 /* ProfileImageRepository.swift */; };
-		D80C68852CC803EE00928921 /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C687D2CC803EE00928921 /* SignUpRepository.swift */; };
-		D80C688E2CC80AD600928921 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D80C688B2CC80AD500928921 /* Debug.xcconfig */; };
-		D80C688F2CC80AD600928921 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D80C688C2CC80AD500928921 /* Release.xcconfig */; };
-		D80C68902CC80AD600928921 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D80C688D2CC80AD600928921 /* Secrets.xcconfig */; };
 		D80C68922CC80BEA00928921 /* GetChatServerResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80C68912CC80BEA00928921 /* GetChatServerResponseDto.swift */; };
 		D80E6A0F2BB2A7F5009F2DFE /* AgreementSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */; };
 		D80E6A152BB2E0C4009F2DFE /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -510,6 +511,25 @@
 		4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingResponseDto.swift; sourceTree = "<group>"; };
+		4A3ECF7A2CC6C869005D4803 /* ViewStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStateManager.swift; sourceTree = "<group>"; };
+		4A45A16B2CCBF5CD00D47F10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A45A16D2CCBF5D500D47F10 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4A45A16E2CCBF5D500D47F10 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4A45A16F2CCBF5D500D47F10 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		4A45A1742CCBF66D00D47F10 /* DefaultDeleteUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDeleteUserRepository.swift; sourceTree = "<group>"; };
+		4A45A1752CCBF66D00D47F10 /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
+		4A45A1762CCBF66D00D47F10 /* DefaultLogoutRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLogoutRepository.swift; sourceTree = "<group>"; };
+		4A45A1772CCBF66D00D47F10 /* DefaultPresignedUrlRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPresignedUrlRepository.swift; sourceTree = "<group>"; };
+		4A45A1782CCBF66D00D47F10 /* DefaultProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultProfileImageRepository.swift; sourceTree = "<group>"; };
+		4A45A1792CCBF66D00D47F10 /* DefaultSignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSignUpRepository.swift; sourceTree = "<group>"; };
+		4A45A17A2CCBF66D00D47F10 /* DefaultUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepository.swift; sourceTree = "<group>"; };
+		4A45A1832CCBF67F00D47F10 /* FetchUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchUserProfileRepository.swift; sourceTree = "<group>"; };
+		4A45A1842CCBF67F00D47F10 /* LoginRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		4A45A1852CCBF67F00D47F10 /* LogoutRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutRepository.swift; sourceTree = "<group>"; };
+		4A45A1862CCBF67F00D47F10 /* PresignedUrlRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresignedUrlRepository.swift; sourceTree = "<group>"; };
+		4A45A1872CCBF67F00D47F10 /* ProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageRepository.swift; sourceTree = "<group>"; };
+		4A45A1882CCBF67F00D47F10 /* SignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
+		4A45A1902CCBF7C800D47F10 /* DeleteUserAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserAccountRepository.swift; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -719,24 +739,6 @@
 		D809412D2BF276460015CFF9 /* ResetPwFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwFormView.swift; sourceTree = "<group>"; };
 		D80C68602CC8022A00928921 /* ChatAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAlamofire.swift; sourceTree = "<group>"; };
 		D80C68622CC8023400928921 /* ChatRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRouter.swift; sourceTree = "<group>"; };
-		D80C68662CC8037F00928921 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D80C68682CC803CB00928921 /* DefaultDeleteUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDeleteUserRepository.swift; sourceTree = "<group>"; };
-		D80C68692CC803CB00928921 /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
-		D80C686A2CC803CB00928921 /* DefaultLogoutRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLogoutRepository.swift; sourceTree = "<group>"; };
-		D80C686B2CC803CB00928921 /* DefaultPresignedUrlRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPresignedUrlRepository.swift; sourceTree = "<group>"; };
-		D80C686C2CC803CB00928921 /* DefaultProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultProfileImageRepository.swift; sourceTree = "<group>"; };
-		D80C686D2CC803CB00928921 /* DefaultSignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSignUpRepository.swift; sourceTree = "<group>"; };
-		D80C686E2CC803CB00928921 /* DefaultUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepository.swift; sourceTree = "<group>"; };
-		D80C68772CC803EE00928921 /* DeleteUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteUserRepository.swift; sourceTree = "<group>"; };
-		D80C68782CC803EE00928921 /* FetchUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchUserProfileRepository.swift; sourceTree = "<group>"; };
-		D80C68792CC803EE00928921 /* LoginRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
-		D80C687A2CC803EE00928921 /* LogoutRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutRepository.swift; sourceTree = "<group>"; };
-		D80C687B2CC803EE00928921 /* PresignedUrlRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresignedUrlRepository.swift; sourceTree = "<group>"; };
-		D80C687C2CC803EE00928921 /* ProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageRepository.swift; sourceTree = "<group>"; };
-		D80C687D2CC803EE00928921 /* SignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
-		D80C688B2CC80AD500928921 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
-		D80C688C2CC80AD500928921 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../../../../Downloads/Release.xcconfig; sourceTree = "<group>"; };
-		D80C688D2CC80AD600928921 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		D80C68912CC80BEA00928921 /* GetChatServerResponseDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetChatServerResponseDto.swift; path = "pennyway-client-iOS/Api/Domain/ChatDomain/Dto/GetChatServerResponseDto.swift"; sourceTree = SOURCE_ROOT; };
 		D80E6A0E2BB2A7F5009F2DFE /* AgreementSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementSectionView.swift; sourceTree = "<group>"; };
 		D8157E632BBEF2040083844B /* InputFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormView.swift; sourceTree = "<group>"; };
@@ -1161,7 +1163,7 @@
 		4A12FEEA2C9C484B00DE10BC /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D80C687E2CC803EE00928921 /* Profile */,
+				4A45A1892CCBF67F00D47F10 /* Profile */,
 				D8DCCF8B2CBD8F4300550A8B /* Chat */,
 			);
 			path = Interfaces;
@@ -1179,7 +1181,7 @@
 		4A12FEF62C9C49B200DE10BC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				D80C686F2CC803CB00928921 /* Profile */,
+				4A45A17B2CCBF66D00D47F10 /* Profile */,
 				D8DCCF9D2CBD949A00550A8B /* Chat */,
 				4ADA09512CBE681B001F9384 /* DefaultChatStompRepository.swift */,
 			);
@@ -1283,6 +1285,7 @@
 				4A12FF0B2C9C4B8600DE10BC /* DIContainer */,
 				4A12FF122C9C4BCF00DE10BC /* AppFlowCoordinator.swift */,
 				4A12FF142C9C4BDE00DE10BC /* RootComponent.swift */,
+				4A3ECF7A2CC6C869005D4803 /* ViewStateManager.swift */,
 				D8DCCFB22CBEB08C00550A8B /* ChatRootComponent.swift */,
 			);
 			path = Application;
@@ -1538,6 +1541,44 @@
 			path = SpendingCategory;
 			sourceTree = "<group>";
 		};
+		4A45A1702CCBF5D500D47F10 /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				4A45A16D2CCBF5D500D47F10 /* Debug.xcconfig */,
+				4A45A16E2CCBF5D500D47F10 /* Release.xcconfig */,
+				4A45A16F2CCBF5D500D47F10 /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
+			sourceTree = "<group>";
+		};
+		4A45A17B2CCBF66D00D47F10 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4A45A1742CCBF66D00D47F10 /* DefaultDeleteUserRepository.swift */,
+				4A45A1752CCBF66D00D47F10 /* DefaultLoginRepository.swift */,
+				4A45A1762CCBF66D00D47F10 /* DefaultLogoutRepository.swift */,
+				4A45A1772CCBF66D00D47F10 /* DefaultPresignedUrlRepository.swift */,
+				4A45A1782CCBF66D00D47F10 /* DefaultProfileImageRepository.swift */,
+				4A45A1792CCBF66D00D47F10 /* DefaultSignUpRepository.swift */,
+				4A45A17A2CCBF66D00D47F10 /* DefaultUserProfileRepository.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		4A45A1892CCBF67F00D47F10 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4A45A1832CCBF67F00D47F10 /* FetchUserProfileRepository.swift */,
+				4A45A1842CCBF67F00D47F10 /* LoginRepository.swift */,
+				4A45A1852CCBF67F00D47F10 /* LogoutRepository.swift */,
+				4A45A1862CCBF67F00D47F10 /* PresignedUrlRepository.swift */,
+				4A45A1872CCBF67F00D47F10 /* ProfileImageRepository.swift */,
+				4A45A1882CCBF67F00D47F10 /* SignUpRepository.swift */,
+				4A45A1902CCBF7C800D47F10 /* DeleteUserAccountRepository.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		4A4703972BCED80000AEE04E /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -1772,8 +1813,8 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D80C688A2CC80AC400928921 /* Xcconfig */,
-				D80C68662CC8037F00928921 /* GoogleService-Info.plist */,
+				4A45A1702CCBF5D500D47F10 /* Xcconfig */,
+				4A45A16B2CCBF5CD00D47F10 /* GoogleService-Info.plist */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
@@ -2412,46 +2453,6 @@
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
-		D80C686F2CC803CB00928921 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				D80C68682CC803CB00928921 /* DefaultDeleteUserRepository.swift */,
-				D80C68692CC803CB00928921 /* DefaultLoginRepository.swift */,
-				D80C686A2CC803CB00928921 /* DefaultLogoutRepository.swift */,
-				D80C686B2CC803CB00928921 /* DefaultPresignedUrlRepository.swift */,
-				D80C686C2CC803CB00928921 /* DefaultProfileImageRepository.swift */,
-				D80C686D2CC803CB00928921 /* DefaultSignUpRepository.swift */,
-				D80C686E2CC803CB00928921 /* DefaultUserProfileRepository.swift */,
-			);
-			name = Profile;
-			path = "../../../../../../../Documents/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Clean/Data/Repository/Profile";
-			sourceTree = "<group>";
-		};
-		D80C687E2CC803EE00928921 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				D80C68772CC803EE00928921 /* DeleteUserRepository.swift */,
-				D80C68782CC803EE00928921 /* FetchUserProfileRepository.swift */,
-				D80C68792CC803EE00928921 /* LoginRepository.swift */,
-				D80C687A2CC803EE00928921 /* LogoutRepository.swift */,
-				D80C687B2CC803EE00928921 /* PresignedUrlRepository.swift */,
-				D80C687C2CC803EE00928921 /* ProfileImageRepository.swift */,
-				D80C687D2CC803EE00928921 /* SignUpRepository.swift */,
-			);
-			name = Profile;
-			path = "../../../../../../../Documents/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Clean/Domain/Interfaces/Profile";
-			sourceTree = "<group>";
-		};
-		D80C688A2CC80AC400928921 /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				D80C688B2CC80AD500928921 /* Debug.xcconfig */,
-				D80C688C2CC80AD500928921 /* Release.xcconfig */,
-				D80C688D2CC80AD600928921 /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
-			sourceTree = "<group>";
-		};
 		D8180BFE2BE507D200F837FB /* FindIdView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2789,19 +2790,18 @@
 			files = (
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
-				D80C68672CC8037F00928921 /* GoogleService-Info.plist in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
+				4A45A16C2CCBF5CE00D47F10 /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
-				D80C684C2CC7F78100928921 /* Debug.xcconfig in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				D80C688E2CC80AD600928921 /* Debug.xcconfig in Resources */,
+				4A45A1712CCBF5D600D47F10 /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				D80C68902CC80AD600928921 /* Secrets.xcconfig in Resources */,
+				4A45A1732CCBF5D600D47F10 /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				D80C688F2CC80AD600928921 /* Release.xcconfig in Resources */,
+				4A45A1722CCBF5D600D47F10 /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2875,15 +2875,11 @@
 				D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */,
 				4AA13C602C63E2B300D8DEE7 /* ObjectStorageRouter.swift in Sources */,
 				D80C68922CC80BEA00928921 /* GetChatServerResponseDto.swift in Sources */,
-				D80C68762CC803CC00928921 /* DefaultUserProfileRepository.swift in Sources */,
 				4A12FF0F2C9C4BAD00DE10BC /* ProfileSceneDIContainer.swift in Sources */,
 				D8457BAD2CB6A233002540B2 /* ChatCellView.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
 				4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */,
-				D80C68752CC803CC00928921 /* DefaultSignUpRepository.swift in Sources */,
-				D80C68742CC803CC00928921 /* DefaultProfileImageRepository.swift in Sources */,
-				D80C68802CC803EE00928921 /* FetchUserProfileRepository.swift in Sources */,
 				4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */,
 				4AC320432C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift in Sources */,
 				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
@@ -2900,8 +2896,10 @@
 				4A12FEED2C9C487800DE10BC /* User.swift in Sources */,
 				4AE9B3332CB689E50044D3E1 /* CustomRoundedBtn.swift in Sources */,
 				D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */,
+				4A45A1812CCBF66D00D47F10 /* DefaultSignUpRepository.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				B599E4C32C58D4F0006051E9 /* AnalyticsConstants.swift in Sources */,
+				4A45A1912CCBF7C800D47F10 /* DeleteUserAccountRepository.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
@@ -2939,7 +2937,6 @@
 				4AC320592C11D5D500DDB4B6 /* CustomToastView.swift in Sources */,
 				4A57898F2BDC298500AFEB26 /* NotFoundError.swift in Sources */,
 				D8180C022BE507FD00F837FB /* FindIdFormView.swift in Sources */,
-				D80C68852CC803EE00928921 /* SignUpRepository.swift in Sources */,
 				4AC3204E2C11D5AC00DDB4B6 /* SpendingCalendarView.swift in Sources */,
 				4AC3205F2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift in Sources */,
 				4A3701D42C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift in Sources */,
@@ -2962,8 +2959,10 @@
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
 				4ADA09522CBE681B001F9384 /* DefaultChatStompRepository.swift in Sources */,
+				4A45A18B2CCBF67F00D47F10 /* LoginRepository.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				D8B0A92C2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift in Sources */,
+				4A45A18C2CCBF67F00D47F10 /* LogoutRepository.swift in Sources */,
 				4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */,
 				4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */,
 				4AE8F3A82C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */,
@@ -2996,7 +2995,10 @@
 				4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */,
 				D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
+				4A3ECF7B2CC6C869005D4803 /* ViewStateManager.swift in Sources */,
 				4A3701BD2C08F7B600F0AEBA /* TargetAmountViewModel.swift in Sources */,
+				4A45A1822CCBF66D00D47F10 /* DefaultUserProfileRepository.swift in Sources */,
+				4A45A1802CCBF66D00D47F10 /* DefaultProfileImageRepository.swift in Sources */,
 				4A12FF152C9C4BDE00DE10BC /* RootComponent.swift in Sources */,
 				4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */,
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
@@ -3011,8 +3013,10 @@
 				D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */,
 				4ADE802C2BF29055007FFB01 /* MainTabView.swift in Sources */,
 				B599E4CA2C58F1CC006051E9 /* AnalyticsManager.swift in Sources */,
+				4A45A17C2CCBF66D00D47F10 /* DefaultDeleteUserRepository.swift in Sources */,
 				D8E24D932BFCF885006E8046 /* ProfileMenuBarListView.swift in Sources */,
 				4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */,
+				4A45A17F2CCBF66D00D47F10 /* DefaultPresignedUrlRepository.swift in Sources */,
 				4AB5AB592BB5E93900D2C9EA /* SignUpFormView.swift in Sources */,
 				4AB0B13E2C50256300A475F5 /* LoadingView.swift in Sources */,
 				4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */,
@@ -3039,12 +3043,12 @@
 				4AA13C692C63F27400D8DEE7 /* StorePresignedUrlRequestDto.swift in Sources */,
 				D8DCCFA32CBE794300550A8B /* MakeChatRoomViewModel.swift in Sources */,
 				4AC320512C11D5AC00DDB4B6 /* SpendingCheckBoxView.swift in Sources */,
+				4A45A17D2CCBF66D00D47F10 /* DefaultLoginRepository.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
 				4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift in Sources */,
 				4A863A162CB464A600BA2F2F /* TemporaryView.swift in Sources */,
 				D898E8182CA5A8C9003739F1 /* LogoutViewModel.swift in Sources */,
-				D80C68732CC803CC00928921 /* DefaultPresignedUrlRepository.swift in Sources */,
 				4A28821F2C652D3600AE50C7 /* GetNotificationRequestDto.swift in Sources */,
 				4A863A142CB461BE00BA2F2F /* TextHeightPreference.swift in Sources */,
 				D8BB4FE02C61BE7300FDD258 /* PhotoActionsPopUp.swift in Sources */,
@@ -3067,7 +3071,6 @@
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				D8DCCF9C2CBD923100550A8B /* MakeChatRoomRequestDto.swift in Sources */,
 				4A12FF0D2C9C4B9A00DE10BC /* AppDIContainer.swift in Sources */,
-				D80C687F2CC803EE00928921 /* DeleteUserRepository.swift in Sources */,
 				4A8BDEE32C6246B900D21424 /* DiffAmountColorUtil.swift in Sources */,
 				4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */,
 				4AE9B3402CB6E5770044D3E1 /* ChatSideMenuView.swift in Sources */,
@@ -3077,8 +3080,8 @@
 				4A863A072CB44D2800BA2F2F /* ChatMessage.swift in Sources */,
 				4AC320562C11D5AC00DDB4B6 /* TotalTargetAmountHeaderView.swift in Sources */,
 				D84348EC2CA6A4B300AC4777 /* DeleteUserViewModel.swift in Sources */,
-				D80C68722CC803CC00928921 /* DefaultLogoutRepository.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
+				4A45A18F2CCBF67F00D47F10 /* SignUpRepository.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
 				4AC320572C11D5AC00DDB4B6 /* TotalTargetAmountView.swift in Sources */,
 				D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */,
@@ -3086,6 +3089,7 @@
 				4AC320522C11D5AC00DDB4B6 /* SpendingManagementMainView.swift in Sources */,
 				4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */,
 				4A5789932BDC29CA00AFEB26 /* NotAcceptableError.swift in Sources */,
+				4A45A18D2CCBF67F00D47F10 /* PresignedUrlRepository.swift in Sources */,
 				D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */,
 				4A6C79E62C46DEA7009463E4 /* ErrorText.swift in Sources */,
 				4A57899B2BDC2A2500AFEB26 /* InternalServerError.swift in Sources */,
@@ -3121,13 +3125,12 @@
 				4A28820C2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift in Sources */,
 				4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */,
 				4A2881FA2C64CC1200AE50C7 /* MoveCategoryRequestDto.swift in Sources */,
-				D80C68822CC803EE00928921 /* LogoutRepository.swift in Sources */,
 				4ADA094F2CBE679C001F9384 /* ChatStompRepository.swift in Sources */,
 				4AE8F3B42C330A0B0014F0D4 /* TargetAmountSettingView.swift in Sources */,
+				4A45A18A2CCBF67F00D47F10 /* FetchUserProfileRepository.swift in Sources */,
 				4AC289FC2C2C0405001A6393 /* GetTotalTargetAmountResponseDto.swift in Sources */,
 				4AD70E222BE013C10058A52A /* ProfileView.swift in Sources */,
 				D8DCCF822CBD8D5700550A8B /* FetchUserProfileUseCase.swift in Sources */,
-				D80C68712CC803CC00928921 /* DefaultLoginRepository.swift in Sources */,
 				D8DCCFB32CBEB08C00550A8B /* ChatRootComponent.swift in Sources */,
 				4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDto.swift in Sources */,
 				4A12FF052C9C4AC300DE10BC /* UserProfileViewModel.swift in Sources */,
@@ -3143,7 +3146,6 @@
 				4AC320502C11D5AC00DDB4B6 /* RecentTargetAmountSuggestionView.swift in Sources */,
 				4A4703A72BCEDD9800AEE04E /* VerificationCodeRequestDto.swift in Sources */,
 				4AA13C622C63E4DF00D8DEE7 /* GeneratePresigendUrlRequestDto.swift in Sources */,
-				D80C68842CC803EE00928921 /* ProfileImageRepository.swift in Sources */,
 				4AC3204D2C11D5AC00DDB4B6 /* SpendingCalendarCellView.swift in Sources */,
 				4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */,
 				4ABE0F222CA813B100CD6DF7 /* Auth.swift in Sources */,
@@ -3183,11 +3185,11 @@
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
-				D80C68812CC803EE00928921 /* LoginRepository.swift in Sources */,
 				4A12FEEF2C9C489C00DE10BC /* UserProfileItemModel.swift in Sources */,
 				4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */,
 				4AA13C672C63ED5100D8DEE7 /* PresignedUrlViewModel.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
+				4A45A17E2CCBF66D00D47F10 /* DefaultLogoutRepository.swift in Sources */,
 				4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */,
 				D889F9F62C6484950055D045 /* CheckUnReadNotificationResponseDto.swift in Sources */,
 				4A2882012C64CC5900AE50C7 /* CategorySpendingListView.swift in Sources */,
@@ -3199,11 +3201,11 @@
 				4AC320462C11D5AC00DDB4B6 /* MySpendingListView.swift in Sources */,
 				D8F9D7412C59FE22005416FC /* NoAlarmArrivedView.swift in Sources */,
 				D8DCCFAF2CBEA30B00550A8B /* ChatMainView.swift in Sources */,
+				4A45A18E2CCBF67F00D47F10 /* ProfileImageRepository.swift in Sources */,
 				4A8523EF2CB5A8C200AE90AF /* ChatMember.swift in Sources */,
 				D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */,
 				D8DCCF812CBD8D5700550A8B /* DeleteUserUseCase.swift in Sources */,
 				D81D5A832C16B68D008E5939 /* DateFormatterUtil .swift in Sources */,
-				D80C68832CC803EE00928921 /* PresignedUrlRepository.swift in Sources */,
 				4A6C79E22C46DE77009463E4 /* PhoneNumberInputField.swift in Sources */,
 				4A3701B32C08F74E00F0AEBA /* TargetAmountRouter.swift in Sources */,
 				4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */,
@@ -3250,7 +3252,6 @@
 				4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */,
 				D8DCCFAD2CBE9F1900550A8B /* ChatFactory.swift in Sources */,
 				D8DCCF862CBD8D5700550A8B /* SignUpUseCase.swift in Sources */,
-				D80C68702CC803CC00928921 /* DefaultDeleteUserRepository.swift in Sources */,
 				4A3560832BEBF12D00BA58F3 /* OAuthAccountViewModel.swift in Sources */,
 				4A8BDEE52C629C3600D21424 /* SpendingHistoryUtil.swift in Sources */,
 				4AC3203F2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift in Sources */,
@@ -3398,7 +3399,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D80C688B2CC80AD500928921 /* Debug.xcconfig */;
+			baseConfigurationReference = 4A45A16D2CCBF5D500D47F10 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3440,7 +3441,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D80C688C2CC80AD500928921 /* Release.xcconfig */;
+			baseConfigurationReference = 4A45A16E2CCBF5D500D47F10 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

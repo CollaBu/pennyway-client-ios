@@ -21,6 +21,7 @@ struct ProfileView: View {
     @State private var updateCount = 0 // 업데이트 횟수를 추적하는 변수
 
     @ObservedObject var viewModelWrapper: UserProfileViewModelWrapper
+    @EnvironmentObject var viewStateManager: ViewStateManager
 
     var body: some View {
         NavigationAvailable {
@@ -94,6 +95,7 @@ struct ProfileView: View {
             Log.debug("showPopUpView:\(showPopUpView)")
             viewModelWrapper.viewModel.getUser()
             loadUserData() // 사용자 정보(사진, 이름) 불러오기
+            viewStateManager.setCurrentView(self)
         }
         .onChange(of: showPopUpView) { newValue in
             isHiddenTabBar = newValue
