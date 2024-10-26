@@ -9,9 +9,8 @@ struct ChatCellView: View {
     @State private var isCheckMarkVisible = false // 체크 표시를 보여줄지 여부
     @State private var isPopUp = false // 채팅방 나가기 팝업 표시 여부
     @State private var selectedChatRoom: ChatRoomItemModel? = nil // 어떤 채팅방이 선택됐는지의 여부
-
+    @EnvironmentObject var viewStateManager: ViewStateManager
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
-
     private let maxLength = 19
 
     var body: some View {
@@ -19,6 +18,7 @@ struct ChatCellView: View {
             ZStack {
                 VStack {
                     Spacer().frame(height: 38 * DynamicSizeFactor.factor())
+
                     HStack(spacing: 30) {
                         Button(action: {
                             selectedTab = 1
@@ -59,10 +59,9 @@ struct ChatCellView: View {
                         firstBtnAction: { self.isPopUp = false },
                         firstBtnLabel: "취소",
                         secondBtnAction: {
-                            withAnimation {
-                                self.isPopUp = false // 팝업 닫기
-                                showCheckMarkAnimation(chatRoom)
-                            }
+                            self.isPopUp = false // 팝업 닫기
+                            showCheckMarkAnimation(chatRoom)
+
                         },
                         secondBtnLabel: "나가기",
                         secondBtnColor: Color("Red03"))
@@ -73,6 +72,7 @@ struct ChatCellView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
+                        .zIndex(1)
                 }
                 NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
@@ -99,6 +99,10 @@ struct ChatCellView: View {
             .onAppear {
                 // 뷰에 진입하자마자 내채팅 조회 api 호출
                 viewModelWrapper.getChatRoomViewModel.getChatRoom()
+                viewStateManager.setCurrentView(self, selectedTab: selectedTab)
+            }
+            .onChange(of: selectedTab) { newSelected in
+                viewStateManager.setCurrentView(self, selectedTab: newSelected)
             }
         }
     }
@@ -108,11 +112,9 @@ struct ChatCellView: View {
             isCheckMarkVisible = true
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            withAnimation {
-                isCheckMarkVisible = false
-                deleteChatRoom(chatRoom)
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            deleteChatRoom(chatRoom)
+            isCheckMarkVisible = false
         }
     }
 
@@ -162,6 +164,7 @@ struct ChatCellView: View {
                     .padding(.top, 4)
             }
         }
+        .contentShape(Rectangle())
     }
 
     private var RecommendChatContainer: some View {
@@ -188,6 +191,7 @@ struct ChatCellView: View {
                     .padding(.top, 4)
             }
         }
+        .contentShape(Rectangle()) 
     }
 }
 
