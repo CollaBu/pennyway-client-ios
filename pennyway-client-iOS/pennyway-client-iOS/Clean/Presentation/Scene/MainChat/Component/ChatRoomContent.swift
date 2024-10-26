@@ -169,6 +169,7 @@ struct ChatRoomCell: View {
         }
     }
     
+    /// 이미지 URL에서 데이터를 다운로드하고 UIImage로 변환하는 함수
     func loadImage(from urlString: String) {
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
