@@ -11,7 +11,7 @@ struct MakeChatRoomResponseDto: Codable {
 // MARK: - ChatRoomData
 
 struct ChatRoomData: Codable {
-    let chatRoom: ChatRoomDetail
+    let chatRooms: [ChatRoomDetail]
 }
 
 // MARK: - ChatRoomDetail
@@ -22,6 +22,7 @@ struct ChatRoomDetail: Codable {
     let description: String
     let backgroundImageUrl: String
     let isPrivate: Bool
+    let isAdmin: Bool
     let participantCount: Int32
-    let createdAt: String
+    let createdAt: String?
 }
