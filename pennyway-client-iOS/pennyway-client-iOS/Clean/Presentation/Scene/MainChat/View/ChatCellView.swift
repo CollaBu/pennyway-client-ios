@@ -189,7 +189,6 @@ struct ChatCellView: View {
             }
         }
         .contentShape(Rectangle()) 
-
     }
 }
 
