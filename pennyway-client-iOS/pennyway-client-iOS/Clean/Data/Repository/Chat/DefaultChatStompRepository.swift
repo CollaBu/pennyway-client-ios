@@ -11,9 +11,7 @@ import StompClientLib
 // MARK: - DefaultChatStompRepository
 
 class DefaultChatStompRepository: NSObject, ChatStompRepository {
-    private var stompClient: StompClientLib
-    private var chatServerUrl: String?
-    private var connectCompletion: ((Result<Void, Error>) -> Void)?
+    private let stompClient: StompClientLib
     
     init(stompClient: StompClientLib) {
         self.stompClient = stompClient
@@ -24,23 +22,21 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         getChatServer { [weak self] result in
             switch result {
             case let .success(url):
-                self?.chatServerUrl = url
-                self?.connectCompletion = completion
-                self?.connectToSocket()
+                self?.connectToSocket(url: url)
             case let .failure(error):
                 completion(.failure(error))
             }
         }
     }
-    
+
     /// Stomp 소켓 연결을 해제하는 메서드
     func disconnect() {
         stompClient.disconnect()
     }
-    
+        
     /// 메시지를 특정 목적지로 보내는 메서드
     func sendMessage(message _: String, destination _: String) {}
-    
+        
     /// 특정 목적지로 Stomp 구독을 설정하는 메서드
     func subscribeToDestination(_: String) {}
 
@@ -49,25 +45,25 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         let errorReceiptId = "error-receipt-\(Date().timeIntervalSince1970)"
         stompClient.subscribeWithHeader(destination: "/user/queue/errors", withHeader: ["receipt": errorReceiptId])
     }
-    
-    /// 실제로 소켓 연결을 수행하는 메서드
-    private func connectToSocket() {
-        guard let url = chatServerUrl else {
-            connectCompletion?(.failure(NSError(domain: "ChatStompRepository", code: 0, userInfo: [NSLocalizedDescriptionKey: "Chat server URL is not set"])))
-            connectCompletion = nil
-            return
-        }
-        
-        let accessToken = KeychainHelper.loadAccessToken() ?? ""
-        let deviceName = DeviceInfoManager.getDeviceModelName()
-        let deviceId = DeviceInfoManager.getDeviceId()
-        let headers = ["Authorization": "Bearer \(accessToken)", "device-id": "\(deviceId)", "device-name": "\(deviceName)"]
-        
+
+    private func connectToSocket(url: String) {
+        let headers = createConnectionHeaders()
         let request = NSURLRequest(url: URL(string: url)!)
         
         stompClient.openSocketWithURLRequest(request: request, delegate: self, connectionHeaders: headers)
     }
-    
+        
+    private func createConnectionHeaders() -> [String: String] {
+        let accessToken = KeychainHelper.loadAccessToken() ?? ""
+        let deviceName = DeviceInfoManager.getDeviceModelName()
+        let deviceId = DeviceInfoManager.getDeviceId()
+        return [
+            "Authorization": "Bearer \(accessToken)",
+            "device-id": "\(deviceId)",
+            "device-name": "\(deviceName)"
+        ]
+    }
+        
     /// 채팅 서버 URL을 가져오는 메서드
     private func getChatServer(completion: @escaping (Result<String, Error>) -> Void) {
         ChatAlamofire.shared.getChatServer { result in
@@ -94,15 +90,11 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
 extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidConnect(client _: StompClientLib!) {
         Log.debug("Socket connected")
-        subscribeToErrors()//소켓 연결 성공할 때마다 error 구독
-        connectCompletion?(.success(()))
-        connectCompletion = nil
+        subscribeToErrors()
     }
     
     func stompClientDidDisconnect(client _: StompClientLib!) {
         Log.debug("Socket disconnected")
-        connectCompletion?(.failure(NSError(domain: "ChatStompRepository", code: 2, userInfo: [NSLocalizedDescriptionKey: "Socket disconnected"])))
-        connectCompletion = nil
     }
     
     func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody _: AnyObject?, akaStringBody _: String?, withHeader _: [String: String]?, withDestination _: String) {}
@@ -113,8 +105,6 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     
     func serverDidSendError(client _: StompClientLib!, withErrorMessage description: String, detailedErrorMessage _: String?) {
         Log.error("Error: \(description)")
-        connectCompletion?(.failure(NSError(domain: "ChatStompRepository", code: 1, userInfo: [NSLocalizedDescriptionKey: description])))
-        connectCompletion = nil
     }
     
     func serverDidSendPing() {
