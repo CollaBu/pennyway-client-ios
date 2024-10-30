@@ -42,7 +42,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
 
     /// 에러 처리위해 Stomp 구독을 설정하는 메서드
     private func subscribeToErrors() {
-        let errorReceiptId = "error-receipt-\(Date().timeIntervalSince1970)"
+        let errorReceiptId = "error-receipt-\(UUID().uuidString)"
         stompClient.subscribeWithHeader(destination: "/user/queue/errors", withHeader: ["receipt": errorReceiptId])
     }
 
