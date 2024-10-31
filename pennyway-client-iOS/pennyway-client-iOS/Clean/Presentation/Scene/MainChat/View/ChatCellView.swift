@@ -51,6 +51,14 @@ struct ChatCellView: View {
                     }
                 }
                 
+                if isCheckMarkVisible {
+                    Image("icon_illust_completion")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
+                        .zIndex(1)
+                }
+                
                 if isPopUp, let chatRoom = selectedChatRoom {
                     CustomPopUpView(
                         showingPopUp: $isPopUp,
@@ -67,13 +75,6 @@ struct ChatCellView: View {
                         secondBtnColor: Color("Red03"))
                 }
                 
-                if isCheckMarkVisible {
-                    Image("icon_illust_completion")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
-                        .zIndex(1)
-                }
                 NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
             }
@@ -227,7 +228,6 @@ final class ChatViewModelWrapper: ObservableObject {
         
         chatData = getChatRoomViewModel.roomData.value
         
-        // Observable을 통해 userData 변화를 감지하고 업데이트
         getChatRoomViewModel.roomData.observe(on: self) { [weak self] newData in
             self?.chatData = newData
         }

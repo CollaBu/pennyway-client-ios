@@ -3,7 +3,7 @@
 import Foundation
 
 class DefaultMakeChatRoomRepository: MakeChatRoomRepository {
-    func makeChatRoom(roomData: MakeChatRoomItemModel, completion: @escaping (Result<ChatRoomData, Error>) -> Void) {
+    func makeChatRoom(roomData: MakeChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void) {
         let parserData = parseChatroomUrl(from: roomData.backgroundImageUrl ?? "")
 
         Log.debug("DefaultMakeChatRoomRepository: title: \(roomData.title), description: \(roomData.description), password: \(roomData.password), backgroundImageUrl: \(parserData)")

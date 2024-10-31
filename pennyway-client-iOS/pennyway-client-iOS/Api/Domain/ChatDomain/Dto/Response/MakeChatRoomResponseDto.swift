@@ -5,18 +5,18 @@ import Foundation
 
 struct MakeChatRoomResponseDto: Codable {
     let code: String
-    let data: ChatRoomData
+    let data: MakeChatRoomData
 }
 
-// MARK: - ChatRoomData
+// MARK: - MakeChatRoomData
 
-struct ChatRoomData: Codable {
-    let chatRooms: [ChatRoomDetail]
+struct MakeChatRoomData: Codable {
+    let chatRoom: MakeChatRoomDetail
 }
 
-// MARK: - ChatRoomDetail
+// MARK: - MakeChatRoomDetail
 
-struct ChatRoomDetail: Codable {
+struct MakeChatRoomDetail: Codable {
     let id: Int64
     let title: String
     let description: String

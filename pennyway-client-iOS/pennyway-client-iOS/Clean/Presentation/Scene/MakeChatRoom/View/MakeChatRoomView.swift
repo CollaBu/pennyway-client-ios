@@ -7,7 +7,7 @@ struct MakeChatRoomView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var roomTitle = "" // 채팅방 제목을 관리하는 함수
     @State var content = "" // 채팅방 설명을 관리하는 변수
-    @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
+    @State private var isPrivate: Bool = false // 토글 상태를 관리하는 변수
     @State var password = "" // 비밀번호 입력을 관리하는 변수
     @State private var showPopUpView = false // 사진 선택 팝업 표시여부를 관리하는 변수
     @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
@@ -34,6 +34,8 @@ struct MakeChatRoomView: View {
                                 }
                                 chatViewModelWrapper.makeChatViewModel.roomData.value.title = newValue
                                 chatViewModelWrapper.makeChatViewModel.validateForm()
+                                Log.debug("title: \(roomTitle)")
+                                Log.debug("vmtitle: \(chatViewModelWrapper.makeChatViewModel.roomData.value.title)")
                             }
 
                         Spacer().frame(height: 23 * DynamicSizeFactor.factor())
@@ -99,9 +101,15 @@ struct MakeChatRoomView: View {
                 Log.debug("onChange실행중")
 
                 if isDismissed {
-                    self.presentationMode.wrappedValue.dismiss()
+                    DispatchQueue.main.async {
+                        self.presentationMode.wrappedValue.dismiss() // 강제로 dismiss 호출
+                    }
                     Log.debug("isDismissed")
                 }
+            }
+            .onAppear {
+                chatViewModelWrapper.makeChatViewModel.isFormValid = false
+                chatViewModelWrapper.makeChatViewModel.validateForm()
             }
 
             if showPopUpView {
@@ -180,12 +188,24 @@ struct MakeChatRoomView: View {
 
                 Spacer()
 
-                Toggle(isOn: $isPublic) {}
-                    .toggleStyle(CustomToggleStyle(hasAppeared: $isPublic))
+                Toggle(isOn: $isPrivate) {}
+                    .toggleStyle(CustomToggleStyle(hasAppeared: $isPrivate))
+                    .onChange(of: isPrivate) { newValue in
+                        chatViewModelWrapper.makeChatViewModel.isPrivate = newValue
+
+//                        if !newValue {
+//                            // 토글이 바뀔때마다 비밀번호를 초기화 시킴
+//                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = ""
+//                            password = ""
+//                        }
+                        chatViewModelWrapper.makeChatViewModel.validateForm() // 유효성 검사 호출
+                        Log.debug("isPrivate: \(isPrivate)")
+                        Log.debug("??:\(chatViewModelWrapper.makeChatViewModel.isPrivate)")
+                    }
             }
             .padding(.horizontal, 20)
 
-            if isPublic {
+            if isPrivate {
                 Spacer().frame(height: 1)
 
                 CustomInputView(inputText: $password, placeholder: "6자리의 숫자 비밀번호가 필요해요", isSecureText: false)
@@ -200,6 +220,7 @@ struct MakeChatRoomView: View {
                         } else {
                             chatViewModelWrapper.makeChatViewModel.roomData.value.password = "" // 유효하지 않은 경우 초기화
                         }
+                        chatViewModelWrapper.makeChatViewModel.validateForm() // 유효성 검사 호출
                     }
             }
         }

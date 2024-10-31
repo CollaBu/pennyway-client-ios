@@ -19,7 +19,6 @@ struct ChatRoomContent: View {
                     .transition(.move(edge: .trailing).combined(with: .opacity))
                 }
             }
-//            .padding(.horizontal, 20)
         }
     }
 }

@@ -16,6 +16,7 @@ protocol MakeChatRoomViewModelOutput {
     var roomData: Observable<MakeChatRoomItemModel> { get set }
     var isFormValid: Bool { get set }
     var isDismissView: Bool { get set }
+    var isPrivate: Bool { get set }
 }
 
 // MARK: - MakeChatRoomViewModel
@@ -27,6 +28,7 @@ protocol MakeChatRoomViewModel: MakeChatRoomViewModelInput, MakeChatRoomViewMode
 class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
     @Published var isFormValid: Bool = false // 버튼 활성화 여부
     @Published var isDismissView: Bool = false // 뷰를 닫는 상태 여부
+    @Published var isPrivate: Bool = false // 공개 범위 설정 상태
     var roomData: Observable<MakeChatRoomItemModel>
 
     private let makeChatRoomUseCase: MakeChatRoomUseCase
@@ -48,7 +50,16 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
     /// 제목의 유효성 검사 메서드
     func validateForm() {
         let title = roomData.value.title
-        isFormValid = !title.isEmpty && title.count <= 30
+        let isTitleValid = !title.isEmpty && title.count <= 30
+        let isPasswordValid = roomData.value.password.count == 6
+        // 1. 제목이 유효하고
+        // 2-1. 비공개방이 아니거나(isPrivate = false)
+        // 2-2. 비공개방이면서(isPrivate = true) 비밀번호가 유효한 경우(password.count == 6)
+        if isPrivate {
+            isFormValid = isTitleValid && isPasswordValid
+        } else {
+            isFormValid = isTitleValid
+        }
     }
 
     /// Presigned URL 생성
@@ -71,15 +82,15 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
     /// 채팅방 생성 확정 요청
     func makeChatRoom() {
         makeChatRoomUseCase.makeChatRoom(roomData: roomData.value) { [weak self] success in
-            guard let self = self else {
-                return
-            }
+//            guard let self = self else {
+//                return
+//            }
 
             DispatchQueue.main.async {
                 if success {
                     Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 성공")
-                    self.isDismissView = true // 값이 변경되는지 확인
-                    Log.debug("isDismissView = \(self.isDismissView)")
+                    self?.isDismissView = true // 값이 변경되는지 확인
+                    Log.debug("isDismissView = \(self?.isDismissView)")
                 } else {
                     Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 실패")
                 }
