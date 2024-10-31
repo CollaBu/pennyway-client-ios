@@ -41,7 +41,7 @@ struct ChatCellView: View {
                             Spacer()
                         } else {
                             searchChatContainer
-                            ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $viewModelWrapper.chatData, isMyChat: true)
+                            ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: .constant(viewModelWrapper.filteredChatData), isMyChat: true)
                         }
                     } else {
                         searchChatContainer
@@ -100,6 +100,9 @@ struct ChatCellView: View {
                 // 뷰에 진입하자마자 내채팅 조회 api 호출
                 viewModelWrapper.getChatRoomViewModel.getChatRoom()
                 viewStateManager.setCurrentView(self, selectedTab: selectedTab)
+                // 검색어 초기화하여 전체 목록 표시
+                viewModelWrapper.searchQuery = ""
+                chatRoomName = ""
             }
             .onChange(of: selectedTab) { newSelected in
                 viewStateManager.setCurrentView(self, selectedTab: newSelected)
@@ -125,7 +128,10 @@ struct ChatCellView: View {
 
     private var searchChatContainer: some View {
         VStack {
-            CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", isSecureText: false, showSearchBtn: true)
+            CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", onCommit: {
+                viewModelWrapper.searchQuery = chatRoomName // 엔터 키 입력 시 검색어 업데이트
+
+            }, isSecureText: false, showSearchBtn: true)
                 .onChange(of: chatRoomName) { newValue in
                     if newValue.count > maxLength {
                         chatRoomName = String(chatRoomName.suffix(19))
@@ -199,9 +205,19 @@ struct ChatCellView: View {
 
 final class ChatViewModelWrapper: ObservableObject {
     @Published var chatData: [ChatRoomItemModel] = []
+    @Published var searchQuery: String = "" // 검색어 추가
 
     var makeChatViewModel: any MakeChatRoomViewModel
     var getChatRoomViewModel: any GetChatRoomViewModel
+
+    var filteredChatData: [ChatRoomItemModel] {
+        if searchQuery.isEmpty {
+            return chatData
+        } else {
+            // title 속성에 검색어가 포함된 항목만 필터링 (대소문자 구분 없이)
+            return chatData.filter { $0.title.range(of: searchQuery, options: .caseInsensitive) != nil }
+        }
+    }
 
     init(makeChatViewModel: any MakeChatRoomViewModel, getChatRoomViewModel: any GetChatRoomViewModel) {
         self.makeChatViewModel = makeChatViewModel
