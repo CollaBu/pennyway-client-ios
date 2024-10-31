@@ -10,12 +10,13 @@ import Foundation
 
 enum ChatRouter: URLRequestConvertible {
     case getChatServer
+    case getJoinedChatRooms(dto: GetJoinedChatRoomsRequestDto)
     case makeChatRoom(dto: MakeChatRoomRequestDto)
     case getChatRoom
 
     var method: HTTPMethod {
         switch self {
-        case .getChatServer, .getChatRoom:
+        case .getChatServer, .getChatRoom, .getJoinedChatRooms:
             return .get
         case .makeChatRoom:
             return .post
@@ -32,6 +33,8 @@ enum ChatRouter: URLRequestConvertible {
             return "v2/chat-rooms"
         case .getChatServer:
             return "v2/socket/chat"
+        case .getJoinedChatRooms:
+            return "v2/chatrooms"
         case .getChatRoom:
             return "v2/chat-rooms/me"
         }
@@ -41,13 +44,16 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case let .makeChatRoom(dto):
             return try? dto.asDictionary()
-        case .getChatServer, .getChatRoom:
+        case .getChatServer, .getChatRoom, .getJoinedChatRooms:
             return [:]
         }
     }
 
     var queryParameters: Parameters? {
         switch self {
+        case let .getJoinedChatRooms(dto):
+            return try? dto.asDictionary()
+            
         case .getChatServer, .makeChatRoom, .getChatRoom:
             return [:]
         }
@@ -62,6 +68,9 @@ enum ChatRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
         case .getChatServer, .getChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method)
+        case .getJoinedChatRooms:
+            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         }
         return request
     }
