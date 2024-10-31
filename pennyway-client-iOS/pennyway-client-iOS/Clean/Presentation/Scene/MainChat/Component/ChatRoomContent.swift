@@ -4,14 +4,14 @@ import SwiftUI
 
 struct ChatRoomContent: View {
     @Binding var isPopUp: Bool // 채팅방 나가기 팝업 표시 여부
-    @Binding var selectedChatRoom: ChatRoom? // 선택된 채팅방을 저장하기 위한 변수
-    @Binding var dummyChatRooms: [ChatRoom]
+    @Binding var selectedChatRoom: ChatRoomItemModel? // 선택된 채팅방을 저장하기 위한 변수
+    @Binding var dummyChatRooms: [ChatRoomItemModel]
     var isMyChat: Bool // 내 채팅 여부
     
     var body: some View {
         ScrollView {
             VStack(spacing: 12) {
-                ForEach(dummyChatRooms) { chatRoom in
+                ForEach(dummyChatRooms, id: \.title) { chatRoom in
                     ChatRoomCell(chatRoom: chatRoom, isMyChat: isMyChat, onDelete: {
                         isPopUp = true
                         selectedChatRoom = chatRoom
@@ -19,6 +19,7 @@ struct ChatRoomContent: View {
                     .transition(.move(edge: .trailing).combined(with: .opacity))
                 }
             }
+            .padding(.horizontal, 20)
         }
     }
 }
@@ -26,7 +27,9 @@ struct ChatRoomContent: View {
 // MARK: - ChatRoomCell
 
 struct ChatRoomCell: View {
-    let chatRoom: ChatRoom
+    @State private var loadedImage: UIImage? = nil
+
+    let chatRoom: ChatRoomItemModel
     let isMyChat: Bool
     let onDelete: () -> Void
     
@@ -60,10 +63,17 @@ struct ChatRoomCell: View {
             }
             // 채팅방 셀
             HStack(spacing: 13) {
-                Image(chatRoom.background_image_url)
-                    .resizable()
-                    .frame(width: 43 * DynamicSizeFactor.factor(), height: 43 * DynamicSizeFactor.factor())
-                    .cornerRadius(8)
+                if let image = loadedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 43 * DynamicSizeFactor.factor(), height: 43 * DynamicSizeFactor.factor())
+                        .cornerRadius(8)
+                } else {
+                    Image("icon_illust_chat_no picture")
+                        .resizable()
+                        .frame(width: 43 * DynamicSizeFactor.factor(), height: 43 * DynamicSizeFactor.factor())
+                        .cornerRadius(8)
+                }
                     
                 ZStack {
                     VStack(alignment: .leading) {
@@ -72,7 +82,7 @@ struct ChatRoomCell: View {
                                 .font(.B1SemiboldeFont())
                                 .platformTextColor(color: Color("Gray07"))
                                 
-                            if chatRoom.privacy_setting {
+                            if chatRoom.isPrivate {
                                 Image("icon_lock")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -82,7 +92,7 @@ struct ChatRoomCell: View {
                                 
                             if isMyChat {
                                 Spacer()
-                                    
+                                // TODO: 채팅방에 마지막으로 접속한 날짜 -> 웹 소켓 연결 후 수정 필요
                                 VStack(alignment: .trailing) {
                                     Text("어제")
                                         .font(.B3MediumFont())
@@ -99,7 +109,7 @@ struct ChatRoomCell: View {
                             
                         Spacer().frame(height: 3 * DynamicSizeFactor.factor())
                             
-                        Text("127명")
+                        Text("\(chatRoom.participantCount)")
                             .font(.B3MediumFont())
                             .platformTextColor(color: Color("Gray04"))
                             .padding(1)
@@ -107,24 +117,24 @@ struct ChatRoomCell: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                         
                     if isMyChat {
-                        if chatRoom.notify_enabled {
-                            ZStack {
-                                Text("24")
-                                    .font(.B3MediumFont())
-                                    .platformTextColor(color: Color("White01"))
-                                    .padding(.vertical, 3 * DynamicSizeFactor.factor())
-                                    .padding(.horizontal, 4 * DynamicSizeFactor.factor())
-                                    .background(Rectangle()
-                                        .cornerRadius(12)
-                                        .platformTextColor(color: Color("Mint03")))
-                            }
-                            .offset(x: 105 * DynamicSizeFactor.factor(), y: 10 * DynamicSizeFactor.factor())
+                        // TODO: 읽지 않은 채팅방 수 -> 웹 소켓 연결 후 수정 필요
+                        // if chatRoom.notify_enabled {
+                        ZStack {
+                            Text("24")
+                                .font(.B3MediumFont())
+                                .platformTextColor(color: Color("White01"))
+                                .padding(.vertical, 3 * DynamicSizeFactor.factor())
+                                .padding(.horizontal, 4 * DynamicSizeFactor.factor())
+                                .background(Rectangle()
+                                    .cornerRadius(12)
+                                    .platformTextColor(color: Color("Mint03")))
                         }
+                        .offset(x: 105 * DynamicSizeFactor.factor(), y: 10 * DynamicSizeFactor.factor())
                     }
+                    // }
                 }
             }
             .padding(.vertical, 8)
-            .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
             .offset(x: offset)
@@ -154,5 +164,26 @@ struct ChatRoomCell: View {
                     }
             )
         }
+        .onAppear {
+            loadImage(from: chatRoom.backgroundImageUrl)
+        }
+    }
+    
+    /// 이미지 URL에서 데이터를 다운로드하고 UIImage로 변환하는 함수
+    func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let data = data, error == nil, let downloadedImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.loadedImage = downloadedImage
+                }
+            } else {
+                print("Failed to load image for chat room: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }.resume()
     }
 }

@@ -66,6 +66,25 @@
 		4A28821B2C65184300AE50C7 /* ProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */; };
 		4A28821F2C652D3600AE50C7 /* GetNotificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */; };
 		4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2882202C654BB500AE50C7 /* ReloadView.swift */; };
+		4A2C3A242CD34204006B6804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C3A232CD34204006B6804 /* GoogleService-Info.plist */; };
+		4A2C3A292CD3420C006B6804 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C3A252CD3420C006B6804 /* Debug.xcconfig */; };
+		4A2C3A2A2CD3420C006B6804 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C3A262CD3420C006B6804 /* Release.xcconfig */; };
+		4A2C3A2B2CD3420C006B6804 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C3A272CD3420C006B6804 /* Secrets.xcconfig */; };
+		4A2C3A5C2CD3457D006B6804 /* ViewStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A5B2CD3457D006B6804 /* ViewStateManager.swift */; };
+		4A2C3A742CD3C93C006B6804 /* DeleteUserAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A6C2CD3C93C006B6804 /* DeleteUserAccountRepository.swift */; };
+		4A2C3A752CD3C93C006B6804 /* FetchUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A6D2CD3C93C006B6804 /* FetchUserProfileRepository.swift */; };
+		4A2C3A762CD3C93C006B6804 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A6E2CD3C93C006B6804 /* LoginRepository.swift */; };
+		4A2C3A772CD3C93C006B6804 /* LogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A6F2CD3C93C006B6804 /* LogoutRepository.swift */; };
+		4A2C3A782CD3C93C006B6804 /* PresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A702CD3C93C006B6804 /* PresignedUrlRepository.swift */; };
+		4A2C3A792CD3C93C006B6804 /* ProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A712CD3C93C006B6804 /* ProfileImageRepository.swift */; };
+		4A2C3A7A2CD3C93C006B6804 /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A722CD3C93C006B6804 /* SignUpRepository.swift */; };
+		4A2C3A832CD3C965006B6804 /* DefaultDeleteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A7B2CD3C965006B6804 /* DefaultDeleteUserRepository.swift */; };
+		4A2C3A842CD3C965006B6804 /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A7C2CD3C965006B6804 /* DefaultLoginRepository.swift */; };
+		4A2C3A852CD3C965006B6804 /* DefaultLogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A7D2CD3C965006B6804 /* DefaultLogoutRepository.swift */; };
+		4A2C3A862CD3C965006B6804 /* DefaultPresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A7E2CD3C965006B6804 /* DefaultPresignedUrlRepository.swift */; };
+		4A2C3A872CD3C965006B6804 /* DefaultProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A7F2CD3C965006B6804 /* DefaultProfileImageRepository.swift */; };
+		4A2C3A882CD3C965006B6804 /* DefaultSignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A802CD3C965006B6804 /* DefaultSignUpRepository.swift */; };
+		4A2C3A892CD3C965006B6804 /* DefaultUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A812CD3C965006B6804 /* DefaultUserProfileRepository.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -91,24 +110,23 @@
 		4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */; };
 		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
 		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
-		4A45A1992CCBF9A300D47F10 /* FetchUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1922CCBF9A300D47F10 /* FetchUserProfileRepository.swift */; };
-		4A45A19A2CCBF9A300D47F10 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1932CCBF9A300D47F10 /* LoginRepository.swift */; };
-		4A45A19B2CCBF9A300D47F10 /* LogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1942CCBF9A300D47F10 /* LogoutRepository.swift */; };
-		4A45A19C2CCBF9A300D47F10 /* PresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1952CCBF9A300D47F10 /* PresignedUrlRepository.swift */; };
-		4A45A19D2CCBF9A300D47F10 /* ProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1962CCBF9A300D47F10 /* ProfileImageRepository.swift */; };
-		4A45A19E2CCBF9A300D47F10 /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1972CCBF9A300D47F10 /* SignUpRepository.swift */; };
-		4A45A1A72CCBF9B700D47F10 /* DefaultDeleteUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A19F2CCBF9B700D47F10 /* DefaultDeleteUserRepository.swift */; };
-		4A45A1A82CCBF9B700D47F10 /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1A02CCBF9B700D47F10 /* DefaultLoginRepository.swift */; };
-		4A45A1A92CCBF9B700D47F10 /* DefaultLogoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1A12CCBF9B700D47F10 /* DefaultLogoutRepository.swift */; };
-		4A45A1AA2CCBF9B700D47F10 /* DefaultPresignedUrlRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1A22CCBF9B700D47F10 /* DefaultPresignedUrlRepository.swift */; };
-		4A45A1AB2CCBF9B700D47F10 /* DefaultProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1A32CCBF9B700D47F10 /* DefaultProfileImageRepository.swift */; };
-		4A45A1AC2CCBF9B700D47F10 /* DefaultSignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1A42CCBF9B700D47F10 /* DefaultSignUpRepository.swift */; };
-		4A45A1AD2CCBF9B700D47F10 /* DefaultUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1A52CCBF9B700D47F10 /* DefaultUserProfileRepository.swift */; };
-		4A45A1AF2CCBF9CA00D47F10 /* DeleteUserAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45A1AE2CCBF9CA00D47F10 /* DeleteUserAccountRepository.swift */; };
-		4A45A1B42CCBFA0500D47F10 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A45A1B02CCBFA0500D47F10 /* Debug.xcconfig */; };
-		4A45A1B52CCBFA0500D47F10 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A45A1B12CCBFA0500D47F10 /* Release.xcconfig */; };
-		4A45A1B62CCBFA0500D47F10 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A45A1B22CCBFA0500D47F10 /* Secrets.xcconfig */; };
-		4A45A1B82CCBFA0E00D47F10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A45A1B72CCBFA0E00D47F10 /* GoogleService-Info.plist */; };
+		4A45A1992CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A19A2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A19B2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A19C2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A19D2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A19E2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1A72CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1A82CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1A92CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1AA2CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1AB2CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1AC2CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1AD2CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1AF2CCBF9CA00D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4A45A1B42CCBFA0500D47F10 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		4A45A1B62CCBFA0500D47F10 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		4A45A1B82CCBFA0E00D47F10 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */; };
 		4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */; };
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */; };
@@ -337,7 +355,6 @@
 		D84348EC2CA6A4B300AC4777 /* DeleteUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84348EB2CA6A4B300AC4777 /* DeleteUserViewModel.swift */; };
 		D8457BAD2CB6A233002540B2 /* ChatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BAC2CB6A233002540B2 /* ChatCellView.swift */; };
 		D8457BB82CB6A3E2002540B2 /* DefaultChatContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BB72CB6A3E2002540B2 /* DefaultChatContent.swift */; };
-		D8457BBA2CB6A462002540B2 /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BB92CB6A462002540B2 /* ChatItemViewModel.swift */; };
 		D8457BBC2CB6A471002540B2 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BBB2CB6A471002540B2 /* ChatViewModel.swift */; };
 		D8457BBE2CB6A4B8002540B2 /* ChatRoomContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BBD2CB6A4B8002540B2 /* ChatRoomContent.swift */; };
 		D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A7882BEBABC700899AA3 /* FindPwContentView.swift */; };
@@ -354,6 +371,7 @@
 		D85927FA2BE9116700653391 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F52BE9116700653391 /* LoginViewModel.swift */; };
 		D85927FB2BE9116700653391 /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F62BE9116700653391 /* SignUpNavigationViewModel.swift */; };
 		D85927FC2BE9116700653391 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85927F72BE9116700653391 /* SignUpViewModel.swift */; };
+		D85FC5922CCD0C850068553A /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773032C76C90700C68728 /* PrivatePolicy.swift */; };
 		D86773062C76CA0100C68728 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773052C76CA0100C68728 /* KeyboardManager.swift */; };
 		D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D874F52A2C32888E00936886 /* DetailSpendingView.swift */; };
@@ -383,6 +401,10 @@
 		D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */; };
 		D8B0A92A2C4EB8E500716ECB /* ResetMyPwRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */; };
 		D8B0A92C2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B0A92B2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift */; };
+		D8BAB3E92CCA92CF00D1910E /* GetChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BAB3E82CCA92CF00D1910E /* GetChatRoomUseCase.swift */; };
+		D8BAB3EB2CCA931500D1910E /* GetChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BAB3EA2CCA931500D1910E /* GetChatRoomRepository.swift */; };
+		D8BAB3ED2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BAB3EC2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift */; };
+		D8BAB3EF2CCA963500D1910E /* ChatRoomItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BAB3EE2CCA963500D1910E /* ChatRoomItemModel.swift */; };
 		D8BB4FE02C61BE7300FDD258 /* PhotoActionsPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB4FDF2C61BE7300FDD258 /* PhotoActionsPopUp.swift */; };
 		D8BDAF712C4928D10095D8E7 /* ProfileModifyPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */; };
 		D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */; };
@@ -424,7 +446,6 @@
 
 /* Begin PBXFileReference section */
 		4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		47DE7CB1D6DCDF1FAA88A105 /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		4A058EFE2BD03E01004B6F89 /* AuthResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDto.swift; sourceTree = "<group>"; };
 		4A058F002BD046C1004B6F89 /* OAuthLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginViewModel.swift; sourceTree = "<group>"; };
 		4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateResponseDto.swift; sourceTree = "<group>"; };
@@ -485,6 +506,25 @@
 		4A28821A2C65184300AE50C7 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
 		4A28821E2C652D3600AE50C7 /* GetNotificationRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNotificationRequestDto.swift; sourceTree = "<group>"; };
 		4A2882202C654BB500AE50C7 /* ReloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadView.swift; sourceTree = "<group>"; };
+		4A2C3A232CD34204006B6804 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A2C3A252CD3420C006B6804 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4A2C3A262CD3420C006B6804 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4A2C3A272CD3420C006B6804 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		4A2C3A5B2CD3457D006B6804 /* ViewStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStateManager.swift; sourceTree = "<group>"; };
+		4A2C3A6C2CD3C93C006B6804 /* DeleteUserAccountRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteUserAccountRepository.swift; sourceTree = "<group>"; };
+		4A2C3A6D2CD3C93C006B6804 /* FetchUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchUserProfileRepository.swift; sourceTree = "<group>"; };
+		4A2C3A6E2CD3C93C006B6804 /* LoginRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		4A2C3A6F2CD3C93C006B6804 /* LogoutRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutRepository.swift; sourceTree = "<group>"; };
+		4A2C3A702CD3C93C006B6804 /* PresignedUrlRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresignedUrlRepository.swift; sourceTree = "<group>"; };
+		4A2C3A712CD3C93C006B6804 /* ProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageRepository.swift; sourceTree = "<group>"; };
+		4A2C3A722CD3C93C006B6804 /* SignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
+		4A2C3A7B2CD3C965006B6804 /* DefaultDeleteUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDeleteUserRepository.swift; sourceTree = "<group>"; };
+		4A2C3A7C2CD3C965006B6804 /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
+		4A2C3A7D2CD3C965006B6804 /* DefaultLogoutRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLogoutRepository.swift; sourceTree = "<group>"; };
+		4A2C3A7E2CD3C965006B6804 /* DefaultPresignedUrlRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPresignedUrlRepository.swift; sourceTree = "<group>"; };
+		4A2C3A7F2CD3C965006B6804 /* DefaultProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultProfileImageRepository.swift; sourceTree = "<group>"; };
+		4A2C3A802CD3C965006B6804 /* DefaultSignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSignUpRepository.swift; sourceTree = "<group>"; };
+		4A2C3A812CD3C965006B6804 /* DefaultUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepository.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -510,24 +550,6 @@
 		4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingResponseDto.swift; sourceTree = "<group>"; };
-		4A45A1922CCBF9A300D47F10 /* FetchUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchUserProfileRepository.swift; sourceTree = "<group>"; };
-		4A45A1932CCBF9A300D47F10 /* LoginRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
-		4A45A1942CCBF9A300D47F10 /* LogoutRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutRepository.swift; sourceTree = "<group>"; };
-		4A45A1952CCBF9A300D47F10 /* PresignedUrlRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresignedUrlRepository.swift; sourceTree = "<group>"; };
-		4A45A1962CCBF9A300D47F10 /* ProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageRepository.swift; sourceTree = "<group>"; };
-		4A45A1972CCBF9A300D47F10 /* SignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
-		4A45A19F2CCBF9B700D47F10 /* DefaultDeleteUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDeleteUserRepository.swift; sourceTree = "<group>"; };
-		4A45A1A02CCBF9B700D47F10 /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
-		4A45A1A12CCBF9B700D47F10 /* DefaultLogoutRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLogoutRepository.swift; sourceTree = "<group>"; };
-		4A45A1A22CCBF9B700D47F10 /* DefaultPresignedUrlRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPresignedUrlRepository.swift; sourceTree = "<group>"; };
-		4A45A1A32CCBF9B700D47F10 /* DefaultProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultProfileImageRepository.swift; sourceTree = "<group>"; };
-		4A45A1A42CCBF9B700D47F10 /* DefaultSignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSignUpRepository.swift; sourceTree = "<group>"; };
-		4A45A1A52CCBF9B700D47F10 /* DefaultUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepository.swift; sourceTree = "<group>"; };
-		4A45A1AE2CCBF9CA00D47F10 /* DeleteUserAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserAccountRepository.swift; sourceTree = "<group>"; };
-		4A45A1B02CCBFA0500D47F10 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4A45A1B12CCBFA0500D47F10 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4A45A1B22CCBFA0500D47F10 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		4A45A1B72CCBFA0E00D47F10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -719,6 +741,7 @@
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
+		6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAnalyticsEvents.swift; sourceTree = "<group>"; };
@@ -749,15 +772,11 @@
 		D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatterUtil .swift"; sourceTree = "<group>"; };
 		D820675B2CC5500700102356 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
-		D82BFEED2CB7E56600DCB9EC /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Release.xcconfig"; sourceTree = "<absolute>"; };
-		D82BFEEE2CB7E56600DCB9EC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Debug.xcconfig"; sourceTree = "<absolute>"; };
-		D82BFEEF2CB7E56600DCB9EC /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = "/Desktop/pennyway-client-ios/pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Secrets.xcconfig"; sourceTree = "<absolute>"; };
 		D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUsernameView.swift; sourceTree = "<group>"; };
 		D82E305A2C5BAB00004244F1 /* EditNameRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameRequestDto.swift; sourceTree = "<group>"; };
 		D84348EB2CA6A4B300AC4777 /* DeleteUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserViewModel.swift; sourceTree = "<group>"; };
 		D8457BAC2CB6A233002540B2 /* ChatCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellView.swift; sourceTree = "<group>"; };
 		D8457BB72CB6A3E2002540B2 /* DefaultChatContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatContent.swift; sourceTree = "<group>"; };
-		D8457BB92CB6A462002540B2 /* ChatItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
 		D8457BBB2CB6A471002540B2 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		D8457BBD2CB6A4B8002540B2 /* ChatRoomContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomContent.swift; sourceTree = "<group>"; };
 		D847A7882BEBABC700899AA3 /* FindPwContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwContentView.swift; sourceTree = "<group>"; };
@@ -806,6 +825,10 @@
 		D8B0A9272C4EA7FC00716ECB /* ValidatePwRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePwRequestDto.swift; sourceTree = "<group>"; };
 		D8B0A9292C4EB8E500716ECB /* ResetMyPwRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetMyPwRequestDto.swift; sourceTree = "<group>"; };
 		D8B0A92B2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeTypeNavigation.swift; sourceTree = "<group>"; };
+		D8BAB3E82CCA92CF00D1910E /* GetChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRoomUseCase.swift; sourceTree = "<group>"; };
+		D8BAB3EA2CCA931500D1910E /* GetChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRoomRepository.swift; sourceTree = "<group>"; };
+		D8BAB3EC2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetChatRoomRepository.swift; sourceTree = "<group>"; };
+		D8BAB3EE2CCA963500D1910E /* ChatRoomItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomItemModel.swift; sourceTree = "<group>"; };
 		D8BB4FDF2C61BE7300FDD258 /* PhotoActionsPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoActionsPopUp.swift; sourceTree = "<group>"; };
 		D8BDAF702C4928D10095D8E7 /* ProfileModifyPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyPwView.swift; sourceTree = "<group>"; };
 		D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryView.swift; sourceTree = "<group>"; };
@@ -870,8 +893,8 @@
 		41951791426F03880A100F2C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				47DE7CB1D6DCDF1FAA88A105 /* Pods-pennyway-client-iOS.debug.xcconfig */,
 				4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */,
+				6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1161,7 +1184,7 @@
 		4A12FEEA2C9C484B00DE10BC /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				4A45A1982CCBF9A300D47F10 /* Profile */,
+				4A2C3A732CD3C93C006B6804 /* Profile */,
 				D8DCCF8B2CBD8F4300550A8B /* Chat */,
 			);
 			path = Interfaces;
@@ -1179,7 +1202,7 @@
 		4A12FEF62C9C49B200DE10BC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				4A45A1A62CCBF9B700D47F10 /* Profile */,
+				4A2C3A822CD3C965006B6804 /* Profile */,
 				D8DCCF9D2CBD949A00550A8B /* Chat */,
 			);
 			path = Repository;
@@ -1279,6 +1302,7 @@
 		4A12FF0A2C9C4B7C00DE10BC /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				4A2C3A5B2CD3457D006B6804 /* ViewStateManager.swift */,
 				4A12FF0B2C9C4B8600DE10BC /* DIContainer */,
 				4A12FF122C9C4BCF00DE10BC /* AppFlowCoordinator.swift */,
 				4A12FF142C9C4BDE00DE10BC /* RootComponent.swift */,
@@ -1341,6 +1365,44 @@
 				4A2881FE2C64CC5900AE50C7 /* SpendingCategoryGridView.swift */,
 			);
 			path = SpendingCategoryManagementView;
+			sourceTree = "<group>";
+		};
+		4A2C3A282CD3420C006B6804 /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				4A2C3A252CD3420C006B6804 /* Debug.xcconfig */,
+				4A2C3A262CD3420C006B6804 /* Release.xcconfig */,
+				4A2C3A272CD3420C006B6804 /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
+			sourceTree = "<group>";
+		};
+		4A2C3A732CD3C93C006B6804 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4A2C3A6C2CD3C93C006B6804 /* DeleteUserAccountRepository.swift */,
+				4A2C3A6D2CD3C93C006B6804 /* FetchUserProfileRepository.swift */,
+				4A2C3A6E2CD3C93C006B6804 /* LoginRepository.swift */,
+				4A2C3A6F2CD3C93C006B6804 /* LogoutRepository.swift */,
+				4A2C3A702CD3C93C006B6804 /* PresignedUrlRepository.swift */,
+				4A2C3A712CD3C93C006B6804 /* ProfileImageRepository.swift */,
+				4A2C3A722CD3C93C006B6804 /* SignUpRepository.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		4A2C3A822CD3C965006B6804 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4A2C3A7B2CD3C965006B6804 /* DefaultDeleteUserRepository.swift */,
+				4A2C3A7C2CD3C965006B6804 /* DefaultLoginRepository.swift */,
+				4A2C3A7D2CD3C965006B6804 /* DefaultLogoutRepository.swift */,
+				4A2C3A7E2CD3C965006B6804 /* DefaultPresignedUrlRepository.swift */,
+				4A2C3A7F2CD3C965006B6804 /* DefaultProfileImageRepository.swift */,
+				4A2C3A802CD3C965006B6804 /* DefaultSignUpRepository.swift */,
+				4A2C3A812CD3C965006B6804 /* DefaultUserProfileRepository.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		4A35607C2BEBA2AA00BA58F3 /* UserAuth */ = {
@@ -1537,44 +1599,6 @@
 			path = SpendingCategory;
 			sourceTree = "<group>";
 		};
-		4A45A1982CCBF9A300D47F10 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				4A45A1922CCBF9A300D47F10 /* FetchUserProfileRepository.swift */,
-				4A45A1932CCBF9A300D47F10 /* LoginRepository.swift */,
-				4A45A1942CCBF9A300D47F10 /* LogoutRepository.swift */,
-				4A45A1952CCBF9A300D47F10 /* PresignedUrlRepository.swift */,
-				4A45A1962CCBF9A300D47F10 /* ProfileImageRepository.swift */,
-				4A45A1972CCBF9A300D47F10 /* SignUpRepository.swift */,
-				4A45A1AE2CCBF9CA00D47F10 /* DeleteUserAccountRepository.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		4A45A1A62CCBF9B700D47F10 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				4A45A19F2CCBF9B700D47F10 /* DefaultDeleteUserRepository.swift */,
-				4A45A1A02CCBF9B700D47F10 /* DefaultLoginRepository.swift */,
-				4A45A1A12CCBF9B700D47F10 /* DefaultLogoutRepository.swift */,
-				4A45A1A22CCBF9B700D47F10 /* DefaultPresignedUrlRepository.swift */,
-				4A45A1A32CCBF9B700D47F10 /* DefaultProfileImageRepository.swift */,
-				4A45A1A42CCBF9B700D47F10 /* DefaultSignUpRepository.swift */,
-				4A45A1A52CCBF9B700D47F10 /* DefaultUserProfileRepository.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		4A45A1B32CCBFA0500D47F10 /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				4A45A1B02CCBFA0500D47F10 /* Debug.xcconfig */,
-				4A45A1B12CCBFA0500D47F10 /* Release.xcconfig */,
-				4A45A1B22CCBFA0500D47F10 /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
-			sourceTree = "<group>";
-		};
 		4A4703972BCED80000AEE04E /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -1640,9 +1664,6 @@
 			isa = PBXGroup;
 			children = (
 				D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */,
-				D82BFEEE2CB7E56600DCB9EC /* Debug.xcconfig */,
-				D82BFEED2CB7E56600DCB9EC /* Release.xcconfig */,
-				D82BFEEF2CB7E56600DCB9EC /* Secrets.xcconfig */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1809,8 +1830,8 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4A45A1B72CCBFA0E00D47F10 /* GoogleService-Info.plist */,
-				4A45A1B32CCBFA0500D47F10 /* Xcconfig */,
+				4A2C3A232CD34204006B6804 /* GoogleService-Info.plist */,
+				4A2C3A282CD3420C006B6804 /* Xcconfig */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
@@ -2481,8 +2502,8 @@
 		D8457BB22CB6A3A1002540B2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				D8457BB92CB6A462002540B2 /* ChatItemViewModel.swift */,
 				D8457BBB2CB6A471002540B2 /* ChatViewModel.swift */,
+				D8BAB3EE2CCA963500D1910E /* ChatRoomItemModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2646,6 +2667,7 @@
 			isa = PBXGroup;
 			children = (
 				D8DCCF882CBD8D7700550A8B /* MakeChatRoomUseCase.swift */,
+				D8BAB3E82CCA92CF00D1910E /* GetChatRoomUseCase.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2655,6 +2677,7 @@
 			children = (
 				4ADA094E2CBE679C001F9384 /* ChatStompRepository.swift */,
 				D8DCCF8C2CBD8F6500550A8B /* MakeChatRoomRepository.swift */,
+				D8BAB3EA2CCA931500D1910E /* GetChatRoomRepository.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2700,6 +2723,7 @@
 			children = (
 				4ADA09512CBE681B001F9384 /* DefaultChatStompRepository.swift */,
 				D8DCCF9F2CBD94B400550A8B /* DefaultMakeChatRoomRepository.swift */,
+				D8BAB3EC2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2785,18 +2809,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A45A1B62CCBFA0500D47F10 /* Secrets.xcconfig in Resources */,
+				4A45A1B62CCBFA0500D47F10 /* (null) in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
-				4A45A1B82CCBFA0E00D47F10 /* GoogleService-Info.plist in Resources */,
+				4A2C3A2B2CD3420C006B6804 /* Secrets.xcconfig in Resources */,
+				4A45A1B82CCBFA0E00D47F10 /* (null) in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
-				4A45A1B52CCBFA0500D47F10 /* Release.xcconfig in Resources */,
+				4A2C3A292CD3420C006B6804 /* Debug.xcconfig in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
+				4A2C3A2A2CD3420C006B6804 /* Release.xcconfig in Resources */,
+				4A2C3A242CD34204006B6804 /* GoogleService-Info.plist in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
-				4A45A1B42CCBFA0500D47F10 /* Debug.xcconfig in Resources */,
+				4A45A1B42CCBFA0500D47F10 /* (null) in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
@@ -2871,21 +2898,21 @@
 			files = (
 				D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */,
 				4AA13C602C63E2B300D8DEE7 /* ObjectStorageRouter.swift in Sources */,
-				4A45A1AD2CCBF9B700D47F10 /* DefaultUserProfileRepository.swift in Sources */,
+				4A45A1AD2CCBF9B700D47F10 /* (null) in Sources */,
 				D80C68922CC80BEA00928921 /* GetChatServerResponseDto.swift in Sources */,
 				4A12FF0F2C9C4BAD00DE10BC /* ProfileSceneDIContainer.swift in Sources */,
 				D8457BAD2CB6A233002540B2 /* ChatCellView.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
-				4A45A1AC2CCBF9B700D47F10 /* DefaultSignUpRepository.swift in Sources */,
-				4A45A1AB2CCBF9B700D47F10 /* DefaultProfileImageRepository.swift in Sources */,
+				4A45A1AC2CCBF9B700D47F10 /* (null) in Sources */,
+				4A45A1AB2CCBF9B700D47F10 /* (null) in Sources */,
 				4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */,
 				4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */,
 				4AC320432C11D5AC00DDB4B6 /* AddSpendingHistoryView.swift in Sources */,
 				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
 				4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */,
 				D8DCCF852CBD8D5700550A8B /* PresignedUrlUseCase.swift in Sources */,
-				4A45A19B2CCBF9A300D47F10 /* LogoutRepository.swift in Sources */,
+				4A45A19B2CCBF9A300D47F10 /* (null) in Sources */,
 				4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */,
 				4A3701D12C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift in Sources */,
 				4A2882002C64CC5900AE50C7 /* CategoryDetailsView.swift in Sources */,
@@ -2896,10 +2923,12 @@
 				4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */,
 				4A12FEED2C9C487800DE10BC /* User.swift in Sources */,
 				4AE9B3332CB689E50044D3E1 /* CustomRoundedBtn.swift in Sources */,
+				4A2C3A792CD3C93C006B6804 /* ProfileImageRepository.swift in Sources */,
 				D889F9FC2C652CB50055D045 /* BasicButtonStyleUtil.swift in Sources */,
 				4AC4FD082BBDCC190027ACD5 /* KakaoOAuthViewModel.swift in Sources */,
 				B599E4C32C58D4F0006051E9 /* AnalyticsConstants.swift in Sources */,
 				4A5789992BDC2A1100AFEB26 /* UnprocessableContentError.swift in Sources */,
+				D8BAB3E92CCA92CF00D1910E /* GetChatRoomUseCase.swift in Sources */,
 				4A4A56742BACA4000071D00E /* NavigationCountView.swift in Sources */,
 				4A5789912BDC29A100AFEB26 /* MethodNotAllowedError.swift in Sources */,
 				4ADA095A2CBED95A001F9384 /* DefaultChatStompService.swift in Sources */,
@@ -2938,6 +2967,7 @@
 				D8180C022BE507FD00F837FB /* FindIdFormView.swift in Sources */,
 				4AC3204E2C11D5AC00DDB4B6 /* SpendingCalendarView.swift in Sources */,
 				4AC3205F2C11F35700DDB4B6 /* CurrentMonthTargetAmountResponseDto.swift in Sources */,
+				4A2C3A832CD3C965006B6804 /* DefaultDeleteUserRepository.swift in Sources */,
 				4A3701D42C08F7F600F0AEBA /* GetSpendingHistoryResponseDto.swift in Sources */,
 				4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */,
 				D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */,
@@ -2945,6 +2975,7 @@
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
+				4A2C3A772CD3C93C006B6804 /* LogoutRepository.swift in Sources */,
 				4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */,
 				4A57897D2BDC1EDF00AFEB26 /* PreconditionFailedErrorCode.swift in Sources */,
 				4A148B5E2C364A3C005C6D4E /* SpendingCategoryViewModel.swift in Sources */,
@@ -2952,6 +2983,8 @@
 				D8DCCF8D2CBD8F6500550A8B /* MakeChatRoomRepository.swift in Sources */,
 				4AE8F3AD2C32AED30014F0D4 /* AppDelegate.swift in Sources */,
 				4A5789972BDC29FD00AFEB26 /* PreconditionFailedError.swift in Sources */,
+				4A2C3A882CD3C965006B6804 /* DefaultSignUpRepository.swift in Sources */,
+				4A2C3A872CD3C965006B6804 /* DefaultProfileImageRepository.swift in Sources */,
 				4A60F64C2C595E4700805F2C /* CustomCompleteView.swift in Sources */,
 				4A8523ED2CB5A8AE00AE90AF /* ChatRoom.swift in Sources */,
 				D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */,
@@ -2987,13 +3020,14 @@
 				4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */,
 				D8DCCFB12CBEA4A300550A8B /* ChatSceneDIContainer.swift in Sources */,
 				4A5789792BDC1DDE00AFEB26 /* NotAcceptableErrorCode.swift in Sources */,
-				D8457BBA2CB6A462002540B2 /* ChatItemViewModel.swift in Sources */,
 				B599E4C02C58B951006051E9 /* AnalyticsTracker.swift in Sources */,
 				4AD0D84A2BFDF80D00A0808F /* AddSpendingHistoryViewModel.swift in Sources */,
 				D85927F22BE69C6A00653391 /* UserLogoutViewModel.swift in Sources */,
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
 				4A3701BD2C08F7B600F0AEBA /* TargetAmountViewModel.swift in Sources */,
+				4A2C3A852CD3C965006B6804 /* DefaultLogoutRepository.swift in Sources */,
 				4A12FF152C9C4BDE00DE10BC /* RootComponent.swift in Sources */,
+				4A2C3A762CD3C93C006B6804 /* LoginRepository.swift in Sources */,
 				4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */,
 				4A058F092BD055F9004B6F89 /* ApiRequstHandler.swift in Sources */,
 				4A6C79DB2C46D067009463E4 /* ProfileActiveNavigation.swift in Sources */,
@@ -3019,15 +3053,17 @@
 				4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */,
+				4A2C3A752CD3C93C006B6804 /* FetchUserProfileRepository.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
 				4A762AED2B99A16B001C1188 /* pennyway_client_iOSApp.swift in Sources */,
 				D82E305B2C5BAB00004244F1 /* EditNameRequestDto.swift in Sources */,
-				4A45A19A2CCBF9A300D47F10 /* LoginRepository.swift in Sources */,
+				4A45A19A2CCBF9A300D47F10 /* (null) in Sources */,
 				D8B0A9282C4EA7FC00716ECB /* ValidatePwRequestDto.swift in Sources */,
 				4AC3205D2C11F33200DDB4B6 /* GenerateCurrentMonthDummyDataRequestDto.swift in Sources */,
 				4A6A9D112C331A9500394771 /* TargetAmountSetCompleteView.swift in Sources */,
 				D8A67ACA2CC1423800749B85 /* LoginUseCase.swift in Sources */,
+				D8BAB3EF2CCA963500D1910E /* ChatRoomItemModel.swift in Sources */,
 				4A4703942BCEB21500AEE04E /* StatusError.swift in Sources */,
 				4AD5733C2C5B973C00A4E192 /* PastSpendingListView.swift in Sources */,
 				D8880E192BCEBEE700922894 /* DynamicFontSize.swift in Sources */,
@@ -3041,7 +3077,7 @@
 				4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift in Sources */,
 				4A863A162CB464A600BA2F2F /* TemporaryView.swift in Sources */,
 				D898E8182CA5A8C9003739F1 /* LogoutViewModel.swift in Sources */,
-				4A45A1AA2CCBF9B700D47F10 /* DefaultPresignedUrlRepository.swift in Sources */,
+				4A45A1AA2CCBF9B700D47F10 /* (null) in Sources */,
 				4A28821F2C652D3600AE50C7 /* GetNotificationRequestDto.swift in Sources */,
 				4A863A142CB461BE00BA2F2F /* TextHeightPreference.swift in Sources */,
 				D8BB4FE02C61BE7300FDD258 /* PhotoActionsPopUp.swift in Sources */,
@@ -3064,16 +3100,17 @@
 				4A4703B02BCF897300AEE04E /* ErrorResponseDto.swift in Sources */,
 				D8DCCF9C2CBD923100550A8B /* MakeChatRoomRequestDto.swift in Sources */,
 				4A12FF0D2C9C4B9A00DE10BC /* AppDIContainer.swift in Sources */,
+				D85FC5922CCD0C850068553A /* (null) in Sources */,
 				4A8BDEE32C6246B900D21424 /* DiffAmountColorUtil.swift in Sources */,
 				4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */,
 				4AE9B3402CB6E5770044D3E1 /* ChatSideMenuView.swift in Sources */,
-				4A45A1AF2CCBF9CA00D47F10 /* DeleteUserAccountRepository.swift in Sources */,
+				4A45A1AF2CCBF9CA00D47F10 /* (null) in Sources */,
 				D8457BBE2CB6A4B8002540B2 /* ChatRoomContent.swift in Sources */,
 				4A0BC6A72BF5F4E20036D900 /* StringAttributeProtocol.swift in Sources */,
 				D874F52B2C32888E00936886 /* DetailSpendingView.swift in Sources */,
 				4A863A072CB44D2800BA2F2F /* ChatMessage.swift in Sources */,
 				4AC320562C11D5AC00DDB4B6 /* TotalTargetAmountHeaderView.swift in Sources */,
-				4A45A1A92CCBF9B700D47F10 /* DefaultLogoutRepository.swift in Sources */,
+				4A45A1A92CCBF9B700D47F10 /* (null) in Sources */,
 				D84348EC2CA6A4B300AC4777 /* DeleteUserViewModel.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
@@ -3118,13 +3155,18 @@
 				4A28820C2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift in Sources */,
 				4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */,
 				4A2881FA2C64CC1200AE50C7 /* MoveCategoryRequestDto.swift in Sources */,
+				4A2C3A742CD3C93C006B6804 /* DeleteUserAccountRepository.swift in Sources */,
+				D8BAB3ED2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift in Sources */,
+				D8BAB3EB2CCA931500D1910E /* GetChatRoomRepository.swift in Sources */,
+				4A2C3A7A2CD3C93C006B6804 /* SignUpRepository.swift in Sources */,
 				4ADA094F2CBE679C001F9384 /* ChatStompRepository.swift in Sources */,
 				4AE8F3B42C330A0B0014F0D4 /* TargetAmountSettingView.swift in Sources */,
+				4A2C3A862CD3C965006B6804 /* DefaultPresignedUrlRepository.swift in Sources */,
 				4AC289FC2C2C0405001A6393 /* GetTotalTargetAmountResponseDto.swift in Sources */,
-				4A45A19C2CCBF9A300D47F10 /* PresignedUrlRepository.swift in Sources */,
+				4A45A19C2CCBF9A300D47F10 /* (null) in Sources */,
 				4AD70E222BE013C10058A52A /* ProfileView.swift in Sources */,
 				D8DCCF822CBD8D5700550A8B /* FetchUserProfileUseCase.swift in Sources */,
-				4A45A1A82CCBF9B700D47F10 /* DefaultLoginRepository.swift in Sources */,
+				4A45A1A82CCBF9B700D47F10 /* (null) in Sources */,
 				D8DCCFB32CBEB08C00550A8B /* ChatRootComponent.swift in Sources */,
 				4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDto.swift in Sources */,
 				4A12FF052C9C4AC300DE10BC /* UserProfileViewModel.swift in Sources */,
@@ -3136,6 +3178,7 @@
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
 				4AC3204F2C11D5AC00DDB4B6 /* SpendingWeekCalendarView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
+				4A2C3A892CD3C965006B6804 /* DefaultUserProfileRepository.swift in Sources */,
 				4A058EFF2BD03E01004B6F89 /* AuthResponseDto.swift in Sources */,
 				4AC320502C11D5AC00DDB4B6 /* RecentTargetAmountSuggestionView.swift in Sources */,
 				4A4703A72BCEDD9800AEE04E /* VerificationCodeRequestDto.swift in Sources */,
@@ -3144,10 +3187,11 @@
 				4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */,
 				4ABE0F222CA813B100CD6DF7 /* Auth.swift in Sources */,
 				4A6753B12CC177CC00B54865 /* DeviceInfoManager.swift in Sources */,
+				4A2C3A842CD3C965006B6804 /* DefaultLoginRepository.swift in Sources */,
 				B599E4D22C64D1F3006051E9 /* AuthCheckAnalyticsEvents.swift in Sources */,
 				4A12FF112C9C4BBE00DE10BC /* AppComponent.swift in Sources */,
 				4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */,
-				4A45A19D2CCBF9A300D47F10 /* ProfileImageRepository.swift in Sources */,
+				4A45A19D2CCBF9A300D47F10 /* (null) in Sources */,
 				4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */,
 				D8DCCF952CBD903400550A8B /* MakeChatRoomResponseDto.swift in Sources */,
 				4A2882022C64CC5900AE50C7 /* MoveCategoryView.swift in Sources */,
@@ -3178,9 +3222,10 @@
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				B599E4BE2C58AF34006051E9 /* AnalyticsEvent.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
-				4A45A1992CCBF9A300D47F10 /* FetchUserProfileRepository.swift in Sources */,
+				4A45A1992CCBF9A300D47F10 /* (null) in Sources */,
 				D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
+				4A2C3A5C2CD3457D006B6804 /* ViewStateManager.swift in Sources */,
 				4A12FEEF2C9C489C00DE10BC /* UserProfileItemModel.swift in Sources */,
 				4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */,
 				4AA13C672C63ED5100D8DEE7 /* PresignedUrlViewModel.swift in Sources */,
@@ -3242,17 +3287,18 @@
 				4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */,
 				4A863A032CB4409600BA2F2F /* ChatReceiveCell.swift in Sources */,
 				4A57898B2BDC28F100AFEB26 /* UnauthorizedError.swift in Sources */,
+				4A2C3A782CD3C93C006B6804 /* PresignedUrlRepository.swift in Sources */,
 				D8BDAF712C4928D10095D8E7 /* ProfileModifyPwView.swift in Sources */,
 				4AB5AB4E2BB4A60500D2C9EA /* URLRequestExtension.swift in Sources */,
 				D8DCCFAD2CBE9F1900550A8B /* ChatFactory.swift in Sources */,
 				D8DCCF862CBD8D5700550A8B /* SignUpUseCase.swift in Sources */,
 				4A3560832BEBF12D00BA58F3 /* OAuthAccountViewModel.swift in Sources */,
-				4A45A1A72CCBF9B700D47F10 /* DefaultDeleteUserRepository.swift in Sources */,
+				4A45A1A72CCBF9B700D47F10 /* (null) in Sources */,
 				4A8BDEE52C629C3600D21424 /* SpendingHistoryUtil.swift in Sources */,
 				4AC3203F2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift in Sources */,
 				4A0BC6AD2BF5FA130036D900 /* NumberFormatterUtil.swift in Sources */,
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
-				4A45A19E2CCBF9A300D47F10 /* SignUpRepository.swift in Sources */,
+				4A45A19E2CCBF9A300D47F10 /* (null) in Sources */,
 				D8B0A92A2C4EB8E500716ECB /* ResetMyPwRequestDto.swift in Sources */,
 				4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */,
 				4AC3204C2C11D5AC00DDB4B6 /* ChangeMonthContentView.swift in Sources */,
@@ -3274,7 +3320,7 @@
 /* Begin XCBuildConfiguration section */
 		4A762AF52B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47DE7CB1D6DCDF1FAA88A105 /* Pods-pennyway-client-iOS.debug.xcconfig */;
+			baseConfigurationReference = 6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3395,7 +3441,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A45A1B02CCBFA0500D47F10 /* Debug.xcconfig */;
+			baseConfigurationReference = 4A2C3A252CD3420C006B6804 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3437,7 +3483,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A45A1B12CCBFA0500D47F10 /* Release.xcconfig */;
+			baseConfigurationReference = 4A2C3A262CD3420C006B6804 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

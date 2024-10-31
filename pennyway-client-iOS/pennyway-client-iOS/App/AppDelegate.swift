@@ -7,7 +7,6 @@ import SwiftUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     static var currentFCMToken: String?
-
     let gcmMessageIDKey = "gcm.message_id"
 
     /// 앱이 켜졌을 때

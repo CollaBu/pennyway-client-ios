@@ -46,8 +46,10 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         stompClient.subscribeWithHeader(destination: "/user/queue/errors", withHeader: ["receipt": errorReceiptId])
     }
 
+    /// 실제로 소켓 연결을 수행하는 메서드
     private func connectToSocket(url: String) {
         let headers = createConnectionHeaders()
+
         let request = NSURLRequest(url: URL(string: url)!)
         
         stompClient.openSocketWithURLRequest(request: request, delegate: self, connectionHeaders: headers)

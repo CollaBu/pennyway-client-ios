@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct PreparedView: View {
+    @EnvironmentObject var viewStateManager: ViewStateManager
+
     var body: some View {
         ZStack {
             VStack {
@@ -22,6 +24,9 @@ struct PreparedView: View {
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray04"))
             }
+        }
+        .onAppear {
+            viewStateManager.setCurrentView(self)
         }
     }
 }

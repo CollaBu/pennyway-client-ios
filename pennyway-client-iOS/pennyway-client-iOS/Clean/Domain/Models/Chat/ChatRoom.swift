@@ -14,7 +14,8 @@ struct ChatRoom: Equatable, Identifiable {
     let title: String
     let description: String
     let background_image_url: String
-    let password: String?
-    let privacy_setting: Bool
-    let notify_enabled: Bool
+    let isPrivate: Bool
+    let isAdmin: Bool
+    let participantCount: Int32
+    let createdAt: String
 }
