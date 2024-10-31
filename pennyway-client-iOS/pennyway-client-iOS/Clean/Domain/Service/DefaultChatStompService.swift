@@ -46,8 +46,4 @@ class DefaultChatStompService {
     private func subscribeToChat() {
         subscribeToDestination("/sub/chat.room.1")
     }
-    
-    private func subscribeToErrors() {
-        subscribeToDestination("/user/queue/errors")
-    }
 }

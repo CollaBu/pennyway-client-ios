@@ -11,8 +11,7 @@ import StompClientLib
 // MARK: - DefaultChatStompRepository
 
 class DefaultChatStompRepository: NSObject, ChatStompRepository {
-    private var stompClient: StompClientLib
-    private var chatServerUrl: String?
+    private let stompClient: StompClientLib
     
     init(stompClient: StompClientLib) {
         self.stompClient = stompClient
@@ -23,43 +22,50 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         getChatServer { [weak self] result in
             switch result {
             case let .success(url):
-                self?.chatServerUrl = url
-                self?.connectToSocket(completion: completion)
+                self?.connectToSocket(url: url)
             case let .failure(error):
                 completion(.failure(error))
             }
         }
     }
-    
+
     /// Stomp 소켓 연결을 해제하는 메서드
     func disconnect() {
         stompClient.disconnect()
     }
-    
+        
     /// 메시지를 특정 목적지로 보내는 메서드
     func sendMessage(message _: String, destination _: String) {}
-    
+        
     /// 특정 목적지로 Stomp 구독을 설정하는 메서드
     func subscribeToDestination(_: String) {}
-    
+
+    /// 에러 처리위해 Stomp 구독을 설정하는 메서드
+    private func subscribeToErrors() {
+        let errorReceiptId = "error-receipt-\(UUID().uuidString)"
+        stompClient.subscribeWithHeader(destination: "/user/queue/errors", withHeader: ["receipt": errorReceiptId])
+    }
+
     /// 실제로 소켓 연결을 수행하는 메서드
-    private func connectToSocket(completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let url = chatServerUrl else {
-            completion(.failure(NSError(domain: "ChatStompRepository", code: 0, userInfo: [NSLocalizedDescriptionKey: "Chat server URL is not set"])))
-            return
-        }
-        
-        let accessToken = KeychainHelper.loadAccessToken() ?? ""
-        let deviceName = DeviceInfoManager.getDeviceModelName()
-        let deviceId = DeviceInfoManager.getDeviceId()
-        let headers = ["Authorization": "Bearer \(accessToken)", "device-id": "\(deviceId)", "device-name": "\(deviceName)", "heart-beat": "0,25000"] // heart-beat 25초
-        
+    private func connectToSocket(url: String) {
+        let headers = createConnectionHeaders()
+
         let request = NSURLRequest(url: URL(string: url)!)
         
         stompClient.openSocketWithURLRequest(request: request, delegate: self, connectionHeaders: headers)
-        completion(.success(()))
     }
-    
+        
+    private func createConnectionHeaders() -> [String: String] {
+        let accessToken = KeychainHelper.loadAccessToken() ?? ""
+        let deviceName = DeviceInfoManager.getDeviceModelName()
+        let deviceId = DeviceInfoManager.getDeviceId()
+        return [
+            "Authorization": "Bearer \(accessToken)",
+            "device-id": "\(deviceId)",
+            "device-name": "\(deviceName)"
+        ]
+    }
+        
     /// 채팅 서버 URL을 가져오는 메서드
     private func getChatServer(completion: @escaping (Result<String, Error>) -> Void) {
         ChatAlamofire.shared.getChatServer { result in
@@ -86,6 +92,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
 extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidConnect(client _: StompClientLib!) {
         Log.debug("Socket connected")
+        subscribeToErrors()
     }
     
     func stompClientDidDisconnect(client _: StompClientLib!) {
