@@ -10,7 +10,7 @@ import Foundation
 struct GetJoinedChatRoomsResponseDto: Decodable {
     let code: String
     let data: ChatRoomDataDto
-    
+
     struct ChatRoomDataDto: Decodable {
         let chatRoom: ChatRoomDto
     }

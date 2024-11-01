@@ -85,6 +85,32 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
             }
         }
     }
+    
+    /// 가입한 채팅방 리스트 가져오기
+    private func getJoinedChatRooms(completion: @escaping (Bool) -> Void) {
+        ChatAlamofire.shared.getJoinedChatRooms(GetJoinedChatRoomsRequestDto(summary: "true")) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(GetJoinedChatRoomsResponseDto.self, from: responseData)
+                        Log.debug("[DefaultChatServerRepository] 가입한 채팅방 리스트 가져오기 성공: \(response)")
+                        completion(true)
+                    } catch {
+                        completion(false)
+                    }
+                }
+            case let .failure(error):
+                if let statusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+
+                completion(false)
+            }
+        }
+    }
 }
 
 // MARK: StompClientLibDelegate
@@ -93,6 +119,9 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidConnect(client _: StompClientLib!) {
         Log.debug("Socket connected")
         subscribeToErrors()
+        getJoinedChatRooms(completion: { _ in 
+            //TODO: 받아온 채팅방 id에 차례대로 구독 요청
+        })
     }
     
     func stompClientDidDisconnect(client _: StompClientLib!) {

@@ -27,7 +27,7 @@ class ChatAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.makeChatRoom(dto: dto), completion: completion)
     }
     
-    ///채팅 서버 조회
+    /// 채팅 서버 조회
     func getChatServer(completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatAlamofire - getChatServer() called")
         
@@ -41,7 +41,7 @@ class ChatAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.getChatRoom, completion: completion)
     }
     
-    ///가입한 채팅방 리스트 조회
+    /// 가입한 채팅방 리스트 조회
     func getJoinedChatRooms(_ dto: GetJoinedChatRoomsRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatAlamofire - getJoinedChatRooms() called")
         

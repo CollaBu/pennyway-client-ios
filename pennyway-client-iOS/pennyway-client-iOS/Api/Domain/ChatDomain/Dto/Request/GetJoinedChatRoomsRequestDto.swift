@@ -6,5 +6,5 @@
 //
 
 struct GetJoinedChatRoomsRequestDto: Codable {
-    let summary: Bool
+    let summary: String
 }

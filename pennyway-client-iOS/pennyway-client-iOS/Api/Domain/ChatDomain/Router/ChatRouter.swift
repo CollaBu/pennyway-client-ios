@@ -34,7 +34,7 @@ enum ChatRouter: URLRequestConvertible {
         case .getChatServer:
             return "v2/socket/chat"
         case .getJoinedChatRooms:
-            return "v2/chatrooms"
+            return "v2/chat-rooms"
         case .getChatRoom:
             return "v2/chat-rooms/me"
         }
@@ -53,7 +53,7 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case let .getJoinedChatRooms(dto):
             return try? dto.asDictionary()
-            
+
         case .getChatServer, .makeChatRoom, .getChatRoom:
             return [:]
         }
