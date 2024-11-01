@@ -45,6 +45,15 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         let errorReceiptId = "error-receipt-\(UUID().uuidString)"
         stompClient.subscribeWithHeader(destination: "/user/queue/errors", withHeader: ["receipt": errorReceiptId])
     }
+    
+    /// 채팅방 ID 리스트에 대한 구독을 설정하는 메서드
+    private func subscribeToChatRooms(_ chatRoomIds: [Int]) {
+        for chatRoomId in chatRoomIds {
+            let chatRoomReceiptId = "chat-room-receipt-\(UUID().uuidString)"
+            let destination = "/sub/chat.room.\(chatRoomId)"
+            stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": chatRoomReceiptId])
+        }
+    }
 
     /// 실제로 소켓 연결을 수행하는 메서드
     private func connectToSocket(url: String) {
@@ -86,8 +95,8 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         }
     }
     
-    /// 가입한 채팅방 리스트 가져오기
-    private func getJoinedChatRooms(completion: @escaping (Bool) -> Void) {
+    // 가입한 채팅방 리스트 가져오기
+    private func getJoinedChatRooms() {
         ChatAlamofire.shared.getJoinedChatRooms(GetJoinedChatRoomsRequestDto(summary: "true")) { result in
             switch result {
             case let .success(data):
@@ -95,9 +104,10 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
                     do {
                         let response = try JSONDecoder().decode(GetJoinedChatRoomsResponseDto.self, from: responseData)
                         Log.debug("[DefaultChatServerRepository] 가입한 채팅방 리스트 가져오기 성공: \(response)")
-                        completion(true)
+                        // 구독 요청 수행
+                        self.subscribeToChatRooms(response.data.chatRoom.chatRoomIds)
                     } catch {
-                        completion(false)
+                        Log.error("Failed to decode: \(error)")
                     }
                 }
             case let .failure(error):
@@ -106,8 +116,6 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
                 } else {
                     Log.error("Network request failed: \(error)")
                 }
-
-                completion(false)
             }
         }
     }
@@ -119,9 +127,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidConnect(client _: StompClientLib!) {
         Log.debug("Socket connected")
         subscribeToErrors()
-        getJoinedChatRooms(completion: { _ in 
-            //TODO: 받아온 채팅방 id에 차례대로 구독 요청
-        })
+        getJoinedChatRooms()
     }
     
     func stompClientDidDisconnect(client _: StompClientLib!) {
