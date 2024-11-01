@@ -13,6 +13,8 @@ struct MakeChatRoomView: View {
     @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var isFormValid: Bool = false //뷰모델에서 isFormValid를 받아와 뷰에서 사용하는 변수
+
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
 
     let titleCustomTextList: [String] = ["제목*"]
@@ -69,7 +71,7 @@ struct MakeChatRoomView: View {
                         }
                     }
 
-                }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
+                }, label: "채팅방 생성", isFormValid: $isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
             .setTabBarVisibility(isHidden: true)
@@ -101,8 +103,13 @@ struct MakeChatRoomView: View {
                     .edgesIgnoringSafeArea(.bottom)
             }
             .onAppear {
-                chatViewModelWrapper.makeChatViewModel.isFormValid = false
+                isFormValid = false
                 chatViewModelWrapper.makeChatViewModel.validateForm()
+                chatViewModelWrapper.makeChatViewModel.isFormValid = false
+                Log.debug("????/:\(chatViewModelWrapper.makeChatViewModel.isFormValid)")
+            }
+            .onChange(of: chatViewModelWrapper.makeChatViewModel.isFormValid) { newValue in
+                isFormValid = newValue
             }
 
             if showPopUpView {
