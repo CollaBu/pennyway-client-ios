@@ -5,7 +5,7 @@ import SwiftUI
 struct ChatCellView: View {
     @State private var selectedTab: Int = 1
     @State private var chatRoomName: String = "" // 수정 예정
-    @State private var isNavigateToMakeChatRoom = false
+    @State var isNavigateToMakeChatRoom = false
     @State private var isCheckMarkVisible = false // 체크 표시를 보여줄지 여부
     @State private var isPopUp = false // 채팅방 나가기 팝업 표시 여부
     @State private var selectedChatRoom: ChatRoomItemModel? = nil // 어떤 채팅방이 선택됐는지의 여부
@@ -47,7 +47,7 @@ struct ChatCellView: View {
                         searchChatContainer
                         Spacer()
                         // TODO: 추천 채팅일 경우엔 검색 api 호출 후 관련 리스트가 보이도록 해야 함
-                        //                        ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $viewModelWrapper.chatData, isMyChat: false)
+                        // ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $viewModelWrapper.chatData, isMyChat: false)
                     }
                 }
                 

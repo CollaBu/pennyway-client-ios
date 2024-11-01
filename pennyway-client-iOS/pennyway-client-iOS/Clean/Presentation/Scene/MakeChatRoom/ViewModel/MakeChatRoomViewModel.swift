@@ -1,4 +1,4 @@
-
+import Combine
 import Foundation
 import UIKit
 
@@ -7,7 +7,7 @@ import UIKit
 protocol MakeChatRoomViewModelInput {
     func validateForm()
     func uploadImage(image: UIImage)
-    func makeChatRoom()
+    func makeChatRoom(completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - MakeChatRoomViewModelOutput
@@ -25,7 +25,7 @@ protocol MakeChatRoomViewModel: MakeChatRoomViewModelInput, MakeChatRoomViewMode
 
 // MARK: - DefaultMakeChatRoomViewModel
 
-class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
+class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel, ObservableObject {
     @Published var isFormValid: Bool = false // 버튼 활성화 여부
     @Published var isDismissView: Bool = false // 뷰를 닫는 상태 여부
     @Published var isPrivate: Bool = false // 공개 범위 설정 상태
@@ -80,19 +80,17 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel {
     }
 
     /// 채팅방 생성 확정 요청
-    func makeChatRoom() {
+    func makeChatRoom(completion: @escaping (Bool) -> Void) {
         makeChatRoomUseCase.makeChatRoom(roomData: roomData.value) { [weak self] success in
-//            guard let self = self else {
-//                return
-//            }
-
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 if success {
                     Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 성공")
                     self?.isDismissView = true // 값이 변경되는지 확인
                     Log.debug("isDismissView = \(self?.isDismissView)")
+                    completion(true)
                 } else {
                     Log.debug("[MakeChatRoomViewModel]: 채팅방 생성 확정 실패")
+                    completion(false)
                 }
             }
         }

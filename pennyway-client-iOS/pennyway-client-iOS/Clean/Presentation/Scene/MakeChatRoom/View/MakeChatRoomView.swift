@@ -13,7 +13,6 @@ struct MakeChatRoomView: View {
     @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
 
     let titleCustomTextList: [String] = ["제목*"]
@@ -34,8 +33,6 @@ struct MakeChatRoomView: View {
                                 }
                                 chatViewModelWrapper.makeChatViewModel.roomData.value.title = newValue
                                 chatViewModelWrapper.makeChatViewModel.validateForm()
-                                Log.debug("title: \(roomTitle)")
-                                Log.debug("vmtitle: \(chatViewModelWrapper.makeChatViewModel.roomData.value.title)")
                             }
 
                         Spacer().frame(height: 23 * DynamicSizeFactor.factor())
@@ -63,7 +60,13 @@ struct MakeChatRoomView: View {
                     let chatRoomData = MakeChatRoomItemModel(title: roomTitle, description: content, password: password)
 
                     if chatViewModelWrapper.makeChatViewModel.isFormValid {
-                        chatViewModelWrapper.makeChatViewModel.makeChatRoom()
+                        chatViewModelWrapper.makeChatViewModel.makeChatRoom { success in
+                            if success {
+                                self.presentationMode.wrappedValue.dismiss()
+                            } else {
+                                Log.debug("[MakeChatRoomView] 현재 창 닫기는 로직 에러")
+                            }
+                        }
                     }
 
                 }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
@@ -96,16 +99,6 @@ struct MakeChatRoomView: View {
             }) {
                 ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                     .edgesIgnoringSafeArea(.bottom)
-            }
-            .onChange(of: chatViewModelWrapper.makeChatViewModel.isDismissView) { isDismissed in
-                Log.debug("onChange실행중")
-
-                if isDismissed {
-                    DispatchQueue.main.async {
-                        self.presentationMode.wrappedValue.dismiss() // 강제로 dismiss 호출
-                    }
-                    Log.debug("isDismissed")
-                }
             }
             .onAppear {
                 chatViewModelWrapper.makeChatViewModel.isFormValid = false
@@ -192,15 +185,7 @@ struct MakeChatRoomView: View {
                     .toggleStyle(CustomToggleStyle(hasAppeared: $isPrivate))
                     .onChange(of: isPrivate) { newValue in
                         chatViewModelWrapper.makeChatViewModel.isPrivate = newValue
-
-//                        if !newValue {
-//                            // 토글이 바뀔때마다 비밀번호를 초기화 시킴
-//                            chatViewModelWrapper.makeChatViewModel.roomData.value.password = ""
-//                            password = ""
-//                        }
                         chatViewModelWrapper.makeChatViewModel.validateForm() // 유효성 검사 호출
-                        Log.debug("isPrivate: \(isPrivate)")
-                        Log.debug("??:\(chatViewModelWrapper.makeChatViewModel.isPrivate)")
                     }
             }
             .padding(.horizontal, 20)
