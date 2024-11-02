@@ -1,4 +1,3 @@
-import Combine
 import SwiftUI
 
 // MARK: - MakeChatRoomView
@@ -13,7 +12,7 @@ struct MakeChatRoomView: View {
     @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State private var isFormValid: Bool = false //뷰모델에서 isFormValid를 받아와 뷰에서 사용하는 변수
+    @State private var isFormValid: Bool = false // 뷰모델에서 isFormValid를 받아와 뷰에서 사용하는 변수
 
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
 
