@@ -17,4 +17,3 @@ public struct SearchChatRoomRequestDto: Encodable {
         self.page = page
     }
 }
-

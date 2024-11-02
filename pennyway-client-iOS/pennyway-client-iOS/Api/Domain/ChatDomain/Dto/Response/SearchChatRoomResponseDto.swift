@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 // MARK: - SearchChatRoomResponseDto
 
 struct SearchChatRoomResponseDto: Codable {
@@ -17,11 +15,13 @@ struct SearchChatRoomResponseDto: Codable {
 }
 
 // MARK: - SearchChatRoomData
+
 struct SearchChatRoomData: Codable {
     let chatRooms: SearchChatRoomsContent
 }
 
 // MARK: - SearchChatRoomsContent
+
 struct SearchChatRoomsContent: Codable {
     let contents: [SearchChatRoomContent]
     let currentPageNumber: Int32
@@ -31,7 +31,7 @@ struct SearchChatRoomsContent: Codable {
 }
 
 // MARK: - SearchChatRoomContent
+
 struct SearchChatRoomContent: Codable {
     let description: String
 }
-

@@ -1,4 +1,3 @@
-
 //
 //  ChatRouter.swift
 //  pennyway-client-iOS
@@ -13,10 +12,11 @@ enum ChatRouter: URLRequestConvertible {
     case getChatServer
     case makeChatRoom(dto: MakeChatRoomRequestDto)
     case searchChatRoom(dto: SearchChatRoomRequestDto)
+    case getChatRoom
 
     var method: HTTPMethod {
         switch self {
-        case .getChatServer, .searchChatRoom:
+        case .getChatServer, .getChatRoom, .searchChatRoom:
             return .get
         case .makeChatRoom:
             return .post
@@ -24,11 +24,6 @@ enum ChatRouter: URLRequestConvertible {
     }
 
     var baseURL: URL {
-//        switch self {
-//        case .getChatServer:
-//            return URL(string: API.BASE_URL)!
-//        }
-
         return URL(string: API.BASE_URL)!
     }
 
@@ -38,6 +33,8 @@ enum ChatRouter: URLRequestConvertible {
             return "v2/chat-rooms"
         case .getChatServer:
             return "v2/socket/chat"
+        case .getChatRoom:
+            return "v2/chat-rooms/me"
         }
     }
 
@@ -45,16 +42,16 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case let .makeChatRoom(dto):
             return try? dto.asDictionary()
-        case .getChatServer, .searchChatRoom:
+        case .getChatServer, .getChatRoom, .searchChatRoom:
             return [:]
         }
     }
 
     var queryParameters: Parameters? {
         switch self {
-        case .getChatServer, .makeChatRoom:
+        case .getChatServer, .makeChatRoom, .getChatRoom:
             return [:]
-        case .searchChatRoom(dto):
+        case let .searchChatRoom(dto):
             return try? dto.asDictionary()
         }
     }
@@ -67,8 +64,9 @@ enum ChatRouter: URLRequestConvertible {
         case .makeChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
         case .searchChatRoom:
-            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryParameters)
-        case .getChatServer:
+            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
+        case .getChatServer, .getChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method)
         }
         return request
