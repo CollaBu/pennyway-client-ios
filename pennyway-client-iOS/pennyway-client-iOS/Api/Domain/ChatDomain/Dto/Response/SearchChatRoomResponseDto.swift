@@ -13,25 +13,25 @@ import Foundation
 
 struct SearchChatRoomResponseDto: Codable {
     let code: String
-    let data: ChatRooms
+    let data: SearchChatRoomData
 }
 
-// MARK: - ChatRooms
-struct ChatRooms: Codable {
-    let chatRooms: ChatRoomsContent
+// MARK: - SearchChatRoomData
+struct SearchChatRoomData: Codable {
+    let chatRooms: SearchChatRoomsContent
 }
 
-// MARK: - ChatRoomsContent
-struct ChatRoomsContent: Codable {
-    let contents: [ChatRoomContent]
+// MARK: - SearchChatRoomsContent
+struct SearchChatRoomsContent: Codable {
+    let contents: [SearchChatRoomContent]
     let currentPageNumber: Int32
     let pageSize: Int32
     let numberOfElements: Int32
     let hasNext: Bool
 }
 
-// MARK: - ChatRoomContent
-struct ChatRoomContent: Codable {
+// MARK: - SearchChatRoomContent
+struct SearchChatRoomContent: Codable {
     let description: String
 }
 
