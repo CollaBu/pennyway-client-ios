@@ -23,15 +23,9 @@ struct SearchChatRoomData: Codable {
 // MARK: - SearchChatRoomsContent
 
 struct SearchChatRoomsContent: Codable {
-    let contents: [SearchChatRoomContent]
+    let contents: [ChatRoomDetail]
     let currentPageNumber: Int32
     let pageSize: Int32
     let numberOfElements: Int32
     let hasNext: Bool
-}
-
-// MARK: - SearchChatRoomContent
-
-struct SearchChatRoomContent: Codable {
-    let description: String
 }

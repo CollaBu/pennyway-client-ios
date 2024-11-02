@@ -5,7 +5,8 @@ import SwiftUI
 struct ChatRoomContent: View {
     @Binding var isPopUp: Bool // 채팅방 나가기 팝업 표시 여부
     @Binding var selectedChatRoom: ChatRoomItemModel? // 선택된 채팅방을 저장하기 위한 변수
-    @Binding var dummyChatRooms: [ChatRoomItemModel]
+    @Binding var dummyChatRooms: [ChatRoomItemModel]? // 내 채팅의 item을 표시하기 위한 항목
+    @Binding var searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
     var isMyChat: Bool // 내 채팅 여부
     
     var body: some View {
