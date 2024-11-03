@@ -134,10 +134,10 @@ struct ChatCellView: View {
                     // 추천채팅 탭이며 검색어가 2자 이상인 경우만 채팅 검색 api 호출
                     viewModelWrapper.getChatRoomViewModel.initSearch()
                     viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: chatRoomName)
-                    
+
                 } else {
                     // 내 채팅인 경우
-                    viewModelWrapper.searchQuery = chatRoomName // 엔터 키 입력 시 검색어 업데이트
+                    viewModelWrapper.searchQuery = chatRoomName
                 }
                 
             }, isSecureText: false, showSearchBtn: true)
@@ -147,6 +147,11 @@ struct ChatCellView: View {
                     }
                 }
             Spacer().frame(height: 23 * DynamicSizeFactor.factor())
+        }
+        .onAppear {
+            // 탭이 전환될 때마다 검색어를 초기화 시킴
+            viewModelWrapper.searchQuery = ""
+            chatRoomName = ""
         }
     }
     

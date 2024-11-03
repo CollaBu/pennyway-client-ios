@@ -28,20 +28,7 @@ struct ChatRoomContent: View {
                         ForEach(rooms, id: \.id) { chatRoom in
                             ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
                                 isPopUp = true
-//                                selectedChatRoom = chatRoom
-                            }
-                            )
-//                            .onAppear {
-//                                // 해당 index가 마지막 index라면 데이터 추가
-//                                guard let index = chatRoom.firstIndex(where: { $0.id == chatRoom.id }) else {
-//                                    return
-//                                }
-//                                if index == chatRoom.count - 1 {
-//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
-//                                        viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: <#T##String#>)
-//                                    }
-//                                }
-//                            }
+                            })
                         }
                     }
                 }
@@ -56,7 +43,6 @@ struct ChatRoomCell: View {
     @State private var loadedImage: UIImage? = nil
 
     let chatRoom: ChatRoomProtocol
-//    let searchChatRoom: SearchChatRoomItemModel
     let isMyChat: Bool
     let onDelete: () -> Void
     
