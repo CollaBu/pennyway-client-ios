@@ -86,8 +86,6 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
             return
         }
 
-        let target = abs(target.hashValue) // 절대값 정수로 변환
-
         searchChatRoomUseCase.execute(target: target, page: currentPageNumber) { [weak self] success, chatRooms in
             DispatchQueue.main.async {
                 if success {

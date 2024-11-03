@@ -6,11 +6,11 @@
 //
 
 public struct SearchChatRoomRequestDto: Encodable {
-    let target: Int
+    let target: String
     let page: Int
 
     public init(
-        target: Int,
+        target: String,
         page: Int
     ) {
         self.target = target

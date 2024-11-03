@@ -8,6 +8,6 @@
 import Foundation
 
 struct SearchChatRoom: Equatable {    
-    let target: Int
+    let target: String
     let page: Int
 }

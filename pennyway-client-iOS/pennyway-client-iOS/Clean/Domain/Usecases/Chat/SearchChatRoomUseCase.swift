@@ -11,7 +11,7 @@ import Foundation
 
 /// 채팅방 검색 usecase를 정의하는 프로토콜
 protocol SearchChatRoomUseCase {
-    func execute(target: Int, page: Int, completion: @escaping (Bool, [SearchChatRoomItemModel]?) -> Void)
+    func execute(target: String, page: Int, completion: @escaping (Bool, [SearchChatRoomItemModel]?) -> Void)
 }
 
 // MARK: - DefaultSearchChatRoomUseCase
@@ -23,7 +23,7 @@ class DefaultSearchChatRoomUseCase: SearchChatRoomUseCase {
         self.searchChatRoomRepository = searchChatRoomRepository
     }
 
-    func execute(target: Int, page: Int, completion: @escaping (Bool, [SearchChatRoomItemModel]?) -> Void) {
+    func execute(target: String, page: Int, completion: @escaping (Bool, [SearchChatRoomItemModel]?) -> Void) {
         let searchModel = SearchChatRoom(target: target, page: page)
 
         searchChatRoomRepository.execute(model: searchModel) { result in
