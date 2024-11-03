@@ -8,16 +8,29 @@ struct ChatRoomContent: View {
     @Binding var dummyChatRooms: [ChatRoomItemModel]? // 내 채팅의 item을 표시하기 위한 항목
     @Binding var searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
     var isMyChat: Bool // 내 채팅 여부
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 12) {
-                ForEach(dummyChatRooms, id: \.id) { chatRoom in
-                    ChatRoomCell(chatRoom: chatRoom, isMyChat: isMyChat, onDelete: {
-                        isPopUp = true
-                        selectedChatRoom = chatRoom
-                    })
-                    .transition(.move(edge: .trailing).combined(with: .opacity))
+                if isMyChat {
+                    if let rooms = dummyChatRooms {
+                        ForEach(rooms, id: \.id) { chatRoom in
+                            ChatRoomCell(chatRoom: chatRoom, isMyChat: true, onDelete: {
+                                isPopUp = true
+                                selectedChatRoom = chatRoom
+                            })
+                            .transition(.move(edge: .trailing).combined(with: .opacity))
+                        }
+                    }
+                } else {
+                    if let rooms = searchChatRooms {
+                        ForEach(rooms, id: \.id) { chatRoom in
+                            ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
+                                isPopUp = true
+//                                selectedChatRoom = chatRoom
+                            })
+                        }
+                    }
                 }
             }
         }
@@ -29,7 +42,8 @@ struct ChatRoomContent: View {
 struct ChatRoomCell: View {
     @State private var loadedImage: UIImage? = nil
 
-    let chatRoom: ChatRoomItemModel
+    let chatRoom: ChatRoomProtocol
+//    let searchChatRoom: SearchChatRoomItemModel
     let isMyChat: Bool
     let onDelete: () -> Void
     

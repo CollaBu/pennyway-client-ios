@@ -34,7 +34,8 @@ class DefaultSearchChatRoomUseCase: SearchChatRoomUseCase {
                     return SearchChatRoomItemModel(
                         id: chatRoom.id,
                         title: chatRoom.title,
-                        description: chatRoom.description,
+                        description: chatRoom.description, 
+                        isPrivate: chatRoom.isPrivate,
                         backgroundImageUrl: chatRoom.background_image_url,
                         participantCount: chatRoom.participantCount)
                 }

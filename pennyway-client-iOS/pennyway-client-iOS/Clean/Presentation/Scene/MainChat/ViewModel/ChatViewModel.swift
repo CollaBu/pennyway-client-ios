@@ -96,7 +96,8 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
                             return SearchChatRoomItemModel(
                                 id: chatRoomDetail.id,
                                 title: chatRoomDetail.title,
-                                description: chatRoomDetail.description,
+                                description: chatRoomDetail.description, 
+                                isPrivate: chatRoomDetail.isPrivate,
                                 backgroundImageUrl: chatRoomDetail.backgroundImageUrl,
                                 participantCount: chatRoomDetail.participantCount
                             )

@@ -41,13 +41,13 @@ struct ChatCellView: View {
                             Spacer()
                         } else {
                             searchChatContainer
-                            ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: .constant(viewModelWrapper.filteredChatData), searchChatRooms: nil, isMyChat: true)
+                            ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: .constant(viewModelWrapper.filteredChatData), searchChatRooms: .constant(nil), isMyChat: true)
                         }
                     } else {
                         searchChatContainer
                         Spacer()
                         // TODO: 추천 채팅일 경우엔 검색 api 호출 후 관련 리스트가 보이도록 해야 함
-                        ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, searchChatRooms: $viewModelWrapper.searchChatData, isMyChat: false)
+                        ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: .constant(viewModelWrapper.searchChatData), isMyChat: false)
                     }
                 }
                 

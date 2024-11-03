@@ -373,6 +373,7 @@
 		D85E46522CD60ED300715169 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D85E464F2CD60ED300715169 /* Secrets.xcconfig */; };
 		D85E46542CD6168100715169 /* SearchChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E46532CD6168000715169 /* SearchChatRoom.swift */; };
 		D85E46582CD6266800715169 /* SearchChatRoomItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E46572CD6266800715169 /* SearchChatRoomItemModel.swift */; };
+		D85E465A2CD7727200715169 /* ChatRoomProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E46592CD7727200715169 /* ChatRoomProtocol.swift */; };
 		D85FC58E2CCC029B0068553A /* SearchChatRoomRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85FC58D2CCC029B0068553A /* SearchChatRoomRequestDto.swift */; };
 		D85FC5902CCC03920068553A /* SearchChatRoomResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85FC58F2CCC03920068553A /* SearchChatRoomResponseDto.swift */; };
 		D86773042C76C90700C68728 /* PrivatePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86773032C76C90700C68728 /* PrivatePolicy.swift */; };
@@ -802,6 +803,7 @@
 		D85E464F2CD60ED300715169 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		D85E46532CD6168000715169 /* SearchChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchChatRoom.swift; sourceTree = "<group>"; };
 		D85E46572CD6266800715169 /* SearchChatRoomItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchChatRoomItemModel.swift; sourceTree = "<group>"; };
+		D85E46592CD7727200715169 /* ChatRoomProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomProtocol.swift; sourceTree = "<group>"; };
 		D85FC58D2CCC029B0068553A /* SearchChatRoomRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchChatRoomRequestDto.swift; sourceTree = "<group>"; };
 		D85FC58F2CCC03920068553A /* SearchChatRoomResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchChatRoomResponseDto.swift; sourceTree = "<group>"; };
 		D86773032C76C90700C68728 /* PrivatePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatePolicy.swift; sourceTree = "<group>"; };
@@ -988,6 +990,7 @@
 			isa = PBXGroup;
 			children = (
 				4A0BC6A62BF5F4E10036D900 /* StringAttributeProtocol.swift */,
+				D85E46592CD7727200715169 /* ChatRoomProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -3121,6 +3124,7 @@
 				4A12FF0D2C9C4B9A00DE10BC /* AppDIContainer.swift in Sources */,
 				4A8BDEE32C6246B900D21424 /* DiffAmountColorUtil.swift in Sources */,
 				4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */,
+				D85E465A2CD7727200715169 /* ChatRoomProtocol.swift in Sources */,
 				4AE9B3402CB6E5770044D3E1 /* ChatSideMenuView.swift in Sources */,
 				4A45A1AF2CCBF9CA00D47F10 /* (null) in Sources */,
 				D8457BBE2CB6A4B8002540B2 /* ChatRoomContent.swift in Sources */,
