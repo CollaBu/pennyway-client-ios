@@ -21,7 +21,7 @@ class DefaultSearchChatRoomRepository: SearchChatRoomRepository {
                         let response = try JSONDecoder().decode(SearchChatRoomResponseDto.self, from: responseData)
 
                         // 응답 DTO를 Model로 매핑
-                        let chatRooms = response.data.chatRooms.contents.map { chatRoomDetail in
+                        let chatRooms = response.data.chatRoom.contents.map { chatRoomDetail in
                             let completeBackgroundImageUrl = self.createFullURL(with: self.cdnUrl, pathComponent: chatRoomDetail.backgroundImageUrl)
 
                             return ChatRoom(

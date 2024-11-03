@@ -8,6 +8,7 @@ struct ChatRoomContent: View {
     @Binding var dummyChatRooms: [ChatRoomItemModel]? // 내 채팅의 item을 표시하기 위한 항목
     @Binding var searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
     var isMyChat: Bool // 내 채팅 여부
+//    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     var body: some View {
         ScrollView {
@@ -28,7 +29,19 @@ struct ChatRoomContent: View {
                             ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
                                 isPopUp = true
 //                                selectedChatRoom = chatRoom
-                            })
+                            }
+                            )
+//                            .onAppear {
+//                                // 해당 index가 마지막 index라면 데이터 추가
+//                                guard let index = chatRoom.firstIndex(where: { $0.id == chatRoom.id }) else {
+//                                    return
+//                                }
+//                                if index == chatRoom.count - 1 {
+//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 임시 버퍼링
+//                                        viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: <#T##String#>)
+//                                    }
+//                                }
+//                            }
                         }
                     }
                 }

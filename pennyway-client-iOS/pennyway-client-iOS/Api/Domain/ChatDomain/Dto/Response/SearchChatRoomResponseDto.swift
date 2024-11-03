@@ -17,7 +17,7 @@ struct SearchChatRoomResponseDto: Codable {
 // MARK: - SearchChatRoomData
 
 struct SearchChatRoomData: Codable {
-    let chatRooms: SearchChatRoomsContent
+    let chatRoom: SearchChatRoomsContent
 }
 
 // MARK: - SearchChatRoomsContent
