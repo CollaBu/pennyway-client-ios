@@ -19,18 +19,7 @@ class DefaultGetChatRoomRepository: GetChatRoomRepository {
                         let response = try JSONDecoder().decode(GetChatRoomResponseDto.self, from: responseData)
                         // 응답 DTO를 Model로 매핑
                         let chatRooms = response.data.chatRooms.map { chatRoomDetail in
-                            let completeBackgroundImageUrl = self.createFullURL(with: self.cdnUrl, pathComponent: chatRoomDetail.backgroundImageUrl)
-
-                            return ChatRoom(
-                                id: chatRoomDetail.id,
-                                title: chatRoomDetail.title,
-                                description: chatRoomDetail.description,
-                                background_image_url: completeBackgroundImageUrl,
-                                isPrivate: chatRoomDetail.isPrivate,
-                                isAdmin: chatRoomDetail.isAdmin,
-                                participantCount: chatRoomDetail.participantCount,
-                                createdAt: chatRoomDetail.createdAt ?? ""
-                            )
+                            return ChatRoomDetail.toChatRoom(dto: chatRoomDetail, cdnUrl: self.cdnUrl)
                         }
 
                         Log.debug("[DefaultGetChatRoomRepository]: 내 채팅 조회 api 성공: \(response)")
@@ -49,13 +38,5 @@ class DefaultGetChatRoomRepository: GetChatRoomRepository {
                 completion(.failure(error))
             }
         }
-    }
-
-    /// 기본 URL과 pathComponent를 결합하는 함수
-    private func createFullURL(with cdnUrl: String, pathComponent: String) -> String {
-        guard let url = URL(string: cdnUrl)?.appendingPathComponent(pathComponent) else {
-            return cdnUrl // 기본 URL 반환 (잘못된 경우)
-        }
-        return url.absoluteString
     }
 }

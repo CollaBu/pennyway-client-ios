@@ -49,8 +49,7 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
         self.getChatRoomUseCase = getChatRoomUseCase
         self.searchChatRoomUseCase = searchChatRoomUseCase
 
-        roomData = Observable([ChatRoomItemModel(id: 0, title: "", description: "", backgroundImageUrl: "", isPrivate: false, isAdmin: false, participantCount: 0)])
-
+        roomData = Observable([])
         searchRoomData = Observable([])
     }
 
