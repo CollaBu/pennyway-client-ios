@@ -29,8 +29,9 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
     let isAdmin: Bool
     let participantCount: Int32
     let createdAt: String?
+    let unreadMessageCount: Int64
 
-    public init(id: Int64, title: String, description: String, backgroundImageUrl: String, isPrivate: Bool, isAdmin: Bool, participantCount: Int32, createdAt: String?) {
+    public init(id: Int64, title: String, description: String, backgroundImageUrl: String, isPrivate: Bool, isAdmin: Bool, participantCount: Int32, createdAt: String?, unreadMessageCount: Int64) {
         self.id = id
         self.title = title
         self.description = description
@@ -39,6 +40,7 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
         self.isAdmin = isAdmin
         self.participantCount = participantCount
         self.createdAt = createdAt
+        self.unreadMessageCount = unreadMessageCount
     }
 
     /// 채팅방 조회 응답 DTO를 Model 타입으로 변환
@@ -49,6 +51,6 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
         // 이미지 url을 http형식으로 변환
         let completeBackgroundImageUrl = createFullURL(with: cdnUrl, pathComponent: dto.backgroundImageUrl)
 
-        return ChatRoom(id: dto.id, title: dto.title, description: dto.description, background_image_url: completeBackgroundImageUrl, isPrivate: dto.isPrivate, isAdmin: dto.isAdmin, participantCount: dto.participantCount, createdAt: dto.createdAt ?? "")
+        return ChatRoom(id: dto.id, title: dto.title, description: dto.description, background_image_url: completeBackgroundImageUrl, isPrivate: dto.isPrivate, isAdmin: dto.isAdmin, participantCount: dto.participantCount, createdAt: dto.createdAt ?? "", unreadMessageCount: dto.unreadMessageCount)
     }
 }
