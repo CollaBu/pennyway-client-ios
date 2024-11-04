@@ -12,7 +12,7 @@ struct ChatRoomContent: View {
         ScrollView {
             VStack(spacing: 12) {
                 ForEach(dummyChatRooms, id: \.id) { chatRoom in
-                    NavigationLink(destination: ChatView(chatRoom: chatRoom)) {
+                    NavigationLink(destination: ChatRoomView(chatRoom: chatRoom)) {
                         ChatRoomCell(chatRoom: chatRoom, isMyChat: isMyChat, onDelete: {
                             isPopUp = true
                             selectedChatRoom = chatRoom

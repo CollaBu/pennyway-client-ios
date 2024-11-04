@@ -48,6 +48,11 @@ struct ChatSideMenuView: View {
                     }
                 }
         )
+        //TODO: 유저 셀 클릭하면 상세 정보 뷰 나오도록
+        //        .fullScreenCover(isPresented: $showChatUserInfo) {
+                //                    ChatUserInfoView()
+                //                        .ignoresSafeArea()
+                //                }
     }
 }
 

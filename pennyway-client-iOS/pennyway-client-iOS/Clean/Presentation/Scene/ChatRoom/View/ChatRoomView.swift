@@ -1,5 +1,5 @@
 //
-//  ChatView.swift
+//  ChatRoomView.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 10/8/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - ChatView
+// MARK: - ChatRoomView
 
-struct ChatView: View {
+struct ChatRoomView: View {
     @StateObject private var keyboardManager = KeyboardManager()
     @State private var isSideMenuPresented = false
     @EnvironmentObject var viewStateManager: ViewStateManager

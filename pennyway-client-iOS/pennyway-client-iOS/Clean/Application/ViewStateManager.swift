@@ -39,7 +39,7 @@ class ViewStateManager: ObservableObject {
                 currentViewType = .activeNonChat
                 Log.info("[ViewStateManager] View state: activeNonChat")
             }
-        } else if view is ChatView {
+        } else if view is ChatRoomView {
             currentViewType = .activeChatRoom
             Log.info("[ViewStateManager] View state: activeChatRoom")
         } else {

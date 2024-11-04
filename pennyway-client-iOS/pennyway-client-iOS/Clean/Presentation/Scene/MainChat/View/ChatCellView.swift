@@ -212,6 +212,7 @@ final class ChatViewModelWrapper: ObservableObject {
     
     var makeChatViewModel: any MakeChatRoomViewModel
     var getChatRoomViewModel: any GetChatRoomViewModel
+    var chatRoomViewModel: any ChatRoomViewModel
     
     var filteredChatData: [ChatRoomItemModel] {
         if searchQuery.isEmpty {
