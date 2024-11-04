@@ -7,13 +7,15 @@
 
 import Foundation
 
+// MARK: - ChatRoomDetailItemModel
+
 struct ChatRoomDetailItemModel {
     var myInfo: ChatUserInfoItemModel
     var recentParticipants: [ChatUserInfoItemModel]
     var otherParticipantIds: [Int64]
     var recentMessages: [MessageItemModel]
-    
-    static func from(model: ChatRoomDetailInfo) -> ChatRoomDetailItemModel{
+
+    static func from(model: ChatRoomDetailInfo) -> ChatRoomDetailItemModel {
         return ChatRoomDetailItemModel(
             myInfo: ChatUserInfoItemModel(
                 id: model.myInfo.id,
@@ -47,7 +49,7 @@ struct ChatRoomDetailItemModel {
     }
 }
 
-// MARK: - ChatUserInfo
+// MARK: - ChatUserInfoItemModel
 
 struct ChatUserInfoItemModel: Equatable {
     var id: Int64
@@ -57,7 +59,7 @@ struct ChatUserInfoItemModel: Equatable {
     var createdAt: String
 }
 
-// MARK: - Message
+// MARK: - MessageItemModel
 
 struct MessageItemModel: Equatable {
     var chatRoomId: Int64

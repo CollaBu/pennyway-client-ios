@@ -7,47 +7,49 @@
 
 import Foundation
 
-
 struct GetChatRoomDetailResponseDto: Codable {
     let code: String
-    let data: GetChatRoomDetail
+    let data: GetChatRoom
 
-    struct GetChatRoomDetail: Codable {
-        let myInfo: GetChatUserInfo
-        let recentParticipants: [GetChatUserInfo]
-        let otherParticipantIds: [Int64]
-        let recentMessages: [GetMessage]
-        
+    struct GetChatRoom: Codable {
+        let chatRoom: GetChatRoomDetail
 
-        struct GetChatUserInfo: Codable {
-            let id: Int64
-            let name: String
-            let role: Role
-            let notifyEnabled: Bool
-            let createdAt: String
-        }
-        
-        struct GetMessage: Codable {
-            let chatRoomId: Int64
-            let chatId: Int64
-            let content: String
-            let contentType: ContentType
-            let categoryType: CategoryType
-            let createdAt: String
-            let senderId: Int64
+        struct GetChatRoomDetail: Codable {
+            let myInfo: GetChatUserInfo
+            let recentParticipants: [GetChatUserInfo]
+            let otherParticipantIds: [Int64]
+            let recentMessages: [GetMessage]
+
+            struct GetChatUserInfo: Codable {
+                let id: Int64
+                let name: String
+                let role: Role
+                let notifyEnabled: Bool
+                let createdAt: String
+            }
+
+            struct GetMessage: Codable {
+                let chatRoomId: Int64
+                let chatId: Int64
+                let content: String
+                let contentType: ContentType
+                let categoryType: CategoryType
+                let createdAt: String
+                let senderId: Int64
+            }
         }
     }
-    
+
     static func to(dto: GetChatRoomDetailResponseDto) -> ChatRoomDetailInfo {
         return ChatRoomDetailInfo(
             myInfo: ChatUserInfo(
-                id: dto.data.myInfo.id,
-                name: dto.data.myInfo.name,
-                role: dto.data.myInfo.role,
-                notifyEnabled: dto.data.myInfo.notifyEnabled,
-                createdAt: dto.data.myInfo.createdAt
+                id: dto.data.chatRoom.myInfo.id,
+                name: dto.data.chatRoom.myInfo.name,
+                role: dto.data.chatRoom.myInfo.role,
+                notifyEnabled: dto.data.chatRoom.myInfo.notifyEnabled,
+                createdAt: dto.data.chatRoom.myInfo.createdAt
             ),
-            recentParticipants: dto.data.recentParticipants.map {
+            recentParticipants: dto.data.chatRoom.recentParticipants.map {
                 ChatUserInfo(
                     id: $0.id,
                     name: $0.name,
@@ -56,8 +58,8 @@ struct GetChatRoomDetailResponseDto: Codable {
                     createdAt: $0.createdAt
                 )
             },
-            otherParticipantIds: dto.data.otherParticipantIds,
-            recentMessages: dto.data.recentMessages.map {
+            otherParticipantIds: dto.data.chatRoom.otherParticipantIds,
+            recentMessages: dto.data.chatRoom.recentMessages.map {
                 Message(
                     chatRoomId: $0.chatRoomId,
                     chatId: $0.chatId,

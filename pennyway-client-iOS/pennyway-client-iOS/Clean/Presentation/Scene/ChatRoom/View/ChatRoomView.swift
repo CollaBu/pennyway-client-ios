@@ -13,6 +13,8 @@ struct ChatRoomView: View {
     @StateObject private var keyboardManager = KeyboardManager()
     @State private var isSideMenuPresented = false
     @EnvironmentObject var viewStateManager: ViewStateManager
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
+    
     var chatRoom: ChatRoomItemModel
 
     var body: some View {
@@ -70,6 +72,7 @@ struct ChatRoomView: View {
             )
             .onAppear {
                 viewStateManager.setCurrentView(self)
+                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
             }
         }
     }
@@ -79,22 +82,19 @@ struct ChatRoomView: View {
 
 final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
-  
-  
+
     var chatRoomViewModel: any ChatRoomViewModel
-    
-   
+
     init(chatRoomViewModel: any ChatRoomViewModel) {
         self.chatRoomViewModel = chatRoomViewModel
-        
+
         roomDetailData = chatRoomViewModel.roomDetailData.value
-        
+
         chatRoomViewModel.roomDetailData.observe(on: self) { [weak self] newData in
             self?.roomDetailData = newData
         }
     }
 }
-
 
 let mockChatRoom = ChatRoom(
     id: 1,

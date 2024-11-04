@@ -37,9 +37,9 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     func getChatRoomDetail(chatRoomId: Int64) {
         chatRoomUseCase.getChatRoomDetail(chatRoomId: chatRoomId) { [weak self] result in
             switch result {
-            case .success(let chatRoomDetail):
+            case let .success(chatRoomDetail):
                 self?.roomDetailData.value = ChatRoomDetailItemModel.from(model: chatRoomDetail)
-            case .failure(let error):
+            case let .failure(error):
                 Log.error("채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
             }
         }

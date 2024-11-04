@@ -9,16 +9,20 @@ import Foundation
 
 class DefaultChatRoomRepository: ChatRoomRepository {
     func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void) {
-        
         ChatRoomAlamofire.shared.getChatRoomDetail(chatRoomId) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
+                    if let responseString = String(data: responseData, encoding: .utf8) {
+                        Log.debug("[DefaultChatRoomRepository]: 채팅 상세 정보 조회 api 응답: \(responseString)")
+                    }
                     do {
                         let response = try JSONDecoder().decode(GetChatRoomDetailResponseDto.self, from: responseData)
-                       
+
+                        if let responseString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("[DefaultChatRoomRepository]: 채팅 상세 정보 조회 api 응답: \(responseString)")
+                        }
                         let chatRoomInfo = GetChatRoomDetailResponseDto.to(dto: response)
-                        
 
                         Log.debug("[DefaultChatRoomRepository]: 채팅 상세 정보 조회 api 성공: \(response)")
                         completion(.success(chatRoomInfo))
