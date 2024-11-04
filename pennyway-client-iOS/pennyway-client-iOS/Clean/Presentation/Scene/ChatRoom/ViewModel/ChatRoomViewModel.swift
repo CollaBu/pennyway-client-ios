@@ -6,39 +6,36 @@
 //
 
 import Foundation
-// MARK: - GetChatRoomViewModelInput
+
+// MARK: - ChatRoomViewModelInput
 
 protocol ChatRoomViewModelInput {
     func getChatRoomDetail()
 }
 
-// MARK: - GetChatRoomViewModelOutput
+// MARK: - ChatRoomViewModelOutput
 
 protocol ChatRoomViewModelOutput {
     var roomDetailData: Observable<[ChatRoomDetailItemModel]> { get set }
 }
 
-// MARK: - GetChatRoomViewModel
+// MARK: - ChatRoomViewModel
 
 protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 
-// MARK: - DefaultGetChatRoomViewModel
+// MARK: - DefaultChatRoomViewModel
 
 class DefaultChatRoomViewModel: ChatRoomViewModel {
-    
-    
-    func getChatRoomDetail() {
-        
-    }
-    
-    var roomDetailData: Observable<[ChatRoomDetailItemModel]>
-    
-//    @Published var roomData: Observable<[ChatRoomItemModel]>
-//
+    var roomDetailData: Observable<[ChatRoomDetailItemModel]> = Observable([])
+
     private let chatRoomUseCase: ChatRoomUseCase
-//
-//    init(getChatRoomUseCase: GetChatRoomUseCase) {
-//        self.getChatRoomUseCase = getChatRoomUseCase
+
+    init(chatRoomUseCase: ChatRoomUseCase) {
+        self.chatRoomUseCase = chatRoomUseCase
+    }
+
+    func getChatRoomDetail() {}
+
 //
 //        roomData = Observable([ChatRoomItemModel(id: 0, title: "", description: "", backgroundImageUrl: "", isPrivate: false, isAdmin: false, participantCount: 0)])
 //    }

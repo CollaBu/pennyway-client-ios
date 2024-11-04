@@ -8,9 +8,5 @@
 import Foundation
 
 class DefaultChatRoomRepository: ChatRoomRepository {
-  
-    func getChatRoomDetail(completion: @escaping (Result<[ChatRoomDetailInfo], any Error>) -> Void) {
-        
-    }
-
+    func getChatRoomDetail(completion _: @escaping (Result<[ChatRoomDetailInfo], any Error>) -> Void) {}
 }

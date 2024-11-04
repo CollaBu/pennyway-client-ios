@@ -2,7 +2,7 @@
 //  ChatAlamofire.swift
 //  pennyway-client-iOS
 //
-//  Created by 아우신얀 on 10/22/24.
+//  Created by 최희진, 아우신얀 on 10/22/24.
 //
 
 import Alamofire

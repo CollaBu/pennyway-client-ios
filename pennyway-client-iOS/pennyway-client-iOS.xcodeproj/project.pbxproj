@@ -319,6 +319,8 @@
 		4AF3A2F92CD932DA0099967F /* ChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A2F82CD932DA0099967F /* ChatRoomUseCase.swift */; };
 		4AF3A2FB2CD934560099967F /* ChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A2FA2CD934560099967F /* ChatRoomRepository.swift */; };
 		4AF3A2FD2CD934D00099967F /* DefaultChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A2FC2CD934D00099967F /* DefaultChatRoomRepository.swift */; };
+		4AF3A2FF2CD9379F0099967F /* ChatRoomAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */; };
+		4AF3A3022CD938310099967F /* ChatRoomRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A3012CD938310099967F /* ChatRoomRouter.swift */; };
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
 		4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */; };
 		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
@@ -749,6 +751,8 @@
 		4AF3A2F82CD932DA0099967F /* ChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomUseCase.swift; sourceTree = "<group>"; };
 		4AF3A2FA2CD934560099967F /* ChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRepository.swift; sourceTree = "<group>"; };
 		4AF3A2FC2CD934D00099967F /* DefaultChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatRoomRepository.swift; sourceTree = "<group>"; };
+		4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomAlamofire.swift; sourceTree = "<group>"; };
+		4AF3A3012CD938310099967F /* ChatRoomRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRouter.swift; sourceTree = "<group>"; };
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
@@ -2480,6 +2484,7 @@
 			isa = PBXGroup;
 			children = (
 				D80C68622CC8023400928921 /* ChatRouter.swift */,
+				4AF3A3012CD938310099967F /* ChatRoomRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -2488,6 +2493,7 @@
 			isa = PBXGroup;
 			children = (
 				D80C68602CC8022A00928921 /* ChatAlamofire.swift */,
+				4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */,
 			);
 			path = Alamofire;
 			sourceTree = "<group>";
@@ -3044,6 +3050,7 @@
 				D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */,
 				4A0FFBFB2BCDA74000EFEC56 /* EncodableExtension.swift in Sources */,
 				D8DCCFAB2CBE9C2800550A8B /* ChatPhotoActionsPopUp.swift in Sources */,
+				4AF3A2FF2CD9379F0099967F /* ChatRoomAlamofire.swift in Sources */,
 				4A12FF132C9C4BCF00DE10BC /* AppFlowCoordinator.swift in Sources */,
 				4A8571422BC70E570082CE47 /* LinkOAuthToAccountViewModel.swift in Sources */,
 				4A2882172C65178400AE50C7 /* UploadProfileImageRequestDto.swift in Sources */,
@@ -3182,6 +3189,7 @@
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
+				4AF3A3022CD938310099967F /* ChatRoomRouter.swift in Sources */,
 				D8180C042BE5081F00F837FB /* FindIdContentView.swift in Sources */,
 				4A28820C2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift in Sources */,
 				4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */,

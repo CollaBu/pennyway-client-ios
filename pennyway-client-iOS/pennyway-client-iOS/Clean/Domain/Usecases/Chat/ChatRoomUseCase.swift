@@ -7,23 +7,22 @@
 
 import Foundation
 
-// MARK: - LoginUseCase
+// MARK: - ChatRoomUseCase
 
 protocol ChatRoomUseCase {
     func getChatRoomDetail(chatRoodId: Int64, completion: @escaping (Result<ChatRoomDetailItemModel, Error>) -> Void)
-
 }
 
-// MARK: - DefaultLoginUseCase
+// MARK: - DefaultChatRoomUseCase
 
 class DefaultChatRoomUseCase: ChatRoomUseCase {
     private let repository: ChatRoomRepository
-    
+
     init(repository: ChatRoomRepository) {
         self.repository = repository
     }
-    
-    func getChatRoomDetail(chatRoodId: Int64, completion: @escaping (Result<ChatRoomDetailItemModel, Error>) -> Void) {
+
+    func getChatRoomDetail(chatRoodId _: Int64, completion _: @escaping (Result<ChatRoomDetailItemModel, Error>) -> Void) {
 //        repository.getChatRoomDetail(chatRoodId: chatRoodId) { [weak self] result in
 //            switch result {
 //            case .success:

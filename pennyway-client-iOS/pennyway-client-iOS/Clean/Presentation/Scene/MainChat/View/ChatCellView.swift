@@ -223,9 +223,10 @@ final class ChatViewModelWrapper: ObservableObject {
         }
     }
     
-    init(makeChatViewModel: any MakeChatRoomViewModel, getChatRoomViewModel: any GetChatRoomViewModel) {
+    init(makeChatViewModel: any MakeChatRoomViewModel, getChatRoomViewModel: any GetChatRoomViewModel, chatRoomViewModel: any ChatRoomViewModel) {
         self.makeChatViewModel = makeChatViewModel
         self.getChatRoomViewModel = getChatRoomViewModel
+        self.chatRoomViewModel = chatRoomViewModel
         
         chatData = getChatRoomViewModel.roomData.value
         

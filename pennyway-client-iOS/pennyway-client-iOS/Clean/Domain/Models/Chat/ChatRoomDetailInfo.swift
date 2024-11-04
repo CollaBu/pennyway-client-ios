@@ -7,12 +7,16 @@
 
 import Foundation
 
+// MARK: - ChatRoomDetailInfo
+
 struct ChatRoomDetailInfo: Equatable {
     let myInfo: ChatUserInfo
     let recentParticipants: [ChatUserInfo]
     let otherParticipantIds: [Int]
     let recentMessages: [Message]
 }
+
+// MARK: - ChatUserInfo
 
 struct ChatUserInfo: Equatable {
     let id: Int
@@ -21,6 +25,8 @@ struct ChatUserInfo: Equatable {
     let notifyEnabled: Bool
     let createdAt: String
 }
+
+// MARK: - Message
 
 struct Message: Equatable {
     let chatRoomId: Int
@@ -32,19 +38,25 @@ struct Message: Equatable {
     let senderId: Int
 }
 
-enum Role: String{
+// MARK: - Role
+
+enum Role: String {
     case admin = "ADMIN"
     case user = "MEMBER"
 }
 
-enum ContentType: String{
+// MARK: - ContentType
+
+enum ContentType: String {
     case text = "TEXT"
     case image = "IMAGE"
     case video = "VIDEO"
     case file = "FILE"
 }
 
-enum CategoryType: String{
+// MARK: - CategoryType
+
+enum CategoryType: String {
     case normal = "NORMAL"
     case important = "SYSTEM"
 }
