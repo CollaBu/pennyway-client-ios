@@ -13,6 +13,7 @@ struct ChatView: View {
     @StateObject private var keyboardManager = KeyboardManager()
     @State private var isSideMenuPresented = false
     @EnvironmentObject var viewStateManager: ViewStateManager
+    var chatRoom: ChatRoomItemModel
 
     var body: some View {
         ZStack {
@@ -26,7 +27,7 @@ struct ChatView: View {
                     .offset(y: -keyboardManager.keyboardHeight)
                     .animation(keyboardManager.keyboardHeight > 0 ? .easeOut(duration: 0.5) : nil, value: keyboardManager.keyboardHeight)
             }
-            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
+            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(chatRoom.title)")
             .background(Color("Ashblue02"))
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
@@ -72,10 +73,6 @@ struct ChatView: View {
             }
         }
     }
-}
-
-#Preview {
-    ChatView()
 }
 
 let mockChatRoom = ChatRoom(

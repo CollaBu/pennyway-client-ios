@@ -27,12 +27,12 @@ struct TemporaryView: View {
                 Text("Btn")
             })
             .setTabBarVisibility(isHidden: false)
-            NavigationLink(destination: ChatView(), isActive: $isNavigate) {}
-
-                .fullScreenCover(isPresented: $showChatUserInfo) {
-                    ChatUserInfoView()
-                        .ignoresSafeArea()
-                }
+//            NavigationLink(destination: ChatView(), isActive: $isNavigate) {}
+//
+//                .fullScreenCover(isPresented: $showChatUserInfo) {
+//                    ChatUserInfoView()
+//                        .ignoresSafeArea()
+//                }
         }
     }
 }
