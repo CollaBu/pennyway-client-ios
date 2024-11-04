@@ -12,14 +12,14 @@ import Foundation
 struct ChatRoomDetailInfo: Equatable {
     let myInfo: ChatUserInfo
     let recentParticipants: [ChatUserInfo]
-    let otherParticipantIds: [Int]
+    let otherParticipantIds: [Int64]
     let recentMessages: [Message]
 }
 
 // MARK: - ChatUserInfo
 
 struct ChatUserInfo: Equatable {
-    let id: Int
+    let id: Int64
     let name: String
     let role: Role
     let notifyEnabled: Bool
@@ -29,25 +29,25 @@ struct ChatUserInfo: Equatable {
 // MARK: - Message
 
 struct Message: Equatable {
-    let chatRoomId: Int
-    let chatId: Int
+    let chatRoomId: Int64
+    let chatId: Int64
     let content: String
     let contentType: ContentType
     let categoryType: CategoryType
     let createdAt: String
-    let senderId: Int
+    let senderId: Int64
 }
 
 // MARK: - Role
 
-enum Role: String {
+enum Role: String, Codable {
     case admin = "ADMIN"
     case user = "MEMBER"
 }
 
 // MARK: - ContentType
 
-enum ContentType: String {
+enum ContentType: String, Codable {
     case text = "TEXT"
     case image = "IMAGE"
     case video = "VIDEO"
@@ -56,7 +56,7 @@ enum ContentType: String {
 
 // MARK: - CategoryType
 
-enum CategoryType: String {
+enum CategoryType: String, Codable {
     case normal = "NORMAL"
     case important = "SYSTEM"
 }

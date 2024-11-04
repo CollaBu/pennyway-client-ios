@@ -23,6 +23,6 @@ class ChatRoomAlamofire {
     func getChatRoomDetail(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatRoomAlamofire - getChatRoomDetail() called \(chatRoomId)")
         
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.getChatRoomDetail, completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatRoomDetail(chatRoomId: chatRoomId), completion: completion)
     }
 }

@@ -76,4 +76,9 @@ final class ChatSceneDIContainer {
     private func makeChatViewModelWrapper() -> ChatViewModelWrapper {
         return ChatViewModelWrapper(makeChatViewModel: makeChatRoomViewModel(), getChatRoomViewModel: makeGetChatRoomViewModel(), chatRoomViewModel: makeChatRoomViewModel())
     }
+    
+    
+    private func makeChatRoomViewModelWrapper() -> ChatRoomViewModelWrapper {
+        return ChatRoomViewModelWrapper(chatRoomViewModel: makeChatRoomViewModel())
+    }
 }

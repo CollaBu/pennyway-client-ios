@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ChatRoomRepository {
-    func getChatRoomDetail(completion: @escaping (Result<[ChatRoomDetailInfo], any Error>) -> Void)
+    func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void)
 }

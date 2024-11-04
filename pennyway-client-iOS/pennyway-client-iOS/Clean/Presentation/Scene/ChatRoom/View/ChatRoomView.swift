@@ -75,6 +75,27 @@ struct ChatRoomView: View {
     }
 }
 
+// MARK: - ChatRoomViewModelWrapper
+
+final class ChatRoomViewModelWrapper: ObservableObject {
+    @Published var roomDetailData: ChatRoomDetailItemModel? = nil
+  
+  
+    var chatRoomViewModel: any ChatRoomViewModel
+    
+   
+    init(chatRoomViewModel: any ChatRoomViewModel) {
+        self.chatRoomViewModel = chatRoomViewModel
+        
+        roomDetailData = chatRoomViewModel.roomDetailData.value
+        
+        chatRoomViewModel.roomDetailData.observe(on: self) { [weak self] newData in
+            self?.roomDetailData = newData
+        }
+    }
+}
+
+
 let mockChatRoom = ChatRoom(
     id: 1,
     title: "SwiftUI Chat Room",

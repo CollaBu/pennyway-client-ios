@@ -321,6 +321,7 @@
 		4AF3A2FD2CD934D00099967F /* DefaultChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A2FC2CD934D00099967F /* DefaultChatRoomRepository.swift */; };
 		4AF3A2FF2CD9379F0099967F /* ChatRoomAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */; };
 		4AF3A3022CD938310099967F /* ChatRoomRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A3012CD938310099967F /* ChatRoomRouter.swift */; };
+		4AF3A3042CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */; };
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
 		4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */; };
 		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
@@ -753,6 +754,7 @@
 		4AF3A2FC2CD934D00099967F /* DefaultChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatRoomRepository.swift; sourceTree = "<group>"; };
 		4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomAlamofire.swift; sourceTree = "<group>"; };
 		4AF3A3012CD938310099967F /* ChatRoomRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRouter.swift; sourceTree = "<group>"; };
+		4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRoomDetailResponseDto.swift; sourceTree = "<group>"; };
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
@@ -2737,6 +2739,7 @@
 				D80C68912CC80BEA00928921 /* GetChatServerResponseDto.swift */,
 				D8DCCF942CBD903400550A8B /* MakeChatRoomResponseDto.swift */,
 				D89263272CD3AD080057AAD6 /* GetChatRoomResponseDto.swift */,
+				4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -3148,6 +3151,7 @@
 				4A863A072CB44D2800BA2F2F /* ChatMessage.swift in Sources */,
 				4AC320562C11D5AC00DDB4B6 /* TotalTargetAmountHeaderView.swift in Sources */,
 				4A45A1A92CCBF9B700D47F10 /* (null) in Sources */,
+				4AF3A3042CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift in Sources */,
 				D84348EC2CA6A4B300AC4777 /* DeleteUserViewModel.swift in Sources */,
 				4A69C14C2BE2DBAC00A27B82 /* AppViewModel.swift in Sources */,
 				4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */,
