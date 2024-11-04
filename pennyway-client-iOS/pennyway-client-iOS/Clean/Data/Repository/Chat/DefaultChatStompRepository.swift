@@ -95,7 +95,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         }
     }
     
-    // 가입한 채팅방 리스트 가져오기
+    /// 가입한 채팅방 리스트 가져오기
     private func getJoinedChatRooms() {
         ChatAlamofire.shared.getJoinedChatRooms(GetJoinedChatRoomsRequestDto(summary: "true")) { result in
             switch result {

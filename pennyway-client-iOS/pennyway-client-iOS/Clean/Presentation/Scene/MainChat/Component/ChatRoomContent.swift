@@ -11,7 +11,7 @@ struct ChatRoomContent: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 12) {
-                ForEach(dummyChatRooms, id: \.title) { chatRoom in
+                ForEach(dummyChatRooms, id: \.id) { chatRoom in
                     ChatRoomCell(chatRoom: chatRoom, isMyChat: isMyChat, onDelete: {
                         isPopUp = true
                         selectedChatRoom = chatRoom
@@ -19,7 +19,6 @@ struct ChatRoomContent: View {
                     .transition(.move(edge: .trailing).combined(with: .opacity))
                 }
             }
-            .padding(.horizontal, 20)
         }
     }
 }
@@ -135,6 +134,8 @@ struct ChatRoomCell: View {
                 }
             }
             .padding(.vertical, 8)
+            .padding(.horizontal, 20)
+
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
             .offset(x: offset)

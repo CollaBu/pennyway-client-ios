@@ -16,7 +16,7 @@ class DefaultGetChatRoomRepository: GetChatRoomRepository {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(MakeChatRoomResponseDto.self, from: responseData)
+                        let response = try JSONDecoder().decode(GetChatRoomResponseDto.self, from: responseData)
                         // 응답 DTO를 Model로 매핑
                         let chatRooms = response.data.chatRooms.map { chatRoomDetail in
                             let completeBackgroundImageUrl = self.createFullURL(with: self.cdnUrl, pathComponent: chatRoomDetail.backgroundImageUrl)

@@ -1,4 +1,3 @@
-import Combine
 import SwiftUI
 
 // MARK: - MakeChatRoomView
@@ -7,12 +6,13 @@ struct MakeChatRoomView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var roomTitle = "" // 채팅방 제목을 관리하는 함수
     @State var content = "" // 채팅방 설명을 관리하는 변수
-    @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
+    @State private var isPrivate: Bool = false // 토글 상태를 관리하는 변수
     @State var password = "" // 비밀번호 입력을 관리하는 변수
     @State private var showPopUpView = false // 사진 선택 팝업 표시여부를 관리하는 변수
     @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var isFormValid: Bool = false // 뷰모델에서 isFormValid를 받아와 뷰에서 사용하는 변수
 
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
 
@@ -61,10 +61,16 @@ struct MakeChatRoomView: View {
                     let chatRoomData = MakeChatRoomItemModel(title: roomTitle, description: content, password: password)
 
                     if chatViewModelWrapper.makeChatViewModel.isFormValid {
-                        chatViewModelWrapper.makeChatViewModel.makeChatRoom()
+                        chatViewModelWrapper.makeChatViewModel.makeChatRoom { success in
+                            if success {
+                                self.presentationMode.wrappedValue.dismiss()
+                            } else {
+                                Log.debug("[MakeChatRoomView] 현재 창 닫기는 로직 에러")
+                            }
+                        }
                     }
 
-                }, label: "채팅방 생성", isFormValid: $chatViewModelWrapper.makeChatViewModel.isFormValid)
+                }, label: "채팅방 생성", isFormValid: $isFormValid)
                     .padding(.bottom, 34 * DynamicSizeFactor.factor())
             }
             .setTabBarVisibility(isHidden: true)
@@ -95,13 +101,14 @@ struct MakeChatRoomView: View {
                 ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                     .edgesIgnoringSafeArea(.bottom)
             }
-            .onChange(of: chatViewModelWrapper.makeChatViewModel.isDismissView) { isDismissed in
-                Log.debug("onChange실행중")
-
-                if isDismissed {
-                    self.presentationMode.wrappedValue.dismiss()
-                    Log.debug("isDismissed")
-                }
+            .onAppear {
+                isFormValid = false
+                chatViewModelWrapper.makeChatViewModel.validateForm()
+                chatViewModelWrapper.makeChatViewModel.isFormValid = false
+                Log.debug("????/:\(chatViewModelWrapper.makeChatViewModel.isFormValid)")
+            }
+            .onChange(of: chatViewModelWrapper.makeChatViewModel.isFormValid) { newValue in
+                isFormValid = newValue
             }
 
             if showPopUpView {
@@ -180,12 +187,16 @@ struct MakeChatRoomView: View {
 
                 Spacer()
 
-                Toggle(isOn: $isPublic) {}
-                    .toggleStyle(CustomToggleStyle(hasAppeared: $isPublic))
+                Toggle(isOn: $isPrivate) {}
+                    .toggleStyle(CustomToggleStyle(hasAppeared: $isPrivate))
+                    .onChange(of: isPrivate) { newValue in
+                        chatViewModelWrapper.makeChatViewModel.isPrivate = newValue
+                        chatViewModelWrapper.makeChatViewModel.validateForm() // 유효성 검사 호출
+                    }
             }
             .padding(.horizontal, 20)
 
-            if isPublic {
+            if isPrivate {
                 Spacer().frame(height: 1)
 
                 CustomInputView(inputText: $password, placeholder: "6자리의 숫자 비밀번호가 필요해요", isSecureText: false)
@@ -200,6 +211,7 @@ struct MakeChatRoomView: View {
                         } else {
                             chatViewModelWrapper.makeChatViewModel.roomData.value.password = "" // 유효하지 않은 경우 초기화
                         }
+                        chatViewModelWrapper.makeChatViewModel.validateForm() // 유효성 검사 호출
                     }
             }
         }
