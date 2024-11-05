@@ -21,7 +21,7 @@ struct ChatRoomView: View {
         ZStack {
             VStack(spacing: 0) {
                 GeometryReader { geometry in
-                    ChatContent(chats: /* viewModelWrapper.messageData */ mockChats, members: mockMembers, currentUserId: 102, keyboardManager: keyboardManager)
+                    ChatContent(chats: viewModelWrapper.messageData, members: mockMembers, currentUserId: 102, keyboardManager: keyboardManager)
                         .frame(height: geometry.size.height - keyboardManager.keyboardHeight) // ChatContent의 높이를 키보드 높이만큼 조정
                 }
 
@@ -85,6 +85,7 @@ struct ChatRoomView: View {
 final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
     @Published var messageData: [MessageItemModel] = []
+    @Published var chatUserData: [ChatUserInfoItemModel] = []
 
     var chatRoomViewModel: any ChatRoomViewModel
 
@@ -93,6 +94,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         roomDetailData = chatRoomViewModel.roomDetailData.value
         messageData = chatRoomViewModel.messageData.value
+        chatUserData = chatRoomViewModel.chatUserData.value
 
         chatRoomViewModel.roomDetailData.observe(on: self) { [weak self] newData in
             self?.roomDetailData = newData
@@ -100,6 +102,10 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         chatRoomViewModel.messageData.observe(on: self) { [weak self] newData in
             self?.messageData = newData
+        }
+
+        chatRoomViewModel.chatUserData.observe(on: self) { [weak self] newData in
+            self?.chatUserData = newData
         }
     }
 }

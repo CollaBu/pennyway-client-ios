@@ -25,15 +25,3 @@ struct ChatUserInfo: Equatable {
     let notifyEnabled: Bool
     let createdAt: String
 }
-
-// MARK: - Message
-
-struct Message: Equatable {
-    let chatRoomId: Int64
-    let chatId: Int64
-    let content: String
-    let contentType: ContentType
-    let categoryType: CategoryType
-    let createdAt: String
-    let senderId: Int64
-}
