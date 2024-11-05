@@ -36,7 +36,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
 
     /// 메시지를 특정 목적지로 보내는 메서드
     func sendMessage(message _: String, destination _: String) {}
-        
+
     /// 특정 목적지로 Stomp 구독을 설정하는 메서드
     func subscribeToDestination(_: String) {}
 
@@ -94,7 +94,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
         Log.debug("Socket connected")
         subscribeToErrors()
     }
-    
+
     func stompClientDidDisconnect(client _: StompClientLib!) {
         Log.debug("Socket disconnected")
     }

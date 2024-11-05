@@ -118,7 +118,8 @@ let mockChatRoom = ChatRoom(
     isPrivate: true,
     isAdmin: true,
     participantCount: 0,
-    createdAt: "2024-10-25T06:09:41.472Z"
+    createdAt: "2024-10-25T06:09:41.472Z",
+    unreadMessageCount: 0
 )
 
 let mockMembers: [ChatMember] = [

@@ -13,7 +13,7 @@ struct ChatMessage: View {
     let isSender: Bool
     let maxWidth: CGFloat = 151 * DynamicSizeFactor.factor()
     @State private var textWidth: CGFloat = .zero
-    
+
     var body: some View {
         HStack(spacing: 9) {
             if isSender {
