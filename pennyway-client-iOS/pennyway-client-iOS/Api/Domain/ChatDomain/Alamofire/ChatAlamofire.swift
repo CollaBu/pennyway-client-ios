@@ -39,4 +39,11 @@ class ChatAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.getChatRoom, completion: completion)
     }
+    
+    /// 채팅방 검색
+    func searchChatRoom(_ dto: SearchChatRoomRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatAlamofire - searchChatRoom() called")
+
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.searchChatRoom(dto: dto), completion: completion)
+    }
 }

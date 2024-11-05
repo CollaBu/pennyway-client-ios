@@ -41,13 +41,12 @@ struct ChatCellView: View {
                             Spacer()
                         } else {
                             searchChatContainer
-                            ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: .constant(viewModelWrapper.filteredChatData), isMyChat: true)
+                            ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: .constant(viewModelWrapper.filteredChatData), searchChatRooms: .constant(nil), isMyChat: true)
                         }
                     } else {
                         searchChatContainer
                         Spacer()
-                        // TODO: 추천 채팅일 경우엔 검색 api 호출 후 관련 리스트가 보이도록 해야 함
-                        // ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: $viewModelWrapper.chatData, isMyChat: false)
+                        ChatRoomContent(isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: .constant(viewModelWrapper.searchChatData), isMyChat: false)
                     }
                 }
                 
@@ -99,7 +98,6 @@ struct ChatCellView: View {
             }
             .onAppear {
                 // 뷰에 진입하자마자 내채팅 조회 api 호출
-                
                 viewModelWrapper.getChatRoomViewModel.getChatRoom()
                 viewStateManager.setCurrentView(self, selectedTab: selectedTab)
                 
@@ -132,7 +130,15 @@ struct ChatCellView: View {
     private var searchChatContainer: some View {
         VStack {
             CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", onCommit: {
-                viewModelWrapper.searchQuery = chatRoomName // 엔터 키 입력 시 검색어 업데이트
+                if selectedTab == 2, chatRoomName.count >= 2 {
+                    // 추천채팅 탭이며 검색어가 2자 이상인 경우만 채팅 검색 api 호출
+                    viewModelWrapper.getChatRoomViewModel.initSearch()
+                    viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: chatRoomName)
+
+                } else {
+                    // 내 채팅인 경우
+                    viewModelWrapper.searchQuery = chatRoomName
+                }
                 
             }, isSecureText: false, showSearchBtn: true)
                 .onChange(of: chatRoomName) { newValue in
@@ -141,6 +147,11 @@ struct ChatCellView: View {
                     }
                 }
             Spacer().frame(height: 23 * DynamicSizeFactor.factor())
+        }
+        .onAppear {
+            // 탭이 전환될 때마다 검색어를 초기화 시킴
+            viewModelWrapper.searchQuery = ""
+            chatRoomName = ""
         }
     }
     
@@ -208,6 +219,7 @@ struct ChatCellView: View {
 
 final class ChatViewModelWrapper: ObservableObject {
     @Published var chatData: [ChatRoomItemModel] = []
+    @Published var searchChatData: [SearchChatRoomItemModel] = []
     @Published var searchQuery: String = "" // 검색어 추가
     
     var makeChatViewModel: any MakeChatRoomViewModel
@@ -230,6 +242,10 @@ final class ChatViewModelWrapper: ObservableObject {
         
         getChatRoomViewModel.roomData.observe(on: self) { [weak self] newData in
             self?.chatData = newData
+        }
+        
+        getChatRoomViewModel.searchRoomData.observe(on: self) { [weak self] newData in
+            self?.searchChatData = newData
         }
     }
 }
