@@ -51,7 +51,7 @@ struct ChatRoomDetailItemModel {
 
 // MARK: - ChatUserInfoItemModel
 
-struct ChatUserInfoItemModel: Equatable {
+struct ChatUserInfoItemModel: Equatable, Identifiable {
     var id: Int64
     var name: String
     var role: Role
