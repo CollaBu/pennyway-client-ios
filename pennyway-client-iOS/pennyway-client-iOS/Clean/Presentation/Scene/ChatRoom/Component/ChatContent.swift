@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatContent: View {
-    let chats: [Chat]
+    let chats: [MessageItemModel]
     let members: [ChatMember]
     let currentUserId: Int64
 
@@ -25,8 +25,8 @@ struct ChatContent: View {
                             Spacer().frame(height: 5 * DynamicSizeFactor.factor())
 
                             ForEach(groupedChatsByDate[date] ?? []) { chat in
-                                if let sender = members.first(where: { $0.user_id == chat.sender_id }) {
-                                    if chat.sender_id == currentUserId {
+                                if let sender = members.first(where: { $0.user_id == chat.senderId }) {
+                                    if chat.senderId == currentUserId {
                                         ChatSendCell(chat: chat, sender: sender)
                                     } else {
                                         ChatReceiveCell(chat: chat, sender: sender)
@@ -52,10 +52,10 @@ struct ChatContent: View {
         }
     }
 
-    private var groupedChatsByDate: [String: [Chat]] {
+    private var groupedChatsByDate: [String: [MessageItemModel]] {
         let formatter = Date.chatDateFormatter()
         return Dictionary(grouping: chats) { chat in
-            formatter.string(from: chat.created_at)
+            formatter.string(from: DateFormatterUtil.dateFromString(chat.createdAt) ?? Date())
         }
     }
 }

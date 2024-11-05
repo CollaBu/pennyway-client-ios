@@ -37,26 +37,3 @@ struct Message: Equatable {
     let createdAt: String
     let senderId: Int64
 }
-
-// MARK: - Role
-
-enum Role: String, Codable {
-    case admin = "ADMIN"
-    case user = "MEMBER"
-}
-
-// MARK: - ContentType
-
-enum ContentType: String, Codable {
-    case text = "TEXT"
-    case image = "IMAGE"
-    case video = "VIDEO"
-    case file = "FILE"
-}
-
-// MARK: - CategoryType
-
-enum CategoryType: String, Codable {
-    case normal = "NORMAL"
-    case important = "SYSTEM"
-}

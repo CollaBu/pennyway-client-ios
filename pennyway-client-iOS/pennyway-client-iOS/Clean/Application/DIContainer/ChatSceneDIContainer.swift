@@ -17,7 +17,13 @@ final class ChatSceneDIContainer {
         return DefaultChatFactory(chatViewModelWrapper: viewModelWrapper, chatRoomViewModelWrapper: chatRoomViewModelWrapper)
     }
 
-    // MARK: - Use Cases
+    // MARK: - Chat View Model Wrapper
+
+    private func makeChatViewModelWrapper() -> ChatViewModelWrapper {
+        return ChatViewModelWrapper(makeChatViewModel: makeChatRoomViewModel(), getChatRoomViewModel: makeGetChatRoomViewModel(), chatRoomViewModel: makeChatRoomViewModel())
+    }
+
+    // - Chat Use Cases
 
     private func makeChatRoomUseCase() -> MakeChatRoomUseCase {
         let presignedUrlRepository = profileSceneDIContainer.makePresignedUrlRepository()
@@ -30,11 +36,7 @@ final class ChatSceneDIContainer {
         return DefaultGetChatRoomUseCase(repository: makeGetChatRoomRepository())
     }
 
-    private func makeChatRoomUseCase() -> ChatRoomUseCase {
-        return DefaultChatRoomUseCase(repository: makeChatRoomDetailRepository())
-    }
-
-    // MARK: - Repository
+    // - Chat Repository
 
     func makeChatRoomRepository() -> MakeChatRoomRepository {
         DefaultMakeChatRoomRepository()
@@ -48,11 +50,7 @@ final class ChatSceneDIContainer {
         DefaultGetChatRoomRepository()
     }
 
-    func makeChatRoomDetailRepository() -> ChatRoomRepository {
-        DefaultChatRoomRepository()
-    }
-
-    // MARK: - View Model
+    // - Chat View Model
 
     private func makeChatRoomViewModel() -> MakeChatRoomViewModel {
         let presignedUrlUseCase = profileSceneDIContainer.makePresignedUrlUseCase()
@@ -68,17 +66,27 @@ final class ChatSceneDIContainer {
         return DefaultGetChatRoomViewModel(getChatRoomUseCase: makeGetChatRoomUseCase())
     }
 
-    private func makeChatRoomViewModel() -> ChatRoomViewModel {
-        return DefaultChatRoomViewModel(chatRoomUseCase: makeChatRoomUseCase())
-    }
-
-    // MARK: - View Model Wrapper
-
-    private func makeChatViewModelWrapper() -> ChatViewModelWrapper {
-        return ChatViewModelWrapper(makeChatViewModel: makeChatRoomViewModel(), getChatRoomViewModel: makeGetChatRoomViewModel(), chatRoomViewModel: makeChatRoomViewModel())
-    }
+    // MARK: - Chat Room View Model Wrapper
 
     private func makeChatRoomViewModelWrapper() -> ChatRoomViewModelWrapper {
         return ChatRoomViewModelWrapper(chatRoomViewModel: makeChatRoomViewModel())
+    }
+
+    // - Chat Room Use Cases
+
+    private func makeChatRoomUseCase() -> ChatRoomUseCase {
+        return DefaultChatRoomUseCase(repository: makeChatRoomDetailRepository())
+    }
+
+    // - Chat Room Repository
+
+    func makeChatRoomDetailRepository() -> ChatRoomRepository {
+        DefaultChatRoomRepository()
+    }
+
+    // - Chat Room View Model
+
+    private func makeChatRoomViewModel() -> ChatRoomViewModel {
+        return DefaultChatRoomViewModel(chatRoomUseCase: makeChatRoomUseCase())
     }
 }
