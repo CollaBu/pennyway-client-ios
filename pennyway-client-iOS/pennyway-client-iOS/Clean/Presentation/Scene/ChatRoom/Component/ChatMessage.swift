@@ -13,7 +13,7 @@ struct ChatMessage: View {
     let isSender: Bool
     let maxWidth: CGFloat = 151 * DynamicSizeFactor.factor()
     @State private var textWidth: CGFloat = .zero
-
+    
     var body: some View {
         HStack(spacing: 9) {
             if isSender {
@@ -56,9 +56,11 @@ struct ChatMessage: View {
     private var Timestamp: some View {
         VStack {
             Spacer()
-            Text(Date.koreanMeridianTimeFormatter(from: DateFormatterUtil.dateFromString(createdAt) ?? Date()))
-                .font(.B4MediumFont())
-                .platformTextColor(color: Color("Gray05"))
+            if let date = DateFormatterUtil.dateFromString(createdAt) {
+                Text(Date.koreanMeridianTimeFormatter(from: date))
+                    .font(.B4MediumFont())
+                    .platformTextColor(color: Color("Gray05"))
+            }
         }
     }
 }

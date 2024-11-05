@@ -54,8 +54,11 @@ struct ChatContent: View {
 
     private var groupedChatsByDate: [String: [MessageItemModel]] {
         let formatter = Date.chatDateFormatter()
-        return Dictionary(grouping: chats) { chat in
-            formatter.string(from: DateFormatterUtil.dateFromString(chat.createdAt) ?? Date())
+        return Dictionary(grouping: chats) { chat -> String in
+            if let date = DateFormatterUtil.dateFromString(chat.createdAt) {
+                return formatter.string(from: date)
+            }
+            return ""
         }
     }
 }
