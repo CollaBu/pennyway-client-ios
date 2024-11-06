@@ -21,7 +21,7 @@ struct ChatSideMenuView: View {
             HStack(spacing: 0) {
                 Spacer()
                 
-                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp)
+                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp, members: viewModelWrapper.chatUserData)
                     .padding(.leading, 105 * DynamicSizeFactor.factor())
                     .transition(.move(edge: .trailing))
             }
@@ -63,6 +63,7 @@ struct ChatSideMenuView: View {
 private struct SideMenuContent: View {
     @Binding var isAlarmOn: Bool
     @Binding var showExitPopUp: Bool
+    let members: [ChatMemberItemModel]
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -96,7 +97,7 @@ private struct SideMenuContent: View {
     
     private var SideMenuCells: some View {
         VStack {
-            if mockMembers[1].role.rawValue == Role.admin.rawValue {
+            if members[0].role.rawValue == Role.admin.rawValue {//첫번째 사용자(나)가 방장인지 확인 후 ui
                 SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone", isAlarmCell: false, isAlarmOn: .constant(false))
             }
             
@@ -118,8 +119,8 @@ private struct SideMenuContent: View {
     }
 
     private var ChatUserCells: some View {
-        ForEach(mockMembers) { user in
-            ChatUserCell(member: user, currentUserId: 102)
+        ForEach(members) { user in
+            ChatUserCell(member: user, currentUserId: getUserData()!.id)
         }
     }
 

@@ -130,26 +130,26 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 //    unreadMessageCount: 0
 // )
 //
-let mockMembers: [ChatMember] = [
-    ChatMember(
-        id: 1,
-        userId: 1,
-        name: "바다오리",
-        role: .user,
-        notifyEnabled: true,
-        createdAt: "2023-9-04 19:46:19", // 예시 날짜
-        profileImage: "https://example.com/user1.jpg"
-    ),
-    ChatMember(
-        id: 2,
-        userId: 2,
-        name: "고래고래고래",
-        role: .admin,
-        notifyEnabled: false,
-        createdAt: "2023-9-04 19:46:19", // 예시 날짜
-        profileImage: "https://example.com/user2.jpg"
-    ),
-]
+// let mockMembers: [ChatMember] = [
+//    ChatMember(
+//        id: 1,
+//        userId: 1,
+//        name: "바다오리",
+//        role: .user,
+//        notifyEnabled: true,
+//        createdAt: "2023-9-04 19:46:19", // 예시 날짜
+//        profileImage: "https://example.com/user1.jpg"
+//    ),
+//    ChatMember(
+//        id: 2,
+//        userId: 2,
+//        name: "고래고래고래",
+//        role: .admin,
+//        notifyEnabled: false,
+//        createdAt: "2023-9-04 19:46:19", // 예시 날짜
+//        profileImage: "https://example.com/user2.jpg"
+//    ),
+// ]
 
 let mockChats: [MessageItemModel] = [
     MessageItemModel(

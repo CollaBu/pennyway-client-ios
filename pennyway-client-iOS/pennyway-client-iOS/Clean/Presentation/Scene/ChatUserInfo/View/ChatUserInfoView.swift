@@ -14,6 +14,8 @@ struct ChatUserInfoView: View {
     @State private var showTransferPopUp: Bool = false // 방장 넘기기 팝업 상태
     @State private var showKickOutPopUp: Bool = false // 내보내기 팝업 상태
 
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
+
     var body: some View {
         ZStack {
             UserInfoContent
@@ -37,7 +39,7 @@ struct ChatUserInfoView: View {
             if showKickOutPopUp {
                 CustomPopUpView(showingPopUp: $showKickOutPopUp,
                                 titleLabel: "내보내기",
-                                subTitleLabel: "\(mockMembers[1].name)님을 내보낼까요?",
+                                subTitleLabel: "\(viewModelWrapper.chatUserData[0].name)님을 내보낼까요?",
                                 firstBtnAction: { self.showKickOutPopUp = false },
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {

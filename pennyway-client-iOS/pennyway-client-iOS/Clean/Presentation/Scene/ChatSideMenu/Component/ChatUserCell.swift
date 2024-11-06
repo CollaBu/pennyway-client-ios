@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatUserCell: View {
-    let member: ChatMember
+    let member: ChatMemberItemModel
     let currentUserId: Int64
 
     var body: some View {
