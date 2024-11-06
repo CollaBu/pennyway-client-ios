@@ -6,6 +6,8 @@ struct ChatRoomDetailView: View, ImageLoadable {
     @State private var isNavigate = false
     @State private var loadedImage: UIImage? = nil
 
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
+
     var body: some View {
         VStack(alignment: .leading) {
             Spacer().frame(height: 17 * DynamicSizeFactor.factor())
@@ -98,7 +100,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
     @ViewBuilder
     private var navigationDestination: some View {
         if chatRoom?.isPrivate == true {
-            SecretRoomView()
+            SecretRoomView(viewModelWrapper: viewModelWrapper)
         } else {
             MakeUsernameView()
         }

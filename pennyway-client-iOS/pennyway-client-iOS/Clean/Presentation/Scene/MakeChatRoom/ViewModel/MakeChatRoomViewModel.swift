@@ -6,6 +6,7 @@ import UIKit
 
 protocol MakeChatRoomViewModelInput {
     func validateForm()
+    func validatePwForm(password: String) 
     func uploadImage(image: UIImage)
     func makeChatRoom(completion: @escaping (Bool) -> Void)
 }
@@ -47,7 +48,7 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel, ObservableObject {
         ))
     }
 
-    /// 제목의 유효성 검사 메서드
+    /// 제목의 유효성 검사 메서드(채팅방 생성)
     func validateForm() {
         let title = roomData.value.title
         let isTitleValid = !title.isEmpty && title.count <= 30
@@ -60,6 +61,11 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel, ObservableObject {
         } else {
             isFormValid = isTitleValid
         }
+    }
+
+    /// 채팅방 가입 검사 메서드
+    func validatePwForm(password: String) {
+        isFormValid = password.count == 6
     }
 
     /// Presigned URL 생성

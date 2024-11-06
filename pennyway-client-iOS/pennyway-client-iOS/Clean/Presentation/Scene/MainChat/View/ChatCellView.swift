@@ -79,7 +79,7 @@ struct ChatCellView: View {
                 NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
                 
-                NavigationLink(destination: ChatRoomDetailView(chatRoom: selectedSearchChatRoom), isActive: $isNavigateChatRoomDetailView) {}
+                NavigationLink(destination: ChatRoomDetailView(chatRoom: selectedSearchChatRoom, viewModelWrapper: viewModelWrapper), isActive: $isNavigateChatRoomDetailView) {}
                     .hidden()
             }
             .setTabBarVisibility(isHidden: false)

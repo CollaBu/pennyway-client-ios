@@ -4,6 +4,9 @@ import SwiftUI
 struct SecretRoomView: View {
     @State private var password = ""
     @State private var isNavigate = false
+//    @State private var isFormValid: Bool = false // 뷰모델에서 isFormValid를 받아와 뷰에서 사용하는 변수
+
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -24,13 +27,23 @@ struct SecretRoomView: View {
             }
             .padding(.horizontal, 20)
 
-            CustomInputView(inputText: $password, placeholder: "", isSecureText: false)
+            CustomInputView(inputText: $password, placeholder: "", onCommit: {
+                viewModelWrapper.makeChatViewModel.validatePwForm(password: password)
+            }, isSecureText: false)
+                .onChange(of: password) { _ in
+                    if password.count > 6 {
+                        password = String(password.prefix(30))
+                    }
+                    viewModelWrapper.makeChatViewModel.validatePwForm(password: password)
+                }
 
             Spacer()
 
             CustomBottomButton(action: {
-                isNavigate = true
-            }, label: "다음", isFormValid: .constant(true))
+                if viewModelWrapper.makeChatViewModel.isFormValid {
+                    isNavigate = true
+                }
+            }, label: "다음", isFormValid: $viewModelWrapper.makeChatViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
             NavigationLink(destination: MakeUsernameView(), isActive: $isNavigate) {}
@@ -51,9 +64,9 @@ struct SecretRoomView: View {
                 }.offset(x: -10)
             }
         }
+//        .onChange(of: password) { newValue in
+//            Log.debug("onChange 실행 됨 ")
+//            isFormValid = newValue
+//        }
     }
-}
-
-#Preview {
-    SecretRoomView()
 }
