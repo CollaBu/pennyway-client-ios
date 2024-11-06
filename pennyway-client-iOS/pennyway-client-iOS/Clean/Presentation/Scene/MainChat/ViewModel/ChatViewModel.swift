@@ -14,6 +14,7 @@ protocol GetChatRoomViewModelInput {
     func getChatRoom()
     func searchChatRoom(target: String)
     func initSearch()
+    func joinChatRoom()
 }
 
 // MARK: - GetChatRoomViewModelOutput
@@ -35,6 +36,7 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
 
     private let getChatRoomUseCase: GetChatRoomUseCase
     private let searchChatRoomUseCase: SearchChatRoomUseCase
+    private let joinChatRoomUseCase: JoinChatRoomUseCase
     private var currentPageNumber: Int = 0
     private var hasNext: Bool = true // 다음 페이지가 있는지 여부
 
@@ -45,9 +47,10 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
         hasNext = true
     }
 
-    init(getChatRoomUseCase: GetChatRoomUseCase, searchChatRoomUseCase: SearchChatRoomUseCase) {
+    init(getChatRoomUseCase: GetChatRoomUseCase, searchChatRoomUseCase: SearchChatRoomUseCase, joinChatRoomUseCase: JoinChatRoomUseCase) {
         self.getChatRoomUseCase = getChatRoomUseCase
         self.searchChatRoomUseCase = searchChatRoomUseCase
+        self.joinChatRoomUseCase = joinChatRoomUseCase
 
         roomData = Observable([])
         searchRoomData = Observable([])
@@ -104,5 +107,10 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
                 }
             }
         }
+    }
+
+    /// 채팅방 가입 요청
+    func joinChatRoom() {
+//        joinChatRoomUseCase.execute(chatRoomId: <#T##Int64#>, password: <#T##String#>)
     }
 }

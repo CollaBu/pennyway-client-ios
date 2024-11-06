@@ -33,6 +33,10 @@ final class ChatSceneDIContainer {
         return DefaultSearchChatRoomUseCase(searchChatRoomRepository: makeSearchChatRoomRepository())
     }
 
+    private func makeJoinChatRoomUseCase() -> JoinChatRoomUseCase {
+        return DefaultJoinChatRoomUseCase(repository: makeJoinChatRoomRepository())
+    }
+
     // MARK: - Repository
 
     func makeChatRoomRepository() -> MakeChatRoomRepository {
@@ -51,6 +55,10 @@ final class ChatSceneDIContainer {
         DefaultSearchChatRoomRepository()
     }
 
+    private func makeJoinChatRoomRepository() -> JoinChatRoomRepository {
+        DefaultJoinChatRoomRepository()
+    }
+
     // MARK: - View Model
 
     private func makeChatRoomViewModel() -> MakeChatRoomViewModel {
@@ -64,7 +72,7 @@ final class ChatSceneDIContainer {
     }
 
     private func makeGetChatRoomViewModel() -> GetChatRoomViewModel {
-        return DefaultGetChatRoomViewModel(getChatRoomUseCase: makeGetChatRoomUseCase(), searchChatRoomUseCase: makeSearchChatRoomUseCase())
+        return DefaultGetChatRoomViewModel(getChatRoomUseCase: makeGetChatRoomUseCase(), searchChatRoomUseCase: makeSearchChatRoomUseCase(), joinChatRoomUseCase: makeJoinChatRoomUseCase())
     }
 
     // MARK: - View Model Wrapper

@@ -442,6 +442,9 @@
 		D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */; };
 		D8E637502C06303D00D43BB6 /* MySpendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */; };
 		D8E889E42CDB796B008FC22E /* JoinChatRoomRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889E32CDB796B008FC22E /* JoinChatRoomRequestDto.swift */; };
+		D8E889E62CDB8102008FC22E /* JoinChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889E52CDB8102008FC22E /* JoinChatRoomUseCase.swift */; };
+		D8E889E82CDB8165008FC22E /* JoinChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889E72CDB8165008FC22E /* JoinChatRoomRepository.swift */; };
+		D8E889EA2CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889E92CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift */; };
 		D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */; };
 		D8F9D7362C593B71005416FC /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7352C593B71005416FC /* PreparedView.swift */; };
 		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
@@ -877,6 +880,9 @@
 		D8E24D9B2BFDAFDA006E8046 /* CustomToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggleStyle.swift; sourceTree = "<group>"; };
 		D8E6374F2C06303D00D43BB6 /* MySpendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpendingListViewModel.swift; sourceTree = "<group>"; };
 		D8E889E32CDB796B008FC22E /* JoinChatRoomRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChatRoomRequestDto.swift; sourceTree = "<group>"; };
+		D8E889E52CDB8102008FC22E /* JoinChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChatRoomUseCase.swift; sourceTree = "<group>"; };
+		D8E889E72CDB8165008FC22E /* JoinChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChatRoomRepository.swift; sourceTree = "<group>"; };
+		D8E889E92CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultJoinChatRoomRepository.swift; sourceTree = "<group>"; };
 		D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleDeleteButtonUtil.swift; sourceTree = "<group>"; };
 		D8F9D7352C593B71005416FC /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedView.swift; path = "pennyway-client-iOS/View/TabView/PreparedView.swift"; sourceTree = SOURCE_ROOT; };
 		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -2691,6 +2697,7 @@
 				D8DCCF882CBD8D7700550A8B /* MakeChatRoomUseCase.swift */,
 				D85E46452CD607E500715169 /* SearchChatRoomUseCase.swift */,
 				D8BAB3E82CCA92CF00D1910E /* GetChatRoomUseCase.swift */,
+				D8E889E52CDB8102008FC22E /* JoinChatRoomUseCase.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2702,6 +2709,7 @@
 				D8DCCF8C2CBD8F6500550A8B /* MakeChatRoomRepository.swift */,
 				D85E46472CD6091700715169 /* SearchChatRoomRepository.swift */,
 				D8BAB3EA2CCA931500D1910E /* GetChatRoomRepository.swift */,
+				D8E889E72CDB8165008FC22E /* JoinChatRoomRepository.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2753,6 +2761,7 @@
 				D8DCCF9F2CBD94B400550A8B /* DefaultMakeChatRoomRepository.swift */,
 				D85E46492CD609E100715169 /* DefaultSearchChatRoomRepository.swift */,
 				D8BAB3EC2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift */,
+				D8E889E92CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3171,6 +3180,7 @@
 				4A863A0F2CB4594200BA2F2F /* ChatView.swift in Sources */,
 				4ACE1FED2BBB149D00BB4F0A /* (null) in Sources */,
 				4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */,
+				D8E889E62CDB8102008FC22E /* JoinChatRoomUseCase.swift in Sources */,
 				4AE8F3B62C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift in Sources */,
 				D8157E722BC19E5A0083844B /* PhoneNumberInputSectionView.swift in Sources */,
 				D85E46582CD6266800715169 /* SearchChatRoomItemModel.swift in Sources */,
@@ -3181,6 +3191,7 @@
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
+				D8E889E82CDB8165008FC22E /* JoinChatRoomRepository.swift in Sources */,
 				D8180C042BE5081F00F837FB /* FindIdContentView.swift in Sources */,
 				4A28820C2C64CD5F00AE50C7 /* GetNotificationResponseDto.swift in Sources */,
 				4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */,
@@ -3330,6 +3341,7 @@
 				4A3560832BEBF12D00BA58F3 /* OAuthAccountViewModel.swift in Sources */,
 				4A45A1A72CCBF9B700D47F10 /* (null) in Sources */,
 				4A8BDEE52C629C3600D21424 /* SpendingHistoryUtil.swift in Sources */,
+				D8E889EA2CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift in Sources */,
 				4AC3203F2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift in Sources */,
 				4A0BC6AD2BF5FA130036D900 /* NumberFormatterUtil.swift in Sources */,
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
