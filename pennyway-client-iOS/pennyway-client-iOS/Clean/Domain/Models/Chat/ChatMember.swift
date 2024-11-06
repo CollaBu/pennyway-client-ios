@@ -14,7 +14,7 @@ struct ChatMember: Equatable, Identifiable {
     let userId: Int64
     let name: String
     let role: Role
-    let notifyEnabled: Bool
+    let notifyEnabled: Bool?
     let createdAt: String
     let profileImage: String?
 }

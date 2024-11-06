@@ -70,7 +70,7 @@ struct ChatMemberItemModel: Equatable, Identifiable {
     var userId: Int64
     var name: String
     var role: Role
-    var notifyEnabled: Bool
+    var notifyEnabled: Bool?
     var createdAt: String
 }
 

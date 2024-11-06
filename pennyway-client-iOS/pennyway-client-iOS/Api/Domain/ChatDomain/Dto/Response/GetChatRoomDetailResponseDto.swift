@@ -30,7 +30,7 @@ struct GetChatRoomDetailResponseDto: Codable {
                 let userId: Int64
                 let name: String
                 let role: Role
-                let notifyEnabled: Bool
+                let notifyEnabled: Bool?
                 let createdAt: String
             }
 

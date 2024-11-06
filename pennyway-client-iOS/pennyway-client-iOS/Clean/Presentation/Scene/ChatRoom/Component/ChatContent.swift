@@ -21,8 +21,8 @@ struct ChatContent: View {
                 LazyVStack(spacing: 14 * DynamicSizeFactor.factor()) {
                     ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-                        Section(header: ChatDateHeader(date: date)) {
-                            Spacer().frame(height: 5 * DynamicSizeFactor.factor())
+                        Section(header: ChatHeader(data: date)) {
+                            Spacer().frame(height: 3)
 
                             ForEach(groupedChatsByDate[date] ?? []) { chat in
                                 if let sender = members.first(where: { $0.userId == chat.senderId }) {
@@ -30,6 +30,12 @@ struct ChatContent: View {
                                         ChatSendCell(chat: chat, sender: sender)
                                     } else {
                                         ChatReceiveCell(chat: chat, sender: sender)
+                                    }
+                                } else {
+                                    Spacer().frame(height: 3)
+
+                                    if chat.categoryType == CategoryType.system {
+                                        ChatHeader(data: chat.content)
                                     }
                                 }
                             }
@@ -54,11 +60,14 @@ struct ChatContent: View {
 
     private var groupedChatsByDate: [String: [MessageItemModel]] {
         let formatter = Date.chatDateFormatter()
-        return Dictionary(grouping: chats) { chat -> String in
+        let grouped = Dictionary(grouping: chats) { chat -> String in
             if let date = DateFormatterUtil.dateFromString(chat.createdAt) {
                 return formatter.string(from: date)
             }
             return ""
         }
+
+        // 각 날짜별 메시지 배열을 오래된순으로 저장
+        return grouped.mapValues { $0.reversed() }
     }
 }
