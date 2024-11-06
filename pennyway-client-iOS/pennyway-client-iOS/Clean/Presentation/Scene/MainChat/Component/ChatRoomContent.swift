@@ -28,11 +28,11 @@ struct ChatRoomContent: View {
                 } else {
                     if let rooms = searchChatRooms {
                         ForEach(rooms, id: \.id) { chatRoom in
-                            // 수정 필요
-//                            NavigationLink(destination: ChatRoomView(chatRoom: chatRoom)) {
-                            ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
-                                isPopUp = true
-                            })
+                            NavigationLink(destination: ChatRoomView(chatRoom: chatRoom)) {
+                                ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
+                                    isPopUp = true
+                                })
+                            }
                         }
                     }
                 }

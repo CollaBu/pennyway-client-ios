@@ -15,7 +15,7 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewStateManager: ViewStateManager
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
-    var chatRoom: ChatRoomItemModel
+    var chatRoom: ChatRoomProtocol
     private let currentUserId = getUserData()!.id
 
     var body: some View {
@@ -73,6 +73,7 @@ struct ChatRoomView: View {
             )
             .onAppear {
                 viewStateManager.setCurrentView(self)
+                viewModelWrapper.roomData = chatRoom // 현재 채팅방 정보 저장
 
                 // 채팅방 상세 정보 조회
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
@@ -84,6 +85,7 @@ struct ChatRoomView: View {
 // MARK: - ChatRoomViewModelWrapper
 
 final class ChatRoomViewModelWrapper: ObservableObject {
+    @Published var roomData: ChatRoomProtocol? = nil
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
     @Published var messageData: [MessageItemModel] = []
     @Published var chatUserData: [ChatMemberItemModel] = []
@@ -93,9 +95,14 @@ final class ChatRoomViewModelWrapper: ObservableObject {
     init(chatRoomViewModel: any ChatRoomViewModel) {
         self.chatRoomViewModel = chatRoomViewModel
 
+        roomData = chatRoomViewModel.roomData.value
         roomDetailData = chatRoomViewModel.roomDetailData.value
         messageData = chatRoomViewModel.messageData.value
         chatUserData = chatRoomViewModel.chatUserData.value
+
+        chatRoomViewModel.roomData.observe(on: self) { [weak self] newData in
+            self?.roomData = newData
+        }
 
         chatRoomViewModel.roomDetailData.observe(on: self) { [weak self] newData in
             self?.roomDetailData = newData
@@ -111,18 +118,18 @@ final class ChatRoomViewModelWrapper: ObservableObject {
     }
 }
 
-let mockChatRoom = ChatRoom(
-    id: 1,
-    title: "SwiftUI Chat Room",
-    description: "A place to talk about SwiftUI",
-    background_image_url: "https://example.com/background.jpg",
-    isPrivate: true,
-    isAdmin: true,
-    participantCount: 0,
-    createdAt: "2024-5-04 19:46:19",
-    unreadMessageCount: 0
-)
-
+// let mockChatRoom = ChatRoom(
+//    id: 1,
+//    title: "SwiftUI Chat Room",
+//    description: "A place to talk about SwiftUI",
+//    background_image_url: "https://example.com/background.jpg",
+//    isPrivate: true,
+//    isAdmin: true,
+//    participantCount: 0,
+//    createdAt: "2024-5-04 19:46:19",
+//    unreadMessageCount: 0
+// )
+//
 let mockMembers: [ChatMember] = [
     ChatMember(
         id: 1,

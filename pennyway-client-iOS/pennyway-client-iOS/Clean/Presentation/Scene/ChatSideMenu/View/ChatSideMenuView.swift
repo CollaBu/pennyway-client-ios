@@ -13,6 +13,8 @@ struct ChatSideMenuView: View {
     @Binding var isPresented: Bool
     @State private var isAlarmOn: Bool = false
     @State private var showExitPopUp: Bool = false
+    
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     var body: some View {
         ZStack {
@@ -26,7 +28,7 @@ struct ChatSideMenuView: View {
             
             if showExitPopUp {
                 CustomPopUpView(showingPopUp: $showExitPopUp,
-                                titleLabel: "\(mockChatRoom.title)",
+                                titleLabel: "\(viewModelWrapper.roomData?.title ?? "")",
                                 subTitleLabel: "채팅방을 나가시겠어요?",
                                 firstBtnAction: { self.showExitPopUp = false },
                                 firstBtnLabel: "취소",
