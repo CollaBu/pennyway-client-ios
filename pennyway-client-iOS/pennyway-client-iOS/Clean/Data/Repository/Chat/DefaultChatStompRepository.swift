@@ -97,6 +97,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
 
     /// 가입한 채팅방 리스트 가져오기
     private func getJoinedChatRooms() {
+        Log.debug("[DefaultChatServerRepository] 가입한 채팅방 리스트 가져오기")
         ChatAlamofire.shared.getJoinedChatRooms(GetJoinedChatRoomsRequestDto(summary: "true")) { result in
             switch result {
             case let .success(data):

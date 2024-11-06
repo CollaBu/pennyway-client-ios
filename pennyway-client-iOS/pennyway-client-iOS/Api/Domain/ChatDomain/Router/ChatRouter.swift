@@ -35,7 +35,7 @@ enum ChatRouter: URLRequestConvertible {
         case .getChatServer:
             return "v2/socket/chat"
         case .getJoinedChatRooms:
-            return "v2/chat-rooms"
+            return "v2/chat-rooms/me"
         case .getChatRoom:
             return "v2/chat-rooms/me"
         }
