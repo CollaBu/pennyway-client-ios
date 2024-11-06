@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct ChatRoomDetailView: View {
-    let chatRoom: SearchChatRoomItemModel
+    let chatRoom: SearchChatRoomItemModel?
     @State private var isNavigate = false
 
     var body: some View {
@@ -20,15 +20,19 @@ struct ChatRoomDetailView: View {
             Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
             VStack(alignment: .leading) {
-                Text("\(chatRoom.title)")
-                    .font(.H2SemiboldFont())
-                    .platformTextColor(color: Color("Gray07"))
+                if let title = chatRoom?.title {
+                    Text("\(title)")
+                        .font(.H2SemiboldFont())
+                        .platformTextColor(color: Color("Gray07"))
+                }
 
                 Spacer().frame(height: 7 * DynamicSizeFactor.factor())
 
-                Text("\(chatRoom.description)")
-                    .font(.B1MediumFont())
-                    .platformTextColor(color: Color("Gray04"))
+                if let description = chatRoom?.description {
+                    Text("\(description)")
+                        .font(.B1MediumFont())
+                        .platformTextColor(color: Color("Gray04"))
+                }
             }
             .padding(.horizontal, 20)
 
@@ -61,9 +65,13 @@ struct ChatRoomDetailView: View {
 
     private var tagSection: some View {
         HStack(spacing: 9 * DynamicSizeFactor.factor()) {
-            CustomRoundedBtn(title: chatRoom.isPrivate ? "비공개방" : "", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {}
+            if let isPrivate = chatRoom?.isPrivate, isPrivate {
+                CustomRoundedBtn(title: "비공개방", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {}
+            }
 
-            CustomRoundedBtn(title: "\(chatRoom.participantCount)명이 대화하고 있어요", fontColor: Color("Yellow02"), backgroundColor: Color("Yellow01"), style: .large) {}
+            if let participantCount = chatRoom?.participantCount {
+                CustomRoundedBtn(title: "\(participantCount)명이 대화하고 있어요", fontColor: Color("Yellow02"), backgroundColor: Color("Yellow01"), style: .large) {}
+            }
         }
         .padding(.horizontal, 20)
     }

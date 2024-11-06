@@ -8,7 +8,7 @@ struct ChatCellView: View {
     @State var isNavigateToMakeChatRoom = false
     @State private var isCheckMarkVisible = false // 체크 표시를 보여줄지 여부
     @State private var isPopUp = false // 채팅방 나가기 팝업 표시 여부
-    @State private var selectedChatRoom: ChatRoomItemModel? = nil // 어떤 채팅방이 선택됐는지의 여부
+    @State private var selectedChatRoom: ChatRoomItemModel? = nil // 내 채팅에서 어떤 채팅방이 선택됐는지의 여부
     @State private var selectedSearchChatRoom: SearchChatRoomItemModel? = nil // 검색된 채팅방 중 어떤 채팅방이 선택됐는지의 여부
     @State private var isNavigateChatRoomDetailView = false // 채팅방 참여뷰로 이동하기 위한 변수
     @EnvironmentObject var viewStateManager: ViewStateManager
@@ -79,7 +79,7 @@ struct ChatCellView: View {
                 NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
                 
-                NavigationLink(destination: ChatRoomDetailView(chatRoom: selectedSearchChatRoom!), isActive: $isNavigateChatRoomDetailView) {}
+                NavigationLink(destination: ChatRoomDetailView(chatRoom: selectedSearchChatRoom), isActive: $isNavigateChatRoomDetailView) {}
                     .hidden()
             }
             .setTabBarVisibility(isHidden: false)
