@@ -4,6 +4,8 @@ import Foundation
 
 class ProfileNotificationViewModel: ObservableObject {
     @Published var notificationData: [NotificationContentData] = [] // 알림 데이터 리스트
+    @Published var unreadNotifications: [NotificationContentData] = [] // 미확인 알림 리스트
+
     @Published var hasUnread: Bool = true // 미확인 알림 여부 조회
     @Published var notificationIds: [Int] = [] // 읽음 처리할 알림 ID 리스트
 
@@ -25,7 +27,7 @@ class ProfileNotificationViewModel: ObservableObject {
         Log.debug("Fetching hasNext: \(hasNext)")
         Log.debug("Fetching page: \(currentPageNumber)")
 
-        let getNotificationRequestDto = GetNotificationRequestDto(size: "5", page: "\(currentPageNumber)")
+        let getNotificationRequestDto = GetNotificationRequestDto(size: "10", page: "\(currentPageNumber)")
 
         UserAccountAlamofire.shared.getNotificationList(dto: getNotificationRequestDto) { result in
             switch result {
@@ -44,6 +46,38 @@ class ProfileNotificationViewModel: ObservableObject {
 
                         Log.debug("currentPageNumber: \(self.currentPageNumber)")
                         Log.debug("hasNext: \(self.hasNext)")
+
+                        completion(true)
+                    } catch {
+                        Log.fault("Error decoding JSON: \(error)")
+                        completion(false)
+                    }
+                }
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
+
+    /// 미확인 알람 목록 조회 api 호출
+    func getUnReadNotificationListApi(completion: @escaping (Bool) -> Void) {
+        UserAccountAlamofire.shared.getUnReadNotification { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(GetUnReadNotificationResponseDto.self, from: responseData)
+
+                        self.unreadNotifications = response.data.notifications
+
+                        if let jsonString = String(data: responseData, encoding: .utf8) {
+                            Log.debug("미확인 알림 목록 조회\(jsonString)")
+                        }
 
                         completion(true)
                     } catch {

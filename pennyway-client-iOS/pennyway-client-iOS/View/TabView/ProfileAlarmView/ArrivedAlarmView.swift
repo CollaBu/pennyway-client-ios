@@ -8,8 +8,8 @@ struct ArrivedAlarmView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if !viewModel.notificationData.filter({ !$0.isRead }).isEmpty {
-                AlarmListView(viewModel: viewModel, alarms: viewModel.notificationData.filter { !$0.isRead })
+            if !viewModel.unreadNotifications.isEmpty {
+                AlarmListView(viewModel: viewModel, alarms: viewModel.unreadNotifications, isUnread: true)
 
                 Rectangle()
                     .platformTextColor(color: .clear)
@@ -19,15 +19,16 @@ struct ArrivedAlarmView: View {
                 Spacer().frame(height: 29 * DynamicSizeFactor.factor())
             }
 
-            if !viewModel.notificationData.filter({ $0.isRead }).isEmpty {
-                AlarmListView(viewModel: viewModel, alarms: viewModel.notificationData.filter { $0.isRead })
+            if !viewModel.notificationData.isEmpty {
+                AlarmListView(viewModel: viewModel, alarms: viewModel.notificationData, isUnread: false)
             }
         }
         .onAppear {
             if viewModel.hasUnread == true {
-                viewModel.getNotificationListApi { success in
+                viewModel.getUnReadNotificationListApi { success in
+                    Log.debug("api 호출")
                     if success {
-                        let unreadNotificationIds = viewModel.notificationData.filter { !$0.isRead }.map { $0.id }
+                        let unreadNotificationIds = viewModel.unreadNotifications.map { $0.id }
                         viewModel.notificationIds = unreadNotificationIds
                         if !unreadNotificationIds.isEmpty {
                             viewModel.readNotificationsApi { success in
@@ -39,7 +40,14 @@ struct ArrivedAlarmView: View {
                             }
                         }
                     } else {
-                        Log.debug("알림 목록 가져오기 실패")
+                        Log.debug("미확인 알림 목록 가져오기 실패")
+                    }
+                }
+
+                // 읽은 알림 목록도 함께 불러오기
+                viewModel.getNotificationListApi { success in
+                    if !success {
+                        Log.debug("읽은 알림 목록 가져오기 실패")
                     }
                 }
             }

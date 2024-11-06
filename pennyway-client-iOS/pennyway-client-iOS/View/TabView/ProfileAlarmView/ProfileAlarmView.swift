@@ -17,7 +17,7 @@ struct ProfileAlarmView: View {
 
                     Spacer().frame(height: 28 * DynamicSizeFactor.factor())
 
-                    if viewModel.notificationData.isEmpty {
+                    if viewModel.notificationData.isEmpty && viewModel.unreadNotifications.isEmpty {
                         NoAlarmArrivedView()
                     } else {
                         ArrivedAlarmView(viewModel: viewModel)
