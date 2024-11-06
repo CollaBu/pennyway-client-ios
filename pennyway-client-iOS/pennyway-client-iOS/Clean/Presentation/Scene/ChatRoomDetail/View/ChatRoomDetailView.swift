@@ -13,15 +13,14 @@ struct ChatRoomDetailView: View, ImageLoadable {
             if let image = loadedImage {
                 Image(uiImage: image)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: 236 * DynamicSizeFactor.factor())
 
             } else {
-                Image("icon_close")
+                Image("icon_notifications") // 임시 아이콘
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: 236 * DynamicSizeFactor.factor())
-                    .border(Color.black)
             }
 
             Spacer().frame(height: 19 * DynamicSizeFactor.factor())
@@ -54,7 +53,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
             }, label: "채팅 참여하기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-            NavigationLink(destination: SecretRoomView(), isActive: $isNavigate) {}
+            NavigationLink(destination: navigationDestination, isActive: $isNavigate) {}
                 .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "채팅방")
@@ -74,8 +73,10 @@ struct ChatRoomDetailView: View, ImageLoadable {
         }
         .onAppear {
             if let image = chatRoom?.backgroundImageUrl {
-                loadImage(from: image) { image in
-                    self.loadedImage = image
+                DispatchQueue.main.async {
+                    loadImage(from: image) { image in
+                        self.loadedImage = image
+                    }
                 }
             }
         }
@@ -93,9 +94,13 @@ struct ChatRoomDetailView: View, ImageLoadable {
         }
         .padding(.horizontal, 20)
     }
-}
 
-//
-// #Preview {
-//    ChatRoomDetailView(chatRoom: )
-// }
+    @ViewBuilder
+    private var navigationDestination: some View {
+        if chatRoom?.isPrivate == true {
+            SecretRoomView()
+        } else {
+            MakeUsernameView()
+        }
+    }
+}
