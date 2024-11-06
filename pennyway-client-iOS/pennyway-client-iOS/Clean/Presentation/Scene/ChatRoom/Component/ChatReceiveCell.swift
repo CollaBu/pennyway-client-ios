@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - ChatReceiveCell
 
 struct ChatReceiveCell: View {
+    @State private var loadedImage: UIImage? = nil
     let chat: MessageItemModel
     let sender: ChatMemberItemModel
 
@@ -17,16 +18,20 @@ struct ChatReceiveCell: View {
         HStack(alignment: .top, spacing: 11 * DynamicSizeFactor.factor()) {
             // 프로필 이미지
 
-            ZStack {
-                Rectangle()
-                    .platformTextColor(color: Color("White01"))
-                    .frame(width: 27 * DynamicSizeFactor.factor(), height: 27 * DynamicSizeFactor.factor())
-                    .cornerRadius(3)
-                Image("icon_ current_spending")
+            if let image = loadedImage {
+                // 프로필 이미지가 다운로드되었을 때
+                Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 27 * DynamicSizeFactor.factor(), height: 27 * DynamicSizeFactor.factor())
-                    .clipped()
+                    .cornerRadius(3)
+            } else {
+                // 이미지가 없을 경우 기본 이미지
+                Image("icon_illust_chat_no picture")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 27 * DynamicSizeFactor.factor(), height: 27 * DynamicSizeFactor.factor())
+                    .cornerRadius(3)
             }
 
             VStack(alignment: .leading, spacing: 5 * DynamicSizeFactor.factor()) {
@@ -41,5 +46,10 @@ struct ChatReceiveCell: View {
             Spacer()
         }
         .padding(.horizontal, 20)
+        .onAppear {
+            ImageLoader.loadImage(from: sender.profileImage ?? "") { loadedImage in
+                self.loadedImage = loadedImage
+            }
+        }
     }
 }

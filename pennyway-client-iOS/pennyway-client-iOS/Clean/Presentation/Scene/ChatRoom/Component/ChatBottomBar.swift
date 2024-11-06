@@ -23,6 +23,7 @@ struct ChatBottomBar: View {
         message.components(separatedBy: "\n").count
     }
 
+    private let chatStompService = DefaultChatStompService.shared
     /// 텍스트 자동 줄바꿈으로 인한 줄 수 계산
     private var autoLineCount: Int {
         var counter: Int = 0
@@ -119,6 +120,7 @@ struct ChatBottomBar: View {
             Spacer()
             if !message.isEmpty {
                 Button(action: {
+                    chatStompService.sendMessage(message: message, destination: "")
                     Log.debug("Message sent: \(message)")
                     message = ""
                 }) {

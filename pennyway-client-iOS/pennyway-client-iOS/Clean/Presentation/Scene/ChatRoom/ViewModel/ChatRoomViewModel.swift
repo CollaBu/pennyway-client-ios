@@ -16,7 +16,7 @@ protocol ChatRoomViewModelInput {
 // MARK: - ChatRoomViewModelOutput
 
 protocol ChatRoomViewModelOutput {
-    var roomData: Observable<ChatRoomProtocol?> { get set }
+    var roomData: Observable<ChatRoomItemModel?> { get set }
     var roomDetailData: Observable<ChatRoomDetailItemModel?> { get set }
     var messageData: Observable<[MessageItemModel]> { get set }
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
@@ -29,7 +29,7 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 // MARK: - DefaultChatRoomViewModel
 
 class DefaultChatRoomViewModel: ChatRoomViewModel {
-    var roomData: Observable<ChatRoomProtocol?> = Observable(nil)
+    var roomData: Observable<ChatRoomItemModel?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
     var messageData: Observable<[MessageItemModel]> = Observable([]) // 최근 메시지 목록
     var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 최근 사용자 + 자신

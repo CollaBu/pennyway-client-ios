@@ -138,6 +138,7 @@ private struct SideMenuContent: View {
                 if myInfo?.role == .admin, user.userId != currentUserId { // 내가 방장일 때, 자신이 아닌 사용자만 선택 가능
                     onUserSelect(user)
                 }
+                Log.debug("??\(user)")
             }) {
                 ChatUserCell(member: user, currentUserId: currentUserId)
             }

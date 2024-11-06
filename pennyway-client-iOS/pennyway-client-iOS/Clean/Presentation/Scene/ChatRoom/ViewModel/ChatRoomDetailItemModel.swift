@@ -23,7 +23,8 @@ struct ChatRoomDetailItemModel {
                 name: model.myInfo.name,
                 role: model.myInfo.role,
                 notifyEnabled: model.myInfo.notifyEnabled,
-                createdAt: model.myInfo.createdAt
+                createdAt: model.myInfo.createdAt, 
+                profileImage: model.myInfo.profileImage
             ),
             recentParticipants: model.recentParticipants.map {
                 ChatMemberItemModel(
@@ -32,7 +33,8 @@ struct ChatRoomDetailItemModel {
                     name: $0.name,
                     role: $0.role,
                     notifyEnabled: $0.notifyEnabled,
-                    createdAt: $0.createdAt
+                    createdAt: $0.createdAt, 
+                    profileImage: $0.profileImage
                 )
             },
             otherParticipants: model.otherParticipants.map {
@@ -72,6 +74,7 @@ struct ChatMemberItemModel: Equatable, Identifiable {
     var role: Role
     var notifyEnabled: Bool?
     var createdAt: String
+    let profileImage: String?
 }
 
 // MARK: - MessageItemModel

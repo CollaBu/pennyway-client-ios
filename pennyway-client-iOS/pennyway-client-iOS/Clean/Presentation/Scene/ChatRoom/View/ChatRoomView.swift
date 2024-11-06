@@ -15,7 +15,7 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewStateManager: ViewStateManager
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
-    var chatRoom: ChatRoomProtocol
+    var chatRoom: ChatRoomItemModel
     private let currentUserId = getUserData()!.id
 
     var body: some View {
@@ -85,7 +85,7 @@ struct ChatRoomView: View {
 // MARK: - ChatRoomViewModelWrapper
 
 final class ChatRoomViewModelWrapper: ObservableObject {
-    @Published var roomData: ChatRoomProtocol? = nil
+    @Published var roomData: ChatRoomItemModel? = nil
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
     @Published var messageData: [MessageItemModel] = []
     @Published var chatUserData: [ChatMemberItemModel] = []
@@ -117,111 +117,3 @@ final class ChatRoomViewModelWrapper: ObservableObject {
         }
     }
 }
-
-// let mockChatRoom = ChatRoom(
-//    id: 1,
-//    title: "SwiftUI Chat Room",
-//    description: "A place to talk about SwiftUI",
-//    background_image_url: "https://example.com/background.jpg",
-//    isPrivate: true,
-//    isAdmin: true,
-//    participantCount: 0,
-//    createdAt: "2024-5-04 19:46:19",
-//    unreadMessageCount: 0
-// )
-//
-// let mockMembers: [ChatMember] = [
-//    ChatMember(
-//        id: 1,
-//        userId: 1,
-//        name: "바다오리",
-//        role: .user,
-//        notifyEnabled: true,
-//        createdAt: "2023-9-04 19:46:19", // 예시 날짜
-//        profileImage: "https://example.com/user1.jpg"
-//    ),
-//    ChatMember(
-//        id: 2,
-//        userId: 2,
-//        name: "고래고래고래",
-//        role: .admin,
-//        notifyEnabled: false,
-//        createdAt: "2023-9-04 19:46:19", // 예시 날짜
-//        profileImage: "https://example.com/user2.jpg"
-//    ),
-// ]
-
-let mockChats: [MessageItemModel] = [
-    MessageItemModel(
-        chatRoomId: 1,
-        chatId: 1,
-        content: "Hey, how's it going?",
-        contentType: .text,
-        categoryType: .normal,
-        createdAt: "2024-9-04 19:46:19",
-        senderId: 1
-    ),
-    MessageItemModel(
-        chatRoomId: 1,
-        chatId: 2,
-        content: "All good here! How about you?",
-        contentType: .text,
-        categoryType: .normal,
-        createdAt: "2024-9-04 19:46:19",
-        senderId: 2
-    ),
-    MessageItemModel(
-        chatRoomId: 1,
-        chatId: 3,
-        content: "안녕하세요안녕하세요",
-        contentType: .text,
-        categoryType: .normal,
-        createdAt: "2024-9-04 19:46:19",
-        senderId: 1
-    ),
-    MessageItemModel(
-        chatRoomId: 1,
-        chatId: 4,
-        content: "Just working on some SwiftUI stuff.",
-        contentType: .text,
-        categoryType: .normal,
-        createdAt: "2024-9-04 19:46:19",
-        senderId: 1
-    ),
-    MessageItemModel(
-        chatRoomId: 1,
-        chatId: 5,
-        content: "Just working on some SwiftUI stuff.",
-        contentType: .text,
-        categoryType: .normal,
-        createdAt: "2024-10-21 19:46:19",
-        senderId: 2
-    ),
-    MessageItemModel(
-        chatRoomId: 1,
-        chatId: 6,
-        content: "Just working on some SwiftUI stuff.",
-        contentType: .text,
-        categoryType: .normal,
-        createdAt: "2024-10-21 19:46:19",
-        senderId: 2
-    ),
-    MessageItemModel(
-        chatRoomId: 1,
-        chatId: 7,
-        content: "Just working on some SwiftUI stuff.",
-        contentType: .text,
-        categoryType: .normal,
-        createdAt: "2024-11-5 19:46:19",
-        senderId: 2
-    ),
-    MessageItemModel(
-        chatRoomId: 1,
-        chatId: 8,
-        content: "Just working on some SwiftUI stuff.",
-        contentType: .text,
-        categoryType: .normal,
-        createdAt: "2024-11-5 19:46:19",
-        senderId: 1
-    ),
-]
