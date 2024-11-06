@@ -4,7 +4,6 @@ import SwiftUI
 struct SecretRoomView: View {
     @State private var password = ""
     @State private var isNavigate = false
-//    @State private var isFormValid: Bool = false // 뷰모델에서 isFormValid를 받아와 뷰에서 사용하는 변수
 
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
@@ -28,25 +27,26 @@ struct SecretRoomView: View {
             .padding(.horizontal, 20)
 
             CustomInputView(inputText: $password, placeholder: "", onCommit: {
-                viewModelWrapper.makeChatViewModel.validatePwForm(password: password)
+                viewModelWrapper.joinChatRoomViewModel.validatePwForm(password: password)
             }, isSecureText: false)
+                .keyboardType(.numberPad)
                 .onChange(of: password) { _ in
                     if password.count > 6 {
-                        password = String(password.prefix(30))
+                        password = String(password.prefix(6))
                     }
-                    viewModelWrapper.makeChatViewModel.validatePwForm(password: password)
+                    viewModelWrapper.joinChatRoomViewModel.validatePwForm(password: password)
                 }
 
             Spacer()
 
             CustomBottomButton(action: {
-                if viewModelWrapper.makeChatViewModel.isFormValid {
+                if viewModelWrapper.joinChatRoomViewModel.isFormValid {
                     isNavigate = true
                 }
-            }, label: "다음", isFormValid: $viewModelWrapper.makeChatViewModel.isFormValid)
+            }, label: "다음", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-            NavigationLink(destination: MakeUsernameView(), isActive: $isNavigate) {}
+            NavigationLink(destination: MakeUsernameView(viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
                 .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "배달음식 그만 먹는 방")
@@ -64,9 +64,5 @@ struct SecretRoomView: View {
                 }.offset(x: -10)
             }
         }
-//        .onChange(of: password) { newValue in
-//            Log.debug("onChange 실행 됨 ")
-//            isFormValid = newValue
-//        }
     }
 }

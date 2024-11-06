@@ -229,6 +229,7 @@ final class ChatViewModelWrapper: ObservableObject {
     
     var makeChatViewModel: any MakeChatRoomViewModel
     var getChatRoomViewModel: any GetChatRoomViewModel
+    var joinChatRoomViewModel: any JoinChatRoomViewModel
     
     var filteredChatData: [ChatRoomItemModel] {
         if searchQuery.isEmpty {
@@ -239,9 +240,10 @@ final class ChatViewModelWrapper: ObservableObject {
         }
     }
     
-    init(makeChatViewModel: any MakeChatRoomViewModel, getChatRoomViewModel: any GetChatRoomViewModel) {
+    init(makeChatViewModel: any MakeChatRoomViewModel, getChatRoomViewModel: any GetChatRoomViewModel, joinChatRoomViewModel: any JoinChatRoomViewModel) {
         self.makeChatViewModel = makeChatViewModel
         self.getChatRoomViewModel = getChatRoomViewModel
+        self.joinChatRoomViewModel = joinChatRoomViewModel
         
         chatData = getChatRoomViewModel.roomData.value
         

@@ -102,7 +102,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
         if chatRoom?.isPrivate == true {
             SecretRoomView(viewModelWrapper: viewModelWrapper)
         } else {
-            MakeUsernameView()
+            MakeUsernameView(viewModelWrapper: viewModelWrapper)
         }
     }
 }

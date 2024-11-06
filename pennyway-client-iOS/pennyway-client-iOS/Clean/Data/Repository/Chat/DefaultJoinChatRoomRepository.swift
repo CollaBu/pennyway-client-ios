@@ -10,8 +10,8 @@ import Foundation
 class DefaultJoinChatRoomRepository: JoinChatRoomRepository {
     private let cdnUrl = "https://cdn.dev.pennyway.co.kr/"
 
-    func joinChatRoom(chatRoomId: Int64, password: String, completion: @escaping (Result<ChatRoom, any Error>) -> Void) {
-        let joinChatRoomDto = JoinChatRoomRequestDto(password: password)
+    func joinChatRoom(chatRoomId: Int64, password: String, name: String, completion: @escaping (Result<ChatRoom, any Error>) -> Void) {
+        let joinChatRoomDto = JoinChatRoomRequestDto(password: password.isEmpty ? nil : password, name: name)
 
         ChatAlamofire.shared.joinChatRoom(chatRoomId, joinChatRoomDto) { result in
             switch result {
@@ -19,10 +19,7 @@ class DefaultJoinChatRoomRepository: JoinChatRoomRepository {
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(MakeChatRoomResponseDto.self, from: responseData)
-                        // 응답 DTO를 Model로 매핑
-//                        let chatRoom = response.data.chatRoom { chatRoomDetail in
-//                            return ChatRoomDetail.toChatRoom(dto: chatRoomDetail, cdnUrl: self.cdnUrl)
-//                        }
+
                         let chatRoom = ChatRoomDetail.toChatRoom(dto: response.data.chatRoom, cdnUrl: self.cdnUrl)
 
                         Log.debug("[DefaultGetChatRoomRepository]: 내 채팅 조회 api 성공: \(response)")

@@ -75,9 +75,13 @@ final class ChatSceneDIContainer {
         return DefaultGetChatRoomViewModel(getChatRoomUseCase: makeGetChatRoomUseCase(), searchChatRoomUseCase: makeSearchChatRoomUseCase(), joinChatRoomUseCase: makeJoinChatRoomUseCase())
     }
 
+    private func makeJoinChatRoomViewModel() -> JoinChatRoomViewModel {
+        return DefaultJoinChatRoomViewModel(joinChatRoomUseCase: makeJoinChatRoomUseCase())
+    }
+
     // MARK: - View Model Wrapper
 
     private func makeChatViewModelWrapper() -> ChatViewModelWrapper {
-        return ChatViewModelWrapper(makeChatViewModel: makeChatRoomViewModel(), getChatRoomViewModel: makeGetChatRoomViewModel())
+        return ChatViewModelWrapper(makeChatViewModel: makeChatRoomViewModel(), getChatRoomViewModel: makeGetChatRoomViewModel(), joinChatRoomViewModel: makeJoinChatRoomViewModel())
     }
 }
