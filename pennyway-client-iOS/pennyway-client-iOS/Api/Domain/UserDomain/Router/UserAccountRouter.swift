@@ -19,10 +19,11 @@ enum UserAccountRouter: URLRequestConvertible {
     case readNotifications(dto: ReadNotificationsRequestDto)
     case checkUnReadNotifications
     case deleteDeviceToken(dto: FcmTokenDto)
+    case getUnReadNotification
 
     var method: HTTPMethod {
         switch self {
-        case .getUserProfile, .getNotificationList, .checkUnReadNotifications:
+        case .getUserProfile, .getNotificationList, .checkUnReadNotifications, .getUnReadNotification:
             return .get
         case .deleteUserAccount, .settingOffAlarm, .deleteProfileImage, .deleteDeviceToken:
             return .delete
@@ -62,13 +63,15 @@ enum UserAccountRouter: URLRequestConvertible {
         case .getNotificationList, .readNotifications:
             return "v2/notifications"
         case .checkUnReadNotifications:
+            return "v2/notifications/unread/exist"
+        case .getUnReadNotification:
             return "v2/notifications/unread"
         }
     }
 
     var parameters: Parameters? {
         switch self {
-        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage:
+        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage, .getUnReadNotification:
             return [:]
         case let .registDeviceToken(dto):
             return try? dto.asDictionary()
@@ -100,7 +103,7 @@ enum UserAccountRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage:
+        case .getUserProfile, .deleteUserAccount, .checkUnReadNotifications, .deleteProfileImage, .getUnReadNotification:
             request = URLRequest.createURLRequest(url: url, method: method)
         case .registDeviceToken, .validatePw, .resetMyPw, .editUserId, .editUserPhoneNumber, .editUserName, .readNotifications, .uploadProfileImage:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: parameters)

@@ -110,4 +110,10 @@ class UserAccountAlamofire {
 
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.deleteDeviceToken(dto: dto), completion: completion)
     }
+
+    func getUnReadNotification(completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("UserAccountAlamofire - getUnReadNotification() called")
+
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.getUnReadNotification, completion: completion)
+    }
 }
