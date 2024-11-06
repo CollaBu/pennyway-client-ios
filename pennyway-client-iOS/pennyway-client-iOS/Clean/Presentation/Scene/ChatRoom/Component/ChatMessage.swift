@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChatMessage: View {
     let content: String
-    let createdAt: Date
+    let createdAt: String
     let isSender: Bool
     let maxWidth: CGFloat = 151 * DynamicSizeFactor.factor()
     @State private var textWidth: CGFloat = .zero
@@ -56,9 +56,11 @@ struct ChatMessage: View {
     private var Timestamp: some View {
         VStack {
             Spacer()
-            Text(Date.koreanMeridianTimeFormatter(from: createdAt))
-                .font(.B4MediumFont())
-                .platformTextColor(color: Color("Gray05"))
+            if let date = DateFormatterUtil.dateFromString(createdAt) {
+                Text(Date.koreanMeridianTimeFormatter(from: date))
+                    .font(.B4MediumFont())
+                    .platformTextColor(color: Color("Gray05"))
+            }
         }
     }
 }

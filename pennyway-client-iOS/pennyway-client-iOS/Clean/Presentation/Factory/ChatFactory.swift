@@ -18,12 +18,15 @@ protocol ChatFactory {
 
 final class DefaultChatFactory: ChatFactory {
     private let chatViewModelWrapper: ChatViewModelWrapper
+    private let chatRoomViewModelWrapper: ChatRoomViewModelWrapper
 
-    init(chatViewModelWrapper: ChatViewModelWrapper) {
+    init(chatViewModelWrapper: ChatViewModelWrapper, chatRoomViewModelWrapper: ChatRoomViewModelWrapper) {
         self.chatViewModelWrapper = chatViewModelWrapper
+        self.chatRoomViewModelWrapper = chatRoomViewModelWrapper
     }
 
     public func makeChatView() -> some View { // some: "특정 타입만 반환"
         return ChatCellView(viewModelWrapper: chatViewModelWrapper)
+            .environmentObject(chatRoomViewModelWrapper)
     }
 }
