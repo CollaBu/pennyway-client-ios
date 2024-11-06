@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ChatReceiveCell: View {
     let chat: MessageItemModel
-    let sender: ChatMember
+    let sender: ChatMemberItemModel
 
     var body: some View {
         HStack(alignment: .top, spacing: 11 * DynamicSizeFactor.factor()) {

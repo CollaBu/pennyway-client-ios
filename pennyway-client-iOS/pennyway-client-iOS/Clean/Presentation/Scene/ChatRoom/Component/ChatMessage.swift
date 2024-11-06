@@ -42,7 +42,7 @@ struct ChatMessage: View {
             .onPreferenceChange(TextWidthPreferenceKey.self) { width in
                 self.textWidth = width
             }
-            .frame(minWidth: textWidth, maxWidth: maxWidth)
+            .frame(minWidth: textWidth)
             .fixedSize(horizontal: false, vertical: true)
 
             if !isSender {

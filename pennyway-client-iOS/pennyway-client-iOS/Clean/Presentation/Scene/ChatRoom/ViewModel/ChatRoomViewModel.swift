@@ -29,8 +29,8 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 
 class DefaultChatRoomViewModel: ChatRoomViewModel {
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
-    var messageData: Observable<[MessageItemModel]> = Observable([])
-    var chatUserData: Observable<[ChatMemberItemModel]> = Observable([])
+    var messageData: Observable<[MessageItemModel]> = Observable([]) // 최근 메시지 목록
+    var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 최근 사용자 + 자신
 
     private let chatRoomUseCase: ChatRoomUseCase
 
@@ -48,8 +48,11 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                     self?.messageData.value = recentMessages
                 }
                 if let recentParticipants = self?.roomDetailData.value?.recentParticipants {
-                    self?.chatUserData.value = recentParticipants
+                    if let myInfo = self?.roomDetailData.value?.myInfo {
+                        self?.chatUserData.value = [myInfo] + recentParticipants
+                    }
                 }
+
             case let .failure(error):
                 Log.error("채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
             }

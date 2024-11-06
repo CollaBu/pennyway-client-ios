@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChatContent: View {
     let chats: [MessageItemModel]
-    let members: [ChatMember]
+    let members: [ChatMemberItemModel]
     let currentUserId: Int64
 
     @State private var scrollToBottom: Bool = false

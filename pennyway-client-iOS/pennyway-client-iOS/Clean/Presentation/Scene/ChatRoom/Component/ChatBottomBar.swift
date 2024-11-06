@@ -46,6 +46,8 @@ struct ChatBottomBar: View {
         return counter
     }
 
+    private let chatStompService = DefaultChatStompService.shared
+
     var body: some View {
         VStack {
             Spacer().frame(height: 11 * DynamicSizeFactor.factor())
@@ -119,6 +121,7 @@ struct ChatBottomBar: View {
             Spacer()
             if !message.isEmpty {
                 Button(action: {
+                    chatStompService.sendMessage(message: message, destination: "")
                     Log.debug("Message sent: \(message)")
                     message = ""
                 }) {

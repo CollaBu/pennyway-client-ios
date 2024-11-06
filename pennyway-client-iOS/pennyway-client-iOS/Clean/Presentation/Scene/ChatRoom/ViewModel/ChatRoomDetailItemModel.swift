@@ -77,7 +77,7 @@ struct ChatMemberItemModel: Equatable, Identifiable {
 // MARK: - MessageItemModel
 
 struct MessageItemModel: Equatable, Identifiable {
-    var id: Int64 { chatId } 
+    var id: Int64 { chatId }
     var chatRoomId: Int64
     var chatId: Int64
     var content: String

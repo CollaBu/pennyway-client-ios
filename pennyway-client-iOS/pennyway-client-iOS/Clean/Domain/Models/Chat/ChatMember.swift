@@ -19,7 +19,6 @@ struct ChatMember: Equatable, Identifiable {
     let profileImage: String?
 }
 
-
 // MARK: - OtherMember
 
 struct OtherMember: Equatable, Identifiable {

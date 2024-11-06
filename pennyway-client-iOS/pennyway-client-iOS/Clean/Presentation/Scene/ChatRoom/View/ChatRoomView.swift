@@ -16,12 +16,13 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     var chatRoom: ChatRoomItemModel
+    private let currentUserId = getUserData()!.id
 
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 GeometryReader { geometry in
-                    ChatContent(chats: viewModelWrapper.messageData, members: mockMembers, currentUserId: 102, keyboardManager: keyboardManager)
+                    ChatContent(chats: viewModelWrapper.messageData, members: viewModelWrapper.chatUserData, currentUserId: currentUserId, keyboardManager: keyboardManager)
                         .frame(height: geometry.size.height - keyboardManager.keyboardHeight) // ChatContent의 높이를 키보드 높이만큼 조정
                 }
 
@@ -125,7 +126,7 @@ let mockChatRoom = ChatRoom(
 let mockMembers: [ChatMember] = [
     ChatMember(
         id: 1,
-        userId: 101,
+        userId: 1,
         name: "바다오리",
         role: .user,
         notifyEnabled: true,
@@ -134,7 +135,7 @@ let mockMembers: [ChatMember] = [
     ),
     ChatMember(
         id: 2,
-        userId: 102,
+        userId: 2,
         name: "고래고래고래",
         role: .admin,
         notifyEnabled: false,
@@ -151,7 +152,7 @@ let mockChats: [MessageItemModel] = [
         contentType: .text,
         categoryType: .normal,
         createdAt: "2024-9-04 19:46:19",
-        senderId: 101
+        senderId: 1
     ),
     MessageItemModel(
         chatRoomId: 1,
@@ -160,7 +161,7 @@ let mockChats: [MessageItemModel] = [
         contentType: .text,
         categoryType: .normal,
         createdAt: "2024-9-04 19:46:19",
-        senderId: 102
+        senderId: 2
     ),
     MessageItemModel(
         chatRoomId: 1,
@@ -169,7 +170,7 @@ let mockChats: [MessageItemModel] = [
         contentType: .text,
         categoryType: .normal,
         createdAt: "2024-9-04 19:46:19",
-        senderId: 101
+        senderId: 1
     ),
     MessageItemModel(
         chatRoomId: 1,
@@ -178,7 +179,7 @@ let mockChats: [MessageItemModel] = [
         contentType: .text,
         categoryType: .normal,
         createdAt: "2024-9-04 19:46:19",
-        senderId: 101
+        senderId: 1
     ),
     MessageItemModel(
         chatRoomId: 1,
@@ -187,7 +188,7 @@ let mockChats: [MessageItemModel] = [
         contentType: .text,
         categoryType: .normal,
         createdAt: "2024-10-21 19:46:19",
-        senderId: 102
+        senderId: 2
     ),
     MessageItemModel(
         chatRoomId: 1,
@@ -196,7 +197,7 @@ let mockChats: [MessageItemModel] = [
         contentType: .text,
         categoryType: .normal,
         createdAt: "2024-10-21 19:46:19",
-        senderId: 102
+        senderId: 2
     ),
     MessageItemModel(
         chatRoomId: 1,
@@ -205,7 +206,7 @@ let mockChats: [MessageItemModel] = [
         contentType: .text,
         categoryType: .normal,
         createdAt: "2024-11-5 19:46:19",
-        senderId: 102
+        senderId: 2
     ),
     MessageItemModel(
         chatRoomId: 1,
@@ -214,6 +215,6 @@ let mockChats: [MessageItemModel] = [
         contentType: .text,
         categoryType: .normal,
         createdAt: "2024-11-5 19:46:19",
-        senderId: 101
+        senderId: 1
     ),
 ]
