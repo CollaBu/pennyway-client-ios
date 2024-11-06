@@ -25,7 +25,7 @@ struct ChatContent: View {
                             Spacer().frame(height: 5 * DynamicSizeFactor.factor())
 
                             ForEach(groupedChatsByDate[date] ?? []) { chat in
-                                if let sender = members.first(where: { $0.user_id == chat.senderId }) {
+                                if let sender = members.first(where: { $0.userId == chat.senderId }) {
                                     if chat.senderId == currentUserId {
                                         ChatSendCell(chat: chat, sender: sender)
                                     } else {

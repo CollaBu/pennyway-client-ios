@@ -11,9 +11,18 @@ import Foundation
 
 struct ChatMember: Equatable, Identifiable {
     let id: Int64
-    let profile_image: String
-    let username: String
-    let role: String
-    let user_id: Int64
-    let chat_room_id: Int64
+    let userId: Int64
+    let name: String
+    let role: Role
+    let notifyEnabled: Bool
+    let createdAt: String
+    let profileImage: String?
+}
+
+
+// MARK: - OtherMember
+
+struct OtherMember: Equatable, Identifiable {
+    let id: Int64
+    let name: String
 }

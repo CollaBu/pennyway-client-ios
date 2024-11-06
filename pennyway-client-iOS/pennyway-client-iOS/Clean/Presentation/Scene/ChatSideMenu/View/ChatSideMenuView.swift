@@ -94,7 +94,7 @@ private struct SideMenuContent: View {
     
     private var SideMenuCells: some View {
         VStack {
-            if mockMembers[1].role == "Admin" {
+            if mockMembers[1].role.rawValue == Role.admin.rawValue {
                 SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone", isAlarmCell: false, isAlarmOn: .constant(false))
             }
             

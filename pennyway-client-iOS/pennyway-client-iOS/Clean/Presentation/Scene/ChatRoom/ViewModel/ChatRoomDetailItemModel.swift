@@ -10,30 +10,37 @@ import Foundation
 // MARK: - ChatRoomDetailItemModel
 
 struct ChatRoomDetailItemModel {
-    var myInfo: ChatUserInfoItemModel
-    var recentParticipants: [ChatUserInfoItemModel]
-    var otherParticipantIds: [Int64]
+    var myInfo: ChatMemberItemModel
+    var recentParticipants: [ChatMemberItemModel]
+    var otherParticipants: [OtherMemberItemModel]
     var recentMessages: [MessageItemModel]
 
     static func from(model: ChatRoomDetailInfo) -> ChatRoomDetailItemModel {
         return ChatRoomDetailItemModel(
-            myInfo: ChatUserInfoItemModel(
+            myInfo: ChatMemberItemModel(
                 id: model.myInfo.id,
+                userId: model.myInfo.userId,
                 name: model.myInfo.name,
                 role: model.myInfo.role,
                 notifyEnabled: model.myInfo.notifyEnabled,
                 createdAt: model.myInfo.createdAt
             ),
             recentParticipants: model.recentParticipants.map {
-                ChatUserInfoItemModel(
+                ChatMemberItemModel(
                     id: $0.id,
+                    userId: $0.userId,
                     name: $0.name,
                     role: $0.role,
                     notifyEnabled: $0.notifyEnabled,
                     createdAt: $0.createdAt
                 )
             },
-            otherParticipantIds: model.otherParticipantIds,
+            otherParticipants: model.otherParticipants.map {
+                OtherMemberItemModel(
+                    id: $0.id,
+                    name: $0.name
+                )
+            },
             recentMessages: model.recentMessages.map {
                 MessageItemModel(
                     chatRoomId: $0.chatRoomId,
@@ -49,10 +56,18 @@ struct ChatRoomDetailItemModel {
     }
 }
 
-// MARK: - ChatUserInfoItemModel
+// MARK: - OtherMemberItemModel
 
-struct ChatUserInfoItemModel: Equatable, Identifiable {
+struct OtherMemberItemModel: Equatable, Identifiable {
+    let id: Int64
+    let name: String
+}
+
+// MARK: - ChatMemberItemModel
+
+struct ChatMemberItemModel: Equatable, Identifiable {
     var id: Int64
+    var userId: Int64
     var name: String
     var role: Role
     var notifyEnabled: Bool

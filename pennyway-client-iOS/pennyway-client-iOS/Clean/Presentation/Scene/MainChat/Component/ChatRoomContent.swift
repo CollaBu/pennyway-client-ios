@@ -16,16 +16,20 @@ struct ChatRoomContent: View {
                 if isMyChat {
                     if let rooms = dummyChatRooms {
                         ForEach(rooms, id: \.id) { chatRoom in
-                            ChatRoomCell(chatRoom: chatRoom, isMyChat: true, onDelete: {
-                                isPopUp = true
-                                selectedChatRoom = chatRoom
-                            })
+                            NavigationLink(destination: ChatRoomView(chatRoom: chatRoom)) {
+                                ChatRoomCell(chatRoom: chatRoom, isMyChat: true, onDelete: {
+                                    isPopUp = true
+                                    selectedChatRoom = chatRoom
+                                })
+                            }
                             .transition(.move(edge: .trailing).combined(with: .opacity))
                         }
                     }
                 } else {
                     if let rooms = searchChatRooms {
                         ForEach(rooms, id: \.id) { chatRoom in
+                            // 수정 필요
+//                            NavigationLink(destination: ChatRoomView(chatRoom: chatRoom)) {
                             ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
                                 isPopUp = true
                             })

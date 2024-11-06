@@ -85,7 +85,7 @@ struct ChatRoomView: View {
 final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
     @Published var messageData: [MessageItemModel] = []
-    @Published var chatUserData: [ChatUserInfoItemModel] = []
+    @Published var chatUserData: [ChatMemberItemModel] = []
 
     var chatRoomViewModel: any ChatRoomViewModel
 
@@ -118,26 +118,28 @@ let mockChatRoom = ChatRoom(
     isPrivate: true,
     isAdmin: true,
     participantCount: 0,
-    createdAt: "2024-10-25T06:09:41.472Z",
+    createdAt: "2024-5-04 19:46:19",
     unreadMessageCount: 0
 )
 
 let mockMembers: [ChatMember] = [
     ChatMember(
         id: 1,
-        profile_image: "https://example.com/user1.jpg",
-        username: "바다오리",
-        role: "Member",
-        user_id: 101,
-        chat_room_id: 1
+        userId: 101,
+        name: "바다오리",
+        role: .user,
+        notifyEnabled: true,
+        createdAt: "2023-9-04 19:46:19", // 예시 날짜
+        profileImage: "https://example.com/user1.jpg"
     ),
     ChatMember(
         id: 2,
-        profile_image: "https://example.com/user2.jpg",
-        username: "고래고래고래",
-        role: "Admin",
-        user_id: 102,
-        chat_room_id: 1
+        userId: 102,
+        name: "고래고래고래",
+        role: .admin,
+        notifyEnabled: false,
+        createdAt: "2023-9-04 19:46:19", // 예시 날짜
+        profileImage: "https://example.com/user2.jpg"
     ),
 ]
 

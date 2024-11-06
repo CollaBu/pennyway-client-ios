@@ -15,13 +15,19 @@ struct GetChatRoomDetailResponseDto: Codable {
         let chatRoom: GetChatRoomDetail
 
         struct GetChatRoomDetail: Codable {
-            let myInfo: GetChatUserInfo
-            let recentParticipants: [GetChatUserInfo]
-            let otherParticipantIds: [Int64]
+            let myInfo: GetChatMember
+            let recentParticipants: [GetChatMember]
+            let otherParticipants: [GetOtherMember]
             let recentMessages: [GetMessage]
 
-            struct GetChatUserInfo: Codable {
+            struct GetOtherMember: Codable {
                 let id: Int64
+                let name: String
+            }
+
+            struct GetChatMember: Codable {
+                let id: Int64
+                let userId: Int64
                 let name: String
                 let role: Role
                 let notifyEnabled: Bool
@@ -42,23 +48,32 @@ struct GetChatRoomDetailResponseDto: Codable {
 
     static func to(dto: GetChatRoomDetailResponseDto) -> ChatRoomDetailInfo {
         return ChatRoomDetailInfo(
-            myInfo: ChatUserInfo(
+            myInfo: ChatMember(
                 id: dto.data.chatRoom.myInfo.id,
+                userId: dto.data.chatRoom.myInfo.userId,
                 name: dto.data.chatRoom.myInfo.name,
                 role: dto.data.chatRoom.myInfo.role,
                 notifyEnabled: dto.data.chatRoom.myInfo.notifyEnabled,
-                createdAt: dto.data.chatRoom.myInfo.createdAt
+                createdAt: dto.data.chatRoom.myInfo.createdAt, 
+                profileImage: ""
             ),
             recentParticipants: dto.data.chatRoom.recentParticipants.map {
-                ChatUserInfo(
+                ChatMember(
                     id: $0.id,
+                    userId: $0.userId,
                     name: $0.name,
                     role: $0.role,
                     notifyEnabled: $0.notifyEnabled,
-                    createdAt: $0.createdAt
+                    createdAt: $0.createdAt,
+                    profileImage: ""
                 )
             },
-            otherParticipantIds: dto.data.chatRoom.otherParticipantIds,
+            otherParticipants: dto.data.chatRoom.otherParticipants.map {
+                OtherMember(
+                    id: $0.id, 
+                    name: $0.name
+                )
+            },
             recentMessages: dto.data.chatRoom.recentMessages.map {
                 Message(
                     chatRoomId: $0.chatRoomId,

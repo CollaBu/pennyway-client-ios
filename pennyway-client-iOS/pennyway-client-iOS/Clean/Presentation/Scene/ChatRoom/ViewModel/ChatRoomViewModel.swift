@@ -18,7 +18,7 @@ protocol ChatRoomViewModelInput {
 protocol ChatRoomViewModelOutput {
     var roomDetailData: Observable<ChatRoomDetailItemModel?> { get set }
     var messageData: Observable<[MessageItemModel]> { get set }
-    var chatUserData: Observable<[ChatUserInfoItemModel]> { get set }
+    var chatUserData: Observable<[ChatMemberItemModel]> { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -30,7 +30,7 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 class DefaultChatRoomViewModel: ChatRoomViewModel {
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
     var messageData: Observable<[MessageItemModel]> = Observable([])
-    var chatUserData: Observable<[ChatUserInfoItemModel]> = Observable([])
+    var chatUserData: Observable<[ChatMemberItemModel]> = Observable([])
 
     private let chatRoomUseCase: ChatRoomUseCase
 

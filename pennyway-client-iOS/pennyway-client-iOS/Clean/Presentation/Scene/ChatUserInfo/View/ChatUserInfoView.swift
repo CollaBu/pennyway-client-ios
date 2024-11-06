@@ -37,7 +37,7 @@ struct ChatUserInfoView: View {
             if showKickOutPopUp {
                 CustomPopUpView(showingPopUp: $showKickOutPopUp,
                                 titleLabel: "내보내기",
-                                subTitleLabel: "\(mockMembers[1].username)님을 내보낼까요?",
+                                subTitleLabel: "\(mockMembers[1].name)님을 내보낼까요?",
                                 firstBtnAction: { self.showKickOutPopUp = false },
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {

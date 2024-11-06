@@ -19,12 +19,12 @@ struct ChatUserCell: View {
                 .frame(width: 23 * DynamicSizeFactor.factor(), height: 23 * DynamicSizeFactor.factor())
                 .cornerRadius(5)
 
-            Text(member.username)
+            Text(member.name)
                 .font(.B3MediumFont())
                 .platformTextColor(color: Color("Gray07"))
                 .padding(.leading, 6 * DynamicSizeFactor.factor())
 
-            if member.user_id == currentUserId {
+            if member.userId == currentUserId {
                 CustomRoundedBtn(
                     title: "나",
                     fontColor: Color("Gray05"),
@@ -34,7 +34,7 @@ struct ChatUserCell: View {
                 )
             }
 
-            if member.role == "Admin" {
+            if member.role.rawValue == Role.admin.rawValue {
                 CustomRoundedBtn(
                     title: "방장",
                     fontColor: Color("Mint03"),

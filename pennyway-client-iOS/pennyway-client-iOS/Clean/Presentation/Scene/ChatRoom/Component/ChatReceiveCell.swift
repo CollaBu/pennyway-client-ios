@@ -31,7 +31,7 @@ struct ChatReceiveCell: View {
 
             VStack(alignment: .leading, spacing: 5 * DynamicSizeFactor.factor()) {
                 // 사용자 이름
-                Text(sender.username)
+                Text(sender.name)
                     .font(.B3MediumFont())
                     .platformTextColor(color: Color("Gray06"))
 
