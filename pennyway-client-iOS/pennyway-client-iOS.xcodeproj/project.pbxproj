@@ -81,6 +81,8 @@
 		4A2C3A872CD3C965006B6804 /* DefaultProfileImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A7F2CD3C965006B6804 /* DefaultProfileImageRepository.swift */; };
 		4A2C3A882CD3C965006B6804 /* DefaultSignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A802CD3C965006B6804 /* DefaultSignUpRepository.swift */; };
 		4A2C3A892CD3C965006B6804 /* DefaultUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A812CD3C965006B6804 /* DefaultUserProfileRepository.swift */; };
+		4A2C3A8B2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */; };
+		4A2C3A8D2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A8C2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -529,6 +531,8 @@
 		4A2C3A7F2CD3C965006B6804 /* DefaultProfileImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultProfileImageRepository.swift; sourceTree = "<group>"; };
 		4A2C3A802CD3C965006B6804 /* DefaultSignUpRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSignUpRepository.swift; sourceTree = "<group>"; };
 		4A2C3A812CD3C965006B6804 /* DefaultUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepository.swift; sourceTree = "<group>"; };
+		4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJoinedChatRoomsRequestDto.swift; sourceTree = "<group>"; };
+		4A2C3A8C2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJoinedChatRoomsResponseDto.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -2752,6 +2756,7 @@
 			children = (
 				D80C68912CC80BEA00928921 /* GetChatServerResponseDto.swift */,
 				D8DCCF942CBD903400550A8B /* MakeChatRoomResponseDto.swift */,
+				4A2C3A8C2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift */,
 				D85FC58F2CCC03920068553A /* SearchChatRoomResponseDto.swift */,
 				D89263272CD3AD080057AAD6 /* GetChatRoomResponseDto.swift */,
 				4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */,
@@ -2763,6 +2768,7 @@
 			isa = PBXGroup;
 			children = (
 				D8DCCF9B2CBD923100550A8B /* MakeChatRoomRequestDto.swift */,
+				4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */,
 				D85FC58D2CCC029B0068553A /* SearchChatRoomRequestDto.swift */,
 			);
 			path = Request;
@@ -3134,6 +3140,7 @@
 				4AF3A2FD2CD934D00099967F /* DefaultChatRoomRepository.swift in Sources */,
 				D85E46542CD6168100715169 /* SearchChatRoom.swift in Sources */,
 				4A863A142CB461BE00BA2F2F /* TextHeightPreference.swift in Sources */,
+				4A2C3A8B2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift in Sources */,
 				D8BB4FE02C61BE7300FDD258 /* PhotoActionsPopUp.swift in Sources */,
 				B599E4DC2C6C6CEB006051E9 /* TargetAmountAnalyticsEvents.swift in Sources */,
 				D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */,
@@ -3253,6 +3260,7 @@
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
+				4A2C3A8D2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4AC320472C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift in Sources */,
 				4A6CC1E02C80E3F600D638B2 /* ScreenUtil.swift in Sources */,
