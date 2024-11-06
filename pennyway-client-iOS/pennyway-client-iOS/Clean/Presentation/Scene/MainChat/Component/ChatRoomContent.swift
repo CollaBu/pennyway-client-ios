@@ -3,8 +3,10 @@ import SwiftUI
 // MARK: - ChatRoomContent
 
 struct ChatRoomContent: View {
+    @Binding var isNavigateChatRoomDetailView: Bool // 채팅방 가입 뷰로 이동하기 위한 변수
     @Binding var isPopUp: Bool // 채팅방 나가기 팝업 표시 여부
-    @Binding var selectedChatRoom: ChatRoomItemModel? // 선택된 채팅방을 저장하기 위한 변수
+    @Binding var selectedChatRoom: ChatRoomItemModel? // 내 채팅 중 선택된 채팅방을 저장하기 위한 변수
+    @Binding var selectedSearchChatRoom: SearchChatRoomItemModel? // 추천 채팅 중 선택된 채팅방을 저장하기 위한 변수
     @Binding var dummyChatRooms: [ChatRoomItemModel]? // 내 채팅의 item을 표시하기 위한 항목
     @Binding var searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
     var isMyChat: Bool // 내 채팅 여부
@@ -26,8 +28,14 @@ struct ChatRoomContent: View {
                 } else {
                     if let rooms = searchChatRooms {
                         ForEach(rooms, id: \.id) { chatRoom in
-                            ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
-                                isPopUp = true
+                            Button(action: {
+                                selectedSearchChatRoom = chatRoom
+                                isNavigateChatRoomDetailView = true
+                            }, label: {
+                                ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
+                                    isPopUp = true
+                                })
+                                .contentShape(Rectangle())
                             })
                         }
                     }
