@@ -10,11 +10,11 @@ import SwiftUI
 // MARK: - ChatSendCell
 
 struct ChatSendCell: View {
-    let chat: Chat
+    let chat: MessageItemModel
     let sender: ChatMember
 
     var body: some View {
-        ChatMessage(content: chat.content, createdAt: chat.created_at, isSender: true)
+        ChatMessage(content: chat.content, createdAt: chat.createdAt, isSender: true)
             .padding(.horizontal, 20)
     }
 }

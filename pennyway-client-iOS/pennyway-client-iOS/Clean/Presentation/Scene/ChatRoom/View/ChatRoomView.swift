@@ -1,5 +1,5 @@
 //
-//  ChatView.swift
+//  ChatRoomView.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 10/8/24.
@@ -7,18 +7,21 @@
 
 import SwiftUI
 
-// MARK: - ChatView
+// MARK: - ChatRoomView
 
-struct ChatView: View {
+struct ChatRoomView: View {
     @StateObject private var keyboardManager = KeyboardManager()
     @State private var isSideMenuPresented = false
     @EnvironmentObject var viewStateManager: ViewStateManager
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
+
+    var chatRoom: ChatRoomItemModel
 
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 GeometryReader { geometry in
-                    ChatContent(chats: mockChats, members: mockMembers, currentUserId: 102, keyboardManager: keyboardManager)
+                    ChatContent(chats: viewModelWrapper.messageData, members: mockMembers, currentUserId: 102, keyboardManager: keyboardManager)
                         .frame(height: geometry.size.height - keyboardManager.keyboardHeight) // ChatContent의 높이를 키보드 높이만큼 조정
                 }
 
@@ -26,7 +29,7 @@ struct ChatView: View {
                     .offset(y: -keyboardManager.keyboardHeight)
                     .animation(keyboardManager.keyboardHeight > 0 ? .easeOut(duration: 0.5) : nil, value: keyboardManager.keyboardHeight)
             }
-            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(mockChatRoom.title)")
+            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(chatRoom.title)")
             .background(Color("Ashblue02"))
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
@@ -69,13 +72,42 @@ struct ChatView: View {
             )
             .onAppear {
                 viewStateManager.setCurrentView(self)
+
+                // 채팅방 상세 정보 조회
+                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
             }
         }
     }
 }
 
-#Preview {
-    ChatView()
+// MARK: - ChatRoomViewModelWrapper
+
+final class ChatRoomViewModelWrapper: ObservableObject {
+    @Published var roomDetailData: ChatRoomDetailItemModel? = nil
+    @Published var messageData: [MessageItemModel] = []
+    @Published var chatUserData: [ChatUserInfoItemModel] = []
+
+    var chatRoomViewModel: any ChatRoomViewModel
+
+    init(chatRoomViewModel: any ChatRoomViewModel) {
+        self.chatRoomViewModel = chatRoomViewModel
+
+        roomDetailData = chatRoomViewModel.roomDetailData.value
+        messageData = chatRoomViewModel.messageData.value
+        chatUserData = chatRoomViewModel.chatUserData.value
+
+        chatRoomViewModel.roomDetailData.observe(on: self) { [weak self] newData in
+            self?.roomDetailData = newData
+        }
+
+        chatRoomViewModel.messageData.observe(on: self) { [weak self] newData in
+            self?.messageData = newData
+        }
+
+        chatRoomViewModel.chatUserData.observe(on: self) { [weak self] newData in
+            self?.chatUserData = newData
+        }
+    }
 }
 
 let mockChatRoom = ChatRoom(
@@ -86,7 +118,8 @@ let mockChatRoom = ChatRoom(
     isPrivate: true,
     isAdmin: true,
     participantCount: 0,
-    createdAt: "2024-10-25T06:09:41.472Z"
+    createdAt: "2024-10-25T06:09:41.472Z",
+    unreadMessageCount: 0
 )
 
 let mockMembers: [ChatMember] = [
@@ -108,62 +141,77 @@ let mockMembers: [ChatMember] = [
     ),
 ]
 
-let mockChats: [Chat] = [
-    Chat(
-        id: 1,
+let mockChats: [MessageItemModel] = [
+    MessageItemModel(
+        chatRoomId: 1,
+        chatId: 1,
         content: "Hey, how's it going?",
-        created_at: Date(),
-        sender_id: 101,
-        chat_room_id: 1
+        contentType: .text,
+        categoryType: .normal,
+        createdAt: "2024-9-04 19:46:19",
+        senderId: 101
     ),
-    Chat(
-        id: 2,
+    MessageItemModel(
+        chatRoomId: 1,
+        chatId: 2,
         content: "All good here! How about you?",
-        created_at: Date(),
-        sender_id: 102,
-        chat_room_id: 1
+        contentType: .text,
+        categoryType: .normal,
+        createdAt: "2024-9-04 19:46:19",
+        senderId: 102
     ),
-    Chat(
-        id: 3,
+    MessageItemModel(
+        chatRoomId: 1,
+        chatId: 3,
         content: "안녕하세요안녕하세요",
-        created_at: Date(),
-        sender_id: 101,
-        chat_room_id: 1
+        contentType: .text,
+        categoryType: .normal,
+        createdAt: "2024-9-04 19:46:19",
+        senderId: 101
     ),
-
-    Chat(
-        id: 4,
+    MessageItemModel(
+        chatRoomId: 1,
+        chatId: 4,
         content: "Just working on some SwiftUI stuff.",
-        created_at: Date(),
-        sender_id: 101,
-        chat_room_id: 1
+        contentType: .text,
+        categoryType: .normal,
+        createdAt: "2024-9-04 19:46:19",
+        senderId: 101
     ),
-    Chat(
-        id: 5,
+    MessageItemModel(
+        chatRoomId: 1,
+        chatId: 5,
         content: "Just working on some SwiftUI stuff.",
-        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 10, day: 21))!,
-        sender_id: 102,
-        chat_room_id: 1
+        contentType: .text,
+        categoryType: .normal,
+        createdAt: "2024-10-21 19:46:19",
+        senderId: 102
     ),
-    Chat(
-        id: 6,
+    MessageItemModel(
+        chatRoomId: 1,
+        chatId: 6,
         content: "Just working on some SwiftUI stuff.",
-        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 10, day: 21))!,
-        sender_id: 102,
-        chat_room_id: 1
+        contentType: .text,
+        categoryType: .normal,
+        createdAt: "2024-10-21 19:46:19",
+        senderId: 102
     ),
-    Chat(
-        id: 7,
+    MessageItemModel(
+        chatRoomId: 1,
+        chatId: 7,
         content: "Just working on some SwiftUI stuff.",
-        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 21))!,
-        sender_id: 102,
-        chat_room_id: 1
+        contentType: .text,
+        categoryType: .normal,
+        createdAt: "2024-11-5 19:46:19",
+        senderId: 102
     ),
-    Chat(
-        id: 8,
+    MessageItemModel(
+        chatRoomId: 1,
+        chatId: 8,
         content: "Just working on some SwiftUI stuff.",
-        created_at: Calendar.current.date(from: DateComponents(year: 2024, month: 11, day: 21))!,
-        sender_id: 101,
-        chat_room_id: 1
+        contentType: .text,
+        categoryType: .normal,
+        createdAt: "2024-11-5 19:46:19",
+        senderId: 101
     ),
 ]

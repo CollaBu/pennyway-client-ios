@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - ChatReceiveCell
 
 struct ChatReceiveCell: View {
-    let chat: Chat
+    let chat: MessageItemModel
     let sender: ChatMember
 
     var body: some View {
@@ -35,7 +35,7 @@ struct ChatReceiveCell: View {
                     .font(.B3MediumFont())
                     .platformTextColor(color: Color("Gray06"))
 
-                ChatMessage(content: chat.content, createdAt: chat.created_at, isSender: false)
+                ChatMessage(content: chat.content, createdAt: chat.createdAt, isSender: false)
             }
 
             Spacer()

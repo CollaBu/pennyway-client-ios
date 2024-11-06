@@ -12,11 +12,12 @@ enum ChatRouter: URLRequestConvertible {
     case getChatServer
     case getJoinedChatRooms(dto: GetJoinedChatRoomsRequestDto)
     case makeChatRoom(dto: MakeChatRoomRequestDto)
+    case searchChatRoom(dto: SearchChatRoomRequestDto)
     case getChatRoom
 
     var method: HTTPMethod {
         switch self {
-        case .getChatServer, .getChatRoom, .getJoinedChatRooms:
+        case .getChatServer, .getChatRoom, .getJoinedChatRooms, .searchChatRoom:
             return .get
         case .makeChatRoom:
             return .post
@@ -29,7 +30,7 @@ enum ChatRouter: URLRequestConvertible {
 
     var path: String {
         switch self {
-        case .makeChatRoom:
+        case .makeChatRoom, .searchChatRoom:
             return "v2/chat-rooms"
         case .getChatServer:
             return "v2/socket/chat"
@@ -44,7 +45,7 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case let .makeChatRoom(dto):
             return try? dto.asDictionary()
-        case .getChatServer, .getChatRoom, .getJoinedChatRooms:
+        case .getChatServer, .getChatRoom, .getJoinedChatRooms, .searchChatRoom:
             return [:]
         }
     }
@@ -56,6 +57,9 @@ enum ChatRouter: URLRequestConvertible {
 
         case .getChatServer, .makeChatRoom, .getChatRoom:
             return [:]
+
+        case let .searchChatRoom(dto):
+            return try? dto.asDictionary()
         }
     }
 
@@ -66,6 +70,9 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case .makeChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
+        case .searchChatRoom:
+            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         case .getChatServer, .getChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method)
         case .getJoinedChatRooms:
