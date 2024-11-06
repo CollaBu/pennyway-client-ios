@@ -1,17 +1,28 @@
 
 import SwiftUI
 
-struct ChatRoomDetailView: View {
+struct ChatRoomDetailView: View, ImageLoadable {
     let chatRoom: SearchChatRoomItemModel?
     @State private var isNavigate = false
+    @State private var loadedImage: UIImage? = nil
 
     var body: some View {
         VStack(alignment: .leading) {
             Spacer().frame(height: 17 * DynamicSizeFactor.factor())
 
-            Image("icon_close")
-                .frame(maxWidth: .infinity, maxHeight: 236 * DynamicSizeFactor.factor())
-                .border(Color.black)
+            if let image = loadedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: 236 * DynamicSizeFactor.factor())
+
+            } else {
+                Image("icon_close")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: 236 * DynamicSizeFactor.factor())
+                    .border(Color.black)
+            }
 
             Spacer().frame(height: 19 * DynamicSizeFactor.factor())
 
@@ -59,6 +70,13 @@ struct ChatRoomDetailView: View {
                         .contentShape(Rectangle())
 
                 }.offset(x: -10)
+            }
+        }
+        .onAppear {
+            if let image = chatRoom?.backgroundImageUrl {
+                loadImage(from: image) { image in
+                    self.loadedImage = image
+                }
             }
         }
     }
