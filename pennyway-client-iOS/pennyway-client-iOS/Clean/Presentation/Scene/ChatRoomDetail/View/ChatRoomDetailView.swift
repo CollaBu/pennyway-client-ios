@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct ChatRoomDetailView: View {
+    let chatRoom: SearchChatRoomItemModel
     @State private var isNavigate = false
 
     var body: some View {
@@ -19,13 +20,13 @@ struct ChatRoomDetailView: View {
             Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
             VStack(alignment: .leading) {
-                Text("배달음식 그만 먹는 방")
+                Text("\(chatRoom.title)")
                     .font(.H2SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
 
                 Spacer().frame(height: 7 * DynamicSizeFactor.factor())
 
-                Text("배달음식 NO 집밥 YES")
+                Text("\(chatRoom.description)")
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray04"))
             }
@@ -60,14 +61,15 @@ struct ChatRoomDetailView: View {
 
     private var tagSection: some View {
         HStack(spacing: 9 * DynamicSizeFactor.factor()) {
-            CustomRoundedBtn(title: "비공개방", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {}
+            CustomRoundedBtn(title: chatRoom.isPrivate ? "비공개방" : "", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {}
 
-            CustomRoundedBtn(title: "127명이 대화하고 있어요", fontColor: Color("Yellow02"), backgroundColor: Color("Yellow01"), style: .large) {}
+            CustomRoundedBtn(title: "\(chatRoom.participantCount)명이 대화하고 있어요", fontColor: Color("Yellow02"), backgroundColor: Color("Yellow01"), style: .large) {}
         }
         .padding(.horizontal, 20)
     }
 }
 
-#Preview {
-    ChatRoomDetailView()
-}
+//
+// #Preview {
+//    ChatRoomDetailView(chatRoom: )
+// }

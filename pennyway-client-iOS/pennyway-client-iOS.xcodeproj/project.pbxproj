@@ -445,6 +445,7 @@
 		D8E889E62CDB8102008FC22E /* JoinChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889E52CDB8102008FC22E /* JoinChatRoomUseCase.swift */; };
 		D8E889E82CDB8165008FC22E /* JoinChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889E72CDB8165008FC22E /* JoinChatRoomRepository.swift */; };
 		D8E889EA2CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889E92CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift */; };
+		D8E889EC2CDBAD10008FC22E /* ImageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889EB2CDBAD10008FC22E /* ImageLoadable.swift */; };
 		D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */; };
 		D8F9D7362C593B71005416FC /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7352C593B71005416FC /* PreparedView.swift */; };
 		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
@@ -883,6 +884,7 @@
 		D8E889E52CDB8102008FC22E /* JoinChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChatRoomUseCase.swift; sourceTree = "<group>"; };
 		D8E889E72CDB8165008FC22E /* JoinChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChatRoomRepository.swift; sourceTree = "<group>"; };
 		D8E889E92CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultJoinChatRoomRepository.swift; sourceTree = "<group>"; };
+		D8E889EB2CDBAD10008FC22E /* ImageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadable.swift; sourceTree = "<group>"; };
 		D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleDeleteButtonUtil.swift; sourceTree = "<group>"; };
 		D8F9D7352C593B71005416FC /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedView.swift; path = "pennyway-client-iOS/View/TabView/PreparedView.swift"; sourceTree = SOURCE_ROOT; };
 		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -1002,6 +1004,7 @@
 				4A0BC6A62BF5F4E10036D900 /* StringAttributeProtocol.swift */,
 				D85E46592CD7727200715169 /* ChatRoomProtocol.swift */,
 				D80B8D972CD905BC00F49BF3 /* MakeFullImageURL.swift */,
+				D8E889EB2CDBAD10008FC22E /* ImageLoadable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -3226,6 +3229,7 @@
 				D85E464A2CD609E100715169 /* DefaultSearchChatRoomRepository.swift in Sources */,
 				4AA13C622C63E4DF00D8DEE7 /* GeneratePresigendUrlRequestDto.swift in Sources */,
 				4AC3204D2C11D5AC00DDB4B6 /* SpendingCalendarCellView.swift in Sources */,
+				D8E889EC2CDBAD10008FC22E /* ImageLoadable.swift in Sources */,
 				4AC4FD0A2BBDCE080027ACD5 /* GoogleOAuthViewModel.swift in Sources */,
 				4ABE0F222CA813B100CD6DF7 /* Auth.swift in Sources */,
 				4A6753B12CC177CC00B54865 /* DeviceInfoManager.swift in Sources */,

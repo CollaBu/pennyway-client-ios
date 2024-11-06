@@ -47,7 +47,7 @@ struct ChatRoomContent: View {
 
 // MARK: - ChatRoomCell
 
-struct ChatRoomCell: View {
+struct ChatRoomCell: View, ImageLoadable {
     @State private var loadedImage: UIImage? = nil
 
     let chatRoom: ChatRoomProtocol
@@ -188,25 +188,9 @@ struct ChatRoomCell: View {
             )
         }
         .onAppear {
-            loadImage(from: chatRoom.backgroundImageUrl)
-        }
-    }
-    
-    /// 이미지 URL에서 데이터를 다운로드하고 UIImage로 변환하는 함수
-    func loadImage(from urlString: String) {
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
-        }
-
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data, error == nil, let downloadedImage = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.loadedImage = downloadedImage
-                }
-            } else {
-                print("Failed to load image for chat room: \(error?.localizedDescription ?? "Unknown error")")
+            loadImage(from: chatRoom.backgroundImageUrl) { image in
+                self.loadedImage = image
             }
-        }.resume()
+        }
     }
 }
