@@ -38,12 +38,4 @@ class DefaultChatStompService {
     func sendMessage(message: String, destination: String) {
         repository.sendMessage(message: message, destination: destination)
     }
-    
-    func subscribeToDestination(_ destination: String) {
-        repository.subscribeToDestination(destination)
-    }
-    
-    private func subscribeToChat() {
-        subscribeToDestination("/sub/chat.room.1")
-    }
 }

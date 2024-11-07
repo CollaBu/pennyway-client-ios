@@ -82,6 +82,7 @@
 		4A2C3A892CD3C965006B6804 /* DefaultUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A812CD3C965006B6804 /* DefaultUserProfileRepository.swift */; };
 		4A2C3A8B2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */; };
 		4A2C3A8D2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A8C2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift */; };
+		4A2C8B5C2CDC7F3C007816A9 /* SendChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C8B5B2CDC7F3C007816A9 /* SendChatUseCase.swift */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -107,10 +108,8 @@
 		4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */; };
 		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
 		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
-		4A45A1992CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A19A2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A19B2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		4A45A19D2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A19E2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A1A72CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A1AB2CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -348,7 +347,6 @@
 		D8180C042BE5081F00F837FB /* FindIdContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8180C032BE5081F00F837FB /* FindIdContentView.swift */; };
 		D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8180C052BE5083500F837FB /* FindIdPhoneVerificationView.swift */; };
 		D8180C082BE5168800F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
-		D8180C0A2BE531C500F837FB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D81D5A832C16B68D008E5939 /* DateFormatterUtil .swift in Sources */ = {isa = PBXBuildFile; fileRef = D81D5A822C16B68D008E5939 /* DateFormatterUtil .swift */; };
 		D820675C2CC5500700102356 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D820675B2CC5500700102356 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E30562C5B3FB4004244F1 /* EditUsernameView.swift */; };
@@ -533,6 +531,7 @@
 		4A2C3A812CD3C965006B6804 /* DefaultUserProfileRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultUserProfileRepository.swift; sourceTree = "<group>"; };
 		4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJoinedChatRoomsRequestDto.swift; sourceTree = "<group>"; };
 		4A2C3A8C2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJoinedChatRoomsResponseDto.swift; sourceTree = "<group>"; };
+		4A2C8B5B2CDC7F3C007816A9 /* SendChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChatUseCase.swift; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -2717,6 +2716,7 @@
 				D85E46452CD607E500715169 /* SearchChatRoomUseCase.swift */,
 				D8BAB3E82CCA92CF00D1910E /* GetChatRoomUseCase.swift */,
 				4AF3A2F82CD932DA0099967F /* ChatRoomUseCase.swift */,
+				4A2C8B5B2CDC7F3C007816A9 /* SendChatUseCase.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3135,6 +3135,7 @@
 				4AC320512C11D5AC00DDB4B6 /* SpendingCheckBoxView.swift in Sources */,
 				4AB5AB502BB4A8CB00D2C9EA /* ApiStatusLogger.swift in Sources */,
 				4AF3A2FB2CD934560099967F /* ChatRoomRepository.swift in Sources */,
+				4A2C8B5C2CDC7F3C007816A9 /* SendChatUseCase.swift in Sources */,
 				D88832982BBC60EC00F49B27 /* TextAutocapitalization.swift in Sources */,
 				4A4703902BCEA4D700AEE04E /* LinkOAuthToAccountRequestDto.swift in Sources */,
 				D898E8182CA5A8C9003739F1 /* LogoutViewModel.swift in Sources */,
