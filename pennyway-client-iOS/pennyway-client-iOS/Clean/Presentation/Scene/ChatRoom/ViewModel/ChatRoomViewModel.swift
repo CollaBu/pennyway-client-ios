@@ -5,6 +5,7 @@
 //  Created by 최희진 on 11/5/24.
 //
 
+import Combine
 import Foundation
 
 // MARK: - ChatRoomViewModelInput
@@ -38,9 +39,21 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     private let chatRoomUseCase: ChatRoomUseCase
     private let sendChatUseCase: SendChatUseCase
 
+    private var cancellables = Set<AnyCancellable>()
+
     init(chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
         self.chatRoomUseCase = chatRoomUseCase
         self.sendChatUseCase = sendChatUseCase
+
+        // NotificationCenter에서 메시지 알림 구독
+        NotificationCenter.default.publisher(for: .didReceiveMessage)
+            .sink { [weak self] notification in
+
+                if let message = notification.object as? MessageItemModel {
+                    self?.messageData.value.insert(message, at: 0)
+                }
+            }
+            .store(in: &cancellables)
     }
 
     /// 채팅방 상세 정보 조회

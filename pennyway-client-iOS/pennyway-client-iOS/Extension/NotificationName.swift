@@ -4,4 +4,5 @@ import Foundation
 extension Notification.Name {
     static let logoutNotification = Notification.Name("logoutNotification")
     static let changeNetworkState = Notification.Name("changeNetworkState")
+    static let didReceiveMessage = Notification.Name("didReceiveMessage")
 }

@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - GetChatRoomDetailResponseDto
+
 struct GetChatRoomDetailResponseDto: Codable {
     let code: String
     let data: GetChatRoom
@@ -32,16 +34,6 @@ struct GetChatRoomDetailResponseDto: Codable {
                 let role: Role
                 let notifyEnabled: Bool?
                 let createdAt: String
-            }
-
-            struct GetMessage: Codable {
-                let chatRoomId: Int64
-                let chatId: Int64
-                let content: String
-                let contentType: ContentType
-                let categoryType: CategoryType
-                let createdAt: String
-                let senderId: Int64
             }
         }
     }
@@ -86,5 +78,35 @@ struct GetChatRoomDetailResponseDto: Codable {
                 )
             }
         )
+    }
+}
+
+// MARK: - GetMessage
+
+struct GetMessage: Codable {
+    let chatRoomId: Int64
+    let chatId: Int64
+    let content: String
+    let contentType: ContentType
+    let categoryType: CategoryType
+    let createdAt: String
+    let senderId: Int64
+
+    /// json -> GetMessage 타입으로 반환
+    static func parseGetMessage(from json: String) -> Result<GetMessage, Error> {
+        guard let jsonData = json.data(using: .utf8) else {
+            return .failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid JSON string"]))
+        }
+
+        do {
+            let getMessage = try JSONDecoder().decode(GetMessage.self, from: jsonData)
+            return .success(getMessage)
+        } catch {
+            return .failure(error)
+        }
+    }
+
+    static func toItemModel(dto: GetMessage) -> MessageItemModel {
+        return MessageItemModel(chatRoomId: dto.chatRoomId, chatId: dto.chatId, content: dto.content, contentType: dto.contentType, categoryType: dto.categoryType, createdAt: dto.createdAt, senderId: dto.senderId)
     }
 }

@@ -35,12 +35,12 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
-    func sendMessage(message: String, destination _: Int64, contentType _: String, completion _: @escaping (Result<Void, Error>) -> Void) {
-        let destination = "/pub/chat.message.\(641_226_760_822_261_524)"
+    func sendMessage(message: String, destination: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
+        let destination = "/pub/chat.message.\(destination)"
         let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")"]
         let messageBody: [String: String] = [
             "content": message,
-            "contentType": "TEXT"
+            "contentType": contentType
         ]
         let headerType = "application/json"
 
@@ -152,6 +152,23 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
 
     func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader _: [String: String]?, withDestination _: String) {
         Log.debug("Did receive Message: \(body), \(akaStringBody)")
+
+        if let body = body as? [String: Any],
+           let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []),
+           let jsonString = String(data: jsonData, encoding: .utf8)
+        {
+            let messageDto = GetMessage.parseGetMessage(from: jsonString)
+
+            switch messageDto {
+            case let .success(messageDto):
+                // NotificationCenter를 통해 viewModel에 메시지를 전달
+                let message = GetMessage.toItemModel(dto: messageDto)
+                NotificationCenter.default.post(name: .didReceiveMessage, object: message)
+                Log.debug("[NotificationCenter] 전달: \(message)")
+            case let .failure(error):
+                Log.error("Failed to parse message: \(error)")
+            }
+        }
     }
 
     func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
