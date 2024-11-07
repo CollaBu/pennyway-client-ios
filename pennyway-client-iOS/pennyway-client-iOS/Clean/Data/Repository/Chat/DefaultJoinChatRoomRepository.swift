@@ -10,8 +10,8 @@ import Foundation
 class DefaultJoinChatRoomRepository: JoinChatRoomRepository {
     private let cdnUrl = "https://cdn.dev.pennyway.co.kr/"
 
-    func joinChatRoom(chatRoomId: Int64, password: String, name: String, completion: @escaping (Result<ChatRoom, any Error>) -> Void) {
-        let joinChatRoomDto = JoinChatRoomRequestDto(password: password.isEmpty ? nil : password, name: name)
+    func execute(chatRoomId: Int64, password: String, completion: @escaping (Result<ChatRoom, any Error>) -> Void) {
+        let joinChatRoomDto = JoinChatRoomRequestDto(password: password.isEmpty ? nil : password)
 
         ChatAlamofire.shared.joinChatRoom(chatRoomId, joinChatRoomDto) { result in
             switch result {

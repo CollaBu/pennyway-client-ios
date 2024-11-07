@@ -4,7 +4,6 @@ import SwiftUI
 struct SecretRoomView: View {
     let chatRoomId: Int64
     @State private var password = ""
-    @State private var isNavigate = false
 
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
@@ -42,13 +41,16 @@ struct SecretRoomView: View {
 
             CustomBottomButton(action: {
                 if viewModelWrapper.joinChatRoomViewModel.isFormValid {
-                    isNavigate = true
+                    viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: password) { success in
+                        if success {
+                            Log.debug("[SecretRoomView]: 채팅방 가입 성공")
+                        } else {
+                            Log.debug("[SecretRoomView]: 채팅방 가입 실패")
+                        }
+                    }
                 }
             }, label: "다음", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
-
-            NavigationLink(destination: MakeUsernameView(chatRoomId: chatRoomId, password: password, viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
-                .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "배달음식 그만 먹는 방")
         .edgesIgnoringSafeArea(.bottom)

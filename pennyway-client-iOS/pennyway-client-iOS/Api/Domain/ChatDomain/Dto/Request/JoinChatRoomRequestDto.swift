@@ -7,13 +7,10 @@
 
 public struct JoinChatRoomRequestDto: Encodable {
     let password: String?
-    let name: String
 
     public init(
-        password: String? = nil,
-        name: String
+        password: String? = nil
     ) {
         self.password = password
-        self.name = name
     }
 }

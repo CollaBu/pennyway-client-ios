@@ -33,7 +33,7 @@ struct MakeUsernameView: View {
             CustomInputView(inputText: $username, placeholder: "", onCommit: {
                 viewModelWrapper.joinChatRoomViewModel.validateName(name: username)
             }, isSecureText: false)
-                .onChange(of: username) { newValue in
+                .onChange(of: username) { _ in
                     if username.count > 8 {
                         username = String(username.prefix(8))
                     }
@@ -45,7 +45,7 @@ struct MakeUsernameView: View {
             CustomBottomButton(action: {
                 if viewModelWrapper.joinChatRoomViewModel.isFormValid {
                     Log.debug("[MakeUsernameView]: isFormValid까지 통과")
-                    viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: password, name: username) { success in
+                    viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: password) { success in
                         if success {
                             Log.debug("[MakeUsernameView]: 채팅방 가입 성공")
                         } else {

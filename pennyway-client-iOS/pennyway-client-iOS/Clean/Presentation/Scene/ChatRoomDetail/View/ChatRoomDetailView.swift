@@ -19,7 +19,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
                     .frame(maxWidth: .infinity, maxHeight: 236 * DynamicSizeFactor.factor())
 
             } else {
-                Image("icon_notifications") // 임시 아이콘
+                Image("illust_chat_no_BG_picture")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity, maxHeight: 236 * DynamicSizeFactor.factor())
@@ -51,12 +51,32 @@ struct ChatRoomDetailView: View, ImageLoadable {
             Spacer()
 
             CustomBottomButton(action: {
-                isNavigate = true
+                if chatRoom?.isPrivate ?? false {
+                    isNavigate = true
+                } else {
+                    if let chatRoomId = chatRoom?.id {
+                        Log.debug("[ChatRoomDetailView]: id까지 진입")
+
+                        viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: "") { success in
+                            Log.debug("[ChatRoomDetailView]: joinChatRoom까지 진입")
+
+                            if success {
+                                Log.debug("[ChatRoomDetailView]: 채팅방 가입 성공")
+                            } else {
+                                Log.debug("[ChatRoomDetailView]: 채팅방 가입 실패")
+                            }
+                        }
+                    }
+                }
             }, label: "채팅 참여하기", isFormValid: .constant(true))
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-            NavigationLink(destination: navigationDestination, isActive: $isNavigate) {}
-                .hidden()
+            if let chatRoomId = chatRoom?.id {
+                if chatRoom?.isPrivate == true {
+                    NavigationLink(destination: SecretRoomView(chatRoomId: chatRoomId, viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
+                        .hidden()
+                }
+            }
         }
         .navigationBarColor(UIColor(named: "White01"), title: "채팅방")
         .edgesIgnoringSafeArea(.bottom)
@@ -95,16 +115,5 @@ struct ChatRoomDetailView: View, ImageLoadable {
             }
         }
         .padding(.horizontal, 20)
-    }
-
-    @ViewBuilder
-    private var navigationDestination: some View {
-        if let chatRoomId = chatRoom?.id {
-            if chatRoom?.isPrivate == true {
-                SecretRoomView(chatRoomId: chatRoomId, viewModelWrapper: viewModelWrapper)
-            } else {
-                MakeUsernameView(chatRoomId: chatRoomId, password: "", viewModelWrapper: viewModelWrapper)
-            }
-        }
     }
 }
