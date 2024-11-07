@@ -38,13 +38,15 @@ class DefaultJoinChatRoomViewModel: JoinChatRoomViewModel {
 
     /// 채팅방 가입 검사 메서드
     func validatePwForm(password: String) {
-        isFormValid = password.count == 6
+        isFormValid = password.count >= 1 && password.count <= 6
     }
 
     /// 채팅방 가입 닉네임 검사 메서드
     func validateName(name: String) {
         let nameRegex = "^[가-힣a-zA-Z]{2,8}$"
-        isFormValid = NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
+        let isNameValid = NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
+
+        isFormValid = isNameValid && name.count >= 2
     }
 
     /// 채팅방 가입 요청

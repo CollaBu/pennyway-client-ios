@@ -33,7 +33,7 @@ struct MakeUsernameView: View {
             CustomInputView(inputText: $username, placeholder: "", onCommit: {
                 viewModelWrapper.joinChatRoomViewModel.validateName(name: username)
             }, isSecureText: false)
-                .onChange(of: username) { _ in
+                .onChange(of: username) { newValue in
                     if username.count > 8 {
                         username = String(username.prefix(8))
                     }
