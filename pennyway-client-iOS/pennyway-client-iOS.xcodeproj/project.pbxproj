@@ -383,7 +383,6 @@
 		D87A9F3A2C3E99520092B1B1 /* SettingAlarmResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */; };
 		D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87AA7F72CB6C3730012BFA3 /* ChatRoomDetailView.swift */; };
 		D87AA7FA2CB6C38E0012BFA3 /* SecretRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87AA7F92CB6C38E0012BFA3 /* SecretRoomView.swift */; };
-		D87AA7FC2CB6C39E0012BFA3 /* MakeUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87AA7FB2CB6C39E0012BFA3 /* MakeUsernameView.swift */; };
 		D87CB0D02BC5A47800BD882A /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0CF2BC5A47800BD882A /* FindPwView.swift */; };
 		D87CB0D22BC5A4BC00BD882A /* ResetPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */; };
 		D87CB0D42BC5A57D00BD882A /* CompleteChangePwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */; };
@@ -820,7 +819,6 @@
 		D87A9F392C3E99520092B1B1 /* SettingAlarmResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAlarmResponseDto.swift; sourceTree = "<group>"; };
 		D87AA7F72CB6C3730012BFA3 /* ChatRoomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDetailView.swift; sourceTree = "<group>"; };
 		D87AA7F92CB6C38E0012BFA3 /* SecretRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretRoomView.swift; sourceTree = "<group>"; };
-		D87AA7FB2CB6C39E0012BFA3 /* MakeUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUsernameView.swift; sourceTree = "<group>"; };
 		D87CB0CF2BC5A47800BD882A /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 		D87CB0D12BC5A4BC00BD882A /* ResetPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwView.swift; sourceTree = "<group>"; };
 		D87CB0D32BC5A57C00BD882A /* CompleteChangePwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteChangePwView.swift; sourceTree = "<group>"; };
@@ -2606,7 +2604,6 @@
 			children = (
 				D87AA7F72CB6C3730012BFA3 /* ChatRoomDetailView.swift */,
 				D87AA7F92CB6C38E0012BFA3 /* SecretRoomView.swift */,
-				D87AA7FB2CB6C39E0012BFA3 /* MakeUsernameView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3342,7 +3339,6 @@
 				4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */,
 				D8180C002BE507E100F837FB /* FindIdView.swift in Sources */,
 				D8180C082BE5168800F837FB /* (null) in Sources */,
-				D87AA7FC2CB6C39E0012BFA3 /* MakeUsernameView.swift in Sources */,
 				D80C68612CC8022A00928921 /* ChatAlamofire.swift in Sources */,
 				B599E4DE2C6C6CFE006051E9 /* SpendingCategoryAnalyticsEvents.swift in Sources */,
 				D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */,

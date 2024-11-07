@@ -12,7 +12,6 @@ import Foundation
 protocol JoinChatRoomViewModelInput {
     func joinChatRoom(chatRoomId: Int64, password: String, completion: @escaping (Bool) -> Void)
     func validatePwForm(password: String)
-    func validateName(name: String)
 }
 
 // MARK: - JoinChatRoomViewModelOutput
@@ -39,14 +38,6 @@ class DefaultJoinChatRoomViewModel: JoinChatRoomViewModel {
     /// 채팅방 가입 검사 메서드
     func validatePwForm(password: String) {
         isFormValid = password.count >= 1 && password.count <= 6
-    }
-
-    /// 채팅방 가입 닉네임 검사 메서드
-    func validateName(name: String) {
-        let nameRegex = "^[가-힣a-zA-Z]{2,8}$"
-        let isNameValid = NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: name)
-
-        isFormValid = isNameValid && name.count >= 2
     }
 
     /// 채팅방 가입 요청
