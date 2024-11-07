@@ -77,6 +77,11 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         }
     }
 
+    /// 채팅 메시지 전송
+    /// - Parameters:
+    ///   - message: 전송할 메시지 내용.
+    ///   - destination: 채팅방  ID.
+    ///   - contentType: 메시지의 콘텐츠 유형.
     func sendMessage(message: String, destination: Int64, contentType: String) {
         sendChatUseCase.sendMessage(message: message, destination: destination, contentType: contentType) { result in
             switch result {

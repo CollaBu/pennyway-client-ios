@@ -18,8 +18,6 @@ struct ChatBottomBar: View {
     private let maxHeight: CGFloat = 14 * DynamicSizeFactor.factor() * 3 // 최대 높이 (3줄)
     private let maxLineCount: Int = 3 // 최대 줄 수
 
-    let chatRoom: ChatRoomItemModel
-
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     /// 현재 메시지에서 줄바꿈(\n)으로 구분된 줄의 수 계산
@@ -123,8 +121,7 @@ struct ChatBottomBar: View {
             Spacer()
             if !message.isEmpty {
                 Button(action: {
-                    viewModelWrapper.chatRoomViewModel.sendMessage(message: message, destination: chatRoom.id, contentType: ContentType.text.rawValue) // destination 수정 필요
-                    Log.debug("Message sent: \(message)")
+                    viewModelWrapper.chatRoomViewModel.sendMessage(message: message, destination: viewModelWrapper.roomData?.id ?? 0, contentType: ContentType.text.rawValue)
                     message = ""
                 }) {
                     Image("icon_send_filled_primary")
