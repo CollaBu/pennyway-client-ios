@@ -164,9 +164,9 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
                 // NotificationCenter를 통해 viewModel에 메시지를 전달
                 let message = GetMessage.toItemModel(dto: messageDto)
                 NotificationCenter.default.post(name: .didReceiveMessage, object: message)
-                Log.debug("[NotificationCenter] 전달: \(message)")
+                Log.debug("[NotificationCenter] chat 전달: \(message)")
             case let .failure(error):
-                Log.error("Failed to parse message: \(error)")
+                Log.error("[NotificationCenter] chat Failed to parse message: \(error)")
             }
         }
     }
