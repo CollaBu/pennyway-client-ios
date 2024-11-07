@@ -7,18 +7,18 @@
 
 import Foundation
 
-// MARK: - ChatRoomUseCase
+// MARK: - SendChatUseCase
 
 protocol SendChatUseCase {
-    func sendMessage(message: String, destination: String, contentType: String, completion: @escaping (Result<Bool, Error>) -> Void)
+    func sendMessage(message: String, destination: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
-// MARK: - DefaultChatRoomUseCase
+// MARK: - DefaultSendChatUseCase
 
 class DefaultSendChatUseCase: SendChatUseCase {
     private let chatStompService = DefaultChatStompService.shared
 
-    func sendMessage(message: String, destination: String, contentType: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        chatStompService.sendMessage(message: message, destination: destination, contentType: contentType)
+    func sendMessage(message: String, destination: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        chatStompService.sendMessage(message: message, destination: destination, contentType: contentType, completion: completion)
     }
 }

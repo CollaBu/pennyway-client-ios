@@ -11,6 +11,7 @@ import Foundation
 
 protocol ChatRoomViewModelInput {
     func getChatRoomDetail(chatRoomId: Int64)
+    func sendMessage(message: String, destination: Int64, contentType: String)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -53,13 +54,19 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                     self?.chatUserData.value = recentParticipants
                 }
             case let .failure(error):
-                Log.error("채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
+                Log.error("[DefaultChatRoomViewModel] 채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
             }
         }
     }
-    func sendMessage(message: String, destination: String, contentType: String){
-        sendChatUseCase.sendMessage(message: message, destination: destination, contentType: contentType) {_ in 
-            
+
+    func sendMessage(message: String, destination: Int64, contentType: String) {
+        sendChatUseCase.sendMessage(message: message, destination: destination, contentType: contentType) { result in
+            switch result {
+            case .success:
+                Log.debug("[DefaultChatRoomViewModel] 채팅 메시지 전송 성공")
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel]  채팅 메시지 전송 실패: \(error.localizedDescription)")
+            }
         }
     }
 }

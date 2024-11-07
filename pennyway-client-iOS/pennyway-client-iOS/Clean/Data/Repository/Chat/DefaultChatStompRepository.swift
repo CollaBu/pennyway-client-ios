@@ -35,7 +35,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
-    func sendMessage(message: String, destination: String, contentType: String) {
+    func sendMessage(message: String, destination: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(destination)"
         let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")"]
         let messageBody: [String: String] = [
@@ -47,15 +47,14 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
             let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
-                Log.debug("📤 [Send Message])")
+                Log.debug("📤 [Send Message]): \(message)")
+                completion(.success(()))
             }
         } catch {
             Log.error("Failed to serialize message body: \(error)")
+            completion(.failure(error))
         }
     }
-
-    /// 특정 목적지로 Stomp 구독을 설정하는 메서드
-    func subscribeToDestination(_: String) {}
 
     /// 에러 처리위해 Stomp 구독을 설정하는 메서드
     private func subscribeToErrors() {

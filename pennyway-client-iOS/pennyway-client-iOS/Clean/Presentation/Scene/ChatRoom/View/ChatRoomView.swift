@@ -15,7 +15,7 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewStateManager: ViewStateManager
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
-    var chatRoom: ChatRoomItemModel
+    let chatRoom: ChatRoomItemModel
 
     var body: some View {
         ZStack {
@@ -25,7 +25,7 @@ struct ChatRoomView: View {
                         .frame(height: geometry.size.height - keyboardManager.keyboardHeight) // ChatContent의 높이를 키보드 높이만큼 조정
                 }
 
-                ChatBottomBar()
+                ChatBottomBar(chatRoom: chatRoom)
                     .offset(y: -keyboardManager.keyboardHeight)
                     .animation(keyboardManager.keyboardHeight > 0 ? .easeOut(duration: 0.5) : nil, value: keyboardManager.keyboardHeight)
             }
