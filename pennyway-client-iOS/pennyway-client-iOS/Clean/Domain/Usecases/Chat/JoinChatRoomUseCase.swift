@@ -11,7 +11,7 @@ import Foundation
 
 /// 채팅방 가입 usecase를 정의하는 프로토콜
 protocol JoinChatRoomUseCase {
-    func execute(chatRoomId: Int64, password: String, name: String, completion: @escaping (Bool) -> Void)
+    func execute(chatRoomId: Int64, password: String, name: String, completion: @escaping (Result<ChatRoom, any Error>) -> Void)
 }
 
 // MARK: - DefaultJoinChatRoomUseCase
@@ -23,16 +23,9 @@ class DefaultJoinChatRoomUseCase: JoinChatRoomUseCase {
         self.repository = repository
     }
 
-    func execute(chatRoomId: Int64, password: String, name: String, completion: @escaping (Bool) -> Void) {
+    func execute(chatRoomId: Int64, password: String, name: String, completion: @escaping (Result<ChatRoom, any Error>) -> Void) {
         repository.joinChatRoom(chatRoomId: chatRoomId, password: password, name: name) { result in
-            switch result {
-            case .success:
-                Log.debug("[JoinChatRoomUseCase] 채팅방 가입 성공")
-                completion(true)
-            case .failure:
-                Log.debug("[JoinChatRoomUseCase] 채팅방 가입 실패")
-                completion(false)
-            }
+            completion(result)
         }
     }
 }

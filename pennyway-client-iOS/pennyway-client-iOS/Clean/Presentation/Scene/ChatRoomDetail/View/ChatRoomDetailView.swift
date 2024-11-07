@@ -99,10 +99,12 @@ struct ChatRoomDetailView: View, ImageLoadable {
 
     @ViewBuilder
     private var navigationDestination: some View {
-        if chatRoom?.isPrivate == true {
-            SecretRoomView(viewModelWrapper: viewModelWrapper)
-        } else {
-            MakeUsernameView(viewModelWrapper: viewModelWrapper)
+        if let chatRoomId = chatRoom?.id {
+            if chatRoom?.isPrivate == true {
+                SecretRoomView(chatRoomId: chatRoomId, viewModelWrapper: viewModelWrapper)
+            } else {
+                MakeUsernameView(chatRoomId: chatRoomId, password: "", viewModelWrapper: viewModelWrapper)
+            }
         }
     }
 }

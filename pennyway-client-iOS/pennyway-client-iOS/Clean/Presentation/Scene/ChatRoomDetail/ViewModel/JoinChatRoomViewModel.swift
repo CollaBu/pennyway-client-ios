@@ -10,7 +10,7 @@ import Foundation
 // MARK: - JoinChatRoomViewModelInput
 
 protocol JoinChatRoomViewModelInput {
-    func joinChatRoom()
+    func joinChatRoom(chatRoomId: Int64, password: String, name: String, completion: @escaping (Bool) -> Void)
     func validatePwForm(password: String)
     func validateName(name: String)
 }
@@ -48,7 +48,17 @@ class DefaultJoinChatRoomViewModel: JoinChatRoomViewModel {
     }
 
     /// 채팅방 가입 요청
-    func joinChatRoom() {
-//        joinChatRoomUseCase.execute(chatRoomId: <#T##Int64#>, password: <#T##String#>)
+    func joinChatRoom(chatRoomId: Int64, password: String, name: String, completion: @escaping (Bool) -> Void) {
+        joinChatRoomUseCase.execute(chatRoomId: chatRoomId, password: password, name: name) { result in
+            switch result {
+            case let .success(chatRoom):
+                Log.debug("[JoinChatRoomViewModel]: 채팅방 가입 성공 - 채팅방 ID: \(chatRoom.id)")
+                completion(true)
+
+            case let .failure(error):
+                Log.fault("[JoinChatRoomViewModel]: 채팅방 가입 실패, 오류: \(error)")
+                completion(false)
+            }
+        }
     }
 }

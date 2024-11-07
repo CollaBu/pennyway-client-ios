@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct SecretRoomView: View {
+    let chatRoomId: Int64
     @State private var password = ""
     @State private var isNavigate = false
 
@@ -46,7 +47,7 @@ struct SecretRoomView: View {
             }, label: "다음", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
-            NavigationLink(destination: MakeUsernameView(viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
+            NavigationLink(destination: MakeUsernameView(chatRoomId: chatRoomId, password: password, viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
                 .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "배달음식 그만 먹는 방")

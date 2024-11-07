@@ -4,6 +4,8 @@ import SwiftUI
 // MARK: - MakeUsernameView
 
 struct MakeUsernameView: View {
+    let chatRoomId: Int64
+    let password: String
     @State private var username = ""
     @State private var isNavigate = false
 
@@ -42,7 +44,14 @@ struct MakeUsernameView: View {
 
             CustomBottomButton(action: {
                 if viewModelWrapper.joinChatRoomViewModel.isFormValid {
-                    viewModelWrapper.joinChatRoomViewModel.joinChatRoom()
+                    Log.debug("[MakeUsernameView]: isFormValid까지 통과")
+                    viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: password, name: username) { success in
+                        if success {
+                            Log.debug("[MakeUsernameView]: 채팅방 가입 성공")
+                        } else {
+                            Log.debug("[MakeUsernameView]: 채팅방 가입 실패")
+                        }
+                    }
                 }
             }, label: "채팅 참여하기", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
@@ -61,6 +70,9 @@ struct MakeUsernameView: View {
 
                 }.offset(x: -10)
             }
+        }
+        .onAppear {
+            Log.debug("[MakeUserNameView]: chatRoomId-\(chatRoomId), password-\(password)")
         }
     }
 }
