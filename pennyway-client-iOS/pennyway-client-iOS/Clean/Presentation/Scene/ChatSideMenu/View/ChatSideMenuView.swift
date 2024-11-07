@@ -13,20 +13,25 @@ struct ChatSideMenuView: View {
     @Binding var isPresented: Bool
     @State private var isAlarmOn: Bool = false
     @State private var showExitPopUp: Bool = false
+    @State private var showChatUserView: Bool = false
+    @State private var selectedUser: ChatMemberItemModel? = nil
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     var body: some View {
         ZStack {
             HStack(spacing: 0) {
                 Spacer()
                 
-                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp)
-                    .padding(.leading, 105 * DynamicSizeFactor.factor())
-                    .transition(.move(edge: .trailing))
+                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp, members: viewModelWrapper.chatUserData, myInfo: viewModelWrapper.roomDetailData?.myInfo, onUserSelect: { user in
+                    selectedUser = user
+                })
+                .padding(.leading, 105 * DynamicSizeFactor.factor())
+                .transition(.move(edge: .trailing))
             }
             
             if showExitPopUp {
                 CustomPopUpView(showingPopUp: $showExitPopUp,
-                                titleLabel: "\(mockChatRoom.title)",
+                                titleLabel: "\(viewModelWrapper.roomData?.title ?? "")",
                                 subTitleLabel: "채팅방을 나가시겠어요?",
                                 firstBtnAction: { self.showExitPopUp = false },
                                 firstBtnLabel: "취소",
@@ -48,11 +53,18 @@ struct ChatSideMenuView: View {
                     }
                 }
         )
-        // TODO: 유저 셀 클릭하면 상세 정보 뷰 나오도록
-        //        .fullScreenCover(isPresented: $showChatUserInfo) {
-        //                    ChatUserInfoView()
-        //                        .ignoresSafeArea()
-        //                }
+        .onChange(of: selectedUser) { newValue in
+            showChatUserView = newValue != nil
+        }
+        .fullScreenCover(isPresented: $showChatUserView) {
+            if let user = selectedUser {
+                ChatUserInfoView(user: user) // 선택된 사용자 정보를 전달
+                    .ignoresSafeArea()
+                    .onDisappear {
+                        selectedUser = nil // 뷰가 닫힐 때 선택된 사용자 초기화
+                    }
+            }
+        }
     }
 }
 
@@ -61,6 +73,11 @@ struct ChatSideMenuView: View {
 private struct SideMenuContent: View {
     @Binding var isAlarmOn: Bool
     @Binding var showExitPopUp: Bool
+    let members: [ChatMemberItemModel]
+    let myInfo: ChatMemberItemModel?
+    let onUserSelect: (ChatMemberItemModel) -> Void
+    
+    private let currentUserId = getUserData()!.id
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -94,7 +111,7 @@ private struct SideMenuContent: View {
     
     private var SideMenuCells: some View {
         VStack {
-            if mockMembers[1].role == "Admin" {
+            if members[0].role.rawValue == Role.admin.rawValue { // 첫번째 사용자(나)가 방장인지 확인 후 ui
                 SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone", isAlarmCell: false, isAlarmOn: .constant(false))
             }
             
@@ -116,8 +133,15 @@ private struct SideMenuContent: View {
     }
 
     private var ChatUserCells: some View {
-        ForEach(mockMembers) { user in
-            ChatUserCell(member: user, currentUserId: 102)
+        ForEach(members) { user in
+            Button(action: {
+                if myInfo?.role == .admin, user.userId != currentUserId { // 내가 방장일 때, 자신이 아닌 사용자만 선택 가능
+                    onUserSelect(user)
+                }
+                Log.debug("??\(user)")
+            }) {
+                ChatUserCell(member: user, currentUserId: currentUserId)
+            }
         }
     }
 

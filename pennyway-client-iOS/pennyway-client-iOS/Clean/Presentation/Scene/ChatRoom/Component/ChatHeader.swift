@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ChatDateHeader: View {
-    let date: String
+struct ChatHeader: View {
+    let data: String
 
     var body: some View {
         ZStack {
@@ -17,7 +17,7 @@ struct ChatDateHeader: View {
                 .cornerRadius(19)
                 .frame(width: 106 * DynamicSizeFactor.factor(), height: 21 * DynamicSizeFactor.factor())
 
-            Text(date)
+            Text(data)
                 .font(.B3MediumFont())
                 .platformTextColor(color: Color("Gray05"))
                 .padding(.vertical, 6)
@@ -27,5 +27,5 @@ struct ChatDateHeader: View {
 }
 
 #Preview {
-    ChatDateHeader(date: "2020년 8월 21일 금요일")
+    ChatHeader(data: "2020년 8월 21일 금요일")
 }
