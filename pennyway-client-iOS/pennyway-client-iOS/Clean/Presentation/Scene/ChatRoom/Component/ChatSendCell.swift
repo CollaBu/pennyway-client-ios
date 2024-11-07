@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ChatSendCell: View {
     let chat: MessageItemModel
-    let sender: ChatMember
+    let sender: ChatMemberItemModel
 
     var body: some View {
         ChatMessage(content: chat.content, createdAt: chat.createdAt, isSender: true)

@@ -71,5 +71,5 @@ enum ContentType: String, Codable {
 
 enum CategoryType: String, Codable {
     case normal = "NORMAL"
-    case important = "SYSTEM"
+    case system = "SYSTEM"
 }

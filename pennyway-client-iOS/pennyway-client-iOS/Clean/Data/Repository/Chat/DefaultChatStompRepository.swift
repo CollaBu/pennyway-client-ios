@@ -35,24 +35,23 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
-    func sendMessage(message: String, destination: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let destination = "/pub/chat.message.\(destination)"
+    func sendMessage(message: String, destination _: Int64, contentType _: String, completion _: @escaping (Result<Void, Error>) -> Void) {
+        let destination = "/pub/chat.message.\(641_226_760_822_261_524)"
         let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")"]
         let messageBody: [String: String] = [
             "content": message,
-            "contentType": contentType
+            "contentType": "TEXT"
         ]
+        let headerType = "application/json"
 
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
-                stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
-                Log.debug("📤 [Send Message]): \(message)")
-                completion(.success(()))
+                stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil, headerType: headerType)
+                Log.debug("📤 [Send Message])")
             }
         } catch {
             Log.error("Failed to serialize message body: \(error)")
-            completion(.failure(error))
         }
     }
 
@@ -151,7 +150,9 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
         Log.debug("Socket disconnected")
     }
 
-    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody _: AnyObject?, akaStringBody _: String?, withHeader _: [String: String]?, withDestination _: String) {}
+    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader _: [String: String]?, withDestination _: String) {
+        Log.debug("Did receive Message: \(body), \(akaStringBody)")
+    }
 
     func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
         Log.debug("Receipt received: \(receiptId)")

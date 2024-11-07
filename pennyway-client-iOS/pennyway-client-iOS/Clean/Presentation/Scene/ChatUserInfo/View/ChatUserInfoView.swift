@@ -13,6 +13,7 @@ struct ChatUserInfoView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showTransferPopUp: Bool = false // 방장 넘기기 팝업 상태
     @State private var showKickOutPopUp: Bool = false // 내보내기 팝업 상태
+    let user: ChatMemberItemModel
 
     var body: some View {
         ZStack {
@@ -37,7 +38,7 @@ struct ChatUserInfoView: View {
             if showKickOutPopUp {
                 CustomPopUpView(showingPopUp: $showKickOutPopUp,
                                 titleLabel: "내보내기",
-                                subTitleLabel: "\(mockMembers[1].username)님을 내보낼까요?",
+                                subTitleLabel: "\(user.name)님을 내보낼까요?",
                                 firstBtnAction: { self.showKickOutPopUp = false },
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
@@ -98,7 +99,7 @@ struct ChatUserInfoView: View {
                                 .stroke(.white01, lineWidth: 3)
                         )
 
-                    Text("걱정하는 바다오리")
+                    Text("\(user.name)")
                         .font(.H3SemiboldFont())
                         .platformTextColor(color: .gray07)
                 }
@@ -145,8 +146,4 @@ struct ChatUserInfoView: View {
             .buttonStyle(BasicButtonStyleUtil())
         }
     }
-}
-
-#Preview {
-    ChatUserInfoView()
 }

@@ -21,8 +21,8 @@ struct ChatRoomContent: View {
                                     isPopUp = true
                                     selectedChatRoom = chatRoom
                                 })
-                                .transition(.move(edge: .trailing).combined(with: .opacity))
                             }
+                            .transition(.move(edge: .trailing).combined(with: .opacity))
                         }
                     }
                 } else {
@@ -182,25 +182,9 @@ struct ChatRoomCell: View {
             )
         }
         .onAppear {
-            loadImage(from: chatRoom.backgroundImageUrl)
-        }
-    }
-    
-    /// 이미지 URL에서 데이터를 다운로드하고 UIImage로 변환하는 함수
-    func loadImage(from urlString: String) {
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL")
-            return
-        }
-
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data, error == nil, let downloadedImage = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.loadedImage = downloadedImage
-                }
-            } else {
-                print("Failed to load image for chat room: \(error?.localizedDescription ?? "Unknown error")")
+            ImageLoader.loadImage(from: chatRoom.backgroundImageUrl) { loadedImage in
+                self.loadedImage = loadedImage
             }
-        }.resume()
+        }
     }
 }
