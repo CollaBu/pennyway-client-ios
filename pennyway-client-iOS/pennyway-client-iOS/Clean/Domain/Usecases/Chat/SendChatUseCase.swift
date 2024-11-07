@@ -10,7 +10,7 @@ import Foundation
 // MARK: - ChatRoomUseCase
 
 protocol SendChatUseCase {
-    func sendMessage(message: String, destination: String, completion: @escaping (Result<Bool, Error>) -> Void)
+    func sendMessage(message: String, destination: String, contentType: String, completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 // MARK: - DefaultChatRoomUseCase
@@ -18,7 +18,7 @@ protocol SendChatUseCase {
 class DefaultSendChatUseCase: SendChatUseCase {
     private let chatStompService = DefaultChatStompService.shared
 
-    func sendMessage(message: String, destination: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        chatStompService.sendMessage(message: message, destination: destination)
+    func sendMessage(message: String, destination: String, contentType: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        chatStompService.sendMessage(message: message, destination: destination, contentType: contentType)
     }
 }

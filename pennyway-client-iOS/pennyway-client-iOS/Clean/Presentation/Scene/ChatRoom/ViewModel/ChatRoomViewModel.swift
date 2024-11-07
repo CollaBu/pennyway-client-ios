@@ -33,9 +33,11 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     var chatUserData: Observable<[ChatUserInfoItemModel]> = Observable([])
 
     private let chatRoomUseCase: ChatRoomUseCase
+    private let sendChatUseCase: SendChatUseCase
 
-    init(chatRoomUseCase: ChatRoomUseCase) {
+    init(chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
         self.chatRoomUseCase = chatRoomUseCase
+        self.sendChatUseCase = sendChatUseCase
     }
 
     /// 채팅방 상세 정보 조회
@@ -53,6 +55,11 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
             case let .failure(error):
                 Log.error("채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
             }
+        }
+    }
+    func sendMessage(message: String, destination: String, contentType: String){
+        sendChatUseCase.sendMessage(message: message, destination: destination, contentType: contentType) {_ in 
+            
         }
     }
 }

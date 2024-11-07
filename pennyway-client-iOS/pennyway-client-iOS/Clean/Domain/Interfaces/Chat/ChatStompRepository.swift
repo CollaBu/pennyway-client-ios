@@ -10,6 +10,6 @@ import Foundation
 protocol ChatStompRepository {
     func connect(completion: @escaping (Result<Void, Error>) -> Void)
     func disconnect()
-    func sendMessage(message: String, destination: String)
+    func sendMessage(message: String, destination: String, contentType: String)
     func subscribeToDestination(_ destination: String)
 }
