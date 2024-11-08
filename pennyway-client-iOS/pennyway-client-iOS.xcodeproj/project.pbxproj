@@ -351,6 +351,7 @@
 		D83EF6EC2CDDCDFE002A4965 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D83EF6E92CDDCDFE002A4965 /* Secrets.xcconfig */; };
 		D83EF6ED2CDDCDFE002A4965 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D83EF6EA2CDDCDFE002A4965 /* Debug.xcconfig */; };
 		D83EF6EE2CDDCDFE002A4965 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D83EF6EB2CDDCDFE002A4965 /* Release.xcconfig */; };
+		D83EF6F02CDDD3EA002A4965 /* CdnUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83EF6EF2CDDD3EA002A4965 /* CdnUrl.swift */; };
 		D84348EC2CA6A4B300AC4777 /* DeleteUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84348EB2CA6A4B300AC4777 /* DeleteUserViewModel.swift */; };
 		D8457BAD2CB6A233002540B2 /* ChatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BAC2CB6A233002540B2 /* ChatCellView.swift */; };
 		D8457BB82CB6A3E2002540B2 /* DefaultChatContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BB72CB6A3E2002540B2 /* DefaultChatContent.swift */; };
@@ -798,6 +799,7 @@
 		D83EF6E92CDDCDFE002A4965 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
 		D83EF6EA2CDDCDFE002A4965 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
 		D83EF6EB2CDDCDFE002A4965 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../../../../Downloads/Release.xcconfig; sourceTree = "<group>"; };
+		D83EF6EF2CDDD3EA002A4965 /* CdnUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdnUrl.swift; sourceTree = "<group>"; };
 		D84348EB2CA6A4B300AC4777 /* DeleteUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserViewModel.swift; sourceTree = "<group>"; };
 		D8457BAC2CB6A233002540B2 /* ChatCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellView.swift; sourceTree = "<group>"; };
 		D8457BB72CB6A3E2002540B2 /* DefaultChatContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChatContent.swift; sourceTree = "<group>"; };
@@ -2025,6 +2027,7 @@
 				4A8571322BC650FA0082CE47 /* BaseUrl.swift */,
 				4A3701D62C090CD500F0AEBA /* Value.swift */,
 				D86773032C76C90700C68728 /* PrivatePolicy.swift */,
+				D83EF6EF2CDDD3EA002A4965 /* CdnUrl.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -3075,6 +3078,7 @@
 				4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */,
 				4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */,
 				4AE8F3A82C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */,
+				D83EF6F02CDDD3EA002A4965 /* CdnUrl.swift in Sources */,
 				4A60F64E2C595F6A00805F2C /* CompleteDeleteUserView.swift in Sources */,
 				D89FB7842BD97B660019DE3C /* FindUserNameRequestDto.swift in Sources */,
 				D851E71B2C0273BD00316DB3 /* BackofficeRequestDto.swift in Sources */,

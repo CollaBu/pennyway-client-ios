@@ -8,8 +8,8 @@
 import Foundation
 
 class DefaultJoinChatRoomRepository: JoinChatRoomRepository {
-    private let cdnUrl = "https://cdn.dev.pennyway.co.kr/"
-
+    private let cdnUrl = Url.cdnUrl
+    
     func execute(chatRoomId: Int64, password: String, completion: @escaping (Result<ChatRoom, any Error>) -> Void) {
         let joinChatRoomDto = JoinChatRoomRequestDto(password: password.isEmpty ? nil : password)
 
