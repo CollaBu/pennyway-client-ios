@@ -10,6 +10,7 @@ import Foundation
 
 enum ChatRouter: URLRequestConvertible {
     case getChatServer
+    case getJoinedChatRooms(dto: GetJoinedChatRoomsRequestDto)
     case makeChatRoom(dto: MakeChatRoomRequestDto)
     case searchChatRoom(dto: SearchChatRoomRequestDto)
     case getChatRoom
@@ -17,7 +18,7 @@ enum ChatRouter: URLRequestConvertible {
 
     var method: HTTPMethod {
         switch self {
-        case .getChatServer, .getChatRoom, .searchChatRoom:
+        case .getChatServer, .getChatRoom, .getJoinedChatRooms, .searchChatRoom:
             return .get
         case .makeChatRoom, .joinChatRoom:
             return .post
@@ -34,6 +35,8 @@ enum ChatRouter: URLRequestConvertible {
             return "v2/chat-rooms"
         case .getChatServer:
             return "v2/socket/chat"
+        case .getJoinedChatRooms:
+            return "v2/chat-rooms/me"
         case .getChatRoom:
             return "v2/chat-rooms/me"
         case let .joinChatRoom(chatRoomId, _):
@@ -47,15 +50,19 @@ enum ChatRouter: URLRequestConvertible {
             return try? dto.asDictionary()
         case let .joinChatRoom(_, dto):
             return try? dto.asDictionary()
-        case .getChatServer, .getChatRoom, .searchChatRoom:
+        case .getChatServer, .getChatRoom, .searchChatRoom, .getJoinedChatRooms:
             return [:]
         }
     }
 
     var queryParameters: Parameters? {
         switch self {
+        case let .getJoinedChatRooms(dto):
+            return try? dto.asDictionary()
+
         case .getChatServer, .makeChatRoom, .getChatRoom, .joinChatRoom:
             return [:]
+
         case let .searchChatRoom(dto):
             return try? dto.asDictionary()
         }
@@ -73,6 +80,9 @@ enum ChatRouter: URLRequestConvertible {
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         case .getChatServer, .getChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method)
+        case .getJoinedChatRooms:
+            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         }
         return request
     }

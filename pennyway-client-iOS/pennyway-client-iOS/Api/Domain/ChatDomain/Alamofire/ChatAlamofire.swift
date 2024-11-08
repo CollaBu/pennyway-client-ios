@@ -2,7 +2,7 @@
 //  ChatAlamofire.swift
 //  pennyway-client-iOS
 //
-//  Created by 아우신얀 on 10/22/24.
+//  Created by 최희진, 아우신얀 on 10/22/24.
 //
 
 import Alamofire
@@ -27,6 +27,7 @@ class ChatAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.makeChatRoom(dto: dto), completion: completion)
     }
     
+    /// 채팅 서버 조회
     func getChatServer(completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatAlamofire - getChatServer() called")
         
@@ -38,6 +39,13 @@ class ChatAlamofire {
         Log.info("ChatAlamofire - getChatRoom() called")
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.getChatRoom, completion: completion)
+    }
+    
+    /// 가입한 채팅방 리스트 조회
+    func getJoinedChatRooms(_ dto: GetJoinedChatRoomsRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatAlamofire - getJoinedChatRooms() called")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.getJoinedChatRooms(dto: dto), completion: completion)
     }
     
     /// 채팅방 검색

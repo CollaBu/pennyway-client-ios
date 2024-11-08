@@ -1,3 +1,10 @@
+//
+//  GetNotificationResponseDto.swift
+//  pennyway-client-iOS
+//
+//  Created by 아우신얀 on 11/6/24.
+//
+
 import Foundation
 
 // MARK: - GetNotificationResponseDto
