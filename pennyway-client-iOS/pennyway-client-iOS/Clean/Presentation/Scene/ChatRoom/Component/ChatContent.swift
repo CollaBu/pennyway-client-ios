@@ -47,6 +47,11 @@ struct ChatContent: View {
                         .id("bottom")
                 }
             }
+            .onChange(of: chats) { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    proxy.scrollTo("bottom", anchor: .bottom)
+                }
+            }
             .onChange(of: keyboardManager.keyboardHeight) { _ in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     proxy.scrollTo("bottom", anchor: .bottom)

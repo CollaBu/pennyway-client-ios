@@ -108,6 +108,10 @@ final class ChatSceneDIContainer {
         return DefaultChatRoomUseCase(repository: makeChatRoomDetailRepository())
     }
 
+    private func makeSendChatUseCase() -> SendChatUseCase {
+        return DefaultSendChatUseCase()
+    }
+
     // - Chat Room Repository
 
     func makeChatRoomDetailRepository() -> ChatRoomRepository {
@@ -117,6 +121,6 @@ final class ChatSceneDIContainer {
     // - Chat Room View Model
 
     private func makeChatRoomViewModel() -> ChatRoomViewModel {
-        return DefaultChatRoomViewModel(chatRoomUseCase: makeChatRoomUseCase())
+        return DefaultChatRoomViewModel(chatRoomUseCase: makeChatRoomUseCase(), sendChatUseCase: makeSendChatUseCase())
     }
 }

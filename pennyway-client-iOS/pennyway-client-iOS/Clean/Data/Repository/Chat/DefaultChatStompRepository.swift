@@ -35,10 +35,25 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
-    func sendMessage(message _: String, destination _: String) {}
+    func sendMessage(message: String, destination: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
+        let destination = "/pub/chat.message.\(destination)"
+        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")"]
+        let messageBody: [String: String] = [
+            "content": message,
+            "contentType": contentType
+        ]
+        let headerType = "application/json"
 
-    /// 특정 목적지로 Stomp 구독을 설정하는 메서드
-    func subscribeToDestination(_: String) {}
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil, headerType: headerType)
+                Log.debug("📤 [Send Message])")
+            }
+        } catch {
+            Log.error("Failed to serialize message body: \(error)")
+        }
+    }
 
     /// 에러 처리위해 Stomp 구독을 설정하는 메서드
     private func subscribeToErrors() {
@@ -135,7 +150,26 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
         Log.debug("Socket disconnected")
     }
 
-    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody _: AnyObject?, akaStringBody _: String?, withHeader _: [String: String]?, withDestination _: String) {}
+    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader _: [String: String]?, withDestination _: String) {
+        Log.debug("Did receive Message: \(body), \(akaStringBody)")
+
+        if let body = body as? [String: Any],
+           let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []),
+           let jsonString = String(data: jsonData, encoding: .utf8)
+        {
+            let messageDto = GetMessage.parseGetMessage(from: jsonString)
+
+            switch messageDto {
+            case let .success(messageDto):
+                // NotificationCenter를 통해 viewModel에 메시지를 전달
+                let message = GetMessage.toItemModel(dto: messageDto)
+                NotificationCenter.default.post(name: .didReceiveMessage, object: message)
+                Log.debug("[NotificationCenter] chat 전달: \(message)")
+            case let .failure(error):
+                Log.error("[NotificationCenter] chat Failed to parse message: \(error)")
+            }
+        }
+    }
 
     func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
         Log.debug("Receipt received: \(receiptId)")

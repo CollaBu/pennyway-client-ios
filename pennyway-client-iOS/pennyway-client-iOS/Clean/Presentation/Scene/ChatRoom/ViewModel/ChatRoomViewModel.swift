@@ -5,12 +5,14 @@
 //  Created by 최희진 on 11/5/24.
 //
 
+import Combine
 import Foundation
 
 // MARK: - ChatRoomViewModelInput
 
 protocol ChatRoomViewModelInput {
     func getChatRoomDetail(chatRoomId: Int64)
+    func sendMessage(message: String, destination: Int64, contentType: String)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -35,9 +37,23 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 최근 사용자 + 자신
 
     private let chatRoomUseCase: ChatRoomUseCase
+    private let sendChatUseCase: SendChatUseCase
 
-    init(chatRoomUseCase: ChatRoomUseCase) {
+    private var cancellables = Set<AnyCancellable>()
+
+    init(chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
         self.chatRoomUseCase = chatRoomUseCase
+        self.sendChatUseCase = sendChatUseCase
+
+        // NotificationCenter에서 메시지 알림 구독
+        NotificationCenter.default.publisher(for: .didReceiveMessage)
+            .sink { [weak self] notification in
+
+                if let message = notification.object as? MessageItemModel {
+                    self?.messageData.value.insert(message, at: 0)
+                }
+            }
+            .store(in: &cancellables)
     }
 
     /// 채팅방 상세 정보 조회
@@ -56,7 +72,23 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 }
 
             case let .failure(error):
-                Log.error("채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
+                Log.error("[DefaultChatRoomViewModel] 채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    /// 채팅 메시지 전송
+    /// - Parameters:
+    ///   - message: 전송할 메시지 내용.
+    ///   - destination: 채팅방  ID.
+    ///   - contentType: 메시지의 콘텐츠 유형.
+    func sendMessage(message: String, destination: Int64, contentType: String) {
+        sendChatUseCase.sendMessage(message: message, destination: destination, contentType: contentType) { result in
+            switch result {
+            case .success:
+                Log.debug("[DefaultChatRoomViewModel] 채팅 메시지 전송 성공")
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel]  채팅 메시지 전송 실패: \(error.localizedDescription)")
             }
         }
     }

@@ -9,7 +9,7 @@ import Foundation
 
 class DefaultGetChatRoomRepository: GetChatRoomRepository {
     private let cdnUrl = Url.cdnUrl
-    
+
     func getChatRoom(completion: @escaping (Result<[ChatRoom], any Error>) -> Void) {
         ChatAlamofire.shared.getChatRoom { result in
             switch result {
