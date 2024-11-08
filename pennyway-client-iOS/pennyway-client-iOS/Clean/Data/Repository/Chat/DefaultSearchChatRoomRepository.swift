@@ -8,7 +8,7 @@
 import Foundation
 
 class DefaultSearchChatRoomRepository: SearchChatRoomRepository {
-    private let cdnUrl = "https://cdn.dev.pennyway.co.kr/"
+    private let cdnUrl = Url.cdnUrl
 
     func execute(model: SearchChatRoom, completion: @escaping (Result<[ChatRoom], any Error>) -> Void) {
         let searchChatRoomDto = SearchChatRoomRequestDto(target: model.target, page: model.page)

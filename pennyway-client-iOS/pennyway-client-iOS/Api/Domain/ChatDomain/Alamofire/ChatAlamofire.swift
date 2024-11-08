@@ -54,4 +54,11 @@ class ChatAlamofire {
 
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.searchChatRoom(dto: dto), completion: completion)
     }
+    
+    /// 채팅방 가입
+    func joinChatRoom(_ chatRoomId: Int64, _ dto: JoinChatRoomRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatAlamofire - joinChatRoom() called")
+
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.joinChatRoom(chatRoomId: chatRoomId, dto: dto), completion: completion)
+    }
 }

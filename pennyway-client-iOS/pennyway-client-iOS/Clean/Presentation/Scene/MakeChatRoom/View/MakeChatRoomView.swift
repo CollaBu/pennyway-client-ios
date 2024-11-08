@@ -105,7 +105,6 @@ struct MakeChatRoomView: View {
                 isFormValid = false
                 chatViewModelWrapper.makeChatViewModel.validateForm()
                 chatViewModelWrapper.makeChatViewModel.isFormValid = false
-                Log.debug("????/:\(chatViewModelWrapper.makeChatViewModel.isFormValid)")
             }
             .onChange(of: chatViewModelWrapper.makeChatViewModel.isFormValid) { newValue in
                 isFormValid = newValue
