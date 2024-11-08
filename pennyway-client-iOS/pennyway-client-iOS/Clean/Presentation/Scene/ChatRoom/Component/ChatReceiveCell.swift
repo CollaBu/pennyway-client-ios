@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - ChatReceiveCell
 
-struct ChatReceiveCell: View {
+struct ChatReceiveCell: View, ImageLoadable {
     @State private var loadedImage: UIImage? = nil
     let chat: MessageItemModel
     let sender: ChatMemberItemModel
@@ -47,8 +47,8 @@ struct ChatReceiveCell: View {
         }
         .padding(.horizontal, 20)
         .onAppear {
-            ImageLoader.loadImage(from: sender.profileImage ?? "") { loadedImage in
-                self.loadedImage = loadedImage
+            loadImage(from: sender.profileImage ?? "") { image in
+                self.loadedImage = image
             }
         }
     }

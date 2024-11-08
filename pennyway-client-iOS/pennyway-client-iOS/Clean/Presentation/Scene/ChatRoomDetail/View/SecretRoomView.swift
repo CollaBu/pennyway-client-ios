@@ -2,8 +2,10 @@
 import SwiftUI
 
 struct SecretRoomView: View {
+    let chatRoomId: Int64
     @State private var password = ""
-    @State private var isNavigate = false
+
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -24,17 +26,31 @@ struct SecretRoomView: View {
             }
             .padding(.horizontal, 20)
 
-            CustomInputView(inputText: $password, placeholder: "", isSecureText: false)
+            CustomInputView(inputText: $password, placeholder: "", onCommit: {
+                viewModelWrapper.joinChatRoomViewModel.validatePwForm(password: password)
+            }, isSecureText: false)
+                .keyboardType(.numberPad)
+                .onChange(of: password) { _ in
+                    if password.count > 6 {
+                        password = String(password.prefix(6))
+                    }
+                    viewModelWrapper.joinChatRoomViewModel.validatePwForm(password: password)
+                }
 
             Spacer()
 
             CustomBottomButton(action: {
-                isNavigate = true
-            }, label: "다음", isFormValid: .constant(true))
+                if viewModelWrapper.joinChatRoomViewModel.isFormValid {
+                    viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: password) { success in
+                        if success {
+                            Log.debug("[SecretRoomView]: 채팅방 가입 성공")
+                        } else {
+                            Log.debug("[SecretRoomView]: 채팅방 가입 실패")
+                        }
+                    }
+                }
+            }, label: "다음", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
-
-            NavigationLink(destination: MakeUsernameView(), isActive: $isNavigate) {}
-                .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "배달음식 그만 먹는 방")
         .edgesIgnoringSafeArea(.bottom)
@@ -52,8 +68,4 @@ struct SecretRoomView: View {
             }
         }
     }
-}
-
-#Preview {
-    SecretRoomView()
 }

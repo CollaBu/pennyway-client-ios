@@ -47,7 +47,7 @@ class DefaultMakeChatRoomViewModel: MakeChatRoomViewModel, ObservableObject {
         ))
     }
 
-    /// 제목의 유효성 검사 메서드
+    /// 제목의 유효성 검사 메서드(채팅방 생성)
     func validateForm() {
         let title = roomData.value.title
         let isTitleValid = !title.isEmpty && title.count <= 30

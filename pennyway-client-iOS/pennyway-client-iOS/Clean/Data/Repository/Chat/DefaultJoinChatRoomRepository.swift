@@ -1,29 +1,29 @@
 //
-//  DefaultGetChatRoomRepository.swift
+//  DefaultJoinChatRoomRepository.swift
 //  pennyway-client-iOS
 //
-//  Created by 아우신얀 on 10/24/24.
+//  Created by 아우신얀 on 11/6/24.
 //
 
 import Foundation
 
-class DefaultGetChatRoomRepository: GetChatRoomRepository {
+class DefaultJoinChatRoomRepository: JoinChatRoomRepository {
     private let cdnUrl = Url.cdnUrl
 
-    func getChatRoom(completion: @escaping (Result<[ChatRoom], any Error>) -> Void) {
-        ChatAlamofire.shared.getChatRoom { result in
+    func execute(chatRoomId: Int64, password: String, completion: @escaping (Result<ChatRoom, any Error>) -> Void) {
+        let joinChatRoomDto = JoinChatRoomRequestDto(password: password.isEmpty ? nil : password)
+
+        ChatAlamofire.shared.joinChatRoom(chatRoomId, joinChatRoomDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(GetChatRoomResponseDto.self, from: responseData)
-                        // 응답 DTO를 Model로 매핑
-                        let chatRooms = response.data.chatRooms.map { chatRoomDetail in
-                            return ChatRoomDetail.toChatRoom(dto: chatRoomDetail, cdnUrl: self.cdnUrl)
-                        }
+                        let response = try JSONDecoder().decode(MakeChatRoomResponseDto.self, from: responseData)
+
+                        let chatRoom = ChatRoomDetail.toChatRoom(dto: response.data.chatRoom, cdnUrl: self.cdnUrl)
 
                         Log.debug("[DefaultGetChatRoomRepository]: 내 채팅 조회 api 성공: \(response)")
-                        completion(.success(chatRooms))
+                        completion(.success(chatRoom))
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                         completion(.failure(error))

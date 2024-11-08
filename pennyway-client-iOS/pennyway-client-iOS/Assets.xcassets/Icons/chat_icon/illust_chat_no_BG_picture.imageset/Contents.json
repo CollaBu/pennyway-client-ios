@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "illust_chat_no BG picture.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}
