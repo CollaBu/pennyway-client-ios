@@ -37,17 +37,17 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     /// 메시지를 특정 목적지로 보내는 메서드
     func sendMessage(message: String, destination: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(destination)"
-        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")"]
+        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
+                       "content-type": "application/json"]
         let messageBody: [String: String] = [
             "content": message,
             "contentType": contentType
         ]
-        let headerType = "application/json"
 
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
-                stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil, headerType: headerType)
+                stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
                 Log.debug("📤 [Send Message])")
             }
         } catch {
