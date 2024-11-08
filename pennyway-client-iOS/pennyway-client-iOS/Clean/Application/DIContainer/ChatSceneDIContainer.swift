@@ -72,7 +72,7 @@ final class ChatSceneDIContainer {
     }
 
     private func makeGetChatRoomViewModel() -> GetChatRoomViewModel {
-        return DefaultGetChatRoomViewModel(getChatRoomUseCase: makeGetChatRoomUseCase(), searchChatRoomUseCase: makeSearchChatRoomUseCase(), joinChatRoomUseCase: makeJoinChatRoomUseCase())
+        return DefaultGetChatRoomViewModel(getChatRoomUseCase: makeGetChatRoomUseCase(), searchChatRoomUseCase: makeSearchChatRoomUseCase())
     }
 
     private func makeJoinChatRoomViewModel() -> JoinChatRoomViewModel {
