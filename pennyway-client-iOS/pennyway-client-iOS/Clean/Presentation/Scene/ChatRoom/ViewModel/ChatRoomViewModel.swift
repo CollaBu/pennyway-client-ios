@@ -13,7 +13,7 @@ import Foundation
 protocol ChatRoomViewModelInput {
     func reset()
     func getChatRoomDetail(chatRoomId: Int64)
-    func getPreviousChat(chatRoomId: Int64, lastMessageId: Int64)
+    func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, destination: Int64, contentType: String)
 }
 
@@ -24,6 +24,7 @@ protocol ChatRoomViewModelOutput {
     var roomDetailData: Observable<ChatRoomDetailItemModel?> { get set }
     var messageData: Observable<[MessageItemModel]> { get set }
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
+    var previousMessageData: Observable<PreviousMessage?> { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -35,10 +36,9 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 class DefaultChatRoomViewModel: ChatRoomViewModel {
     var roomData: Observable<ChatRoomItemModel?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
-    var messageData: Observable<[MessageItemModel]> = Observable([]) // 최근 메시지 목록
+    var messageData: Observable<[MessageItemModel]> = Observable([]) // 메시지 목록
     var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 최근 사용자 + 자신
-
-    private var previousMessageData: Observable<PreviousMessage?> = Observable(nil)
+    var previousMessageData: Observable<PreviousMessage?> = Observable(nil)
 
     private let chatRoomUseCase: ChatRoomUseCase
     private let sendChatUseCase: SendChatUseCase
@@ -89,22 +89,25 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         }
     }
 
-    func getPreviousChat(chatRoomId: Int64, lastMessageId: Int64) {
+    func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void) {
         // previousMessageData가 nil일 경우 또는 hasNext가 true인 경우에만 채팅을 불러옴
         if previousMessageData.value == nil || (previousMessageData.value?.hasNext == true) {
-            chatRoomUseCase.getPreviousChat(chatRoomId: chatRoomId, lastMessageId: lastMessageId) { [weak self] result in
-                switch result {
-                case let .success(previousMessage):
-                    // PreviousMessage를 MessageItemModel로 변환
-                    let messages = PreviousMessage.to(model: previousMessage)
+            if let message = messageData.value.last {
+                chatRoomUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
+                    switch result {
+                    case let .success(previousMessage):
+                        let messages = PreviousMessage.to(model: previousMessage)
 
-                    // 이전 메시지 데이터 업데이트
-                    self?.previousMessageData.value = previousMessage
-                    self?.messageData.value.append(contentsOf: messages)
-                    Log.debug("[DefaultChatRoomViewModel] 이전 채팅 조회 성공: \(previousMessage)")
+                        // 이전 메시지 데이터 업데이트
+                        self?.previousMessageData.value = previousMessage
+                        self?.messageData.value.append(contentsOf: messages)
+                        Log.debug("[DefaultChatRoomViewModel] 이전 채팅 조회 성공: \(previousMessage)")
+                        completion(.success(()))
 
-                case let .failure(error):
-                    Log.error("[DefaultChatRoomViewModel] 이전 채팅 조회 실패: \(error.localizedDescription)")
+                    case let .failure(error):
+                        Log.error("[DefaultChatRoomViewModel] 이전 채팅 조회 실패: \(error.localizedDescription)")
+                        completion(.failure(error))
+                    }
                 }
             }
         } else {

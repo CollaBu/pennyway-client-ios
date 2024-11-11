@@ -92,6 +92,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
     @Published var messageData: [MessageItemModel] = []
     @Published var chatUserData: [ChatMemberItemModel] = []
+    @Published var previousMessageData: PreviousMessage? = nil
 
     var chatRoomViewModel: any ChatRoomViewModel
 
@@ -102,6 +103,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
         roomDetailData = chatRoomViewModel.roomDetailData.value
         messageData = chatRoomViewModel.messageData.value
         chatUserData = chatRoomViewModel.chatUserData.value
+        previousMessageData = chatRoomViewModel.previousMessageData.value
 
         chatRoomViewModel.roomData.observe(on: self) { [weak self] newData in
             self?.roomData = newData
@@ -117,6 +119,10 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         chatRoomViewModel.chatUserData.observe(on: self) { [weak self] newData in
             self?.chatUserData = newData
+        }
+
+        chatRoomViewModel.previousMessageData.observe(on: self) { [weak self] newData in
+            self?.previousMessageData = newData
         }
     }
 }

@@ -12,9 +12,12 @@ struct ChatContent: View {
     let members: [ChatMemberItemModel]
     let currentUserId: Int64
 
-    @State private var scrollToTop: Bool = false//위쪽으로 스크롤 했는지 여부
-    @ObservedObject var keyboardManager: KeyboardManager
+    @State private var isLoadingViewShown: Bool = false
+    @State private var isReloadViewShown: Bool = false
+    @State private var animateLoadingView: Bool = false
+    @State private var scrollToTop: Bool = false // 위쪽으로 스크롤 했는지 여부
 
+    @ObservedObject var keyboardManager: KeyboardManager
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     var body: some View {
@@ -26,9 +29,10 @@ struct ChatContent: View {
                             .onAppear {
                                 // 스크롤 뷰가 가장 위쪽에 도달했을 때 getPreviousChat 호출
                                 if geometry.frame(in: .global).minY >= 0 {
-                                    if let roomId = viewModelWrapper.roomData?.id, let lastMessageId = chats.last?.chatId {
-                                        scrollToTop = true
-                                        viewModelWrapper.chatRoomViewModel.getPreviousChat(chatRoomId: roomId, lastMessageId: lastMessageId)
+                                    scrollToTop = true
+
+                                    if viewModelWrapper.previousMessageData == nil || (viewModelWrapper.previousMessageData?.hasNext == true) {
+                                        self.loadPreviousChat()
                                     }
                                 }
                             }
@@ -37,6 +41,14 @@ struct ChatContent: View {
                             }
                     }
                     .frame(height: 1)
+
+                    if isLoadingViewShown {
+                        LoadingView(startAnimate: $animateLoadingView)
+                    }
+
+                    if isReloadViewShown {
+                        ReloadView(action: retryLoadPreviousChat)
+                    }
 
                     ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
@@ -96,5 +108,67 @@ struct ChatContent: View {
 
         // 각 날짜별 메시지 배열을 오래된순으로 저장
         return grouped.mapValues { $0.reversed() }
+    }
+
+    private func loadPreviousChat() {
+        // LoadingView를 표시하고, 10초 후에 ReloadView를 표시할 타이머 설정
+        isLoadingViewShown = true
+        isReloadViewShown = false
+
+        var retryWorkItem: DispatchWorkItem?
+
+        retryWorkItem = DispatchWorkItem {
+            Log.debug("API 응답이 10초 이상 걸림")
+
+            // 로딩 뷰 사라지고, 재로드 뷰 나타남
+            animateLoadingView = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isLoadingViewShown = false
+                isReloadViewShown = true
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem!)
+
+        // 10초가 지나기 전에 API가 성공하면 타이머 취소
+        viewModelWrapper.chatRoomViewModel.getPreviousChat { result in
+            switch result {
+            case .success:
+                // 로딩 뷰와 재로드 뷰 사라짐
+                animateLoadingView = false
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isLoadingViewShown = false
+                    isReloadViewShown = false
+                }
+            case .failure:
+                // 로딩 뷰 사라지고, 재로드 뷰 나타남
+                animateLoadingView = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isLoadingViewShown = false
+                    isReloadViewShown = true
+                }
+            }
+            retryWorkItem?.cancel()
+        }
+    }
+
+    private func retryLoadPreviousChat() {
+        // ReloadView가 클릭되었을 때 다시 데이터를 요청하는 함수
+        isLoadingViewShown = true
+        isReloadViewShown = false
+
+        // getPreviousChat 다시 호출
+        viewModelWrapper.chatRoomViewModel.getPreviousChat { result in
+            switch result {
+            case .success:
+                // 데이터가 성공적으로 로드되었으면 LoadingView 숨김
+                self.isLoadingViewShown = false
+            case .failure:
+                // 실패 시에도 LoadingView 숨김
+                self.isLoadingViewShown = false
+                self.isReloadViewShown = true
+            }
+        }
     }
 }

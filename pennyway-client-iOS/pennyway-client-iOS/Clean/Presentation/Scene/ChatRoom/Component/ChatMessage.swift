@@ -22,10 +22,6 @@ struct ChatMessage: View {
             }
 
             ZStack(alignment: .topLeading) {
-                Rectangle()
-                    .fill(isSender ? Color("Yellow01") : Color("White01"))
-                    .cornerRadius(6)
-                    .frame(width: textWidth)
 
                 Text(content)
                     .font(.B1MediumFont())
@@ -33,15 +29,22 @@ struct ChatMessage: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
                     .background(
+                        // Rectangle을 Text의 배경으로 사용
+                        Rectangle()
+                            .fill(isSender ? Color("Yellow01") : Color("White01"))
+                            .cornerRadius(6)
+                    )
+                    .background(
                         GeometryReader { geo in
                             Color.clear.preference(key: TextHeightPreferenceKey.self, value: geo.size.height)
                             Color.clear.preference(key: TextWidthPreferenceKey.self, value: geo.size.width)
                         }
                     )
+                    .onPreferenceChange(TextWidthPreferenceKey.self) { width in
+                        self.textWidth = width
+                    }
             }
-            .onPreferenceChange(TextWidthPreferenceKey.self) { width in
-                self.textWidth = width
-            }
+
             .frame(minWidth: textWidth)
             .fixedSize(horizontal: false, vertical: true)
 
