@@ -148,6 +148,15 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
 
     func stompClientDidDisconnect(client _: StompClientLib!) {
         Log.debug("Socket disconnected")
+        
+        connect { result in
+            switch result {
+            case .success:
+                Log.debug("[DefaultChatStompRepository] 재연결 시도 성공")
+            case let .failure(error):
+                Log.error("재연결 시도 실패: \(error)")
+            }
+        }
     }
 
     func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader _: [String: String]?, withDestination _: String) {

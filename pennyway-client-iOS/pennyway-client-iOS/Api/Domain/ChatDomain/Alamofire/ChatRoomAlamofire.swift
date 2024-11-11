@@ -25,4 +25,11 @@ class ChatRoomAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatRoomDetail(chatRoomId: chatRoomId), completion: completion)
     }
+    
+    /// 채팅 이력 조회
+    func getChatData(_ chatRoomId: Int64, _ lastMessageId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatRoomAlamofire - getChatData() called \(chatRoomId) \(lastMessageId)")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatData(chatRoomId: chatRoomId, lastMessageId: lastMessageId), completion: completion)
+    }
 }
