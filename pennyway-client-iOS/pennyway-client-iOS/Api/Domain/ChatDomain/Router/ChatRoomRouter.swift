@@ -36,7 +36,6 @@ enum ChatRoomRouter: URLRequestConvertible {
         switch self {
         case .getChatRoomDetail, .getChatData:
             return [:]
-            
         }
     }
 

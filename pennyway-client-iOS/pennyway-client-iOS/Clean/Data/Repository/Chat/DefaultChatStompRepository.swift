@@ -148,7 +148,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
 
     func stompClientDidDisconnect(client _: StompClientLib!) {
         Log.debug("Socket disconnected")
-        
+
         connect { result in
             switch result {
             case .success:

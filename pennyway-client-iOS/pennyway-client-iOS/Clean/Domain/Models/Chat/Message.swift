@@ -18,3 +18,13 @@ struct Message: Equatable {
     let createdAt: String
     let senderId: Int64
 }
+
+// MARK: - PreviousMessage
+
+struct PreviousMessage: Equatable {
+    let contents: [Message]
+    let currentPageNumber: Int
+    let pageSize: Int
+    let numberOfElements: Int
+    let hasNext: Bool
+}

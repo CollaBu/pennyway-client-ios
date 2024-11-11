@@ -137,6 +137,7 @@
 		4A4F1A422CE227E600105218 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4F1A3E2CE227E600105218 /* Debug.xcconfig */; };
 		4A4F1A432CE227E600105218 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4F1A3F2CE227E600105218 /* Release.xcconfig */; };
 		4A4F1A442CE227E600105218 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4F1A402CE227E600105218 /* Secrets.xcconfig */; };
+		4A4F1A462CE25F9500105218 /* GetPreviousChatResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F1A452CE25F9500105218 /* GetPreviousChatResponseDto.swift */; };
 		4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5050322BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift */; };
 		4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */; };
 		4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */; };
@@ -584,6 +585,7 @@
 		4A4F1A3E2CE227E600105218 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		4A4F1A3F2CE227E600105218 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		4A4F1A402CE227E600105218 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		4A4F1A452CE25F9500105218 /* GetPreviousChatResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPreviousChatResponseDto.swift; sourceTree = "<group>"; };
 		4A5050322BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatterUtil.swift; sourceTree = "<group>"; };
 		4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAccountToOAuthViewModel.swift; sourceTree = "<group>"; };
 		4A51D2AB2BB1855A0080083D /* CustomBottomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBottomButton.swift; sourceTree = "<group>"; };
@@ -2774,6 +2776,7 @@
 				D85FC58F2CCC03920068553A /* SearchChatRoomResponseDto.swift */,
 				D89263272CD3AD080057AAD6 /* GetChatRoomResponseDto.swift */,
 				4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */,
+				4A4F1A452CE25F9500105218 /* GetPreviousChatResponseDto.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -3304,6 +3307,7 @@
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				4AE9B3422CB6E5A00044D3E1 /* SideMenuCell.swift in Sources */,
 				4AD824752C76263B00AEF371 /* NetworkMonitor.swift in Sources */,
+				4A4F1A462CE25F9500105218 /* GetPreviousChatResponseDto.swift in Sources */,
 				D85927EE2BE6842A00653391 /* CustomPopUpView.swift in Sources */,
 				4A28821B2C65184300AE50C7 /* ProfileImageViewModel.swift in Sources */,
 				D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */,
@@ -3538,6 +3542,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A4F1A3E2CE227E600105218 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3583,6 +3588,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A4F1A3F2CE227E600105218 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

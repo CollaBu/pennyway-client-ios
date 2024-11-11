@@ -34,4 +34,31 @@ class DefaultChatRoomRepository: ChatRoomRepository {
             }
         }
     }
+
+    func getPreviousChat(chatRoomId: Int64, lastMessageId: Int64, completion: @escaping (Result<PreviousMessage, Error>) -> Void) {
+        ChatRoomAlamofire.shared.getPreviousChat(chatRoomId, lastMessageId) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(GetPreviousChatResponseDto.self, from: responseData)
+                        let previousMessage = GetPreviousChatResponseDto.to(dto: response)
+
+                        Log.debug("[DefaultChatRoomRepository]: 채팅 상세 정보 조회 api 성공: \(response)")
+                        completion(.success(previousMessage))
+                    } catch {
+                        Log.fault("Error parsing response JSON: \(error)")
+                        completion(.failure(error))
+                    }
+                }
+            case let .failure(error):
+                if let statusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(.failure(error))
+            }
+        }
+    }
 }

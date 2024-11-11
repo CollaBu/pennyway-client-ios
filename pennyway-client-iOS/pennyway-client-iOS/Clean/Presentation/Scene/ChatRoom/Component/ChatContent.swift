@@ -15,11 +15,15 @@ struct ChatContent: View {
     @State private var scrollToBottom: Bool = false
     @ObservedObject var keyboardManager: KeyboardManager
 
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
+
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 14 * DynamicSizeFactor.factor()) {
-                    ForEach(groupedChatsByDate.keys.sorted(by: >), id: \.self) { date in
+                    
+
+                    ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                         Section(header: ChatHeader(data: date)) {
                             Spacer().frame(height: 3)
@@ -56,7 +60,8 @@ struct ChatContent: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     proxy.scrollTo("bottom", anchor: .bottom)
                 }
-            }.onAppear {
+            }
+            .onAppear {
                 // 처음 열릴 때 가장 아래로 스크롤
                 proxy.scrollTo("bottom", anchor: .bottom)
             }
