@@ -12,7 +12,7 @@ struct ChatContent: View {
     let members: [ChatMemberItemModel]
     let currentUserId: Int64
 
-    @State private var scrollToBottom: Bool = false
+    @State private var scrollToTop: Bool = false//위쪽으로 스크롤 했는지 여부
     @ObservedObject var keyboardManager: KeyboardManager
 
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
@@ -21,7 +21,22 @@ struct ChatContent: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 14 * DynamicSizeFactor.factor()) {
-                    
+                    GeometryReader { geometry in
+                        Color.clear
+                            .onAppear {
+                                // 스크롤 뷰가 가장 위쪽에 도달했을 때 getPreviousChat 호출
+                                if geometry.frame(in: .global).minY >= 0 {
+                                    if let roomId = viewModelWrapper.roomData?.id, let lastMessageId = chats.last?.chatId {
+                                        scrollToTop = true
+                                        viewModelWrapper.chatRoomViewModel.getPreviousChat(chatRoomId: roomId, lastMessageId: lastMessageId)
+                                    }
+                                }
+                            }
+                            .onDisappear {
+                                scrollToTop = false
+                            }
+                    }
+                    .frame(height: 1)
 
                     ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
@@ -52,8 +67,10 @@ struct ChatContent: View {
                 }
             }
             .onChange(of: chats) { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    proxy.scrollTo("bottom", anchor: .bottom)
+                if !scrollToTop {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        proxy.scrollTo("bottom", anchor: .bottom)
+                    }
                 }
             }
             .onChange(of: keyboardManager.keyboardHeight) { _ in

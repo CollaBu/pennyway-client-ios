@@ -78,6 +78,9 @@ struct ChatRoomView: View {
                 // 채팅방 상세 정보 조회
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
             }
+            .onDisappear {
+                viewModelWrapper.chatRoomViewModel.reset()
+            }
         }
     }
 }
