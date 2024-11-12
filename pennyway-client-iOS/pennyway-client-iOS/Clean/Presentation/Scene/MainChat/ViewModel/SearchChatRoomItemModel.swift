@@ -10,7 +10,7 @@ import Foundation
 // MARK: - SearchChatRoomItemModel
 
 struct SearchChatRoomItemModel: Equatable, Identifiable, ChatRoomProtocol {
-    var id: Int
+    var id: Int64
     var title: String
     var description: String
     var isPrivate: Bool

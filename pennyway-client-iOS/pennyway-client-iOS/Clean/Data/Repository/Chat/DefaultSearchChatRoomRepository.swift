@@ -69,6 +69,9 @@ class DefaultSearchChatRoomRepository: SearchChatRoomRepository {
             }
         }
 
+        let existId = Set(chatRoomData.map { $0.id })
+        let uniqueNewChatRoomData = newChatRoomData.filter { !existId.contains($0.id) }
+
         combinedChatRooms.sort { $0.id > $1.id }
         chatRoomData = combinedChatRooms
     }

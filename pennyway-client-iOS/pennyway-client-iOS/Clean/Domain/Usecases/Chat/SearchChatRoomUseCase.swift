@@ -32,7 +32,7 @@ class DefaultSearchChatRoomUseCase: SearchChatRoomUseCase {
                 // ChatRoom 데이터를 SearchChatRoomItemModel로 변환
                 let chatRoomItemModels = chatRooms.map { chatRoom in
                     return SearchChatRoomItemModel(
-                        id: Int(chatRoom.id),
+                        id: chatRoom.id,
                         title: chatRoom.title,
                         description: chatRoom.description, 
                         isPrivate: chatRoom.isPrivate,
