@@ -15,10 +15,11 @@ class DefaultSearchChatRoomRepository: SearchChatRoomRepository {
     private let pageSize: Int = 10 // 페이지당 채팅방 개수
     private var hasNext = true // 다음 페이지가 있는지 여부
 
-    func execute(model: SearchChatRoom, completion: @escaping (Result<[ChatRoom], any Error>) -> Void) {
+    func execute(model: SearchChatRoom, completion: @escaping (Result<([ChatRoom], Bool), any Error>) -> Void) {
         guard hasNext else {
             return
         }
+
         let searchChatRoomDto = SearchChatRoomRequestDto(target: model.target, page: currentPageNumber)
         Log.debug("Fetching hasNext: \(hasNext)")
 
@@ -41,7 +42,7 @@ class DefaultSearchChatRoomRepository: SearchChatRoomRepository {
                         Log.debug("hasNext: \(self.hasNext)")
 
                         Log.debug("[SearchChatRoomResponseDto]: 채팅방 검색 api 성공: \(response)")
-                        completion(.success(chatRooms))
+                        completion(.success((chatRooms, self.hasNext)))
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
                         completion(.failure(error))

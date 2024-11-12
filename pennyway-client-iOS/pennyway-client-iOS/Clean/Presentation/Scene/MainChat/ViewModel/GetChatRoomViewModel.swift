@@ -21,6 +21,7 @@ protocol GetChatRoomViewModelInput {
 protocol GetChatRoomViewModelOutput {
     var roomData: Observable<[ChatRoomItemModel]> { get set }
     var searchRoomData: Observable<[SearchChatRoomItemModel]> { get set }
+    var hasNext: Bool { get }
 }
 
 // MARK: - GetChatRoomViewModel
@@ -36,7 +37,7 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
     private let getChatRoomUseCase: GetChatRoomUseCase
     private let searchChatRoomUseCase: SearchChatRoomUseCase
     private var currentPageNumber: Int = 0
-    private var hasNext: Bool = true // 다음 페이지가 있는지 여부
+    var hasNext: Bool = true // 다음 페이지가 있는지 여부
 
     /// 검색 초기화
     func initSearch() {
@@ -85,7 +86,7 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
             return
         }
 
-        searchChatRoomUseCase.execute(target: target, page: currentPageNumber) { [weak self] success, chatRooms in
+        searchChatRoomUseCase.execute(target: target, page: currentPageNumber) { [weak self] success, chatRooms, nextPageAvailable in
             DispatchQueue.main.async {
                 if success {
                     if let chatRooms = chatRooms {
@@ -100,7 +101,13 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
                             )
                         }
                         Log.debug("[ChatViewModel]: 채팅방 검색 성공")
+
+                        Log.debug("뷰모델 hasNext1:\(self?.hasNext)")
+                        self?.hasNext = nextPageAvailable // hasNext 상태 갱신
+                        Log.debug("뷰모델 hasNext2:\(self?.hasNext)")
                     }
+                } else {
+                    self?.hasNext = false
                 }
             }
         }

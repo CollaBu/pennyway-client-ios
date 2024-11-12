@@ -10,6 +10,7 @@ struct ChatRoomContent: View {
     @Binding var dummyChatRooms: [ChatRoomItemModel]? // 내 채팅의 item을 표시하기 위한 항목
     let searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
     var isMyChat: Bool // 내 채팅 여부
+    let target: String // 채팅방 검색어를 나타내는 항목
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     var body: some View {
@@ -38,8 +39,14 @@ struct ChatRoomContent: View {
                                     return
                                 }
                                 if index == rooms.count - 1 {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                        viewModelWrapper.getChatRoomViewModel.getChatRoom()
+                                    Log.debug("???")
+                                    if viewModelWrapper.getChatRoomViewModel.hasNext {
+                                        Log.debug("뷰에서 hasNext까지 들어옴")
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                            Log.debug("무한스크롤 까지 왔음")
+                                            Log.debug("target: \(target)")
+                                            viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
+                                        }
                                     }
                                 }
                             }

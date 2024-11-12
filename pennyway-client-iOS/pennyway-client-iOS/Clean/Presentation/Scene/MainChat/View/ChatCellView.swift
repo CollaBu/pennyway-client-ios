@@ -43,12 +43,12 @@ struct ChatCellView: View {
                             Spacer()
                         } else {
                             searchChatContainer
-                            ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(viewModelWrapper.filteredChatData), searchChatRooms: [], isMyChat: true, viewModelWrapper: viewModelWrapper)
+                            ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(viewModelWrapper.filteredChatData), searchChatRooms: [], isMyChat: true, target: chatRoomName, viewModelWrapper: viewModelWrapper)
                         }
                     } else {
                         searchChatContainer
                         Spacer()
-                        ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: viewModelWrapper.searchChatData, isMyChat: false, viewModelWrapper: viewModelWrapper)
+                        ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: viewModelWrapper.searchChatData, isMyChat: false, target: chatRoomName, viewModelWrapper: viewModelWrapper)
                     }
                 }
                 
