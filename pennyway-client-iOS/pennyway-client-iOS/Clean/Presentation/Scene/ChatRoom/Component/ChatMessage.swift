@@ -22,7 +22,6 @@ struct ChatMessage: View {
             }
 
             ZStack(alignment: .topLeading) {
-
                 Text(content)
                     .font(.B1MediumFont())
                     .platformTextColor(color: Color("Gray07"))
@@ -44,7 +43,6 @@ struct ChatMessage: View {
                         self.textWidth = width
                     }
             }
-
             .frame(minWidth: textWidth)
             .fixedSize(horizontal: false, vertical: true)
 

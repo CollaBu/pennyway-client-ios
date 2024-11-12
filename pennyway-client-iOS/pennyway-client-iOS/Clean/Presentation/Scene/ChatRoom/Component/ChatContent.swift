@@ -31,6 +31,7 @@ struct ChatContent: View {
                                 if geometry.frame(in: .global).minY >= 0 {
                                     scrollToTop = true
 
+                                    // previousMessageData가 nil일 경우 또는 hasNext가 true인 경우에만 채팅을 불러옴
                                     if viewModelWrapper.previousMessageData == nil || (viewModelWrapper.previousMessageData?.hasNext == true) {
                                         self.loadPreviousChat()
                                     }

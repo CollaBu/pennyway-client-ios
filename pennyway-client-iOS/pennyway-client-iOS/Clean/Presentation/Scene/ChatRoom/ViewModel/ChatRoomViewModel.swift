@@ -90,29 +90,23 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     }
 
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void) {
-        // previousMessageData가 nil일 경우 또는 hasNext가 true인 경우에만 채팅을 불러옴
-        if previousMessageData.value == nil || (previousMessageData.value?.hasNext == true) {
-            if let message = messageData.value.last {
-                chatRoomUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
-                    switch result {
-                    case let .success(previousMessage):
-                        let messages = PreviousMessage.to(model: previousMessage)
+        if let message = messageData.value.last {
+            chatRoomUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
+                switch result {
+                case let .success(previousMessage):
+                    let messages = PreviousMessage.to(model: previousMessage)
 
-                        // 이전 메시지 데이터 업데이트
-                        self?.previousMessageData.value = previousMessage
-                        self?.messageData.value.append(contentsOf: messages)
-                        Log.debug("[DefaultChatRoomViewModel] 이전 채팅 조회 성공: \(previousMessage)")
-                        completion(.success(()))
+                    // 이전 메시지 데이터 업데이트
+                    self?.previousMessageData.value = previousMessage
+                    self?.messageData.value.append(contentsOf: messages)
+                    Log.debug("[DefaultChatRoomViewModel] 이전 채팅 조회 성공: \(previousMessage)")
+                    completion(.success(()))
 
-                    case let .failure(error):
-                        Log.error("[DefaultChatRoomViewModel] 이전 채팅 조회 실패: \(error.localizedDescription)")
-                        completion(.failure(error))
-                    }
+                case let .failure(error):
+                    Log.error("[DefaultChatRoomViewModel] 이전 채팅 조회 실패: \(error.localizedDescription)")
+                    completion(.failure(error))
                 }
             }
-        } else {
-            // 이전 메시지가 더 이상 없으면 호출하지 않음
-            Log.debug("[DefaultChatRoomViewModel] 이전 메시지가 더 이상 없음.")
         }
     }
 
