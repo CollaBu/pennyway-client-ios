@@ -57,7 +57,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
                     if let chatRoomId = chatRoom?.id {
                         Log.debug("[ChatRoomDetailView]: id까지 진입")
 
-                        viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: "") { success in
+                        viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: Int64(chatRoomId), password: "") { success in
                             Log.debug("[ChatRoomDetailView]: joinChatRoom까지 진입")
 
                             if success {
@@ -73,7 +73,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
 
             if let chatRoomId = chatRoom?.id {
                 if chatRoom?.isPrivate == true {
-                    NavigationLink(destination: SecretRoomView(chatRoomId: chatRoomId, viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
+                    NavigationLink(destination: SecretRoomView(chatRoomId: Int64(chatRoomId), viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
                         .hidden()
                 }
             }

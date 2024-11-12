@@ -8,9 +8,9 @@ struct ChatRoomContent: View {
     @Binding var selectedChatRoom: ChatRoomItemModel? // 내 채팅 중 선택된 채팅방을 저장하기 위한 변수
     @Binding var selectedSearchChatRoom: SearchChatRoomItemModel? // 추천 채팅 중 선택된 채팅방을 저장하기 위한 변수
     @Binding var dummyChatRooms: [ChatRoomItemModel]? // 내 채팅의 item을 표시하기 위한 항목
-    @Binding var searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
+    let searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
     var isMyChat: Bool // 내 채팅 여부
-//    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     var body: some View {
         ScrollView {
@@ -29,16 +29,20 @@ struct ChatRoomContent: View {
                     }
                 } else {
                     if let rooms = searchChatRooms {
-                        ForEach(rooms, id: \.id) { chatRoom in
-                            Button(action: {
-                                selectedSearchChatRoom = chatRoom
-                                isNavigateChatRoomDetailView = true
-                            }, label: {
-                                ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
-                                    isPopUp = true
-                                })
-                                .contentShape(Rectangle())
+                        ForEach(rooms, id: \.id) { (chatRoom: SearchChatRoomItemModel) in
+                            ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
+                                isPopUp = true
                             })
+                            .onAppear {
+                                guard let index = rooms.firstIndex(where: { $0.id == chatRoom.id }) else {
+                                    return
+                                }
+                                if index == rooms.count - 1 {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                        viewModelWrapper.getChatRoomViewModel.getChatRoom()
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -159,7 +163,6 @@ struct ChatRoomCell: View, ImageLoadable {
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 20)
-
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
             .offset(x: offset)
