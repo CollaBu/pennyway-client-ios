@@ -78,7 +78,6 @@ struct ChatCellView: View {
                 }
                 
                 if isErrorPopUp {
-
                     ErrorCodePopUpView(showingPopUp: $isErrorPopUp, titleLabel: "두 글자 이상 입력해주세요", subLabel: "검색은 두 글자부터 가능해요")
                 }
                 
