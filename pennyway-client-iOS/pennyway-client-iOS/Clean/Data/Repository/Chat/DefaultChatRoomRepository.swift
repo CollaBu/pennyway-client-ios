@@ -36,7 +36,9 @@ class DefaultChatRoomRepository: ChatRoomRepository {
     }
 
     func getPreviousChat(chatRoomId: Int64, lastMessageId: Int64, completion: @escaping (Result<PreviousMessage, Error>) -> Void) {
-        ChatRoomAlamofire.shared.getPreviousChat(chatRoomId, lastMessageId) { result in
+        let dto = GetPreviousChatRequestDto(lastMessageId: lastMessageId)
+
+        ChatRoomAlamofire.shared.getPreviousChat(chatRoomId, dto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {

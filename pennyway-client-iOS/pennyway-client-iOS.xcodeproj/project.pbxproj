@@ -271,6 +271,7 @@
 		4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift */; };
 		4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */; };
 		4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */; };
+		4ACB61152CE4C20C0018E78A /* GetPreviousChatRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */; };
 		4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */; };
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
@@ -721,6 +722,7 @@
 		4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRegistrationManager.swift; sourceTree = "<group>"; };
 		4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingView.swift; sourceTree = "<group>"; };
+		4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPreviousChatRequestDto.swift; sourceTree = "<group>"; };
 		4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsContentView.swift; sourceTree = "<group>"; };
 		4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTabBarVisibilityExtension.swift; sourceTree = "<group>"; };
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
@@ -2788,6 +2790,7 @@
 				4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */,
 				D85FC58D2CCC029B0068553A /* SearchChatRoomRequestDto.swift */,
 				D8E889E32CDB796B008FC22E /* JoinChatRoomRequestDto.swift */,
+				4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -3114,6 +3117,7 @@
 				4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */,
 				4A3701BD2C08F7B600F0AEBA /* TargetAmountViewModel.swift in Sources */,
 				4A2C3A852CD3C965006B6804 /* DefaultLogoutRepository.swift in Sources */,
+				4ACB61152CE4C20C0018E78A /* GetPreviousChatRequestDto.swift in Sources */,
 				4A12FF152C9C4BDE00DE10BC /* RootComponent.swift in Sources */,
 				4A2C3A762CD3C93C006B6804 /* LoginRepository.swift in Sources */,
 				4A0BC6982BF53D6F0036D900 /* SpendingHistoryViewModel.swift in Sources */,
