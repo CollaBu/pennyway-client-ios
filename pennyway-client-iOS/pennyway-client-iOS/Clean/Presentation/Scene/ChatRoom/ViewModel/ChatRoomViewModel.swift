@@ -38,16 +38,15 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 
     private let chatRoomUseCase: ChatRoomUseCase
     private let sendChatUseCase: SendChatUseCase
+    private let chatHistoryList: ChatHistoryList
 
     private var cancellables = Set<AnyCancellable>()
 
-    private let chatHistory: ChatHistoryList
-
-    init(chatHistory: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
-        self.chatHistory = chatHistory
+    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+        self.chatHistoryList = chatHistoryList
         self.chatRoomUseCase = chatRoomUseCase
         self.sendChatUseCase = sendChatUseCase
-        self.chatHistory.delegate = self
+        self.chatHistoryList.delegate = self
 
         // NotificationCenter에서 메시지 알림 구독
         NotificationCenter.default.publisher(for: .didReceiveMessage)
@@ -97,14 +96,14 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         }
     }
 
-    /// 새로운 메시지를 수신하여 chatHistory에 삽입
+    /// 단일 메시지 삽입
     private func handleNewMessage(_ message: MessageItemModel) {
-        chatHistory.insert(message)
+        chatHistoryList.insert(message)
     }
 
-    /// 기존 메시지 로드 (예: 초기 로드 또는 특정 시점에서 로드 필요 시 사용)
-    private func loadHistoricalMessages(_ messages: [MessageItemModel]) {
-        chatHistory.insertMessages(messages)
+    /// 여러 메시지 삽입
+    private func handleNewMessages(_ messages: [MessageItemModel]) {
+        chatHistoryList.insertMessages(messages)
     }
 }
 
@@ -113,9 +112,5 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 extension DefaultChatRoomViewModel: ChatHistoryDelegate {
     func chatHistoryDidAdd(_ messages: [MessageItemModel]) {
         messageData.value.insert(contentsOf: messages, at: 0)
-    }
-
-    func chatHistoryDidUpdate(_ messages: [MessageItemModel]) {
-        messageData.value = messages
     }
 }

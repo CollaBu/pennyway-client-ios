@@ -5,14 +5,13 @@
 //  Created by 최희진 on 11/13/24.
 //
 
+import Foundation
+
 // MARK: - ChatHistoryDelegate
 
 protocol ChatHistoryDelegate: AnyObject {
     /// 새로운 메시지가 추가되었을 때 호출
     func chatHistoryDidAdd(_ messages: [MessageItemModel])
-    
-    /// 전체 메시지가 업데이트되었을 때 호출
-    func chatHistoryDidUpdate(_ messages: [MessageItemModel])
 }
 
 // MARK: - ChatHistoryList
@@ -22,7 +21,6 @@ protocol ChatHistoryList: AnyObject {
     
     func insert(_ message: MessageItemModel)
     func insertMessages(_ messages: [MessageItemModel])
-    func getAllMessages() -> [MessageItemModel]
 }
 
 // MARK: - ChatHistoryBinaryList
@@ -78,10 +76,6 @@ final class ChatHistoryBinaryList: ChatHistoryList {
                 self.delegate?.chatHistoryDidAdd(sortedMessages)
             }
         }
-    }
-    
-    func getAllMessages() -> [MessageItemModel] {
-        queue.sync { messages }
     }
     
     // MARK: - Private Methods
