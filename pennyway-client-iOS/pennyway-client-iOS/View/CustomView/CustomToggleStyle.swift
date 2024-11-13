@@ -23,7 +23,6 @@ struct CustomToggleStyle: ToggleStyle {
                         .padding(1.5)
                         .offset(x: configuration.isOn ? 8 : -8))
                 .animation(hasAppeared ? .easeInOut(duration: 0.3) : nil)
-//                .animation(nil)
                 .onTapGesture { configuration.isOn.toggle() }
         }
     }

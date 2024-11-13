@@ -57,7 +57,6 @@ class DefaultJoinChatRoomViewModel: JoinChatRoomViewModel {
                     switch joinChatRoomError {
                     case .invalidPassword:
                         self.isPasswordInvalid = true 
-                        Log.debug("뷰모델:\(self.isPasswordInvalid)")
                         completion(false)
                     case .other:
                         self.isPasswordInvalid = false
