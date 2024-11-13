@@ -42,19 +42,22 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 
     private let chatRoomUseCase: ChatRoomUseCase
     private let sendChatUseCase: SendChatUseCase
+    private let chatHistoryList: ChatHistoryList
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+        self.chatHistoryList = chatHistoryList
         self.chatRoomUseCase = chatRoomUseCase
         self.sendChatUseCase = sendChatUseCase
+        self.chatHistoryList.delegate = self
 
         // NotificationCenter에서 메시지 알림 구독
         NotificationCenter.default.publisher(for: .didReceiveMessage)
             .sink { [weak self] notification in
 
                 if let message = notification.object as? MessageItemModel {
-                    self?.messageData.value.insert(message, at: 0)
+                    self?.handleNewMessage(message)
                 }
             }
             .store(in: &cancellables)
@@ -98,7 +101,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 
                     // 이전 메시지 데이터 업데이트
                     self?.previousMessageData.value = previousMessage
-                    self?.messageData.value.append(contentsOf: messages)
+                    self?.handleNewMessages(messages)
                     Log.debug("[DefaultChatRoomViewModel] 이전 채팅 조회 성공: \(previousMessage)")
                     completion(.success(()))
 
@@ -124,5 +127,27 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
             }
         }
+    }
+
+    /// 단일 메시지 삽입
+    private func handleNewMessage(_ message: MessageItemModel) {
+        chatHistoryList.insert(message, true)
+    }
+
+    /// 여러 메시지 삽입
+    private func handleNewMessages(_ messages: [MessageItemModel]) {
+        chatHistoryList.insertMessages(messages)
+    }
+}
+
+// MARK: ChatHistoryDelegate
+
+extension DefaultChatRoomViewModel: ChatHistoryDelegate {
+    func didAddChatHistory(_ messages: [MessageItemModel]) {
+        messageData.value.insert(contentsOf: messages, at: 0)
+    }
+
+    func didAddChatHistories(_ messages: [MessageItemModel]) {
+        messageData.value.append(contentsOf: messages)
     }
 }

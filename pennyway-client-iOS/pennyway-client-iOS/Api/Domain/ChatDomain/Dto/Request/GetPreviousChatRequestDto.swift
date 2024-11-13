@@ -1,5 +1,5 @@
 //
-//  GetChatDataRequestDto.swift
+//  GetPreviousChatRequestDto.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 11/13/24.

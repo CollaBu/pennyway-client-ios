@@ -108,6 +108,10 @@
 		4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */; };
 		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
 		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
+		4A4028BC2CE3CD490050C6ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A4028BB2CE3CD490050C6ED /* GoogleService-Info.plist */; };
+		4A4028C12CE3CD4C0050C6ED /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4028BD2CE3CD4C0050C6ED /* Debug.xcconfig */; };
+		4A4028C22CE3CD4C0050C6ED /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4028BE2CE3CD4C0050C6ED /* Release.xcconfig */; };
+		4A4028C32CE3CD4C0050C6ED /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4028BF2CE3CD4C0050C6ED /* Secrets.xcconfig */; };
 		4A45A19A2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A19B2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A19E2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -271,6 +275,8 @@
 		4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift */; };
 		4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */; };
 		4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */; };
+		4ACB61132CE4C09D0018E78A /* ChatHistoryBinaryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */; };
+		4ACB611D2CE4CC8A0018E78A /* ChatHistoryListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */; };
 		4ACB61152CE4C20C0018E78A /* GetPreviousChatRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */; };
 		4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */; };
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
@@ -460,6 +466,16 @@
 		D8F9D7452C5A09ED005416FC /* ArrivedAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4ACB611E2CE4CC8A0018E78A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A762AE12B99A16B001C1188 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A762AE82B99A16B001C1188;
+			remoteInfo = "pennyway-client-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		4A058EFE2BD03E01004B6F89 /* AuthResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDto.swift; sourceTree = "<group>"; };
@@ -564,6 +580,10 @@
 		4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingResponseDto.swift; sourceTree = "<group>"; };
+		4A4028BB2CE3CD490050C6ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4A4028BD2CE3CD4C0050C6ED /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4A4028BE2CE3CD4C0050C6ED /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4A4028BF2CE3CD4C0050C6ED /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -722,6 +742,9 @@
 		4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRegistrationManager.swift; sourceTree = "<group>"; };
 		4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingView.swift; sourceTree = "<group>"; };
+		4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryBinaryList.swift; sourceTree = "<group>"; };
+		4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pennyway-client-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryListTest.swift; sourceTree = "<group>"; };
 		4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPreviousChatRequestDto.swift; sourceTree = "<group>"; };
 		4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsContentView.swift; sourceTree = "<group>"; };
 		4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTabBarVisibilityExtension.swift; sourceTree = "<group>"; };
@@ -919,6 +942,13 @@
 			files = (
 				D820675C2CC5500700102356 /* OSLog.framework in Frameworks */,
 				7C0E38D4CE51A896B5A498EE /* Pods_pennyway_client_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4ACB61172CE4CC8A0018E78A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,6 +1405,7 @@
 				4A12FF1A2C9C4D7600DE10BC /* Extensions */,
 				4A12FF182C9C4D4600DE10BC /* Observable.swift */,
 				4A863A132CB461BE00BA2F2F /* TextHeightPreference.swift */,
+				4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1636,6 +1667,16 @@
 			path = SpendingCategory;
 			sourceTree = "<group>";
 		};
+		4A4028C02CE3CD4C0050C6ED /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				4A4028BD2CE3CD4C0050C6ED /* Debug.xcconfig */,
+				4A4028BE2CE3CD4C0050C6ED /* Release.xcconfig */,
+				4A4028BF2CE3CD4C0050C6ED /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
+			sourceTree = "<group>";
+		};
 		4A4703972BCED80000AEE04E /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -1859,6 +1900,7 @@
 			isa = PBXGroup;
 			children = (
 				4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */,
+				4ACB611B2CE4CC8A0018E78A /* pennyway-client-iOSTests */,
 				4A762AEA2B99A16B001C1188 /* Products */,
 				41951791426F03880A100F2C /* Pods */,
 				4A4B454C2BD16EE500D41C9A /* Recovered References */,
@@ -1870,6 +1912,7 @@
 			isa = PBXGroup;
 			children = (
 				4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */,
+				4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1877,8 +1920,8 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4A4F1A3C2CE227E000105218 /* GoogleService-Info.plist */,
-				4A4F1A412CE227E600105218 /* Xcconfig */,
+				4A4028C02CE3CD4C0050C6ED /* Xcconfig */,
+				4A4028BB2CE3CD490050C6ED /* GoogleService-Info.plist */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
@@ -2225,6 +2268,14 @@
 				4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */,
 			);
 			path = OAuthViewModel;
+			sourceTree = "<group>";
+		};
+		4ACB611B2CE4CC8A0018E78A /* pennyway-client-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */,
+			);
+			path = "pennyway-client-iOSTests";
 			sourceTree = "<group>";
 		};
 		4AD0D83E2BFD0F4400A0808F /* View */ = {
@@ -2859,6 +2910,24 @@
 			productReference = 4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4ACB61192CE4CC8A0018E78A /* pennyway-client-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4ACB61222CE4CC8A0018E78A /* Build configuration list for PBXNativeTarget "pennyway-client-iOSTests" */;
+			buildPhases = (
+				4ACB61162CE4CC8A0018E78A /* Sources */,
+				4ACB61172CE4CC8A0018E78A /* Frameworks */,
+				4ACB61182CE4CC8A0018E78A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4ACB611F2CE4CC8A0018E78A /* PBXTargetDependency */,
+			);
+			name = "pennyway-client-iOSTests";
+			productName = "pennyway-client-iOSTests";
+			productReference = 4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2866,11 +2935,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					4A762AE82B99A16B001C1188 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					4ACB61192CE4CC8A0018E78A = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 4A762AE82B99A16B001C1188;
 					};
 				};
 			};
@@ -2888,6 +2961,7 @@
 			projectRoot = "";
 			targets = (
 				4A762AE82B99A16B001C1188 /* pennyway-client-iOS */,
+				4ACB61192CE4CC8A0018E78A /* pennyway-client-iOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2899,19 +2973,26 @@
 			files = (
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
-				4A4F1A3D2CE227E000105218 /* GoogleService-Info.plist in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
+				4A4028BC2CE3CD490050C6ED /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				4A4F1A422CE227E600105218 /* Debug.xcconfig in Resources */,
+				4A4028C12CE3CD4C0050C6ED /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				4A4F1A442CE227E600105218 /* Secrets.xcconfig in Resources */,
+				4A4028C32CE3CD4C0050C6ED /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				4A4F1A432CE227E600105218 /* Release.xcconfig in Resources */,
+				4A4028C22CE3CD4C0050C6ED /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4ACB61182CE4CC8A0018E78A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3268,6 +3349,7 @@
 				D8DCCFB32CBEB08C00550A8B /* ChatRootComponent.swift in Sources */,
 				4A4703922BCEA55500AEE04E /* OAuthSignUpRequestDto.swift in Sources */,
 				4A12FF052C9C4AC300DE10BC /* UserProfileViewModel.swift in Sources */,
+				4ACB61132CE4C09D0018E78A /* ChatHistoryBinaryList.swift in Sources */,
 				4A0BC6AF2BF6459B0036D900 /* DateExtensions.swift in Sources */,
 				4A5789812BDC1FF300AFEB26 /* InternalServerErrorCode.swift in Sources */,
 				4A3560802BEBE99A00BA58F3 /* LoginOAuthButtonView.swift in Sources */,
@@ -3420,7 +3502,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4ACB61162CE4CC8A0018E78A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4ACB611D2CE4CC8A0018E78A /* ChatHistoryListTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4ACB611F2CE4CC8A0018E78A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A762AE82B99A16B001C1188 /* pennyway-client-iOS */;
+			targetProxy = 4ACB611E2CE4CC8A0018E78A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4A762AF52B99A16D001C1188 /* Debug */ = {
@@ -3546,7 +3644,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A4F1A3E2CE227E600105218 /* Debug.xcconfig */;
+			baseConfigurationReference = 4A4028BD2CE3CD4C0050C6ED /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3594,7 +3692,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A4F1A3F2CE227E600105218 /* Release.xcconfig */;
+			baseConfigurationReference = 4A4028BE2CE3CD4C0050C6ED /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3639,6 +3737,52 @@
 			};
 			name = Release;
 		};
+		4ACB61202CE4CC8A0018E78A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q8UK3SWSPM;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pennyway-client-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pennyway-client-iOS";
+			};
+			name = Debug;
+		};
+		4ACB61212CE4CC8A0018E78A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q8UK3SWSPM;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pennyway-client-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pennyway-client-iOS";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3656,6 +3800,15 @@
 			buildConfigurations = (
 				4A762AF82B99A16D001C1188 /* Debug */,
 				4A762AF92B99A16D001C1188 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4ACB61222CE4CC8A0018E78A /* Build configuration list for PBXNativeTarget "pennyway-client-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4ACB61202CE4CC8A0018E78A /* Debug */,
+				4ACB61212CE4CC8A0018E78A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
