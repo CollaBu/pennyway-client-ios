@@ -22,7 +22,7 @@ protocol ChatHistoryDelegate: AnyObject {
 protocol ChatHistoryList: AnyObject {
     var delegate: ChatHistoryDelegate? { get set }
     
-    func insert(_ message: MessageItemModel)
+    func insert(_ message: MessageItemModel, _ ascending: Bool)
     func insertMessages(_ messages: [MessageItemModel])
     func getAllMessages() -> [MessageItemModel]
 }
@@ -39,13 +39,13 @@ final class ChatHistoryBinaryList: ChatHistoryList {
     /// 스레드 안전성을 위한 직렬 큐
     private let queue = DispatchQueue(label: "com.app.chat.history")
     
-    func insert(_ message: MessageItemModel) {
+    func insert(_ message: MessageItemModel, _ ascending: Bool = true) {
         queue.async { [weak self] in
             guard let self = self else {
                 return
             }
             
-            let index = self.findInsertionIndex(for: message)
+            let index = self.findInsertionIndex(for: message, ascending: ascending)
             guard index >= self.messages.count || self.messages[index].chatId != message.chatId else {
                 return
             }
@@ -89,16 +89,26 @@ final class ChatHistoryBinaryList: ChatHistoryList {
     // MARK: - Private Methods
     
     /// 이진 탐색으로 삽입 위치 찾기
-    private func findInsertionIndex(for message: MessageItemModel) -> Int {
+    private func findInsertionIndex(for message: MessageItemModel, ascending: Bool = true) -> Int {
         var low = 0
         var high = messages.count
         
         while low < high {
             let mid = (low + high) / 2
-            if messages[mid].chatId < message.chatId {
-                low = mid + 1
+            if ascending {
+                // 오름차순: chatId가 더 작으면 왼쪽으로 이동
+                if messages[mid].chatId < message.chatId {
+                    low = mid + 1
+                } else {
+                    high = mid
+                }
             } else {
-                high = mid
+                // 내림차순: chatId가 더 크면 왼쪽으로 이동
+                if messages[mid].chatId > message.chatId {
+                    low = mid + 1
+                } else {
+                    high = mid
+                }
             }
         }
         
@@ -112,10 +122,10 @@ final class ChatHistoryBinaryList: ChatHistoryList {
         var index2 = 0
         
         while index1 < array1.count && index2 < array2.count {
-            if array1[index1].chatId < array2[index2].chatId {
+            if array1[index1].chatId > array2[index2].chatId {
                 result.append(array1[index1])
                 index1 += 1
-            } else if array1[index1].chatId > array2[index2].chatId {
+            } else if array1[index1].chatId < array2[index2].chatId {
                 result.append(array2[index2])
                 index2 += 1
             } else {

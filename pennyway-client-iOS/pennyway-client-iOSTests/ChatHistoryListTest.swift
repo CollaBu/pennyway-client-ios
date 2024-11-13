@@ -124,7 +124,7 @@ final class UserUnitTestTests: XCTestCase {
         
         mockDelegate.onAdd = { addedMessages in
             XCTAssertEqual(addedMessages.count, 5)
-            XCTAssertEqual(addedMessages.map { $0.chatId }, [1, 2, 3, 4, 5])
+            XCTAssertEqual(addedMessages.map { $0.chatId }, [5, 4, 3, 2, 1])
             expectation.fulfill()
         }
         
@@ -133,7 +133,7 @@ final class UserUnitTestTests: XCTestCase {
         
         // Then
         wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(sut.getAllMessages().map { $0.chatId }, [1, 2, 3, 4, 5])
+        XCTAssertEqual(sut.getAllMessages().map { $0.chatId }, [5, 4, 3, 2, 1])
     }
     
     // MARK: - Edge Cases Tests
@@ -149,14 +149,14 @@ final class UserUnitTestTests: XCTestCase {
         
         // Extreme values
         let extremeMessages = [
-            createMessage(chatId: Int64(Int.min)),
+            createMessage(chatId: Int64(Int.max)),
             createMessage(chatId: 0),
-            createMessage(chatId: Int64(Int.max))
+            createMessage(chatId: Int64(Int.min))
         ]
         sut.insertMessages(extremeMessages)
         XCTAssertEqual(sut.getAllMessages().count, 3)
-        XCTAssertEqual(sut.getAllMessages().first?.chatId, Int64(Int.min))
-        XCTAssertEqual(sut.getAllMessages().last?.chatId, Int64(Int.max))
+        XCTAssertEqual(sut.getAllMessages().first?.chatId, Int64(Int.max))
+        XCTAssertEqual(sut.getAllMessages().last?.chatId, Int64(Int.min))
     }
     
     // MARK: - Concurrency Tests
@@ -223,7 +223,7 @@ final class UserUnitTestTests: XCTestCase {
         for i in 0 ..< singleInsertCount {
             queue.async(group: dispatchGroup) {
                 let chatId = batchCount * batchSize + i
-                self.sut.insert(self.createMessage(chatId: Int64(chatId)))
+                self.sut.insert(self.createMessage(chatId: Int64(chatId)), false)
             }
         }
         
@@ -235,8 +235,8 @@ final class UserUnitTestTests: XCTestCase {
             
             // 정렬 및 중복 검증
             let chatIds = messages.map { $0.chatId }
-            XCTAssertEqual(chatIds, Array(Set(chatIds)).sorted())
-            
+            XCTAssertEqual(chatIds, Array(Set(chatIds)).sorted(by: >))
+
             expectation.fulfill()
         }
         

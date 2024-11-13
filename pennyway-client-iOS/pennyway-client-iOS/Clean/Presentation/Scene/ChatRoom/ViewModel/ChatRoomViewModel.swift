@@ -131,7 +131,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 
     /// 단일 메시지 삽입
     private func handleNewMessage(_ message: MessageItemModel) {
-        chatHistoryList.insert(message)
+        chatHistoryList.insert(message, true)
     }
 
     /// 여러 메시지 삽입
