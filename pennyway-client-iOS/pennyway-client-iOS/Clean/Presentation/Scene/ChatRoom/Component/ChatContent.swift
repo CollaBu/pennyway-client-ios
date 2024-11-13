@@ -116,7 +116,7 @@ struct ChatContent: View {
         isLoadingViewShown = true
         isReloadViewShown = false
 
-        var retryWorkItem: DispatchWorkItem?
+        var retryWorkItem: DispatchWorkItem
 
         retryWorkItem = DispatchWorkItem {
             Log.debug("API 응답이 10초 이상 걸림")
@@ -129,7 +129,7 @@ struct ChatContent: View {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: retryWorkItem)
 
         // 10초가 지나기 전에 API가 성공하면 타이머 취소
         viewModelWrapper.chatRoomViewModel.getPreviousChat { result in
@@ -150,7 +150,7 @@ struct ChatContent: View {
                     isReloadViewShown = true
                 }
             }
-            retryWorkItem?.cancel()
+            retryWorkItem.cancel()
         }
     }
 
