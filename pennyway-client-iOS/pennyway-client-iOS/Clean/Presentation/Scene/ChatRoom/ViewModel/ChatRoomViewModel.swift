@@ -41,16 +41,20 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+    private let chatHistory: ChatHistoryList
+
+    init(chatHistory: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+        self.chatHistory = chatHistory
         self.chatRoomUseCase = chatRoomUseCase
         self.sendChatUseCase = sendChatUseCase
+        self.chatHistory.delegate = self
 
         // NotificationCenter에서 메시지 알림 구독
         NotificationCenter.default.publisher(for: .didReceiveMessage)
             .sink { [weak self] notification in
 
                 if let message = notification.object as? MessageItemModel {
-                    self?.messageData.value.insert(message, at: 0)
+                    self?.handleNewMessage(message)
                 }
             }
             .store(in: &cancellables)
@@ -91,5 +95,27 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 Log.error("[DefaultChatRoomViewModel]  채팅 메시지 전송 실패: \(error.localizedDescription)")
             }
         }
+    }
+
+    /// 새로운 메시지를 수신하여 chatHistory에 삽입
+    private func handleNewMessage(_ message: MessageItemModel) {
+        chatHistory.insert(message)
+    }
+
+    /// 기존 메시지 로드 (예: 초기 로드 또는 특정 시점에서 로드 필요 시 사용)
+    private func loadHistoricalMessages(_ messages: [MessageItemModel]) {
+        chatHistory.insertMessages(messages)
+    }
+}
+
+// MARK: ChatHistoryDelegate
+
+extension DefaultChatRoomViewModel: ChatHistoryDelegate {
+    func chatHistoryDidAdd(_ messages: [MessageItemModel]) {
+        messageData.value.insert(contentsOf: messages, at: 0)
+    }
+
+    func chatHistoryDidUpdate(_ messages: [MessageItemModel]) {
+        messageData.value = messages
     }
 }
