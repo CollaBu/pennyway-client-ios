@@ -271,6 +271,7 @@
 		4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */; };
 		4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */; };
 		4ACB61132CE4C09D0018E78A /* ChatHistoryBinaryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */; };
+		4ACB611D2CE4CC8A0018E78A /* ChatHistoryListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */; };
 		4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */; };
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
@@ -458,6 +459,16 @@
 		D8F9D7432C5A0596005416FC /* ProfileAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7422C5A0596005416FC /* ProfileAlarmView.swift */; };
 		D8F9D7452C5A09ED005416FC /* ArrivedAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7442C5A09EC005416FC /* ArrivedAlarmView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4ACB611E2CE4CC8A0018E78A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A762AE12B99A16B001C1188 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A762AE82B99A16B001C1188;
+			remoteInfo = "pennyway-client-iOS";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -721,6 +732,8 @@
 		4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRegistrationManager.swift; sourceTree = "<group>"; };
 		4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingView.swift; sourceTree = "<group>"; };
 		4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryBinaryList.swift; sourceTree = "<group>"; };
+		4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pennyway-client-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryListTest.swift; sourceTree = "<group>"; };
 		4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsContentView.swift; sourceTree = "<group>"; };
 		4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTabBarVisibilityExtension.swift; sourceTree = "<group>"; };
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
@@ -917,6 +930,13 @@
 			files = (
 				D820675C2CC5500700102356 /* OSLog.framework in Frameworks */,
 				7C0E38D4CE51A896B5A498EE /* Pods_pennyway_client_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4ACB61172CE4CC8A0018E78A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1858,6 +1878,7 @@
 			isa = PBXGroup;
 			children = (
 				4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */,
+				4ACB611B2CE4CC8A0018E78A /* pennyway-client-iOSTests */,
 				4A762AEA2B99A16B001C1188 /* Products */,
 				41951791426F03880A100F2C /* Pods */,
 				4A4B454C2BD16EE500D41C9A /* Recovered References */,
@@ -1869,6 +1890,7 @@
 			isa = PBXGroup;
 			children = (
 				4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */,
+				4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2224,6 +2246,14 @@
 				4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */,
 			);
 			path = OAuthViewModel;
+			sourceTree = "<group>";
+		};
+		4ACB611B2CE4CC8A0018E78A /* pennyway-client-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */,
+			);
+			path = "pennyway-client-iOSTests";
 			sourceTree = "<group>";
 		};
 		4AD0D83E2BFD0F4400A0808F /* View */ = {
@@ -2856,6 +2886,24 @@
 			productReference = 4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4ACB61192CE4CC8A0018E78A /* pennyway-client-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4ACB61222CE4CC8A0018E78A /* Build configuration list for PBXNativeTarget "pennyway-client-iOSTests" */;
+			buildPhases = (
+				4ACB61162CE4CC8A0018E78A /* Sources */,
+				4ACB61172CE4CC8A0018E78A /* Frameworks */,
+				4ACB61182CE4CC8A0018E78A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4ACB611F2CE4CC8A0018E78A /* PBXTargetDependency */,
+			);
+			name = "pennyway-client-iOSTests";
+			productName = "pennyway-client-iOSTests";
+			productReference = 4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2863,11 +2911,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					4A762AE82B99A16B001C1188 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					4ACB61192CE4CC8A0018E78A = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 4A762AE82B99A16B001C1188;
 					};
 				};
 			};
@@ -2885,6 +2937,7 @@
 			projectRoot = "";
 			targets = (
 				4A762AE82B99A16B001C1188 /* pennyway-client-iOS */,
+				4ACB61192CE4CC8A0018E78A /* pennyway-client-iOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2909,6 +2962,13 @@
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
 				4A4028C22CE3CD4C0050C6ED /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4ACB61182CE4CC8A0018E78A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3416,7 +3476,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4ACB61162CE4CC8A0018E78A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4ACB611D2CE4CC8A0018E78A /* ChatHistoryListTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4ACB611F2CE4CC8A0018E78A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A762AE82B99A16B001C1188 /* pennyway-client-iOS */;
+			targetProxy = 4ACB611E2CE4CC8A0018E78A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4A762AF52B99A16D001C1188 /* Debug */ = {
@@ -3631,6 +3707,52 @@
 			};
 			name = Release;
 		};
+		4ACB61202CE4CC8A0018E78A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q8UK3SWSPM;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pennyway-client-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pennyway-client-iOS";
+			};
+			name = Debug;
+		};
+		4ACB61212CE4CC8A0018E78A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q8UK3SWSPM;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pennyway-client-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pennyway-client-iOS";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3648,6 +3770,15 @@
 			buildConfigurations = (
 				4A762AF82B99A16D001C1188 /* Debug */,
 				4A762AF92B99A16D001C1188 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4ACB61222CE4CC8A0018E78A /* Build configuration list for PBXNativeTarget "pennyway-client-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4ACB61202CE4CC8A0018E78A /* Debug */,
+				4ACB61212CE4CC8A0018E78A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

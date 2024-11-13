@@ -21,6 +21,7 @@ protocol ChatHistoryList: AnyObject {
     
     func insert(_ message: MessageItemModel)
     func insertMessages(_ messages: [MessageItemModel])
+    func getAllMessages() -> [MessageItemModel]
 }
 
 // MARK: - ChatHistoryBinaryList
@@ -76,6 +77,10 @@ final class ChatHistoryBinaryList: ChatHistoryList {
                 self.delegate?.chatHistoryDidAdd(sortedMessages)
             }
         }
+    }
+    
+    func getAllMessages() -> [MessageItemModel] {
+        queue.sync { messages }
     }
     
     // MARK: - Private Methods
