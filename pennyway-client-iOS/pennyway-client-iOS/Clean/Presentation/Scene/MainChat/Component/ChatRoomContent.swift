@@ -30,20 +30,7 @@ struct ChatRoomContent: View {
                     }
                 } else {
                     if let rooms = searchChatRooms {
-//                        ForEach(rooms, id: \.id) { (chatRoom: SearchChatRoomItemModel) in
-//                            ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
-//                                isPopUp = true
-//                            })
-//                            .onAppear {
-//                                if chatRoom.id == rooms.last?.id, viewModelWrapper.getChatRoomViewModel.hasNext {
-//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//                                        viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
-//                                    }
-//                                }
-//                            }
-//                        }
                         ForEach(rooms, id: \.id) { chatRoom in
-//                        ForEach(Array(rooms.enumerated()), id: \.element.id) { _, chatRoom in
                             ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
                                 isPopUp = true
                             })

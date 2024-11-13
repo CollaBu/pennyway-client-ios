@@ -49,8 +49,6 @@ class DefaultSearchChatRoomRepository: SearchChatRoomRepository {
                         Log.debug("currentPageNumber before merge: \(self.currentPageNumber)")
 
                         // 새 데이터를 병합
-//                        self.mergeNewChatRooms(newChatRoomData: chatRooms)
-//                        self.mergeNewChatRooms(newChatRoomData: response.data.chatRoom.contents)
                         let mergedChatRooms = self.mergeNewChatRooms(newChatRoomData: response.data.chatRoom.contents)
 
                         self.currentPageNumber += 1
@@ -86,8 +84,6 @@ class DefaultSearchChatRoomRepository: SearchChatRoomRepository {
 
         // 새로운 데이터 추가
         chatRoomData.append(contentsOf: uniqueNewChatRooms)
-
-        //        chatRoomData.sort { $0.id > $1.id }
 
         Log.debug("After merging and sorting - Updated chatRoomData count: \(chatRoomData.count)")
         return chatRoomData
