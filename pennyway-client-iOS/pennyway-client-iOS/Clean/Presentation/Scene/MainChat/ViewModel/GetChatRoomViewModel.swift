@@ -22,6 +22,7 @@ protocol GetChatRoomViewModelOutput {
     var roomData: Observable<[ChatRoomItemModel]> { get set }
     var searchRoomData: Observable<[SearchChatRoomItemModel]> { get set }
     var hasNext: Bool { get }
+    var isFetching: Bool { get }
 }
 
 // MARK: - GetChatRoomViewModel
@@ -38,12 +39,14 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
     private let searchChatRoomUseCase: SearchChatRoomUseCase
     private var currentPageNumber: Int = 0
     var hasNext: Bool = true // 다음 페이지가 있는지 여부
+    var isFetching: Bool = false // API 호출 중인지 여부를 나타내는 플래그
 
     /// 검색 초기화
     func initSearch() {
         searchRoomData.value = []
         currentPageNumber = 0
         hasNext = true
+        isFetching = false
     }
 
     init(getChatRoomUseCase: GetChatRoomUseCase, searchChatRoomUseCase: SearchChatRoomUseCase) {
@@ -82,32 +85,21 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
 
     /// 채팅 검색 조회 요청
     func searchChatRoom(target: String) {
-        guard hasNext else {
+        guard !isFetching, hasNext else {
             return
         }
+        isFetching = true
 
-        searchChatRoomUseCase.execute(target: target, page: currentPageNumber) { [weak self] success, chatRooms, nextPageAvailable in
+        searchChatRoomUseCase.execute(target: target, page: currentPageNumber) { [weak self] success, chatRooms, hasNext in
             DispatchQueue.main.async {
+                self?.isFetching = false
+
                 if success {
                     if let chatRooms = chatRooms {
-                        self?.searchRoomData.value = chatRooms.map { chatRoomDetail in
-                            return SearchChatRoomItemModel(
-                                id: chatRoomDetail.id,
-                                title: chatRoomDetail.title,
-                                description: chatRoomDetail.description, 
-                                isPrivate: chatRoomDetail.isPrivate,
-                                backgroundImageUrl: chatRoomDetail.backgroundImageUrl,
-                                participantCount: chatRoomDetail.participantCount
-                            )
-                        }
+                        self?.searchRoomData.value = chatRooms
+                        self?.hasNext = hasNext
                         Log.debug("[ChatViewModel]: 채팅방 검색 성공")
-
-                        Log.debug("뷰모델 hasNext1:\(self?.hasNext)")
-                        self?.hasNext = nextPageAvailable // hasNext 상태 갱신
-                        Log.debug("뷰모델 hasNext2:\(self?.hasNext)")
                     }
-                } else {
-                    self?.hasNext = false
                 }
             }
         }

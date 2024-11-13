@@ -36,7 +36,7 @@ class DefaultSearchChatRoomUseCase: SearchChatRoomUseCase {
                         title: chatRoom.title,
                         description: chatRoom.description, 
                         isPrivate: chatRoom.isPrivate,
-                        backgroundImageUrl: chatRoom.background_image_url,
+                        backgroundImageUrl: chatRoom.backgroundImageUrl,
                         participantCount: chatRoom.participantCount)
                 }
                 Log.debug("[SearchChatRoomUseCase] 채팅 검색 성공")

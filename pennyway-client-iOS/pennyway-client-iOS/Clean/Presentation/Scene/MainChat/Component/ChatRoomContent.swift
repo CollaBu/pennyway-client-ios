@@ -8,7 +8,7 @@ struct ChatRoomContent: View {
     @Binding var selectedChatRoom: ChatRoomItemModel? // 내 채팅 중 선택된 채팅방을 저장하기 위한 변수
     @Binding var selectedSearchChatRoom: SearchChatRoomItemModel? // 추천 채팅 중 선택된 채팅방을 저장하기 위한 변수
     @Binding var dummyChatRooms: [ChatRoomItemModel]? // 내 채팅의 item을 표시하기 위한 항목
-    let searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
+    var searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
     var isMyChat: Bool // 내 채팅 여부
     let target: String // 채팅방 검색어를 나타내는 항목
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
@@ -30,7 +30,20 @@ struct ChatRoomContent: View {
                     }
                 } else {
                     if let rooms = searchChatRooms {
-                        ForEach(rooms, id: \.id) { (chatRoom: SearchChatRoomItemModel) in
+//                        ForEach(rooms, id: \.id) { (chatRoom: SearchChatRoomItemModel) in
+//                            ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
+//                                isPopUp = true
+//                            })
+//                            .onAppear {
+//                                if chatRoom.id == rooms.last?.id, viewModelWrapper.getChatRoomViewModel.hasNext {
+//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                                        viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
+//                                    }
+//                                }
+//                            }
+//                        }
+                        ForEach(rooms, id: \.id) { chatRoom in
+//                        ForEach(Array(rooms.enumerated()), id: \.element.id) { _, chatRoom in
                             ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
                                 isPopUp = true
                             })
@@ -38,17 +51,23 @@ struct ChatRoomContent: View {
                                 guard let index = rooms.firstIndex(where: { $0.id == chatRoom.id }) else {
                                     return
                                 }
-                                if index == rooms.count - 1 {
-                                    if viewModelWrapper.getChatRoomViewModel.hasNext {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                            viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
-                                        }
+                                print("현재 인덱스: \(index), ChatRoom ID: \(chatRoom.id)")
+
+                                // 현재 항목이 마지막 인덱스에 도달했을 때만 API 호출
+                                if index == rooms.count - 1 && viewModelWrapper.getChatRoomViewModel.hasNext && !viewModelWrapper.getChatRoomViewModel.isFetching {
+                                    print("마지막 인덱스 도달: \(index), ChatRoom ID: \(chatRoom.id)")
+
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                        viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
+            .onAppear {
+                viewModelWrapper.getChatRoomViewModel.initSearch()
             }
         }
     }

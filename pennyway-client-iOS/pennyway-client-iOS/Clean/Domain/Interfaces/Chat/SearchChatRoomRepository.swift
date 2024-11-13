@@ -7,5 +7,5 @@
 
 /// 채팅방 검색 동작을 정의하는 프로토콜
 protocol SearchChatRoomRepository {
-    func execute(model: SearchChatRoom, completion: @escaping (Result<([ChatRoom], Bool), any Error>) -> Void) 
+    func execute(model: SearchChatRoom, completion: @escaping (Result<([ChatRoomDetail], Bool), any Error>) -> Void) 
 }
