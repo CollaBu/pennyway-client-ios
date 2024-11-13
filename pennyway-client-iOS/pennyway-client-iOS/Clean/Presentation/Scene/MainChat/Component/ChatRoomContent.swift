@@ -38,11 +38,8 @@ struct ChatRoomContent: View {
                                 guard let index = rooms.firstIndex(where: { $0.id == chatRoom.id }) else {
                                     return
                                 }
-                                print("현재 인덱스: \(index), ChatRoom ID: \(chatRoom.id)")
-
                                 // 현재 항목이 마지막 인덱스에 도달했을 때만 API 호출
                                 if index == rooms.count - 1 && viewModelWrapper.getChatRoomViewModel.hasNext && !viewModelWrapper.getChatRoomViewModel.isFetching {
-                                    print("마지막 인덱스 도달: \(index), ChatRoom ID: \(chatRoom.id)")
 
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                                         viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
@@ -52,9 +49,6 @@ struct ChatRoomContent: View {
                         }
                     }
                 }
-            }
-            .onAppear {
-                viewModelWrapper.getChatRoomViewModel.initSearch()
             }
         }
     }

@@ -107,6 +107,8 @@ struct ChatCellView: View {
                 viewStateManager.setCurrentView(self, selectedTab: selectedTab)
                 
                 // 검색어 초기화하여 전체 목록 표시
+                viewModelWrapper.getChatRoomViewModel.initSearch()
+                viewModelWrapper.searchChatData = []
                 viewModelWrapper.searchQuery = ""
                 chatRoomName = ""
             }
@@ -138,7 +140,7 @@ struct ChatCellView: View {
                 if selectedTab == 2, chatRoomName.count >= 2 {
                     // 추천채팅 탭이며 검색어가 2자 이상인 경우만 채팅 검색 api 호출
                     viewModelWrapper.getChatRoomViewModel.initSearch()
-                    viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: chatRoomName)
+                    viewModelWrapper.updateSearchQuery(chatRoomName)
 
                 } else {
                     // 내 채팅인 경우
@@ -255,6 +257,17 @@ final class ChatViewModelWrapper: ObservableObject {
         
         getChatRoomViewModel.searchRoomData.observe(on: self) { [weak self] newData in
             self?.searchChatData = newData
+        }
+    }
+    
+    /// 검색어가 변경될 때 호출할 메서드
+    func updateSearchQuery(_ query: String) {
+        // 검색어가 변경되었거나 같은 검색어로 다시 검색할 때 초기화
+        if searchQuery != query && query.count >= 2 {
+            searchQuery = query
+            getChatRoomViewModel.initSearch() // 페이지 번호 초기화
+            searchChatData = []
+            getChatRoomViewModel.searchChatRoom(target: query)
         }
     }
 }

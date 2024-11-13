@@ -44,9 +44,9 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
     /// 검색 초기화
     func initSearch() {
         searchRoomData.value = []
-        currentPageNumber = 0
-        hasNext = true
+        searchChatRoomUseCase.resetPage()
         isFetching = false
+        hasNext = true
     }
 
     init(getChatRoomUseCase: GetChatRoomUseCase, searchChatRoomUseCase: SearchChatRoomUseCase) {
