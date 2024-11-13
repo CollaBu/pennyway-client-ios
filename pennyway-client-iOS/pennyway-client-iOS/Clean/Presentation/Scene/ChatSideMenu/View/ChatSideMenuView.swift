@@ -21,7 +21,7 @@ struct ChatSideMenuView: View {
             HStack(spacing: 0) {
                 Spacer()
                 
-                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp, members: viewModelWrapper.chatUserData, myInfo: viewModelWrapper.roomDetailData?.myInfo, onUserSelect: { user in
+                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp, members: viewModelWrapper.chatUserData, onUserSelect: { user in
                     selectedUser = user
                 })
                 .padding(.leading, 105 * DynamicSizeFactor.factor())
@@ -48,7 +48,7 @@ struct ChatSideMenuView: View {
         }
         .fullScreenCover(isPresented: $showChatUserView) {
             if let user = selectedUser {
-                ChatUserInfoView(user: user) // 선택된 사용자 정보를 전달
+                ChatUserInfoView(user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo) // 선택된 사용자 정보를 전달
                     .ignoresSafeArea()
                     .onDisappear {
                         selectedUser = nil // 뷰가 닫힐 때 선택된 사용자 초기화
@@ -64,7 +64,6 @@ private struct SideMenuContent: View {
     @Binding var isAlarmOn: Bool
     @Binding var showExitPopUp: Bool
     let members: [ChatMemberItemModel]
-    let myInfo: ChatMemberItemModel?
     let onUserSelect: (ChatMemberItemModel) -> Void
     
     private let currentUserId = getUserData()!.id
