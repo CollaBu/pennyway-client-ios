@@ -39,12 +39,8 @@ struct ChatRoomContent: View {
                                     return
                                 }
                                 if index == rooms.count - 1 {
-                                    Log.debug("???")
                                     if viewModelWrapper.getChatRoomViewModel.hasNext {
-                                        Log.debug("뷰에서 hasNext까지 들어옴")
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                            Log.debug("무한스크롤 까지 왔음")
-                                            Log.debug("target: \(target)")
                                             viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
                                         }
                                     }
