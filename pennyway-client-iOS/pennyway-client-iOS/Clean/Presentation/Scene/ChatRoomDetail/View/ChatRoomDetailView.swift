@@ -78,7 +78,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
                 }
             }
         }
-        .navigationBarColor(UIColor(named: "White01"), title: "채팅방")
+        .navigationBarColor(UIColor(named: "White01"), title: "\(chatRoom?.title ?? "")")
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
