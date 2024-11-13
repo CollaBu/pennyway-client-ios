@@ -11,7 +11,10 @@ import Foundation
 
 protocol ChatHistoryDelegate: AnyObject {
     /// 새로운 메시지가 추가되었을 때 호출
-    func chatHistoryDidAdd(_ messages: [MessageItemModel])
+    func didAddChatHistory(_ messages: [MessageItemModel])
+    
+    /// 메시지가 업데이트되었을 때 호출
+    func didAddChatHistories(_ messages: [MessageItemModel])
 }
 
 // MARK: - ChatHistoryList
@@ -50,7 +53,7 @@ final class ChatHistoryBinaryList: ChatHistoryList {
             self.messages.insert(message, at: index)
             
             DispatchQueue.main.async {
-                self.delegate?.chatHistoryDidAdd([message])
+                self.delegate?.didAddChatHistory([message])
             }
         }
     }
@@ -65,7 +68,7 @@ final class ChatHistoryBinaryList: ChatHistoryList {
                 return
             }
             
-            let sortedMessages = messages.sorted(by: { $0.chatId < $1.chatId })
+            let sortedMessages = messages.sorted(by: { $0.chatId > $1.chatId })
             
             if self.messages.isEmpty {
                 self.messages = sortedMessages
@@ -74,7 +77,7 @@ final class ChatHistoryBinaryList: ChatHistoryList {
             }
             
             DispatchQueue.main.async {
-                self.delegate?.chatHistoryDidAdd(sortedMessages)
+                self.delegate?.didAddChatHistories(sortedMessages)
             }
         }
     }
@@ -104,7 +107,7 @@ final class ChatHistoryBinaryList: ChatHistoryList {
     
     /// 정렬된 두 배열 병합
     private func mergeSortedArrays(_ array1: [MessageItemModel], _ array2: [MessageItemModel]) -> [MessageItemModel] {
-        var result: [MessageItemModel] = []
+        var result: [MessageItemModel] = [] 
         var index1 = 0
         var index2 = 0
         

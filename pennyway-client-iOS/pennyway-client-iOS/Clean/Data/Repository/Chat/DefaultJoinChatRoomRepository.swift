@@ -7,6 +7,15 @@
 
 import Foundation
 
+// MARK: - JoinChatRoomError
+
+enum JoinChatRoomError: Error {
+    case invalidPassword // 비밀번호가 일치하지 않는다는 4004 에러
+    case other(Error)
+}
+
+// MARK: - DefaultJoinChatRoomRepository
+
 class DefaultJoinChatRoomRepository: JoinChatRoomRepository {
     private let cdnUrl = Url.cdnUrl
 
@@ -32,6 +41,11 @@ class DefaultJoinChatRoomRepository: JoinChatRoomRepository {
             case let .failure(error):
                 if let StatusSpecificError = error as? StatusSpecificError {
                     Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                    if StatusSpecificError.domainError == .badRequest, StatusSpecificError.code == BadRequestErrorCode.invalidRequest.rawValue {
+                        completion(.failure(JoinChatRoomError.invalidPassword))
+                    } else {
+                        completion(.failure(JoinChatRoomError.other(error)))
+                    }
                 } else {
                     Log.error("Network request failed: \(error)")
                 }

@@ -13,7 +13,11 @@ import XCTest
 class MockChatHistoryDelegate: ChatHistoryDelegate {
     var onAdd: (([MessageItemModel]) -> Void)?
     
-    func chatHistoryDidAdd(_ messages: [MessageItemModel]) {
+    func didAddChatHistory(_ messages: [MessageItemModel]) {
+        onAdd?(messages)
+    }
+    
+    func didAddChatHistories(_ messages: [MessageItemModel]) {
         onAdd?(messages)
     }
 }
