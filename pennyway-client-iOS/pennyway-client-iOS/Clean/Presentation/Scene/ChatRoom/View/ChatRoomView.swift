@@ -63,20 +63,26 @@ struct ChatRoomView: View {
                     }.offset(x: 10)
                 }
             }
-            .overlay(
-                Group {
-                    if isSideMenuPresented {
-                        ChatSideMenuView(isPresented: $isSideMenuPresented)
-                            .transition(.move(edge: .trailing))
-                    }
-                }
-            )
             .onAppear {
                 viewStateManager.setCurrentView(self)
                 viewModelWrapper.roomData = chatRoom // 현재 채팅방 정보 저장
 
                 // 채팅방 상세 정보 조회
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
+            }
+
+            if isSideMenuPresented {
+                Color.black.opacity(0.3)
+                    .edgesIgnoringSafeArea(.all)
+                    .transition(.opacity)
+                    .onTapGesture {
+                        withAnimation {
+                            isSideMenuPresented = false
+                        }
+                    }
+                ChatSideMenuView()
+                    .transition(.move(edge: .trailing))
+                    .animation(.easeInOut(duration: 0.3))
             }
         }
     }

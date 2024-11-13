@@ -105,18 +105,22 @@ struct ChatUserInfoView: View {
                 }
                 .offset(y: -35 * DynamicSizeFactor.factor())
 
-                HStack(spacing: 14 * DynamicSizeFactor.factor()) {
-                    ActionBtn(title: "방장 넘기기", icon: "icon_chatprofile_delegation_primary", textColor: .mint03, backgroundColor: .mint01, action: {
-                        showTransferPopUp = true
-                    })
-                    ActionBtn(title: "내보내기", icon: "icon_chatprofile_export", textColor: .red03, backgroundColor: .red01, action: {
-                        showKickOutPopUp = true
-                    })
+                if user.role == .admin {
+                    HStack(spacing: 14 * DynamicSizeFactor.factor()) {
+                        ActionBtn(title: "방장 넘기기", icon: "icon_chatprofile_delegation_primary", textColor: .mint03, backgroundColor: .mint01, action: {
+                            showTransferPopUp = true
+                        })
+                        ActionBtn(title: "내보내기", icon: "icon_chatprofile_export", textColor: .red03, backgroundColor: .red01, action: {
+                            showKickOutPopUp = true
+                        })
+                    }
+                } else {
+                    Spacer().frame(height: 42 * DynamicSizeFactor.factor())
                 }
 
-                Spacer().frame(height: 50 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 55 * DynamicSizeFactor.factor())
             }
-            .frame(height: 180 * DynamicSizeFactor.factor())
+            .frame(height: 170 * DynamicSizeFactor.factor())
             .frame(maxWidth: .infinity)
             .background(Color(.white01))
         }
@@ -137,8 +141,7 @@ struct ChatUserInfoView: View {
                     Image(icon)
                     Text(title)
                 }
-                .frame(width: 130 * DynamicSizeFactor.factor())
-                .padding(.vertical, 14 * DynamicSizeFactor.factor())
+                .frame(width: 130 * DynamicSizeFactor.factor(), height: 42 * DynamicSizeFactor.factor())
                 .background(backgroundColor)
                 .platformTextColor(color: textColor)
                 .cornerRadius(6)

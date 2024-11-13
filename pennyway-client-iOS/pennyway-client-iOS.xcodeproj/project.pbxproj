@@ -266,6 +266,10 @@
 		4AC4FD0C2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift */; };
 		4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */; };
 		4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */; };
+		4ACB61242CE52C930018E78A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB61232CE52C930018E78A /* GoogleService-Info.plist */; };
+		4ACB61292CE52C970018E78A /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB61252CE52C960018E78A /* Debug.xcconfig */; };
+		4ACB612A2CE52C970018E78A /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB61262CE52C960018E78A /* Release.xcconfig */; };
+		4ACB612B2CE52C970018E78A /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4ACB61272CE52C960018E78A /* Secrets.xcconfig */; };
 		4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */; };
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
@@ -413,10 +417,6 @@
 		D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */; };
 		D8C9AC422BF66BB3006D1FCD /* InquiryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */; };
 		D8CEFB732C32BDF000E61C51 /* MoreDetailSpendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CEFB722C32BDF000E61C51 /* MoreDetailSpendingView.swift */; };
-		D8CFE18C2CDE2BEF00FD633E /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8CFE1892CDE2BEF00FD633E /* Debug.xcconfig */; };
-		D8CFE18D2CDE2BEF00FD633E /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8CFE18A2CDE2BEF00FD633E /* Release.xcconfig */; };
-		D8CFE18E2CDE2BEF00FD633E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8CFE18B2CDE2BEF00FD633E /* Secrets.xcconfig */; };
-		D8CFE1902CDE2BFF00FD633E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8CFE18F2CDE2BFF00FD633E /* GoogleService-Info.plist */; };
 		D8DCCF742CBD8B4B00550A8B /* InputContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF6F2CBD8B4B00550A8B /* InputContent.swift */; };
 		D8DCCF752CBD8B4B00550A8B /* MakeChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF712CBD8B4B00550A8B /* MakeChatRoomView.swift */; };
 		D8DCCF802CBD8D5700550A8B /* DeleteImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCCF782CBD8D5700550A8B /* DeleteImageUseCase.swift */; };
@@ -715,6 +715,10 @@
 		4AC4FD0B2BBE8AFC0027ACD5 /* AppleOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleOAuthViewModel.swift; sourceTree = "<group>"; };
 		4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRegistrationManager.swift; sourceTree = "<group>"; };
 		4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingView.swift; sourceTree = "<group>"; };
+		4ACB61232CE52C930018E78A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4ACB61252CE52C960018E78A /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4ACB61262CE52C960018E78A /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4ACB61272CE52C960018E78A /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsContentView.swift; sourceTree = "<group>"; };
 		4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTabBarVisibilityExtension.swift; sourceTree = "<group>"; };
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
@@ -863,10 +867,6 @@
 		D8C9AC3F2BF661A2006D1FCD /* InquiryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryView.swift; sourceTree = "<group>"; };
 		D8C9AC412BF66BB3006D1FCD /* InquiryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryListView.swift; sourceTree = "<group>"; };
 		D8CEFB722C32BDF000E61C51 /* MoreDetailSpendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDetailSpendingView.swift; sourceTree = "<group>"; };
-		D8CFE1892CDE2BEF00FD633E /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
-		D8CFE18A2CDE2BEF00FD633E /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../../../../Downloads/Release.xcconfig; sourceTree = "<group>"; };
-		D8CFE18B2CDE2BEF00FD633E /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
-		D8CFE18F2CDE2BFF00FD633E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8DCCF6F2CBD8B4B00550A8B /* InputContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputContent.swift; sourceTree = "<group>"; };
 		D8DCCF712CBD8B4B00550A8B /* MakeChatRoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeChatRoomView.swift; sourceTree = "<group>"; };
 		D8DCCF782CBD8D5700550A8B /* DeleteImageUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteImageUseCase.swift; sourceTree = "<group>"; };
@@ -1863,8 +1863,8 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D8CFE18F2CDE2BFF00FD633E /* GoogleService-Info.plist */,
-				D8CFE1882CDE2BE400FD633E /* Xcconfig */,
+				4ACB61282CE52C960018E78A /* Xcconfig */,
+				4ACB61232CE52C930018E78A /* GoogleService-Info.plist */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
@@ -2211,6 +2211,16 @@
 				4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */,
 			);
 			path = OAuthViewModel;
+			sourceTree = "<group>";
+		};
+		4ACB61282CE52C960018E78A /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				4ACB61252CE52C960018E78A /* Debug.xcconfig */,
+				4ACB61262CE52C960018E78A /* Release.xcconfig */,
+				4ACB61272CE52C960018E78A /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
 			sourceTree = "<group>";
 		};
 		4AD0D83E2BFD0F4400A0808F /* View */ = {
@@ -2669,16 +2679,6 @@
 			path = AddSpendingHistoryView;
 			sourceTree = "<group>";
 		};
-		D8CFE1882CDE2BE400FD633E /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				D8CFE1892CDE2BEF00FD633E /* Debug.xcconfig */,
-				D8CFE18A2CDE2BEF00FD633E /* Release.xcconfig */,
-				D8CFE18B2CDE2BEF00FD633E /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
-			sourceTree = "<group>";
-		};
 		D8DCCF702CBD8B4B00550A8B /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -2893,18 +2893,18 @@
 			files = (
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
-				D8CFE1902CDE2BFF00FD633E /* GoogleService-Info.plist in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
+				4ACB61242CE52C930018E78A /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				D8CFE18C2CDE2BEF00FD633E /* Debug.xcconfig in Resources */,
+				4ACB61292CE52C970018E78A /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				D8CFE18E2CDE2BEF00FD633E /* Secrets.xcconfig in Resources */,
+				4ACB612B2CE52C970018E78A /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				D8CFE18D2CDE2BEF00FD633E /* Release.xcconfig in Resources */,
+				4ACB612A2CE52C970018E78A /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3538,7 +3538,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8CFE1892CDE2BEF00FD633E /* Debug.xcconfig */;
+			baseConfigurationReference = 4ACB61252CE52C960018E78A /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3584,7 +3584,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8CFE18A2CDE2BEF00FD633E /* Release.xcconfig */;
+			baseConfigurationReference = 4ACB61262CE52C960018E78A /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
