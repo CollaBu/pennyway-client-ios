@@ -106,8 +106,8 @@ struct ChatUserInfoView: View {
                 }
                 .offset(y: -35 * DynamicSizeFactor.factor())
 
-                //자신이 방장이고, 클릭한 유저가 방장이 아닌 경우
-                if let myRole = myInfo?.role, myRole == .admin, user.role != .admin{
+                // 자신이 방장이고, 클릭한 유저가 방장이 아닌 경우
+                if let myRole = myInfo?.role, myRole == .admin, user.role != .admin {
                     HStack(spacing: 14 * DynamicSizeFactor.factor()) {
                         ActionBtn(title: "방장 넘기기", icon: "icon_chatprofile_delegation_primary", textColor: .mint03, backgroundColor: .mint01, action: {
                             showTransferPopUp = true

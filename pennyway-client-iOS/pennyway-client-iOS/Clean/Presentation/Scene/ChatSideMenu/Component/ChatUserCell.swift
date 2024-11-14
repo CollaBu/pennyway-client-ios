@@ -13,7 +13,7 @@ struct ChatUserCell: View {
 
     var body: some View {
         HStack(spacing: 3 * DynamicSizeFactor.factor()) {
-            Image("icon_illust_error")
+            Image("icon_illust_no_image_no_margin")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 23 * DynamicSizeFactor.factor(), height: 23 * DynamicSizeFactor.factor())
