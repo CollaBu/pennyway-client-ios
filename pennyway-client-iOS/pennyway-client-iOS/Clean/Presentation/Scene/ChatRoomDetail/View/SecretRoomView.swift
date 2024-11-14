@@ -53,7 +53,7 @@ struct SecretRoomView: View {
             }, label: "다음", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
-        .navigationBarColor(UIColor(named: "White01"), title: "\(chatRoom?.title)")
+        .navigationBarColor(UIColor(named: "White01"), title: "\(chatRoom?.title ?? "")")
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)

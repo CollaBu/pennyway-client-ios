@@ -31,20 +31,27 @@ struct ChatRoomContent: View {
                 } else {
                     if let rooms = searchChatRooms {
                         ForEach(rooms, id: \.id) { chatRoom in
-                            ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
-                                isPopUp = true
-                            })
-                            .onAppear {
-                                guard let index = rooms.firstIndex(where: { $0.id == chatRoom.id }) else {
-                                    return
-                                }
-                                // 현재 항목이 마지막 인덱스에 도달했을 때만 API 호출
-                                if index == rooms.count - 1 && viewModelWrapper.getChatRoomViewModel.hasNext && !viewModelWrapper.getChatRoomViewModel.isFetching {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                        viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
+                            Button(action: {
+                                selectedSearchChatRoom = chatRoom
+                                isNavigateChatRoomDetailView = true
+                            }, label: {
+                                ChatRoomCell(chatRoom: chatRoom, isMyChat: false, onDelete: {
+                                    isPopUp = true
+                                })
+                                .contentShape(Rectangle())
+                                .onAppear {
+                                    guard let index = rooms.firstIndex(where: { $0.id == chatRoom.id }) else {
+                                        return
+                                    }
+                                    // 현재 항목이 마지막 인덱스에 도달했을 때만 API 호출
+                                    if index == rooms.count - 1, viewModelWrapper.getChatRoomViewModel.hasNext, !viewModelWrapper.getChatRoomViewModel.isFetching {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                            viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
+                                        }
                                     }
                                 }
-                            }
+                                
+                            })
                         }
                     }
                 }
