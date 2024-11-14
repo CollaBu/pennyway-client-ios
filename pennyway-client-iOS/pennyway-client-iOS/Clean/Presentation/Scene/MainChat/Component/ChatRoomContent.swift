@@ -40,7 +40,6 @@ struct ChatRoomContent: View {
                                 }
                                 // 현재 항목이 마지막 인덱스에 도달했을 때만 API 호출
                                 if index == rooms.count - 1 && viewModelWrapper.getChatRoomViewModel.hasNext && !viewModelWrapper.getChatRoomViewModel.isFetching {
-
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                                         viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
                                     }

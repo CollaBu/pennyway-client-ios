@@ -107,8 +107,8 @@ struct ChatCellView: View {
                 viewStateManager.setCurrentView(self, selectedTab: selectedTab)
                 
                 // 검색어 초기화하여 전체 목록 표시
-                viewModelWrapper.getChatRoomViewModel.initSearch()
                 viewModelWrapper.searchChatData = []
+                viewModelWrapper.getChatRoomViewModel.initSearch()
                 viewModelWrapper.searchQuery = ""
                 chatRoomName = ""
             }
