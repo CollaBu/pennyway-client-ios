@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct SecretRoomView: View {
+    let chatRoom: SearchChatRoomItemModel?
     let chatRoomId: Int64
     @State private var password = ""
 
@@ -52,7 +53,7 @@ struct SecretRoomView: View {
             }, label: "다음", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
         }
-        .navigationBarColor(UIColor(named: "White01"), title: "배달음식 그만 먹는 방")
+        .navigationBarColor(UIColor(named: "White01"), title: "\(chatRoom?.title)")
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
