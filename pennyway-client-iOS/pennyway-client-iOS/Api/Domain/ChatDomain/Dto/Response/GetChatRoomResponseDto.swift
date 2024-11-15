@@ -29,9 +29,10 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
     let isAdmin: Bool
     let participantCount: Int32
     let createdAt: String?
+    let lastMessage: LastMessageData?
     let unreadMessageCount: Int64
 
-    public init(id: Int64, title: String, description: String, backgroundImageUrl: String, isPrivate: Bool, isAdmin: Bool, participantCount: Int32, createdAt: String?, unreadMessageCount: Int64) {
+    public init(id: Int64, title: String, description: String, backgroundImageUrl: String, isPrivate: Bool, isAdmin: Bool, participantCount: Int32, createdAt: String?, lastMessage: LastMessageData, unreadMessageCount: Int64) {
         self.id = id
         self.title = title
         self.description = description
@@ -40,6 +41,7 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
         self.isAdmin = isAdmin
         self.participantCount = participantCount
         self.createdAt = createdAt
+        self.lastMessage = lastMessage
         self.unreadMessageCount = unreadMessageCount
     }
 
@@ -53,4 +55,16 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
 
         return ChatRoom(id: dto.id, title: dto.title, description: dto.description, background_image_url: completeBackgroundImageUrl, isPrivate: dto.isPrivate, isAdmin: dto.isAdmin, participantCount: dto.participantCount, createdAt: dto.createdAt ?? "", unreadMessageCount: dto.unreadMessageCount)
     }
+}
+
+// MARK: - LastMessageData
+
+public struct LastMessageData: Codable {
+    let chatRoomId: Int64
+    let chatId: Int64
+    let content: String
+    let contentType: String
+    let categoryType: String
+    let createdAt: String
+    let senderId: Int64
 }

@@ -11,7 +11,9 @@ import Foundation
 // MARK: - ChatRoomViewModelInput
 
 protocol ChatRoomViewModelInput {
+    func reset()
     func getChatRoomDetail(chatRoomId: Int64)
+    func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, destination: Int64, contentType: String)
 }
 
@@ -22,6 +24,7 @@ protocol ChatRoomViewModelOutput {
     var roomDetailData: Observable<ChatRoomDetailItemModel?> { get set }
     var messageData: Observable<[MessageItemModel]> { get set }
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
+    var previousMessageData: Observable<PreviousMessage?> { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -33,27 +36,39 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 class DefaultChatRoomViewModel: ChatRoomViewModel {
     var roomData: Observable<ChatRoomItemModel?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
-    var messageData: Observable<[MessageItemModel]> = Observable([]) // 최근 메시지 목록
+    var messageData: Observable<[MessageItemModel]> = Observable([]) // 메시지 목록
     var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 최근 사용자 + 자신
+    var previousMessageData: Observable<PreviousMessage?> = Observable(nil)
 
     private let chatRoomUseCase: ChatRoomUseCase
     private let sendChatUseCase: SendChatUseCase
+    private let chatHistoryList: ChatHistoryList
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+        self.chatHistoryList = chatHistoryList
         self.chatRoomUseCase = chatRoomUseCase
         self.sendChatUseCase = sendChatUseCase
+        self.chatHistoryList.delegate = self
 
         // NotificationCenter에서 메시지 알림 구독
         NotificationCenter.default.publisher(for: .didReceiveMessage)
             .sink { [weak self] notification in
 
                 if let message = notification.object as? MessageItemModel {
-                    self?.messageData.value.insert(message, at: 0)
+                    self?.handleNewMessage(message)
                 }
             }
             .store(in: &cancellables)
+    }
+
+    func reset() {
+        roomData.value = nil
+        roomDetailData.value = nil
+        messageData.value = []
+        chatUserData.value = []
+        previousMessageData.value = nil
     }
 
     /// 채팅방 상세 정보 조회
@@ -77,6 +92,27 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         }
     }
 
+    func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void) {
+        if let message = messageData.value.last {
+            chatRoomUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
+                switch result {
+                case let .success(previousMessage):
+                    let messages = PreviousMessage.to(model: previousMessage)
+
+                    // 이전 메시지 데이터 업데이트
+                    self?.previousMessageData.value = previousMessage
+                    self?.handleNewMessages(messages)
+                    Log.debug("[DefaultChatRoomViewModel] 이전 채팅 조회 성공: \(previousMessage)")
+                    completion(.success(()))
+
+                case let .failure(error):
+                    Log.error("[DefaultChatRoomViewModel] 이전 채팅 조회 실패: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
     /// 채팅 메시지 전송
     /// - Parameters:
     ///   - message: 전송할 메시지 내용.
@@ -88,8 +124,30 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
             case .success:
                 Log.debug("[DefaultChatRoomViewModel] 채팅 메시지 전송 성공")
             case let .failure(error):
-                Log.error("[DefaultChatRoomViewModel]  채팅 메시지 전송 실패: \(error.localizedDescription)")
+                Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
             }
         }
+    }
+
+    /// 단일 메시지 삽입
+    private func handleNewMessage(_ message: MessageItemModel) {
+        chatHistoryList.insert(message, true)
+    }
+
+    /// 여러 메시지 삽입
+    private func handleNewMessages(_ messages: [MessageItemModel]) {
+        chatHistoryList.insertMessages(messages)
+    }
+}
+
+// MARK: ChatHistoryDelegate
+
+extension DefaultChatRoomViewModel: ChatHistoryDelegate {
+    func didAddChatHistory(_ messages: [MessageItemModel]) {
+        messageData.value.insert(contentsOf: messages, at: 0)
+    }
+
+    func didAddChatHistories(_ messages: [MessageItemModel]) {
+        messageData.value.append(contentsOf: messages)
     }
 }
