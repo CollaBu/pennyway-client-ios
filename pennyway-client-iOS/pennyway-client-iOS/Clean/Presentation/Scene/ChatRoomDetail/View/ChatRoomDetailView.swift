@@ -73,7 +73,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
 
             if let chatRoomId = chatRoom?.id {
                 if chatRoom?.isPrivate == true {
-                    NavigationLink(destination: SecretRoomView(chatRoomId: chatRoomId, viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
+                    NavigationLink(destination: SecretRoomView(chatRoom: chatRoom ?? nil, chatRoomId: Int64(chatRoomId), viewModelWrapper: viewModelWrapper), isActive: $isNavigate) {}
                         .hidden()
                 }
             }

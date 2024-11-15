@@ -108,10 +108,6 @@
 		4A3DE21A2C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */; };
 		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
 		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
-		4A4028BC2CE3CD490050C6ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A4028BB2CE3CD490050C6ED /* GoogleService-Info.plist */; };
-		4A4028C12CE3CD4C0050C6ED /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4028BD2CE3CD4C0050C6ED /* Debug.xcconfig */; };
-		4A4028C22CE3CD4C0050C6ED /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4028BE2CE3CD4C0050C6ED /* Release.xcconfig */; };
-		4A4028C32CE3CD4C0050C6ED /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4028BF2CE3CD4C0050C6ED /* Secrets.xcconfig */; };
 		4A45A19A2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A19B2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A19E2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -137,10 +133,6 @@
 		4A4A567A2BADEFF90071D00E /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A56792BADEFF90071D00E /* NavigationBackButton.swift */; };
 		4A4D884D2BD81A62009EADB0 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D884C2BD81A62009EADB0 /* KeychainHelper.swift */; };
 		4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D884E2BD81F82009EADB0 /* CryptoHelper.swift */; };
-		4A4F1A3D2CE227E000105218 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A4F1A3C2CE227E000105218 /* GoogleService-Info.plist */; };
-		4A4F1A422CE227E600105218 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4F1A3E2CE227E600105218 /* Debug.xcconfig */; };
-		4A4F1A432CE227E600105218 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4F1A3F2CE227E600105218 /* Release.xcconfig */; };
-		4A4F1A442CE227E600105218 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A4F1A402CE227E600105218 /* Secrets.xcconfig */; };
 		4A4F1A462CE25F9500105218 /* GetPreviousChatResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F1A452CE25F9500105218 /* GetPreviousChatResponseDto.swift */; };
 		4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5050322BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift */; };
 		4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */; };
@@ -276,8 +268,8 @@
 		4AC9488E2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */; };
 		4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */; };
 		4ACB61132CE4C09D0018E78A /* ChatHistoryBinaryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */; };
-		4ACB611D2CE4CC8A0018E78A /* ChatHistoryListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */; };
 		4ACB61152CE4C20C0018E78A /* GetPreviousChatRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */; };
+		4ACB611D2CE4CC8A0018E78A /* ChatHistoryListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */; };
 		4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */; };
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
@@ -458,6 +450,10 @@
 		D8E889EA2CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889E92CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift */; };
 		D8E889EC2CDBAD10008FC22E /* ImageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889EB2CDBAD10008FC22E /* ImageLoadable.swift */; };
 		D8E889F02CDBC6EB008FC22E /* JoinChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E889EF2CDBC6EB008FC22E /* JoinChatRoomViewModel.swift */; };
+		D8F556602CE6FD510063825E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8F5565F2CE6FD510063825E /* GoogleService-Info.plist */; };
+		D8F556642CE6FD580063825E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8F556612CE6FD580063825E /* Secrets.xcconfig */; };
+		D8F556652CE6FD580063825E /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8F556622CE6FD580063825E /* Release.xcconfig */; };
+		D8F556662CE6FD580063825E /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8F556632CE6FD580063825E /* Debug.xcconfig */; };
 		D8F9D7342C57E297005416FC /* handleDeleteButtonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */; };
 		D8F9D7362C593B71005416FC /* PreparedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7352C593B71005416FC /* PreparedView.swift */; };
 		D8F9D73A2C59576B005416FC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F9D7392C59576B005416FC /* ImagePicker.swift */; };
@@ -580,10 +576,6 @@
 		4A3DE2192C3EF64000817589 /* GetCategorySpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategorySpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCategorySpendingHistoryResponseDto.swift; sourceTree = "<group>"; };
 		4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingResponseDto.swift; sourceTree = "<group>"; };
-		4A4028BB2CE3CD490050C6ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4A4028BD2CE3CD4C0050C6ED /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4A4028BE2CE3CD4C0050C6ED /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4A4028BF2CE3CD4C0050C6ED /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginRequestDto.swift; sourceTree = "<group>"; };
 		4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationCodeRequestDto.swift; sourceTree = "<group>"; };
 		4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthVerificationRequestDto.swift; sourceTree = "<group>"; };
@@ -602,10 +594,6 @@
 		4A4A56792BADEFF90071D00E /* NavigationBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackButton.swift; sourceTree = "<group>"; };
 		4A4D884C2BD81A62009EADB0 /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		4A4D884E2BD81F82009EADB0 /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
-		4A4F1A3C2CE227E000105218 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4A4F1A3E2CE227E600105218 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4A4F1A3F2CE227E600105218 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4A4F1A402CE227E600105218 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A4F1A452CE25F9500105218 /* GetPreviousChatResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPreviousChatResponseDto.swift; sourceTree = "<group>"; };
 		4A5050322BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFormatterUtil.swift; sourceTree = "<group>"; };
 		4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAccountToOAuthViewModel.swift; sourceTree = "<group>"; };
@@ -743,9 +731,9 @@
 		4AC9488D2BC1AD8F008DBC1F /* OAuthRegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRegistrationManager.swift; sourceTree = "<group>"; };
 		4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingView.swift; sourceTree = "<group>"; };
 		4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryBinaryList.swift; sourceTree = "<group>"; };
+		4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPreviousChatRequestDto.swift; sourceTree = "<group>"; };
 		4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pennyway-client-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryListTest.swift; sourceTree = "<group>"; };
-		4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPreviousChatRequestDto.swift; sourceTree = "<group>"; };
 		4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsContentView.swift; sourceTree = "<group>"; };
 		4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTabBarVisibilityExtension.swift; sourceTree = "<group>"; };
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
@@ -927,6 +915,10 @@
 		D8E889E92CDB81A4008FC22E /* DefaultJoinChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultJoinChatRoomRepository.swift; sourceTree = "<group>"; };
 		D8E889EB2CDBAD10008FC22E /* ImageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadable.swift; sourceTree = "<group>"; };
 		D8E889EF2CDBC6EB008FC22E /* JoinChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChatRoomViewModel.swift; sourceTree = "<group>"; };
+		D8F5565F2CE6FD510063825E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D8F556612CE6FD580063825E /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../../../../../Downloads/Secrets.xcconfig; sourceTree = "<group>"; };
+		D8F556622CE6FD580063825E /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = ../../../../../Downloads/Release.xcconfig; sourceTree = "<group>"; };
+		D8F556632CE6FD580063825E /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = ../../../../../Downloads/Debug.xcconfig; sourceTree = "<group>"; };
 		D8F9D7332C57E296005416FC /* handleDeleteButtonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handleDeleteButtonUtil.swift; sourceTree = "<group>"; };
 		D8F9D7352C593B71005416FC /* PreparedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreparedView.swift; path = "pennyway-client-iOS/View/TabView/PreparedView.swift"; sourceTree = SOURCE_ROOT; };
 		D8F9D7392C59576B005416FC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -1670,9 +1662,9 @@
 		4A4028C02CE3CD4C0050C6ED /* Xcconfig */ = {
 			isa = PBXGroup;
 			children = (
-				4A4028BD2CE3CD4C0050C6ED /* Debug.xcconfig */,
-				4A4028BE2CE3CD4C0050C6ED /* Release.xcconfig */,
-				4A4028BF2CE3CD4C0050C6ED /* Secrets.xcconfig */,
+				D8F556632CE6FD580063825E /* Debug.xcconfig */,
+				D8F556622CE6FD580063825E /* Release.xcconfig */,
+				D8F556612CE6FD580063825E /* Secrets.xcconfig */,
 			);
 			path = Xcconfig;
 			sourceTree = "<group>";
@@ -1744,16 +1736,6 @@
 				D89FB7882BDA925F0019DE3C /* FindUserNameViewModel.swift */,
 			);
 			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		4A4F1A412CE227E600105218 /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				4A4F1A3E2CE227E600105218 /* Debug.xcconfig */,
-				4A4F1A3F2CE227E600105218 /* Release.xcconfig */,
-				4A4F1A402CE227E600105218 /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
 			sourceTree = "<group>";
 		};
 		4A57896D2BDBEFF000AFEB26 /* Error */ = {
@@ -1920,8 +1902,8 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D8F5565F2CE6FD510063825E /* GoogleService-Info.plist */,
 				4A4028C02CE3CD4C0050C6ED /* Xcconfig */,
-				4A4028BB2CE3CD490050C6ED /* GoogleService-Info.plist */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
@@ -2973,19 +2955,18 @@
 			files = (
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
+				D8F556642CE6FD580063825E /* Secrets.xcconfig in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
-
 				4A4028BC2CE3CD490050C6ED /* GoogleService-Info.plist in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
+				D8F556662CE6FD580063825E /* Debug.xcconfig in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
-				4A4028C12CE3CD4C0050C6ED /* Debug.xcconfig in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
-				4A4028C32CE3CD4C0050C6ED /* Secrets.xcconfig in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
-				4A4028C22CE3CD4C0050C6ED /* Release.xcconfig in Resources */,
+				D8F556652CE6FD580063825E /* Release.xcconfig in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3645,7 +3626,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A4028BD2CE3CD4C0050C6ED /* Debug.xcconfig */;
+			baseConfigurationReference = D8F556632CE6FD580063825E /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3693,7 +3674,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A4028BE2CE3CD4C0050C6ED /* Release.xcconfig */;
+			baseConfigurationReference = D8F556622CE6FD580063825E /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3740,6 +3721,7 @@
 		};
 		4ACB61202CE4CC8A0018E78A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8F556632CE6FD580063825E /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3753,16 +3735,18 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pennyway-client-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pennyway-client-iOS";
 			};
 			name = Debug;
 		};
 		4ACB61212CE4CC8A0018E78A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8F556622CE6FD580063825E /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3776,10 +3760,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pennyway-client-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pennyway-client-iOS";
 			};
 			name = Release;

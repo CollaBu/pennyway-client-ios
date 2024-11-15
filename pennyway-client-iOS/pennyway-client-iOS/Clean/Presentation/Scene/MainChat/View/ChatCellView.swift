@@ -44,12 +44,12 @@ struct ChatCellView: View {
                             Spacer()
                         } else {
                             searchChatContainer
-                            ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: .constant(nil), dummyChatRooms: .constant(viewModelWrapper.filteredChatData), searchChatRooms: .constant(nil), isMyChat: true)
+                            ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(viewModelWrapper.filteredChatData), searchChatRooms: [], isMyChat: true, target: chatRoomName, viewModelWrapper: viewModelWrapper)
                         }
                     } else {
                         searchChatContainer
                         Spacer()
-                        ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: .constant(viewModelWrapper.searchChatData), isMyChat: false)
+                        ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: viewModelWrapper.searchChatData, isMyChat: false, target: chatRoomName, viewModelWrapper: viewModelWrapper)
                     }
                 }
 
@@ -106,12 +106,20 @@ struct ChatCellView: View {
                     }
                 }
             }
+            .onDisappear {
+                viewModelWrapper.searchChatData = []
+                viewModelWrapper.getChatRoomViewModel.initSearch()
+                viewModelWrapper.searchQuery = ""
+                chatRoomName = ""
+            }
             .onAppear {
                 // 뷰에 진입하자마자 내채팅 조회 api 호출
                 viewModelWrapper.getChatRoomViewModel.getChatRoom()
                 viewStateManager.setCurrentView(self, selectedTab: selectedTab)
                 
                 // 검색어 초기화하여 전체 목록 표시
+                viewModelWrapper.searchChatData = []
+                viewModelWrapper.getChatRoomViewModel.initSearch()
                 viewModelWrapper.searchQuery = ""
                 chatRoomName = ""
             }
@@ -144,7 +152,8 @@ struct ChatCellView: View {
                     // 추천채팅 탭이며 검색어가 2자 이상인 경우만 채팅 검색 api 호출
                     if chatRoomName.count >= 2 {
                         viewModelWrapper.getChatRoomViewModel.initSearch()
-                        viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: chatRoomName)
+                        viewModelWrapper.updateSearchQuery(chatRoomName)
+
                     } else {
                         isErrorPopUp = true
                         Log.debug("isErrorPopUp:\(isErrorPopUp)")
@@ -265,6 +274,17 @@ final class ChatViewModelWrapper: ObservableObject {
         
         getChatRoomViewModel.searchRoomData.observe(on: self) { [weak self] newData in
             self?.searchChatData = newData
+        }
+    }
+    
+    /// 검색어가 변경될 때 호출할 메서드
+    func updateSearchQuery(_ query: String) {
+        // 검색어가 변경되었거나 같은 검색어로 다시 검색할 때 초기화
+        if searchQuery != query && query.count >= 2 {
+            searchQuery = query
+            getChatRoomViewModel.initSearch() // 페이지 번호 초기화
+            searchChatData = []
+            getChatRoomViewModel.searchChatRoom(target: query)
         }
     }
 }
