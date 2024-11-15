@@ -8,6 +8,7 @@ struct ChatCellView: View {
     @State var isNavigateToMakeChatRoom = false
     @State private var isCheckMarkVisible = false // 체크 표시를 보여줄지 여부
     @State private var isPopUp = false // 채팅방 나가기 팝업 표시 여부
+    @State private var isErrorPopUp = false // 검색뷰에서 특정 글자 수 이하인 경우 나오는 팝업 표시 여부
     @State private var selectedChatRoom: ChatRoomItemModel? = nil // 내 채팅에서 어떤 채팅방이 선택됐는지의 여부
     @State private var selectedSearchChatRoom: SearchChatRoomItemModel? = nil // 검색된 채팅방 중 어떤 채팅방이 선택됐는지의 여부
     @State private var isNavigateChatRoomDetailView = false // 채팅방 참여뷰로 이동하기 위한 변수
@@ -51,7 +52,7 @@ struct ChatCellView: View {
                         ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: viewModelWrapper.searchChatData, isMyChat: false, target: chatRoomName, viewModelWrapper: viewModelWrapper)
                     }
                 }
-                
+
                 if isCheckMarkVisible {
                     Image("icon_illust_completion")
                         .resizable()
@@ -74,6 +75,10 @@ struct ChatCellView: View {
                         },
                         secondBtnLabel: "나가기",
                         secondBtnColor: Color("Red03"))
+                }
+                
+                if isErrorPopUp {
+                    ErrorCodePopUpView(showingPopUp: $isErrorPopUp, titleLabel: "두 글자 이상 입력해주세요", subLabel: "검색은 두 글자부터 가능해요")
                 }
                 
                 NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
@@ -100,6 +105,12 @@ struct ChatCellView: View {
                         .buttonStyle(BasicButtonStyleUtil())
                     }
                 }
+            }
+            .onDisappear {
+                viewModelWrapper.searchChatData = []
+                viewModelWrapper.getChatRoomViewModel.initSearch()
+                viewModelWrapper.searchQuery = ""
+                chatRoomName = ""
             }
             .onAppear {
                 // 뷰에 진입하자마자 내채팅 조회 api 호출
@@ -137,11 +148,17 @@ struct ChatCellView: View {
     private var searchChatContainer: some View {
         VStack {
             CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", onCommit: {
-                if selectedTab == 2, chatRoomName.count >= 2 {
+                if selectedTab == 2 {
                     // 추천채팅 탭이며 검색어가 2자 이상인 경우만 채팅 검색 api 호출
-                    viewModelWrapper.getChatRoomViewModel.initSearch()
-                    viewModelWrapper.updateSearchQuery(chatRoomName)
+                    if chatRoomName.count >= 2 {
+                        viewModelWrapper.getChatRoomViewModel.initSearch()
+                        viewModelWrapper.updateSearchQuery(chatRoomName)
 
+                    } else {
+                        isErrorPopUp = true
+                        Log.debug("isErrorPopUp:\(isErrorPopUp)")
+                    }
+                    
                 } else {
                     // 내 채팅인 경우
                     viewModelWrapper.searchQuery = chatRoomName

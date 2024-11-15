@@ -87,8 +87,6 @@ struct ProfileMenuBarListView: View {
             }
 
             if googleOAuthViewModel.isExistUser || kakaoOAuthViewModel.isExistUser || appleOAuthViewModel.isExistUser {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
-
                 ErrorCodePopUpView(showingPopUp: $googleOAuthViewModel.isExistUser, titleLabel: "계정이 이미 연동되어 있어요", subLabel: "이미 연동된 계정은 사용할 수 없어요")
             }
 
