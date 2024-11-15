@@ -145,7 +145,7 @@ struct ChatRoomCell: View, ImageLoadable {
                             
                         Spacer().frame(height: 3 * DynamicSizeFactor.factor())
                             
-                        Text("\(chatRoom.participantCount)")
+                        Text("\(chatRoom.participantCount)명")
                             .font(.B3MediumFont())
                             .platformTextColor(color: Color("Gray04"))
                             .padding(1)
