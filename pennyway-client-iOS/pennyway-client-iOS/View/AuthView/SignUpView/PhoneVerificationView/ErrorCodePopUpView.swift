@@ -69,6 +69,9 @@ extension ErrorCodePopUpView {
                         Text(titleLabel)
                             .platformTextColor(color: Color("Gray07"))
                             .font(.H3SemiboldFont())
+
+                        Spacer().frame(height: 1)
+
                         Text(subLabel)
                             .platformTextColor(color: Color("Gray04"))
                             .font(.B1MediumFont())
