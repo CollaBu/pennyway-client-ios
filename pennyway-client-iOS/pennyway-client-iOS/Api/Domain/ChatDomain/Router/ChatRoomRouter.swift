@@ -11,10 +11,11 @@ import Foundation
 enum ChatRoomRouter: URLRequestConvertible {
     case getChatRoomDetail(chatRoomId: Int64)
     case getPreviousChat(chatRoomId: Int64, dto: GetPreviousChatRequestDto)
+    case getChatMembers(chatRoomId: Int64, dto: GetChatMembersRequestDto)
 
     var method: HTTPMethod {
         switch self {
-        case .getChatRoomDetail, .getPreviousChat:
+        case .getChatRoomDetail, .getPreviousChat, .getChatMembers:
             return .get
         }
     }
@@ -29,12 +30,14 @@ enum ChatRoomRouter: URLRequestConvertible {
             return "v2/chat-rooms/\(chatRoomId)"
         case let .getPreviousChat(chatRoomId, _):
             return "v2/chat-rooms/\(chatRoomId)/chats"
+        case let .getChatMembers(chatRoomId, _):
+            return "v2/chat-rooms/\(chatRoomId)/chats-members"
         }
     }
 
     var bodyParameters: Parameters? {
         switch self {
-        case .getChatRoomDetail, .getPreviousChat:
+        case .getChatRoomDetail, .getPreviousChat, .getChatMembers:
             return [:]
         }
     }
@@ -44,6 +47,8 @@ enum ChatRoomRouter: URLRequestConvertible {
         case .getChatRoomDetail:
             return [:]
         case let .getPreviousChat(_, dto):
+            return try? dto.asDictionary()
+        case let .getChatMembers(_, dto):
             return try? dto.asDictionary()
         }
     }
@@ -56,6 +61,9 @@ enum ChatRoomRouter: URLRequestConvertible {
         case .getChatRoomDetail:
             request = URLRequest.createURLRequest(url: url, method: method)
         case .getPreviousChat:
+            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
+        case .getChatMembers:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         }
