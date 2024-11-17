@@ -124,11 +124,16 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         }
     }
 
+    /// 채팅방 멤버 조회
     private func getChatMembers(chatRoomId: Int64, ids: [Int64]) {
         chatRoomUseCase.getChatMembers(chatRoomId: chatRoomId, ids: ids) { [weak self] result in
             switch result {
             case let .success(members):
-                Log.debug("\(members)")
+
+                let membersItem = ChatMemberItemModel.from(model: members)
+                self?.chatUserData.value += membersItem
+
+                Log.debug("[DefaultChatRoomViewModel] 채팅방 멤버 조회 성공: \(membersItem)")
 
             case let .failure(error):
                 Log.error("[DefaultChatRoomViewModel] 채팅방 멤버 조회 실패: \(error.localizedDescription)")

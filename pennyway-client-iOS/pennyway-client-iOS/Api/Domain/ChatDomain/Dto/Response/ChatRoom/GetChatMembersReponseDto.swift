@@ -17,7 +17,7 @@ struct GetChatMembersReponseDto: Codable {
 
     static func to(dto: GetChatMembersReponseDto) -> [ChatMember] {
         let members = dto.data.chatMembers.map { member in
-            ChatMember(id: member.id, userId: member.userId, name: member.name, role: member.role, notifyEnabled: member.notifyEnabled, createdAt: member.createdAt, profileImage: nil)
+            ChatMember(id: member.id, userId: member.userId, name: member.name, role: member.role, notifyEnabled: member.notifyEnabled, createdAt: member.createdAt, profileImage: "")
         }
 
         return members
