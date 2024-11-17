@@ -8,7 +8,6 @@
 import Foundation
 
 class DefaultChatRoomRepository: ChatRoomRepository {
-    
     /// 채팅 상세 정보 조회
     func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void) {
         ChatRoomAlamofire.shared.getChatRoomDetail(chatRoomId) { result in
@@ -67,7 +66,6 @@ class DefaultChatRoomRepository: ChatRoomRepository {
         }
     }
 
-    
     /// 채팅 멤버 조회
     func getChatMembers(chatRoomId: Int64, ids: [Int64], completion: @escaping (Result<[ChatMember], any Error>) -> Void) {
         let dto = GetChatMembersRequestDto(ids: ids)
