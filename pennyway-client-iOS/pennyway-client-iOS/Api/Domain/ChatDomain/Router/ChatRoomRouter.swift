@@ -31,7 +31,7 @@ enum ChatRoomRouter: URLRequestConvertible {
         case let .getPreviousChat(chatRoomId, _):
             return "v2/chat-rooms/\(chatRoomId)/chats"
         case let .getChatMembers(chatRoomId, _):
-            return "v2/chat-rooms/\(chatRoomId)/chats-members"
+            return "v2/chat-rooms/\(chatRoomId)/chat-members"
         }
     }
 
@@ -49,7 +49,12 @@ enum ChatRoomRouter: URLRequestConvertible {
         case let .getPreviousChat(_, dto):
             return try? dto.asDictionary()
         case let .getChatMembers(_, dto):
-            return try? dto.asDictionary()
+            // ids 배열을 키-값 쌍으로 분리
+            var params: Parameters = [:]
+            for (index, id) in dto.ids.enumerated() {
+                params["ids[\(index)]"] = "\(id)"
+            }
+            return params
         }
     }
 
@@ -64,7 +69,7 @@ enum ChatRoomRouter: URLRequestConvertible {
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         case .getChatMembers:
-            let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            let queryDatas = queryParameters?.map { URLQueryItem(name: "ids", value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         }
         return request

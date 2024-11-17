@@ -38,7 +38,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
     var messageData: Observable<[MessageItemModel]> = Observable([]) // 메시지 목록
     var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 최근 사용자 + 자신
-    var previousMessageData: Observable<PreviousMessage?> = Observable(nil)
+    var previousMessageData: Observable<PreviousMessage?> = Observable(nil) // 이전 채팅 목록 및 무한 스크롤 데이터
 
     private let chatRoomUseCase: ChatRoomUseCase
     private let sendChatUseCase: SendChatUseCase
@@ -86,12 +86,23 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                     }
                 }
 
+                if let otherParticipants = self?.roomDetailData.value?.otherParticipants {
+                    let ids = otherParticipants.map { $0.id }
+
+                    // ID를 50개씩 나누어 처리
+                    for chunk in stride(from: 0, to: ids.count, by: 50) {
+                        let chunkedIds = Array(ids[chunk ..< min(chunk + 50, ids.count)])
+                        self?.getChatMembers(chatRoomId: chatRoomId, ids: chunkedIds)
+                    }
+                }
+
             case let .failure(error):
                 Log.error("[DefaultChatRoomViewModel] 채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
             }
         }
     }
 
+    /// 채팅방 이전 채팅 내역 조회
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void) {
         if let message = messageData.value.last {
             chatRoomUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
@@ -109,6 +120,18 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                     Log.error("[DefaultChatRoomViewModel] 이전 채팅 조회 실패: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
+            }
+        }
+    }
+
+    private func getChatMembers(chatRoomId: Int64, ids: [Int64]) {
+        chatRoomUseCase.getChatMembers(chatRoomId: chatRoomId, ids: ids) { [weak self] result in
+            switch result {
+            case let .success(members):
+                Log.debug("\(members)")
+
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel] 채팅방 멤버 조회 실패: \(error.localizedDescription)")
             }
         }
     }

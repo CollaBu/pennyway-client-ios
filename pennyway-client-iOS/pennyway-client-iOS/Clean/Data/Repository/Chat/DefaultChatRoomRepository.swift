@@ -63,4 +63,35 @@ class DefaultChatRoomRepository: ChatRoomRepository {
             }
         }
     }
+
+    func getChatMembers(chatRoomId: Int64, ids: [Int64], completion: @escaping (Result<[ChatMember], any Error>) -> Void) {
+        let dto = GetChatMembersRequestDto(ids: ids)
+
+        Log.debug("[getChatMembers] - \(ids)")
+
+        ChatRoomAlamofire.shared.getChatMembers(chatRoomId, dto) { result in
+            switch result {
+            case let .success(data):
+                if let responseData = data {
+                    do {
+                        let response = try JSONDecoder().decode(GetChatMembersReponseDto.self, from: responseData)
+                        let members = GetChatMembersReponseDto.to(dto: response)
+
+                        Log.debug("[DefaultChatRoomRepository]: 채팅 멤버 조회 api 성공: \(response)")
+                        completion(.success(members))
+                    } catch {
+                        Log.fault("Error parsing response JSON: \(error)")
+                        completion(.failure(error))
+                    }
+                }
+            case let .failure(error):
+                if let statusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(.failure(error))
+            }
+        }
+    }
 }

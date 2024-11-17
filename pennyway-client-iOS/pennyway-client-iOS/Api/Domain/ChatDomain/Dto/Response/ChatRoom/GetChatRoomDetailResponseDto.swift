@@ -102,6 +102,8 @@ struct GetMessage: Codable {
     }
 }
 
+// MARK: - GetChatMember
+
 struct GetChatMember: Codable {
     let id: Int64
     let userId: Int64
