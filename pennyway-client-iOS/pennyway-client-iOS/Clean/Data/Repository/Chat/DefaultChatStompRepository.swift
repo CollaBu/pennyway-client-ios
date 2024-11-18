@@ -35,8 +35,8 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
-    func sendMessage(message: String, destination: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
-        let destination = "/pub/chat.message.\(destination)"
+    func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
+        let destination = "/pub/chat.message.\(chatRoomId)"
         let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
                        "content-type": "application/json"]
         let messageBody: [String: String] = [
@@ -53,6 +53,16 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         } catch {
             Log.error("Failed to serialize message body: \(error)")
         }
+    }
+
+    /// 마지막으로 읽은 메시지를 특정 목적지로 보내는 메서드
+    func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
+        let destination = "/pub/chat.message.\(chatRoomId).read.\(lastReadMessageId) "
+        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
+                       "content-type": "application/json"]
+
+        stompClient.sendMessage(message: "", toDestination: destination, withHeaders: headers, withReceipt: nil)
+        Log.debug("📤 [Send Last Message])")
     }
 
     /// 에러 처리위해 Stomp 구독을 설정하는 메서드

@@ -14,7 +14,7 @@ protocol ChatRoomViewModelInput {
     func reset()
     func getChatRoomDetail(chatRoomId: Int64)
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
-    func sendMessage(message: String, destination: Int64, contentType: String)
+    func sendMessage(message: String, chatRoomId: Int64, contentType: String)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -116,10 +116,10 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     /// 채팅 메시지 전송
     /// - Parameters:
     ///   - message: 전송할 메시지 내용.
-    ///   - destination: 채팅방  ID.
+    ///   - chatRoomId: 채팅방  ID.
     ///   - contentType: 메시지의 콘텐츠 유형.
-    func sendMessage(message: String, destination: Int64, contentType: String) {
-        sendChatUseCase.sendMessage(message: message, destination: destination, contentType: contentType) { result in
+    func sendMessage(message: String, chatRoomId: Int64, contentType: String) {
+        sendChatUseCase.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType) { result in
             switch result {
             case .success:
                 Log.debug("[DefaultChatRoomViewModel] 채팅 메시지 전송 성공")
