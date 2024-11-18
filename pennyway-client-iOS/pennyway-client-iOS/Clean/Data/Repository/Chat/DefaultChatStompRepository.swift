@@ -37,8 +37,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     /// 메시지를 특정 목적지로 보내는 메서드
     func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(chatRoomId)"
-        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
-                       "content-type": "application/json"]
+        let headers = createSendHeaders()
         let messageBody: [String: String] = [
             "content": message,
             "contentType": contentType
@@ -58,13 +57,16 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     /// 마지막으로 읽은 메시지를 특정 목적지로 보내는 메서드
     func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, completion _: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(chatRoomId).read.\(lastReadMessageId) "
-        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
-                       "content-type": "application/json"]
+        let headers = createSendHeaders()
 
         stompClient.sendMessage(message: "", toDestination: destination, withHeaders: headers, withReceipt: nil)
         Log.debug("📤 [Send Last Message])")
     }
+}
 
+// MARK: Private Methods
+
+extension DefaultChatStompRepository {
     /// 에러 처리위해 Stomp 구독을 설정하는 메서드
     private func subscribeToErrors() {
         let errorReceiptId = "error-receipt-\(UUID().uuidString)"
@@ -87,6 +89,12 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         let request = NSURLRequest(url: URL(string: url)!)
 
         stompClient.openSocketWithURLRequest(request: request, delegate: self, connectionHeaders: headers)
+    }
+
+    private func createSendHeaders() -> [String: String] {
+        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
+                       "content-type": "application/json"]
+        return headers
     }
 
     private func createConnectionHeaders() -> [String: String] {

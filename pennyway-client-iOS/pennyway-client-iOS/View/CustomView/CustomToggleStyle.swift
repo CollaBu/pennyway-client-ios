@@ -4,8 +4,7 @@ import SwiftUI
 
 struct CustomToggleStyle: ToggleStyle {
     @Binding var hasAppeared: Bool
-    var activeAnimation = false
-
+    var activeAnimation = false // 채팅 사이드 메뉴에서만 사용
     var onColor = Color("Mint03")
     var offColor = Color("Gray05")
     var thumbColor = Color("White01")
@@ -23,7 +22,7 @@ struct CustomToggleStyle: ToggleStyle {
                         .shadow(radius: 1, x: 0, y: 1)
                         .padding(1.5)
                         .offset(x: configuration.isOn ? 8 : -8))
-                .animation(hasAppeared ? .easeInOut(duration: 0.3) : (activeAnimation ? .easeInOut(duration: 0.3) : nil))
+                .animation(hasAppeared ? .easeInOut(duration: 0.3) : nil)
                 .onTapGesture { configuration.isOn.toggle() }
         }
     }
