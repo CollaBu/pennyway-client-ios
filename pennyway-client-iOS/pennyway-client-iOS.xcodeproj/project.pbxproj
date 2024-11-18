@@ -196,10 +196,6 @@
 		4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* TokenHandler.swift */; };
 		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
-		4A7A08B12CEB507100DDD95E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A7A08B02CEB507100DDD95E /* GoogleService-Info.plist */; };
-		4A7A08B62CEB507900DDD95E /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A7A08B22CEB507900DDD95E /* Debug.xcconfig */; };
-		4A7A08B72CEB507900DDD95E /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A7A08B32CEB507900DDD95E /* Release.xcconfig */; };
-		4A7A08B82CEB507900DDD95E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A7A08B42CEB507900DDD95E /* Secrets.xcconfig */; };
 		4A8523EA2CB5297100AE90AF /* ChatHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523E92CB5297100AE90AF /* ChatHeader.swift */; };
 		4A8523ED2CB5A8AE00AE90AF /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523EC2CB5A8AE00AE90AF /* ChatRoom.swift */; };
 		4A8523EF2CB5A8C200AE90AF /* ChatMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523EE2CB5A8C200AE90AF /* ChatMember.swift */; };
@@ -665,10 +661,6 @@
 		4A762B062B99A262001C1188 /* TokenHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandler.swift; sourceTree = "<group>"; };
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
-		4A7A08B02CEB507100DDD95E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4A7A08B22CEB507900DDD95E /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4A7A08B32CEB507900DDD95E /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4A7A08B42CEB507900DDD95E /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A8523E92CB5297100AE90AF /* ChatHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeader.swift; sourceTree = "<group>"; };
 		4A8523EC2CB5A8AE00AE90AF /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		4A8523EE2CB5A8C200AE90AF /* ChatMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMember.swift; sourceTree = "<group>"; };
@@ -2076,16 +2068,6 @@
 				4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		4A7A08B52CEB507900DDD95E /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				4A7A08B22CEB507900DDD95E /* Debug.xcconfig */,
-				4A7A08B32CEB507900DDD95E /* Release.xcconfig */,
-				4A7A08B42CEB507900DDD95E /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
 			sourceTree = "<group>";
 		};
 		4A8523EB2CB5A88D00AE90AF /* Chat */ = {
