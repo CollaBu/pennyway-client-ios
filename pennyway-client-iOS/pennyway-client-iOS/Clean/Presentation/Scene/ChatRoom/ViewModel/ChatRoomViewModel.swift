@@ -55,7 +55,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         // NotificationCenter에서 메시지 알림 구독
         NotificationCenter.default.publisher(for: .didReceiveMessage)
             .sink { [weak self] notification in
-
+                // 메시지 받은 경우
                 if let message = notification.object as? MessageItemModel {
                     self?.handleNewMessage(message)
                     self?.sendLastMessage(chatRoomId: message.chatRoomId, lastReadMessageId: message.chatId)
