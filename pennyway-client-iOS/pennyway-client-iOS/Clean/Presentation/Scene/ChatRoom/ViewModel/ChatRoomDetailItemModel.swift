@@ -75,6 +75,14 @@ struct ChatMemberItemModel: Equatable, Identifiable {
     var notifyEnabled: Bool?
     var createdAt: String
     let profileImage: String?
+
+    static func from(model: [ChatMember]) -> [ChatMemberItemModel] {
+        let members = model.map { member in
+            ChatMemberItemModel(id: member.id, userId: member.userId, name: member.name, role: member.role, notifyEnabled: member.notifyEnabled, createdAt: member.createdAt, profileImage: member.profileImage)
+        }
+
+        return members
+    }
 }
 
 // MARK: - MessageItemModel
