@@ -65,7 +65,7 @@ struct ChatRoomView: View {
             }
             .onAppear {
                 viewStateManager.setCurrentView(self)
-                viewModelWrapper.roomData = chatRoom // 현재 채팅방 정보 저장
+                viewModelWrapper.chatRoomViewModel.roomData.value = chatRoom // 현재 채팅방 정보 저장
 
                 // 채팅방 상세 정보 조회
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)

@@ -26,15 +26,6 @@ struct GetChatRoomDetailResponseDto: Codable {
                 let id: Int64
                 let name: String
             }
-
-            struct GetChatMember: Codable {
-                let id: Int64
-                let userId: Int64
-                let name: String
-                let role: Role
-                let notifyEnabled: Bool?
-                let createdAt: String
-            }
         }
     }
 
@@ -109,4 +100,15 @@ struct GetMessage: Codable {
     static func toItemModel(dto: GetMessage) -> MessageItemModel {
         return MessageItemModel(chatRoomId: dto.chatRoomId, chatId: dto.chatId, content: dto.content, contentType: dto.contentType, categoryType: dto.categoryType, createdAt: dto.createdAt, senderId: dto.senderId)
     }
+}
+
+// MARK: - GetChatMember
+
+struct GetChatMember: Codable {
+    let id: Int64
+    let userId: Int64
+    let name: String
+    let role: Role
+    let notifyEnabled: Bool?
+    let createdAt: String
 }

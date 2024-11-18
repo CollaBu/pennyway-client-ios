@@ -56,7 +56,7 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
     }
 
     /// 마지막으로 읽은 메시지를 특정 목적지로 보내는 메서드
-    func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
+    func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, completion _: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(chatRoomId).read.\(lastReadMessageId) "
         let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
                        "content-type": "application/json"]

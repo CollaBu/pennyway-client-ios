@@ -47,8 +47,10 @@ struct ChatReceiveCell: View, ImageLoadable {
         }
         .padding(.horizontal, 20)
         .onAppear {
-            loadImage(from: sender.profileImage ?? "") { image in
-                self.loadedImage = image
+            if sender.profileImage != "" {
+                loadImage(from: sender.profileImage ?? "") { image in
+                    self.loadedImage = image
+                }
             }
         }
     }

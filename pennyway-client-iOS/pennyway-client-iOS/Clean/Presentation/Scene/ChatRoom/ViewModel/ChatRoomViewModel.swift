@@ -37,8 +37,8 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     var roomData: Observable<ChatRoomItemModel?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
     var messageData: Observable<[MessageItemModel]> = Observable([]) // 메시지 목록
-    var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 최근 사용자 + 자신
-    var previousMessageData: Observable<PreviousMessage?> = Observable(nil)
+    var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 모든 채팅방 사용자
+    var previousMessageData: Observable<PreviousMessage?> = Observable(nil) // 이전 채팅 목록 및 무한 스크롤 데이터
 
     private let chatRoomUseCase: ChatRoomUseCase
     private let sendChatUseCase: SendChatUseCase
@@ -58,6 +58,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 
                 if let message = notification.object as? MessageItemModel {
                     self?.handleNewMessage(message)
+                    self?.sendLastMessage(chatRoomId: message.chatRoomId, lastReadMessageId: message.chatId)
                 }
             }
             .store(in: &cancellables)
@@ -79,10 +80,23 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 self?.roomDetailData.value = ChatRoomDetailItemModel.from(model: chatRoomDetail)
                 if let recentMessages = self?.roomDetailData.value?.recentMessages {
                     self?.messageData.value = recentMessages
+
+                    // 마지막 메시지 id 전달
+                    self?.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: recentMessages[0].chatId)
                 }
                 if let recentParticipants = self?.roomDetailData.value?.recentParticipants {
                     if let myInfo = self?.roomDetailData.value?.myInfo {
                         self?.chatUserData.value = [myInfo] + recentParticipants
+                    }
+                }
+
+                if let otherParticipants = self?.roomDetailData.value?.otherParticipants {
+                    let ids = otherParticipants.map { $0.id }
+
+                    // ID를 50개씩 나누어 처리
+                    for chunk in stride(from: 0, to: ids.count, by: 50) {
+                        let chunkedIds = Array(ids[chunk ..< min(chunk + 50, ids.count)])
+                        self?.getChatMembers(chatRoomId: chatRoomId, ids: chunkedIds)
                     }
                 }
 
@@ -92,6 +106,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         }
     }
 
+    /// 채팅방 이전 채팅 내역 조회
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void) {
         if let message = messageData.value.last {
             chatRoomUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
@@ -125,6 +140,39 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 Log.debug("[DefaultChatRoomViewModel] 채팅 메시지 전송 성공")
             case let .failure(error):
                 Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+// MARK: Private Methods
+
+extension DefaultChatRoomViewModel {
+    /// 채팅방 멤버 조회
+    private func getChatMembers(chatRoomId: Int64, ids: [Int64]) {
+        chatRoomUseCase.getChatMembers(chatRoomId: chatRoomId, ids: ids) { [weak self] result in
+            switch result {
+            case let .success(members):
+
+                let membersItem = ChatMemberItemModel.from(model: members)
+                self?.chatUserData.value += membersItem
+
+                Log.debug("[DefaultChatRoomViewModel] 채팅방 멤버 조회 성공: \(membersItem)")
+
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel] 채팅방 멤버 조회 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    /// 채팅 마지막으로 읽은 메시지 전송
+    private func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64) {
+        sendChatUseCase.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: lastReadMessageId) { result in
+            switch result {
+            case .success:
+                Log.debug("[DefaultChatRoomViewModel] 채팅 마지막으로 읽은 메시지 전송 성공")
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel] 채팅 마지막으로 읽은 메시지 전송 실패: \(error.localizedDescription)")
             }
         }
     }
