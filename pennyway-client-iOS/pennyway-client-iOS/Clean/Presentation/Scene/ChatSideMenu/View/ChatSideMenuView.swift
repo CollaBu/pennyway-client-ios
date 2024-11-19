@@ -90,7 +90,7 @@ private struct SideMenuContent: View {
             
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())
         }
-        .padding(.horizontal, 25 * DynamicSizeFactor.factor())
+        .padding(.horizontal, 25)
         .frame(maxHeight: .infinity)
         .background(
             RoundedCornerUtil(radius: 8, corners: [.topLeft, .bottomLeft])
@@ -101,10 +101,10 @@ private struct SideMenuContent: View {
     private var SideMenuCells: some View {
         VStack {
             if members[0].role.rawValue == Role.admin.rawValue { // 첫번째 사용자(나)가 방장인지 확인 후 ui
-                SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone", isAlarmCell: false, isAlarmOn: .constant(false))
+                SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone_no_padding", isAlarmCell: false, isAlarmOn: .constant(false))
             }
             
-            SideMenuCell(title: "알람 설정", imageName: "icon_notificationsetting", isAlarmCell: true, isAlarmOn: $isAlarmOn)
+            SideMenuCell(title: "알람 설정", imageName: "icon_notificationsetting_no_padding", isAlarmCell: true, isAlarmOn: $isAlarmOn)
         }
     }
     
