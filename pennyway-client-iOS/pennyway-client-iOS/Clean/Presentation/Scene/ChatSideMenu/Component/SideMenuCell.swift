@@ -18,7 +18,7 @@ struct SideMenuCell: View {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 18 * DynamicSizeFactor.factor(), height: 18 * DynamicSizeFactor.factor())
+                .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
             Text(title)
                 .font(.B2SemiboldFont())
                 .platformTextColor(color: Color("Gray07"))
