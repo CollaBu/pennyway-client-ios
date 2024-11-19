@@ -116,6 +116,7 @@ struct ChatCellView: View {
                 // 뷰에 진입하자마자 내채팅 조회 api 호출
                 viewModelWrapper.getChatRoomViewModel.getChatRoom()
                 viewStateManager.setCurrentView(self, selectedTab: selectedTab)
+                viewModelWrapper.getChatRoomViewModel.subscribeToNotifications()
                 
                 // 검색어 초기화하여 전체 목록 표시
                 viewModelWrapper.searchChatData = []

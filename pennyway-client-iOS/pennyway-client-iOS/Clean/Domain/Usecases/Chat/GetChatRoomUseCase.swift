@@ -38,7 +38,15 @@ class DefaultGetChatRoomUseCase: GetChatRoomUseCase {
                         isPrivate: chatRoom.isPrivate,
                         isAdmin: chatRoom.isAdmin,
                         participantCount: chatRoom.participantCount,
-                        lastMassage: chatRoom.lastMassage,
+                        lastMassage: MessageItemModel(
+                            chatRoomId: chatRoom.lastMassage?.chatRoomId ?? 0,
+                            chatId: chatRoom.lastMassage?.chatId ?? 0,
+                            content: chatRoom.lastMassage?.content ?? "",
+                            contentType: chatRoom.lastMassage?.contentType ?? .text,
+                            categoryType: chatRoom.lastMassage?.categoryType ?? .normal,
+                            createdAt: chatRoom.lastMassage?.createdAt ?? "",
+                            senderId: chatRoom.lastMassage?.senderId ?? 0 
+                        ),
                         unreadMessageCount: chatRoom.unreadMessageCount
                     )
                 }

@@ -63,7 +63,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         cancellables.removeAll() // 모든 구독 해제
     }
 
-    // NotificationCenter에서 메시지 알림 구독
+    /// NotificationCenter에서 메시지 알림 구독
     func subscribeToNotifications() {
         NotificationCenter.default.publisher(for: .didReceiveMessage)
             .sink { [weak self] notification in

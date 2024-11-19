@@ -29,10 +29,10 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
     let isAdmin: Bool
     let participantCount: Int32
     let createdAt: String?
-    let lastMessage: LastMessageData?
+    let lastMessage: GetMessage?
     let unreadMessageCount: Int64
 
-    public init(id: Int64, title: String, description: String, backgroundImageUrl: String, isPrivate: Bool, isAdmin: Bool, participantCount: Int32, createdAt: String?, lastMessage: LastMessageData, unreadMessageCount: Int64) {
+    init(id: Int64, title: String, description: String, backgroundImageUrl: String, isPrivate: Bool, isAdmin: Bool, participantCount: Int32, createdAt: String?, lastMessage: GetMessage, unreadMessageCount: Int64) {
         self.id = id
         self.title = title
         self.description = description
@@ -54,12 +54,12 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
         let completeBackgroundImageUrl = createFullURL(with: cdnUrl, pathComponent: dto.backgroundImageUrl)
 
         // lastMessage가 nil일 경우 기본 LastMessage 생성
-        let defaultLastMessage = LastMessage(
+        let defaultLastMessage = Message(
             chatRoomId: 0,
             chatId: 0,
             content: "",
-            contentType: "",
-            categoryType: "",
+            contentType: ContentType.text,
+            categoryType: CategoryType.normal,
             createdAt: "",
             senderId: 0
         )
@@ -73,7 +73,7 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
             isAdmin: dto.isAdmin,
             participantCount: dto.participantCount,
             createdAt: dto.createdAt ?? "",
-            lastMassage: dto.lastMessage != nil ? LastMessage(
+            lastMassage: dto.lastMessage != nil ? Message(
                 chatRoomId: dto.lastMessage!.chatRoomId,
                 chatId: dto.lastMessage!.chatId,
                 content: dto.lastMessage!.content,
@@ -84,16 +84,4 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
             ) : defaultLastMessage,
             unreadMessageCount: dto.unreadMessageCount)
     }
-}
-
-// MARK: - LastMessageData
-
-public struct LastMessageData: Codable {
-    let chatRoomId: Int64
-    let chatId: Int64
-    let content: String
-    let contentType: String
-    let categoryType: String
-    let createdAt: String
-    let senderId: Int64
 }

@@ -5,7 +5,7 @@
 //  Created by 아우신얀 on 10/9/24.
 //
 
-import Foundation
+import Combine
 import UIKit
 
 // MARK: - GetChatRoomViewModelInput
@@ -14,6 +14,7 @@ protocol GetChatRoomViewModelInput {
     func getChatRoom()
     func searchChatRoom(target: String)
     func initSearch()
+    func subscribeToNotifications()
 }
 
 // MARK: - GetChatRoomViewModelOutput
@@ -40,6 +41,7 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
     private var currentPageNumber: Int = 0
     var hasNext: Bool = true // 다음 페이지가 있는지 여부
     var isFetching: Bool = false // API 호출 중인지 여부를 나타내는 플래그
+    private var cancellables = Set<AnyCancellable>()
 
     /// 검색 초기화
     func initSearch() {
