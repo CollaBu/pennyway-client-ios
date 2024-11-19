@@ -315,6 +315,10 @@
 		4AF3A2FF2CD9379F0099967F /* ChatRoomAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */; };
 		4AF3A3022CD938310099967F /* ChatRoomRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A3012CD938310099967F /* ChatRoomRouter.swift */; };
 		4AF3A3042CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */; };
+		4AF5D10D2CEC718A004EC203 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5D1092CEC7189004EC203 /* Debug.xcconfig */; };
+		4AF5D10E2CEC718A004EC203 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5D10A2CEC7189004EC203 /* Release.xcconfig */; };
+		4AF5D10F2CEC718A004EC203 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5D10B2CEC7189004EC203 /* Secrets.xcconfig */; };
+		4AF5D1112CEC7192004EC203 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5D1102CEC7192004EC203 /* GoogleService-Info.plist */; };
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
 		4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */; };
 		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
@@ -781,6 +785,10 @@
 		4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomAlamofire.swift; sourceTree = "<group>"; };
 		4AF3A3012CD938310099967F /* ChatRoomRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRouter.swift; sourceTree = "<group>"; };
 		4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRoomDetailResponseDto.swift; sourceTree = "<group>"; };
+		4AF5D1092CEC7189004EC203 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4AF5D10A2CEC7189004EC203 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4AF5D10B2CEC7189004EC203 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		4AF5D1102CEC7192004EC203 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
@@ -2537,6 +2545,16 @@
 				4AF3A2F62CD931CE0099967F /* ChatRoomDetailItemModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4AF5D10C2CEC7189004EC203 /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				4AF5D1092CEC7189004EC203 /* Debug.xcconfig */,
+				4AF5D10A2CEC7189004EC203 /* Release.xcconfig */,
+				4AF5D10B2CEC7189004EC203 /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
 			sourceTree = "<group>";
 		};
 		B599E4BA2C58AE72006051E9 /* Analytics */ = {

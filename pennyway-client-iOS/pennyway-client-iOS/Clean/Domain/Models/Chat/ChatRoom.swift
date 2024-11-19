@@ -18,5 +18,18 @@ struct ChatRoom: Equatable, Identifiable {
     let isAdmin: Bool
     let participantCount: Int32
     let createdAt: String
+    let lastMassage: LastMessage?
     let unreadMessageCount: Int64
+}
+
+// MARK: - LastMessage
+
+struct LastMessage: Equatable {
+    let chatRoomId: Int64
+    let chatId: Int64
+    let content: String
+    let contentType: String
+    let categoryType: String
+    let createdAt: String
+    let senderId: Int64
 }

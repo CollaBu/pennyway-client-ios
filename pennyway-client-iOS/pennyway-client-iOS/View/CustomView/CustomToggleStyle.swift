@@ -41,6 +41,7 @@ struct CustomToggleStyle: ToggleStyle {
     @Binding var hasAppeared: Bool
     var size: ToggleSize
 
+    var activeAnimation = false // 채팅 사이드 메뉴에서만 사용
     var onColor = Color("Mint03")
     var offColor = Color("Gray05")
     var thumbColor = Color("White01")

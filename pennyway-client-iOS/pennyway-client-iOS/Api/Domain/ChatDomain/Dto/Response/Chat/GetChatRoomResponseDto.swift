@@ -53,7 +53,36 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
         // 이미지 url을 http형식으로 변환
         let completeBackgroundImageUrl = createFullURL(with: cdnUrl, pathComponent: dto.backgroundImageUrl)
 
-        return ChatRoom(id: dto.id, title: dto.title, description: dto.description, background_image_url: completeBackgroundImageUrl, isPrivate: dto.isPrivate, isAdmin: dto.isAdmin, participantCount: dto.participantCount, createdAt: dto.createdAt ?? "", unreadMessageCount: dto.unreadMessageCount)
+        // lastMessage가 nil일 경우 기본 LastMessage 생성
+        let defaultLastMessage = LastMessage(
+            chatRoomId: 0,
+            chatId: 0,
+            content: "",
+            contentType: "",
+            categoryType: "",
+            createdAt: "",
+            senderId: 0
+        )
+
+        return ChatRoom(
+            id: dto.id,
+            title: dto.title,
+            description: dto.description,
+            background_image_url: completeBackgroundImageUrl,
+            isPrivate: dto.isPrivate,
+            isAdmin: dto.isAdmin,
+            participantCount: dto.participantCount,
+            createdAt: dto.createdAt ?? "",
+            lastMassage: dto.lastMessage != nil ? LastMessage(
+                chatRoomId: dto.lastMessage!.chatRoomId,
+                chatId: dto.lastMessage!.chatId,
+                content: dto.lastMessage!.content,
+                contentType: dto.lastMessage!.contentType,
+                categoryType: dto.lastMessage!.categoryType,
+                createdAt: dto.lastMessage!.createdAt,
+                senderId: dto.lastMessage!.senderId
+            ) : defaultLastMessage,
+            unreadMessageCount: dto.unreadMessageCount)
     }
 }
 
