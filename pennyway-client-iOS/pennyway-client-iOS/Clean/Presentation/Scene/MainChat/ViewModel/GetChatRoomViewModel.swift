@@ -71,7 +71,6 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
                 // 메시지 받은 경우 처리
                 if let message = notification.object as? MessageItemModel {
                     if let index = self?.roomData.value.firstIndex(where: { $0.id == message.chatRoomId }) {
-
                         // 해당 roomData의 lastMassage를 업데이트
                         self?.roomData.value[index].lastMassage = message
                         self?.roomData.value[index].unreadMessageCount += 1

@@ -47,9 +47,12 @@ class AppViewModel: ObservableObject {
 
     func registDeviceTokenApi() {
         if let fcmToken = AppDelegate.currentFCMToken {
-            let fcmTokenDto = FcmTokenDto(token: fcmToken)
+//            let fcmTokenDto = FcmTokenDto(token: fcmToken)
+            let deviceName = DeviceInfoManager.getDeviceModelName()
+            let deviceId = DeviceInfoManager.getDeviceId()
+            let deviceInfoDto = DeviceInfoDto(token: fcmToken, deviceId: deviceId, deviceName: deviceName)
 
-            UserAccountAlamofire.shared.registDeviceToken(fcmTokenDto) { result in
+            UserAccountAlamofire.shared.registDeviceToken(deviceInfoDto) { result in
                 switch result {
                 case let .success(data):
                     if let responseData = data {
