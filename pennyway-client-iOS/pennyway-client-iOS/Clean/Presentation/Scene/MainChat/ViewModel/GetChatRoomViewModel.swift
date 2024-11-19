@@ -15,6 +15,7 @@ protocol GetChatRoomViewModelInput {
     func searchChatRoom(target: String)
     func initSearch()
     func subscribeToNotifications()
+    func unsubscribeFromNotifications()
 }
 
 // MARK: - GetChatRoomViewModelOutput
@@ -51,12 +52,33 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
         hasNext = true
     }
 
+    func unsubscribeFromNotifications() {
+        cancellables.removeAll() // 모든 구독 해제
+    }
+
     init(getChatRoomUseCase: GetChatRoomUseCase, searchChatRoomUseCase: SearchChatRoomUseCase) {
         self.getChatRoomUseCase = getChatRoomUseCase
         self.searchChatRoomUseCase = searchChatRoomUseCase
 
         roomData = Observable([])
         searchRoomData = Observable([])
+    }
+
+    /// NotificationCenter에서 메시지 알림 구독
+    func subscribeToNotifications() {
+        NotificationCenter.default.publisher(for: .didReceiveMessage)
+            .sink { [weak self] notification in
+                // 메시지 받은 경우 처리
+                if let message = notification.object as? MessageItemModel {
+                    if let index = self?.roomData.value.firstIndex(where: { $0.id == message.chatRoomId }) {
+
+                        // 해당 roomData의 lastMassage를 업데이트
+                        self?.roomData.value[index].lastMassage = message
+                        self?.roomData.value[index].unreadMessageCount += 1
+                    }
+                }
+            }
+            .store(in: &cancellables) // 구독 관리
     }
 
     /// 내 채팅방 조회 요청

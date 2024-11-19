@@ -109,6 +109,7 @@ struct ChatCellView: View {
             .onDisappear {
                 viewModelWrapper.searchChatData = []
                 viewModelWrapper.getChatRoomViewModel.initSearch()
+                viewModelWrapper.getChatRoomViewModel.unsubscribeFromNotifications()
                 viewModelWrapper.searchQuery = ""
                 chatRoomName = ""
             }
