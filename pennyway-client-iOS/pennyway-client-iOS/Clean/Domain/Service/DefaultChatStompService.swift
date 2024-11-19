@@ -35,7 +35,11 @@ class DefaultChatStompService {
         repository.disconnect()
     }
     
-    func sendMessage(message: String, destination: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        repository.sendMessage(message: message, destination: destination, contentType: contentType, completion: completion)
+    func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        repository.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, completion: completion)
+    }
+    
+    func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
+        repository.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: lastReadMessageId, completion: completion)
     }
 }

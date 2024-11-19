@@ -158,7 +158,7 @@ struct TotalTargetAmountView: View {
 
     private func setOffset(offset: CGFloat) -> some View {
         DispatchQueue.main.async {
-            if updateCount < 2 {
+            if updateCount < 4 {
                 updateCount += 1
             } else if initialOffset == 0 {
                 initialOffset = offset
