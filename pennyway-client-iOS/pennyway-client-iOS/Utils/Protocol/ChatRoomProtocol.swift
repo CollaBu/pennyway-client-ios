@@ -13,6 +13,6 @@ protocol ChatRoomProtocol {
     var isPrivate: Bool { get }
     var participantCount: Int32 { get }
     var backgroundImageUrl: String { get }
-    var lastMassage: LastMessage? { get }
+    var lastMassage: MessageItemModel? { get }
     var unreadMessageCount: Int64 { get }
 }

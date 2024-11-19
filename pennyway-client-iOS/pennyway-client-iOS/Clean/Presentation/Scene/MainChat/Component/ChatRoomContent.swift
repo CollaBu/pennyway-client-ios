@@ -141,7 +141,7 @@ struct ChatRoomCell: View, ImageLoadable {
                             
                         // 내 채팅인 경우 categoryType이 NORMAL인 경우만 뷰에 표시되도록 함
                         if isMyChat {
-                            Text(chatRoom.lastMassage?.categoryType == "NORMAL" ? chatRoom.lastMassage?.content ?? "" : "")
+                            Text(chatRoom.lastMassage?.categoryType == CategoryType.normal ? chatRoom.lastMassage?.content ?? "" : "")
                                 .font(.B3MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
                         } else {
