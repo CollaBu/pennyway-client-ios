@@ -37,7 +37,9 @@ class DefaultGetChatRoomUseCase: GetChatRoomUseCase {
                         backgroundImageUrl: chatRoom.background_image_url,
                         isPrivate: chatRoom.isPrivate,
                         isAdmin: chatRoom.isAdmin,
-                        participantCount: chatRoom.participantCount
+                        participantCount: chatRoom.participantCount,
+                        lastMassage: chatRoom.lastMassage,
+                        unreadMessageCount: chatRoom.unreadMessageCount
                     )
                 }
                 Log.debug("[GetChatRoomUseCase] 내 채팅 조회 성공")

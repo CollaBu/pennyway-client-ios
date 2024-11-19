@@ -16,4 +16,6 @@ struct SearchChatRoomItemModel: Equatable, Identifiable, ChatRoomProtocol {
     var isPrivate: Bool
     var backgroundImageUrl: String
     var participantCount: Int32
+    var lastMassage: LastMessage?
+    var unreadMessageCount: Int64
 }
