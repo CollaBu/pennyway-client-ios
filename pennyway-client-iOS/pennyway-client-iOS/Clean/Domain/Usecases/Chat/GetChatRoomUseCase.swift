@@ -37,7 +37,17 @@ class DefaultGetChatRoomUseCase: GetChatRoomUseCase {
                         backgroundImageUrl: chatRoom.background_image_url,
                         isPrivate: chatRoom.isPrivate,
                         isAdmin: chatRoom.isAdmin,
-                        participantCount: chatRoom.participantCount
+                        participantCount: chatRoom.participantCount,
+                        lastMassage: MessageItemModel(
+                            chatRoomId: chatRoom.lastMassage?.chatRoomId ?? 0,
+                            chatId: chatRoom.lastMassage?.chatId ?? 0,
+                            content: chatRoom.lastMassage?.content ?? "",
+                            contentType: chatRoom.lastMassage?.contentType ?? .text,
+                            categoryType: chatRoom.lastMassage?.categoryType ?? .normal,
+                            createdAt: chatRoom.lastMassage?.createdAt ?? "",
+                            senderId: chatRoom.lastMassage?.senderId ?? 0 
+                        ),
+                        unreadMessageCount: chatRoom.unreadMessageCount
                     )
                 }
                 Log.debug("[GetChatRoomUseCase] 내 채팅 조회 성공")

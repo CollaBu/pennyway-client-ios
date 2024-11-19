@@ -27,7 +27,7 @@ struct ChatReceiveCell: View, ImageLoadable {
                     .cornerRadius(3)
             } else {
                 // 이미지가 없을 경우 기본 이미지
-                Image("icon_illust_chat_no picture")
+                Image("icon_chat_no profile picture_square")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 27 * DynamicSizeFactor.factor(), height: 27 * DynamicSizeFactor.factor())
@@ -47,8 +47,10 @@ struct ChatReceiveCell: View, ImageLoadable {
         }
         .padding(.horizontal, 20)
         .onAppear {
-            loadImage(from: sender.profileImage ?? "") { image in
-                self.loadedImage = image
+            if sender.profileImage != "" {
+                loadImage(from: sender.profileImage ?? "") { image in
+                    self.loadedImage = image
+                }
             }
         }
     }

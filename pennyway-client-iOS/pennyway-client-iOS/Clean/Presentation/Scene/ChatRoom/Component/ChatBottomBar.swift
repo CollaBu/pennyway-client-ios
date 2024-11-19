@@ -121,7 +121,7 @@ struct ChatBottomBar: View {
             Spacer()
             if !message.isEmpty {
                 Button(action: {
-                    viewModelWrapper.chatRoomViewModel.sendMessage(message: message, destination: viewModelWrapper.roomData?.id ?? 0, contentType: ContentType.text.rawValue)
+                    viewModelWrapper.chatRoomViewModel.sendMessage(message: message, chatRoomId: viewModelWrapper.roomData?.id ?? 0, contentType: ContentType.text.rawValue)
                     message = ""
                 }) {
                     Image("icon_send_filled_primary")

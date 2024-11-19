@@ -11,7 +11,8 @@ import Foundation
 
 /// 채팅방 검색 usecase를 정의하는 프로토콜
 protocol SearchChatRoomUseCase {
-    func execute(target: String, page: Int, completion: @escaping (Bool, [SearchChatRoomItemModel]?) -> Void)
+    func execute(target: String, page: Int, completion: @escaping (Bool, [SearchChatRoomItemModel]?, Bool) -> Void)
+    func resetPage() // 페이지 초기화 메서드 추가
 }
 
 // MARK: - DefaultSearchChatRoomUseCase
@@ -23,12 +24,12 @@ class DefaultSearchChatRoomUseCase: SearchChatRoomUseCase {
         self.searchChatRoomRepository = searchChatRoomRepository
     }
 
-    func execute(target: String, page: Int, completion: @escaping (Bool, [SearchChatRoomItemModel]?) -> Void) {
+    func execute(target: String, page: Int, completion: @escaping (Bool, [SearchChatRoomItemModel]?, Bool) -> Void) {
         let searchModel = SearchChatRoom(target: target, page: page)
 
         searchChatRoomRepository.execute(model: searchModel) { result in
             switch result {
-            case let .success(chatRooms):
+            case let .success(chatRooms, hasNext):
                 // ChatRoom 데이터를 SearchChatRoomItemModel로 변환
                 let chatRoomItemModels = chatRooms.map { chatRoom in
                     return SearchChatRoomItemModel(
@@ -36,16 +37,22 @@ class DefaultSearchChatRoomUseCase: SearchChatRoomUseCase {
                         title: chatRoom.title,
                         description: chatRoom.description, 
                         isPrivate: chatRoom.isPrivate,
-                        backgroundImageUrl: chatRoom.background_image_url,
-                        participantCount: chatRoom.participantCount)
+                        backgroundImageUrl: chatRoom.backgroundImageUrl,
+                        participantCount: chatRoom.participantCount,
+                        unreadMessageCount: chatRoom.unreadMessageCount
+                    )
                 }
                 Log.debug("[SearchChatRoomUseCase] 채팅 검색 성공")
-                completion(true, chatRoomItemModels)
+                completion(true, chatRoomItemModels, hasNext)
 
             case let .failure(error):
                 Log.debug("[SearchChatRoomUseCase] 채팅 검색 실패: \(error)")
-                completion(false, nil) // 실패 시 false와 nil 전달
+                completion(false, nil, false) 
             }
         }
+    }
+
+    func resetPage() {
+        searchChatRoomRepository.resetPage()
     }
 }

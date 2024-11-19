@@ -17,4 +17,6 @@ struct ChatRoomItemModel: Equatable, Identifiable, ChatRoomProtocol {
     var isPrivate: Bool
     var isAdmin: Bool
     var participantCount: Int32
+    var lastMassage: MessageItemModel?
+    var unreadMessageCount: Int64
 }

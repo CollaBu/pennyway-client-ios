@@ -18,6 +18,7 @@ protocol JoinChatRoomViewModelInput {
 
 protocol JoinChatRoomViewModelOutput {
     var isFormValid: Bool { get set }
+    var isPasswordInvalid: Bool { get set }
 }
 
 // MARK: - JoinChatRoomViewModel
@@ -28,6 +29,7 @@ protocol JoinChatRoomViewModel: JoinChatRoomViewModelInput, JoinChatRoomViewMode
 
 class DefaultJoinChatRoomViewModel: JoinChatRoomViewModel {
     @Published var isFormValid: Bool = false // 버튼 활성화 여부
+    @Published var isPasswordInvalid: Bool = false // 4004 오류 상태 표시
 
     private let joinChatRoomUseCase: JoinChatRoomUseCase
 
@@ -46,11 +48,21 @@ class DefaultJoinChatRoomViewModel: JoinChatRoomViewModel {
             switch result {
             case let .success(chatRoom):
                 Log.debug("[JoinChatRoomViewModel]: 채팅방 가입 성공 - 채팅방 ID: \(chatRoom.id)")
+                self.isPasswordInvalid = false
                 completion(true)
 
             case let .failure(error):
                 Log.fault("[JoinChatRoomViewModel]: 채팅방 가입 실패, 오류: \(error)")
-                completion(false)
+                if let joinChatRoomError = error as? JoinChatRoomError {
+                    switch joinChatRoomError {
+                    case .invalidPassword:
+                        self.isPasswordInvalid = true 
+                        completion(false)
+                    case .other:
+                        self.isPasswordInvalid = false
+                        completion(false)
+                    }
+                }
             }
         }
     }

@@ -9,6 +9,9 @@ struct ErrorCodePopUpView: View {
     let subLabel: String
 
     var body: some View {
+        if showingPopUp {
+            Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+        }
         PopupContent(imageSize: CGSize(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor()), frameHeight: 145 * DynamicSizeFactor.factor(), contentHeight: 70 * DynamicSizeFactor.factor(), titleLabel: titleLabel, subLabel: subLabel, showingPopUp: $showingPopUp)
     }
 }
@@ -66,6 +69,9 @@ extension ErrorCodePopUpView {
                         Text(titleLabel)
                             .platformTextColor(color: Color("Gray07"))
                             .font(.H3SemiboldFont())
+
+                        Spacer().frame(height: 1)
+
                         Text(subLabel)
                             .platformTextColor(color: Color("Gray04"))
                             .font(.B1MediumFont())

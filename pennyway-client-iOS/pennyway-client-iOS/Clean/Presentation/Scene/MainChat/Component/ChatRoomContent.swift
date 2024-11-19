@@ -8,9 +8,10 @@ struct ChatRoomContent: View {
     @Binding var selectedChatRoom: ChatRoomItemModel? // 내 채팅 중 선택된 채팅방을 저장하기 위한 변수
     @Binding var selectedSearchChatRoom: SearchChatRoomItemModel? // 추천 채팅 중 선택된 채팅방을 저장하기 위한 변수
     @Binding var dummyChatRooms: [ChatRoomItemModel]? // 내 채팅의 item을 표시하기 위한 항목
-    @Binding var searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
+    var searchChatRooms: [SearchChatRoomItemModel]? // 추천 채팅 item을 표시하기 위한 항목
     var isMyChat: Bool // 내 채팅 여부
-//    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
+    let target: String // 채팅방 검색어를 나타내는 항목
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
     var body: some View {
         ScrollView {
@@ -38,6 +39,18 @@ struct ChatRoomContent: View {
                                     isPopUp = true
                                 })
                                 .contentShape(Rectangle())
+                                .onAppear {
+                                    guard let index = rooms.firstIndex(where: { $0.id == chatRoom.id }) else {
+                                        return
+                                    }
+                                    // 현재 항목이 마지막 인덱스에 도달했을 때만 API 호출
+                                    if index == rooms.count - 1, viewModelWrapper.getChatRoomViewModel.hasNext, !viewModelWrapper.getChatRoomViewModel.isFetching {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                            viewModelWrapper.getChatRoomViewModel.searchChatRoom(target: target)
+                                        }
+                                    }
+                                }
+                                
                             })
                         }
                     }
@@ -117,7 +130,7 @@ struct ChatRoomCell: View, ImageLoadable {
                                 Spacer()
                                 // TODO: 채팅방에 마지막으로 접속한 날짜 -> 웹 소켓 연결 후 수정 필요
                                 VStack(alignment: .trailing) {
-                                    Text("어제")
+                                    Text(DateFormatterUtil.formatRelativeDate(from: chatRoom.lastMassage?.createdAt ?? ""))
                                         .font(.B3MediumFont())
                                         .platformTextColor(color: Color("Gray04"))
                                 }
@@ -126,13 +139,20 @@ struct ChatRoomCell: View, ImageLoadable {
                             
                         Spacer().frame(height: 4 * DynamicSizeFactor.factor())
                             
-                        Text(chatRoom.description)
-                            .font(.B3MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
+                        // 내 채팅인 경우 categoryType이 NORMAL인 경우만 뷰에 표시되도록 함
+                        if isMyChat {
+                            Text(chatRoom.lastMassage?.categoryType == CategoryType.normal ? chatRoom.lastMassage?.content ?? "" : "")
+                                .font(.B3MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                        } else {
+                            Text(chatRoom.description)
+                                .font(.B3MediumFont())
+                                .platformTextColor(color: Color("Gray07"))
+                        }
                             
                         Spacer().frame(height: 3 * DynamicSizeFactor.factor())
-                            
-                        Text("\(chatRoom.participantCount)")
+                        
+                        Text("\(chatRoom.participantCount)명")
                             .font(.B3MediumFont())
                             .platformTextColor(color: Color("Gray04"))
                             .padding(1)
@@ -140,26 +160,24 @@ struct ChatRoomCell: View, ImageLoadable {
                     .frame(maxWidth: .infinity, alignment: .leading)
                         
                     if isMyChat {
-                        // TODO: 읽지 않은 채팅방 수 -> 웹 소켓 연결 후 수정 필요
-                        // if chatRoom.notify_enabled {
-                        ZStack {
-                            Text("24")
-                                .font(.B3MediumFont())
-                                .platformTextColor(color: Color("White01"))
-                                .padding(.vertical, 3 * DynamicSizeFactor.factor())
-                                .padding(.horizontal, 4 * DynamicSizeFactor.factor())
-                                .background(Rectangle()
-                                    .cornerRadius(12)
-                                    .platformTextColor(color: Color("Mint03")))
+                        if chatRoom.unreadMessageCount > 0 {
+                            ZStack {
+                                Text("\(chatRoom.unreadMessageCount)")
+                                    .font(.B3MediumFont())
+                                    .platformTextColor(color: Color("White01"))
+                                    .padding(.vertical, 3 * DynamicSizeFactor.factor())
+                                    .padding(.horizontal, 4 * DynamicSizeFactor.factor())
+                                    .background(Rectangle()
+                                        .cornerRadius(12)
+                                        .platformTextColor(color: Color("Mint03")))
+                            }
+                            .offset(x: 105 * DynamicSizeFactor.factor(), y: 10 * DynamicSizeFactor.factor())
                         }
-                        .offset(x: 105 * DynamicSizeFactor.factor(), y: 10 * DynamicSizeFactor.factor())
                     }
-                    // }
                 }
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 20)
-
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
             .offset(x: offset)

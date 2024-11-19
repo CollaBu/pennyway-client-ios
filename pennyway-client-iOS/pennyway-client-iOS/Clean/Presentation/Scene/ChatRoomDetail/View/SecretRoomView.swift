@@ -2,8 +2,11 @@
 import SwiftUI
 
 struct SecretRoomView: View {
+    let chatRoom: SearchChatRoomItemModel?
     let chatRoomId: Int64
     @State private var password = ""
+    @State private var isPasswordMatch = false // 비밀번호 일치 여부를 관리하는 변수
+    @State private var isNavigateToChatRoom = false
 
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
@@ -12,7 +15,7 @@ struct SecretRoomView: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 36 * DynamicSizeFactor.factor())
 
-                Text("비밀번호를\n입력해 주세요")
+                Text("비밀번호를\n입력해주세요")
                     .font(.H1SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
 
@@ -37,6 +40,14 @@ struct SecretRoomView: View {
                     viewModelWrapper.joinChatRoomViewModel.validatePwForm(password: password)
                 }
 
+            if isPasswordMatch {
+                Spacer().frame(height: 12)
+
+                Text("비밀번호가 잘못 입력되었어요")
+                    .font(.B1MediumFont())
+                    .platformTextColor(color: Color("Red03"))
+                    .padding(.horizontal, 20)
+            }
             Spacer()
 
             CustomBottomButton(action: {
@@ -44,15 +55,25 @@ struct SecretRoomView: View {
                     viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: password) { success in
                         if success {
                             Log.debug("[SecretRoomView]: 채팅방 가입 성공")
+                            isNavigateToChatRoom = true
                         } else {
+                            if viewModelWrapper.joinChatRoomViewModel.isPasswordInvalid {
+                                isPasswordMatch = true
+                            }
                             Log.debug("[SecretRoomView]: 채팅방 가입 실패")
                         }
                     }
                 }
-            }, label: "다음", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
+            }, label: "채팅 참여하기", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
+            NavigationLink(
+                destination: ChatRoomView(chatRoom: chatRoom!),
+                isActive: $isNavigateToChatRoom
+            ) {}
+                .hidden()
         }
-        .navigationBarColor(UIColor(named: "White01"), title: "배달음식 그만 먹는 방")
+        .navigationBarColor(UIColor(named: "White01"), title: "\(chatRoom?.title ?? "")")
         .edgesIgnoringSafeArea(.bottom)
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)

@@ -15,7 +15,7 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewStateManager: ViewStateManager
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
-    var chatRoom: ChatRoomItemModel
+    var chatRoom: ChatRoomProtocol
     private let currentUserId = getUserData()!.id
 
     var body: some View {
@@ -63,20 +63,30 @@ struct ChatRoomView: View {
                     }.offset(x: 10)
                 }
             }
-            .overlay(
-                Group {
-                    if isSideMenuPresented {
-                        ChatSideMenuView(isPresented: $isSideMenuPresented)
-                            .transition(.move(edge: .trailing))
-                    }
-                }
-            )
             .onAppear {
                 viewStateManager.setCurrentView(self)
-                viewModelWrapper.roomData = chatRoom // 현재 채팅방 정보 저장
+                viewModelWrapper.chatRoomViewModel.roomData.value = chatRoom // 현재 채팅방 정보 저장
 
                 // 채팅방 상세 정보 조회
-                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
+                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: Int64(chatRoom.id))
+                viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
+            }
+            .onDisappear {
+                viewModelWrapper.chatRoomViewModel.reset()
+            }
+
+            if isSideMenuPresented {
+                Color.black.opacity(0.3)
+                    .edgesIgnoringSafeArea(.all)
+                    .transition(.opacity)
+                    .onTapGesture {
+                        withAnimation {
+                            isSideMenuPresented = false
+                        }
+                    }
+                ChatSideMenuView()
+                    .transition(.move(edge: .trailing))
+                    .animation(.easeInOut(duration: 0.3))
             }
         }
     }
@@ -85,10 +95,11 @@ struct ChatRoomView: View {
 // MARK: - ChatRoomViewModelWrapper
 
 final class ChatRoomViewModelWrapper: ObservableObject {
-    @Published var roomData: ChatRoomItemModel? = nil
+    @Published var roomData: ChatRoomProtocol? = nil
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
     @Published var messageData: [MessageItemModel] = []
     @Published var chatUserData: [ChatMemberItemModel] = []
+    @Published var previousMessageData: PreviousMessage? = nil
 
     var chatRoomViewModel: any ChatRoomViewModel
 
@@ -99,6 +110,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
         roomDetailData = chatRoomViewModel.roomDetailData.value
         messageData = chatRoomViewModel.messageData.value
         chatUserData = chatRoomViewModel.chatUserData.value
+        previousMessageData = chatRoomViewModel.previousMessageData.value
 
         chatRoomViewModel.roomData.observe(on: self) { [weak self] newData in
             self?.roomData = newData
@@ -114,6 +126,10 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         chatRoomViewModel.chatUserData.observe(on: self) { [weak self] newData in
             self?.chatUserData = newData
+        }
+
+        chatRoomViewModel.previousMessageData.observe(on: self) { [weak self] newData in
+            self?.previousMessageData = newData
         }
     }
 }
