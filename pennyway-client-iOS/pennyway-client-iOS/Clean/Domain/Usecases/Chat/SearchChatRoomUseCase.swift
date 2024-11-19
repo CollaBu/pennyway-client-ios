@@ -38,7 +38,9 @@ class DefaultSearchChatRoomUseCase: SearchChatRoomUseCase {
                         description: chatRoom.description, 
                         isPrivate: chatRoom.isPrivate,
                         backgroundImageUrl: chatRoom.backgroundImageUrl,
-                        participantCount: chatRoom.participantCount)
+                        participantCount: chatRoom.participantCount,
+                        unreadMessageCount: chatRoom.unreadMessageCount
+                    )
                 }
                 Log.debug("[SearchChatRoomUseCase] 채팅 검색 성공")
                 completion(true, chatRoomItemModels, hasNext)

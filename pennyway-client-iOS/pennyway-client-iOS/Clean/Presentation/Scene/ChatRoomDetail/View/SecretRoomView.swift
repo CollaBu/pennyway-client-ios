@@ -6,6 +6,7 @@ struct SecretRoomView: View {
     let chatRoomId: Int64
     @State private var password = ""
     @State private var isPasswordMatch = false // 비밀번호 일치 여부를 관리하는 변수
+    @State private var isNavigateToChatRoom = false
 
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
@@ -54,6 +55,7 @@ struct SecretRoomView: View {
                     viewModelWrapper.joinChatRoomViewModel.joinChatRoom(chatRoomId: chatRoomId, password: password) { success in
                         if success {
                             Log.debug("[SecretRoomView]: 채팅방 가입 성공")
+                            isNavigateToChatRoom = true
                         } else {
                             if viewModelWrapper.joinChatRoomViewModel.isPasswordInvalid {
                                 isPasswordMatch = true
@@ -64,6 +66,12 @@ struct SecretRoomView: View {
                 }
             }, label: "채팅 참여하기", isFormValid: $viewModelWrapper.joinChatRoomViewModel.isFormValid)
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
+
+            NavigationLink(
+                destination: ChatRoomView(chatRoom: chatRoom!),
+                isActive: $isNavigateToChatRoom
+            ) {}
+                .hidden()
         }
         .navigationBarColor(UIColor(named: "White01"), title: "\(chatRoom?.title ?? "")")
         .edgesIgnoringSafeArea(.bottom)

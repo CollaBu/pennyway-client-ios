@@ -71,7 +71,9 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
                                 backgroundImageUrl: chatRoomDetail.backgroundImageUrl,
                                 isPrivate: chatRoomDetail.isPrivate,
                                 isAdmin: chatRoomDetail.isAdmin,
-                                participantCount: chatRoomDetail.participantCount
+                                participantCount: chatRoomDetail.participantCount,
+                                lastMassage: chatRoomDetail.lastMassage,
+                                unreadMessageCount: chatRoomDetail.unreadMessageCount
                             )
                         }
                         Log.debug("[ChatViewModel]: 내 채팅방 조회 성공")

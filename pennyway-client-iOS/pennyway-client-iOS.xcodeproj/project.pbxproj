@@ -52,10 +52,6 @@
 		4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
-		4A23E7BC2CE871F5006FD4E2 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A23E7B82CE871F5006FD4E2 /* Debug.xcconfig */; };
-		4A23E7BD2CE871F5006FD4E2 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A23E7B92CE871F5006FD4E2 /* Release.xcconfig */; };
-		4A23E7BE2CE871F5006FD4E2 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A23E7BA2CE871F5006FD4E2 /* Secrets.xcconfig */; };
-		4A23E7C02CE871F9006FD4E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A23E7BF2CE871F9006FD4E2 /* GoogleService-Info.plist */; };
 		4A23E7C22CE874E5006FD4E2 /* GetChatMembersRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A23E7C12CE874E5006FD4E2 /* GetChatMembersRequestDto.swift */; };
 		4A23E7C42CE8771C006FD4E2 /* GetChatMembersReponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A23E7C32CE8771C006FD4E2 /* GetChatMembersReponseDto.swift */; };
 		4A2881FA2C64CC1200AE50C7 /* MoveCategoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2881F92C64CC1200AE50C7 /* MoveCategoryRequestDto.swift */; };
@@ -319,6 +315,10 @@
 		4AF3A2FF2CD9379F0099967F /* ChatRoomAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */; };
 		4AF3A3022CD938310099967F /* ChatRoomRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A3012CD938310099967F /* ChatRoomRouter.swift */; };
 		4AF3A3042CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */; };
+		4AF5D10D2CEC718A004EC203 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5D1092CEC7189004EC203 /* Debug.xcconfig */; };
+		4AF5D10E2CEC718A004EC203 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5D10A2CEC7189004EC203 /* Release.xcconfig */; };
+		4AF5D10F2CEC718A004EC203 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5D10B2CEC7189004EC203 /* Secrets.xcconfig */; };
+		4AF5D1112CEC7192004EC203 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5D1102CEC7192004EC203 /* GoogleService-Info.plist */; };
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
 		4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */; };
 		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
@@ -522,10 +522,6 @@
 		4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSpendingRow.swift; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
-		4A23E7B82CE871F5006FD4E2 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4A23E7B92CE871F5006FD4E2 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4A23E7BA2CE871F5006FD4E2 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		4A23E7BF2CE871F9006FD4E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A23E7C12CE874E5006FD4E2 /* GetChatMembersRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatMembersRequestDto.swift; sourceTree = "<group>"; };
 		4A23E7C32CE8771C006FD4E2 /* GetChatMembersReponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatMembersReponseDto.swift; sourceTree = "<group>"; };
 		4A2881F92C64CC1200AE50C7 /* MoveCategoryRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveCategoryRequestDto.swift; sourceTree = "<group>"; };
@@ -785,6 +781,10 @@
 		4AF3A2FE2CD9379F0099967F /* ChatRoomAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomAlamofire.swift; sourceTree = "<group>"; };
 		4AF3A3012CD938310099967F /* ChatRoomRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRouter.swift; sourceTree = "<group>"; };
 		4AF3A3032CD93A6D0099967F /* GetChatRoomDetailResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRoomDetailResponseDto.swift; sourceTree = "<group>"; };
+		4AF5D1092CEC7189004EC203 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4AF5D10A2CEC7189004EC203 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4AF5D10B2CEC7189004EC203 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		4AF5D1102CEC7192004EC203 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
@@ -1430,16 +1430,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4A23E7BB2CE871F5006FD4E2 /* Xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				4A23E7B82CE871F5006FD4E2 /* Debug.xcconfig */,
-				4A23E7B92CE871F5006FD4E2 /* Release.xcconfig */,
-				4A23E7BA2CE871F5006FD4E2 /* Secrets.xcconfig */,
-			);
-			path = Xcconfig;
-			sourceTree = "<group>";
-		};
 		4A23E7C52CE87720006FD4E2 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1948,8 +1938,8 @@
 		4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4A23E7BF2CE871F9006FD4E2 /* GoogleService-Info.plist */,
-				4A23E7BB2CE871F5006FD4E2 /* Xcconfig */,
+				4AF5D1102CEC7192004EC203 /* GoogleService-Info.plist */,
+				4AF5D10C2CEC7189004EC203 /* Xcconfig */,
 				4A12FEE62C9C47D800DE10BC /* Clean */,
 				B599E4BA2C58AE72006051E9 /* Analytics */,
 				4AE8F3AB2C32AEC30014F0D4 /* App */,
@@ -2539,6 +2529,16 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		4AF5D10C2CEC7189004EC203 /* Xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				4AF5D1092CEC7189004EC203 /* Debug.xcconfig */,
+				4AF5D10A2CEC7189004EC203 /* Release.xcconfig */,
+				4AF5D10B2CEC7189004EC203 /* Secrets.xcconfig */,
+			);
+			path = Xcconfig;
+			sourceTree = "<group>";
+		};
 		B599E4BA2C58AE72006051E9 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -2991,18 +2991,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A23E7BE2CE871F5006FD4E2 /* Secrets.xcconfig in Resources */,
+				4AF5D10F2CEC718A004EC203 /* Secrets.xcconfig in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
-				4A23E7C02CE871F9006FD4E2 /* GoogleService-Info.plist in Resources */,
+				4AF5D1112CEC7192004EC203 /* GoogleService-Info.plist in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
-				4A23E7BD2CE871F5006FD4E2 /* Release.xcconfig in Resources */,
+				4AF5D10E2CEC718A004EC203 /* Release.xcconfig in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
-				4A23E7BC2CE871F5006FD4E2 /* Debug.xcconfig in Resources */,
+				4AF5D10D2CEC718A004EC203 /* Debug.xcconfig in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
@@ -3666,7 +3666,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A23E7B82CE871F5006FD4E2 /* Debug.xcconfig */;
+			baseConfigurationReference = 4AF5D1092CEC7189004EC203 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3714,7 +3714,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A23E7B92CE871F5006FD4E2 /* Release.xcconfig */;
+			baseConfigurationReference = 4AF5D10A2CEC7189004EC203 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
