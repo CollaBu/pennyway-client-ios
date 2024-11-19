@@ -15,7 +15,7 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewStateManager: ViewStateManager
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
-    var chatRoom: ChatRoomItemModel
+    var chatRoom: ChatRoomProtocol
     private let currentUserId = getUserData()!.id
 
     var body: some View {
@@ -68,7 +68,7 @@ struct ChatRoomView: View {
                 viewModelWrapper.roomData = chatRoom // 현재 채팅방 정보 저장
 
                 // 채팅방 상세 정보 조회
-                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
+                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: Int64(chatRoom.id) ?? 0)
             }
             .onDisappear {
                 viewModelWrapper.chatRoomViewModel.reset()
@@ -94,7 +94,7 @@ struct ChatRoomView: View {
 // MARK: - ChatRoomViewModelWrapper
 
 final class ChatRoomViewModelWrapper: ObservableObject {
-    @Published var roomData: ChatRoomItemModel? = nil
+    @Published var roomData: ChatRoomProtocol? = nil
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
     @Published var messageData: [MessageItemModel] = []
     @Published var chatUserData: [ChatMemberItemModel] = []
