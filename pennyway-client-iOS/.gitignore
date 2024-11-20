@@ -7,4 +7,5 @@ fastlane/*.json
 *.dSYM.zip
 *.cer
 *.mobileprovision
+*.env
 
