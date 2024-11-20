@@ -1,0 +1,11 @@
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/*.json
+*.ipa
+*.dSYM.zip
+*.cer
+*.mobileprovision
+*.env
+
