@@ -134,7 +134,7 @@ struct ChatRoomCell: View, ImageLoadable {
                                 Spacer()
                                 // TODO: 채팅방에 마지막으로 접속한 날짜 -> 웹 소켓 연결 후 수정 필요
                                 VStack(alignment: .trailing) {
-                                    Text(DateFormatterUtil.formatRelativeDate(from: chatRoom.lastMassage?.createdAt ?? ""))
+                                    Text(DateFormatterUtil.formatUnReadChatDate(from: chatRoom.lastMassage?.createdAt ?? ""))
                                         .font(.B3MediumFont())
                                         .platformTextColor(color: Color("Gray04"))
                                 }

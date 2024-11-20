@@ -74,4 +74,34 @@ enum DateFormatterUtil {
             return "오늘"
         }
     }
+
+    static func formatUnReadChatDate(from createdAt: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone.current
+
+        guard let date = formatter.date(from: createdAt) else {
+            return createdAt // 변환 실패 시 원본 반환
+        }
+
+        let calendar = Calendar.current
+        let now = Date()
+
+        if calendar.isDateInToday(date) {
+            let components = calendar.dateComponents([.hour, .minute], from: date, to: now)
+            if let minutes = components.minute, minutes < 60 {
+                return "\(minutes)분 전"
+            } else if let hours = components.hour, hours < 24 {
+                return "\(hours)시간 전"
+            }
+        }
+
+        if calendar.isDateInYesterday(date) {
+            return "어제"
+        }
+
+        formatter.dateFormat = "M월 d일"
+        return formatter.string(from: date)
+    }
 }
