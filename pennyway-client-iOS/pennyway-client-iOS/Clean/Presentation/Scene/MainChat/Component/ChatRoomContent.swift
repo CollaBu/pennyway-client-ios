@@ -162,7 +162,7 @@ struct ChatRoomCell: View, ImageLoadable {
                     if isMyChat {
                         if chatRoom.unreadMessageCount > 0 {
                             ZStack {
-                                Text("\(chatRoom.unreadMessageCount)")
+                                Text(chatRoom.unreadMessageCount >= 100 ? "99+" : "\(chatRoom.unreadMessageCount)")
                                     .font(.B3MediumFont())
                                     .platformTextColor(color: Color("White01"))
                                     .padding(.vertical, 3 * DynamicSizeFactor.factor())
