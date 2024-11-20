@@ -24,6 +24,8 @@ struct ChatRoomContent: View {
                                     isPopUp = true
                                     selectedChatRoom = chatRoom
                                 })
+                                .buttonStyle(PlainButtonStyle())
+                                .buttonStyle(BasicButtonStyleUtil())
                             }
                             .transition(.move(edge: .trailing).combined(with: .opacity))
                         }
@@ -52,6 +54,8 @@ struct ChatRoomContent: View {
                                 }
                                 
                             })
+                            .buttonStyle(PlainButtonStyle())
+                            .buttonStyle(BasicButtonStyleUtil())
                         }
                     }
                 }
@@ -95,6 +99,8 @@ struct ChatRoomCell: View, ImageLoadable {
                         .background(Color("Red03"))
                         
                     })
+                    .transition(.opacity)
+                    .opacity(isShowingDeleteButton ? 1 : 0) // 버튼이 보이는 경우에만 완전 표시
                 }
             }
             // 채팅방 셀
@@ -130,7 +136,7 @@ struct ChatRoomCell: View, ImageLoadable {
                                 Spacer()
                                 // TODO: 채팅방에 마지막으로 접속한 날짜 -> 웹 소켓 연결 후 수정 필요
                                 VStack(alignment: .trailing) {
-                                    Text(DateFormatterUtil.formatRelativeDate(from: chatRoom.lastMassage?.createdAt ?? ""))
+                                    Text(DateFormatterUtil.formatUnReadChatDate(from: chatRoom.lastMassage?.createdAt ?? ""))
                                         .font(.B3MediumFont())
                                         .platformTextColor(color: Color("Gray04"))
                                 }
@@ -186,7 +192,7 @@ struct ChatRoomCell: View, ImageLoadable {
                     .onChanged { value in
                         withAnimation {
                             if value.translation.width < 0, isMyChat { // 내 채팅방일 때만 스와이프 가능
-                                offset = max(value.translation.width, -90)
+                                offset = max(value.translation.width, -110)
                                 isShowingDeleteButton = true
                             } else {
                                 offset = 0
@@ -199,9 +205,11 @@ struct ChatRoomCell: View, ImageLoadable {
                             if value.translation.width < -80, isMyChat {
                                 // 스와이프가 80pt 이상이면 삭제 버튼 표시
                                 offset = -90 * DynamicSizeFactor.factor()
+                                isShowingDeleteButton = true
                             } else {
                                 // 그렇지 않으면 원래 위치로 복구
                                 offset = 0
+                                isShowingDeleteButton = false
                             }
                         }
                     }
