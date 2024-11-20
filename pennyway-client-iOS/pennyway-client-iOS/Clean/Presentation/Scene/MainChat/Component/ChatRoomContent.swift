@@ -54,6 +54,8 @@ struct ChatRoomContent: View {
                                 }
                                 
                             })
+                            .buttonStyle(PlainButtonStyle())
+                            .buttonStyle(BasicButtonStyleUtil())
                         }
                     }
                 }
