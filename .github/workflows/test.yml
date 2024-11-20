@@ -6,7 +6,7 @@ on:
   # main 브랜치에 pr을 올리는 경우(main 브랜치에서 분기한 브랜치도 실행된다.)
   pull_request:
     branches: 
-      - 'main'
+      - 'dev'
 
 # workflow가 어떻게 실행될지에 대한 설명(How)
 jobs:
