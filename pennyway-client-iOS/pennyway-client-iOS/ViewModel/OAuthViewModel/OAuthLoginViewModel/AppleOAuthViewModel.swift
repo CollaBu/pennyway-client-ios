@@ -64,7 +64,8 @@ extension AppleOAuthViewModel: ASAuthorizationControllerPresentationContextProvi
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
 
-            let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
+            let deviceId = DeviceInfoManager.getDeviceId()
+            let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider, deviceId: deviceId)
             let oauthLoginViewModel = OAuthLoginViewModel(model: model)
 
             KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)

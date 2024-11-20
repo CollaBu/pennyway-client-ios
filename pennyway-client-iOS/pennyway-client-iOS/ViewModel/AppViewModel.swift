@@ -47,7 +47,6 @@ class AppViewModel: ObservableObject {
 
     func registDeviceTokenApi() {
         if let fcmToken = AppDelegate.currentFCMToken {
-//            let fcmTokenDto = FcmTokenDto(token: fcmToken)
             let deviceName = DeviceInfoManager.getDeviceModelName()
             let deviceId = DeviceInfoManager.getDeviceId()
             let deviceInfoDto = DeviceInfoDto(token: fcmToken, deviceId: deviceId, deviceName: deviceName)

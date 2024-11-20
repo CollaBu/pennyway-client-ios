@@ -14,6 +14,7 @@ struct OAuthLogin: Equatable {
     let idToken: String
     let nonce: String
     let provider: String
+    let deviceId: String
 }
 
 // MARK: - SignUp
@@ -48,6 +49,7 @@ struct LinkOAuthToAccount: Equatable {
     let phone: String
     let code: String
     let provider: String
+    let deviceId: String
 }
 
 // MARK: - LinkAccountToOAuth
@@ -56,4 +58,5 @@ struct LinkAccountToOAuth: Equatable {
     let password: String
     let phone: String
     let code: String
+    let deviceId: String
 }

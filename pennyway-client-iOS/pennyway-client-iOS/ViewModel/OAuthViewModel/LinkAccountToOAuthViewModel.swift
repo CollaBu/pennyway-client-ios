@@ -8,7 +8,7 @@ class LinkAccountToOAuthViewModel: ObservableObject {
     }
 
     func linkAccountToOAuthApi(completion: @escaping (Bool) -> Void) { // 바로 로그인 처리
-        let model = LinkAccountToOAuth(password: RegistrationManager.shared.password, phone: RegistrationManager.shared.formattedPhoneNumber ?? "", code: RegistrationManager.shared.code)
+        let model = LinkAccountToOAuth(password: RegistrationManager.shared.password, phone: RegistrationManager.shared.formattedPhoneNumber ?? "", code: RegistrationManager.shared.code, deviceId: DeviceInfoManager.getDeviceId())
 
         loginUseCase.linkAccountToOAuth(data: model) { success, userId in
             if success {
