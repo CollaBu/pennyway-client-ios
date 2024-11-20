@@ -80,7 +80,7 @@ struct ChatRoomDetailView: View, ImageLoadable {
                         .hidden()
                 } else {
                     NavigationLink(
-                        destination: ChatRoomView(chatRoom: chatRoom!),
+                        destination: ChatRoomView(chatViewModelWrapper: viewModelWrapper, chatRoom: chatRoom!),
                         isActive: $isNavigateToChatRoom
                     ) {}
                         .hidden()
