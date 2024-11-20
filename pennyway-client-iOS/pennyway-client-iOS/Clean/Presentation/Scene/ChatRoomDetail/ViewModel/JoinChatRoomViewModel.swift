@@ -57,6 +57,7 @@ class DefaultJoinChatRoomViewModel: JoinChatRoomViewModel {
                     switch joinChatRoomError {
                     case .invalidPassword:
                         self.isPasswordInvalid = true 
+                        self.isFormValid = false
                         completion(false)
                     case .other:
                         self.isPasswordInvalid = false

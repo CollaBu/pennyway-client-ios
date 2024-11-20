@@ -7,6 +7,7 @@ struct SecretRoomView: View {
     @State private var password = ""
     @State private var isPasswordMatch = false // 비밀번호 일치 여부를 관리하는 변수
     @State private var isNavigateToChatRoom = false
+    @State private var isFirstAttempt = true
 
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
 
@@ -38,6 +39,12 @@ struct SecretRoomView: View {
                         password = String(password.prefix(6))
                     }
                     viewModelWrapper.joinChatRoomViewModel.validatePwForm(password: password)
+                    if !password.isEmpty {
+                        isPasswordMatch = false
+                    }
+                }
+                .onChange(of: isPasswordMatch) { _ in
+                    password = ""
                 }
 
             if isPasswordMatch {
