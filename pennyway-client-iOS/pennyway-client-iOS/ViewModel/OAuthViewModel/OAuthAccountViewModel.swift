@@ -8,7 +8,7 @@ class OAuthAccountViewModel: ObservableObject {
     let profileInfoViewModel = UserAccountViewModel()
 
     func linkOAuthAccountApi(completion: @escaping (Bool) -> Void) {
-        let oauthUserData = OAuthUserData(oauthId: KeychainHelper.loadOAuthUserData()?.oauthId ?? "", idToken: KeychainHelper.loadOAuthUserData()?.idToken ?? "", nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "")
+        let oauthUserData = OAuthUserData(oauthId: KeychainHelper.loadOAuthUserData()?.oauthId ?? "", idToken: KeychainHelper.loadOAuthUserData()?.idToken ?? "", nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "", deviceId: DeviceInfoManager.getDeviceId())
 
         UserAuthAlamofire.shared.linkOAuthAccount(oauthUserData) { result in
             switch result {

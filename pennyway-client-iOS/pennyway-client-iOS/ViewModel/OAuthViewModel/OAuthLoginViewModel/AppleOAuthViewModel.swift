@@ -12,7 +12,7 @@ class AppleOAuthViewModel: NSObject, ObservableObject {
     @Published var isLoginSuccessful = false
 
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
-    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "", deviceId: DeviceInfoManager.getDeviceId())
     let oauthAccountViewModel = OAuthAccountViewModel()
     @Published var isExistUser: Bool = false
 

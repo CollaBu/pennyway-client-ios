@@ -10,7 +10,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var isLoginSuccessful = false
 
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
-    private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "", deviceId: DeviceInfoManager.getDeviceId())
     let oauthAccountViewModel = OAuthAccountViewModel()
     @Published var isExistUser: Bool = false
 
