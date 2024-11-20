@@ -14,6 +14,8 @@ struct ChatRoomView: View {
     @State private var isSideMenuPresented = false
     @EnvironmentObject var viewStateManager: ViewStateManager
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
+    @State private var isNavigateToMyChat = false
+    @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
 
     var chatRoom: ChatRoomProtocol
     private let currentUserId = getUserData()!.id
@@ -38,10 +40,18 @@ struct ChatRoomView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
+                        Button(action: {
+                            isNavigateToMyChat = true
+                        }, label: {
+                            Image("icon_arrow_back")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 34, height: 34)
+                                .padding(5)
+                        })
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
                     }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -88,6 +98,9 @@ struct ChatRoomView: View {
                     .transition(.move(edge: .trailing))
                     .animation(.easeInOut(duration: 0.3))
             }
+
+            NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
+                .hidden()
         }
     }
 }

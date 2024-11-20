@@ -85,8 +85,10 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 if let recentMessages = self?.roomDetailData.value?.recentMessages {
                     self?.messageData.value = recentMessages
 
-                    // 마지막 메시지 id 전달
-                    self?.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: recentMessages[0].chatId)
+                    if !recentMessages.isEmpty {
+                        // 마지막 메시지 id 전달
+                        self?.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: recentMessages[0].chatId)
+                    }
                 }
                 if let recentParticipants = self?.roomDetailData.value?.recentParticipants {
                     if let myInfo = self?.roomDetailData.value?.myInfo {
