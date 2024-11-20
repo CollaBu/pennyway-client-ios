@@ -9,7 +9,8 @@ import Foundation
 
 class DefaultLoginRepository: LoginRepository {
     func login(username: String, password: String, completion: @escaping (Result<AuthResponseData, Error>) -> Void) {
-        let loginDto = LoginRequestDto(username: username, password: password)
+        let deviceId = DeviceInfoManager.getDeviceId()
+        let loginDto = LoginRequestDto(username: username, password: password, deviceId: deviceId)
         AuthAlamofire.shared.login(loginDto) { result in
             switch result {
             case let .success(data):

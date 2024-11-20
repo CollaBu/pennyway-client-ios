@@ -10,7 +10,7 @@ class GoogleOAuthViewModel: ObservableObject {
     @Published var isLoginSuccessful = false
 
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.google ?? false
-    private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    private var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "", deviceId: DeviceInfoManager.getDeviceId())
     let oauthAccountViewModel = OAuthAccountViewModel()
     @Published var isExistUser: Bool = false
 
@@ -47,7 +47,8 @@ class GoogleOAuthViewModel: ObservableObject {
     }
 
     func oauthLoginApi() {
-        let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
+        let deviceId = DeviceInfoManager.getDeviceId()
+        let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider, deviceId: deviceId)
         let oauthLoginViewModel = OAuthLoginViewModel(model: model)
 
         KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)

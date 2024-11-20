@@ -5,7 +5,7 @@ import Foundation
 enum UserAccountRouter: URLRequestConvertible {
     case getUserProfile
     case deleteUserAccount
-    case registDeviceToken(dto: FcmTokenDto)
+    case registDeviceToken(dto: DeviceInfoDto)
     case settingOnAlarm(type: String)
     case settingOffAlarm(type: String)
     case validatePw(dto: ValidatePwRequestDto)

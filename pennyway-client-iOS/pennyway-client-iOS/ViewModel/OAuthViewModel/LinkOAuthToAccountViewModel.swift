@@ -15,7 +15,8 @@ class LinkOAuthToAccountViewModel: ObservableObject {
             nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "",
             phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "",
             code: OAuthRegistrationManager.shared.code,
-            provider: OAuthRegistrationManager.shared.provider
+            provider: OAuthRegistrationManager.shared.provider,
+            deviceId: DeviceInfoManager.getDeviceId()
         )
 
         loginUseCase.linkOAuthToAccount(data: model) { success, userId in

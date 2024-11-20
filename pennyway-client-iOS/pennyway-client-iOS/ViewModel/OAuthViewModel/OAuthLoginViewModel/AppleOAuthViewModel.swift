@@ -12,7 +12,7 @@ class AppleOAuthViewModel: NSObject, ObservableObject {
     @Published var isLoginSuccessful = false
 
     @Published var existOAuthAccount: Bool = getUserData()?.oauthAccount.apple ?? false
-    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "")
+    var oauthUserData = OAuthUserData(oauthId: "", idToken: "", nonce: "", deviceId: DeviceInfoManager.getDeviceId())
     let oauthAccountViewModel = OAuthAccountViewModel()
     @Published var isExistUser: Bool = false
 
@@ -64,7 +64,8 @@ extension AppleOAuthViewModel: ASAuthorizationControllerPresentationContextProvi
             print("User ID : \(userIdentifier)")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
 
-            let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider)
+            let deviceId = DeviceInfoManager.getDeviceId()
+            let model = OAuthLogin(oauthId: oauthUserData.oauthId, idToken: oauthUserData.idToken, nonce: oauthUserData.nonce, provider: OAuthRegistrationManager.shared.provider, deviceId: deviceId)
             let oauthLoginViewModel = OAuthLoginViewModel(model: model)
 
             KeychainHelper.saveOAuthUserData(oauthUserData: oauthUserData)

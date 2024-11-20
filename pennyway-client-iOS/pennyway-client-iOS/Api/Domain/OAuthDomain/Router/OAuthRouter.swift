@@ -38,15 +38,25 @@ enum OAuthRouter: URLRequestConvertible {
     var parameters: Parameters? {
         switch self {
         case let .oauthLogin(dto):
-            return try? dto.asDictionary()
+            var params = try? dto.asDictionary()
+            params?.removeValue(forKey: "provider")
+            return params
         case let .oauthReceiveVerificationCode(dto, _):
-            return try? dto.asDictionary()
+            var params = try? dto.asDictionary()
+            params?.removeValue(forKey: "provider")
+            return params
         case let .oauthVerifyVerificationCode(dto):
-            return try? dto.asDictionary()
+            var params = try? dto.asDictionary()
+            params?.removeValue(forKey: "provider")
+            return params
         case let .linkOAuthToAccount(dto):
-            return try? dto.asDictionary()
+            var params = try? dto.asDictionary()
+            params?.removeValue(forKey: "provider")
+            return params
         case let .oauthSignUp(dto):
-            return try? dto.asDictionary()
+            var params = try? dto.asDictionary()
+            params?.removeValue(forKey: "provider")
+            return params
         }
     }
 
