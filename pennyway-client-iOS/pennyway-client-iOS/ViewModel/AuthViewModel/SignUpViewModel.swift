@@ -8,7 +8,7 @@ class SignUpViewModel: ObservableObject {
     }
 
     func signUp(completion: @escaping (Bool, UserId?) -> Void) {
-        let model = SignUp(name: RegistrationManager.shared.name, username: RegistrationManager.shared.username, password: RegistrationManager.shared.password, phone: RegistrationManager.shared.formattedPhoneNumber ?? "", code: RegistrationManager.shared.code)
+        let model = SignUp(name: RegistrationManager.shared.name, username: RegistrationManager.shared.username, password: RegistrationManager.shared.password, phone: RegistrationManager.shared.formattedPhoneNumber ?? "", code: RegistrationManager.shared.code, deviceId: DeviceInfoManager.getDeviceId())
 
         signUpUseCase.signup(model: model) { success, userId in
             if success {
@@ -22,7 +22,7 @@ class SignUpViewModel: ObservableObject {
     }
 
     func oauthSignUp(completion: @escaping (Bool, UserId?) -> Void) {
-        let model = OAuthSignUp(oauthId: KeychainHelper.loadOAuthUserData()?.oauthId ?? "", idToken: KeychainHelper.loadOAuthUserData()?.idToken ?? "", nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider)
+        let model = OAuthSignUp(oauthId: KeychainHelper.loadOAuthUserData()?.oauthId ?? "", idToken: KeychainHelper.loadOAuthUserData()?.idToken ?? "", nonce: KeychainHelper.loadOAuthUserData()?.nonce ?? "", name: OAuthRegistrationManager.shared.name, username: OAuthRegistrationManager.shared.username, phone: OAuthRegistrationManager.shared.formattedPhoneNumber ?? "", code: OAuthRegistrationManager.shared.code, provider: OAuthRegistrationManager.shared.provider, deviceId: DeviceInfoManager.getDeviceId())
 
         signUpUseCase.oauthSignUp(model: model) { success, userId in
             if success {

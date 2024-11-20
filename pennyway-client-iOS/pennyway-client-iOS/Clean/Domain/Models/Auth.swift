@@ -25,6 +25,7 @@ struct SignUp: Equatable {
     let password: String
     let phone: String
     let code: String
+    let deviceId: String
 }
 
 // MARK: - OAuthSignUp
@@ -38,6 +39,7 @@ struct OAuthSignUp: Equatable {
     let phone: String
     let code: String
     let provider: String
+    let deviceId: String
 }
 
 // MARK: - LinkOAuthToAccount

@@ -9,6 +9,7 @@ public struct OAuthSignUpRequestDto: Encodable {
     let phone: String
     let code: String
     let provider: String
+    let deviceId: String
 
     public init(
         oauthId: String,
@@ -18,7 +19,8 @@ public struct OAuthSignUpRequestDto: Encodable {
         username: String,
         phone: String,
         code: String,
-        provider: String
+        provider: String,
+        deviceId: String
     ) {
         self.oauthId = oauthId
         self.idToken = idToken
@@ -28,9 +30,10 @@ public struct OAuthSignUpRequestDto: Encodable {
         self.phone = phone
         self.code = code
         self.provider = provider
+        self.deviceId = deviceId
     }
 
     static func from(model: OAuthSignUp) -> OAuthSignUpRequestDto {
-        return OAuthSignUpRequestDto(oauthId: model.oauthId, idToken: model.idToken, nonce: model.nonce, name: model.name, username: model.username, phone: model.phone, code: model.code, provider: model.provider)
+        return OAuthSignUpRequestDto(oauthId: model.oauthId, idToken: model.idToken, nonce: model.nonce, name: model.name, username: model.username, phone: model.phone, code: model.code, provider: model.provider, deviceId: model.deviceId)
     }
 }
