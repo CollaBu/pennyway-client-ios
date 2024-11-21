@@ -14,6 +14,7 @@ protocol MakeChatRoomUseCase {
 class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
     private let repository: MakeChatRoomRepository
     private let urlRepository: PresignedUrlRepository
+    private let chatStompService = DefaultChatStompService.shared
 
     init(repository: MakeChatRoomRepository, urlRepository: PresignedUrlRepository) {
         self.repository = repository
@@ -47,6 +48,7 @@ class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
             switch result {
             case let .success(response):
                 Log.debug("[MakeChatRoomUseCase]-채팅방 생성 확정 성공: \(response)")
+                self.chatStompService.connect()
                 completion(true)
             case let .failure(error):
                 Log.error("[MakeChatRoomUseCase]-채팅방 생성 확정 실패: \(error)")
