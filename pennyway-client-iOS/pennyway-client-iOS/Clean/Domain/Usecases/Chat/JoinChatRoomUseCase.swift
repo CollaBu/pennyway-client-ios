@@ -28,10 +28,10 @@ class DefaultJoinChatRoomUseCase: JoinChatRoomUseCase {
         repository.execute(chatRoomId: chatRoomId, password: password) { result in
             switch result {
             case let .success(chatRoom):
-                Log.debug("[DefaultJoinChatRoomUseCase]: 채팅방 가입 성공 ")
-                self.chatStompService.connect()
+                Log.debug("[DefaultJoinChatRoomUseCase]: 채팅방 가입 성공")
+                self.chatStompService.subscribeToChatRoom(chatRoomId: chatRoom.id)
                 completion(.success(chatRoom))
-                
+
             case let .failure(error):
                 Log.fault("[DefaultJoinChatRoomUseCase]: 채팅방 가입 실패, 오류: \(error)")
                 completion(.failure(error))

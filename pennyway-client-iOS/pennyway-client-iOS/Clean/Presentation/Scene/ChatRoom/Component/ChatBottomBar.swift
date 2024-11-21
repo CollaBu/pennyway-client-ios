@@ -120,7 +120,7 @@ struct ChatBottomBar: View {
     private var SendButton: some View {
         VStack {
             Spacer()
-            if !message.isEmpty {
+            if !message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Button(action: {
                     UIApplication.shouldDismissKeyboard = false
                     viewModelWrapper.chatRoomViewModel.sendMessage(message: message, chatRoomId: viewModelWrapper.roomData?.id ?? 0, contentType: ContentType.text.rawValue)
@@ -133,7 +133,7 @@ struct ChatBottomBar: View {
                         .padding(.bottom, 8)
                 }
                 .transition(.opacity)
-                .animation(.easeInOut, value: message.isEmpty)
+                .animation(.easeInOut, value: message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 .buttonStyle(PlainButtonStyle())
             }
         }

@@ -48,7 +48,7 @@ class DefaultMakeChatRoomUseCase: MakeChatRoomUseCase {
             switch result {
             case let .success(response):
                 Log.debug("[MakeChatRoomUseCase]-채팅방 생성 확정 성공: \(response)")
-                self.chatStompService.connect()
+                self.chatStompService.subscribeToChatRoom(chatRoomId: response.chatRoom.id)
                 completion(true)
             case let .failure(error):
                 Log.error("[MakeChatRoomUseCase]-채팅방 생성 확정 실패: \(error)")
