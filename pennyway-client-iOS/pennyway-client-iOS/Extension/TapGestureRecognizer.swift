@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension UIApplication {
-    static var shouldDismissKeyboard: Bool = true
+    static var shouldDismissKeyboard: Bool = true// 키보드 닫기 여부
 
     func addTapGestureRecognizer() {
         guard let window = windows.first else {
@@ -15,13 +15,15 @@ extension UIApplication {
         window.addGestureRecognizer(tapGesture)
     }
 
+    /// 화면 터치하는 경우 실행
     @objc private func handleTapGesture(_: UITapGestureRecognizer) {
         guard let window = windows.first else {
             return
         }
 
+        // shouldDismissKeyboard가 true이면 키보드 닫기
         if UIApplication.shouldDismissKeyboard {
-            window.endEditing(true) // 키보드 닫기
+            window.endEditing(true)
         }
     }
 }
