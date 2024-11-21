@@ -42,4 +42,8 @@ class DefaultChatStompService {
     func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
         repository.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: lastReadMessageId, completion: completion)
     }
+    
+    func subscribeToChatRoom(chatRoomId: Int64) {
+        repository.subscribeToChatRoom(chatRoomId: chatRoomId)
+    }
 }

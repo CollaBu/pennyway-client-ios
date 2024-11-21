@@ -16,6 +16,6 @@ struct GetJoinedChatRoomsResponseDto: Decodable {
     }
 
     struct ChatRoomDto: Decodable {
-        let chatRoomIds: [Int]
+        let chatRoomIds: [Int64]
     }
 }

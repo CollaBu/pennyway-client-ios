@@ -62,6 +62,13 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         stompClient.sendMessage(message: "", toDestination: destination, withHeaders: headers, withReceipt: nil)
         Log.debug("📤 [Send Last Message])")
     }
+
+    /// 채팅방 ID 에 대한 구독을 설정하는 메서드
+    func subscribeToChatRoom(chatRoomId: Int64) {
+        let chatRoomReceiptId = "chat-room-receipt-\(UUID().uuidString)"
+        let destination = "/sub/chat.room.\(chatRoomId)"
+        stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": chatRoomReceiptId])
+    }
 }
 
 // MARK: Private Methods
@@ -74,7 +81,7 @@ extension DefaultChatStompRepository {
     }
 
     /// 채팅방 ID 리스트에 대한 구독을 설정하는 메서드
-    private func subscribeToChatRooms(_ chatRoomIds: [Int]) {
+    private func subscribeToChatRooms(_ chatRoomIds: [Int64]) {
         for chatRoomId in chatRoomIds {
             let chatRoomReceiptId = "chat-room-receipt-\(UUID().uuidString)"
             let destination = "/sub/chat.room.\(chatRoomId)"
