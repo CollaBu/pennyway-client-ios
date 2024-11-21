@@ -95,6 +95,9 @@ struct ChatContent: View {
                 // 처음 열릴 때 가장 아래로 스크롤
                 proxy.scrollTo("bottom", anchor: .bottom)
             }
+            .onTapGesture {
+                UIApplication.shouldDismissKeyboard = true // 빈 화면 터치 시 키보드 닫기
+            }
         }
     }
 

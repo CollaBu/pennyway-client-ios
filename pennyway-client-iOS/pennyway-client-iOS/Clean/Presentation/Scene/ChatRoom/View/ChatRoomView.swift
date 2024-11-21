@@ -41,6 +41,7 @@ struct ChatRoomView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Button(action: {
+                            UIApplication.shouldDismissKeyboard = true
                             isNavigateToMyChat = true
                         }, label: {
                             Image("icon_arrow_back")
@@ -58,6 +59,7 @@ struct ChatRoomView: View {
                     HStack {
                         Button(action: {
                             withAnimation {
+                                UIApplication.shouldDismissKeyboard = true
                                 isSideMenuPresented.toggle()
                             }
                         }, label: {
