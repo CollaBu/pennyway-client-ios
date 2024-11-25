@@ -1,5 +1,5 @@
 //
-//  ChatSettingView.swift
+//  ChatRoomSettingView.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 10/9/24.
@@ -12,7 +12,6 @@ struct ChatRoomSettingView: View {
     @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
     @State private var chatRoomName: String = ""
     @State private var password: String = ""
-    @State private var isNavigateToEditView: Bool = false
     @State private var showCompleteToastPopup: Bool = false
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
