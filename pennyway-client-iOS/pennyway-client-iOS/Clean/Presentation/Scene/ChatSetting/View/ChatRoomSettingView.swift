@@ -12,39 +12,60 @@ struct ChatRoomSettingView: View {
     @State private var chatRoomName: String = ""
     @State private var password: String = ""
     @State private var isNavigateToEditView: Bool = false
+    @State private var showCompleteToastPopup: Bool = false
 
     var body: some View {
-        ScrollView {
-            VStack {
-                // 상단 여백 및 아이콘 이미지
-                Spacer().frame(height: 30 * DynamicSizeFactor.factor())
+        ZStack {
+            ScrollView {
+                VStack {
+                    // 상단 여백 및 아이콘 이미지
+                    Spacer().frame(height: 30 * DynamicSizeFactor.factor())
 
-                Image("icon_illust_maintain_goal")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
-                    .cornerRadius(12 * DynamicSizeFactor.factor())
+                    Image("icon_illust_maintain_goal")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
+                        .cornerRadius(12 * DynamicSizeFactor.factor())
 
-                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                // 채팅방 커버 수정 버튼
-                CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
-                    // 버튼 액션
+                    // 채팅방 커버 수정 버튼
+                    CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
+                        // 버튼 액션
+                    }
+
+                    Spacer().frame(height: 25 * DynamicSizeFactor.factor())
+
+                    // 채팅방 이름 입력
+                    ChatRoomNameSection
+
+                    Spacer().frame(height: 32 * DynamicSizeFactor.factor())
+
+                    // 공개 범위 설정
+                    PublicScopeSection
+
+                    Spacer()
                 }
-
-                Spacer().frame(height: 35 * DynamicSizeFactor.factor())
-
-                // 채팅방 이름 입력
-                ChatRoomNameSection
-
-                Spacer().frame(height: 35 * DynamicSizeFactor.factor())
-
-                // 공개 범위 설정
-                PublicScopeSection
-
-                Spacer()
             }
         }
+        .overlay(
+            Group {
+                if showCompleteToastPopup {
+                    CustomToastView(message: "변경 사항이 저장되었어요")
+                        .transition(.move(edge: .bottom))
+                        .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                if showCompleteToastPopup {
+                                    showCompleteToastPopup = false
+                                }
+                            }
+                        }
+                }
+            }, alignment: .bottom
+        )
+        .edgesIgnoringSafeArea(.bottom)
         .navigationBarColor(UIColor(named: "White01"), title: "채팅방 설정")
         .background(Color("White01"))
         .setTabBarVisibility(isHidden: true)
@@ -52,14 +73,14 @@ struct ChatRoomSettingView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 NavigationBackButton()
-                    .padding(.leading, 5)
+                    .padding(.trailing, 10)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
             }
             ToolbarItem(placement: .topBarTrailing) {
                 HStack {
                     Button(action: {
-                        
+                        showCompleteToastPopup = true
                     }, label: {
                         Text("완료")
                             .font(.H4MediumFont())
@@ -103,7 +124,7 @@ struct ChatRoomSettingView: View {
 
     /// 공개 범위 설정 섹션
     private var PublicScopeSection: some View {
-        VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
+        VStack(alignment: .leading, spacing: 8 * DynamicSizeFactor.factor()) {
             Text("공개 범위")
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray04"))
@@ -116,8 +137,10 @@ struct ChatRoomSettingView: View {
                 Spacer()
 
                 Toggle(isOn: $isPublic) {}
-                    .toggleStyle(CustomToggleStyle(hasAppeared: $isPublic))
+                    .toggleStyle(CustomToggleStyle(hasAppeared: .constant(true)))
             }
+
+            Spacer().frame(height: 3 * DynamicSizeFactor.factor())
 
             if !isPublic {
                 ZStack(alignment: .leading) {
