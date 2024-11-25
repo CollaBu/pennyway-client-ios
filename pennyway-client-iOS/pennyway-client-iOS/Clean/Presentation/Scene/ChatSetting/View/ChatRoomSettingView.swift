@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct ChatSettingView: View {
+struct ChatRoomSettingView: View {
     @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
+    @State private var chatRoomName: String = ""
     @State private var password: String = ""
     @State private var isNavigateToEditView: Bool = false
 
@@ -16,7 +17,7 @@ struct ChatSettingView: View {
         ScrollView {
             VStack {
                 // 상단 여백 및 아이콘 이미지
-                Spacer().frame(height: 17 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 30 * DynamicSizeFactor.factor())
 
                 Image("icon_illust_maintain_goal")
                     .resizable()
@@ -24,7 +25,7 @@ struct ChatSettingView: View {
                     .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
                     .cornerRadius(12 * DynamicSizeFactor.factor())
 
-                Spacer().frame(height: 17 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
                 // 채팅방 커버 수정 버튼
                 CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
@@ -49,11 +50,24 @@ struct ChatSettingView: View {
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 NavigationBackButton()
                     .padding(.leading, 5)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack {
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("완료")
+                            .font(.H4MediumFont())
+                            .platformTextColor(color: .mint03)
+                            .padding(.trailing, 10)
+                    })
+                    .buttonStyle(PlainButtonStyle())
+                }
             }
         }
     }
@@ -74,16 +88,11 @@ struct ChatSettingView: View {
                     isNavigateToEditView = true
                 }) {
                     HStack {
-                        Text("채팅방 이름")
+                        TextField("", text: $chatRoomName)
                             .font(.H4MediumFont())
                             .platformTextColor(color: Color("Gray07"))
                             .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         Spacer()
-                        Image("icon_navigationbar_write_primary")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20 * DynamicSizeFactor.factor(), height: 20 * DynamicSizeFactor.factor())
-                            .padding(.trailing, 13 * DynamicSizeFactor.factor())
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -120,6 +129,7 @@ struct ChatSettingView: View {
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
+                        .keyboardType(.numberPad)
                 }
             }
         }
@@ -128,5 +138,5 @@ struct ChatSettingView: View {
 }
 
 #Preview {
-    ChatSettingView()
+    ChatRoomSettingView()
 }

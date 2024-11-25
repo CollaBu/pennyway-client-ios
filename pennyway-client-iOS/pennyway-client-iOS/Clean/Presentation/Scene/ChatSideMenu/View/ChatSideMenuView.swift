@@ -102,7 +102,10 @@ private struct SideMenuContent: View {
         VStack {
             if !members.isEmpty {
                 if members[0].role.rawValue == Role.admin.rawValue { // 첫번째 사용자(나)가 방장인지 확인 후 ui
-                    SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone_no_padding", isAlarmCell: false, isAlarmOn: .constant(false))
+                    NavigationLink(destination: ChatRoomSettingView()) {
+                        SideMenuCell(title: "채팅방 설정", imageName: "icon_checkwithsomeone_no_padding", isAlarmCell: false, isAlarmOn: .constant(false))
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
             
