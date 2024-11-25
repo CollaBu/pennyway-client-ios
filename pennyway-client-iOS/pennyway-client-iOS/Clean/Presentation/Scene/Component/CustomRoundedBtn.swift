@@ -30,7 +30,7 @@ struct CustomRoundedBtn: View {
         var horizontalPadding: CGFloat {
             switch self {
             case .large:
-                return 10
+                return 8
             case .small:
                 return 4
             }
@@ -39,18 +39,9 @@ struct CustomRoundedBtn: View {
         var verticalPadding: CGFloat {
             switch self {
             case .large:
-                return 7
+                return 6
             case .small:
                 return 2
-            }
-        }
-
-        var cornerRadius: CGFloat {
-            switch self {
-            case .large:
-                return 14
-            case .small:
-                return 6
             }
         }
     }
@@ -65,7 +56,7 @@ struct CustomRoundedBtn: View {
                 .padding(.horizontal, style.horizontalPadding * DynamicSizeFactor.factor())
                 .padding(.vertical, style.verticalPadding * DynamicSizeFactor.factor())
                 .background(
-                    RoundedRectangle(cornerRadius: style.cornerRadius * DynamicSizeFactor.factor())
+                    RoundedRectangle(cornerRadius: 6 * DynamicSizeFactor.factor())
                         .fill(backgroundColor)
                 )
         }

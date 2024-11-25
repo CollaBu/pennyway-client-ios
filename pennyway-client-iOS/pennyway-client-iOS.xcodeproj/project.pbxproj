@@ -301,7 +301,7 @@
 		4AE8F3AF2C3307940014F0D4 /* CustomDropDownMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */; };
 		4AE8F3B42C330A0B0014F0D4 /* TargetAmountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3B32C330A0B0014F0D4 /* TargetAmountSettingView.swift */; };
 		4AE8F3B62C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8F3B52C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift */; };
-		4AE9B32E2CB67E3E0044D3E1 /* ChatSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */; };
+		4AE9B32E2CB67E3E0044D3E1 /* ChatRoomSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B32D2CB67E3E0044D3E1 /* ChatRoomSettingView.swift */; };
 		4AE9B3332CB689E50044D3E1 /* CustomRoundedBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B3322CB689E50044D3E1 /* CustomRoundedBtn.swift */; };
 		4AE9B3402CB6E5770044D3E1 /* ChatSideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B33F2CB6E5770044D3E1 /* ChatSideMenuView.swift */; };
 		4AE9B3422CB6E5A00044D3E1 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9B3412CB6E5A00044D3E1 /* SideMenuCell.swift */; };
@@ -768,7 +768,7 @@
 		4AE8F3AE2C3307940014F0D4 /* CustomDropDownMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropDownMenuView.swift; sourceTree = "<group>"; };
 		4AE8F3B32C330A0B0014F0D4 /* TargetAmountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountSettingView.swift; sourceTree = "<group>"; };
 		4AE8F3B52C330F7A0014F0D4 /* TargetAmountSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAmountSettingViewModel.swift; sourceTree = "<group>"; };
-		4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingView.swift; sourceTree = "<group>"; };
+		4AE9B32D2CB67E3E0044D3E1 /* ChatRoomSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomSettingView.swift; sourceTree = "<group>"; };
 		4AE9B3322CB689E50044D3E1 /* CustomRoundedBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundedBtn.swift; sourceTree = "<group>"; };
 		4AE9B33F2CB6E5770044D3E1 /* ChatSideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSideMenuView.swift; sourceTree = "<group>"; };
 		4AE9B3412CB6E5A00044D3E1 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
@@ -2484,7 +2484,7 @@
 		4AE9B32C2CB67E330044D3E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4AE9B32D2CB67E3E0044D3E1 /* ChatSettingView.swift */,
+				4AE9B32D2CB67E3E0044D3E1 /* ChatRoomSettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3353,7 +3353,7 @@
 				4AB5AB472BB4A32F00D2C9EA /* AuthAlamofire.swift in Sources */,
 				4A5050332BC3DA7700EE5666 /* PhoneNumberFormatterUtil.swift in Sources */,
 				4A51D2AC2BB1855A0080083D /* CustomBottomButton.swift in Sources */,
-				4AE9B32E2CB67E3E0044D3E1 /* ChatSettingView.swift in Sources */,
+				4AE9B32E2CB67E3E0044D3E1 /* ChatRoomSettingView.swift in Sources */,
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
