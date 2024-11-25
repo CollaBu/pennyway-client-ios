@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChatRoomSettingView: View {
+    @StateObject private var keyboardHandler = KeyboardManager()
     @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
     @State private var chatRoomName: String = ""
     @State private var password: String = ""
@@ -19,7 +20,7 @@ struct ChatRoomSettingView: View {
             ScrollView {
                 VStack {
                     // 상단 여백 및 아이콘 이미지
-                    Spacer().frame(height: 30 * DynamicSizeFactor.factor())
+                    Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
                     Image("icon_illust_maintain_goal")
                         .resizable()
@@ -46,7 +47,10 @@ struct ChatRoomSettingView: View {
 
                     Spacer()
                 }
+                .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 20 : nil)
             }
+            .padding(.bottom, keyboardHandler.keyboardHeight)
+            .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
         }
         .overlay(
             Group {
@@ -124,13 +128,15 @@ struct ChatRoomSettingView: View {
 
     /// 공개 범위 설정 섹션
     private var PublicScopeSection: some View {
-        VStack(alignment: .leading, spacing: 8 * DynamicSizeFactor.factor()) {
+        VStack(alignment: .leading) {
             Text("공개 범위")
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray04"))
 
+            Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+
             HStack {
-                Text("채팅방 공개 설정")
+                Text("채팅방 비밀번호 설정")
                     .font(.ButtonH4SemiboldFont())
                     .platformTextColor(color: Color("Gray07"))
 
@@ -140,7 +146,7 @@ struct ChatRoomSettingView: View {
                     .toggleStyle(CustomToggleStyle(hasAppeared: .constant(true)))
             }
 
-            Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
             if !isPublic {
                 ZStack(alignment: .leading) {
