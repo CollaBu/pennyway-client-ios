@@ -14,6 +14,7 @@ struct ChatRoomSettingView: View {
     @State private var password: String = ""
     @State private var isNavigateToEditView: Bool = false
     @State private var showCompleteToastPopup: Bool = false
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     var body: some View {
         ZStack {
@@ -109,18 +110,17 @@ struct ChatRoomSettingView: View {
                     .fill(Color("Gray01"))
                     .frame(height: 46 * DynamicSizeFactor.factor())
 
-                Button(action: {
-                    isNavigateToEditView = true
-                }) {
-                    HStack {
-                        TextField("", text: $chatRoomName)
-                            .font(.H4MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
-                            .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-                        Spacer()
-                    }
+                if chatRoomName.isEmpty {
+                    Text(viewModelWrapper.chatRoomViewModel.roomData.value?.title ?? "")
+                        .font(.H4MediumFont())
+                        .platformTextColor(color: Color("Gray07"))
+                        .padding(.leading, 13 * DynamicSizeFactor.factor())
                 }
-                .buttonStyle(PlainButtonStyle())
+
+                TextField("", text: $chatRoomName)
+                    .font(.H4MediumFont())
+                    .platformTextColor(color: Color("Gray07"))
+                    .padding(.horizontal, 13 * DynamicSizeFactor.factor())
             }
         }
         .padding(.horizontal, 20)
@@ -159,6 +159,11 @@ struct ChatRoomSettingView: View {
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .keyboardType(.numberPad)
+                        .onChange(of: password) { pw in
+                            if pw.count > 6 {
+                                password = String(pw.prefix(6))
+                            }
+                        }
                 }
             }
         }

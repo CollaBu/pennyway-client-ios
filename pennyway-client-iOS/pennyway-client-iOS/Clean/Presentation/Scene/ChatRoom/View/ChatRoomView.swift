@@ -43,6 +43,7 @@ struct ChatRoomView: View {
                         Button(action: {
                             UIApplication.shouldDismissKeyboard = true
                             isNavigateToMyChat = true
+                            viewModelWrapper.chatRoomViewModel.reset()
                         }, label: {
                             Image("icon_arrow_back")
                                 .resizable()
@@ -82,9 +83,6 @@ struct ChatRoomView: View {
                 // 채팅방 상세 정보 조회
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: Int64(chatRoom.id))
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
-            }
-            .onDisappear {
-                viewModelWrapper.chatRoomViewModel.reset()
             }
 
             if isSideMenuPresented {
