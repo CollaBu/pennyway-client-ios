@@ -3,6 +3,16 @@
     {
       "filename" : "Frame 581.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Frame 582.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

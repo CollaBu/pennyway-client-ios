@@ -195,6 +195,7 @@ extension DefaultChatRoomViewModel {
         chatHistoryList.insertMessages(messages)
     }
 
+    /// 채팅방 사용자 정렬
     private func sortChatUserData() {
         guard let currentUser = getUserData() else {
             return
@@ -204,7 +205,7 @@ extension DefaultChatRoomViewModel {
             return
         }
 
-        // 0번째 인덱스 요소를 따로 저장
+        // 0번째 인덱스(현재 사용자) 따로 저장
         let firstElement = chatUserData.value[0]
 
         // 나머지 요소들만 정렬
