@@ -87,7 +87,7 @@ struct ChatRoomView: View {
 
             ZStack {
                 if isSideMenuPresented {
-                    Color.black.opacity(0.3)
+                    Color(.black01)
                         .edgesIgnoringSafeArea(.all)
                         .transition(.opacity)
                         .onTapGesture {

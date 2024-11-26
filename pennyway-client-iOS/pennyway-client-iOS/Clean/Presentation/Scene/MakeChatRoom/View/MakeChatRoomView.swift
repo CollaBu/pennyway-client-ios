@@ -111,7 +111,7 @@ struct MakeChatRoomView: View {
             }
 
             if showPopUpView {
-                Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+                Color(.black01).edgesIgnoringSafeArea(.all)
 
                 ChatPhotoActionsPopUp(isPresented: $showPopUpView,
                                       showPopUpView: $showPopUpView,
@@ -228,7 +228,7 @@ struct MakeChatRoomView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .background(Color.black.opacity(0.3))
+                    .background(Color(.black01))
                     .frame(width: 57 * DynamicSizeFactor.factor(), height: 57 * DynamicSizeFactor.factor())
                     .clipShape(RoundedRectangle(cornerRadius: 6))
                     .overlay(
