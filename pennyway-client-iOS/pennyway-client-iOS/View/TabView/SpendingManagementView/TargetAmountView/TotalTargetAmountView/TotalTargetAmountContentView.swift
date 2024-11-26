@@ -13,7 +13,7 @@ struct TotalTargetAmountContentView: View {
             VStack {
                 HStack {
                     Text("지난 사용 금액")
-                        .font(.B1SemiboldeFont())
+                        .font(.ButtonH4SemiboldFont())
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.leading, 18)
 
@@ -31,6 +31,16 @@ struct TotalTargetAmountContentView: View {
                     .buttonStyle(BasicButtonStyleUtil())
                 }
                 .padding(.top, 18)
+                
+                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+
+                HStack {
+                    HStack(spacing: ) {
+                        Circle()
+                            .frame(width: 6 * DynamicSizeFactor.factor(), height: 6 * DynamicSizeFactor.factor())
+                            .platformTextColor(color: Color("Mint01"))
+                    }
+                }
 
                 Spacer().frame(height: 11 * DynamicSizeFactor.factor())
 
