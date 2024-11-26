@@ -26,7 +26,7 @@ struct TotalTargetAmountView: View {
                     setOffset(offset: offset)
 
                     TotalTargetAmountHeaderView(viewModel: viewModel)
-                        .background(Color("Mint03"))
+                        .background(Color("Gray01"))
                         .offset(y: adjustedOffset > 0 ? -adjustedOffset : 0)
 
                     TotalTargetAmountContentView(viewModel: viewModel, isnavigateToPastSpendingView: $isnavigateToPastSpendingView)
@@ -65,7 +65,7 @@ struct TotalTargetAmountView: View {
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color("Gray01"))
-            .navigationBarColor(UIColor(named: "Mint03"), title: "")
+            .navigationBarColor(UIColor(named: "White01"), title: "")
             .edgesIgnoringSafeArea(.bottom)
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
