@@ -93,6 +93,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 if let recentParticipants = self?.roomDetailData.value?.recentParticipants {
                     if let myInfo = self?.roomDetailData.value?.myInfo {
                         self?.chatUserData.value = [myInfo] + recentParticipants
+                        self?.sortChatUserData()
                     }
                 }
 
@@ -163,6 +164,7 @@ extension DefaultChatRoomViewModel {
                 let membersItem = ChatMemberItemModel.from(model: members)
                 self?.chatUserData.value += membersItem
 
+                self?.sortChatUserData()
                 Log.debug("[DefaultChatRoomViewModel] 채팅방 멤버 조회 성공: \(membersItem)")
 
             case let .failure(error):
@@ -191,6 +193,36 @@ extension DefaultChatRoomViewModel {
     /// 여러 메시지 삽입
     private func handleNewMessages(_ messages: [MessageItemModel]) {
         chatHistoryList.insertMessages(messages)
+    }
+
+    private func sortChatUserData() {
+        guard let currentUser = getUserData() else {
+            return
+        }
+
+        guard !chatUserData.value.isEmpty else {
+            return
+        }
+
+        // 0번째 인덱스 요소를 따로 저장
+        let firstElement = chatUserData.value[0]
+
+        // 나머지 요소들만 정렬
+        let sortedRest = chatUserData.value.dropFirst().sorted { (lhs: ChatMemberItemModel, rhs: ChatMemberItemModel) -> Bool in
+            // 다른 사용자가 Admin이면 두 번째 우선순위
+            if lhs.role == .admin, lhs.id != currentUser.id {
+                return true
+            }
+            if rhs.role == .admin, rhs.id != currentUser.id {
+                return false
+            }
+
+            // 나머지는 이름 순 정렬
+            return lhs.name < rhs.name
+        }
+
+        // 0번째 요소를 맨 앞에 두고 나머지 정렬된 배열을 이어붙임
+        chatUserData.value = [firstElement] + sortedRest
     }
 }
 
