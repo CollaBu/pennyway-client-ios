@@ -54,20 +54,25 @@ struct ChatContent: View {
                     ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                         Section(header: ChatHeader(data: date)) {
-                            Spacer().frame(height: 3)
+                            let chatsForDate = groupedChatsByDate[date] ?? []
 
-                            ForEach(groupedChatsByDate[date] ?? []) { chat in
-                                if let sender = members.first(where: { $0.userId == chat.senderId }) {
+                            if chatsForDate[0].categoryType != CategoryType.system {// 첫번째 데이터가 system 아닌 경우 간격 적용
+                                Spacer().frame(height: 3)
+                            }
+
+                            ForEach(Array(chatsForDate.enumerated()), id: \.element.id) { index, chat in
+                                if chat.categoryType == CategoryType.system {
+                                    if index != 0 {// system이 첫번째 데이터인 경우 간격 적용
+                                        Spacer().frame(height: 3)
+                                    }
+
+                                    ChatHeader(data: chat.content)
+
+                                } else if let sender = members.first(where: { $0.userId == chat.senderId }) {
                                     if chat.senderId == currentUserId {
                                         ChatSendCell(chat: chat, sender: sender)
                                     } else {
                                         ChatReceiveCell(chat: chat, sender: sender)
-                                    }
-                                } else {
-                                    Spacer().frame(height: 3)
-
-                                    if chat.categoryType == CategoryType.system {
-                                        ChatHeader(data: chat.content)
                                     }
                                 }
                             }
