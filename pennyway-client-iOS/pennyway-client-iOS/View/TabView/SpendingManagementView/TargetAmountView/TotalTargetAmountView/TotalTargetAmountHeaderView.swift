@@ -43,7 +43,6 @@ struct TotalTargetAmountHeaderView: View {
                         Text(viewModel.currentData.targetAmountDetail.amount != -1 ? "\(viewModel.currentData.targetAmountDetail.amount)" : "-")
                             .font(.H1SemiboldFont())
                             .platformTextColor(color: Color("Gray07"))
-                            .border(.black)
                         Text(" 원")
                             .font(.H3SemiboldFont())
                             .platformTextColor(color: Color("Gray07"))
@@ -137,7 +136,7 @@ struct TotalTargetAmountHeaderView: View {
         .frame(maxWidth: .infinity)
         .frame(height: 177 * DynamicSizeFactor.factor())
         .background(
-            RoundedCornerUtil(radius: 8, corners: [.topLeft, .topRight])
+            RoundedCornerUtil(radius: 8, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight])
                 .fill(Color("White01"))
         )
         .padding(.horizontal, 20)

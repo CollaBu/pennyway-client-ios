@@ -31,23 +31,61 @@ struct TotalTargetAmountContentView: View {
                     .buttonStyle(BasicButtonStyleUtil())
                 }
                 .padding(.top, 18)
-                
+
                 Spacer().frame(height: 3 * DynamicSizeFactor.factor())
 
-                HStack {
-                    HStack(spacing: ) {
+                HStack(spacing: 12 * DynamicSizeFactor.factor()) {
+                    HStack(spacing: 6 * DynamicSizeFactor.factor()) {
                         Circle()
                             .frame(width: 6 * DynamicSizeFactor.factor(), height: 6 * DynamicSizeFactor.factor())
                             .platformTextColor(color: Color("Mint01"))
+
+                        Text("목표금액")
+                            .platformTextColor(color: Color("Gray04"))
+                            .font(.B3MediumFont())
                     }
+
+                    HStack(spacing: 6 * DynamicSizeFactor.factor()) {
+                        Circle()
+                            .frame(width: 6 * DynamicSizeFactor.factor(), height: 6 * DynamicSizeFactor.factor())
+                            .platformTextColor(color: Color("mint02"))
+
+                        Text("소비금액")
+                            .platformTextColor(color: Color("Gray04"))
+                            .font(.B3MediumFont())
+                    }
+
+                    HStack(spacing: 6 * DynamicSizeFactor.factor()) {
+                        Circle()
+                            .frame(width: 6 * DynamicSizeFactor.factor(), height: 6 * DynamicSizeFactor.factor())
+                            .platformTextColor(color: Color("Mint03"))
+
+                        Text("초과금액")
+                            .platformTextColor(color: Color("Gray04"))
+                            .font(.B3MediumFont())
+                    }
+
+                    Spacer()
                 }
+                .padding(.horizontal, 20)
 
                 Spacer().frame(height: 11 * DynamicSizeFactor.factor())
 
                 TotalTargetAmountGraphView(viewModel: viewModel)
 
-                Spacer().frame(height: 36 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(maxWidth: 244 * DynamicSizeFactor.factor(), maxHeight: 0.5)
+                    .background(Color("Gray02"))
+                
+                Spacer().frame(height: 24 * DynamicSizeFactor.factor())
+
+                Text("최근 3개월 동안 사용한 금액이에요")
+                    .font(.B2MediumFont())
+                    .platformTextColor(color: Color("Gray05"))
+                
                 ForEach(Array(viewModel.targetAmounts.prefix(6).enumerated()), id: \.offset) { _, content in
                     VStack(alignment: .leading) {
                         Text("\(String(content.year))년 \(content.month)월")
