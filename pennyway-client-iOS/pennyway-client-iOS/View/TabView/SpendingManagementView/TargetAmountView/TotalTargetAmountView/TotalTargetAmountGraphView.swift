@@ -11,16 +11,42 @@ struct TotalTargetAmountGraphView: View {
             ForEach(0 ..< 6) { index in
                 if index >= 6 - viewModel.sortTargetAmounts.count {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
-                    let adjustedHeight = (maxSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxSpending) * maxHeight : 0 // 그래프 높이 조정
+//                    let adjustedHeight = (maxSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxSpending) * maxHeight : 0 // 그래프 높이 조정
+                    // 그래프 높이 계산
+                    let totalHeight = (CGFloat(content.totalSpending) / CGFloat(maxSpending)) * maxHeight
+                    let overHeight = (content.diffAmount > 0) ? (CGFloat(content.diffAmount) / CGFloat(maxSpending)) * maxHeight : 0
+                    let targetHeight = (content.targetAmountDetail.amount > 0) ? (CGFloat(content.targetAmountDetail.amount) / CGFloat(maxSpending)) * maxHeight : 0
+                    let spendingHeight = totalHeight - overHeight
 
                     VStack {
                         Text("\(content.totalSpending / 10000)")
                             .font(.B3MediumFont())
                             .platformTextColor(color: determineColorGray04(for: content))
-                        Rectangle()
-                            .frame(width: 26 * DynamicSizeFactor.factor(), height: adjustedHeight)
-                            .platformTextColor(color: determineColorGray03(for: content))
-                            .clipShape(RoundedCornerUtil(radius: 4, corners: [.topLeft, .topRight]))
+
+                        ZStack {
+                            // 목표 금액
+                            if targetHeight > 0 {
+                                Rectangle()
+                                    .platformTextColor(color: Color("Mint01"))
+                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
+                            }
+
+                            // 사용 금액
+                            Rectangle()
+                                .platformTextColor(color: Color("mint02"))
+                                .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
+
+                            // 초과 금액
+                            if overHeight > 0 {
+                                Rectangle()
+                                    .platformTextColor(color: Color("Mint03"))
+                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: overHeight)
+                            }
+                        }
+//                        Rectangle()
+//                            .frame(width: 26 * DynamicSizeFactor.factor(), height: adjustedHeight)
+//                            .platformTextColor(color: determineColorGray03(for: content))
+                        .clipShape(RoundedCornerUtil(radius: 4, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight]))
 
                         if content.totalSpending != 0 {
                             Spacer().frame(height: 8 * DynamicSizeFactor.factor())

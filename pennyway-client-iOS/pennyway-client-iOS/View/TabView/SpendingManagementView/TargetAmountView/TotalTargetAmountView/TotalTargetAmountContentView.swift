@@ -90,7 +90,10 @@ struct TotalTargetAmountContentView: View {
 
                 Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
-                ForEach(Array(viewModel.targetAmounts.prefix(3).enumerated()), id: \.offset) { _, content in
+                ForEach(Array(viewModel.targetAmounts
+                        .filter { $0.month < Date.month(from: Date()) || $0.year < Date.year(from: Date()) } // 현재 달 제외
+                        .prefix(3).enumerated()), id: \.offset)
+                { _, content in
                     VStack(alignment: .leading) {
                         Text("\(String(content.year))년 \(content.month)월")
                             .font(.B2MediumFont())
