@@ -11,14 +11,12 @@ struct TotalTargetAmountGraphView: View {
             ForEach(0 ..< 6) { index in
                 if index >= 6 - viewModel.sortTargetAmounts.count {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
-//                    let adjustedHeight = (maxSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxSpending) * maxHeight : 0 // 그래프 높이 조정
+
                     // 그래프 높이 계산
                     let totalHeight = (CGFloat(content.totalSpending) / CGFloat(maxSpending)) * maxHeight // 전체 높이
-//                    let overHeight = (content.diffAmount > 0) ? (CGFloat(content.diffAmount) / CGFloat(maxSpending)) * maxHeight : 0 // 초과금액
-                    let targetHeight = (content.targetAmountDetail.amount > 0) ? (CGFloat(content.targetAmountDetail.amount) / CGFloat(maxSpending)) * maxHeight : 0 // 목표금액
-//                    let spendingHeight = CGFloat(totalHeight - CGFloat(overHeight))
-                    let spendingHeight = (CGFloat(content.totalSpending - max(content.diffAmount, 0)) / CGFloat(maxSpending)) * maxHeight
-                    let overHeight = (content.diffAmount > 0) ? (CGFloat(content.diffAmount) / CGFloat(maxSpending)) * maxHeight : 0
+                    let targetHeight = min((CGFloat(content.targetAmountDetail.amount) / CGFloat(maxSpending)) * maxHeight, maxHeight) // 목표금액
+                    let spendingHeight = min((CGFloat(content.totalSpending - max(content.diffAmount, 0)) / CGFloat(maxSpending)) * maxHeight, maxHeight) // 소비금액
+                    let overHeight = (content.diffAmount > 0) ? (CGFloat(content.diffAmount) / CGFloat(maxSpending)) * maxHeight : 0 // 초과금액
 
                     VStack {
                         Text("\(content.totalSpending / 10000)")
@@ -31,6 +29,7 @@ struct TotalTargetAmountGraphView: View {
                                 Rectangle()
                                     .platformTextColor(color: Color("Mint01"))
                                     .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
+                                    .border(Color.black)
                             }
 
                             // 사용 금액
