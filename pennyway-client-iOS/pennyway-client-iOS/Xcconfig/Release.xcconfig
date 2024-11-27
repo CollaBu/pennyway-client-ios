@@ -1,6 +1,0 @@
-
-// Release.xcconfig
-
-#include "Secrets.xcconfig"
-
-BASE_URL = https:/$()/api.pennyway.co.kr

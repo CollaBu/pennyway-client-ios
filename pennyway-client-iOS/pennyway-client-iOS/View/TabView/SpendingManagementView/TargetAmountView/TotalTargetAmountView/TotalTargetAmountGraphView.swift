@@ -7,7 +7,7 @@ struct TotalTargetAmountGraphView: View {
         let maxHeight = 120 * DynamicSizeFactor.factor() // 최대 높이
         let maxSpending = max(viewModel.maxTotalSpending, 100_000) // 최소값을 100000으로 설정
 
-        HStack(spacing: 24 * DynamicSizeFactor.factor()) {
+        HStack(spacing: 14 * DynamicSizeFactor.factor()) {
             ForEach(0 ..< 6) { index in
                 if index >= 6 - viewModel.sortTargetAmounts.count {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
@@ -18,9 +18,9 @@ struct TotalTargetAmountGraphView: View {
                             .font(.B3MediumFont())
                             .platformTextColor(color: determineColorGray04(for: content))
                         Rectangle()
-                            .frame(width: 16 * DynamicSizeFactor.factor(), height: adjustedHeight)
+                            .frame(width: 26 * DynamicSizeFactor.factor(), height: adjustedHeight)
                             .platformTextColor(color: determineColorGray03(for: content))
-                            .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
+                            .clipShape(RoundedCornerUtil(radius: 4, corners: [.topLeft, .topRight]))
 
                         if content.totalSpending != 0 {
                             Spacer().frame(height: 8 * DynamicSizeFactor.factor())
@@ -37,7 +37,7 @@ struct TotalTargetAmountGraphView: View {
                             .font(.B3MediumFont())
                             .platformTextColor(color: Color("Gray04"))
                         Rectangle()
-                            .frame(maxWidth: 16 * DynamicSizeFactor.factor(), maxHeight: 0)
+                            .frame(maxWidth: 26 * DynamicSizeFactor.factor(), maxHeight: 0)
                         Text("\(viewModel.currentData.month - (6 - (index + 1)))월")
                             .font(.B3MediumFont())
                             .platformTextColor(color: Color("Gray06"))

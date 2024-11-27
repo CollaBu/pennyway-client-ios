@@ -5,10 +5,6 @@ import SwiftUI
 struct TotalTargetAmountView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = TotalTargetAmountViewModel()
-    ///    @State private var isClickMenu = false
-    ///    @State private var selectedMenu: String? = nil // 선택한 메뉴
-    ///    @State private var listArray: [String] = ["목표금액 수정", "초기화하기"]
-    ///    @State private var isnavigateToEditTargetView = false
     @State private var isnavigateToPastSpendingView = false
     @State var showingDeletePopUp = false
     @State private var showToastPopup = false
@@ -21,9 +17,11 @@ struct TotalTargetAmountView: View {
     var body: some View {
         ZStack {
             ScrollView {
+                Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+
                 GeometryReader { geometry in
                     let offset = geometry.frame(in: .global).minY
-                    setOffset(offset: offset)
+//                    setOffset(offset: offset)
 
                     TotalTargetAmountHeaderView(showingDeletePopUp: $showingDeletePopUp, viewModel: viewModel)
                         .background(Color("Gray01"))
@@ -140,6 +138,6 @@ struct TotalTargetAmountView: View {
     }
 }
 
-// #Preview {
-//    TotalTargetAmountView()
-// }
+#Preview {
+    TotalTargetAmountView()
+}

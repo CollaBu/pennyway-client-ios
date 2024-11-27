@@ -12,9 +12,11 @@ struct TotalTargetAmountHeaderView: View {
 
     var body: some View {
         ZStack {
-            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+//            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
             VStack(spacing: 0) {
+//                Spacer().frame(height: 18)
+
                 VStack(alignment: .leading, spacing: 8 * DynamicSizeFactor.factor()) {
                     HStack {
                         Text("\(String(viewModel.currentData.year))년 \(viewModel.currentData.month)월 목표금액")
@@ -82,6 +84,8 @@ struct TotalTargetAmountHeaderView: View {
                         .padding(.top, 12)
                 }
                 
+                Spacer().frame(height: 4 * DynamicSizeFactor.factor())
+                
                 HStack {
                     HStack {
                         HStack(spacing: 4) {
@@ -106,11 +110,14 @@ struct TotalTargetAmountHeaderView: View {
                             .padding(.bottom, 12)
                     }
                 }
-   
-                NavigationLink(destination: TargetAmountSettingView(currentData: viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
-                    .hidden()
+                
+                Spacer().frame(height: 14 * DynamicSizeFactor.factor())
             }
+            
+            NavigationLink(destination: TargetAmountSettingView(currentData: viewModel.currentData, entryPoint: .afterLogin), isActive: $isnavigateToEditTargetView) {}
+                .hidden()
         }
+        .padding(.top, 15)
         .overlay(
             VStack(alignment: .leading) {
                 if isClickMenu {
@@ -132,9 +139,7 @@ struct TotalTargetAmountHeaderView: View {
             .offset(y: 30 * DynamicSizeFactor.factor()),
             alignment: .topTrailing
         )
-        .padding(.top, 18)
         .frame(maxWidth: .infinity)
-        .frame(height: 177 * DynamicSizeFactor.factor())
         .background(
             RoundedCornerUtil(radius: 8, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight])
                 .fill(Color("White01"))

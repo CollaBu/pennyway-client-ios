@@ -10,7 +10,7 @@ struct TotalTargetAmountContentView: View {
         VStack {
             Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-            VStack {
+            VStack(alignment: .leading) {
                 HStack {
                     Text("지난 사용 금액")
                         .font(.ButtonH4SemiboldFont())
@@ -32,7 +32,7 @@ struct TotalTargetAmountContentView: View {
                 }
                 .padding(.top, 18)
 
-                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
                 HStack(spacing: 12 * DynamicSizeFactor.factor()) {
                     HStack(spacing: 6 * DynamicSizeFactor.factor()) {
@@ -79,14 +79,18 @@ struct TotalTargetAmountContentView: View {
                     .foregroundColor(.clear)
                     .frame(maxWidth: 244 * DynamicSizeFactor.factor(), maxHeight: 0.5)
                     .background(Color("Gray02"))
-                
+                    .padding(.horizontal, 18 * DynamicSizeFactor.factor())
+
                 Spacer().frame(height: 24 * DynamicSizeFactor.factor())
 
                 Text("최근 3개월 동안 사용한 금액이에요")
-                    .font(.B2MediumFont())
-                    .platformTextColor(color: Color("Gray05"))
-                
-                ForEach(Array(viewModel.targetAmounts.prefix(6).enumerated()), id: \.offset) { _, content in
+                    .font(.B1SemiboldeFont())
+                    .platformTextColor(color: Color("Gray07"))
+                    .padding(.horizontal, 20)
+
+                Spacer().frame(height: 20 * DynamicSizeFactor.factor())
+
+                ForEach(Array(viewModel.targetAmounts.prefix(3).enumerated()), id: \.offset) { _, content in
                     VStack(alignment: .leading) {
                         Text("\(String(content.year))년 \(content.month)월")
                             .font(.B2MediumFont())
