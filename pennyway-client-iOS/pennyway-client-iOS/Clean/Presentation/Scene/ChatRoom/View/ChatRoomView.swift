@@ -85,19 +85,21 @@ struct ChatRoomView: View {
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
 
-            if isSideMenuPresented {
-                Color.black.opacity(0.3)
-                    .edgesIgnoringSafeArea(.all)
-                    .transition(.opacity)
-                    .onTapGesture {
-                        withAnimation {
-                            isSideMenuPresented = false
+            ZStack {
+                if isSideMenuPresented {
+                    Color(.black01)
+                        .edgesIgnoringSafeArea(.all)
+                        .transition(.opacity)
+                        .onTapGesture {
+                            withAnimation {
+                                isSideMenuPresented = false
+                            }
                         }
-                    }
-                ChatSideMenuView()
-                    .transition(.move(edge: .trailing))
-                    .animation(.easeInOut(duration: 0.3))
+                    ChatSideMenuView()
+                        .transition(.move(edge: .trailing))
+                }
             }
+            .animation(.easeInOut(duration: 0.3), value: isSideMenuPresented)
 
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
