@@ -15,7 +15,9 @@ struct TotalTargetAmountGraphView: View {
                     // 그래프 높이 계산
                     let totalHeight = (CGFloat(content.totalSpending) / CGFloat(maxSpending)) * maxHeight // 전체 높이
                     let targetHeight = min((CGFloat(content.targetAmountDetail.amount) / CGFloat(maxSpending)) * maxHeight, maxHeight) // 목표금액
-                    let spendingHeight = min((CGFloat(content.totalSpending - max(content.diffAmount, 0)) / CGFloat(maxSpending)) * maxHeight, maxHeight) // 소비금액
+
+                    let spendingHeight = (CGFloat(content.totalSpending - max(content.diffAmount, 0)) / CGFloat(maxSpending)) * maxHeight // 소비금액
+
                     let overHeight = (content.diffAmount > 0) ? (CGFloat(content.diffAmount) / CGFloat(maxSpending)) * maxHeight : 0 // 초과금액
 
                     VStack {
@@ -29,7 +31,6 @@ struct TotalTargetAmountGraphView: View {
                                 Rectangle()
                                     .platformTextColor(color: Color("Mint01"))
                                     .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
-                                    .border(Color.black)
                             }
 
                             // 사용 금액
@@ -41,7 +42,7 @@ struct TotalTargetAmountGraphView: View {
                             if overHeight > 0 {
                                 Rectangle()
                                     .platformTextColor(color: Color("Mint03"))
-                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: overHeight - spendingHeight)
+                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: abs(overHeight))
                             }
                         }
                         .clipShape(RoundedCornerUtil(radius: 4, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight]))
