@@ -136,7 +136,7 @@ struct TotalTargetAmountHeaderView: View {
                     ).padding(.trailing, 20)
                 }
             }
-            .offset(y: 30 * DynamicSizeFactor.factor()),
+            .offset(y: 40 * DynamicSizeFactor.factor()),
             alignment: .topTrailing
         )
         .frame(maxWidth: .infinity)

@@ -21,7 +21,6 @@ struct TotalTargetAmountView: View {
 
                 GeometryReader { geometry in
                     let offset = geometry.frame(in: .global).minY
-//                    setOffset(offset: offset)
 
                     TotalTargetAmountHeaderView(showingDeletePopUp: $showingDeletePopUp, viewModel: viewModel)
                         .background(Color("Gray01"))

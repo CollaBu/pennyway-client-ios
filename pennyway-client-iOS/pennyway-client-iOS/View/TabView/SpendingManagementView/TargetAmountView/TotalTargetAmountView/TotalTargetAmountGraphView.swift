@@ -13,17 +13,17 @@ struct TotalTargetAmountGraphView: View {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
 //                    let adjustedHeight = (maxSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxSpending) * maxHeight : 0 // 그래프 높이 조정
                     // 그래프 높이 계산
-                    let totalHeight = (CGFloat(content.totalSpending) / CGFloat(maxSpending)) * maxHeight
-                    let overHeight = (content.diffAmount > 0) ? (CGFloat(content.diffAmount) / CGFloat(maxSpending)) * maxHeight : 0
-                    let targetHeight = (content.targetAmountDetail.amount > 0) ? (CGFloat(content.targetAmountDetail.amount) / CGFloat(maxSpending)) * maxHeight : 0
-                    let spendingHeight = totalHeight - overHeight
+                    let totalHeight = (CGFloat(content.totalSpending) / CGFloat(maxSpending)) * maxHeight // 전체 높이
+                    let overHeight = (content.diffAmount > 0) ? (CGFloat(content.diffAmount) / CGFloat(maxSpending)) * maxHeight : 0 // 초과금액
+                    let targetHeight = (content.targetAmountDetail.amount > 0) ? (CGFloat(content.targetAmountDetail.amount) / CGFloat(maxSpending)) * maxHeight : 0 // 목표금액
+                    let spendingHeight = CGFloat(totalHeight - CGFloat(overHeight))
 
                     VStack {
                         Text("\(content.totalSpending / 10000)")
                             .font(.B3MediumFont())
                             .platformTextColor(color: determineColorGray04(for: content))
 
-                        ZStack {
+                        ZStack(alignment: .bottom) {
                             // 목표 금액
                             if targetHeight > 0 {
                                 Rectangle()
@@ -43,9 +43,7 @@ struct TotalTargetAmountGraphView: View {
                                     .frame(width: 26 * DynamicSizeFactor.factor(), height: overHeight)
                             }
                         }
-//                        Rectangle()
-//                            .frame(width: 26 * DynamicSizeFactor.factor(), height: adjustedHeight)
-//                            .platformTextColor(color: determineColorGray03(for: content))
+
                         .clipShape(RoundedCornerUtil(radius: 4, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight]))
 
                         if content.totalSpending != 0 {
@@ -90,7 +88,7 @@ struct TotalTargetAmountGraphView: View {
     func determineColorGray04(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             if content.targetAmountDetail.amount != -1 {
-                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
+                return content.diffAmount > 0 ? Color("Mint03") : Color("Mint03")
             }
             return Color("Mint03")
         } else {
@@ -101,7 +99,7 @@ struct TotalTargetAmountGraphView: View {
     func determineColorGray06(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             if content.targetAmountDetail.amount != -1 {
-                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
+                return content.diffAmount > 0 ? Color("Mint03") : Color("Mint03")
             }
             return Color("Mint03")
         } else {
