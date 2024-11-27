@@ -12,11 +12,7 @@ struct TotalTargetAmountHeaderView: View {
 
     var body: some View {
         ZStack {
-//            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
             VStack(spacing: 0) {
-//                Spacer().frame(height: 18)
-
                 VStack(alignment: .leading, spacing: 8 * DynamicSizeFactor.factor()) {
                     HStack {
                         Text("\(String(viewModel.currentData.year))년 \(viewModel.currentData.month)월 목표금액")
@@ -58,7 +54,7 @@ struct TotalTargetAmountHeaderView: View {
                 
                 Rectangle()
                     .foregroundColor(.clear)
-                    .frame(maxWidth: 244 * DynamicSizeFactor.factor(), maxHeight: 0.5)
+                    .frame(maxWidth: 244 * DynamicSizeFactor.factor(), maxHeight: 1)
                     .background(Color("Gray02"))
                 
                 HStack {
