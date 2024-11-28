@@ -3757,7 +3757,6 @@
 		};
 		4ACB61202CE4CC8A0018E78A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A3246562CF8943200DE023D /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3782,7 +3781,6 @@
 		};
 		4ACB61212CE4CC8A0018E78A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A3246572CF8943200DE023D /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
