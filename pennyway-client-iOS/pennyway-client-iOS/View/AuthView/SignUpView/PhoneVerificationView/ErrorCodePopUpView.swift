@@ -10,7 +10,7 @@ struct ErrorCodePopUpView: View {
 
     var body: some View {
         if showingPopUp {
-            Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
+            Color(.black01).edgesIgnoringSafeArea(.all)
         }
         PopupContent(imageSize: CGSize(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor()), frameHeight: 145 * DynamicSizeFactor.factor(), contentHeight: 70 * DynamicSizeFactor.factor(), titleLabel: titleLabel, subLabel: subLabel, showingPopUp: $showingPopUp)
     }

@@ -23,7 +23,7 @@ struct ChatContent: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                LazyVStack(spacing: 14 * DynamicSizeFactor.factor()) {
+                LazyVStack(spacing: 10 * DynamicSizeFactor.factor()) {
                     GeometryReader { geometry in
                         Color.clear
                             .onAppear {
@@ -54,20 +54,33 @@ struct ChatContent: View {
                     ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                         Section(header: ChatHeader(data: date)) {
-                            Spacer().frame(height: 3)
+                            let chatsForDate = groupedChatsByDate[date] ?? []
 
-                            ForEach(groupedChatsByDate[date] ?? []) { chat in
-                                if let sender = members.first(where: { $0.userId == chat.senderId }) {
+                            if chatsForDate[0].categoryType != CategoryType.system { // 첫번째 데이터가 system 아닌 경우 간격 적용
+                                Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+                            }
+
+                            ForEach(Array(chatsForDate.enumerated()), id: \.element.id) { index, chat in
+                                let hasPreviousChat = index > 0
+                                let hasNextChat = index < chatsForDate.count - 1
+                                let previousChatType = hasPreviousChat ? chatsForDate[index - 1].categoryType : nil
+                                let nextChatType = hasNextChat ? chatsForDate[index + 1].categoryType : nil
+
+                                if chat.categoryType == CategoryType.system {
+                                    if hasPreviousChat, previousChatType != .system {
+                                        Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+                                    }
+
+                                    ChatHeader(data: chat.content)
+
+                                    if !hasPreviousChat, hasNextChat, nextChatType != .system { // system 문구가 첫 데이터인 경우
+                                        Spacer().frame(height: 3 * DynamicSizeFactor.factor())
+                                    }
+                                } else if let sender = members.first(where: { $0.userId == chat.senderId }) {
                                     if chat.senderId == currentUserId {
                                         ChatSendCell(chat: chat, sender: sender)
                                     } else {
                                         ChatReceiveCell(chat: chat, sender: sender)
-                                    }
-                                } else {
-                                    Spacer().frame(height: 3)
-
-                                    if chat.categoryType == CategoryType.system {
-                                        ChatHeader(data: chat.content)
                                     }
                                 }
                             }
@@ -94,6 +107,9 @@ struct ChatContent: View {
             .onAppear {
                 // 처음 열릴 때 가장 아래로 스크롤
                 proxy.scrollTo("bottom", anchor: .bottom)
+            }
+            .onTapGesture {
+                UIApplication.shouldDismissKeyboard = true // 빈 화면 터치 시 키보드 닫기
             }
         }
     }

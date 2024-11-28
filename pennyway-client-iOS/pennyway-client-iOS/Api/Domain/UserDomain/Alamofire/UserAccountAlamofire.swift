@@ -27,7 +27,7 @@ class UserAccountAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.deleteUserAccount, completion: completion)
     }
 
-    func registDeviceToken(_ dto: FcmTokenDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+    func registDeviceToken(_ dto: DeviceInfoDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("UserAccountAlamofire - registDeviceToken() called")
 
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: UserAccountRouter.registDeviceToken(dto: dto), completion: completion)

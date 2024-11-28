@@ -14,6 +14,8 @@ struct ChatRoomView: View {
     @State private var isSideMenuPresented = false
     @EnvironmentObject var viewStateManager: ViewStateManager
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
+    @State private var isNavigateToMyChat = false
+    @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
 
     var chatRoom: ChatRoomProtocol
     private let currentUserId = getUserData()!.id
@@ -38,16 +40,27 @@ struct ChatRoomView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
-                        NavigationBackButton()
-                            .padding(.leading, 5)
-                            .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
+                        Button(action: {
+                            UIApplication.shouldDismissKeyboard = true
+                            isNavigateToMyChat = true
+                            viewModelWrapper.chatRoomViewModel.reset()
+                        }, label: {
+                            Image("icon_arrow_back")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 34, height: 34)
+                                .padding(5)
+                        })
+                        .padding(.leading, 5)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
                     }.offset(x: -10)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack {
                         Button(action: {
                             withAnimation {
+                                UIApplication.shouldDismissKeyboard = true
                                 isSideMenuPresented.toggle()
                             }
                         }, label: {
@@ -71,23 +84,25 @@ struct ChatRoomView: View {
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: Int64(chatRoom.id))
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
-            .onDisappear {
-                viewModelWrapper.chatRoomViewModel.reset()
-            }
 
-            if isSideMenuPresented {
-                Color.black.opacity(0.3)
-                    .edgesIgnoringSafeArea(.all)
-                    .transition(.opacity)
-                    .onTapGesture {
-                        withAnimation {
-                            isSideMenuPresented = false
+            ZStack {
+                if isSideMenuPresented {
+                    Color(.black01)
+                        .edgesIgnoringSafeArea(.all)
+                        .transition(.opacity)
+                        .onTapGesture {
+                            withAnimation {
+                                isSideMenuPresented = false
+                            }
                         }
-                    }
-                ChatSideMenuView()
-                    .transition(.move(edge: .trailing))
-                    .animation(.easeInOut(duration: 0.3))
+                    ChatSideMenuView()
+                        .transition(.move(edge: .trailing))
+                }
             }
+            .animation(.easeInOut(duration: 0.3), value: isSideMenuPresented)
+
+            NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
+                .hidden()
         }
     }
 }

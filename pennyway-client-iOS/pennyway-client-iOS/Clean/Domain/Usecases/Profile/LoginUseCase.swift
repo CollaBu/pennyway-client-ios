@@ -51,6 +51,7 @@ class DefaultLoginUseCase: LoginUseCase {
                     completion(false, nil)
                 }
             case let .failure(error):
+                Log.debug(error)
                 completion(false, error.localizedDescription)
             }
         }

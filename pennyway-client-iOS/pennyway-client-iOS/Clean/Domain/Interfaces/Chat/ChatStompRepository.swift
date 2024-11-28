@@ -12,4 +12,5 @@ protocol ChatStompRepository {
     func disconnect()
     func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void)
     func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, completion: @escaping (Result<Void, Error>) -> Void)
+    func subscribeToChatRoom(chatRoomId: Int64)
 }

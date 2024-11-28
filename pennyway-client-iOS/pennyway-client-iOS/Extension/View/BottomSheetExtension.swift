@@ -22,7 +22,7 @@ struct BottomSheet<SheetContent: View>: ViewModifier {
                         )
                 }
                 .background(
-                    Color.black.opacity(0.3)
+                    Color(.black01)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
                             isPresented = false
@@ -58,7 +58,7 @@ struct DragBottomSheet<SheetContent: View>: ViewModifier {
             content
 
             if isPresented {
-                Color.black.opacity(0.3)
+                Color(.black01)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         isPresented = false
