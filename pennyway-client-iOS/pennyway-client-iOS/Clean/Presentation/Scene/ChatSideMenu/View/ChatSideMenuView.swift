@@ -40,6 +40,7 @@ struct ChatSideMenuView: View {
                                 secondBtnLabel: "나가기",
                                 secondBtnColor: Color("Red03")
                 )
+                .edgesIgnoringSafeArea(.vertical)
             }
         }
         .edgesIgnoringSafeArea(.bottom)
