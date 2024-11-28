@@ -10,20 +10,31 @@ on:
 
 # workflow가 어떻게 실행될지에 대한 설명(How)
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    runs-on: macos-latest
+  build: # 빌드 및 테스트 작업 정의
+    runs-on: macos-latest # macOS 환경에서 워크플로 실행 (iOS 프로젝트를 위해 macOS 필요)
+    
+    defaults:
+      run:
+        working-directory: ./pennyway-client-iOS # 작업 디렉토리를 fastlane이 포함된 iOS 프로젝트 폴더로 설정
+
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2 # 리포지토리 코드를 현재 작업 디렉토리로 체크아웃
 
-    # ruby 설치
-    - uses: ruby/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1 # Ruby 환경 설정
       with:
-        ruby-version: 2.7
+        ruby-version: 2.7 # 프로젝트에서 사용할 Ruby 버전 명시
 
-    # fastlane 설치
-    - name: Install Fastlane
+    - name: Install Bundler # Ruby 의존성 관리 도구(Bundler) 설치
+      run: gem install bundler
+
+    - name: Install Fastlane # Fastlane 설치 (iOS CI/CD를 위한 도구)
       run: brew install fastlane
 
-    - name: fastlane tests run
-      run: fastlane tests
+    - name: Verify Fastlane Installation # Fastlane이 제대로 설치되었는지 확인
+      run: fastlane --version
+
+    - name: Install dependencies # Gemfile에 정의된 Ruby 의존성 설치
+      run: bundle install
+
+    - name: Run tests with Fastlane # Fastlane을 사용해 테스트 실행
+      run: bundle exec fastlane tests
