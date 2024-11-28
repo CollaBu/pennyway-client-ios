@@ -25,7 +25,7 @@ jobs:
         ruby-version: 2.7 # 프로젝트에서 사용할 Ruby 버전 명시
 
     - name: Install Bundler # Ruby 의존성 관리 도구(Bundler) 설치
-      run: gem install bundler
+      run: gem install bundler -v 2.4.22
 
     - name: Install Fastlane # Fastlane 설치 (iOS CI/CD를 위한 도구)
       run: brew install fastlane
@@ -34,7 +34,7 @@ jobs:
       run: fastlane --version
 
     - name: Install dependencies # Gemfile에 정의된 Ruby 의존성 설치
-      run: bundle install
+      run: bundle _2.4.22_ install
 
     - name: Run tests with Fastlane # Fastlane을 사용해 테스트 실행
       run: bundle exec fastlane tests
