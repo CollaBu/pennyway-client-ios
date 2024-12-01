@@ -24,9 +24,6 @@ jobs:
       with:
         ruby-version: 2.7 # 프로젝트에서 사용할 Ruby 버전 명시
         
-    - name: path check
-      run: pwd
-        
     - name: Create Test.xcconfig
       run: echo "${{ secrets.TEST_CONFIG }}" > ./pennyway-client-iOS/Xcconfig/Test.xcconfig
 
