@@ -44,7 +44,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4ACB61192CE4CC8A0018E78A"
+               BlueprintIdentifier = "4A7B3F632CFC61AF009B85E0"
                BuildableName = "pennyway-client-iOSTests.xctest"
                BlueprintName = "pennyway-client-iOSTests"
                ReferencedContainer = "container:pennyway-client-iOS.xcodeproj">

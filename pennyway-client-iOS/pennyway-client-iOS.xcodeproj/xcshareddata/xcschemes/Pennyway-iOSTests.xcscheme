@@ -9,17 +9,17 @@
    </BuildAction>
    <TestAction
       buildConfiguration = "Test"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
-            skipped = "YES"
+            skipped = "NO"
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4A7B3F632CFC61AF009B85E0"
+               BlueprintIdentifier = "4A7B3F742CFC9B99009B85E0"
                BuildableName = "pennyway-client-iOSTests.xctest"
                BlueprintName = "pennyway-client-iOSTests"
                ReferencedContainer = "container:pennyway-client-iOS.xcodeproj">
@@ -29,8 +29,8 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Test"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -54,6 +54,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4A762AE82B99A16B001C1188"
+            BuildableName = "pennyway-client-iOS.app"
+            BlueprintName = "pennyway-client-iOS"
+            ReferencedContainer = "container:pennyway-client-iOS.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Test">
