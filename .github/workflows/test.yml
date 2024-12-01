@@ -23,6 +23,9 @@ jobs:
     - uses: ruby/setup-ruby@v1 # Ruby 환경 설정
       with:
         ruby-version: 2.7 # 프로젝트에서 사용할 Ruby 버전 명시
+        
+    - name: Create Test.xcconfig
+      run: echo "${{ secrets.TEST_CONFIG }}" > ./pennyway-client-iOS/pennyway-client-iOS/Xcconfig/Test.xcconfig
 
     - name: Install Bundler # Ruby 의존성 관리 도구(Bundler) 설치
       run: gem install bundler -v 2.4.22
