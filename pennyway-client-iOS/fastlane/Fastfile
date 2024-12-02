@@ -21,4 +21,13 @@ platform :ios do
   lane :tests do
     run_tests(scheme: "Pennyway-iOSTests")
   end
+
+  desc "Runs `pod install`"
+  
+  lane :pod_install do
+    cocoapods(
+      clean_install: true,
+      podfile: "./Podfile"
+  )
+  end
 end
