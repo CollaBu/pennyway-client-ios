@@ -72,7 +72,27 @@ class DefaultChatStompRepository: ChatStompRepository {
 
     /// 뷰 상태를 전달하는 메서드
     func sendViewState(status: String, chatRoomId: Int64?) {
-        Log.debug("[DefaultChatStompRepository] view state: \(status) \(String(describing: chatRoomId))")
+        let destination = "/pub/status.me"
+        let headers = createSendHeaders()
+
+        var messageBody: [String: Any] = [
+            "status": status
+        ]
+
+        // chatRoomId가 nil값이 아닌 경우 body에 포함
+        if let chatRoomId = chatRoomId {
+            messageBody["chatRoomId"] = chatRoomId
+        }
+
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
+                Log.debug("📤 [Send User State] \(jsonString)")
+            }
+        } catch {
+            Log.error("Failed to serialize message body: \(error)")
+        }
     }
 }
 
