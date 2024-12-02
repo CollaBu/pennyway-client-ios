@@ -10,7 +10,7 @@ import StompClientLib
 
 // MARK: - DefaultChatStompRepository
 
-class DefaultChatStompRepository: NSObject, ChatStompRepository {
+class DefaultChatStompRepository: ChatStompRepository {
     private let stompClient: StompClientLib
 
     init(stompClient: StompClientLib) {
@@ -68,6 +68,11 @@ class DefaultChatStompRepository: NSObject, ChatStompRepository {
         let chatRoomReceiptId = "chat-room-receipt-\(UUID().uuidString)"
         let destination = "/sub/chat.room.\(chatRoomId)"
         stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": chatRoomReceiptId])
+    }
+
+    /// 뷰 상태를 전달하는 메서드
+    func sendViewState(status: String, chatRoomId: Int64?) {
+        Log.debug("[DefaultChatStompRepository] view state: \(status) \(String(describing: chatRoomId))")
     }
 }
 
@@ -174,14 +179,14 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidDisconnect(client _: StompClientLib!) {
         Log.debug("Socket disconnected")
 
-        connect { result in
-            switch result {
-            case .success:
-                Log.debug("[DefaultChatStompRepository] 재연결 시도 성공")
-            case let .failure(error):
-                Log.error("재연결 시도 실패: \(error)")
-            }
-        }
+//        connect { result in
+//            switch result {
+//            case .success:
+//                Log.debug("[DefaultChatStompRepository] 재연결 시도 성공")
+//            case let .failure(error):
+//                Log.error("재연결 시도 실패: \(error)")
+//            }
+//        }
     }
 
     func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader _: [String: String]?, withDestination _: String) {

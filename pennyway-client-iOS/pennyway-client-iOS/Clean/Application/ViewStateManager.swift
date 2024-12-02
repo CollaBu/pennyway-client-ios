@@ -9,17 +9,19 @@ import SwiftUI
 
 // MARK: - CurrentViewType
 
-enum CurrentViewType {
-    case activeNonChat // MainChatView와 ChatView를 제외한 모든 뷰
-    case activeChatRoomCell // MainChatView일 경우(추천 채팅 제외)
-    case activeChatRoom // ChatView일 경우
-    case inactive
-    case background
+enum CurrentViewType: String {
+    case activeNonChat = "ACTIVE_APP" // MainChatView와 ChatView를 제외한 모든 뷰
+    case activeChatRoomCell = "ACTIVE_CHAT_ROOM_LIST" // MainChatView일 경우(추천 채팅 제외)
+    case activeChatRoom = "ACTIVE_CHAT_ROOM" // ChatView일 경우
+    case inactive = "INACTIVE"
+    case background = "BACKGROUND"
 }
 
 // MARK: - ViewStateManager
 
 class ViewStateManager: ObservableObject {
+    private let chatStompService = DefaultChatStompService.shared
+
     /// 현재 활성화된 뷰 타입을 저장하는 변수 (기본값: activeApp)
     @Published var currentViewType: CurrentViewType = .activeNonChat
     /// 현재 표시되고 있는 뷰를 저장하는 변수
@@ -28,7 +30,7 @@ class ViewStateManager: ObservableObject {
     /// 현재 뷰 설정 함수
     /// - parameter view: 새로운 뷰를 받아와서 currentView에 설정함
     /// - parameter selectedTab: 선택된 탭, nil일 수 있음
-    func setCurrentView(_ view: some View, selectedTab: Int? = nil) {
+    func setCurrentView(_ view: some View, selectedTab: Int? = nil, chatRoomId: Int64? = nil) {
         currentView = AnyView(view)
 
         if view is ChatCellView {
@@ -46,6 +48,8 @@ class ViewStateManager: ObservableObject {
             currentViewType = .activeNonChat
             Log.info("[ViewStateManager] View state: activeNonChat")
         }
+
+        chatStompService.sendViewState(status: currentViewType.rawValue, chatRoomId: chatRoomId)
     }
 
     /// 앱의 화면 상태(ScenePhase)에 따른 처리
@@ -64,5 +68,7 @@ class ViewStateManager: ObservableObject {
         @unknown default:
             currentViewType = .activeNonChat
         }
+
+        chatStompService.sendViewState(status: currentViewType.rawValue, chatRoomId: nil)
     }
 }
