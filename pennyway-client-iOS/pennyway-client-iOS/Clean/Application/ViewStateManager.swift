@@ -21,15 +21,20 @@ enum CurrentViewType: String {
 
 class ViewStateManager: ObservableObject {
     private let chatStompService = DefaultChatStompService.shared
+    private var lastViewType: CurrentViewType = .activeNonChat
+    private var lastChatRoomId: Int64? = nil
 
     /// 현재 활성화된 뷰 타입을 저장하는 변수 (기본값: activeApp)
-    @Published var currentViewType: CurrentViewType = .activeNonChat
+    var currentViewType: CurrentViewType = .activeNonChat
+
     /// 현재 표시되고 있는 뷰를 저장하는 변수
-    @Published var currentView: AnyView?
+    var currentView: AnyView?
 
     /// 현재 뷰 설정 함수
-    /// - parameter view: 새로운 뷰를 받아와서 currentView에 설정함
-    /// - parameter selectedTab: 선택된 탭, nil일 수 있음
+    /// - Parameters:
+    ///   - view: 새로운 뷰를 받아와서 currentView에 설정
+    ///   - selectedTab: 선택된 탭 (기본값: nil)
+    ///   - chatRoomId: 선택된 채팅방 ID (기본값: nil)
     func setCurrentView(_ view: some View, selectedTab: Int? = nil, chatRoomId: Int64? = nil) {
         currentView = AnyView(view)
 
@@ -44,11 +49,13 @@ class ViewStateManager: ObservableObject {
         } else if view is ChatRoomView {
             currentViewType = .activeChatRoom
             Log.info("[ViewStateManager] View state: activeChatRoom")
-        } else {
+        }  else {
             currentViewType = .activeNonChat
             Log.info("[ViewStateManager] View state: activeNonChat")
         }
 
+        lastViewType = currentViewType
+        lastChatRoomId = chatRoomId
         chatStompService.sendViewState(status: currentViewType.rawValue, chatRoomId: chatRoomId)
     }
 
@@ -57,18 +64,16 @@ class ViewStateManager: ObservableObject {
     func setScenePhase(_ phase: ScenePhase) {
         switch phase {
         case .active:
-            currentViewType = .activeNonChat
-            Log.info("[ViewStateManager - setScenePhase] View state: activeNonChat")
-        case .inactive:
-            currentViewType = .inactive
-            Log.info("[ViewStateManager - setScenePhase] View state: inactive")
-        case .background:
+            currentViewType = lastViewType
+            Log.info("[ViewStateManager - setScenePhase] View state: \(currentViewType.rawValue)")
+        case .inactive, .background:
             currentViewType = .background
             Log.info("[ViewStateManager - setScenePhase] View state: background")
         @unknown default:
             currentViewType = .activeNonChat
         }
 
-        chatStompService.sendViewState(status: currentViewType.rawValue, chatRoomId: nil)
+        chatStompService.sendViewState(status: currentViewType.rawValue, chatRoomId: currentViewType == .activeChatRoom ? lastChatRoomId : nil)
+        
     }
 }

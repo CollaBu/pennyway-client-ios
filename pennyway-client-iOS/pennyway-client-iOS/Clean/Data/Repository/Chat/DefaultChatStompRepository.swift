@@ -47,7 +47,7 @@ class DefaultChatStompRepository: ChatStompRepository {
             let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
-                Log.debug("📤 [Send Message])")
+                Log.info("📤 [Send Message])")
             }
         } catch {
             Log.error("Failed to serialize message body: \(error)")
@@ -60,7 +60,7 @@ class DefaultChatStompRepository: ChatStompRepository {
         let headers = createSendHeaders()
 
         stompClient.sendMessage(message: "", toDestination: destination, withHeaders: headers, withReceipt: nil)
-        Log.debug("📤 [Send Last Message])")
+        Log.info("📤 [Send Last Message])")
     }
 
     /// 채팅방 ID 에 대한 구독을 설정하는 메서드
@@ -88,7 +88,7 @@ class DefaultChatStompRepository: ChatStompRepository {
             let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
-                Log.debug("📤 [Send User State] \(jsonString)")
+                Log.info("📤 [Send User State] \(jsonString)")
             }
         } catch {
             Log.error("Failed to serialize message body: \(error)")
@@ -191,26 +191,26 @@ extension DefaultChatStompRepository {
 
 extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidConnect(client _: StompClientLib!) {
-        Log.debug("Socket connected")
+        Log.info("Socket connected")
         subscribeToErrors()
         getJoinedChatRooms()
     }
 
     func stompClientDidDisconnect(client _: StompClientLib!) {
-        Log.debug("Socket disconnected")
+        Log.info("Socket disconnected")
 
-//        connect { result in
-//            switch result {
-//            case .success:
-//                Log.debug("[DefaultChatStompRepository] 재연결 시도 성공")
-//            case let .failure(error):
-//                Log.error("재연결 시도 실패: \(error)")
-//            }
-//        }
+        connect { result in
+            switch result {
+            case .success:
+                Log.debug("[DefaultChatStompRepository] 재연결 시도 성공")
+            case let .failure(error):
+                Log.error("재연결 시도 실패: \(error)")
+            }
+        }
     }
 
     func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader _: [String: String]?, withDestination _: String) {
-        Log.debug("Did receive Message: \(body), \(akaStringBody)")
+        Log.info("Did receive Message: \(body), \(akaStringBody)")
 
         if let body = body as? [String: Any],
            let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []),
@@ -231,7 +231,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     }
 
     func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
-        Log.debug("Receipt received: \(receiptId)")
+        Log.info("Receipt received: \(receiptId)")
     }
 
     func serverDidSendError(client _: StompClientLib!, withErrorMessage description: String, detailedErrorMessage _: String?) {
@@ -239,6 +239,6 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     }
 
     func serverDidSendPing() {
-        Log.debug("Server ping received")
+        Log.info("Server ping received")
     }
 }
