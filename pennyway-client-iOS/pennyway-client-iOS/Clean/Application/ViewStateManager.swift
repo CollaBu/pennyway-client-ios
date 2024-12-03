@@ -49,7 +49,10 @@ class ViewStateManager: ObservableObject {
         } else if view is ChatRoomView {
             currentViewType = .activeChatRoom
             Log.info("[ViewStateManager] View state: activeChatRoom")
-        }  else {
+        } else if view is LoginView {
+            currentViewType = .inactive
+            Log.info("[ViewStateManager] View state: inactive")
+        } else {
             currentViewType = .activeNonChat
             Log.info("[ViewStateManager] View state: activeNonChat")
         }
@@ -74,6 +77,5 @@ class ViewStateManager: ObservableObject {
         }
 
         chatStompService.sendViewState(status: currentViewType.rawValue, chatRoomId: currentViewType == .activeChatRoom ? lastChatRoomId : nil)
-        
     }
 }
