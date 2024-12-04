@@ -77,11 +77,11 @@ struct ChatRoomView: View {
                 }
             }
             .onAppear {
-                viewStateManager.setCurrentView(self)
                 viewModelWrapper.chatRoomViewModel.roomData.value = chatRoom // 현재 채팅방 정보 저장
+                viewStateManager.setCurrentView(self, chatRoomId: viewModelWrapper.roomData?.id)
 
                 // 채팅방 상세 정보 조회
-                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: Int64(chatRoom.id))
+                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
 
