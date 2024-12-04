@@ -85,9 +85,6 @@
 		4A2C3A8B2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */; };
 		4A2C3A8D2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C3A8C2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift */; };
 		4A2C8B5C2CDC7F3C007816A9 /* SendChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2C8B5B2CDC7F3C007816A9 /* SendChatUseCase.swift */; };
-		4A32465A2CF8943200DE023D /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A3246562CF8943200DE023D /* Debug.xcconfig */; };
-		4A32465B2CF8943200DE023D /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A3246572CF8943200DE023D /* Release.xcconfig */; };
-		4A32465C2CF8943200DE023D /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A3246582CF8943200DE023D /* Secrets.xcconfig */; };
 		4A3560762BEB9C8200BA58F3 /* OAuthUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */; };
 		4A3560782BEBA1D000BA58F3 /* UserAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */; };
 		4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */; };
@@ -321,6 +318,9 @@
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
 		4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */; };
 		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
+		6AAB57E62D00441F007C40C7 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */; };
+		6AAB57E72D00441F007C40C7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E42D00441F007C40C7 /* Debug.xcconfig */; };
+		6AAB57E82D00441F007C40C7 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E52D00441F007C40C7 /* Release.xcconfig */; };
 		7C0E38D4CE51A896B5A498EE /* Pods_pennyway_client_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */; };
 		B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */; };
 		B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */; };
@@ -556,9 +556,6 @@
 		4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJoinedChatRoomsRequestDto.swift; sourceTree = "<group>"; };
 		4A2C3A8C2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJoinedChatRoomsResponseDto.swift; sourceTree = "<group>"; };
 		4A2C8B5B2CDC7F3C007816A9 /* SendChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChatUseCase.swift; sourceTree = "<group>"; };
-		4A3246562CF8943200DE023D /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		4A3246572CF8943200DE023D /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		4A3246582CF8943200DE023D /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A3560752BEB9C8200BA58F3 /* OAuthUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUserData.swift; sourceTree = "<group>"; };
 		4A3560772BEBA1CF00BA58F3 /* UserAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A3560792BEBA25100BA58F3 /* UserAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthRouter.swift; sourceTree = "<group>"; };
@@ -788,6 +785,9 @@
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
+		6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		6AAB57E42D00441F007C40C7 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		6AAB57E52D00441F007C40C7 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnalyticsEvents.swift; sourceTree = "<group>"; };
@@ -1516,9 +1516,9 @@
 		4A3246592CF8943200DE023D /* Xcconfig */ = {
 			isa = PBXGroup;
 			children = (
-				4A3246562CF8943200DE023D /* Debug.xcconfig */,
-				4A3246572CF8943200DE023D /* Release.xcconfig */,
-				4A3246582CF8943200DE023D /* Secrets.xcconfig */,
+				6AAB57E42D00441F007C40C7 /* Debug.xcconfig */,
+				6AAB57E52D00441F007C40C7 /* Release.xcconfig */,
+				6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */,
 			);
 			path = Xcconfig;
 			sourceTree = "<group>";
@@ -2994,22 +2994,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AAB57E82D00441F007C40C7 /* Release.xcconfig in Resources */,
+				6AAB57E62D00441F007C40C7 /* Secrets.xcconfig in Resources */,
 				D846A29B2CEDD16D000B9BBC /* .gitignore in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
-				4A32465A2CF8943200DE023D /* Debug.xcconfig in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
-				4A32465C2CF8943200DE023D /* Secrets.xcconfig in Resources */,
+				6AAB57E72D00441F007C40C7 /* Debug.xcconfig in Resources */,
 				D80DB7882CF5FFC30052F234 /* GoogleService-Info.plist in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
-				4A32465B2CF8943200DE023D /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3671,7 +3671,7 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A3246562CF8943200DE023D /* Debug.xcconfig */;
+			baseConfigurationReference = 6AAB57E42D00441F007C40C7 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3719,7 +3719,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A3246572CF8943200DE023D /* Release.xcconfig */;
+			baseConfigurationReference = 6AAB57E52D00441F007C40C7 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3766,6 +3766,7 @@
 		};
 		4ACB61202CE4CC8A0018E78A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AAB57E42D00441F007C40C7 /* Debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -3790,7 +3791,7 @@
 		};
 		4ACB61212CE4CC8A0018E78A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A3246572CF8943200DE023D /* Release.xcconfig */;
+			baseConfigurationReference = 6AAB57E52D00441F007C40C7 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
