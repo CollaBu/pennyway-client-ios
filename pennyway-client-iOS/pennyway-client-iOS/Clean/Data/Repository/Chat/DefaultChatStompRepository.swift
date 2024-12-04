@@ -136,7 +136,8 @@ extension DefaultChatStompRepository {
         return [
             "Authorization": "Bearer \(accessToken)",
             "device-id": "\(deviceId)",
-            "device-name": "\(deviceName)"
+            "device-name": "\(deviceName)",
+            "heart-beat": "25000,25000"
         ]
     }
 
