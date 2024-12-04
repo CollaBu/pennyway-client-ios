@@ -35,8 +35,6 @@ class TotalTargetAmountViewModel: ObservableObject {
                         // 뒤에서 6개의 데이터 중 최대값을 maxTotalSpending에 설정
                         let lastSixTargetAmounts = Array(self.sortTargetAmounts.suffix(6))
                         self.maxTotalSpending = lastSixTargetAmounts.map { Int($0.totalSpending) }.max() ?? 0
-
-                        self.maxTotalSpending = lastSixTargetAmounts.map { Int($0.totalSpending) }.max() ?? 0
                         self.maxDiffAmount = lastSixTargetAmounts.map { Int($0.diffAmount) }.max() ?? 0
                         self.maxTargetAmount = lastSixTargetAmounts.map { Int($0.targetAmountDetail.amount) }.max() ?? 0
 

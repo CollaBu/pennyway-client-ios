@@ -6,7 +6,6 @@ struct TotalTargetAmountGraphView: View {
     var body: some View {
         let maxHeight = 112 * DynamicSizeFactor.factor() // 최대 높이
         let maxTotalSpending = max(viewModel.maxTotalSpending, 100_000) // 최소값을 100000으로 설정
-        let maxDiffAmount = max(viewModel.maxDiffAmount, 100_000)
         let maxTargetAmount = max(viewModel.maxTargetAmount, 100_000)
 
         HStack(spacing: 14 * DynamicSizeFactor.factor()) {
@@ -14,10 +13,8 @@ struct TotalTargetAmountGraphView: View {
                 if index >= 6 - viewModel.sortTargetAmounts.count {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
                     let spendingHeight = (maxTotalSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxTotalSpending) * maxHeight : 0 // 소비금액 그래프 높이 조정
-
                     let targetHeight = (maxTargetAmount > 0) ? CGFloat(content.targetAmountDetail.amount) / CGFloat(maxTargetAmount) * maxHeight : 0 // 목표금액 그래프 높이 조정
-
-                    let overHeight = (maxDiffAmount > 0) ? CGFloat(content.diffAmount) / CGFloat(maxDiffAmount) * maxHeight : 0 // 초과금액 그래프 높이 조정
+                    let overHeight = (maxTotalSpending > 0) ? CGFloat(content.diffAmount) / CGFloat(maxTotalSpending) * maxHeight : 0 // 초과금액 그래프 높이 조정
 
                     VStack {
                         Text("\(content.totalSpending / 10000)")
@@ -26,7 +23,8 @@ struct TotalTargetAmountGraphView: View {
 
                         ZStack(alignment: .bottom) {
                             // 목표 금액
-                            if targetHeight > 0 {
+                            // 조건 - 목표금액이 사용금액보다 큰 경우에만 표시되도록 
+                            if content.targetAmountDetail.amount > content.totalSpending {
                                 Rectangle()
                                     .platformTextColor(color: Color("Mint01"))
                                     .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
