@@ -39,7 +39,7 @@ enum Log {
 
     private static func log(_ message: Any, level: Level) {
         let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: level.category)
-        let logMessage = "\(message)"
+        let logMessage = "\(level.category): \(message)" // 메시지에 카테고리 포함
 
         switch level {
         case .default:
