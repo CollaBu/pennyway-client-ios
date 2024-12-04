@@ -8,6 +8,8 @@ class TotalTargetAmountViewModel: ObservableObject {
     @Published var targetAmounts: [TargetAmount] = [] // 내림차순 데이터
     @Published var sortTargetAmounts: [TargetAmount] = [] // 오름차순 정렬
     @Published var maxTotalSpending = 0
+    @Published var maxDiffAmount = 0 // 최대 초과금액
+    @Published var maxTargetAmount = 0 // 최대 목표금액
     @Published var currentData: TargetAmount = .init(year: 0, month: 0, targetAmountDetail: AmountDetail(id: -1, amount: -1, isRead: false), totalSpending: 0, diffAmount: 0) // 당월 데이터
 
     func getTotalTargetAmountApi(completion: @escaping (Bool) -> Void) {
@@ -33,6 +35,10 @@ class TotalTargetAmountViewModel: ObservableObject {
                         // 뒤에서 6개의 데이터 중 최대값을 maxTotalSpending에 설정
                         let lastSixTargetAmounts = Array(self.sortTargetAmounts.suffix(6))
                         self.maxTotalSpending = lastSixTargetAmounts.map { Int($0.totalSpending) }.max() ?? 0
+
+                        self.maxTotalSpending = lastSixTargetAmounts.map { Int($0.totalSpending) }.max() ?? 0
+                        self.maxDiffAmount = lastSixTargetAmounts.map { Int($0.diffAmount) }.max() ?? 0
+                        self.maxTargetAmount = lastSixTargetAmounts.map { Int($0.targetAmountDetail.amount) }.max() ?? 0
 
                         if let firstTargetAmount = self.targetAmounts.first {
                             self.currentData = firstTargetAmount
