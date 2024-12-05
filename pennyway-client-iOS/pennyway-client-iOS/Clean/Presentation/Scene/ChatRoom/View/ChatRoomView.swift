@@ -28,7 +28,7 @@ struct ChatRoomView: View {
                         .frame(height: geometry.size.height - keyboardManager.keyboardHeight) // ChatContent의 높이를 키보드 높이만큼 조정
                 }
 
-                ChatBottomBar()
+                ChatBottomBar(keyboardHeight: keyboardManager.keyboardHeight)
                     .offset(y: -keyboardManager.keyboardHeight)
                     .animation(keyboardManager.keyboardHeight > 0 ? .easeOut(duration: 0.5) : nil, value: keyboardManager.keyboardHeight)
             }
