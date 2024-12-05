@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ChatBottomBar: View {
+    var keyboardHeight = 0.0
+
     @State private var message: String = ""
     @State private var showFeature: Bool = false
     @State private var currentTextEditorHeight: CGFloat = 14 * DynamicSizeFactor.factor()
     @State private var maxTextWidth: CGFloat = 0
 
     // TextEditor의 최소, 최대 높이 정의
-    private let minHeight: CGFloat = 15 * DynamicSizeFactor.factor() // 최소 높이
+    private let minHeight: CGFloat = 14 * DynamicSizeFactor.factor() // 최소 높이
     private let maxHeight: CGFloat = 14 * DynamicSizeFactor.factor() * 3 // 최대 높이 (3줄)
     private let maxLineCount: Int = 3 // 최대 줄 수
 
@@ -50,7 +52,7 @@ struct ChatBottomBar: View {
 
     var body: some View {
         VStack {
-            Spacer().frame(height: 11 * DynamicSizeFactor.factor())
+            Spacer().frame(height: 10 * DynamicSizeFactor.factor())
 
             HStack(spacing: 4) {
                 FeatureButton
@@ -155,7 +157,11 @@ struct ChatBottomBar: View {
                 }
                 Spacer().frame(height: 20 * DynamicSizeFactor.factor())
             } else {
-                Spacer().frame(height: 19 * DynamicSizeFactor.factor())
+                if keyboardHeight > 0 {
+                    Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                } else {
+                    Spacer().frame(height: 22 * DynamicSizeFactor.factor())
+                }
             }
         }
     }
