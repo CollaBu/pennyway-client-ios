@@ -32,7 +32,7 @@ struct TotalTargetAmountGraphView: View {
 
                             // 사용 금액
                             Rectangle()
-                                .platformTextColor(color: Color("mint02"))
+                                .platformTextColor(color: Color("Mint02"))
                                 .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
 
                             // 초과 금액
