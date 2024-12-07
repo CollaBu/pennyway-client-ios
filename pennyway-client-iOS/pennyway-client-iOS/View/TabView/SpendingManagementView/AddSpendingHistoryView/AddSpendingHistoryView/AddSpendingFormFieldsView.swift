@@ -55,15 +55,8 @@ struct MemoInputView: View {
                 RoundedRectangle(cornerRadius: 4)
                     .fill(Color("Gray01"))
                     .frame(height: 104 * DynamicSizeFactor.factor())
-
+                
                 TextEditor(text: $memoText)
-//                CustomTextFieldModifier(
-//                    text: $memoText,
-//                    isSecureText: false, keyboardType: .default
-//                )
-//                
-//                .offset(x: 3 * DynamicSizeFactor.factor(), y: -32 * DynamicSizeFactor.factor())
-//                .font(.H4MediumFont())
                     .padding(.horizontal, 8 * DynamicSizeFactor.factor())
                     .padding(.vertical, 5 * DynamicSizeFactor.factor())
                     .zIndex(0)
@@ -75,8 +68,8 @@ struct MemoInputView: View {
                         if memoText.count > maxCharacterCount {
                             memoText = String(memoText.prefix(maxCharacterCount))
                         }
-                    }
-                    .frame(height: 104 * DynamicSizeFactor.factor())
+                }
+                .frame(height: 104 * DynamicSizeFactor.factor())
 
                 if memoText.isEmpty {
                     Text(placeholder)
