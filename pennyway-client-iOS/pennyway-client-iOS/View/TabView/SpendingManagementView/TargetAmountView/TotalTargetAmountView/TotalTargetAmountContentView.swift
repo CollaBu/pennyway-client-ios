@@ -48,7 +48,7 @@ struct TotalTargetAmountContentView: View {
                     HStack(spacing: 6 * DynamicSizeFactor.factor()) {
                         Circle()
                             .frame(width: 6 * DynamicSizeFactor.factor(), height: 6 * DynamicSizeFactor.factor())
-                            .platformTextColor(color: Color("mint02"))
+                            .platformTextColor(color: Color("Mint02"))
 
                         Text("소비금액")
                             .platformTextColor(color: Color("Gray04"))
