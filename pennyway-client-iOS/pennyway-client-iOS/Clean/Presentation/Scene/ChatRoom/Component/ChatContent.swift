@@ -51,7 +51,15 @@ struct ChatContent: View {
                         ReloadView(action: retryLoadPreviousChat)
                     }
 
-                    ForEach(groupedChatsByDate.keys.sorted(), id: \.self) { date in
+                    ForEach(groupedChatsByDate.keys.sorted(by: { lhs, rhs in
+                        guard
+                            let date1 = Date.chatDateFormatter().date(from: lhs),
+                            let date2 = Date.chatDateFormatter().date(from: rhs)
+                        else {
+                            return false
+                        }
+                        return date1 < date2
+                    }), id: \.self) { date in
                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                         Section(header: ChatHeader(data: date)) {
                             let chatsForDate = groupedChatsByDate[date] ?? []
