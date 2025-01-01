@@ -23,24 +23,51 @@ struct TotalTargetAmountGraphView: View {
 
                         ZStack(alignment: .bottom) {
                             // 목표 금액
-                            // 조건 - 목표금액이 사용금액보다 큰 경우에만 표시되도록 
-                            if content.targetAmountDetail.amount > content.totalSpending {
+                            // 조건 - 목표금액이 사용금액보다 큰 경우에만 표시되도록
+                            // 소비 금액이 목표 금액보다 클 경우 전체를 빨간색으로 표시
+                            if content.targetAmountDetail.amount != -1 && content.totalSpending > content.targetAmountDetail.amount {
                                 Rectangle()
-                                    .platformTextColor(color: Color("Mint01"))
-                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
-                            }
-
-                            // 사용 금액
-                            Rectangle()
-                                .platformTextColor(color: Color("Mint02"))
-                                .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
-
-                            // 초과 금액
-                            if overHeight > 0 {
+                                    .platformTextColor(color: Color("Red03"))
+                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
+                            } else if content.targetAmountDetail.amount == -1 { // 목표 금액이 없는 경우 소비 금액만 표시
                                 Rectangle()
                                     .platformTextColor(color: Color("Mint03"))
+                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
+                            } else {
+                                // 목표 금액 선 표시
+                                Rectangle()
+                                    .platformTextColor(color: Color("Gray01"))
+                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
+
+                                // 소비 금액 표시
+                                Rectangle()
+                                    .platformTextColor(color: Color("Mint03"))
+                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
+                            }
+
+                            // 초과 금액 표시
+                            if content.diffAmount > 0 {
+                                Rectangle()
+                                    .platformTextColor(color: Color("Red03"))
                                     .frame(width: 26 * DynamicSizeFactor.factor(), height: overHeight)
                             }
+//                            if content.targetAmountDetail.amount > content.totalSpending {
+//                                Rectangle()
+//                                    .platformTextColor(color: Color("Gray01"))
+//                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
+//                            }
+//
+//                            // 사용 금액
+//                            Rectangle()
+//                                .platformTextColor(color: Color("Mint03"))
+//                                .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
+//
+//                            // 초과 금액
+//                            if overHeight > 0 {
+//                                Rectangle()
+//                                    .platformTextColor(color: Color("Red03"))
+//                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: overHeight)
+//                            }
                         }
                         .clipShape(RoundedCornerUtil(radius: 4, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight]))
 
@@ -48,9 +75,16 @@ struct TotalTargetAmountGraphView: View {
                             Spacer().frame(height: 8 * DynamicSizeFactor.factor())
                         }
 
-                        Text("\(content.month)월")
-                            .font(.B3MediumFont())
-                            .platformTextColor(color: determineColorGray06(for: content))
+                        // 월 텍스트
+                        if content.month == Date.month(from: Date()) {
+                            Text("이번달")
+                                .font(.B3MediumFont())
+                                .platformTextColor(color: Color("Gray06"))
+                        } else {
+                            Text("\(content.month)월")
+                                .font(.B3MediumFont())
+                                .platformTextColor(color: Color("Gray06"))
+                        }
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
                 } else {
@@ -72,36 +106,25 @@ struct TotalTargetAmountGraphView: View {
         .frame(height: 140 * DynamicSizeFactor.factor(), alignment: .center)
     }
 
-    func determineColorGray03(for content: TargetAmount) -> Color {
+//    func determineColorGray03(for content: TargetAmount) -> Color {
+//        if content.month == Date.month(from: Date()) {
+//            if content.targetAmountDetail.amount != -1 {
+//                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
+//            }
+//            return Color("Mint03")
+//        } else {
+//            return Color("Gray03")
+//        }
+//    }
+
+    func determineColorGray04(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
             if content.targetAmountDetail.amount != -1 {
                 return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
             }
             return Color("Mint03")
         } else {
-            return Color("Gray03")
-        }
-    }
-
-    func determineColorGray04(for content: TargetAmount) -> Color {
-        if content.month == Date.month(from: Date()) {
-            if content.targetAmountDetail.amount != -1 {
-                return content.diffAmount > 0 ? Color("Mint03") : Color("Mint03")
-            }
             return Color("Mint03")
-        } else {
-            return Color("Gray04")
-        }
-    }
-
-    func determineColorGray06(for content: TargetAmount) -> Color {
-        if content.month == Date.month(from: Date()) {
-            if content.targetAmountDetail.amount != -1 {
-                return content.diffAmount > 0 ? Color("Mint03") : Color("Mint03")
-            }
-            return Color("Mint03")
-        } else {
-            return Color("Gray06")
         }
     }
 }

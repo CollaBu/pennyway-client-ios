@@ -32,42 +32,12 @@ struct TotalTargetAmountContentView: View {
                 }
                 .padding(.top, 18)
 
-                Spacer().frame(height: 13 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 5 * DynamicSizeFactor.factor())
 
-                HStack(spacing: 12 * DynamicSizeFactor.factor()) {
-                    HStack(spacing: 6 * DynamicSizeFactor.factor()) {
-                        Circle()
-                            .frame(width: 6 * DynamicSizeFactor.factor(), height: 6 * DynamicSizeFactor.factor())
-                            .platformTextColor(color: Color("Mint01"))
-
-                        Text("목표금액")
-                            .platformTextColor(color: Color("Gray04"))
-                            .font(.B3MediumFont())
-                    }
-
-                    HStack(spacing: 6 * DynamicSizeFactor.factor()) {
-                        Circle()
-                            .frame(width: 6 * DynamicSizeFactor.factor(), height: 6 * DynamicSizeFactor.factor())
-                            .platformTextColor(color: Color("Mint02"))
-
-                        Text("소비금액")
-                            .platformTextColor(color: Color("Gray04"))
-                            .font(.B3MediumFont())
-                    }
-
-                    HStack(spacing: 6 * DynamicSizeFactor.factor()) {
-                        Circle()
-                            .frame(width: 6 * DynamicSizeFactor.factor(), height: 6 * DynamicSizeFactor.factor())
-                            .platformTextColor(color: Color("Mint03"))
-
-                        Text("초과금액")
-                            .platformTextColor(color: Color("Gray04"))
-                            .font(.B3MediumFont())
-                    }
-
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
+                Text("단위:만 원")
+                    .platformTextColor(color: Color("Gray04"))
+                    .font(.B3MediumFont())
+                    .padding(.horizontal, 20)
 
                 Spacer().frame(height: 11 * DynamicSizeFactor.factor())
 
