@@ -90,7 +90,9 @@ enum DateFormatterUtil {
 
         if calendar.isDateInToday(date) {
             let components = calendar.dateComponents([.hour, .minute], from: date, to: now)
-            if let minutes = components.minute, minutes < 60 {
+            if let minutes = components.minute, minutes == 0 {
+                return "지금"
+            } else if let minutes = components.minute, minutes < 60 {
                 return "\(minutes)분 전"
             } else if let hours = components.hour, hours < 24 {
                 return "\(hours)시간 전"

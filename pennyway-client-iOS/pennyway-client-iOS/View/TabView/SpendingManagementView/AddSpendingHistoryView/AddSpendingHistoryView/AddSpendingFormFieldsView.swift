@@ -57,7 +57,6 @@ struct MemoInputView: View {
                     .frame(height: 104 * DynamicSizeFactor.factor())
 
                 TextEditor(text: $memoText)
-                    .font(.H4MediumFont())
                     .padding(.horizontal, 8 * DynamicSizeFactor.factor())
                     .padding(.vertical, 5 * DynamicSizeFactor.factor())
                     .zIndex(0)

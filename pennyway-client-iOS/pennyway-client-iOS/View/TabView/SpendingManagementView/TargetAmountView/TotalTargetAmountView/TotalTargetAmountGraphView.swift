@@ -4,21 +4,17 @@ import SwiftUI
 struct TotalTargetAmountGraphView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     var body: some View {
-        let maxHeight = 120 * DynamicSizeFactor.factor() // 최대 높이
-        let maxSpending = max(viewModel.maxTotalSpending, 100_000) // 최소값을 100000으로 설정
+        let maxHeight = 112 * DynamicSizeFactor.factor() // 최대 높이
+        let maxTotalSpending = max(viewModel.maxTotalSpending, 100_000) // 최소값을 100000으로 설정
+        let maxTargetAmount = max(viewModel.maxTargetAmount, 100_000)
 
         HStack(spacing: 14 * DynamicSizeFactor.factor()) {
             ForEach(0 ..< 6) { index in
                 if index >= 6 - viewModel.sortTargetAmounts.count {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
-
-                    // 그래프 높이 계산
-                    let totalHeight = (CGFloat(content.totalSpending) / CGFloat(maxSpending)) * maxHeight // 전체 높이
-                    let targetHeight = min((CGFloat(content.targetAmountDetail.amount) / CGFloat(maxSpending)) * maxHeight, maxHeight) // 목표금액
-
-                    let spendingHeight = (CGFloat(content.totalSpending - max(content.diffAmount, 0)) / CGFloat(maxSpending)) * maxHeight // 소비금액
-
-                    let overHeight = (content.diffAmount > 0) ? (CGFloat(content.diffAmount) / CGFloat(maxSpending)) * maxHeight : 0 // 초과금액
+                    let spendingHeight = (maxTotalSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxTotalSpending) * maxHeight : 0 // 소비금액 그래프 높이 조정
+                    let targetHeight = (maxTargetAmount > 0) ? CGFloat(content.targetAmountDetail.amount) / CGFloat(maxTargetAmount) * maxHeight : 0 // 목표금액 그래프 높이 조정
+                    let overHeight = (maxTotalSpending > 0) ? CGFloat(content.diffAmount) / CGFloat(maxTotalSpending) * maxHeight : 0 // 초과금액 그래프 높이 조정
 
                     VStack {
                         Text("\(content.totalSpending / 10000)")
@@ -27,7 +23,8 @@ struct TotalTargetAmountGraphView: View {
 
                         ZStack(alignment: .bottom) {
                             // 목표 금액
-                            if targetHeight > 0 {
+                            // 조건 - 목표금액이 사용금액보다 큰 경우에만 표시되도록 
+                            if content.targetAmountDetail.amount > content.totalSpending {
                                 Rectangle()
                                     .platformTextColor(color: Color("Mint01"))
                                     .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
@@ -35,14 +32,14 @@ struct TotalTargetAmountGraphView: View {
 
                             // 사용 금액
                             Rectangle()
-                                .platformTextColor(color: Color("mint02"))
+                                .platformTextColor(color: Color("Mint02"))
                                 .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
 
                             // 초과 금액
                             if overHeight > 0 {
                                 Rectangle()
                                     .platformTextColor(color: Color("Mint03"))
-                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: abs(overHeight))
+                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: overHeight)
                             }
                         }
                         .clipShape(RoundedCornerUtil(radius: 4, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight]))

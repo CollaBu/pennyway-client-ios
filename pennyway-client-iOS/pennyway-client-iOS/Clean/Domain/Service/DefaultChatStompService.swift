@@ -46,4 +46,8 @@ class DefaultChatStompService {
     func subscribeToChatRoom(chatRoomId: Int64) {
         repository.subscribeToChatRoom(chatRoomId: chatRoomId)
     }
+    
+    func sendViewState(status: String, chatRoomId: Int64?) {
+        repository.sendViewState(status: status, chatRoomId: chatRoomId)
+    }
 }

@@ -16,11 +16,6 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-
-  lane :tests do
-    run_tests(scheme: "Pennyway-iOSTests")
-  end
 
   desc "Runs `pod install`"
   
@@ -30,4 +25,11 @@ platform :ios do
       podfile: "./Podfile"
   )
   end
+
+  desc "Description of what the lane does"
+
+  lane :tests do
+    run_tests(scheme: "Pennyway-iOSTests")
+  end
+
 end
