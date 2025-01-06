@@ -38,6 +38,9 @@ jobs:
 
     - name: Install dependencies # Gemfile에 정의된 Ruby 의존성 설치
       run: bundle _2.4.22_ install
+      
+    - name: Install Pod
+      run: pod install --repo-update --clean-install
 
     - name: Run tests with Fastlane # Fastlane을 사용해 테스트 실행
       run: bundle exec fastlane tests
