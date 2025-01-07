@@ -12,7 +12,7 @@ import StompClientLib
 
 class DefaultChatStompRepository: ChatStompRepository {
     private let stompClient: StompClientLib
-    private var messageUUIDs: [String: [String: String]] = [:]
+    private var messageDatas: [String: [String: String]] = [:]
 
     init(stompClient: StompClientLib) {
         self.stompClient = stompClient
@@ -38,7 +38,7 @@ class DefaultChatStompRepository: ChatStompRepository {
     /// 메시지를 특정 목적지로 보내는 메서드
     func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(chatRoomId)"
-        let uuid = generateSequentialUUID().uuidString
+        let uuid = GenerateUuid.generateSequentialUuid().uuidString
         let headers = createSendMessageIdHeaders(uuid: uuid)
 
         let messageBody: [String: String] = [
@@ -50,9 +50,9 @@ class DefaultChatStompRepository: ChatStompRepository {
             let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
-                messageUUIDs[uuid] = ["message": message, "chatRoomId": String(chatRoomId), "contentType": contentType]
-                Log.info("📤 [Send Message] total - \(String(describing: messageUUIDs))")
-                Log.info("📤 [Send Message] - \(String(describing: messageUUIDs[uuid]))")
+                messageDatas[uuid] = ["message": message, "chatRoomId": String(chatRoomId), "contentType": contentType]
+                Log.info("📤 [Send Message] total - \(String(describing: messageDatas))")
+                Log.info("📤 [Send Message] - \(String(describing: messageDatas[uuid]))")
                 printSortedMessageUUIDs()
             }
         } catch {
@@ -102,13 +102,13 @@ class DefaultChatStompRepository: ChatStompRepository {
     }
 
     func printSortedMessageUUIDs() {
-        let sortedMessageUUIDs = messageUUIDs.keys.sorted().map { uuid -> (String, [String: String]) in
-            (uuid, messageUUIDs[uuid]!)
+        let sortedMessageUUIDs = messageDatas.keys.sorted().map { uuid -> (String, [String: String]) in
+            (uuid, messageDatas[uuid]!)
         }
 
         // 출력: 정렬된 UUID와 해당 데이터
         for (uuid, data) in sortedMessageUUIDs {
-            print("UUID: \(uuid), Data: \(data)")
+            Log.debug("UUID: \(uuid), Data: \(data)")
         }
     }
 }
@@ -120,6 +120,12 @@ extension DefaultChatStompRepository {
     private func subscribeToErrors() {
         let errorReceiptId = "error-receipt-\(UUID().uuidString)"
         stompClient.subscribeWithHeader(destination: "/user/queue/errors", withHeader: ["receipt": errorReceiptId])
+    }
+
+    /// 메시지 전송 성공 처리에 대한 구독을 설정하는 메서드
+    private func subscribeToSuccess() {
+        let errorReceiptId = "success-receipt-\(UUID().uuidString)"
+        stompClient.subscribeWithHeader(destination: "/user/queue/success", withHeader: ["receipt": errorReceiptId])
     }
 
     /// 채팅방 ID 리스트에 대한 구독을 설정하는 메서드
@@ -214,7 +220,7 @@ extension DefaultChatStompRepository {
 
     /// 메시지 UUID 관리에서 제거
     private func removeMessageUUID(uuid: String) {
-        if messageUUIDs.removeValue(forKey: uuid) != nil {
+        if messageDatas.removeValue(forKey: uuid) != nil {
             Log.debug("Message UUID removed: \(uuid)")
         } else {
             Log.warning("Attempted to remove non-existing UUID: \(uuid)")
@@ -228,6 +234,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidConnect(client _: StompClientLib!) {
         Log.info("Socket connected")
         subscribeToErrors()
+        subscribeToSuccess()
         getJoinedChatRooms()
     }
 
@@ -246,6 +253,18 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
 
     func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader header: [String: String]?, withDestination _: String) {
         Log.info("Did receive Message: body - \(body), \(akaStringBody), \n header - \(header)")
+
+        // `destination` 확인
+        if let destination = header?["destination"], destination == "/user/queue/success" {
+            Log.info("Message ignored: destination is \(destination)")
+            if let id = header?["x-message-id"] {
+                messageDatas.removeValue(forKey: id)
+
+                Log.info("📤📤📤 [Send Message] total - \(String(describing: messageDatas))")
+            }
+
+            return
+        }
 
         if let body = body as? [String: Any],
            let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []),
@@ -276,28 +295,4 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     func serverDidSendPing() {
         Log.info("Server ping received")
     }
-}
-
-func generateSequentialUUID() -> UUID {
-    var uuidBytes = [UInt8](repeating: 0, count: 16)
-
-    // 현재 시간을 밀리초 단위로 가져오기
-    let timestamp = UInt64(Date().timeIntervalSince1970 * 1000)
-
-    // 상위 48비트: 타임스탬프 (6 바이트)
-    uuidBytes[0 ... 5] = withUnsafeBytes(of: timestamp.bigEndian) { Array($0) }[2 ... 7]
-
-    // 버전: UUIDv7의 경우 4비트 값 0111
-    uuidBytes[6] = (uuidBytes[6] & 0x0F) | 0x70
-
-    // Variant: 상위 2비트는 10
-    uuidBytes[8] = (uuidBytes[8] & 0x3F) | 0x80
-
-    // 나머지 6바이트: 랜덤 값
-    for i in 9 ..< 16 {
-        uuidBytes[i] = UInt8.random(in: 0 ... 255)
-    }
-
-    // UUID로 변환
-    return UUID(uuid: uuidBytes.withUnsafeBytes { $0.load(as: uuid_t.self) })
 }
