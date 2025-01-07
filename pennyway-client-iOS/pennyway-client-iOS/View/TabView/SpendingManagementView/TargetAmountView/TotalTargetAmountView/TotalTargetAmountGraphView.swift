@@ -4,87 +4,29 @@ import SwiftUI
 struct TotalTargetAmountGraphView: View {
     @ObservedObject var viewModel: TotalTargetAmountViewModel
     var body: some View {
-        let maxHeight = 112 * DynamicSizeFactor.factor() // 최대 높이
-        let maxTotalSpending = max(viewModel.maxTotalSpending, 100_000) // 최소값을 100000으로 설정
-        let maxTargetAmount = max(viewModel.maxTargetAmount, 100_000)
+        let maxHeight = 120 * DynamicSizeFactor.factor() // 최대 높이
+        let maxSpending = max(viewModel.maxTotalSpending, 100_000) // 최소값을 100000으로 설정
 
-        HStack(spacing: 14 * DynamicSizeFactor.factor()) {
+        HStack(spacing: 24 * DynamicSizeFactor.factor()) {
             ForEach(0 ..< 6) { index in
                 if index >= 6 - viewModel.sortTargetAmounts.count {
                     let content = viewModel.sortTargetAmounts[index - (6 - viewModel.sortTargetAmounts.count)]
-                    let spendingHeight = (maxTotalSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxTotalSpending) * maxHeight : 0 // 소비금액 그래프 높이 조정
-                    let targetHeight = (maxTargetAmount > 0) ? CGFloat(content.targetAmountDetail.amount) / CGFloat(maxTargetAmount) * maxHeight : 0 // 목표금액 그래프 높이 조정
-                    let overHeight = (maxTotalSpending > 0) ? CGFloat(content.diffAmount) / CGFloat(maxTotalSpending) * maxHeight : 0 // 초과금액 그래프 높이 조정
+                    let adjustedHeight = (maxSpending > 0) ? CGFloat(content.totalSpending) / CGFloat(maxSpending) * maxHeight : 0 // 그래프 높이 조정
 
                     VStack {
                         Text("\(content.totalSpending / 10000)")
                             .font(.B3MediumFont())
                             .platformTextColor(color: determineColorGray04(for: content))
-
-                        ZStack(alignment: .bottom) {
-                            // 목표 금액
-                            // 조건 - 목표금액이 사용금액보다 큰 경우에만 표시되도록
-                            // 소비 금액이 목표 금액보다 클 경우 전체를 빨간색으로 표시
-                            if content.targetAmountDetail.amount != -1 && content.totalSpending > content.targetAmountDetail.amount {
-                                Rectangle()
-                                    .platformTextColor(color: Color("Red03"))
-                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
-                            } else if content.targetAmountDetail.amount == -1 { // 목표 금액이 없는 경우 소비 금액만 표시
-                                Rectangle()
-                                    .platformTextColor(color: Color("Mint03"))
-                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
-                            } else {
-                                // 목표 금액 선 표시
-                                Rectangle()
-                                    .platformTextColor(color: Color("Gray01"))
-                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
-
-                                // 소비 금액 표시
-                                Rectangle()
-                                    .platformTextColor(color: Color("Mint03"))
-                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
-                            }
-
-                            // 초과 금액 표시
-                            if content.diffAmount > 0 {
-                                Rectangle()
-                                    .platformTextColor(color: Color("Red03"))
-                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: overHeight)
-                            }
-//                            if content.targetAmountDetail.amount > content.totalSpending {
-//                                Rectangle()
-//                                    .platformTextColor(color: Color("Gray01"))
-//                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: targetHeight)
-//                            }
-//
-//                            // 사용 금액
-//                            Rectangle()
-//                                .platformTextColor(color: Color("Mint03"))
-//                                .frame(width: 26 * DynamicSizeFactor.factor(), height: spendingHeight)
-//
-//                            // 초과 금액
-//                            if overHeight > 0 {
-//                                Rectangle()
-//                                    .platformTextColor(color: Color("Red03"))
-//                                    .frame(width: 26 * DynamicSizeFactor.factor(), height: overHeight)
-//                            }
-                        }
-                        .clipShape(RoundedCornerUtil(radius: 4, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight]))
-
+                        Rectangle()
+                            .frame(width: 16 * DynamicSizeFactor.factor(), height: adjustedHeight)
+                            .platformTextColor(color: determineColorGray03(for: content))
+                            .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
                         if content.totalSpending != 0 {
                             Spacer().frame(height: 8 * DynamicSizeFactor.factor())
                         }
-
-                        // 월 텍스트
-                        if content.month == Date.month(from: Date()) {
-                            Text("이번달")
-                                .font(.B3MediumFont())
-                                .platformTextColor(color: Color("Gray06"))
-                        } else {
-                            Text("\(content.month)월")
-                                .font(.B3MediumFont())
-                                .platformTextColor(color: Color("Gray06"))
-                        }
+                        Text("\(content.month)월")
+                            .font(.B3MediumFont())
+                            .platformTextColor(color: determineColorGray06(for: content))
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
                 } else {
@@ -93,7 +35,7 @@ struct TotalTargetAmountGraphView: View {
                             .font(.B3MediumFont())
                             .platformTextColor(color: Color("Gray04"))
                         Rectangle()
-                            .frame(maxWidth: 26 * DynamicSizeFactor.factor(), maxHeight: 0)
+                            .frame(maxWidth: 16 * DynamicSizeFactor.factor(), maxHeight: 0)
                         Text("\(viewModel.currentData.month - (6 - (index + 1)))월")
                             .font(.B3MediumFont())
                             .platformTextColor(color: Color("Gray06"))
@@ -106,16 +48,16 @@ struct TotalTargetAmountGraphView: View {
         .frame(height: 140 * DynamicSizeFactor.factor(), alignment: .center)
     }
 
-//    func determineColorGray03(for content: TargetAmount) -> Color {
-//        if content.month == Date.month(from: Date()) {
-//            if content.targetAmountDetail.amount != -1 {
-//                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
-//            }
-//            return Color("Mint03")
-//        } else {
-//            return Color("Gray03")
-//        }
-//    }
+    func determineColorGray03(for content: TargetAmount) -> Color {
+        if content.month == Date.month(from: Date()) {
+            if content.targetAmountDetail.amount != -1 {
+                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
+            }
+            return Color("Mint03")
+        } else {
+            return Color("Gray03")
+        }
+    }
 
     func determineColorGray04(for content: TargetAmount) -> Color {
         if content.month == Date.month(from: Date()) {
@@ -124,7 +66,18 @@ struct TotalTargetAmountGraphView: View {
             }
             return Color("Mint03")
         } else {
+            return Color("Gray04")
+        }
+    }
+
+    func determineColorGray06(for content: TargetAmount) -> Color {
+        if content.month == Date.month(from: Date()) {
+            if content.targetAmountDetail.amount != -1 {
+                return content.diffAmount > 0 ? Color("Red03") : Color("Mint03")
+            }
             return Color("Mint03")
+        } else {
+            return Color("Gray06")
         }
     }
 }
