@@ -21,9 +21,11 @@ struct TotalTargetAmountGraphView: View {
                             .frame(width: 16 * DynamicSizeFactor.factor(), height: adjustedHeight)
                             .platformTextColor(color: determineColorGray03(for: content))
                             .clipShape(RoundedCornerUtil(radius: 15, corners: [.topLeft, .topRight]))
+
                         if content.totalSpending != 0 {
                             Spacer().frame(height: 8 * DynamicSizeFactor.factor())
                         }
+
                         Text("\(content.month)월")
                             .font(.B3MediumFont())
                             .platformTextColor(color: determineColorGray06(for: content))
