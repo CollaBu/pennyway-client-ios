@@ -106,6 +106,7 @@ struct ProfileMenuBarListView: View {
     func handleLogout() {
         if let fcmToken = AppDelegate.currentFCMToken {
             viewModelWrapper.logoutViewModel.deleteDeviceToken(fcmToken: fcmToken)
+            viewModelWrapper.logoutViewModel.logout()
             showLogoutPopUp = false
             authViewModel.logout()
         }

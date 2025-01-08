@@ -48,7 +48,6 @@ class DefaultLogoutViewModel: LogoutViewModel {
         logoutUseCase.deleteDeviceToken(fcmToken: fcmToken) { success in
             if success {
                 Log.debug("[LogoutViewModel]: 디바이스 토큰삭제 성공")
-                self.logout()
             } else {
                 Log.error("[LogoutViewModel]: 디바이스 토큰삭제 실패")
             }
