@@ -218,12 +218,11 @@ extension DefaultChatStompRepository {
         }
     }
 
-    /// 메시지 UUID 관리에서 제거
-    private func removeMessageUUID(uuid: String) {
-        if messageDatas.removeValue(forKey: uuid) != nil {
-            Log.debug("Message UUID removed: \(uuid)")
-        } else {
-            Log.warning("Attempted to remove non-existing UUID: \(uuid)")
+    /// `/user/queue/success`에서 받은 메시지 처리
+    private func handleRemovedMessage(header: [String: String]?) {
+        if let id = header?["x-message-id"] {
+            messageDatas.removeValue(forKey: id)
+            Log.info("📤 [Send Message] Removed ID \(id). Remaining messages: \(messageDatas)")
         }
     }
 }
@@ -256,12 +255,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
 
         // `destination` 확인
         if let destination = header?["destination"], destination == "/user/queue/success" {
-            Log.info("Message ignored: destination is \(destination)")
-            if let id = header?["x-message-id"] {
-                messageDatas.removeValue(forKey: id)
-
-                Log.info("📤📤📤 [Send Message] total - \(String(describing: messageDatas))")
-            }
+            handleRemovedMessage(header: header)
 
             return
         }

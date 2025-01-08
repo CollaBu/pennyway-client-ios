@@ -33,6 +33,19 @@ struct pennyway_client_iOSApp: App {
                 }
             }
             .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
+            .onAppear {
+                // 사용 예시
+                let secretKey = "exampleSecretKeyForSpringBootProjectAtSubRepository"
+                let expirationTimeMs: Int64 = 5 * 60 * 1000 // 5분
+
+                let generator = AccessTokenGenerator(secretKey: secretKey, expirationTimeMs: expirationTimeMs)
+                do {
+                    let token = try generator.generateToken(userId: 1, role: "ROLE_USER")
+                    print("📍📍📍 Generated Token:", token)
+                } catch {
+                    print("Error:", error)
+                }
+            }
             .onOpenURL { url in
                 GIDSignIn.sharedInstance.handle(url)
             }
