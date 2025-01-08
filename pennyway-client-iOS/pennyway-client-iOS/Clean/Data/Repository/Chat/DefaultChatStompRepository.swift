@@ -12,7 +12,6 @@ import StompClientLib
 
 class DefaultChatStompRepository: ChatStompRepository {
     private let stompClient: StompClientLib
-    private var subscriptionIds: [String] = [] // 구독 ID를 저장하는 배열
 
     init(stompClient: StompClientLib) {
         self.stompClient = stompClient
@@ -32,11 +31,6 @@ class DefaultChatStompRepository: ChatStompRepository {
 
     /// Stomp 소켓 연결을 해제하는 메서드
     func disconnect() {
-        // 모든 구독 해제
-        for subscriptionId in subscriptionIds {
-            stompClient.unsubscribe(destination: subscriptionId)
-        }
-        subscriptionIds.removeAll() // 저장된 구독 ID 초기화
 
         // 소켓 연결 해제
         stompClient.disconnect()
@@ -77,7 +71,6 @@ class DefaultChatStompRepository: ChatStompRepository {
         let chatRoomReceiptId = "chat-room-receipt-\(UUID().uuidString)"
         let destination = "/sub/chat.room.\(chatRoomId)"
         stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": chatRoomReceiptId])
-        subscriptionIds.append(destination)
     }
 
     /// 뷰 상태를 전달하는 메서드
@@ -114,7 +107,6 @@ extension DefaultChatStompRepository {
         let destination = "/user/queue/errors"
         let errorReceiptId = "error-receipt-\(UUID().uuidString)"
         stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": errorReceiptId])
-        subscriptionIds.append(destination)
     }
 
     /// 채팅방 ID 리스트에 대한 구독을 설정하는 메서드
@@ -123,7 +115,6 @@ extension DefaultChatStompRepository {
             let chatRoomReceiptId = "chat-room-receipt-\(UUID().uuidString)"
             let destination = "/sub/chat.room.\(chatRoomId)"
             stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": chatRoomReceiptId])
-            subscriptionIds.append(destination) // 구독 ID 저장
         }
     }
 
