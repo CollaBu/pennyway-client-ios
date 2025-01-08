@@ -11,7 +11,7 @@ final class DefaultLogoutRepository: LogoutRepository {
     func execute(completion: @escaping (Bool) -> Void) {
         AuthAlamofire.shared.logout { result in
             switch result {
-            case let .success(data):
+            case .success:
                 Log.debug("Success Logout")
                 KeychainHelper.deleteAccessToken()
                 TokenHandler.deleteAllRefreshTokens()
@@ -39,15 +39,6 @@ final class DefaultLogoutRepository: LogoutRepository {
                         let response = try JSONDecoder().decode(ErrorResponseDto.self, from: responseData)
                         Log.debug(response)
                         Log.debug("디바이스 토큰 삭제됨")
-                        self.execute { success in
-                            if success {
-                                Log.debug("로그아웃 성공")
-                                completion(true)
-                            } else {
-                                Log.error("로그아웃 실패.")
-                                completion(false)
-                            }
-                        }
 
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")
