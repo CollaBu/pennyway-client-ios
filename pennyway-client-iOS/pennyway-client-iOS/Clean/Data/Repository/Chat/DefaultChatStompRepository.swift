@@ -36,7 +36,7 @@ class DefaultChatStompRepository: ChatStompRepository {
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
-    func sendMessage(message: String, chatRoomId: Int64, contentType: String, retry: Bool? = false, uuid: String? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
+    func sendMessage(message: String, chatRoomId: Int64, contentType: String, retry _: Bool? = false, uuid: String? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(chatRoomId)"
         let messageUuid = uuid ?? GenerateUuid.generateSequentialUuid().uuidString
         let headers = createSendMessageIdHeaders(uuid: messageUuid)
@@ -70,19 +70,6 @@ class DefaultChatStompRepository: ChatStompRepository {
         Log.info("📤 [Send Last Message])")
     }
 
-    /// refresh token을 전송하는  메서드
-    func sendRefreshToken(completion: @escaping (Result<Void, Error>) -> Void) {
-        let destination = "/pub/auth.refresh"
-        let headers = createSendHeaders()
-
-        stompClient.sendMessage(message: "", toDestination: destination, withHeaders: headers, withReceipt: nil)
-
-        Log.info("📤 [Send RefreshToken])")
-
-        // 여기에 completion 호출 추가
-        completion(.success(()))
-    }
-
     /// 채팅방 ID 에 대한 구독을 설정하는 메서드
     func subscribeToChatRoom(chatRoomId: Int64) {
         let chatRoomReceiptId = "chat-room-receipt-\(UUID().uuidString)"
@@ -114,37 +101,6 @@ class DefaultChatStompRepository: ChatStompRepository {
             Log.error("Failed to serialize message body: \(error)")
         }
     }
-
-    /// 보내지지 않은 메시지 보내는 메서드
-    func retryUnsentMessages() {
-        sendRefreshToken { _ in
-            Log.debug("💀💀💀 retry 실행")
-            let sortedMessages = self.messageDatas.keys.sorted().map { uuid -> (String, [String: String]) in
-                (uuid, self.messageDatas[uuid]!)
-            }
-            
-            for (uuid, data) in sortedMessages {
-                guard let message = data["message"],
-                      let chatRoomIdString = data["chatRoomId"],
-                      let chatRoomId = Int64(chatRoomIdString),
-                      let contentType = data["contentType"]
-                else {
-                    Log.error("📤 [Retry Messages] Invalid message data: \(data)")
-                    continue
-                }
-                
-                self.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: true, uuid: uuid) { [weak self] result in
-                    switch result {
-                    case .success:
-                        self?.messageDatas.removeValue(forKey: uuid)
-                        Log.info("📤 [Retry Messages] Successfully sent message with UUID: \(uuid)")
-                    case let .failure(error):
-                        Log.error("📤 [Retry Messages] Failed to resend message with UUID: \(uuid), Error: \(error)")
-                    }
-                }
-            }
-        }
-    }
 }
 
 // MARK: Private Methods
@@ -173,6 +129,7 @@ extension DefaultChatStompRepository {
 
     /// 실제로 소켓 연결을 수행하는 메서드
     private func connectToSocket(url: String) {
+        Log.debug("[connectToSocket] - 소켓 연결 수행")
         let headers = createConnectionHeaders()
 
         let request = NSURLRequest(url: URL(string: url)!)
@@ -259,6 +216,52 @@ extension DefaultChatStompRepository {
             Log.info("📤 [Send Message] Removed ID \(id). Remaining messages: \(messageDatas)")
         }
     }
+
+    /// refresh token을 서버에 전송하는  메서드
+    private func sendRefreshToken(completion: @escaping (Result<Void, Error>) -> Void) {
+        let destination = "/pub/auth.refresh"
+        let receiptId = "refresh-receipt-\(UUID().uuidString)"
+        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
+                       "content-type": "application/json",
+                       "receipt": receiptId]
+
+        stompClient.sendMessage(message: "", toDestination: destination, withHeaders: headers, withReceipt: nil)
+
+        Log.info("📤 [Send RefreshToken])")
+
+        completion(.success(()))
+    }
+
+    /// 보내지지 않은 메시지 보내는 메서드
+    private func retryUnsentMessages() {
+        sendRefreshToken { _ in
+            Log.info("💀💀💀 [Retry Messages] 호출")
+            let sortedMessages = self.messageDatas.keys.sorted().map { uuid -> (String, [String: String]) in
+                (uuid, self.messageDatas[uuid]!)
+            }
+
+            for (uuid, data) in sortedMessages {
+                guard let message = data["message"],
+                      let chatRoomIdString = data["chatRoomId"],
+                      let chatRoomId = Int64(chatRoomIdString),
+                      let contentType = data["contentType"]
+                else {
+                    Log.error("📤 [Retry Messages] Invalid message data: \(data)")
+                    continue
+                }
+
+                self.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: true, uuid: uuid) { [weak self] result in
+                    switch result {
+                    case .success:
+                        self?.messageDatas.removeValue(forKey: uuid)
+                        Log.info("📤 [Retry Messages] Successfully sent message with UUID: \(uuid)")
+                    case let .failure(error):
+                        Log.error("📤 [Retry Messages] Failed to resend message with UUID: \(uuid), Error: \(error)")
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: StompClientLibDelegate
@@ -329,8 +332,8 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
         Log.info("Receipt received: \(receiptId)")
     }
 
-    func serverDidSendError(client _: StompClientLib!, withErrorMessage description: String, detailedErrorMessage _: String?) {
-        Log.error("Error: \(description)")
+    func serverDidSendError(client _: StompClientLib!, withErrorMessage description: String, detailedErrorMessage detailedErrorMessage: String?) {
+        Log.error("Error: \(description) \n detail: \(detailedErrorMessage)")
     }
 
     func serverDidSendPing() {
