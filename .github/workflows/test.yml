@@ -24,8 +24,12 @@ jobs:
       with:
         ruby-version: 2.7 # 프로젝트에서 사용할 Ruby 버전 명시
         
-    - name: Create Test.xcconfig
-      run: echo "${{ secrets.TEST_CONFIG }}" > ./pennyway-client-iOS/Xcconfig/Test.xcconfig
+    - name: Create xcconfig files
+      run: |
+        echo "${{ secrets.TEST_CONFIG }}" > ./pennyway-client-iOS/Xcconfig/Test.xcconfig
+        echo "${{ secrets.RELEASE_CONFIG }}" > ./pennyway-client-iOS/Xcconfig/Release.xcconfig
+        echo "${{ secrets.DEBUG_CONFIG }}" > ./pennyway-client-iOS/Xcconfig/Debug.xcconfig
+        echo "${{ secrets.SECRETS_CONFIG }}" > ./pennyway-client-iOS/Xcconfig/Secrets.xcconfig
 
     - name: Install Bundler # Ruby 의존성 관리 도구(Bundler) 설치
       run: gem install bundler -v 2.4.22
