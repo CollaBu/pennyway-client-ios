@@ -17,15 +17,6 @@ default_platform(:ios)
 
 platform :ios do
 
-  desc "Runs `pod install`"
-  
-  lane :pod_install do
-    cocoapods(
-      clean_install: true,
-      podfile: "./Podfile"
-  )
-  end
-
   desc "Description of what the lane does"
 
   lane :tests do
