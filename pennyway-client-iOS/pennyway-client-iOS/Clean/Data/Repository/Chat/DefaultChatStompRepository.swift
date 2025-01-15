@@ -31,13 +31,16 @@ class DefaultChatStompRepository: ChatStompRepository {
 
     /// Stomp 소켓 연결을 해제하는 메서드
     func disconnect() {
+
+        // 소켓 연결 해제
         stompClient.disconnect()
+        Log.info("[Disconnect] 모든 구독이 해제되고 소켓 연결 해제")
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
     func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(chatRoomId)"
-        let headers = createSendHeaders()
+        let headers = createSendMessageIdHeaders(uuid: "")
         let messageBody: [String: String] = [
             "content": message,
             "contentType": contentType
@@ -101,8 +104,9 @@ class DefaultChatStompRepository: ChatStompRepository {
 extension DefaultChatStompRepository {
     /// 에러 처리위해 Stomp 구독을 설정하는 메서드
     private func subscribeToErrors() {
+        let destination = "/user/queue/errors"
         let errorReceiptId = "error-receipt-\(UUID().uuidString)"
-        stompClient.subscribeWithHeader(destination: "/user/queue/errors", withHeader: ["receipt": errorReceiptId])
+        stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": errorReceiptId])
     }
 
     /// 채팅방 ID 리스트에 대한 구독을 설정하는 메서드
@@ -121,6 +125,14 @@ extension DefaultChatStompRepository {
         let request = NSURLRequest(url: URL(string: url)!)
 
         stompClient.openSocketWithURLRequest(request: request, delegate: self, connectionHeaders: headers)
+    }
+
+    private func createSendMessageIdHeaders(uuid: String) -> [String: String] {
+        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
+                       "content-type": "application/json",
+                       "x-message-id": uuid
+        ]
+        return headers
     }
 
     private func createSendHeaders() -> [String: String] {

@@ -51,6 +51,8 @@ struct ChatContent: View {
                         ReloadView(action: retryLoadPreviousChat)
                     }
 
+                    Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+
                     ForEach(groupedChatsByDate.keys.sorted(by: { lhs, rhs in
                         guard
                             let date1 = Date.chatDateFormatter().date(from: lhs),
@@ -60,11 +62,10 @@ struct ChatContent: View {
                         }
                         return date1 < date2
                     }), id: \.self) { date in
-                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
-                        Section(header: ChatHeader(data: date)) {
-                            let chatsForDate = groupedChatsByDate[date] ?? []
+                        let chatsForDate = groupedChatsByDate[date] ?? []
 
-                            if chatsForDate[0].categoryType != CategoryType.system { // 첫번째 데이터가 system 아닌 경우 간격 적용
+                        Section(header: ChatHeader(data: date)) {
+                            if chatsForDate.first?.categoryType != CategoryType.system {
                                 Spacer().frame(height: 3 * DynamicSizeFactor.factor())
                             }
 
@@ -74,21 +75,26 @@ struct ChatContent: View {
                                 let previousChatType = hasPreviousChat ? chatsForDate[index - 1].categoryType : nil
                                 let nextChatType = hasNextChat ? chatsForDate[index + 1].categoryType : nil
 
-                                if chat.categoryType == CategoryType.system {
+                                if chat.categoryType == .system {
                                     if hasPreviousChat, previousChatType != .system {
                                         Spacer().frame(height: 3 * DynamicSizeFactor.factor())
                                     }
 
                                     ChatHeader(data: chat.content)
 
-                                    if !hasPreviousChat, hasNextChat, nextChatType != .system { // system 문구가 첫 데이터인 경우
+                                    if !hasPreviousChat, hasNextChat, nextChatType != .system {
                                         Spacer().frame(height: 3 * DynamicSizeFactor.factor())
                                     }
+
                                 } else if let sender = members.first(where: { $0.userId == chat.senderId }) {
                                     if chat.senderId == currentUserId {
                                         ChatSendCell(chat: chat, sender: sender)
                                     } else {
                                         ChatReceiveCell(chat: chat, sender: sender)
+                                    }
+
+                                    if index == chatsForDate.count - 1, chatsForDate[index].categoryType != .system {
+                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                                     }
                                 }
                             }
