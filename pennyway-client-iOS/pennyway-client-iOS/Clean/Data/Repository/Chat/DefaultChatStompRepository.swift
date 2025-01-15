@@ -218,7 +218,7 @@ extension DefaultChatStompRepository {
     }
 
     /// refresh token을 서버에 전송하는  메서드
-    private func sendRefreshToken(completion: @escaping (Result<Void, Error>) -> Void) {
+    private func sendRefreshToken() {
         let destination = "/pub/auth.refresh"
         let receiptId = "refresh-receipt-\(UUID().uuidString)"
         let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
@@ -228,36 +228,31 @@ extension DefaultChatStompRepository {
         stompClient.sendMessage(message: "", toDestination: destination, withHeaders: headers, withReceipt: nil)
 
         Log.info("📤 [Send RefreshToken])")
-
-        completion(.success(()))
     }
 
     /// 보내지지 않은 메시지 보내는 메서드
     private func retryUnsentMessages() {
-        sendRefreshToken { _ in
-            Log.info("💀💀💀 [Retry Messages] 호출")
-            let sortedMessages = self.messageDatas.keys.sorted().map { uuid -> (String, [String: String]) in
-                (uuid, self.messageDatas[uuid]!)
+        let sortedMessages = messageDatas.keys.sorted().map { uuid -> (String, [String: String]) in
+            (uuid, self.messageDatas[uuid]!)
+        }
+
+        for (uuid, data) in sortedMessages {
+            guard let message = data["message"],
+                  let chatRoomIdString = data["chatRoomId"],
+                  let chatRoomId = Int64(chatRoomIdString),
+                  let contentType = data["contentType"]
+            else {
+                Log.error("📤 [Retry Messages] Invalid message data: \(data)")
+                continue
             }
 
-            for (uuid, data) in sortedMessages {
-                guard let message = data["message"],
-                      let chatRoomIdString = data["chatRoomId"],
-                      let chatRoomId = Int64(chatRoomIdString),
-                      let contentType = data["contentType"]
-                else {
-                    Log.error("📤 [Retry Messages] Invalid message data: \(data)")
-                    continue
-                }
-
-                self.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: true, uuid: uuid) { [weak self] result in
-                    switch result {
-                    case .success:
-                        self?.messageDatas.removeValue(forKey: uuid)
-                        Log.info("📤 [Retry Messages] Successfully sent message with UUID: \(uuid)")
-                    case let .failure(error):
-                        Log.error("📤 [Retry Messages] Failed to resend message with UUID: \(uuid), Error: \(error)")
-                    }
+            sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: true, uuid: uuid) { [weak self] result in
+                switch result {
+                case .success:
+                    self?.messageDatas.removeValue(forKey: uuid)
+                    Log.info("📤 [Retry Messages] Successfully sent message with UUID: \(uuid)")
+                case let .failure(error):
+                    Log.error("📤 [Retry Messages] Failed to resend message with UUID: \(uuid), Error: \(error)")
                 }
             }
         }
@@ -302,7 +297,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
                 switch result {
                 case .success:
                     Log.debug("Token refreshed, retrying request sucess")
-                    self.retryUnsentMessages()
+                    self.sendRefreshToken()
 
                 case .failure:
                     Log.debug("Token refreshed, retrying request fail")
@@ -328,8 +323,13 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
         }
     }
 
-    func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
-        Log.info("Receipt received: \(receiptId)")
+    func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {
+        Log.info("Receipt received: \(receiptId) \(String(describing: client))")
+
+        // receiptId가 "refresh-receipt-"로 시작하는 경우 처리
+        if receiptId.hasPrefix("refresh-receipt-") {
+            retryUnsentMessages()
+        }
     }
 
     func serverDidSendError(client _: StompClientLib!, withErrorMessage description: String, detailedErrorMessage detailedErrorMessage: String?) {
