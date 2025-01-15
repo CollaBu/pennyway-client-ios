@@ -23,7 +23,8 @@ platform :ios do
     run_tests(
 	scheme: "Pennyway-iOSTests",
 	skip_build: true,
-	output_style: "raw"
+	output_style: "raw",
+	suppress_xcode_output: true
 	)
   end
 
