@@ -13,44 +13,97 @@ struct ChatRoomSettingView: View {
     @State private var chatRoomName: String = ""
     @State private var password: String = ""
     @State private var showCompleteToastPopup: Bool = false
+    @State private var showImagePopUp: Bool = false
+    @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
+    @State private var showImagePicker = false
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     var body: some View {
         ZStack {
-            ScrollView {
-                VStack {
-                    // 상단 여백 및 아이콘 이미지
-                    Spacer().frame(height: 20 * DynamicSizeFactor.factor())
+            VStack {
+                ScrollView {
+                    VStack {
+                        // 상단 여백 및 아이콘 이미지
+                        Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
-                    Image("icon_illust_maintain_goal")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
-                        .cornerRadius(12 * DynamicSizeFactor.factor())
+                        if let image = selectedUIImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
+                                .cornerRadius(12 * DynamicSizeFactor.factor())
+                        } else {
+                            Image("icon_illust_maintain_goal")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
+                                .cornerRadius(12 * DynamicSizeFactor.factor())
+                        }
 
-                    Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+                        Spacer().frame(height: 16 * DynamicSizeFactor.factor())
 
-                    // 채팅방 커버 수정 버튼
-                    CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
-                        // 버튼 액션
+                        // 채팅방 커버 수정 버튼
+                        CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
+                            showImagePopUp = true
+                        }
+
+                        Spacer().frame(height: 25 * DynamicSizeFactor.factor())
+
+                        // 채팅방 이름 입력
+                        ChatRoomNameSection
+
+                        Spacer().frame(height: 32 * DynamicSizeFactor.factor())
+
+                        // 공개 범위 설정
+                        PublicScopeSection
+
+                        Spacer()
                     }
-
-                    Spacer().frame(height: 25 * DynamicSizeFactor.factor())
-
-                    // 채팅방 이름 입력
-                    ChatRoomNameSection
-
-                    Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-
-                    // 공개 범위 설정
-                    PublicScopeSection
-
-                    Spacer()
+                    .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 20 : nil)
                 }
-                .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 20 : nil)
+                .padding(.bottom, keyboardHandler.keyboardHeight)
+                .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
             }
-            .padding(.bottom, keyboardHandler.keyboardHeight)
-            .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
+            .edgesIgnoringSafeArea(.bottom)
+            .navigationBarColor(UIColor(named: "White01"), title: "채팅방 설정")
+            .background(Color("White01"))
+            .setTabBarVisibility(isHidden: true)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationBackButton()
+                        .padding(.trailing, 10)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack {
+                        Button(action: {
+                            showCompleteToastPopup = true
+                        }, label: {
+                            Text("완료")
+                                .font(.H4MediumFont())
+                                .platformTextColor(color: .mint03)
+                                .padding(.trailing, 10)
+                        })
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                }
+            }
+
+            if showImagePopUp {
+                Color(.black01).edgesIgnoringSafeArea(.all)
+
+                ChatPhotoActionsPopUp(isPresented: $showImagePopUp,
+                                      showPopUpView: $showImagePopUp,
+                                      isHiddenTabBar: .constant(true),
+                                      showImagePicker: $showImagePicker,
+                                      selectedUIImage: $selectedUIImage,
+                                      sourceType: $sourceType)
+                    .edgesIgnoringSafeArea(.bottom)
+            }
         }
         .overlay(
             Group {
@@ -69,31 +122,18 @@ struct ChatRoomSettingView: View {
                 }
             }, alignment: .bottom
         )
-        .edgesIgnoringSafeArea(.bottom)
-        .navigationBarColor(UIColor(named: "White01"), title: "채팅방 설정")
-        .background(Color("White01"))
-        .setTabBarVisibility(isHidden: true)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                NavigationBackButton()
-                    .padding(.trailing, 10)
-                    .frame(width: 44, height: 44)
-                    .contentShape(Rectangle())
+        .sheet(isPresented: $showImagePicker, onDismiss: {
+            // 사진 클릭한 경우
+            showImagePopUp = false
+
+            if let selectedUIImage {
+                self.selectedUIImage = selectedUIImage
+//                chatViewModelWrapper.makeChatViewModel.uploadImage(image: selectedUIImage)
             }
-            ToolbarItem(placement: .topBarTrailing) {
-                HStack {
-                    Button(action: {
-                        showCompleteToastPopup = true
-                    }, label: {
-                        Text("완료")
-                            .font(.H4MediumFont())
-                            .platformTextColor(color: .mint03)
-                            .padding(.trailing, 10)
-                    })
-                    .buttonStyle(PlainButtonStyle())
-                }
-            }
+
+        }) {
+            ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
+                .edgesIgnoringSafeArea(.bottom)
         }
     }
 

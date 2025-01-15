@@ -31,7 +31,6 @@ class DefaultChatStompRepository: ChatStompRepository {
 
     /// Stomp 소켓 연결을 해제하는 메서드
     func disconnect() {
-
         // 소켓 연결 해제
         stompClient.disconnect()
         Log.info("[Disconnect] 모든 구독이 해제되고 소켓 연결 해제")
