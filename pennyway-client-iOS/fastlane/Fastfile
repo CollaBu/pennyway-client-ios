@@ -22,7 +22,6 @@ platform :ios do
   lane :tests do
     run_tests(
 	scheme: "Pennyway-iOSTests",
-	workspace: "pennyway-client-iOS.xcworkspace",
 	skip_build: true
     )
   end
