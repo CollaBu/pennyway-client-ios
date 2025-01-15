@@ -20,7 +20,11 @@ platform :ios do
   desc "Description of what the lane does"
 
   lane :tests do
-    run_tests(scheme: "Pennyway-iOSTests")
+    run_tests(
+	scheme: "Pennyway-iOSTests",
+	workspace: "pennyway-client-iOS.xcworkspace",
+	skip_build: true
+    )
   end
 
 end
