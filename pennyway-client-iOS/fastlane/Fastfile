@@ -22,8 +22,9 @@ platform :ios do
   lane :tests do
     run_tests(
 	scheme: "Pennyway-iOSTests",
-	skip_build: true
-    )
+	skip_build: true,
+	output_style: "raw"
+	)
   end
 
 end
