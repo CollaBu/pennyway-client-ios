@@ -8,26 +8,26 @@
 import Foundation
 
 class DefaultEditChatRoomRepository: EditChatRoomRepository {
-    func editChatRoom(chatRoomId: Int64, roomData: MakeChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void) {
+    func editChatRoom(roomData: EditChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void) {
         let parserData = parseChatroomUrl(from: roomData.backgroundImageUrl ?? "")
 
-        Log.debug("DefaultMakeChatRoomRepository: title: \(roomData.title), description: \(roomData.description), password: \(roomData.password), backgroundImageUrl: \(parserData)")
+        Log.debug("DefaultEditChatRoomRepository: title: \(roomData.title), description: \(roomData.description), password: \(roomData.password), backgroundImageUrl: \(parserData)")
 
         let editChatRoomRequestDto = EditChatRoomRequestDto(
-            chatRoomId: chatRoomId,
+            chatRoomId: roomData.chatRoomId,
             title: roomData.title,
             description: roomData.description.isEmpty ? nil : roomData.description,
             password: roomData.password.isEmpty ? nil : roomData.password,
             backgroundImageUrl: parserData.isEmpty ? nil : parserData
         )
 
-        ChatAlamofire.shared.editChatRoom(chatRoomId, editChatRoomRequestDto) { result in
+        ChatAlamofire.shared.editChatRoom(roomData.chatRoomId, editChatRoomRequestDto) { result in
             switch result {
             case let .success(data):
                 if let responseData = data {
                     do {
                         let response = try JSONDecoder().decode(MakeChatRoomResponseDto.self, from: responseData)
-                        Log.debug("[DefaultMakeChatRoomRepository]: 채팅방 생성 확정 api 성공: \(response)")
+                        Log.debug("[DefaultEditChatRoomRepository]: 채팅방 수정 api 성공: \(response)")
                         completion(.success(response.data))
                     } catch {
                         Log.fault("Error parsing response JSON: \(error)")

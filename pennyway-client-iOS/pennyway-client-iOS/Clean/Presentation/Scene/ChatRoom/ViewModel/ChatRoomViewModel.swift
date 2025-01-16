@@ -42,15 +42,13 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     var previousMessageData: Observable<PreviousMessage?> = Observable(nil) // 이전 채팅 목록 및 무한 스크롤 데이터
 
     private let getChatUseCase: GetChatUseCase
-    private let editChatRoomUseCase: EditChatRoomUseCase
     private let sendChatUseCase: SendChatUseCase
     private let chatHistoryList: ChatHistoryList
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: GetChatUseCase, editChatRoomUseCase: EditChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: GetChatUseCase, sendChatUseCase: SendChatUseCase) {
         getChatUseCase = chatRoomUseCase
-        self.editChatRoomUseCase = editChatRoomUseCase
         self.chatHistoryList = chatHistoryList
         self.sendChatUseCase = sendChatUseCase
         self.chatHistoryList.delegate = self

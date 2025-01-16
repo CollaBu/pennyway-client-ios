@@ -9,5 +9,5 @@ import Foundation
 import UIKit
 
 protocol EditChatRoomRepository {
-    func editChatRoom(chatRoomId: Int64, roomData: MakeChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void)
+    func editChatRoom(roomData: EditChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void)
 }

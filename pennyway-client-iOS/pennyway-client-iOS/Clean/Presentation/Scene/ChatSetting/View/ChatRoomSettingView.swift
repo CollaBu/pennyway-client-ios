@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChatRoomSettingView: View {
     @StateObject private var keyboardHandler = KeyboardManager()
-    @State private var isPublic: Bool = false // 토글 상태를 관리하는 변수
+    @State private var isSecret: Bool = false // 토글 상태를 관리하는 변수
     @State private var chatRoomName: String = ""
     @State private var password: String = ""
     @State private var showCompleteToastPopup: Bool = false
@@ -81,7 +81,13 @@ struct ChatRoomSettingView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack {
                         Button(action: {
-                            showCompleteToastPopup = true
+                            viewModelWrapper.editChatRoomViewModel.editChatRoomData(title: chatRoomName, password: password)
+                            viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
+                                if success {
+                                    showCompleteToastPopup = true
+                                }
+                            }
+
                         }, label: {
                             Text("완료")
                                 .font(.H4MediumFont())
@@ -128,7 +134,7 @@ struct ChatRoomSettingView: View {
 
             if let selectedUIImage {
                 self.selectedUIImage = selectedUIImage
-//                chatViewModelWrapper.makeChatViewModel.uploadImage(image: selectedUIImage)
+                viewModelWrapper.editChatRoomViewModel.uploadImage(image: selectedUIImage)
             }
 
         }) {
@@ -150,7 +156,7 @@ struct ChatRoomSettingView: View {
                     .frame(height: 46 * DynamicSizeFactor.factor())
 
                 if chatRoomName.isEmpty {
-                    Text(viewModelWrapper.chatRoomViewModel.roomData.value?.title ?? "")
+                    Text(viewModelWrapper.editRoomData?.title ?? "")
                         .font(.H4MediumFont())
                         .platformTextColor(color: Color("Gray07"))
                         .padding(.leading, 13 * DynamicSizeFactor.factor())
@@ -181,13 +187,13 @@ struct ChatRoomSettingView: View {
 
                 Spacer()
 
-                Toggle(isOn: $isPublic) {}
+                Toggle(isOn: $isSecret) {}
                     .toggleStyle(CustomToggleStyle(hasAppeared: .constant(true)))
             }
 
             Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
-            if !isPublic {
+            if isSecret {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color("Gray01"))
@@ -199,8 +205,14 @@ struct ChatRoomSettingView: View {
                         .padding(.horizontal, 13 * DynamicSizeFactor.factor())
                         .keyboardType(.numberPad)
                         .onChange(of: password) { pw in
-                            if pw.count > 6 {
-                                password = String(pw.prefix(6))
+                            // 숫자만 필터링
+                            let filtered = pw.filter { $0.isNumber }
+                            if filtered != pw {
+                                password = filtered
+                            }
+                            // 최대 6자리까지만 허용
+                            if password.count > 6 {
+                                password = String(password.prefix(6))
                             }
                         }
                 }

@@ -20,7 +20,7 @@ final class ChatSceneDIContainer {
     // MARK: - Chat View Model Wrapper
 
     private func makeChatViewModelWrapper() -> ChatViewModelWrapper {
-        return ChatViewModelWrapper(makeChatViewModel: makeChatRoomViewModel(), getChatRoomViewModel: makeGetChatRoomViewModel(), chatRoomViewModel: makeChatRoomDetailViewModel(), joinChatRoomViewModel: makeJoinChatRoomViewModel())
+        return ChatViewModelWrapper(makeChatViewModel: makeChatRoomViewModel(), getChatRoomViewModel: makeGetChatRoomViewModel(), chatRoomViewModel: makeChatRoomViewModel(), joinChatRoomViewModel: makeJoinChatRoomViewModel())
     }
 
     // - Chat Use Cases
@@ -86,17 +86,10 @@ final class ChatSceneDIContainer {
         return DefaultJoinChatRoomViewModel(joinChatRoomUseCase: makeJoinChatRoomUseCase())
     }
 
-//    // MARK: - View Model Wrapper
-//
-//    private func makeChatViewModelWrapper() -> ChatViewModelWrapper {
-//        return ChatViewModelWrapper(makeChatViewModel: makeChatRoomViewModel(), getChatRoomViewModel: makeGetChatRoomViewModel(), chatRoomViewModel: makeChatRoomViewModel(), joinChatRoomViewModel: makeJoinChatRoomViewModel())
-//    }
-//
-
     // MARK: - Chat Room View Model Wrapper
 
     private func makeChatRoomViewModelWrapper() -> ChatRoomViewModelWrapper {
-        return ChatRoomViewModelWrapper(chatRoomViewModel: makeChatRoomDetailViewModel())
+        return ChatRoomViewModelWrapper(chatRoomViewModel: makeChatRoomViewModel(), editChatRoomViewModel: makeEditChatRoomViewModel())
     }
 
     // - Chat Room Use Cases
@@ -126,7 +119,11 @@ final class ChatSceneDIContainer {
 
     // - Chat Room View Model
 
-    private func makeChatRoomDetailViewModel() -> ChatRoomViewModel {
-        return DefaultChatRoomViewModel(chatRoomUseCase: makeGetChatUseCase(), editChatRoomUseCase: makeEditChatRoomUseCase(), sendChatUseCase: makeSendChatUseCase())
+    private func makeChatRoomViewModel() -> ChatRoomViewModel {
+        return DefaultChatRoomViewModel(chatRoomUseCase: makeGetChatUseCase(), sendChatUseCase: makeSendChatUseCase())
+    }
+
+    private func makeEditChatRoomViewModel() -> EditChatRoomViewModel {
+        return DefaultEditChatRoomViewModel(editChatRoomUseCase: makeEditChatRoomUseCase())
     }
 }
