@@ -28,4 +28,3 @@ public struct EditChatRoomRequestDto: Encodable {
         self.backgroundImageUrl = backgroundImageUrl
     }
 }
-

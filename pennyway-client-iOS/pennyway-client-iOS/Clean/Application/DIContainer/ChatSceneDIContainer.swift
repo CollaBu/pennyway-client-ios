@@ -101,23 +101,32 @@ final class ChatSceneDIContainer {
 
     // - Chat Room Use Cases
 
-    private func makeChatRoomUseCase() -> ChatRoomUseCase {
-        return DefaultChatRoomUseCase(repository: makeChatRoomDetailRepository())
+    private func makeGetChatUseCase() -> GetChatUseCase {
+        return DefaultGetChatUseCase(repository: makeGetChatRepository())
     }
 
     private func makeSendChatUseCase() -> SendChatUseCase {
         return DefaultSendChatUseCase()
     }
 
+    private func makeEditChatRoomUseCase() -> EditChatRoomUseCase {
+        let presignedUrlRepository = profileSceneDIContainer.makePresignedUrlRepository()
+        return DefaultEditChatRoomUseCase(repository: makeEdittChatRoomRepository(), urlRepository: presignedUrlRepository)
+    }
+
     // - Chat Room Repository
 
-    func makeChatRoomDetailRepository() -> ChatRoomRepository {
-        DefaultChatRoomRepository()
+    func makeGetChatRepository() -> GetChatRepository {
+        DefaultGetChatRepository()
+    }
+
+    func makeEdittChatRoomRepository() -> EditChatRoomRepository {
+        DefaultEditChatRoomRepository()
     }
 
     // - Chat Room View Model
 
     private func makeChatRoomDetailViewModel() -> ChatRoomViewModel {
-        return DefaultChatRoomViewModel(chatRoomUseCase: makeChatRoomUseCase(), sendChatUseCase: makeSendChatUseCase())
+        return DefaultChatRoomViewModel(chatRoomUseCase: makeGetChatUseCase(), editChatRoomUseCase: makeEditChatRoomUseCase(), sendChatUseCase: makeSendChatUseCase())
     }
 }

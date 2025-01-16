@@ -7,20 +7,20 @@
 
 import Foundation
 
-// MARK: - ChatRoomUseCase
+// MARK: - GetChatUseCase
 
-protocol ChatRoomUseCase {
+protocol GetChatUseCase {
     func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void)
     func getPreviousChat(chatRoomId: Int64, lastMessageId: Int64, completion: @escaping (Result<PreviousMessage, Error>) -> Void)
     func getChatMembers(chatRoomId: Int64, ids: [Int64], completion: @escaping (Result<[ChatMember], Error>) -> Void)
 }
 
-// MARK: - DefaultChatRoomUseCase
+// MARK: - DefaultGetChatUseCase
 
-class DefaultChatRoomUseCase: ChatRoomUseCase {
-    private let repository: ChatRoomRepository
+class DefaultGetChatUseCase: GetChatUseCase {
+    private let repository: GetChatRepository
 
-    init(repository: ChatRoomRepository) {
+    init(repository: GetChatRepository) {
         self.repository = repository
     }
 
