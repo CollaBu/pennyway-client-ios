@@ -19,7 +19,7 @@ class ChatRoomAlamofire {
         session = Session(interceptor: interceptors, eventMonitors: monitors)
     }
     
-    /// 채팅방 생성
+    /// 채팅방 정보 조회
     func getChatRoomDetail(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatRoomAlamofire - getChatRoomDetail() called \(chatRoomId)")
         

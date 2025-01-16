@@ -61,4 +61,11 @@ class ChatAlamofire {
 
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.joinChatRoom(chatRoomId: chatRoomId, dto: dto), completion: completion)
     }
+    
+    /// 채팅방 수정
+    func editChatRoom(_ chatRoomId: Int64, _ dto: EditChatRoomRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatAlamofire - editChatRoom() called")
+
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRouter.editChatRoom(chatRoomId: chatRoomId, dto: dto), completion: completion)
+    }
 }

@@ -292,6 +292,8 @@
 		4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */; };
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
 		4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */; };
+		4ADD84662D391CA7003F5894 /* EditChatRoomRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84652D391CA7003F5894 /* EditChatRoomRequestDto.swift */; };
+		4ADD84682D391E55003F5894 /* EditChatRoomResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84672D391E55003F5894 /* EditChatRoomResponseDto.swift */; };
 		4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */; };
 		4ADE802C2BF29055007FFB01 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE802B2BF29055007FFB01 /* MainTabView.swift */; };
 		4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */; };
@@ -759,6 +761,8 @@
 		4ADBFAEE2BE2C43B00C3ECE4 /* UserAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRouter.swift; sourceTree = "<group>"; };
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
 		4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewModel.swift; sourceTree = "<group>"; };
+		4ADD84652D391CA7003F5894 /* EditChatRoomRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomRequestDto.swift; sourceTree = "<group>"; };
+		4ADD84672D391E55003F5894 /* EditChatRoomResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomResponseDto.swift; sourceTree = "<group>"; };
 		4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListItem.swift; sourceTree = "<group>"; };
 		4ADE802B2BF29055007FFB01 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
@@ -1439,6 +1443,7 @@
 				4A2C3A8A2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift */,
 				D85FC58D2CCC029B0068553A /* SearchChatRoomRequestDto.swift */,
 				D8E889E32CDB796B008FC22E /* JoinChatRoomRequestDto.swift */,
+				4ADD84652D391CA7003F5894 /* EditChatRoomRequestDto.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1460,6 +1465,7 @@
 				4A2C3A8C2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift */,
 				D85FC58F2CCC03920068553A /* SearchChatRoomResponseDto.swift */,
 				D89263272CD3AD080057AAD6 /* GetChatRoomResponseDto.swift */,
+				4ADD84672D391E55003F5894 /* EditChatRoomResponseDto.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3304,6 +3310,7 @@
 				D8DCCF9C2CBD923100550A8B /* MakeChatRoomRequestDto.swift in Sources */,
 				4A12FF0D2C9C4B9A00DE10BC /* AppDIContainer.swift in Sources */,
 				4A8BDEE32C6246B900D21424 /* DiffAmountColorUtil.swift in Sources */,
+				4ADD84662D391CA7003F5894 /* EditChatRoomRequestDto.swift in Sources */,
 				4A7514D72C51713F00573671 /* PhoneViewModelHandlers.swift in Sources */,
 				D85E465A2CD7727200715169 /* ChatRoomProtocol.swift in Sources */,
 				4AE9B3402CB6E5770044D3E1 /* ChatSideMenuView.swift in Sources */,
@@ -3365,6 +3372,7 @@
 				4A2C3A742CD3C93C006B6804 /* DeleteUserAccountRepository.swift in Sources */,
 				D8BAB3ED2CCA945E00D1910E /* DefaultGetChatRoomRepository.swift in Sources */,
 				D8BAB3EB2CCA931500D1910E /* GetChatRoomRepository.swift in Sources */,
+				4ADD84682D391E55003F5894 /* EditChatRoomResponseDto.swift in Sources */,
 				4A2C3A7A2CD3C93C006B6804 /* SignUpRepository.swift in Sources */,
 				4ADA094F2CBE679C001F9384 /* ChatStompRepository.swift in Sources */,
 				4AE8F3B42C330A0B0014F0D4 /* TargetAmountSettingView.swift in Sources */,
