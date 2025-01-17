@@ -79,7 +79,7 @@ struct ChatRoomView: View {
             .onAppear {
                 // 현재 채팅방 정보 저장
                 viewModelWrapper.chatRoomViewModel.roomData.value = chatRoom
-                viewModelWrapper.editChatRoomViewModel.editRoomData.value = EditChatRoomItemModel(chatRoomId: chatRoom.id, title: chatRoom.title, description: chatRoom.description, password: "", backgroundImageUrl: chatRoom.backgroundImageUrl) // TODO: password 받아오도록 수정해야함
+                viewModelWrapper.editChatRoomViewModel.editRoomData.value = EditChatRoomItemModel(chatRoomId: chatRoom.id, title: chatRoom.title, description: "소비 그만하자", password: "", backgroundImageUrl: chatRoom.backgroundImageUrl) // TODO: password 받아오도록 수정해야함
                 viewStateManager.setCurrentView(self, chatRoomId: viewModelWrapper.roomData?.id)
 
                 // 채팅방 상세 정보 조회

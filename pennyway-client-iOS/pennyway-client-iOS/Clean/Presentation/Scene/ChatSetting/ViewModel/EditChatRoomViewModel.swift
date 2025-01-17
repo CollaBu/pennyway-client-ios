@@ -56,11 +56,13 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
     }
 
     func editChatRoomData(title: String, password: String) {
-        if !title.isEmpty{
+        if !title.isEmpty {
             editRoomData.value.title = title
         }
-        
-        editRoomData.value.password = password
+
+        if !password.isEmpty, password.count == 6 {
+            editRoomData.value.password = password
+        }
     }
 
     /// Presigned URL 생성
