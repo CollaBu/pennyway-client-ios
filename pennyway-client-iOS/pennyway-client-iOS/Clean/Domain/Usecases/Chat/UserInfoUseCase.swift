@@ -8,7 +8,7 @@
 // MARK: - UserInfoUseCase
 
 protocol UserInfoUseCase {
-    func banChatMember(chatRoomId: Int64, chatMemberId: Int64)
+    func banChatMember(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - DefaultUserInfoUseCase
@@ -21,10 +21,12 @@ class DefaultUserInfoUseCase: UserInfoUseCase {
     }
 
     /// 채팅 멤버 강제 추방
-    func banChatMember(chatRoomId: Int64, chatMemberId: Int64) {
+    func banChatMember(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void) {
         repository.banChatMember(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { success in
             if success {
+                let isSuccess = true
                 Log.debug("[DefaultUserInfoUseCase]: 채팅멤버 강제 추방 성공")
+                completion(isSuccess)
             } else {
                 Log.error("[DefaultUserInfoUseCase]: 채팅멤버 강제 추방 실패")
             }

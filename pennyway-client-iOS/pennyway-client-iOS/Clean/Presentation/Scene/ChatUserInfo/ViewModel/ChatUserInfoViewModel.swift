@@ -16,7 +16,9 @@ protocol ChatUserInfoViewModelInput {
 
 // MARK: - ChatUserInfoViewModelOutput
 
-protocol ChatUserInfoViewModelOutput {}
+protocol ChatUserInfoViewModelOutput {
+    var isBanSuccessful: Bool { get set }
+}
 
 // MARK: - ChatUserInfoViewModel
 
@@ -27,6 +29,7 @@ protocol ChatUserInfoViewModel: ChatUserInfoViewModelInput, ChatUserInfoViewMode
 class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
     @Published var chatRoomId: Int64
     @Published var chatMemberId: Int64
+    @Published var isBanSuccessful: Bool = false // 강제 추방 성공 상태 관리
 
     private let userInfoUseCase: UserInfoUseCase
 
@@ -46,6 +49,11 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
 
     /// 채팅멤버 강제 추방
     func banChatMember() {
-        userInfoUseCase.banChatMember(chatRoomId: chatRoomId, chatMemberId: chatMemberId)
+        userInfoUseCase.banChatMember(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { [weak self] isSuccess in
+            DispatchQueue.main.async {
+                self?.isBanSuccessful = isSuccess
+                Log.debug("[DefaultChatUserInfoViewModel] - isBanSuccessful: \(self!.isBanSuccessful)")
+            }
+        }
     }
 }
