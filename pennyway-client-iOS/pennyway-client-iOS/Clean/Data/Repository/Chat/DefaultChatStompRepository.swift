@@ -12,6 +12,7 @@ import StompClientLib
 
 class DefaultChatStompRepository: ChatStompRepository {
     private let stompClient: StompClientLib
+    private var messageDatas: [String: [String: String]] = [:]
 
     init(stompClient: StompClientLib) {
         self.stompClient = stompClient
@@ -31,16 +32,16 @@ class DefaultChatStompRepository: ChatStompRepository {
 
     /// Stomp 소켓 연결을 해제하는 메서드
     func disconnect() {
-
         // 소켓 연결 해제
         stompClient.disconnect()
         Log.info("[Disconnect] 모든 구독이 해제되고 소켓 연결 해제")
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
-    func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
+    func sendMessage(message: String, chatRoomId: Int64, contentType: String, retry _: Bool? = false, uuid: String? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
         let destination = "/pub/chat.message.\(chatRoomId)"
-        let headers = createSendMessageIdHeaders(uuid: "")
+        let messageUuid = uuid ?? GenerateUuid.generateSequentialUuid().uuidString
+        let headers = createSendMessageIdHeaders(uuid: messageUuid)
         let messageBody: [String: String] = [
             "content": message,
             "contentType": contentType
@@ -50,10 +51,14 @@ class DefaultChatStompRepository: ChatStompRepository {
             let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
-                Log.info("📤 [Send Message])")
+                messageDatas[messageUuid] = ["message": message, "chatRoomId": String(chatRoomId), "contentType": contentType]
+                Log.info("📤 [Send Message] total - \(String(describing: messageDatas))")
+                Log.info("📤 [Send Message] - \(String(describing: messageDatas[messageUuid]))")
+                completion(.success(()))
             }
         } catch {
             Log.error("Failed to serialize message body: \(error)")
+            completion(.failure(error))
         }
     }
 
@@ -109,6 +114,12 @@ extension DefaultChatStompRepository {
         stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": errorReceiptId])
     }
 
+    /// 메시지 전송 성공 처리에 대한 구독을 설정하는 메서드
+    private func subscribeToSuccess() {
+        let errorReceiptId = "success-receipt-\(UUID().uuidString)"
+        stompClient.subscribeWithHeader(destination: "/user/queue/success", withHeader: ["receipt": errorReceiptId])
+    }
+
     /// 채팅방 ID 리스트에 대한 구독을 설정하는 메서드
     private func subscribeToChatRooms(_ chatRoomIds: [Int64]) {
         for chatRoomId in chatRoomIds {
@@ -120,6 +131,7 @@ extension DefaultChatStompRepository {
 
     /// 실제로 소켓 연결을 수행하는 메서드
     private func connectToSocket(url: String) {
+        Log.debug("[connectToSocket] - 소켓 연결 수행")
         let headers = createConnectionHeaders()
 
         let request = NSURLRequest(url: URL(string: url)!)
@@ -198,6 +210,54 @@ extension DefaultChatStompRepository {
             }
         }
     }
+
+    /// `/user/queue/success`에서 받은 메시지 처리
+    private func handleRemovedMessage(header: [String: String]?) {
+        if let id = header?["x-message-id"] {
+            messageDatas.removeValue(forKey: id)
+            Log.info("📤 [Send Message] Removed ID \(id). Remaining messages: \(messageDatas)")
+        }
+    }
+
+    /// refresh token을 서버에 전송하는  메서드
+    private func sendRefreshToken() {
+        let destination = "/pub/auth.refresh"
+        let receiptId = "refresh-receipt-\(UUID().uuidString)"
+        let headers = ["Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
+                       "content-type": "application/json",
+                       "receipt": receiptId]
+
+        stompClient.sendMessage(message: "", toDestination: destination, withHeaders: headers, withReceipt: nil)
+
+        Log.info("📤 [Send RefreshToken])")
+    }
+
+    /// 보내지지 않은 메시지 보내는 메서드
+    private func retryUnsentMessages() {
+        let sortedMessages = messageDatas.keys.sorted().map { uuid -> (String, [String: String]) in
+            (uuid, self.messageDatas[uuid]!)
+        }
+
+        for (uuid, data) in sortedMessages {
+            guard let message = data["message"],
+                  let chatRoomIdString = data["chatRoomId"],
+                  let chatRoomId = Int64(chatRoomIdString),
+                  let contentType = data["contentType"]
+            else {
+                Log.error("📤 [Retry Messages] Invalid message data: \(data)")
+                continue
+            }
+
+            sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: true, uuid: uuid) { [weak self] result in
+                switch result {
+                case .success:
+                    Log.info("📤 [Retry Messages] Successfully sent message with UUID: \(uuid)")
+                case let .failure(error):
+                    Log.error("📤 [Retry Messages] Failed to resend message with UUID: \(uuid), Error: \(error)")
+                }
+            }
+        }
+    }
 }
 
 // MARK: StompClientLibDelegate
@@ -206,6 +266,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
     func stompClientDidConnect(client _: StompClientLib!) {
         Log.info("Socket connected")
         subscribeToErrors()
+        subscribeToSuccess()
         getJoinedChatRooms()
     }
 
@@ -222,8 +283,28 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
         }
     }
 
-    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader _: [String: String]?, withDestination _: String) {
-        Log.info("Did receive Message: \(body), \(akaStringBody)")
+    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody body: AnyObject?, akaStringBody akaStringBody: String?, withHeader header: [String: String]?, withDestination _: String) {
+        Log.info("Did receive Message: body - \(body), \(akaStringBody), \n header - \(header)")
+
+        // `destination` 확인
+        if let destination = header?["destination"], destination == "/user/queue/success" {
+            handleRemovedMessage(header: header)
+            return
+        }
+
+        if let body = body as? [String: Any], let code = body["code"] as? String, code == "4011" {
+            Log.info("📤 [Retry Messages] Error code \(code) detected. Retrying unsent messages.")
+            TokenRefreshHandler.shared.refreshSync { result, _ in
+                switch result {
+                case .success:
+                    Log.debug("Token refreshed, retrying request sucess")
+                    self.sendRefreshToken()
+
+                case .failure:
+                    Log.debug("Token refreshed, retrying request fail")
+                }
+            }
+        }
 
         if let body = body as? [String: Any],
            let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []),
@@ -243,12 +324,17 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
         }
     }
 
-    func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
-        Log.info("Receipt received: \(receiptId)")
+    func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {
+        Log.info("Receipt received: \(receiptId) \(String(describing: client))")
+
+        // receiptId가 "refresh-receipt-"로 시작하는 경우 처리
+        if receiptId.hasPrefix("refresh-receipt-") {
+            retryUnsentMessages()
+        }
     }
 
-    func serverDidSendError(client _: StompClientLib!, withErrorMessage description: String, detailedErrorMessage _: String?) {
-        Log.error("Error: \(description)")
+    func serverDidSendError(client _: StompClientLib!, withErrorMessage description: String, detailedErrorMessage detailedErrorMessage: String?) {
+        Log.error("Error: \(description) \n detail: \(detailedErrorMessage)")
     }
 
     func serverDidSendPing() {
