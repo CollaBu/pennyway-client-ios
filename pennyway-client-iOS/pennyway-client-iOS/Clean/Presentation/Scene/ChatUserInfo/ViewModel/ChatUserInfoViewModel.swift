@@ -11,6 +11,7 @@ import Foundation
 
 protocol ChatUserInfoViewModelInput {
     func banChatMember()
+    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64)
 }
 
 // MARK: - ChatUserInfoViewModelOutput
@@ -35,6 +36,12 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
         // 초기화
         chatRoomId = 0
         chatMemberId = 0
+    }
+
+    /// 채팅 멤버 정보를 설정
+    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64) {
+        self.chatRoomId = chatRoomId
+        self.chatMemberId = chatMemberId
     }
 
     /// 채팅멤버 강제 추방
