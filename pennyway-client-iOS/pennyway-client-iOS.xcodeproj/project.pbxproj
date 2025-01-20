@@ -52,6 +52,9 @@
 		4A148B602C370123005C6D4E /* CustomSpendingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */; };
 		4A1C59882BC51AAE00EA2B49 /* OAuthAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */; };
 		4A1C598A2BC51AEB00EA2B49 /* OAuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */; };
+		4A1EBBA22D2BBE770091B771 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EBB9F2D2BBE760091B771 /* Debug.xcconfig */; };
+		4A1EBBA32D2BBE770091B771 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EBBA02D2BBE760091B771 /* Release.xcconfig */; };
+		4A1EBBA42D2BBE770091B771 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4A1EBBA12D2BBE760091B771 /* Secrets.xcconfig */; };
 		4A23E7C22CE874E5006FD4E2 /* GetChatMembersRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A23E7C12CE874E5006FD4E2 /* GetChatMembersRequestDto.swift */; };
 		4A23E7C42CE8771C006FD4E2 /* GetChatMembersReponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A23E7C32CE8771C006FD4E2 /* GetChatMembersReponseDto.swift */; };
 		4A2881FA2C64CC1200AE50C7 /* MoveCategoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2881F92C64CC1200AE50C7 /* MoveCategoryRequestDto.swift */; };
@@ -111,12 +114,8 @@
 		4A3DE21C2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21B2C3EFC5B00817589 /* getCategorySpendingHistoryResponseDto.swift */; };
 		4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3DE21D2C3EFCCC00817589 /* SpendingResponseDto.swift */; };
 		4A45A19A2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		4A45A19B2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A19E2CCBF9A300D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A45A1A72CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		4A45A1AB2CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		4A45A1AC2CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		4A45A1AD2CCBF9B700D47F10 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4A47038A2BCEA3B700AEE04E /* OAuthLoginRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4703892BCEA3B700AEE04E /* OAuthLoginRequestDto.swift */; };
 		4A47038C2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038B2BCEA43500AEE04E /* OAuthVerificationCodeRequestDto.swift */; };
 		4A47038E2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47038D2BCEA47600AEE04E /* OAuthVerificationRequestDto.swift */; };
@@ -192,6 +191,7 @@
 		4A762B072B99A262001C1188 /* TokenHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B062B99A262001C1188 /* TokenHandler.swift */; };
 		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
+		4A7B3F782CFC9B99009B85E0 /* ChatHistoryListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7B3F772CFC9B99009B85E0 /* ChatHistoryListTest.swift */; };
 		4A8523EA2CB5297100AE90AF /* ChatHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523E92CB5297100AE90AF /* ChatHeader.swift */; };
 		4A8523ED2CB5A8AE00AE90AF /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523EC2CB5A8AE00AE90AF /* ChatRoom.swift */; };
 		4A8523EF2CB5A8C200AE90AF /* ChatMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523EE2CB5A8C200AE90AF /* ChatMember.swift */; };
@@ -272,7 +272,6 @@
 		4AC948902BC1C563008DBC1F /* OAuthAccountLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */; };
 		4ACB61132CE4C09D0018E78A /* ChatHistoryBinaryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */; };
 		4ACB61152CE4C20C0018E78A /* GetPreviousChatRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */; };
-		4ACB611D2CE4CC8A0018E78A /* ChatHistoryListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */; };
 		4ACE1FEF2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */; };
 		4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */; };
 		4AD0D8442BFD1B5600A0808F /* NavigationBarModifierExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */; };
@@ -319,9 +318,7 @@
 		4AF69F642BFDF9E2001D49F8 /* BottomSheetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */; };
 		4AFC7C9B2C581D9D003CFA8C /* TooManyRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */; };
 		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
-		6AAB57E62D00441F007C40C7 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */; };
-		6AAB57E72D00441F007C40C7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E42D00441F007C40C7 /* Debug.xcconfig */; };
-		7C0E38D4CE51A896B5A498EE /* Pods_pennyway_client_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */; };
+		620AB499538A8F921B545B0A /* Pods_pennyway_client_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EDBA0D63DD15AED01A70B3 /* Pods_pennyway_client_iOS.framework */; };
 		B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */; };
 		B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */; };
 		B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */; };
@@ -467,7 +464,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4ACB611E2CE4CC8A0018E78A /* PBXContainerItemProxy */ = {
+		4A7B3F792CFC9B99009B85E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4A762AE12B99A16B001C1188 /* Project object */;
 			proxyType = 1;
@@ -477,7 +474,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		01EDBA0D63DD15AED01A70B3 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		13C471E5B4B1108B25112EBA /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		249400109D83A510F26C6F85 /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		4A058EFE2BD03E01004B6F89 /* AuthResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDto.swift; sourceTree = "<group>"; };
 		4A058F002BD046C1004B6F89 /* OAuthLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginViewModel.swift; sourceTree = "<group>"; };
 		4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateResponseDto.swift; sourceTree = "<group>"; };
@@ -524,6 +523,9 @@
 		4A148B5F2C370123005C6D4E /* CustomSpendingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSpendingRow.swift; sourceTree = "<group>"; };
 		4A1C59872BC51AAE00EA2B49 /* OAuthAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAlamofire.swift; sourceTree = "<group>"; };
 		4A1C59892BC51AEB00EA2B49 /* OAuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthRouter.swift; sourceTree = "<group>"; };
+		4A1EBB9F2D2BBE760091B771 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4A1EBBA02D2BBE760091B771 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4A1EBBA12D2BBE760091B771 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		4A23E7C12CE874E5006FD4E2 /* GetChatMembersRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatMembersRequestDto.swift; sourceTree = "<group>"; };
 		4A23E7C32CE8771C006FD4E2 /* GetChatMembersReponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatMembersReponseDto.swift; sourceTree = "<group>"; };
 		4A2881F92C64CC1200AE50C7 /* MoveCategoryRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveCategoryRequestDto.swift; sourceTree = "<group>"; };
@@ -659,6 +661,9 @@
 		4A762B062B99A262001C1188 /* TokenHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandler.swift; sourceTree = "<group>"; };
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
+		4A7B3F5C2CFC4ECC009B85E0 /* Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
+		4A7B3F752CFC9B99009B85E0 /* pennyway-client-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pennyway-client-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A7B3F772CFC9B99009B85E0 /* ChatHistoryListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryListTest.swift; sourceTree = "<group>"; };
 		4A8523E92CB5297100AE90AF /* ChatHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeader.swift; sourceTree = "<group>"; };
 		4A8523EC2CB5A8AE00AE90AF /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		4A8523EE2CB5A8C200AE90AF /* ChatMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMember.swift; sourceTree = "<group>"; };
@@ -739,8 +744,6 @@
 		4AC9488F2BC1C563008DBC1F /* OAuthAccountLinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAccountLinkingView.swift; sourceTree = "<group>"; };
 		4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryBinaryList.swift; sourceTree = "<group>"; };
 		4ACB61142CE4C20C0018E78A /* GetPreviousChatRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPreviousChatRequestDto.swift; sourceTree = "<group>"; };
-		4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pennyway-client-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryListTest.swift; sourceTree = "<group>"; };
 		4ACE1FEE2BBB1D9600BB4F0A /* TermsAndConditionsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsContentView.swift; sourceTree = "<group>"; };
 		4AD0D8412BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTabBarVisibilityExtension.swift; sourceTree = "<group>"; };
 		4AD0D8432BFD1B5600A0808F /* NavigationBarModifierExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifierExtension.swift; sourceTree = "<group>"; };
@@ -787,10 +790,7 @@
 		4AF69F632BFDF9E2001D49F8 /* BottomSheetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetExtension.swift; sourceTree = "<group>"; };
 		4AFC7C9A2C581D9D003CFA8C /* TooManyRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestError.swift; sourceTree = "<group>"; };
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
-		6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		6AAB57E42D00441F007C40C7 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B29984560DF689A2D4EC8306 /* Pods-pennyway-client-iOS.test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.test.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.test.xcconfig"; sourceTree = "<group>"; };
 		B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
@@ -941,11 +941,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D820675C2CC5500700102356 /* OSLog.framework in Frameworks */,
-				7C0E38D4CE51A896B5A498EE /* Pods_pennyway_client_iOS.framework in Frameworks */,
+				620AB499538A8F921B545B0A /* Pods_pennyway_client_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4ACB61172CE4CC8A0018E78A /* Frameworks */ = {
+		4A7B3F722CFC9B99009B85E0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -959,7 +959,7 @@
 			isa = PBXGroup;
 			children = (
 				D820675B2CC5500700102356 /* OSLog.framework */,
-				A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */,
+				01EDBA0D63DD15AED01A70B3 /* Pods_pennyway_client_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -967,8 +967,9 @@
 		41951791426F03880A100F2C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */,
-				6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */,
+				13C471E5B4B1108B25112EBA /* Pods-pennyway-client-iOS.debug.xcconfig */,
+				B29984560DF689A2D4EC8306 /* Pods-pennyway-client-iOS.test.xcconfig */,
+				249400109D83A510F26C6F85 /* Pods-pennyway-client-iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1519,9 +1520,10 @@
 		4A3246592CF8943200DE023D /* Xcconfig */ = {
 			isa = PBXGroup;
 			children = (
-				6AAB57E42D00441F007C40C7 /* Debug.xcconfig */,
-				D84711F62D25265500605E31 /* Release.xcconfig */,
-				6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */,
+				4A1EBB9F2D2BBE760091B771 /* Debug.xcconfig */,
+				4A1EBBA02D2BBE760091B771 /* Release.xcconfig */,
+				4A1EBBA12D2BBE760091B771 /* Secrets.xcconfig */,
+				4A7B3F5C2CFC4ECC009B85E0 /* Test.xcconfig */,
 			);
 			path = Xcconfig;
 			sourceTree = "<group>";
@@ -1934,7 +1936,7 @@
 			children = (
 				D846A29A2CEDD16D000B9BBC /* .gitignore */,
 				4A762AEB2B99A16B001C1188 /* pennyway-client-iOS */,
-				4ACB611B2CE4CC8A0018E78A /* pennyway-client-iOSTests */,
+				4A7B3F762CFC9B99009B85E0 /* pennyway-client-iOSTests */,
 				4A762AEA2B99A16B001C1188 /* Products */,
 				41951791426F03880A100F2C /* Pods */,
 				4A4B454C2BD16EE500D41C9A /* Recovered References */,
@@ -1946,7 +1948,7 @@
 			isa = PBXGroup;
 			children = (
 				4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */,
-				4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */,
+				4A7B3F752CFC9B99009B85E0 /* pennyway-client-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2074,6 +2076,14 @@
 				4A69C1492BE2CF6700A27B82 /* UserDefaultsHelper.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		4A7B3F762CFC9B99009B85E0 /* pennyway-client-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				4A7B3F772CFC9B99009B85E0 /* ChatHistoryListTest.swift */,
+			);
+			path = "pennyway-client-iOSTests";
 			sourceTree = "<group>";
 		};
 		4A8523EB2CB5A88D00AE90AF /* Chat */ = {
@@ -2302,14 +2312,6 @@
 				4A513BE72BEFCF5600D35964 /* LinkAccountToOAuthViewModel.swift */,
 			);
 			path = OAuthViewModel;
-			sourceTree = "<group>";
-		};
-		4ACB611B2CE4CC8A0018E78A /* pennyway-client-iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				4ACB611C2CE4CC8A0018E78A /* ChatHistoryListTest.swift */,
-			);
-			path = "pennyway-client-iOSTests";
 			sourceTree = "<group>";
 		};
 		4AD0D83E2BFD0F4400A0808F /* View */ = {
@@ -2920,12 +2922,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A762AF72B99A16D001C1188 /* Build configuration list for PBXNativeTarget "pennyway-client-iOS" */;
 			buildPhases = (
-				12C0FE4B0DBB54F34032EF01 /* [CP] Check Pods Manifest.lock */,
+				B7CF96BD4640C0CC3D7470F4 /* [CP] Check Pods Manifest.lock */,
 				D8A9FB3D2C5E1B0F009E8D68 /* ShellScript */,
 				4A762AE52B99A16B001C1188 /* Sources */,
 				4A762AE62B99A16B001C1188 /* Frameworks */,
 				4A762AE72B99A16B001C1188 /* Resources */,
-				5CB46F203C71805D8EDC1936 /* [CP] Embed Pods Frameworks */,
+				43A6F70DB6F6ADA5014094C3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2936,22 +2938,22 @@
 			productReference = 4A762AE92B99A16B001C1188 /* pennyway-client-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4ACB61192CE4CC8A0018E78A /* pennyway-client-iOSTests */ = {
+		4A7B3F742CFC9B99009B85E0 /* pennyway-client-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ACB61222CE4CC8A0018E78A /* Build configuration list for PBXNativeTarget "pennyway-client-iOSTests" */;
+			buildConfigurationList = 4A7B3F7E2CFC9B99009B85E0 /* Build configuration list for PBXNativeTarget "pennyway-client-iOSTests" */;
 			buildPhases = (
-				4ACB61162CE4CC8A0018E78A /* Sources */,
-				4ACB61172CE4CC8A0018E78A /* Frameworks */,
-				4ACB61182CE4CC8A0018E78A /* Resources */,
+				4A7B3F712CFC9B99009B85E0 /* Sources */,
+				4A7B3F722CFC9B99009B85E0 /* Frameworks */,
+				4A7B3F732CFC9B99009B85E0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4ACB611F2CE4CC8A0018E78A /* PBXTargetDependency */,
+				4A7B3F7A2CFC9B99009B85E0 /* PBXTargetDependency */,
 			);
 			name = "pennyway-client-iOSTests";
 			productName = "pennyway-client-iOSTests";
-			productReference = 4ACB611A2CE4CC8A0018E78A /* pennyway-client-iOSTests.xctest */;
+			productReference = 4A7B3F752CFC9B99009B85E0 /* pennyway-client-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -2967,7 +2969,7 @@
 					4A762AE82B99A16B001C1188 = {
 						CreatedOnToolsVersion = 15.2;
 					};
-					4ACB61192CE4CC8A0018E78A = {
+					4A7B3F742CFC9B99009B85E0 = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 4A762AE82B99A16B001C1188;
 					};
@@ -2987,7 +2989,7 @@
 			projectRoot = "";
 			targets = (
 				4A762AE82B99A16B001C1188 /* pennyway-client-iOS */,
-				4ACB61192CE4CC8A0018E78A /* pennyway-client-iOSTests */,
+				4A7B3F742CFC9B99009B85E0 /* pennyway-client-iOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2997,26 +2999,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D84711F72D25265500605E31 /* Release.xcconfig in Resources */,
-				6AAB57E62D00441F007C40C7 /* Secrets.xcconfig in Resources */,
 				D846A29B2CEDD16D000B9BBC /* .gitignore in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
+				4A1EBBA22D2BBE770091B771 /* Debug.xcconfig in Resources */,
 				4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */,
 				4A1179AD2BA9572F00A9CF4C /* Pretendard-Regular.otf in Resources */,
 				4A1179AC2BA9572F00A9CF4C /* Pretendard-Thin.otf in Resources */,
 				4A1179AF2BA9572F00A9CF4C /* Pretendard-SemiBold.otf in Resources */,
 				4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */,
-				6AAB57E72D00441F007C40C7 /* Debug.xcconfig in Resources */,
+				4A1EBBA42D2BBE770091B771 /* Secrets.xcconfig in Resources */,
 				D80DB7882CF5FFC30052F234 /* GoogleService-Info.plist in Resources */,
 				4A762AF12B99A16D001C1188 /* Assets.xcassets in Resources */,
 				4A1179AB2BA9572F00A9CF4C /* Pretendard-ExtraLight.otf in Resources */,
 				4A1179AE2BA9572F00A9CF4C /* Pretendard-Black.otf in Resources */,
 				4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */,
 				4A1179AA2BA9572F00A9CF4C /* Pretendard-ExtraBold.otf in Resources */,
+				4A1EBBA32D2BBE770091B771 /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4ACB61182CE4CC8A0018E78A /* Resources */ = {
+		4A7B3F732CFC9B99009B85E0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3026,7 +3028,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		12C0FE4B0DBB54F34032EF01 /* [CP] Check Pods Manifest.lock */ = {
+		43A6F70DB6F6ADA5014094C3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7CF96BD4640C0CC3D7470F4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3046,23 +3065,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5CB46F203C71805D8EDC1936 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D8A9FB3D2C5E1B0F009E8D68 /* ShellScript */ = {
@@ -3092,14 +3094,11 @@
 				D89263282CD3AD080057AAD6 /* GetChatRoomResponseDto.swift in Sources */,
 				D8C9AC402BF661A2006D1FCD /* InquiryView.swift in Sources */,
 				4AA13C602C63E2B300D8DEE7 /* ObjectStorageRouter.swift in Sources */,
-				4A45A1AD2CCBF9B700D47F10 /* (null) in Sources */,
 				D80C68922CC80BEA00928921 /* GetChatServerResponseDto.swift in Sources */,
 				4A12FF0F2C9C4BAD00DE10BC /* ProfileSceneDIContainer.swift in Sources */,
 				D8457BAD2CB6A233002540B2 /* ChatCellView.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
-				4A45A1AC2CCBF9B700D47F10 /* (null) in Sources */,
-				4A45A1AB2CCBF9B700D47F10 /* (null) in Sources */,
 				4A3DE21E2C3EFCCC00817589 /* SpendingResponseDto.swift in Sources */,
 				4AD0D8422BFD12AE00A0808F /* SetTabBarVisibilityExtension.swift in Sources */,
 				4AF3A2F52CD930790099967F /* ChatRoomDetailInfo.swift in Sources */,
@@ -3107,7 +3106,6 @@
 				D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */,
 				4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */,
 				D8DCCF852CBD8D5700550A8B /* PresignedUrlUseCase.swift in Sources */,
-				4A45A19B2CCBF9A300D47F10 /* (null) in Sources */,
 				4ADBFAEF2BE2C43B00C3ECE4 /* UserAccountRouter.swift in Sources */,
 				4A3701D12C08F7F600F0AEBA /* AddSpendingCustomCategoryResponseDto.swift in Sources */,
 				4A2882002C64CC5900AE50C7 /* CategoryDetailsView.swift in Sources */,
@@ -3532,28 +3530,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4ACB61162CE4CC8A0018E78A /* Sources */ = {
+		4A7B3F712CFC9B99009B85E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ACB611D2CE4CC8A0018E78A /* ChatHistoryListTest.swift in Sources */,
+				4A7B3F782CFC9B99009B85E0 /* ChatHistoryListTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4ACB611F2CE4CC8A0018E78A /* PBXTargetDependency */ = {
+		4A7B3F7A2CFC9B99009B85E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4A762AE82B99A16B001C1188 /* pennyway-client-iOS */;
-			targetProxy = 4ACB611E2CE4CC8A0018E78A /* PBXContainerItemProxy */;
+			targetProxy = 4A7B3F792CFC9B99009B85E0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4A762AF52B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */;
+			baseConfigurationReference = 13C471E5B4B1108B25112EBA /* Pods-pennyway-client-iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3618,7 +3616,7 @@
 		};
 		4A762AF62B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */;
+			baseConfigurationReference = 249400109D83A510F26C6F85 /* Pods-pennyway-client-iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3675,13 +3673,13 @@
 		};
 		4A762AF82B99A16D001C1188 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AAB57E42D00441F007C40C7 /* Debug.xcconfig */;
+			baseConfigurationReference = 4A1EBB9F2D2BBE760091B771 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "pennyway-client-iOS/pennyway-client-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"pennyway-client-iOS/Preview Content\"";
@@ -3710,7 +3708,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Pennyway Release";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Pennyway;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3723,7 +3721,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D84711F62D25265500605E31 /* Release.xcconfig */;
+			baseConfigurationReference = 4A1EBBA02D2BBE760091B771 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3768,17 +3766,129 @@
 			};
 			name = Release;
 		};
-		4ACB61202CE4CC8A0018E78A /* Debug */ = {
+		4A7B3F5D2CFC5235009B85E0 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AAB57E42D00441F007C40C7 /* Debug.xcconfig */;
+			baseConfigurationReference = B29984560DF689A2D4EC8306 /* Pods-pennyway-client-iOS.test.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Test;
+		};
+		4A7B3F5E2CFC5235009B85E0 /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A7B3F5C2CFC4ECC009B85E0 /* Test.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "pennyway-client-iOS/pennyway-client-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_ASSET_PATHS = "\"pennyway-client-iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Q8UK3SWSPM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "pennyway-client-iOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Pennyway;
+				INFOPLIST_KEY_NSCameraUsageDescription = "camera 접근 권한 주세요";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "album 권한 접근 주세요";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.pennyway.iOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Pennyway;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Test;
+		};
+		4A7B3F7B2CFC9B99009B85E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A7B3F5C2CFC4ECC009B85E0 /* Test.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q8UK3SWSPM;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
@@ -3793,17 +3903,42 @@
 			};
 			name = Debug;
 		};
-		4ACB61212CE4CC8A0018E78A /* Release */ = {
+		4A7B3F7C2CFC9B99009B85E0 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D84711F62D25265500605E31 /* Release.xcconfig */;
+			baseConfigurationReference = 4A7B3F5C2CFC4ECC009B85E0 /* Test.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q8UK3SWSPM;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pennyway-client-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pennyway-client-iOS";
+			};
+			name = Test;
+		};
+		4A7B3F7D2CFC9B99009B85E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A7B3F5C2CFC4ECC009B85E0 /* Test.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q8UK3SWSPM;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.heejin.pennyway-client-iOSTests";
@@ -3825,28 +3960,31 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A762AF52B99A16D001C1188 /* Debug */,
+				4A7B3F5D2CFC5235009B85E0 /* Test */,
 				4A762AF62B99A16D001C1188 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Test;
 		};
 		4A762AF72B99A16D001C1188 /* Build configuration list for PBXNativeTarget "pennyway-client-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4A762AF82B99A16D001C1188 /* Debug */,
+				4A7B3F5E2CFC5235009B85E0 /* Test */,
 				4A762AF92B99A16D001C1188 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Test;
 		};
-		4ACB61222CE4CC8A0018E78A /* Build configuration list for PBXNativeTarget "pennyway-client-iOSTests" */ = {
+		4A7B3F7E2CFC9B99009B85E0 /* Build configuration list for PBXNativeTarget "pennyway-client-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4ACB61202CE4CC8A0018E78A /* Debug */,
-				4ACB61212CE4CC8A0018E78A /* Release */,
+				4A7B3F7B2CFC9B99009B85E0 /* Debug */,
+				4A7B3F7C2CFC9B99009B85E0 /* Test */,
+				4A7B3F7D2CFC9B99009B85E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Test;
 		};
 /* End XCConfigurationList section */
 	};

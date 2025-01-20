@@ -12,11 +12,11 @@ import XCTest
 
 class MockChatHistoryDelegate: ChatHistoryDelegate {
     var onAdd: (([MessageItemModel]) -> Void)?
-    
+
     func didAddChatHistory(_ messages: [MessageItemModel]) {
         onAdd?(messages)
     }
-    
+
     func didAddChatHistories(_ messages: [MessageItemModel]) {
         onAdd?(messages)
     }
@@ -27,22 +27,22 @@ class MockChatHistoryDelegate: ChatHistoryDelegate {
 final class UserUnitTestTests: XCTestCase {
     private var sut: ChatHistoryBinaryList!
     private var mockDelegate: MockChatHistoryDelegate!
-    
+
     override func setUp() {
         super.setUp()
         sut = ChatHistoryBinaryList()
         mockDelegate = MockChatHistoryDelegate()
         sut.delegate = mockDelegate
     }
-    
+
     override func tearDown() {
         mockDelegate = nil
         sut = nil
         super.tearDown()
     }
-    
+
     // MARK: - Helper Methods
-    
+
     /// 테스트용 메시지 생성
     private func createMessage(roomId: Int64 = 1, chatId: Int64, content: String = "test") -> MessageItemModel {
         return MessageItemModel(
@@ -55,9 +55,9 @@ final class UserUnitTestTests: XCTestCase {
             senderId: 1
         )
     }
-    
+
     // MARK: - Basic Operation Tests
-    
+
     /// 단일 메시지 삽입 테스트
     /// - 메시지가 정상적으로 저장되는지 확인
     /// - delegate에 정확한 이벤트가 전달되는지 확인
@@ -72,14 +72,14 @@ final class UserUnitTestTests: XCTestCase {
             XCTAssertEqual(messages[0].chatId, 1)
             expectation.fulfill()
         }
-        
+
         // When
         sut.insert(message)
-        
+
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(sut.getAllMessages().count, 1)
     }
-    
+
     /// 중복 메시지 삽입 테스트
     /// - 동일한 chatId를 가진 메시지 삽입 시 처리 검증
     /// - 첫 번째 메시지만 유지되어야 함
@@ -89,15 +89,15 @@ final class UserUnitTestTests: XCTestCase {
         let message1 = createMessage(chatId: 1, content: "first")
         let message2 = createMessage(chatId: 1, content: "second")
         var eventCount = 0
-        
+
         mockDelegate.onAdd = { _ in
             eventCount += 1
         }
-        
+
         // When
         sut.insert(message1)
         sut.insert(message2)
-        
+
         // Then
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             XCTAssertEqual(eventCount, 1)
@@ -105,9 +105,9 @@ final class UserUnitTestTests: XCTestCase {
             XCTAssertEqual(self.sut.getAllMessages().first?.content, "first")
         }
     }
-    
+
     // MARK: - Bulk Operation Tests
-    
+
     /// 정렬되지 않은 메시지 일괄 삽입 테스트
     /// - 순서가 섞인 메시지들이 정렬되어 저장되는지 확인
     /// - delegate 이벤트가 정상적으로 발생하는지 확인
@@ -121,23 +121,23 @@ final class UserUnitTestTests: XCTestCase {
             createMessage(chatId: 3)
         ]
         let expectation = expectation(description: "Bulk insert")
-        
+
         mockDelegate.onAdd = { addedMessages in
             XCTAssertEqual(addedMessages.count, 5)
             XCTAssertEqual(addedMessages.map { $0.chatId }, [5, 4, 3, 2, 1])
             expectation.fulfill()
         }
-        
+
         // When
         sut.insertMessages(messages)
-        
+
         // Then
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(sut.getAllMessages().map { $0.chatId }, [5, 4, 3, 2, 1])
     }
-    
+
     // MARK: - Edge Cases Tests
-    
+
     /// 경계값 테스트
     /// - 빈 배열 삽입
     /// - Int.min, Int.max chatId 처리
@@ -146,7 +146,7 @@ final class UserUnitTestTests: XCTestCase {
         // Empty array insert
         sut.insertMessages([])
         XCTAssertTrue(sut.getAllMessages().isEmpty)
-        
+
         // Extreme values
         let extremeMessages = [
             createMessage(chatId: Int64(Int.max)),
@@ -158,9 +158,9 @@ final class UserUnitTestTests: XCTestCase {
         XCTAssertEqual(sut.getAllMessages().first?.chatId, Int64(Int.max))
         XCTAssertEqual(sut.getAllMessages().last?.chatId, Int64(Int.min))
     }
-    
+
     // MARK: - Concurrency Tests
-    
+
     /// 동시성 테스트
     /// - 여러 스레드에서 동시에 메시지 삽입
     /// - 데이터 일관성 검증
@@ -171,29 +171,29 @@ final class UserUnitTestTests: XCTestCase {
         let expectation = self.expectation(description: "Concurrent inserts")
         let dispatchGroup = DispatchGroup()
         let queue = DispatchQueue(label: "test.concurrent", attributes: .concurrent)
-        
+
         // When
         for i in 0 ..< messageCount {
             queue.async(group: dispatchGroup) {
                 self.sut.insert(self.createMessage(chatId: Int64(i)))
             }
         }
-        
+
         // Then
         dispatchGroup.notify(queue: .main) {
             let messages = self.sut.getAllMessages()
             XCTAssertEqual(messages.count, messageCount)
-            
+
             // 정렬 확인
             for i in 0 ..< (messages.count - 1) {
                 XCTAssertLessThan(messages[i].chatId, messages[i + 1].chatId)
             }
             expectation.fulfill()
         }
-        
+
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     /// 동시성 스트레스 테스트
     /// - 단일 삽입과 일괄 삽입을 동시에 수행
     /// - 대량의 데이터로 성능과 안정성 검증
@@ -206,7 +206,7 @@ final class UserUnitTestTests: XCTestCase {
         let expectation = self.expectation(description: "Stress test")
         let dispatchGroup = DispatchGroup()
         let queue = DispatchQueue(label: "test.stress", attributes: .concurrent)
-        
+
         // When
         // 배치 삽입
         for i in 0 ..< batchCount {
@@ -218,7 +218,7 @@ final class UserUnitTestTests: XCTestCase {
                 self.sut.insertMessages(messages)
             }
         }
-        
+
         // 개별 삽입
         for i in 0 ..< singleInsertCount {
             queue.async(group: dispatchGroup) {
@@ -226,20 +226,20 @@ final class UserUnitTestTests: XCTestCase {
                 self.sut.insert(self.createMessage(chatId: Int64(chatId)), false)
             }
         }
-        
+
         // Then
         dispatchGroup.notify(queue: .main) {
             let messages = self.sut.getAllMessages()
             let expectedCount = (batchCount * batchSize) + singleInsertCount
             XCTAssertEqual(messages.count, expectedCount)
-            
+
             // 정렬 및 중복 검증
             let chatIds = messages.map { $0.chatId }
             XCTAssertEqual(chatIds, Array(Set(chatIds)).sorted(by: >))
 
             expectation.fulfill()
         }
-        
+
         wait(for: [expectation], timeout: 10.0)
     }
 }
