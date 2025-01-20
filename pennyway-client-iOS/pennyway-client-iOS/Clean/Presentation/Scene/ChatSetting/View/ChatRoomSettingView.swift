@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct ChatRoomSettingView: View {
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @StateObject private var keyboardHandler = KeyboardManager()
-    @State private var isSecret: Bool = false // 토글 상태를 관리하는 변수
+    @State private var isSecret: Bool = false // 채팅방 공개 상태를 관리하는 변수
+    @State private var isPasswordValid: Bool = true // 비밀번호 유효성 판단하는 변수
+    @State private var isFormValid: Bool = false // 채팅방 수정 폼 유효성 판단하는 변수
+    @State private var description: String = ""
     @State private var chatRoomName: String = ""
     @State private var password: String = ""
     @State private var showCompleteToastPopup: Bool = false
+
+    // 이미지 관련
     @State private var showImagePopUp: Bool = false
     @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-
-    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     var body: some View {
         ZStack {
@@ -81,11 +85,15 @@ struct ChatRoomSettingView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack {
                         Button(action: {
-                            viewModelWrapper.editChatRoomViewModel.editChatRoomData(title: chatRoomName, password: password)
-                            viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
-                                if success {
-                                    showCompleteToastPopup = true
-                                }
+                            validateForm()
+
+                            if isFormValid {
+                                viewModelWrapper.editChatRoomViewModel.editChatRoomData(title: chatRoomName, password: password)
+//                                viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
+//                                    if success {
+//                                        showCompleteToastPopup = true
+//                                    }
+//                                }
                             }
 
                         }, label: {
@@ -149,76 +157,86 @@ struct ChatRoomSettingView: View {
             Text("채팅방 이름")
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray04"))
+                .padding(.horizontal, 20)
 
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color("Gray01"))
-                    .frame(height: 46 * DynamicSizeFactor.factor())
-
-                if chatRoomName.isEmpty {
-                    Text(viewModelWrapper.editRoomData?.title ?? "")
-                        .font(.H4MediumFont())
-                        .platformTextColor(color: Color("Gray07"))
-                        .padding(.leading, 13 * DynamicSizeFactor.factor())
+            CustomInputView(inputText: $chatRoomName, placeholder: viewModelWrapper.editRoomData?.title ?? "", onCommit: {
+                if chatRoomName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    chatRoomName = viewModelWrapper.editRoomData?.title ?? ""
                 }
 
-                TextField("", text: $chatRoomName)
-                    .font(.H4MediumFont())
-                    .platformTextColor(color: Color("Gray07"))
-                    .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-            }
+            }, isSecureText: false, placeholderColor: .gray07)
+                .onChange(of: chatRoomName) { _ in
+                    if chatRoomName.count > 30 {
+                        chatRoomName = String(chatRoomName.prefix(30))
+                    }
+                }
         }
-        .padding(.horizontal, 20)
     }
 
     /// 공개 범위 설정 섹션
     private var PublicScopeSection: some View {
         VStack(alignment: .leading) {
-            Text("공개 범위")
-                .font(.B1MediumFont())
-                .platformTextColor(color: Color("Gray04"))
+            Group {
+                Text("공개 범위")
+                    .font(.B1MediumFont())
+                    .platformTextColor(color: Color("Gray04"))
 
-            Spacer().frame(height: 8 * DynamicSizeFactor.factor())
+                Spacer().frame(height: 8 * DynamicSizeFactor.factor())
 
-            HStack {
-                Text("채팅방 비밀번호 설정")
-                    .font(.ButtonH4SemiboldFont())
-                    .platformTextColor(color: Color("Gray07"))
+                HStack {
+                    Text("채팅방 비밀번호 설정")
+                        .font(.ButtonH4SemiboldFont())
+                        .platformTextColor(color: Color("Gray07"))
 
-                Spacer()
+                    Spacer()
 
-                Toggle(isOn: $isSecret) {}
-                    .toggleStyle(CustomToggleStyle(hasAppeared: .constant(true)))
-            }
+                    Toggle(isOn: $isSecret) {}
+                        .toggleStyle(CustomToggleStyle(hasAppeared: .constant(true)))
+                }
+            }.padding(.horizontal, 20)
 
             Spacer().frame(height: 13 * DynamicSizeFactor.factor())
 
             if isSecret {
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color("Gray01"))
-                        .frame(height: 46 * DynamicSizeFactor.factor())
-
-                    TextField("", text: $password)
-                        .font(.H4MediumFont())
-                        .platformTextColor(color: Color("Gray07"))
-                        .padding(.horizontal, 13 * DynamicSizeFactor.factor())
-                        .keyboardType(.numberPad)
-                        .onChange(of: password) { pw in
-                            // 숫자만 필터링
-                            let filtered = pw.filter { $0.isNumber }
-                            if filtered != pw {
-                                password = filtered
-                            }
-                            // 최대 6자리까지만 허용
-                            if password.count > 6 {
-                                password = String(password.prefix(6))
-                            }
+                CustomInputView(inputText: $password, onCommit: {
+                    validatePassword()
+                }, isSecureText: false, keyboardType: .numberPad)
+                    .onChange(of: password) { pw in
+                        // 숫자만 필터링
+                        let filtered = pw.filter { $0.isNumber }
+                        if filtered != pw {
+                            password = filtered
                         }
-                }
+                        // 최대 6자리까지만 허용
+                        if password.count >= 6 {
+                            password = String(password.prefix(6))
+                        }
+                    }
+            }
+
+            if isSecret, !isPasswordValid, !password.isEmpty {
+                Text("6자리의 숫자 비밀번호가 필요해요")
+                    .font(.B1MediumFont())
+                    .platformTextColor(color: Color(.red03))
+                    .padding(.horizontal, 20)
             }
         }
-        .padding(.horizontal, 20)
+    }
+
+    private func validateForm() {
+        if isSecret {
+            isFormValid = isPasswordValid
+        } else {
+            isFormValid = true
+        }
+    }
+
+    private func validatePassword() {
+        if password.count >= 6 {
+            isPasswordValid = true
+        } else {
+            isPasswordValid = false
+        }
     }
 }
 

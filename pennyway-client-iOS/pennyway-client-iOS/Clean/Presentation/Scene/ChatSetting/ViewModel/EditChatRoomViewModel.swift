@@ -39,6 +39,7 @@ protocol EditChatRoomViewModel: EditChatRoomViewModelInput, EditChatRoomViewMode
 // MARK: - DefaultEditChatRoomViewModel
 
 class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
+    var isFormValid: Bool = false
     var editRoomData: Observable<EditChatRoomItemModel>
 
     private let editChatRoomUseCase: EditChatRoomUseCase
@@ -56,13 +57,12 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
     }
 
     func editChatRoomData(title: String, password: String) {
-        if !title.isEmpty {
+        if !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             editRoomData.value.title = title
         }
+        editRoomData.value.password = password
 
-        if !password.isEmpty, password.count == 6 {
-            editRoomData.value.password = password
-        }
+        Log.debug("?? 전달 \(editRoomData.value.title), \(editRoomData.value.password)")
     }
 
     /// Presigned URL 생성
