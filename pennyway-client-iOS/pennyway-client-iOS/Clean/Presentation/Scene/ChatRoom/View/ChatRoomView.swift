@@ -117,9 +117,11 @@ final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var previousMessageData: PreviousMessage? = nil
 
     var chatRoomViewModel: any ChatRoomViewModel
+    var chatUserInfoViewModel: any ChatUserInfoViewModel
 
-    init(chatRoomViewModel: any ChatRoomViewModel) {
+    init(chatRoomViewModel: any ChatRoomViewModel, chatUserInfoViewModel: any ChatUserInfoViewModel) {
         self.chatRoomViewModel = chatRoomViewModel
+        self.chatUserInfoViewModel = chatUserInfoViewModel
 
         roomData = chatRoomViewModel.roomData.value
         roomDetailData = chatRoomViewModel.roomDetailData.value

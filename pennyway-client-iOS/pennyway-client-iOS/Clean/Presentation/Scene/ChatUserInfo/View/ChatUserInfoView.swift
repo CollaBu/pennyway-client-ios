@@ -13,7 +13,7 @@ struct ChatUserInfoView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showTransferPopUp: Bool = false // 방장 넘기기 팝업 상태
     @State private var showKickOutPopUp: Bool = false // 내보내기 팝업 상태
-    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
+    @ObservedObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     let user: ChatMemberItemModel
     let myInfo: ChatMemberItemModel?
@@ -46,6 +46,7 @@ struct ChatUserInfoView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showKickOutPopUp = false
+                                    viewModelWrapper.chatUserInfoViewModel.banChatMember()
                                 },
                                 secondBtnLabel: "내보내기",
                                 secondBtnColor: Color(.red03)

@@ -1,0 +1,33 @@
+//
+//  UserInfoUseCase.swift
+//  pennyway-client-iOS
+//
+//  Created by 신얀 on 1/20/25.
+//
+
+// MARK: - UserInfoUseCase
+
+protocol UserInfoUseCase {
+    func banChatMember(chatRoomId: Int64, chatMemberId: Int64)
+}
+
+// MARK: - DefaultUserInfoUseCase
+
+class DefaultUserInfoUseCase: UserInfoUseCase {
+    private let repository: UserInfoRepository
+
+    init(repository: UserInfoRepository) {
+        self.repository = repository
+    }
+
+    /// 채팅 멤버 강제 추방
+    func banChatMember(chatRoomId: Int64, chatMemberId: Int64) {
+        repository.banChatMember(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { success in
+            if success {
+                Log.debug("[DefaultUserInfoUseCase]: 채팅멤버 강제 추방 성공")
+            } else {
+                Log.error("[DefaultUserInfoUseCase]: 채팅멤버 강제 추방 실패")
+            }
+        }
+    }
+}
