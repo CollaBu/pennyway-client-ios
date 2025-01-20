@@ -23,7 +23,7 @@ import UIKit
 protocol EditChatRoomViewModelInput {
     func uploadImage(image: UIImage)
     func editChatRoom(completion: @escaping (Bool) -> Void)
-    func editChatRoomData(title: String, password: String)
+    func updateEditRoomData(title: String, password: String)
 }
 
 // MARK: - EditChatRoomViewModelOutput
@@ -56,13 +56,11 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
         ))
     }
 
-    func editChatRoomData(title: String, password: String) {
+    func updateEditRoomData(title: String, password: String) {
         if !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             editRoomData.value.title = title
         }
         editRoomData.value.password = password
-
-        Log.debug("?? 전달 \(editRoomData.value.title), \(editRoomData.value.password)")
     }
 
     /// Presigned URL 생성
@@ -84,7 +82,7 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
 
     /// 채팅방 수정 확정 요청
     func editChatRoom(completion: @escaping (Bool) -> Void) {
-        editChatRoomUseCase.editChatRoom(roomData: editRoomData.value) { [weak self] success in
+        editChatRoomUseCase.editChatRoom(roomData: editRoomData.value) { success in
             DispatchQueue.main.async {
                 if success {
                     Log.debug("[EditChatRoomViewModel]: 채팅방 수정 확정 성공")

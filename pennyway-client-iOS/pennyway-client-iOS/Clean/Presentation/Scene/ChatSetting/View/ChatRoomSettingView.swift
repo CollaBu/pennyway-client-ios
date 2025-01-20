@@ -12,7 +12,7 @@ struct ChatRoomSettingView: View {
     @StateObject private var keyboardHandler = KeyboardManager()
     @State private var isSecret: Bool = false // 채팅방 공개 상태를 관리하는 변수
     @State private var isPasswordValid: Bool = true // 비밀번호 유효성 판단하는 변수
-    @State private var isFormValid: Bool = false // 채팅방 수정 폼 유효성 판단하는 변수
+    @State private var isFormValid: Bool = true // 채팅방 수정 폼 유효성 판단하는 변수
     @State private var description: String = ""
     @State private var chatRoomName: String = ""
     @State private var password: String = ""
@@ -88,19 +88,20 @@ struct ChatRoomSettingView: View {
                             validateForm()
 
                             if isFormValid {
-                                viewModelWrapper.editChatRoomViewModel.editChatRoomData(title: chatRoomName, password: password)
-//                                viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
-//                                    if success {
-//                                        showCompleteToastPopup = true
-//                                    }
-//                                }
+                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, password: password)
+                                viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
+                                    if success {
+                                        showCompleteToastPopup = true
+                                    }
+                                }
                             }
 
                         }, label: {
                             Text("완료")
                                 .font(.H4MediumFont())
-                                .platformTextColor(color: .mint03)
+                                .platformTextColor(color: isFormValid ? .mint03 : .gray04)
                                 .padding(.trailing, 10)
+                                .disabled(!isFormValid)
                         })
                         .buttonStyle(PlainButtonStyle())
                     }
@@ -200,6 +201,7 @@ struct ChatRoomSettingView: View {
             if isSecret {
                 CustomInputView(inputText: $password, onCommit: {
                     validatePassword()
+                    validateForm()
                 }, isSecureText: false, keyboardType: .numberPad)
                     .onChange(of: password) { pw in
                         // 숫자만 필터링
