@@ -13,6 +13,8 @@ struct ChatUserInfoView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showTransferPopUp: Bool = false // 방장 넘기기 팝업 상태
     @State private var showKickOutPopUp: Bool = false // 내보내기 팝업 상태
+    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
+
     let user: ChatMemberItemModel
     let myInfo: ChatMemberItemModel?
 
