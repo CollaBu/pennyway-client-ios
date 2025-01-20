@@ -54,7 +54,3 @@ class DefaultLogoutViewModel: LogoutViewModel {
         }
     }
 }
-
-// MARK: - INPUT. View event methods
-
-extension DefaultLogoutViewModel {}

@@ -32,7 +32,9 @@ class DefaultChatStompRepository: ChatStompRepository {
 
     /// Stomp 소켓 연결을 해제하는 메서드
     func disconnect() {
+        // 소켓 연결 해제
         stompClient.disconnect()
+        Log.info("[Disconnect] 모든 구독이 해제되고 소켓 연결 해제")
     }
 
     /// 메시지를 특정 목적지로 보내는 메서드
@@ -40,7 +42,6 @@ class DefaultChatStompRepository: ChatStompRepository {
         let destination = "/pub/chat.message.\(chatRoomId)"
         let messageUuid = uuid ?? GenerateUuid.generateSequentialUuid().uuidString
         let headers = createSendMessageIdHeaders(uuid: messageUuid)
-
         let messageBody: [String: String] = [
             "content": message,
             "contentType": contentType
@@ -108,8 +109,9 @@ class DefaultChatStompRepository: ChatStompRepository {
 extension DefaultChatStompRepository {
     /// 에러 처리위해 Stomp 구독을 설정하는 메서드
     private func subscribeToErrors() {
+        let destination = "/user/queue/errors"
         let errorReceiptId = "error-receipt-\(UUID().uuidString)"
-        stompClient.subscribeWithHeader(destination: "/user/queue/errors", withHeader: ["receipt": errorReceiptId])
+        stompClient.subscribeWithHeader(destination: destination, withHeader: ["receipt": errorReceiptId])
     }
 
     /// 메시지 전송 성공 처리에 대한 구독을 설정하는 메서드
@@ -249,7 +251,6 @@ extension DefaultChatStompRepository {
             sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: true, uuid: uuid) { [weak self] result in
                 switch result {
                 case .success:
-                    self?.messageDatas.removeValue(forKey: uuid)
                     Log.info("📤 [Retry Messages] Successfully sent message with UUID: \(uuid)")
                 case let .failure(error):
                     Log.error("📤 [Retry Messages] Failed to resend message with UUID: \(uuid), Error: \(error)")

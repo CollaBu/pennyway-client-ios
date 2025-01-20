@@ -26,13 +26,22 @@ protocol LogoutUseCase {
 
 class DefaultLogoutUseCase: LogoutUseCase {
     private let repository: LogoutRepository
+    private let chatStompService = DefaultChatStompService.shared
 
     init(repository: LogoutRepository) {
         self.repository = repository
     }
 
     func execute(completion: @escaping (Bool) -> Void) {
-        repository.execute(completion: completion)
+        repository.execute { result in
+            switch result {
+            case true:
+                self.chatStompService.disconnect()
+                completion(true)
+            case false:
+                completion(false)
+            }
+        }
     }
 
     func deleteDeviceToken(fcmToken: String, completion: @escaping (Bool) -> Void) {
