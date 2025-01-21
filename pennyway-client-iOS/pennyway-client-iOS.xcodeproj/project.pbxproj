@@ -222,6 +222,7 @@
 		4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */; };
 		4AA969752C6D2B8F00CA889C /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA969742C6D2B8F00CA889C /* NotificationName.swift */; };
 		4AABDBBC2C9C8C2900E9436D /* PresignedUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AABDBBB2C9C8C2900E9436D /* PresignedUrl.swift */; };
+		4AAD2ED82D2D528F00E9EAF2 /* GenerateUuid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAD2ED72D2D528F00E9EAF2 /* GenerateUuid.swift */; };
 		4AB0B13A2C4E56C900A475F5 /* EntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */; };
 		4AB0B13C2C4F497400A475F5 /* MapCategoryIconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */; };
 		4AB0B13E2C50256300A475F5 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB0B13D2C50256300A475F5 /* LoadingView.swift */; };
@@ -326,7 +327,12 @@
 		4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */; };
 		6AAB57E62D00441F007C40C7 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */; };
 		6AAB57E72D00441F007C40C7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E42D00441F007C40C7 /* Debug.xcconfig */; };
+		6AAB57E82D00441F007C40C7 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E52D00441F007C40C7 /* Release.xcconfig */; };
 		7C0E38D4CE51A896B5A498EE /* Pods_pennyway_client_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */; };
+		960A204A2D3E925300DC613E /* DefaultUserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A20492D3E923E00DC613E /* DefaultUserInfoRepository.swift */; };
+		960A204C2D3E929500DC613E /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A204B2D3E929200DC613E /* UserInfoRepository.swift */; };
+		960A204E2D3E930100DC613E /* UserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A204D2D3E92FD00DC613E /* UserInfoUseCase.swift */; };
+		960A20512D3EAE2D00DC613E /* ChatUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A20502D3EAE2800DC613E /* ChatUserInfoViewModel.swift */; };
 		B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */; };
 		B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */; };
 		B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */; };
@@ -369,7 +375,6 @@
 		D8457BBC2CB6A471002540B2 /* GetChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BBB2CB6A471002540B2 /* GetChatRoomViewModel.swift */; };
 		D8457BBE2CB6A4B8002540B2 /* ChatRoomContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8457BBD2CB6A4B8002540B2 /* ChatRoomContent.swift */; };
 		D846A29B2CEDD16D000B9BBC /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D846A29A2CEDD16D000B9BBC /* .gitignore */; };
-		D84711F72D25265500605E31 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D84711F62D25265500605E31 /* Release.xcconfig */; };
 		D847A7892BEBABC700899AA3 /* FindPwContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A7882BEBABC700899AA3 /* FindPwContentView.swift */; };
 		D847A78B2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */; };
 		D847A78D2BEBB35500899AA3 /* ResetPwViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */; };
@@ -694,6 +699,7 @@
 		4AA52F3E2C05C3AD00B21521 /* RoundedCornerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerUtil.swift; sourceTree = "<group>"; };
 		4AA969742C6D2B8F00CA889C /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		4AABDBBB2C9C8C2900E9436D /* PresignedUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresignedUrl.swift; sourceTree = "<group>"; };
+		4AAD2ED72D2D528F00E9EAF2 /* GenerateUuid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateUuid.swift; sourceTree = "<group>"; };
 		4AB0B1392C4E56C900A475F5 /* EntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPoint.swift; sourceTree = "<group>"; };
 		4AB0B13B2C4F497400A475F5 /* MapCategoryIconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCategoryIconUtil.swift; sourceTree = "<group>"; };
 		4AB0B13D2C50256300A475F5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -799,7 +805,12 @@
 		4AFC7C9C2C581E1C003CFA8C /* TooManyRequestErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooManyRequestErrorCode.swift; sourceTree = "<group>"; };
 		6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		6AAB57E42D00441F007C40C7 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		6AAB57E52D00441F007C40C7 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		960A20492D3E923E00DC613E /* DefaultUserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserInfoRepository.swift; sourceTree = "<group>"; };
+		960A204B2D3E929200DC613E /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
+		960A204D2D3E92FD00DC613E /* UserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoUseCase.swift; sourceTree = "<group>"; };
+		960A20502D3EAE2800DC613E /* ChatUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserInfoViewModel.swift; sourceTree = "<group>"; };
 		A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAnalyticsEvents.swift; sourceTree = "<group>"; };
@@ -841,7 +852,6 @@
 		D8457BBB2CB6A471002540B2 /* GetChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChatRoomViewModel.swift; sourceTree = "<group>"; };
 		D8457BBD2CB6A4B8002540B2 /* ChatRoomContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomContent.swift; sourceTree = "<group>"; };
 		D846A29A2CEDD16D000B9BBC /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		D84711F62D25265500605E31 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D847A7882BEBABC700899AA3 /* FindPwContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwContentView.swift; sourceTree = "<group>"; };
 		D847A78A2BEBABF600899AA3 /* FindPwPhoneVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwPhoneVerificationView.swift; sourceTree = "<group>"; };
 		D847A78C2BEBB35500899AA3 /* ResetPwViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwViewModel.swift; sourceTree = "<group>"; };
@@ -1416,6 +1426,7 @@
 				4A12FF182C9C4D4600DE10BC /* Observable.swift */,
 				4A863A132CB461BE00BA2F2F /* TextHeightPreference.swift */,
 				4ACB61122CE4C09D0018E78A /* ChatHistoryBinaryList.swift */,
+				4AAD2ED72D2D528F00E9EAF2 /* GenerateUuid.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1431,6 +1442,7 @@
 		4A1684362CBA63F30069ADE9 /* ChatUserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				960A204F2D3EAE2200DC613E /* ViewModel */,
 				4A1684372CBA63FE0069ADE9 /* View */,
 			);
 			path = ChatUserInfo;
@@ -1530,7 +1542,7 @@
 			isa = PBXGroup;
 			children = (
 				6AAB57E42D00441F007C40C7 /* Debug.xcconfig */,
-				D84711F62D25265500605E31 /* Release.xcconfig */,
+				6AAB57E52D00441F007C40C7 /* Release.xcconfig */,
 				6AAB57E32D00441F007C40C7 /* Secrets.xcconfig */,
 			);
 			path = Xcconfig;
@@ -2565,6 +2577,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		960A204F2D3EAE2200DC613E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				960A20502D3EAE2800DC613E /* ChatUserInfoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		B599E4BA2C58AE72006051E9 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -2832,6 +2852,7 @@
 		D8DCCF872CBD8D6300550A8B /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				960A204D2D3E92FD00DC613E /* UserInfoUseCase.swift */,
 				D8DCCF882CBD8D7700550A8B /* MakeChatRoomUseCase.swift */,
 				D85E46452CD607E500715169 /* SearchChatRoomUseCase.swift */,
 				D8BAB3E82CCA92CF00D1910E /* GetChatRoomUseCase.swift */,
@@ -2846,6 +2867,7 @@
 		D8DCCF8B2CBD8F4300550A8B /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				960A204B2D3E929200DC613E /* UserInfoRepository.swift */,
 				4ADA094E2CBE679C001F9384 /* ChatStompRepository.swift */,
 				D8DCCF8C2CBD8F6500550A8B /* MakeChatRoomRepository.swift */,
 				D85E46472CD6091700715169 /* SearchChatRoomRepository.swift */,
@@ -2897,6 +2919,7 @@
 		D8DCCF9D2CBD949A00550A8B /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				960A20492D3E923E00DC613E /* DefaultUserInfoRepository.swift */,
 				4ADA09512CBE681B001F9384 /* DefaultChatStompRepository.swift */,
 				D8DCCF9F2CBD94B400550A8B /* DefaultMakeChatRoomRepository.swift */,
 				D85E46492CD609E100715169 /* DefaultSearchChatRoomRepository.swift */,
@@ -3020,7 +3043,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D84711F72D25265500605E31 /* Release.xcconfig in Resources */,
+				6AAB57E82D00441F007C40C7 /* Release.xcconfig in Resources */,
 				6AAB57E62D00441F007C40C7 /* Secrets.xcconfig in Resources */,
 				D846A29B2CEDD16D000B9BBC /* .gitignore in Resources */,
 				4A762AF42B99A16D001C1188 /* Preview Assets.xcassets in Resources */,
@@ -3215,6 +3238,7 @@
 				D8B0A92C2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift in Sources */,
 				4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */,
 				4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */,
+				4AAD2ED82D2D528F00E9EAF2 /* GenerateUuid.swift in Sources */,
 				4AE8F3A82C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */,
 				D83EF6F02CDDD3EA002A4965 /* CdnUrl.swift in Sources */,
 				4A60F64E2C595F6A00805F2C /* CompleteDeleteUserView.swift in Sources */,
@@ -3308,6 +3332,7 @@
 				4A863A142CB461BE00BA2F2F /* TextHeightPreference.swift in Sources */,
 				4A2C3A8B2CD3DCF0006B6804 /* GetJoinedChatRoomsRequestDto.swift in Sources */,
 				D8BB4FE02C61BE7300FDD258 /* PhotoActionsPopUp.swift in Sources */,
+				960A204E2D3E930100DC613E /* UserInfoUseCase.swift in Sources */,
 				B599E4DC2C6C6CEB006051E9 /* TargetAmountAnalyticsEvents.swift in Sources */,
 				D82E30572C5B3FB4004244F1 /* EditUsernameView.swift in Sources */,
 				D88832A02BBC615100F49B27 /* ErrorCodeContentView.swift in Sources */,
@@ -3385,6 +3410,7 @@
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
+				960A204C2D3E929500DC613E /* UserInfoRepository.swift in Sources */,
 				D8E889E82CDB8165008FC22E /* JoinChatRoomRepository.swift in Sources */,
 				4AF3A3022CD938310099967F /* ChatRoomRouter.swift in Sources */,
 				D8180C042BE5081F00F837FB /* FindIdContentView.swift in Sources */,
@@ -3470,6 +3496,7 @@
 				4AA13C672C63ED5100D8DEE7 /* PresignedUrlViewModel.swift in Sources */,
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
 				4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */,
+				960A204A2D3E925300DC613E /* DefaultUserInfoRepository.swift in Sources */,
 				D889F9F62C6484950055D045 /* CheckUnReadNotificationResponseDto.swift in Sources */,
 				D85E46482CD6091700715169 /* SearchChatRoomRepository.swift in Sources */,
 				4A2882012C64CC5900AE50C7 /* CategorySpendingListView.swift in Sources */,
@@ -3503,6 +3530,7 @@
 				4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */,
 				4A4A56722BACA2250071D00E /* PhoneVerificationView.swift in Sources */,
 				D85927F92BE9116700653391 /* PhoneVerificationViewModel.swift in Sources */,
+				960A20512D3EAE2D00DC613E /* ChatUserInfoViewModel.swift in Sources */,
 				D8880E242BD17FD000922894 /* TapGestureRecognizer.swift in Sources */,
 				4A5789772BDC1D5500AFEB26 /* MethodNotAllowedErrorCode.swift in Sources */,
 				4A3701B12C08F74E00F0AEBA /* TargetAmountAlamofire.swift in Sources */,
@@ -3751,7 +3779,7 @@
 		};
 		4A762AF92B99A16D001C1188 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D84711F62D25265500605E31 /* Release.xcconfig */;
+			baseConfigurationReference = 6AAB57E52D00441F007C40C7 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3823,7 +3851,7 @@
 		};
 		4ACB61212CE4CC8A0018E78A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D84711F62D25265500605E31 /* Release.xcconfig */;
+			baseConfigurationReference = 6AAB57E52D00441F007C40C7 /* Release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

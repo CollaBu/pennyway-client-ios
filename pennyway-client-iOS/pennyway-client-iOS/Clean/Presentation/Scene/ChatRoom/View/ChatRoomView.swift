@@ -121,10 +121,12 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
     var chatRoomViewModel: any ChatRoomViewModel
     var editChatRoomViewModel: any EditChatRoomViewModel
+    var chatUserInfoViewModel: any ChatUserInfoViewModel
 
-    init(chatRoomViewModel: any ChatRoomViewModel, editChatRoomViewModel: any EditChatRoomViewModel) {
+    init(chatRoomViewModel: any ChatRoomViewModel, editChatRoomViewModel: any EditChatRoomViewModel, chatUserInfoViewModel: any ChatUserInfoViewModel) {
         self.chatRoomViewModel = chatRoomViewModel
         self.editChatRoomViewModel = editChatRoomViewModel
+        self.chatUserInfoViewModel = chatUserInfoViewModel
 
         roomData = chatRoomViewModel.roomData.value
         roomDetailData = chatRoomViewModel.roomDetailData.value

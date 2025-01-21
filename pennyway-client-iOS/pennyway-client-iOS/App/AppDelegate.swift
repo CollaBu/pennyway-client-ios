@@ -96,7 +96,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     /// 푸시메세지를 받았을 떄
     func userNotificationCenter(_: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void)
+                                withCompletionHandler _: @escaping () -> Void)
     {
         let userInfo = response.notification.request.content.userInfo
 
@@ -104,8 +104,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Log.debug("Message ID: \(messageID)")
         }
 
-        Log.debug(userInfo)
-
-        completionHandler()
+        Log.debug("userInfo:\(userInfo)")
     }
 }
