@@ -63,12 +63,6 @@ struct ChatUserInfoView: View {
                 .resizable()
                 .scaledToFill()
         )
-        .onChange(of: viewModelWrapper.chatUserInfoViewModel.isBanSuccessful) { isSuccessful in
-            if isSuccessful {
-                // 추방 성공 시 화면 이동 또는 닫기
-                presentationMode.wrappedValue.dismiss()
-            }
-        }
     }
 
     private var UserInfoContent: some View {
