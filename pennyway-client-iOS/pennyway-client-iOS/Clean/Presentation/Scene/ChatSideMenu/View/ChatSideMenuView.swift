@@ -10,11 +10,11 @@ import SwiftUI
 // MARK: - ChatSideMenuView
 
 struct ChatSideMenuView: View {
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @State private var isAlarmOn: Bool = false
     @State private var showExitPopUp: Bool = false
     @State private var showChatUserView: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
-    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     var body: some View {
         ZStack {
@@ -36,7 +36,11 @@ struct ChatSideMenuView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showExitPopUp = false
-//                    viewModelWrapper.chatRoomViewModel
+                                    if let chatRoomId = viewModelWrapper.roomData?.id,
+                                       let chatMemberId = viewModelWrapper.roomDetailData?.myInfo.id
+                                    {
+                                        viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId)
+                                    }
                                 },
                                 secondBtnLabel: "나가기",
                                 secondBtnColor: Color("Red03")

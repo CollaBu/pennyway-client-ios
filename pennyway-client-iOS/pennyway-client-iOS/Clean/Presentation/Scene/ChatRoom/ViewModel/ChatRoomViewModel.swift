@@ -16,7 +16,7 @@ protocol ChatRoomViewModelInput {
     func getChatRoomDetail(chatRoomId: Int64)
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
-//    func deleteChatRoom()
+    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64)
 //    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64)
 }
 
@@ -28,7 +28,7 @@ protocol ChatRoomViewModelOutput {
     var messageData: Observable<[MessageItemModel]> { get set }
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
     var previousMessageData: Observable<PreviousMessage?> { get set }
-//    var isDeleteSuccessful: Bool { get set }
+    var isDeleteSuccessful: Bool { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -38,7 +38,9 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 // MARK: - DefaultChatRoomViewModel
 
 class DefaultChatRoomViewModel: ChatRoomViewModel {
-//    var isDeleteSuccessful: Bool
+    @Published var chatRoomId: Int64 = 0
+    @Published var chatMemberId: Int64 = 0
+    @Published var isDeleteSuccessful: Bool = false
 
     var roomData: Observable<ChatRoomProtocol?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
@@ -152,6 +154,16 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 Log.debug("[DefaultChatRoomViewModel] 채팅 메시지 전송 성공")
             case let .failure(error):
                 Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    /// 채팅방 나가기
+    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64) {
+        chatRoomUseCase.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { [weak self] isSuccess in
+            DispatchQueue.main.async {
+                self?.isDeleteSuccessful = isSuccess
+                Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
             }
         }
     }

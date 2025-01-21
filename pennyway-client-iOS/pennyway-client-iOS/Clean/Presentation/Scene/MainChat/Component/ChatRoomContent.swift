@@ -187,11 +187,11 @@ struct ChatRoomCell: View, ImageLoadable {
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
             .offset(x: offset)
-            .simultaneousGesture(gesture)
-            .highPriorityGesture(
-                TapGesture()
-                    .exclusively(before: gesture)
-            )
+//            .simultaneousGesture(gesture)
+//            .highPriorityGesture(
+//                TapGesture()
+//                    .exclusively(before: gesture)
+//            )
         }
         .onAppear {
             loadImage(from: chatRoom.backgroundImageUrl) { image in

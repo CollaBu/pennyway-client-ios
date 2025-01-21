@@ -16,6 +16,7 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @State private var isNavigateToMyChat = false
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
+    @Environment(\.presentationMode) var presentationMode
 
     var chatRoom: ChatRoomProtocol
     private let currentUserId = getUserData()!.id
@@ -83,6 +84,13 @@ struct ChatRoomView: View {
                 // 채팅방 상세 정보 조회
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
+            }
+            .onChange(of: viewModelWrapper.chatRoomViewModel.isDeleteSuccessful) { isSuccess in
+                Log.debug("onchange 실행됨")
+                if isSuccess {
+                    Log.debug("isSuccess 내부 실행")
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
 
             ZStack {
