@@ -18,6 +18,11 @@ struct ChatRoomSettingView: View {
     @State private var password: String = ""
     @State private var showCompleteToastPopup: Bool = false
 
+    // title ui 관련
+    private var chatRoomTitle = "채팅방 이름*"
+    let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray04"))
+    let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
+
     // 이미지 관련
     @State private var showImagePopUp: Bool = false
     @State private var selectedUIImage: UIImage? // 이미지에서 선택된 이미지의 상태를 관리하는 변수
@@ -57,6 +62,11 @@ struct ChatRoomSettingView: View {
 
                         // 채팅방 이름 입력
                         ChatRoomNameSection
+
+                        Spacer().frame(height: 32 * DynamicSizeFactor.factor())
+
+                        // 설명 입력
+                        RoomDescriptionSection
 
                         Spacer().frame(height: 32 * DynamicSizeFactor.factor())
 
@@ -101,11 +111,15 @@ struct ChatRoomSettingView: View {
                                 .font(.H4MediumFont())
                                 .platformTextColor(color: isFormValid ? .mint03 : .gray04)
                                 .padding(.trailing, 10)
-                                .disabled(!isFormValid)
+                                .disabled(isFormValid)
                         })
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
+            }
+            .onAppear {
+                chatRoomName = viewModelWrapper.editRoomData?.title ?? ""
+                description = viewModelWrapper.editRoomData?.description ?? ""
             }
 
             if showImagePopUp {
@@ -155,22 +169,58 @@ struct ChatRoomSettingView: View {
     /// 채팅방 이름 입력 섹션
     private var ChatRoomNameSection: some View {
         VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
-            Text("채팅방 이름")
+            chatRoomTitle.toAttributesText(base: baseAttribute, stringAttribute)
                 .font(.B1MediumFont())
                 .platformTextColor(color: Color("Gray04"))
                 .padding(.horizontal, 20)
 
-            CustomInputView(inputText: $chatRoomName, placeholder: viewModelWrapper.editRoomData?.title ?? "", onCommit: {
-                if chatRoomName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    chatRoomName = viewModelWrapper.editRoomData?.title ?? ""
-                }
-
-            }, isSecureText: false, placeholderColor: .gray07)
+            CustomInputView(inputText: $chatRoomName, isSecureText: false, placeholderColor: .gray07)
                 .onChange(of: chatRoomName) { _ in
                     if chatRoomName.count > 30 {
                         chatRoomName = String(chatRoomName.prefix(30))
                     }
+                    if chatRoomName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        isFormValid = false
+                    } else {
+                        isFormValid = true
+                    }
                 }
+        }
+    }
+
+    /// 설명 입력 섹션
+    private var RoomDescriptionSection: some View {
+        VStack(alignment: .leading, spacing: 13 * DynamicSizeFactor.factor()) {
+            Text("설명")
+                .font(.B1MediumFont())
+                .platformTextColor(color: Color(.gray04))
+                .padding(.horizontal, 20)
+
+            HStack(spacing: 11 * DynamicSizeFactor.factor()) {
+                ZStack(alignment: .topLeading) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color("Gray01"))
+                        .frame(height: 106 * DynamicSizeFactor.factor())
+
+                    TextEditor(text: $description)
+                        .font(.H4MediumFont())
+                        .padding(.horizontal, 10)
+                        .padding(.top, 8)
+                        .zIndex(0)
+                        .colorMultiply(Color("Gray01"))
+                        .cornerRadius(6)
+                        .TextAutocapitalization()
+                        .AutoCorrectionExtensions()
+                        .onChange(of: description) { _ in
+                            if description.count > 100 {
+                                description = String(description.prefix(100))
+                            }
+                        }
+                        .frame(height: 106 * DynamicSizeFactor.factor())
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+            }
+            .padding(.horizontal, 20)
         }
     }
 
@@ -226,10 +276,14 @@ struct ChatRoomSettingView: View {
     }
 
     private func validateForm() {
-        if isSecret {
-            isFormValid = isPasswordValid
+        if chatRoomName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            isFormValid = false
         } else {
-            isFormValid = true
+            if isSecret {
+                isFormValid = isPasswordValid
+            } else {
+                isFormValid = true
+            }
         }
     }
 
