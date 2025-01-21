@@ -16,6 +16,8 @@ protocol ChatRoomViewModelInput {
     func getChatRoomDetail(chatRoomId: Int64)
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
+//    func deleteChatRoom()
+//    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -26,6 +28,7 @@ protocol ChatRoomViewModelOutput {
     var messageData: Observable<[MessageItemModel]> { get set }
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
     var previousMessageData: Observable<PreviousMessage?> { get set }
+//    var isDeleteSuccessful: Bool { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -35,6 +38,8 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 // MARK: - DefaultChatRoomViewModel
 
 class DefaultChatRoomViewModel: ChatRoomViewModel {
+//    var isDeleteSuccessful: Bool
+
     var roomData: Observable<ChatRoomProtocol?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
     var messageData: Observable<[MessageItemModel]> = Observable([]) // 메시지 목록

@@ -187,32 +187,10 @@ struct ChatRoomCell: View, ImageLoadable {
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
             .offset(x: offset)
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        withAnimation {
-                            if value.translation.width < 0, isMyChat { // 내 채팅방일 때만 스와이프 가능
-                                offset = max(value.translation.width, -110)
-                                isShowingDeleteButton = true
-                            } else {
-                                offset = 0
-                                isShowingDeleteButton = false
-                            }
-                        }
-                    }
-                    .onEnded { value in
-                        withAnimation {
-                            if value.translation.width < -80, isMyChat {
-                                // 스와이프가 80pt 이상이면 삭제 버튼 표시
-                                offset = -90 * DynamicSizeFactor.factor()
-                                isShowingDeleteButton = true
-                            } else {
-                                // 그렇지 않으면 원래 위치로 복구
-                                offset = 0
-                                isShowingDeleteButton = false
-                            }
-                        }
-                    }
+            .simultaneousGesture(gesture)
+            .highPriorityGesture(
+                TapGesture()
+                    .exclusively(before: gesture)
             )
         }
         .onAppear {
@@ -220,5 +198,33 @@ struct ChatRoomCell: View, ImageLoadable {
                 self.loadedImage = image
             }
         }
+    }
+    
+    private var gesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                withAnimation {
+                    if value.translation.width < 0, isMyChat { // 내 채팅방일 때만 스와이프 가능
+                        offset = max(value.translation.width, -110)
+                        isShowingDeleteButton = true
+                    } else {
+                        offset = 0
+                        isShowingDeleteButton = false
+                    }
+                }
+            }
+            .onEnded { value in
+                withAnimation {
+                    if value.translation.width < -80, isMyChat {
+                        // 스와이프가 80pt 이상이면 삭제 버튼 표시
+                        offset = -90 * DynamicSizeFactor.factor()
+                        isShowingDeleteButton = true
+                    } else {
+                        // 그렇지 않으면 원래 위치로 복구
+                        offset = 0
+                        isShowingDeleteButton = false
+                    }
+                }
+            }
     }
 }
