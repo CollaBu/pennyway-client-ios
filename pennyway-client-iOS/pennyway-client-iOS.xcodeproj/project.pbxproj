@@ -322,11 +322,6 @@
 		6AAB57E72D00441F007C40C7 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E42D00441F007C40C7 /* Debug.xcconfig */; };
 		6AAB57E82D00441F007C40C7 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6AAB57E52D00441F007C40C7 /* Release.xcconfig */; };
 		7C0E38D4CE51A896B5A498EE /* Pods_pennyway_client_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */; };
-		960A203D2D3E33C500DC613E /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A203C2D3E33C500DC613E /* DeepLink.swift */; };
-		960A20412D3E343300DC613E /* HandleDeepLinkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A20402D3E342400DC613E /* HandleDeepLinkUseCase.swift */; };
-		960A20442D3E37F800DC613E /* DefaultDeepLinkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A20432D3E37EC00DC613E /* DefaultDeepLinkRepository.swift */; };
-		960A20462D3E380900DC613E /* DeepLinkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A20452D3E37FF00DC613E /* DeepLinkRepository.swift */; };
-		960A20482D3E389F00DC613E /* DeepLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A20472D3E389300DC613E /* DeepLinkCoordinator.swift */; };
 		B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */; };
 		B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */; };
 		B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */; };
@@ -794,11 +789,6 @@
 		6AAB57E42D00441F007C40C7 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		6AAB57E52D00441F007C40C7 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		6E197F320882D15FA5AB74B7 /* Pods-pennyway-client-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.debug.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		960A203C2D3E33C500DC613E /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
-		960A20402D3E342400DC613E /* HandleDeepLinkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleDeepLinkUseCase.swift; sourceTree = "<group>"; };
-		960A20432D3E37EC00DC613E /* DefaultDeepLinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDeepLinkRepository.swift; sourceTree = "<group>"; };
-		960A20452D3E37FF00DC613E /* DeepLinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRepository.swift; sourceTree = "<group>"; };
-		960A20472D3E389300DC613E /* DeepLinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkCoordinator.swift; sourceTree = "<group>"; };
 		A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAnalyticsEvents.swift; sourceTree = "<group>"; };
@@ -1258,7 +1248,6 @@
 		4A12FEE92C9C481900DE10BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				960A20392D3E339500DC613E /* DeepLink */,
 				4A8523EB2CB5A88D00AE90AF /* Chat */,
 				4A12FEEC2C9C487800DE10BC /* User.swift */,
 				4AABDBBB2C9C8C2900E9436D /* PresignedUrl.swift */,
@@ -1270,7 +1259,6 @@
 		4A12FEEA2C9C484B00DE10BC /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				960A203E2D3E33D800DC613E /* DeepLink */,
 				4A2C3A732CD3C93C006B6804 /* Profile */,
 				D8DCCF8B2CBD8F4300550A8B /* Chat */,
 			);
@@ -1280,7 +1268,6 @@
 		4A12FEEB2C9C486300DE10BC /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
-				960A203F2D3E341D00DC613E /* DeepLink */,
 				D8DCCF872CBD8D6300550A8B /* Chat */,
 				D8DCCF7F2CBD8D5700550A8B /* Profile */,
 			);
@@ -1290,7 +1277,6 @@
 		4A12FEF62C9C49B200DE10BC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				960A20422D3E37E600DC613E /* DeepLink */,
 				4A2C3A822CD3C965006B6804 /* Profile */,
 				D8DCCF9D2CBD949A00550A8B /* Chat */,
 			);
@@ -1391,7 +1377,6 @@
 		4A12FF0A2C9C4B7C00DE10BC /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				960A20472D3E389300DC613E /* DeepLinkCoordinator.swift */,
 				4A2C3A5B2CD3457D006B6804 /* ViewStateManager.swift */,
 				4A12FF0B2C9C4B8600DE10BC /* DIContainer */,
 				4A12FF122C9C4BCF00DE10BC /* AppFlowCoordinator.swift */,
@@ -2557,38 +2542,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		960A20392D3E339500DC613E /* DeepLink */ = {
-			isa = PBXGroup;
-			children = (
-				960A203C2D3E33C500DC613E /* DeepLink.swift */,
-			);
-			path = DeepLink;
-			sourceTree = "<group>";
-		};
-		960A203E2D3E33D800DC613E /* DeepLink */ = {
-			isa = PBXGroup;
-			children = (
-				960A20452D3E37FF00DC613E /* DeepLinkRepository.swift */,
-			);
-			path = DeepLink;
-			sourceTree = "<group>";
-		};
-		960A203F2D3E341D00DC613E /* DeepLink */ = {
-			isa = PBXGroup;
-			children = (
-				960A20402D3E342400DC613E /* HandleDeepLinkUseCase.swift */,
-			);
-			path = DeepLink;
-			sourceTree = "<group>";
-		};
-		960A20422D3E37E600DC613E /* DeepLink */ = {
-			isa = PBXGroup;
-			children = (
-				960A20432D3E37EC00DC613E /* DefaultDeepLinkRepository.swift */,
-			);
-			path = DeepLink;
-			sourceTree = "<group>";
-		};
 		B599E4BA2C58AE72006051E9 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -3298,7 +3251,6 @@
 				4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */,
-				960A20442D3E37F800DC613E /* DefaultDeepLinkRepository.swift in Sources */,
 				4A2C3A752CD3C93C006B6804 /* FetchUserProfileRepository.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
@@ -3378,7 +3330,6 @@
 				4A23E7C22CE874E5006FD4E2 /* GetChatMembersRequestDto.swift in Sources */,
 				4AF3A2F92CD932DA0099967F /* ChatRoomUseCase.swift in Sources */,
 				B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */,
-				960A20412D3E343300DC613E /* HandleDeepLinkUseCase.swift in Sources */,
 				4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
@@ -3389,7 +3340,6 @@
 				D8F9D7432C5A0596005416FC /* ProfileAlarmView.swift in Sources */,
 				4A3701D52C08F7F600F0AEBA /* SpendingRouter.swift in Sources */,
 				4A3701CE2C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift in Sources */,
-				960A20462D3E380900DC613E /* DeepLinkRepository.swift in Sources */,
 				4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */,
 				D86773062C76CA0100C68728 /* KeyboardManager.swift in Sources */,
 				4A4703A92BCEE25000AEE04E /* SmsResponseDto.swift in Sources */,
@@ -3453,7 +3403,6 @@
 				D8DCCF952CBD903400550A8B /* MakeChatRoomResponseDto.swift in Sources */,
 				4A2882022C64CC5900AE50C7 /* MoveCategoryView.swift in Sources */,
 				4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */,
-				960A20482D3E389F00DC613E /* DeepLinkCoordinator.swift in Sources */,
 				B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */,
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
@@ -3485,7 +3434,6 @@
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
-				960A203D2D3E33C500DC613E /* DeepLink.swift in Sources */,
 				4A2C3A5C2CD3457D006B6804 /* ViewStateManager.swift in Sources */,
 				4A12FEEF2C9C489C00DE10BC /* UserProfileItemModel.swift in Sources */,
 				4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */,
