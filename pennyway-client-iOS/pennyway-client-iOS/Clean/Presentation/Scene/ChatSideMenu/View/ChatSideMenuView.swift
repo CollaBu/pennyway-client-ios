@@ -36,6 +36,7 @@ struct ChatSideMenuView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showExitPopUp = false
+//                    viewModelWrapper.chatRoomViewModel
                                 },
                                 secondBtnLabel: "나가기",
                                 secondBtnColor: Color("Red03")

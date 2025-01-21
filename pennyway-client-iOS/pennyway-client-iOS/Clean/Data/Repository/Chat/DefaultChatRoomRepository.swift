@@ -95,4 +95,21 @@ class DefaultChatRoomRepository: ChatRoomRepository {
             }
         }
     }
+
+    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void) {
+        ChatRoomAlamofire.shared.deleteChatRoom(chatRoomId, chatMemberId) { result in
+            switch result {
+            case let .success(data):
+                Log.debug("[DefaultChatRoomRepository]: 채팅방 나가기 성공")
+                completion(true)
+            case let .failure(error):
+                if let statusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
 }

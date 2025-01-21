@@ -21,7 +21,7 @@ struct ChatCellView: View {
             ZStack {
                 VStack {
                     Spacer().frame(height: 38 * DynamicSizeFactor.factor())
-                    
+                        
                     HStack(spacing: 30) {
                         Button(action: {
                             selectedTab = 1
@@ -34,9 +34,9 @@ struct ChatCellView: View {
                             RecommendChatContainer
                         })
                     }
-                    
+                        
                     Spacer().frame(height: 28 * DynamicSizeFactor.factor())
-                    
+                        
                     // 내 채팅에서 채팅방의 존재 유무에 따라 다른 뷰를 보여주도록 함
                     if selectedTab == 1 {
                         if viewModelWrapper.chatData.isEmpty {
@@ -52,7 +52,7 @@ struct ChatCellView: View {
                         ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: viewModelWrapper.searchChatData, isMyChat: false, target: chatRoomName, viewModelWrapper: viewModelWrapper)
                     }
                 }
-
+                    
                 if isCheckMarkVisible {
                     Image("icon_illust_completion")
                         .resizable()
@@ -60,7 +60,7 @@ struct ChatCellView: View {
                         .frame(width: 68 * DynamicSizeFactor.factor(), height: 68 * DynamicSizeFactor.factor())
                         .zIndex(1)
                 }
-                
+                    
                 if isPopUp, let chatRoom = selectedChatRoom {
                     CustomPopUpView(
                         showingPopUp: $isPopUp,
@@ -71,19 +71,19 @@ struct ChatCellView: View {
                         secondBtnAction: {
                             self.isPopUp = false // 팝업 닫기
                             showCheckMarkAnimation(chatRoom)
-                            
+                                
                         },
                         secondBtnLabel: "나가기",
                         secondBtnColor: Color("Red03"))
                 }
-                
+                    
                 if isErrorPopUp {
                     ErrorCodePopUpView(showingPopUp: $isErrorPopUp, titleLabel: "두 글자 이상 입력해주세요", subLabel: "검색은 두 글자부터 가능해요")
                 }
-                
+                    
                 NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
-                
+                    
                 NavigationLink(destination: ChatRoomDetailView(chatRoom: selectedSearchChatRoom, viewModelWrapper: viewModelWrapper), isActive: $isNavigateChatRoomDetailView) {}
                     .hidden()
             }
