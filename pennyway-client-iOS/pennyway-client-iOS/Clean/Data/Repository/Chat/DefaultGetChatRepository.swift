@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DefaultChatRoomRepository: ChatRoomRepository {
+class DefaultGetChatRepository: GetChatRepository {
     /// 채팅 상세 정보 조회
     func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void) {
         ChatRoomAlamofire.shared.getChatRoomDetail(chatRoomId) { result in

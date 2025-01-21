@@ -41,15 +41,15 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 모든 채팅방 사용자
     var previousMessageData: Observable<PreviousMessage?> = Observable(nil) // 이전 채팅 목록 및 무한 스크롤 데이터
 
-    private let chatRoomUseCase: ChatRoomUseCase
+    private let getChatUseCase: GetChatUseCase
     private let sendChatUseCase: SendChatUseCase
     private let chatHistoryList: ChatHistoryList
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: GetChatUseCase, sendChatUseCase: SendChatUseCase) {
+        getChatUseCase = chatRoomUseCase
         self.chatHistoryList = chatHistoryList
-        self.chatRoomUseCase = chatRoomUseCase
         self.sendChatUseCase = sendChatUseCase
         self.chatHistoryList.delegate = self
     }
@@ -78,7 +78,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 
     /// 채팅방 상세 정보 조회
     func getChatRoomDetail(chatRoomId: Int64) {
-        chatRoomUseCase.getChatRoomDetail(chatRoomId: chatRoomId) { [weak self] result in
+        getChatUseCase.getChatRoomDetail(chatRoomId: chatRoomId) { [weak self] result in
             switch result {
             case let .success(chatRoomDetail):
                 self?.roomDetailData.value = ChatRoomDetailItemModel.from(model: chatRoomDetail)
@@ -116,7 +116,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     /// 채팅방 이전 채팅 내역 조회
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void) {
         if let message = messageData.value.last {
-            chatRoomUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
+            getChatUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
                 switch result {
                 case let .success(previousMessage):
                     let messages = PreviousMessage.to(model: previousMessage)
@@ -157,7 +157,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 extension DefaultChatRoomViewModel {
     /// 채팅방 멤버 조회
     private func getChatMembers(chatRoomId: Int64, ids: [Int64]) {
-        chatRoomUseCase.getChatMembers(chatRoomId: chatRoomId, ids: ids) { [weak self] result in
+        getChatUseCase.getChatMembers(chatRoomId: chatRoomId, ids: ids) { [weak self] result in
             switch result {
             case let .success(members):
 
