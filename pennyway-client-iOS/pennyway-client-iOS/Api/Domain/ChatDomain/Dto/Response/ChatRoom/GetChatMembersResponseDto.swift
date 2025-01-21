@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetChatMembersReponseDto: Codable {
+struct GetChatMembersResponseDto: Codable {
     let code: String
     let data: GetChatMembers
 
@@ -15,7 +15,7 @@ struct GetChatMembersReponseDto: Codable {
         let chatMembers: [GetChatMember]
     }
 
-    static func to(dto: GetChatMembersReponseDto) -> [ChatMember] {
+    static func to(dto: GetChatMembersResponseDto) -> [ChatMember] {
         let members = dto.data.chatMembers.map { member in
             ChatMember(id: member.id, userId: member.userId, name: member.name, role: member.role, notifyEnabled: member.notifyEnabled, createdAt: member.createdAt, profileImage: "")
         }

@@ -46,4 +46,11 @@ class ChatRoomAlamofire {
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.banChatMember(chatRoomId: chatRoomId, chatMemberId: chatMemberId), completion: completion)
     }
+    
+    func getChatAdminMode(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatRoomAlamofire - getChatAdminMode() called \(chatRoomId) \(chatMemberId)")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatAdminMode(chatRoomId: chatRoomId), completion: completion)
+    }
+    
 }
