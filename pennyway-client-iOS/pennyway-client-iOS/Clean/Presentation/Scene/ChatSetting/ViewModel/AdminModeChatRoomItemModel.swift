@@ -1,5 +1,5 @@
 //
-//  EditChatRoomItemModel.swift
+//  AdminModeChatRoomItemModel.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 1/16/25.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-// MARK: - EditChatRoomItemModel
+// MARK: - AdminModeChatRoomItemModel
 
-struct EditChatRoomItemModel: Equatable {
+struct AdminModeChatRoomItemModel: Equatable {
     var chatRoomId: Int64
     var title: String
     var description: String?

@@ -30,7 +30,7 @@ protocol EditChatRoomViewModelInput {
 // MARK: - EditChatRoomViewModelOutput
 
 protocol EditChatRoomViewModelOutput {
-    var editRoomData: Observable<EditChatRoomItemModel> { get set }
+    var editRoomData: Observable<AdminModeChatRoomItemModel> { get set }
 }
 
 // MARK: - EditChatRoomViewModel
@@ -41,14 +41,14 @@ protocol EditChatRoomViewModel: EditChatRoomViewModelInput, EditChatRoomViewMode
 
 class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
     var isFormValid: Bool = false
-    var editRoomData: Observable<EditChatRoomItemModel>
+    var editRoomData: Observable<AdminModeChatRoomItemModel>
 
     private let editChatRoomUseCase: EditChatRoomUseCase
 
     init(editChatRoomUseCase: EditChatRoomUseCase) {
         self.editChatRoomUseCase = editChatRoomUseCase
 
-        editRoomData = Observable(EditChatRoomItemModel(
+        editRoomData = Observable(AdminModeChatRoomItemModel(
             chatRoomId: 0,
             title: "",
             description: nil,
@@ -64,16 +64,20 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
         editRoomData.value.password = password
     }
 
-    func getChatAdminMode(completion: @escaping (Bool) -> Void) {
+    func getChatAdminMode(completion: @escaping (Result<AdminModeChatRoomItemModel, Error>) -> Void) {
         editChatRoomUseCase.getChatAdminMode(chatRoomId: editRoomData.value.chatRoomId) { [weak self] result in
             switch result {
             case let .success(response):
 
-                if response.password != 0, response.password != nil {
-                    self?.editRoomData.value.password = String(response.password!)
+                var password: String? = nil
+                if response.password != nil {
+                    password = String(response.password!)
                 }
+
+                self?.editRoomData.value = AdminModeChatRoomItemModel(chatRoomId: response.id, title: response.title, description: response.description, password: password, backgroundImageUrl: response.backgroundImageUrl)
+
                 Log.debug("[EditChatRoomViewModel]: 채팅방 관리자 모드 조회 성공, URL: \(response)")
-                completion(true)
+                completion(response)
 
             case let .failure(error):
                 Log.fault("[EditChatRoomViewModel]: 채팅방 관리자 모드 조회 실패, 오류: \(error)")

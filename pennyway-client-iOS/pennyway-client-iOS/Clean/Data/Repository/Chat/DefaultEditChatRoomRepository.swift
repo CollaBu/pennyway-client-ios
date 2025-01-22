@@ -41,7 +41,7 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
         }
     }
 
-    func editChatRoom(roomData: EditChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void) {
+    func editChatRoom(roomData: AdminModeChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void) {
         let parserData = parseChatroomUrl(from: roomData.backgroundImageUrl ?? "")
 
         let editChatRoomRequestDto = EditChatRoomRequestDto(

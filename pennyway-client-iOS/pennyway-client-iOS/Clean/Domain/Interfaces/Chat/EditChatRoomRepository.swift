@@ -10,5 +10,5 @@ import UIKit
 
 protocol EditChatRoomRepository {
     func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void)
-    func editChatRoom(roomData: EditChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void)
+    func editChatRoom(roomData: AdminModeChatRoomItemModel, completion: @escaping (Result<MakeChatRoomData, Error>) -> Void)
 }

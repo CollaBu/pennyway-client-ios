@@ -299,7 +299,7 @@
 		4ADD846C2D3927F6003F5894 /* EditChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD846B2D3927F6003F5894 /* EditChatRoomRepository.swift */; };
 		4ADD846E2D39295C003F5894 /* DefaultEditChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD846D2D39295C003F5894 /* DefaultEditChatRoomRepository.swift */; };
 		4ADD84732D392FC4003F5894 /* EditChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84722D392FC4003F5894 /* EditChatRoomViewModel.swift */; };
-		4ADD84752D3937ED003F5894 /* EditChatRoomItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84742D3937ED003F5894 /* EditChatRoomItemModel.swift */; };
+		4ADD84752D3937ED003F5894 /* AdminModeChatRoomItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84742D3937ED003F5894 /* AdminModeChatRoomItemModel.swift */; };
 		4ADE80252BF23D2F007FFB01 /* ProfileSettingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */; };
 		4ADE802C2BF29055007FFB01 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE802B2BF29055007FFB01 /* MainTabView.swift */; };
 		4AE1A61A2BD2D57600E7687B /* DynamicSizeFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */; };
@@ -778,7 +778,7 @@
 		4ADD846B2D3927F6003F5894 /* EditChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomRepository.swift; sourceTree = "<group>"; };
 		4ADD846D2D39295C003F5894 /* DefaultEditChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEditChatRoomRepository.swift; sourceTree = "<group>"; };
 		4ADD84722D392FC4003F5894 /* EditChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomViewModel.swift; sourceTree = "<group>"; };
-		4ADD84742D3937ED003F5894 /* EditChatRoomItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomItemModel.swift; sourceTree = "<group>"; };
+		4ADD84742D3937ED003F5894 /* AdminModeChatRoomItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminModeChatRoomItemModel.swift; sourceTree = "<group>"; };
 		4ADE80242BF23D2F007FFB01 /* ProfileSettingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingListItem.swift; sourceTree = "<group>"; };
 		4ADE802B2BF29055007FFB01 /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4AE1A6192BD2D57600E7687B /* DynamicSizeFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSizeFactor.swift; sourceTree = "<group>"; };
@@ -2485,7 +2485,7 @@
 			isa = PBXGroup;
 			children = (
 				4ADD84722D392FC4003F5894 /* EditChatRoomViewModel.swift */,
-				4ADD84742D3937ED003F5894 /* EditChatRoomItemModel.swift */,
+				4ADD84742D3937ED003F5894 /* AdminModeChatRoomItemModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3466,7 +3466,7 @@
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
 				4A2C3A8D2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
-				4ADD84752D3937ED003F5894 /* EditChatRoomItemModel.swift in Sources */,
+				4ADD84752D3937ED003F5894 /* AdminModeChatRoomItemModel.swift in Sources */,
 				4AC320472C11D5AC00DDB4B6 /* NoSpendingHistoryView.swift in Sources */,
 				4A6CC1E02C80E3F600D638B2 /* ScreenUtil.swift in Sources */,
 				B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */,
