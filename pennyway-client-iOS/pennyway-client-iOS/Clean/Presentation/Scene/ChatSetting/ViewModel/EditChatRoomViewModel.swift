@@ -22,7 +22,7 @@ import UIKit
 
 protocol EditChatRoomViewModelInput {
     func uploadImage(image: UIImage)
-    func getChatAdminMode(completion: @escaping (Bool) -> Void)
+    func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoomItemModel, Error>) -> Void)
     func editChatRoom(completion: @escaping (Bool) -> Void)
     func updateEditRoomData(title: String, password: String)
 }
@@ -64,24 +64,20 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
         editRoomData.value.password = password
     }
 
-    func getChatAdminMode(completion: @escaping (Result<AdminModeChatRoomItemModel, Error>) -> Void) {
-        editChatRoomUseCase.getChatAdminMode(chatRoomId: editRoomData.value.chatRoomId) { [weak self] result in
+    func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoomItemModel, Error>) -> Void) {
+        editChatRoomUseCase.getChatAdminMode(chatRoomId: chatRoomId) { [weak self] result in
             switch result {
             case let .success(response):
 
-                var password: String? = nil
-                if response.password != nil {
-                    password = String(response.password!)
-                }
-
-                self?.editRoomData.value = AdminModeChatRoomItemModel(chatRoomId: response.id, title: response.title, description: response.description, password: password, backgroundImageUrl: response.backgroundImageUrl)
+                let adminModeChatRoomItemModel = AdminModeChatRoom.to(model: response)
+                self?.editRoomData.value = adminModeChatRoomItemModel
 
                 Log.debug("[EditChatRoomViewModel]: 채팅방 관리자 모드 조회 성공, URL: \(response)")
-                completion(response)
+                completion(.success(adminModeChatRoomItemModel))
 
             case let .failure(error):
                 Log.fault("[EditChatRoomViewModel]: 채팅방 관리자 모드 조회 실패, 오류: \(error)")
-                completion(false)
+                completion(.failure(error))
             }
         }
     }

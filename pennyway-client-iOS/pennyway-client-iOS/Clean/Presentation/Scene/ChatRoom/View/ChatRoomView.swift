@@ -16,7 +16,9 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @State private var isNavigateToMyChat = false
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
+    @State private var roomTitle = ""
 
+    var chatRoomId: Int64
     private let currentUserId = getUserData()!.id
 
     var body: some View {
@@ -31,7 +33,7 @@ struct ChatRoomView: View {
                     .offset(y: -keyboardManager.keyboardHeight)
                     .animation(keyboardManager.keyboardHeight > 0 ? .easeOut(duration: 0.5) : nil, value: keyboardManager.keyboardHeight)
             }
-            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(viewModelWrapper.roomData?.title)")
+            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(roomTitle)")
             .background(Color("Ashblue02"))
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
@@ -76,9 +78,12 @@ struct ChatRoomView: View {
                 }
             }
             .onAppear {
-                viewModelWrapper.editChatRoomViewModel.getChatAdminMode { success in
-                    if success {
-                        viewModelWrapper.chatRoomViewModel.roomData.value = viewModelWrapper.editChatRoomViewModel.editRoomData.value
+                viewModelWrapper.editChatRoomViewModel.getChatAdminMode(chatRoomId: chatRoomId) { result in
+
+                    switch result {
+                    case let .success(data):
+                        viewModelWrapper.chatRoomViewModel.roomData.value = data
+                        roomTitle = data.title
 
                         // 현재 채팅방 정보 저장
                         viewStateManager.setCurrentView(self, chatRoomId: viewModelWrapper.roomData?.chatRoomId)
@@ -86,6 +91,9 @@ struct ChatRoomView: View {
                         // 채팅방 상세 정보 조회
                         viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: viewModelWrapper.roomData?.chatRoomId ?? 0)
                         viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
+
+                    case .failure:
+                        Log.debug("[ChatRoomView] 관리자 모드 조회 실패")
                     }
                 }
             }

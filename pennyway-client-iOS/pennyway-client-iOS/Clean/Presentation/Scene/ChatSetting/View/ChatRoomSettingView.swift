@@ -20,8 +20,8 @@ struct ChatRoomSettingView: View {
 
     // title ui 관련
     private var chatRoomTitle = "채팅방 이름*"
-    let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray04"))
-    let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
+    let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color(.gray04))
+    let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color(.mint03))
 
     // 이미지 관련
     @State private var showImagePopUp: Bool = false
@@ -285,6 +285,7 @@ struct ChatRoomSettingView: View {
                 isFormValid = isPasswordValid
             } else {
                 isFormValid = true
+                password = ""
             }
         }
     }

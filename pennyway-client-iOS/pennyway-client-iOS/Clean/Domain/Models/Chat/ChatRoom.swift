@@ -30,4 +30,14 @@ struct AdminModeChatRoom: Equatable, Identifiable {
     let description: String?
     let backgroundImageUrl: String?
     let password: Int32?
+
+    static func to(model: AdminModeChatRoom) -> AdminModeChatRoomItemModel {
+        var password: String? = nil
+
+        if model.password != nil {
+            password = String(model.password!)
+        }
+
+        return AdminModeChatRoomItemModel(chatRoomId: model.id, title: model.title, description: model.description, password: password, backgroundImageUrl: model.backgroundImageUrl)
+    }
 }
