@@ -170,7 +170,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 }
             case let .failure(error):
                 Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
-                
+
                 if let deleteChatRoomError = error as? DeleteChatRoomError {
                     switch deleteChatRoomError {
                     case .admin:

@@ -87,6 +87,10 @@ struct ChatRoomView: View {
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
 
+//            if viewModelWrapper.chatRoomViewModel.isPopupShow {
+//                Log.debug("[ChatRoomView] ispopupshow 실행중")
+//                ErrorCodePopUpView(showingPopUp: $viewModelWrapper.chatRoomViewModel.isPopupShow, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
+//            }
             ZStack {
                 if isSideMenuPresented {
                     Color(.black01)
@@ -105,12 +109,6 @@ struct ChatRoomView: View {
 
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
-            
-            
-            if viewModelWrapper.chatRoomViewModel.isPopupShow {
-                Log.debug("[ChatRoomView] ispopupshow 실행중")
-                
-            }
         }
     }
 }
@@ -124,6 +122,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var chatUserData: [ChatMemberItemModel] = []
     @Published var previousMessageData: PreviousMessage? = nil
     @Published var isDeleteSuccess: Bool = false
+    @Published var showErrorPopUp: Bool = false
 
     var chatRoomViewModel: any ChatRoomViewModel
 
@@ -158,6 +157,10 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         chatRoomViewModel.isDeleteSuccessful.observe(on: self) { [weak self] newData in
             self?.isDeleteSuccess = newData
+        }
+
+        chatRoomViewModel.isPopupShow.observe(on: self) { [weak self] newData in
+            self?.showErrorPopUp = newData
         }
     }
 }

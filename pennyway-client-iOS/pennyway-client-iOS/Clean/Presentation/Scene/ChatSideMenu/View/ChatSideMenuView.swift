@@ -29,6 +29,11 @@ struct ChatSideMenuView: View {
                 .transition(.move(edge: .trailing))
             }
             
+            if viewModelWrapper.showErrorPopUp {
+                ErrorCodePopUpView(showingPopUp: $viewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
+                    .edgesIgnoringSafeArea(.vertical)
+            }
+            
             if showExitPopUp {
                 CustomPopUpView(showingPopUp: $showExitPopUp,
                                 titleLabel: "\(viewModelWrapper.roomData?.title ?? "")",
@@ -40,7 +45,14 @@ struct ChatSideMenuView: View {
                                     if let chatRoomId = viewModelWrapper.roomData?.id,
                                        let chatMemberId = viewModelWrapper.roomDetailData?.myInfo.id
                                     {
-                                        viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId)
+                                        viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { success in
+                                        
+                                            if success {
+                                                Log.debug("[ChatSideMenuView]: 채팅방 나가기 성공")
+                                            } else {
+                                                Log.debug("[ChatSideMenuView]: 채팅방 나가기 실패")
+                                            }
+                                        }
                                     }
                                 },
                                 secondBtnLabel: "나가기",
@@ -51,12 +63,8 @@ struct ChatSideMenuView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .onChange(of: viewModelWrapper.isDeleteSuccess) { success in
-            Log.debug("[ChatSideMenuView]: onChange까지는 성공")
             if success {
-                Log.debug("채팅방 화면 닫기 성공")
                 self.presentationMode.wrappedValue.dismiss()
-            } else {
-                Log.debug("채팅방 화면 닫기 실패")
             }
         }
         .onChange(of: selectedUser) { newValue in
