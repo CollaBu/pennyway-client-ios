@@ -30,8 +30,11 @@ struct ChatSideMenuView: View {
             }
             
             if viewModelWrapper.showErrorPopUp {
-                ErrorCodePopUpView(showingPopUp: $viewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
-                    .edgesIgnoringSafeArea(.vertical)
+                ZStack {
+                    ErrorCodePopUpView(showingPopUp: $viewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
+                        .edgesIgnoringSafeArea(.vertical)
+                }
+                .edgesIgnoringSafeArea(.vertical)
             }
             
             if showExitPopUp {
