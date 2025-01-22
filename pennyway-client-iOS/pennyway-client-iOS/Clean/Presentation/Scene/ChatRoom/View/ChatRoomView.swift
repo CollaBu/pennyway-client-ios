@@ -2,9 +2,10 @@
 //  ChatRoomView.swift
 //  pennyway-client-iOS
 //
-//  Created by 최희진 on 10/8/24.
+//  Created by 최희진, 아우신얀 on 10/8/24.
 //
 
+import Combine
 import SwiftUI
 
 // MARK: - ChatRoomView
@@ -85,13 +86,6 @@ struct ChatRoomView: View {
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
-            .onChange(of: viewModelWrapper.chatRoomViewModel.isDeleteSuccessful) { isSuccess in
-                Log.debug("onchange 실행됨")
-                if isSuccess {
-                    Log.debug("isSuccess 내부 실행")
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }
 
             ZStack {
                 if isSideMenuPresented {
@@ -123,6 +117,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var messageData: [MessageItemModel] = []
     @Published var chatUserData: [ChatMemberItemModel] = []
     @Published var previousMessageData: PreviousMessage? = nil
+    @Published var isDeleteSuccess: Bool = false
 
     var chatRoomViewModel: any ChatRoomViewModel
 
@@ -153,6 +148,10 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         chatRoomViewModel.previousMessageData.observe(on: self) { [weak self] newData in
             self?.previousMessageData = newData
+        }
+
+        chatRoomViewModel.isDeleteSuccessful.observe(on: self) { [weak self] newData in
+            self?.isDeleteSuccess = newData
         }
     }
 }

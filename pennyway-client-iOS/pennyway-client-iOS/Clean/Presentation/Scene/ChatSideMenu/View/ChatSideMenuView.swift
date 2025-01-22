@@ -2,7 +2,7 @@
 //  ChatSideMenuView.swift
 //  pennyway-client-iOS
 //
-//  Created by 최희진 on 10/10/24.
+//  Created by 최희진, 아우신얀 on 10/10/24.
 //
 
 import SwiftUI
@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - ChatSideMenuView
 
 struct ChatSideMenuView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @State private var isAlarmOn: Bool = false
     @State private var showExitPopUp: Bool = false
@@ -49,6 +50,15 @@ struct ChatSideMenuView: View {
             }
         }
         .edgesIgnoringSafeArea(.bottom)
+        .onChange(of: viewModelWrapper.isDeleteSuccess) { success in
+            Log.debug("[ChatSideMenuView]: onChange까지는 성공")
+            if success {
+                Log.debug("채팅방 화면 닫기 성공")
+                self.presentationMode.wrappedValue.dismiss()
+            } else {
+                Log.debug("채팅방 화면 닫기 실패")
+            }
+        }
         .onChange(of: selectedUser) { newValue in
             showChatUserView = newValue != nil
         }

@@ -2,7 +2,7 @@
 //  ChatRoomViewModel.swift
 //  pennyway-client-iOS
 //
-//  Created by 최희진 on 11/5/24.
+//  Created by 최희진, 아우신얀 on 11/5/24.
 //
 
 import Combine
@@ -17,7 +17,6 @@ protocol ChatRoomViewModelInput {
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
     func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64)
-//    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -28,7 +27,7 @@ protocol ChatRoomViewModelOutput {
     var messageData: Observable<[MessageItemModel]> { get set }
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
     var previousMessageData: Observable<PreviousMessage?> { get set }
-    var isDeleteSuccessful: Bool { get set }
+    var isDeleteSuccessful: Observable<Bool> { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -40,7 +39,7 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 class DefaultChatRoomViewModel: ChatRoomViewModel {
     @Published var chatRoomId: Int64 = 0
     @Published var chatMemberId: Int64 = 0
-    @Published var isDeleteSuccessful: Bool = false
+    @Published var isDeleteSuccessful = Observable<Bool>(false)
 
     var roomData: Observable<ChatRoomProtocol?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
@@ -162,7 +161,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64) {
         chatRoomUseCase.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { [weak self] isSuccess in
             DispatchQueue.main.async {
-                self?.isDeleteSuccessful = isSuccess
+                self?.isDeleteSuccessful.value = isSuccess
                 Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
             }
         }
