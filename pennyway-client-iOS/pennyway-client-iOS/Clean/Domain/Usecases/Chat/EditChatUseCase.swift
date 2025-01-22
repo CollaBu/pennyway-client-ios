@@ -11,6 +11,7 @@ import UIKit
 // MARK: - EditChatRoomUseCase
 
 protocol EditChatRoomUseCase {
+    func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void)
     func uploadImage(roomData: EditChatRoomItemModel, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
     func editChatRoom(roomData: EditChatRoomItemModel, completion: @escaping (Bool) -> Void)
 }
@@ -24,6 +25,10 @@ class DefaultEditChatRoomUseCase: EditChatRoomUseCase {
     init(repository: EditChatRoomRepository, urlRepository: PresignedUrlRepository) {
         self.repository = repository
         self.urlRepository = urlRepository
+    }
+
+    func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void) {
+        repository.getChatAdminMode(chatRoomId: chatRoomId, completion: completion)
     }
 
     func editChatRoom(roomData: EditChatRoomItemModel, completion: @escaping (Bool) -> Void) {

@@ -13,8 +13,8 @@ import UIKit
 struct EditChatRoomItemModel: Equatable {
     var chatRoomId: Int64
     var title: String
-    var description: String
-    var password: String
+    var description: String?
+    var password: String?
     var backgroundImageUrl: String?
     var image: UIImage?
 

@@ -118,8 +118,14 @@ struct ChatRoomSettingView: View {
                 }
             }
             .onAppear {
-                chatRoomName = viewModelWrapper.editRoomData?.title ?? ""
-                description = viewModelWrapper.editRoomData?.description ?? ""
+                viewModelWrapper.editChatRoomViewModel.getChatAdminMode { success in
+                    if success {
+                        chatRoomName = viewModelWrapper.editRoomData?.title ?? ""
+                        description = viewModelWrapper.editRoomData?.description ?? ""
+                        password = viewModelWrapper.editRoomData?.password ?? ""
+                        isSecret = !password.isEmpty
+                    }
+                }
             }
 
             if showImagePopUp {

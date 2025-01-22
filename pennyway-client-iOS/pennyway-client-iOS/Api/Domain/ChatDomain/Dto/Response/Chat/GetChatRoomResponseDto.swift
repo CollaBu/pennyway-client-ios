@@ -51,7 +51,9 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
     ///     - cdnUrl: 응답으로 받은 url을 http형식의 url로 변환하기 위함
     static func toChatRoom(dto: ChatRoomDetail, cdnUrl: String) -> ChatRoom {
         // 이미지 url을 http형식으로 변환
-        let completeBackgroundImageUrl = createFullURL(with: cdnUrl, pathComponent: dto.backgroundImageUrl)
+        let completeBackgroundImageUrl = dto.backgroundImageUrl.isEmpty
+            ? dto.backgroundImageUrl
+            : createFullURL(with: cdnUrl, pathComponent: dto.backgroundImageUrl)
 
         // lastMessage가 nil일 경우 기본 LastMessage 생성
         let defaultLastMessage = Message(
@@ -68,7 +70,7 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
             id: dto.id,
             title: dto.title,
             description: dto.description,
-            background_image_url: completeBackgroundImageUrl,
+            backgroundImageUrl: completeBackgroundImageUrl,
             isPrivate: dto.isPrivate,
             isAdmin: dto.isAdmin,
             participantCount: dto.participantCount,

@@ -22,6 +22,7 @@ import UIKit
 
 protocol EditChatRoomViewModelInput {
     func uploadImage(image: UIImage)
+    func getChatAdminMode(completion: @escaping (Bool) -> Void)
     func editChatRoom(completion: @escaping (Bool) -> Void)
     func updateEditRoomData(title: String, password: String)
 }
@@ -50,9 +51,9 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
         editRoomData = Observable(EditChatRoomItemModel(
             chatRoomId: 0,
             title: "",
-            description: "",
-            password: "",
-            backgroundImageUrl: ""
+            description: nil,
+            password: nil,
+            backgroundImageUrl: nil
         ))
     }
 
@@ -61,6 +62,24 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
             editRoomData.value.title = title
         }
         editRoomData.value.password = password
+    }
+
+    func getChatAdminMode(completion: @escaping (Bool) -> Void) {
+        editChatRoomUseCase.getChatAdminMode(chatRoomId: editRoomData.value.chatRoomId) { [weak self] result in
+            switch result {
+            case let .success(response):
+
+                if response.password != 0, response.password != nil {
+                    self?.editRoomData.value.password = String(response.password!)
+                }
+                Log.debug("[EditChatRoomViewModel]: 채팅방 관리자 모드 조회 성공, URL: \(response)")
+                completion(true)
+
+            case let .failure(error):
+                Log.fault("[EditChatRoomViewModel]: 채팅방 관리자 모드 조회 실패, 오류: \(error)")
+                completion(false)
+            }
+        }
     }
 
     /// Presigned URL 생성
