@@ -72,14 +72,29 @@ struct ChatRoomSettingView: View {
 
                         // 공개 범위 설정
                         PublicScopeSection
-
-                        Spacer()
                     }
                     .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 20 : nil)
                 }
                 .padding(.bottom, keyboardHandler.keyboardHeight)
                 .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
             }
+            .overlay(
+                Group {
+                    if showCompleteToastPopup {
+                        CustomToastView(message: "변경 사항이 저장되었어요")
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                            .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    if showCompleteToastPopup {
+                                        showCompleteToastPopup = false
+                                    }
+                                }
+                            }
+                    }
+                }, alignment: .bottom
+            )
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarColor(UIColor(named: "White01"), title: "채팅방 설정")
             .background(Color("White01"))
@@ -105,7 +120,6 @@ struct ChatRoomSettingView: View {
                                     }
                                 }
                             }
-
                         }, label: {
                             Text("완료")
                                 .font(.H4MediumFont())
@@ -136,23 +150,6 @@ struct ChatRoomSettingView: View {
                     .edgesIgnoringSafeArea(.bottom)
             }
         }
-        .overlay(
-            Group {
-                if showCompleteToastPopup {
-                    CustomToastView(message: "변경 사항이 저장되었어요")
-                        .transition(.move(edge: .bottom))
-                        .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                if showCompleteToastPopup {
-                                    showCompleteToastPopup = false
-                                }
-                            }
-                        }
-                }
-            }, alignment: .bottom
-        )
         .sheet(isPresented: $showImagePicker, onDismiss: {
             // 사진 클릭한 경우
             showImagePopUp = false
