@@ -16,7 +16,7 @@ protocol ChatRoomViewModelInput {
     func getChatRoomDetail(chatRoomId: Int64)
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
-    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64)
+    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -28,6 +28,7 @@ protocol ChatRoomViewModelOutput {
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
     var previousMessageData: Observable<PreviousMessage?> { get set }
     var isDeleteSuccessful: Observable<Bool> { get set }
+    var isPopupShow: Observable<Bool> { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -40,6 +41,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     @Published var chatRoomId: Int64 = 0
     @Published var chatMemberId: Int64 = 0
     @Published var isDeleteSuccessful = Observable<Bool>(false)
+    @Published var isPopupShow = Observable<Bool>(false)
 
     var roomData: Observable<ChatRoomProtocol?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
@@ -158,11 +160,26 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     }
 
     /// 채팅방 나가기
-    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64) {
-        chatRoomUseCase.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { [weak self] isSuccess in
-            DispatchQueue.main.async {
-                self?.isDeleteSuccessful.value = isSuccess
-                Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
+    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void) {
+        chatRoomUseCase.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { [weak self] result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.isDeleteSuccessful.value = true
+                    Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
+                }
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
+                
+                if let deleteChatRoomError = error as? DeleteChatRoomError {
+                    switch deleteChatRoomError {
+                    case .admin:
+                        self?.isPopupShow.value = true
+                        completion(false)
+                    case .other:
+                        completion(false)
+                    }
+                }
             }
         }
     }

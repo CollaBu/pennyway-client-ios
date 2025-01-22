@@ -105,6 +105,12 @@ struct ChatRoomView: View {
 
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
+            
+            
+            if viewModelWrapper.chatRoomViewModel.isPopupShow {
+                Log.debug("[ChatRoomView] ispopupshow 실행중")
+                
+            }
         }
     }
 }

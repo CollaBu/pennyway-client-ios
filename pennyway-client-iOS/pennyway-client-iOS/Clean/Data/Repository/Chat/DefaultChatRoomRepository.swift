@@ -7,6 +7,15 @@
 
 import Foundation
 
+// MARK: - DeleteChatRoomError
+
+enum DeleteChatRoomError: Error {
+    case admin // 채팅방장은 채팅방을 나갈 수 없다는 4090애러
+    case other(Error)
+}
+
+// MARK: - DefaultChatRoomRepository
+
 class DefaultChatRoomRepository: ChatRoomRepository {
     /// 채팅 상세 정보 조회
     func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void) {
@@ -96,19 +105,22 @@ class DefaultChatRoomRepository: ChatRoomRepository {
         }
     }
 
-    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void) {
+    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
         ChatRoomAlamofire.shared.deleteChatRoom(chatRoomId, chatMemberId) { result in
             switch result {
-            case let .success(data):
+            case .success:
                 Log.debug("[DefaultChatRoomRepository]: 채팅방 나가기 성공")
-                completion(true)
+                completion(.success(()))
+
             case let .failure(error):
-                if let statusSpecificError = error as? StatusSpecificError {
-                    Log.info("StatusSpecificError occurred: \(statusSpecificError)")
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .conflict,
+                   statusSpecificError.code == ConflictErrorCode.requestConflictWithResourceState.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.admin))
                 } else {
-                    Log.error("Network request failed: \(error)")
+                    completion(.failure(DeleteChatRoomError.other(error)))
                 }
-                completion(false)
             }
         }
     }
