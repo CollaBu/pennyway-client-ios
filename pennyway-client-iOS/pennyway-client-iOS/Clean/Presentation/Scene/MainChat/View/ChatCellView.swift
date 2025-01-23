@@ -79,10 +79,7 @@ struct ChatCellView: View {
                 }
                 
                 if chatRoomViewModelWrapper.showErrorPopUp {
-//                                        ZStack {
                     ErrorCodePopUpView(showingPopUp: $chatRoomViewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
-//                            .edgesIgnoringSafeArea(.vertical)
-                    // }
                 }
                 
                 if isErrorPopUp {
@@ -161,11 +158,12 @@ struct ChatCellView: View {
         withAnimation {
             isCheckMarkVisible = true
         }
-        
+        //TODO: gesture 관련 수정해야 할 코드
         viewModelWrapper.getChatRoomViewModel.getChatRoom { success in
             if success {
                 isCheckMarkVisible = false
             }
+            
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             isCheckMarkVisible = false
