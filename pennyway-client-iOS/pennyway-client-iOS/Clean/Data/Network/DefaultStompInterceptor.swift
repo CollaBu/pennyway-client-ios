@@ -1,0 +1,31 @@
+//
+//  DefaultStompInterceptor.swift
+//  pennyway-client-iOS
+//
+//  Created by 최희진 on 1/23/25.
+//
+
+import Foundation
+
+// MARK: - DefaultStompInterceptor
+
+class DefaultStompInterceptor: StompInterceptor{
+    private let socketAuthHandler: SocketAuthHandler
+
+    init(socketAuthHandler: SocketAuthHandler) {
+        self.socketAuthHandler = socketAuthHandler
+    }
+
+    func handle() {
+        socketAuthHandler.retry()
+    }
+}
+
+// MARK: - AuthEvent
+
+enum AuthEvent {
+    case refreshStart
+    case refreshComplete(token: String)
+    case authUpdateComplete
+}
+

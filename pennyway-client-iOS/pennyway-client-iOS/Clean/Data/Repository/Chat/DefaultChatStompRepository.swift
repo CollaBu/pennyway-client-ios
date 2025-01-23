@@ -11,11 +11,16 @@ import StompClientLib
 // MARK: - DefaultChatStompRepository
 
 class DefaultChatStompRepository: ChatStompRepository {
-    private let stompClient: StompClientLib
-    private var messageDatas: [String: [String: String]] = [:]
+//    private let stompClient: StompClientLib
+    private let stompClient: CustomStompClient
+    private let messageQueue: MessageQueue
 
-    init(stompClient: StompClientLib) {
+    init(
+        stompClient: CustomStompClient = .shared,
+        messageQueue: MessageQueue = .shared
+    ) {
         self.stompClient = stompClient
+        self.messageQueue = messageQueue
     }
 
     /// Stomp 서버에 연결하는 메서드. 먼저 채팅 서버 URL을 가져온 뒤 소켓 연결을 시도함
@@ -46,20 +51,28 @@ class DefaultChatStompRepository: ChatStompRepository {
             "content": message,
             "contentType": contentType
         ]
+        
+        let socketMessage = SocketMessage(
+            content: message,
+            destination: destination,
+            contentType: contentType
+        )
 
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
-                messageDatas[messageUuid] = ["message": message, "chatRoomId": String(chatRoomId), "contentType": contentType]
-                Log.info("📤 [Send Message] total - \(String(describing: messageDatas))")
-                Log.info("📤 [Send Message] - \(String(describing: messageDatas[messageUuid]))")
-                completion(.success(()))
-            }
-        } catch {
-            Log.error("Failed to serialize message body: \(error)")
-            completion(.failure(error))
-        }
+        messageQueue.enqueue(message: socketMessage, id: Int(messageUuid) ?? 0)
+//        do {
+//            let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
+//            if let jsonString = String(data: jsonData, encoding: .utf8) {
+//                stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: nil)
+           
+//                messageDatas[messageUuid] = ["message": message, "chatRoomId": String(chatRoomId), "contentType": contentType]
+//                Log.info("📤 [Send Message] total - \(String(describing: messageDatas))")
+//                Log.info("📤 [Send Message] - \(String(describing: messageDatas[messageUuid]))")
+//                completion(.success(()))
+//            }
+//        } catch {
+//            Log.error("Failed to serialize message body: \(error)")
+//            completion(.failure(error))
+//        }
     }
 
     /// 마지막으로 읽은 메시지를 특정 목적지로 보내는 메서드
@@ -214,8 +227,8 @@ extension DefaultChatStompRepository {
     /// `/user/queue/success`에서 받은 메시지 처리
     private func handleRemovedMessage(header: [String: String]?) {
         if let id = header?["x-message-id"] {
-            messageDatas.removeValue(forKey: id)
-            Log.info("📤 [Send Message] Removed ID \(id). Remaining messages: \(messageDatas)")
+//            messageDatas.removeValue(forKey: id)
+//            Log.info("📤 [Send Message] Removed ID \(id). Remaining messages: \(messageDatas)")
         }
     }
 
@@ -233,31 +246,31 @@ extension DefaultChatStompRepository {
     }
 
     /// 보내지지 않은 메시지 보내는 메서드
-    private func retryUnsentMessages() {
-        let sortedMessages = messageDatas.keys.sorted().map { uuid -> (String, [String: String]) in
-            (uuid, self.messageDatas[uuid]!)
-        }
-
-        for (uuid, data) in sortedMessages {
-            guard let message = data["message"],
-                  let chatRoomIdString = data["chatRoomId"],
-                  let chatRoomId = Int64(chatRoomIdString),
-                  let contentType = data["contentType"]
-            else {
-                Log.error("📤 [Retry Messages] Invalid message data: \(data)")
-                continue
-            }
-
-            sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: true, uuid: uuid) { [weak self] result in
-                switch result {
-                case .success:
-                    Log.info("📤 [Retry Messages] Successfully sent message with UUID: \(uuid)")
-                case let .failure(error):
-                    Log.error("📤 [Retry Messages] Failed to resend message with UUID: \(uuid), Error: \(error)")
-                }
-            }
-        }
-    }
+//    private func retryUnsentMessages() {
+//        let sortedMessages = messageDatas.keys.sorted().map { uuid -> (String, [String: String]) in
+//            (uuid, self.messageDatas[uuid]!)
+//        }
+//
+//        for (uuid, data) in sortedMessages {
+//            guard let message = data["message"],
+//                  let chatRoomIdString = data["chatRoomId"],
+//                  let chatRoomId = Int64(chatRoomIdString),
+//                  let contentType = data["contentType"]
+//            else {
+//                Log.error("📤 [Retry Messages] Invalid message data: \(data)")
+//                continue
+//            }
+//
+//            sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: true, uuid: uuid) { [weak self] result in
+//                switch result {
+//                case .success:
+//                    Log.info("📤 [Retry Messages] Successfully sent message with UUID: \(uuid)")
+//                case let .failure(error):
+//                    Log.error("📤 [Retry Messages] Failed to resend message with UUID: \(uuid), Error: \(error)")
+//                }
+//            }
+//        }
+//    }
 }
 
 // MARK: StompClientLibDelegate
@@ -329,7 +342,7 @@ extension DefaultChatStompRepository: StompClientLibDelegate {
 
         // receiptId가 "refresh-receipt-"로 시작하는 경우 처리
         if receiptId.hasPrefix("refresh-receipt-") {
-            retryUnsentMessages()
+//            retryUnsentMessages()
         }
     }
 

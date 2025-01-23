@@ -17,7 +17,7 @@ class DefaultChatStompService {
     private let repository: ChatStompRepository
     
     private init() {
-        repository = DefaultChatStompRepository(stompClient: StompClientLib())
+        repository = DefaultChatStompRepository(stompClient: CustomStompClient.shared)
     }
     
     func connect() {

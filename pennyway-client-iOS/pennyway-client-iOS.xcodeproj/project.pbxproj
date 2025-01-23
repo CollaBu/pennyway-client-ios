@@ -208,6 +208,12 @@
 		4A863A142CB461BE00BA2F2F /* TextHeightPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A863A132CB461BE00BA2F2F /* TextHeightPreference.swift */; };
 		4A8BDEE32C6246B900D21424 /* DiffAmountColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */; };
 		4A8BDEE52C629C3600D21424 /* SpendingHistoryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */; };
+		4A8CA11F2D4217F80084839A /* CustomStompClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA11E2D4217F80084839A /* CustomStompClient.swift */; };
+		4A8CA1232D42183D0084839A /* SocketAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1222D42183D0084839A /* SocketAuthHandler.swift */; };
+		4A8CA1252D4218520084839A /* SocketAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1242D4218520084839A /* SocketAuthRepository.swift */; };
+		4A8CA1272D4218900084839A /* DefaultStompInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1262D4218900084839A /* DefaultStompInterceptor.swift */; };
+		4A8CA1292D4218D00084839A /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1282D4218D00084839A /* MessageQueue.swift */; };
+		4A8CA12B2D425C0A0084839A /* StompInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA12A2D425C0A0084839A /* StompInterceptor.swift */; };
 		4A8E26B12CA2ECD30030EEB2 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E26B02CA2ECD30030EEB2 /* LazyView.swift */; };
 		4A9634B02C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */; };
 		4A9634B22C42EAF6000A218A /* SpendingListGroupUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */; };
@@ -685,6 +691,12 @@
 		4A863A132CB461BE00BA2F2F /* TextHeightPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHeightPreference.swift; sourceTree = "<group>"; };
 		4A8BDEE22C6246B900D21424 /* DiffAmountColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffAmountColorUtil.swift; sourceTree = "<group>"; };
 		4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingHistoryUtil.swift; sourceTree = "<group>"; };
+		4A8CA11E2D4217F80084839A /* CustomStompClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStompClient.swift; sourceTree = "<group>"; };
+		4A8CA1222D42183D0084839A /* SocketAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAuthHandler.swift; sourceTree = "<group>"; };
+		4A8CA1242D4218520084839A /* SocketAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAuthRepository.swift; sourceTree = "<group>"; };
+		4A8CA1262D4218900084839A /* DefaultStompInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStompInterceptor.swift; sourceTree = "<group>"; };
+		4A8CA1282D4218D00084839A /* MessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
+		4A8CA12A2D425C0A0084839A /* StompInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompInterceptor.swift; sourceTree = "<group>"; };
 		4A8E26B02CA2ECD30030EEB2 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
 		4A9634AF2C42E75A000A218A /* DeleteSpendingHistoryRequestDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteSpendingHistoryRequestDto.swift; sourceTree = "<group>"; };
 		4A9634B12C42EAF6000A218A /* SpendingListGroupUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingListGroupUtil.swift; sourceTree = "<group>"; };
@@ -1309,6 +1321,12 @@
 			isa = PBXGroup;
 			children = (
 				4A12FEFA2C9C49F100DE10BC /* DataMapping */,
+				4A8CA11E2D4217F80084839A /* CustomStompClient.swift */,
+				4A8CA1222D42183D0084839A /* SocketAuthHandler.swift */,
+				4A8CA1242D4218520084839A /* SocketAuthRepository.swift */,
+				4A8CA1262D4218900084839A /* DefaultStompInterceptor.swift */,
+				4A8CA1282D4218D00084839A /* MessageQueue.swift */,
+				4A8CA12A2D425C0A0084839A /* StompInterceptor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -3217,6 +3235,7 @@
 				4A0FFBEF2BCDA05B00EFEC56 /* SignUpRequestDto.swift in Sources */,
 				4A57898D2BDC291900AFEB26 /* ForbiddenError.swift in Sources */,
 				4A5789872BDC277100AFEB26 /* BadRequestError.swift in Sources */,
+				4A8CA1292D4218D00084839A /* MessageQueue.swift in Sources */,
 				4A2C3A772CD3C93C006B6804 /* LogoutRepository.swift in Sources */,
 				4AFC7C9D2C581E1C003CFA8C /* TooManyRequestErrorCode.swift in Sources */,
 				4A23E7C42CE8771C006FD4E2 /* GetChatMembersReponseDto.swift in Sources */,
@@ -3233,6 +3252,7 @@
 				D8E24D9C2BFDAFDA006E8046 /* CustomToggleStyle.swift in Sources */,
 				D8E24D8D2BFC7FE4006E8046 /* InquiryViewModel.swift in Sources */,
 				4A762AEF2B99A16B001C1188 /* MainView.swift in Sources */,
+				4A8CA12B2D425C0A0084839A /* StompInterceptor.swift in Sources */,
 				4ADA09522CBE681B001F9384 /* DefaultChatStompRepository.swift in Sources */,
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				D8B0A92C2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift in Sources */,
@@ -3461,6 +3481,7 @@
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
+				4A8CA1252D4218520084839A /* SocketAuthRepository.swift in Sources */,
 				4A2C3A8D2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4ADD84752D3937ED003F5894 /* EditChatRoomItemModel.swift in Sources */,
@@ -3487,6 +3508,7 @@
 				4AC3204B2C11D5AC00DDB4B6 /* SpendingDetailSheetView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
 				B599E4BE2C58AF34006051E9 /* AnalyticsEvent.swift in Sources */,
+				4A8CA11F2D4217F80084839A /* CustomStompClient.swift in Sources */,
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
@@ -3525,6 +3547,7 @@
 				4A12FF092C9C4B4E00DE10BC /* ProfileFactory.swift in Sources */,
 				4A513BE82BEFCF5700D35964 /* LinkAccountToOAuthViewModel.swift in Sources */,
 				4AD70E272BE015500058A52A /* ProfileOAuthButtonView.swift in Sources */,
+				4A8CA1272D4218900084839A /* DefaultStompInterceptor.swift in Sources */,
 				D851E7232C02743C00316DB3 /* BackofficeAlamofire.swift in Sources */,
 				4AC320412C11D5AC00DDB4B6 /* SpendingCategoryListView.swift in Sources */,
 				4AA52F3F2C05C3AD00B21521 /* RoundedCornerUtil.swift in Sources */,
@@ -3568,6 +3591,7 @@
 				4ADD846C2D3927F6003F5894 /* EditChatRoomRepository.swift in Sources */,
 				4AC3203F2C11D5AC00DDB4B6 /* AddSpendingCategoryView.swift in Sources */,
 				4A0BC6AD2BF5FA130036D900 /* NumberFormatterUtil.swift in Sources */,
+				4A8CA1232D42183D0084839A /* SocketAuthHandler.swift in Sources */,
 				4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */,
 				4A45A19E2CCBF9A300D47F10 /* (null) in Sources */,
 				D8B0A92A2C4EB8E500716ECB /* ResetMyPwRequestDto.swift in Sources */,
