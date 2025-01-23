@@ -2,9 +2,10 @@
 //  ChatRoomView.swift
 //  pennyway-client-iOS
 //
-//  Created by 최희진 on 10/8/24.
+//  Created by 최희진, 아우신얀 on 10/8/24.
 //
 
+import Combine
 import SwiftUI
 
 // MARK: - ChatRoomView
@@ -16,6 +17,7 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @State private var isNavigateToMyChat = false
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
+    @Environment(\.presentationMode) var presentationMode
 
     var chatRoom: ChatRoomProtocol
     private let currentUserId = getUserData()!.id
@@ -117,6 +119,8 @@ final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var messageData: [MessageItemModel] = []
     @Published var chatUserData: [ChatMemberItemModel] = []
     @Published var previousMessageData: PreviousMessage? = nil
+    @Published var isDeleteSuccess: Bool = false
+    @Published var showErrorPopUp: Bool = false
     @Published var editRoomData: EditChatRoomItemModel? = nil
 
     var chatRoomViewModel: any ChatRoomViewModel
@@ -152,6 +156,14 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         chatRoomViewModel.previousMessageData.observe(on: self) { [weak self] newData in
             self?.previousMessageData = newData
+        }
+
+        chatRoomViewModel.isDeleteSuccessful.observe(on: self) { [weak self] newData in
+            self?.isDeleteSuccess = newData
+        }
+
+        chatRoomViewModel.isErrorPopupShow.observe(on: self) { [weak self] newData in
+            self?.showErrorPopUp = newData
         }
 
         editChatRoomViewModel.editRoomData.observe(on: self) { [weak self] newData in
