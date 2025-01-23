@@ -71,27 +71,20 @@ struct ChatCellView: View {
                         firstBtnAction: { self.isPopUp = false },
                         firstBtnLabel: "취소",
                         secondBtnAction: {
-                            Log.debug("버튼누름")
-                            // if let chatRoomId = chatRoomViewModelWrapper.roomData?.id {
-                            chatRoomViewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoom.id) { success in
-                                Log.debug("클로저 실행전")
-                                if success {
-                                    Log.debug("[ChatCellView]: 채팅방 나가기 성공")
-//                                        self.isPopUp = false
-//                                        self.showCheckMarkAnimation()
-                                } else {
-                                    Log.debug("[ChatCellView]: 채팅방 나가기 실패")
-                                }
-                            }
-                            // }
-//                            deleteChatRoom()
-//                            Log.debug("selectedChatRoom: \(chatRoom)")
-                                
+                            isPopUp = false
+                            deleteChatRoom()
                         },
                         secondBtnLabel: "나가기",
                         secondBtnColor: Color("Red03"))
                 }
-                    
+                
+                if chatRoomViewModelWrapper.showErrorPopUp {
+//                                        ZStack {
+                    ErrorCodePopUpView(showingPopUp: $chatRoomViewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
+//                            .edgesIgnoringSafeArea(.vertical)
+                    // }
+                }
+                
                 if isErrorPopUp {
                     ErrorCodePopUpView(showingPopUp: $isErrorPopUp, titleLabel: "두 글자 이상 입력해주세요", subLabel: "검색은 두 글자부터 가능해요")
                 }
@@ -130,7 +123,11 @@ struct ChatCellView: View {
             }
             .onAppear {
                 // 뷰에 진입하자마자 내채팅 조회 api 호출
-                viewModelWrapper.getChatRoomViewModel.getChatRoom()
+                viewModelWrapper.getChatRoomViewModel.getChatRoom { success in
+                    if success {
+                        Log.debug("[ChatCellView] onAppear: 내채팅 조회 api 호출")
+                    }
+                }
                 viewStateManager.setCurrentView(self, selectedTab: selectedTab)
                 viewModelWrapper.getChatRoomViewModel.subscribeToNotifications()
                 
@@ -150,32 +147,29 @@ struct ChatCellView: View {
         }
     }
     
+    private func deleteChatRoom() {
+        chatRoomViewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: selectedChatRoom?.id ?? 0) { success in
+            if success {
+                Log.debug("[ChatCellView]: 채팅방 나가기 성공")
+            } else {
+                Log.debug("[ChatCellView]: 채팅방 나가기 실패")
+            }
+        }
+    }
+    
     private func showCheckMarkAnimation() {
         withAnimation {
             isCheckMarkVisible = true
         }
         
+        viewModelWrapper.getChatRoomViewModel.getChatRoom { success in
+            if success {
+                isCheckMarkVisible = false
+            }
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             isCheckMarkVisible = false
         }
-    }
-    
-    /// 채팅방 삭제 함수
-    private func deleteChatRoom() {
-        Log.debug("[ChatCellView]: \(selectedChatRoom?.id)")
-        
-        // if let chatRoomId = selectedChatRoom?.id {
-        chatRoomViewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: selectedChatRoom?.id ?? 0) { success in
-            Log.debug("????")
-            if success {
-                Log.debug("[ChatCellView]: 채팅방 나가기 성공")
-                self.isPopUp = false
-                self.showCheckMarkAnimation()
-            } else {
-                Log.debug("[ChatCellView]: 채팅방 나가기 실패")
-            }
-        }
-        // }
     }
     
     private var searchChatContainer: some View {

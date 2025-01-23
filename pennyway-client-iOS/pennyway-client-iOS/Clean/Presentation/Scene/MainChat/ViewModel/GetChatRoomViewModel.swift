@@ -11,7 +11,7 @@ import UIKit
 // MARK: - GetChatRoomViewModelInput
 
 protocol GetChatRoomViewModelInput {
-    func getChatRoom()
+    func getChatRoom(completion: @escaping (Bool) -> Void)
     func searchChatRoom(target: String)
     func initSearch()
     func subscribeToNotifications()
@@ -81,7 +81,7 @@ class DefaultGetChatRoomViewModel: GetChatRoomViewModel {
     }
 
     /// 내 채팅방 조회 요청
-    func getChatRoom() {
+    func getChatRoom(completion _: @escaping (Bool) -> Void) {
         getChatRoomUseCase.getChatRoom { [weak self] success, chatRooms in
             DispatchQueue.main.async {
                 if success {
