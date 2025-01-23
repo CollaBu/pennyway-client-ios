@@ -2,7 +2,7 @@
 //  ChatRoomViewModel.swift
 //  pennyway-client-iOS
 //
-//  Created by 최희진 on 11/5/24.
+//  Created by 최희진, 아우신얀 on 11/5/24.
 //
 
 import Combine
@@ -16,6 +16,7 @@ protocol ChatRoomViewModelInput {
     func getChatRoomDetail(chatRoomId: Int64)
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -26,6 +27,8 @@ protocol ChatRoomViewModelOutput {
     var messageData: Observable<[MessageItemModel]> { get set }
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
     var previousMessageData: Observable<PreviousMessage?> { get set }
+    var isDeleteSuccessful: Observable<Bool> { get set }
+    var isErrorPopupShow: Observable<Bool> { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -35,21 +38,26 @@ protocol ChatRoomViewModel: ChatRoomViewModelInput, ChatRoomViewModelOutput {}
 // MARK: - DefaultChatRoomViewModel
 
 class DefaultChatRoomViewModel: ChatRoomViewModel {
+    @Published var chatRoomId: Int64 = 0
+    @Published var chatMemberId: Int64 = 0
+    @Published var isDeleteSuccessful = Observable<Bool>(false)
+    @Published var isErrorPopupShow = Observable<Bool>(false)
+
     var roomData: Observable<ChatRoomProtocol?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
     var messageData: Observable<[MessageItemModel]> = Observable([]) // 메시지 목록
     var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 모든 채팅방 사용자
     var previousMessageData: Observable<PreviousMessage?> = Observable(nil) // 이전 채팅 목록 및 무한 스크롤 데이터
 
-    private let chatRoomUseCase: ChatRoomUseCase
+    private let getChatUseCase: GetChatUseCase
     private let sendChatUseCase: SendChatUseCase
     private let chatHistoryList: ChatHistoryList
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: ChatRoomUseCase, sendChatUseCase: SendChatUseCase) {
+    init(chatHistoryList: ChatHistoryList = ChatHistoryBinaryList(), chatRoomUseCase: GetChatUseCase, sendChatUseCase: SendChatUseCase) {
+        getChatUseCase = chatRoomUseCase
         self.chatHistoryList = chatHistoryList
-        self.chatRoomUseCase = chatRoomUseCase
         self.sendChatUseCase = sendChatUseCase
         self.chatHistoryList.delegate = self
     }
@@ -78,7 +86,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 
     /// 채팅방 상세 정보 조회
     func getChatRoomDetail(chatRoomId: Int64) {
-        chatRoomUseCase.getChatRoomDetail(chatRoomId: chatRoomId) { [weak self] result in
+        getChatUseCase.getChatRoomDetail(chatRoomId: chatRoomId) { [weak self] result in
             switch result {
             case let .success(chatRoomDetail):
                 self?.roomDetailData.value = ChatRoomDetailItemModel.from(model: chatRoomDetail)
@@ -116,7 +124,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     /// 채팅방 이전 채팅 내역 조회
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void) {
         if let message = messageData.value.last {
-            chatRoomUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
+            getChatUseCase.getPreviousChat(chatRoomId: message.chatRoomId, lastMessageId: message.chatId) { [weak self] result in
                 switch result {
                 case let .success(previousMessage):
                     let messages = PreviousMessage.to(model: previousMessage)
@@ -150,6 +158,31 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
             }
         }
     }
+
+    /// 채팅방 나가기
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void) {
+        getChatUseCase.deleteChatRoom(chatRoomId: chatRoomId) { [weak self] result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.isDeleteSuccessful.value = true
+                    Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
+                }
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
+
+                if let deleteChatRoomError = error as? DeleteChatRoomError {
+                    switch deleteChatRoomError {
+                    case .admin:
+                        self?.isErrorPopupShow.value = true
+                        completion(false)
+                    case .other:
+                        completion(false)
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: Private Methods
@@ -157,7 +190,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
 extension DefaultChatRoomViewModel {
     /// 채팅방 멤버 조회
     private func getChatMembers(chatRoomId: Int64, ids: [Int64]) {
-        chatRoomUseCase.getChatMembers(chatRoomId: chatRoomId, ids: ids) { [weak self] result in
+        getChatUseCase.getChatMembers(chatRoomId: chatRoomId, ids: ids) { [weak self] result in
             switch result {
             case let .success(members):
 

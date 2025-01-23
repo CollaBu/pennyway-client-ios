@@ -14,6 +14,8 @@ struct ChatCellView: View {
     @State private var isNavigateChatRoomDetailView = false // 채팅방 참여뷰로 이동하기 위한 변수
     @EnvironmentObject var viewStateManager: ViewStateManager
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
+    @EnvironmentObject var chatRoomViewModelWrapper: ChatRoomViewModelWrapper
+
     private let maxLength = 19
     
     var body: some View {
@@ -21,7 +23,7 @@ struct ChatCellView: View {
             ZStack {
                 VStack {
                     Spacer().frame(height: 38 * DynamicSizeFactor.factor())
-                    
+                        
                     HStack(spacing: 30) {
                         Button(action: {
                             selectedTab = 1
@@ -34,9 +36,9 @@ struct ChatCellView: View {
                             RecommendChatContainer
                         })
                     }
-                    
+                        
                     Spacer().frame(height: 28 * DynamicSizeFactor.factor())
-                    
+                        
                     // 내 채팅에서 채팅방의 존재 유무에 따라 다른 뷰를 보여주도록 함
                     if selectedTab == 1 {
                         if viewModelWrapper.chatData.isEmpty {
@@ -52,7 +54,7 @@ struct ChatCellView: View {
                         ChatRoomContent(isNavigateChatRoomDetailView: $isNavigateChatRoomDetailView, isPopUp: $isPopUp, selectedChatRoom: $selectedChatRoom, selectedSearchChatRoom: $selectedSearchChatRoom, dummyChatRooms: .constant(nil), searchChatRooms: viewModelWrapper.searchChatData, isMyChat: false, target: chatRoomName, viewModelWrapper: viewModelWrapper)
                     }
                 }
-
+                    
                 if isCheckMarkVisible {
                     Image("icon_illust_completion")
                         .resizable()
@@ -69,21 +71,24 @@ struct ChatCellView: View {
                         firstBtnAction: { self.isPopUp = false },
                         firstBtnLabel: "취소",
                         secondBtnAction: {
-                            self.isPopUp = false // 팝업 닫기
-                            showCheckMarkAnimation(chatRoom)
-                            
+                            isPopUp = false
+                            deleteChatRoom()
                         },
                         secondBtnLabel: "나가기",
                         secondBtnColor: Color("Red03"))
                 }
                 
+                if chatRoomViewModelWrapper.showErrorPopUp {
+                    ErrorCodePopUpView(showingPopUp: $chatRoomViewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
+                }
+                
                 if isErrorPopUp {
                     ErrorCodePopUpView(showingPopUp: $isErrorPopUp, titleLabel: "두 글자 이상 입력해주세요", subLabel: "검색은 두 글자부터 가능해요")
                 }
-                
+                    
                 NavigationLink(destination: MakeChatRoomView(chatViewModelWrapper: viewModelWrapper), isActive: $isNavigateToMakeChatRoom) {}
                     .hidden()
-                
+                    
                 NavigationLink(destination: ChatRoomDetailView(chatRoom: selectedSearchChatRoom, viewModelWrapper: viewModelWrapper), isActive: $isNavigateChatRoomDetailView) {}
                     .hidden()
             }
@@ -115,7 +120,11 @@ struct ChatCellView: View {
             }
             .onAppear {
                 // 뷰에 진입하자마자 내채팅 조회 api 호출
-                viewModelWrapper.getChatRoomViewModel.getChatRoom()
+                viewModelWrapper.getChatRoomViewModel.getChatRoom { success in
+                    if success {
+                        Log.debug("[ChatCellView] onAppear: 내채팅 조회 api 호출")
+                    }
+                }
                 viewStateManager.setCurrentView(self, selectedTab: selectedTab)
                 viewModelWrapper.getChatRoomViewModel.subscribeToNotifications()
                 
@@ -128,23 +137,36 @@ struct ChatCellView: View {
             .onChange(of: selectedTab) { newSelected in
                 viewStateManager.setCurrentView(self, selectedTab: newSelected)
             }
+            .onChange(of: chatRoomViewModelWrapper.isDeleteSuccess) { _ in
+                isPopUp = false
+                showCheckMarkAnimation()
+            }
         }
     }
     
-    private func showCheckMarkAnimation(_ chatRoom: ChatRoomItemModel) {
+    private func deleteChatRoom() {
+        chatRoomViewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: selectedChatRoom?.id ?? 0) { success in
+            if success {
+                Log.debug("[ChatCellView]: 채팅방 나가기 성공")
+            } else {
+                Log.debug("[ChatCellView]: 채팅방 나가기 실패")
+            }
+        }
+    }
+    
+    private func showCheckMarkAnimation() {
         withAnimation {
             isCheckMarkVisible = true
         }
-        
+        // TODO: gesture 관련 수정해야 할 코드
+        viewModelWrapper.getChatRoomViewModel.getChatRoom { success in
+            if success {
+                isCheckMarkVisible = false
+            }
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            deleteChatRoom(chatRoom)
             isCheckMarkVisible = false
         }
-    }
-    
-    /// 채팅방 삭제 함수
-    private func deleteChatRoom(_ chatRoom: ChatRoomItemModel) {
-        viewModelWrapper.getChatRoomViewModel.roomData.value.removeAll { $0.id == chatRoom.id }
     }
     
     private var searchChatContainer: some View {
@@ -247,6 +269,7 @@ final class ChatViewModelWrapper: ObservableObject {
     @Published var chatData: [ChatRoomItemModel] = []
     @Published var searchChatData: [SearchChatRoomItemModel] = []
     @Published var searchQuery: String = "" // 검색어 추가
+    @Published var isPopUp: Bool = false
     
     var makeChatViewModel: any MakeChatRoomViewModel
     var getChatRoomViewModel: any GetChatRoomViewModel
@@ -276,6 +299,10 @@ final class ChatViewModelWrapper: ObservableObject {
         
         getChatRoomViewModel.searchRoomData.observe(on: self) { [weak self] newData in
             self?.searchChatData = newData
+        }
+        
+        chatRoomViewModel.isDeleteSuccessful.observe(on: self) { [weak self] newData in
+            self?.isPopUp = newData
         }
     }
     

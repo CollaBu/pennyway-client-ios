@@ -103,7 +103,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     /// 푸시메세지를 받았을 떄
     func userNotificationCenter(_: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void)
+                                withCompletionHandler _: @escaping () -> Void)
     {
         let userInfo = response.notification.request.content.userInfo
 
@@ -111,6 +111,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Log.debug("Message ID: \(messageID)")
         }
 
+<<<<<<< HEAD
 //        if let deepLink = userInfo["deepLink"] {
 //            handleDeepLink(url: deepLink as! URL)
 //            Log.debug("deepLink: \(deepLink)")
@@ -126,6 +127,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Log.debug("userInfo:\(userInfo)")
 
         completionHandler()
+=======
+        Log.debug("userInfo:\(userInfo)")
+>>>>>>> 7211b4dfe1dc6eb7f41247387a1990df12ab93d2
     }
 
     /// 딥링크 처리 로직 호출

@@ -2,7 +2,7 @@
 //  ChatRoomRouter.swift
 //  pennyway-client-iOS
 //
-//  Created by 최희진 on 11/5/24.
+//  Created by 최희진, 신얀 on 11/5/24.
 //
 
 import Alamofire
@@ -12,11 +12,15 @@ enum ChatRoomRouter: URLRequestConvertible {
     case getChatRoomDetail(chatRoomId: Int64)
     case getPreviousChat(chatRoomId: Int64, dto: GetPreviousChatRequestDto)
     case getChatMembers(chatRoomId: Int64, dto: GetChatMembersRequestDto)
+    case deleteChatRoom(chatRoomId: Int64)
+    case banChatMember(chatRoomId: Int64, chatMemberId: Int64)
 
     var method: HTTPMethod {
         switch self {
         case .getChatRoomDetail, .getPreviousChat, .getChatMembers:
             return .get
+        case .banChatMember, .deleteChatRoom:
+            return .delete
         }
     }
 
@@ -30,21 +34,23 @@ enum ChatRoomRouter: URLRequestConvertible {
             return "v2/chat-rooms/\(chatRoomId)"
         case let .getPreviousChat(chatRoomId, _):
             return "v2/chat-rooms/\(chatRoomId)/chats"
-        case let .getChatMembers(chatRoomId, _):
+        case let .getChatMembers(chatRoomId, _), let .deleteChatRoom(chatRoomId):
             return "v2/chat-rooms/\(chatRoomId)/chat-members"
+        case let .banChatMember(chatRoomId, chatMemberId):
+            return "v2/chat-rooms/\(chatRoomId)/chat-members/\(chatMemberId)/ban"
         }
     }
 
     var bodyParameters: Parameters? {
         switch self {
-        case .getChatRoomDetail, .getPreviousChat, .getChatMembers:
+        case .getChatRoomDetail, .getPreviousChat, .getChatMembers, .banChatMember, .deleteChatRoom:
             return [:]
         }
     }
 
     var queryParameters: Parameters? {
         switch self {
-        case .getChatRoomDetail:
+        case .getChatRoomDetail, .banChatMember, .deleteChatRoom:
             return [:]
         case let .getPreviousChat(_, dto):
             return try? dto.asDictionary()
@@ -63,7 +69,7 @@ enum ChatRoomRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .getChatRoomDetail:
+        case .getChatRoomDetail, .banChatMember, .deleteChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method)
         case .getPreviousChat:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }

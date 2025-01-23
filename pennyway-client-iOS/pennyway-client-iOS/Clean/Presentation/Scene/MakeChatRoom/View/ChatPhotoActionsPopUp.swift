@@ -11,8 +11,6 @@ struct ChatPhotoActionsPopUp: View {
     @Binding var selectedUIImage: UIImage?
     @Binding var sourceType: UIImagePickerController.SourceType
 
-    @ObservedObject var viewModelWrapper: ChatViewModelWrapper
-
     let options = ["앨범에서 사진 선택", "사진 촬영", "삭제"]
 
     var body: some View {

@@ -1,5 +1,5 @@
 //
-//  DefaultChatRoomRepository.swift
+//  DefaultGetChatRepository.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 11/5/24.
@@ -7,7 +7,16 @@
 
 import Foundation
 
-class DefaultChatRoomRepository: ChatRoomRepository {
+// MARK: - DeleteChatRoomError
+
+enum DeleteChatRoomError: Error {
+    case admin // 채팅방장은 채팅방을 나갈 수 없다는 4090애러
+    case other(Error)
+}
+
+// MARK: - DefaultGetChatRepository
+
+class DefaultGetChatRepository: GetChatRepository {
     /// 채팅 상세 정보 조회
     func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void) {
         ChatRoomAlamofire.shared.getChatRoomDetail(chatRoomId) { result in
@@ -92,6 +101,26 @@ class DefaultChatRoomRepository: ChatRoomRepository {
                     Log.error("Network request failed: \(error)")
                 }
                 completion(.failure(error))
+            }
+        }
+    }
+
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
+        ChatRoomAlamofire.shared.deleteChatRoom(chatRoomId) { result in
+            switch result {
+            case .success:
+                Log.debug("[DefaultChatRoomRepository]: 채팅방 나가기 성공")
+                completion(.success(()))
+
+            case let .failure(error):
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .conflict,
+                   statusSpecificError.code == ConflictErrorCode.requestConflictWithResourceState.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.admin))
+                } else {
+                    completion(.failure(DeleteChatRoomError.other(error)))
+                }
             }
         }
     }

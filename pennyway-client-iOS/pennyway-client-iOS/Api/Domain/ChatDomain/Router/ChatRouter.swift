@@ -15,6 +15,7 @@ enum ChatRouter: URLRequestConvertible {
     case searchChatRoom(dto: SearchChatRoomRequestDto)
     case getChatRoom
     case joinChatRoom(chatRoomId: Int64, dto: JoinChatRoomRequestDto)
+    case editChatRoom(chatRoomId: Int64, dto: EditChatRoomRequestDto)
 
     var method: HTTPMethod {
         switch self {
@@ -22,6 +23,8 @@ enum ChatRouter: URLRequestConvertible {
             return .get
         case .makeChatRoom, .joinChatRoom:
             return .post
+        case .editChatRoom:
+            return .put
         }
     }
 
@@ -41,6 +44,8 @@ enum ChatRouter: URLRequestConvertible {
             return "v2/chat-rooms/me"
         case let .joinChatRoom(chatRoomId, _):
             return "v2/chat-rooms/\(chatRoomId)/chat-members"
+        case let .editChatRoom(chatRoomId, _):
+            return "v2/chat-rooms/\(chatRoomId)"
         }
     }
 
@@ -49,6 +54,8 @@ enum ChatRouter: URLRequestConvertible {
         case let .makeChatRoom(dto):
             return try? dto.asDictionary()
         case let .joinChatRoom(_, dto):
+            return try? dto.asDictionary()
+        case let .editChatRoom(_, dto):
             return try? dto.asDictionary()
         case .getChatServer, .getChatRoom, .searchChatRoom, .getJoinedChatRooms:
             return [:]
@@ -59,12 +66,10 @@ enum ChatRouter: URLRequestConvertible {
         switch self {
         case let .getJoinedChatRooms(dto):
             return try? dto.asDictionary()
-
-        case .getChatServer, .makeChatRoom, .getChatRoom, .joinChatRoom:
-            return [:]
-
         case let .searchChatRoom(dto):
             return try? dto.asDictionary()
+        case .getChatServer, .makeChatRoom, .getChatRoom, .joinChatRoom, .editChatRoom:
+            return [:]
         }
     }
 
@@ -73,7 +78,7 @@ enum ChatRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .makeChatRoom, .joinChatRoom:
+        case .makeChatRoom, .joinChatRoom, .editChatRoom:
             request = URLRequest.createURLRequest(url: url, method: method, bodyParameters: bodyParameters)
         case .searchChatRoom:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }

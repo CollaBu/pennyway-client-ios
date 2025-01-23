@@ -2,7 +2,7 @@
 //  ChatSideMenuView.swift
 //  pennyway-client-iOS
 //
-//  Created by 최희진 on 10/10/24.
+//  Created by 최희진, 아우신얀 on 10/10/24.
 //
 
 import SwiftUI
@@ -10,12 +10,13 @@ import SwiftUI
 // MARK: - ChatSideMenuView
 
 struct ChatSideMenuView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @State private var isAlarmOn: Bool = false
     @State private var showExitPopUp: Bool = false
     @State private var showChatUserView: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
-    @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
-
+    
     var body: some View {
         ZStack {
             HStack(spacing: 0) {
@@ -28,6 +29,14 @@ struct ChatSideMenuView: View {
                 .transition(.move(edge: .trailing))
             }
             
+            if viewModelWrapper.showErrorPopUp {
+                ZStack {
+                    ErrorCodePopUpView(showingPopUp: $viewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
+                        .edgesIgnoringSafeArea(.vertical)
+                }
+                .edgesIgnoringSafeArea(.vertical)
+            }
+            
             if showExitPopUp {
                 CustomPopUpView(showingPopUp: $showExitPopUp,
                                 titleLabel: "\(viewModelWrapper.roomData?.title ?? "")",
@@ -36,6 +45,16 @@ struct ChatSideMenuView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showExitPopUp = false
+                                    if let chatRoomId = viewModelWrapper.roomData?.id {
+                                        viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId) { success in
+                                        
+                                            if success {
+                                                Log.debug("[ChatSideMenuView]: 채팅방 나가기 성공")
+                                            } else {
+                                                Log.debug("[ChatSideMenuView]: 채팅방 나가기 실패")
+                                            }
+                                        }
+                                    }
                                 },
                                 secondBtnLabel: "나가기",
                                 secondBtnColor: Color("Red03")
@@ -44,12 +63,17 @@ struct ChatSideMenuView: View {
             }
         }
         .edgesIgnoringSafeArea(.bottom)
+        .onChange(of: viewModelWrapper.isDeleteSuccess) { success in
+            if success {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
         .onChange(of: selectedUser) { newValue in
             showChatUserView = newValue != nil
         }
         .fullScreenCover(isPresented: $showChatUserView) {
             if let user = selectedUser {
-                ChatUserInfoView(user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo) // 선택된 사용자 정보를 전달
+                ChatUserInfoView(viewModelWrapper: viewModelWrapper, user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo, chatRoom: viewModelWrapper.roomData!) // 선택된 사용자 정보를 전달
                     .ignoresSafeArea()
                     .onDisappear {
                         selectedUser = nil // 뷰가 닫힐 때 선택된 사용자 초기화
