@@ -16,7 +16,7 @@ struct ChatSideMenuView: View {
     @State private var showExitPopUp: Bool = false
     @State private var showChatUserView: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
-
+    
     var body: some View {
         ZStack {
             HStack(spacing: 0) {
@@ -73,7 +73,7 @@ struct ChatSideMenuView: View {
         }
         .fullScreenCover(isPresented: $showChatUserView) {
             if let user = selectedUser {
-                ChatUserInfoView(user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo) // 선택된 사용자 정보를 전달
+                ChatUserInfoView(viewModelWrapper: viewModelWrapper, user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo, chatRoom: viewModelWrapper.roomData!) // 선택된 사용자 정보를 전달
                     .ignoresSafeArea()
                     .onDisappear {
                         selectedUser = nil // 뷰가 닫힐 때 선택된 사용자 초기화

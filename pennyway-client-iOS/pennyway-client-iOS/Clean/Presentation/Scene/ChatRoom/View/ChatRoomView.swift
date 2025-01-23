@@ -79,7 +79,9 @@ struct ChatRoomView: View {
                 }
             }
             .onAppear {
-                viewModelWrapper.chatRoomViewModel.roomData.value = chatRoom // 현재 채팅방 정보 저장
+                // 현재 채팅방 정보 저장
+                viewModelWrapper.chatRoomViewModel.roomData.value = chatRoom
+                viewModelWrapper.editChatRoomViewModel.editRoomData.value = EditChatRoomItemModel(chatRoomId: chatRoom.id, title: chatRoom.title, description: "소비 그만하자", password: "", backgroundImageUrl: chatRoom.backgroundImageUrl) // TODO: password 받아오도록 수정해야함
                 viewStateManager.setCurrentView(self, chatRoomId: viewModelWrapper.roomData?.id)
 
                 // 채팅방 상세 정보 조회
@@ -119,11 +121,16 @@ final class ChatRoomViewModelWrapper: ObservableObject {
     @Published var previousMessageData: PreviousMessage? = nil
     @Published var isDeleteSuccess: Bool = false
     @Published var showErrorPopUp: Bool = false
+    @Published var editRoomData: EditChatRoomItemModel? = nil
 
     var chatRoomViewModel: any ChatRoomViewModel
+    var editChatRoomViewModel: any EditChatRoomViewModel
+    var chatUserInfoViewModel: any ChatUserInfoViewModel
 
-    init(chatRoomViewModel: any ChatRoomViewModel) {
+    init(chatRoomViewModel: any ChatRoomViewModel, editChatRoomViewModel: any EditChatRoomViewModel, chatUserInfoViewModel: any ChatUserInfoViewModel) {
         self.chatRoomViewModel = chatRoomViewModel
+        self.editChatRoomViewModel = editChatRoomViewModel
+        self.chatUserInfoViewModel = chatUserInfoViewModel
 
         roomData = chatRoomViewModel.roomData.value
         roomDetailData = chatRoomViewModel.roomDetailData.value
@@ -157,6 +164,10 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         chatRoomViewModel.isErrorPopupShow.observe(on: self) { [weak self] newData in
             self?.showErrorPopUp = newData
+        }
+
+        editChatRoomViewModel.editRoomData.observe(on: self) { [weak self] newData in
+            self?.editRoomData = newData
         }
     }
 }

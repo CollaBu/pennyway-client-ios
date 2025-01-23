@@ -14,6 +14,7 @@ struct CustomInputView: View {
     var showDeleteButton: Bool = false // 삭제 버튼 표시 여부 (기본값: false)
     var deleteAction: (() -> Void)? // 삭제 버튼 클릭 시 실행할 함수 (옵션)
     var keyboardType: UIKeyboardType = .default // 키보드 타입 (기본값: .default)
+    var placeholderColor: Color = Color("Gray03")
 
     let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray07"))
     let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
@@ -43,7 +44,7 @@ struct CustomInputView: View {
                         .frame(height: 46 * DynamicSizeFactor.factor())
                     if inputText.isEmpty {
                         Text(placeholder ?? "")
-                            .platformTextColor(color: Color("Gray03"))
+                            .platformTextColor(color: placeholderColor)
                             .padding(.leading, 13 * DynamicSizeFactor.factor())
                             .font(.H4MediumFont())
                     }

@@ -1,5 +1,5 @@
 //
-//  DefaultChatRoomRepository.swift
+//  DefaultGetChatRepository.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 11/5/24.
@@ -14,9 +14,9 @@ enum DeleteChatRoomError: Error {
     case other(Error)
 }
 
-// MARK: - DefaultChatRoomRepository
+// MARK: - DefaultGetChatRepository
 
-class DefaultChatRoomRepository: ChatRoomRepository {
+class DefaultGetChatRepository: GetChatRepository {
     /// 채팅 상세 정보 조회
     func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void) {
         ChatRoomAlamofire.shared.getChatRoomDetail(chatRoomId) { result in

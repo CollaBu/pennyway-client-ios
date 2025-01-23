@@ -158,12 +158,11 @@ struct ChatCellView: View {
         withAnimation {
             isCheckMarkVisible = true
         }
-        //TODO: gesture 관련 수정해야 할 코드
+        // TODO: gesture 관련 수정해야 할 코드
         viewModelWrapper.getChatRoomViewModel.getChatRoom { success in
             if success {
                 isCheckMarkVisible = false
             }
-            
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             isCheckMarkVisible = false

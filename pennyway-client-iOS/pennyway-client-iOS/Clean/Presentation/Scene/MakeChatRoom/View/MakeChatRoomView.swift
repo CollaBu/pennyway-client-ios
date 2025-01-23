@@ -118,8 +118,7 @@ struct MakeChatRoomView: View {
                                       isHiddenTabBar: .constant(true),
                                       showImagePicker: $showImagePicker,
                                       selectedUIImage: $selectedUIImage,
-                                      sourceType: $sourceType,
-                                      viewModelWrapper: chatViewModelWrapper)
+                                      sourceType: $sourceType)
                     .edgesIgnoringSafeArea(.bottom)
             }
         }
