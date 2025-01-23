@@ -105,8 +105,8 @@ class DefaultChatRoomRepository: ChatRoomRepository {
         }
     }
 
-    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
-        ChatRoomAlamofire.shared.deleteChatRoom(chatRoomId, chatMemberId) { result in
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
+        ChatRoomAlamofire.shared.deleteChatRoom(chatRoomId) { result in
             switch result {
             case .success:
                 Log.debug("[DefaultChatRoomRepository]: 채팅방 나가기 성공")

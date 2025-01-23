@@ -187,6 +187,7 @@ struct ChatRoomCell: View, ImageLoadable {
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
             .offset(x: offset)
+            .gesture(gesture)
 //            .simultaneousGesture(gesture)
 //            .highPriorityGesture(
 //                TapGesture()

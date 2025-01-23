@@ -41,9 +41,9 @@ class ChatRoomAlamofire {
     }
     
     /// 채팅방 나가기
-    func deleteChatRoom(_ chatRoomId: Int64, _ chatMemberId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
-        Log.info("ChatRoomAlamofire - deleteChatRoom() called \(chatRoomId),\(chatMemberId)")
+    func deleteChatRoom(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatRoomAlamofire - deleteChatRoom() called \(chatRoomId)")
         
-        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId), completion: completion)
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.deleteChatRoom(chatRoomId: chatRoomId), completion: completion)
     }
 }

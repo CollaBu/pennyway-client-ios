@@ -16,7 +16,7 @@ protocol ChatRoomViewModelInput {
     func getChatRoomDetail(chatRoomId: Int64)
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
-    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void)
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -28,7 +28,7 @@ protocol ChatRoomViewModelOutput {
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
     var previousMessageData: Observable<PreviousMessage?> { get set }
     var isDeleteSuccessful: Observable<Bool> { get set }
-    var isPopupShow: Observable<Bool> { get set }
+    var isErrorPopupShow: Observable<Bool> { get set }
 }
 
 // MARK: - ChatRoomViewModel
@@ -41,7 +41,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     @Published var chatRoomId: Int64 = 0
     @Published var chatMemberId: Int64 = 0
     @Published var isDeleteSuccessful = Observable<Bool>(false)
-    @Published var isPopupShow = Observable<Bool>(false)
+    @Published var isErrorPopupShow = Observable<Bool>(false)
 
     var roomData: Observable<ChatRoomProtocol?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
@@ -160,8 +160,8 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     }
 
     /// 채팅방 나가기
-    func deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void) {
-        chatRoomUseCase.deleteChatRoom(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { [weak self] result in
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void) {
+        chatRoomUseCase.deleteChatRoom(chatRoomId: chatRoomId) { [weak self] result in
             switch result {
             case .success:
                 DispatchQueue.main.async {
@@ -174,7 +174,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 if let deleteChatRoomError = error as? DeleteChatRoomError {
                     switch deleteChatRoomError {
                     case .admin:
-                        self?.isPopupShow.value = true
+                        self?.isErrorPopupShow.value = true
                         completion(false)
                     case .other:
                         completion(false)

@@ -155,7 +155,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
             self?.isDeleteSuccess = newData
         }
 
-        chatRoomViewModel.isPopupShow.observe(on: self) { [weak self] newData in
+        chatRoomViewModel.isErrorPopupShow.observe(on: self) { [weak self] newData in
             self?.showErrorPopUp = newData
         }
     }

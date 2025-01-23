@@ -12,7 +12,7 @@ enum ChatRoomRouter: URLRequestConvertible {
     case getChatRoomDetail(chatRoomId: Int64)
     case getPreviousChat(chatRoomId: Int64, dto: GetPreviousChatRequestDto)
     case getChatMembers(chatRoomId: Int64, dto: GetChatMembersRequestDto)
-    case deleteChatRoom(chatRoomId: Int64, chatMemberId: Int64)
+    case deleteChatRoom(chatRoomId: Int64)
 
     var method: HTTPMethod {
         switch self {
@@ -33,10 +33,11 @@ enum ChatRoomRouter: URLRequestConvertible {
             return "v2/chat-rooms/\(chatRoomId)"
         case let .getPreviousChat(chatRoomId, _):
             return "v2/chat-rooms/\(chatRoomId)/chats"
-        case let .getChatMembers(chatRoomId, _):
+        case let .getChatMembers(chatRoomId, _), let .deleteChatRoom(chatRoomId):
             return "v2/chat-rooms/\(chatRoomId)/chat-members"
-        case let .deleteChatRoom(chatRoomId, chatMemberId):
-            return "v2/chat-rooms/\(chatRoomId)/chat-members/\(chatMemberId)"
+            //        case let .deleteChatRoom(chatRoomId, chatMemberId):
+            //            return "v2/chat-rooms/\(chatRoomId)/chat-members/\(chatMemberId)"
+            //        }
         }
     }
 
