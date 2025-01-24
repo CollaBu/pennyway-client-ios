@@ -12,6 +12,7 @@ enum ChatRoomRouter: URLRequestConvertible {
     case getChatRoomDetail(chatRoomId: Int64)
     case getPreviousChat(chatRoomId: Int64, dto: GetPreviousChatRequestDto)
     case getChatMembers(chatRoomId: Int64, dto: GetChatMembersRequestDto)
+    case deleteChatRoom(chatRoomId: Int64)
     case banChatMember(chatRoomId: Int64, chatMemberId: Int64)
     case getChatAdminMode(chatRoomId: Int64)
 
@@ -19,7 +20,7 @@ enum ChatRoomRouter: URLRequestConvertible {
         switch self {
         case .getChatRoomDetail, .getPreviousChat, .getChatMembers, .getChatAdminMode:
             return .get
-        case .banChatMember:
+        case .banChatMember, .deleteChatRoom:
             return .delete
         }
     }
@@ -34,7 +35,7 @@ enum ChatRoomRouter: URLRequestConvertible {
             return "v2/chat-rooms/\(chatRoomId)"
         case let .getPreviousChat(chatRoomId, _):
             return "v2/chat-rooms/\(chatRoomId)/chats"
-        case let .getChatMembers(chatRoomId, _):
+        case let .getChatMembers(chatRoomId, _), let .deleteChatRoom(chatRoomId):
             return "v2/chat-rooms/\(chatRoomId)/chat-members"
         case let .banChatMember(chatRoomId, chatMemberId):
             return "v2/chat-rooms/\(chatRoomId)/chat-members/\(chatMemberId)/ban"
@@ -45,14 +46,14 @@ enum ChatRoomRouter: URLRequestConvertible {
 
     var bodyParameters: Parameters? {
         switch self {
-        case .getChatRoomDetail, .getPreviousChat, .getChatMembers, .banChatMember, .getChatAdminMode:
+        case .getChatRoomDetail, .getPreviousChat, .getChatMembers, .banChatMember, .deleteChatRoom, .getChatAdminMode:
             return [:]
         }
     }
 
     var queryParameters: Parameters? {
         switch self {
-        case .getChatRoomDetail, .banChatMember, .getChatAdminMode:
+        case .getChatRoomDetail, .banChatMember, .deleteChatRoom, .getChatAdminMode:
             return [:]
         case let .getPreviousChat(_, dto):
             return try? dto.asDictionary()
@@ -71,7 +72,7 @@ enum ChatRoomRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .getChatRoomDetail, .banChatMember, .getChatAdminMode:
+        case .getChatRoomDetail, .banChatMember, .deleteChatRoom, .getChatAdminMode:
             request = URLRequest.createURLRequest(url: url, method: method)
         case .getPreviousChat:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
