@@ -140,8 +140,8 @@ struct ChatRoomSettingView: View, ImageLoadable {
             showImagePopUp = false
 
             if let selectedUIImage {
-                self.selectedUIImage = selectedUIImage
                 viewModelWrapper.editChatRoomViewModel.uploadImage(image: selectedUIImage)
+                viewModelWrapper.editChatRoomViewModel.editRoomData.value.imageUpdate(image: selectedUIImage)
             }
 
         }) {
