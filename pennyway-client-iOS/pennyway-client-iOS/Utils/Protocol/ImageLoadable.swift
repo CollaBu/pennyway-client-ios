@@ -17,7 +17,7 @@ extension ImageLoadable {
     /// 이미지 URL에서 데이터를 다운로드하고 UIImage로 변환하는 함수
     func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: urlString) else {
-            print("Invalid URL")
+            Log.debug("Invalid URL")
             completion(nil)
             return
         }
@@ -28,7 +28,7 @@ extension ImageLoadable {
                     completion(downloadedImage)
                 }
             } else {
-                print("Failed to load image for chat room: \(error?.localizedDescription ?? "Unknown error")")
+                Log.fault("Failed to load image for chat room: \(error?.localizedDescription ?? "Unknown error")")
                 completion(nil)
             }
         }.resume()

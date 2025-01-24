@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChatRoomSettingView: View {
+struct ChatRoomSettingView: View, ImageLoadable {
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @StateObject private var keyboardHandler = KeyboardManager()
     @State private var isSecret: Bool = false // 채팅방 공개 상태를 관리하는 변수
@@ -37,26 +37,7 @@ struct ChatRoomSettingView: View {
                         // 상단 여백 및 아이콘 이미지
                         Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
-                        if let image = selectedUIImage {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
-                                .cornerRadius(12 * DynamicSizeFactor.factor())
-                        } else {
-                            Image("icon_illust_maintain_goal")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
-                                .cornerRadius(12 * DynamicSizeFactor.factor())
-                        }
-
-                        Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
-                        // 채팅방 커버 수정 버튼
-                        CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
-                            showImagePopUp = true
-                        }
+                        ChatRoomImageSection
 
                         Spacer().frame(height: 25 * DynamicSizeFactor.factor())
 
@@ -113,7 +94,7 @@ struct ChatRoomSettingView: View {
                             validateForm()
 
                             if isFormValid {
-                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, password: password)
+                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, password: password, selectedUIImage: selectedUIImage)
                                 viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
                                     if success {
                                         showCompleteToastPopup = true
@@ -136,6 +117,10 @@ struct ChatRoomSettingView: View {
                 description = viewModelWrapper.editRoomData?.description ?? ""
                 password = viewModelWrapper.editRoomData?.password ?? ""
                 isSecret = !password.isEmpty
+
+                loadImage(from: viewModelWrapper.editRoomData?.backgroundImageUrl ?? "") { image in
+                    self.selectedUIImage = image
+                }
             }
 
             if showImagePopUp {
@@ -162,6 +147,31 @@ struct ChatRoomSettingView: View {
         }) {
             ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                 .edgesIgnoringSafeArea(.bottom)
+        }
+    }
+
+    private var ChatRoomImageSection: some View {
+        VStack {
+            if let image = selectedUIImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
+                    .cornerRadius(12 * DynamicSizeFactor.factor())
+            } else {
+                Image("icon_illust_chat_no picture")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
+                    .cornerRadius(12 * DynamicSizeFactor.factor())
+            }
+
+            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+
+            // 채팅방 커버 수정 버튼
+            CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
+                showImagePopUp = true
+            }
         }
     }
 
@@ -294,8 +304,4 @@ struct ChatRoomSettingView: View {
             isPasswordValid = false
         }
     }
-}
-
-#Preview {
-    ChatRoomSettingView()
 }

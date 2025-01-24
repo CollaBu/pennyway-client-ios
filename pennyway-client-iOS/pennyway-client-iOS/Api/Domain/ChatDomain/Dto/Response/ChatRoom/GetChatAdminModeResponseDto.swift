@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetChatAdminModeResponseDto: Codable {
+struct GetChatAdminModeResponseDto: Codable, MakeFullImageURL {
     let code: String
     let data: GetChatRoom
 
@@ -23,12 +23,18 @@ struct GetChatAdminModeResponseDto: Codable {
         let password: Int32?
     }
 
-    static func to(dto: GetChatAdminModeResponseDto) -> AdminModeChatRoom {
+    static func to(dto: GetChatAdminModeResponseDto, cdnUrl: String) -> AdminModeChatRoom {
+        var completeBackgroundImageUrl: String? = nil
+
+        if let imageUrl = dto.data.chatRoom.backgroundImageUrl {
+            completeBackgroundImageUrl = createFullURL(with: cdnUrl, pathComponent: imageUrl)
+        }
+
         return AdminModeChatRoom(
             id: dto.data.chatRoom.id,
             title: dto.data.chatRoom.title,
             description: dto.data.chatRoom.description,
-            backgroundImageUrl: dto.data.chatRoom.backgroundImageUrl,
+            backgroundImageUrl: completeBackgroundImageUrl,
             password: dto.data.chatRoom.password)
     }
 }

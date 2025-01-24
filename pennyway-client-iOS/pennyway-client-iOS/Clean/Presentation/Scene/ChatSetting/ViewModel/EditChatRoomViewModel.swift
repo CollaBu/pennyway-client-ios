@@ -24,7 +24,7 @@ protocol EditChatRoomViewModelInput {
     func uploadImage(image: UIImage)
     func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoomItemModel, Error>) -> Void)
     func editChatRoom(completion: @escaping (Bool) -> Void)
-    func updateEditRoomData(title: String, password: String)
+    func updateEditRoomData(title: String, password: String, selectedUIImage: UIImage?)
 }
 
 // MARK: - EditChatRoomViewModelOutput
@@ -57,9 +57,12 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
         ))
     }
 
-    func updateEditRoomData(title: String, password: String) {
+    func updateEditRoomData(title: String, password: String, selectedUIImage: UIImage?) {
         if !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             editRoomData.value.title = title
+        }
+        if selectedUIImage == nil {
+            editRoomData.value.backgroundImageUrlUpdate(backgroundImageUrl: nil)
         }
         editRoomData.value.password = password
     }

@@ -22,11 +22,11 @@ struct AdminModeChatRoomItemModel: Equatable {
         image = nil
     }
 
-    mutating func imageUpdate(image: UIImage) {
+    mutating func imageUpdate(image: UIImage?) {
         self.image = image
     }
 
-    mutating func backgroundImageUrlUpdate(backgroundImageUrl: String) {
+    mutating func backgroundImageUrlUpdate(backgroundImageUrl: String?) {
         self.backgroundImageUrl = backgroundImageUrl
     }
 }
