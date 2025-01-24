@@ -11,8 +11,9 @@ import UIKit
 // MARK: - EditChatRoomUseCase
 
 protocol EditChatRoomUseCase {
-    func uploadImage(roomData: EditChatRoomItemModel, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
-    func editChatRoom(roomData: EditChatRoomItemModel, completion: @escaping (Bool) -> Void)
+    func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void)
+    func uploadImage(roomData: AdminModeChatRoomItemModel, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
+    func editChatRoom(roomData: AdminModeChatRoomItemModel, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - DefaultEditChatRoomUseCase
@@ -26,7 +27,11 @@ class DefaultEditChatRoomUseCase: EditChatRoomUseCase {
         self.urlRepository = urlRepository
     }
 
-    func editChatRoom(roomData: EditChatRoomItemModel, completion: @escaping (Bool) -> Void) {
+    func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void) {
+        repository.getChatAdminMode(chatRoomId: chatRoomId, completion: completion)
+    }
+
+    func editChatRoom(roomData: AdminModeChatRoomItemModel, completion: @escaping (Bool) -> Void) {
         repository.editChatRoom(roomData: roomData) { result in
             switch result {
             case let .success(response):
@@ -40,7 +45,7 @@ class DefaultEditChatRoomUseCase: EditChatRoomUseCase {
     }
 
     /// Presigned URL을 생성하고 이미지를 업로드한 후 채팅방 수정을 확정하는 함수
-    func uploadImage(roomData _: EditChatRoomItemModel, image: UIImage, completion: @escaping
+    func uploadImage(roomData _: AdminModeChatRoomItemModel, image: UIImage, completion: @escaping
         (Result<String, Error>) -> Void)
     {
         // 1. Presigned URL 생성 및 이미지 업로드

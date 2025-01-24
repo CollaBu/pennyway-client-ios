@@ -75,7 +75,7 @@ struct SecretRoomView: View {
                 .padding(.bottom, 34 * DynamicSizeFactor.factor())
 
             NavigationLink(
-                destination: ChatRoomView(chatViewModelWrapper: viewModelWrapper, chatRoom: chatRoom!),
+                destination: ChatRoomView(chatViewModelWrapper: viewModelWrapper, chatRoomId: chatRoomId),
                 isActive: $isNavigateToChatRoom
             ) {}
                 .hidden()

@@ -125,7 +125,7 @@ struct ChatBottomBar: View {
             if !message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Button(action: {
                     UIApplication.shouldDismissKeyboard = false
-                    viewModelWrapper.chatRoomViewModel.sendMessage(message: message, chatRoomId: viewModelWrapper.roomData?.id ?? 0, contentType: ContentType.text.rawValue)
+                    viewModelWrapper.chatRoomViewModel.sendMessage(message: message, chatRoomId: viewModelWrapper.roomData?.chatRoomId ?? 0, contentType: ContentType.text.rawValue)
                     message = ""
                 }) {
                     Image("icon_send_filled_primary")

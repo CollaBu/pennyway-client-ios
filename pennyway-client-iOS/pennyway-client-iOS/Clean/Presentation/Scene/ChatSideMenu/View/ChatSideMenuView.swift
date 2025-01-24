@@ -45,7 +45,7 @@ struct ChatSideMenuView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showExitPopUp = false
-                                    if let chatRoomId = viewModelWrapper.roomData?.id {
+                                    if let chatRoomId = viewModelWrapper.roomData?.chatRoomId {
                                         viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId) { success in
                                         
                                             if success {
@@ -73,7 +73,7 @@ struct ChatSideMenuView: View {
         }
         .fullScreenCover(isPresented: $showChatUserView) {
             if let user = selectedUser {
-                ChatUserInfoView(viewModelWrapper: viewModelWrapper, user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo, chatRoom: viewModelWrapper.roomData!) // 선택된 사용자 정보를 전달
+                ChatUserInfoView(viewModelWrapper: viewModelWrapper, user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo, chatRoom: viewModelWrapper.roomData) // 선택된 사용자 정보를 전달
                     .ignoresSafeArea()
                     .onDisappear {
                         selectedUser = nil // 뷰가 닫힐 때 선택된 사용자 초기화
