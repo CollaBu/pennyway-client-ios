@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChatRoomSettingView: View {
+struct ChatRoomSettingView: View, ImageLoadable {
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @StateObject private var keyboardHandler = KeyboardManager()
     @State private var isSecret: Bool = false // 채팅방 공개 상태를 관리하는 변수
@@ -20,8 +20,8 @@ struct ChatRoomSettingView: View {
 
     // title ui 관련
     private var chatRoomTitle = "채팅방 이름*"
-    let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color("Gray04"))
-    let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color("Mint03"))
+    let baseAttribute: BaseAttribute = .init(font: .B1MediumFont(), color: Color(.gray04))
+    let stringAttribute: StringAttribute = .init(text: "*", font: .B1MediumFont(), color: Color(.mint03))
 
     // 이미지 관련
     @State private var showImagePopUp: Bool = false
@@ -37,26 +37,7 @@ struct ChatRoomSettingView: View {
                         // 상단 여백 및 아이콘 이미지
                         Spacer().frame(height: 20 * DynamicSizeFactor.factor())
 
-                        if let image = selectedUIImage {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
-                                .cornerRadius(12 * DynamicSizeFactor.factor())
-                        } else {
-                            Image("icon_illust_maintain_goal")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
-                                .cornerRadius(12 * DynamicSizeFactor.factor())
-                        }
-
-                        Spacer().frame(height: 16 * DynamicSizeFactor.factor())
-
-                        // 채팅방 커버 수정 버튼
-                        CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
-                            showImagePopUp = true
-                        }
+                        ChatRoomImageSection
 
                         Spacer().frame(height: 25 * DynamicSizeFactor.factor())
 
@@ -72,14 +53,29 @@ struct ChatRoomSettingView: View {
 
                         // 공개 범위 설정
                         PublicScopeSection
-
-                        Spacer()
                     }
                     .padding(.bottom, keyboardHandler.keyboardHeight > 0 ? 20 : nil)
                 }
                 .padding(.bottom, keyboardHandler.keyboardHeight)
                 .animation(keyboardHandler.keyboardHeight > 0 ? .easeOut(duration: 0.3) : nil)
             }
+            .overlay(
+                Group {
+                    if showCompleteToastPopup {
+                        CustomToastView(message: "변경 사항이 저장되었어요")
+                            .transition(.move(edge: .bottom))
+                            .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
+                            .padding(.bottom, 34 * DynamicSizeFactor.factor())
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    if showCompleteToastPopup {
+                                        showCompleteToastPopup = false
+                                    }
+                                }
+                            }
+                    }
+                }, alignment: .bottom
+            )
             .edgesIgnoringSafeArea(.bottom)
             .navigationBarColor(UIColor(named: "White01"), title: "채팅방 설정")
             .background(Color("White01"))
@@ -98,14 +94,13 @@ struct ChatRoomSettingView: View {
                             validateForm()
 
                             if isFormValid {
-                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, password: password)
+                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, password: password, selectedUIImage: selectedUIImage)
                                 viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
                                     if success {
                                         showCompleteToastPopup = true
                                     }
                                 }
                             }
-
                         }, label: {
                             Text("완료")
                                 .font(.H4MediumFont())
@@ -120,6 +115,12 @@ struct ChatRoomSettingView: View {
             .onAppear {
                 chatRoomName = viewModelWrapper.editRoomData?.title ?? ""
                 description = viewModelWrapper.editRoomData?.description ?? ""
+                password = viewModelWrapper.editRoomData?.password ?? ""
+                isSecret = !password.isEmpty
+
+                loadImage(from: viewModelWrapper.editRoomData?.backgroundImageUrl ?? "") { image in
+                    self.selectedUIImage = image
+                }
             }
 
             if showImagePopUp {
@@ -134,35 +135,43 @@ struct ChatRoomSettingView: View {
                     .edgesIgnoringSafeArea(.bottom)
             }
         }
-        .overlay(
-            Group {
-                if showCompleteToastPopup {
-                    CustomToastView(message: "변경 사항이 저장되었어요")
-                        .transition(.move(edge: .bottom))
-                        .animation(.easeInOut(duration: 0.2)) // 애니메이션 시간
-                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                if showCompleteToastPopup {
-                                    showCompleteToastPopup = false
-                                }
-                            }
-                        }
-                }
-            }, alignment: .bottom
-        )
         .sheet(isPresented: $showImagePicker, onDismiss: {
             // 사진 클릭한 경우
             showImagePopUp = false
 
             if let selectedUIImage {
-                self.selectedUIImage = selectedUIImage
                 viewModelWrapper.editChatRoomViewModel.uploadImage(image: selectedUIImage)
+                viewModelWrapper.editChatRoomViewModel.editRoomData.value.imageUpdate(image: selectedUIImage)
             }
 
         }) {
             ImagePicker(image: $selectedUIImage, isActive: $showImagePicker, sourceType: sourceType)
                 .edgesIgnoringSafeArea(.bottom)
+        }
+    }
+
+    private var ChatRoomImageSection: some View {
+        VStack {
+            if let image = selectedUIImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
+                    .cornerRadius(12 * DynamicSizeFactor.factor())
+            } else {
+                Image("icon_illust_chat_no picture")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 88 * DynamicSizeFactor.factor(), height: 88 * DynamicSizeFactor.factor())
+                    .cornerRadius(12 * DynamicSizeFactor.factor())
+            }
+
+            Spacer().frame(height: 16 * DynamicSizeFactor.factor())
+
+            // 채팅방 커버 수정 버튼
+            CustomRoundedBtn(title: "채팅방 커버 변경", fontColor: Color("Mint03"), backgroundColor: Color("Mint01"), style: .large) {
+                showImagePopUp = true
+            }
         }
     }
 
@@ -283,6 +292,7 @@ struct ChatRoomSettingView: View {
                 isFormValid = isPasswordValid
             } else {
                 isFormValid = true
+                password = ""
             }
         }
     }
@@ -294,8 +304,4 @@ struct ChatRoomSettingView: View {
             isPasswordValid = false
         }
     }
-}
-
-#Preview {
-    ChatRoomSettingView()
 }

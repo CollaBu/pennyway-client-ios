@@ -17,9 +17,10 @@ struct ChatRoomView: View {
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @State private var isNavigateToMyChat = false
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
+    @State private var roomTitle = ""
     @Environment(\.presentationMode) var presentationMode
 
-    var chatRoom: ChatRoomProtocol
+    var chatRoomId: Int64
     private let currentUserId = getUserData()!.id
 
     var body: some View {
@@ -34,7 +35,7 @@ struct ChatRoomView: View {
                     .offset(y: -keyboardManager.keyboardHeight)
                     .animation(keyboardManager.keyboardHeight > 0 ? .easeOut(duration: 0.5) : nil, value: keyboardManager.keyboardHeight)
             }
-            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(chatRoom.title)")
+            .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(roomTitle)")
             .background(Color("Ashblue02"))
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
@@ -79,14 +80,24 @@ struct ChatRoomView: View {
                 }
             }
             .onAppear {
-                // 현재 채팅방 정보 저장
-                viewModelWrapper.chatRoomViewModel.roomData.value = chatRoom
-                viewModelWrapper.editChatRoomViewModel.editRoomData.value = EditChatRoomItemModel(chatRoomId: chatRoom.id, title: chatRoom.title, description: "소비 그만하자", password: "", backgroundImageUrl: chatRoom.backgroundImageUrl) // TODO: password 받아오도록 수정해야함
-                viewStateManager.setCurrentView(self, chatRoomId: viewModelWrapper.roomData?.id)
+                viewModelWrapper.editChatRoomViewModel.getChatAdminMode(chatRoomId: chatRoomId) { result in
 
-                // 채팅방 상세 정보 조회
-                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: chatRoom.id)
-                viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
+                    switch result {
+                    case let .success(data):
+                        viewModelWrapper.chatRoomViewModel.roomData.value = data
+                        roomTitle = data.title
+
+                        // 현재 채팅방 정보 저장
+                        viewStateManager.setCurrentView(self, chatRoomId: viewModelWrapper.roomData?.chatRoomId)
+
+                        // 채팅방 상세 정보 조회
+                        viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: viewModelWrapper.roomData?.chatRoomId ?? 0)
+                        viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
+
+                    case .failure:
+                        Log.debug("[ChatRoomView] 관리자 모드 조회 실패")
+                    }
+                }
             }
 
             ZStack {
@@ -114,14 +125,15 @@ struct ChatRoomView: View {
 // MARK: - ChatRoomViewModelWrapper
 
 final class ChatRoomViewModelWrapper: ObservableObject {
-    @Published var roomData: ChatRoomProtocol? = nil
+    @Published var roomData: AdminModeChatRoomItemModel? = nil
     @Published var roomDetailData: ChatRoomDetailItemModel? = nil
     @Published var messageData: [MessageItemModel] = []
     @Published var chatUserData: [ChatMemberItemModel] = []
     @Published var previousMessageData: PreviousMessage? = nil
+    @Published var editRoomData: AdminModeChatRoomItemModel? = nil
+
     @Published var isDeleteSuccess: Bool = false
     @Published var showErrorPopUp: Bool = false
-    @Published var editRoomData: EditChatRoomItemModel? = nil
 
     var chatRoomViewModel: any ChatRoomViewModel
     var editChatRoomViewModel: any EditChatRoomViewModel

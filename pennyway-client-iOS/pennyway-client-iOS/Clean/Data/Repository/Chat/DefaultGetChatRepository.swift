@@ -84,8 +84,8 @@ class DefaultGetChatRepository: GetChatRepository {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(GetChatMembersReponseDto.self, from: responseData)
-                        let members = GetChatMembersReponseDto.to(dto: response)
+                        let response = try JSONDecoder().decode(GetChatMembersResponseDto.self, from: responseData)
+                        let members = GetChatMembersResponseDto.to(dto: response)
 
                         Log.debug("[DefaultChatRoomRepository]: 채팅 멤버 조회 api 성공: \(response)")
                         completion(.success(members))
