@@ -21,26 +21,19 @@ class DefaultChatStompService {
     }
     
     func connect() {
-        repository.connect { result in
-            switch result {
-            case .success:
-                Log.debug("[DefaultChatStompService] sucess connect")
-            case let .failure(error):
-                Log.error("Failed to connect: \(error)")
-            }
-        }
+        repository.connect()
     }
     
     func disconnect() {
         repository.disconnect()
     }
     
-    func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        repository.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, retry: nil, uuid: nil, completion: completion)
+    func sendMessage(message: String, chatRoomId: Int64, contentType: String) {
+        repository.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType)
     }
     
-    func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
-        repository.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: lastReadMessageId, completion: completion)
+    func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64) {
+        repository.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: lastReadMessageId)
     }
     
     func subscribeToChatRoom(chatRoomId: Int64) {

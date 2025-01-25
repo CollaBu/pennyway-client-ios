@@ -8,6 +8,5 @@
 import Foundation
 
 protocol StompInterceptor {
-    
-    func handle() -> Void
+    func handle(completion: @escaping (Result<String, Error>) -> Void)
 }

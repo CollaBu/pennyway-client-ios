@@ -97,10 +97,3 @@ final class SocketAuthHandler {
         )
     }
 }
-
-// MARK: - Notification Extension
-
-extension Notification.Name {
-    static let socketAuthStart = Notification.Name("socket-auth-start")
-    static let socketAuthUnlock = Notification.Name("socket-auth-unlock")
-}

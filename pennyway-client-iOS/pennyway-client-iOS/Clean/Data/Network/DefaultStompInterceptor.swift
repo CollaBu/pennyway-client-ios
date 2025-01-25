@@ -9,14 +9,14 @@ import Foundation
 
 // MARK: - DefaultStompInterceptor
 
-class DefaultStompInterceptor: StompInterceptor{
+class DefaultStompInterceptor: StompInterceptor {
     private let socketAuthHandler: SocketAuthHandler
 
     init(socketAuthHandler: SocketAuthHandler) {
         self.socketAuthHandler = socketAuthHandler
     }
 
-    func handle() {
+    func handle(completion _: @escaping (Result<String, any Error>) -> Void) {
         socketAuthHandler.retry()
     }
 }
@@ -28,4 +28,3 @@ enum AuthEvent {
     case refreshComplete(token: String)
     case authUpdateComplete
 }
-

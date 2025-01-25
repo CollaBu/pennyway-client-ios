@@ -44,7 +44,7 @@ final class MessageQueue {
     // MARK: - Public Methods
     
     func enqueue(message: SocketMessage, id: Int) {
-        messages.insert(message, at: id)
+        messages.insert((id, message))
         
         if !isAuthUpdating {
             sendMessage(message, id: id)
@@ -52,7 +52,9 @@ final class MessageQueue {
     }
     
     func markSuccess(messageId: Int) {
-        messages.remove(at: messageId)
+        if let index = messages.index(forKey: messageId) { // ✅ `index(forKey:)`로 인덱스 찾기
+            messages.remove(at: index) // ✅ `remove(at:)` 사용
+        }
         
         // 만약 성공 처리 후 큐에 메시지가 남아있고, 인증 갱신 중이 아니라면 다음 메시지 전송
         if !isAuthUpdating, let oldest = getOldestMessage() {
@@ -72,7 +74,8 @@ final class MessageQueue {
         stompClient.sendMessage(
             message: message.content,
             destination: message.destination,
-            headers: headers
+            headers: headers, 
+            contentType: message.contentType
         )
     }
     
