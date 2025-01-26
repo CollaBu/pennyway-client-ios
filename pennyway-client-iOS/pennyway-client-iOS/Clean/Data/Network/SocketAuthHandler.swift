@@ -13,17 +13,14 @@ final class SocketAuthHandler {
     // MARK: - Properties
    
     static let shared = SocketAuthHandler()
-    private let authRepository: SocketAuthRepository
     private let notificationQueue: NotificationQueue
     private var isProcessing = false
    
     // MARK: - Initialize
    
     private init(
-        authRepository: SocketAuthRepository = SocketAuthRepository(),
         notificationQueue: NotificationQueue = .default
     ) {
-        self.authRepository = authRepository
         self.notificationQueue = notificationQueue
        
         setupNotifications()
@@ -42,14 +39,14 @@ final class SocketAuthHandler {
             object: nil
         )
        
-        // TokenRefreshHandler의 토큰 갱신 완료 이벤트 구독
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleTokenRefreshComplete),
-            name: .tokenRefreshComplete,
-            object: nil
-        )
-       
+//        // TokenRefreshHandler의 토큰 갱신 완료 이벤트 구독
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(handleTokenRefreshComplete),
+//            name: .tokenRefreshComplete,
+//            object: nil
+//        )
+//       
         // TokenRefreshHandler의 토큰 갱신 실패 이벤트 구독
         NotificationCenter.default.addObserver(
             self,
@@ -75,9 +72,10 @@ final class SocketAuthHandler {
         TokenRefreshHandler.shared.refreshSync { _, _ in }
     }
    
-    @objc private func handleTokenRefreshComplete() {
-        authRepository.updateAuthentication()
-    }
+//    @objc private func handleTokenRefreshComplete() {
+    ////        authRepository.updateAuthentication()
+//     
+//    }
    
     @objc private func handleAuthComplete() {
         isProcessing = false
@@ -85,6 +83,7 @@ final class SocketAuthHandler {
             Notification(name: .socketAuthUnlock),
             postingStyle: .asap
         )
+        Log.debug("[SocketAuthHandler] - handleAuthComplete")
     }
    
     @objc private func handleTokenRefreshFailure() {

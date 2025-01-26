@@ -73,6 +73,7 @@ extension CustomStompClient {
             let jsonData = try JSONSerialization.data(withJSONObject: messageBody, options: [])
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 stompClient.sendMessage(message: jsonString, toDestination: destination, withHeaders: headers, withReceipt: receipt)
+                Log.info("📤 [Send Message] - \(message)")
             }
         } catch {
             Log.fault("Failed to serialize message body: \(error)")
@@ -232,13 +233,13 @@ extension CustomStompClient {
         }
     }
     
-    /// `/user/queue/success`에서 받은 메시지 처리
-    private func handleRemovedMessage(header: [String: String]?) {
-        if let id = header?["x-message-id"] {
-            //            messageDatas.removeValue(forKey: id)
-            //            Log.info("📤 [Send Message] Removed ID \(id). Remaining messages: \(messageDatas)")
-        }
-    }
+//    /// `/user/queue/success`에서 받은 메시지 처리
+//    private func handleRemovedMessage(header: [String: String]?) {
+//        if let id = header?["x-message-id"] {
+//            //            messageDatas.removeValue(forKey: id)
+//            //            Log.info("📤 [Send Message] Removed ID \(id). Remaining messages: \(messageDatas)")
+//        }
+//    }
 }
 
 // MARK: StompClientLibDelegate

@@ -7,6 +7,14 @@
 
 import Foundation
 
+// MARK: - StompInterceptor
+
 protocol StompInterceptor {
     func handle(completion: @escaping (Result<String, Error>) -> Void)
+}
+
+// MARK: - SocketRefreshInterceptor
+
+protocol SocketRefreshInterceptor {
+    func handle()
 }

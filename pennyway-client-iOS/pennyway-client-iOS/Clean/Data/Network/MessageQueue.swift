@@ -87,7 +87,7 @@ final class MessageQueue {
     }
     
     private func processPendingMessages() {
-        while !isAuthUpdating, let oldest = getOldestMessage() {
+        if !isAuthUpdating, let oldest = getOldestMessage() {
             sendMessage(oldest.message, id: oldest.id)
         }
     }

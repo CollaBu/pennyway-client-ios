@@ -28,3 +28,17 @@ enum AuthEvent {
     case refreshComplete(token: String)
     case authUpdateComplete
 }
+
+// MARK: - DefaultRefreshSocketInterceptor
+
+class DefaultRefreshSocketInterceptor: SocketRefreshInterceptor {
+    private let socketAuthRepository: SocketAuthRepository
+
+    init(socketAuthRepository: SocketAuthRepository) {
+        self.socketAuthRepository = socketAuthRepository
+    }
+
+    func handle() {
+        socketAuthRepository.handleTokenRefreshComplete()
+    }
+}

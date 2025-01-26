@@ -32,6 +32,9 @@ struct pennyway_client_iOSApp: App {
                     }
                 }
             }
+            .onAppear {
+                KeychainHelper.saveAccessToken(accessToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsInJlZ0RhdGUiOjE3Mzc4ODMxOTMxNjZ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOiIxIiwiZXhwIjoxNzM3ODgzMzEzfQ.UJoz42ElwgwvFYe7hPzP6kdzkDpRJVTENQJHsUsHJ1M")
+            }
             .onAppear(perform: UIApplication.shared.addTapGestureRecognizer)
             .onOpenURL { url in
                 GIDSignIn.sharedInstance.handle(url)
