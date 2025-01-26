@@ -51,7 +51,7 @@ class DefaultChatStompRepository: ChatStompRepository {
             contentType: contentType
         )
 
-        messageQueue.enqueue(message: socketMessage, id: Int(messageId) ?? 0)
+        messageQueue.enqueue(message: socketMessage, id: messageId)
     }
 
     /// 마지막으로 읽은 메시지를 특정 목적지로 보내는 메서드

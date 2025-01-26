@@ -6,6 +6,7 @@
 //
 
 import BTree
+import Combine
 import Foundation
 
 // MARK: - MessageQueue
@@ -14,9 +15,10 @@ final class MessageQueue {
     // MARK: - Properties
     
     static let shared = MessageQueue()
-    private var messages = BTree<Int, SocketMessage>()
+    private var messages = BTree<String, SocketMessage>()
     private var isAuthUpdating = false
     private let stompClient: CustomStompClient
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialize
     
@@ -39,11 +41,18 @@ final class MessageQueue {
             name: .socketAuthUnlock,
             object: nil
         )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleRemoveMessage),
+            name: .successSendMessage,
+            object: nil
+        )
     }
     
     // MARK: - Public Methods
     
-    func enqueue(message: SocketMessage, id: Int) {
+    func enqueue(message: SocketMessage, id: String) {
         messages.insert((id, message))
         
         if !isAuthUpdating {
@@ -51,7 +60,7 @@ final class MessageQueue {
         }
     }
     
-    func markSuccess(messageId: Int) {
+    func markSuccess(messageId: String) {
         if let index = messages.index(forKey: messageId) { // ✅ `index(forKey:)`로 인덱스 찾기
             messages.remove(at: index) // ✅ `remove(at:)` 사용
         }
@@ -64,11 +73,11 @@ final class MessageQueue {
     
     // MARK: - Private Methods
     
-    private func sendMessage(_ message: SocketMessage, id: Int) {
+    private func sendMessage(_ message: SocketMessage, id: String) {
         let headers = [
             "Authorization": "Bearer \(KeychainHelper.loadAccessToken() ?? "")",
             "content-type": "application/json",
-            "x-message-id": String(id)
+            "x-message-id": id
         ]
         
         stompClient.sendMessage(
@@ -79,7 +88,7 @@ final class MessageQueue {
         )
     }
     
-    private func getOldestMessage() -> (id: Int, message: SocketMessage)? {
+    private func getOldestMessage() -> (id: String, message: SocketMessage)? {
         guard let first = messages.first else {
             return nil
         }
@@ -101,6 +110,22 @@ final class MessageQueue {
     @objc private func handleAuthUnlock() {
         isAuthUpdating = false
         processPendingMessages()
+    }
+    
+    @objc func handleRemoveMessage(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let messageId = userInfo["messageId"] as? String else { return }
+
+        Log.debug("[💀 메세지 삭제] \(messageId) , index: \(messages.index(forKey: messageId))")
+        
+        for (key, message) in messages {
+            Log.debug("Key: \(key), Message: \(message)")
+        }
+
+        if let index = messages.index(forKey: messageId) { // ✅ 키 변환 후 인덱스 찾기
+            messages.remove(at: index)
+            Log.debug("[💀 메세지 삭제] - \(index)")
+        }
     }
 }
 

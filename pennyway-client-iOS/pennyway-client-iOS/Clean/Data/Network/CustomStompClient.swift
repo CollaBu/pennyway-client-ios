@@ -269,6 +269,21 @@ extension CustomStompClient: StompClientLibDelegate {
     func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody: String?, withHeader: [String: String]?, withDestination _: String) {
         Log.info("Did receive Message: body - \(String(describing: jsonBody)), \(String(describing: akaStringBody)), \n header - \(String(describing: withHeader))")
         
+        // destination: `/user/queue/success` 확인
+        if let destination = withHeader?["destination"], destination == "/user/queue/success" {
+            if let id = withHeader?["x-message-id"] {
+                notificationQueue.enqueue(
+                    Notification(
+                        name: .successSendMessage,
+                        object: nil,
+                        userInfo: ["messageId": id] // ✅ messageId 전달
+                    ),
+                    postingStyle: .asap
+                )
+            }
+            return
+        }
+        
         // error queue에서 401 메시지 수신 시 interceptor 호출
         if let body = jsonBody as? [String: Any],
            let code = body["code"] as? String,

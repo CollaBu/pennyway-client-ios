@@ -50,14 +50,6 @@ class TokenRefreshHandler: DefaultRefreshSocketInterceptor {
                             AnalyticsConstants.Parameter.isRefresh: true,
                         ])
 
-                        // Socket Auth 갱신을 위한 이벤트 비동기 발행
-                        self.notificationQueue.enqueue(
-                            Notification(
-                                name: .tokenRefreshComplete,
-                                object: KeychainHelper.loadAccessToken()
-                            ),
-                            postingStyle: .asap
-                        )
                         interceptor.handle()
 
                     } catch {

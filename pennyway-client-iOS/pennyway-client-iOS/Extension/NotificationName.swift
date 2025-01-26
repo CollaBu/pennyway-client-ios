@@ -10,4 +10,5 @@ extension Notification.Name {
     static let socketAuthStart = Notification.Name("socket-auth-start")
     static let socketAuthUnlock = Notification.Name("socket-auth-unlock")
     static let socketAuthComplete = Notification.Name("socket-auth-complete")
+    static let successSendMessage = Notification.Name("success-send-message")
 }
