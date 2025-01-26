@@ -1,5 +1,5 @@
 //
-//  StompInterceptor.swift
+//  RefreshInterceptor.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 1/23/25.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-// MARK: - StompInterceptor
+// MARK: - RefreshInterceptor
 
-protocol StompInterceptor {
+protocol RefreshInterceptor {
     func handle(completion: @escaping (Result<String, Error>) -> Void)
 }
 

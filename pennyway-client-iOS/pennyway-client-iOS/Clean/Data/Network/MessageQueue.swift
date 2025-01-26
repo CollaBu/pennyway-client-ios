@@ -61,8 +61,8 @@ final class MessageQueue {
     }
     
     func markSuccess(messageId: String) {
-        if let index = messages.index(forKey: messageId) { // ✅ `index(forKey:)`로 인덱스 찾기
-            messages.remove(at: index) // ✅ `remove(at:)` 사용
+        if let index = messages.index(forKey: messageId) {
+            messages.remove(at: index)
         }
         
         // 만약 성공 처리 후 큐에 메시지가 남아있고, 인증 갱신 중이 아니라면 다음 메시지 전송
@@ -96,8 +96,12 @@ final class MessageQueue {
     }
     
     private func processPendingMessages() {
-        if !isAuthUpdating, let oldest = getOldestMessage() {
+        while !isAuthUpdating, let oldest = getOldestMessage() {
             sendMessage(oldest.message, id: oldest.id)
+            
+            if let index = messages.index(forKey: oldest.id) {
+                messages.remove(at: index)
+            }
         }
     }
     
@@ -116,23 +120,10 @@ final class MessageQueue {
         guard let userInfo = notification.userInfo,
               let messageId = userInfo["messageId"] as? String else { return }
 
-        Log.debug("[💀 메세지 삭제] \(messageId) , index: \(messages.index(forKey: messageId))")
-        
-        for (key, message) in messages {
-            Log.debug("Key: \(key), Message: \(message)")
-        }
-
-        if let index = messages.index(forKey: messageId) { // ✅ 키 변환 후 인덱스 찾기
+        if let index = messages.index(forKey: messageId) {
             messages.remove(at: index)
-            Log.debug("[💀 메세지 삭제] - \(index)")
+            Log.debug("[✅ Remove Message] - messageId: \(messageId)")
         }
     }
 }
 
-// MARK: - SocketMessage
-
-struct SocketMessage {
-    let content: String
-    let destination: String
-    let contentType: String
-}

@@ -50,7 +50,7 @@ class TokenRefreshHandler: DefaultRefreshSocketInterceptor {
                             AnalyticsConstants.Parameter.isRefresh: true,
                         ])
 
-                        interceptor.handle()
+                        self.interceptor.handle()
 
                     } catch {
                         // Socket Auth Refresh 실패 이벤트 비동기 발행

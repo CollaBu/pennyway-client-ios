@@ -39,14 +39,6 @@ final class SocketAuthHandler {
             object: nil
         )
        
-//        // TokenRefreshHandler의 토큰 갱신 완료 이벤트 구독
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(handleTokenRefreshComplete),
-//            name: .tokenRefreshComplete,
-//            object: nil
-//        )
-//       
         // TokenRefreshHandler의 토큰 갱신 실패 이벤트 구독
         NotificationCenter.default.addObserver(
             self,
@@ -62,6 +54,8 @@ final class SocketAuthHandler {
         guard !isProcessing else {
             return
         } // 진행 중이면, 나머지 요청은 버림.
+        
+        Log.debug("[SocketAuthHandler] - retry")
        
         isProcessing = true
         notificationQueue.enqueue(
@@ -72,22 +66,20 @@ final class SocketAuthHandler {
         TokenRefreshHandler.shared.refreshSync { _, _ in }
     }
    
-//    @objc private func handleTokenRefreshComplete() {
-    ////        authRepository.updateAuthentication()
-//     
-//    }
-   
     @objc private func handleAuthComplete() {
+        Log.debug("[SocketAuthHandler] - handleAuthComplete")
+        
         isProcessing = false
         notificationQueue.enqueue(
             Notification(name: .socketAuthUnlock),
             postingStyle: .asap
         )
-        Log.debug("[SocketAuthHandler] - handleAuthComplete")
     }
    
     @objc private func handleTokenRefreshFailure() {
         // 필요한 에러 핸들링. isProcessing 상태는 실패해도 반드시 바꿔줘야 함.
+        
+        Log.debug("[SocketAuthHandler] - handleTokenRefreshFailure")
    
         isProcessing = false
         notificationQueue.enqueue(

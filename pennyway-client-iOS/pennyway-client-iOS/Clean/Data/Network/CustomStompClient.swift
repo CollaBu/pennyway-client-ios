@@ -16,14 +16,14 @@ final class CustomStompClient {
    
     static let shared = CustomStompClient(stompClient: StompClientLib())
     private let stompClient: StompClientLib
-    private let interceptor: StompInterceptor // retry를 위한 interceptor, 배열로 하고 싶으면 그렇게 하면 됨.
-    private let notificationQueue: NotificationQueue // 원래 여기서 처리하면 안 되는데, `serverDidSendReceipt`에 이유를 적음.
+    private let interceptor: RefreshInterceptor
+    private let notificationQueue: NotificationQueue
    
     // MARK: - Initialize
    
     private init(
         stompClient: StompClientLib,
-        interceptor: StompInterceptor = DefaultStompInterceptor(socketAuthHandler: SocketAuthHandler.shared),
+        interceptor: RefreshInterceptor = DefaultRefreshInterceptor(socketAuthHandler: SocketAuthHandler.shared),
         notificationQueue: NotificationQueue = .default
     ) {
         self.stompClient = stompClient
@@ -232,14 +232,6 @@ extension CustomStompClient {
             }
         }
     }
-    
-//    /// `/user/queue/success`에서 받은 메시지 처리
-//    private func handleRemovedMessage(header: [String: String]?) {
-//        if let id = header?["x-message-id"] {
-//            //            messageDatas.removeValue(forKey: id)
-//            //            Log.info("📤 [Send Message] Removed ID \(id). Remaining messages: \(messageDatas)")
-//        }
-//    }
 }
 
 // MARK: StompClientLibDelegate
@@ -314,7 +306,7 @@ extension CustomStompClient: StompClientLibDelegate {
    
     func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
         if receiptId.hasPrefix("refresh-receipt-") {
-            notificationQueue.enqueue( // 원래 SocketAuthRepository가 처리해야 하는데, 순환 참조 걸려서 임시로 처리.
+            notificationQueue.enqueue(
                 Notification(name: .socketAuthComplete),
                 postingStyle: .asap
             )
