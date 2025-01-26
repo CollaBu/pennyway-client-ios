@@ -176,7 +176,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 case .admin:
                     self?.isErrorPopupShow.value = true
                     completion(false)
-                case .other, .notAdmin:
+                case .other, .notAdmin, .notFound:
                     completion(false)
                 }
             
@@ -197,7 +197,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
                 
                 switch error {
-                case .admin, .other, .notAdmin:
+                case .admin, .other, .notAdmin, .notFound:
                     completion(false)
                 }
             }

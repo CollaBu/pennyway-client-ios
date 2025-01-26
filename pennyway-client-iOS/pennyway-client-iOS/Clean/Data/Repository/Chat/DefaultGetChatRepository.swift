@@ -12,6 +12,7 @@ import Foundation
 enum DeleteChatRoomError: Error {
     case admin // 채팅방장은 채팅방을 나갈 수 없다는 4090애러
     case notAdmin // 관리자가 아니라는 4033에러
+    case notFound // 채팅멤버를 찾을 수 없다는 4040에러
     case other(Error)
 }
 
@@ -134,14 +135,25 @@ class DefaultGetChatRepository: GetChatRepository {
             case .success:
                 Log.debug("[DefaultChatRoomRepository]: 채팅방장이 채팅방 삭제 성공")
                 completion(.success(()))
-
+                
             case let .failure(error):
+                // 4033에러
                 if let statusSpecificError = error as? StatusSpecificError,
                    statusSpecificError.domainError == .forbidden,
                    statusSpecificError.code == ForbiddenErrorCode.accessNotAllowedForUserRole.rawValue
                 {
                     completion(.failure(DeleteChatRoomError.notAdmin))
-                } else {
+                }
+                
+                // 4040에러
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .notFound,
+                   statusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.notFound))
+                }
+                
+                else {
                     completion(.failure(DeleteChatRoomError.other(error)))
                 }
             }
