@@ -168,20 +168,18 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                     self?.isDeleteSuccessful.value = true
                     Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
                 }
-            case let .failure(error):
-                Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
 
-                if let deleteChatRoomError = error as? DeleteChatRoomError {
-                    switch deleteChatRoomError {
-                    case .admin:
-                        self?.isErrorPopupShow.value = true
-                        completion(false)
-                    case .other:
-                        completion(false)
-                    case .notAdmin:
-                        completion(false)
-                    }
+            case .failure(let error):
+                Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
+                
+                switch error {
+                case .admin:
+                    self?.isErrorPopupShow.value = true
+                    completion(false)
+                case .other, .notAdmin:
+                    completion(false)
                 }
+            
             }
         }
     }
@@ -192,21 +190,15 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-//                    self?.isDeleteSuccessful.value = true
+                    //                    self?.isDeleteSuccessful.value = true
                     Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
                 }
-            case let .failure(error):
-                Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
-
-                if let deleteChatRoomError = error as? DeleteChatRoomError {
-                    switch deleteChatRoomError {
-                    case .admin:
-                        completion(false)
-                    case .other:
-                        completion(false)
-                    case .notAdmin:
-                        completion(false)
-                    }
+            case .failure(let error):
+                Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
+                
+                switch error {
+                case .admin, .other, .notAdmin:
+                    completion(false)
                 }
             }
         }
