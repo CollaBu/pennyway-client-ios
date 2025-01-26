@@ -15,6 +15,8 @@ protocol GetChatUseCase {
     func getChatMembers(chatRoomId: Int64, ids: [Int64], completion: @escaping (Result<[ChatMember], Error>) -> Void)
     /// 채팅방 나가기 기능을 수행하는 함수
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void)
+    /// 채팅방장이 채팅방 삭제 기능을 수행하는 함수
+    func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void)
 }
 
 // MARK: - DefaultGetChatUseCase
@@ -39,6 +41,10 @@ class DefaultGetChatUseCase: GetChatUseCase {
     }
 
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) { repository.deleteChatRoom(chatRoomId: chatRoomId, completion: completion)
+    }
+    
+    func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
+        repository.deleteChatRoomByAdmin(chatRoomId: chatRoomId, completion: completion)
     }
 }
     
