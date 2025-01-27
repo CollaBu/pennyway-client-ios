@@ -14,6 +14,8 @@ protocol EditChatRoomUseCase {
     func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void)
     func uploadImage(roomData: AdminModeChatRoomItemModel, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
     func editChatRoom(roomData: AdminModeChatRoomItemModel, completion: @escaping (Bool) -> Void)
+    func turnOnChatRoomAlarm(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
+    func turnOffChatRoomAlarm(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - DefaultEditChatRoomUseCase
@@ -27,10 +29,12 @@ class DefaultEditChatRoomUseCase: EditChatRoomUseCase {
         self.urlRepository = urlRepository
     }
 
+    /// 채팅방 관리자 모드 조회 메서드
     func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void) {
         repository.getChatAdminMode(chatRoomId: chatRoomId, completion: completion)
     }
 
+    /// 채팅방 수정 메서드
     func editChatRoom(roomData: AdminModeChatRoomItemModel, completion: @escaping (Bool) -> Void) {
         repository.editChatRoom(roomData: roomData) { result in
             switch result {
@@ -73,6 +77,16 @@ class DefaultEditChatRoomUseCase: EditChatRoomUseCase {
                 completion(.failure(error))
             }
         }
+    }
+    
+    /// 채팅방 알림 켜기 메서드
+    func turnOnChatRoomAlarm(chatRoomId: Int64, completion: @escaping (Bool) -> Void) {
+        <#code#>
+    }
+    
+    /// 채팅방 알림 끄기 메서드
+    func turnOffChatRoomAlarm(chatRoomId: Int64, completion: @escaping (Bool) -> Void) {
+        <#code#>
     }
 
     /// Presigned URL을 생성하는 메서드의 구현

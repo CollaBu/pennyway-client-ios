@@ -8,8 +8,6 @@
 import Foundation
 
 class DefaultEditChatRoomRepository: EditChatRoomRepository {
-    private let cdnUrl = Url.cdnUrl
-
     func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void) {
         ChatRoomAlamofire.shared.getChatAdminMode(chatRoomId) { result in
             switch result {
@@ -24,7 +22,7 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
                         let response = try JSONDecoder().decode(GetChatAdminModeResponseDto.self, from: responseData)
                         Log.debug("[DefaultEditChatRoomRepository]: 채팅방 관리자 모드 조회 api 성공: \(response)")
 
-                        let chatRoomdata = GetChatAdminModeResponseDto.to(dto: response, cdnUrl: self.cdnUrl)
+                        let chatRoomdata = GetChatAdminModeResponseDto.to(dto: response, cdnUrl: Url.cdnUrl)
 
                         Log.debug("[DefaultEditChatRoomRepository]: 데이터 확인:  \(chatRoomdata)")
 
@@ -80,6 +78,8 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
             }
         }
     }
+    
+   
 
     /// delete이후 문자열만 추출하는 함수
     private func parseChatroomUrl(from presignedUrl: String) -> String {
@@ -100,4 +100,9 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
         }
         return presignedUrl
     }
+}
+
+enum ChatRoomAlarm{
+    case on
+    case off
 }
