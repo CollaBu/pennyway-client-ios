@@ -61,7 +61,7 @@ class ChatRoomAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatAdminMode(chatRoomId: chatRoomId), completion: completion)
     }
     
-    ///채팅방 알림 켜기
+    /// 채팅방 알림 켜기
     func turnOnChatRoomAlarm(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatRoomAlamofire - turnOnChatRoomAlarm() called \(chatRoomId)")
         

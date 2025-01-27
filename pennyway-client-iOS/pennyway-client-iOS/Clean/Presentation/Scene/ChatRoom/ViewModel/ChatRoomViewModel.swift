@@ -17,6 +17,7 @@ protocol ChatRoomViewModelInput {
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
+    func updateAlarmSetting()
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -182,6 +183,11 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 }
             }
         }
+    }
+    
+    /// roomDetailData의 notifiation 여부 update
+    func updateAlarmSetting(setting: Bool) {
+        
     }
 }
 

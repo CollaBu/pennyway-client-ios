@@ -16,6 +16,7 @@ struct ChatSideMenuView: View {
     @State private var showExitPopUp: Bool = false
     @State private var showChatUserView: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
+    @State private var isInitialLoad: Bool = true // 초기 로드 여부
     
     var body: some View {
         ZStack {
@@ -70,6 +71,26 @@ struct ChatSideMenuView: View {
         }
         .onChange(of: selectedUser) { newValue in
             showChatUserView = newValue != nil
+        }
+        .onAppear {
+            isAlarmOn = viewModelWrapper.roomDetailData?.myInfo.notifyEnabled ?? false
+            isInitialLoad = false // 초기 로드 이후 false로 변경
+        }
+        .onChange(of: isAlarmOn) { newValue in
+            guard !isInitialLoad else {
+                return
+            } // 초기 로드 시 무시
+
+            let alarmType = newValue ? ChatRoomAlarm.on : ChatRoomAlarm.off
+
+            viewModelWrapper.editChatRoomViewModel.handleChatRoomAlarm(chatRoomId: viewModelWrapper.roomData?.chatRoomId ?? 0, chatRoomAlarm: alarmType) { success in
+                if success {
+                    Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 성공")
+                    viewModelWrapper.chatRoomViewModel.
+                }else{
+                    Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 실패")
+                }
+            }
         }
         .fullScreenCover(isPresented: $showChatUserView) {
             if let user = selectedUser {

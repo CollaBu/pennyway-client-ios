@@ -15,6 +15,7 @@ struct ChatRoomDetailItemModel {
     var otherParticipants: [OtherMemberItemModel]
     var recentMessages: [MessageItemModel]
 
+    
     static func from(model: ChatRoomDetailInfo) -> ChatRoomDetailItemModel {
         return ChatRoomDetailItemModel(
             myInfo: ChatMemberItemModel(
