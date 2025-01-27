@@ -1,62 +1,44 @@
 //
-//  GetChatRoomUseCase.swift
+//  GetChatRoomDetailUseCase.swift
 //  pennyway-client-iOS
 //
-//  Created by 아우신얀 on 10/24/24.
+//  Created by 최희진, 아우신얀 on 11/5/24.
 //
 
 import Foundation
-import UIKit
 
-// MARK: - GetChatRoomUseCase
+// MARK: - GetChatUseCase
 
-protocol GetChatRoomUseCase {
-    func getChatRoom(completion: @escaping (Bool, [ChatRoomItemModel]?) -> Void)
+protocol GetChatUseCase {
+    func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void)
+    func getPreviousChat(chatRoomId: Int64, lastMessageId: Int64, completion: @escaping (Result<PreviousMessage, Error>) -> Void)
+    func getChatMembers(chatRoomId: Int64, ids: [Int64], completion: @escaping (Result<[ChatMember], Error>) -> Void)
+    /// 채팅방 나가기 기능을 수행하는 함수
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void)
 }
 
-// MARK: - DefaultGetChatRoomUseCase
+// MARK: - DefaultGetChatUseCase
 
-class DefaultGetChatRoomUseCase: GetChatRoomUseCase {
-    private let repository: GetChatRoomRepository
+class DefaultGetChatUseCase: GetChatUseCase {
+    private let repository: GetChatRepository
 
-    init(repository: GetChatRoomRepository) {
+    init(repository: GetChatRepository) {
         self.repository = repository
     }
 
-    func getChatRoom(completion: @escaping (Bool, [ChatRoomItemModel]?) -> Void) {
-        repository.getChatRoom { result in
-            switch result {
-            case let .success(chatRooms): // chatRoom은 ChatRoom 타입
-                // ChatRoom 데이터를 ChatRoomItemModel로 변환
+    func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Result<ChatRoomDetailInfo, Error>) -> Void) {
+        repository.getChatRoomDetail(chatRoomId: chatRoomId, completion: completion)
+    }
 
-                let chatRoomItemModels = chatRooms.map { chatRoom in
-                    return ChatRoomItemModel(
-                        id: chatRoom.id,
-                        title: chatRoom.title,
-                        description: chatRoom.description,
-                        backgroundImageUrl: chatRoom.backgroundImageUrl,
-                        isPrivate: chatRoom.isPrivate,
-                        isAdmin: chatRoom.isAdmin,
-                        participantCount: chatRoom.participantCount,
-                        lastMassage: MessageItemModel(
-                            chatRoomId: chatRoom.lastMassage?.chatRoomId ?? 0,
-                            chatId: chatRoom.lastMassage?.chatId ?? 0,
-                            content: chatRoom.lastMassage?.content ?? "",
-                            contentType: chatRoom.lastMassage?.contentType ?? .text,
-                            categoryType: chatRoom.lastMassage?.categoryType ?? .normal,
-                            createdAt: chatRoom.lastMassage?.createdAt ?? "",
-                            senderId: chatRoom.lastMassage?.senderId ?? 0 
-                        ),
-                        unreadMessageCount: chatRoom.unreadMessageCount
-                    )
-                }
-                Log.debug("[GetChatRoomUseCase] 내 채팅 조회 성공")
-                completion(true, chatRoomItemModels) // 성공 시 데이터와 함께 true 전달
+    func getPreviousChat(chatRoomId: Int64, lastMessageId: Int64, completion: @escaping (Result<PreviousMessage, Error>) -> Void) {
+        repository.getPreviousChat(chatRoomId: chatRoomId, lastMessageId: lastMessageId, completion: completion)
+    }
 
-            case let .failure(error):
-                Log.debug("[GetChatRoomUseCase] 내 채팅 조회 실패: \(error)")
-                completion(false, nil) // 실패 시 false와 nil 전달
-            }
-        }
+    func getChatMembers(chatRoomId: Int64, ids: [Int64], completion: @escaping (Result<[ChatMember], Error>) -> Void) {
+        repository.getChatMembers(chatRoomId: chatRoomId, ids: ids, completion: completion)
+    }
+
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) { repository.deleteChatRoom(chatRoomId: chatRoomId, completion: completion)
     }
 }
+    
