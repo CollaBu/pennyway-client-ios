@@ -86,8 +86,8 @@ struct ChatSideMenuView: View {
             viewModelWrapper.editChatRoomViewModel.handleChatRoomAlarm(chatRoomId: viewModelWrapper.roomData?.chatRoomId ?? 0, chatRoomAlarm: alarmType) { success in
                 if success {
                     Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 성공")
-                    viewModelWrapper.chatRoomViewModel.
-                }else{
+                    viewModelWrapper.chatRoomViewModel.updateAlarmSetting(setting: isAlarmOn)
+                } else {
                     Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 실패")
                 }
             }
