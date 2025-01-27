@@ -84,6 +84,8 @@ struct ChatPhotoActionsPopUp: View {
 
     private func deleteProfileImage() {
         // TODO: 선택한 사진이 사라지도록 구현해야 함 
+        showPopUpView = false
+        selectedUIImage = nil
     }
 
     private func checkPhotoLibraryPermission() {

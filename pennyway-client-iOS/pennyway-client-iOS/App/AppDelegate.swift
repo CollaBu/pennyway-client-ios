@@ -87,7 +87,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let messageID = userInfo[gcmMessageIDKey] {
             Log.debug("Message ID: \(messageID)")
         }
-
         Log.debug(userInfo)
 
         completionHandler([[.banner, .badge, .sound]])

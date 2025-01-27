@@ -1,5 +1,5 @@
 //
-//  EditChatRoomItemModel.swift
+//  AdminModeChatRoomItemModel.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 1/16/25.
@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-// MARK: - EditChatRoomItemModel
+// MARK: - AdminModeChatRoomItemModel
 
-struct EditChatRoomItemModel: Equatable {
+struct AdminModeChatRoomItemModel: Equatable {
     var chatRoomId: Int64
     var title: String
-    var description: String
-    var password: String
+    var description: String?
+    var password: String?
     var backgroundImageUrl: String?
     var image: UIImage?
 
@@ -22,11 +22,11 @@ struct EditChatRoomItemModel: Equatable {
         image = nil
     }
 
-    mutating func imageUpdate(image: UIImage) {
+    mutating func imageUpdate(image: UIImage?) {
         self.image = image
     }
 
-    mutating func backgroundImageUrlUpdate(backgroundImageUrl: String) {
+    mutating func backgroundImageUrlUpdate(backgroundImageUrl: String?) {
         self.backgroundImageUrl = backgroundImageUrl
     }
 }

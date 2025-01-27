@@ -1,11 +1,20 @@
 //
-//  DefaultChatRoomRepository.swift
+//  DefaultGetChatRepository.swift
 //  pennyway-client-iOS
 //
 //  Created by 최희진 on 11/5/24.
 //
 
 import Foundation
+
+// MARK: - DeleteChatRoomError
+
+enum DeleteChatRoomError: Error {
+    case admin // 채팅방장은 채팅방을 나갈 수 없다는 4090애러
+    case other(Error)
+}
+
+// MARK: - DefaultGetChatRepository
 
 class DefaultGetChatRepository: GetChatRepository {
     /// 채팅 상세 정보 조회
@@ -75,8 +84,8 @@ class DefaultGetChatRepository: GetChatRepository {
             case let .success(data):
                 if let responseData = data {
                     do {
-                        let response = try JSONDecoder().decode(GetChatMembersReponseDto.self, from: responseData)
-                        let members = GetChatMembersReponseDto.to(dto: response)
+                        let response = try JSONDecoder().decode(GetChatMembersResponseDto.self, from: responseData)
+                        let members = GetChatMembersResponseDto.to(dto: response)
 
                         Log.debug("[DefaultChatRoomRepository]: 채팅 멤버 조회 api 성공: \(response)")
                         completion(.success(members))
@@ -92,6 +101,26 @@ class DefaultGetChatRepository: GetChatRepository {
                     Log.error("Network request failed: \(error)")
                 }
                 completion(.failure(error))
+            }
+        }
+    }
+
+    func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
+        ChatRoomAlamofire.shared.deleteChatRoom(chatRoomId) { result in
+            switch result {
+            case .success:
+                Log.debug("[DefaultChatRoomRepository]: 채팅방 나가기 성공")
+                completion(.success(()))
+
+            case let .failure(error):
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .conflict,
+                   statusSpecificError.code == ConflictErrorCode.requestConflictWithResourceState.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.admin))
+                } else {
+                    completion(.failure(DeleteChatRoomError.other(error)))
+                }
             }
         }
     }

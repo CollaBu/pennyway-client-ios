@@ -40,10 +40,23 @@ class ChatRoomAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatMembers(chatRoomId: chatRoomId, dto: dto), completion: completion)
     }
     
+    /// 채팅방 나가기
+    func deleteChatRoom(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatRoomAlamofire - deleteChatRoom() called \(chatRoomId)")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.deleteChatRoom(chatRoomId: chatRoomId), completion: completion)
+    }
+    
     /// 채팅방 멤버 강제추방
     func banChatMember(_ chatRoomId: Int64, _ chatMemberId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatRoomAlamofire - banChatMember() called \(chatRoomId) \(chatMemberId)")
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.banChatMember(chatRoomId: chatRoomId, chatMemberId: chatMemberId), completion: completion)
+    }
+    
+    func getChatAdminMode(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatRoomAlamofire - getChatAdminMode() called \(chatRoomId)")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatAdminMode(chatRoomId: chatRoomId), completion: completion)
     }
 }

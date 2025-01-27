@@ -34,7 +34,7 @@ class DefaultGetChatRoomUseCase: GetChatRoomUseCase {
                         id: chatRoom.id,
                         title: chatRoom.title,
                         description: chatRoom.description,
-                        backgroundImageUrl: chatRoom.background_image_url,
+                        backgroundImageUrl: chatRoom.backgroundImageUrl,
                         isPrivate: chatRoom.isPrivate,
                         isAdmin: chatRoom.isAdmin,
                         participantCount: chatRoom.participantCount,
