@@ -16,17 +16,17 @@ class DefaultRefreshInterceptor: RefreshInterceptor {
         self.socketAuthHandler = socketAuthHandler
     }
 
-    func handle(completion _: @escaping (Result<String, any Error>) -> Void) {
-        socketAuthHandler.retry()
+    func handle(completion: @escaping (Bool) -> Void) {
+        socketAuthHandler.handle(completion: completion)
     }
 }
 
 // MARK: - DefaultRefreshSocketInterceptor
 
 class DefaultRefreshSocketInterceptor: SocketRefreshInterceptor {
-    private let socketAuthRepository: SocketAuthRepository
+    private let socketAuthRepository: DefaultSocketAuthRepository
 
-    init(socketAuthRepository: SocketAuthRepository) {
+    init(socketAuthRepository: DefaultSocketAuthRepository) {
         self.socketAuthRepository = socketAuthRepository
     }
 

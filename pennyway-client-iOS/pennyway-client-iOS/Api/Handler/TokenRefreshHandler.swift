@@ -8,7 +8,7 @@
 import Foundation
 
 class TokenRefreshHandler: DefaultRefreshSocketInterceptor {
-    static let shared = TokenRefreshHandler(interceptor: DefaultRefreshSocketInterceptor(socketAuthRepository: SocketAuthRepository()))
+    static let shared = TokenRefreshHandler(interceptor: DefaultRefreshSocketInterceptor(socketAuthRepository: DefaultSocketAuthRepository()))
 
     private var isRefreshing = false
     private var pendingRequests: [(Result<Data?, Error>, Bool) -> Void] = []
@@ -18,7 +18,7 @@ class TokenRefreshHandler: DefaultRefreshSocketInterceptor {
 
     private init(interceptor: SocketRefreshInterceptor) {
         self.interceptor = interceptor
-        super.init(socketAuthRepository: SocketAuthRepository())
+        super.init(socketAuthRepository: DefaultSocketAuthRepository())
     }
 
     func refreshSync(completion: @escaping (Result<Data?, Error>, Bool) -> Void) {

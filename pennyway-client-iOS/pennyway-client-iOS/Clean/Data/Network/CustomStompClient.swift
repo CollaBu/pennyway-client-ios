@@ -10,7 +10,6 @@ import StompClientLib
 
 // MARK: - CustomStompClient
 
-/// 의존성 주입해주는 곳에서 생성
 final class CustomStompClient {
     // MARK: - Properties
    

@@ -10,7 +10,7 @@ import Foundation
 // MARK: - RefreshInterceptor
 
 protocol RefreshInterceptor {
-    func handle(completion: @escaping (Result<String, Error>) -> Void)
+    func handle(completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - SocketRefreshInterceptor

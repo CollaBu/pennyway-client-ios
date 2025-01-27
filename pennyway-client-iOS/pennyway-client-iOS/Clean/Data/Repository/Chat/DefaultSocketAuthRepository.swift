@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SocketAuthRepository: SocketRefreshInterceptor {
+final class DefaultSocketAuthRepository: SocketRefreshInterceptor {
     private let stompClient: CustomStompClient
 
     init(

@@ -210,7 +210,7 @@
 		4A8BDEE52C629C3600D21424 /* SpendingHistoryUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */; };
 		4A8CA11F2D4217F80084839A /* CustomStompClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA11E2D4217F80084839A /* CustomStompClient.swift */; };
 		4A8CA1232D42183D0084839A /* SocketAuthHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1222D42183D0084839A /* SocketAuthHandler.swift */; };
-		4A8CA1252D4218520084839A /* SocketAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1242D4218520084839A /* SocketAuthRepository.swift */; };
+		4A8CA1252D4218520084839A /* DefaultSocketAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1242D4218520084839A /* DefaultSocketAuthRepository.swift */; };
 		4A8CA1272D4218900084839A /* DefaultRefreshInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1262D4218900084839A /* DefaultRefreshInterceptor.swift */; };
 		4A8CA1292D4218D00084839A /* MessageQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA1282D4218D00084839A /* MessageQueue.swift */; };
 		4A8CA12B2D425C0A0084839A /* RefreshInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CA12A2D425C0A0084839A /* RefreshInterceptor.swift */; };
@@ -693,7 +693,7 @@
 		4A8BDEE42C629C3600D21424 /* SpendingHistoryUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingHistoryUtil.swift; sourceTree = "<group>"; };
 		4A8CA11E2D4217F80084839A /* CustomStompClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStompClient.swift; sourceTree = "<group>"; };
 		4A8CA1222D42183D0084839A /* SocketAuthHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAuthHandler.swift; sourceTree = "<group>"; };
-		4A8CA1242D4218520084839A /* SocketAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAuthRepository.swift; sourceTree = "<group>"; };
+		4A8CA1242D4218520084839A /* DefaultSocketAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSocketAuthRepository.swift; sourceTree = "<group>"; };
 		4A8CA1262D4218900084839A /* DefaultRefreshInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRefreshInterceptor.swift; sourceTree = "<group>"; };
 		4A8CA1282D4218D00084839A /* MessageQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQueue.swift; sourceTree = "<group>"; };
 		4A8CA12A2D425C0A0084839A /* RefreshInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshInterceptor.swift; sourceTree = "<group>"; };
@@ -1293,6 +1293,7 @@
 		4A12FEEA2C9C484B00DE10BC /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				4A8CA12A2D425C0A0084839A /* RefreshInterceptor.swift */,
 				4A2C3A732CD3C93C006B6804 /* Profile */,
 				D8DCCF8B2CBD8F4300550A8B /* Chat */,
 			);
@@ -1322,11 +1323,7 @@
 			children = (
 				4A12FEFA2C9C49F100DE10BC /* DataMapping */,
 				4A8CA11E2D4217F80084839A /* CustomStompClient.swift */,
-				4A8CA1222D42183D0084839A /* SocketAuthHandler.swift */,
-				4A8CA1242D4218520084839A /* SocketAuthRepository.swift */,
 				4A8CA1262D4218900084839A /* DefaultRefreshInterceptor.swift */,
-				4A8CA1282D4218D00084839A /* MessageQueue.swift */,
-				4A8CA12A2D425C0A0084839A /* RefreshInterceptor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2183,6 +2180,8 @@
 			isa = PBXGroup;
 			children = (
 				4ADA09592CBED95A001F9384 /* DefaultChatStompService.swift */,
+				4A8CA1282D4218D00084839A /* MessageQueue.swift */,
+				4A8CA1222D42183D0084839A /* SocketAuthHandler.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -2937,6 +2936,7 @@
 		D8DCCF9D2CBD949A00550A8B /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				4A8CA1242D4218520084839A /* DefaultSocketAuthRepository.swift */,
 				960A20492D3E923E00DC613E /* DefaultUserInfoRepository.swift */,
 				4ADA09512CBE681B001F9384 /* DefaultChatStompRepository.swift */,
 				D8DCCF9F2CBD94B400550A8B /* DefaultMakeChatRoomRepository.swift */,
@@ -3481,7 +3481,7 @@
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
 				D847A78F2BEBB42200899AA3 /* RequestResetPwDto.swift in Sources */,
-				4A8CA1252D4218520084839A /* SocketAuthRepository.swift in Sources */,
+				4A8CA1252D4218520084839A /* DefaultSocketAuthRepository.swift in Sources */,
 				4A2C3A8D2CD3F612006B6804 /* GetJoinedChatRoomsResponseDto.swift in Sources */,
 				4A0FFBF52BCDA16B00EFEC56 /* CheckDuplicateRequestDto.swift in Sources */,
 				4ADD84752D3937ED003F5894 /* EditChatRoomItemModel.swift in Sources */,

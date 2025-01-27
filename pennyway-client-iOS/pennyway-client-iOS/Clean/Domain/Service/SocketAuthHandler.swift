@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - SocketAuthHandler
 
-final class SocketAuthHandler {
+final class SocketAuthHandler: RefreshInterceptor {
     // MARK: - Properties
    
     static let shared = SocketAuthHandler()
@@ -39,7 +39,7 @@ final class SocketAuthHandler {
             object: nil
         )
        
-        // TokenRefreshHandler의 토큰 갱신 실패 이벤트 구독
+        // TokenRefreshHandler의 토큰 갱신 실 패 이벤트 구독
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleTokenRefreshFailure),
@@ -50,8 +50,9 @@ final class SocketAuthHandler {
    
     // MARK: - Public Methods
    
-    func retry() {
+    func handle(completion: @escaping (Bool) -> Void) {
         guard !isProcessing else {
+            completion(false)
             return
         } // 진행 중이면, 나머지 요청은 버림.
         
@@ -63,7 +64,9 @@ final class SocketAuthHandler {
             postingStyle: .asap
         )
        
-        TokenRefreshHandler.shared.refreshSync { _, _ in }
+        TokenRefreshHandler.shared.refreshSync { _, _ in
+            completion(true)
+        }
     }
    
     @objc private func handleAuthComplete() {

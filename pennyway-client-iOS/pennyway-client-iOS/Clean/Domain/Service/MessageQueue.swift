@@ -6,7 +6,6 @@
 //
 
 import BTree
-import Combine
 import Foundation
 
 // MARK: - MessageQueue
@@ -18,7 +17,6 @@ final class MessageQueue {
     private var messages = BTree<String, SocketMessage>()
     private var isAuthUpdating = false
     private let stompClient: CustomStompClient
-    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialize
     
@@ -57,17 +55,6 @@ final class MessageQueue {
         
         if !isAuthUpdating {
             sendMessage(message, id: id)
-        }
-    }
-    
-    func markSuccess(messageId: String) {
-        if let index = messages.index(forKey: messageId) {
-            messages.remove(at: index)
-        }
-        
-        // 만약 성공 처리 후 큐에 메시지가 남아있고, 인증 갱신 중이 아니라면 다음 메시지 전송
-        if !isAuthUpdating, let oldest = getOldestMessage() {
-            sendMessage(oldest.message, id: oldest.id)
         }
     }
     
@@ -126,4 +113,3 @@ final class MessageQueue {
         }
     }
 }
-
