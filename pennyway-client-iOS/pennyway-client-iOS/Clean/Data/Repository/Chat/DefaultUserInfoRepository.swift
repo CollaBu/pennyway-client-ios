@@ -24,4 +24,21 @@ class DefaultUserInfoRepository: UserInfoRepository {
             }
         }
     }
+    
+    func delegateToAdmin(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void) {
+        ChatRoomAlamofire.shared.delegateToAdmin(chatRoomId, chatMemberId) { result in
+            switch result {
+            case let .success(data):
+                Log.debug("[DefaultUserInfoRepository]: 관리자 위임 성공")
+                completion(true)
+            case let .failure(error):
+                if let StatusSpecificError = error as? StatusSpecificError {
+                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                } else {
+                    Log.error("Network request failed: \(error)")
+                }
+                completion(false)
+            }
+        }
+    }
 }
