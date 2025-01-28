@@ -31,7 +31,21 @@ struct ChatUserInfoView: View {
                                 firstBtnAction: { self.showTransferPopUp = false },
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
-                                    self.showTransferPopUp = false
+                                    Log.debug("????: \(chatRoom?.chatRoomId ?? 0) \(user.id)")
+                                    viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.chatRoomId ?? 0, chatMemberId: user.id) { success in
+                                        if success {
+                                            Log.debug("??")
+                                            viewModelWrapper.chatUserInfoViewModel.delegateToAdmin { success in
+                                                if success {
+                                                    self.showTransferPopUp = false
+                                                    self.presentationMode.wrappedValue.dismiss()
+                                                    Log.debug("[ChatUserInfoView]: 관리자 위임 성공")
+                                                } else {
+                                                    Log.debug("[ChatUserInfoView]: 관리자 위임 실패")
+                                                }
+                                            }
+                                        }
+                                    }
                                 },
                                 secondBtnLabel: "넘길래요",
                                 secondBtnColor: Color(.mint03)
@@ -47,8 +61,12 @@ struct ChatUserInfoView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showKickOutPopUp = false
-                                    viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.chatRoomId ?? 0, chatMemberId: user.id)
-                                    viewModelWrapper.chatUserInfoViewModel.banChatMember()
+                                    viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.chatRoomId ?? 0, chatMemberId: user.id) { success in
+                                        if success {
+                                            viewModelWrapper.chatUserInfoViewModel.banChatMember()
+                                            Log.debug("[ChatUserInfoView]: 내보내기 성공")
+                                        }
+                                    }
                                 },
                                 secondBtnLabel: "내보내기",
                                 secondBtnColor: Color(.red03)

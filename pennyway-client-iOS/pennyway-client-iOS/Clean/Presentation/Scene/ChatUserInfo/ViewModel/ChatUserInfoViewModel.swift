@@ -11,14 +11,15 @@ import Foundation
 
 protocol ChatUserInfoViewModelInput {
     func banChatMember()
-    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64)
-//    func delegateToAdmin()
+    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void)
+    func delegateToAdmin(completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - ChatUserInfoViewModelOutput
 
 protocol ChatUserInfoViewModelOutput {
     var isBanSuccessful: Bool { get set }
+    var isDelegateSuccessful: Bool { get set }
 }
 
 // MARK: - ChatUserInfoViewModel
@@ -31,6 +32,7 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
     @Published var chatRoomId: Int64
     @Published var chatMemberId: Int64
     @Published var isBanSuccessful: Bool = false // 강제 추방 성공 상태 관리
+    @Published var isDelegateSuccessful: Bool = false // 관리자 위임 성공여부 상태 관리
 
     private let userInfoUseCase: UserInfoUseCase
 
@@ -43,9 +45,10 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
     }
 
     /// 채팅 멤버 정보를 설정
-    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64) {
+    func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void) {
         self.chatRoomId = chatRoomId
         self.chatMemberId = chatMemberId
+        completion(true)
     }
 
     /// 채팅멤버 강제 추방
@@ -57,10 +60,25 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
             }
         }
     }
-//
-//    func delegateToAdmin() {
-//        userInfoUseCase.delegateToAdmin(chatRoomId: chatRoomId, chatMemberId: chatMemberId) {
-//
-//        }
-//    }
+
+    /// 관리자 위임
+    func delegateToAdmin(completion: @escaping (Bool) -> Void) {
+        userInfoUseCase.delegateToAdmin(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { [weak self] result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self?.isDelegateSuccessful = true
+                    Log.debug("[DefaultChatUserInfoViewModel] - isDelegateSuccessful: \(String(describing: self?.isDelegateSuccessful))")
+                    completion(true)
+                }
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
+
+                switch error {
+                case .mismatchConflict, .other, .notAdmin, .notFound:
+                    completion(false)
+                }
+            }
+        }
+    }
 }
