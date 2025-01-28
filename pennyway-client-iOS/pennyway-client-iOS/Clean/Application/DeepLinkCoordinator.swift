@@ -8,7 +8,7 @@
 import Foundation
 
 final class DeepLinkCoordinator {
-    func handle(deepLink: DeepLink) {
+    func handle(deepLink _: DeepLink) {
         // 화면 전환 로직
     }
 }
