@@ -88,13 +88,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Log.debug("Message ID: \(messageID)")
         }
 
-        if let deepLink = userInfo["deep_link"] as? String,
-           let url = URL(string: deepLink)
-        {
-            handleDeepLink(url: url)
-            Log.debug("deepLink: \(deepLink)")
-        }
-
         Log.debug(userInfo)
 
         completionHandler([[.banner, .badge, .sound]])
@@ -111,45 +104,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Log.debug("Message ID: \(messageID)")
         }
 
-<<<<<<< HEAD
-//        if let deepLink = userInfo["deepLink"] {
-//            handleDeepLink(url: deepLink as! URL)
-//            Log.debug("deepLink: \(deepLink)")
-//        }
-
-        if let deepLink = userInfo["deep_link"] as? String,
-           let url = URL(string: deepLink)
-        {
-            handleDeepLink(url: url)
-            Log.debug("deepLink: \(deepLink)")
-        }
-
         Log.debug("userInfo:\(userInfo)")
-
-        completionHandler()
-=======
-        Log.debug("userInfo:\(userInfo)")
->>>>>>> 7211b4dfe1dc6eb7f41247387a1990df12ab93d2
     }
 
-    /// 딥링크 처리 로직 호출
-    private func handleDeepLink(url: URL) {
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-              let host = components.host,
-              host == "chatRoom",
-              let queryItems = components.queryItems
-        else {
-            return
-        }
-
-        if let chatRoomId = queryItems.first(where: { $0.name == "id" })?.value {
-            navigateToChatRoom(chatRoomId: chatRoomId)
-        }
-    }
-
-    private func navigateToChatRoom(chatRoomId: String) {
-        // 딥링크에 따라 화면 전환 로직
-        let coordinator = DeepLinkCoordinator()
-        coordinator.handle(deepLink: .chatRoom(chatRoomId: chatRoomId))
-    }
 }

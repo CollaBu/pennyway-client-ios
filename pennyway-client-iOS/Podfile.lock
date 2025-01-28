@@ -10,6 +10,7 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - PromisesObjC (~> 2.4)
+  - BTree (4.1.0)
   - Firebase/Analytics (11.3.0):
     - Firebase/Core
   - Firebase/Core (11.3.0):
@@ -141,6 +142,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - BTree
   - Firebase/Analytics
   - Firebase/Messaging
   - GoogleSignIn
@@ -155,6 +157,7 @@ SPEC REPOS:
     - Alamofire
     - AppAuth
     - AppCheckCore
+    - BTree
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -180,6 +183,7 @@ SPEC CHECKSUMS:
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   AppCheckCore: cc8fd0a3a230ddd401f326489c99990b013f0c4f
+  BTree: 99b99930790b88dc5e8bafbf666a5dfb8d7808b4
   Firebase: 5c575140761e22324806f401e38c483d58db2dec
   FirebaseAnalytics: ce1593872635a5ebd715d0d3937fab195991ecc9
   FirebaseCore: 8542de610f35f86196ba26cdb2544565a5157c8e
@@ -201,6 +205,6 @@ SPEC CHECKSUMS:
   StompClientLib: ac40390e9660c574675f1c933bec81c8e2811a4f
   SwiftFormat: 9f26de7d1d46de100e4d66bec289531b119fc057
 
-PODFILE CHECKSUM: dbacbf475f2b80cf716f02da7827d156cb3061de
+PODFILE CHECKSUM: e39fc241458b742170337f885997ed473acfb33c
 
 COCOAPODS: 1.16.2

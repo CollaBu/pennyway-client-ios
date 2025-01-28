@@ -19,11 +19,11 @@ protocol SendChatUseCase {
 class DefaultSendChatUseCase: SendChatUseCase {
     private let chatStompService = DefaultChatStompService.shared
 
-    func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        chatStompService.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType, completion: completion)
+    func sendMessage(message: String, chatRoomId: Int64, contentType: String, completion _: @escaping (Result<Void, Error>) -> Void) {
+        chatStompService.sendMessage(message: message, chatRoomId: chatRoomId, contentType: contentType)
     }
 
-    func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
-        chatStompService.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: lastReadMessageId, completion: completion)
+    func sendLastMessage(chatRoomId: Int64, lastReadMessageId: Int64, completion _: @escaping (Result<Void, Error>) -> Void) {
+        chatStompService.sendLastMessage(chatRoomId: chatRoomId, lastReadMessageId: lastReadMessageId)
     }
 }

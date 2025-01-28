@@ -7,12 +7,19 @@
 
 import Foundation
 
-class TokenRefreshHandler {
-    static let shared = TokenRefreshHandler()
+class TokenRefreshHandler: DefaultRefreshSocketInterceptor {
+    static let shared = TokenRefreshHandler(interceptor: DefaultRefreshSocketInterceptor(socketAuthRepository: DefaultSocketAuthRepository()))
+
     private var isRefreshing = false
     private var pendingRequests: [(Result<Data?, Error>, Bool) -> Void] = []
+    private let notificationQueue: NotificationQueue = .default
 
-    private init() {}
+    private let interceptor: SocketRefreshInterceptor
+
+    private init(interceptor: SocketRefreshInterceptor) {
+        self.interceptor = interceptor
+        super.init(socketAuthRepository: DefaultSocketAuthRepository())
+    }
 
     func refreshSync(completion: @escaping (Result<Data?, Error>, Bool) -> Void) {
         Log.debug("TokenRefreshManager - refreshSync() called - isRefreshing: \(isRefreshing)")
@@ -43,7 +50,18 @@ class TokenRefreshHandler {
                             AnalyticsConstants.Parameter.isRefresh: true,
                         ])
 
+                        self.interceptor.handle()
+
                     } catch {
+                        // Socket Auth Refresh 실패 이벤트 비동기 발행
+                        self.notificationQueue.enqueue(
+                            Notification(
+                                name: .tokenRefreshFailure,
+                                object: KeychainHelper.loadAccessToken()
+                            ),
+                            postingStyle: .asap
+                        )
+
                         Log.fault("Error parsing response JSON: \(error)")
                         self.notifyPendingRequests(result: .failure(error), shouldRetry: false)
                         completion(.failure(error), false)
