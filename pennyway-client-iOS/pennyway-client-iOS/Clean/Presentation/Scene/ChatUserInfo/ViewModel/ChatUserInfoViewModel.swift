@@ -19,7 +19,7 @@ protocol ChatUserInfoViewModelInput {
 
 protocol ChatUserInfoViewModelOutput {
     var isBanSuccessful: Bool { get set }
-    var isDelegateSuccessful: Bool { get set }
+    var isDelegateSuccessful: Observable<Bool> { get set }
 }
 
 // MARK: - ChatUserInfoViewModel
@@ -28,11 +28,11 @@ protocol ChatUserInfoViewModel: ChatUserInfoViewModelInput, ChatUserInfoViewMode
 
 // MARK: - DefaultChatUserInfoViewModel
 
-class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
+class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {    
     @Published var chatRoomId: Int64
     @Published var chatMemberId: Int64
     @Published var isBanSuccessful: Bool = false // 강제 추방 성공 상태 관리
-    @Published var isDelegateSuccessful: Bool = false // 관리자 위임 성공여부 상태 관리
+    @Published var isDelegateSuccessful = Observable<Bool>(false) // 관리자 위임 성공여부 상태 관리
 
     private let userInfoUseCase: UserInfoUseCase
 
@@ -67,7 +67,7 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self?.isDelegateSuccessful = true
+                    self?.isDelegateSuccessful.value = true
                     Log.debug("[DefaultChatUserInfoViewModel] - isDelegateSuccessful: \(String(describing: self?.isDelegateSuccessful))")
                     completion(true)
                 }

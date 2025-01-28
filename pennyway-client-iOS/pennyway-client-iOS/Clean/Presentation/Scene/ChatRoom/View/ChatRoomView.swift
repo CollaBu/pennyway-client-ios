@@ -118,6 +118,10 @@ struct ChatRoomView: View {
 
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
+            
+//            if viewModelWrapper.isDelegateSuccessful {
+//                
+//            }
         }
     }
 }
@@ -134,6 +138,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
     @Published var isDeleteSuccess: Bool = false
     @Published var showErrorPopUp: Bool = false
+    @Published var isDelegateSuccessful: Bool = false
 
     var chatRoomViewModel: any ChatRoomViewModel
     var editChatRoomViewModel: any EditChatRoomViewModel
@@ -180,6 +185,10 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         editChatRoomViewModel.editRoomData.observe(on: self) { [weak self] newData in
             self?.editRoomData = newData
+        }
+        
+        chatUserInfoViewModel.isDelegateSuccessful.observe(on: self) { [weak self] newData in
+            self?.isDelegateSuccessful = newData
         }
     }
 }
