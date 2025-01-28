@@ -119,9 +119,9 @@ struct ChatRoomView: View {
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
             
-//            if viewModelWrapper.isDelegateSuccessful {
-//                
-//            }
+            if viewModelWrapper.isDelegateSuccessful {
+                ErrorCodePopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: "check")
+            }
         }
     }
 }
