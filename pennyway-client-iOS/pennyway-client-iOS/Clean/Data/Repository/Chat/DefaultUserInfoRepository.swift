@@ -32,12 +32,33 @@ class DefaultUserInfoRepository: UserInfoRepository {
                 Log.debug("[DefaultUserInfoRepository]: 관리자 위임 성공")
                 completion(true)
             case let .failure(error):
-                if let StatusSpecificError = error as? StatusSpecificError {
-                    Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
-                } else {
-                    Log.error("Network request failed: \(error)")
+                // 4033에러
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .forbidden,
+                   statusSpecificError.code == ForbiddenErrorCode.accessNotAllowedForUserRole.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.notAdmin))
                 }
-                completion(false)
+
+                // 4040에러
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .notFound,
+                   statusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.notFound))
+                }
+
+                // 4090 에러
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .conflict,
+                   statusSpecificError.code == ConflictErrorCode.requestConflictWithResourceState.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.mismatchConflict))
+                }
+                
+                else {
+                    completion(.failure(DeleteChatRoomError.other(error)))
+                }
             }
         }
     }

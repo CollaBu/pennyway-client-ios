@@ -1284,7 +1284,6 @@
 		4A12FEE92C9C481900DE10BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				960A20392D3E339500DC613E /* DeepLink */,
 				4A8523EB2CB5A88D00AE90AF /* Chat */,
 				4A12FEEC2C9C487800DE10BC /* User.swift */,
 				4AABDBBB2C9C8C2900E9436D /* PresignedUrl.swift */,
@@ -1306,7 +1305,6 @@
 		4A12FEEB2C9C486300DE10BC /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
-				960A203F2D3E341D00DC613E /* DeepLink */,
 				D8DCCF872CBD8D6300550A8B /* Chat */,
 				D8DCCF7F2CBD8D5700550A8B /* Profile */,
 			);
@@ -1316,7 +1314,6 @@
 		4A12FEF62C9C49B200DE10BC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				960A20422D3E37E600DC613E /* DeepLink */,
 				4A2C3A822CD3C965006B6804 /* Profile */,
 				D8DCCF9D2CBD949A00550A8B /* Chat */,
 			);
@@ -1419,7 +1416,6 @@
 		4A12FF0A2C9C4B7C00DE10BC /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				960A20472D3E389300DC613E /* DeepLinkCoordinator.swift */,
 				4A2C3A5B2CD3457D006B6804 /* ViewStateManager.swift */,
 				4A12FF0B2C9C4B8600DE10BC /* DIContainer */,
 				4A12FF122C9C4BCF00DE10BC /* AppFlowCoordinator.swift */,
@@ -3328,7 +3324,6 @@
 				4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */,
-				960A20442D3E37F800DC613E /* DefaultDeepLinkRepository.swift in Sources */,
 				4A2C3A752CD3C93C006B6804 /* FetchUserProfileRepository.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
@@ -3410,7 +3405,6 @@
 				4A23E7C22CE874E5006FD4E2 /* GetChatMembersRequestDto.swift in Sources */,
 				4AF3A2F92CD932DA0099967F /* GetChatUseCase.swift in Sources */,
 				B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */,
-				960A20412D3E343300DC613E /* HandleDeepLinkUseCase.swift in Sources */,
 				4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
@@ -3421,7 +3415,6 @@
 				D8F9D7432C5A0596005416FC /* ProfileAlarmView.swift in Sources */,
 				4A3701D52C08F7F600F0AEBA /* SpendingRouter.swift in Sources */,
 				4A3701CE2C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift in Sources */,
-				960A20462D3E380900DC613E /* DeepLinkRepository.swift in Sources */,
 				4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */,
 				D86773062C76CA0100C68728 /* KeyboardManager.swift in Sources */,
 				4A4703A92BCEE25000AEE04E /* SmsResponseDto.swift in Sources */,
@@ -3487,7 +3480,6 @@
 				D8DCCF952CBD903400550A8B /* MakeChatRoomResponseDto.swift in Sources */,
 				4A2882022C64CC5900AE50C7 /* MoveCategoryView.swift in Sources */,
 				4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */,
-				960A20482D3E389F00DC613E /* DeepLinkCoordinator.swift in Sources */,
 				B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */,
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
@@ -3523,7 +3515,6 @@
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
-				960A203D2D3E33C500DC613E /* DeepLink.swift in Sources */,
 				4A2C3A5C2CD3457D006B6804 /* ViewStateManager.swift in Sources */,
 				4A12FEEF2C9C489C00DE10BC /* UserProfileItemModel.swift in Sources */,
 				4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */,
@@ -3869,7 +3860,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = Q8UK3SWSPM;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
@@ -3894,7 +3885,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = Q8UK3SWSPM;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MACOSX_DEPLOYMENT_TARGET = 14.5;

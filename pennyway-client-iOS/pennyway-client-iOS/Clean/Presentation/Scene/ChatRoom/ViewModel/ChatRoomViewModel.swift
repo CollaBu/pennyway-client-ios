@@ -197,7 +197,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
 
                 switch error {
-                case .admin, .other, .notAdmin, .notFound:
+                case .mismatchConflict, .other, .notAdmin, .notFound:
                     completion(false)
                 }
             }
