@@ -47,7 +47,6 @@ enum ChatRoomRouter: URLRequestConvertible {
             return "v2/chat-rooms/\(chatRoomId)/admin"
         case let .delegateToAdmin(chatRoomId, chatMemberId):
             return "v2/chat-rooms/\(chatRoomId)/chat-members/\(chatMemberId)/delegate"
-
         }
     }
 

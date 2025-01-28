@@ -24,13 +24,14 @@ class DefaultUserInfoRepository: UserInfoRepository {
             }
         }
     }
-    
-    func delegateToAdmin(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void) {
+
+    func delegateToAdmin(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
         ChatRoomAlamofire.shared.delegateToAdmin(chatRoomId, chatMemberId) { result in
             switch result {
-            case let .success(data):
+            case .success:
                 Log.debug("[DefaultUserInfoRepository]: 관리자 위임 성공")
-                completion(true)
+                completion(.success(()))
+
             case let .failure(error):
                 // 4033에러
                 if let statusSpecificError = error as? StatusSpecificError,
@@ -55,7 +56,7 @@ class DefaultUserInfoRepository: UserInfoRepository {
                 {
                     completion(.failure(DeleteChatRoomError.mismatchConflict))
                 }
-                
+
                 else {
                     completion(.failure(DeleteChatRoomError.other(error)))
                 }

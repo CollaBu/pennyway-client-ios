@@ -12,7 +12,7 @@ import Foundation
 protocol ChatUserInfoViewModelInput {
     func banChatMember()
     func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64)
-    func delegateToAdmin()
+//    func delegateToAdmin()
 }
 
 // MARK: - ChatUserInfoViewModelOutput
@@ -57,7 +57,7 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
             }
         }
     }
-    
+//
 //    func delegateToAdmin() {
 //        userInfoUseCase.delegateToAdmin(chatRoomId: chatRoomId, chatMemberId: chatMemberId) {
 //

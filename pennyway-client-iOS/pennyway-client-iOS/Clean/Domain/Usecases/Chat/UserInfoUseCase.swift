@@ -33,7 +33,7 @@ class DefaultUserInfoUseCase: UserInfoUseCase {
             }
         }
     }
-    
+
     /// 관리자 위임
     func delegateToAdmin(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
         repository.delegateToAdmin(chatRoomId: chatRoomId, chatMemberId: chatMemberId, completion: completion)
