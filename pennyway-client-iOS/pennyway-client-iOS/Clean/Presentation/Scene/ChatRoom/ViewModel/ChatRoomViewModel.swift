@@ -17,6 +17,7 @@ protocol ChatRoomViewModelInput {
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
+    func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -169,9 +170,9 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                     Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
                 }
 
-            case .failure(let error):
+            case let .failure(error):
                 Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
-                
+
                 switch error {
                 case .admin:
                     self?.isErrorPopupShow.value = true
@@ -179,11 +180,10 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 case .other, .notAdmin, .notFound:
                     completion(false)
                 }
-            
             }
         }
     }
-    
+
     /// 채팅방장이 채팅방 삭제
     func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Bool) -> Void) {
         getChatUseCase.deleteChatRoomByAdmin(chatRoomId: chatRoomId) { [weak self] result in
@@ -193,9 +193,9 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                     //                    self?.isDeleteSuccessful.value = true
                     Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
                 }
-            case .failure(let error):
+            case let .failure(error):
                 Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
-                
+
                 switch error {
                 case .admin, .other, .notAdmin, .notFound:
                     completion(false)

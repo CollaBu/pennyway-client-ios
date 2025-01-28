@@ -42,7 +42,7 @@ class DefaultGetChatUseCase: GetChatUseCase {
 
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) { repository.deleteChatRoom(chatRoomId: chatRoomId, completion: completion)
     }
-    
+
     func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
         repository.deleteChatRoomByAdmin(chatRoomId: chatRoomId, completion: completion)
     }

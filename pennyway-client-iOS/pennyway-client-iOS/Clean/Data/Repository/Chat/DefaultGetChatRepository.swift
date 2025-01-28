@@ -127,7 +127,7 @@ class DefaultGetChatRepository: GetChatRepository {
             }
         }
     }
-    
+
     /// 채팅방장이 채팅방 삭제
     func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
         ChatRoomAlamofire.shared.deleteChatRoomByAdmin(chatRoomId) { result in
@@ -135,7 +135,7 @@ class DefaultGetChatRepository: GetChatRepository {
             case .success:
                 Log.debug("[DefaultChatRoomRepository]: 채팅방장이 채팅방 삭제 성공")
                 completion(.success(()))
-                
+
             case let .failure(error):
                 // 4033에러
                 if let statusSpecificError = error as? StatusSpecificError,
@@ -144,7 +144,7 @@ class DefaultGetChatRepository: GetChatRepository {
                 {
                     completion(.failure(DeleteChatRoomError.notAdmin))
                 }
-                
+
                 // 4040에러
                 if let statusSpecificError = error as? StatusSpecificError,
                    statusSpecificError.domainError == .notFound,
@@ -152,7 +152,7 @@ class DefaultGetChatRepository: GetChatRepository {
                 {
                     completion(.failure(DeleteChatRoomError.notFound))
                 }
-                
+
                 else {
                     completion(.failure(DeleteChatRoomError.other(error)))
                 }
