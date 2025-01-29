@@ -111,7 +111,7 @@ struct ChatRoomView: View {
                                 isSideMenuPresented = false
                             }
                         }
-                    ChatSideMenuView()
+                    ChatSideMenuView(isSideMenuPresented: $isSideMenuPresented)
                         .transition(.move(edge: .trailing))
                 }
             }

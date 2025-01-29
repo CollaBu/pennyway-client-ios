@@ -16,6 +16,7 @@ struct ChatSideMenuView: View {
     @State private var showExitPopUp: Bool = false
     @State private var showChatUserView: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
+    @Binding var isSideMenuPresented: Bool
     
     var body: some View {
         ZStack {
@@ -66,6 +67,7 @@ struct ChatSideMenuView: View {
         .onChange(of: viewModelWrapper.isDeleteSuccess) { success in
             if success {
                 self.presentationMode.wrappedValue.dismiss()
+                isSideMenuPresented = false
             }
         }
         .onChange(of: selectedUser) { newValue in
@@ -73,7 +75,7 @@ struct ChatSideMenuView: View {
         }
         .fullScreenCover(isPresented: $showChatUserView) {
             if let user = selectedUser {
-                ChatUserInfoView(viewModelWrapper: viewModelWrapper, user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo, chatRoom: viewModelWrapper.roomData) // 선택된 사용자 정보를 전달
+                ChatUserInfoView(isSideMenuPresented: $isSideMenuPresented, viewModelWrapper: viewModelWrapper, user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo, chatRoom: viewModelWrapper.roomData) // 선택된 사용자 정보를 전달
                     .ignoresSafeArea()
                     .onDisappear {
                         selectedUser = nil // 뷰가 닫힐 때 선택된 사용자 초기화

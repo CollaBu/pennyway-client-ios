@@ -10,7 +10,7 @@ import Foundation
 // MARK: - ChatUserInfoViewModelInput
 
 protocol ChatUserInfoViewModelInput {
-    func banChatMember()
+    func banChatMember(completion: @escaping (Bool) -> Void) 
     func setChatMemberInfo(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void)
     func delegateToAdmin(completion: @escaping (Bool) -> Void)
 }
@@ -52,11 +52,12 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
     }
 
     /// 채팅멤버 강제 추방
-    func banChatMember() {
+    func banChatMember(completion: @escaping (Bool) -> Void) {
         userInfoUseCase.banChatMember(chatRoomId: chatRoomId, chatMemberId: chatMemberId) { [weak self] isSuccess in
             DispatchQueue.main.async {
                 self?.isBanSuccessful = isSuccess
                 Log.debug("[DefaultChatUserInfoViewModel] - isBanSuccessful: \(self!.isBanSuccessful)")
+                completion(true)
             }
         }
     }
