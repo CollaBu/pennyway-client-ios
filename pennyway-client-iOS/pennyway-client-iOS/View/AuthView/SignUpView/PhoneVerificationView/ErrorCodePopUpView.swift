@@ -1,6 +1,22 @@
 
 import SwiftUI
 
+// MARK: - IconType
+
+enum IconType {
+    case check
+    case error
+
+    var iconName: String {
+        switch self {
+        case .check:
+            return "icon_chatRoom_check"
+        case .error:
+            return "icon_close"
+        }
+    }
+}
+
 // MARK: - ErrorCodePopUpView
 
 // TODO: 변수명 네이밍 수정필요
@@ -8,7 +24,7 @@ struct ErrorCodePopUpView: View {
     @Binding var showingPopUp: Bool
     let titleLabel: String
     let subLabel: String
-    let iconType: String?
+    let iconType: IconType
 
     var body: some View {
         if showingPopUp {
@@ -27,10 +43,10 @@ extension ErrorCodePopUpView {
         var contentHeight: CGFloat
         let titleLabel: String
         let subLabel: String
-        let iconType: String?
+        let iconType: IconType
 
         @Binding var showingPopUp: Bool
-        
+
         var body: some View {
             ZStack {
                 VStack(alignment: .center) {
@@ -88,15 +104,9 @@ extension ErrorCodePopUpView {
             .cornerRadius(10)
             .padding(.horizontal, 40)
         }
-        
-        // 아이콘 타입에 따라 아이콘 이름 매핑
+
         private var iconName: String {
-            switch iconType {
-            case "check":
-                return "icon_chatRoom_check"
-            default:
-                return "icon_close"
-            }
+            iconType.iconName
         }
     }
 }
