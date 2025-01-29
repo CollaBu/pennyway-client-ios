@@ -81,7 +81,7 @@ struct ChatSideMenuView: View {
                 return
             } // 초기 로드 시 무시
 
-            let alarmType = newValue ? ChatRoomAlarm.on : ChatRoomAlarm.off
+            let alarmType = newValue ? ChatRoomAlarmType.on : ChatRoomAlarmType.off
 
             viewModelWrapper.editChatRoomViewModel.handleChatRoomAlarm(chatRoomId: viewModelWrapper.roomData?.chatRoomId ?? 0, chatRoomAlarm: alarmType) { success in
                 if success {

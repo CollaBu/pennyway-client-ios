@@ -14,7 +14,7 @@ protocol EditChatRoomUseCase {
     func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void)
     func uploadImage(roomData: AdminModeChatRoomItemModel, image: UIImage, completion: @escaping (Result<String, Error>) -> Void)
     func editChatRoom(roomData: AdminModeChatRoomItemModel, completion: @escaping (Bool) -> Void)
-    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarm, completion: @escaping (Bool) -> Void)
+    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarmType, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - DefaultEditChatRoomUseCase
@@ -79,7 +79,7 @@ class DefaultEditChatRoomUseCase: EditChatRoomUseCase {
     }
 
     /// 채팅방 알림 설정  메서드
-    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarm, completion: @escaping (Bool) -> Void) {
+    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarmType, completion: @escaping (Bool) -> Void) {
         repository.handleChatRoomAlarm(chatRoomId: chatRoomId, chatRoomAlarm: chatRoomAlarm, completion: completion)
     }
 

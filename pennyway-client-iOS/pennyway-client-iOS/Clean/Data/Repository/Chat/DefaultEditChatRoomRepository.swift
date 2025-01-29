@@ -82,7 +82,7 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
     }
 
     /// 채팅방 알림 설정
-    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarm, completion: @escaping (Bool) -> Void) {
+    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarmType, completion: @escaping (Bool) -> Void) {
         if chatRoomAlarm == .on {
             ChatRoomAlamofire.shared.turnOnChatRoomAlarm(chatRoomId) { result in
                 switch result {
@@ -139,11 +139,4 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
         }
         return presignedUrl
     }
-}
-
-// MARK: - ChatRoomAlarm
-
-enum ChatRoomAlarm {
-    case on
-    case off
 }
