@@ -23,7 +23,7 @@ protocol ChatRoomViewModelInput {
 // MARK: - ChatRoomViewModelOutput
 
 protocol ChatRoomViewModelOutput {
-    var roomData: Observable<AdminModeChatRoomItemModel?> { get set }
+    var roomData: Observable<ChatRoomProtocol?> { get set }
     var roomDetailData: Observable<ChatRoomDetailItemModel?> { get set }
     var messageData: Observable<[MessageItemModel]> { get set }
     var chatUserData: Observable<[ChatMemberItemModel]> { get set }
@@ -44,7 +44,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     @Published var isDeleteSuccessful = Observable<Bool>(false)
     @Published var isErrorPopupShow = Observable<Bool>(false)
 
-    var roomData: Observable<AdminModeChatRoomItemModel?> = Observable(nil)
+    var roomData: Observable<ChatRoomProtocol?> = Observable(nil)
     var roomDetailData: Observable<ChatRoomDetailItemModel?> = Observable(nil)
     var messageData: Observable<[MessageItemModel]> = Observable([]) // 메시지 목록
     var chatUserData: Observable<[ChatMemberItemModel]> = Observable([]) // 모든 채팅방 사용자
@@ -77,7 +77,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
         NotificationCenter.default.publisher(for: .didReceiveMessage)
             .sink { [weak self] notification in
                 // 메시지 받은 경우 처리
-                if let message = notification.object as? MessageItemModel, self?.roomData.value?.chatRoomId == message.chatRoomId {
+                if let message = notification.object as? MessageItemModel, self?.roomData.value?.id == message.chatRoomId {
                     self?.handleNewMessage(message)
                     self?.sendLastMessage(chatRoomId: message.chatRoomId, lastReadMessageId: message.chatId)
                 }
