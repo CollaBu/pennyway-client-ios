@@ -17,7 +17,7 @@ struct ChatUserInfoView: View {
 
     let user: ChatMemberItemModel
     let myInfo: ChatMemberItemModel?
-    let chatRoom: AdminModeChatRoomItemModel?
+    let chatRoom: ChatRoomProtocol?
 
     var body: some View {
         ZStack {
@@ -47,7 +47,7 @@ struct ChatUserInfoView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showKickOutPopUp = false
-                                    viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.chatRoomId ?? 0, chatMemberId: user.id)
+                                    viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.id ?? 0, chatMemberId: user.id)
                                     viewModelWrapper.chatUserInfoViewModel.banChatMember()
                                 },
                                 secondBtnLabel: "내보내기",

@@ -18,6 +18,7 @@ protocol ChatRoomViewModelInput {
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
     func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
+    func updateRoomData(title: String, description: String, backgroundImageUrl: String, isPrivate: Bool) -> ChatRoomProtocol?
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -202,6 +203,20 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 }
             }
         }
+    }
+
+    /// 채팅방 수정 후 데이터 업데이트
+    func updateRoomData(title: String, description: String, backgroundImageUrl: String, isPrivate: Bool) -> ChatRoomProtocol? {
+        if let room = roomData.value {
+            return UpdatedChatRoomModel(
+                original: room,
+                title: title,
+                description: description,
+                isPrivate: isPrivate,
+                backgroundImageUrl: backgroundImageUrl
+            )
+        }
+        return nil
     }
 }
 

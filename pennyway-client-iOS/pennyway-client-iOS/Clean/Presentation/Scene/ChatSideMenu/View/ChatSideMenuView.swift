@@ -45,7 +45,7 @@ struct ChatSideMenuView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showExitPopUp = false
-                                    if let chatRoomId = viewModelWrapper.roomData?.chatRoomId {
+                                    if let chatRoomId = viewModelWrapper.roomData?.id {
                                         viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId) { success in
                                         
                                             if success {
