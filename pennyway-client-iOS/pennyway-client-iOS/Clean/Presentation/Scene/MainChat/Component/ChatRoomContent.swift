@@ -188,11 +188,6 @@ struct ChatRoomCell: View, ImageLoadable {
             .background(Color.white)
             .offset(x: offset)
             .gesture(gesture)
-//            .simultaneousGesture(gesture)
-//            .highPriorityGesture(
-//                TapGesture()
-//                    .exclusively(before: gesture)
-//            )
         }
         .onAppear {
             loadImage(from: chatRoom.backgroundImageUrl) { image in
@@ -202,7 +197,7 @@ struct ChatRoomCell: View, ImageLoadable {
     }
     
     private var gesture: some Gesture {
-        DragGesture()
+        DragGesture(minimumDistance: 20)
             .onChanged { value in
                 withAnimation {
                     if value.translation.width < 0, isMyChat { // 내 채팅방일 때만 스와이프 가능

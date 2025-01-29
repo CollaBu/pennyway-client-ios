@@ -42,3 +42,11 @@ struct PreviousMessage: Equatable {
         }
     }
 }
+
+// MARK: - SocketMessage
+
+struct SocketMessage {
+    let content: String
+    let destination: String
+    let contentType: String
+}
