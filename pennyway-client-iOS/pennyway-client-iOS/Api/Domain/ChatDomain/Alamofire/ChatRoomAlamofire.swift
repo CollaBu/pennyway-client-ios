@@ -60,6 +60,13 @@ class ChatRoomAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatAdminMode(chatRoomId: chatRoomId), completion: completion)
     }
     
+    /// 관리자 위임
+    func delegateToAdmin(_ chatRoomId: Int64, _ chatMemberId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatRoomAlamofire - delegateToAdmin() called \(chatRoomId)")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.delegateToAdmin(chatRoomId: chatRoomId, chatMemberId: chatMemberId), completion: completion)
+    }
+    
     /// 채팅방장이 채팅방 삭제
     func deleteChatRoomByAdmin(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatRoomAlamofire - deleteChatRoomByAdmin() called \(chatRoomId)")

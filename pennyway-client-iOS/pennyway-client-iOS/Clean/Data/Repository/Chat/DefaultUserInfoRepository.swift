@@ -24,4 +24,43 @@ class DefaultUserInfoRepository: UserInfoRepository {
             }
         }
     }
+
+    func delegateToAdmin(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
+        ChatRoomAlamofire.shared.delegateToAdmin(chatRoomId, chatMemberId) { result in
+            switch result {
+            case .success:
+                Log.debug("[DefaultUserInfoRepository]: 관리자 위임 성공")
+                completion(.success(()))
+
+            case let .failure(error):
+                // 4033에러
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .forbidden,
+                   statusSpecificError.code == ForbiddenErrorCode.accessNotAllowedForUserRole.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.notAdmin))
+                }
+
+                // 4040에러
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .notFound,
+                   statusSpecificError.code == NotFoundErrorCode.resourceNotFound.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.notFound))
+                }
+
+                // 4090 에러
+                if let statusSpecificError = error as? StatusSpecificError,
+                   statusSpecificError.domainError == .conflict,
+                   statusSpecificError.code == ConflictErrorCode.requestConflictWithResourceState.rawValue
+                {
+                    completion(.failure(DeleteChatRoomError.mismatchConflict))
+                }
+
+                else {
+                    completion(.failure(DeleteChatRoomError.other(error)))
+                }
+            }
+        }
+    }
 }

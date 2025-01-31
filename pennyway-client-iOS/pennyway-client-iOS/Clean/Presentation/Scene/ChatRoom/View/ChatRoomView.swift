@@ -35,6 +35,7 @@ struct ChatRoomView: View {
                     .offset(y: -keyboardManager.keyboardHeight)
                     .animation(keyboardManager.keyboardHeight > 0 ? .easeOut(duration: 0.5) : nil, value: keyboardManager.keyboardHeight)
             }
+
             .navigationBarColor(UIColor(named: "Ashblue02"), title: "\(roomTitle)")
             .background(Color("Ashblue02"))
             .setTabBarVisibility(isHidden: true)
@@ -110,12 +111,18 @@ struct ChatRoomView: View {
                                 isSideMenuPresented = false
                             }
                         }
-                    ChatSideMenuView()
+                    ChatSideMenuView(isSideMenuPresented: $isSideMenuPresented)
                         .transition(.move(edge: .trailing))
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: isSideMenuPresented)
 
+//            ZStack {
+//                if viewModelWrapper.isDelegateSuccessful {
+//                    ErrorCodePopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: "check")
+//                }
+//            }
+//            
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
         }
@@ -134,6 +141,7 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
     @Published var isDeleteSuccess: Bool = false
     @Published var showErrorPopUp: Bool = false
+    @Published var isDelegateSuccessful: Bool = false
 
     var chatRoomViewModel: any ChatRoomViewModel
     var editChatRoomViewModel: any EditChatRoomViewModel
@@ -180,6 +188,10 @@ final class ChatRoomViewModelWrapper: ObservableObject {
 
         editChatRoomViewModel.editRoomData.observe(on: self) { [weak self] newData in
             self?.editRoomData = newData
+        }
+
+        chatUserInfoViewModel.isDelegateSuccessful.observe(on: self) { [weak self] newData in
+            self?.isDelegateSuccessful = newData
         }
     }
 }
