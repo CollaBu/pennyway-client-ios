@@ -11,4 +11,6 @@ import Foundation
 protocol UserInfoRepository {
     /// 채팅멤버를 강제추방 하는 함수
     func banChatMember(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void)
+    /// 관리자 위임하는 함수
+    func delegateToAdmin(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void)
 }

@@ -1,18 +1,36 @@
 
 import SwiftUI
 
+// MARK: - IconType
+
+enum IconType {
+    case check
+    case error
+
+    var iconName: String {
+        switch self {
+        case .check:
+            return "icon_chatRoom_check"
+        case .error:
+            return "icon_close"
+        }
+    }
+}
+
 // MARK: - ErrorCodePopUpView
 
+// TODO: 변수명 네이밍 수정필요
 struct ErrorCodePopUpView: View {
     @Binding var showingPopUp: Bool
     let titleLabel: String
     let subLabel: String
+    let iconType: IconType
 
     var body: some View {
         if showingPopUp {
             Color(.black01).edgesIgnoringSafeArea(.all)
         }
-        PopupContent(imageSize: CGSize(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor()), frameHeight: 145 * DynamicSizeFactor.factor(), contentHeight: 70 * DynamicSizeFactor.factor(), titleLabel: titleLabel, subLabel: subLabel, showingPopUp: $showingPopUp)
+        PopupContent(imageSize: CGSize(width: 44 * DynamicSizeFactor.factor(), height: 44 * DynamicSizeFactor.factor()), frameHeight: 145 * DynamicSizeFactor.factor(), contentHeight: 70 * DynamicSizeFactor.factor(), titleLabel: titleLabel, subLabel: subLabel, iconType: iconType, showingPopUp: $showingPopUp)
     }
 }
 
@@ -25,6 +43,7 @@ extension ErrorCodePopUpView {
         var contentHeight: CGFloat
         let titleLabel: String
         let subLabel: String
+        let iconType: IconType
 
         @Binding var showingPopUp: Bool
 
@@ -40,7 +59,7 @@ extension ErrorCodePopUpView {
                                 Button(action: {
                                     showingPopUp = false
                                 }) {
-                                    Image("icon_close")
+                                    Image(iconName)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -84,6 +103,10 @@ extension ErrorCodePopUpView {
             .background(Color("White01"))
             .cornerRadius(10)
             .padding(.horizontal, 40)
+        }
+
+        private var iconName: String {
+            iconType.iconName
         }
     }
 }
