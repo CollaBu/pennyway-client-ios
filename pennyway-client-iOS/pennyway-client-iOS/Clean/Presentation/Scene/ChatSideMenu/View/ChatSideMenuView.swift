@@ -47,7 +47,7 @@ struct ChatSideMenuView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showExitPopUp = false
-                                    if let chatRoomId = viewModelWrapper.roomData?.chatRoomId {
+                                    if let chatRoomId = viewModelWrapper.roomData?.id {
                                         viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId) { success in
                                         
                                             if success {
@@ -85,7 +85,7 @@ struct ChatSideMenuView: View {
 
             let alarmType = newValue ? ChatRoomAlarmType.on : ChatRoomAlarmType.off
 
-            viewModelWrapper.editChatRoomViewModel.handleChatRoomAlarm(chatRoomId: viewModelWrapper.roomData?.chatRoomId ?? 0, chatRoomAlarm: alarmType) { success in
+            viewModelWrapper.editChatRoomViewModel.handleChatRoomAlarm(chatRoomId: viewModelWrapper.roomData?.id ?? 0, chatRoomAlarm: alarmType) { success in
                 if success {
                     Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 성공")
                     viewModelWrapper.chatRoomViewModel.updateAlarmSetting(setting: isAlarmOn)

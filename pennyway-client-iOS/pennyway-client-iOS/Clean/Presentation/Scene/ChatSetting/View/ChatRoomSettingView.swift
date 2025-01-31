@@ -94,10 +94,14 @@ struct ChatRoomSettingView: View, ImageLoadable {
                             validateForm()
 
                             if isFormValid {
-                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, password: password, description: description, selectedUIImage: selectedUIImage)
+                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, description: description, password: password, selectedUIImage: selectedUIImage)
                                 viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
                                     if success {
                                         showCompleteToastPopup = true
+                                        if let editData = viewModelWrapper.editRoomData {
+                                            let isPrivate = editData.password != nil
+                                            viewModelWrapper.chatRoomViewModel.roomData.value = viewModelWrapper.chatRoomViewModel.updateRoomData(title: editData.title, description: editData.description ?? "", backgroundImageUrl: editData.backgroundImageUrl ?? "", isPrivate: isPrivate)
+                                        }
                                     }
                                 }
                             }
@@ -113,13 +117,22 @@ struct ChatRoomSettingView: View, ImageLoadable {
                 }
             }
             .onAppear {
-                chatRoomName = viewModelWrapper.editRoomData?.title ?? ""
-                description = viewModelWrapper.editRoomData?.description ?? ""
-                password = viewModelWrapper.editRoomData?.password ?? ""
-                isSecret = !password.isEmpty
+                viewModelWrapper.editChatRoomViewModel.getChatAdminMode(chatRoomId: viewModelWrapper.roomData?.id ?? 0) { result in
 
-                loadImage(from: viewModelWrapper.editRoomData?.backgroundImageUrl ?? "") { image in
-                    self.selectedUIImage = image
+                    switch result {
+                    case let .success(data):
+
+                        chatRoomName = data.title
+                        description = data.description ?? ""
+                        loadImage(from: data.backgroundImageUrl ?? "") { image in
+                            self.selectedUIImage = image
+                        }
+                        password = data.password ?? ""
+                        isSecret = !password.isEmpty
+
+                    case .failure:
+                        Log.debug("[ChatRoomSettingView] 관리자 모드 조회 실패")
+                    }
                 }
             }
 

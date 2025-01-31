@@ -15,11 +15,6 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
             switch result {
             case let .success(data):
                 if let responseData = data {
-                    if let jsonString = String(data: responseData, encoding: .utf8) {
-                        Log.debug("[DefaultEditChatRoomRepository]: 응답 JSON 출력: \(jsonString)")
-                    } else {
-                        Log.warning("[DefaultEditChatRoomRepository]: 응답 데이터를 문자열로 변환할 수 없습니다.")
-                    }
                     do {
                         let response = try JSONDecoder().decode(GetChatAdminModeResponseDto.self, from: responseData)
                         Log.debug("[DefaultEditChatRoomRepository]: 채팅방 관리자 모드 조회 api 성공: \(response)")
