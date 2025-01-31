@@ -50,8 +50,8 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
 
         let editChatRoomRequestDto = EditChatRoomRequestDto(
             title: roomData.title,
-            description: roomData.description?.isEmpty == true ? nil : roomData.description!,
-            password: roomData.password?.isEmpty == true ? nil : roomData.password!,
+            description: roomData.description?.isEmpty == true ? nil : roomData.description,
+            password: roomData.password?.isEmpty == true ? nil : roomData.password,
             backgroundImageUrl: parserData.isEmpty ? nil : parserData
         )
 

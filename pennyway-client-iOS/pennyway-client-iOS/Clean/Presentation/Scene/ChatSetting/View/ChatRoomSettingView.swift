@@ -94,7 +94,7 @@ struct ChatRoomSettingView: View, ImageLoadable {
                             validateForm()
 
                             if isFormValid {
-                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, password: password, selectedUIImage: selectedUIImage)
+                                viewModelWrapper.editChatRoomViewModel.updateEditRoomData(title: chatRoomName, password: password, description: description, selectedUIImage: selectedUIImage)
                                 viewModelWrapper.editChatRoomViewModel.editChatRoom { success in
                                     if success {
                                         showCompleteToastPopup = true
