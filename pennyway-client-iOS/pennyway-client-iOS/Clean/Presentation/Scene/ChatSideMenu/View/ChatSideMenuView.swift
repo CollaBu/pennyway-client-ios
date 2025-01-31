@@ -48,7 +48,7 @@ struct ChatSideMenuView: View {
                                     self.showExitPopUp = false
                                     if let chatRoomId = viewModelWrapper.roomData?.chatRoomId {
                                         viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId) { success in
-                                        
+                                            
                                             if success {
                                                 Log.debug("[ChatSideMenuView]: 채팅방 나가기 성공")
                                             } else {
