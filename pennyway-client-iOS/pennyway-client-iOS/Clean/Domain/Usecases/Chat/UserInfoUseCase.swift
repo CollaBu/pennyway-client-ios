@@ -9,6 +9,7 @@
 
 protocol UserInfoUseCase {
     func banChatMember(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Bool) -> Void)
+    func delegateToAdmin(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void)
 }
 
 // MARK: - DefaultUserInfoUseCase
@@ -31,5 +32,10 @@ class DefaultUserInfoUseCase: UserInfoUseCase {
                 Log.error("[DefaultUserInfoUseCase]: 채팅멤버 강제 추방 실패")
             }
         }
+    }
+
+    /// 관리자 위임
+    func delegateToAdmin(chatRoomId: Int64, chatMemberId: Int64, completion: @escaping (Result<Void, DeleteChatRoomError>) -> Void) {
+        repository.delegateToAdmin(chatRoomId: chatRoomId, chatMemberId: chatMemberId, completion: completion)
     }
 }
