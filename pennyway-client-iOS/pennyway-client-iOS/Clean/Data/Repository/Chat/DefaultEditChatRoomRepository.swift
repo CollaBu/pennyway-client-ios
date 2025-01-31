@@ -7,9 +7,9 @@
 
 import Foundation
 
-class DefaultEditChatRoomRepository: EditChatRoomRepository {
-    private let cdnUrl = Url.cdnUrl
+// MARK: - DefaultEditChatRoomRepository
 
+class DefaultEditChatRoomRepository: EditChatRoomRepository {
     func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoom, Error>) -> Void) {
         ChatRoomAlamofire.shared.getChatAdminMode(chatRoomId) { result in
             switch result {
@@ -24,7 +24,7 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
                         let response = try JSONDecoder().decode(GetChatAdminModeResponseDto.self, from: responseData)
                         Log.debug("[DefaultEditChatRoomRepository]: 채팅방 관리자 모드 조회 api 성공: \(response)")
 
-                        let chatRoomdata = GetChatAdminModeResponseDto.to(dto: response, cdnUrl: self.cdnUrl)
+                        let chatRoomdata = GetChatAdminModeResponseDto.to(dto: response, cdnUrl: Url.cdnUrl)
 
                         Log.debug("[DefaultEditChatRoomRepository]: 데이터 확인:  \(chatRoomdata)")
 
@@ -77,6 +77,45 @@ class DefaultEditChatRoomRepository: EditChatRoomRepository {
                     Log.error("Network request failed: \(error)")
                 }
                 completion(.failure(error))
+            }
+        }
+    }
+
+    /// 채팅방 알림 설정
+    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarmType, completion: @escaping (Bool) -> Void) {
+        if chatRoomAlarm == .on {
+            ChatRoomAlamofire.shared.turnOnChatRoomAlarm(chatRoomId) { result in
+                switch result {
+                case let .success(data):
+                    if let responseData = data {
+                        Log.debug("[DefaultEditChatRoomRepository]: 채팅방 알림 켜기 api 성공: \(responseData)")
+                        completion(true)
+                    }
+                case let .failure(error):
+                    if let StatusSpecificError = error as? StatusSpecificError {
+                        Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                    } else {
+                        Log.error("Network request failed: \(error)")
+                    }
+                    completion(false)
+                }
+            }
+        } else {
+            ChatRoomAlamofire.shared.turnOffChatRoomAlarm(chatRoomId) { result in
+                switch result {
+                case let .success(data):
+                    if let responseData = data {
+                        Log.debug("[DefaultEditChatRoomRepository]: 채팅방 알림 끄기 api 성공: \(responseData)")
+                        completion(true)
+                    }
+                case let .failure(error):
+                    if let StatusSpecificError = error as? StatusSpecificError {
+                        Log.info("StatusSpecificError occurred: \(StatusSpecificError)")
+                    } else {
+                        Log.error("Network request failed: \(error)")
+                    }
+                    completion(false)
+                }
             }
         }
     }

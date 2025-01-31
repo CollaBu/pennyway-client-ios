@@ -16,6 +16,7 @@ protocol EditChatRoomViewModelInput {
     func getChatAdminMode(chatRoomId: Int64, completion: @escaping (Result<AdminModeChatRoomItemModel, Error>) -> Void)
     func editChatRoom(completion: @escaping (Bool) -> Void)
     func updateEditRoomData(title: String, password: String, selectedUIImage: UIImage?)
+    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarmType, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - EditChatRoomViewModelOutput
@@ -123,6 +124,13 @@ class DefaultEditChatRoomViewModel: EditChatRoomViewModel {
         executeEditChatRoom(completion: completion)
     }
 
+    /// 채팅방 알람 설정 요청
+    func handleChatRoomAlarm(chatRoomId: Int64, chatRoomAlarm: ChatRoomAlarmType, completion: @escaping (Bool) -> Void) {
+        editChatRoomUseCase.handleChatRoomAlarm(chatRoomId: chatRoomId, chatRoomAlarm: chatRoomAlarm, completion: completion)
+    }
+}
+
+extension DefaultEditChatRoomViewModel {
     /// 채팅방 수정 실행 (공통 메서드)
     private func executeEditChatRoom(completion: @escaping (Bool) -> Void) {
         editChatRoomUseCase.editChatRoom(roomData: editRoomData.value) { success in

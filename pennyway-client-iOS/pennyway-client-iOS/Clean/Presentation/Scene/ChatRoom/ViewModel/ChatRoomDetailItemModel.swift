@@ -15,6 +15,10 @@ struct ChatRoomDetailItemModel {
     var otherParticipants: [OtherMemberItemModel]
     var recentMessages: [MessageItemModel]
 
+    mutating func updateAlarmSetting(setting: Bool) {
+        myInfo.notifyEnabled = setting
+    }
+
     static func from(model: ChatRoomDetailInfo) -> ChatRoomDetailItemModel {
         return ChatRoomDetailItemModel(
             myInfo: ChatMemberItemModel(
