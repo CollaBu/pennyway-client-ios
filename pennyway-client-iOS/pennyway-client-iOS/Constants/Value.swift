@@ -74,8 +74,7 @@ enum CategoryType: String, Codable {
     case system = "SYSTEM"
 }
 
-
-// MARK: - ChatRoomAlarm
+// MARK: - ChatRoomAlarmType
 
 enum ChatRoomAlarmType {
     case on

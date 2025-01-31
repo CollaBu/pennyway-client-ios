@@ -18,6 +18,7 @@ protocol ChatRoomViewModelInput {
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
     func updateAlarmSetting(setting: Bool)
+    func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - ChatRoomViewModelOutput
@@ -169,17 +170,36 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                     self?.isDeleteSuccessful.value = true
                     Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
                 }
-            case let .failure(error):
-                Log.error("[DefaultChatRoomViewModel] 채팅 메시지 전송 실패: \(error.localizedDescription)")
 
-                if let deleteChatRoomError = error as? DeleteChatRoomError {
-                    switch deleteChatRoomError {
-                    case .admin:
-                        self?.isErrorPopupShow.value = true
-                        completion(false)
-                    case .other:
-                        completion(false)
-                    }
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
+
+                switch error {
+                case .admin:
+                    self?.isErrorPopupShow.value = true
+                    completion(false)
+                case .other, .notAdmin, .notFound:
+                    completion(false)
+                }
+            }
+        }
+    }
+
+    /// 채팅방장이 채팅방 삭제
+    func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Bool) -> Void) {
+        getChatUseCase.deleteChatRoomByAdmin(chatRoomId: chatRoomId) { [weak self] result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    //                    self?.isDeleteSuccessful.value = true
+                    Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
+                }
+            case let .failure(error):
+                Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
+
+                switch error {
+                case .admin, .other, .notAdmin, .notFound:
+                    completion(false)
                 }
             }
         }
