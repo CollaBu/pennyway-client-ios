@@ -16,6 +16,8 @@ struct ChatSideMenuView: View {
     @State private var showExitPopUp: Bool = false
     @State private var showChatUserView: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
+    @State private var isInitialLoad: Bool = true // 초기 로드 여부
+    @Binding var isSideMenuPresented: Bool
     
     var body: some View {
         ZStack {
@@ -31,7 +33,7 @@ struct ChatSideMenuView: View {
             
             if viewModelWrapper.showErrorPopUp {
                 ZStack {
-                    ErrorCodePopUpView(showingPopUp: $viewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요")
+                    ErrorCodePopUpView(showingPopUp: $viewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요", iconType: .error)
                         .edgesIgnoringSafeArea(.vertical)
                 }
                 .edgesIgnoringSafeArea(.vertical)
@@ -66,14 +68,35 @@ struct ChatSideMenuView: View {
         .onChange(of: viewModelWrapper.isDeleteSuccess) { success in
             if success {
                 self.presentationMode.wrappedValue.dismiss()
+                isSideMenuPresented = false
             }
         }
         .onChange(of: selectedUser) { newValue in
             showChatUserView = newValue != nil
         }
+        .onAppear {
+            isAlarmOn = viewModelWrapper.roomDetailData?.myInfo.notifyEnabled ?? false
+            isInitialLoad = false // 초기 로드 이후 false로 변경
+        }
+        .onChange(of: isAlarmOn) { newValue in
+            guard !isInitialLoad else {
+                return
+            } // 초기 로드 시 무시
+
+            let alarmType = newValue ? ChatRoomAlarmType.on : ChatRoomAlarmType.off
+
+            viewModelWrapper.editChatRoomViewModel.handleChatRoomAlarm(chatRoomId: viewModelWrapper.roomData?.id ?? 0, chatRoomAlarm: alarmType) { success in
+                if success {
+                    Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 성공")
+                    viewModelWrapper.chatRoomViewModel.updateAlarmSetting(setting: isAlarmOn)
+                } else {
+                    Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 실패")
+                }
+            }
+        }
         .fullScreenCover(isPresented: $showChatUserView) {
             if let user = selectedUser {
-                ChatUserInfoView(viewModelWrapper: viewModelWrapper, user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo, chatRoom: viewModelWrapper.roomData) // 선택된 사용자 정보를 전달
+                ChatUserInfoView(isSideMenuPresented: $isSideMenuPresented, viewModelWrapper: viewModelWrapper, user: user, myInfo: viewModelWrapper.roomDetailData?.myInfo, chatRoom: viewModelWrapper.roomData) // 선택된 사용자 정보를 전달
                     .ignoresSafeArea()
                     .onDisappear {
                         selectedUser = nil // 뷰가 닫힐 때 선택된 사용자 초기화

@@ -17,6 +17,7 @@ protocol ChatRoomViewModelInput {
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
+    func updateAlarmSetting(setting: Bool)
     func deleteChatRoomByAdmin(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
     func updateRoomData(title: String, description: String, backgroundImageUrl: String, isPrivate: Bool) -> ChatRoomProtocol?
 }
@@ -175,7 +176,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
 
                 switch error {
-                case .admin:
+                case .mismatchConflict:
                     self?.isErrorPopupShow.value = true
                     completion(false)
                 case .other, .notAdmin, .notFound:
@@ -198,7 +199,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                 Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
 
                 switch error {
-                case .admin, .other, .notAdmin, .notFound:
+                case .mismatchConflict, .other, .notAdmin, .notFound:
                     completion(false)
                 }
             }
@@ -217,6 +218,11 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
             )
         }
         return nil
+    }
+
+    /// roomDetailData의 notifiation 여부 update
+    func updateAlarmSetting(setting: Bool) {
+        roomDetailData.value?.updateAlarmSetting(setting: setting)
     }
 }
 
