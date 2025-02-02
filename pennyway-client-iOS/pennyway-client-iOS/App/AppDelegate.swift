@@ -88,6 +88,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Log.debug("Message ID: \(messageID)")
         }
 
+        if let chatRoomId = userInfo["chatRoomId"] as? String {
+            Log.info("📩 Received chatRoomId: \(chatRoomId)")
+
+            // 딥링크 처리
+            let parameters: [String: String] = ["chatRoomId": chatRoomId] // parameters 설정
+            let deepLink = DeepLink(target: .chatRoom(chatRoomId: chatRoomId), parameters: parameters)
+            let deepLinkHandler = setupDeepLinking()
+//            deepLinkHandler.handle(url: deepLink)
+        } else {
+            Log.fault("⚠️ chatRoomId is missing in userInfo")
+        }
+
         Log.debug(userInfo)
 
         completionHandler([[.banner, .badge, .sound]])
@@ -104,6 +116,25 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Log.debug("Message ID: \(messageID)")
         }
 
+        if let chatRoomId = userInfo["chatRoomId"] as? String {
+            Log.info("📩 Received chatRoomId: \(chatRoomId)")
+
+            // 딥링크 처리
+            let parameters: [String: String] = ["chatRoomId": chatRoomId] // parameters 설정
+            let deepLink = DeepLink(target: .chatRoom(chatRoomId: chatRoomId), parameters: parameters)
+            let deepLinkHandler = setupDeepLinking()
+//            deepLinkHandler.handle(url: deepLink)
+        } else {
+            Log.fault("⚠️ chatRoomId is missing in userInfo")
+        }
+
         Log.debug("userInfo:\(userInfo)")
+    }
+
+    private func setupDeepLinking() -> DeepLinkHandler {
+        let coordinator = DeepLinkCoordinator()
+        let repository = DefaultDeepLinkRepository()
+        let useCase = DefaultHandleDeepLinkUseCase(coordinator: coordinator)
+        return DeepLinkHandler(repository: repository, useCase: useCase)
     }
 }

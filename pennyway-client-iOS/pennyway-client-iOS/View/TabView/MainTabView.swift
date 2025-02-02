@@ -6,6 +6,7 @@ struct MainTabView: View {
     @State private var selection = 0
     @EnvironmentObject var authViewModel: AppViewModel
     @EnvironmentObject var networkStatus: NetworkStatusViewModel
+    @EnvironmentObject var deepLinkCoordinator: DeepLinkCoordinator
 
     var body: some View {
         TabView(selection: $selection) {
@@ -50,6 +51,12 @@ struct MainTabView: View {
         .accentColor(Color("Mint03"))
         .onAppear {
             UITabBar.appearance().barTintColor = .white
+        }
+        .onChange(of: deepLinkCoordinator.currentChatRoomId) { chatRoomId in
+            if chatRoomId != nil {
+                // 딥링크를 통해 채팅 탭으로 이동
+                selection = 2
+            }
         }
     }
 }
