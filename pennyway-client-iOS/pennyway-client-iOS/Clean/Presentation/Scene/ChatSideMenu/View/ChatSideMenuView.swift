@@ -16,6 +16,7 @@ struct ChatSideMenuView: View {
     @State private var showExitPopUp: Bool = false
     @State private var showChatUserView: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
+    @State private var isInitialLoad: Bool = true // 초기 로드 여부
     @Binding var isSideMenuPresented: Bool
     
     var body: some View {
@@ -46,7 +47,7 @@ struct ChatSideMenuView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showExitPopUp = false
-                                    if let chatRoomId = viewModelWrapper.roomData?.chatRoomId {
+                                    if let chatRoomId = viewModelWrapper.roomData?.id {
                                         viewModelWrapper.chatRoomViewModel.deleteChatRoom(chatRoomId: chatRoomId) { success in
                                             
                                             if success {
@@ -72,6 +73,26 @@ struct ChatSideMenuView: View {
         }
         .onChange(of: selectedUser) { newValue in
             showChatUserView = newValue != nil
+        }
+        .onAppear {
+            isAlarmOn = viewModelWrapper.roomDetailData?.myInfo.notifyEnabled ?? false
+            isInitialLoad = false // 초기 로드 이후 false로 변경
+        }
+        .onChange(of: isAlarmOn) { newValue in
+            guard !isInitialLoad else {
+                return
+            } // 초기 로드 시 무시
+
+            let alarmType = newValue ? ChatRoomAlarmType.on : ChatRoomAlarmType.off
+
+            viewModelWrapper.editChatRoomViewModel.handleChatRoomAlarm(chatRoomId: viewModelWrapper.roomData?.id ?? 0, chatRoomAlarm: alarmType) { success in
+                if success {
+                    Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 성공")
+                    viewModelWrapper.chatRoomViewModel.updateAlarmSetting(setting: isAlarmOn)
+                } else {
+                    Log.debug("[ChatSideMenuView]: 채팅방 알람 설정 - \(alarmType) 실패")
+                }
+            }
         }
         .fullScreenCover(isPresented: $showChatUserView) {
             if let user = selectedUser {

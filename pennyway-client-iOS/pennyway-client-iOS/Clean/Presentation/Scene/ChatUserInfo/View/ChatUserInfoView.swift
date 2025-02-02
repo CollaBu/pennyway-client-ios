@@ -18,7 +18,7 @@ struct ChatUserInfoView: View {
 
     let user: ChatMemberItemModel
     let myInfo: ChatMemberItemModel?
-    let chatRoom: AdminModeChatRoomItemModel?
+    let chatRoom: ChatRoomProtocol?
 
     var body: some View {
         ZStack {
@@ -65,7 +65,7 @@ struct ChatUserInfoView: View {
     }
 
     private func banChatMember() {
-        viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.chatRoomId ?? 0, chatMemberId: user.id) { success in
+        viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.id ?? 0, chatMemberId: user.id) { success in
             if success {
                 viewModelWrapper.chatUserInfoViewModel.banChatMember { success in
                     if success {
@@ -80,7 +80,7 @@ struct ChatUserInfoView: View {
     }
 
     private func delegateToAdmin() {
-        viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.chatRoomId ?? 0, chatMemberId: user.id) { success in
+        viewModelWrapper.chatUserInfoViewModel.setChatMemberInfo(chatRoomId: chatRoom?.id ?? 0, chatMemberId: user.id) { success in
             if success {
                 viewModelWrapper.chatUserInfoViewModel.delegateToAdmin { success in
                     if success {

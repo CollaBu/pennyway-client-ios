@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A0463852D4A950F0067D665 /* UpdatedChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0463842D4A950F0067D665 /* UpdatedChatRoomModel.swift */; };
 		4A058EFF2BD03E01004B6F89 /* AuthResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058EFE2BD03E01004B6F89 /* AuthResponseDto.swift */; };
 		4A058F012BD046C1004B6F89 /* OAuthLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F002BD046C1004B6F89 /* OAuthLoginViewModel.swift */; };
 		4A058F032BD048F8004B6F89 /* CheckDuplicateResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */; };
@@ -301,7 +302,7 @@
 		4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */; };
 		4ADBFAF52BE2C83600C3ECE4 /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */; };
 		4ADD84662D391CA7003F5894 /* EditChatRoomRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84652D391CA7003F5894 /* EditChatRoomRequestDto.swift */; };
-		4ADD846A2D392364003F5894 /* EditChatUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84692D392364003F5894 /* EditChatUseCase.swift */; };
+		4ADD846A2D392364003F5894 /* EditChatRoomUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84692D392364003F5894 /* EditChatRoomUseCase.swift */; };
 		4ADD846C2D3927F6003F5894 /* EditChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD846B2D3927F6003F5894 /* EditChatRoomRepository.swift */; };
 		4ADD846E2D39295C003F5894 /* DefaultEditChatRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD846D2D39295C003F5894 /* DefaultEditChatRoomRepository.swift */; };
 		4ADD84732D392FC4003F5894 /* EditChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD84722D392FC4003F5894 /* EditChatRoomViewModel.swift */; };
@@ -495,6 +496,7 @@
 
 /* Begin PBXFileReference section */
 		4258164B818E9C142AE01116 /* Pods-pennyway-client-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pennyway-client-iOS.release.xcconfig"; path = "Target Support Files/Pods-pennyway-client-iOS/Pods-pennyway-client-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		4A0463842D4A950F0067D665 /* UpdatedChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedChatRoomModel.swift; sourceTree = "<group>"; };
 		4A058EFE2BD03E01004B6F89 /* AuthResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDto.swift; sourceTree = "<group>"; };
 		4A058F002BD046C1004B6F89 /* OAuthLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginViewModel.swift; sourceTree = "<group>"; };
 		4A058F022BD048F8004B6F89 /* CheckDuplicateResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDuplicateResponseDto.swift; sourceTree = "<group>"; };
@@ -786,7 +788,7 @@
 		4ADBFAF02BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserProfileResponseDto.swift; sourceTree = "<group>"; };
 		4ADBFAF42BE2C83600C3ECE4 /* UserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewModel.swift; sourceTree = "<group>"; };
 		4ADD84652D391CA7003F5894 /* EditChatRoomRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomRequestDto.swift; sourceTree = "<group>"; };
-		4ADD84692D392364003F5894 /* EditChatUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatUseCase.swift; sourceTree = "<group>"; };
+		4ADD84692D392364003F5894 /* EditChatRoomUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomUseCase.swift; sourceTree = "<group>"; };
 		4ADD846B2D3927F6003F5894 /* EditChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomRepository.swift; sourceTree = "<group>"; };
 		4ADD846D2D39295C003F5894 /* DefaultEditChatRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEditChatRoomRepository.swift; sourceTree = "<group>"; };
 		4ADD84722D392FC4003F5894 /* EditChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChatRoomViewModel.swift; sourceTree = "<group>"; };
@@ -1284,7 +1286,6 @@
 		4A12FEE92C9C481900DE10BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				960A20392D3E339500DC613E /* DeepLink */,
 				4A8523EB2CB5A88D00AE90AF /* Chat */,
 				4A12FEEC2C9C487800DE10BC /* User.swift */,
 				4AABDBBB2C9C8C2900E9436D /* PresignedUrl.swift */,
@@ -1306,7 +1307,6 @@
 		4A12FEEB2C9C486300DE10BC /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
-				960A203F2D3E341D00DC613E /* DeepLink */,
 				D8DCCF872CBD8D6300550A8B /* Chat */,
 				D8DCCF7F2CBD8D5700550A8B /* Profile */,
 			);
@@ -1316,7 +1316,6 @@
 		4A12FEF62C9C49B200DE10BC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				960A20422D3E37E600DC613E /* DeepLink */,
 				4A2C3A822CD3C965006B6804 /* Profile */,
 				D8DCCF9D2CBD949A00550A8B /* Chat */,
 			);
@@ -1419,7 +1418,6 @@
 		4A12FF0A2C9C4B7C00DE10BC /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				960A20472D3E389300DC613E /* DeepLinkCoordinator.swift */,
 				4A2C3A5B2CD3457D006B6804 /* ViewStateManager.swift */,
 				4A12FF0B2C9C4B8600DE10BC /* DIContainer */,
 				4A12FF122C9C4BCF00DE10BC /* AppFlowCoordinator.swift */,
@@ -2597,6 +2595,7 @@
 			children = (
 				4AF3A2F22CD92F6E0099967F /* ChatRoomViewModel.swift */,
 				4AF3A2F62CD931CE0099967F /* ChatRoomDetailItemModel.swift */,
+				4A0463842D4A950F0067D665 /* UpdatedChatRoomModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2883,7 +2882,7 @@
 				D8E889E52CDB8102008FC22E /* JoinChatRoomUseCase.swift */,
 				4AF3A2F82CD932DA0099967F /* GetChatUseCase.swift */,
 				4A2C8B5B2CDC7F3C007816A9 /* SendChatUseCase.swift */,
-				4ADD84692D392364003F5894 /* EditChatUseCase.swift */,
+				4ADD84692D392364003F5894 /* EditChatRoomUseCase.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3221,6 +3220,7 @@
 				B599E4DA2C68A8E6006051E9 /* TokenRefreshHandler.swift in Sources */,
 				D8DCCF892CBD8D7700550A8B /* MakeChatRoomUseCase.swift in Sources */,
 				D85927FC2BE9116700653391 /* SignUpViewModel.swift in Sources */,
+				4A0463852D4A950F0067D665 /* UpdatedChatRoomModel.swift in Sources */,
 				4A4D884F2BD81F82009EADB0 /* CryptoHelper.swift in Sources */,
 				4A5789752BDC1CBF00AFEB26 /* NotFoundErrorCode.swift in Sources */,
 				4A863A0B2CB44FAF00BA2F2F /* ChatBottomBar.swift in Sources */,
@@ -3328,7 +3328,6 @@
 				4A3DE2102C3E423800817589 /* SpendingCategoryRouter.swift in Sources */,
 				4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */,
 				4A2882192C6517A700AE50C7 /* UploadProfileImageResponseDto.swift in Sources */,
-				960A20442D3E37F800DC613E /* DefaultDeepLinkRepository.swift in Sources */,
 				4A2C3A752CD3C93C006B6804 /* FetchUserProfileRepository.swift in Sources */,
 				4AD70E292BE015970058A52A /* ProfileSettingListView.swift in Sources */,
 				4A3701D02C08F7F600F0AEBA /* GetSpendingHistoryRequestDto.swift in Sources */,
@@ -3410,7 +3409,6 @@
 				4A23E7C22CE874E5006FD4E2 /* GetChatMembersRequestDto.swift in Sources */,
 				4AF3A2F92CD932DA0099967F /* GetChatUseCase.swift in Sources */,
 				B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */,
-				960A20412D3E343300DC613E /* HandleDeepLinkUseCase.swift in Sources */,
 				4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
 				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
@@ -3421,7 +3419,6 @@
 				D8F9D7432C5A0596005416FC /* ProfileAlarmView.swift in Sources */,
 				4A3701D52C08F7F600F0AEBA /* SpendingRouter.swift in Sources */,
 				4A3701CE2C08F7F600F0AEBA /* AddSpendingCustomCategoryRequestDto.swift in Sources */,
-				960A20462D3E380900DC613E /* DeepLinkRepository.swift in Sources */,
 				4A35607A2BEBA25100BA58F3 /* UserAuthRouter.swift in Sources */,
 				D86773062C76CA0100C68728 /* KeyboardManager.swift in Sources */,
 				4A4703A92BCEE25000AEE04E /* SmsResponseDto.swift in Sources */,
@@ -3487,7 +3484,6 @@
 				D8DCCF952CBD903400550A8B /* MakeChatRoomResponseDto.swift in Sources */,
 				4A2882022C64CC5900AE50C7 /* MoveCategoryView.swift in Sources */,
 				4A6C79D42C463C0B009463E4 /* CustomRectangleButton.swift in Sources */,
-				960A20482D3E389F00DC613E /* DeepLinkCoordinator.swift in Sources */,
 				B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */,
 				4A57897F2BDC1F4E00AFEB26 /* UnprocessableContentErrorCode.swift in Sources */,
 				4ADBFAF12BE2C4E100C3ECE4 /* GetUserProfileResponseDto.swift in Sources */,
@@ -3504,7 +3500,7 @@
 				4AD824792C7626C400AEF371 /* LayoutView.swift in Sources */,
 				4AC320452C11D5AC00DDB4B6 /* SelectSpendingDayView.swift in Sources */,
 				4A6E62D62BA5F7FC00111246 /* PhoneVerificationContentView.swift in Sources */,
-				4ADD846A2D392364003F5894 /* EditChatUseCase.swift in Sources */,
+				4ADD846A2D392364003F5894 /* EditChatRoomUseCase.swift in Sources */,
 				4AE9B3422CB6E5A00044D3E1 /* SideMenuCell.swift in Sources */,
 				4AD824752C76263B00AEF371 /* NetworkMonitor.swift in Sources */,
 				4A4F1A462CE25F9500105218 /* GetPreviousChatResponseDto.swift in Sources */,
@@ -3523,7 +3519,6 @@
 				D809412E2BF276460015CFF9 /* ResetPwFormView.swift in Sources */,
 				D87AA7F82CB6C3730012BFA3 /* ChatRoomDetailView.swift in Sources */,
 				D8180C062BE5083500F837FB /* FindIdPhoneVerificationView.swift in Sources */,
-				960A203D2D3E33C500DC613E /* DeepLink.swift in Sources */,
 				4A2C3A5C2CD3457D006B6804 /* ViewStateManager.swift in Sources */,
 				4A12FEEF2C9C489C00DE10BC /* UserProfileItemModel.swift in Sources */,
 				4AA13C6B2C63F6F800D8DEE7 /* GeneratePresignedUrlResponseDto.swift in Sources */,

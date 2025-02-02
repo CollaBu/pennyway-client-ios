@@ -19,7 +19,7 @@ struct ChatRoomContent: View {
                 if isMyChat {
                     if let rooms = dummyChatRooms {
                         ForEach(rooms, id: \.id) { chatRoom in
-                            NavigationLink(destination: ChatRoomView(chatViewModelWrapper: viewModelWrapper, chatRoomId: chatRoom.id)) {
+                            NavigationLink(destination: ChatRoomView(chatViewModelWrapper: viewModelWrapper, chatRoom: chatRoom)) {
                                 ChatRoomCell(chatRoom: chatRoom, isMyChat: true, onDelete: {
                                     isPopUp = true
                                     selectedChatRoom = chatRoom

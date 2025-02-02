@@ -54,12 +54,27 @@ class ChatRoomAlamofire {
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.banChatMember(chatRoomId: chatRoomId, chatMemberId: chatMemberId), completion: completion)
     }
     
+    /// 채팅방 관리자 모드 조회
     func getChatAdminMode(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatRoomAlamofire - getChatAdminMode() called \(chatRoomId)")
         
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.getChatAdminMode(chatRoomId: chatRoomId), completion: completion)
     }
     
+    /// 채팅방 알림 켜기
+    func turnOnChatRoomAlarm(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatRoomAlamofire - turnOnChatRoomAlarm() called \(chatRoomId)")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.turnOnChatRoomAlarm(chatRoomId: chatRoomId), completion: completion)
+    }
+    
+    /// 채팅방 알림 끄기
+    func turnOffChatRoomAlarm(_ chatRoomId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
+        Log.info("ChatRoomAlamofire - turnOffChatRoomAlarm() called \(chatRoomId)")
+        
+        ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: ChatRoomRouter.turnOffChatRoomAlarm(chatRoomId: chatRoomId), completion: completion)
+    }
+
     /// 관리자 위임
     func delegateToAdmin(_ chatRoomId: Int64, _ chatMemberId: Int64, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("ChatRoomAlamofire - delegateToAdmin() called \(chatRoomId)")
