@@ -138,14 +138,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         Log.debug("userInfo:\(userInfo)")
     }
-
-//    private func setupDeepLinking() -> DeepLinkHandler {
-//        let coordinator = DeepLinkCoordinator()
-//        let repository = DefaultDeepLinkRepository()
-//        let useCase = DefaultHandleDeepLinkUseCase(coordinator: coordinator)
-//        return DeepLinkHandler(repository: repository, useCase: useCase)
-//    }
-
+    
     private func handleDeepLink(url: URL) {
         deepLinkCoordinator?.handleDeepLink(url: url)
     }
