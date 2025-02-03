@@ -304,6 +304,8 @@ extension CustomStompClient: StompClientLibDelegate {
     }
    
     func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
+        Log.debug("[Socket] Did Send Receipt \(receiptId)")
+        
         if receiptId.hasPrefix("refresh-receipt-") {
             notificationQueue.enqueue(
                 Notification(name: .socketAuthComplete),

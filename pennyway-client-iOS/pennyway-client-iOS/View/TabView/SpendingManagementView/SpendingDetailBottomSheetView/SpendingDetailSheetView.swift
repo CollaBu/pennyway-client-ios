@@ -9,6 +9,7 @@ struct SpendingDetailSheetView: View {
     @State private var showAddSpendingHistoryView = false
     @State private var isDeleted: Bool = false
     @State private var showDetailSpendingView = false
+    @State private var showShareToChatRoomView = false
     @State private var selectedSpendingId: Int? = nil
     @State private var isEditSuccess: Bool = false
     @State private var isAddSpendingData: Bool = false
@@ -56,6 +57,17 @@ struct SpendingDetailSheetView: View {
                         .padding(10)
                         .buttonStyle(BasicButtonStyleUtil())
                     }
+
+                    Button(action: {
+                        showShareToChatRoomView = true
+                    }, label: {
+                        Image(.iconExpenditureShare)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 34, height: 34)
+
+                    })
+                    .buttonStyle(BasicButtonStyleUtil())
 
                     Button(action: {
                         showAddSpendingHistoryView = true
@@ -131,6 +143,11 @@ struct SpendingDetailSheetView: View {
             .fullScreenCover(isPresented: $showDetailSpendingView) {
                 NavigationAvailable {
                     DetailSpendingView(clickDate: $clickDate, spendingId: $selectedSpendingId, isDeleted: $isDeleted, showToastPopup: .constant(false), isEditSuccess: $isEditSuccess, isAddSpendingData: $isAddSpendingData, spendingCategoryViewModel: SpendingCategoryViewModel())
+                }
+            }
+            .fullScreenCover(isPresented: $showShareToChatRoomView) {
+                NavigationAvailable {
+                    ShareToChatRoomView()
                 }
             }
             // 지출추가 완료시 onChange트리거 동작안함
