@@ -11,6 +11,8 @@ import SwiftUI
 
 struct ShareToChatRoomView: View {
     @State private var chatRoomName: String = ""
+    @State private var isFormValid: Bool = false
+    @State private var selectedChatRoomIds: [Int64] = []
     private let maxLength = 19
 
     @ObservedObject var viewModelWrapper: ShareToChatRoomViewModelWrapper
@@ -18,14 +20,12 @@ struct ShareToChatRoomView: View {
     var body: some View {
         ZStack {
             VStack {
-                Spacer().frame(height: 32 * DynamicSizeFactor.factor())
-                
                 if viewModelWrapper.chatData.isEmpty {
                     Spacer()
                     DefaultChatContent()
                     Spacer()
                 } else {
-                    Spacer()
+                    Spacer().frame(height: 32 * DynamicSizeFactor.factor())
                     
                     searchChatContainer
                     
@@ -33,12 +33,19 @@ struct ShareToChatRoomView: View {
                     
                     ScrollView {
                         ForEach(viewModelWrapper.filteredChatData, id: \.id) { chatRoom in
-                            SelectChatRoomCell(chatRoom: chatRoom)
-                                .buttonStyle(BasicButtonStyleUtil()) // 중복 제거
+                            SelectChatRoomCell(selectedChatRoomIds: $selectedChatRoomIds, chatRoom: chatRoom)
+                                .buttonStyle(BasicButtonStyleUtil())
                         }
+                        Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     }
+                    
+                    CustomBottomButton(action: {}, label: "공유하기", isFormValid: $isFormValid)
+                        .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 }
             }
+        }
+        .onChange(of: selectedChatRoomIds) { newValue in
+            isFormValid = !newValue.isEmpty // 선택된 항목이 있으면 활성화
         }
         .onAppear {
             // 뷰에 진입하자마자 내채팅 조회 api 호출
@@ -84,9 +91,15 @@ struct ShareToChatRoomView: View {
 
 struct SelectChatRoomCell: View, ImageLoadable {
     @State private var loadedImage: UIImage? = nil
+    @Binding var selectedChatRoomIds: [Int64]
     
     let chatRoom: ChatRoomProtocol
     
+    /// selectedChatRoomIds를 기반으로 isSelected를 계산
+    private var isSelected: Bool {
+        selectedChatRoomIds.contains(chatRoom.id)
+    }
+
     var body: some View {
         ZStack {
             HStack(spacing: 13) {
@@ -114,7 +127,7 @@ struct SelectChatRoomCell: View, ImageLoadable {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 9 * DynamicSizeFactor.factor(), height: 11.3 * DynamicSizeFactor.factor())
-                                    .platformTextColor(color: Color("Gray04"))
+                                    .platformTextColor(color: Color(.gray04))
                             }
                         }
                         
@@ -122,27 +135,45 @@ struct SelectChatRoomCell: View, ImageLoadable {
                         
                         Text(chatRoom.description)
                             .font(.B3MediumFont())
-                            .platformTextColor(color: Color("Gray07"))
+                            .platformTextColor(color: Color(.gray07))
                         
                         Spacer().frame(height: 3 * DynamicSizeFactor.factor())
                         
                         Text("\(chatRoom.participantCount)명")
                             .font(.B3MediumFont())
-                            .platformTextColor(color: Color("Gray04"))
+                            .platformTextColor(color: Color(.gray04))
                             .padding(1)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                let selected = isSelected == true ? Image(.iconCheckoneOnSmall) : Image(.iconCheckoneOffSmallGray03)
+
+                selected
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, maxHeight: 60 * DynamicSizeFactor.factor())
             .background(Color.white)
         }
+        .onTapGesture {
+            updateSelection()
+            Log.debug("\(selectedChatRoomIds)")
+        }
         .onAppear {
             loadImage(from: chatRoom.backgroundImageUrl) { image in
                 self.loadedImage = image
             }
+        }
+    }
+
+    private func updateSelection() {
+        if isSelected {
+            selectedChatRoomIds.removeAll { $0 == chatRoom.id } // 선택 해제
+        } else {
+            selectedChatRoomIds.append(chatRoom.id) // 선택 추가
         }
     }
 }
@@ -153,7 +184,7 @@ final class ShareToChatRoomViewModelWrapper: ObservableObject {
     @Published var chatData: [ChatRoomItemModel] = []
     @Published var searchQuery: String = "" // 검색어 추가
  
-    var shareToChatRoomViewModel: DefaultShareToChatRoomViewModel
+    var shareToChatRoomViewModel: ShareToChatRoomViewModel
     
     var filteredChatData: [ChatRoomItemModel] {
         if searchQuery.isEmpty {
@@ -164,7 +195,7 @@ final class ShareToChatRoomViewModelWrapper: ObservableObject {
         }
     }
     
-    init(shareToChatRoomViewModel: DefaultShareToChatRoomViewModel) {
+    init(shareToChatRoomViewModel: ShareToChatRoomViewModel) {
         self.shareToChatRoomViewModel = shareToChatRoomViewModel
         
         shareToChatRoomViewModel.roomData.observe(on: self) { [weak self] newData in
