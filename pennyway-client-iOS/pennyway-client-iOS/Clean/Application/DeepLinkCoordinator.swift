@@ -16,7 +16,7 @@ protocol FlowCoordinatorProtocol {
 // MARK: - DeepLinkCoordinator
 
 final class DeepLinkCoordinator: ObservableObject {
-    @Published var currentChatRoomId: Int64?
+    @Published var currentChatRoomId: Int64? = nil
     private let navigationState = ChatNavigationState.shared
 
     func handleDeepLink(url: URL) {

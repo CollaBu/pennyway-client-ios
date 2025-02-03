@@ -11,7 +11,7 @@ import SwiftUI
 // MARK: - ChatNavigationState
 
 final class ChatNavigationState: ObservableObject {
-    @Published var selectedChatRoomId: Int64?
+    @Published var selectedChatRoomId: Int64? 
     @Published var shouldNavigateToChatRoom: Bool = false
 
     static let shared = ChatNavigationState()

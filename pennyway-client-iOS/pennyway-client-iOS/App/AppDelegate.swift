@@ -97,7 +97,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             if let deepLinkURL = URL(string: deepLinkURLString) {
                 Log.debug("🔗 Generated DeepLink URL: \(deepLinkURL)")
 
-                // 딥링크 핸들링
                 handleDeepLink(url: deepLinkURL)
             } else {
                 Log.fault("⚠️ Invalid deep link URL")
@@ -129,7 +128,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             if let deepLinkURL = URL(string: deepLinkURLString) {
                 Log.debug("🔗 Generated DeepLink URL: \(deepLinkURL)")
 
-                // 딥링크 핸들링
                 handleDeepLink(url: deepLinkURL)
             } else {
                 Log.fault("⚠️ Invalid deep link URL")
@@ -141,12 +139,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Log.debug("userInfo:\(userInfo)")
     }
 
-    private func setupDeepLinking() -> DeepLinkHandler {
-        let coordinator = DeepLinkCoordinator()
-        let repository = DefaultDeepLinkRepository()
-        let useCase = DefaultHandleDeepLinkUseCase(coordinator: coordinator)
-        return DeepLinkHandler(repository: repository, useCase: useCase)
-    }
+//    private func setupDeepLinking() -> DeepLinkHandler {
+//        let coordinator = DeepLinkCoordinator()
+//        let repository = DefaultDeepLinkRepository()
+//        let useCase = DefaultHandleDeepLinkUseCase(coordinator: coordinator)
+//        return DeepLinkHandler(repository: repository, useCase: useCase)
+//    }
 
     private func handleDeepLink(url: URL) {
         deepLinkCoordinator?.handleDeepLink(url: url)

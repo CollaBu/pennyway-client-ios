@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - ChatCellView
 
 struct ChatCellView: View {
+    @State private var isNavigateToChatRoom = false // 딥링크를 통한 채팅방으로 이동하기 위한 상태변수
     @State private var selectedTab: Int = 1
     @State private var chatRoomName: String = "" // 수정 예정
     @State var isNavigateToMakeChatRoom = false
@@ -15,6 +16,8 @@ struct ChatCellView: View {
     @EnvironmentObject var viewStateManager: ViewStateManager
     @ObservedObject var viewModelWrapper: ChatViewModelWrapper
     @EnvironmentObject var chatRoomViewModelWrapper: ChatRoomViewModelWrapper
+    @ObservedObject var navigationState = ChatNavigationState.shared
+    var chatRoom: ChatRoomProtocol?
 
     private let maxLength = 19
     
@@ -91,6 +94,9 @@ struct ChatCellView: View {
                     
                 NavigationLink(destination: ChatRoomDetailView(chatRoom: selectedSearchChatRoom, viewModelWrapper: viewModelWrapper), isActive: $isNavigateChatRoomDetailView) {}
                     .hidden()
+                
+                NavigationLink(destination: ChatRoomView(chatViewModelWrapper: viewModelWrapper, chatRoomId: navigationState.selectedChatRoomId, chatRoom: selectedChatRoom), isActive: $isNavigateToChatRoom) {}
+                    .hidden()
             }
             .setTabBarVisibility(isHidden: false)
             .navigationTitle(Text("채팅방"))
@@ -140,6 +146,26 @@ struct ChatCellView: View {
             .onChange(of: chatRoomViewModelWrapper.isDeleteSuccess) { _ in
                 isPopUp = false
                 showCheckMarkAnimation()
+            }
+            .onChange(of: navigationState.shouldNavigateToChatRoom) { showNavigate in
+                Log.debug("??????: \(String(describing: navigationState.selectedChatRoomId))")
+                if showNavigate {
+                    if chatRoomViewModelWrapper.chatRoomViewModel.roomData.value == nil {
+                        chatRoomViewModelWrapper.chatRoomViewModel.roomData.value = selectedChatRoom
+                        Log.debug("데이터:\(selectedChatRoom)")
+                    }
+                    
+                    viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: navigationState.selectedChatRoomId!) { success in
+                        if success {
+                            isNavigateToChatRoom = true
+                            Log.debug("[ChatCellView]: isNavigateChatRoomDetailView - \(isNavigateChatRoomDetailView)")
+                        } else {
+                            Log.debug("[ChatCellView]: 채팅방 상세정보 조회 실패")
+                        }
+                    }
+                    viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
+                    Log.debug("[ChatCellView]: 딥링크 화면 이동 성공")
+                }
             }
         }
     }

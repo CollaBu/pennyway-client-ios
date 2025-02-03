@@ -7,7 +7,7 @@ struct MainTabView: View {
     @EnvironmentObject var authViewModel: AppViewModel
     @EnvironmentObject var networkStatus: NetworkStatusViewModel
     @EnvironmentObject var deepLinkCoordinator: DeepLinkCoordinator
-    @StateObject private var navigationState = ChatNavigationState.shared
+//    @StateObject private var navigationState = ChatNavigationState.shared
 
     var body: some View {
         TabView(selection: $selection) {
@@ -53,12 +53,12 @@ struct MainTabView: View {
         .onAppear {
             UITabBar.appearance().barTintColor = .white
         }
-        .onChange(of: navigationState.shouldNavigateToChatRoom) { showNavigate in
-            if showNavigate {
-                // 딥링크를 통해 채팅 탭으로 이동
-                selection = 2
-                Log.debug("[MainTabView]: 채팅 탭까지 이동완료")
-            }
-        }
+//        .onChange(of: navigationState.shouldNavigateToChatRoom) { showNavigate in
+//            if showNavigate {
+//                // 딥링크를 통해 채팅 탭으로 이동
+//                selection = 2
+//                Log.debug("[MainTabView]: \(String(describing: navigationState.selectedChatRoomId))")
+//            }
+//        }
     }
 }

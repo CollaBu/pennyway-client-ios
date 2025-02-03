@@ -13,7 +13,7 @@ import Foundation
 protocol ChatRoomViewModelInput {
     func reset()
     func subscribeToNotifications()
-    func getChatRoomDetail(chatRoomId: Int64)
+    func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
     func getPreviousChat(completion: @escaping (Result<Void, Error>) -> Void)
     func sendMessage(message: String, chatRoomId: Int64, contentType: String)
     func deleteChatRoom(chatRoomId: Int64, completion: @escaping (Bool) -> Void)
@@ -88,7 +88,7 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
     }
 
     /// 채팅방 상세 정보 조회
-    func getChatRoomDetail(chatRoomId: Int64) {
+    func getChatRoomDetail(chatRoomId: Int64, completion: @escaping (Bool) -> Void) {
         getChatUseCase.getChatRoomDetail(chatRoomId: chatRoomId) { [weak self] result in
             switch result {
             case let .success(chatRoomDetail):
@@ -117,9 +117,11 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
                         self?.getChatMembers(chatRoomId: chatRoomId, ids: chunkedIds)
                     }
                 }
+                completion(true)
 
             case let .failure(error):
                 Log.error("[DefaultChatRoomViewModel] 채팅방 상세 정보 가져오기 실패: \(error.localizedDescription)")
+                completion(false)
             }
         }
     }
