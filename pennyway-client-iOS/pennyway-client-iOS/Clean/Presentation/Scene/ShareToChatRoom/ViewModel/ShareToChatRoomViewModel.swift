@@ -29,9 +29,11 @@ class DefaultShareToChatRoomViewModel: ShareToChatRoomViewModel, ObservableObjec
     @Published var roomData: Observable<[ChatRoomItemModel]>
 
     private let getChatRoomUseCase: GetChatRoomUseCase
+    private let shareToChatRoomUseCase: ShareToChatRoomUseCase
 
-    init(getChatRoomUseCase: GetChatRoomUseCase) {
+    init(getChatRoomUseCase: GetChatRoomUseCase, shareToChatRoomUseCase: ShareToChatRoomUseCase) {
         self.getChatRoomUseCase = getChatRoomUseCase
+        self.shareToChatRoomUseCase = shareToChatRoomUseCase
 
         roomData = Observable([])
     }
