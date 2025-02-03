@@ -17,10 +17,9 @@ enum IconType {
     }
 }
 
-// MARK: - ErrorCodePopUpView
+// MARK: - InfoPopUpView
 
-// TODO: 변수명 네이밍 수정필요
-struct ErrorCodePopUpView: View {
+struct InfoPopUpView: View {
     @Binding var showingPopUp: Bool
     let titleLabel: String
     let subLabel: String
@@ -34,9 +33,9 @@ struct ErrorCodePopUpView: View {
     }
 }
 
-// MARK: ErrorCodePopUpView.PopupContent
+// MARK: InfoPopUpView.PopupContent
 
-extension ErrorCodePopUpView {
+extension InfoPopUpView {
     struct PopupContent: View {
         var imageSize: CGSize
         var frameHeight: CGFloat
