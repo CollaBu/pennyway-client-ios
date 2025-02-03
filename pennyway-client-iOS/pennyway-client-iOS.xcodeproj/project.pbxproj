@@ -195,6 +195,7 @@
 		4A762B092B99A26C001C1188 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B082B99A26C001C1188 /* TextExtensions.swift */; };
 		4A762B0B2B99A27A001C1188 /* NavigationAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */; };
 		4A7AD50E2D511B3600A109B7 /* ShareToChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7AD50D2D511B3600A109B7 /* ShareToChatRoomView.swift */; };
+		4A7AD5122D5127BC00A109B7 /* ShareToChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7AD5112D5127BC00A109B7 /* ShareToChatRoomViewModel.swift */; };
 		4A8523EA2CB5297100AE90AF /* ChatHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523E92CB5297100AE90AF /* ChatHeader.swift */; };
 		4A8523ED2CB5A8AE00AE90AF /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523EC2CB5A8AE00AE90AF /* ChatRoom.swift */; };
 		4A8523EF2CB5A8C200AE90AF /* ChatMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8523EE2CB5A8C200AE90AF /* ChatMember.swift */; };
@@ -681,6 +682,7 @@
 		4A762B082B99A26C001C1188 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		4A762B0A2B99A27A001C1188 /* NavigationAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAvailable.swift; sourceTree = "<group>"; };
 		4A7AD50D2D511B3600A109B7 /* ShareToChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToChatRoomView.swift; sourceTree = "<group>"; };
+		4A7AD5112D5127BC00A109B7 /* ShareToChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareToChatRoomViewModel.swift; sourceTree = "<group>"; };
 		4A8523E92CB5297100AE90AF /* ChatHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeader.swift; sourceTree = "<group>"; };
 		4A8523EC2CB5A8AE00AE90AF /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		4A8523EE2CB5A8C200AE90AF /* ChatMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMember.swift; sourceTree = "<group>"; };
@@ -2124,9 +2126,26 @@
 		4A7AD50C2D511A6A00A109B7 /* ShareToChatRoom */ = {
 			isa = PBXGroup;
 			children = (
-				4A7AD50D2D511B3600A109B7 /* ShareToChatRoomView.swift */,
+				4A7AD5102D5127A800A109B7 /* ViewModel */,
+				4A7AD50F2D5127A200A109B7 /* View */,
 			);
 			path = ShareToChatRoom;
+			sourceTree = "<group>";
+		};
+		4A7AD50F2D5127A200A109B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A7AD50D2D511B3600A109B7 /* ShareToChatRoomView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A7AD5102D5127A800A109B7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A7AD5112D5127BC00A109B7 /* ShareToChatRoomViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		4A8523EB2CB5A88D00AE90AF /* Chat */ = {
@@ -3474,6 +3493,7 @@
 				D889F9F82C64BCC00055D045 /* DeleteProfileImageViewModel.swift in Sources */,
 				4A2882212C654BB500AE50C7 /* ReloadView.swift in Sources */,
 				4A4A56782BACADBF0071D00E /* TermsAndConditionsView.swift in Sources */,
+				4A7AD5122D5127BC00A109B7 /* ShareToChatRoomViewModel.swift in Sources */,
 				4AC3204F2C11D5AC00DDB4B6 /* SpendingWeekCalendarView.swift in Sources */,
 				4AB5AB4A2BB4A37600D2C9EA /* AuthRouter.swift in Sources */,
 				4A2C3A892CD3C965006B6804 /* DefaultUserProfileRepository.swift in Sources */,

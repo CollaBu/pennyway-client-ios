@@ -147,7 +147,7 @@ struct SpendingDetailSheetView: View {
             }
             .fullScreenCover(isPresented: $showShareToChatRoomView) {
                 NavigationAvailable {
-                    ShareToChatRoomView()
+                    ShareToChatRoomView(viewModelWrapper: ShareToChatRoomViewModelWrapper(shareToChatRoomViewModel: DefaultShareToChatRoomViewModel(getChatRoomUseCase: DefaultGetChatRoomUseCase(repository: DefaultGetChatRoomRepository()))))
                 }
             }
             // 지출추가 완료시 onChange트리거 동작안함

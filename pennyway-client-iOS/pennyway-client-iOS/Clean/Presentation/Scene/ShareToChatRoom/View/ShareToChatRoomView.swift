@@ -12,17 +12,40 @@ import SwiftUI
 struct ShareToChatRoomView: View {
     @State private var chatRoomName: String = ""
     private let maxLength = 19
-    
+
+    @ObservedObject var viewModelWrapper: ShareToChatRoomViewModelWrapper
+
     var body: some View {
         ZStack {
             VStack {
-                searchChatContainer
+                Spacer().frame(height: 32 * DynamicSizeFactor.factor())
                 
-//                ForEach(rooms, id: \.id) { chatRoom in
-//                    SelectChatRoomCell(chatRoom: chatRoom)
-//                        .buttonStyle(PlainButtonStyle())
-//                        .buttonStyle(BasicButtonStyleUtil())
-//                }
+                if viewModelWrapper.chatData.isEmpty {
+                    Spacer()
+                    DefaultChatContent()
+                    Spacer()
+                } else {
+                    Spacer()
+                    
+                    searchChatContainer
+                    
+                    Spacer().frame(height: 28 * DynamicSizeFactor.factor())
+                    
+                    ScrollView {
+                        ForEach(viewModelWrapper.filteredChatData, id: \.id) { chatRoom in
+                            SelectChatRoomCell(chatRoom: chatRoom)
+                                .buttonStyle(BasicButtonStyleUtil()) // 중복 제거
+                        }
+                    }
+                }
+            }
+        }
+        .onAppear {
+            // 뷰에 진입하자마자 내채팅 조회 api 호출
+            viewModelWrapper.shareToChatRoomViewModel.getChatRoom { success in
+                if success {
+                    Log.debug("[ShareToChatRoomView] onAppear: 내채팅 조회 api 호출")
+                }
             }
         }
         .navigationBarColor(UIColor(named: "White01"), title: "내 채팅")
@@ -45,7 +68,9 @@ struct ShareToChatRoomView: View {
     
     private var searchChatContainer: some View {
         VStack {
-            CustomInputView(inputText: $chatRoomName, placeholder: "", onCommit: {}, isSecureText: false, showSearchBtn: true)
+            CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", onCommit: {
+                viewModelWrapper.searchQuery = chatRoomName
+            }, isSecureText: false, showSearchBtn: true)
                 .onChange(of: chatRoomName) { newValue in
                     if newValue.count > maxLength {
                         chatRoomName = String(chatRoomName.suffix(19))
@@ -118,6 +143,32 @@ struct SelectChatRoomCell: View, ImageLoadable {
             loadImage(from: chatRoom.backgroundImageUrl) { image in
                 self.loadedImage = image
             }
+        }
+    }
+}
+
+// MARK: - ShareToChatRoomViewModelWrapper
+
+final class ShareToChatRoomViewModelWrapper: ObservableObject {
+    @Published var chatData: [ChatRoomItemModel] = []
+    @Published var searchQuery: String = "" // 검색어 추가
+ 
+    var shareToChatRoomViewModel: DefaultShareToChatRoomViewModel
+    
+    var filteredChatData: [ChatRoomItemModel] {
+        if searchQuery.isEmpty {
+            return chatData
+        } else {
+            // title 속성에 검색어가 포함된 항목만 필터링 (대소문자 구분 없이)
+            return chatData.filter { $0.title.range(of: searchQuery, options: .caseInsensitive) != nil }
+        }
+    }
+    
+    init(shareToChatRoomViewModel: DefaultShareToChatRoomViewModel) {
+        self.shareToChatRoomViewModel = shareToChatRoomViewModel
+        
+        shareToChatRoomViewModel.roomData.observe(on: self) { [weak self] newData in
+            self?.chatData = newData
         }
     }
 }
