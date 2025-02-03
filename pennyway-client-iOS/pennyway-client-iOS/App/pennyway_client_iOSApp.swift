@@ -37,6 +37,9 @@ struct pennyway_client_iOSApp: App {
             .onOpenURL { url in
                 GIDSignIn.sharedInstance.handle(url)
             }
+            .onOpenURL { url in
+                deepLinkCoordinator.handleDeepLink(url: url)
+            }
             .onChange(of: scenePhase) { newPhase in
                 viewStateManager.setScenePhase(newPhase)
             }

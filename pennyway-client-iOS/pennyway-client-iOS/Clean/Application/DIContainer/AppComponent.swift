@@ -23,21 +23,6 @@ final class AppComponent {
         return chatRootComponent(chatFactory: chatFactory).makeChatView()
     }
 
-//    
-//    func makeChatRoomRootView() -> some View {
-//        let chatFactory = appFlowCoordinator.chatFlowStart()
-//        return NavigationAvailable {
-//            if let chatRoomId = DeepLinkCoordinator().currentChatRoomId {
-//                let viewModelWrapper = ChatViewModelWrapper(chatFactory: chatFactory)
-//                let chatRoomItem = SearchChatRoomItemModel(id: chatRoomId, title: nil, description: nil)
-//                ChatRoomDetailView(chatRoom: chatRoomItem, viewModelWrapper: viewModelWrapper)
-//            } else {
-//                Log.debug("DeepLink에서 chatRoomId를 가져오지 못했습니다.")
-//                chatRootComponent(chatFactory: chatFactory).makeChatView()
-//            }
-//        }
-//    }
-
     private func rootComponent(profileFactory: any ProfileFactory) -> RootComponent {
         RootComponent(dependency: ProfileFactoryDependency(profileFactory: profileFactory))
     }

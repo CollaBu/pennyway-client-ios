@@ -347,6 +347,7 @@
 		964011422D4F4F9B00684734 /* DeepLinkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011412D4F4F9500684734 /* DeepLinkRepository.swift */; };
 		964011442D4F4FC000684734 /* DeepLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011432D4F4FB900684734 /* DeepLinkCoordinator.swift */; };
 		964011462D4F593900684734 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011452D4F593100684734 /* DeepLinkHandler.swift */; };
+		964011482D50AA0700684734 /* ChatNavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011472D50A9F700684734 /* ChatNavigationState.swift */; };
 		B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */; };
 		B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */; };
 		B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */; };
@@ -839,6 +840,7 @@
 		964011412D4F4F9500684734 /* DeepLinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkRepository.swift; sourceTree = "<group>"; };
 		964011432D4F4FB900684734 /* DeepLinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkCoordinator.swift; sourceTree = "<group>"; };
 		964011452D4F593100684734 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
+		964011472D50A9F700684734 /* ChatNavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigationState.swift; sourceTree = "<group>"; };
 		A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAnalyticsEvents.swift; sourceTree = "<group>"; };
@@ -1434,6 +1436,7 @@
 		4A12FF0A2C9C4B7C00DE10BC /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				964011472D50A9F700684734 /* ChatNavigationState.swift */,
 				964011432D4F4FB900684734 /* DeepLinkCoordinator.swift */,
 				4A2C3A5B2CD3457D006B6804 /* ViewStateManager.swift */,
 				4A12FF0B2C9C4B8600DE10BC /* DIContainer */,
@@ -3459,6 +3462,7 @@
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
+				964011482D50AA0700684734 /* ChatNavigationState.swift in Sources */,
 				960A204C2D3E929500DC613E /* UserInfoRepository.swift in Sources */,
 				D8E889E82CDB8165008FC22E /* JoinChatRoomRepository.swift in Sources */,
 				4AF3A3022CD938310099967F /* ChatRoomRouter.swift in Sources */,

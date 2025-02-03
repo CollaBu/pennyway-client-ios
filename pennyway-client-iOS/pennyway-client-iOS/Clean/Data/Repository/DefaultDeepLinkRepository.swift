@@ -8,20 +8,6 @@
 import Foundation
 
 final class DefaultDeepLinkRepository: DeepLinkRepository {
-    ///    func parse(url: URL) -> DeepLink? {
-    ///        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
-    ///              let host = components.host,
-    ///              let queryItems = components.queryItems else {
-    ///            return nil
-    ///        }
-    ///
-    ///        if host == "chatRoom",
-    ///           let chatRoomId = queryItems.first(where: { $0.name == "id" })?.value {
-    ///            return DeepLink(target: .chatRoom(chatRoomId: chatRoomId), parameters: [:])
-    ///        }
-    ///
-    ///        return nil
-    ///    }
     func parse(url: URL) -> DeepLink? {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
               let host = components.host
