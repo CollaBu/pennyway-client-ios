@@ -16,7 +16,6 @@ struct ChatSideMenuView: View {
     @State private var showExitPopUp: Bool = false
     @State private var showDeletePopUp: Bool = false
     @State private var showChatUserView: Bool = false
-    @State private var showErrorPopUp: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
     @State private var isInitialLoad: Bool = true // 초기 로드 여부
     @Binding var isSideMenuPresented: Bool
@@ -74,13 +73,13 @@ struct ChatSideMenuView: View {
                                 firstBtnLabel: "취소",
                                 secondBtnAction: {
                                     self.showDeletePopUp = false
+
                                     if let chatRoomId = viewModelWrapper.roomData?.id {
                                         viewModelWrapper.chatRoomViewModel.deleteChatRoomByAdmin(chatRoomId: chatRoomId) { success in
                                             
                                             if success {
                                                 Log.debug("[ChatSideMenuView]: 채팅방장이 채팅방 삭제 성공")
                                             } else {
-                                                showErrorPopUp = true
                                                 Log.debug("[ChatSideMenuView]: 채팅방장이 채팅방 삭제 실패")
                                             }
                                         }
@@ -90,11 +89,6 @@ struct ChatSideMenuView: View {
                                 secondBtnColor: Color("Red03")
                 )
                 .edgesIgnoringSafeArea(.vertical)
-            }
-            
-            if showErrorPopUp {
-                InfoPopUpView(showingPopUp: $showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요", iconType: .error)
-                    .edgesIgnoringSafeArea(.vertical)
             }
         }
         .edgesIgnoringSafeArea(.bottom)
