@@ -35,6 +35,7 @@ enum SpendingRouter: URLRequestConvertible {
 
         case let .getDetailSpendingHistory(spendingId), let .editSpendingHistory(spendingId, _), let .deleteSingleSpendingHistory(spendingId):
             return "v2/spendings/\(spendingId)"
+
         case .shareSpendingHistory:
             return "v2/spendings/share"
         }

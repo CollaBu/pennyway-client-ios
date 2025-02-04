@@ -15,7 +15,10 @@ struct ShareToChatRoomView: View {
     @State private var selectedChatRoomIds: [Int64] = []
     private let maxLength = 19
 
+    @Binding var clickDate: Date?
     @ObservedObject var viewModelWrapper: ShareToChatRoomViewModelWrapper
+    @EnvironmentObject var mainTabViewModel: MainTabViewModel
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         ZStack {
@@ -39,7 +42,15 @@ struct ShareToChatRoomView: View {
                         Spacer().frame(height: 12 * DynamicSizeFactor.factor())
                     }
                     
-                    CustomBottomButton(action: {}, label: "공유하기", isFormValid: $isFormValid)
+                    CustomBottomButton(action: {
+                        viewModelWrapper.shareToChatRoomViewModel.shareToChatRoom(date: clickDate, chatRoomIds: selectedChatRoomIds) { success in
+                            if success {
+                                self.presentationMode.wrappedValue.dismiss()
+                                mainTabViewModel.resetSpendingViewAndSwitchToChat()
+                            }
+                        }
+                        
+                    }, label: "공유하기", isFormValid: $isFormValid)
                         .padding(.bottom, 34 * DynamicSizeFactor.factor())
                 }
             }

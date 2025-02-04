@@ -49,7 +49,7 @@ class SpendingAlamofire {
 
         ApiRequstHandler.shared.requestWithErrorHandling(session: session, router: SpendingRouter.editSpendingHistory(spendingId: spendingId, dto: dto), completion: completion)
     }
-    
+
     func shareSpendingHistory(dto: ShareSpendingHistoryRequestDto, completion: @escaping (Result<Data?, Error>) -> Void) {
         Log.info("SpendingAlamofire - shareSpendingHistory() called")
 

@@ -16,7 +16,6 @@ protocol ShareToChatRoomUseCase {
 // MARK: - DefaultShareToChatRoomUseCase
 
 class DefaultShareToChatRoomUseCase: ShareToChatRoomUseCase {
-    
     private let repository: ShareToChatRoomRepository
 
     init(repository: ShareToChatRoomRepository) {

@@ -12,19 +12,13 @@ public struct ShareSpendingHistoryRequestDto: Encodable {
     let year: Int
     let month: Int
     let day: Int
-    let chatRoomIds: [Int64]
+    let chatRoomIds: String
 
-    public init(
-        type: String,
-        year: Int,
-        month: Int,
-        day: Int,
-        chatRoomIds: [Int64]
-    ) {
+    init(type: String, year: Int, month: Int, day: Int, chatRoomIds: [Int64]) {
         self.type = type
         self.year = year
         self.month = month
         self.day = day
-        self.chatRoomIds = chatRoomIds
+        self.chatRoomIds = chatRoomIds.map { "\($0)" }.joined(separator: ",") // 배열을 문자열로 변환
     }
 }

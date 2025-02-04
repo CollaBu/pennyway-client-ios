@@ -11,6 +11,7 @@ import Foundation
 
 protocol ShareToChatRoomViewModelInput {
     func getChatRoom(completion: @escaping (Bool) -> Void)
+    func shareToChatRoom(date: Date?, chatRoomIds: [Int64], completion: @escaping (Bool) -> Void)
 }
 
 // MARK: - ShareToChatRoomViewModelOutput
@@ -62,6 +63,20 @@ class DefaultShareToChatRoomViewModel: ShareToChatRoomViewModel, ObservableObjec
                     }
                 } else {
                     Log.debug("[ShareToChatRoomViewModel]: 내 채팅방 조회 실패")
+                    completion(false)
+                }
+            }
+        }
+    }
+
+    func shareToChatRoom(date: Date?, chatRoomIds: [Int64], completion: @escaping (Bool) -> Void) {
+        if let date = date {
+            shareToChatRoomUseCase.shareToChatRoom(date: date, chatRoomIds: chatRoomIds) { success in
+                if success {
+                    Log.debug("[DefaultShareToChatRoomViewModel]: 채팅방 공유 성공")
+                    completion(true)
+                } else {
+                    Log.debug("[DefaultShareToChatRoomViewModel]: 채팅방 공유 실패")
                     completion(false)
                 }
             }
