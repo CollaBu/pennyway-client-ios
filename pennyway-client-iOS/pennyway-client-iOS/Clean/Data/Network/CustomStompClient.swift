@@ -294,7 +294,19 @@ extension CustomStompClient: StompClientLibDelegate {
             switch messageDto {
             case let .success(messageDto):
                 // NotificationCenter를 통해 viewModel에 메시지를 전달
-                let message = GetMessage.toItemModel(dto: messageDto)
+                let message = GetMessage.toItemModel(dto: messageDto, shareDate: nil)
+                
+                if let withHeader = withHeader,
+                   let date = withHeader["date"]
+                {
+                    let message = GetMessage.toItemModel(dto: messageDto, shareDate: date)
+                    NotificationCenter.default.post(
+                        name: .didReceiveMessage,
+                        object: message
+                    )
+                    return
+                }
+
                 NotificationCenter.default.post(name: .didReceiveMessage, object: message)
                 Log.debug("[NotificationCenter] chat 전달: \(message)")
             case let .failure(error):

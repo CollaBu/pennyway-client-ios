@@ -100,4 +100,5 @@ struct MessageItemModel: Equatable, Identifiable {
     var categoryType: CategoryType
     var createdAt: String
     var senderId: Int64
+    var shareDate: String?
 }
