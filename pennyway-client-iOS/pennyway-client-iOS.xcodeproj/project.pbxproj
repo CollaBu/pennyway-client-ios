@@ -343,7 +343,6 @@
 		960A20512D3EAE2D00DC613E /* ChatUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A20502D3EAE2800DC613E /* ChatUserInfoViewModel.swift */; };
 		964011402D4F4F6400684734 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9640113F2D4F4F6200684734 /* DeepLink.swift */; };
 		964011442D4F4FC000684734 /* DeepLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011432D4F4FB900684734 /* DeepLinkCoordinator.swift */; };
-		964011462D4F593900684734 /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011452D4F593100684734 /* DeepLinkHandler.swift */; };
 		964011482D50AA0700684734 /* ChatNavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011472D50A9F700684734 /* ChatNavigationState.swift */; };
 		B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */; };
 		B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */; };
@@ -833,7 +832,6 @@
 		960A20502D3EAE2800DC613E /* ChatUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserInfoViewModel.swift; sourceTree = "<group>"; };
 		9640113F2D4F4F6200684734 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		964011432D4F4FB900684734 /* DeepLinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkCoordinator.swift; sourceTree = "<group>"; };
-		964011452D4F593100684734 /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
 		964011472D50A9F700684734 /* ChatNavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigationState.swift; sourceTree = "<group>"; };
 		A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnalyticsEvents.swift; sourceTree = "<group>"; };
@@ -2116,7 +2114,6 @@
 		4A762AFF2B99A1DF001C1188 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				964011452D4F593100684734 /* DeepLinkHandler.swift */,
 				4AA52F3D2C05C38F00B21521 /* View */,
 				4A0BC6AB2BF5FA010036D900 /* Formatter */,
 				4A0BC6A52BF5F2660036D900 /* Protocol */,
@@ -3277,7 +3274,6 @@
 				D80E6A152BB2E0C4009F2DFE /* (null) in Sources */,
 				D8B0A92C2C4EBDDC00716ECB /* PasswordChangeTypeNavigation.swift in Sources */,
 				4A641A152C0F98380041B053 /* TotalTargetAmountViewModel.swift in Sources */,
-				964011462D4F593900684734 /* DeepLinkHandler.swift in Sources */,
 				4A3701CD2C08F7F600F0AEBA /* SpendingAlamofire.swift in Sources */,
 				4AAD2ED82D2D528F00E9EAF2 /* GenerateUuid.swift in Sources */,
 				4AE8F3A82C32AB970014F0D4 /* GetTargetAmountForPreviousMonthResponseDto.swift in Sources */,

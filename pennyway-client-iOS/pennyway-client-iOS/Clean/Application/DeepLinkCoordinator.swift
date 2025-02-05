@@ -7,12 +7,6 @@
 
 import Foundation
 
-// MARK: - FlowCoordinatorProtocol
-
-protocol FlowCoordinatorProtocol {
-    func chatRoomFlowStart(chatRoomId: String)
-}
-
 // MARK: - DeepLinkCoordinator
 
 final class DeepLinkCoordinator: ObservableObject {

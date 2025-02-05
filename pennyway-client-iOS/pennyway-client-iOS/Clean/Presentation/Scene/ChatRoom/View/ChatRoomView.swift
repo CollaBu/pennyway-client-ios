@@ -86,10 +86,10 @@ struct ChatRoomView: View {
                 // 현재 채팅방 정보 저장
                 viewStateManager.setCurrentView(self, chatRoomId: viewModelWrapper.roomData?.id)
 
-//                // 채팅방 상세 정보 조회
-//                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: viewModelWrapper.roomData?.id ?? 0) { _ in
-//                    Log.debug("채팅방 상세 정보 조회 api")
-//                }
+                // 채팅방 상세 정보 조회
+                viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: viewModelWrapper.roomData?.id ?? 0) { _ in
+                    Log.debug("채팅방 상세 정보 조회 api")
+                }
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
 

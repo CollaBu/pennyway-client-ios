@@ -150,24 +150,17 @@ struct ChatCellView: View {
             .onChange(of: navigationState.shouldNavigateToChatRoom) { showNavigate in
                 Log.debug("??????: \(String(describing: navigationState.selectedChatRoomId))")
                 if showNavigate {
-                    if chatRoomViewModelWrapper.chatRoomViewModel.roomData.value == nil {
-                        chatRoomViewModelWrapper.chatRoomViewModel.roomData.value = selectedChatRoom
-                        Log.debug("데이터:\(selectedChatRoom)")
-                    }
-                    
-                    viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: navigationState.selectedChatRoomId!) { success in
-                        if success {
-                            isNavigateToChatRoom = true
-                            Log.debug("[ChatCellView]: isNavigateChatRoomDetailView - \(isNavigateChatRoomDetailView)")
-                        } else {
-                            Log.debug("[ChatCellView]: 채팅방 상세정보 조회 실패")
-                        }
-                    }
-                    viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
+                    selectedChatRoom = self.getChatRoom(by: navigationState.selectedChatRoomId!)
+                    isNavigateToChatRoom = true
+
                     Log.debug("[ChatCellView]: 딥링크 화면 이동 성공")
                 }
             }
         }
+    }
+    
+    func getChatRoom(by id: Int64) -> ChatRoomItemModel? {
+        return viewModelWrapper.chatData.first { $0.id == id }
     }
     
     private func deleteChatRoom() {
