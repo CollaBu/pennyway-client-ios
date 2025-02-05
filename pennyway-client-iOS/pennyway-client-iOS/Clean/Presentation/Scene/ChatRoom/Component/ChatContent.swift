@@ -120,7 +120,9 @@ struct ChatContent: View {
             }
             .onAppear {
                 // 처음 열릴 때 가장 아래로 스크롤
-                proxy.scrollTo("bottom", anchor: .bottom) // TODO: 공유메시지인 경우에만 아래로 스크롤되지 않는 오류
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    proxy.scrollTo("bottom", anchor: .bottom)
+                }
             }
             .onTapGesture {
                 UIApplication.shouldDismissKeyboard = true // 빈 화면 터치 시 키보드 닫기
