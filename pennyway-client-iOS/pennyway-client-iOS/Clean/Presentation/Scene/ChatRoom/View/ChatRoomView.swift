@@ -18,6 +18,7 @@ struct ChatRoomView: View {
     @State private var isNavigateToMyChat = false
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
     @Environment(\.presentationMode) var presentationMode
+    
 
     var chatRoom: ChatRoomProtocol?
     private let currentUserId = getUserData()!.id
@@ -39,6 +40,7 @@ struct ChatRoomView: View {
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
             .edgesIgnoringSafeArea(.bottom)
+
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
@@ -89,7 +91,12 @@ struct ChatRoomView: View {
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: viewModelWrapper.roomData?.id ?? 0)
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
-
+            
+                ZStack {
+                    if viewModelWrapper.isDelegateSuccessful {
+                        InfoPopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: .check)
+                    }
+                }
             ZStack {
                 if isSideMenuPresented {
                     Color(.black01)
@@ -106,12 +113,7 @@ struct ChatRoomView: View {
             }
             .animation(.easeInOut(duration: 0.3), value: isSideMenuPresented)
 
-//            ZStack {
-//                if viewModelWrapper.isDelegateSuccessful {
-//                    InfoPopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: "check")
-//                }
-//            }
-//            
+
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
         }

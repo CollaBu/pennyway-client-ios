@@ -12,7 +12,7 @@ enum IconType {
         case .check:
             return "icon_chatRoom_check"
         case .error:
-            return "icon_close"
+            return "icon_illust_error"
         }
     }
 }
@@ -58,7 +58,7 @@ extension InfoPopUpView {
                                 Button(action: {
                                     showingPopUp = false
                                 }) {
-                                    Image(iconName)
+                                    Image("icon_close")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -71,7 +71,7 @@ extension InfoPopUpView {
                             })
                         }
 
-                        Image("icon_illust_error")
+                        Image(iconName)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: imageSize.width, height: imageSize.height)

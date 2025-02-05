@@ -14,6 +14,8 @@ struct ChatUserInfoView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showTransferPopUp: Bool = false // 방장 넘기기 팝업 상태
     @State private var showKickOutPopUp: Bool = false // 내보내기 팝업 상태
+    @State private var showErrorPopUp = false // 방장 넘기기 에러 팝업 상태 관리
+
     @ObservedObject var viewModelWrapper: ChatRoomViewModelWrapper
 
     let user: ChatMemberItemModel
@@ -53,6 +55,11 @@ struct ChatUserInfoView: View {
                                 secondBtnColor: Color(.red03)
                 )
             }
+
+            // 방장권한에 실패할 경우
+            if showErrorPopUp {
+                InfoPopUpView(showingPopUp: $showErrorPopUp, titleLabel: "방장 넘기기를 실패했어요", subLabel: "사용자 정보를 다시 확인해 주세요", iconType: .error)
+            }
         }
         .setTabBarVisibility(isHidden: true)
         .navigationBarBackButtonHidden(true)
@@ -62,6 +69,11 @@ struct ChatUserInfoView: View {
                 .resizable()
                 .scaledToFill()
         )
+        .onChange(of: viewModelWrapper.isDelegateSuccessful) { newValue in
+            if !newValue {
+                showErrorPopUp = true // 실패 시 팝업 표시
+            }
+        }
     }
 
     private func banChatMember() {
