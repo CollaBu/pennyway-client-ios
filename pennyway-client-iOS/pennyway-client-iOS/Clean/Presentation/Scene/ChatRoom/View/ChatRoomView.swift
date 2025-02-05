@@ -92,11 +92,12 @@ struct ChatRoomView: View {
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
             
-                ZStack {
-                    if viewModelWrapper.isDelegateSuccessful {
-                        InfoPopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: .check)
-                    }
+            //TODO: 소켓 연결 후 방장이 된 사용자에게 표시되도록 수정
+            ZStack {
+                if viewModelWrapper.isDelegateSuccessful {
+                    InfoPopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: .check)
                 }
+            }
             ZStack {
                 if isSideMenuPresented {
                     Color(.black01)
