@@ -18,7 +18,6 @@ struct ChatRoomView: View {
     @State private var isNavigateToMyChat = false
     @ObservedObject var chatViewModelWrapper: ChatViewModelWrapper
     @Environment(\.presentationMode) var presentationMode
-    
 
     var chatRoom: ChatRoomProtocol?
     private let currentUserId = getUserData()!.id
@@ -91,8 +90,8 @@ struct ChatRoomView: View {
                 viewModelWrapper.chatRoomViewModel.getChatRoomDetail(chatRoomId: viewModelWrapper.roomData?.id ?? 0)
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
-            
-            //TODO: 소켓 연결 후 방장이 된 사용자에게 표시되도록 수정
+
+            // TODO: 소켓 연결 후 방장이 된 사용자에게 표시되도록 수정
             ZStack {
                 if viewModelWrapper.isDelegateSuccessful {
                     InfoPopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: .check)
@@ -113,7 +112,6 @@ struct ChatRoomView: View {
                 }
             }
             .animation(.easeInOut(duration: 0.3), value: isSideMenuPresented)
-
 
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
