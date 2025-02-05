@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>더 나은 맞춤 서비스와 콘텐츠 제공을 위해 사용되며, 서비스 이외의 목적으로는 사용되지 않습니다.</string>
 	<key>BaseURL</key>
 	<string>$(BASE_URL)</string>
 	<key>CFBundleURLTypes</key>

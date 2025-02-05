@@ -1,3 +1,5 @@
+import AdSupport
+import AppTrackingTransparency
 import Firebase
 import FirebaseCore
 import FirebaseMessaging
@@ -14,45 +16,69 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         NetworkMonitor.shared.startMonitoring()
 
-        // 파이어베이스 설정
-        let firebaseAnalyticsService = FirebaseAnalyticsService()
+        deepLinkCoordinator = DeepLinkCoordinator()
+        FirebaseApp.configure()
 
+        setupNotification(application)
+        requestTrackingPermissionAndInitializeAnalytics(application, launchOptions)
+
+        application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
+
+        return true
+    }
+
+    /// 🔔 **알림 설정**
+    private func setupNotification(_ application: UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
+            if granted {
+                Log.info("알림 허용됨")
+            } else {
+                Log.info("알림 거부됨")
+            }
+
+            if let error = error {
+                Log.error("Error requesting notification authorization: \(error.localizedDescription)")
+            }
+
+            // 알림 요청 후 1초 뒤 앱 추적 권한 요청 실행
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.requestTrackingPermissionAndInitializeAnalytics(application, nil)
+            }
+        }
+    }
+
+    /// 📊 **앱 추적 권한 요청 및 Firebase Analytics 초기화**
+    private func requestTrackingPermissionAndInitializeAnalytics(_ application: UIApplication, _ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        let status = ATTrackingManager.trackingAuthorizationStatus
+
+        if status == .authorized {
+            initializeAnalytics(application, launchOptions) // 추적 허용된 경우 실행
+        } else if status == .notDetermined {
+            // 권한 요청 후 승인된 경우 실행
+            ATTrackingManager.requestTrackingAuthorization { newStatus in
+                if newStatus == .authorized {
+                    DispatchQueue.main.async {
+                        self.initializeAnalytics(application, launchOptions)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Firebase Analytics 초기화
+    private func initializeAnalytics(_ application: UIApplication, _ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        let firebaseAnalyticsService = FirebaseAnalyticsService()
         AnalyticsManager.shared.addService(firebaseAnalyticsService)
 
         if let launchOptions = launchOptions {
             AnalyticsManager.shared.initialize(application: application, didFinishLaunchingWithOptions: launchOptions)
         }
 
-        deepLinkCoordinator = DeepLinkCoordinator() // 초기화
-        FirebaseApp.configure()
-
-        // 알림 허용 여부
-        UNUserNotificationCenter.current().delegate = self
-
-        let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOption,
-            completionHandler: { granted, error in
-                if granted { // 알림 허용
-                    Log.info("알림 허용")
-                } else { // 알림 거부
-                    Log.info("알림 거부")
-                }
-
-                if let error = error {
-                    Log.error("Error requesting notification authorization: \(error.localizedDescription)")
-                }
-            }
-        )
-
-        application.registerForRemoteNotifications()
-
-        // Setting Up Cloud Messaging...
-        // 메세징 델리겟
-        Messaging.messaging().delegate = self
-
-        UNUserNotificationCenter.current().delegate = self
-        return true
+        Log.info("📊 Firebase Analytics Initialized")
     }
 
     /// fcm 토큰이 등록 되었을 때

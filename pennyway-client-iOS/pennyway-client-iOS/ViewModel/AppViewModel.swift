@@ -8,6 +8,7 @@ class AppViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var isSplashShown: Bool = false
     @Published var checkLoginState = false
+    let profileInfoViewModel = UserAccountViewModel()
 
     private var cancellables = Set<AnyCancellable>()
     private let loginUseCase: LoginUseCase
@@ -36,11 +37,20 @@ class AppViewModel: ObservableObject {
 
     func checkLoginStateUseCase() {
         loginUseCase.checkLoginState { [weak self] isLoggedIn in
-            self?.checkLoginState = isLoggedIn
-            self?.isLoggedIn = isLoggedIn
             if isLoggedIn {
-                self?.registDeviceTokenApi()
-                Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
+                self?.profileInfoViewModel.getUserProfileApi { success, userId in
+                    if success, let userId = userId {
+                        AnalyticsManager.shared.setUser("userId = \(userId)")
+                        AnalyticsManager.shared.trackEvent(AuthEvents.login, additionalParams: [
+                            AnalyticsConstants.Parameter.oauthType: OAuthRegistrationManager.shared.provider,
+                            AnalyticsConstants.Parameter.isRefresh: false,
+                        ])
+                        self?.checkLoginState = isLoggedIn
+                        self?.isLoggedIn = isLoggedIn
+                        self?.registDeviceTokenApi()
+                        Log.debug("[AppViewModel] accessToken: \(KeychainHelper.loadAccessToken())")
+                    }
+                }
             }
         }
     }
