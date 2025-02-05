@@ -13,6 +13,7 @@ struct pennyway_client_iOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var viewStateManager = ViewStateManager() // view 상태 감지
+    @StateObject private var deepLinkCoordinator = DeepLinkCoordinator()
 
     init() {
         let kakaoAppKey = Bundle.main.infoDictionary?["KakaoAppKey"] as! String
@@ -36,9 +37,13 @@ struct pennyway_client_iOSApp: App {
             .onOpenURL { url in
                 GIDSignIn.sharedInstance.handle(url)
             }
+            .onOpenURL { url in
+                deepLinkCoordinator.handleDeepLink(url: url)
+            }
             .onChange(of: scenePhase) { newPhase in
                 viewStateManager.setScenePhase(newPhase)
             }
+            .environmentObject(deepLinkCoordinator)
             .environmentObject(appViewModel)
             .environmentObject(networkStatus)
             .environmentObject(viewStateManager)

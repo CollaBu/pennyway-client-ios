@@ -341,6 +341,9 @@
 		960A204C2D3E929500DC613E /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A204B2D3E929200DC613E /* UserInfoRepository.swift */; };
 		960A204E2D3E930100DC613E /* UserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A204D2D3E92FD00DC613E /* UserInfoUseCase.swift */; };
 		960A20512D3EAE2D00DC613E /* ChatUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960A20502D3EAE2800DC613E /* ChatUserInfoViewModel.swift */; };
+		964011402D4F4F6400684734 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9640113F2D4F4F6200684734 /* DeepLink.swift */; };
+		964011442D4F4FC000684734 /* DeepLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011432D4F4FB900684734 /* DeepLinkCoordinator.swift */; };
+		964011482D50AA0700684734 /* ChatNavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964011472D50A9F700684734 /* ChatNavigationState.swift */; };
 		B501605F2C75B54100328AFD /* ProfileAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */; };
 		B50160612C75EA8C00328AFD /* QuestionAnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */; };
 		B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599E4BB2C58AE97006051E9 /* AnalyticsService.swift */; };
@@ -827,6 +830,9 @@
 		960A204B2D3E929200DC613E /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
 		960A204D2D3E92FD00DC613E /* UserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoUseCase.swift; sourceTree = "<group>"; };
 		960A20502D3EAE2800DC613E /* ChatUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserInfoViewModel.swift; sourceTree = "<group>"; };
+		9640113F2D4F4F6200684734 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		964011432D4F4FB900684734 /* DeepLinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkCoordinator.swift; sourceTree = "<group>"; };
+		964011472D50A9F700684734 /* ChatNavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigationState.swift; sourceTree = "<group>"; };
 		A3E298D8A2B0690BBB7DB144 /* Pods_pennyway_client_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pennyway_client_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B501605E2C75B54100328AFD /* ProfileAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAnalyticsEvents.swift; sourceTree = "<group>"; };
 		B50160602C75EA8C00328AFD /* QuestionAnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAnalyticsEvents.swift; sourceTree = "<group>"; };
@@ -1286,6 +1292,7 @@
 		4A12FEE92C9C481900DE10BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9640113F2D4F4F6200684734 /* DeepLink.swift */,
 				4A8523EB2CB5A88D00AE90AF /* Chat */,
 				4A12FEEC2C9C487800DE10BC /* User.swift */,
 				4AABDBBB2C9C8C2900E9436D /* PresignedUrl.swift */,
@@ -1418,6 +1425,8 @@
 		4A12FF0A2C9C4B7C00DE10BC /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				964011472D50A9F700684734 /* ChatNavigationState.swift */,
+				964011432D4F4FB900684734 /* DeepLinkCoordinator.swift */,
 				4A2C3A5B2CD3457D006B6804 /* ViewStateManager.swift */,
 				4A12FF0B2C9C4B8600DE10BC /* DIContainer */,
 				4A12FF122C9C4BCF00DE10BC /* AppFlowCoordinator.swift */,
@@ -3166,6 +3175,7 @@
 				D80C68922CC80BEA00928921 /* GetChatServerResponseDto.swift in Sources */,
 				4A12FF0F2C9C4BAD00DE10BC /* ProfileSceneDIContainer.swift in Sources */,
 				D8457BAD2CB6A233002540B2 /* ChatCellView.swift in Sources */,
+				964011442D4F4FC000684734 /* DeepLinkCoordinator.swift in Sources */,
 				4ADBFAED2BE2C36500C3ECE4 /* UserAccountAlamofire.swift in Sources */,
 				4A5789852BDC269000AFEB26 /* StatusSpecificError.swift in Sources */,
 				4A45A1AC2CCBF9B700D47F10 /* (null) in Sources */,
@@ -3437,6 +3447,7 @@
 				4A0BC6AA2BF5F5DB0036D900 /* StringAttributeExtensions.swift in Sources */,
 				4AC3205B2C11F31C00DDB4B6 /* GetTotalTargetAmountRequestDto.swift in Sources */,
 				4AC320442C11D5AC00DDB4B6 /* AddSpendingInputFormView.swift in Sources */,
+				964011482D50AA0700684734 /* ChatNavigationState.swift in Sources */,
 				960A204C2D3E929500DC613E /* UserInfoRepository.swift in Sources */,
 				D8E889E82CDB8165008FC22E /* JoinChatRoomRepository.swift in Sources */,
 				4AF3A3022CD938310099967F /* ChatRoomRouter.swift in Sources */,
@@ -3526,6 +3537,7 @@
 				4A0FFBF32BCDA13500EFEC56 /* VerificationRequestDto.swift in Sources */,
 				4AD70E252BE0153F0058A52A /* ProfileUserInfoView.swift in Sources */,
 				960A204A2D3E925300DC613E /* DefaultUserInfoRepository.swift in Sources */,
+				964011402D4F4F6400684734 /* DeepLink.swift in Sources */,
 				D889F9F62C6484950055D045 /* CheckUnReadNotificationResponseDto.swift in Sources */,
 				D85E46482CD6091700715169 /* SearchChatRoomRepository.swift in Sources */,
 				4A2882012C64CC5900AE50C7 /* CategorySpendingListView.swift in Sources */,
@@ -3779,8 +3791,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "pennyway-client-iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Pennyway;
-				INFOPLIST_KEY_NSCameraUsageDescription = "camera 접근 권한 주세요";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "album 권한 접근 주세요";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Pennyway앱이 귀하의 카메라에 액세스하려고 합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Pennyway앱이 귀하의 앨범에 액세스하려고 합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -3827,8 +3839,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "pennyway-client-iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Pennyway;
-				INFOPLIST_KEY_NSCameraUsageDescription = "camera 접근 권한 주세요";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "album 권한 접근 주세요";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Pennyway앱이 귀하의 카메라에 액세스하려고 합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Pennyway앱이 귀하의 앨범에 액세스하려고 합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
