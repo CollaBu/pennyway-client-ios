@@ -97,8 +97,8 @@ struct GetMessage: Codable {
         }
     }
 
-    static func toItemModel(dto: GetMessage, shareDate: String?) -> MessageItemModel {
-        return MessageItemModel(chatRoomId: dto.chatRoomId, chatId: dto.chatId, content: dto.content, contentType: dto.contentType, categoryType: dto.categoryType, createdAt: dto.createdAt, senderId: dto.senderId, shareDate: shareDate)
+    static func toItemModel(dto: GetMessage) -> MessageItemModel {
+        return MessageItemModel(chatRoomId: dto.chatRoomId, chatId: dto.chatId, content: dto.content, contentType: dto.contentType, categoryType: dto.categoryType, createdAt: dto.createdAt, senderId: dto.senderId)
     }
 }
 

@@ -257,8 +257,8 @@ extension CustomStompClient: StompClientLibDelegate {
         }
     }
    
-    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody: String?, withHeader: [String: String]?, withDestination _: String) {
-        Log.info("Did receive Message: body - \(String(describing: jsonBody)), \(String(describing: akaStringBody)), \n header - \(String(describing: withHeader))")
+    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody _: String?, withHeader: [String: String]?, withDestination _: String) {
+        Log.info("Did receive Message: body - \(String(describing: jsonBody)), \n header - \(String(describing: withHeader))")
         
         // destination: `/user/queue/success` 확인
         if let destination = withHeader?["destination"], destination == "/user/queue/success" {
@@ -294,19 +294,7 @@ extension CustomStompClient: StompClientLibDelegate {
             switch messageDto {
             case let .success(messageDto):
                 // NotificationCenter를 통해 viewModel에 메시지를 전달
-                let message = GetMessage.toItemModel(dto: messageDto, shareDate: nil)
-                
-                if let withHeader = withHeader,
-                   let date = withHeader["date"]
-                {
-                    let message = GetMessage.toItemModel(dto: messageDto, shareDate: date)
-                    NotificationCenter.default.post(
-                        name: .didReceiveMessage,
-                        object: message
-                    )
-                    return
-                }
-
+                let message = GetMessage.toItemModel(dto: messageDto)
                 NotificationCenter.default.post(name: .didReceiveMessage, object: message)
                 Log.debug("[NotificationCenter] chat 전달: \(message)")
             case let .failure(error):

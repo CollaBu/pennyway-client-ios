@@ -106,4 +106,21 @@ enum DateFormatterUtil {
         formatter.dateFormat = "M월 d일"
         return formatter.string(from: date)
     }
+
+    /// 2024년 4월 11일 형식으로 반환
+    static func formatNormalDateString(_ dateString: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.locale = Locale(identifier: "ko_KR") // 한국어 로케일 설정
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "yyyy년 M월 d일"
+        outputFormatter.locale = Locale(identifier: "ko_KR")
+
+        if let date = inputFormatter.date(from: dateString) {
+            return outputFormatter.string(from: date)
+        } else {
+            return dateString // 변환 실패 시 원본 반환
+        }
+    }
 }

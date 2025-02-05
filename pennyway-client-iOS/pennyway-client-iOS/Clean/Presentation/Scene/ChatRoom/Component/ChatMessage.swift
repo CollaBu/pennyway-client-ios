@@ -18,12 +18,15 @@ struct ChatMessage: View {
     @State private var isNavigateToShareView = false
     @State private var textWidth: CGFloat = .zero
     
-    private var parsedSpendings: [SpendingItemToChat] {
+    private var spendingContent: SpendingContent? { // 총 지출 내역 정보
         guard let data = chat.content.data(using: .utf8) else {
-            return []
+            return nil
         }
-        let decodedData = try? JSONDecoder().decode([SpendingItemToChat].self, from: data)
-        return decodedData ?? []
+        return try? JSONDecoder().decode(SpendingContent.self, from: data)
+    }
+
+    private var parsedSpendings: [SpendingItemToChat] { // 지출 내역 리스트
+        return spendingContent?.spendingOnDates ?? []
     }
     
     var body: some View {
@@ -91,7 +94,7 @@ struct ChatMessage: View {
     private var shareChatMessage: some View {
         VStack(spacing: 12) {
             // 타이틀 영역
-            Text("\(sender.name)님의\n\(formatDateString(chat.shareDate ?? "")) 지출 내역") // TODO: 날짜랑 닉네임 수정
+            Text("\(sender.name)님의\n\(DateFormatterUtil.formatNormalDateString(spendingContent?.date ?? "")) 지출 내역")
                 .font(.B2SemiboldFont())
                 .platformTextColor(color: .white01)
                 .padding(.leading, 13 * DynamicSizeFactor.factor())
@@ -165,22 +168,13 @@ struct ChatMessage: View {
     private func categoryBaseName(from icon: String) -> CategoryBaseName? {
         return SpendingCategoryIconList.allCases.first { $0.rawValue == icon }?.baseName
     }
-    
-    private func formatDateString(_ dateString: String) -> String {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        inputFormatter.locale = Locale(identifier: "ko_KR") // 한국어 로케일 설정
+}
 
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "yyyy년 MM월 dd일"
-        outputFormatter.locale = Locale(identifier: "ko_KR")
+// MARK: - SpendingContent
 
-        if let date = inputFormatter.date(from: dateString) {
-            return outputFormatter.string(from: date)
-        } else {
-            return dateString // 변환 실패 시 원본 반환
-        }
-    }
+struct SpendingContent: Codable {
+    let date: String
+    let spendingOnDates: [SpendingItemToChat]
 }
 
 // MARK: - SpendingItemToChat

@@ -16,7 +16,7 @@ struct ShareToChatRoomView: View {
     private let maxLength = 19
 
     @Binding var clickDate: Date?
-    @ObservedObject var viewModelWrapper: ShareToChatRoomViewModelWrapper
+    @StateObject var viewModelWrapper: ShareToChatRoomViewModelWrapper
     @EnvironmentObject var mainTabViewModel: MainTabViewModel
     @Environment(\.presentationMode) var presentationMode
 
@@ -63,7 +63,6 @@ struct ShareToChatRoomView: View {
             viewModelWrapper.shareToChatRoomViewModel.getChatRoom { success in
                 if success {
                     Log.debug("[ShareToChatRoomView] onAppear: 내채팅 조회 api 호출")
-                    // TODO: 처음 빌드하는 경우에만 채팅 목록 바로 나오지 않는 오류 수정
                 }
             }
         }

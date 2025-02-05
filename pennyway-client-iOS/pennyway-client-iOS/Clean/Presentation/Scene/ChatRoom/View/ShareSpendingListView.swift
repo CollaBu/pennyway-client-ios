@@ -13,8 +13,10 @@ struct ShareSpendingListView: View {
     let spendings: [SpendingItemToChat]
 
     var body: some View {
-        ZStack {
+        ScrollView {
             VStack(spacing: 12 * DynamicSizeFactor.factor()) {
+                Spacer().frame(height: 6 * DynamicSizeFactor.factor())
+
                 ForEach(spendings, id: \.name) { spending in
                     HStack {
                         if let icon = categoryBaseName(from: spending.icon) {

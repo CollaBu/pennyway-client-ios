@@ -147,9 +147,12 @@ struct ChatRoomCell: View, ImageLoadable {
                             
                         // 내 채팅인 경우 categoryType이 NORMAL과 SHARE인 경우만 뷰에 표시되도록 함
                         if isMyChat {
-                            Text((chatRoom.lastMassage?.categoryType == .normal || chatRoom.lastMassage?.categoryType == .share) ? chatRoom.lastMassage?.content ?? "" : "")
+                            Text((chatRoom.lastMassage?.categoryType == .normal || chatRoom.lastMassage?.categoryType == .share) ?
+                                (chatRoom.lastMassage?.categoryType == .share ? "지출 내역을 공유했습니다" : (chatRoom.lastMassage?.content ?? ""))
+                                : "")
                                 .font(.B3MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
+
                         } else {
                             Text(chatRoom.description)
                                 .font(.B3MediumFont())
