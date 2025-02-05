@@ -9,10 +9,11 @@ enum SpendingRouter: URLRequestConvertible {
     case getDetailSpendingHistory(spendingId: Int)
     case deleteSingleSpendingHistory(spendingId: Int) // 지출내역 단일 삭제
     case editSpendingHistory(spendingId: Int, dto: AddSpendingHistoryRequestDto)
+    case shareSpendingHistory(dto: ShareSpendingHistoryRequestDto)
 
     var method: HTTPMethod {
         switch self {
-        case .getSpendingHistory, .getDetailSpendingHistory:
+        case .getSpendingHistory, .getDetailSpendingHistory, .shareSpendingHistory:
             return .get
         case .addSpendingHistory:
             return .post
@@ -34,12 +35,15 @@ enum SpendingRouter: URLRequestConvertible {
 
         case let .getDetailSpendingHistory(spendingId), let .editSpendingHistory(spendingId, _), let .deleteSingleSpendingHistory(spendingId):
             return "v2/spendings/\(spendingId)"
+
+        case .shareSpendingHistory:
+            return "v2/spendings/share"
         }
     }
 
     var bodyParameters: Parameters? {
         switch self {
-        case .getSpendingHistory, .getDetailSpendingHistory, .deleteSingleSpendingHistory:
+        case .getSpendingHistory, .getDetailSpendingHistory, .deleteSingleSpendingHistory, .shareSpendingHistory:
             return [:]
         case let .addSpendingHistory(dto):
             return try? dto.asDictionary()
@@ -54,6 +58,8 @@ enum SpendingRouter: URLRequestConvertible {
         switch self {
         case let .getSpendingHistory(dto):
             return try? dto.asDictionary()
+        case let .shareSpendingHistory(dto):
+            return try? dto.asDictionary()
         case .addSpendingHistory, .deleteSpendingHistory, .getDetailSpendingHistory, .editSpendingHistory, .deleteSingleSpendingHistory:
             return [:]
         }
@@ -64,7 +70,7 @@ enum SpendingRouter: URLRequestConvertible {
         var request: URLRequest
 
         switch self {
-        case .getSpendingHistory:
+        case .getSpendingHistory, .shareSpendingHistory:
             let queryDatas = queryParameters?.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
             request = URLRequest.createURLRequest(url: url, method: method, queryParameters: queryDatas)
         case .addSpendingHistory, .editSpendingHistory, .deleteSpendingHistory:

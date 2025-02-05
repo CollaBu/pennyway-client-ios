@@ -45,6 +45,8 @@ struct ChatCellView: View {
                     // 내 채팅에서 채팅방의 존재 유무에 따라 다른 뷰를 보여주도록 함
                     if selectedTab == 1 {
                         if viewModelWrapper.chatData.isEmpty {
+                            Spacer().frame(height: 91 * DynamicSizeFactor.factor())
+           
                             DefaultChatContent()
                             Spacer()
                         } else {

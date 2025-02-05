@@ -72,6 +72,7 @@ enum ContentType: String, Codable {
 enum CategoryType: String, Codable {
     case normal = "NORMAL"
     case system = "SYSTEM"
+    case share = "SHARE"
 }
 
 // MARK: - ChatRoomAlarmType

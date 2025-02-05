@@ -14,7 +14,7 @@ struct ChatSendCell: View {
     let sender: ChatMemberItemModel
 
     var body: some View {
-        ChatMessage(content: chat.content, createdAt: chat.createdAt, isSender: true)
+        ChatMessage(chat: chat, sender: sender, isSender: true)
             .padding(.horizontal, 20)
     }
 }
