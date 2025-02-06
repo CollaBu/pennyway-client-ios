@@ -257,8 +257,8 @@ extension CustomStompClient: StompClientLibDelegate {
         }
     }
    
-    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody: String?, withHeader: [String: String]?, withDestination _: String) {
-        Log.info("Did receive Message: body - \(String(describing: jsonBody)), \(String(describing: akaStringBody)), \n header - \(String(describing: withHeader))")
+    func stompClient(client _: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody _: String?, withHeader: [String: String]?, withDestination _: String) {
+        Log.info("Did receive Message: body - \(String(describing: jsonBody)), \n header - \(String(describing: withHeader))")
         
         // destination: `/user/queue/success` 확인
         if let destination = withHeader?["destination"], destination == "/user/queue/success" {
@@ -304,6 +304,8 @@ extension CustomStompClient: StompClientLibDelegate {
     }
    
     func serverDidSendReceipt(client _: StompClientLib!, withReceiptId receiptId: String) {
+        Log.debug("[Socket] Did Send Receipt \(receiptId)")
+        
         if receiptId.hasPrefix("refresh-receipt-") {
             notificationQueue.enqueue(
                 Notification(name: .socketAuthComplete),

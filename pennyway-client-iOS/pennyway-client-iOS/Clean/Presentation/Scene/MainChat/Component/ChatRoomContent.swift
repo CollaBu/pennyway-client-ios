@@ -19,7 +19,7 @@ struct ChatRoomContent: View {
                 if isMyChat {
                     if let rooms = dummyChatRooms {
                         ForEach(rooms, id: \.id) { chatRoom in
-                            NavigationLink(destination: ChatRoomView(chatViewModelWrapper: viewModelWrapper, chatRoom: chatRoom)) {
+                            NavigationLink(destination: ChatRoomView(chatViewModelWrapper: viewModelWrapper, chatRoomId: nil, chatRoom: chatRoom)) {
                                 ChatRoomCell(chatRoom: chatRoom, isMyChat: true, onDelete: {
                                     isPopUp = true
                                     selectedChatRoom = chatRoom
@@ -145,11 +145,14 @@ struct ChatRoomCell: View, ImageLoadable {
                             
                         Spacer().frame(height: 4 * DynamicSizeFactor.factor())
                             
-                        // 내 채팅인 경우 categoryType이 NORMAL인 경우만 뷰에 표시되도록 함
+                        // 내 채팅인 경우 categoryType이 NORMAL과 SHARE인 경우만 뷰에 표시되도록 함
                         if isMyChat {
-                            Text(chatRoom.lastMassage?.categoryType == CategoryType.normal ? chatRoom.lastMassage?.content ?? "" : "")
+                            Text((chatRoom.lastMassage?.categoryType == .normal || chatRoom.lastMassage?.categoryType == .share) ?
+                                (chatRoom.lastMassage?.categoryType == .share ? "지출 내역을 공유했습니다" : (chatRoom.lastMassage?.content ?? ""))
+                                : "")
                                 .font(.B3MediumFont())
                                 .platformTextColor(color: Color("Gray07"))
+
                         } else {
                             Text(chatRoom.description)
                                 .font(.B3MediumFont())

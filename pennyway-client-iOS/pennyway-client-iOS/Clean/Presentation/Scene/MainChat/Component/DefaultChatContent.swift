@@ -4,8 +4,6 @@ import SwiftUI
 struct DefaultChatContent: View {
     var body: some View {
         VStack(alignment: .center) {
-            Spacer().frame(height: 91 * DynamicSizeFactor.factor())
-
             Image("icon_illust_my_chating")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
