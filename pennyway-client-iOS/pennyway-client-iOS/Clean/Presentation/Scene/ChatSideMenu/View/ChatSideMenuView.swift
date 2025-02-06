@@ -167,7 +167,12 @@ private struct SideMenuContent: View {
 
                 Spacer()
                 
-                DeleteButton
+                // 방장에게만 보이도록 표시
+                if !members.isEmpty {
+                    if members[0].role.rawValue == Role.admin.rawValue {
+                        DeleteButton
+                    }
+                }
             }
             
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())

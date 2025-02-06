@@ -58,7 +58,8 @@ struct MainTabView: View {
         .onChange(of: navigationState.shouldNavigateToChatRoom) { showNavigate in
             if showNavigate {
                 // 딥링크를 통해 채팅 탭으로 이동
-                selection = 2
+                viewModel.selection = 2
+
                 Log.debug("[MainTabView]: \(String(describing: navigationState.selectedChatRoomId))")
 
                 DispatchQueue.main.async {
