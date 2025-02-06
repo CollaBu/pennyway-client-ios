@@ -20,7 +20,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
 
         setupNotification(application)
-        requestTrackingPermissionAndInitializeAnalytics(application, launchOptions)
+        AnalyticsManager.shared.initialize(application: application, didFinishLaunchingWithOptions: launchOptions)
 
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
@@ -29,7 +29,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 
     /// 🔔 **알림 설정**
-    private func setupNotification(_ application: UIApplication) {
+    private func setupNotification(_: UIApplication) {
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
 
@@ -43,44 +43,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             if let error = error {
                 Log.error("Error requesting notification authorization: \(error.localizedDescription)")
             }
-
-            // 알림 요청 후 1초 뒤 앱 추적 권한 요청 실행
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.requestTrackingPermissionAndInitializeAnalytics(application, nil)
-            }
         }
     }
-
-    /// 📊 **앱 추적 권한 요청 및 Firebase Analytics 초기화**
-    private func requestTrackingPermissionAndInitializeAnalytics(_ application: UIApplication, _ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        let status = ATTrackingManager.trackingAuthorizationStatus
-
-        if status == .authorized {
-            initializeAnalytics(application, launchOptions) // 추적 허용된 경우 실행
-        } else if status == .notDetermined {
-            // 권한 요청 후 승인된 경우 실행
-            ATTrackingManager.requestTrackingAuthorization { newStatus in
-                if newStatus == .authorized {
-                    DispatchQueue.main.async {
-                        self.initializeAnalytics(application, launchOptions)
-                    }
-                }
-            }
-        }
-    }
-
-    /// Firebase Analytics 초기화
-    private func initializeAnalytics(_ application: UIApplication, _ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        let firebaseAnalyticsService = FirebaseAnalyticsService()
-        AnalyticsManager.shared.addService(firebaseAnalyticsService)
-
-        if let launchOptions = launchOptions {
-            AnalyticsManager.shared.initialize(application: application, didFinishLaunchingWithOptions: launchOptions)
-        }
-
-        Log.info("📊 Firebase Analytics Initialized")
-    }
-
+    
     /// fcm 토큰이 등록 되었을 때
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
