@@ -134,8 +134,13 @@ private struct SideMenuContent: View {
             
             Spacer()
             
-            ExitButton
             
+            ExitButton
+//            // 방장에게만 보이도록 표시
+//            if let currentUser = members.first(where: { $0.id == currentUserId }), currentUser.role == .admin {
+//                ExitButton
+//            }
+    
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())
         }
         .padding(.horizontal, 25)
