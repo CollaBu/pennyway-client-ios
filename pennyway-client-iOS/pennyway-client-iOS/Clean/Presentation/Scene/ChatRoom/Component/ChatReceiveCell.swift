@@ -36,7 +36,7 @@ struct ChatReceiveCell: View, ImageLoadable {
 
             VStack(alignment: .leading, spacing: 5 * DynamicSizeFactor.factor()) {
                 // 사용자 이름
-                Text(sender?.name ?? "알수없음")
+                Text(sender?.name ?? "알 수 없음")
                     .font(.B3MediumFont())
                     .platformTextColor(color: Color("Gray06"))
 

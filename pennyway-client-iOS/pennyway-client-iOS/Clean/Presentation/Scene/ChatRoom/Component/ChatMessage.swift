@@ -94,7 +94,7 @@ struct ChatMessage: View {
     private var shareChatMessage: some View {
         VStack(spacing: 12) {
             // 타이틀 영역
-            Text("\(sender?.name ?? "알수없음")님의\n\(DateFormatterUtil.formatNormalDateString(spendingContent?.date ?? "")) 지출 내역")
+            Text("\(sender?.name ?? "알 수 없음")님의\n\(DateFormatterUtil.formatNormalDateString(spendingContent?.date ?? "")) 지출 내역")
                 .font(.B2SemiboldFont())
                 .platformTextColor(color: .white01)
                 .padding(.leading, 13 * DynamicSizeFactor.factor())
