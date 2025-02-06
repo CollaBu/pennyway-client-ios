@@ -43,7 +43,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
         }
     }
-    
+
     /// fcm 토큰이 등록 되었을 때
     func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken

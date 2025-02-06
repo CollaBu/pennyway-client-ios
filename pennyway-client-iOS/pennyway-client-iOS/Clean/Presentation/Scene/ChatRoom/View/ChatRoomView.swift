@@ -40,6 +40,7 @@ struct ChatRoomView: View {
             .setTabBarVisibility(isHidden: true)
             .navigationBarBackButtonHidden(true)
             .edgesIgnoringSafeArea(.bottom)
+
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
@@ -93,6 +94,12 @@ struct ChatRoomView: View {
                 viewModelWrapper.chatRoomViewModel.subscribeToNotifications()
             }
 
+            // TODO: 소켓 연결 후 방장이 된 사용자에게 표시되도록 수정
+            ZStack {
+                if viewModelWrapper.isDelegateSuccessful {
+                    InfoPopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: .check)
+                }
+            }
             ZStack {
                 if isSideMenuPresented {
                     Color(.black01)
@@ -109,12 +116,6 @@ struct ChatRoomView: View {
             }
             .animation(.easeInOut(duration: 0.3), value: isSideMenuPresented)
 
-//            ZStack {
-//                if viewModelWrapper.isDelegateSuccessful {
-//                    ErrorCodePopUpView(showingPopUp: $viewModelWrapper.isDelegateSuccessful, titleLabel: "방장이 되었어요!", subLabel: "더 다양한 기능으로 친구들과 소통해요", iconType: "check")
-//                }
-//            }
-//            
             NavigationLink(destination: ChatCellView(viewModelWrapper: chatViewModelWrapper), isActive: $isNavigateToMyChat) {}
                 .hidden()
         }

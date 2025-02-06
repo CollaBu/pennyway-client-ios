@@ -34,7 +34,7 @@
 		4A1179B02BA9572F00A9CF4C /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A72BA9572F00A9CF4C /* Pretendard-Bold.otf */; };
 		4A1179B12BA9572F00A9CF4C /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A82BA9572F00A9CF4C /* Pretendard-Medium.otf */; };
 		4A1179B22BA9572F00A9CF4C /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */; };
-		4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */; };
+		4A1179B52BA9C20900A9CF4C /* InfoPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1179B42BA9C20900A9CF4C /* InfoPopUpView.swift */; };
 		4A12BC912C038D1200AACBCA /* CategoryIconListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */; };
 		4A12FEED2C9C487800DE10BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEEC2C9C487800DE10BC /* User.swift */; };
 		4A12FEEF2C9C489C00DE10BC /* UserProfileItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */; };
@@ -534,7 +534,7 @@
 		4A1179A82BA9572F00A9CF4C /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		4A1179A92BA9572F00A9CF4C /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		4A1179B32BA958ED00A9CF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodePopUpView.swift; sourceTree = "<group>"; };
+		4A1179B42BA9C20900A9CF4C /* InfoPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopUpView.swift; sourceTree = "<group>"; };
 		4A12BC902C038D1200AACBCA /* CategoryIconListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconListItem.swift; sourceTree = "<group>"; };
 		4A12FEEC2C9C487800DE10BC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4A12FEEE2C9C489C00DE10BC /* UserProfileItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileItemModel.swift; sourceTree = "<group>"; };
@@ -1813,7 +1813,7 @@
 			children = (
 				4A4A56712BACA2250071D00E /* PhoneVerificationView.swift */,
 				4A6E62D52BA5F7FC00111246 /* PhoneVerificationContentView.swift */,
-				4A1179B42BA9C20900A9CF4C /* ErrorCodePopUpView.swift */,
+				4A1179B42BA9C20900A9CF4C /* InfoPopUpView.swift */,
 				4A8571392BC6FFD30082CE47 /* CodeInputSectionView.swift */,
 				D8157E712BC19E590083844B /* PhoneNumberInputSectionView.swift */,
 			);
@@ -3494,7 +3494,7 @@
 				B599E4BC2C58AE97006051E9 /* AnalyticsService.swift in Sources */,
 				4A3DE20E2C3E41EC00817589 /* SpendingCategoryAlamofire.swift in Sources */,
 				D8880E202BCEED9B00922894 /* NavigationUtil.swift in Sources */,
-				4A1179B52BA9C20900A9CF4C /* ErrorCodePopUpView.swift in Sources */,
+				4A1179B52BA9C20900A9CF4C /* InfoPopUpView.swift in Sources */,
 				D8E889E22CDB2466008FC22E /* GetUnReadNotificationResponseDto.swift in Sources */,
 				4A28820D2C64CD5F00AE50C7 /* NotificationContentData.swift in Sources */,
 				4AC320402C11D5AC00DDB4B6 /* SelectCategoryIconView.swift in Sources */,

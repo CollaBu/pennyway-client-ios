@@ -77,6 +77,7 @@ class DefaultChatUserInfoViewModel: ChatUserInfoViewModel, ObservableObject {
 
                 switch error {
                 case .mismatchConflict, .other, .notAdmin, .notFound:
+                    self?.isDelegateSuccessful.value = false
                     completion(false)
                 }
             }
