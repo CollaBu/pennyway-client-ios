@@ -194,16 +194,18 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    //                    self?.isDeleteSuccessful.value = true
                     Log.debug("[DefaultChatRoomViewModel] - isDeleteSuccessful: \(self!.isDeleteSuccessful)")
                 }
             case let .failure(error):
-                Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
-
                 switch error {
-                case .mismatchConflict, .other, .notAdmin, .notFound:
+                case .notAdmin:
+                    self?.isErrorPopupShow.value = true
+                    completion(false)
+
+                case .mismatchConflict, .other, .notFound:
                     completion(false)
                 }
+                Log.error("[DefaultChatRoomViewModel] 채팅방 삭제 실패: \(error.localizedDescription)")
             }
         }
     }

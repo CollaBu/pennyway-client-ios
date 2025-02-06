@@ -12,15 +12,14 @@ enum IconType {
         case .check:
             return "icon_chatRoom_check"
         case .error:
-            return "icon_close"
+            return "icon_illust_error"
         }
     }
 }
 
-// MARK: - ErrorCodePopUpView
+// MARK: - InfoPopUpView
 
-// TODO: 변수명 네이밍 수정필요
-struct ErrorCodePopUpView: View {
+struct InfoPopUpView: View {
     @Binding var showingPopUp: Bool
     let titleLabel: String
     let subLabel: String
@@ -34,9 +33,9 @@ struct ErrorCodePopUpView: View {
     }
 }
 
-// MARK: ErrorCodePopUpView.PopupContent
+// MARK: InfoPopUpView.PopupContent
 
-extension ErrorCodePopUpView {
+extension InfoPopUpView {
     struct PopupContent: View {
         var imageSize: CGSize
         var frameHeight: CGFloat
@@ -59,7 +58,7 @@ extension ErrorCodePopUpView {
                                 Button(action: {
                                     showingPopUp = false
                                 }) {
-                                    Image(iconName)
+                                    Image("icon_close")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24 * DynamicSizeFactor.factor(), height: 24 * DynamicSizeFactor.factor())
@@ -72,7 +71,7 @@ extension ErrorCodePopUpView {
                             })
                         }
 
-                        Image("icon_illust_error")
+                        Image(iconName)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: imageSize.width, height: imageSize.height)

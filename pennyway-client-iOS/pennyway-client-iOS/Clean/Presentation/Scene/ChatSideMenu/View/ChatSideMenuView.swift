@@ -14,6 +14,7 @@ struct ChatSideMenuView: View {
     @EnvironmentObject var viewModelWrapper: ChatRoomViewModelWrapper
     @State private var isAlarmOn: Bool = false
     @State private var showExitPopUp: Bool = false
+    @State private var showDeletePopUp: Bool = false
     @State private var showChatUserView: Bool = false
     @State private var selectedUser: ChatMemberItemModel? = nil
     @State private var isInitialLoad: Bool = true // 초기 로드 여부
@@ -24,7 +25,7 @@ struct ChatSideMenuView: View {
             HStack(spacing: 0) {
                 Spacer()
                 
-                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp, members: viewModelWrapper.chatUserData, onUserSelect: { user in
+                SideMenuContent(isAlarmOn: $isAlarmOn, showExitPopUp: $showExitPopUp, showDeletePopUp: $showDeletePopUp, members: viewModelWrapper.chatUserData, onUserSelect: { user in
                     selectedUser = user
                 })
                 .padding(.leading, 105 * DynamicSizeFactor.factor())
@@ -33,7 +34,7 @@ struct ChatSideMenuView: View {
             
             if viewModelWrapper.showErrorPopUp {
                 ZStack {
-                    ErrorCodePopUpView(showingPopUp: $viewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요", iconType: .error)
+                    InfoPopUpView(showingPopUp: $viewModelWrapper.showErrorPopUp, titleLabel: "채팅방을 나갈 수 없어요", subLabel: "방장 권한을 넘긴 후 다시 시도해주세요", iconType: .error)
                         .edgesIgnoringSafeArea(.vertical)
                 }
                 .edgesIgnoringSafeArea(.vertical)
@@ -59,6 +60,32 @@ struct ChatSideMenuView: View {
                                     }
                                 },
                                 secondBtnLabel: "나가기",
+                                secondBtnColor: Color("Red03")
+                )
+                .edgesIgnoringSafeArea(.vertical)
+            }
+            
+            if showDeletePopUp {
+                CustomPopUpView(showingPopUp: $showExitPopUp,
+                                titleLabel: "채팅방 삭제",
+                                subTitleLabel: "    채팅방을 삭제하시겠어요?\n삭제된 내용은 복구할 수 없어요",
+                                firstBtnAction: { self.showDeletePopUp = false },
+                                firstBtnLabel: "취소",
+                                secondBtnAction: {
+                                    self.showDeletePopUp = false
+
+                                    if let chatRoomId = viewModelWrapper.roomData?.id {
+                                        viewModelWrapper.chatRoomViewModel.deleteChatRoomByAdmin(chatRoomId: chatRoomId) { success in
+                                            
+                                            if success {
+                                                Log.debug("[ChatSideMenuView]: 채팅방장이 채팅방 삭제 성공")
+                                            } else {
+                                                Log.debug("[ChatSideMenuView]: 채팅방장이 채팅방 삭제 실패")
+                                            }
+                                        }
+                                    }
+                                },
+                                secondBtnLabel: "삭제하기",
                                 secondBtnColor: Color("Red03")
                 )
                 .edgesIgnoringSafeArea(.vertical)
@@ -111,6 +138,7 @@ struct ChatSideMenuView: View {
 private struct SideMenuContent: View {
     @Binding var isAlarmOn: Bool
     @Binding var showExitPopUp: Bool
+    @Binding var showDeletePopUp: Bool
     let members: [ChatMemberItemModel]
     let onUserSelect: (ChatMemberItemModel) -> Void
     
@@ -134,11 +162,17 @@ private struct SideMenuContent: View {
             
             Spacer()
             
-            ExitButton
+            HStack {
+                ExitButton
+
+                Spacer()
+                
+                DeleteButton
+            }
             
             Spacer().frame(height: 31 * DynamicSizeFactor.factor())
         }
-        .padding(.horizontal, 25)
+        .padding(.horizontal, 25 * DynamicSizeFactor.factor())
         .frame(maxHeight: .infinity)
         .background(
             RoundedCornerUtil(radius: 8, corners: [.topLeft, .bottomLeft])
@@ -189,6 +223,17 @@ private struct SideMenuContent: View {
             showExitPopUp = true
         }, label: {
             Image("icon_chat_close")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
+        })
+    }
+    
+    private var DeleteButton: some View {
+        Button(action: {
+            showDeletePopUp = true
+        }, label: {
+            Image("icon_imagedelete")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 28 * DynamicSizeFactor.factor(), height: 28 * DynamicSizeFactor.factor())
