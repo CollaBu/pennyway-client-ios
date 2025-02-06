@@ -1,5 +1,3 @@
-import AdSupport
-import AppTrackingTransparency
 import Firebase
 import FirebaseCore
 import FirebaseMessaging
