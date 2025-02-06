@@ -36,17 +36,12 @@ class AppViewModel: ObservableObject {
     }
 
     func checkLoginStateUseCase() {
-        if getUserData() == nil {
-            KeychainHelper.deleteAccessToken()
-            TokenHandler.deleteAllRefreshTokens()     
-        } else {
-            loginUseCase.checkLoginState { [weak self] isLoggedIn in
-                self?.checkLoginState = isLoggedIn
-                self?.isLoggedIn = isLoggedIn
-                if isLoggedIn {
-                    self?.registDeviceTokenApi()
-                    Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
-                }
+        loginUseCase.checkLoginState { [weak self] isLoggedIn in
+            self?.checkLoginState = isLoggedIn
+            self?.isLoggedIn = isLoggedIn
+            if isLoggedIn {
+                self?.registDeviceTokenApi()
+                Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
             }
         }
     }

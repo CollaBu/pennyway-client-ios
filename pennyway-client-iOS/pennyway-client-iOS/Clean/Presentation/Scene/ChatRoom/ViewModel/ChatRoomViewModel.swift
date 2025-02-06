@@ -80,6 +80,9 @@ class DefaultChatRoomViewModel: ChatRoomViewModel {
             .sink { [weak self] notification in
                 // 메시지 받은 경우 처리
                 if let message = notification.object as? MessageItemModel, self?.roomData.value?.id == message.chatRoomId {
+                    if message.categoryType == .system {
+                        self?.getChatRoomDetail(chatRoomId: message.chatRoomId) { _ in }
+                    }
                     self?.handleNewMessage(message)
                     self?.sendLastMessage(chatRoomId: message.chatRoomId, lastReadMessageId: message.chatId)
                 }
