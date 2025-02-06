@@ -40,7 +40,7 @@ struct ChatReceiveCell: View, ImageLoadable {
                     .font(.B3MediumFont())
                     .platformTextColor(color: Color("Gray06"))
 
-                ChatMessage(content: chat.content, createdAt: chat.createdAt, isSender: false)
+                ChatMessage(chat: chat, sender: sender, isSender: false)
             }
 
             Spacer()

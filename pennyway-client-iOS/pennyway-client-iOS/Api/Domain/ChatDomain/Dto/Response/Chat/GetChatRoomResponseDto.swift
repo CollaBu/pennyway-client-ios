@@ -66,6 +66,26 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
             senderId: 0
         )
 
+        // lastMessage가 존재할 경우 처리
+        let processedLastMessage: Message = {
+            guard let lastMessage = dto.lastMessage else {
+                return defaultLastMessage
+            }
+
+            // categoryType이 SHARE이면 content를 "지출 내역을 공유했습니다"로 변경
+            let content = lastMessage.categoryType == .share ? "지출 내역을 공유했습니다" : lastMessage.content
+
+            return Message(
+                chatRoomId: lastMessage.chatRoomId,
+                chatId: lastMessage.chatId,
+                content: content,
+                contentType: lastMessage.contentType,
+                categoryType: lastMessage.categoryType,
+                createdAt: lastMessage.createdAt,
+                senderId: lastMessage.senderId
+            )
+        }()
+
         return ChatRoom(
             id: dto.id,
             title: dto.title,
@@ -75,15 +95,8 @@ public struct ChatRoomDetail: Codable, MakeFullImageURL {
             isAdmin: dto.isAdmin,
             participantCount: dto.participantCount,
             createdAt: dto.createdAt ?? "",
-            lastMassage: dto.lastMessage != nil ? Message(
-                chatRoomId: dto.lastMessage!.chatRoomId,
-                chatId: dto.lastMessage!.chatId,
-                content: dto.lastMessage!.content,
-                contentType: dto.lastMessage!.contentType,
-                categoryType: dto.lastMessage!.categoryType,
-                createdAt: dto.lastMessage!.createdAt,
-                senderId: dto.lastMessage!.senderId
-            ) : defaultLastMessage,
-            unreadMessageCount: dto.unreadMessageCount)
+            lastMassage: processedLastMessage,
+            unreadMessageCount: dto.unreadMessageCount
+        )
     }
 }

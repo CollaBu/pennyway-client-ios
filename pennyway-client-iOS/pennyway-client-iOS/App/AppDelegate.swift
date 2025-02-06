@@ -8,6 +8,7 @@ import SwiftUI
 class AppDelegate: NSObject, UIApplicationDelegate {
     static var currentFCMToken: String?
     let gcmMessageIDKey = "gcm.message_id"
+    private var deepLinkCoordinator: DeepLinkCoordinator?
 
     /// 앱이 켜졌을 때
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
@@ -22,6 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             AnalyticsManager.shared.initialize(application: application, didFinishLaunchingWithOptions: launchOptions)
         }
 
+        deepLinkCoordinator = DeepLinkCoordinator() // 초기화
         FirebaseApp.configure()
 
         // 알림 허용 여부
@@ -88,6 +90,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Log.debug("Message ID: \(messageID)")
         }
 
+        if let chatRoomId = userInfo["chatRoomId"] {
+            Log.info("📩 Received chatRoomId: \(chatRoomId)")
+
+            let deepLinkURLString = "pennyway://chat?roomId=\(chatRoomId)"
+            if let deepLinkURL = URL(string: deepLinkURLString) {
+                Log.debug("🔗 Generated DeepLink URL: \(deepLinkURL)")
+
+                handleDeepLink(url: deepLinkURL)
+            } else {
+                Log.fault("⚠️ Invalid deep link URL")
+            }
+        } else {
+            Log.fault("⚠️ chatRoomId is missing in userInfo")
+        }
+
         Log.debug(userInfo)
 
         completionHandler([[.banner, .badge, .sound]])
@@ -104,6 +121,25 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Log.debug("Message ID: \(messageID)")
         }
 
+        if let chatRoomId = userInfo["chatRoomId"] {
+            Log.info("📩 Received chatRoomId: \(chatRoomId)")
+
+            let deepLinkURLString = "pennyway://chat?roomId=\(chatRoomId)"
+            if let deepLinkURL = URL(string: deepLinkURLString) {
+                Log.debug("🔗 Generated DeepLink URL: \(deepLinkURL)")
+
+                handleDeepLink(url: deepLinkURL)
+            } else {
+                Log.fault("⚠️ Invalid deep link URL")
+            }
+        } else {
+            Log.fault("⚠️ chatRoomId is missing in userInfo")
+        }
+
         Log.debug("userInfo:\(userInfo)")
+    }
+
+    private func handleDeepLink(url: URL) {
+        deepLinkCoordinator?.handleDeepLink(url: url)
     }
 }
