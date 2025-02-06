@@ -142,7 +142,7 @@ private struct SideMenuContent: View {
     let members: [ChatMemberItemModel]
     let onUserSelect: (ChatMemberItemModel) -> Void
     
-    private let currentUserId = getUserData()!.id
+    private let currentUserId = getUserData()?.id ?? 0
     
     var body: some View {
         VStack(alignment: .leading) {

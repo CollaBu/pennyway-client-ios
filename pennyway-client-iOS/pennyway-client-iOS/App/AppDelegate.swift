@@ -14,45 +14,34 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         NetworkMonitor.shared.startMonitoring()
 
-        // 파이어베이스 설정
-        let firebaseAnalyticsService = FirebaseAnalyticsService()
-
-        AnalyticsManager.shared.addService(firebaseAnalyticsService)
-
-        if let launchOptions = launchOptions {
-            AnalyticsManager.shared.initialize(application: application, didFinishLaunchingWithOptions: launchOptions)
-        }
-
-        deepLinkCoordinator = DeepLinkCoordinator() // 초기화
+        deepLinkCoordinator = DeepLinkCoordinator()
         FirebaseApp.configure()
 
-        // 알림 허용 여부
-        UNUserNotificationCenter.current().delegate = self
-
-        let authOption: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOption,
-            completionHandler: { granted, error in
-                if granted { // 알림 허용
-                    Log.info("알림 허용")
-                } else { // 알림 거부
-                    Log.info("알림 거부")
-                }
-
-                if let error = error {
-                    Log.error("Error requesting notification authorization: \(error.localizedDescription)")
-                }
-            }
-        )
+        setupNotification(application)
+        AnalyticsManager.shared.initialize(application: application, didFinishLaunchingWithOptions: launchOptions)
 
         application.registerForRemoteNotifications()
-
-        // Setting Up Cloud Messaging...
-        // 메세징 델리겟
         Messaging.messaging().delegate = self
 
-        UNUserNotificationCenter.current().delegate = self
         return true
+    }
+
+    /// 🔔 **알림 설정**
+    private func setupNotification(_: UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
+            if granted {
+                Log.info("알림 허용됨")
+            } else {
+                Log.info("알림 거부됨")
+            }
+
+            if let error = error {
+                Log.error("Error requesting notification authorization: \(error.localizedDescription)")
+            }
+        }
     }
 
     /// fcm 토큰이 등록 되었을 때

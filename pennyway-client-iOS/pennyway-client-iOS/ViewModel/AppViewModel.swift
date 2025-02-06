@@ -1,5 +1,7 @@
 
+import AppTrackingTransparency
 import Combine
+import Firebase
 import SwiftUI
 
 // MARK: - AppViewModel
@@ -32,15 +34,16 @@ class AppViewModel: ObservableObject {
     func login() {
         registDeviceTokenApi()
         isLoggedIn = true
+        requestTrackingPermissionAndInitializeAnalytics()
     }
 
     func checkLoginStateUseCase() {
         loginUseCase.checkLoginState { [weak self] isLoggedIn in
-            self?.checkLoginState = isLoggedIn
-            self?.isLoggedIn = isLoggedIn
             if isLoggedIn {
+                self?.checkLoginState = isLoggedIn
+                self?.isLoggedIn = isLoggedIn
                 self?.registDeviceTokenApi()
-                Log.debug("accessToken: \(KeychainHelper.loadAccessToken())")
+                Log.debug("[AppViewModel] accessToken: \(KeychainHelper.loadAccessToken())")
             }
         }
     }
@@ -73,5 +76,30 @@ class AppViewModel: ObservableObject {
         } else {
             Log.fault("fcm Token 존재 x")
         }
+    }
+
+    /// 앱 추적 권한 요청 및 Firebase Analytics 초기화
+    private func requestTrackingPermissionAndInitializeAnalytics() {
+        let status = ATTrackingManager.trackingAuthorizationStatus
+
+        if status == .authorized {
+            initializeAnalytics() // 추적 허용된 경우 실행
+        } else if status == .notDetermined {
+            ATTrackingManager.requestTrackingAuthorization { newStatus in
+                if newStatus == .authorized {
+                    DispatchQueue.main.async {
+                        self.initializeAnalytics()
+                    }
+                }
+            }
+        }
+    }
+
+    /// Firebase Analytics 초기화
+    private func initializeAnalytics() {
+        let firebaseAnalyticsService = FirebaseAnalyticsService()
+        AnalyticsManager.shared.addService(firebaseAnalyticsService)
+
+        Log.info("📊 Firebase Analytics Initialized")
     }
 }
