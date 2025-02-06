@@ -61,10 +61,10 @@ struct EditPhoneNumberView: View {
             }
 
             if showCodeErrorPopUp {
-                ErrorCodePopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요", iconType: .error)
+                InfoPopUpView(showingPopUp: $showCodeErrorPopUp, titleLabel: "잘못된 인증번호예요", subLabel: "다시 한번 확인해주세요", iconType: .error)
             }
             if showManyRequestPopUp {
-                ErrorCodePopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요", iconType: .error)
+                InfoPopUpView(showingPopUp: $showManyRequestPopUp, titleLabel: "인증 요청 제한 횟수를 초과했어요", subLabel: "24시간 후에 다시 시도해주세요", iconType: .error)
             }
 
             if showDiffNumberPopUp {

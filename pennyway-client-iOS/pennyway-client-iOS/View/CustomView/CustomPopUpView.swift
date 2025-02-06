@@ -74,6 +74,7 @@ extension CustomPopUpView {
                         .font(.H3SemiboldFont())
                         .multilineTextAlignment(.center) // 이 라인을 추가하여 텍스트를 가운데 정렬
                         .frame(maxWidth: .infinity)
+                        .padding(.bottom, 1)
 
                     Spacer().frame(height: 7 * DynamicSizeFactor.factor())
 
@@ -81,7 +82,7 @@ extension CustomPopUpView {
                         .platformTextColor(color: Color("Gray04"))
                         .font(.B1MediumFont())
 
-                    Spacer().frame(height: 25 * DynamicSizeFactor.factor())
+                    Spacer()
 
                     HStack(spacing: 8 * DynamicSizeFactor.factor()) {
                         Button(action: firstBtnAction) {

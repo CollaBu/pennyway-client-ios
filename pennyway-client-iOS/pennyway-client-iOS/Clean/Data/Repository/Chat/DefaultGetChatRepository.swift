@@ -10,7 +10,7 @@ import Foundation
 // MARK: - DeleteChatRoomError
 
 enum DeleteChatRoomError: Error {
-    case mismatchConflict // 채팅방장은 채팅방을 나갈 수 없다 및 가입한 채팅방 정보가 일치하지 않다는 4090애러
+    case mismatchConflict // 채팅방장은 채팅방을 나갈 수 없다 및 가입한 채팅방 정보가 일치하지 않다는 4090에러
     case notAdmin // 관리자가 아니라는 4033에러
     case notFound // 채팅멤버를 찾을 수 없다는 4040에러
     case other(Error)
@@ -140,7 +140,7 @@ class DefaultGetChatRepository: GetChatRepository {
                 // 4033에러
                 if let statusSpecificError = error as? StatusSpecificError,
                    statusSpecificError.domainError == .forbidden,
-                   statusSpecificError.code == ForbiddenErrorCode.accessNotAllowedForUserRole.rawValue
+                   statusSpecificError.code == ForbiddenErrorCode.accessForbidden.rawValue
                 {
                     completion(.failure(DeleteChatRoomError.notAdmin))
                 }
