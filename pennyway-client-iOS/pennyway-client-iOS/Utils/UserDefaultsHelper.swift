@@ -15,6 +15,10 @@ func saveUserData(userData: UserDataDto) {
     }
 }
 
+func removeUserData() {
+    UserDefaults.standard.removeObject(forKey: "userData")
+}
+
 func getUserData() -> UserDataDto? {
     if let userDataJSON = UserDefaults.standard.data(forKey: "userData") {
         do {

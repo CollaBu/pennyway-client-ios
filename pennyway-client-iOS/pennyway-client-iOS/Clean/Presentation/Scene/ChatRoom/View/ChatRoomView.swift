@@ -21,7 +21,7 @@ struct ChatRoomView: View {
 
     let chatRoomId: Int64?
     var chatRoom: ChatRoomProtocol?
-    private let currentUserId = getUserData()!.id
+    private let currentUserId = getUserData()?.id ?? 0
 
     var body: some View {
         ZStack {
