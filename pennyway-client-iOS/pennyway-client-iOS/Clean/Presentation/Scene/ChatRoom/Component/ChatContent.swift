@@ -96,6 +96,13 @@ struct ChatContent: View {
                                     if index == chatsForDate.count - 1, chatsForDate[index].categoryType != .system {
                                         Spacer().frame(height: 10 * DynamicSizeFactor.factor())
                                     }
+                                } else if !members.contains(where: { $0.userId == chat.senderId }) {
+                                    // members에 없는 userId를 가진 경우 처리
+                                    ChatReceiveCell(chat: chat, sender: nil)
+
+                                    if index == chatsForDate.count - 1, chatsForDate[index].categoryType != .system {
+                                        Spacer().frame(height: 10 * DynamicSizeFactor.factor())
+                                    }
                                 }
                             }
                         }

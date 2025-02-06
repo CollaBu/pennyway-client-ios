@@ -86,7 +86,7 @@ struct ShareToChatRoomView: View {
     
     private var searchChatContainer: some View {
         VStack {
-            CustomInputView(inputText: $chatRoomName, placeholder: "원하는 주제를 찾아보세요", onCommit: {
+            CustomInputView(inputText: $chatRoomName, placeholder: "", onCommit: {
                 viewModelWrapper.searchQuery = chatRoomName
             }, isSecureText: false, showSearchBtn: true)
                 .onChange(of: chatRoomName) { newValue in

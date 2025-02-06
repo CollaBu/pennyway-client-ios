@@ -12,7 +12,7 @@ import SwiftUI
 struct ChatReceiveCell: View, ImageLoadable {
     @State private var loadedImage: UIImage? = nil
     let chat: MessageItemModel
-    let sender: ChatMemberItemModel
+    let sender: ChatMemberItemModel?
 
     var body: some View {
         HStack(alignment: .top, spacing: 11 * DynamicSizeFactor.factor()) {
@@ -36,7 +36,7 @@ struct ChatReceiveCell: View, ImageLoadable {
 
             VStack(alignment: .leading, spacing: 5 * DynamicSizeFactor.factor()) {
                 // 사용자 이름
-                Text(sender.name)
+                Text(sender?.name ?? "알수없음")
                     .font(.B3MediumFont())
                     .platformTextColor(color: Color("Gray06"))
 
@@ -47,8 +47,8 @@ struct ChatReceiveCell: View, ImageLoadable {
         }
         .padding(.horizontal, 20)
         .onAppear {
-            if sender.profileImage != "" {
-                loadImage(from: sender.profileImage ?? "") { image in
+            if sender?.profileImage != "" {
+                loadImage(from: sender?.profileImage ?? "") { image in
                     self.loadedImage = image
                 }
             }

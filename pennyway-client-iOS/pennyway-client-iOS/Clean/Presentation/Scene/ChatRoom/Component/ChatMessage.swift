@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ChatMessage: View {
     let chat: MessageItemModel
-    let sender: ChatMemberItemModel
+    let sender: ChatMemberItemModel?
     let isSender: Bool
     let maxWidth: CGFloat = 151 * DynamicSizeFactor.factor()
     
@@ -94,7 +94,7 @@ struct ChatMessage: View {
     private var shareChatMessage: some View {
         VStack(spacing: 12) {
             // 타이틀 영역
-            Text("\(sender.name)님의\n\(DateFormatterUtil.formatNormalDateString(spendingContent?.date ?? "")) 지출 내역")
+            Text("\(sender?.name ?? "알수없음")님의\n\(DateFormatterUtil.formatNormalDateString(spendingContent?.date ?? "")) 지출 내역")
                 .font(.B2SemiboldFont())
                 .platformTextColor(color: .white01)
                 .padding(.leading, 13 * DynamicSizeFactor.factor())
