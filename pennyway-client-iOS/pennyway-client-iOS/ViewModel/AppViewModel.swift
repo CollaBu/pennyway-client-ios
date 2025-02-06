@@ -29,6 +29,7 @@ class AppViewModel: ObservableObject {
     func logout() {
         isLoggedIn = false
         checkLoginState = false
+        removeUserData()
     }
 
     func login() {
